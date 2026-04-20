@@ -5,6 +5,15 @@
 Measurement-centric investigation of phase-controlled coupled multi-mass systems, with emphasis on statistical properties of measured normal forces under controlled excitation.
 
 ---
+*measurement-driven nonlinear multi-body dynamics
+
+*phase-controlled force transduction systems
+
+*artifact-aware experimental dynamics
+
+*Coupled Multi-Mass Force Statistics / Controlled Multi-Body Force Measurement (CMMFS/CMMFM)
+
+---
 
 ## Overview
 
