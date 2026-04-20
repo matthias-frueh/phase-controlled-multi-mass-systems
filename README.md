@@ -11,7 +11,17 @@ Measurement-centric investigation of phase-controlled coupled multi-mass systems
 
 *artifact-aware experimental dynamics
 
-*Phase-Controlled Multi-Mass Force Statistics / Phase-Controlled Multi-Mass Force Measurement (PCMMFS/PCMMFM)
+*phase-controlled force statistics 
+
+*coupled force state dynamics
+
+*measurement-driven force dynamics
+
+This work operates within the conceptual framework of:
+
+*Phase-Controlled Multi-Mass Force Statistics / Phase-Controlled Multi-Mass Force Measurement (PCMMFS/PCMMFM)*
+
+as a measurement-oriented perspective on force behavior in phase-controlled multi-mass systems.
 
 ---
 
