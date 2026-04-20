@@ -2,7 +2,7 @@
 
 # Phase-Controlled Multi-Mass Systems (PCMMS)
 
-Measurement-centric investigation of phase-controlled coupled multi-mass systems with focus on statistical properties of measured normal forces.
+Measurement-centric investigation of phase-controlled coupled multi-mass systems, with emphasis on statistical properties of measured normal forces under controlled excitation.
 
 ---
 
