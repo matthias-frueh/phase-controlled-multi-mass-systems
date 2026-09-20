@@ -1,59 +1,42 @@
-# Phase-Controlled Multi-Mass Systems
+# Wegweiser durch die Dokumente
 
-Measurement-centric investigation of phase-controlled coupled multi-mass systems with focus on statistical properties of measured normal forces.
+Stand: 20. September 2026. Diese Datei ersetzt die Übersicht vom April 2026.
 
----
+## Lesereihenfolge
 
-## Core Idea
+1. `was_ist_pcmms.md` — worum es geht, ohne Vorwissen.
+2. `werkstattbericht.md` — der fachliche Stand: warum die Wellenform und nicht der Mittelwert untersucht wird.
+3. `expose_2026-09.md` — Kernfrage, Stand der Simulation, das messbare Signal, nächster Schritt.
+4. `praeregistrierung_2026-06.md` — Hypothesen, Falsifikationskriterien, Abbruchregeln (Juni 2026).
+5. `literaturabgleich_2026-09-12.md` — wo PCMMS in der Ratchet-, Tribologie- und Kontaktdynamik-Literatur steht.
+6. `neuheitsgrad.md`, `einordnung.md`, `zehn_fragen.md` — Abgrenzung und Antworten auf die üblichen Einwände.
+7. `archiv_vermerk_kernhypothese_v3.md` — der dokumentierte Rückzug der früheren Hypothese.
 
-This project studies whether internally driven, phase-controlled multi-mass systems can produce **state-dependent changes in measured force statistics** under controlled conditions.
+## Verbindliche Begriffe
 
-The focus is not on new physics, but on:
+- **⟨N⟩ = M·g** ist Erhaltungssatz und Kontrollgröße, keine Messgröße und kein Ergebnis.
+- **Kraftverschiebung statt Kraft:** Gemessen wird nie ein Absolutwert, sondern die Abweichung gegen die
+  Referenz M·g; deren Erwartungswert ist null.
+- **Zielgrößen** sind Wellenform-Observablen: Schiefe γ₁, Liftoff-Anteil λ, Asymmetrieverhältnis
+  A = (F_max − M·g)/(M·g − F_min), Minimalkraft F_min.
+- **Linie A** (ruhender Körper, Wellenformstatistik) ist die primäre Linie; **Linie B** (Bewegung durch
+  Mediumkopplung) ist optional und hier nicht abgelegt.
 
-- precise measurement definition  
-- separation of dynamics and measurement artefacts  
-- statistical detection of small deviations  
+## Hinweise zu einzelnen Dateien
 
----
+- Die **Präregistrierung** ist unverändert vom Juni 2026 und wird nicht nachträglich editiert. Sie
+  nennt als dritte Observable das „Spitzen-zu-Mittel-Verhältnis“; in Engine, Daten und allen
+  September-Dokumenten ist diese Größe als Asymmetrieverhältnis A definiert (Codevariable `peak_ratio`).
+  Eine v2 der Präregistrierung mit Änderungsvermerk ist vorgesehen.
+- Der **Literaturabgleich** ist ein Arbeitsdokument für die nächste Fassung des Forschungsrahmens (v3.6);
+  die dort genannte Fassung v3.5 ist noch nicht im Repository abgelegt, weil sie vor der Umstellung auf
+  Linie A als primäre Linie entstand.
+- Das **Exposé** und die Kurznotizen beziehen alle Zahlen auf den Parametersatz der Engine
+  (`../data/README.md`). Die Auslegung eines physischen Aufbaus ist davon getrennt und offen.
+- Alle Zahlen in den Dokumenten sind Simulationsergebnisse. Messdaten existieren nicht.
 
-## Measurement Model
+## Was nicht im Repository liegt
 
-The observable is defined as:
-
-F_N(t) = m g + Σ m_k z̈_k(t) + C(x,t)
-
-where:
-
-- m g : static load contribution  
-- Σ m_k z̈_k(t) : internal dynamic contributions  
-- C(x,t) : coupling + measurement artefacts  
-
----
-
-## Research Objective
-
-Detect a **statistically significant state-dependent mean shift** in the measured normal force under controlled excitation.
-
----
-
-## Methodology
-
-- phase-controlled excitation  
-- multi-module system coupling  
-- residual-based signal decomposition  
-- statistical decision framework (α = 0.05)  
-
----
-
-## Status
-
-- Pre-experimental framework established  
-- Simulation and modeling ongoing  
-- Experimental validation planned  
-
----
-
-## Author
-
-Matthias Früh  
-Independent Researcher
+Arbeitsstände in Bearbeitung (Forschungsrahmen v3.6, Symbolverzeichnis, Arbeitspapier), Linie-B-Skripte
+und -Notizen, Labor- und Messtechnikplanung. Sie folgen, sobald sie den Stand der abgelegten Dokumente
+erreicht haben.

@@ -1,0 +1,47 @@
+# Datensätze
+
+**Alle Dateien in diesem Verzeichnis sind Simulationsausgaben. Gemessene Daten existieren nicht.**
+Beim Zitieren immer als Simulation kennzeichnen.
+
+Gemeinsamer Parametersatz (siehe `code/pcmms_v3a_phasen_sweep.py`, Block „Systemparameter“):
+M = 0,650 kg Gesamtmasse (drei Module à M/3) · g = 9,81 m/s² · M·g = 6,3765 N · f = 10 Hz ·
+Egg-Profil mit Halteanteil 0,65 (C¹-stetig, Hold-Radius 5 mm) · Kontakt linear-elastisch K = 10⁴ N/m,
+viskos C = 16 N·s/m (ζ ≈ 0,1), unilateral (keine Zugkraft) · RK4 mit Δt = 5·10⁻⁵ s ·
+15 s je Konfiguration, davon 5 s Einschwingen; ausgewertet werden die letzten 10 s.
+
+## Spalten
+
+| Spalte | Bedeutung |
+|---|---|
+| `phi2_deg`, `phi3_deg` (bzw. `phi2`, `phi3`) | Phasenlage von Modul 2 und 3 gegen Modul 1 in Grad |
+| `F_mean` | Zeitmittel der Kontaktkraft in N; Erwartung M·g = 6,3765 N (Kontrollgröße, kein Ergebnis) |
+| `F_skew` | Schiefe γ₁ der Kontaktkraft-Wellenform |
+| `liftoff` | Anteil der Auswertezeit ohne Kontakt in Prozent |
+| `F_max`, `F_min` | Maximum und Minimum der Kontaktkraft in N |
+| `peak_ratio` / `asym` | Asymmetrieverhältnis A = (F_max − M·g)/(M·g − F_min). Die Spalte heißt im Code `peak_ratio`, berechnet aber A und nicht F_max/⟨F⟩ |
+| `R` (nur Sinus-Sweep) | Resultierende der drei Phasenzeiger, R = \|1 + e^{iφ₂} + e^{iφ₃}\| |
+
+## Dateien
+
+### `sweep_19x19.csv` — Grobraster, 361 Konfigurationen
+Erzeugt mit `code/pcmms_v3a_phasen_sweep.py` (N_GRID = 19). Raster über [0°, 360°)² mit Schrittweite
+360°/19 = 18,947° ohne doppelten Randpunkt (`endpoint=False`). Die Punkte (120°, 240°) und (240°, 120°)
+liegen deshalb nicht exakt auf dem Raster.
+Kennzahlen: ⟨F⟩ Median 6,3765 N, Spannweite 6,3330–6,3832 N (Endlich-Fenster-Effekt bei hohem Liftoff) ·
+Schiefe −0,288 … +1,979 · Liftoff 0–76,2 % · F_max bis 50,55 N · F_min bis 2,88 N · 12 Rasterpunkte
+liftoff-frei.
+
+### `finesweep_2deg_120_240.csv` — 2°-Feinraster, 441 Konfigurationen
+Erzeugt mit `code/finesweep.py` (vektorisierte Reproduktion der Engine mit identischen Parametern,
+gegen `sweep_19x19.csv` geprüft mit `--validate`: liftoff-arme Punkte stimmen auf sechs
+Nachkommastellen, am Punkt (0°, 0°) mit 75,8 % Liftoff weicht F_mean um 1,7·10⁻⁴ N ab —
+Unterschied der Auswertungsreihenfolge zwischen skalarer und vektorisierter Fassung). Fenster φ₂ ∈ [100°, 140°],
+φ₃ ∈ [220°, 260°], Schrittweite 2°.
+Kennzahlen: F_min-Maximum 5,3304 N bei (120°, 240°), entlang φ₃ = 240° beidseitig linear abfallend
+(≈ 0,21 N je Grad; 0,77 N bei φ₂ = 100°, 1,62 N bei 140°) · 90,7 % des Fensters liftoff-frei ·
+|⟨F⟩ − M·g| ≤ 0,2 mN durchgehend.
+
+### `sweep_7x7_sinus.csv` — Kontrollsweep mit Sinusprofil, 49 Konfigurationen
+Gleiche Engine-Parameter, aber sinusförmiges statt Egg-Bewegungsprofil; Raster 7×7 über [0°, 360°),
+Schrittweite 360°/7. Ergebnis: ohne Liftoff ist die Schiefe exakt null; die Phasenkarte kollabiert auf
+die Zeigersumme R. Das erzeugende Skript (Sinus-Variante der Engine) ist noch nicht im Repository abgelegt.
