@@ -3,6 +3,8 @@
 **Simulationsausgabe, keine Messdaten.** Das gilt für alle Dateien in diesem Verzeichnis; gemessene Daten
 existieren nicht. Beim Zitieren immer als Simulation kennzeichnen.
 
+Lizenz dieses Ordners: CC BY 4.0, siehe [`../LICENSE-CC-BY-4.0`](../LICENSE-CC-BY-4.0). Namensnennung: „Matthias Früh, PCMMS“, https://github.com/matthias-frueh/phase-controlled-multi-mass-systems
+
 Herkunft: erzeugt mit der Referenz-Engine [`../code/pcmms_v3a_phasen_sweep.py`](../code/pcmms_v3a_phasen_sweep.py)
 (19×19-Sweep) und [`../code/finesweep.py`](../code/finesweep.py) (2°-Feinsweep). Engine-Stand im Repository:
 Commit `1f75564` vom 20.09.2026, mit dem Engine und Datensätze gemeinsam abgelegt wurden. Ein Erzeugungsdatum
