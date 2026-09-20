@@ -68,8 +68,8 @@ Kürzel v3a auch den zurückgezogenen Simulationszyklus v3a–v3d bezeichnet. Mi
   (Spannweite 6,333–6,383 N, Endlich-Fenster-Effekt bei hohem Liftoff) · Schiefe −0,29 … +1,98 ·
   Liftoff 0–76,2 % · F_max bis 50,6 N. Nur 12 Rasterpunkte um (120°, 240°) und (240°, 120°) sind liftoff-frei.
 - **2°-Feinsweep** um (120°, 240°) (441 Konfigurationen, [`data/finesweep_2deg_120_240.csv`](data/finesweep_2deg_120_240.csv)):
-  F_min bildet eine Zeltkurve mit Spitze 5,3304 N genau am Triphasik-Punkt, beidseitig ≈ 0,21 N je Grad
-  abfallend · 90,7 % des Fensters liftoff-frei · |⟨F⟩ − M·g| ≤ 0,2 mN durchgehend.
+  F_min bildet eine Zeltkurve mit Spitze 5,3304 N genau am Triphasik-Punkt, abfallend mit ≈ 0,23 N je Grad
+  zu kleineren φ₂ und ≈ 0,19 N je Grad zu größeren φ₂ · 90,7 % des Fensters liftoff-frei · |⟨F⟩ − M·g| ≤ 0,2 mN durchgehend.
 - Ein Sinusprofil liefert ohne Liftoff keine Schiefe; das asymmetrische Bewegungsprofil ist für das
   Zielsignal zwingend.
 
