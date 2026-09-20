@@ -22,7 +22,7 @@ des Zeitmittels gilt als Apparaturfehler. Der Untersuchungsgegenstand ist die We
 Ausdrücklich **nicht** behauptet werden: reaktionsloser Antrieb, Gravitationsmodifikation,
 Gewichtsreduktion, Verschiebung des Zeitmittels. Ein früherer Simulationszyklus (v3a–v3d) berichtete eine
 solche Verschiebung; sie wurde als Kontaktmodell-Artefakt erkannt, zurückgezogen und archiviert
-(`docs/archiv_vermerk_kernhypothese_v3.md`). Die alten Gleichungen bleiben als Nulllinie dokumentiert.
+([`docs/archiv_vermerk_kernhypothese_v3.md`](docs/archiv_vermerk_kernhypothese_v3.md)). Die alten Gleichungen bleiben als Nulllinie dokumentiert.
 
 ## Zwei Forschungslinien
 
@@ -36,22 +36,22 @@ solche Verschiebung; sie wurde als Kontaktmodell-Artefakt erkannt, zurückgezoge
 
 | Pfad | Inhalt |
 |---|---|
-| `docs/overview.md` | Wegweiser durch die Dokumente, Lesereihenfolge |
-| `docs/was_ist_pcmms.md` | Einstieg ohne Vorwissen |
-| `docs/werkstattbericht.md` | „Wellenform statt Mittelwert“ — der Stand für fachliche Leser |
-| `docs/expose_2026-09.md` | Projekt-Exposé (Kernfrage, Stand, messbares Signal, nächster Schritt) |
-| `docs/praeregistrierung_2026-06.md` | Präregistrierung mit Falsifikationskriterien (Juni 2026, unverändert) |
-| `docs/einordnung.md`, `docs/zehn_fragen.md` | Einordnung, Abgrenzung, Antworten auf die üblichen Einwände |
-| `docs/neuheitsgrad.md` | Was daran nicht neu ist — und was übrig bleibt |
-| `docs/literaturabgleich_2026-09-12.md` | Abgleich mit der Ratchet-, Tribologie- und Kontaktdynamik-Literatur, 12 verifizierte Referenzen, davon 10 mit DOI |
-| `docs/archiv_vermerk_kernhypothese_v3.md` | Dokumentierter Rückzug der früheren Hypothese |
-| `code/` | Simulations-Engine (`pcmms_v3a_phasen_sweep.py`) und 2°-Feinsweep (`finesweep.py`) |
-| `data/` | Simulationsausgaben: 19×19-Phasensweep und 2°-Feinsweep (`data/README.md`) |
+| [`docs/overview.md`](docs/overview.md) | Wegweiser durch die Dokumente, Lesereihenfolge |
+| [`docs/was_ist_pcmms.md`](docs/was_ist_pcmms.md) | Einstieg ohne Vorwissen |
+| [`docs/werkstattbericht.md`](docs/werkstattbericht.md) | „Wellenform statt Mittelwert“ — der Stand für fachliche Leser |
+| [`docs/expose_2026-09.md`](docs/expose_2026-09.md) | Projekt-Exposé (Kernfrage, Stand, messbares Signal, nächster Schritt) |
+| [`docs/praeregistrierung_2026-06.md`](docs/praeregistrierung_2026-06.md) | Präregistrierung mit Falsifikationskriterien (Juni 2026, unverändert) |
+| [`docs/einordnung.md`](docs/einordnung.md), [`docs/zehn_fragen.md`](docs/zehn_fragen.md) | Einordnung, Abgrenzung, Antworten auf die üblichen Einwände |
+| [`docs/neuheitsgrad.md`](docs/neuheitsgrad.md) | Was daran nicht neu ist — und was übrig bleibt |
+| [`docs/literaturabgleich_2026-09-12.md`](docs/literaturabgleich_2026-09-12.md) | Abgleich mit der Ratchet-, Tribologie- und Kontaktdynamik-Literatur, 12 verifizierte Referenzen, davon 10 mit DOI |
+| [`docs/archiv_vermerk_kernhypothese_v3.md`](docs/archiv_vermerk_kernhypothese_v3.md) | Dokumentierter Rückzug der früheren Hypothese |
+| [`code/`](code/) | Simulations-Engine ([`pcmms_v3a_phasen_sweep.py`](code/pcmms_v3a_phasen_sweep.py)) und 2°-Feinsweep ([`finesweep.py`](code/finesweep.py)) |
+| [`data/`](data/) | Simulationsausgaben: 19×19-Phasensweep und 2°-Feinsweep ([`data/README.md`](data/README.md)) |
 
 ## Simulationsstand
 
 Parametersatz der Engine (Simulationsreferenz für alle Zahlen in diesem Repository; Variablennamen aus
-`code/pcmms_v3a_phasen_sweep.py`, Block „Systemparameter“):
+[`code/pcmms_v3a_phasen_sweep.py`](code/pcmms_v3a_phasen_sweep.py), Block „Systemparameter“):
 M = 0,650 kg Gesamtmasse (drei Module à M/3) · g = 9,81 m/s², M·g = 6,3765 N · f = 10 Hz ·
 Egg-Profil: Halteanteil pro Zyklus 0,65 (`THOLD`), Anteil der schnellen Phase 1 − THOLD = 0,35 (`TFAST`),
 Hold-Radius oben 5 mm (`RTOP`), Radius unten (schnelle Phase) RTOP·TFAST/THOLD ≈ 2,69 mm (`RBOT`, C¹-stetig) ·
@@ -59,22 +59,22 @@ Kontakt: linear-elastisch K = 10⁴ N/m, viskos C = 16 N·s/m (ζ ≈ 0,1), unil
 RK4, Δt = 50 µs · 15 s je Konfiguration, davon 5 s Einschwingen; ausgewertet werden die letzten 10 s.
 Alle Datensätze sind Simulationsausgaben; **gemessene Daten existieren nicht.**
 
-Namenshinweis: Die Referenz-Engine heißt `pcmms_v3a_phasen_sweep.py`; der Name wird beibehalten, obwohl das
+Namenshinweis: Die Referenz-Engine heißt [`pcmms_v3a_phasen_sweep.py`](code/pcmms_v3a_phasen_sweep.py); der Name wird beibehalten, obwohl das
 Kürzel v3a auch den zurückgezogenen Simulationszyklus v3a–v3d bezeichnet. Mit dieser Engine wird das Zeitmittel
 ⟨F⟩ seit dem Rückzug als Kontrollgröße mit Zielwert M·g ausgewertet, nicht als Ergebnis
-(`docs/archiv_vermerk_kernhypothese_v3.md`).
+([`docs/archiv_vermerk_kernhypothese_v3.md`](docs/archiv_vermerk_kernhypothese_v3.md)).
 
-- **19×19-Phasensweep** (361 Konfigurationen, `data/sweep_19x19.csv`): ⟨F⟩ im Median 6,3765 N = M·g
+- **19×19-Phasensweep** (361 Konfigurationen, [`data/sweep_19x19.csv`](data/sweep_19x19.csv)): ⟨F⟩ im Median 6,3765 N = M·g
   (Spannweite 6,333–6,383 N, Endlich-Fenster-Effekt bei hohem Liftoff) · Schiefe −0,29 … +1,98 ·
   Liftoff 0–76,2 % · F_max bis 50,6 N. Nur 12 Rasterpunkte um (120°, 240°) und (240°, 120°) sind liftoff-frei.
-- **2°-Feinsweep** um (120°, 240°) (441 Konfigurationen, `data/finesweep_2deg_120_240.csv`):
+- **2°-Feinsweep** um (120°, 240°) (441 Konfigurationen, [`data/finesweep_2deg_120_240.csv`](data/finesweep_2deg_120_240.csv)):
   F_min bildet eine Zeltkurve mit Spitze 5,3304 N genau am Triphasik-Punkt, beidseitig ≈ 0,21 N je Grad
   abfallend · 90,7 % des Fensters liftoff-frei · |⟨F⟩ − M·g| ≤ 0,2 mN durchgehend.
 - Ein Sinusprofil liefert ohne Liftoff keine Schiefe; das asymmetrische Bewegungsprofil ist für das
   Zielsignal zwingend.
 
 Die Auslegung eines physischen Aufbaus (Bewegungsprofil, Wägezellen, Kalibrierung bei intermittierendem
-Kontakt) ist davon getrennt und offen; siehe `docs/expose_2026-09.md`, Abschnitt „Nächster Schritt“.
+Kontakt) ist davon getrennt und offen; siehe [`docs/expose_2026-09.md`](docs/expose_2026-09.md), Abschnitt „Nächster Schritt“.
 
 ## Nachrechnen
 
@@ -89,12 +89,12 @@ Der vollständige 19×19-Sweep braucht je nach Rechner 30–60 Minuten; das Skri
 
 ## Zitieren
 
-Siehe `CITATION.cff`. Frühere Stände (April–Mai 2026) liegen auf Zenodo unter *Früh, Matthias*; sie
+Siehe [`CITATION.cff`](CITATION.cff). Frühere Stände (April–Mai 2026) liegen auf Zenodo unter *Früh, Matthias*; sie
 dokumentieren den Weg, nicht den aktuellen Stand.
 
 ## Lizenz
 
-MIT, siehe `LICENSE`.
+MIT, siehe [`LICENSE`](LICENSE).
 
 ---
 
