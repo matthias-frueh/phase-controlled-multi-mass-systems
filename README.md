@@ -50,10 +50,14 @@ solche Verschiebung; sie wurde als Kontaktmodell-Artefakt erkannt, zurückgezoge
 
 ## Simulationsstand
 
-Parametersatz der Engine (Simulationsreferenz für alle Zahlen in diesem Repository):
-M = 0,650 kg (drei Module à M/3) · f = 10 Hz · Egg-Profil mit Halteanteil 0,65, C¹-stetig ·
-Kontakt: linear-elastisch K = 10⁴ N/m, viskos C = 16 N·s/m (ζ ≈ 0,1), unilateral · RK4, Δt = 50 µs,
-15 s je Punkt (5 s Einschwingen). Alle Datensätze sind Simulationsausgaben; **gemessene Daten existieren nicht.**
+Parametersatz der Engine (Simulationsreferenz für alle Zahlen in diesem Repository; Variablennamen aus
+`code/pcmms_v3a_phasen_sweep.py`, Block „Systemparameter“):
+M = 0,650 kg Gesamtmasse (drei Module à M/3) · g = 9,81 m/s², M·g = 6,3765 N · f = 10 Hz ·
+Egg-Profil: Halteanteil pro Zyklus 0,65 (`THOLD`), Anteil der schnellen Phase 1 − THOLD = 0,35 (`TFAST`),
+Hold-Radius oben 5 mm (`RTOP`), Radius unten (schnelle Phase) RTOP·TFAST/THOLD ≈ 2,69 mm (`RBOT`, C¹-stetig) ·
+Kontakt: linear-elastisch K = 10⁴ N/m, viskos C = 16 N·s/m (ζ ≈ 0,1), unilateral (nur Druck, keine Zugkraft) ·
+RK4, Δt = 50 µs · 15 s je Konfiguration, davon 5 s Einschwingen; ausgewertet werden die letzten 10 s.
+Alle Datensätze sind Simulationsausgaben; **gemessene Daten existieren nicht.**
 
 - **19×19-Phasensweep** (361 Konfigurationen, `data/sweep_19x19.csv`): ⟨F⟩ im Median 6,3765 N = M·g
   (Spannweite 6,333–6,383 N, Endlich-Fenster-Effekt bei hohem Liftoff) · Schiefe −0,29 … +1,98 ·
