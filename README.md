@@ -59,6 +59,11 @@ Kontakt: linear-elastisch K = 10⁴ N/m, viskos C = 16 N·s/m (ζ ≈ 0,1), unil
 RK4, Δt = 50 µs · 15 s je Konfiguration, davon 5 s Einschwingen; ausgewertet werden die letzten 10 s.
 Alle Datensätze sind Simulationsausgaben; **gemessene Daten existieren nicht.**
 
+Namenshinweis: Die Referenz-Engine heißt `pcmms_v3a_phasen_sweep.py`; der Name wird beibehalten, obwohl das
+Kürzel v3a auch den zurückgezogenen Simulationszyklus v3a–v3d bezeichnet. Mit dieser Engine wird das Zeitmittel
+⟨F⟩ seit dem Rückzug als Kontrollgröße mit Zielwert M·g ausgewertet, nicht als Ergebnis
+(`docs/archiv_vermerk_kernhypothese_v3.md`).
+
 - **19×19-Phasensweep** (361 Konfigurationen, `data/sweep_19x19.csv`): ⟨F⟩ im Median 6,3765 N = M·g
   (Spannweite 6,333–6,383 N, Endlich-Fenster-Effekt bei hohem Liftoff) · Schiefe −0,29 … +1,98 ·
   Liftoff 0–76,2 % · F_max bis 50,6 N. Nur 12 Rasterpunkte um (120°, 240°) und (240°, 120°) sind liftoff-frei.
