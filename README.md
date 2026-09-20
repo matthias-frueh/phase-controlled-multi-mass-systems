@@ -94,7 +94,9 @@ dokumentieren den Weg, nicht den aktuellen Stand.
 
 ## Lizenz
 
-MIT, siehe [`LICENSE`](LICENSE).
+- Code in [`code/`](code/): MIT, siehe [`LICENSE`](LICENSE).
+- Dokumente in [`docs/`](docs/) und Daten in [`data/`](data/): CC BY 4.0, siehe [`LICENSE-CC-BY-4.0`](LICENSE-CC-BY-4.0).
+  Namensnennung: „Matthias Früh, PCMMS“, https://github.com/matthias-frueh/phase-controlled-multi-mass-systems
 
 ---
 
