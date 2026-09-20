@@ -1,7 +1,28 @@
 cff-version: 1.2.0
-title: "Phase-Controlled Multi-Mass Systems"
-message: "If you use this work, please cite it as follows."
+message: "Wenn Sie dieses Repository verwenden, zitieren Sie es bitte wie unten angegeben."
+type: software
+title: "PCMMS — Phasenkontrollierte Mehrmassensysteme (Phase-Controlled Multi-Mass Systems)"
 authors:
   - family-names: "Früh"
     given-names: "Matthias"
-date-released: 2026
+    orcid: "https://orcid.org/0009-0005-9984-4207"
+    affiliation: "Gravidon Systemics Research"
+version: "2026-09"
+date-released: "2026-09-20"
+repository-code: "https://github.com/matthias-frueh/phase-controlled-multi-mass-systems"
+license: MIT
+keywords:
+  - contact force waveform
+  - unilateral contact
+  - phase-controlled internal masses
+  - vibration dynamics
+  - preregistration
+  - null result
+abstract: >-
+  Prä-experimentelle Untersuchung in der klassischen Mechanik: Wie bestimmt die
+  Phasenkonfiguration dreier intern periodisch bewegter Massen die Wellenform der
+  einseitigen Kontaktkraft eines ruhenden Körpers? Das Zeitmittel der Kontaktkraft ist
+  durch den Schwerpunktsatz auf M·g festgelegt und dient als Nullkontrolle; Zielgrößen
+  sind Schiefe, Liftoff-Anteil, Asymmetrieverhältnis und Minimalkraft. Enthalten sind
+  Dokumente, Präregistrierung, Literaturabgleich, Simulations-Engine und Simulationsdaten.
+  Messdaten existieren nicht.
