@@ -1,7 +1,7 @@
 # PCMMS — Phasenkontrollierte Mehrmassensysteme
 
-**Phase-Controlled Multi-Mass Systems**
-Matthias Früh · Gravidon Systemics Research · ORCID [0009-0005-9984-4207](https://orcid.org/0009-0005-9984-4207)
+**Phase-Controlled Multi-Mass Systems**  
+Matthias Früh · Gravidon Systemics Research · ORCID [0009-0005-9984-4207](https://orcid.org/0009-0005-9984-4207)  
 Stand: 20. September 2026 · Status: prä-experimentell (Simulation; keine Messdaten)
 
 ---
