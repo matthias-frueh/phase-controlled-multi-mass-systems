@@ -10,7 +10,9 @@ authors:
 version: "2026-09"
 date-released: "2026-09-20"
 repository-code: "https://github.com/matthias-frueh/phase-controlled-multi-mass-systems"
-license: MIT
+license:
+  - MIT
+  - CC-BY-4.0
 keywords:
   - contact force waveform
   - unilateral contact
