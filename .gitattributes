@@ -1,0 +1,2 @@
+# Simulationsdaten auf allen Plattformen byteidentisch halten: keine Zeilenende-Konvertierung
+*.csv -text
