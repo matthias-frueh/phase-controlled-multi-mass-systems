@@ -205,3 +205,8 @@ cython_debug/
 marimo/_static/
 marimo/_lsp/
 __marimo__/
+
+# PCMMS: Laufartefakte der Skripte in code/ (finesweep.py schreibt series_regime.npz ins Arbeitsverzeichnis;
+# pcmms_v3a_phasen_sweep.py schreibt nach ~/pcmms_outputs_v3a_sweep)
+series_regime.npz
+pcmms_outputs_v3a_sweep/
