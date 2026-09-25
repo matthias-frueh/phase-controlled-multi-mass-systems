@@ -31,11 +31,13 @@ Aufruf:
   python3 linear_solver.py --harmonics                Anteil der zweiten Harmonischen an Zeltsteigung und Karte
   python3 linear_solver.py --contact [--long] [--grid] Kontaktast: Anteile, Gebiete, Bistabilität der Inseln,
                                                       Monostabilität des Hauptgebiets (RK4)
+  python3 linear_solver.py --section                  21-Punkt-Schnitt φ₂ = 100° … 140° bei φ₃ = 240° mit |N_k|
   python3 linear_solver.py --point 120 240            Observablen an einem Punkt
   python3 linear_solver.py --ktable                   F_min(120°, 240°) über K (ζ fest und C fest), Band um
                                                       3f = f_n, RK4-Gegenprobe bei 23 000 N/m (ca. 30 s)
   python3 linear_solver.py --map karte.csv --step 2   Karte über [0°, 360°)², Anteil liftoff-freier Punkte
-Optionen für --point und --map: --K, --C oder --zeta, --mu, --rigid (starre Auflage), --sinus (Sinusprofil).
+Optionen für --section, --point und --map: --K, --C oder --zeta, --mu, --rigid (starre Auflage), --sinus
+(Sinusprofil), --f (Anregungsfrequenz bei gleichem Hub).
 
 Rechenzeit: ca. 1 ms je Punkt (Engine: ca. 2 s). Stichproben wie in der Engine (Δt = 50 µs, 2000 je
 Periode), damit F_min, F_max und Schiefe direkt mit den CSV-Werten vergleichbar sind. Das Spektrum wird
@@ -83,11 +85,11 @@ def profile_spectrum(profile='egg', oversample=OVERSAMPLE, n=None):
     return P, n
 
 
-def transfer(K_c, C_c, n_harm, h_one=()):
-    """H(kω) für k = 0 … n_harm−1; K_c = None bedeutet starre Auflage (H = 1). Für die Harmonischen in
-    h_one wird H := 1 gesetzt (Diagnose ohne Kontaktresonanz; kein physikalisches Modell, deshalb dort nur
-    F_min auswerten, nicht z)."""
-    w = OMEGA * np.arange(n_harm)
+def transfer(K_c, C_c, n_harm, h_one=(), f_hz=F_HZ):
+    """H(kω) für k = 0 … n_harm−1 bei der Anregungsfrequenz f_hz; K_c = None bedeutet starre Auflage
+    (H = 1). Für die Harmonischen in h_one wird H := 1 gesetzt (Diagnose ohne Kontaktresonanz; kein
+    physikalisches Modell, deshalb dort nur F_min auswerten, nicht z)."""
+    w = 2 * np.pi * f_hz * np.arange(n_harm)
     if K_c is None:
         return np.ones(n_harm, complex), np.zeros(n_harm, complex)
     den = K_c - M * w**2 + 1j * w * C_c
@@ -97,14 +99,16 @@ def transfer(K_c, C_c, n_harm, h_one=()):
 
 
 def solve(phi2_deg, phi3_deg, K_c=K, C_c=C_DAMP, mu=1.0, profile='egg', oversample=OVERSAMPLE,
-          chunk=256, h_one=()):
+          chunk=256, h_one=(), f_hz=F_HZ):
     """Stationäre Lösung für beliebig viele Phasenpunkte. Gibt ein Dict mit Arrays zurück
-    (Spalten wie in den CSV-Dateien der Engine, dazu valid und F_min_lin)."""
+    (Spalten wie in den CSV-Dateien der Engine, dazu valid und F_min_lin). f_hz ändert die
+    Anregungsfrequenz bei gleichem Hub; die Profilbeschleunigung skaliert dann mit (f_hz/10 Hz)²."""
     phi2 = np.atleast_1d(np.asarray(phi2_deg, float))
     phi3 = np.atleast_1d(np.asarray(phi3_deg, float))
     P, n = profile_spectrum(profile, oversample)
+    P = P * (f_hz / F_HZ) ** 2
     k = np.arange(P.size)
-    H, Y = transfer(K_c, C_c, P.size, h_one)
+    H, Y = transfer(K_c, C_c, P.size, h_one, f_hz)
     out = {c: np.empty(phi2.size) for c in
            ('F_mean', 'F_skew', 'liftoff', 'F_max', 'F_min', 'peak_ratio', 'F_min_lin', 'z_max')}
     out['valid'] = np.empty(phi2.size, bool)
@@ -371,6 +375,34 @@ def main_region_probe(step=3.0):
           f'{n_lift} mit Liftoff (max. {r["liftoff"].max():.2f} %)')
 
 
+def section(K_c=K, C_c=C_DAMP, mu=1.0, profile='egg', f_hz=F_HZ, phi3=240.0, lo=100.0, hi=140.0, step=2.0):
+    """Querschnitt entlang φ₂ bei festem φ₃ (Standard: der 21-Punkt-Schnitt 100° … 140° bei φ₃ = 240°):
+    Observablen der linearen Lösung und Amplituden |N_k| der Harmonischen k = 1 … 3 der Kontaktkraft.
+    Format der Vorhersagetabelle für gemessene K, C, μ und f."""
+    p2 = np.arange(lo, hi + step / 2, step)
+    r = solve(p2, phi3, K_c, C_c, mu, profile, f_hz=f_hz)
+    P, n = profile_spectrum(profile)
+    H, _ = transfer(K_c, C_c, 4, f_hz=f_hz)
+    amp1 = 2 * mu * M * np.abs(H[:4] * P[:4]) / n * (f_hz / F_HZ) ** 2      # synchrone Phasung
+    kk = np.arange(1, 4)
+    comb = np.abs(1 + np.exp(-1j * np.outer(np.radians(p2), kk)) + np.exp(-1j * kk * np.radians(phi3))) / 3
+    f_n = np.inf if K_c is None else np.sqrt(K_c / M) / (2 * np.pi)
+    print(f'f = {f_hz:g} Hz, K = {"starr" if K_c is None else f"{K_c:.4g} N/m"}, C = {C_c:.4g} N·s/m, μ = {mu:g}, '
+          f'f_n = {f_n:.2f} Hz, f/f_n = {f_hz / f_n:.3f}; |N_k| bei synchroner Phasung: '
+          + ', '.join(f'k={k} {amp1[k]:.4f} N' for k in (1, 2, 3)))
+    print(f'{"φ₂ [°]":>7} {"Kontakt":>8} {"F_min_lin":>10} {"F_max":>8} {"Schiefe":>8} {"A":>7} '
+          f'{"|N_1|":>8} {"|N_2|":>8} {"|N_3|":>8}')
+    for i, x in enumerate(p2):
+        print(f'{x:>7.1f} {str(bool(r["valid"][i])):>8} {r["F_min_lin"][i]:>10.4f} {r["F_max"][i]:>8.4f} '
+              f'{r["F_skew"][i]:>8.4f} {r["peak_ratio"][i]:>7.4f} '
+              + ' '.join(f'{amp1[k] * comb[i, k - 1]:>8.4f}' for k in kk))
+    j = int(np.argmax(r['F_min_lin']))
+    if 0 < j < p2.size - 1:
+        print(f'Spitze bei φ₂ = {p2[j]:g}°, F_min = {r["F_min_lin"][j]:.4f} N; Steigung links '
+              f'{(r["F_min_lin"][j] - r["F_min_lin"][j - 1]) / step:.4f} N/°, rechts '
+              f'{(r["F_min_lin"][j] - r["F_min_lin"][j + 1]) / step:.4f} N/°')
+
+
 def params(a):
     K_c = None if a.rigid else a.K
     C_c = 0.0 if a.rigid else (c_for(a.K, a.zeta) if a.zeta is not None else a.C)
@@ -395,6 +427,9 @@ def main():
     ap.add_argument('--mu', type=float, default=1.0, help='Anteil der bewegten Masse')
     ap.add_argument('--rigid', action='store_true')
     ap.add_argument('--sinus', action='store_true')
+    ap.add_argument('--section', action='store_true', help='21-Punkt-Schnitt φ₂ = 100° … 140° bei φ₃ = 240°')
+    ap.add_argument('--phi3', type=float, default=240.0, help='mit --section: festes φ₃')
+    ap.add_argument('--f', type=float, default=F_HZ, help='Anregungsfrequenz bei gleichem Hub [Hz]')
     a = ap.parse_args()
     prof = 'sinus' if a.sinus else 'egg'
     if a.validate:
@@ -407,21 +442,23 @@ def main():
         contact(a.long)
         if a.grid:
             main_region_probe()
+    if a.section:
+        section(*params(a), a.mu, prof, a.f, a.phi3)
     if a.point:
         K_c, C_c = params(a)
-        r = solve(*a.point, K_c, C_c, a.mu, prof)
+        r = solve(*a.point, K_c, C_c, a.mu, prof, f_hz=a.f)
         for q in ('valid', 'F_mean', 'F_skew', 'F_max', 'F_min', 'peak_ratio', 'F_min_lin'):
             print(f'{q:>10}: {r[q][0]}')
     if a.map:
         K_c, C_c = params(a)
         g = np.arange(0.0, 360.0, a.step)
         P2, P3 = np.meshgrid(g, g, indexing='ij')
-        r = solve(P2.ravel(), P3.ravel(), K_c, C_c, a.mu, prof)
+        r = solve(P2.ravel(), P3.ravel(), K_c, C_c, a.mu, prof, f_hz=a.f)
         cols = ['phi2_deg', 'phi3_deg', 'valid', 'F_mean', 'F_skew', 'liftoff', 'F_max', 'F_min',
                 'peak_ratio', 'F_min_lin']
         pd.DataFrame({c: r[c] for c in cols}).to_csv(a.map, index=False, float_format='%.6f')
         print(f'{a.map}: {r["valid"].size} Punkte, mit Kontaktast {100 * r["valid"].mean():.1f} %')
-    if not (a.validate or a.ktable or a.harmonics or a.contact or a.point or a.map):
+    if not (a.validate or a.ktable or a.harmonics or a.contact or a.section or a.point or a.map):
         ap.print_help()
 
 

@@ -2,7 +2,7 @@
 
 **Phase-Controlled Multi-Mass Systems**\
 Matthias Früh · Gravidon Systemics Research · ORCID [0009-0005-9984-4207](https://orcid.org/0009-0005-9984-4207)\
-Stand: 20. September 2026 · Status: prä-experimentell (Simulation; keine Messdaten)
+Stand: 25. September 2026 · Status: prä-experimentell (Simulation; keine Messdaten)
 
 ---
 
@@ -48,6 +48,8 @@ solche Verschiebung; sie wurde als Kontaktmodell-Artefakt erkannt, zurückgezoge
 | [`code/`](code/) | Simulations-Engine ([`pcmms_v3a_phasen_sweep.py`](code/pcmms_v3a_phasen_sweep.py)), 2°-Feinsweep ([`finesweep.py`](code/finesweep.py)), analytische Lösung für den liftoff-freien Bereich ([`linear_solver.py`](code/linear_solver.py)) und Abbildungen ([`plot_figures.py`](code/plot_figures.py)) |
 | [`docs/figures/`](docs/figures/) | Abbildungen aus den Simulationsdaten, je in heller und dunkler Fassung |
 | [`data/`](data/) | Simulationsausgaben: 19×19-Phasensweep und 2°-Feinsweep ([`data/README.md`](data/README.md)) |
+
+Die Präregistrierung v2 für die Messkampagne liegt als [Entwurf](docs/praeregistrierung_v2_entwurf.md) vor (nicht eingefroren, nicht registriert).
 
 ## Simulationsstand
 
@@ -150,7 +152,8 @@ Der vollständige 19×19-Sweep braucht je nach Rechner 30–60 Minuten; das Skri
 
 ## Zitieren
 
-Siehe [`CITATION.cff`](CITATION.cff). Frühere Stände (April–Mai 2026) liegen auf Zenodo unter *Früh, Matthias*; sie
+Siehe [`CITATION.cff`](CITATION.cff). Archivierter Stand 2026-09 auf Zenodo: https://zenodo.org/records/22864178.
+Frühere Stände (April–Mai 2026) liegen auf Zenodo unter *Früh, Matthias*; sie
 dokumentieren den Weg, nicht den aktuellen Stand.
 
 ## Lizenz

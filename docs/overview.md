@@ -1,6 +1,6 @@
 # Wegweiser durch die Dokumente
 
-Stand: 20. September 2026. Diese Datei ersetzt die Übersicht vom April 2026.
+Stand: 25. September 2026. Diese Datei ersetzt die Übersicht vom April 2026.
 
 Lizenz dieses Ordners: CC BY 4.0, siehe [`../LICENSE-CC-BY-4.0`](../LICENSE-CC-BY-4.0). Namensnennung: „Matthias Früh, PCMMS“, https://github.com/matthias-frueh/phase-controlled-multi-mass-systems
 
@@ -29,7 +29,8 @@ Lizenz dieses Ordners: CC BY 4.0, siehe [`../LICENSE-CC-BY-4.0`](../LICENSE-CC-B
 - Die **Präregistrierung** ist unverändert vom Juni 2026 und wird nicht nachträglich editiert. Sie
   nennt als dritte Observable das „Spitzen-zu-Mittel-Verhältnis“; in Engine, Daten und allen
   September-Dokumenten ist diese Größe als Asymmetrieverhältnis A definiert (Codevariable `peak_ratio`).
-  Eine v2 der Präregistrierung mit Änderungsvermerk ist vorgesehen.
+  Eine v2 mit Änderungsvermerk liegt als [Entwurf](praeregistrierung_v2_entwurf.md) vor (nicht eingefroren,
+  nicht registriert).
 - Der **Literaturabgleich** ist ein Arbeitsdokument für die nächste Fassung des Forschungsrahmens (v3.6);
   die dort genannte Fassung v3.5 ist noch nicht im Repository abgelegt, weil sie vor der Umstellung auf
   Linie A als primäre Linie entstand.
