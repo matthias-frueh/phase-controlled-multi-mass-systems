@@ -9,7 +9,9 @@ Lizenz dieses Ordners: CC BY 4.0, siehe [`../LICENSE-CC-BY-4.0`](../LICENSE-CC-B
 1. `was_ist_pcmms.md` — worum es geht, ohne Vorwissen.
 2. `werkstattbericht.md` — der fachliche Stand: warum die Wellenform und nicht der Mittelwert untersucht wird.
 3. `expose_2026-09.md` — Kernfrage, Stand der Simulation, das messbare Signal, nächster Schritt.
-4. `praeregistrierung_2026-06.md` — Hypothesen, Falsifikationskriterien, Abbruchregeln (Juni 2026).
+4. `praeregistrierung_2026-06.md` — Hypothesen, Falsifikationskriterien, Abbruchregeln (Juni 2026);
+   dazu der Entwurf v2 `praeregistrierung_v2_entwurf.md` mit Anhang `praeregistrierung_v2_anhang.md`
+   (September 2026, nicht eingefroren, nicht registriert).
 5. `literaturabgleich_2026-09-12.md` — wo PCMMS in der Ratchet-, Tribologie- und Kontaktdynamik-Literatur steht.
 6. `neuheitsgrad.md`, `einordnung.md`, `zehn_fragen.md` — Abgrenzung und Antworten auf die üblichen Einwände.
 7. `archiv_vermerk_kernhypothese_v3.md` — der dokumentierte Rückzug der früheren Hypothese.
@@ -29,7 +31,8 @@ Lizenz dieses Ordners: CC BY 4.0, siehe [`../LICENSE-CC-BY-4.0`](../LICENSE-CC-B
 - Die **Präregistrierung** ist unverändert vom Juni 2026 und wird nicht nachträglich editiert. Sie
   nennt als dritte Observable das „Spitzen-zu-Mittel-Verhältnis“; in Engine, Daten und allen
   September-Dokumenten ist diese Größe als Asymmetrieverhältnis A definiert (Codevariable `peak_ratio`).
-  Eine v2 der Präregistrierung mit Änderungsvermerk ist vorgesehen.
+  Eine v2 mit Änderungsvermerk liegt als Entwurf vor (`praeregistrierung_v2_entwurf.md`, Anhang A0);
+  sie wird vor Beginn der Messungen eingefroren und extern registriert.
 - Der **Literaturabgleich** ist ein Arbeitsdokument für die nächste Fassung des Forschungsrahmens (v3.6);
   die dort genannte Fassung v3.5 ist noch nicht im Repository abgelegt, weil sie vor der Umstellung auf
   Linie A als primäre Linie entstand.

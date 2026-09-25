@@ -41,6 +41,7 @@ solche Verschiebung; sie wurde als Kontaktmodell-Artefakt erkannt, zurückgezoge
 | [`docs/werkstattbericht.md`](docs/werkstattbericht.md) | „Wellenform statt Mittelwert“ — der Stand für fachliche Leser |
 | [`docs/expose_2026-09.md`](docs/expose_2026-09.md) | Projekt-Exposé (Kernfrage, Stand, messbares Signal, nächster Schritt) |
 | [`docs/praeregistrierung_2026-06.md`](docs/praeregistrierung_2026-06.md) | Präregistrierung mit Falsifikationskriterien (Juni 2026, unverändert) |
+| [`docs/praeregistrierung_v2_entwurf.md`](docs/praeregistrierung_v2_entwurf.md), [`docs/praeregistrierung_v2_anhang.md`](docs/praeregistrierung_v2_anhang.md) | Entwurf der Präregistrierung v2 für die Messkampagne mit technischem Anhang (September 2026, nicht eingefroren, nicht registriert) |
 | [`docs/einordnung.md`](docs/einordnung.md), [`docs/zehn_fragen.md`](docs/zehn_fragen.md) | Einordnung, Abgrenzung, Antworten auf die üblichen Einwände |
 | [`docs/neuheitsgrad.md`](docs/neuheitsgrad.md) | Was daran nicht neu ist — und was übrig bleibt |
 | [`docs/literaturabgleich_2026-09-12.md`](docs/literaturabgleich_2026-09-12.md) | Abgleich mit der Ratchet-, Tribologie- und Kontaktdynamik-Literatur, 12 verifizierte Referenzen, davon 10 mit DOI |
