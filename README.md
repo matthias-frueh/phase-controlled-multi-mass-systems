@@ -52,9 +52,11 @@ solche Verschiebung; sie wurde als Kontaktmodell-Artefakt erkannt, zurückgezoge
 
 Parametersatz der Engine (Simulationsreferenz für alle Zahlen in diesem Repository; Variablennamen aus
 [`code/pcmms_v3a_phasen_sweep.py`](code/pcmms_v3a_phasen_sweep.py), Block „Systemparameter“):
-M = 0,650 kg Gesamtmasse (drei Module à M/3) · g = 9,81 m/s², M·g = 6,3765 N · f = 10 Hz ·
+M = 0,650 kg Gesamtmasse (drei Module à M/3; der Rahmen ist masselos, die gesamte Masse bewegt sich
+mit den Modulen) · g = 9,81 m/s², M·g = 6,3765 N · f = 10 Hz ·
 Egg-Profil: Halteanteil pro Zyklus 0,65 (`THOLD`), Anteil der schnellen Phase 1 − THOLD = 0,35 (`TFAST`),
-Hold-Radius oben 5 mm (`RTOP`), Radius unten (schnelle Phase) RTOP·TFAST/THOLD ≈ 2,69 mm (`RBOT`, C¹-stetig) ·
+Hold-Radius oben 5 mm (`RTOP`), Radius unten (schnelle Phase) RTOP·TFAST/THOLD ≈ 2,69 mm (`RBOT`, C¹-stetig),
+Hub (Spitze-Spitze) RTOP + RBOT ≈ 7,69 mm ·
 Kontakt: linear-elastisch K = 10⁴ N/m, viskos C = 16 N·s/m (ζ ≈ 0,1), unilateral (nur Druck, keine Zugkraft) ·
 RK4, Δt = 50 µs · 15 s je Konfiguration, davon 5 s Einschwingen; ausgewertet werden die letzten 10 s.
 Alle Datensätze sind Simulationsausgaben; **gemessene Daten existieren nicht.**
@@ -65,8 +67,11 @@ Kürzel v3a auch den zurückgezogenen Simulationszyklus v3a–v3d bezeichnet. Mi
 ([`docs/archiv_vermerk_kernhypothese_v3.md`](docs/archiv_vermerk_kernhypothese_v3.md)).
 
 - **19×19-Phasensweep** (361 Konfigurationen, [`data/sweep_19x19.csv`](data/sweep_19x19.csv)): ⟨F⟩ im Median 6,3765 N = M·g
-  (Spannweite 6,333–6,383 N, Endlich-Fenster-Effekt bei hohem Liftoff) · Schiefe −0,29 … +1,98 ·
+  (Spannweite 6,333–6,383 N durch Einschwing- und Endlich-Fenster-Effekte bei hohem Liftoff) · Schiefe −0,29 … +1,98 ·
   Liftoff 0–76,2 % · F_max bis 50,6 N. Nur 12 Rasterpunkte um (120°, 240°) und (240°, 120°) sind liftoff-frei.
+  Im Liftoff-Bereich ist die Karte nicht eindeutig: Physikalisch gleiche Konfigurationen (Module nur umbenannt)
+  können in verschiedenen stationären Zuständen landen, etwa (0°, 113,7°) mit 75,6 % und (246,3°, 246,3°) mit
+  18,2 % Liftoff. Die Spannweiten gelten, der Wert eines einzelnen Liftoff-Punkts hängt aber von der Startbedingung ab.
 - **2°-Feinsweep** um (120°, 240°) (441 Konfigurationen, [`data/finesweep_2deg_120_240.csv`](data/finesweep_2deg_120_240.csv)):
   F_min bildet eine Zeltkurve mit Spitze 5,3304 N genau am Triphasik-Punkt, abfallend mit ≈ 0,23 N je Grad
   zu kleineren φ₂ und ≈ 0,19 N je Grad zu größeren φ₂ · 90,7 % des Fensters liftoff-frei · |⟨F⟩ − M·g| ≤ 0,2 mN durchgehend.
