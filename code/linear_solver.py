@@ -73,7 +73,10 @@ def profile_spectrum(profile='egg', oversample=OVERSAMPLE, n=None):
     t = np.arange(n) * (T_CYC / n)
     a = z_egg_zdd(t) if profile == 'egg' else sinus_zdd(t)
     P = np.fft.rfft(a)
-    P[0] = 0.0      # Mittelwert der Profilbeschleunigung ist exakt null (Rasterfehler ~1e-7 m/s² verwerfen)
+    # Gleichanteil exakt null: Über einen Zyklus gilt ∫a dt = (2π/T)·(RBOT/TFAST − RTOP/THOLD) = 0, weil
+    # RBOT = RTOP·TFAST/THOLD (beim Sinus trivial). Die Abtastung liefert nur Rundungsreste; damit ist
+    # ⟨N⟩ = M·g in der linearen Lösung exakt und wird nicht numerisch gemittelt.
+    P[0] = 0.0
     return P, n
 
 
@@ -107,8 +110,7 @@ def solve(phi2_deg, phi3_deg, K_c=K, C_c=C_DAMP, mu=1.0, profile='egg', oversamp
         comb = (1 + np.exp(-1j * np.outer(np.radians(phi2[sl]), k))
                 + np.exp(-1j * np.outer(np.radians(phi3[sl]), k))) / 3
         A = P * comb
-        F_fine = MG + mu * M * np.fft.irfft(A * H, n, axis=1)
-        F = F_fine[:, ::oversample]                         # Stichproben wie in der Engine
+        F = MG + mu * M * np.fft.irfft(A * H, n, axis=1)[:, ::oversample]   # Stichproben wie in der Engine
         if K_c is None:
             z_max = np.full(F.shape[0], -np.inf)
         else:                                               # Auflagerkoordinate um die statische Einfederung
@@ -116,7 +118,7 @@ def solve(phi2_deg, phi3_deg, K_c=K, C_c=C_DAMP, mu=1.0, profile='egg', oversamp
         F_min, F_max = F.min(1), F.max(1)
         valid = (F_min > 0) & (z_max < 0)
         denom = MG - F_min
-        out['F_mean'][sl] = F_fine.mean(1)
+        out['F_mean'][sl] = MG                              # exakt, Gleichanteil null (profile_spectrum)
         out['F_skew'][sl] = np.where(valid, skew(F, axis=1), np.nan)
         out['liftoff'][sl] = np.where(valid, 0.0, np.nan)
         out['F_max'][sl] = np.where(valid, F_max, np.nan)
@@ -236,8 +238,9 @@ def rk4(phi2_deg, phi3_deg, K_c=K, C_c=C_DAMP, z0=None, v0=0.0, t_sim=15.0, t_ev
 
 # ── Kommandos ────────────────────────────────────────────────────────────────
 def validate():
-    """Abgleich mit den Engine-Datensätzen: Liftoff-Klassifikation aller Punkte und Observablen aller
-    liftoff-freien Punkte. Toleranz 1e-4 (N bzw. dimensionslos), F_mean 1e-5 N."""
+    """Abgleich mit den Engine-Datensätzen: Liftoff-Klassifikation aller Punkte, Observablen aller
+    liftoff-freien Punkte (Toleranz 1e-4 N bzw. dimensionslos) und Nullkontrolle |⟨F⟩ − M·g| der Engine an
+    diesen Punkten (Toleranz 1e-5 N; die lineare Lösung hat ⟨F⟩ = M·g exakt)."""
     checks = [('sweep_19x19.csv', 'phi2_deg', 'phi3_deg', 'peak_ratio', 'egg'),
               ('finesweep_2deg_120_240.csv', 'phi2_deg', 'phi3_deg', 'peak_ratio', 'egg'),
               ('sweep_7x7_sinus.csv', 'phi2', 'phi3', 'asym', 'sinus')]
@@ -247,16 +250,16 @@ def validate():
         r = solve(df[c2].values, df[c3].values, profile=prof)
         free = (df.liftoff == 0).values
         mis = int((r['valid'] != free).sum())
-        dev = {'F_mean': np.abs(r['F_mean'][free] - df.F_mean.values[free]).max(),
+        dev = {'|F_mean−Mg|': np.abs(df.F_mean.values[free] - MG).max(),
                'F_min': np.abs(r['F_min'][free] - df.F_min.values[free]).max(),
                'F_max': np.abs(r['F_max'][free] - df.F_max.values[free]).max(),
                'F_skew': np.abs(r['F_skew'][free] - df.F_skew.values[free]).max(),
                'A': np.abs(r['peak_ratio'][free] - df[ca].values[free]).max()}
-        tol = {'F_mean': 1e-5, 'F_min': 1e-4, 'F_max': 1e-4, 'F_skew': 1e-4, 'A': 1e-4}
+        tol = {'|F_mean−Mg|': 1e-5, 'F_min': 1e-4, 'F_max': 1e-4, 'F_skew': 1e-4, 'A': 1e-4}
         bad = [q for q in dev if not dev[q] <= tol[q]]
         ok &= (mis == 0) and not bad
         print(f'{fname}: {len(df)} Punkte, {free.sum()} liftoff-frei, Klassifikation abweichend: {mis}')
-        print('   max |Δ| ' + '  '.join(f'{q} {v:.1e}' for q, v in dev.items())
+        print('   max ' + '  '.join(f'{q} {v:.1e}' for q, v in dev.items())
               + ('   OK' if not bad and mis == 0 else f'   FEHLER: {bad or "Klassifikation"}'))
     print('Ergebnis:', 'bestanden' if ok else 'NICHT bestanden')
     return ok
