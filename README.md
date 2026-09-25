@@ -11,8 +11,10 @@ Stand: 25. September 2026 · Status: prä-experimentell (Simulation; keine Messd
 Ein ruhender Körper steht auf einer Unterlage. In seinem Inneren bewegen sich drei Massen periodisch
 mit demselben Profil, aber mit einstellbarer relativer Phasenlage (φ₂, φ₃). Untersucht wird, wie diese
 Phasenkonfiguration die **zeitliche Form** der Kontaktkraft N(t) zwischen Körper und Unterlage bestimmt —
-gemessen an Schiefe γ₁, Liftoff-Anteil λ, Asymmetrieverhältnis A = (F_max − M·g)/(M·g − F_min) und
-Minimalkraft F_min.
+in der Simulation gemessen an Schiefe γ₁, Liftoff-Anteil λ, Asymmetrieverhältnis
+A = (F_max − M·g)/(M·g − F_min) und Minimalkraft F_min. Für die Messkampagne sind nach dem
+[Entwurf der Präregistrierung v2](docs/praeregistrierung_v2_entwurf.md) F_min − ⟨N⟩ und die Harmonischen
+N₁ … N₃ primär, γ₁ sekundär, A beschreibend und λ explorativ.
 
 Der Grundsatz des Projekts: **Primär ausgewertet werden nicht Absolutkräfte, sondern Abweichungen der
 Kontaktkraft gegen eine Referenz.** Die Referenz ist das Zeitmittel ⟨N⟩ = M·g, das aus dem Schwerpunktsatz
@@ -114,8 +116,10 @@ Alle Abbildungen zeigen Simulationsausgaben bei K = 10⁴ N/m; erzeugt mit
   <img alt="F_min entlang φ₃ = 240°: Zeltkurve mit Spitze 5,3304 N bei φ₂ = 120°, 0,77 N bei 100° und 1,62 N bei 140°" src="docs/figures/zeltkurve_light.png">
 </picture>
 
-*F_min entlang φ₃ = 240° aus dem 2°-Feinsweep. Die Lage der Spitze folgt aus der Phasengeometrie, ihre
-Höhe und die Steigung der Flanken hängen von der Kontaktsteifigkeit ab.*
+*F_min entlang φ₃ = 240° aus dem 2°-Feinsweep. Bei identischen Modulen folgt aus der Phasengeometrie für
+jeden linearen Kontakt ein Knick mit relativem Maximum bei φ₂ = 120°; ob er auch das Maximum der Kurve ist,
+hängt vom Kontakt ab (in dieser Simulation ja). Die Höhe der Spitze und die Steigung der Flanken hängen von
+der Kontaktsteifigkeit ab.*
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="docs/figures/phasenkarten_dark.png">
@@ -170,4 +174,6 @@ oscillating masses with adjustable relative phases (φ₂, φ₃). The object of
 unilateral contact force — skewness, liftoff fraction, asymmetry ratio, minimum force — not its time
 average, which is fixed at M·g by the centre-of-mass theorem and serves as the null control. No claim of
 reactionless propulsion, gravity modification or mean-force shift is made; an earlier mean-shift result
-was identified as a contact-model artefact and retracted. All data here are simulation output.
+was identified as a contact-model artefact and retracted. All data here are simulation output. For the
+measurement campaign, the draft preregistration v2 makes F_min − ⟨N⟩ and the harmonics N₁ … N₃ primary,
+skewness secondary, the asymmetry ratio descriptive and the liftoff fraction exploratory.

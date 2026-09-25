@@ -38,7 +38,7 @@ externe Registrierung, Datenmanagement und Abweichungsprotokoll. Die Bezeichnung
 - **README, `overview.md`:** Zielgrößen γ₁, λ, A, F_min; nach v2 sind F_min − ⟨N⟩ und N₁ … N₃ primär, γ₁
   sekundär, A beschreibend, λ explorativ; v2 verlinken. README, Bildunterschrift der Zeltkurve: „Die Lage
   der Spitze folgt aus der Phasengeometrie“ (aus der Geometrie folgt bei identischen Modulen nur der Knick
-  bei 120°, A2.2; das Maximum kann kontaktabhängig wandern, A5).
+  bei 120°, A2.2; das Maximum kann kontaktabhängig wandern, A5). Erledigt.
 - **README, `overview.md`, Grundsatz:** README „Es werden keine Kräfte gemessen“ und `overview.md` „Gemessen
   wird nie ein Absolutwert“ (H3 und G6 brauchen eine absolute Kalibrierung, §0); `overview.md` „⟨N⟩ … keine
   Messgröße“ (⟨N⟩ wird in jedem Lauf bestimmt, H0). Umformuliert zu „primär ausgewertet“ und „Kontrollgröße,
