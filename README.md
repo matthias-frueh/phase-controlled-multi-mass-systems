@@ -91,7 +91,10 @@ Kürzel v3a auch den zurückgezogenen Simulationszyklus v3a–v3d bezeichnet. Mi
   K = 10⁴ N/m (Referenz), 76,1 % bei K = 10⁶ N/m mit ζ fest (68,5 % mit C = 16 N·s/m fest), 76,6 % bei starrer
   Auflage, 48,6 % bei K = 10⁴ N/m mit halber bewegter Masse. Bei der Referenz besteht der Kontaktast aus zwei
   Hauptgebieten um (120°, 240°) und (240°, 120°) (2 × 2524 Punkte, 3,90 %), in denen die Engine in allen Proben
-  auf dem Kontaktast landet, und sechs Satelliteninseln (6 × 74 Punkte, 0,34 %, z. B. um (35°, 116°)). Die Inseln
+  auf dem Kontaktast landet (412 Rasterpunkte der Datensätze vom Standardstart, `--validate`; im 3°-Raster um
+  (120°, 240°) 280 Punkte × 7 Starts, nämlich Standardstart sowie ż₀ ∈ {0,5; 1,5; 3,0} m/s × t₀ ∈ {0; 0,05} s,
+  je 20 s mit Auswertung der letzten 4 s, `--contact --grid`, ca. 6–8 min; dazu Würfe mit ż₀ = 3 m/s bei
+  (98°, 240°) und (148°, 240°), `--contact`), und sechs Satelliteninseln (6 × 74 Punkte, 0,34 %, z. B. um (35°, 116°)). Die Inseln
   sind bistabil: Vom Standardstart der Engine aus hebt der Körper ab (Liftoff ≈ 75,8 %, F_max ≈ 39,5 N), vom
   linearen Orbit aus bleibt er in Kontakt (`python3 code/linear_solver.py --contact`). Die Bistabilität bleibt
   über 200 s und bei halbiertem Zeitschritt bestehen: Bei (35°, 116°) ergibt der Standardstart λ = 75,82 % bzw.

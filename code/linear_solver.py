@@ -20,14 +20,17 @@ periodische Lösung ohne Abheben. Streng folgt nur die Umkehrung: Erreicht die l
 (F_min_lin ≤ 0), hebt der Körper ab, und nur die RK4-Engine liefert die Wellenform; dort gibt das Skript
 nur F_min_lin aus. Existiert ein Kontaktast, kann die Engine je nach Anfangszustand trotzdem auf einem
 abhebenden Zustand landen: Bei der Referenz sind die sechs kleinen Satelliteninseln des Kontaktasts
-bistabil, die beiden Hauptgebiete um (120°, 240°) und (240°, 120°) in allen Proben nicht (--contact).
+bistabil, die beiden Hauptgebiete um (120°, 240°) und (240°, 120°) in allen Proben nicht (412 Rasterpunkte
+der Datensätze vom Standardstart; 280 Punkte × 7 Starts im 3°-Raster um (120°, 240°) mit --contact --grid;
+zwei Würfe mit ż₀ = 3 m/s mit --contact).
 Kein Rasterpunkt der drei Datensätze liegt in einer Insel; dort stimmen lineare Klassifikation und Engine
 überein (--validate). Die Spalte liftoff = 0 bedeutet deshalb „auf dem Kontaktast“.
 
 Aufruf:
   python3 linear_solver.py --validate                 Abgleich mit allen drei Datensätzen in data/ (Exit-Code 1 bei Abweichung)
   python3 linear_solver.py --harmonics                Anteil der zweiten Harmonischen an Zeltsteigung und Karte
-  python3 linear_solver.py --contact [--long]         Kontaktast: Anteile, Gebiete, Bistabilität der Inseln (RK4)
+  python3 linear_solver.py --contact [--long] [--grid] Kontaktast: Anteile, Gebiete, Bistabilität der Inseln,
+                                                      Monostabilität des Hauptgebiets (RK4)
   python3 linear_solver.py --point 120 240            Observablen an einem Punkt
   python3 linear_solver.py --ktable                   F_min(120°, 240°) über K (ζ fest und C fest), Band um
                                                       3f = f_n, RK4-Gegenprobe bei 23 000 N/m (ca. 30 s)
@@ -202,16 +205,17 @@ def c_for(K_c, zeta):
 ZETA0 = C_DAMP / (2 * np.sqrt(K * M))   # Dämpfungsgrad der Referenz, 0,099228 („ζ fest“)
 
 
-def rk4(phi2_deg, phi3_deg, K_c=K, C_c=C_DAMP, z0=None, v0=0.0, t_sim=15.0, t_eval=10.0, dt=DT):
+def rk4(phi2_deg, phi3_deg, K_c=K, C_c=C_DAMP, z0=None, v0=0.0, t_sim=15.0, t_eval=10.0, dt=DT, t0=0.0):
     """Zeitintegration wie in der Engine (RK4, Kontaktkraft aus der ersten Stufe, unilateraler
-    Feder-Dämpfer-Kontakt), aber mit wählbarem K, C und Anfangszustand. Ohne z0 startet sie wie die
-    Engine in der statischen Ruhelage bei t = 0. Gibt Liftoff-Anteil [%], F_max und F_min der letzten
-    t_eval Sekunden zurück, je Phasenpunkt."""
+    Feder-Dämpfer-Kontakt), aber mit wählbarem K, C, Anfangszustand (z0, v0) und Startzeit t0. Ohne z0
+    startet sie wie die Engine in der statischen Ruhelage bei t = 0. Gibt Liftoff-Anteil [%], F_max und
+    F_min der letzten t_eval Sekunden zurück, je Phasenpunkt."""
     phi2 = np.atleast_1d(np.asarray(phi2_deg, float))
     phi3 = np.atleast_1d(np.asarray(phi3_deg, float))
     tau2, tau3 = np.radians(phi2) / OMEGA, np.radians(phi3) / OMEGA
     z = np.broadcast_to(-MG / K_c if z0 is None else z0, phi2.shape).astype(float)
     zd = np.broadcast_to(v0, phi2.shape).astype(float)
+    t_start = np.broadcast_to(t0, phi2.shape).astype(float)
 
     def rhs(z, zd, t):
         F = -K_c * z - C_c * zd
@@ -223,7 +227,7 @@ def rk4(phi2_deg, phi3_deg, K_c=K, C_c=C_DAMP, z0=None, v0=0.0, t_sim=15.0, t_ev
     lift = np.zeros(phi2.size)
     F_max, F_min = np.full(phi2.size, -np.inf), np.full(phi2.size, np.inf)
     for i in range(n_steps):
-        t = i * dt
+        t = t_start + i * dt
         k1z, k1d, Fc = rhs(z, zd, t)
         k2z, k2d, _ = rhs(z + 0.5 * dt * k1z, zd + 0.5 * dt * k1d, t + 0.5 * dt)
         k3z, k3d, _ = rhs(z + 0.5 * dt * k2z, zd + 0.5 * dt * k2d, t + 0.5 * dt)
@@ -349,6 +353,24 @@ def contact(long_run=False):
             print(f'  {p[0]:48s} Liftoff {r["liftoff"][i]:6.2f} %  F_max {r["F_max"][i]:6.2f} N')
 
 
+def main_region_probe(step=3.0):
+    """Monostabilität des Hauptgebiets um (120°, 240°): jeder Rasterpunkt des Kontaktasts (Raster step)
+    mit 7 Starts – Standardstart der Engine sowie ż₀ ∈ {0,5; 1,5; 3,0} m/s × t₀ ∈ {0; 0,05} s aus der
+    statischen Ruhelage –, je 20 s RK4, Auswertung der letzten 4 s (ca. 6–8 min)."""
+    phis, _, _, valid = contact_map(step)
+    i0 = (int(round(120.0 / step)), int(round(240.0 / step)))
+    idx = next(c for _, c in components(valid) if (c == i0).all(1).any())
+    starts = [(0.0, 0.0)] + [(v, t) for v in (0.5, 1.5, 3.0) for t in (0.0, 0.05)]
+    p2, p3 = np.repeat(phis[idx[:, 0]], len(starts)), np.repeat(phis[idx[:, 1]], len(starts))
+    v0 = np.tile([s[0] for s in starts], len(idx))
+    t0 = np.tile([s[1] for s in starts], len(idx))
+    r = rk4(p2, p3, v0=v0, t0=t0, t_sim=20.0, t_eval=4.0)
+    n_lift = int((r['liftoff'] > 0).sum())
+    print(f'Hauptgebiet um (120°, 240°), {step:g}°-Raster: {len(idx)} Punkte × {len(starts)} Starts = {p2.size} '
+          f'RK4-Läufe, 20 s, Auswertung der letzten 4 s: {p2.size - n_lift} enden im Kontakt, '
+          f'{n_lift} mit Liftoff (max. {r["liftoff"].max():.2f} %)')
+
+
 def params(a):
     K_c = None if a.rigid else a.K
     C_c = 0.0 if a.rigid else (c_for(a.K, a.zeta) if a.zeta is not None else a.C)
@@ -362,6 +384,8 @@ def main():
     ap.add_argument('--harmonics', action='store_true')
     ap.add_argument('--contact', action='store_true')
     ap.add_argument('--long', action='store_true', help='mit --contact: zusätzlich 200 s bei Δt und Δt/2')
+    ap.add_argument('--grid', action='store_true',
+                    help='mit --contact: Hauptgebiet im 3°-Raster, 7 Starts je Punkt (ca. 6–8 min)')
     ap.add_argument('--point', nargs=2, type=float, metavar=('PHI2', 'PHI3'))
     ap.add_argument('--map', metavar='CSV')
     ap.add_argument('--step', type=float, default=2.0, help='Rasterweite der Karte in Grad')
@@ -381,6 +405,8 @@ def main():
         harmonics()
     if a.contact:
         contact(a.long)
+        if a.grid:
+            main_region_probe()
     if a.point:
         K_c, C_c = params(a)
         r = solve(*a.point, K_c, C_c, a.mu, prof)
