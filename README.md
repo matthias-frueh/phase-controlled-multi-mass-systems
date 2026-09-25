@@ -45,7 +45,8 @@ solche Verschiebung; sie wurde als Kontaktmodell-Artefakt erkannt, zurückgezoge
 | [`docs/neuheitsgrad.md`](docs/neuheitsgrad.md) | Was daran nicht neu ist — und was übrig bleibt |
 | [`docs/literaturabgleich_2026-09-12.md`](docs/literaturabgleich_2026-09-12.md) | Abgleich mit der Ratchet-, Tribologie- und Kontaktdynamik-Literatur, 12 verifizierte Referenzen, davon 10 mit DOI |
 | [`docs/archiv_vermerk_kernhypothese_v3.md`](docs/archiv_vermerk_kernhypothese_v3.md) | Dokumentierter Rückzug der früheren Hypothese |
-| [`code/`](code/) | Simulations-Engine ([`pcmms_v3a_phasen_sweep.py`](code/pcmms_v3a_phasen_sweep.py)) und 2°-Feinsweep ([`finesweep.py`](code/finesweep.py)) |
+| [`code/`](code/) | Simulations-Engine ([`pcmms_v3a_phasen_sweep.py`](code/pcmms_v3a_phasen_sweep.py)), 2°-Feinsweep ([`finesweep.py`](code/finesweep.py)) und Abbildungen ([`plot_figures.py`](code/plot_figures.py)) |
+| [`docs/figures/`](docs/figures/) | Abbildungen aus den Simulationsdaten, je in heller und dunkler Fassung |
 | [`data/`](data/) | Simulationsausgaben: 19×19-Phasensweep und 2°-Feinsweep ([`data/README.md`](data/README.md)) |
 
 ## Simulationsstand
@@ -78,6 +79,37 @@ Kürzel v3a auch den zurückgezogenen Simulationszyklus v3a–v3d bezeichnet. Mi
 - Ein Sinusprofil liefert ohne Liftoff keine Schiefe; das asymmetrische Bewegungsprofil ist für das
   Zielsignal zwingend.
 
+### Abbildungen
+
+Alle Abbildungen zeigen Simulationsausgaben bei K = 10⁴ N/m; erzeugt mit
+[`code/plot_figures.py`](code/plot_figures.py) aus den Dateien in [`data/`](data/).
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/figures/zeltkurve_dark.png">
+  <img alt="F_min entlang φ₃ = 240°: Zeltkurve mit Spitze 5,3304 N bei φ₂ = 120°, 0,77 N bei 100° und 1,62 N bei 140°" src="docs/figures/zeltkurve_light.png">
+</picture>
+
+*F_min entlang φ₃ = 240° aus dem 2°-Feinsweep. Die Lage der Spitze folgt aus der Phasengeometrie, ihre
+Höhe und die Steigung der Flanken hängen von der Kontaktsteifigkeit ab.*
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/figures/phasenkarten_dark.png">
+  <img alt="Phasenkarten des 19×19-Sweeps: Schiefe und Liftoff-Anteil über φ₂ und φ₃; liftoff-frei nur nahe (120°, 240°) und (240°, 120°), negative Schiefe dort und schwach im Übergangsbereich" src="docs/figures/phasenkarten_light.png">
+</picture>
+
+*Schiefe und Liftoff-Anteil über den ganzen Phasenraum. Liftoff-freier Kontakt tritt nur in der Nähe der
+triphasischen Konfigurationen auf (höchstens 28° entfernt). Deutlich negative Schiefe (−0,2 bis −0,29) liegt
+bis 40° um diese Punkte, schwach negative (bis −0,08) reicht weiter in den Übergangsbereich. Im Liftoff-Bereich hängt der Wert einzelner Zellen von der
+Startbedingung ab (siehe oben).*
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/figures/wellenformen_dark.png">
+  <img alt="Kontaktkraft N(t) über 300 ms für synchrone Phasen (Liftoff 75,8 %), einen Übergangspunkt (Liftoff 10,9 %) und die triphasische Konfiguration (kein Liftoff)" src="docs/figures/wellenformen_light.png">
+</picture>
+
+*Kontaktkraft N(t) für drei Phasenlagen, gleiche y-Achse: synchron hebt der Körper ab und landet mit
+Spitzen um 40 N, triphasisch bleibt die Kraft in einem schmalen Band um M·g.*
+
 Die Auslegung eines physischen Aufbaus (Bewegungsprofil, Wägezellen, Kalibrierung bei intermittierendem
 Kontakt) ist davon getrennt und offen; siehe [`docs/expose_2026-09.md`](docs/expose_2026-09.md), Abschnitt „Nächster Schritt“.
 
@@ -88,6 +120,7 @@ pip install -r code/requirements.txt
 cd data
 python3 ../code/finesweep.py --validate      # prüft die Feinsweep-Engine gegen sweep_19x19.csv
 python3 ../code/pcmms_v3a_phasen_sweep.py    # voller 19×19-Sweep, schreibt nach ~/pcmms_outputs_v3a_sweep
+python3 ../code/plot_figures.py              # Abbildungen nach docs/figures/ (ca. 40 s)
 ```
 
 Der vollständige 19×19-Sweep braucht je nach Rechner 30–60 Minuten; das Skript ist checkpoint-fest.
