@@ -57,6 +57,7 @@ externe Registrierung, Datenmanagement und Abweichungsprotokoll. Die Bezeichnung
   jeder Mittelwertabweichung (nach v2: Lauf ungültig, Stopp erst bei reproduzierbarem Verstoß, S1); „gilt H1
   … als falsifiziert“, wenn keine Struktur über dem Rauschen (nach v2: „nicht entscheidbar“); „ohne jede
   Statistik am Kraftsignal ablesbar“; Wellenformstatistik als „primäre Zielgröße“ (nach v2: γ₁ sekundär).
+  Erledigt; „primäre Zielgröße“ für die zeitaufgelöste Kontaktkraft bleibt, das gilt auch nach v2.
 - **`code/linear_solver.py`:** `--section`, `--phi3`, `--f` liegen seit Commit `069cb9b` im Repository
   (Werkzeug 1, erledigt).
 

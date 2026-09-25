@@ -30,9 +30,11 @@ Neuheitsbeweis — widerlegbar durch einen einzigen Literaturhinweis.
 
 Nein — und das ist konstruktiv abgesichert. Linie A behauptet ausdrücklich, dass das Zeitmittel
 *nicht* verschiebbar ist, und nutzt diese Unmöglichkeit als Kontrollgröße: Jede beobachtete
-Mittelwertabweichung gilt per Protokoll als Apparaturfehler und löst harten Stopp aus. Linie B
-behauptet Nettobewegung, benennt aber den Reaktionspartner (Luft) und sagt vorher, dass der Effekt
-im Vakuum exakt verschwindet. Eine frühere Fassung behauptete tatsächlich eine
+Mittelwertabweichung gilt per Protokoll als Apparaturfehler. Nach dem
+[Entwurf](praeregistrierung_v2_entwurf.md) der Präregistrierung v2 macht eine Abweichung über der
+Kontrollschwelle ε_ctrl den Lauf ungültig; angehalten wird die Messung erst bei einem reproduzierbaren
+Verstoß (S1, dort §9.2). Linie B behauptet Nettobewegung, benennt aber den Reaktionspartner (Luft) und
+sagt vorher, dass der Effekt im Vakuum exakt verschwindet. Eine frühere Fassung behauptete tatsächlich eine
 Mittelwertverschiebung — sie wurde zurückgezogen, dokumentiert und archiviert.
 
 **4 · Warum schwankt die Kraft bei festem Mittel?**
@@ -59,8 +61,10 @@ Mechanik ist das unüblich — und es ist der Teil, der auch bei einem Null-Erge
 **7 · Was, wenn nichts herauskommt?**
 
 Dann ist das ein Ergebnis. Die Falsifikationsbedingung steht vorab fest: Ist die Regime-Struktur nach
-allen Kontrollen nicht über dem Rauschboden nachweisbar, gilt H1 für den getesteten Bereich als
-falsifiziert. Eingeplant, nicht abgefedert.
+allen Kontrollen nicht über dem Rauschboden nachweisbar, gilt H1 der Präregistrierung vom Juni 2026 für
+den getesteten Bereich als falsifiziert. Nach dem [Entwurf](praeregistrierung_v2_entwurf.md) der
+Präregistrierung v2, der die Bezeichnung H1 neu belegt, ist dieser Ausgang „nicht entscheidbar" (die
+Präzision reicht nicht, dort §9.4) und wird wie jeder Ausgang veröffentlicht. Eingeplant, nicht abgefedert.
 
 **8 · Warum kein Roboter?**
 
