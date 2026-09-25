@@ -23,7 +23,7 @@ Lizenz dieses Ordners: CC BY 4.0, siehe [`../LICENSE-CC-BY-4.0`](../LICENSE-CC-B
 - **Zielgrößen** sind Wellenform-Observablen: in der Simulation Schiefe γ₁, Liftoff-Anteil λ,
   Asymmetrieverhältnis A = (F_max − M·g)/(M·g − F_min), Minimalkraft F_min. Für die Messkampagne sind
   nach dem [Entwurf der Präregistrierung v2](praeregistrierung_v2_entwurf.md) F_min − ⟨N⟩ und die
-  Harmonischen N₁ … N₃ primär, γ₁ sekundär, A beschreibend und λ explorativ.
+  Harmonischen 1–3 der Kontaktkraft N(t) primär, γ₁ sekundär, A beschreibend und λ explorativ.
 - **Linie A** (ruhender Körper, Wellenformstatistik) ist die primäre Linie; **Linie B** (Bewegung durch
   Mediumkopplung) ist optional und hier nicht abgelegt.
 

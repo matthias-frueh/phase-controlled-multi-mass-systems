@@ -14,7 +14,7 @@ Phasenkonfiguration die **zeitliche Form** der Kontaktkraft N(t) zwischen Körpe
 in der Simulation gemessen an Schiefe γ₁, Liftoff-Anteil λ, Asymmetrieverhältnis
 A = (F_max − M·g)/(M·g − F_min) und Minimalkraft F_min. Für die Messkampagne sind nach dem
 [Entwurf der Präregistrierung v2](docs/praeregistrierung_v2_entwurf.md) F_min − ⟨N⟩ und die Harmonischen
-N₁ … N₃ primär, γ₁ sekundär, A beschreibend und λ explorativ.
+1–3 der Kontaktkraft N(t) primär, γ₁ sekundär, A beschreibend und λ explorativ.
 
 Der Grundsatz des Projekts: **Primär ausgewertet werden nicht Absolutkräfte, sondern Abweichungen der
 Kontaktkraft gegen eine Referenz.** Die Referenz ist das Zeitmittel ⟨N⟩ = M·g, das aus dem Schwerpunktsatz
@@ -175,5 +175,5 @@ unilateral contact force — skewness, liftoff fraction, asymmetry ratio, minimu
 average, which is fixed at M·g by the centre-of-mass theorem and serves as the null control. No claim of
 reactionless propulsion, gravity modification or mean-force shift is made; an earlier mean-shift result
 was identified as a contact-model artefact and retracted. All data here are simulation output. For the
-measurement campaign, the draft preregistration v2 makes F_min − ⟨N⟩ and the harmonics N₁ … N₃ primary,
-skewness secondary, the asymmetry ratio descriptive and the liftoff fraction exploratory.
+measurement campaign, the draft preregistration v2 makes F_min − ⟨N⟩ and the first three harmonics of the
+contact force primary, skewness secondary, the asymmetry ratio descriptive and the liftoff fraction exploratory.

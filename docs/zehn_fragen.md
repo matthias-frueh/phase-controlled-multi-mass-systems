@@ -63,7 +63,7 @@ Mechanik ist das unüblich — und es ist der Teil, der auch bei einem Null-Erge
 Dann ist das ein Ergebnis. Die Falsifikationsbedingung steht vorab fest: Ist die Regime-Struktur nach
 allen Kontrollen nicht über dem Rauschboden nachweisbar, gilt H1 der Präregistrierung vom Juni 2026 für
 den getesteten Bereich als falsifiziert. Nach dem [Entwurf](praeregistrierung_v2_entwurf.md) der
-Präregistrierung v2, der die Bezeichnung H1 neu belegt, ist dieser Ausgang „nicht entscheidbar" (die
+Präregistrierung v2, der die Bezeichnung H1 neu belegt, ist dieser Ausgang „nicht entscheidbar“ (die
 Präzision reicht nicht, dort §9.4) und wird wie jeder Ausgang veröffentlicht. Eingeplant, nicht abgefedert.
 
 **8 · Warum kein Roboter?**
