@@ -15,15 +15,19 @@ mit P_k den Fourier-Koeffizienten des Bewegungsprofils. Die Phasenlage wirkt nur
 (1 + e^{−ikφ₂} + e^{−ikφ₃})/3; bei (120°, 240°) verschwindet er für alle k, die kein Vielfaches von 3
 sind (wie beim Massenausgleich des Dreizylindermotors). Die Kontaktsteifigkeit wirkt nur über H.
 
-Die Lösung ist gültig, wenn N(t) > 0 und die Auflagerkoordinate z(t) < 0 bleiben; sonst hebt der
-Körper ab, und nur die RK4-Engine liefert die Wellenform. Das Skript kennzeichnet solche Punkte
-(valid = False) und gibt dort nur das lineare Minimum F_min_lin < 0 aus. Ob die Engine aus ihrer
-Startbedingung tatsächlich in den liftoff-freien Zustand einschwingt, sagt die lineare Lösung allein nicht;
-für alle Punkte der drei Datensätze trifft es zu (--validate).
+Bleiben N(t) > 0 und die Auflagerkoordinate z(t) < 0, existiert ein Kontaktast (valid = True): eine
+periodische Lösung ohne Abheben. Streng folgt nur die Umkehrung: Erreicht die lineare Lösung N ≤ 0
+(F_min_lin ≤ 0), hebt der Körper ab, und nur die RK4-Engine liefert die Wellenform; dort gibt das Skript
+nur F_min_lin aus. Existiert ein Kontaktast, kann die Engine je nach Anfangszustand trotzdem auf einem
+abhebenden Zustand landen: Bei der Referenz sind die sechs kleinen Satelliteninseln des Kontaktasts
+bistabil, die beiden Hauptgebiete um (120°, 240°) und (240°, 120°) in allen Proben nicht (--contact).
+Kein Rasterpunkt der drei Datensätze liegt in einer Insel; dort stimmen lineare Klassifikation und Engine
+überein (--validate). Die Spalte liftoff = 0 bedeutet deshalb „auf dem Kontaktast“.
 
 Aufruf:
   python3 linear_solver.py --validate                 Abgleich mit allen drei Datensätzen in data/ (Exit-Code 1 bei Abweichung)
   python3 linear_solver.py --harmonics                Anteil der zweiten Harmonischen an Zeltsteigung und Karte
+  python3 linear_solver.py --contact [--long]         Kontaktast: Anteile, Gebiete, Bistabilität der Inseln (RK4)
   python3 linear_solver.py --point 120 240            Observablen an einem Punkt
   python3 linear_solver.py --ktable                   F_min(120°, 240°) über K (ζ fest und C fest), Band um
                                                       3f = f_n, RK4-Gegenprobe bei 23 000 N/m (ca. 30 s)
@@ -157,6 +161,38 @@ def contact_map(step=1.0, K_c=K, C_c=C_DAMP, mu=1.0, profile='egg', h_one=(), pe
     return np.arange(m) * step, F_min, z_max, (F_min > 0) & (z_max < 0)
 
 
+def components(valid):
+    """Zusammenhängende Gebiete einer periodischen Karte (4er-Nachbarschaft, Ränder verbunden).
+    Gibt je Gebiet (Anzahl Punkte, Liste der Indizes) zurück, größte zuerst."""
+    from scipy import ndimage
+    lab, n = ndimage.label(valid)
+    parent = list(range(n + 1))
+
+    def root(a):
+        while parent[a] != a:
+            parent[a] = parent[parent[a]]
+            a = parent[a]
+        return a
+
+    for x, y in ((lab[0, :], lab[-1, :]), (lab[:, 0], lab[:, -1])):   # periodische Ränder
+        for a, b in zip(x, y):
+            if a and b:
+                parent[root(a)] = root(b)
+    roots = np.array([root(a) for a in range(n + 1)])[lab]
+    out = [np.argwhere((roots == r) & valid) for r in np.unique(roots[valid])]
+    return sorted(((len(c), c) for c in out), key=lambda x: -x[0])
+
+
+def orbit_state(phi2_deg, phi3_deg, K_c=K, C_c=C_DAMP, mu=1.0, oversample=OVERSAMPLE):
+    """Zustand (z, ż) der linearen periodischen Lösung bei t = 0, als Startwert für rk4()."""
+    P, n = profile_spectrum(oversample=oversample)
+    k = np.arange(P.size)
+    _, Y = transfer(K_c, C_c, P.size)
+    comb = (1 + np.exp(-1j * k * np.radians(phi2_deg)) + np.exp(-1j * k * np.radians(phi3_deg))) / 3
+    X = mu * M * P * comb * Y
+    return (-MG / K_c + np.fft.irfft(X, n)[0], np.fft.irfft(1j * OMEGA * k * X, n)[0])
+
+
 def c_for(K_c, zeta):
     return 2 * zeta * np.sqrt(K_c * M)
 
@@ -274,6 +310,39 @@ def harmonics():
           f'|H₂| := 1 {100 * (h2 > 0).mean():.1f} %')
 
 
+def contact(long_run=False):
+    """Kontaktast: Anteil im Phasenraum (1°-Raster) für mehrere Auflagen, Gebiete bei der Referenz und
+    RK4-Proben zur Bistabilität. long_run: zusätzlich 200 s bei Δt und Δt/2 (ca. 10 min)."""
+    cases = [('Referenz, K = 1e4 N/m', dict()),
+             ('K = 1e6 N/m, ζ fest', dict(K_c=1e6, C_c=c_for(1e6, ZETA0))),
+             ('K = 1e6 N/m, C = 16 N·s/m fest', dict(K_c=1e6, C_c=C_DAMP)),
+             ('starre Auflage', dict(K_c=None, C_c=0.0)),
+             ('Referenz, halbe bewegte Masse (μ = 0,5)', dict(mu=0.5))]
+    print('Anteil mit Kontaktast (F_min > 0 und z < 0), 1°-Raster:')
+    for name, kw in cases:
+        print(f'  {name:42s} {100 * contact_map(1.0, **kw)[3].mean():6.2f} %')
+    _, F_min, _, valid = contact_map(1.0)
+    print('Zusammenhängende Gebiete bei der Referenz (Zentrum [°], größtes F_min):')
+    for cnt, idx in components(valid):
+        c = idx.mean(0)
+        print(f'  {cnt:5d} Punkte ({100 * cnt / valid.size:.3f} %) um ({c[0]:.0f}°, {c[1]:.0f}°), '
+              f'F_min max {F_min[tuple(idx.T)].max():.3f} N')
+    probes = [('Insel (35°, 116°), Start wie Engine', 35.0, 116.0, None, 0.0),
+              ('Insel (35°, 116°), Start auf dem linearen Orbit', 35.0, 116.0, *orbit_state(35.0, 116.0)),
+              ('Insel (28°, 115°), Start wie Engine', 28.0, 115.0, None, 0.0),
+              ('Insel (28°, 115°), Start auf dem linearen Orbit', 28.0, 115.0, *orbit_state(28.0, 115.0)),
+              ('Hauptgebiet (98°, 240°), Wurf v₀ = 3 m/s', 98.0, 240.0, None, 3.0),
+              ('Hauptgebiet (148°, 240°), Wurf v₀ = 3 m/s', 148.0, 240.0, None, 3.0)]
+    z0 = np.array([-MG / K if p[3] is None else p[3] for p in probes])
+    v0 = np.array([p[4] for p in probes])
+    runs = [(15.0, DT)] + ([(200.0, DT), (200.0, DT / 2)] if long_run else [])
+    for t_sim, dt in runs:
+        print(f'RK4, {t_sim:.0f} s, Δt = {dt * 1e6:.0f} µs, Auswertung der letzten 10 s:')
+        r = rk4([p[1] for p in probes], [p[2] for p in probes], z0=z0, v0=v0, t_sim=t_sim, dt=dt)
+        for i, p in enumerate(probes):
+            print(f'  {p[0]:48s} Liftoff {r["liftoff"][i]:6.2f} %  F_max {r["F_max"][i]:6.2f} N')
+
+
 def params(a):
     K_c = None if a.rigid else a.K
     C_c = 0.0 if a.rigid else (c_for(a.K, a.zeta) if a.zeta is not None else a.C)
@@ -285,6 +354,8 @@ def main():
     ap.add_argument('--validate', action='store_true')
     ap.add_argument('--ktable', action='store_true')
     ap.add_argument('--harmonics', action='store_true')
+    ap.add_argument('--contact', action='store_true')
+    ap.add_argument('--long', action='store_true', help='mit --contact: zusätzlich 200 s bei Δt und Δt/2')
     ap.add_argument('--point', nargs=2, type=float, metavar=('PHI2', 'PHI3'))
     ap.add_argument('--map', metavar='CSV')
     ap.add_argument('--step', type=float, default=2.0, help='Rasterweite der Karte in Grad')
@@ -302,6 +373,8 @@ def main():
         ktable()
     if a.harmonics:
         harmonics()
+    if a.contact:
+        contact(a.long)
     if a.point:
         K_c, C_c = params(a)
         r = solve(*a.point, K_c, C_c, a.mu, prof)
@@ -315,8 +388,8 @@ def main():
         cols = ['phi2_deg', 'phi3_deg', 'valid', 'F_mean', 'F_skew', 'liftoff', 'F_max', 'F_min',
                 'peak_ratio', 'F_min_lin']
         pd.DataFrame({c: r[c] for c in cols}).to_csv(a.map, index=False, float_format='%.6f')
-        print(f'{a.map}: {r["valid"].size} Punkte, liftoff-frei {100 * r["valid"].mean():.1f} %')
-    if not (a.validate or a.ktable or a.harmonics or a.point or a.map):
+        print(f'{a.map}: {r["valid"].size} Punkte, mit Kontaktast {100 * r["valid"].mean():.1f} %')
+    if not (a.validate or a.ktable or a.harmonics or a.contact or a.point or a.map):
         ap.print_help()
 
 

@@ -81,13 +81,19 @@ Kürzel v3a auch den zurückgezogenen Simulationszyklus v3a–v3d bezeichnet. Mi
   (`python3 code/linear_solver.py --harmonics`).
 - Ein Sinusprofil liefert ohne Liftoff keine Schiefe; das asymmetrische Bewegungsprofil ist für das
   Zielsignal zwingend.
-- **Liftoff-freier Bereich analytisch:** Ohne Liftoff ist das Modell linear. [`code/linear_solver.py`](code/linear_solver.py)
+- **Kontaktast analytisch:** Ohne Abheben ist das Modell linear. [`code/linear_solver.py`](code/linear_solver.py)
   berechnet die stationäre Lösung exakt aus Fourier-Reihe des Profils und Übertragungsfunktion des Kontakts
   (ca. 1 ms je Punkt) und trifft alle liftoff-freien Punkte der drei Datensätze auf ≤ 6·10⁻⁶. Die Phasenlage
   wirkt nur über den Faktor (1 + e^{−ikφ₂} + e^{−ikφ₃})/3 auf die k-te Harmonische; bei (120°, 240°) bleiben nur
-  Vielfache der dritten Harmonischen übrig. Der liftoff-freie Anteil des Phasenraums (3°-Raster) hängt stark vom
-  Kontaktmodell und vom Anteil der bewegten Masse ab: 4,2 % bei K = 10⁴ N/m (Referenz), 76,2 % bei K = 10⁶ N/m
-  (ζ = 0,1), 76,6 % bei starrer Auflage, 48,7 % bei K = 10⁴ N/m mit halber bewegter Masse.
+  Vielfache der dritten Harmonischen übrig. Bleibt diese Lösung überall bei N > 0, existiert ein Kontaktast;
+  streng folgt nur aus einem negativen linearen F_min, dass der Körper abhebt. Der Anteil des Phasenraums mit
+  Kontaktast (1°-Raster) hängt stark vom Kontaktmodell und vom Anteil der bewegten Masse ab: 4,24 % bei
+  K = 10⁴ N/m (Referenz), 76,1 % bei K = 10⁶ N/m mit ζ fest (68,5 % mit C = 16 N·s/m fest), 76,6 % bei starrer
+  Auflage, 48,6 % bei K = 10⁴ N/m mit halber bewegter Masse. Bei der Referenz besteht der Kontaktast aus zwei
+  Hauptgebieten um (120°, 240°) und (240°, 120°) (2 × 2524 Punkte, 3,90 %), in denen die Engine in allen Proben
+  auf dem Kontaktast landet, und sechs Satelliteninseln (6 × 74 Punkte, 0,34 %, z. B. um (35°, 116°)). Die Inseln
+  sind bistabil: Vom Standardstart der Engine aus hebt der Körper ab (Liftoff ≈ 75,8 %, F_max ≈ 39,5 N), vom
+  linearen Orbit aus bleibt er in Kontakt (`python3 code/linear_solver.py --contact`).
 
 ### Abbildungen
 
