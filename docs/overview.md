@@ -1,6 +1,6 @@
 # Wegweiser durch die Dokumente
 
-Stand: 20. September 2026. Diese Datei ersetzt die Übersicht vom April 2026.
+Stand: 25. September 2026. Diese Datei ersetzt die Übersicht vom April 2026.
 
 Lizenz dieses Ordners: CC BY 4.0, siehe [`../LICENSE-CC-BY-4.0`](../LICENSE-CC-BY-4.0). Namensnennung: „Matthias Früh, PCMMS“, https://github.com/matthias-frueh/phase-controlled-multi-mass-systems
 

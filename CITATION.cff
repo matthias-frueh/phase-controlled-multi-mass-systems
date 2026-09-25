@@ -7,13 +7,7 @@ authors:
     given-names: "Matthias"
     orcid: "https://orcid.org/0009-0005-9984-4207"
     affiliation: "Gravidon Systemics Research"
-version: "2026-09-25"
-date-released: "2026-09-25"
 repository-code: "https://github.com/matthias-frueh/phase-controlled-multi-mass-systems"
-identifiers:
-  - type: doi
-    value: "10.5281/zenodo.________"
-    description: "Concept-DOI (alle Versionen dieses Repositorys)"
 license:
   - MIT
   - CC-BY-4.0

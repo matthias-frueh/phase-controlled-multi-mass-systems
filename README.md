@@ -152,7 +152,7 @@ Der vollständige 19×19-Sweep braucht je nach Rechner 30–60 Minuten; das Skri
 
 ## Zitieren
 
-Siehe [`CITATION.cff`](CITATION.cff). Concept-DOI für alle Versionen dieses Repositorys: 10.5281/zenodo.________.
+Siehe [`CITATION.cff`](CITATION.cff). Archivierter Stand 2026-09 auf Zenodo: https://zenodo.org/records/22864178.
 Frühere Stände (April–Mai 2026) liegen auf Zenodo unter *Früh, Matthias*; sie
 dokumentieren den Weg, nicht den aktuellen Stand.
 
