@@ -23,6 +23,7 @@ für alle Punkte der drei Datensätze trifft es zu (--validate).
 
 Aufruf:
   python3 linear_solver.py --validate                 Abgleich mit allen drei Datensätzen in data/ (Exit-Code 1 bei Abweichung)
+  python3 linear_solver.py --harmonics                Anteil der zweiten Harmonischen an Zeltsteigung und Karte
   python3 linear_solver.py --point 120 240            Observablen an einem Punkt
   python3 linear_solver.py --ktable                   F_min(120°, 240°) über K (ζ fest und C fest), Band um
                                                       3f = f_n, RK4-Gegenprobe bei 23 000 N/m (ca. 30 s)
@@ -61,9 +62,10 @@ def sinus_zdd(t, amplitude=SINUS_AMPLITUDE):
     return -amplitude * OMEGA**2 * np.sin(OMEGA * t)
 
 
-def profile_spectrum(profile='egg', oversample=OVERSAMPLE):
-    """Fourier-Koeffizienten P_k der Profilbeschleunigung auf einem Raster mit N_PER·oversample Punkten."""
-    n = N_PER * oversample
+def profile_spectrum(profile='egg', oversample=OVERSAMPLE, n=None):
+    """Fourier-Koeffizienten P_k der Profilbeschleunigung auf einem Raster mit N_PER·oversample (oder n)
+    Punkten je Periode."""
+    n = N_PER * oversample if n is None else n
     t = np.arange(n) * (T_CYC / n)
     a = z_egg_zdd(t) if profile == 'egg' else sinus_zdd(t)
     P = np.fft.rfft(a)
@@ -71,24 +73,28 @@ def profile_spectrum(profile='egg', oversample=OVERSAMPLE):
     return P, n
 
 
-def transfer(K_c, C_c, n_harm):
-    """H(kω) für k = 0 … n_harm−1; K_c = None bedeutet starre Auflage (H = 1)."""
+def transfer(K_c, C_c, n_harm, h_one=()):
+    """H(kω) für k = 0 … n_harm−1; K_c = None bedeutet starre Auflage (H = 1). Für die Harmonischen in
+    h_one wird H := 1 gesetzt (Diagnose ohne Kontaktresonanz; kein physikalisches Modell, deshalb dort nur
+    F_min auswerten, nicht z)."""
     w = OMEGA * np.arange(n_harm)
     if K_c is None:
         return np.ones(n_harm, complex), np.zeros(n_harm, complex)
     den = K_c - M * w**2 + 1j * w * C_c
-    return (K_c + 1j * w * C_c) / den, -1.0 / den      # Kraft- und Nachgiebigkeitsübertragung
+    H, Y = (K_c + 1j * w * C_c) / den, -1.0 / den     # Kraft- und Nachgiebigkeitsübertragung
+    H[list(h_one)] = 1.0
+    return H, Y
 
 
 def solve(phi2_deg, phi3_deg, K_c=K, C_c=C_DAMP, mu=1.0, profile='egg', oversample=OVERSAMPLE,
-          chunk=256):
+          chunk=256, h_one=()):
     """Stationäre Lösung für beliebig viele Phasenpunkte. Gibt ein Dict mit Arrays zurück
     (Spalten wie in den CSV-Dateien der Engine, dazu valid und F_min_lin)."""
     phi2 = np.atleast_1d(np.asarray(phi2_deg, float))
     phi3 = np.atleast_1d(np.asarray(phi3_deg, float))
     P, n = profile_spectrum(profile, oversample)
     k = np.arange(P.size)
-    H, Y = transfer(K_c, C_c, P.size)
+    H, Y = transfer(K_c, C_c, P.size, h_one)
     out = {c: np.empty(phi2.size) for c in
            ('F_mean', 'F_skew', 'liftoff', 'F_max', 'F_min', 'peak_ratio', 'F_min_lin', 'z_max')}
     out['valid'] = np.empty(phi2.size, bool)
@@ -127,6 +133,28 @@ def waveform(phi2_deg, phi3_deg, K_c=K, C_c=C_DAMP, mu=1.0, profile='egg', overs
     H, _ = transfer(K_c, C_c, P.size)
     comb = (1 + np.exp(-1j * k * np.radians(phi2_deg)) + np.exp(-1j * k * np.radians(phi3_deg))) / 3
     return np.arange(n) * (T_CYC / n), MG + mu * M * np.fft.irfft(P * comb * H, n)
+
+
+def contact_map(step=1.0, K_c=K, C_c=C_DAMP, mu=1.0, profile='egg', h_one=(), per_step=10):
+    """Lineares F_min und z_max auf dem Raster φ₂, φ₃ ∈ {0, step, …} (360/step ganzzahlig). Eine
+    Phasenverschiebung um i·step ist dort eine zyklische Verschiebung des Zeitsignals um i·per_step
+    Stichproben; so kostet die 1°-Karte Sekunden. Rückgabe: Phasen [°], F_min, z_max, valid
+    (Kontaktast existiert: F_min > 0 und z_max < 0), Index [i, j] ↔ (φ₂, φ₃) = (i·step, j·step)."""
+    m = int(round(360.0 / step))
+    if abs(m * step - 360.0) > 1e-9:
+        raise ValueError('360/step muss ganzzahlig sein')
+    n = m * per_step
+    P, _ = profile_spectrum(profile, n=n)
+    H, Y = transfer(K_c, C_c, P.size, h_one)
+    h = mu * M * np.fft.irfft(P * H, n) / 3                  # Beitrag eines Moduls zu N(t) − M·g
+    g = mu * M * np.fft.irfft(P * Y, n) / 3                  # Beitrag eines Moduls zu z(t) + M·g/K
+    Rh = np.stack([np.roll(h, i * per_step) for i in range(m)])
+    Rg = np.stack([np.roll(g, i * per_step) for i in range(m)])
+    F_min, z_max = np.empty((m, m)), np.empty((m, m))
+    for i in range(m):
+        F_min[i] = MG + ((h + Rh[i])[None, :] + Rh).min(1)
+        z_max[i] = (-np.inf if K_c is None else -MG / K_c + ((g + Rg[i])[None, :] + Rg).max(1))
+    return np.arange(m) * step, F_min, z_max, (F_min > 0) & (z_max < 0)
 
 
 def c_for(K_c, zeta):
@@ -221,6 +249,31 @@ def ktable():
     print(f'RK4 bei K = 23000 N/m (ζ fest, Start wie Engine): Liftoff {r["liftoff"][0]:.2f} %')
 
 
+def harmonics():
+    """Anteil der zweiten Harmonischen an Zeltsteigung und Karte (Referenz: 2f ≈ f_n)."""
+    f_n = np.sqrt(K / M) / (2 * np.pi)
+    print(f'Referenz: f_n = {f_n:.2f} Hz, f/f_n = {F_HZ / f_n:.3f}, 2f/f_n = {2 * F_HZ / f_n:.3f}, '
+          f'3f/f_n = {3 * F_HZ / f_n:.3f}')
+    P, n = profile_spectrum()
+    H, _ = transfer(K, C_DAMP, P.size)
+    print('Kraftamplitude der k-ten Harmonischen für ein Modul mit voller Masse (= synchrone Phasung):')
+    for k in range(1, 5):
+        print(f'  k = {k}  {k * F_HZ:.0f} Hz  |H| = {abs(H[k]):.2f}  2·M·|H·P_k| = {2 * M * abs(H[k] * P[k]) / n:.3f} N')
+
+    def slopes(**kw):
+        f = [solve(p2, 240.0, **kw)['F_min_lin'][0] for p2 in (118.0, 120.0, 122.0)]
+        return (f[1] - f[0]) / 2, (f[1] - f[2]) / 2
+
+    print('Zeltsteigung entlang φ₃ = 240° [N/°], 118° → 120° und 122° → 120°:')
+    print('  Referenz          {:.3f}  {:.3f}'.format(*slopes()))
+    print('  |H₂| := 1         {:.3f}  {:.3f}'.format(*slopes(h_one=(2,))))
+    for K_c in (3e4, 1e5, 1e6, 1e7):
+        print(f'  ζ fest, K = {K_c:.0e}  ' + '{:.3f}  {:.3f}'.format(*slopes(K_c=K_c, C_c=c_for(K_c, ZETA0))))
+    ref, h2 = contact_map(1.0)[1], contact_map(1.0, h_one=(2,))[1]
+    print(f'Anteil mit F_min > 0 (Kontaktast), 1°-Raster: Referenz {100 * (ref > 0).mean():.2f} %, '
+          f'|H₂| := 1 {100 * (h2 > 0).mean():.1f} %')
+
+
 def params(a):
     K_c = None if a.rigid else a.K
     C_c = 0.0 if a.rigid else (c_for(a.K, a.zeta) if a.zeta is not None else a.C)
@@ -231,6 +284,7 @@ def main():
     ap = argparse.ArgumentParser(description=__doc__.split('\n\n')[0])
     ap.add_argument('--validate', action='store_true')
     ap.add_argument('--ktable', action='store_true')
+    ap.add_argument('--harmonics', action='store_true')
     ap.add_argument('--point', nargs=2, type=float, metavar=('PHI2', 'PHI3'))
     ap.add_argument('--map', metavar='CSV')
     ap.add_argument('--step', type=float, default=2.0, help='Rasterweite der Karte in Grad')
@@ -246,6 +300,8 @@ def main():
         sys.exit(0 if validate() else 1)
     if a.ktable:
         ktable()
+    if a.harmonics:
+        harmonics()
     if a.point:
         K_c, C_c = params(a)
         r = solve(*a.point, K_c, C_c, a.mu, prof)
@@ -260,7 +316,7 @@ def main():
                 'peak_ratio', 'F_min_lin']
         pd.DataFrame({c: r[c] for c in cols}).to_csv(a.map, index=False, float_format='%.6f')
         print(f'{a.map}: {r["valid"].size} Punkte, liftoff-frei {100 * r["valid"].mean():.1f} %')
-    if not (a.validate or a.ktable or a.point or a.map):
+    if not (a.validate or a.ktable or a.harmonics or a.point or a.map):
         ap.print_help()
 
 

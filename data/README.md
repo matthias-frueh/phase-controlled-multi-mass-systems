@@ -55,7 +55,9 @@ Nachkommastellen, am Punkt (0°, 0°) mit 75,8 % Liftoff weicht F_mean um 1,7·1
 Unterschied der Auswertungsreihenfolge zwischen skalarer und vektorisierter Fassung). Fenster φ₂ ∈ [100°, 140°],
 φ₃ ∈ [220°, 260°], Schrittweite 2°.
 Kennzahlen: F_min-Maximum 5,3304 N bei (120°, 240°), entlang φ₃ = 240° linear abfallend mit ≈ 0,23 N je Grad
-zu kleineren φ₂ und ≈ 0,19 N je Grad zu größeren φ₂ (0,77 N bei φ₂ = 100°, 1,62 N bei 140°) · 90,7 % des Fensters liftoff-frei ·
+zu kleineren φ₂ und ≈ 0,19 N je Grad zu größeren φ₂ (0,77 N bei φ₂ = 100°, 1,62 N bei 140°; Resonanzwert von
+K = 10⁴ N/m, weil 2f/f_n = 1,013; bei festem ζ und K = 3·10⁴ … 10⁷ N/m 0,09–0,12 N je Grad, siehe
+`../code/linear_solver.py --harmonics`) · 90,7 % des Fensters liftoff-frei ·
 |⟨F⟩ − M·g| ≤ 0,2 mN durchgehend.
 
 ### `sweep_7x7_sinus.csv` — Kontrollsweep mit Sinusprofil, 49 Konfigurationen

@@ -76,6 +76,9 @@ Kürzel v3a auch den zurückgezogenen Simulationszyklus v3a–v3d bezeichnet. Mi
 - **2°-Feinsweep** um (120°, 240°) (441 Konfigurationen, [`data/finesweep_2deg_120_240.csv`](data/finesweep_2deg_120_240.csv)):
   F_min bildet eine Zeltkurve mit Spitze 5,3304 N genau am Triphasik-Punkt, abfallend mit ≈ 0,23 N je Grad
   zu kleineren φ₂ und ≈ 0,19 N je Grad zu größeren φ₂ · 90,7 % des Fensters liftoff-frei · |⟨F⟩ − M·g| ≤ 0,2 mN durchgehend.
+  Die Steigung ist ein Resonanzwert von K = 10⁴ N/m: Die zweite Harmonische liegt mit 2f/f_n = 1,013 auf der
+  Kontaktresonanz (|H₂| = 5,03); bei festem ζ und K = 3·10⁴ … 10⁷ N/m beträgt sie 0,09–0,12 N je Grad
+  (`python3 code/linear_solver.py --harmonics`).
 - Ein Sinusprofil liefert ohne Liftoff keine Schiefe; das asymmetrische Bewegungsprofil ist für das
   Zielsignal zwingend.
 - **Liftoff-freier Bereich analytisch:** Ohne Liftoff ist das Modell linear. [`code/linear_solver.py`](code/linear_solver.py)

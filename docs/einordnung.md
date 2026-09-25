@@ -114,7 +114,9 @@ Präregistrierung mit Abbruchkriterien, Artefakt-Taxonomie, Auswerteplan, Schwel
 
 **Die schärfste prüfbare Vorhersage:** Bei festem φ₃ = 240° und Variation von φ₂ durchläuft F_min
 eine Zeltkurve mit scharfem Maximum von 5,330 N exakt bei φ₂ = 120°, abfallend auf 0,77 N bei 100°
-und 1,62 N bei 140°. Steigung 0,21 N pro Grad. Das ist ohne jede Statistik am Kraftsignal ablesbar.
+und 1,62 N bei 140°. Steigung 0,21 N pro Grad bei K = 10⁴ N/m; das ist ein Resonanzwert, weil die zweite
+Harmonische mit 2f/f_n = 1,013 auf der Kontaktresonanz liegt (bei festem ζ und K = 3·10⁴ … 10⁷ N/m:
+0,09–0,12 N pro Grad). Das ist ohne jede Statistik am Kraftsignal ablesbar.
 
 ---
 

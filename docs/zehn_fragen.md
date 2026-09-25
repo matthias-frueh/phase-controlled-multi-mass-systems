@@ -5,7 +5,8 @@
 **Zahlen, die man parat haben sollte**
 M·g = 6,3765 N · 361 Konfigurationen im Grobraster, 441 im 2°-Feinraster · Streuung des Zeitmittels
 0,07 % · Liftoff 0 – 76,2 % · Schiefe −0,29 … +1,98 · Spitzenkraft bis 50,6 N ·
-F_min-Maximum 5,330 N exakt bei (120°, 240°), Steigung 0,21 N/° · alles Simulation
+F_min-Maximum 5,330 N exakt bei (120°, 240°), Steigung 0,21 N/° (Resonanzwert von K = 10⁴ N/m; bei festem ζ
+und K = 3·10⁴ … 10⁷ N/m 0,09–0,12 N/°) · alles Simulation
 
 ---
 
