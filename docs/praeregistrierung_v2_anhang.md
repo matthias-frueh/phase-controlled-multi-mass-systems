@@ -50,7 +50,7 @@ externe Registrierung, Datenmanagement und Abweichungsprotokoll. Die Bezeichnung
   „11 Kanäle“; ob die Zahl oder die Aufzählung zu ändern ist, ist offen.
 - **Werkstattbericht:** „präregistriert“ (v1 war eine nicht extern registrierte Arbeitsfassung); „Zwei
   Schwellenwerte des Auswerteverfahrens sind nicht festgelegt“; „Steigung, die man gegen ein Messrauschen
-  halten kann“ (v2 registriert nur die Lage der Spitze).
+  halten kann“ (v2 registriert nur die Lage der Spitze). Erledigt.
 - **Literaturabgleich (§4.2, T3):** ε_ctrl ist nach v2 festgelegt (§8.8), ε_phys für die Wellenformgrößen
   ersetzt (§1).
 - **`einordnung.md` (§4, §6), `zehn_fragen.md` (Nr. 3, 7), `neuheitsgrad.md` (§5, §6):** „harten Stopp“ bei
