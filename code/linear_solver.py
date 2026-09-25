@@ -24,7 +24,8 @@ für alle Punkte der drei Datensätze trifft es zu (--validate).
 Aufruf:
   python3 linear_solver.py --validate                 Abgleich mit allen drei Datensätzen in data/ (Exit-Code 1 bei Abweichung)
   python3 linear_solver.py --point 120 240            Observablen an einem Punkt
-  python3 linear_solver.py --ktable                   F_min(120°, 240°) über K, ζ konstant und C fest
+  python3 linear_solver.py --ktable                   F_min(120°, 240°) über K (ζ fest und C fest), Band um
+                                                      3f = f_n, RK4-Gegenprobe bei 23 000 N/m (ca. 30 s)
   python3 linear_solver.py --map karte.csv --step 2   Karte über [0°, 360°)², Anteil liftoff-freier Punkte
 Optionen für --point und --map: --K, --C oder --zeta, --mu, --rigid (starre Auflage), --sinus (Sinusprofil).
 
@@ -132,6 +133,43 @@ def c_for(K_c, zeta):
     return 2 * zeta * np.sqrt(K_c * M)
 
 
+ZETA0 = C_DAMP / (2 * np.sqrt(K * M))   # Dämpfungsgrad der Referenz, 0,099228 („ζ fest“)
+
+
+def rk4(phi2_deg, phi3_deg, K_c=K, C_c=C_DAMP, z0=None, v0=0.0, t_sim=15.0, t_eval=10.0, dt=DT):
+    """Zeitintegration wie in der Engine (RK4, Kontaktkraft aus der ersten Stufe, unilateraler
+    Feder-Dämpfer-Kontakt), aber mit wählbarem K, C und Anfangszustand. Ohne z0 startet sie wie die
+    Engine in der statischen Ruhelage bei t = 0. Gibt Liftoff-Anteil [%], F_max und F_min der letzten
+    t_eval Sekunden zurück, je Phasenpunkt."""
+    phi2 = np.atleast_1d(np.asarray(phi2_deg, float))
+    phi3 = np.atleast_1d(np.asarray(phi3_deg, float))
+    tau2, tau3 = np.radians(phi2) / OMEGA, np.radians(phi3) / OMEGA
+    z = np.broadcast_to(-MG / K_c if z0 is None else z0, phi2.shape).astype(float)
+    zd = np.broadcast_to(v0, phi2.shape).astype(float)
+
+    def rhs(z, zd, t):
+        F = -K_c * z - C_c * zd
+        Fc = np.where((z >= 0.0) | (F <= 0.0), 0.0, F)
+        a = (z_egg_zdd(t) + z_egg_zdd(t - tau2) + z_egg_zdd(t - tau3)) / 3.0
+        return zd, -MG / M + Fc / M - a, Fc
+
+    n_steps, n_eval = int(round(t_sim / dt)), int(round(t_eval / dt))
+    lift = np.zeros(phi2.size)
+    F_max, F_min = np.full(phi2.size, -np.inf), np.full(phi2.size, np.inf)
+    for i in range(n_steps):
+        t = i * dt
+        k1z, k1d, Fc = rhs(z, zd, t)
+        k2z, k2d, _ = rhs(z + 0.5 * dt * k1z, zd + 0.5 * dt * k1d, t + 0.5 * dt)
+        k3z, k3d, _ = rhs(z + 0.5 * dt * k2z, zd + 0.5 * dt * k2d, t + 0.5 * dt)
+        k4z, k4d, _ = rhs(z + dt * k3z, zd + dt * k3d, t + dt)
+        z = z + dt * (k1z + 2 * k2z + 2 * k3z + k4z) / 6.0
+        zd = zd + dt * (k1d + 2 * k2d + 2 * k3d + k4d) / 6.0
+        if i >= n_steps - n_eval:
+            lift += Fc < 1e-9
+            F_max, F_min = np.maximum(F_max, Fc), np.minimum(F_min, Fc)
+    return dict(liftoff=100.0 * lift / n_eval, F_max=F_max, F_min=F_min)
+
+
 # ── Kommandos ────────────────────────────────────────────────────────────────
 def validate():
     """Abgleich mit den Engine-Datensätzen: Liftoff-Klassifikation aller Punkte und Observablen aller
@@ -161,17 +199,26 @@ def validate():
 
 
 def ktable():
-    print('F_min bei (120°, 240°), Referenzparameter bis auf K und C')
-    print(f'{"K [N/m]":>10} {"3f/f_n":>7} {"ζ konst. (C ~ √K)":>18} {"C = 16 N·s/m":>14}')
-    for K_c in [1e4, 2e4, 2.3e4, 2.5e4, 3e4, 1e5, 1e6, 1e7]:
+    """K-Tabelle im Werkstattbericht: F_min am triphasischen Punkt über K, das Band um 3f = f_n, in dem
+    er selbst abhebt, und eine RK4-Gegenprobe darin (ca. 15 s)."""
+    print(f'F_min bei (120°, 240°) [N], Referenzparameter bis auf K und C; ζ fest = {ZETA0:.6f}')
+    print(f'{"K [N/m]":>10} {"3f/f_n":>7} {"ζ fest, C = 2ζ√(KM)":>20} {"C = 16 N·s/m fest":>18}')
+    for K_c in [1e4, 2.3e4, 3e4, 1e5, 1e6, 1e7]:
         f_n = np.sqrt(K_c / M) / (2 * np.pi)
         vals = []
-        for C_c in (C_DAMP * np.sqrt(K_c / K), C_DAMP):
+        for C_c in (c_for(K_c, ZETA0), C_DAMP):
             r = solve(120.0, 240.0, K_c, C_c)
-            vals.append(f'{r["F_min"][0]:.4f}' if r['valid'][0] else f'Liftoff ({r["F_min_lin"][0]:+.2f})')
-        print(f'{K_c:>10.0f} {3 * F_HZ / f_n:>7.2f} {vals[0]:>18} {vals[1]:>14}')
+            vals.append(f'{r["F_min"][0]:.4f}' if r['valid'][0] else f'hebt ab ({r["F_min_lin"][0]:+.3f})')
+        print(f'{K_c:>10.0f} {3 * F_HZ / f_n:>7.2f} {vals[0]:>20} {vals[1]:>18}')
     r = solve(120.0, 240.0, None)
-    print(f'{"starr":>10} {0:>7.2f} {r["F_min"][0]:>18.4f} {r["F_min"][0]:>14.4f}')
+    print(f'{"starr":>10} {0:>7.2f} {r["F_min"][0]:>20.5f} {r["F_min"][0]:>18.5f}')
+    Ks = np.arange(20000.0, 28001.0, 250.0)
+    fmin = np.array([solve(120.0, 240.0, K_c, c_for(K_c, ZETA0))['F_min_lin'][0] for K_c in Ks])
+    band = Ks[fmin <= 0]
+    print(f'3f = f_n bei K = {M * (3 * OMEGA) ** 2:.0f} N/m. Lineares F_min ≤ 0 (ζ fest, Raster 250 N/m) für '
+          f'K = {band.min():.0f} … {band.max():.0f} N/m, Minimum {fmin.min():+.3f} N bei K = {Ks[fmin.argmin()]:.0f}')
+    r = rk4(120.0, 240.0, 23000.0, c_for(23000.0, ZETA0))
+    print(f'RK4 bei K = 23000 N/m (ζ fest, Start wie Engine): Liftoff {r["liftoff"][0]:.2f} %')
 
 
 def params(a):

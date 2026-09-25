@@ -54,17 +54,18 @@ Nach der Korrektur blieb ein Befund, der stabil aussah. Verfeinert man den Phase
 
 Eine Zeltkurve mit einem Meter Höhenunterschied in Newton, an einem Punkt, den man vorher benennen kann. Das ist eine brauchbare Vorhersage.
 
-Nur gehört zu ihr eine Fußnote, die größer ist als die Aussage. Der Wert 5,3304 N gilt für 10 Hz, 7,7 mm Hub und eine Kontaktsteifigkeit von 10 000 N/m. Die letzte Zahl ist keine gemessene Größe, sondern eine Modellannahme. Und die Minimalkraft hängt erheblich an ihr (Dämpfung dabei mit K mitskaliert, sodass ζ ≈ 0,1 konstant bleibt; mit festem C = 16 N·s/m lägen die Werte bei 30 000 und 100 000 N/m bei 0,91 und 2,03 N; nachrechenbar mit `python3 code/linear_solver.py --ktable`):
+Nur gehört zu ihr eine Fußnote, die größer ist als die Aussage. Der Wert 5,3304 N gilt für 10 Hz, 7,7 mm Hub und eine Kontaktsteifigkeit von 10 000 N/m. Die letzte Zahl ist keine gemessene Größe, sondern eine Modellannahme. Und die Minimalkraft hängt erheblich an ihr (ζ fest heißt: Dämpfungsgrad der Referenz, ζ = 0,0992; nachrechenbar mit `python3 code/linear_solver.py --ktable`):
 
-| Steifigkeit K [N/m] | 3f / f_n | F_min [N] |
-|---|---|---|
-| 10 000 | 1,52 | 5,3304 |
-| 30 000 | 0,88 | 1,5018 |
-| 100 000 | 0,48 | 3,4073 |
-| 1 000 000 | 0,15 | 4,3404 |
-| 10 000 000 | 0,05 | 4,4823 |
+| Steifigkeit K [N/m] | 3f / f_n | F_min [N], ζ fest, C = 2ζ√(KM) | F_min [N], C = 16 N·s/m fest |
+|---|---|---|---|
+| 10 000 | 1,52 | 5,3304 | 5,3304 |
+| 23 000 | 1,00 | hebt ab | hebt ab |
+| 30 000 | 0,88 | 1,5018 | 0,9139 |
+| 100 000 | 0,48 | 3,4073 | 2,0285 |
+| 1 000 000 | 0,15 | 4,3404 | 4,3687 |
+| 10 000 000 | 0,05 | 4,4823 | 4,4503 |
 
-Der Zusammenhang ist nicht monoton, und das hat einen Grund. An der triphasischen Konfiguration löscht die Mittelung dreier um ein Drittel der Periode versetzter Profile die niedrigen Harmonischen aus; übrig bleiben das Dreifache, Sechsfache und Neunfache der Anregungsfrequenz. Ob die verbleibende Modulation verstärkt oder gedämpft wird, entscheidet sich daran, wo diese Harmonischen relativ zur Eigenfrequenz des Kontakts liegen. Bei den gewählten Parametern liegt diese bei 19,74 Hz — und die dritte Harmonische bei 30 Hz, also knapp darüber. Genau auf die Eigenfrequenz trifft die dritte Harmonische bei etwa 23 000 N/m (3f / f_n = 1). In diesem Bereich hebt der Körper selbst an der triphasischen Konfiguration ab (bei 23 000 N/m rund 19 % Liftoff mit ζ ≈ 0,1); 30 000 N/m liegt knapp oberhalb dieser Resonanz, deshalb die niedrige Minimalkraft in der Tabelle.
+Der Zusammenhang ist nicht monoton, und das hat einen Grund. An der triphasischen Konfiguration löscht die Mittelung dreier um ein Drittel der Periode versetzter Profile die niedrigen Harmonischen aus; übrig bleiben das Dreifache, Sechsfache und Neunfache der Anregungsfrequenz. Ob die verbleibende Modulation verstärkt oder gedämpft wird, entscheidet sich daran, wo diese Harmonischen relativ zur Eigenfrequenz des Kontakts liegen. Bei den gewählten Parametern liegt diese bei 19,74 Hz — und die dritte Harmonische bei 30 Hz, also knapp darüber. Genau auf die Eigenfrequenz trifft die dritte Harmonische bei 23 095 N/m (3f = f_n). Für K ≈ 21 500 bis 26 250 N/m (ζ fest) hebt der Körper selbst an der triphasischen Konfiguration ab: Die lineare Lösung erreicht dort ein F_min bis −0,855 N, die RK4-Rechnung ergibt bei 23 000 N/m 19,35 % Liftoff. 30 000 N/m liegt knapp oberhalb dieses Bandes, deshalb die niedrige Minimalkraft in der Tabelle.
 
 Macht man die Auflage steif genug, verschwindet die Abhängigkeit. Oberhalb von etwa einer Million Newton pro Meter verändert ein Faktor zehn in K die Minimalkraft noch um 0,14 N, und der Wert läuft gegen den quasistatischen Grenzfall von 4,5483 N, in dem die Kraft nur noch der Spitzenbeschleunigung der Innenmassen folgt.
 
