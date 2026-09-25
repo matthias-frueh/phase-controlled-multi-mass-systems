@@ -33,7 +33,7 @@ Repositorys oder daraus abgeleitet.
 Neu sind Phase 0, die Driftkontrolle über ŷ¹, Profilphasen, Anlaufprotokoll, Einzelzellkräfte,
 externe Registrierung, Datenmanagement und Abweichungsprotokoll. Die Bezeichnung H1 ist neu belegt.
 
-**Folgen für andere Dokumente** (dort nicht geändert; §12):
+**Folgen für andere Dokumente** (§12; am 25.09.2026 nachgezogen, soweit „erledigt“ vermerkt):
 
 - **README, `overview.md`:** Zielgrößen γ₁, λ, A, F_min; nach v2 sind F_min − ⟨N⟩ und N₁ … N₃ primär, γ₁
   sekundär, A beschreibend, λ explorativ; v2 verlinken. README, Bildunterschrift der Zeltkurve: „Die Lage
