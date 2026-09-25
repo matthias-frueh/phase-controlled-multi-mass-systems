@@ -1,6 +1,6 @@
 # PCMMS — Literaturabgleich für Forschungsrahmen v3.6 und Arbeitspapier
 
-**Stand:** 12. September 2026 – Version v3 (Korrekturläufe; Änderungslog in §8) · Repository-Fassung 20.09.2026: organisatorische Punkte (Einreichungswege) entfernt, Zieltext (B) als „Arbeitspapier“ bezeichnet, sonst unverändert  
+**Stand:** 12. September 2026 – Version v3 (Korrekturläufe; Änderungslog in §8) · Repository-Fassung 20.09.2026: organisatorische Punkte (Einreichungswege) entfernt, Zieltext (B) als „Arbeitspapier“ bezeichnet, sonst unverändert · 25.09.2026: Schwellen in §4.2 (T3) an den Entwurf der Präregistrierung v2 angepasst  
 **Autor des PCMMS-Korpus:** Matthias Früh  
 **Funktion:** Einmal geschriebener Arbeitsabgleich für zwei Zieltexte: (A) `PCMMS_Forschungsrahmen_v3.6` und (B) Forschungsstand des Arbeitspapiers.  
 **Status:** Literatur- und Änderungsgrundlage; keine experimentelle Evidenz und kein Ersatz für Primärmessungen.
@@ -315,7 +315,7 @@ Prüfen, ob Schiefe, Liftoff, Asymmetrieverhältnis A und Mittelwertresiduum phy
 
 **T3 — Erhaltungs- und Fensterprüfung**
 
-- Relatives Mittelwertresiduum `r_F = |mean(F_N)-Mg|/(Mg)` nach Burn-in und über ganzzahlige Periodenzahlen. (`epsilon_phys` und `epsilon_ctrl` bleiben die Schwellen des Projekts – 3·σ̂_ref je Funktional bzw. Schwelle der Kontrollgröße – und werden hier nicht umdefiniert.)
+- Relatives Mittelwertresiduum `r_F = |mean(F_N)-Mg|/(Mg)` nach Burn-in und über ganzzahlige Periodenzahlen. (`epsilon_phys` und `epsilon_ctrl` werden hier nicht umdefiniert. Der [Entwurf der Präregistrierung v2](praeregistrierung_v2_entwurf.md) legt `epsilon_ctrl`, die Schwelle der Kontrollgröße, als 3·σ̂_ref oder 3·σ̂_betr fest (dort §4, §8.8) und ersetzt `epsilon_phys` für die Wellenformgrößen durch standardisierte Residuen und eine Äquivalenzbedingung (dort §1, §8.4, §8.5).)
 - Zusätzlich Randterm aus Impulsänderung des Gesamtschwerpunkts ausweisen.
 - Konvergenz über verlängerte Fenster und halbierte Zeitschritte prüfen.
 

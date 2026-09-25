@@ -52,7 +52,7 @@ externe Registrierung, Datenmanagement und Abweichungsprotokoll. Die Bezeichnung
   Schwellenwerte des Auswerteverfahrens sind nicht festgelegt“; „Steigung, die man gegen ein Messrauschen
   halten kann“ (v2 registriert nur die Lage der Spitze). Erledigt.
 - **Literaturabgleich (§4.2, T3):** ε_ctrl ist nach v2 festgelegt (§8.8), ε_phys für die Wellenformgrößen
-  ersetzt (§1).
+  ersetzt (§1). Erledigt.
 - **`einordnung.md` (§4, §6), `zehn_fragen.md` (Nr. 3, 7), `neuheitsgrad.md` (§5, §6):** „harten Stopp“ bei
   jeder Mittelwertabweichung (nach v2: Lauf ungültig, Stopp erst bei reproduzierbarem Verstoß, S1); „gilt H1
   … als falsifiziert“, wenn keine Struktur über dem Rauschen (nach v2: „nicht entscheidbar“); „ohne jede
