@@ -79,7 +79,7 @@ behauptet es nicht.
 
 Die Physik ist unstrittig; Code und Simulationsdaten liegen in diesem Repository. Was fehlt, ist die Messung,
 und das steht in jedem Dokument. Angeboten wird keine Entdeckung, sondern eine vorbereitete,
-falsifizierbare Messfrage samt Auswertepipeline — und die Bereitschaft, ein Null-Ergebnis zu
+falsifizierbare Messfrage samt Auswerteplan — und die Bereitschaft, ein Null-Ergebnis zu
 veröffentlichen.
 
 ---
