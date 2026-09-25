@@ -41,7 +41,6 @@ solche Verschiebung; sie wurde als Kontaktmodell-Artefakt erkannt, zurückgezoge
 | [`docs/werkstattbericht.md`](docs/werkstattbericht.md) | „Wellenform statt Mittelwert“ — der Stand für fachliche Leser |
 | [`docs/expose_2026-09.md`](docs/expose_2026-09.md) | Projekt-Exposé (Kernfrage, Stand, messbares Signal, nächster Schritt) |
 | [`docs/praeregistrierung_2026-06.md`](docs/praeregistrierung_2026-06.md) | Präregistrierung mit Falsifikationskriterien (Juni 2026, unverändert) |
-| [`docs/praeregistrierung_v2_entwurf.md`](docs/praeregistrierung_v2_entwurf.md), [`docs/praeregistrierung_v2_anhang.md`](docs/praeregistrierung_v2_anhang.md) | Entwurf der Präregistrierung v2 für die Messkampagne mit technischem Anhang (September 2026, nicht eingefroren, nicht registriert) |
 | [`docs/einordnung.md`](docs/einordnung.md), [`docs/zehn_fragen.md`](docs/zehn_fragen.md) | Einordnung, Abgrenzung, Antworten auf die üblichen Einwände |
 | [`docs/neuheitsgrad.md`](docs/neuheitsgrad.md) | Was daran nicht neu ist — und was übrig bleibt |
 | [`docs/literaturabgleich_2026-09-12.md`](docs/literaturabgleich_2026-09-12.md) | Abgleich mit der Ratchet-, Tribologie- und Kontaktdynamik-Literatur, 12 verifizierte Referenzen, davon 10 mit DOI |
@@ -49,6 +48,8 @@ solche Verschiebung; sie wurde als Kontaktmodell-Artefakt erkannt, zurückgezoge
 | [`code/`](code/) | Simulations-Engine ([`pcmms_v3a_phasen_sweep.py`](code/pcmms_v3a_phasen_sweep.py)), 2°-Feinsweep ([`finesweep.py`](code/finesweep.py)), analytische Lösung für den liftoff-freien Bereich ([`linear_solver.py`](code/linear_solver.py)) und Abbildungen ([`plot_figures.py`](code/plot_figures.py)) |
 | [`docs/figures/`](docs/figures/) | Abbildungen aus den Simulationsdaten, je in heller und dunkler Fassung |
 | [`data/`](data/) | Simulationsausgaben: 19×19-Phasensweep und 2°-Feinsweep ([`data/README.md`](data/README.md)) |
+
+Die Präregistrierung v2 für die Messkampagne liegt als [Entwurf](docs/praeregistrierung_v2_entwurf.md) vor (nicht eingefroren, nicht registriert).
 
 ## Simulationsstand
 
