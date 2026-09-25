@@ -315,7 +315,10 @@ def harmonics():
 
 def contact(long_run=False):
     """Kontaktast: Anteil im Phasenraum (1°-Raster) für mehrere Auflagen, Gebiete bei der Referenz und
-    RK4-Proben zur Bistabilität. long_run: zusätzlich 200 s bei Δt und Δt/2 (ca. 10 min)."""
+    RK4-Proben zur Bistabilität. long_run: zusätzlich 200 s bei Δt und Δt/2 (ca. 20–25 min).
+    Die Bistabilität bleibt über 200 s und bei halbiertem Zeitschritt bestehen: Bei (35°, 116°) ergibt der
+    Standardstart λ = 75,82 % bzw. 75,81 % (Δt = 50 bzw. 25 µs), F_max 39,49 bzw. 39,48 N; der Start auf
+    dem linearen Orbit λ = 0 %, F_max 19,81 N."""
     cases = [('Referenz, K = 1e4 N/m', dict()),
              ('K = 1e6 N/m, ζ fest', dict(K_c=1e6, C_c=c_for(1e6, ZETA0))),
              ('K = 1e6 N/m, C = 16 N·s/m fest', dict(K_c=1e6, C_c=C_DAMP)),

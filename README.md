@@ -93,7 +93,10 @@ Kürzel v3a auch den zurückgezogenen Simulationszyklus v3a–v3d bezeichnet. Mi
   Hauptgebieten um (120°, 240°) und (240°, 120°) (2 × 2524 Punkte, 3,90 %), in denen die Engine in allen Proben
   auf dem Kontaktast landet, und sechs Satelliteninseln (6 × 74 Punkte, 0,34 %, z. B. um (35°, 116°)). Die Inseln
   sind bistabil: Vom Standardstart der Engine aus hebt der Körper ab (Liftoff ≈ 75,8 %, F_max ≈ 39,5 N), vom
-  linearen Orbit aus bleibt er in Kontakt (`python3 code/linear_solver.py --contact`).
+  linearen Orbit aus bleibt er in Kontakt (`python3 code/linear_solver.py --contact`). Die Bistabilität bleibt
+  über 200 s und bei halbiertem Zeitschritt bestehen: Bei (35°, 116°) ergibt der Standardstart λ = 75,82 % bzw.
+  75,81 % (Δt = 50 bzw. 25 µs), F_max 39,49 bzw. 39,48 N; der Start auf dem linearen Orbit λ = 0 %, F_max 19,81 N.
+  Reproduzierbar mit `--contact --long` (ca. 20–25 min).
 
 ### Abbildungen
 
