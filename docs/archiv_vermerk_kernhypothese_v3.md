@@ -22,3 +22,7 @@ Die Dokumente erklären ΔF̄ ≠ 0 bei unterbrechbarem (unilateralem) Kontakt f
 
 - Beide Kernhypothese-Dateien mit Präfix `ARCHIV_` versehen bzw. diesen Vermerk als Deckblatt voranstellen; in neuen Texten **nicht mehr zitieren**.
 - Hinweis Dateihygiene: Beide Dateien (und weitere „.docx" im Projekt, u. a. Playbooks und Warnung) sind Klartext mit falscher Endung — bei Gelegenheit in `.md` umbenennen, sonst scheitert das Öffnen in Word.
+
+## Nachtrag 25.09.2026 zum Konvergenztest (Beleg 2)
+
+Eine Nachrechnung mit der Repository-Engine präzisiert die Deutung, ohne die Schlussfolgerung zu ändern (kein physikalischer Shift). Bei (φ₂ = 0°, φ₃ = 208,4°) stammen die −43,5 mN nicht aus der Fensterlänge, sondern aus einem Einschwingvorgang in den ersten zwei Sekunden des Auswertefensters: Die Einschwingzeit von 5 s ist dort zu kurz, ab etwa 7 s ist die Bahn stationär. Die −0,5 mN ergeben sich für Fenster, die erst nach 15 s beginnen (15–55 s, 15–115 s); mit 5 s Einschwingzeit und 50 bzw. 110 s Fenster sind es −9,1 bzw. −4,4 mN. Der Rest von −0,5 mN ist ein Zeitschritteffekt (−0,07 mN bei Δt = 25 µs). Neben der Schiefe (1,672 → 1,658) ändert sich im stationären Zustand auch F_max (44,1 N → 38,5 N). Beim zweiten Extrem (246,3°, 37,9°) schwankt ⟨F⟩ von Fenster zu Fenster um einige mN und mittelt sich mit längeren Fenstern heraus; das ist ein echter Endlich-Fenster-Effekt.

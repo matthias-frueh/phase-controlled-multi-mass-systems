@@ -96,9 +96,10 @@ Dokumente sind mit Archivvermerk versehen.
 ## 4 · Aktueller Stand
 
 **Vorhanden:** 361 Konfigurationen im Grobraster, 441 im 2°-Feinraster um den Triphasik-Punkt,
-Präregistrierung mit Abbruchkriterien, Artefakt-Taxonomie, Auswertepipeline, Schwellenfestlegung.
+Präregistrierung mit Abbruchkriterien, Artefakt-Taxonomie, Auswerteplan, Schwellen als Formel
+(3·σ̂_ref; die Zahlenwerte folgen erst aus der Referenzmessung).
 
-**Nicht vorhanden:** jede Messung. Das Projekt ist prä-experimentell. Alle Zahlen sind numerisch.
+**Nicht vorhanden:** jede Messung und damit auch der Auswertecode für Messdaten. Das Projekt ist prä-experimentell. Alle Zahlen sind numerisch.
 
 **Die Kernbefunde aus der Simulation:**
 
@@ -113,7 +114,9 @@ Präregistrierung mit Abbruchkriterien, Artefakt-Taxonomie, Auswertepipeline, Sc
 
 **Die schärfste prüfbare Vorhersage:** Bei festem φ₃ = 240° und Variation von φ₂ durchläuft F_min
 eine Zeltkurve mit scharfem Maximum von 5,330 N exakt bei φ₂ = 120°, abfallend auf 0,77 N bei 100°
-und 1,62 N bei 140°. Steigung 0,21 N pro Grad. Das ist ohne jede Statistik am Kraftsignal ablesbar.
+und 1,62 N bei 140°. Steigung 0,21 N pro Grad bei K = 10⁴ N/m; das ist ein Resonanzwert, weil die zweite
+Harmonische mit 2f/f_n = 1,013 auf der Kontaktresonanz liegt (bei festem ζ und K = 3·10⁴ … 10⁷ N/m:
+0,09–0,12 N pro Grad). Das ist ohne jede Statistik am Kraftsignal ablesbar.
 
 ---
 
@@ -258,7 +261,7 @@ das Projekt behauptet es nicht, es untersucht die Grundlage.
 Die faire Antwort: Die Physik ist unstrittig; Simulationscode und Simulationsdaten liegen in diesem
 Repository (`code/`, `data/`) und sind nachrechenbar. Was fehlt, ist die Messung, und das steht in jedem Dokument. Was das Projekt anbietet, ist
 keine Entdeckung, sondern eine vollständig vorbereitete, falsifizierbare Messfrage mitsamt
-Auswertepipeline — und die Bereitschaft, ein Null-Ergebnis zu veröffentlichen.
+Auswerteplan — und die Bereitschaft, ein Null-Ergebnis zu veröffentlichen.
 
 ---
 
@@ -289,7 +292,8 @@ mit der von Linie A vermischt werden.
 Für die Auswertung sind Bootstrap-Konfidenzintervalle vorgesehen.
 
 **Die dynamische Kalibrierung bei intermittierendem Kontakt ist ungelöst.** Nicht die absolute
-Kraftmessbarkeit ist das Problem — statische Rückführbarkeit ist über DKD-R 3-10 verfügbar — sondern
+Kraftmessbarkeit ist das Problem — statische Rückführbarkeit ist über DKD-R 3-3 verfügbar, Verfahren
+zur dynamischen Kalibrierung einachsig belasteter Kraftaufnehmer beschreibt DKD-R 3-10 — sondern
 die Übertragung auf einen Kontakt, der zyklisch abhebt.
 
 **Simulationsresiduen lassen sich beliebig klein rechnen.** Der numerische Boden von 2·10⁻⁴ N sagt
