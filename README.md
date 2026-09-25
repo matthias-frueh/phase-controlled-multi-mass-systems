@@ -2,7 +2,7 @@
 
 **Phase-Controlled Multi-Mass Systems**\
 Matthias Früh · Gravidon Systemics Research · ORCID [0009-0005-9984-4207](https://orcid.org/0009-0005-9984-4207)\
-Stand: 20. September 2026 · Status: prä-experimentell (Simulation; keine Messdaten)
+Stand: 25. September 2026 · Status: prä-experimentell (Simulation; keine Messdaten)
 
 ---
 
@@ -152,7 +152,8 @@ Der vollständige 19×19-Sweep braucht je nach Rechner 30–60 Minuten; das Skri
 
 ## Zitieren
 
-Siehe [`CITATION.cff`](CITATION.cff). Frühere Stände (April–Mai 2026) liegen auf Zenodo unter *Früh, Matthias*; sie
+Siehe [`CITATION.cff`](CITATION.cff). Concept-DOI für alle Versionen dieses Repositorys: 10.5281/zenodo.________.
+Frühere Stände (April–Mai 2026) liegen auf Zenodo unter *Früh, Matthias*; sie
 dokumentieren den Weg, nicht den aktuellen Stand.
 
 ## Lizenz
