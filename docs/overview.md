@@ -16,9 +16,10 @@ Lizenz dieses Ordners: CC BY 4.0, siehe [`../LICENSE-CC-BY-4.0`](../LICENSE-CC-B
 
 ## Verbindliche Begriffe
 
-- **⟨N⟩ = M·g** ist Erhaltungssatz und Kontrollgröße, keine Messgröße und kein Ergebnis.
-- **Kraftverschiebung statt Kraft:** Gemessen wird nie ein Absolutwert, sondern die Abweichung gegen die
-  Referenz M·g; deren Erwartungswert ist null.
+- **⟨N⟩ = M·g** ist Erhaltungssatz; ⟨N⟩ wird in jedem Lauf bestimmt, aber als Kontrollgröße, nicht als
+  Zielgröße und nicht als Ergebnis.
+- **Kraftverschiebung statt Kraft:** Ausgewertet wird primär die Abweichung gegen die Referenz M·g
+  (Erwartungswert null), nicht der Absolutwert.
 - **Zielgrößen** sind Wellenform-Observablen: Schiefe γ₁, Liftoff-Anteil λ, Asymmetrieverhältnis
   A = (F_max − M·g)/(M·g − F_min), Minimalkraft F_min.
 - **Linie A** (ruhender Körper, Wellenformstatistik) ist die primäre Linie; **Linie B** (Bewegung durch

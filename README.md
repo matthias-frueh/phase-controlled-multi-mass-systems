@@ -14,10 +14,11 @@ Phasenkonfiguration die **zeitliche Form** der Kontaktkraft N(t) zwischen Körpe
 gemessen an Schiefe γ₁, Liftoff-Anteil λ, Asymmetrieverhältnis A = (F_max − M·g)/(M·g − F_min) und
 Minimalkraft F_min.
 
-Der Grundsatz des Projekts: **Es werden keine Kräfte gemessen, sondern Verschiebungen gegen eine
-Referenz.** Die Referenz ist das Zeitmittel ⟨N⟩ = M·g, das aus dem Schwerpunktsatz folgt. Es ist kein
-Ergebnis und kein Forschungsziel, sondern Randbedingung und Kontrollgröße: Jede beobachtete Abweichung
-des Zeitmittels gilt als Apparaturfehler. Der Untersuchungsgegenstand ist die Wellenform, nicht das Mittel.
+Der Grundsatz des Projekts: **Primär ausgewertet werden nicht Absolutkräfte, sondern Abweichungen der
+Kontaktkraft gegen eine Referenz.** Die Referenz ist das Zeitmittel ⟨N⟩ = M·g, das aus dem Schwerpunktsatz
+folgt. Es ist kein Ergebnis und kein Forschungsziel, sondern Randbedingung und Kontrollgröße: Jede
+beobachtete Abweichung des Zeitmittels gilt als Apparaturfehler. Der Untersuchungsgegenstand ist die
+Wellenform, nicht das Mittel.
 
 Ausdrücklich **nicht** behauptet werden: reaktionsloser Antrieb, Gravitationsmodifikation,
 Gewichtsreduktion, Verschiebung des Zeitmittels. Ein früherer Simulationszyklus (v3a–v3d) berichtete eine
