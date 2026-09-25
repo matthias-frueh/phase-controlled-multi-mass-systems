@@ -46,7 +46,8 @@ externe Registrierung, Datenmanagement und Abweichungsprotokoll. Die Bezeichnung
 - **Exposé:** „braucht keine Statistik“, „direkt am Kraftsignal ablesbar“ (v2 entscheidet mit Residuen und
   Bootstrap); Ziel „Nachweis oder Falsifikation der F_min-Zeltkurve“ (v2: nur Lage der Spitze); die
   Vorzeichenregel „werden in die vorgesehene v2 der Präregistrierung aufgenommen“ (v2 registriert
-  stattdessen H4); „11 Kanäle“ bei neun aufgezählten; „noch nicht präregistriert“.
+  stattdessen H4); „11 Kanäle“ bei neun aufgezählten; „noch nicht präregistriert“. Erledigt bis auf
+  „11 Kanäle“; ob die Zahl oder die Aufzählung zu ändern ist, ist offen.
 - **Werkstattbericht:** „präregistriert“ (v1 war eine nicht extern registrierte Arbeitsfassung); „Zwei
   Schwellenwerte des Auswerteverfahrens sind nicht festgelegt“; „Steigung, die man gegen ein Messrauschen
   halten kann“ (v2 registriert nur die Lage der Spitze).
