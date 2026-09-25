@@ -54,13 +54,13 @@ Nach der Korrektur blieb ein Befund, der stabil aussah. Verfeinert man den Phase
 
 Eine Zeltkurve mit einem Meter Höhenunterschied in Newton, an einem Punkt, den man vorher benennen kann. Das ist eine brauchbare Vorhersage.
 
-Nur gehört zu ihr eine Fußnote, die größer ist als die Aussage. Der Wert 5,3304 N gilt für 10 Hz, 7,7 mm Hub und eine Kontaktsteifigkeit von 10 000 N/m. Die letzte Zahl ist keine gemessene Größe, sondern eine Modellannahme. Und die Minimalkraft hängt erheblich an ihr (Dämpfung dabei mit K mitskaliert, sodass ζ ≈ 0,1 konstant bleibt; mit festem C = 16 N·s/m lägen die Werte bei 30 000 und 100 000 N/m bei 0,91 und 2,03 N):
+Nur gehört zu ihr eine Fußnote, die größer ist als die Aussage. Der Wert 5,3304 N gilt für 10 Hz, 7,7 mm Hub und eine Kontaktsteifigkeit von 10 000 N/m. Die letzte Zahl ist keine gemessene Größe, sondern eine Modellannahme. Und die Minimalkraft hängt erheblich an ihr (Dämpfung dabei mit K mitskaliert, sodass ζ ≈ 0,1 konstant bleibt; mit festem C = 16 N·s/m lägen die Werte bei 30 000 und 100 000 N/m bei 0,91 und 2,03 N; nachrechenbar mit `python3 code/linear_solver.py --ktable`):
 
 | Steifigkeit K [N/m] | 3f / f_n | F_min [N] |
 |---|---|---|
 | 10 000 | 1,52 | 5,3304 |
-| 30 000 | 0,88 | 1,5028 |
-| 100 000 | 0,48 | 3,4080 |
+| 30 000 | 0,88 | 1,5018 |
+| 100 000 | 0,48 | 3,4073 |
 | 1 000 000 | 0,15 | 4,3404 |
 | 10 000 000 | 0,05 | 4,4823 |
 
