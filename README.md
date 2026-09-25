@@ -45,7 +45,7 @@ solche Verschiebung; sie wurde als Kontaktmodell-Artefakt erkannt, zurückgezoge
 | [`docs/neuheitsgrad.md`](docs/neuheitsgrad.md) | Was daran nicht neu ist — und was übrig bleibt |
 | [`docs/literaturabgleich_2026-09-12.md`](docs/literaturabgleich_2026-09-12.md) | Abgleich mit der Ratchet-, Tribologie- und Kontaktdynamik-Literatur, 12 verifizierte Referenzen, davon 10 mit DOI |
 | [`docs/archiv_vermerk_kernhypothese_v3.md`](docs/archiv_vermerk_kernhypothese_v3.md) | Dokumentierter Rückzug der früheren Hypothese |
-| [`code/`](code/) | Simulations-Engine ([`pcmms_v3a_phasen_sweep.py`](code/pcmms_v3a_phasen_sweep.py)), 2°-Feinsweep ([`finesweep.py`](code/finesweep.py)) und Abbildungen ([`plot_figures.py`](code/plot_figures.py)) |
+| [`code/`](code/) | Simulations-Engine ([`pcmms_v3a_phasen_sweep.py`](code/pcmms_v3a_phasen_sweep.py)), 2°-Feinsweep ([`finesweep.py`](code/finesweep.py)), analytische Lösung für den liftoff-freien Bereich ([`linear_solver.py`](code/linear_solver.py)) und Abbildungen ([`plot_figures.py`](code/plot_figures.py)) |
 | [`docs/figures/`](docs/figures/) | Abbildungen aus den Simulationsdaten, je in heller und dunkler Fassung |
 | [`data/`](data/) | Simulationsausgaben: 19×19-Phasensweep und 2°-Feinsweep ([`data/README.md`](data/README.md)) |
 
@@ -78,6 +78,13 @@ Kürzel v3a auch den zurückgezogenen Simulationszyklus v3a–v3d bezeichnet. Mi
   zu kleineren φ₂ und ≈ 0,19 N je Grad zu größeren φ₂ · 90,7 % des Fensters liftoff-frei · |⟨F⟩ − M·g| ≤ 0,2 mN durchgehend.
 - Ein Sinusprofil liefert ohne Liftoff keine Schiefe; das asymmetrische Bewegungsprofil ist für das
   Zielsignal zwingend.
+- **Liftoff-freier Bereich analytisch:** Ohne Liftoff ist das Modell linear. [`code/linear_solver.py`](code/linear_solver.py)
+  berechnet die stationäre Lösung exakt aus Fourier-Reihe des Profils und Übertragungsfunktion des Kontakts
+  (ca. 1 ms je Punkt) und trifft alle liftoff-freien Punkte der drei Datensätze auf ≤ 6·10⁻⁶. Die Phasenlage
+  wirkt nur über den Faktor (1 + e^{−ikφ₂} + e^{−ikφ₃})/3 auf die k-te Harmonische; bei (120°, 240°) bleiben nur
+  Vielfache der dritten Harmonischen übrig. Der liftoff-freie Anteil des Phasenraums (3°-Raster) hängt stark vom
+  Kontaktmodell und vom Anteil der bewegten Masse ab: 4,2 % bei K = 10⁴ N/m (Referenz), 76,2 % bei K = 10⁶ N/m
+  (ζ = 0,1), 76,6 % bei starrer Auflage, 48,7 % bei K = 10⁴ N/m mit halber bewegter Masse.
 
 ### Abbildungen
 
@@ -120,6 +127,7 @@ pip install -r code/requirements.txt
 cd data
 python3 ../code/finesweep.py --validate      # prüft die Feinsweep-Engine gegen sweep_19x19.csv
 python3 ../code/pcmms_v3a_phasen_sweep.py    # voller 19×19-Sweep, schreibt nach ~/pcmms_outputs_v3a_sweep
+python3 ../code/linear_solver.py --validate  # analytische Lösung gegen alle drei Datensätze (ca. 5 s)
 python3 ../code/plot_figures.py              # Abbildungen nach docs/figures/ (ca. 40 s)
 ```
 
