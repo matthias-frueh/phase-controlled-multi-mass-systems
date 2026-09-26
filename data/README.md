@@ -47,6 +47,8 @@ noch nicht abgeklungen ist; im stationären Zustand liegt ⟨F⟩ dort bei M·g 
 trotzdem landen gleichwertige Rasterpunkte teils in verschiedenen stationären Zuständen, etwa (0°, 113,684°)
 mit 75,6 % und (246,316°, 246,316°) mit 18,2 % Liftoff. Die Werte einzelner Liftoff-Punkte hängen damit von der
 Startbedingung ab (Start in statischer Ruhelage bei t = 0).
+Eine Nachrechnung dieses Rasters mit adaptivem Burn-in (13.09.2026) liegt unter
+[`../docs/arbeitspapier/nachrechnung_2026-09-13/`](../docs/arbeitspapier/nachrechnung_2026-09-13/).
 
 ### `finesweep_2deg_120_240.csv` — 2°-Feinraster, 441 Konfigurationen
 Erzeugt mit [`../code/finesweep.py`](../code/finesweep.py) (vektorisierte Reproduktion der Engine mit identischen Parametern,
