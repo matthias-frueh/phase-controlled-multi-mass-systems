@@ -116,7 +116,9 @@ Präregistrierung mit Abbruchkriterien, Artefakt-Taxonomie, Auswerteplan, Schwel
 eine Zeltkurve mit scharfem Maximum von 5,330 N exakt bei φ₂ = 120°, abfallend auf 0,77 N bei 100°
 und 1,62 N bei 140°. Steigung 0,21 N pro Grad bei K = 10⁴ N/m; das ist ein Resonanzwert, weil die zweite
 Harmonische mit 2f/f_n = 1,013 auf der Kontaktresonanz liegt (bei festem ζ und K = 3·10⁴ … 10⁷ N/m:
-0,09–0,12 N pro Grad). Das ist ohne jede Statistik am Kraftsignal ablesbar.
+0,09–0,12 N pro Grad). Nach dem [Entwurf](praeregistrierung_v2_entwurf.md) der Präregistrierung v2 wird
+die Zeltkurve statistisch gegen eine Vorhersage aus Messungen an der Apparatur geprüft: F_min − ⟨F_N⟩ mit
+standardisierten Residuen, die Lage der Spitze mit einem Zeltfit und Bootstrap-Intervall (dort §8.3–§8.6).
 
 ---
 
@@ -208,8 +210,10 @@ zeigt, die es schon gibt.
 
 Nein, und die Struktur des Projekts ist genau darauf ausgelegt, das prüfbar zu machen. Linie A
 behauptet ausdrücklich, dass das Zeitmittel **nicht** verschiebbar ist, und benutzt diese Unmöglichkeit
-als Kontrollgröße: Jede beobachtete Mittelwertabweichung gilt per Protokoll als Apparaturfehler und
-löst einen harten Stopp aus, keine Interpretation.
+als Kontrollgröße: Jede beobachtete Mittelwertabweichung gilt per Protokoll als Apparaturfehler, keine
+Interpretation. Nach dem [Entwurf](praeregistrierung_v2_entwurf.md) der Präregistrierung v2 macht eine
+Abweichung über der Kontrollschwelle ε_ctrl den Lauf ungültig; angehalten wird die Messung erst bei einem
+reproduzierbaren Verstoß (S1, dort §9.2).
 
 Linie B behauptet eine Nettobewegung, benennt aber den Reaktionspartner explizit — die umgebende
 Luft — und sagt vorher, dass der Effekt im Vakuum exakt verschwindet und mit der Mediendichte
@@ -239,8 +243,11 @@ Arbeit, der auch dann Bestand hat, wenn die Physik nichts hergibt.
 ### „Was ist, wenn nichts herauskommt?"
 
 Dann ist das ein Ergebnis. Die Falsifikationsbedingung steht vorab fest: Ist die Regime-Struktur nach
-allen Kontrollen nicht über dem Rauschboden nachweisbar, gilt H1 für den getesteten Bereich als
-falsifiziert. Ein Null-Ergebnis ist eingeplant, nicht abgefedert.
+allen Kontrollen nicht über dem Rauschboden nachweisbar, gilt H1 der Präregistrierung vom Juni 2026 für
+den getesteten Bereich als falsifiziert. Nach dem [Entwurf](praeregistrierung_v2_entwurf.md) der
+Präregistrierung v2, der die Bezeichnung H1 neu belegt, ist dieser Ausgang „nicht entscheidbar" (die
+Präzision reicht nicht, dort §9.4) und wird wie jeder Ausgang veröffentlicht. Ein Null-Ergebnis ist
+eingeplant, nicht abgefedert.
 
 ### „Warum kein Roboter? Das wäre doch die Anwendung."
 

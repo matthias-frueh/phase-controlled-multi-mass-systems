@@ -115,8 +115,10 @@ Wellenform  =  Untersuchungsgegenstand
 ```
 
 Die Wellenform kann sich verändern, ohne dass ein Erhaltungssatz verletzt wird. Und jede
-beobachtete Mittelwertabweichung gilt per Protokoll als Apparaturfehler mit hartem Stopp, nicht als
-Befund.
+beobachtete Mittelwertabweichung gilt per Protokoll als Apparaturfehler, nicht als Befund. Nach dem
+[Entwurf](praeregistrierung_v2_entwurf.md) der Präregistrierung v2 macht eine Abweichung über der
+Kontrollschwelle ε_ctrl den Lauf ungültig; angehalten wird die Messung erst bei einem reproduzierbaren
+Verstoß (S1, dort §9.2).
 
 Das ist messtechnisch erheblich sauberer, als eine scheinbare Mittelwertabweichung als neues
 physikalisches Ergebnis zu interpretieren — ein Fehler, den dieses Projekt in einer früheren
@@ -140,8 +142,9 @@ aus dem Modell hervorgeht, ist sie wissenschaftlich interessanter als eine nacht
 Kennzahl.
 
 **Wichtig zur Einordnung:** F_min ist die scharfe experimentelle Prüfform, nicht der Neuheitskern.
-Die methodische Behauptung bleibt die Wellenformstatistik der unilateralen Kontaktkraft als primäre
-Zielgröße.
+Die methodische Behauptung bleibt die Wellenformstatistik der unilateralen Kontaktkraft als Zielgröße;
+nach dem [Entwurf](praeregistrierung_v2_entwurf.md) der Präregistrierung v2 ist die Schiefe γ₁ allerdings
+sekundär, primär sind F_min − ⟨F_N⟩ und die ersten drei Harmonischen der Kontaktkraft (dort §3).
 
 ---
 

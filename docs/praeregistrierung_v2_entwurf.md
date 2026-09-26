@@ -73,8 +73,8 @@ einzelnen dephasierten Punkt hängt aber vom Kontakt ab (Triphasik-Punkt: γ₁ 
 Superpositionsvorhersage.
 
 **Schwellen.** ε_ctrl wird hier mit einer Definition von σ̂_ref festgelegt (§4, §8.8). Die Einordnung (§4)
-nannte die Form 3·σ̂_ref; der Literaturabgleich (§4.2, T3) ordnet 3·σ̂_ref je Funktional ε_phys zu und nennt
-ε_ctrl ohne Formel; der Werkstattbericht führt beide als offen. ε_phys wird für die Wellenformgrößen durch
+nannte die Form 3·σ̂_ref; der Literaturabgleich (§4.2, T3) ordnete 3·σ̂_ref je Funktional ε_phys zu und nannte
+ε_ctrl ohne Formel; der Werkstattbericht führte beide als offen. ε_phys wird für die Wellenformgrößen durch
 standardisierte Residuen und eine Äquivalenzbedingung ersetzt (§8.4, §8.5).
 
 ---
@@ -560,6 +560,6 @@ Registrierungsplattform; endgültige Dateinamen von Hauptdokument und Anhang; ei
 Linie B. Die Diskrepanz bei Frequenz (10 Hz im Code gegen 2,2 Hz in älterer Dokumentation) und
 Profilasymmetrie berührt v2 nicht, weil f nach §5.3 gewählt und das Profil gemessen wird.
 
-**Folgen für andere Dokumente** (hier nicht geändert): Liste im Anhang A0. Betroffen sind README,
-`overview.md`, Exposé, Werkstattbericht, Literaturabgleich, `einordnung.md`, `zehn_fragen.md` und
-`neuheitsgrad.md`.
+**Folgen für andere Dokumente:** Liste im Anhang A0. Die dort genannten Stellen in README, `overview.md`,
+Exposé, Werkstattbericht, Literaturabgleich, `einordnung.md`, `zehn_fragen.md` und `neuheitsgrad.md` sind
+nachgezogen; offen ist die Kanalzahl im Exposé („11 Kanäle“ bei neun aufgezählten).

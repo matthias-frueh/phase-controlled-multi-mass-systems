@@ -33,12 +33,12 @@ Repositorys oder daraus abgeleitet.
 Neu sind Phase 0, die Driftkontrolle über ŷ¹, Profilphasen, Anlaufprotokoll, Einzelzellkräfte,
 externe Registrierung, Datenmanagement und Abweichungsprotokoll. Die Bezeichnung H1 ist neu belegt.
 
-**Folgen für andere Dokumente** (dort nicht geändert; §12):
+**Folgen für andere Dokumente** (§12; am 25.09.2026 nachgezogen, soweit „erledigt“ vermerkt):
 
 - **README, `overview.md`:** Zielgrößen γ₁, λ, A, F_min; nach v2 sind F_min − ⟨N⟩ und N₁ … N₃ primär, γ₁
   sekundär, A beschreibend, λ explorativ; v2 verlinken. README, Bildunterschrift der Zeltkurve: „Die Lage
   der Spitze folgt aus der Phasengeometrie“ (aus der Geometrie folgt bei identischen Modulen nur der Knick
-  bei 120°, A2.2; das Maximum kann kontaktabhängig wandern, A5).
+  bei 120°, A2.2; das Maximum kann kontaktabhängig wandern, A5). Erledigt.
 - **README, `overview.md`, Grundsatz:** README „Es werden keine Kräfte gemessen“ und `overview.md` „Gemessen
   wird nie ein Absolutwert“ (H3 und G6 brauchen eine absolute Kalibrierung, §0); `overview.md` „⟨N⟩ … keine
   Messgröße“ (⟨N⟩ wird in jedem Lauf bestimmt, H0). Umformuliert zu „primär ausgewertet“ und „Kontrollgröße,
@@ -46,16 +46,18 @@ externe Registrierung, Datenmanagement und Abweichungsprotokoll. Die Bezeichnung
 - **Exposé:** „braucht keine Statistik“, „direkt am Kraftsignal ablesbar“ (v2 entscheidet mit Residuen und
   Bootstrap); Ziel „Nachweis oder Falsifikation der F_min-Zeltkurve“ (v2: nur Lage der Spitze); die
   Vorzeichenregel „werden in die vorgesehene v2 der Präregistrierung aufgenommen“ (v2 registriert
-  stattdessen H4); „11 Kanäle“ bei neun aufgezählten; „noch nicht präregistriert“.
+  stattdessen H4); „11 Kanäle“ bei neun aufgezählten; „noch nicht präregistriert“. Erledigt bis auf
+  „11 Kanäle“; ob die Zahl oder die Aufzählung zu ändern ist, ist offen.
 - **Werkstattbericht:** „präregistriert“ (v1 war eine nicht extern registrierte Arbeitsfassung); „Zwei
   Schwellenwerte des Auswerteverfahrens sind nicht festgelegt“; „Steigung, die man gegen ein Messrauschen
-  halten kann“ (v2 registriert nur die Lage der Spitze).
+  halten kann“ (v2 registriert nur die Lage der Spitze). Erledigt.
 - **Literaturabgleich (§4.2, T3):** ε_ctrl ist nach v2 festgelegt (§8.8), ε_phys für die Wellenformgrößen
-  ersetzt (§1).
+  ersetzt (§1). Erledigt.
 - **`einordnung.md` (§4, §6), `zehn_fragen.md` (Nr. 3, 7), `neuheitsgrad.md` (§5, §6):** „harten Stopp“ bei
   jeder Mittelwertabweichung (nach v2: Lauf ungültig, Stopp erst bei reproduzierbarem Verstoß, S1); „gilt H1
   … als falsifiziert“, wenn keine Struktur über dem Rauschen (nach v2: „nicht entscheidbar“); „ohne jede
   Statistik am Kraftsignal ablesbar“; Wellenformstatistik als „primäre Zielgröße“ (nach v2: γ₁ sekundär).
+  Erledigt; „primäre Zielgröße“ für die zeitaufgelöste Kontaktkraft bleibt, das gilt auch nach v2.
 - **`code/linear_solver.py`:** `--section`, `--phi3`, `--f` liegen seit Commit `069cb9b` im Repository
   (Werkzeug 1, erledigt).
 
