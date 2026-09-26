@@ -1,0 +1,820 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{babel}
+\babelprovide[import,main]{ngerman}
+\usepackage{lmodern,needspace,etoolbox}
+\usepackage{amsmath,amssymb,mathtools}
+\usepackage{booktabs,array,longtable,geometry,enumitem,microtype}
+\usepackage[hidelinks]{hyperref}
+\geometry{left=25mm,right=25mm,top=25mm,bottom=25mm}
+\hypersetup{pdftitle={Symbolverzeichnis und Formelzeichen im PCMMS-Forschungsrahmen, Version 2.6},pdfauthor={Matthias Früh},pdfsubject={Kontaktkraft, Wellenformstatistik und Messmodell},pdfkeywords={PCMMS, Kontaktkraft, Wellenformstatistik, Kalibrierung, Formelzeichen}}
+\newcommand{\dd}{\mathrm{d}}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\Var}{\operatorname{Var}}
+\newcommand{\Cov}{\operatorname{Cov}}
+\newcommand{\SE}{\operatorname{SE}}
+\newcommand{\PCMMS}{\textit{Phase-Controlled Multi-Mass Systems}}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newenvironment{symtab}{\begin{longtable}{@{}L{.22\textwidth}L{.62\textwidth}L{.12\textwidth}@{}}\toprule\textbf{Symbol}&\textbf{Bedeutung}&\textbf{Einheit}\\\midrule\endhead}{\bottomrule\end{longtable}}
+\setlength{\tabcolsep}{3pt}
+\renewcommand{\arraystretch}{1.17}
+\setlist{leftmargin=1.7em,itemsep=3pt,topsep=5pt}
+\setlength{\emergencystretch}{2em}
+\pretocmd{\section}{\Needspace{12\baselineskip}}{}{}
+\pretocmd{\subsection}{\Needspace{7\baselineskip}}{}{}
+\begin{document}
+\title{Symbolverzeichnis und Formelzeichen im PCMMS-Forschungsrahmen\\[.5em]\large Version 2.6 -- fachlich überarbeitete Fassung\\Schwerpunkt: Kontaktkraft, Wellenformstatistik und Messmodell}
+\author{Matthias Früh}
+\date{Arbeitsstand: 26. September 2026}
+\maketitle
+\begin{abstract}
+Dieses Dokument definiert die Größen für die Untersuchung phasen- und profilgesteuerter Mehrmassendynamik im PCMMS-Forschungsrahmen. Schwerpunkt ist Linie A: die zeitliche Form der Kontaktkraft an einer Auflage und ihre experimentelle Rekonstruktion. Kontaktkraft, kalibriertes Kraftsignal, Referenzdifferenz und Modellresiduum werden getrennt. Der Schwerpunktsatz liefert unter angegebenen Randbedingungen die Mittelwertreferenz $\langle F_c\rangle=Mg$; sie dient der Bilanz- und Messkontrolle. Untersuchungsgrößen sind insbesondere Schiefe, Kontaktverlustanteil, Extremwerte und Peak-to-Mean. Die Fassung präzisiert Nullpunktbezug, endliche Messfenster, statistische Entscheidungsschwellen und nichtlineare Messketteneffekte. Sie ist ein prä-experimentelles Arbeitsdokument und enthält keine neuen Messnachweise. Medienkopplung und Energiebilanzen werden als Anschlüsse eingeordnet, nicht als vollständig spezifizierte Modelle behandelt.
+\end{abstract}
+\clearpage
+\tableofcontents
+\clearpage
+\section*{Änderungsvermerk und Geltungsbereich}
+\addcontentsline{toc}{section}{Änderungsvermerk und Geltungsbereich}
+Die Hauptgliederung der Version 2 bleibt erhalten; Definitionen und Querverbindungen wurden fachlich überarbeitet. Gegenüber Version 1 bleibt der Übergang von einer Suche nach Mittelwertverschiebungen zur Untersuchung der Wellenform bestehen. Die Korrekturen der Version 2.1 bleiben erhalten. Version 2.2 ergänzt Mehrkanalnotation, Codezuordnung, Parametersatzregister, Glossar und Migration. Version 2.3 präzisiert die Kontaktmoment- und Kalibriernotation sowie die Restmasse des Referenzmodells. Version 2.4 präzisiert Messrichtungen, Lastpfade und Rekonstruktionsbedingungen der Mehrkanalmessung, vereinheitlicht die methodische Leitlinie und bereinigt die Literaturhinweise. Version 2.5 bindet Codezuordnung und Parametersatzregister an den veröffentlichten Repository-Stand 2026-09 (GitHub-Tag \texttt{2026-09}, DOI 10.5281/zenodo.22864178), nimmt die Feinsweep- und Sinusprofil-Dateien in die Codezuordnung auf und ordnet das in der Dissertation verwendete Symbol $\Theta$ dem Hold-Zeitanteil $\beta_h$ zu; Definitionen sind gegenüber Version 2.4 unverändert. Version 2.6 bezieht den Impulsrandterm des Fenstermittels auf die Basislinie ($\delta_w$), trennt ihn bei numerisch gebildeten Mitteln vom Quadraturfehler ($\delta_Q$), ergänzt die Schranke über die Schwerpunktgeschwindigkeit ($v_{S,\max}$), ordnet die Bezeichnungen des Arbeitspapiers v2.3 zu und nimmt die Nachrechnung mit adaptivem Burn-in vom 13.~September 2026 in die Codezuordnung auf; die Definitionen der Version 2.5 bleiben unverändert. Die Parameter in Anhang~\ref{app:code} sind dem angegebenen Simulationsstand zugeordnet. Gegenüber Version 2 sind insbesondere korrigiert:
+\begin{enumerate}
+\item Primäre Untersuchungsgrößen sind zeitaufgelöste Referenzabweichungen und Unterschiede zwischen Betriebszuständen. Kalibrierte Kraftwerte mit Messunsicherheit dienen zugleich der Bilanzprüfung, Kontaktklassifikation und Normierung.
+\item $F_N$ besitzt einen dokumentierten Bezug auf den unbelasteten Kraftnullpunkt. Ein unter Last tariertes Anzeigesignal wird gesondert bezeichnet.
+\item Äußere Zusatzkräfte, Rahmenbewegung und endlicher Impulsrandterm werden ausdrücklich bilanziert. Ganze Anregungsperioden genügen nicht in jedem Bewegungsregime.
+\item Kontaktkraftverteilung und Verteilung des Sensorsignals werden getrennt. Zwei Auswertungen derselben Zeitreihe sind keine unabhängigen Messungen.
+\item Quadratische und kubische Nichtlinearität können beide den Signalmittelwert beeinflussen.
+\item Entscheidungsschwelle und minimale nachweisbare Effektgröße werden getrennt; Paarung, Autokorrelation, Mehrfachtests und Teststärke werden berücksichtigt.
+\item Egg-Profil, zeitliche Parametrisierung und Phasenversatz werden unterschieden. Die Rückholphase ist aktiv geführt; Nahtbedingungen sind explizit.
+\item Aussagen zu Symmetrien, Sinusüberlagerung, Beobachtbarkeit und bestandenen Nulltests sind auf ihre jeweiligen Voraussetzungen begrenzt.
+\end{enumerate}
+Dieses Verzeichnis spezifiziert vorwiegend die vertikale Resultierende an einem definierten Kontaktinterface. Bei mehreren Kontaktstellen ist $F_c$ deren vertikale Summe. Kräfte einzelner Sensoren oder Auflagepunkte können sich im Mittel umverteilen. Sie sind nicht einzeln durch $Mg$ festgelegt. Die Systemgrenze muss im Versuch angeben, welche Massen und Kontaktstellen dazugehören.
+
+\section{Messprinzip und Notationskonventionen}\label{sec:messprinzip}
+\subsection{Was gemessen wird}
+Ein Kraftaufnehmer wandelt mechanische Belastung in ein elektrisches Signal um. Ein Kalibriermodell ordnet diesem Signal einen Kraftwert mit Messunsicherheit zu. Statische Kalibrierung allein legt die dynamische Übertragung bei schnellen Lastwechseln oder Kontaktverlust nicht fest.
+In diesem Dokument bezeichnet $F_N(t)$ das kalibrierte, auf den unbelasteten Kraftnullpunkt bezogene Kraftsignal in Newton. Es ist eine Messgröße zur Schätzung der Kontaktkraft $F_c(t)$, nicht mit dieser identisch. Zur Unsicherheit tragen unter anderem Kalibrierfaktor, Nullpunkt, Drift, Bandbreite und Übersprechen bei.
+
+Wurde eine konstante Last $F_{\mathrm{tara}}$ elektronisch abgezogen, gilt
+\begin{equation}
+F_{N,\mathrm{tar}}(t)=F_N(t)-F_{\mathrm{tara}},\qquad F_N(t)=F_{N,\mathrm{tar}}(t)+F_{\mathrm{tara}}.
+\label{eq:tara}
+\end{equation}
+Die Tara und ihre Unsicherheit werden mitgespeichert. Für Nullkontakt, kraftbezogene Verhältnisgrößen und den Vergleich mit $Mg$ ist der unbelastete Nullpunkt wiederherzustellen. Ein Referenzzustand unter Last ist nicht der unbelastete Nullpunkt.
+
+Die Auswertung priorisiert Referenzabweichungen und Zustandsunterschiede. Kalibrierte Kraftwerte mit dokumentierter Unsicherheit werden für Bilanzierung, Kontaktklassifikation und Normierung verwendet. Verwendet werden:
+\begin{equation}
+\delta F(t)=F_N(t)-\hat F_{\mathrm{base}},\qquad
+\Delta F_{ab}=\overline F_a-\overline F_b,\qquad
+\hat F_{\mathrm{base}}=\overline F_{\mathrm{ref}}.
+\label{eq:differenzen}
+\end{equation}
+Gemeinsame additive Offsets können bei der Differenzbildung entfallen. Verstärkungsfehler, zeitliche Drift und zustandsabhängige Übertragung entfallen dadurch nicht automatisch. Kennzahlen wie Schiefe und Kontaktverlustanteil sind auch je Zustand bestimmbar; ihre Differenzen dienen dem Zustandsvergleich.
+
+\subsection{Mechanische und messtechnische Ebene}
+$F_c$ bezeichnet die physikalische Kontaktkraft innerhalb der festgelegten Systemgrenze. Mechanische Gleichungen beschreiben sie; Messungen ermöglichen ihre Schätzung. $F_N$ bezeichnet das kalibrierte Signal mit den Eigenschaften der realen Messkette. Eine aus $F_N$ berechnete Kennzahl ist zunächst eine Signalkennzahl. Ihre Interpretation als Kontaktkraftkennzahl erfordert eine geeignete dynamische Kalibrierung oder eine überprüfte Rekonstruktion.
+
+\subsection{Vorzeichen und Bezugssystem}
+Die Koordinate $z$ ist in einem näherungsweise inertialen Laborbezugssystem nach oben positiv. $g>0$ ist der Betrag der Erdbeschleunigung. $F_c>0$ bezeichnet die nach oben auf das System wirkende Druckkraft; beim unilateralen Kontakt gilt $F_c\ge0$. $F_{\mathrm{ext},z}$ fasst weitere äußere Vertikalkräfte mit positivem Vorzeichen nach oben zusammen. Ein mitbewegtes Auflagenkoordinatensystem erfordert zusätzliche Beschleunigungsterme und wird nicht stillschweigend verwendet.
+
+\subsection{Indizes und Schreibweisen}
+\begin{symtab}
+$k,l=1,\ldots,n$&Modulindizes; $k=0$ bezeichnet den übrigen Körper bzw. Rahmen.&--\\
+$i=0,\ldots,N-1$&Abtastindex; $t_i=t_0+i\Delta t$, $T_w=N\Delta t$.&--\\
+$j$, $N_b$&Blockindex und Anzahl der Blöcke.&--\\
+$r$, $N_r$&Laufindex und Anzahl unabhängiger Wiederholungen; beim gepaarten Test Anzahl der Paare.&--\\
+$a,b,\mathrm{ref}$&Betriebszustände bzw. Referenzzustand.&--\\
+$\mathbf x,\mathbf A$&Vektor, Matrix; Skalare kursiv.&variabel\\
+$\langle X\rangle_{T_w}$&Kontinuierliches Zeitmittel über das angegebene Fenster.&wie $X$\\
+$\overline X$, $X^{(r)}$&Diskretes Mittel; Kennzahl aus Lauf $r$. Mittel über Läufe ausdrücklich kennzeichnen.&wie $X$\\
+$\hat X$, $\E[X]$&Schätzwert; Erwartungswert.&wie $X$\\
+$\delta X$, $\Delta X_{ab}$&Zeitabhängige Referenzabweichung; Unterschied einer Kennzahl zwischen Zuständen.&wie $X$\\
+$\mathbf p,\mathbf q_C$&Parametervektoren; Einheiten komponentenweise, nicht pauschal dimensionslos.&variabel\\
+\end{symtab}
+
+\Needspace{12\baselineskip}
+\section{Grundlegende mechanische Größen}
+\subsection{Massen und Koordinaten}
+\begin{symtab}
+$m_k$, $m_0$&Modulmasse; Restmasse. Bewegte Aktorteile sind ihrer tatsächlichen Bewegung entsprechend zuzuordnen.&kg\\
+$M$&Gesamtmasse innerhalb der Systemgrenze: $M=\sum_{k=0}^n m_k$.&kg\\
+$z_k$, $\dot z_k$, $\ddot z_k$&Absolute vertikale Schwerpunktkoordinate der Teilmasse und ihre Ableitungen.&m; m/s; m/s$^2$\\
+$z_S$&Gesamtschwerpunkt: $z_S=M^{-1}\sum_{k=0}^n m_kz_k$.&m\\
+$q_k$&Relative vertikale Modulkoordinate, im rein translatorischen Modell $q_k=z_k-z_0$.&m\\
+$\mathbf m_*$&Vollständiger Massenvektor $(m_0,\ldots,m_n)^\top$.&kg\\
+$\mathbf z_*$&Vollständiger Koordinatenvektor $(z_0,\ldots,z_n)^\top$.&m\\
+$g$&Lokale Erdbeschleunigung; überschlägig $9{,}81\,\mathrm{m/s^2}$.&m/s$^2$\\
+\end{symtab}
+Für einen rotierenden oder deformierbaren Rahmen sind $z_k$ aus der vollständigen Kinematik zu bestimmen. Die einfache Beziehung $z_k=z_0+q_k$ gilt nur bei entsprechender translatorischer Koordinatenwahl.
+
+\subsection{Kraftgrößen}
+\begin{symtab}
+$F_c$, $F_N$&Physikalische Kontaktresultierende; kalibriertes Kraftsignal mit unbelastetem Nullpunkt.&N\\
+$F_{\mathrm{ext},z}$&Weitere äußere Vertikalkraft, ohne Gewicht und betrachtete Kontaktresultierende.&N\\
+$F_{\mathrm{base}}$&Theoretische Referenz $Mg$ ohne mittlere äußere Zusatzkraft und ohne Impulsrandterm.&N\\
+$\hat F_{\mathrm{base}}$&Gemessener Mittelwert des angegebenen Referenzzustands.&N\\
+$S_{\mathrm{true}}$&Tatsächlicher Beschleunigungsbeitrag $\mathbf m_*^\top\ddot{\mathbf z}_*=M\ddot z_S$.&N\\
+$S(t;\mathbf p)$&Vorwärtsmodell für $S_{\mathrm{true}}$, aus vollständiger Kinematik oder Dynamikmodell.&N\\
+$C(t;\mathbf q_C)$&Gesamtabweichung von $Mg+S$; umfasst äußere Kopplung, Modell- und Messabweichungen.&N\\
+$F_{\mathrm{ideal}}$&Modellkraft $Mg+S$ für die gewählte Basiskonfiguration.&N\\
+$\hat F_N$, $R$&Vorhergesagtes Messsignal; Residuum $R=F_N-\hat F_N$.&N\\
+$\delta F$, $\Delta F_{ab}$&Zeitaufgelöste Referenzabweichung; Mittelwertdifferenz.&N\\
+\end{symtab}
+
+
+\subsection{Mehrpunkt-, Mehrinterface- und Mehrkanalmessung}\label{sec:mehrkanal}
+Die folgende Notation beschreibt Mehrpunkt- und Mehrkanalarchitekturen, ohne eine konkrete Sensorbelegung oder bereits erreichte Rekonstruktionsgüte vorauszusetzen. Die Anzahl physischer Interfaces $n_I$, die Anzahl skalarer Messkanäle $n_y$ und die Zahl rekonstruierbarer Lastkomponenten sind verschiedene Größen.
+\begin{symtab}
+$\iota=1,\ldots,n_I$&Interfaceindex; Zustände behalten die Indizes $a,b$.&--\\
+$\mathbf r_\iota$&Vektor vom Bezugspunkt $O$ zum Angriffspunkt des Interfaces.&m\\
+$\mathbf F_\iota$&Am Interface auf das untersuchte System wirkende Kraft, im gemeinsamen Laborbezugssystem.&N\\
+$\boldsymbol\tau^{\mathrm c}_\iota$&Gegebenenfalls zusätzlich übertragendes freies Kontaktmoment ($\mu$ bleibt dem Signalmittel $\mu_N$ vorbehalten).&N m\\
+$\mathbf F_\Sigma$&Resultierende $\sum_\iota\mathbf F_\iota$.&N\\
+$\boldsymbol\tau_O$&Moment $\sum_\iota(\mathbf r_\iota\times\mathbf F_\iota+\boldsymbol\tau^{\mathrm c}_\iota)$.&N m\\
+$\mathbf w_O$&Lastvektor $(\mathbf F_\Sigma^\top,\boldsymbol\tau_O^\top)^\top$.&gemischt\\
+$\mathbf y$&Vektor der $n_y$ Messkanäle mit dokumentierter Kalibrierung, Richtung und Zeitbasis.&variabel\\
+\end{symtab}
+Die vertikale Kontaktresultierende ist $F_c=\mathbf e_z^\top\mathbf F_\Sigma$. Die Bindung ihres Mittelwerts an $Mg$ legt die Mittelwerte einzelner Interfacekräfte nicht fest. Lokale Lastverteilungen und Kippmomente können sich bei gleicher Gesamtstützkraft ändern. Sensorwerte sind nur dann direkt zu summieren, wenn Kalibrierung, Orientierung und mechanischer Lastpfad dies erlauben.
+
+Eine vereinfachte statische Messbeziehung für einen auf sechs Resultierendenkomponenten ausgelegten Sensoraufbau ist
+\[
+\mathbf y=\mathbf H_{\mathrm{cal}}\mathbf w_O+\mathbf b+\boldsymbol\eta_y.
+\]
+Sie setzt voraus, dass die Kanäle durch diesen Lastvektor hinreichend beschrieben werden. Bei unbekannter lokaler Lastverteilung kann ein umfangreicherer Interface-Lastvektor nötig sein. Die eindeutige Rekonstruktion aller sechs Komponenten erfordert ein identifiziertes Modell mit entsprechendem Rang; die Zahl der Interfaces allein genügt nicht. Matrixeinheiten hängen von den Kanälen und Lastkomponenten ab. Dynamisch tritt an die Stelle der statischen Matrix eine frequenzabhängige Übertragungsmatrix $\mathbf H_{\mathrm{cal}}(f)$; das Symbol $\mathbf K$ bleibt der Steifigkeit vorbehalten. Gegenseitiges Übersprechen und die Kovarianzen rekonstruierter Komponenten gehören zur Unsicherheit.
+
+Ein Messrahmen mit sechs Interfaces kann die Flächen eines Quaders nutzen. Die Normalen verlaufen entlang dreier orthogonaler Achsen, jeweils in positiver und negativer Richtung. Bei zwei skalaren Sensorkanälen je Interface ergeben sich zwölf Kanäle; zusätzliche Weg- oder Untergrundreferenzkanäle erhöhen $n_y$. Zwei Sensoren unterschiedlicher Bauart können für die niederfrequente Lastmessung und die hochfrequente Wellenform vorgesehen werden. Gleiche Messrichtung bedeutet bei räumlich getrennten Sensoren jedoch nicht automatisch gleiche Last: Die Zuordnung zur Interfacekraft erfordert einen dokumentierten mechanischen Lastpfad und eine entsprechende Kalibrierung. Werden Frequenzbereiche zusammengeführt, sind auch Überlappungsbereich, Verstärkung und Phasenlage abzugleichen.
+
+Eine auf die Flächennormale beschränkte Sensorbelegung erfasst nicht automatisch sämtliche lokalen Kraftkomponenten. Insbesondere lässt sich die Übertragung tangentialer Lasten auf andere Interfaces nur aus dem konkreten mechanischen Modell bestimmen. Momente können aus bekannten Kräften und Angriffspunkten rekonstruiert werden; zusätzlich übertragene freie Kontaktmomente sind gegebenenfalls gesondert zu berücksichtigen. Die Zahl der Sensorkanäle ersetzt diese Voraussetzungen nicht.
+
+Die erforderliche Messbandbreite richtet sich nach den auszuwertenden Spektralanteilen einschließlich relevanter Harmonischer und Kontaktstöße. Ein festes Vielfaches der Grundfrequenz genügt als einziges Kriterium nicht. Übertragungsverhalten, Abtastrate und Antialiasfilter werden gemeinsam festgelegt und dokumentiert.
+
+Die Architekturebenen werden getrennt von Versuchsnamen geführt: L0 bezeichnet den passiven Messrahmen, L1 den Träger mit gegebenenfalls eigenen aktiven Freiheitsgraden, L2 die bewegten Module und L3 die Kopplung zwischen Träger und Modulen. Diese Rollen sind keine Aussage über einen bereits gebauten oder validierten Gesamtaufbau. Für jeden Versuch ist insbesondere festzulegen, ob L1 und welche Teile der Sensoraufsätze innerhalb der bilanzierten Masse $M$ liegen. Ein einfacher V1-Aufbau muss nicht alle sechs Interfaces verwenden.
+
+\subsection{Frequenz und Phase}
+\begin{symtab}
+$f,\omega,T$&Anregungsfrequenz, Kreisfrequenz $\omega=2\pi f$, Periode $T=1/f$.&Hz; rad/s; s\\
+$\phi_k$, $\boldsymbol\phi$&Verzögerungsphase eines Moduls; Vektor aller Phasen. Positive Werte verzögern das Profil.&rad\\
+$\Delta\phi_{kl}$&$\phi_k-\phi_l$; bei gemeinsamer Frequenz und autonomem stationärem Vergleich kann $\phi_1=0$ gesetzt werden.&rad\\
+$T_{\mathrm{sys}}$&Periode der vollständigen Systembewegung, sofern vorhanden; nicht zwingend gleich $T$.&s\\
+$T_w$, $\Delta t$, $f_s$&Auswertefenster, Abtastintervall, Abtastrate $f_s=1/\Delta t$.&s; s; Hz\\
+\end{symtab}
+
+\section{Basislinie und Schwerpunktsatz}\label{sec:bilanz}
+\subsection{Allgemeine vertikale Bilanz}
+Für konstante Massen und die definierte Systemgrenze gilt
+\begin{align}
+M\ddot z_S&=F_c+F_{\mathrm{ext},z}-Mg,\\
+F_c&=Mg+S_{\mathrm{true}}-F_{\mathrm{ext},z},\qquad
+S_{\mathrm{true}}=\sum_{k=0}^{n}m_k\ddot z_k.
+\label{eq:bilanz}
+\end{align}
+Innere Wechselwirkungskräfte heben sich in der Gesamtbilanz auf. Sie beeinflussen die Trajektorien und damit den zeitlichen Verlauf von $S_{\mathrm{true}}$.
+Bei $F_{\mathrm{ext},z}=0$ folgt $F_c=Mg+M\ddot z_S$. Nur wenn der Rahmen tatsächlich vertikal ruht, darf $m_0\ddot z_0$ entfallen. Eine starre Unterlage allein garantiert dies bei Liftoff nicht. Im translatorischen Relativkoordinatenmodell gilt
+\begin{equation}
+S_{\mathrm{true}}=M\ddot z_0+\sum_{k=1}^{n}m_k\ddot q_k.
+\label{eq:rahmen}
+\end{equation}
+
+\subsection{Zeitmittel und endliches Fenster}
+Mit $\Delta v_S=\dot z_S(t_1+T_w)-\dot z_S(t_1)$ ergibt sich exakt
+\begin{equation}
+\langle F_c\rangle_{T_w}=Mg-\langle F_{\mathrm{ext},z}\rangle_{T_w}+b_w,
+\qquad b_w=\frac{M\Delta v_S}{T_w}.
+\label{eq:fenster}
+\end{equation}
+Der Randterm verschwindet, wenn die Schwerpunktgeschwindigkeit an beiden Fenstergrenzen gleich ist. Eine hinreichende Bedingung ist eine periodische vollständige Bewegung mit $T_w=n_T T_{\mathrm{sys}}$, $n_T\in\mathbb N$. Ganze Anregungsperioden $n_TT$ genügen nur bei passender Systemantwort. Subharmonische, quasiperiodische oder noch einschwingende Rahmenbewegung sind gesondert zu prüfen.
+
+Sind die Geschwindigkeiten im betrachteten Bereich gleichmäßig beschränkt, gilt
+\begin{equation}
+|b_w|\le\varepsilon_w,\qquad
+\varepsilon_w=\frac{2}{T_w}\sum_{k=0}^{n}m_k\sup_t|\dot z_k(t)|.
+\label{eq:bound}
+\end{equation}
+Dies ist eine konservative obere Schranke, keine Vorhersage eines exakt monotonen $1/T_w$-Verlaufs. Der direkt bestimmte Endpunktterm kann wesentlich kleiner sein. Beschränkte Position allein ist keine ausreichende Voraussetzung für die verwendete Geschwindigkeitsschranke.
+
+Ohne mittlere äußere Zusatzkraft und auf die Basislinie bezogen gilt für das relative Residuum des Fenstermittels
+\begin{equation}
+\delta=\frac{\langle F_c\rangle_{T_w}-Mg}{Mg}=\delta_w,\qquad
+\delta_w=\frac{b_w}{Mg}=\frac{\Delta v_S}{g\,T_w},\qquad
+|\delta_w|\le\frac{2\,v_{S,\max}}{g\,T_w}\le\frac{\varepsilon_w}{Mg},
+\label{eq:randterm-rel}
+\end{equation}
+mit $v_{S,\max}=\sup_t|\dot z_S(t)|$. Die mittlere Schranke folgt aus $|\Delta v_S|\le2v_{S,\max}$; sie benötigt nur die Schwerpunktgeschwindigkeit und ist nie größer als $\varepsilon_w/(Mg)$. Wird das Fenstermittel numerisch gebildet, tritt der Quadraturfehler der Mittelung hinzu, $\delta=\delta_w+\delta_Q$. Größere Werte von $\delta_w$ entstehen bei noch einschwingender Bewegung, bei Fenstern ohne ganze Systemperioden $T_{\mathrm{sys}}$ und bei aperiodischer Bewegung. Nur der letzte Anteil bleibt bei jeder Einschwingdauer bestehen; er ist durch \eqref{eq:randterm-rel} beschränkt.
+\begin{symtab}
+$\Delta v_S$&Änderung der Schwerpunktgeschwindigkeit über das Auswertefenster.&m/s\\
+$b_w$, $\varepsilon_w$&Impulsrandterm des Fenstermittels und seine konservative Schranke.&N\\
+$\delta$&Relatives Residuum des Fenstermittels gegen $Mg$; nicht mit $\delta F$, $\delta_p$ oder $\delta(\cdot)$ zu verwechseln.&--\\
+$\delta_w$, $\delta_Q$&Randterm $b_w/(Mg)$ und Quadraturanteil numerischer Mittelung; ohne äußere Zusatzkraft $\delta=\delta_w+\delta_Q$.&--\\
+$v_{S,\max}$&Größter Betrag der Schwerpunktgeschwindigkeit, $\sup_t|\dot z_S(t)|$.&m/s\\
+\end{symtab}
+
+\subsection{Nullreferenz und Kontaktverlust}
+Ohne mittlere äußere Zusatzkraft und bei $b_w=0$ gilt
+\begin{equation}\langle F_c\rangle=Mg.\label{eq:basis}\end{equation}
+Im kontaktfreien Flug gilt bei $F_{\mathrm{ext},z}=0$ entsprechend $\ddot z_S=-g$. Die Mittelwertbilanz bleibt auch mit Kontaktverlust und Stößen gültig, sofern sämtliche Kontaktimpulse und der Randterm erfasst werden. Bei idealisierten Impulsen ist die Bilanz integral zu lesen.
+
+Eine mittlere äußere Medienkraft verändert dagegen die gemessene Stützkraft gemäß \eqref{eq:fenster}. In einer gezielt mediumgekoppelten Konfiguration ist dieser Beitrag eine physikalische Messgröße. Er darf nicht allein aufgrund seiner Aufnahme in $C$ als Messartefakt bezeichnet werden.
+
+\subsection{Theoretische und operative Basislinie}
+$Mg$ dient der Bilanzprüfung; $\hat F_{\mathrm{base}}$ beschreibt den tatsächlich gemessenen Referenzzustand. Der Unterschied $\overline F_{\mathrm{ref}}-Mg$ kann Nullpunkt- und Verstärkungsfehler, äußere Lasten, Unsicherheit in $M,g$ und einen Randterm enthalten. Er ist nicht automatisch ein reiner Nullpunktfehler.
+
+\subsection{Historische Form}
+Die historische Schreibweise $F_N=mg+\sum_{k=1}^n m_k\ddot z_k+C(x,t)$ wird als vereinfachtes Messmodell eingeordnet. In der überarbeiteten Notation ist $M$ die Gesamtmasse; die Rahmenbewegung wird explizit berücksichtigt oder ihr Weglassen begründet. Eine persistente Mittelwertänderung durch ausschließlich periodische Innendynamik folgt daraus nicht. Die Aussage betrifft die Basiskonfiguration ohne mittlere äußere Zusatzkraft.
+
+\section{Zentrale Messgleichung}\label{sec:messmodell}
+\subsection{Mechanische Bilanz und Messabweichung}
+Zur eindeutigen Trennung werden definiert
+\begin{equation}
+e_{\mathrm m}=F_N-F_c,\qquad e_S=S_{\mathrm{true}}-S.
+\end{equation}
+Damit folgt aus \eqref{eq:bilanz}
+\begin{equation}
+F_N=Mg+S+C,\qquad C=e_S-F_{\mathrm{ext},z}+e_{\mathrm m}.
+\label{eq:messgleichung}
+\end{equation}
+$C$ ist der Sammelterm relativ zum gewählten Vorwärtsmodell. Er kann reale äußere Kräfte, unmodellierte Mechanik und Messabweichungen enthalten. Ohne Kontrollen ist seine Zerlegung nicht eindeutig.
+
+Für Zustand $a$ sei $b_{w,a}$ der Randterm. Dann gilt unabhängig von der Wahl von $S$
+\begin{align}
+\Delta F_{ab}={}&-\Delta\langle F_{\mathrm{ext},z}\rangle_{ab}
++\Delta\langle e_{\mathrm m}\rangle_{ab}+b_{w,a}-b_{w,b}.
+\label{eq:nulltest}
+\end{align}
+Die unberücksichtigten Randterme sind durch $\varepsilon_{w,a}+\varepsilon_{w,b}$ beschränkt. Alternativ gilt exakt $\Delta F_{ab}=\Delta\langle S\rangle_{ab}+\Delta\langle C\rangle_{ab}$. Erst bei mittelwertfreiem $S$ entfällt der erste Term. Ein Nulltest erwartet unter seinen Kontrollbedingungen keine auflösbare Differenz; eine Abweichung löst Bilanz-, Umgebungs- und Messkettenprüfung aus.
+
+\subsection{Messoperator}
+Ein allgemeiner Messoperator kann auch Querlasten, Momente und Temperatur berücksichtigen. Für eine lineare, zeitinvariante Näherung des Vertikalkanals gilt
+\begin{equation}
+F_N=(h*F_c)+b_0+F_{\mathrm{drift}}+e_{\mathrm{cross}}+\eta.
+\label{eq:operator}
+\end{equation}
+$h$ ist die Impulsantwort, $H$ ihre Übertragungsfunktion, $b_0$ der verbleibende Offset, $\eta$ das Rauschen. Bei stabiler Kette, $H(0)=1$ und stationärer Auswertung bleibt der Mittelwert des gefalteten Kraftsignals erhalten. Endliche Fenster, Anfangszustände des Filters und additive Terme sind zusätzlich zu berücksichtigen. Zeitvariable Verstärkung oder Nichtlinearität fallen nicht unter diese Aussage.
+
+Wellenformkennzahlen ändern sich bereits durch lineare Filterung. Für Kontaktkraftaussagen wird entweder das Vorwärtsmodell durch die identifizierte Messkette geführt oder die Kraft mit ausgewiesener Rekonstruktionsunsicherheit geschätzt. Eine Entfaltung kann Rauschen verstärken und ersetzt keine Bandbreitenprüfung.
+
+\subsection{Residualstufen}
+\begin{align}
+R&=F_N-\hat F_N,\\
+\text{Stufe 0:}\quad \hat F_N&=\hat F_{\mathrm{base}},\qquad R=\delta F,\\
+\text{Stufe 1:}\quad \hat F_N&=Mg+S,\qquad R=C,\\
+\text{Stufe 2:}\quad \hat F_N&=h*(Mg+S-\hat F_{\mathrm{ext},z})+\hat e_{\mathrm{rest}}.
+\end{align}
+$\hat e_{\mathrm{rest}}$ enthält nur die noch nicht explizit modellierten Signalbeiträge. Die Faltung darf nicht ein zweites Mal im Restterm enthalten sein. Bei $H(0)=1$ und stationärem Filter ist $h*Mg=Mg$.
+
+\subsection{Auswerteschritte}
+\begin{enumerate}
+\item Systemgrenze, Nullpunkt, Tara, Kalibrierung und Messbandbreite dokumentieren.
+\item Referenz- und aktive Zustände in vorab festgelegter, zeitlich ausbalancierter Reihenfolge messen.
+\item Stationarität prüfen, Auswertefenster wählen und Randterm bzw. dessen Unsicherheit bewerten.
+\item Kraftsignal, Referenzabweichung und Wellenformkennzahlen je Lauf bestimmen.
+\item Mittelwertbilanz mit Entscheidungsschwelle und systematischen Unsicherheiten prüfen.
+\item Modellresiduen und Kontrollen auswerten; anschließend Kennzahlen über Phasen- und Profilparameter kartieren.
+\end{enumerate}
+
+\section{Wellenform-Observablen}\label{sec:wellenform}
+\subsection{Grundgedanke und Bezug}
+Die Wellenform kann sich bei gleicher mittlerer Kontaktkraft erheblich ändern. $\delta F$ entfernt die operative Referenz; es muss im aktiven Zustand nicht exakt mittelwertfrei sein. Zentralmomente werden deshalb stets um den jeweiligen Laufmittelwert gebildet. Signalkennzahlen erhalten bei Bedarf den Index $N$, rekonstruierte Kontaktkraftkennzahlen den Index $c$. Ohne Zusatz sind die folgenden empirischen Momente auf $F_N$ bezogen.
+
+\subsection{Kontaktkraftverteilung und Signalverteilung}
+Für eine endliche, nichtnegative Kontaktkraft und einen kontaktfreien Zeitanteil $\Lambda$ kann die ideale Verteilung geschrieben werden als
+\begin{equation}
+p_c(F)=\Lambda\delta(F)+(1-\Lambda)p_{c,+}(F),\qquad p_{c,+}(F)=0\quad(F<0).
+\label{eq:pdf}
+\end{equation}
+Der positive Anteil ist bedingt auf Kontakt normiert. Diese Darstellung setzt voraus, dass keine anderen Zustände endlicher Dauer mit exakt verschwindender Kraft auftreten; sonst ist die Nullmasse nicht eindeutig Kontaktverlust. Idealisierte unendlich hohe Stoßimpulse erfordern eine gesonderte Behandlung, reale Messungen stets endliche Bandbreite.
+
+Die Verteilung $p_N(F)$ des Sensorsignals besitzt wegen Rauschen, Filtergedächtnis und Restoffset im Allgemeinen keine exakte Punktmasse bei null und kann negative Werte enthalten. $p_c$ und $p_N$ dürfen nicht gleichgesetzt werden. Bei einer bilateral kraftübertragenden Befestigung gilt das unilaterale Modell nicht; mögliche Ablösung einzelner Flächen ist separat zu modellieren.
+
+\subsection{Momente}
+Für $x_i=F_N(t_i)$ und $\mu_N=\overline{x}$ werden die empirischen Zentralmomente mit Nenner $N$ definiert:
+\begin{equation}
+m_{j,N}=\frac1N\sum_{i=0}^{N-1}(x_i-\mu_N)^j,\qquad \sigma_N=\sqrt{m_{2,N}}.
+\end{equation}
+\begin{symtab}
+$\sigma_N=\sigma_{\delta F}$&Standardabweichung des Signalverlaufs bzw. RMS seines zentrierten Wechselanteils.&N\\
+$F_{\mathrm{RMS}}$&$\sqrt{N^{-1}\sum_i x_i^2}$; $F_{\mathrm{RMS}}^2=\mu_N^2+\sigma_N^2$.&N\\
+$\gamma_N$&Empirische Schiefe $m_{3,N}/\sigma_N^3$, nur für $\sigma_N>0$.&--\\
+$\gamma_{2,N}$&Exzess-Kurtosis $m_{4,N}/\sigma_N^4-3$, nur für $\sigma_N>0$. Ergänzende Kennzahl.&--\\
+\end{symtab}
+Die Standardabweichung ist nur bei verschwindendem Mittelwert gleich dem RMS von $\delta F$ selbst. Für Schätzer mit Bias-Korrektur sind die verwendeten Definitionen zusätzlich anzugeben. Bei nahezu konstanter Kraft sind normierte höhere Momente instabil oder undefiniert. $\sigma_N^2$ ist ein Maß der Signalvariation in N$^2$, keine mechanische Leistung in Watt.
+
+\subsection{Kontaktverlustanteil und Schätzung}
+Physikalisch sei $I_{\mathrm{off}}(t)$ der Indikator eines getrennten Kontakts:
+\begin{equation}
+\Lambda=\frac1{T_w}\int_{t_1}^{t_1+T_w} I_{\mathrm{off}}(t)\,\dd t.
+\end{equation}
+Eine kraftbasierte Näherung lautet
+\begin{equation}
+\hat\Lambda_{\mathrm{thr}}=\frac1N\sum_{i=0}^{N-1}\mathbf1\{F_N(t_i)\le F_{\mathrm{thr}}\}.
+\label{eq:liftoff}
+\end{equation}
+Die Schwelle bezieht sich auf den unbelasteten Nullpunkt. Sie wird anhand kontaktfreier Kalibriersegmente, Messrauschen und gewünschter Fehlklassifikationsrate festgelegt. Bandbreite, Mindestdauer, gegebenenfalls Hysterese und Zeitsynchronisation gehören zur Definition des Schätzers. Ein einzelner niedriger Abtastwert beweist keinen Kontaktverlust.
+
+Ein Mischverteilungsmodell kann alternativ $\hat\Lambda_{\mathrm{mix}}$ aus $p_N$ schätzen, wenn die kontaktfreie Signalverteilung und die Übertragung berücksichtigt werden. Beide Verfahren nutzen gegebenenfalls dieselben Daten und sind dann statistisch abhängig. Ihre Übereinstimmung ist eine interne Konsistenzprüfung. Ein geeigneter optischer Spalt- oder Kontaktkanal kann eine zusätzliche, physikalisch unabhängige Information liefern.
+
+\subsection{Extremwerte und Verhältnisgrößen}
+\begin{symtab}
+$F_{N,\min}$, $F_{N,\max}$&Minimum und Maximum eines definierten Auswertefensters bei festgelegter Bandbreite.&N\\
+$\Pi_N$&Peak-to-Mean $F_{N,\max}/\mu_N$ für einen ausreichend sicher von null verschiedenen positiven Mittelwert.&--\\
+$\Pi_{\min,N}$&$F_{N,\min}/\mu_N$ mit derselben Nullpunktkonvention.&--\\
+$A_{\mathrm{pk}}$&Extremabweichungsverhältnis $(F_{c,\max}-Mg)/(Mg-F_{c,\min})$; Codezuordnung in Anhang~\ref{app:code}.&--\\
+$\mathrm{CF}_N$&Crest-Faktor $\max_i|x_i|/F_{\mathrm{RMS}}$, sofern $F_{\mathrm{RMS}}>0$.&--\\
+$F_{\mathrm{thr}}$&Kalibrierte Kontaktschwelle mit dokumentierter Auswerteregel.&N\\
+\end{symtab}
+Exakt gilt $\Pi_N=(\hat F_{\mathrm{base}}+\delta F_{\max})/\mu_N$. Die Kurzform $1+\delta F_{\max}/(Mg)$ gilt nur, wenn zugleich $\mu_N=\hat F_{\mathrm{base}}=Mg$. Schiefe und Zentralmomente sind gegen konstante additive Offsets invariant; Peak-to-Mean und kraftbasierter Kontaktverlust sind es nicht. Extremwerte hängen von Abtastrate, Filterung und Fensterlänge ab. Diese Größen sind im Zustandsvergleich konstant zu halten oder ihre Auswirkungen zu modellieren.
+
+\subsection{Regime und Zustandsabhängigkeit}
+Kontaktregime bedeutet anhaltenden Kontakt; intermittierender Kontakt bedeutet Wechsel zwischen Kontakt und Trennung. Eine zusätzliche Einteilung in seltene und häufige Kontaktverluste ist eine operative Klassifikation und benötigt vorab festgelegte Schwellen.
+Es gibt keine allgemeine Regel, dass Schiefe bei bestehendem Kontakt klein sein muss oder monoton mit $\Lambda$ wächst. Schiefe und Kontaktverlust sind getrennte Achsen der Beschreibung. Eine positive Kraftuntergrenze stützt nur innerhalb der Messauflösung die Annahme durchgehenden Kontakts.
+
+Die Phasenkarten enthalten je Konfiguration die folgenden Größen:
+\[\gamma_N(\boldsymbol\phi),\quad\hat\Lambda(\boldsymbol\phi),\quad\Pi_N(\boldsymbol\phi),\quad F_{N,\min}(\boldsymbol\phi).\] Zustandsdifferenzen $\Delta X_{ab}=X_a-X_b$ werden mit Unsicherheit ausgewertet. Die Kraft-PDF hat die Einheit N$^{-1}$; die Anteile und normierten Momente sind dimensionslos.
+
+
+\subsection{Spektralanalyse und Phaseninformation}
+$P_{XX}(f)$ bezeichnet die einseitige Leistungsdichte eines zentrierten reellen Signals $X(t)$, mit Einheit $[X]^2/\mathrm{Hz}$. Bei konsistenter Normierung liefert das Integral über den positiven Frequenzbereich seine Varianz. Der Welch-Schätzer mittelt gefensterte Segmentperiodogramme; Segmentlänge, Überlappung, Fenster, Detrending und Frequenzauflösung werden angegeben. Diese Welch-Methode ist vom Welch-Zweistichproben-$t$-Test zu unterscheiden.
+Kreuzspektrum $P_{XY}(f)$, spektrale Phase und Kohärenz können Kanalbeziehungen beschreiben. Sie beweisen keine Kausalität. Die Kohärenz lautet bei nicht verschwindenden Nennern $|P_{XY}|^2/(P_{XX}P_{YY})$. Ein Leistungsspektrum allein enthält nicht die vollständige zeitliche Phaseninformation und ersetzt weder Wellenform noch Schiefe.
+
+\section{Statistik und Signalnachweis}\label{sec:statistik}
+\subsection{Läufe und Stichproben}
+Ein Lauf ist eine vorab definierte Messrealisierung eines Betriebszustands. Zeitabschnitte desselben Datensatzes sind nicht allein durch ihre Benennung unabhängige Läufe. Wiederholungen benötigen eine geeignete experimentelle Trennung und Kontrolle gemeinsamer Drift. Je Lauf werden die vollständige Wellenform und ein Wert je Zielkennzahl gespeichert.
+Für $N_r$ unabhängige Laufwerte gilt
+\begin{equation}
+\overline X=\frac1{N_r}\sum_r X^{(r)},\qquad
+s_X^2=\frac1{N_r-1}\sum_r(X^{(r)}-\overline X)^2,\qquad
+\SE(\overline X)=\frac{s_X}{\sqrt{N_r}}.
+\end{equation}
+Die Formel beschreibt die Streuung der Wiederholungen, nicht die gesamte Messunsicherheit. Gemeinsame Kalibrierfehler werden durch mehr Läufe nicht beliebig kleiner.
+
+\subsection{Blockmittel und Autokorrelation}
+Blockmittel können innerhalb eines Laufs die Mittelwertunsicherheit abschätzen, wenn Blöcke ausreichend lang und näherungsweise unabhängig sind. Ganze Bewegungsperioden helfen, deterministische Periodik zu unterdrücken. Zwischen Blöcken verbleibende Drift ist separat zu behandeln.
+Für einen schwach stationären stochastischen Restprozess mit Varianz $\sigma^2$ gilt
+\begin{equation}
+\Var(\overline x)=\frac{\sigma^2}{N}\left[1+2\sum_{\ell=1}^{N-1}\left(1-\frac\ell N\right)\rho_\ell\right].
+\label{eq:acf}
+\end{equation}
+Eine effektive Stichprobengröße ergibt sich als $N$ geteilt durch den Klammerausdruck. Empirische Autokorrelationssummen benötigen eine begründete Abschneide- oder Schätzregel. Die Formel wird nicht unbesehen auf eine deterministische periodische Wellenform angewendet; die Zufallskomponente ist zuvor zu identifizieren. Nichtlineare Kennzahlen lassen sich über wiederholte Läufe auswerten. Auch Resampling in geeigneten Blöcken ist unter dokumentierten Voraussetzungen möglich.
+
+\subsection{Gepaarte und ungepaarte Vergleiche}
+Allgemein gilt
+\begin{equation}
+\Var(\overline X_a-\overline X_b)=\Var(\overline X_a)+\Var(\overline X_b)-2\Cov(\overline X_a,\overline X_b).
+\end{equation}
+Bei unabhängig wiederholten Paaren wird die Differenz direkt ausgewertet:
+\begin{equation}
+d^{(r)}=X_a^{(r)}-X_b^{(r)},\qquad
+\SE(\overline d)=\frac{s_d}{\sqrt{N_r}},\qquad
+ t_{\mathrm{stat}}=\frac{\overline d}{s_d/\sqrt{N_r}},\quad \nu=N_r-1.
+\label{eq:paired}
+\end{equation}
+Bei ungepaarten unabhängigen Gruppen gilt
+\begin{equation}
+\SE(\overline X_a-\overline X_b)=\sqrt{\frac{s_a^2}{N_{r,a}}+\frac{s_b^2}{N_{r,b}}}.
+\end{equation}
+Der Welch-Test nutzt diesen Nenner. Die Freiheitsgrade folgen der Näherung nach Welch und Satterthwaite. Unterschiedliche Varianzen allein sind kein Grund, eine vorhandene sinnvolle Paarung zu verwerfen. Ein Konfidenzintervall für den gepaarten mittleren Unterschied lautet
+\begin{equation}
+\overline d\ \pm\ t_{1-\alpha/2,\nu}\SE(\overline d).
+\end{equation}
+Bei wenigen, stark schiefen oder begrenzten Laufwerten sind die Testvoraussetzungen besonders zu prüfen.
+
+\subsection{Entscheidungsschwelle und Nachweisplanung}\label{sec:schwelle}
+Eine vereinfachte zweiseitige statistische Entscheidungsschwelle ist
+\begin{equation}
+\Delta X_{\mathrm{crit}}=\kappa\,\SE(\widehat{\Delta X}),
+\label{eq:crit}
+\end{equation}
+mit einem zur Verteilung, Freiheitsgradzahl und Mehrfachteststrategie passenden Quantil $\kappa$. Pauschale Werte 2 oder 3 sind nur Näherungen unter entsprechenden Annahmen.
+Die minimale nachweisbare Effektgröße bei vorgegebener Teststärke ist davon zu unterscheiden. In einer normalapproximierten Planung mit näherungsweise konstanter Standardabweichung gilt
+\begin{equation}
+\Delta X_{\min}\approx(z_{1-\alpha/2}+z_{1-\beta_{\mathrm{II}}})\,\SE(\widehat{\Delta X}).
+\label{eq:power}
+\end{equation}
+$\beta_{\mathrm{II}}$ ist die Fehlerwahrscheinlichkeit zweiter Art; $1-\beta_{\mathrm{II}}$ die Teststärke. Kleine Stichproben oder nichtlineare Schätzer benötigen eine genauere Planung. Systematische Unsicherheit, etwa dynamische Kalibrierung und Impulsrandterm, ist zusätzlich im Messmodell zu führen; nicht jeder Beitrag lässt sich wie unabhängiges Rauschen quadratisch addieren.
+
+\subsection{Hypothesen und Nulltest}
+Für den kontrollierten Mittelwertvergleich lautet $H_0:\Delta F_{ab}=0$ unter den Bedingungen von \eqref{eq:nulltest}. Für eine Wellenformkennzahl lautet $H_0:\Delta X_{ab}=0$. Eine Verwerfung ist ein statistischer Befund unter den Testannahmen und keine automatische Ursachenbestimmung.
+Ein nicht signifikanter Unterschied beweist weder exakte Gleichheit noch eine fehlerfreie Messkette. Soll eine praktisch relevante Abweichung ausgeschlossen werden, sind eine vorab definierte Toleranz $\Delta X_{\mathrm{tol}}$ und ein passendes Äquivalenzverfahren bzw. ein entsprechend enges Konfidenzintervall erforderlich. Ein bestandener Mittelwertvergleich validiert nicht die dynamische Übertragung der Wellenform.
+
+\subsection{Versuchsreihenfolge und Mehrfachtests}
+Ein einfaches ABAB-Schema entfernt lineare Drift nicht exakt. Randomisierte oder zeitlich ausbalancierte Blöcke, etwa geeignete ABBA-Folgen, können bestimmte Driftbeiträge reduzieren. Die Reihenfolge, Paarbildung und zulässige Driftkorrektur werden vorab festgelegt. Mehrere Gitterpunkte und mehrere Kennzahlen bilden Testfamilien; primäre Endpunkte und eine Korrektur, beispielsweise Holm oder eine begründete FDR-Kontrolle, sind festzulegen.
+
+\subsection{SNR, relative Größen und Tail-Evaluation}
+Für zentrierte Signal- und Rauschanteile ist $\mathrm{SNR}_{\mathrm{amp}}=\sigma_S/\sigma_\eta$ ein Amplitudenverhältnis; das Leistungsverhältnis ist sein Quadrat. Der Quotient $|\widehat{\Delta X}|/\SE(\widehat{\Delta X})$ ist eine standardisierte Abweichung.
+Relative Kraftgrößen können als $\delta F/(Mg)$ oder $10^6\Delta F_{ab}/(Mg)$ in ppm angegeben werden; Unsicherheiten in $M,g$ sind bei Bedarf mitzunehmen.
+Ausgewertet wird ein nach überprüftem Einschwingen festgelegtes Fenster. Eine pauschale Zeitvorgabe ersetzt kein Stationaritäts- oder Konvergenzkriterium. Periodenmittel und Zielkennzahlen werden auf Stabilität geprüft; ein nachträgliches Aussuchen günstiger Fenster ist zu vermeiden.
+
+\section{Dynamik- und Kopplungsparameter}\label{sec:dynamik}
+\subsection{Grundgrößen}
+\begin{symtab}
+$k_{\mathrm f}$, $c$&Lineare Federsteifigkeit und viskose Dämpfung: $F_{\mathrm f}=-k_{\mathrm f}x$, $F_D=-c\dot x$.&N/m; N s/m\\
+$k_{kl}$, $c_{kl}$&Kopplungsparameter zwischen Freiheitsgraden.&N/m; N s/m\\
+$\mathbf M,\mathbf D,\mathbf K$&Massen-, Dämpfungs- und Steifigkeitsmatrix für rein translatorische Koordinaten.&kg; N s/m; N/m\\
+$\omega_0$, $\zeta$&Einmassenschwinger: $\omega_0=\sqrt{k_{\mathrm f}/m}$, $\zeta=c/(2\sqrt{k_{\mathrm f}m})$.&rad/s; --\\
+$T_s$&Einschwingzeit. $4/(\zeta\omega_0)$ ist eine grobe 2-Prozent-Abschätzung für geeignete unterdämpfte lineare Antworten.&s\\
+$k_{\mathrm{wz}}$&Effektive Aufstellungssteifigkeit.&N/m\\
+$f_{\mathrm{wz}}$&$\sqrt{k_{\mathrm{wz}}/M}/(2\pi)$ für eine entsprechende Einfreiheitsgrad-Näherung.&Hz\\
+\end{symtab}
+Bei gemischten Rotations- und Translationskoordinaten hängen Matrixeinheiten von den jeweiligen Zeilen und Spalten ab. Die lineare Einschwingformel ist keine allgemeine Regel für stark überdämpfte, nichtlineare oder intermittierende Systeme.
+
+\subsection{Mehrmodulmodell und Aktorreaktionen}
+Ein linearisierter Ansatz um eine Referenzlage lautet
+\begin{equation}
+\mathbf M\ddot{\mathbf q}+\mathbf D\dot{\mathbf q}+\mathbf K\mathbf q
+=\mathbf G_u\mathbf u_F+\mathbf f_{\mathrm{nl}}+\mathbf f_{\mathrm{ext}}.
+\label{eq:dynamik}
+\end{equation}
+$\mathbf u_F$ enthält Aktorkräfte in Newton; $\mathbf G_u$ verteilt sie auf die Freiheitsgrade. Bei internen Aktoren sind die Gegenkräfte auf den Rahmen enthalten. Ein Positionssollwert in Metern darf nicht ohne Regler- und Aktormodell an die Stelle eines Kraftvektors treten. Nichtlineare Kontaktkräfte und Gewicht sind in der gewählten Koordinatendarstellung konsistent zu ergänzen bzw. über die Referenzlage zu berücksichtigen.
+Vorgegebene Relativtrajektorien bestimmen nicht automatisch die absolute Rahmenbewegung. Bei Liftoff oder elastischer Aufstellung ist diese zusätzlich zu lösen. Im Kraftvorwärtsmodell wird dann \eqref{eq:rahmen} bzw. die vollständige Kinematik verwendet.
+
+\subsection{Messkette und Bandbreite}
+\begin{symtab}
+$H(s)$, $h(t)$&Übertragungsfunktion, Impulsantwort des normierten Kraftkanals.&--; s$^{-1}$\\
+$s$&Laplace-Variable; vom Stichproben-Streuungsmaß $s_X$ unterschieden.&s$^{-1}$\\
+$f_g$, $f_s$&Filtergrenzfrequenz und Abtastrate; Antialiasing und Amplituden-/Phasentreue sind gemeinsam auszulegen.&Hz\\
+$\tau_{\mathrm{sync}}$&Zeitversatz zwischen Kraft- und Bewegungskanälen.&s\\
+$\Delta F_{\mathrm{LSB}}$&Quantisierungsschritt des Kraftkanals.&N\\
+\end{symtab}
+Für unverzerrte direkte Wellenformauswertung sollte der relevante Frequenzbereich unterhalb störender Aufstellungsresonanzen liegen. Alternativ ist die Übertragung zu identifizieren und im Modell zu berücksichtigen. Eine Grenzfrequenz oberhalb der Grundfrequenz allein genügt bei Oberwellen oder Stößen nicht.
+
+\section{Zustandsraumdarstellung}\label{sec:zustandsraum}
+\subsection{Lineare, nichtlineare und diskrete Form}
+\begin{align}
+\dot{\mathbf x}&=\mathbf A\mathbf x+\mathbf G\mathbf u, &
+\mathbf y&=\mathbf C_y\mathbf x+\mathbf D_y\mathbf u+\mathbf y_0,\\
+\dot{\mathbf x}&=\mathbf f(\mathbf x,\mathbf u,t), &
+\mathbf y&=\boldsymbol\psi(\mathbf x,\mathbf u,t),\\
+\mathbf x_{i+1}&=\mathbf A_d\mathbf x_i+\mathbf G_d\mathbf u_i.
+\end{align}
+$\mathbf G$ bezeichnet wie in den Werkzeugdokumenten die Eingangsmatrix; ein Bias heißt $b_0$. Die diskrete lineare Form setzt eine definierte Diskretisierung und Eingangsinterpolation voraus. Der Zustand kann Positionen, Geschwindigkeiten, Aktor- und Filterzustände umfassen. $\mathbf G_u$ verteilt Kräfte im mechanischen Modell; $\mathbf G$ ist die daraus abgeleitete Zustandsraum-Eingangsmatrix.
+
+\subsection{Kraftausgang}
+Aus den Zeilenblöcken für die absoluten Beschleunigungen folgt im Basismodell
+\begin{equation}
+F_{\mathrm{ideal}}=Mg+\mathbf m_*^\top(\mathbf A_2\mathbf x+\mathbf G_2\mathbf u).
+\end{equation}
+Ein algebraischer Durchgriff ist möglich, aber nicht zwingend. Bei vollständiger Bilanz interner Aktoren können sich deren unmittelbare Beiträge in $\mathbf m_*^\top\mathbf G_2$ aufheben. Kontaktgesetz, Koordinaten und Systemgrenze entscheiden darüber. Das Messsignal folgt erst nach der Messkette.
+
+\subsection{Beobachtbarkeit und Identifizierbarkeit}
+Beobachtbarkeit betrifft die Rekonstruktion von Zuständen aus Ein- und Ausgängen; Parameteridentifizierbarkeit betrifft die eindeutige Bestimmung von Modellparametern. Beides ist zu unterscheiden. Für ein bestimmtes Residuum kann die Rekonstruierbarkeit der benötigten Kraftkombination genügen, auch wenn nicht jeder Zustand beobachtbar ist. Ein Steuerprofil allein ersetzt keine Messung der tatsächlichen Bewegung, solange Regelfehler und Rahmenbewegung unbekannt sind.
+Numerische Abweichungen von der Bilanz können neben Integrationsfehlern auch inkonsistente Kontaktmodelle, fehlende Freiheitsgrade, unaufgelöste Stöße oder Auswertefehler anzeigen. Die Abweichung wird nicht ohne Prüfung einem einzigen Mechanismus zugeordnet.
+
+\section{Residual- und Artefaktmodellierung}\label{sec:residual}
+\subsection{Struktur und Zuordnung}
+Ein Residuum ist zunächst der Abstand zwischen Messung und Modell. Als Artefakt wird hier eine durch Messung, Numerik oder Auswertung verursachte scheinbare Eigenschaft der untersuchten Zielgröße bezeichnet. Reale, bislang unmodellierte Dynamik ist nicht allein deshalb ein Artefakt. In älteren Korpustexten wurde der Begriff teilweise weiter für Anteile außerhalb des Modells verwendet; solche Stellen sind bei der Migration ausdrücklich zu präzisieren.
+
+Ein pragmatischer Ansatz ist $R=R_{\mathrm{mod}}+R_{\mathrm{ext}}+b_0+d_1t+F_p+e_{\mathrm{nl}}+e_{\mathrm{cross}}+\eta$. Die Summanden sind modellabhängig und können korreliert sein. Periodische Beiträge $F_p$ sind über beliebige endliche Fenster nicht zwingend mittelwertfrei. Drift kann mit der Zustandsreihenfolge korrelieren; Interleaving beseitigt sie nicht automatisch.
+
+\subsection{Quadratische und kubische Nichtlinearität}\label{sec:gleichrichtung}
+Für die isolierte statische Nichtlinearität um die Basiskraft setze man $x_c=F_c-Mg$ und unter den Bedingungen von \eqref{eq:basis} $\langle x_c\rangle=0$:
+\begin{equation}
+F_N=F_c+\epsilon_2 x_c^2+\epsilon_3 x_c^3+\cdots.
+\end{equation}
+Dann gilt mit den Momenten der \emph{Eingangskraft} dieser Nichtlinearität
+\begin{equation}
+\langle F_N\rangle-Mg=\epsilon_2\sigma_c^2+\epsilon_3\gamma_c\sigma_c^3+\cdots.
+\label{eq:gleichrichtung}
+\end{equation}
+Insbesondere kann ein kubischer Term bei schiefer Wellenform den Mittelwert verschieben. Bei vorausgehender Filterung sind die Momente des gefilterten Eingangssignals einzusetzen. Die gemessenen Ausgangsmomente sind höchstens eine begründete Näherung für diese Eingangsmomente.
+Für zwei Zustände bei unveränderten Koeffizienten ergibt sich
+\begin{equation}
+\Delta\overline F_{\mathrm{nl},ab}=\epsilon_2(\sigma_{c,a}^2-\sigma_{c,b}^2)
++\epsilon_3(\gamma_{c,a}\sigma_{c,a}^3-\gamma_{c,b}\sigma_{c,b}^3)+\cdots.
+\end{equation}
+$\epsilon_2$ hat die Einheit N$^{-1}$, $\epsilon_3$ N$^{-2}$. Die Skalierung mit Momenten hilft beim Vergleich möglicher Ursachen. Sie beweist allein aber keinen Mechanismus. Dynamische Lastkalibrierung und Messung mit einem unabhängig charakterisierten Sensor ergänzen die Prüfung.
+
+\subsection{Übersprechen und Momente}
+Eine lineare Näherung lautet $e_{\mathrm{cross}}=\chi_xF_x+\chi_yF_y+\chi_{\tau}\tau_{\perp}$. Kraftübersprechkoeffizienten sind dimensionslos, Momentübersprechkoeffizienten haben die Einheit m$^{-1}$.
+Die zeitlich gemittelte horizontale \emph{Gesamtresultierende} ist bei verschwindendem horizontalem Impulsrandterm null. Einzelne Auflagekräfte oder Kippmomente können jedoch statische Beiträge besitzen, etwa bei außermittigem Schwerpunkt und gewähltem Momentenbezugspunkt. Die Drehimpulsbilanz gilt für die Summe aller äußeren Momente um einen geeigneten Bezugspunkt; sie setzt nicht jedes Sensormoment einzeln auf null.
+
+\subsection{Kontrollen und iterative Modellverbesserung}
+\begin{itemize}
+\item Referenz, Dummy-Last und geeignete Aktor-Kontrollen; Unterschiede in Wärme- und Vibrationspfaden dokumentieren.
+\item Randomisierte bzw. ausbalancierte Zustandsblöcke und Temperaturprotokoll.
+\item Amplituden-, Frequenz- und Fensterreihen; Endpunktimpuls und Messbandbreite mitprüfen.
+\item Mehrkanalmessung, zusätzliche Kontaktinformation und unabhängig charakterisierter Kraftsensor.
+\item Symmetrietests nur für nachgewiesene Symmetrien der vollständigen Mechanik, Anregung und Messung. Vertauschung gleicher Module mit gleicher Kopplung kann eine solche Symmetrie sein. Eine beliebige Spiegelung oder Zeitumkehr muss bei Gravitation, Dämpfung und Kontakt keine identischen Kennzahlen liefern.
+\item Synthetische Signale mit bekannten Beiträgen zur Prüfung der Auswertung; Ergebnisse nicht als Hardwarevalidierung ausgeben.
+\end{itemize}
+Modelländerungen werden anhand von Kontrollen und Residualstruktur begründet. Auswertung und Modellanpassung auf denselben Daten können überanpassen; getrennte Validierungsläufe sind vorzusehen.
+
+\section{Modulations- und Steuerkonzepte}\label{sec:modulation}
+\subsection{Profil, Amplitude und Phase}
+Für einen relativen Positionssollwert wird geschrieben
+\begin{equation}
+u_{q,k}(t)=q_{k,0}+A_k(t)f_k(\theta_k;\mathbf p_k),\quad
+\theta_k=\omega t-\phi_k,\quad f_k(\theta+2\pi)=f_k(\theta).
+\end{equation}
+$A_k$ hat die Einheit Meter, $f_k$ ist dimensionslos; bei der Normierung $\max|f_k|=1$ ist die Lage des Profilnullpunkts mitanzugeben. $\mathbf p_k$ enthält Profilparameter. Für Kraftvorgaben wird separat $u_{F,k}$ mit Kraftamplitude in Newton verwendet.
+Die Trajektorienform, ihre zeitliche Parametrisierung und der relative Phasenversatz sind unterschiedliche Festlegungen. Eine zeitabhängige Anfahramplitude erzeugt zusätzliche Ableitungsterme:
+\begin{equation}
+\ddot u_{q,k}=\ddot A_k f_k+2\dot A_k\omega f'_k+A_k\omega^2f''_k
+\end{equation}
+für konstante $\omega,\phi_k$. Im stationären Betrieb mit konstantem $A_k$ bleibt der letzte Term. Eine tatsächliche Relativposition ist $q_k=u_{q,k}+e_{q,k}$; die absolute Beschleunigung enthält zusätzlich die Rahmenkinematik.
+
+\subsection{Phasenkonfiguration und Sweep}
+Bei $n$ Modulen verbleiben unter den genannten Bedingungen $n-1$ relative Phasen. Für $G$ \emph{verschiedene} Punkte auf einer periodischen Achse wird verwendet
+\begin{equation}
+\Delta\phi_{k1}\in\{2\pi j_\phi/G:j_\phi=0,\ldots,G-1\},\quad k=2,\ldots,n.
+\end{equation}
+Ein zusätzlich dargestellter Endpunkt $2\pi$ dupliziert $0$ und wird nicht als unabhängige Konfiguration gezählt. Die geprüfte Referenz-Engine verwendet \texttt{endpoint=False}; das 19er-Raster hat die Schrittweite $360^\circ/19$. Auch die beigefügten 13er-Driftraster enthalten keinen doppelten Endpunkt. Der Nenner $G-1$ in Version 2 war ein Formelfehler; daraus folgt kein Fehler dieser Datengitter.
+
+
+\subsection{Phasenwinkel und Zeitverzögerung}
+Die Konvention der Referenz-Engine wird übernommen:
+\[
+\tau_{\phi,k}=\frac{\phi_k}{\omega},\qquad q_k(t)=q_0(t-\tau_{\phi,k}),\qquad
+\theta_k=\omega t-\phi_k.
+\]
+$\phi_k$ wird im Verzeichnis in Radiant geführt; CSV-Spalten mit dem Suffix \texttt{\_deg} enthalten Grad. Eine Schreibweise mit $\omega t+\phi_k$ ist nur mit entgegengesetzt definiertem Phasenwinkel äquivalent. $\tau_{\phi,k}$ wird vom Kanalversatz $\tau_{\mathrm{sync}}$ und vom Drehmoment unterschieden. Bei unterschiedlichen Modulfrequenzen ändern sich die relativen Phasen zeitlich; ein festes Phasenraster ist dann keine vollständige Zustandsbeschreibung.
+
+\subsection{Standardzustände und Kontrollen}
+\begin{longtable}{@{}L{.22\textwidth}L{.73\textwidth}@{}}
+\toprule\textbf{Zustand}&\textbf{Festlegung und Zweck}\\\midrule\endhead
+Referenz&Ohne Innenbewegung oder mit ausdrücklich definierter Referenzanregung; operative Basislinie.\\
+Sinus-Kontrolle&Sinusförmige Profile; linearer Überlagerungsfall zur Prüfung von Harmonischen und Nichtlinearitäten.\\
+Synchron&Identische Profile mit gleichen Phasen; nicht gleichbedeutend mit symmetrischer Wellenform.\\
+Profilvergleich&Sinus und Egg bzw. verschiedene Egg-Profile bei dokumentierter Amplituden- oder RMS-Normierung.\\
+Dephasiert&Unterschiedliche Phasen, darunter Triphasik $(0^\circ,120^\circ,240^\circ)$.\\
+Modulvertauschung&Kontrolle bei tatsächlich gleichen Massen, Profilen und Kopplungspfaden.\\
+Aktor-/Dummy-Kontrolle&Bestromte Aktoren ohne Sollbewegung oder geeignete Ersatzlast; Wärme, Vibration und elektrische Einkopplung gesondert bewerten.\\
+\bottomrule\end{longtable}
+Ein Zustand ist vollständig erst mit Frequenz, Amplitude, Profilversion, Phasen, Lastpfad und Regelmodus beschrieben. Die Kürzel ersetzen keine Versuchsmetadaten.
+
+\subsection{Sinusprofil}
+Bei konstanten Amplituden und gemeinsamer Frequenz bleibt die lineare Überlagerung beliebig vieler Sinusschwingungen ein Sinus:
+\begin{equation}
+\sum_k a_k\sin(\omega t-\phi_k)=A_{\mathrm{res}}\sin(\omega t-\phi_{\mathrm{res}}).
+\end{equation}
+Über vollständige Perioden ist dessen Schiefe null, sofern die Varianz nicht verschwindet. Reine Mehrmodulüberlagerung erzeugt unter diesen Voraussetzungen keine Schiefe. Nichtsinusförmige Profile, Nichtlinearitäten, Kontaktverlust, transiente Vorgänge oder Messketteneffekte können dies ändern.
+
+\subsection{Egg-Profil und aktiv geführte Rückholung}
+Im PCMMS-Kontext bezeichnet Egg die vorgegebene Trajektorienform bzw. Hüllkurve; die zeitliche Durchfahrung und der Phasenbezug sind zusätzlich festzulegen. Eine Vorwärts- und Rückholphase werden durch
+\begin{equation}
+T=T_f+T_r,\qquad \beta=T_f/T,\qquad T_r=(1-\beta)T
+\end{equation}
+parametrisiert. Die projektübliche Orientierung $\beta\approx0{,}8$ ist ein Entwurfswert, keine allgemeine Festlegung. Vorwärts und rückwärts sind nicht automatisch aufwärts und abwärts; die räumliche Orientierung wird im jeweiligen Aufbau angegeben.
+Für eine skalare Relativtrajektorie lautet die allgemeine Spezifikation mit $\tau=t\bmod T$
+\begin{equation}
+q(\tau)=\begin{cases}q_f(\tau),&0\le\tau<T_f,\\q_r(\tau-T_f),&T_f\le\tau<T.\end{cases}
+\end{equation}
+Die Rückholphase ist aktiv geführt. Die Teilprofile sind mindestens stückweise zweimal differenzierbar mit beschränkter Beschleunigung zu wählen. Periodische $C^1$-Verknüpfung erfordert
+\begin{align}
+q_f(T_f)&=q_r(0),&\dot q_f(T_f)&=\dot q_r(0),\\
+q_r(T_r)&=q_f(0),&\dot q_r(T_r)&=\dot q_f(0).
+\end{align}
+Bei Vektortrajektorien gelten die Bedingungen für jede Komponente. Eine $C^1$-Naht hält die Geschwindigkeit stetig; für stetige Beschleunigung sind zusätzlich $C^2$-Nähte nötig. Beschleunigungs- und Ruckgrenzen werden passend zu Aktorik und Messbandbreite festgelegt.
+
+Ungleiche Phasendauern allein garantieren keine von null verschiedene Beschleunigungsschiefe. Bei geometrisch ähnlichen zeitgestreckten Teilprofilen skaliert die Beschleunigung zwar mit der inversen Dauer zum Quadrat; die Schiefe folgt jedoch aus der vollständigen Funktion. Auch $\beta=1/2$ garantiert ohne passende Teilprofile keine Symmetrie.
+Eine konkrete Polynom-, Cosinus- oder Splinefunktion wird hier nicht als neue kanonische Egg-Definition eingeführt. Für jeden Versuch sind die verwendete Profilfunktion oder versionierte Profildatei, Normierung, Raumorientierung, Nahtbedingungen und Parameter zu hinterlegen. Damit bleibt die Anschlussfähigkeit an bestehende PCMMS-Trajektorien erhalten.
+
+
+\subsection{Versioniertes Referenzprofil der Kontakt-Engine}\label{sec:refprofil}
+Für die im Kernpaket enthaltene Datei \texttt{pcmms\_v3a\_phasen\_sweep.py} entspricht die kodierte Beschleunigung der zweiten Ableitung des folgenden vertikalen Profils. Mit $\tau=t\bmod T$, Hold-Dauer $T_h=\beta_hT$ und schneller Dauer $T_s^{\mathrm{prof}}=(1-\beta_h)T$ gilt
+\[
+q(\tau)=\begin{cases}
+R_{\mathrm{top}}\sin(\pi\tau/T_h),&0\le\tau<T_h,\\
+-R_{\mathrm{bot}}\sin\bigl(\pi(\tau-T_h)/T_s^{\mathrm{prof}}\bigr),&T_h\le\tau<T.
+\end{cases}
+\]
+Die Nahtgeschwindigkeiten stimmen überein, wenn
+\[
+\frac{R_{\mathrm{top}}}{T_h}=\frac{R_{\mathrm{bot}}}{T_s^{\mathrm{prof}}},\qquad
+R_{\mathrm{bot}}=R_{\mathrm{top}}\frac{1-\beta_h}{\beta_h}.
+\]
+Die Position ist an beiden Nähten null; die Beschleunigungen verschwinden dort ebenfalls. Für dieses Profil sind somit auch die Beschleunigungsnähte stetig, während der Ruck springen kann. Der Code liefert die stückweisen Beschleunigungen direkt. Der Hold-Zeitanteil $\beta_h$ ist ein Parameter dieser Profilversion und nicht ungeprüft mit dem allgemeinen Vorwärtsanteil $\beta$ gleichzusetzen.
+Der ältere \texttt{pcmms\_v10\_egg\_traj.py}-Stand enthält dagegen seitliche Bewegung und eine zusätzliche Schnipp-Phase. Er wird als separate historische Variante geführt. Diese Variante wird ohne vollständigen Profil- und Nahtabgleich nicht zur verbindlichen Hardwaretrajektorie erklärt. Bei dreiphasiger Parametrisierung müssen die normierten Zeitanteile zusammen eins ergeben; sie sind nicht unabhängig wählbar.
+
+\subsection{Puls, Hüllkurve und adaptive Steuerung}
+$\delta_p$ bezeichnet den Tastgrad eines Pulsprofils, $T_{\mathrm{ramp}}$ die Anfahrzeit der Amplitudenhülle. Harte Sprünge in einem Positionssollwert sind keine mechanisch realisierbaren Trajektorien ohne zusätzliche Übergangsmodellierung.
+Adaptive Änderungen von Frequenz, Phase oder Amplitude werden mitprotokolliert. Eine deterministische Zeitänderung ist nicht derselbe feste Betriebszustand wie eine stationäre Konfiguration. Stochastisch stationäre Regelprozesse benötigen eine eigene Zustands- und Auswertedefinition. Für gleichmäßige Phasenstaffelung mit $\phi_1=0$ gilt $\phi_k=2\pi(k-1)/n$.
+
+\section{Konzeptionelle Spezialbegriffe und Anschlüsse}
+\begin{longtable}{@{}L{.29\textwidth}L{.68\textwidth}@{}}
+\toprule\textbf{Begriff}&\textbf{Bedeutung}\\\midrule\endhead
+Measurement-Centric&Messzentrierte Vorgehensweise: Referenzabweichungen und Zustandsvergleiche priorisieren; Kraftwerte und Messmodell mit Unsicherheit mitführen.\\
+State-Dependent Waveform Statistics&Zustandsabhängige Wellenformstatistik; aktueller Anschlussbegriff für die Kontaktkraftlinie.\\
+State-Dependent Mean Shift&Historischer Such- und Publikationsbegriff. Im kontrollierten Kontaktfall heute Nulltest bzw. Kopplungsdiagnose; alte Titel werden nicht rückwirkend geändert.\\
+Force Statistics&Statistische Beschreibung der Kraftwerte, ihrer zeitlichen Struktur und Kennzahlen.\\
+Residual-Based Modeling&Modellergänzung anhand von Residuen, Kontrollmessungen und gesonderter Validierung.\\
+Signal Detection $\ne$ Interpretation&Ein nachweisbarer Unterschied legt seine physikalische Ursache nicht fest.\\
+Null Hypothesis Framework&Getrennte Hypothesen für Mittelwertkontrolle und Unterschiede der Wellenform; Nichtverwerfen beweist keine Gleichheit.\\
+Tail Evaluation&Auswertung eines nach überprüftem Einschwingen festgelegten Fensters mit kontrolliertem Randterm.\\
+Dynamic Coupling&Wechselwirkung von Modulen, Träger, Aufstellung und Umgebung; von reinen Messkettenabweichungen zu unterscheiden.\\
+Detection Threshold&Statistische Entscheidungsschwelle $\Delta X_{\mathrm{crit}}$; von der nachweisbaren Effektgröße $\Delta X_{\min}$ zu unterscheiden.\\
+Measurement Equation&Explizites Messmodell, hier $F_N=Mg+S+C$ mit definierter Zerlegung.\\
+Regime&Operative Einteilung der Dynamik, etwa Dauerkontakt und intermittierender Kontakt; Schwellen vorab festlegen.\\
+Lauf (Run)&Definierte Messrealisierung; eine bloße Segmentierung erzeugt keine unabhängigen Wiederholungen.\\
+Peak-to-Mean&$\Pi_N=F_{N,\max}/\mu_N$ mit eindeutigem Kraftnullpunkt; nicht die historische CSV-Spalte \texttt{peak\_ratio}.\\
+Egg Modulation&Trajektorienform und zeitliche Durchfahrung mit aktiv geführter Rückholung; versioniertes Profil referenzieren.\\
+Gleichrichtungsartefakt&Eine scheinbare Änderung des Kraftmittelwerts durch nichtlineare Signalübertragung, etwa quadratische oder kubische Beiträge.\\
+Residualoffen&Nicht erklärte Beiträge werden sichtbar belassen; ihre Ursache wird nicht vorweggenommen.\\
+Modellagnostisch&Kennzahlen können vor einem detaillierten Dynamikmodell beschrieben werden. Kalibrierung und Auswertung sind dennoch nicht voraussetzungsfrei.\\
+PCMMS&\PCMMS: Forschungsrahmen für phasen- und profilgesteuerte Mehrmassendynamik. Die Kraftplattform ist eine Untersuchungskonfiguration, keine universelle Begrenzung des Begriffs.\\
+PCMMFS&Bezeichnung des statistischen Auswerteteils: Kraftwellenform, Kennzahlen, Unsicherheit und Kontrollen.\\
+Basislinie&$\langle F_c\rangle=Mg$ unter den Bedingungen von Abschnitt~\ref{sec:bilanz}. Keine allgemeine Aussage über jedes Sensorsignal und jede äußere Kopplung.\\
+Kraftverschiebung&Zeitabhängige Referenzabweichung $\delta F$ oder mittlere Kraftdifferenz $\Delta F_{ab}$. Eine Differenz der Schiefe ist eine Kennzahldifferenz, keine Kraft.\\
+Mean Shift&Im kontrollierten Kontaktversuch Bilanz- und Messkontrolle; bei definierter äußerer Kopplung möglicherweise Zielgröße dieser Kopplung.\\
+Wellenformstatistik&Verteilung und Kennzahlen des zeitlichen Kraftverlaufs bei dokumentierter Bandbreite und Fensterwahl.\\
+Liftoff&Kontaktverlust; physikalischer Zustand, der durch geeignete Sensorik geschätzt wird.\\
+Residual&Modellabhängige Abweichung $R=F_N-\hat F_N$, ohne eindeutige Ursachenzuordnung.\\
+Closed-System Dynamics&Im Korpus häufig: nur interne Aktuierung. Bilanziell sind trotzdem sämtliche äußeren Kräfte anzugeben; ein aufliegender Körper ist wegen Gewicht und Auflagekraft nicht impulsisoliert.\\
+Artefact Sensitivity&Abhängigkeit einer Kennzahl von Störgrößen. Eine allgemeine Rangfolge wie ``Liftoff wenig empfindlich'' ist ohne Messmodell nicht begründet.\\
+Pre-Experimental&Methodischer und numerischer Arbeitsstand vor eigener experimenteller Validierung.\\
+\bottomrule\end{longtable}
+\subsection{Anschluss an Linie B und C}
+Linie B untersucht äußere Medienkopplung. Dafür sind Relativgeschwindigkeit zum Medium, Widerstandsgesetz, stationäre Drift und gebundene mittlere Reaktionskraft getrennt zu definieren. Eine aus einer Driftgeschwindigkeit berechnete Widerstandskraft ist nicht automatisch die Kraft eines gebundenen Pendelversuchs. Die beigefügten Skriptkorrekturen vom 6. September 2026 dokumentieren diese Unterscheidung; ihre Zahlen werden hier nicht als allgemeine Formelkonstanten übernommen.
+Linie C betrifft mögliche Energieaufnahme, -verteilung und -rückübertragung. Dafür sind Systemgrenze, Speicheränderung, zugeführte und abgeführte Leistung erforderlich. Weder ein erhöhter Kraft-RMS noch eine veränderte Schiefe ist für sich ein Nachweis verbesserter Energieeffizienz.
+
+\section{Kernbeziehungen}
+Alle Beziehungen gelten mit den im Haupttext genannten Randbedingungen.
+\begin{align*}
+\text{Gesamtmasse:}\quad M&=\sum_{k=0}^{n}m_k,\\
+\text{Kontaktbilanz:}\quad F_c&=Mg+M\ddot z_S-F_{\mathrm{ext},z},\\
+\text{Fenstermittel:}\quad\langle F_c\rangle&=Mg-\langle F_{\mathrm{ext},z}\rangle+\frac{M\Delta v_S}{T_w},\\
+\text{Basiskontrolle:}\quad\langle F_c\rangle&=Mg\quad(\langle F_{\mathrm{ext},z}\rangle=0,\ \Delta v_S=0),\\
+\text{Relativer Randterm:}\quad\delta_w&=\frac{\Delta v_S}{g\,T_w},\qquad|\delta_w|\le\frac{2v_{S,\max}}{g\,T_w},\\
+\text{Messmodell:}\quad F_N&=Mg+S+C,\\
+C&=e_S-F_{\mathrm{ext},z}+e_{\mathrm m},\\
+\text{Referenzabweichung:}\quad\delta F&=F_N-\hat F_{\mathrm{base}},\\
+\text{Residuum:}\quad R&=F_N-\hat F_N,\\
+\text{Ideale Kraftverteilung:}\quad p_c(F)&=\Lambda\delta(F)+(1-\Lambda)p_{c,+}(F),\\
+\text{Schiefe:}\quad\gamma_N&=m_{3,N}/\sigma_N^3,\\
+\text{RMS:}\quad F_{\mathrm{RMS}}^2&=\mu_N^2+\sigma_N^2,\\
+\text{Peak-to-Mean:}\quad\Pi_N&=F_{N,\max}/\mu_N,\\
+\text{Nichtlinearer Mittelwert:}\quad\Delta\overline F_{\mathrm{nl}}&=\epsilon_2\sigma_c^2+\epsilon_3\gamma_c\sigma_c^3+\cdots,\\
+\text{Gepaarter Standardfehler:}\quad\SE(\overline d)&=s_d/\sqrt{N_r},\\
+\text{Entscheidungsschwelle:}\quad\Delta X_{\mathrm{crit}}&=\kappa\SE(\widehat{\Delta X}),\\
+\text{Nachweisplanung:}\quad\Delta X_{\min}&\approx(z_{1-\alpha/2}+z_{1-\beta_{\mathrm{II}}})\SE(\widehat{\Delta X}),\\
+\text{Zeitaufteilung:}\quad T&=T_f+T_r,\qquad\beta=T_f/T.
+\end{align*}
+
+\section{Interpretation und noch festzulegende Versuchsdaten}
+Die Analyse beginnt mit den Messdaten und einem expliziten Messmodell. Die Bilanzreferenz liefert eine Kontrolle; die Forschungsfrage betrifft die reproduzierbare Steuerung der Wellenform und die Grenzen ihrer Messbarkeit. Das Ausbleiben eines signifikanten Unterschieds begrenzt Aussagen nur innerhalb der erreichten Empfindlichkeit. Die Erfüllung einer Mittelwertkontrolle ist ein Baustein der Validierung, kein umfassendes Gütesiegel.
+
+Vor einer Messkampagne bleiben konkret festzulegen:
+\begin{enumerate}
+\item Systemgrenze, Massen, Freiheitsgrade und Zuordnung aller Kraftkanäle;
+\item versioniertes Egg-Profil, Zeitaufteilung, Phasenraster und Aktorgrenzen;
+\item unbelasteter Nullpunkt, Tara, dynamische Kalibrierung, Filter und Abtastrate;
+\item Kontaktklassifikator mit Schwelle, Mindestdauer und unabhängiger Kontrolle;
+\item Einschwing- und Fensterkriterium einschließlich Impulsrandterm;
+\item primäre Kennzahlen, relevante Toleranzen, Anzahl der Läufe, Teststärke und Umgang mit Mehrfachtests;
+\item randomisierte bzw. ausbalancierte Reihenfolge, Ausschluss- und Abbruchkriterien.
+\end{enumerate}
+Diese Punkte sind absichtlich als Versuchsspezifikation offen. Das Verzeichnis ersetzt weder Präregistrierung noch experimentelle Validierung und legt keine unbelegten numerischen Schwellen fest.
+
+\appendix
+
+\section{Migration Version 1 nach Version 2.6}\label{app:migration}
+Die Tabelle verfolgt die im V1/V2-Abgleich dokumentierten Altbelegungen und ab Version 2.6 die Bezeichnungen des Arbeitspapiers. Ein entfallener generischer Parameter wird nicht stillschweigend einer physikalisch anderen Größe zugeordnet. Alte Dateifelder bleiben erhalten; die Auswertung verwendet einen expliziten Adapter.
+\begin{longtable}{@{}L{.27\textwidth}L{.28\textwidth}L{.40\textwidth}@{}}
+\toprule\textbf{Version 1 / Altbelegung}&\textbf{Version 2.6}&\textbf{Zuordnung}\\\midrule\endhead
+$mg$, $F_g$&$Mg$, $F_{\mathrm{base}}$&Gesamtmasse, theoretische Referenz unter Randbedingungen.\\
+$F_{\mathrm{gesamt}}$ als ppm-Nenner&$Mg$&Referenz des jeweiligen Parametersatzes.\\
+$F_N$, $F_{\mathrm{meas}}$, $F_{\mathrm{phys}}$&$F_N$, $F_c$, $F_{N,\mathrm{tar}}$&Messwert, Kontaktkraft und tarierte Anzeige trennen.\\
+$F_{\mathrm{dyn}}$, $\sum m_k\ddot z_k$&$S$, $S_{\mathrm{true}}$&Vorwärtsmodell oder tatsächliche vollständige Dynamik.\\
+$F_{\mathrm{res}}$&$R$ bzw. $C$&Zuordnung nach der alten Definition, nicht allein nach dem Namen.\\
+$C(x,t)$&$C(t;\mathbf q_C)$&Modellbezogener Sammelterm.\\
+$\Delta F$&$\Delta F_{ab}$&Zustandsdifferenz, im Basiskontaktfall Kontrolle.\\
+$\mu_{\mathrm{aktiv}}$, $\mu_{\mathrm{ref}}$&$\overline F_a$, $\overline F_{\mathrm{ref}}$&Zustandsmittel mit explizitem Fenster.\\
+$\gamma=t_{\mathrm{up}}/t_{\mathrm{ges}}$&$\beta$ bzw. $\beta_h$&Zeitanteil nur nach Profilzuordnung; $\gamma_N$ ist Schiefe.\\
+$\Theta=T_h/T$ (Dissertation v2)&$\beta_h$&Hold-Zeitanteil des Referenzprofils nach Abschnitt~\ref{sec:refprofil}; nicht mit dem allgemeinen Vorwärtsanteil $\beta$ gleichzusetzen.\\
+$\Delta F_{\min}\approx k\sigma$ oder $q\sigma$&$\Delta X_{\mathrm{crit}}$, $\Delta X_{\min}$&Entscheidung und Teststärkeplanung trennen.\\
+$k$ (Feder)&$k_{\mathrm f}$&$k$ bleibt Modulindex.\\
+$q$ (Schwelle)&$\kappa$&Quantil bzw. Näherungsfaktor.\\
+$\mathbf q$ (Koordinaten)&$\mathbf q$; $\mathbf q_C$&Koordinaten und Parameter des Sammelterms ausdrücklich trennen.\\
+$C$ (Dämpfung), $D$ (Durchgriff)&$\mathbf D$, $\mathbf D_y$&Dämpfung und Ausgangsdurchgriff.\\
+$C$ (Ausgang), $B$ (Eingang)&$\mathbf C_y$, $\mathbf G$&Anschluss an die Werkzeugnotation.\\
+$K$ (allgemeine Kopplung)&$\mathbf K$, $k_{kl},c_{kl}$&Steifigkeit und Dämpfung explizit unterscheiden.\\
+$N(t)$&$\eta(t)$&Rauschen; $N$ bleibt Abtastzahl.\\
+$B(t),B_0$&$b_0+F_{\mathrm{drift}}$&Offset und zeitliche Drift.\\
+$D(t)=at+b$&$b_0+d_1t$&Driftmodell.\\
+$A_{\mathrm{sys}},A_{\mathrm{rand}}$&Systematische Beiträge, $\eta$&Nur bei bekannter Altdefinition eindeutig.\\
+$A(t)=A_0\sin(\ldots)$&$F_p$, $a_{p,m}$&Periodischer Störanteil.\\
+$E(t)$ als Hülle&$A_k(t)$&Von Energie $E$ unterscheiden.\\
+$M(t),\mu,\rho,\lambda,w_k$ generisch&Keine pauschale Übernahme&Unbestimmte Modulationsparameter; konkrete Funktion erforderlich. Mediendichte $\rho_{\mathrm{med}}$ ist davon verschieden.\\
+$\tau$ als Zeitkonstante&$T_s$ bzw. konkrete Zeitkonstante&Einschwingzeit ist nicht allgemein dieselbe Größe wie eine exponentielle Zeitkonstante.\\
+$T$ als Auswertezeit&$T_w$&Von $T$ und $T_{\mathrm{sys}}$ unterscheiden.\\
+$P(t)$ als Puls&$f_{\mathrm{puls}},\delta_p$&$P$ bezeichnet Leistung oder indizierte Spektraldichte.\\
+$s(t),e(t)$ generisch&Nur mit Definition behalten&Kein allgemeines Ersatzsymbol.\\
+$\Delta\phi_{ij}$&$\Delta\phi_{kl}$&Modulindizes von Abtast- und Blockindizes trennen.\\
+$x_{k+1}$&$\mathbf x_{i+1}$&Diskreter Zeitindex.\\
+$\alpha$ als Winkelbeschleunigung&$\ddot\vartheta$&$\alpha$ bleibt Signifikanzniveau.\\
+$s=\sigma+j\omega$&$s$ als Laplace-Variable&$s_X$ ist Stichprobenstreuung; Fourierfrequenz gesondert.\\
+$H(t),S(t)$ als Messoperatoranteile&$h(t)$, explizite Restterme&$S$ ist das Kraftvorwärtsmodell.\\
+$d$ als Dämpfungsgrad&$\zeta$&Von laufweiser Differenz $d^{(r)}$ unterscheiden.\\
+$s_p$ gepoolte Streuung&Nicht im Standardtest&Hier gepaarter oder Welch-Test; alte Tests nicht still umetikettieren.\\
+$G(s),U(s),Y(s)$&$H(s)$ bzw. definierte Transformierte&Nur bei gleichem Ein-/Ausgang ist $G(s)\to H(s)$ zulässig.\\
+$J$ Trägheitstensor&Bei 3D-Modell $\mathbf I$&Skalares $I$ genügt nur im angegebenen Achsenfall.\\
+$C_d,D_d$&$\mathbf C_{y,d},\mathbf D_{y,d}$&Bei diskretem Ausgangsmodell entsprechend definieren.\\
+$R$ Radius&$R_{\mathrm{ring}}$&$R(t)$ bleibt Residuum.\\
+$N(t)$, $\langle N\rangle$ (Arbeitspapier v2.3)&$F_c(t)$, $\langle F_c\rangle_{T_w}$&Simulierte Kontaktkraft; im Verzeichnis bleibt $N$ die Abtastzahl.\\
+$\gamma_1$, $\lambda$, $A$ (Arbeitspapier v2.3)&$\gamma_c$, $\Lambda$, $A_{\mathrm{pk}}$&Schiefe, Kontaktverlustanteil (im Arbeitspapier in Prozent), Asymmetrieverhältnis.\\
+$N_{\min}$, $N_{\max}$ (Arbeitspapier v2.3)&$F_{c,\min}$, $F_{c,\max}$&Extrema im Auswertefenster.\\
+$R$, $Q$ (Ergebnisnotiz 13.09.2026)&$\delta_w$, $\delta_Q$&Relativer Randterm und Quadraturanteil; $R$ bleibt Residuum.\\
+\bottomrule\end{longtable}
+\subsection{Zusätzliche Korrekturen gegenüber Version 2 und 2.1}
+$p_c$ und $p_N$ trennen Kraft- und Signalverteilung. $\hat\Lambda_{\mathrm{thr}}$ und $\hat\Lambda_{\mathrm{mix}}$ benennen die Auswertemethoden ohne Unabhängigkeitsbehauptung. $\mathbf p_k$ ersetzt die Profilparameter $\boldsymbol\eta_k$ aus V2.1. $\mathbf G$ ersetzt deren vorübergehende Eingangsmatrix $\mathbf B$. Der Profilwinkel lautet konsistent zum Code $\omega t-\phi_k$. $t_{\mathrm{stat}}$ bezeichnet den Testwert. Die allgemeine Definition von $\Pi_N$ wird nicht auf die anders definierte CSV-Spalte \texttt{peak\_ratio} übertragen.
+
+\section{Codezuordnung und Parametersatzregister}\label{app:code}
+\subsection{Kontaktkraft-Sweep}
+Die Zuordnung gilt für die folgenden Dateien des Repository-Stands 2026-09 (Ordner \texttt{code/} und \texttt{data/}):
+\begin{itemize}
+\item \texttt{pcmms\_v3a\_phasen\_sweep.py} -- Referenz-Engine, erzeugt den 19\,$\times$\,19-Phasensweep
+\item \texttt{sweep\_19x19.csv} -- 361 Konfigurationen, Schrittweite $360^\circ/19$
+\item \texttt{finesweep.py} -- 2$^\circ$-Feinsweep um $(120^\circ,240^\circ)$ mit derselben Engine; Option \texttt{--validate} rechnet drei Punkte des Grobrasters nach
+\item \texttt{finesweep\_2deg\_120\_240.csv} -- 441 Konfigurationen, gleiche Spalten wie \texttt{sweep\_19x19.csv}
+\item \texttt{sweep\_7x7\_sinus.csv} -- 49 Konfigurationen mit Sinusprofil; Spalten \texttt{phi2}, \texttt{phi3} (Grad) sowie \texttt{asym} und \texttt{R} anstelle von \texttt{peak\_ratio}, Definition in \texttt{data/README.md}; das erzeugende Skript ist nicht Teil des Repository-Stands
+\end{itemize} Es sind Simulationsgrößen der Kontaktkraft, keine Messwerte eines realen Sensors.
+\begin{longtable}{@{}L{.24\textwidth}L{.24\textwidth}L{.47\textwidth}@{}}
+\toprule\textbf{Codefeld}&\textbf{Größe / Einheit}&\textbf{Definition / Besonderheit}\\\midrule\endhead
+\texttt{phi2\_deg}, \texttt{phi3\_deg}&$\phi_2,\phi_3$ in Grad&Verzögerungsphasen; Winkelumrechnung vor $\tau_\phi=\phi/\omega$.\\
+\texttt{F\_mean}&$\overline F_c$ / N&Mittel im gespeicherten Auswertefenster.\\
+\texttt{F\_skew}&$\gamma_c$ / --&Schiefe der simulierten Kraftwerte. Verwendete Software und Schätzeroptionen mitversionieren.\\
+\texttt{liftoff}&$100\hat\Lambda_{\mathrm{sim}}$ / Prozent&Anteil $F_c<10^{-9}\,\mathrm N$ mal 100; keine Hardware-Kontaktschwelle.\\
+\texttt{F\_max}, \texttt{F\_min}&$F_{c,\max},F_{c,\min}$ / N&Extrema des Auswertefensters.\\
+\texttt{peak\_ratio}&$A_{\mathrm{pk}}$ / --&$(F_{c,\max}-Mg)/(Mg-F_{c,\min})$, nur bei Nenner $>10^{-6}\,\mathrm N$, sonst NaN.\\
+Keine eigene CSV-Spalte&$\Pi_c$ / --&Peak-to-Mean $F_{c,\max}/\overline F_c$ separat berechnen.\\
+\bottomrule\end{longtable}
+$A_{\mathrm{pk}}$ beschreibt die Asymmetrie der Extremabweichungen um $Mg$ und ist keine statistische Schiefe. Nahe verschwindendem Nenner ist die Größe instabil. Im synchronen ersten CSV-Punkt sind $A_{\mathrm{pk}}\approx5{,}449$ und $\Pi_c\approx6{,}449$ verschiedene Kennzahlen.
+Die Datei \texttt{series\_regime.npz} ist eine Laufausgabe der Engine, nicht Teil des Repository-Stands, und enthält $t$, eine Kraftmatrix $F$ mit drei Spalten und die zugehörigen Phasen. Ihr kurzer gespeicherter Ausschnitt ersetzt keine vollständige Langzeit-Bilanzprüfung; Zeitfenster und Herkunft müssen bei einer Abbildung angegeben werden.
+
+\subsection{Nachrechnung mit adaptivem Burn-in}\label{app:nachrechnung}
+Die Nachrechnung vom 13.~September 2026 gehört nicht zum Repository-Stand 2026-09; sie liegt im Hauptzweig unter \texttt{docs/arbeitspapier/nachrechnung\_2026-09-13/}. Die Datei \texttt{sweep\_19x19\_burnin\_2026-09-13.csv} enthält dieselben 361 Konfigurationen wie \texttt{sweep\_19x19.csv}, mit derselben Engine integriert, jedoch mit adaptivem Burn-in und einem Fenster von 100 Zyklen. Die Archivwerte stehen in Spalten mit dem Präfix \texttt{arch\_}; die Funktionale tragen sprechende Namen (\texttt{liftoff\_pct}, \texttt{skew}, \texttt{N\_max\_N}, \texttt{N\_min\_N}, \texttt{A\_Mg}) mit derselben Bedeutung wie oben.
+\begin{longtable}{@{}L{.24\textwidth}L{.24\textwidth}L{.47\textwidth}@{}}
+\toprule\textbf{Codefeld}&\textbf{Größe / Einheit}&\textbf{Definition / Besonderheit}\\\midrule\endhead
+\texttt{t\_burn\_s}&$T_s$ / s&Einschwingdauer bis zur Fensteröffnung nach dem Wiederkehrkriterium; frühestens 5 s, gekappt bei 40 s.\\
+\texttt{period\_k}&$T_{\mathrm{sys}}/T$ / --&Erkannte Periode der Zyklusstartzustände in Anregungsperioden; $-1$, wenn bis zur Kappung keine erkannt wurde.\\
+\texttt{mean\_N1\_N}&$\langle F_c\rangle_{T_w}$ / N&Fenstermittel mit der Rechteckregel des Archivs.\\
+\texttt{mean\_RK4\_N}&$\langle F_c\rangle_{T_w}$ / N&Fenstermittel aus den mitgeführten Stufenkräften des Integrators; die Differenz zu \texttt{mean\_N1\_N} ist der Quadraturfehler.\\
+\texttt{delta\_ppm}, \texttt{R\_ppm}, \texttt{Q\_ppm}&$10^6\delta$, $10^6\delta_w$, $10^6\delta_Q$&Relatives Residuum und seine Zerlegung nach \eqref{eq:randterm-rel}.\\
+\texttt{stationaer\_10s}&Klasse&\texttt{ja}, \texttt{grenzwertig}, \texttt{nein} für $|\delta_w|\le10$, $\le100$, $>100\,\mathrm{ppm}$.\\
+\bottomrule\end{longtable}
+
+\subsection{Getrennte Parameterstände}
+\begin{longtable}{@{}L{.24\textwidth}L{.33\textwidth}L{.38\textwidth}@{}}
+\toprule\textbf{Größe}&\textbf{Referenzsimulation}&\textbf{Andere Projektangabe / Konsequenz}\\\midrule\endhead
+Masse&$M=0{,}650\,\mathrm{kg}$; Codekommentar: drei Module zu $M/3$.&Index nennt $0{,}650\,\mathrm{kg}$ je Modul. Kein identischer Lastfall; Hardwaremassen separat festlegen.\\
+Frequenz&$f=10\,\mathrm{Hz}$&$2{,}2\,\mathrm{Hz}$ als anderer Entwurfsstand.\\
+Zeitanteil&$\beta_h=0{,}65$&Vorwärtsanteil ungefähr $0{,}80$ als andere Profilfestlegung.\\
+Profilradien&$R_{\mathrm{top}}=5\,\mathrm{mm}$; $R_{\mathrm{bot}}=2{,}6923\,\mathrm{mm}$&An das konkrete Halbsinusprofil gebunden.\\
+Kontakt&$k_c=10^4\,\mathrm{N/m}$, $c_c=16\,\mathrm{N\,s/m}$&Keine universellen Hardwarewerte.\\
+Numerik&$\Delta t_{\mathrm{sim}}=5\cdot10^{-5}\,\mathrm s$; 15 s je Punkt, davon 5 s Burn-in.&Zeitliche Konvergenz und Randterm je Regime prüfen; Nachrechnung mit adaptivem Burn-in (5 bis 40 s) nach Anhang~\ref{app:nachrechnung}.\\
+Raster&19 verschiedene Phasenwerte pro Achse, $360^\circ/19$.&Triphasik $(120^\circ,240^\circ)$ ist kein Punkt dieses Grobrasters; sie liegt im 2$^\circ$-Feinsweep.\\
+\bottomrule\end{longtable}
+Im reduzierten Referenzmodell ist die Restmasse $m_0=0$: Die kodierte Rahmengleichung $M\ddot z_f=-Mg+F_c-(M/3)\sum_{k=1}^{3}\ddot q_k$ folgt aus der kinematischen Beziehung \eqref{eq:rahmen} zusammen mit der Kraftbilanz \eqref{eq:bilanz}, für $m_k=M/3$, $m_0=0$ und $F_{\mathrm{ext},z}=0$. Es ist damit kein vollständig ausgewiesenes Hardwaremodell mit unabhängig spezifizierter Restmasse. Vor einer Übertragung auf reale Module ist die Zuordnung gemäß \eqref{eq:rahmen} zu klären.
+
+Der 2$^\circ$-Feinsweep (\texttt{data/finesweep\_2deg\_120\_240.csv}, 441 Konfigurationen um $(120^\circ,240^\circ)$) liefert ein Maximum der \emph{Minimalkraft} von $5{,}3304\,\mathrm N$ genau an der Triphasik bei diesem weichen Kontakt; entlang $\phi_3=240^\circ$ fällt $F_{c,\min}$ mit etwa $0{,}23\,\mathrm N$ je Grad zu kleineren und $0{,}19\,\mathrm N$ je Grad zu größeren $\phi_2$ ab, und 90{,}7\,\% des Fensters sind liftoff-frei. Das Exposé nennt an einer Stelle ein Minimum; diese Formulierung ist nicht zu übernehmen. Der Wert ist eine parametergebundene Simulationsangabe, kein allgemeines PCMMS-Ergebnis.
+
+\subsection{Linie-B-Daten und Reproduzierbarkeit}\label{app:linieb}
+Für \texttt{sweep\_13x13\_drift\_v2.csv} sind \texttt{v\_d\_mps} und \texttt{v\_d\_mmps} dieselbe Driftgeschwindigkeit in verschiedenen Einheiten. \texttt{F\_bar\_A\_N} bezeichnet die modellierte gebundene mittlere Reaktionskraft, \texttt{tau\_s} die modellierte Relaxationszeit und \texttt{rho} die Mediendichte. Sie werden als $v_d$, $\overline F_A$, $\tau_{\mathrm{relax}}$ und $\rho_{\mathrm{med}}$ geführt. Die gemittelte stationäre Bilanz ist von der zeitintegrierten Kontrolle zu unterscheiden. Alte Driftkarten mit unzureichendem Einschwingen werden nicht mit den korrigierten Karten vermischt.
+Jeder verwendete Datensatz benötigt mindestens Quelldatei und Version bzw. Hash, Parameter, Einheiten, Phasen- und Vorzeichenkonvention, Integrator, Zeitfenster und Auswerteoptionen. Die allgemeine Symboldefinition bleibt unabhängig von einzelnen Zahlenwerten.
+
+\section{Allgemeine mechanische Grundbeziehungen}
+\subsection{Rotation und Geometrie}
+\begin{symtab}
+$I$&Trägheitsmoment um die angegebene Achse; Punktmassen: $I=\sum_k m_kr_{\perp,k}^2$.&kg m$^2$\\
+$\boldsymbol\tau$, $\mathbf L$&Drehmoment und Drehimpuls; um einen festen inertialen Bezugspunkt $\boldsymbol\tau_{\mathrm{ext}}=\dd\mathbf L/\dd t$.&N m; kg m$^2$/s\\
+$\tau=I\ddot\vartheta$&Spezialfall einer festen Achse mit konstantem $I$.&N m\\
+$\mathbf a_{\mathrm{cor}}$&Kinematischer Coriolisanteil $2\boldsymbol\Omega\times\mathbf v_{\mathrm{rel}}$; Betrag $2\Omega v_{\mathrm{rel}}$ nur bei senkrechten Vektoren.&m/s$^2$\\
+$a_{\mathrm{zp}}$&Zentripetalbetrag $\Omega^2r_\perp$ bei Kreisbewegung; Richtung zur Achse.&m/s$^2$\\
+$R_{\mathrm{ring}}$&Radius der räumlichen Modulanordnung.&m\\
+$\vartheta_k$&Anordnungswinkel, gleichmäßig $2\pi(k-1)/n$.&rad\\
+\end{symtab}
+Eine Beispielgeometrie ist $\mathbf r_k=R_{\mathrm{ring}}(\cos\vartheta_k,\sin\vartheta_k,0)^\top+z_k\mathbf e_z$. Anordnungswinkel und Bewegungsphase sind unabhängig. Für eine vertikale Kreisbahn gilt relativ zum Bahnmittelpunkt $q_{z,k}=r\sin\vartheta_k(t)$; für die absolute Höhe ist die Bewegung des Bahnmittelpunkts hinzuzufügen.
+Geometrische Symmetrie kann Querkräfte und Momente reduzieren, garantiert deren Aufhebung aber nur bei passender Massen-, Bewegungs- und Kopplungssymmetrie.
+
+\subsection{Energie und Leistung}
+\begin{align*}
+E_{\mathrm{kin}}&=\tfrac12mv^2, & E_{\mathrm{rot}}&=\tfrac12I\Omega^2,\\
+E_{\mathrm{pot}}&=mg\Delta z, & E_{\mathrm{el}}&=\tfrac12k_{\mathrm f}x^2,\\
+P_F&=\mathbf F\cdot\mathbf v, & P_\tau&=\boldsymbol\tau\cdot\boldsymbol\Omega,\\
+P_D&=c\dot x^2\ge0, & W&=\int\mathbf F\cdot\dd\mathbf r.
+\end{align*}
+Energie und Arbeit haben die Einheit Joule, Leistung Watt. Translations- und Rotationsleistung sind getrennte Beiträge und nicht allgemein einander gleich. Für eine definierte Energiebilanz gilt
+\begin{equation}
+\frac{\dd E}{\dd t}=P_{\mathrm{in}}-P_{\mathrm{out}}-P_{\mathrm{diss}}.
+\end{equation}
+Im periodisch stationären Betrieb ist die mittlere Speicheränderung null. Zyklische Speicherung kann Leistung innerhalb der Periode verschieben; im Mittel müssen Zufuhr, Abfuhr und Verluste bilanziert werden. Elektrische Aufnahme, mechanische Aktorleistung und mögliche Rückspeisung sind gesondert zu erfassen.
+
+\section{Ableitungs- und Operatornotation}
+\begin{align*}
+\dot x&=\dd x/\dd t,\qquad \ddot x=\dd^2x/\dd t^2,\\
+\langle X\rangle_{T_w}&=T_w^{-1}\int_{t_1}^{t_1+T_w}X(t)\,\dd t,\\
+(h*F)(t)&=\int_{-\infty}^{\infty}h(t-t')F(t')\,\dd t',\\
+\dot x(t_i)&\approx\frac{x_{i+1}-x_{i-1}}{2\Delta t},\\
+\ddot x(t_i)&\approx\frac{x_{i+1}-2x_i+x_{i-1}}{\Delta t^2}.
+\end{align*}
+Die direkte zweite Differenz ist von einer zweimal angewandten zentralen ersten Differenz zu unterscheiden; letztere erzeugt ein anderes Stencil. Beide können Rauschen stark verstärken. Ableitungsfilter, Randbehandlung und ihre Phasenwirkung werden dokumentiert. $\delta(\cdot)$ bezeichnet die Dirac-Distribution, $\mathbf1\{\cdot\}$ einen Indikator und $\mathbf x^\top$ die Transposition.
+
+
+\section{Projektgrundlagen und Literaturanschluss}\label{app:quellen}
+Die Codezuordnung und die Parametersätze in Anhang~\ref{app:code} beziehen sich auf den veröffentlichten Repository-Stand 2026-09 (\texttt{matthias-frueh/phase-controlled-multi-mass-systems}, GitHub-Tag \texttt{2026-09}, Zenodo-DOI \href{https://doi.org/10.5281/zenodo.22864178}{10.5281/zenodo.22864178}) sowie auf die in Abschnitt~\ref{app:linieb} genannten Linie-B-Datensätze, die nicht Teil dieses Repository-Stands sind, und auf die Nachrechnung vom 13.~September 2026 im Hauptzweig (Abschnitt~\ref{app:nachrechnung}). Die Angaben beschreiben numerische Referenzfälle. Eine experimentelle Validierung ist mit dieser Fassung nicht verbunden; die Nachrechnung ist ein Simulationslauf.
+
+Die folgenden Primärarbeiten bilden einen fachlichen Anschluss, nicht einen Nachweis des PCMMS-Aufbaus. Perret-Liaudet und Rigaud untersuchen Spektren und Statistik eines Hertz-Kontakts mit möglichem Kontaktverlust \cite{perret}. Wakou, Ochiai und Isobe behandeln die Schwerpunktdynamik eines granularen Systems mit einem Langevin-Ansatz \cite{wakou}. Umbanhowar und van Hecke untersuchen nichtlineare Kraftdynamik in schwach vibrierten granularen Packungen \cite{umbanhowar}. Anregung, Geometrie und Material unterscheiden sich von PCMMS. Konkrete Schiefe-/Liftoff-Zahlen werden deshalb nicht als allgemeine Kalibrierskala übernommen.
+Die bibliografischen Angaben und diese begrenzte Einordnung wurden anhand der Primärquellen-Einträge geprüft. Bei Perret-Liaudet und Rigaud ist 2003 das Zeitschriftenjahr; 2007 bezeichnet die arXiv-Bereitstellung. Die Schwerpunktbilanz dieses Verzeichnisses wird unabhängig davon in Abschnitt~\ref{sec:bilanz} hergeleitet.
+\begin{thebibliography}{9}
+\bibitem{perret} J. Perret-Liaudet und E. Rigaud: \emph{Experiments and numerical results on nonlinear vibrations of an impacting Hertzian contact. Part 2: random excitation}. Journal of Sound and Vibration 265 (2003), 309--327. \href{https://doi.org/10.1016/S0022-460X(02)01267-1}{DOI: 10.1016/S0022-460X(02)01267-1}. \href{https://arxiv.org/abs/physics/0701033}{arXiv:physics/0701033}, bereitgestellt 2007.
+\bibitem{wakou} J. Wakou, A. Ochiai und M. Isobe: \emph{A Langevin Approach to One-Dimensional Granular Media Fluidized by Vibrations}. 2008. \href{https://arxiv.org/abs/0801.4428}{arXiv:0801.4428}.
+\bibitem{umbanhowar} P. Umbanhowar und M. van Hecke: \emph{Force Dynamics in Weakly Vibrated Granular Packings}. Physical Review E 72 (2005), 030301(R). \href{https://doi.org/10.1103/PhysRevE.72.030301}{DOI: 10.1103/PhysRevE.72.030301}. \href{https://arxiv.org/abs/cond-mat/0410152}{arXiv:cond-mat/0410152}.
+\end{thebibliography}
+\end{document}
