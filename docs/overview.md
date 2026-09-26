@@ -34,6 +34,9 @@ Lizenz dieses Ordners: CC BY 4.0, siehe [`../LICENSE-CC-BY-4.0`](../LICENSE-CC-B
   September-Dokumenten ist diese Größe als Asymmetrieverhältnis A definiert (Codevariable `peak_ratio`).
   Eine v2 mit Änderungsvermerk liegt als [Entwurf](praeregistrierung_v2_entwurf.md) vor (nicht eingefroren,
   nicht registriert).
+- Das **Arbeitspapier** v2.3 liegt in [`arbeitspapier/`](arbeitspapier/) (die zwei Skripte der Nachrechnung dort
+  unter MIT), das **Symbol- und Formelverzeichnis** in der aktuellen Fassung v2.6 in
+  [`formelverzeichnis/`](formelverzeichnis/).
 - Der **Literaturabgleich** ist ein Arbeitsdokument für die nächste Fassung des Forschungsrahmens (v3.6);
   die dort genannte Fassung v3.5 ist noch nicht im Repository abgelegt, weil sie vor der Umstellung auf
   Linie A als primäre Linie entstand.
@@ -43,6 +46,6 @@ Lizenz dieses Ordners: CC BY 4.0, siehe [`../LICENSE-CC-BY-4.0`](../LICENSE-CC-B
 
 ## Was nicht im Repository liegt
 
-Arbeitsstände in Bearbeitung (Forschungsrahmen v3.6, Symbolverzeichnis, Arbeitspapier), Linie-B-Skripte
+Arbeitsstände in Bearbeitung (Forschungsrahmen v3.6), Linie-B-Skripte
 und -Notizen, Labor- und Messtechnikplanung. Sie folgen, sobald sie den Stand der abgelegten Dokumente
 erreicht haben.

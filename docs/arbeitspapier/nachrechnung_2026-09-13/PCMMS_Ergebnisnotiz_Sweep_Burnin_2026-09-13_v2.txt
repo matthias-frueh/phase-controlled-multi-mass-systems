@@ -1,0 +1,143 @@
+PCMMS – ERGEBNISNOTIZ 19×19-SWEEP MIT BURN-IN-KRITERIUM, 13.09.2026, v2
+Matthias Früh. Status: Simulation, reproduzierbar; keine Messdaten.
+Solver unverändert (rhs/RK4 aus pcmms_v3a_phasen_sweep.py, DT = 5·10⁻⁵ s,
+M = 0,65 kg, K = 10⁴ N/m, C = 16 N·s/m, f = 10 Hz, exaktes Gitter
+φ = i·360/19°). Rechenzeit 361 Punkte ≈ 9 min (1 Kern).
+ÄNDERUNGSLOG v1 → v2 (nach externer Prüfung und 100-s-Folgeläufen)
+- Drei Kriterien getrennt: kleiner Randterm, periodisch, eingeschwungen.
+- Periodenkarte als Wiederkehr bei Fensteröffnung gekennzeichnet; In-
+  Fenster-Prüfung an 26 Punkten (§2b): (0,0) P2 bestätigt, P6-Labels an
+  (8,6)/(6,8) Fehldetektionen, (2,13)/(13,2) P6 ab 42 s, (12,17)/(17,12)
+  P30 ab 21 s.
+- „Kein Burn-in beseitigt ihn" zurückgenommen: Randterme haben drei
+  Ursachen (§4a); bei P3/P6/P30 verschwindet R mit Fenstern aus ganzen
+  Orbitperioden (99/96/90 Zyklen).
+- A_max bei (16,1) als statistisch stationär nachgewiesen (§4e).
+- Punktzahl innerhalb aller vier Toleranzen: 347/361 = 96,1 %
+  (externe Nachrechnung), nicht „97 %".
+
+Dateien: sweep_19x19_burnin_2026-09-13.csv (neu + Archivspalten),
+PCMMS_Klassifikation_100s_2026-09-13.csv, pcmms_folgelaeufe_2026-09-13.py,
+PCMMS_Sweep_Karten_Periode_Randterm_2026-09-13.txt (Karten),
+sweep_19x19_burnin_2026-09-13.log, pcmms_sweep_burnin_2026-09-13.py.
+
+1  VERFAHREN
+- Burn-in adaptiv: Fenster (100 Zyklen) wird am Zyklusstart geöffnet,
+  sobald die Zyklusstart-Zustände (z, ż) über die letzten 20 Zyklen
+  für ein k ∈ {1…8, 10, 20, 25, 50, 100} wiederkehren
+  (|Δż| < 10⁻³ m/s, |Δz| < 10⁻⁴ m); frühestens 5 s, spätestens 40 s.
+- Je Punkt: N̄₁ (Original-Linksrechteck), N̄_RK4, Randterm
+  R = M·Δv_CoM/T, Quadratur Q = N̄₁ − N̄_RK4, Funktionale aus N₁
+  (λ, γ₁, N_max, N_min, A_Mg), erkannte Periode k, Burn-in-Zeit.
+- Klassifikation des Fensters nach R: stationär |R| ≤ 10 ppm,
+  grenzwertig 10–100 ppm, nicht stationär > 100 ppm.
+
+2  KERNZAHLEN
+- Randterm: 315 stationär, 24 grenzwertig, 22 nicht stationär;
+  max |R| = 3714 ppm bei (1,16)/(16,1), λ = 71,9 %.
+- Quadratur Q: Median 0, 5/95 %: −51/+39 ppm, max |Q| = 93 ppm.
+  N̄_RK4 − Mg − R = 10⁻⁷ N (Egg-Simpson-Defekt) an allen Punkten.
+- δ = N̄₁ − Mg: max 3736 ppm (Archiv 6816); jeder Wert > 100 ppm ist
+  Randterm, nicht Quadratur.
+- Orbitperioden (Zyklen): P1 211, P2 104, P3 8, P4 5, P5 1, P6 4,
+  P7 1, P8 1, P10 2, P20 1; nicht periodisch bis 40 s: 23.
+- Burn-in: Median 5,0 s, 90 % ≤ 8,5 s, max 40 s (Kappung).
+- Symmetriekontrolle (i2,i3) ↔ (i3,i2), identische Module: bei
+  stationären Paaren |Δλ| ≤ 0,008 %-Pkt (Median 0), bei nicht
+  stationären bis 0,78 %-Pkt.
+- Die Periodenkarte zeigt die Wiederkehr der Zyklusstart-Zustände bei
+  Fensteröffnung; sie wird im Fenster nicht mitgeprüft (§2b).
+
+2b  100-s-FOLGELÄUFE (26 Punkte: 23 ohne erkannte Periode + 3 P6)
+Fortlaufendes Log von (z, ż) je Zyklusstart, Flugbruchteil je Zyklus,
+fünf 10-s-Fenster in 50–100 s, Fenster aus ganzen Orbitperioden.
+- (0,0): echte Periode 2, ż alternierend −0,460 / −0,520 m/s.
+- (12,17)/(17,12): langer Transient, ab 21 s Orbit P30 (3 s); Fenster
+  90 Zyklen → R = 0,0; λ 34,7–35,4 %, A 2,970. Archivwert λ 75,6 %
+  (5–15 s) war Transient. Bistabilität nicht getestet.
+- (2,13)/(13,2): Transient ≈ 40 s, dann P6; Fenster 96 Zyklen → R ≈ 0;
+  λ 37,7–38,0 %, A 2,722. (2,14)/(14,2): P3, 99 Zyklen → R = 0,0.
+- (8,6)/(6,8): P6-Label war Fehldetektion; aperiodisch mit variabler
+  Fensterstatistik (λ 35,5–37,8 % je Block).
+- Aperiodisch, statistisch stationär (14 Punkte): λ je 10-s-Fenster
+  innerhalb ≤ 1 %-Pkt, A innerhalb ≤ 0,04, obwohl R ±300…±6500 ppm.
+  Darunter (16,1)/(1,16): A 6,927–6,928, λ 71,7–71,9 %, R ±3700 ppm;
+  (15,16)/(16,15): A 6,847–6,849, R ±6500 ppm.
+- Aperiodisch, Fensterstatistik variabel (5 Punkte): (0,10), (1,11),
+  (6,8), (8,6), (11,17); λ-Spanne 1–2,5 %-Pkt, A bis 0,1. Auf 10 s
+  nicht charakterisierbar; längere Fenster oder Streuung angeben.
+
+3  VERGLEICH MIT DEM ARCHIV (sweep_19x19.csv, Burn-in fest 5 s)
+- Funktionale geändert (neu − Archiv): λ > 0,5 %-Pkt an 11 Punkten,
+  γ₁ > 0,02 an 7, N_max > 0,2 N an 9, A > 0,05 an 6. Rund 97 % der
+  Karte sind robust; der Burn-in von 5 s reichte dort.
+- Hot-Spot-Paar (0,11)/(11,0): Archiv einschwing-kontaminiert.
+  Attraktor: λ 74,35 → 75,09 %, γ₁ 1,672 → 1,658,
+  N_max 44,10 → 38,49 N, A 5,917 → 5,037.
+- (12,17)/(17,12): Archiv λ 75,63 %, A 5,166 (Transient); Attraktor
+  P30 ab 21 s: λ 35,2 %, A 2,970 (§2b). (2,13)/(13,2): Transient
+  ≈ 40 s, dann P6. Beides Burn-in-Fälle, keine Bistabilität nachgewiesen.
+- Unverändert: A_max = 6,928 bei (1,16)/(16,1); N_max,max = 50,55 N
+  = 7,93 Mg; negative Schiefe an 36 Punkten. An (1,16)/(16,1) ist
+  der Zustand nicht periodisch (R −3700 ppm), die Funktionale sind
+  trotzdem fensterstabil (Archiv = neu auf 3 Stellen).
+- Archiv-Residuen |δ| > 200 ppm: 19 Punkte, drei Ursachen (§4a):
+  Einschwingen, Fenster ohne ganze Orbitperioden, aperiodischer
+  Zustand. Nur die dritte bleibt bei jedem Burn-in bestehen.
+
+4  DEUTUNG
+a) Drei getrennte Kriterien: kleiner Randterm, periodisch,
+   eingeschwungen. Der Randterm hat drei Ursachen: (1) Einschwingen
+   (Hot-Spot −6816 ppm; (12,17) bis > 15 s; (2,13) ≈ 40 s) – längerer
+   Burn-in; (2) Fenster ohne ganze Orbitperioden (P3/P6/P30) – Fenster
+   99/96/90 Zyklen, dann R = 0; (3) aperiodische Bewegung – R bleibt
+   bei jedem Fenster O(M·|Δż|/T), bis ±6500 ppm bei 10 s.
+   Q liegt überall unter 100 ppm.
+b) Bei nicht periodischen Zuständen konvergiert N̄₁ nicht schneller
+   als M·|Δż|/T mit |Δż| bis 0,36 m/s. Das ist kein Auswertefehler,
+   sondern die Physik des Fensters. In der Simulation ist die
+   geschlossene Größe N̄_RK4 − R = Mg (10⁻⁷ N); R ist separat zu
+   berichten. Im Labor ist derselbe Term der mechanische Anteil von
+   ε_ctrl: |R|/Mg ≤ 2·v_max/(g·T).
+c) Die Phasenkarte hat Bifurkationsstruktur: Periode-2-Band nahe den
+   gleichphasigen Konfigurationen (P2 bei (0,0) im Fenster bestätigt),
+   Periode 1 im Inneren, höhere Perioden und aperiodische Punkte auf
+   den Grenzen. Für das Simulationskapitel sind die Labels erst nach
+   In-Fenster-Prüfung zu verwenden; die Karte ist bis dahin eine Karte
+   der Wiederkehr bei Fensteröffnung.
+e) A_max = 6,928 bei (16,1)/(1,16) ist die Kennzahl eines
+   aperiodischen, statistisch stationären Zustands: fünf 10-s-Fenster
+   in 50–100 s geben A 6,927–6,928 und λ 71,7–71,9 %, während R
+   zwischen −3700 und +2740 ppm schwankt. Die Formfunktionale sind
+   dort stationär, der Fenstermittelwert nicht.
+d) Die Symmetrie (i2,i3) ↔ (i3,i2) ist eine kostenlose Kontrolle:
+   Abweichung > 0,01 %-Pkt in λ zeigt Nichtstationarität an.
+
+5  FOLGEN FÜR DISSERTATION UND PIPELINE
+1. §9: Deutung „langsame Modulation" ersetzen durch Randterm
+   (Einschwingen bzw. nicht periodischer Zustand) + Quadratur.
+   Tab. 9.2/9.3 durch R/Q-Zerlegung ersetzen; „0,68 %" wird
+   „R bis 0,37 % bei nicht stationären Zuständen, Q ≤ 0,01 %".
+2. Karten (λ, γ₁, A, N_min) aus dem neuen Sweep; 22 nicht
+   stationäre Punkte markieren; Hot-Spot-Werte korrigieren.
+3. Neue Abbildung: Periodenkarte und Randtermklassen.
+4. Pipeline: Burn-in-Kriterium; Wiederkehr und Fensterstatistik
+   fortlaufend mitloggen (nicht nur bei Fensteröffnung); bei
+   erkannter Periode über ganze Orbitperioden auswerten; R aus zwei
+   Werten, N̄_RK4 und Q als Standardausgabe; Symmetriekontrolle. Sweep-CSV mit Gitterindex
+   oder voller Phasenpräzision (Archiv rundet auf 3 Stellen; das
+   Hot-Spot-Archiv entspricht φ3 = 208,421° gerundet).
+5. Aussagen, die stehen bleiben: N_max,max ≈ 8 Mg, 36 Konfigurationen
+   mit negativer Schiefe, Sinus-Kollaps, Zeltkurve am
+   Auslöschungspunkt (Dauerkontakt ist überall stationär).
+6. Präregistrierung: Vermerk zu Burn-in-Kriterium, R-Berichtspflicht,
+   ε_ctrl mechanischer Anteil; Hypothesen, Schwellen, Ausgänge
+   unverändert.
+
+6  OFFEN
+1. Erledigt (§2b). Offen: (12,17) und (2,13) mit anderen
+   Anfangsbedingungen auf Bistabilität prüfen; die fünf Punkte mit
+   variabler Fensterstatistik über ≥ 300 s auswerten.
+2. dt-Halbierung an 5 Punkten für Q und Trajektoriengenauigkeit.
+3. Fensterlänge für nicht stationäre Punkte: 100 s senkt R auf
+   ≤ 370 ppm; Zielwert festlegen.
