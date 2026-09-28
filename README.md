@@ -2,7 +2,7 @@
 
 **Phase-Controlled Multi-Mass Systems**\
 Matthias Früh · Gravidon Systemics Research · ORCID [0009-0005-9984-4207](https://orcid.org/0009-0005-9984-4207)\
-Stand: 26. September 2026 · Status: prä-experimentell (Simulation; keine Messdaten)
+Stand: 28. September 2026 · Status: prä-experimentell (Simulation; keine Messdaten)
 
 ---
 
@@ -54,7 +54,7 @@ solche Verschiebung; sie wurde als Kontaktmodell-Artefakt erkannt, zurückgezoge
 
 Die Präregistrierung v2 für die Messkampagne liegt als [Entwurf](docs/praeregistrierung_v2_entwurf.md) vor (nicht eingefroren, nicht registriert).
 
-Das Arbeitspapier v2.3 liegt mit Quellen und Nachrechnung in [`docs/arbeitspapier/`](docs/arbeitspapier/), das
+Das Arbeitspapier v2.4 liegt mit Quellen und Nachrechnung in [`docs/arbeitspapier/`](docs/arbeitspapier/), das
 Symbol- und Formelverzeichnis v2.6 in [`docs/formelverzeichnis/`](docs/formelverzeichnis/).
 
 ## Simulationsstand
@@ -169,8 +169,9 @@ dokumentieren den Weg, nicht den aktuellen Stand.
 - Code in [`code/`](code/): MIT, siehe [`LICENSE`](LICENSE).
 - Dokumente in [`docs/`](docs/) und Daten in [`data/`](data/): CC BY 4.0, siehe [`LICENSE-CC-BY-4.0`](LICENSE-CC-BY-4.0).
   Namensnennung: „Matthias Früh, PCMMS“, https://github.com/matthias-frueh/phase-controlled-multi-mass-systems
-- Ausnahme: Die zwei Python-Skripte in
-  [`docs/arbeitspapier/nachrechnung_2026-09-13/`](docs/arbeitspapier/nachrechnung_2026-09-13/) stehen als Code unter
+- Ausnahme: Die Python-Skripte in
+  [`docs/arbeitspapier/nachrechnung_2026-09-13/`](docs/arbeitspapier/nachrechnung_2026-09-13/) und
+  [`docs/arbeitspapier/gegenprobe_2026-09-26/`](docs/arbeitspapier/gegenprobe_2026-09-26/) stehen als Code unter
   MIT (siehe [`LICENSE`](LICENSE)); Texte und Daten dort unter CC BY 4.0.
 
 ---

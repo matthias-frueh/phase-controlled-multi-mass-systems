@@ -1,0 +1,70 @@
+=== A  Validierung (Referenz K = 1e4 N/m, C = 16 N·s/m, 10 Hz)
+  Triphasik (120°, 240°): gamma1 = +0.067, F_min = 5.3304 N   [Anhang: +0,067; 5,3304 N]
+  Triphasik, starr      : gamma1 = -0.450            [Anhang: −0,450]
+  (113.7°, 227.4°): gamma1 = -0.273, F_min = 2.883 N   [AP v2.3 Tab. liftoff-frei: −0,273 / 2,882 N]
+  (94.7°, 227.4°): gamma1 = -0.092, F_min = 0.754 N   [AP v2.3 Tab. liftoff-frei: −0,092 / 0,753 N]
+  f_n = 19.74 Hz; 2f/f_n = 1.013; |H_1..3| = 1.34 / 5.03 / 0.78
+
+=== B  Einzelmodul im Kontaktast: gamma1 gegen 3f/f_n (zeta fest; im Kontaktast hubunabhängig)
+  Nullstellen bei 3f/f_n = 1.561, 2.669, 3.280  (K bei 10 Hz: 9478, 3242, 2147 N/m)
+  3f/f_n = 0.48   gamma1 = +0.822
+  3f/f_n = 0.88   gamma1 = +1.029
+  3f/f_n = 1.00   gamma1 = +0.693
+  3f/f_n = 1.40   gamma1 = +0.475
+  3f/f_n = 1.52   gamma1 = +0.142
+  3f/f_n = 1.60   gamma1 = -0.131
+  3f/f_n = 1.70   gamma1 = -0.359
+  3f/f_n = 1.82   gamma1 = -0.399
+  3f/f_n = 2.00   gamma1 = -0.297
+  3f/f_n = 2.40   gamma1 = -0.088
+  3f/f_n = 2.77   gamma1 = +0.025
+  3f/f_n = 3.00   gamma1 = +0.048
+  3f/f_n = 4.81   gamma1 = -0.129
+  starre Auflage: gamma1 = +0.755
+  Referenz, Einzelmodul, voller Hub: linear F_min = -2.057 N -> hebt ab, Kontaktast dort ungültig
+
+=== C  Amplitudensweep eines einzelnen Oszillators (s = 1/3: ein Modul, s = 1: synchron)
+  K = 10000 N/m, C = 16.00 N·s/m, 3f/f_n = 1.52
+    s = 0.10   gamma1 = +0.143   Liftoff   0.0 %   <N>/Mg−1 = +8.1e-14
+    s = 0.20   gamma1 = +0.143   Liftoff   0.0 %   <N>/Mg−1 = +1.8e-13
+    s = 0.25   gamma1 = +0.143   Liftoff   0.0 %   <N>/Mg−1 = +2.2e-13
+    s = 0.33   gamma1 = +0.090   Liftoff  17.9 %   <N>/Mg−1 = +2.0e-05   <- ein Modul, Referenzhub
+    s = 0.40   gamma1 = -0.006   Liftoff  23.8 %   <N>/Mg−1 = +2.4e-05
+    s = 0.50   gamma1 = +0.491   Liftoff  25.8 %   <N>/Mg−1 = +2.3e-05
+    s = 0.60   gamma1 = +1.659   Liftoff  75.1 %   <N>/Mg−1 = -1.9e-05
+    s = 0.75   gamma1 = +1.689   Liftoff  75.7 %   <N>/Mg−1 = -8.8e-05
+    s = 1.00   gamma1 = +1.705   Liftoff  75.8 %   <N>/Mg−1 = +9.3e-06   <- synchron
+  K = 6944 N/m, C = 13.33 N·s/m, 3f/f_n = 1.82
+    s = 0.10   gamma1 = -0.398   Liftoff   0.0 %   <N>/Mg−1 = +8.1e-14
+    s = 0.20   gamma1 = -0.398   Liftoff   0.0 %   <N>/Mg−1 = +1.1e-13
+    s = 0.25   gamma1 = -0.398   Liftoff   0.0 %   <N>/Mg−1 = +1.4e-13
+    s = 0.33   gamma1 = -0.384   Liftoff   9.0 %   <N>/Mg−1 = +6.7e-06   <- ein Modul, Referenzhub
+    s = 0.40   gamma1 = -0.210   Liftoff  21.1 %   <N>/Mg−1 = -1.0e-05
+    s = 0.50   gamma1 = +1.336   Liftoff  69.2 %   <N>/Mg−1 = -5.2e-05
+    s = 0.60   gamma1 = +1.363   Liftoff  69.8 %   <N>/Mg−1 = +5.2e-05
+    s = 0.75   gamma1 = +1.399   Liftoff  70.6 %   <N>/Mg−1 = +1.5e-05
+    s = 1.00   gamma1 = +1.422   Liftoff  71.0 %   <N>/Mg−1 = +2.6e-05   <- synchron
+
+=== D  Zweiergruppen-Linie (0°, phi3), voller Hub, K = 6944 N/m (3f/f_n = 1,82; zeta fest)
+  0°: +1.42/71 %  20°: +1.42/71 %  40°: +1.43/71 %  60°: +1.44/71 %  80°: +1.43/71 %  100°: +1.41/71 %  120°: +1.38/70 %  140°: +1.33/69 %  160°: +0.32/24 %  180°: -0.21/27 %  200°: +1.35/69 %  220°: +1.37/70 %  240°: +1.39/71 %  260°: +1.41/71 %  280°: +1.43/71 %  300°: +1.44/71 %  320°: +1.43/71 %  340°: +1.42/71 %
+  dt = 5.0e-05 s: 170°: gamma1 = +0.034, Liftoff 25.6 %  180°: gamma1 = -0.214, Liftoff 27.2 %  190°: gamma1 = -0.313, Liftoff 29.1 %
+  dt = 2.5e-05 s: 170°: gamma1 = +0.034, Liftoff 25.6 %  180°: gamma1 = -0.214, Liftoff 27.2 %  190°: gamma1 = -0.313, Liftoff 29.1 %
+  zum Vergleich Referenz K = 1e4: min gamma1 auf der Linie = +0.707 bei 180°   [AP v2.3: Paarlinien +0,60 … +1,72]
+
+=== E  Triadenzerlegung im Kontaktast: <(N-Mg)^3> = 6 Σ Re(N_j^2 N_2j*) + 12 Σ_{j<l} Re(N_j N_l N_{j+l}*)
+  3f/f_n = 1.52: m3 direkt +1.6593e+01, Triadensumme +1.6593e+01; Triade (1,1,2) 61 % von m3; cos arg(N1^2 N2*) = +0.134
+  3f/f_n = 1.82: m3 direkt -2.3335e+01, Triadensumme -2.3335e+01; Triade (1,1,2) 114 % von m3; cos arg(N1^2 N2*) = -0.664
+  starr: cos arg(N1^2 N2*) = +1.000 (Profil zeitumkehrsymmetrisch -> Triadenphasen 0 oder pi)
+  Referenz: Kontaktanteil arg(T1^2 T2*) = +82.2°, arg T1 = -2.0°, arg T2 = -86.1°
+  Nullstellen der Zwei-Harmonischen-Reduktion: 1.542, 2.673
+  Einzelmodul bei K = 1e4 N/m: Vorzeichenwechsel bei zeta = 0.0557
+  Paar (0°, 180°) im Kontaktast, K = 10000: gamma1 = +0.037
+  Paar (0°, 180°) im Kontaktast, K = 6944: gamma1 = -0.392
+  Konfigurationsanteil arg(Phi1^2 Phi2*) bei (0°, 0°): +0.0°
+  Konfigurationsanteil arg(Phi1^2 Phi2*) bei (0°, 180°): -0.0°
+  Konfigurationsanteil arg(Phi1^2 Phi2*) bei (0°, 120°): -90.0°
+
+=== F  19×19-Raster: Kontaktorbit (lineares F_min > 0) gegen liftoff-freie Punkte der CSV
+  Punkte mit Kontaktorbit: 12, liftoff-frei in der CSV: 12, übereinstimmend: 12
+  -> kein Rasterpunkt liegt in einer bistabilen Satelliteninsel
+  gleichphasige Paare im Raster: 55 Konfigurationen, Liftoff 18.2 … 76.1 %, gamma1 +0.596 … +1.717
