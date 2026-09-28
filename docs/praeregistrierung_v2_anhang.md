@@ -1,7 +1,7 @@
 # PCMMS — Präregistrierung v2, Technischer Anhang
 
 **Matthias Früh · ORCID 0009-0005-9984-4207**
-Stand: 25. September 2026 · gleichrangiger Teil von Teil A, Entwurf — nicht eingefroren, nicht registriert
+Stand: 28. September 2026 · gleichrangiger Teil von Teil A, Entwurf — nicht eingefroren, nicht registriert
 
 Dieser Anhang gehört zu `praeregistrierung_v2_entwurf.md` (Hauptdokument, Dateiname vorläufig, §12; Verweise
 „§“ beziehen sich darauf) und wird mit ihm eingefroren und registriert. Er enthält den Änderungsvermerk
@@ -434,6 +434,14 @@ und S3 sind obere Schranken, keine Raten des Verfahrens.
 - **Messkette.** Feste Verstärkung; keine Softwarefilter, automatische Nullpunktnachführung,
   Stillstandserkennung, adaptive Filter oder Bereichsumschaltung; analoge Anti-Aliasing-Filter gleicher
   Bauart in allen Kraftkanälen. Die Einstellungen stehen in Teil B und in den Metadaten jedes Laufs.
+  *Begründung:* Median- und Stillstandsfilter liefern einen formabhängigen Lagewert, kein Zeitmittel.
+  Für den Median gilt Median(N) − ⟨N⟩ = s_N·med(u) mit u = (N − ⟨N⟩)/s_N und s_N der
+  Standardabweichung von N über einen Zyklus. Beim Egg-Profil (Einzelmodul, starre Auflage) ist
+  med(u) = −0,368 bei γ₁ = +0,755. Ein solcher Anzeigewert weicht damit schon bei s_N = 0,54–1,36 %
+  von M·g um 0,2–0,5 % vom Mittel ab, in der Größe der Zielauflösung von v1. Beim Sinus verschwindet
+  der Versatz, bei umgekehrtem Vorzeichen der Kraftabweichung kehrt er sich um; er erzeugt damit die
+  Signatur eines phasenabhängigen Mittelwerteffekts, obwohl ⟨N⟩ = M·g gilt. Nachträglich korrigieren
+  lässt er sich nicht: Die Momentennäherung −γ₁·s_N/6 unterschätzt ihn um den Faktor 2,9.
 - **Zeitbasis.** Gemeinsame Zeitbasis aller Kanäle; Kraftkanäle gleichzeitig abgetastet oder mit bekanntem,
   korrigiertem Kanalversatz. Die Indeximpulse stempelt ein Zeitgeber derselben Zeitbasis; die Quantisierung
   360°·f/f_clk beträgt höchstens 0,01° (bei 10 Hz f_clk ≥ 360 kHz).
@@ -645,6 +653,7 @@ Wert für ε_ctrl liefert eine eigene Simulation nach A9.8.
 | Vibrationen (v1) | nicht synchrone Kraftanteile | Referenzläufe, Beschleunigungssensor, phasensynchrone Mittelung |
 | EM-Rückwirkungen (v1) | Einstreuung der Antriebe | D2; Blindkanal in jedem Lauf |
 | Software-Filter (v1) | Formänderung der Kurve | nur die Bandbegrenzung auf k_max, für alle Läufe identisch, Code eingefroren |
+| Anzeige- und Stillstandsstatistik (neu) | formabhängiger Lagewert statt Zeitmittel; Versatz s_N·med(u), Signatur eines phasenabhängigen Mittelwerteffekts | Verbot in A9.1; Rohdaten, ganze Zyklen (A9.4) |
 | Sensor- und Kettennichtlinearität (v1, erweitert) | verzerrte Wellenform, verletzte Superposition | P0.1 (Brückensimulator), P0.4 (zwei Amplituden), feste Einstellungen; G5 |
 | Phasenfehler (v1) | falscher Konfigurationspunkt | gemessene Phasenzeiger ρⱼₖ; Profilphasen mit Δδⱼ; G2 |
 | Erwartungseffekte (v1) | Auswahl, nachträgliches Justieren | Randomisierung, eingefrorene Regeln, automatische Gültigkeitsprüfung, Blindung, Abweichungsprotokoll |
@@ -776,6 +785,7 @@ Hauptdokument; A0–A9, Tab. C, Tab. F und Z Anhang.
 | \|H\| ≤ 1,33 und d ln\|H\|/d ln f ≤ 0,67 bei k·f/f_m = 0,5, ζ → 0; numerisch für r ≤ 0,5 und jedes ζ ≤ 2 (Maxima 1,3333 und 0,6667) | §5.3; A6, Tab. F | `python3 -c "r=0.5; print(round(1/(1-r*r),3), round(2*r*r/(1-r*r),3))"`; `python3 -c "import numpy as np; r=np.linspace(1e-4,0.5,5001); z=np.linspace(0,2,2001)[:,None]; lh=lambda r:0.5*np.log((1+4*z*z*r*r)/((1-r*r)**2+4*z*z*r*r)); h=1e-6; d=(lh(r+h)-lh(r-h))/(2*h)*r; print(round(float(np.exp(lh(r)).max()),4), round(float(d.max()),4))"` |
 | bandbegrenzt, starr, μ = 0,4: k_max = 9: 2°-Sekante 0,0343 N/°, F_min 5,6781 N (120°) und 5,1608 N (100°), ΔF_Zelt 0,5173 N, γ₁(120°) −0,4305; k_max = 6: γ₁ −0,3775; k_max = 3, 4, 5: γ₁ 0 | A6 | BL(9; `None,0,0.4`), BL(6; …), BL(5; …), BL(4; …), BL(3; …): Zeilen 100°, 120° und letzte Zeile |
 | Abtastrate f_s ≥ 6,3 kHz bei k_max = 9, f = 10 Hz; f_clk ≥ 360 kHz für 0,01° bei 10 Hz | A6, A9.1 | `python3 -c "import math; print(round(math.pi*9*10/(2e-3)**0.5), 360*10/0.01)"` |
+| Median-Versatz, Egg-Profil (Einzelmodul, starr): med(u) = −0,368 (numerisch und geschlossen), γ₁ +0,755; 0,2–0,5 % bei s_N = 0,54–1,36 % von M·g; Faktor 2,9 gegenüber −γ₁/6; umgekehrtes Vorzeichen +0,368; Sinus 0 | A9.1, Tab. C | `python3 -c "import numpy as np;p=np.arange(2*10**6)/2e6;w=lambda h:(lambda a:a-a.mean())(np.where(p<h,-np.sin(np.pi*p/h)/h**2,np.sin(np.pi*(p-h)/(1-h))/(h*(1-h))));x=w(0.65);s=x.std();m=float(np.median(x)/s);g=float(np.mean(x**3)/s**3);print(round(m,3),round(-np.sqrt(2*0.35/0.65)*np.sin(np.pi*(1-1/1.3)/2),3),round(g,3),round(0.2/-m,2),round(0.5/-m,2),round(m/(-g/6),1),round(float(np.median(-x)/s),3),round(abs(float(np.median(w(0.5)))),6))"` |
 | Pilotkonfigurationen: zyklische Abstände 110/140/110, 130/100/130, 110/142/108 (nicht äquivalent, paarweise verschieden); Beispiele 110/120/130 und 120/130/110 (äquivalent) | §5.4; A7 | `python3 -c "g=lambda a,b:(lambda s:[s[1]-s[0],s[2]-s[1],360-s[2]])(sorted([0,a,b]));c=lambda x:min(tuple(x[i:]+x[:i]) for i in range(3));S={c(g(*q)) for p in range(100,141,2) for q in ((p,240),(240,p))};[print((a,b),g(a,b),c(g(a,b)) in S) for a,b in ((110,250),(130,230),(110,252),(110,230),(120,250))];print(len({c(g(a,b)) for a,b in ((110,250),(130,230),(110,252))}))"` |
 | Pilotkonfigurationen im Modell: Referenz F_min 1,6016 / 1,8699 / 1,3164 N (Kontaktast); starr, μ = 0,4: 5,1742 / 5,3253 / 5,1472 N; Beispiele: 3,4139 N wie (130°, 240°) | A7 | `python3 code/linear_solver.py --point 110 250` (ebenso `130 230`, `110 252`, `110 230`, `120 250`), jeweils auch mit `--rigid --mu 0.4`; `python3 code/linear_solver.py --section` (Zeile 130°) |
 | 81,1 / 83,5 / 80,7 % von M·g | A7 | `python3 -c "print(round(100*5.1742/6.3765,1), round(100*5.3253/6.3765,1), round(100*5.1472/6.3765,1))"` |
