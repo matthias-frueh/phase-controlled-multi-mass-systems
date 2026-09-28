@@ -117,6 +117,6 @@ Aktuelle Ausgabe: 103 Seiten · XeLaTeX/BibTeX · keine unaufgelösten Verweise.
 - [x] 37 Starrgrenzfall: N ≈ Mg + (M/3)Σz̈ (Punkt 16 hatte „−“).
 - [x] 38 Bistabile Satelliteninseln als Modellgrenze (Anhang B.6); kein Rasterpunkt betroffen.
 
-39. Formelverzeichnis v2.7: Symbole j, N̂_j, N̂_j⁽¹⁾, Φ_j, T_j, T̃_j, r_j, s und Gl. 4.15, B.6 aufnehmen.
+39. ~~Formelverzeichnis v2.7: Symbole j, N̂_j, N̂_j⁽¹⁾, Φ_j, T_j, T̃_j, r_j, s und Gl. 4.15, B.6 aufnehmen~~ **erledigt 28.09.**
 40. Abbildung γ₁ des Einzelmoduls über 3f/f_n mit Resonanzlinien erwägen (Daten: gegenprobe_2026-09-26, Abschnitt B).
 41. Nachrechnung nahe der Liftoff-Grenze mit ereignislokalisierendem Löser.

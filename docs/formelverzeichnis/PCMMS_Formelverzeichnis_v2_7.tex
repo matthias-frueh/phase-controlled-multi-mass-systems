@@ -8,7 +8,7 @@
 \usepackage{booktabs,array,longtable,geometry,enumitem,microtype}
 \usepackage[hidelinks]{hyperref}
 \geometry{left=25mm,right=25mm,top=25mm,bottom=25mm}
-\hypersetup{pdftitle={Symbolverzeichnis und Formelzeichen im PCMMS-Forschungsrahmen, Version 2.6},pdfauthor={Matthias Früh},pdfsubject={Kontaktkraft, Wellenformstatistik und Messmodell},pdfkeywords={PCMMS, Kontaktkraft, Wellenformstatistik, Kalibrierung, Formelzeichen}}
+\hypersetup{pdftitle={Symbolverzeichnis und Formelzeichen im PCMMS-Forschungsrahmen, Version 2.7},pdfauthor={Matthias Früh},pdfsubject={Kontaktkraft, Wellenformstatistik und Messmodell},pdfkeywords={PCMMS, Kontaktkraft, Wellenformstatistik, Kalibrierung, Formelzeichen}}
 \newcommand{\dd}{\mathrm{d}}
 \newcommand{\E}{\mathbb{E}}
 \newcommand{\Var}{\operatorname{Var}}
@@ -24,9 +24,9 @@
 \pretocmd{\section}{\Needspace{12\baselineskip}}{}{}
 \pretocmd{\subsection}{\Needspace{7\baselineskip}}{}{}
 \begin{document}
-\title{Symbolverzeichnis und Formelzeichen im PCMMS-Forschungsrahmen\\[.5em]\large Version 2.6 -- fachlich überarbeitete Fassung\\Schwerpunkt: Kontaktkraft, Wellenformstatistik und Messmodell}
+\title{Symbolverzeichnis und Formelzeichen im PCMMS-Forschungsrahmen\\[.5em]\large Version 2.7 -- fachlich überarbeitete Fassung\\Schwerpunkt: Kontaktkraft, Wellenformstatistik und Messmodell}
 \author{Matthias Früh}
-\date{Arbeitsstand: 26. September 2026}
+\date{Arbeitsstand: 28. September 2026}
 \maketitle
 \begin{abstract}
 Dieses Dokument definiert die Größen für die Untersuchung phasen- und profilgesteuerter Mehrmassendynamik im PCMMS-Forschungsrahmen. Schwerpunkt ist Linie A: die zeitliche Form der Kontaktkraft an einer Auflage und ihre experimentelle Rekonstruktion. Kontaktkraft, kalibriertes Kraftsignal, Referenzdifferenz und Modellresiduum werden getrennt. Der Schwerpunktsatz liefert unter angegebenen Randbedingungen die Mittelwertreferenz $\langle F_c\rangle=Mg$; sie dient der Bilanz- und Messkontrolle. Untersuchungsgrößen sind insbesondere Schiefe, Kontaktverlustanteil, Extremwerte und Peak-to-Mean. Die Fassung präzisiert Nullpunktbezug, endliche Messfenster, statistische Entscheidungsschwellen und nichtlineare Messketteneffekte. Sie ist ein prä-experimentelles Arbeitsdokument und enthält keine neuen Messnachweise. Medienkopplung und Energiebilanzen werden als Anschlüsse eingeordnet, nicht als vollständig spezifizierte Modelle behandelt.
@@ -36,7 +36,7 @@ Dieses Dokument definiert die Größen für die Untersuchung phasen- und profilg
 \clearpage
 \section*{Änderungsvermerk und Geltungsbereich}
 \addcontentsline{toc}{section}{Änderungsvermerk und Geltungsbereich}
-Die Hauptgliederung der Version 2 bleibt erhalten; Definitionen und Querverbindungen wurden fachlich überarbeitet. Gegenüber Version 1 bleibt der Übergang von einer Suche nach Mittelwertverschiebungen zur Untersuchung der Wellenform bestehen. Die Korrekturen der Version 2.1 bleiben erhalten. Version 2.2 ergänzt Mehrkanalnotation, Codezuordnung, Parametersatzregister, Glossar und Migration. Version 2.3 präzisiert die Kontaktmoment- und Kalibriernotation sowie die Restmasse des Referenzmodells. Version 2.4 präzisiert Messrichtungen, Lastpfade und Rekonstruktionsbedingungen der Mehrkanalmessung, vereinheitlicht die methodische Leitlinie und bereinigt die Literaturhinweise. Version 2.5 bindet Codezuordnung und Parametersatzregister an den veröffentlichten Repository-Stand 2026-09 (GitHub-Tag \texttt{2026-09}, DOI 10.5281/zenodo.22864178), nimmt die Feinsweep- und Sinusprofil-Dateien in die Codezuordnung auf und ordnet das in der Dissertation verwendete Symbol $\Theta$ dem Hold-Zeitanteil $\beta_h$ zu; Definitionen sind gegenüber Version 2.4 unverändert. Version 2.6 bezieht den Impulsrandterm des Fenstermittels auf die Basislinie ($\delta_w$), trennt ihn bei numerisch gebildeten Mitteln vom Quadraturfehler ($\delta_Q$), ergänzt die Schranke über die Schwerpunktgeschwindigkeit ($v_{S,\max}$), ordnet die Bezeichnungen des Arbeitspapiers v2.3 zu und nimmt die Nachrechnung mit adaptivem Burn-in vom 13.~September 2026 in die Codezuordnung auf; die Definitionen der Version 2.5 bleiben unverändert. Die Parameter in Anhang~\ref{app:code} sind dem angegebenen Simulationsstand zugeordnet. Gegenüber Version 2 sind insbesondere korrigiert:
+Die Hauptgliederung der Version 2 bleibt erhalten; Definitionen und Querverbindungen wurden fachlich überarbeitet. Gegenüber Version 1 bleibt der Übergang von einer Suche nach Mittelwertverschiebungen zur Untersuchung der Wellenform bestehen. Die Korrekturen der Version 2.1 bleiben erhalten. Version 2.2 ergänzt Mehrkanalnotation, Codezuordnung, Parametersatzregister, Glossar und Migration. Version 2.3 präzisiert die Kontaktmoment- und Kalibriernotation sowie die Restmasse des Referenzmodells. Version 2.4 präzisiert Messrichtungen, Lastpfade und Rekonstruktionsbedingungen der Mehrkanalmessung, vereinheitlicht die methodische Leitlinie und bereinigt die Literaturhinweise. Version 2.5 bindet Codezuordnung und Parametersatzregister an den veröffentlichten Repository-Stand 2026-09 (GitHub-Tag \texttt{2026-09}, DOI 10.5281/zenodo.22864178), nimmt die Feinsweep- und Sinusprofil-Dateien in die Codezuordnung auf und ordnet das in der Dissertation verwendete Symbol $\Theta$ dem Hold-Zeitanteil $\beta_h$ zu; Definitionen sind gegenüber Version 2.4 unverändert. Version 2.6 bezieht den Impulsrandterm des Fenstermittels auf die Basislinie ($\delta_w$), trennt ihn bei numerisch gebildeten Mitteln vom Quadraturfehler ($\delta_Q$), ergänzt die Schranke über die Schwerpunktgeschwindigkeit ($v_{S,\max}$), ordnet die Bezeichnungen des Arbeitspapiers v2.3 zu und nimmt die Nachrechnung mit adaptivem Burn-in vom 13.~September 2026 in die Codezuordnung auf; die Definitionen der Version 2.5 bleiben unverändert. Version 2.7 übernimmt die mit dem Arbeitspapier v2.4 eingeführten Größen: die Ordnung $m$ einer Harmonischen, die komplexen Harmonischen $\underline{F}_{c,m}$ der Kontaktkraft, den Phasenfaktor $\Phi_m$ der Konfiguration, die Kontaktübertragung $H_c$ mit dem Frequenzverhältnis $\varrho_m$ und den Hubfaktor $\xi_A$. Neu sind die Triadenzerlegung des dritten Moments im Dauerkontakt (Abschnitt~\ref{sec:triaden}), die Kontaktübertragung (Abschnitt~\ref{sec:kontaktuebertragung}), die Gegenprobe vom 26.~September 2026 in der Codezuordnung und die Zuordnung der neuen Zeichen des Arbeitspapiers; die Definitionen der Version 2.6 bleiben unverändert. Die Parameter in Anhang~\ref{app:code} sind dem angegebenen Simulationsstand zugeordnet. Gegenüber Version 2 sind insbesondere korrigiert:
 \begin{enumerate}
 \item Primäre Untersuchungsgrößen sind zeitaufgelöste Referenzabweichungen und Unterschiede zwischen Betriebszuständen. Kalibrierte Kraftwerte mit Messunsicherheit dienen zugleich der Bilanzprüfung, Kontaktklassifikation und Normierung.
 \item $F_N$ besitzt einen dokumentierten Bezug auf den unbelasteten Kraftnullpunkt. Ein unter Last tariertes Anzeigesignal wird gesondert bezeichnet.
@@ -81,12 +81,14 @@ Die Koordinate $z$ ist in einem näherungsweise inertialen Laborbezugssystem nac
 $k,l=1,\ldots,n$&Modulindizes; $k=0$ bezeichnet den übrigen Körper bzw. Rahmen.&--\\
 $i=0,\ldots,N-1$&Abtastindex; $t_i=t_0+i\Delta t$, $T_w=N\Delta t$.&--\\
 $j$, $N_b$&Blockindex und Anzahl der Blöcke.&--\\
+$m$ (als Index)&Ordnung einer Harmonischen der Anregungsfrequenz, $m\ge1$; von den Massen $m_k$ und der Momentordnung $j$ in $m_{j,N}$ unterschieden.&--\\
 $r$, $N_r$&Laufindex und Anzahl unabhängiger Wiederholungen; beim gepaarten Test Anzahl der Paare.&--\\
 $a,b,\mathrm{ref}$&Betriebszustände bzw. Referenzzustand.&--\\
 $\mathbf x,\mathbf A$&Vektor, Matrix; Skalare kursiv.&variabel\\
 $\langle X\rangle_{T_w}$&Kontinuierliches Zeitmittel über das angegebene Fenster.&wie $X$\\
 $\overline X$, $X^{(r)}$&Diskretes Mittel; Kennzahl aus Lauf $r$. Mittel über Läufe ausdrücklich kennzeichnen.&wie $X$\\
 $\hat X$, $\E[X]$&Schätzwert; Erwartungswert.&wie $X$\\
+$\underline{X}$, $\mathrm i$&Komplexe Amplitude einer Harmonischen; imaginäre Einheit, aufrecht gesetzt ($i$ bleibt Abtastindex).&wie $X$; --\\
 $\delta X$, $\Delta X_{ab}$&Zeitabhängige Referenzabweichung; Unterschied einer Kennzahl zwischen Zuständen.&wie $X$\\
 $\mathbf p,\mathbf q_C$&Parametervektoren; Einheiten komponentenweise, nicht pauschal dimensionslos.&variabel\\
 \end{symtab}
@@ -334,6 +336,35 @@ Die Phasenkarten enthalten je Konfiguration die folgenden Größen:
 $P_{XX}(f)$ bezeichnet die einseitige Leistungsdichte eines zentrierten reellen Signals $X(t)$, mit Einheit $[X]^2/\mathrm{Hz}$. Bei konsistenter Normierung liefert das Integral über den positiven Frequenzbereich seine Varianz. Der Welch-Schätzer mittelt gefensterte Segmentperiodogramme; Segmentlänge, Überlappung, Fenster, Detrending und Frequenzauflösung werden angegeben. Diese Welch-Methode ist vom Welch-Zweistichproben-$t$-Test zu unterscheiden.
 Kreuzspektrum $P_{XY}(f)$, spektrale Phase und Kohärenz können Kanalbeziehungen beschreiben. Sie beweisen keine Kausalität. Die Kohärenz lautet bei nicht verschwindenden Nennern $|P_{XY}|^2/(P_{XX}P_{YY})$. Ein Leistungsspektrum allein enthält nicht die vollständige zeitliche Phaseninformation und ersetzt weder Wellenform noch Schiefe.
 
+\subsection{Harmonischentriaden und Vorzeichen der Schiefe}\label{sec:triaden}
+Im Dauerkontakt eines linearen Kontaktmodells ist die stationäre Kontaktkraft periodisch mit der Anregungsperiode $T$:
+\begin{equation}
+F_c(t)=Mg+\sum_{m\neq0}\underline{F}_{c,m}\,e^{\mathrm i m\omega t},\qquad \underline{F}_{c,-m}=\underline{F}_{c,m}^{*}.
+\end{equation}
+Das dritte zentrale Moment über ganze Perioden zerfällt exakt in Beiträge von Triaden der Harmonischen $(m,\,m',\,m+m')$:
+\begin{equation}
+\bigl\langle(F_c-Mg)^3\bigr\rangle_T
+=6\sum_{m\ge1}\operatorname{Re}\bigl(\underline{F}_{c,m}^{2}\,\underline{F}_{c,2m}^{*}\bigr)
++12\sum_{1\le m<m'}\operatorname{Re}\bigl(\underline{F}_{c,m}\,\underline{F}_{c,m'}\,\underline{F}_{c,m+m'}^{*}\bigr),
+\label{eq:triaden}
+\end{equation}
+und die Schiefe ist $\gamma_c=\langle(F_c-Mg)^3\rangle_T/\sigma_c^3$. Eine einzelne Harmonische bildet keine Triade; das ist der Sinusfall ohne Kontaktverlust (Abschnitt~\ref{sec:sinus}). Das Vorzeichen eines Terms hängt an seiner Triadenphase $\arg\bigl(\underline{F}_{c,m}\underline{F}_{c,m'}\underline{F}_{c,m+m'}^{*}\bigr)$. Bei $n$ baugleichen Modulen mit den Verzögerungsphasen $\phi_k$ gilt im linearen Dauerkontakt
+\begin{equation}
+\underline{F}_{c,m}=\Phi_m\,\underline{F}^{(1)}_{c,m},\qquad \Phi_m=\sum_{k=1}^{n}e^{-\mathrm i m\phi_k},
+\label{eq:phasenfaktor}
+\end{equation}
+mit der Harmonischen $\underline{F}^{(1)}_{c,m}$ eines allein laufenden Moduls. Jede Triadenphase zerfällt damit additiv (modulo $2\pi$) in drei Anteile: den Profilanteil, das ist die Triadenphase eines einzelnen Moduls auf starrer Auflage, den Kontaktanteil
+\[
+\arg\bigl(H_c(m\omega)\,H_c(m'\omega)\,H_c^{*}((m+m')\omega)\bigr)
+\]
+nach Abschnitt~\ref{sec:kontaktuebertragung} und den Konfigurationsanteil $\arg\bigl(\Phi_m\Phi_{m'}\Phi_{m+m'}^{*}\bigr)$. Die Phasenkonfiguration verschiebt das Vorzeichen der Schiefe, legt es aber nicht allein fest; ohne gemessene Kontakt\-übertragung erlaubt ein Vorzeichen keinen Schluss auf die Phasenlage. Bei Kontaktverlust gilt die Zerlegung nicht.
+\begin{symtab}
+$\underline{F}_{c,m}$&Komplexe $m$-te Harmonische der Kontaktkraft im Dauerkontakt.&N\\
+$\underline{F}^{(1)}_{c,m}$&Dieselbe Größe bei einem allein laufenden Modul.&N\\
+$\Phi_m$&Phasenfaktor der Konfiguration, $\sum_k e^{-\mathrm i m\phi_k}$; synchron gilt $\Phi_m=n$.&--\\
+$\xi_A$&Hubfaktor: Beschleunigungsamplitude der gleichphasig bewegten Module, bezogen auf die synchrone Anregung aller Module mit Referenzamplitude $A_{\mathrm{ref}}$; $\xi_A=\sum_k m_kA_k/(MA_{\mathrm{ref}})$ über diese Module. Im Referenzmodell mit $m_k=M/3$ entspricht $\xi_A=1/3$ einem Modul mit Referenzamplitude und $\xi_A=1$ der synchronen Anregung.&--\\
+\end{symtab}
+
 \section{Statistik und Signalnachweis}\label{sec:statistik}
 \subsection{Läufe und Stichproben}
 Ein Lauf ist eine vorab definierte Messrealisierung eines Betriebszustands. Zeitabschnitte desselben Datensatzes sind nicht allein durch ihre Benennung unabhängige Läufe. Wiederholungen benötigen eine geeignete experimentelle Trennung und Kontrolle gemeinsamer Drift. Je Lauf werden die vollständige Wellenform und ein Wert je Zielkennzahl gespeichert.
@@ -434,6 +465,22 @@ $\tau_{\mathrm{sync}}$&Zeitversatz zwischen Kraft- und Bewegungskanälen.&s\\
 $\Delta F_{\mathrm{LSB}}$&Quantisierungsschritt des Kraftkanals.&N\\
 \end{symtab}
 Für unverzerrte direkte Wellenformauswertung sollte der relevante Frequenzbereich unterhalb störender Aufstellungsresonanzen liegen. Alternativ ist die Übertragung zu identifizieren und im Modell zu berücksichtigen. Eine Grenzfrequenz oberhalb der Grundfrequenz allein genügt bei Oberwellen oder Stößen nicht.
+
+\subsection{Kontaktübertragung im Dauerkontakt}\label{sec:kontaktuebertragung}
+Für die Referenz-Engine mit linearem einseitigem Kontakt (Parameter $k_c$, $c_c$ nach Anhang~\ref{app:code}) überträgt die Auflage im Dauerkontakt die Trägheitskraft der Module mit
+\begin{equation}
+H_c(\omega)=\frac{k_c+\mathrm i\omega c_c}{k_c-M\omega^2+\mathrm i\omega c_c}
+=\frac{1+2\mathrm i\zeta\varrho}{1-\varrho^2+2\mathrm i\zeta\varrho},\qquad
+\varrho=\frac{\omega}{\omega_{0,c}},\quad \omega_{0,c}=\sqrt{\frac{k_c}{M}},\quad \zeta=\frac{c_c}{2\sqrt{k_cM}}.
+\label{eq:Hc}
+\end{equation}
+Die $m$-te Harmonische wird mit $H_c(m\omega)$ übertragen, $\varrho_m=m\omega/\omega_{0,c}$; der Betrag $|H_c|$ ist die Transmissibilität. Die $m$-te Harmonische trifft die Kontaktresonanz bei $3f/f_{0,c}=3/m$. Beim Referenzparametersatz liegt die zweite Harmonische auf der Resonanz, $\varrho_2=1{,}013$ und $|H_c(2\omega)|=5{,}03$ (Arbeitspapier v2.4, Anhang~B.3). Im starren Grenzfall gilt $H_c\to1$ und im Referenzmodell $F_c\approx Mg+\sum_k m_k\ddot q_k$. Außerhalb des Dauerkontakts gilt \eqref{eq:Hc} nicht.
+\begin{symtab}
+$k_c$, $c_c$&Steifigkeit und Dämpfung des einseitigen Kontakts der Referenz-Engine.&N/m; N s/m\\
+$\omega_{0,c}$, $f_{0,c}$&Kontakteigenkreisfrequenz $\sqrt{k_c/M}$ und Kontakteigenfrequenz $\omega_{0,c}/(2\pi)$; im Arbeitspapier $f_n$.&rad/s; Hz\\
+$H_c(\omega)$&Komplexe Kontaktübertragung im Dauerkontakt; $|H_c|$ ist die Transmissibilität.&--\\
+$\varrho_m$&Frequenzverhältnis der $m$-ten Harmonischen, $m\omega/\omega_{0,c}$.&--\\
+\end{symtab}
 
 \section{Zustandsraumdarstellung}\label{sec:zustandsraum}
 \subsection{Lineare, nichtlineare und diskrete Form}
@@ -539,12 +586,12 @@ Aktor-/Dummy-Kontrolle&Bestromte Aktoren ohne Sollbewegung oder geeignete Ersatz
 \bottomrule\end{longtable}
 Ein Zustand ist vollständig erst mit Frequenz, Amplitude, Profilversion, Phasen, Lastpfad und Regelmodus beschrieben. Die Kürzel ersetzen keine Versuchsmetadaten.
 
-\subsection{Sinusprofil}
+\subsection{Sinusprofil}\label{sec:sinus}
 Bei konstanten Amplituden und gemeinsamer Frequenz bleibt die lineare Überlagerung beliebig vieler Sinusschwingungen ein Sinus:
 \begin{equation}
 \sum_k a_k\sin(\omega t-\phi_k)=A_{\mathrm{res}}\sin(\omega t-\phi_{\mathrm{res}}).
 \end{equation}
-Über vollständige Perioden ist dessen Schiefe null, sofern die Varianz nicht verschwindet. Reine Mehrmodulüberlagerung erzeugt unter diesen Voraussetzungen keine Schiefe. Nichtsinusförmige Profile, Nichtlinearitäten, Kontaktverlust, transiente Vorgänge oder Messketteneffekte können dies ändern.
+Über vollständige Perioden ist dessen Schiefe null, sofern die Varianz nicht verschwindet. Reine Mehrmodulüberlagerung erzeugt unter diesen Voraussetzungen keine Schiefe. Nichtsinusförmige Profile, Nichtlinearitäten, Kontaktverlust, transiente Vorgänge oder Messketteneffekte können dies ändern. Im Dauerkontakt folgt der Befund aus \eqref{eq:triaden}: Eine einzelne Harmonische bildet keine Triade.
 
 \subsection{Egg-Profil und aktiv geführte Rückholung}
 Im PCMMS-Kontext bezeichnet Egg die vorgegebene Trajektorienform bzw. Hüllkurve; die zeitliche Durchfahrung und der Phasenbezug sind zusätzlich festzulegen. Eine Vorwärts- und Rückholphase werden durch
@@ -580,7 +627,7 @@ Die Nahtgeschwindigkeiten stimmen überein, wenn
 \frac{R_{\mathrm{top}}}{T_h}=\frac{R_{\mathrm{bot}}}{T_s^{\mathrm{prof}}},\qquad
 R_{\mathrm{bot}}=R_{\mathrm{top}}\frac{1-\beta_h}{\beta_h}.
 \]
-Die Position ist an beiden Nähten null; die Beschleunigungen verschwinden dort ebenfalls. Für dieses Profil sind somit auch die Beschleunigungsnähte stetig, während der Ruck springen kann. Der Code liefert die stückweisen Beschleunigungen direkt. Der Hold-Zeitanteil $\beta_h$ ist ein Parameter dieser Profilversion und nicht ungeprüft mit dem allgemeinen Vorwärtsanteil $\beta$ gleichzusetzen.
+Die Position ist an beiden Nähten null; die Beschleunigungen verschwinden dort ebenfalls. Für dieses Profil sind somit auch die Beschleunigungsnähte stetig, während der Ruck springen kann. Der Code liefert die stückweisen Beschleunigungen direkt. Die Beschleunigung besteht aus zwei in sich symmetrischen Halbwellen und ist damit zeitumkehrsymmetrisch; alle Triadenphasen des Profils nach \eqref{eq:triaden} sind $0$ oder $\pi$. Der Hold-Zeitanteil $\beta_h$ ist ein Parameter dieser Profilversion und nicht ungeprüft mit dem allgemeinen Vorwärtsanteil $\beta$ gleichzusetzen.
 Der ältere \texttt{pcmms\_v10\_egg\_traj.py}-Stand enthält dagegen seitliche Bewegung und eine zusätzliche Schnipp-Phase. Er wird als separate historische Variante geführt. Diese Variante wird ohne vollständigen Profil- und Nahtabgleich nicht zur verbindlichen Hardwaretrajektorie erklärt. Bei dreiphasiger Parametrisierung müssen die normierten Zeitanteile zusammen eins ergeben; sie sind nicht unabhängig wählbar.
 
 \subsection{Puls, Hüllkurve und adaptive Steuerung}
@@ -638,6 +685,10 @@ C&=e_S-F_{\mathrm{ext},z}+e_{\mathrm m},\\
 \text{Residuum:}\quad R&=F_N-\hat F_N,\\
 \text{Ideale Kraftverteilung:}\quad p_c(F)&=\Lambda\delta(F)+(1-\Lambda)p_{c,+}(F),\\
 \text{Schiefe:}\quad\gamma_N&=m_{3,N}/\sigma_N^3,\\
+\text{Triaden (Dauerkontakt):}\quad\bigl\langle(F_c-Mg)^3\bigr\rangle_T&=6\sum_{m}\operatorname{Re}\bigl(\underline{F}_{c,m}^2\underline{F}_{c,2m}^*\bigr)\\
+&\quad+12\sum_{m<m'}\operatorname{Re}\bigl(\underline{F}_{c,m}\underline{F}_{c,m'}\underline{F}_{c,m+m'}^*\bigr),\\
+\text{Phasenfaktor:}\quad\underline{F}_{c,m}&=\Phi_m\underline{F}^{(1)}_{c,m},\qquad\Phi_m=\sum_k e^{-\mathrm i m\phi_k},\\
+\text{Kontaktübertragung:}\quad H_c(\omega)&=\frac{1+2\mathrm i\zeta\varrho}{1-\varrho^2+2\mathrm i\zeta\varrho},\qquad\varrho=\omega/\omega_{0,c},\\
 \text{RMS:}\quad F_{\mathrm{RMS}}^2&=\mu_N^2+\sigma_N^2,\\
 \text{Peak-to-Mean:}\quad\Pi_N&=F_{N,\max}/\mu_N,\\
 \text{Nichtlinearer Mittelwert:}\quad\Delta\overline F_{\mathrm{nl}}&=\epsilon_2\sigma_c^2+\epsilon_3\gamma_c\sigma_c^3+\cdots,\\
@@ -664,10 +715,10 @@ Diese Punkte sind absichtlich als Versuchsspezifikation offen. Das Verzeichnis e
 
 \appendix
 
-\section{Migration Version 1 nach Version 2.6}\label{app:migration}
+\section{Migration Version 1 nach Version 2.7}\label{app:migration}
 Die Tabelle verfolgt die im V1/V2-Abgleich dokumentierten Altbelegungen und ab Version 2.6 die Bezeichnungen des Arbeitspapiers. Ein entfallener generischer Parameter wird nicht stillschweigend einer physikalisch anderen Größe zugeordnet. Alte Dateifelder bleiben erhalten; die Auswertung verwendet einen expliziten Adapter.
 \begin{longtable}{@{}L{.27\textwidth}L{.28\textwidth}L{.40\textwidth}@{}}
-\toprule\textbf{Version 1 / Altbelegung}&\textbf{Version 2.6}&\textbf{Zuordnung}\\\midrule\endhead
+\toprule\textbf{Version 1 / Altbelegung}&\textbf{Version 2.7}&\textbf{Zuordnung}\\\midrule\endhead
 $mg$, $F_g$&$Mg$, $F_{\mathrm{base}}$&Gesamtmasse, theoretische Referenz unter Randbedingungen.\\
 $F_{\mathrm{gesamt}}$ als ppm-Nenner&$Mg$&Referenz des jeweiligen Parametersatzes.\\
 $F_N$, $F_{\mathrm{meas}}$, $F_{\mathrm{phys}}$&$F_N$, $F_c$, $F_{N,\mathrm{tar}}$&Messwert, Kontaktkraft und tarierte Anzeige trennen.\\
@@ -711,6 +762,12 @@ $N(t)$, $\langle N\rangle$ (Arbeitspapier v2.3)&$F_c(t)$, $\langle F_c\rangle_{T
 $\gamma_1$, $\lambda$, $A$ (Arbeitspapier v2.3)&$\gamma_c$, $\Lambda$, $A_{\mathrm{pk}}$&Schiefe, Kontaktverlustanteil (im Arbeitspapier in Prozent), Asymmetrieverhältnis.\\
 $N_{\min}$, $N_{\max}$ (Arbeitspapier v2.3)&$F_{c,\min}$, $F_{c,\max}$&Extrema im Auswertefenster.\\
 $R$, $Q$ (Ergebnisnotiz 13.09.2026)&$\delta_w$, $\delta_Q$&Relativer Randterm und Quadraturanteil; $R$ bleibt Residuum.\\
+$j$ (Arbeitspapier v2.4)&$m$&Ordnung der Harmonischen; $j$ bleibt Block- bzw. Momentindex.\\
+$\hat N_j$, $\hat N_j^{(1)}$ (Arbeitspapier v2.4)&$\underline{F}_{c,m}$, $\underline{F}^{(1)}_{c,m}$&Komplexe Harmonische; das Dach bleibt Schätzwert.\\
+$\Phi_j$ (Arbeitspapier v2.4)&$\Phi_m$&Phasenfaktor; für $n=3$ und $\phi_1=0$ gleich.\\
+$T_j$, $\tilde T_j$, $r_j$ (Arbeitspapier v2.4)&$|H_c(m\omega)|$, $H_c(m\omega)$, $\varrho_m$&Kontaktübertragung; $T$ bleibt Periode, $r$ Laufindex.\\
+$f_n$, $k$, $c$ (Arbeitspapier)&$f_{0,c}$, $k_c$, $c_c$&Kontakteigenfrequenz und Kontaktparameter der Referenz-Engine.\\
+$s$ (Arbeitspapier v2.4)&$\xi_A$&Hubfaktor; $s$ bleibt Laplace-Variable.\\
 \bottomrule\end{longtable}
 \subsection{Zusätzliche Korrekturen gegenüber Version 2 und 2.1}
 $p_c$ und $p_N$ trennen Kraft- und Signalverteilung. $\hat\Lambda_{\mathrm{thr}}$ und $\hat\Lambda_{\mathrm{mix}}$ benennen die Auswertemethoden ohne Unabhängigkeitsbehauptung. $\mathbf p_k$ ersetzt die Profilparameter $\boldsymbol\eta_k$ aus V2.1. $\mathbf G$ ersetzt deren vorübergehende Eingangsmatrix $\mathbf B$. Der Profilwinkel lautet konsistent zum Code $\omega t-\phi_k$. $t_{\mathrm{stat}}$ bezeichnet den Testwert. Die allgemeine Definition von $\Pi_N$ wird nicht auf die anders definierte CSV-Spalte \texttt{peak\_ratio} übertragen.
@@ -750,6 +807,24 @@ Die Nachrechnung vom 13.~September 2026 gehört nicht zum Repository-Stand 2026-
 \texttt{stationaer\_10s}&Klasse&\texttt{ja}, \texttt{grenzwertig}, \texttt{nein} für $|\delta_w|\le10$, $\le100$, $>100\,\mathrm{ppm}$.\\
 \bottomrule\end{longtable}
 
+\subsection{Gegenprobe zum Vorzeichen der Schiefe}\label{app:gegenprobe}
+Die Gegenprobe vom 26.~September 2026 gehört nicht zum Repository-Stand 2026-09; sie liegt im Hauptzweig unter \texttt{docs/\allowbreak arbeitspapier/\allowbreak gegenprobe\_2026-09-26/}:
+\begin{itemize}
+\item \texttt{pcmms\_gegenprobe\_\allowbreak einzelmodul\_\allowbreak 2026-09-26.py} -- Dauerkontakt im Frequenzbereich nach \eqref{eq:Hc} und \eqref{eq:phasenfaktor}, Bereich mit Kontaktverlust mit einer RK4-Nachbildung der Referenz-Engine
+\item \texttt{pcmms\_pruefung\_\allowbreak pr4\_\allowbreak linearloeser.py} -- unabhängige Prüfung des linearen Lösers \texttt{code/\allowbreak linear\_solver.py}
+\end{itemize}
+Beide Ausgaben liegen als Textdateien bei. Bezeichnungen in den Ausgaben:
+\begin{longtable}{@{}L{.24\textwidth}L{.24\textwidth}L{.47\textwidth}@{}}
+\toprule\textbf{Ausgabefeld}&\textbf{Größe / Einheit}&\textbf{Definition / Besonderheit}\\\midrule\endhead
+\texttt{gamma1}&$\gamma_c$ / --&Schiefe im Auswertefenster bzw. im Dauerkontakt.\\
+\texttt{Liftoff}&$100\hat\Lambda_{\mathrm{sim}}$ / Prozent&Anteil $F_c<10^{-9}\,\mathrm N$ mal 100.\\
+\texttt{s}&$\xi_A$ / --&Hubfaktor des allein laufenden Oszillators.\\
+\texttt{K}, \texttt{C}&$k_c$ / N/m; $c_c$ / N\,s/m&Kontaktparameter; in der Sensitivität bei festem $\zeta$, also $c_c\propto\sqrt{k_c}$.\\
+\texttt{3f/f\_n}&$3f/f_{0,c}$ / --&Lage zur Kontaktresonanz; die $m$-te Harmonische trifft sie bei $3/m$.\\
+\texttt{|H\_1..3|}, \texttt{H\_2}, \texttt{T1}, \texttt{T2}&$|H_c(m\omega)|$, $H_c(m\omega)$&Kontaktübertragung der ersten Harmonischen.\\
+\texttt{N1}, \texttt{N2}, \texttt{Phi1}, \texttt{Phi2}&$\underline{F}_{c,m}$, $\Phi_m$&Harmonische und Phasenfaktor in den Triadenphasen (Abschnitt E der Gegenprobe).\\
+\bottomrule\end{longtable}
+
 \subsection{Getrennte Parameterstände}
 \begin{longtable}{@{}L{.24\textwidth}L{.33\textwidth}L{.38\textwidth}@{}}
 \toprule\textbf{Größe}&\textbf{Referenzsimulation}&\textbf{Andere Projektangabe / Konsequenz}\\\midrule\endhead
@@ -758,12 +833,13 @@ Frequenz&$f=10\,\mathrm{Hz}$&$2{,}2\,\mathrm{Hz}$ als anderer Entwurfsstand.\\
 Zeitanteil&$\beta_h=0{,}65$&Vorwärtsanteil ungefähr $0{,}80$ als andere Profilfestlegung.\\
 Profilradien&$R_{\mathrm{top}}=5\,\mathrm{mm}$; $R_{\mathrm{bot}}=2{,}6923\,\mathrm{mm}$&An das konkrete Halbsinusprofil gebunden.\\
 Kontakt&$k_c=10^4\,\mathrm{N/m}$, $c_c=16\,\mathrm{N\,s/m}$&Keine universellen Hardwarewerte.\\
+Kontakt (Gegenprobe)&$k_c=6\,944\,\mathrm{N/m}$, $c_c=13{,}33\,\mathrm{N\,s/m}$, $\zeta$ wie Referenz.&Stichprobe im Band $1{,}561<3f/f_{0,c}<2{,}669$, in dem ein allein laufendes Modul im Dauerkontakt linksschief ist (Anhang~\ref{app:gegenprobe}).\\
 Numerik&$\Delta t_{\mathrm{sim}}=5\cdot10^{-5}\,\mathrm s$; 15 s je Punkt, davon 5 s Burn-in.&Zeitliche Konvergenz und Randterm je Regime prüfen; Nachrechnung mit adaptivem Burn-in (5 bis 40 s) nach Anhang~\ref{app:nachrechnung}.\\
 Raster&19 verschiedene Phasenwerte pro Achse, $360^\circ/19$.&Triphasik $(120^\circ,240^\circ)$ ist kein Punkt dieses Grobrasters; sie liegt im 2$^\circ$-Feinsweep.\\
 \bottomrule\end{longtable}
 Im reduzierten Referenzmodell ist die Restmasse $m_0=0$: Die kodierte Rahmengleichung $M\ddot z_f=-Mg+F_c-(M/3)\sum_{k=1}^{3}\ddot q_k$ folgt aus der kinematischen Beziehung \eqref{eq:rahmen} zusammen mit der Kraftbilanz \eqref{eq:bilanz}, für $m_k=M/3$, $m_0=0$ und $F_{\mathrm{ext},z}=0$. Es ist damit kein vollständig ausgewiesenes Hardwaremodell mit unabhängig spezifizierter Restmasse. Vor einer Übertragung auf reale Module ist die Zuordnung gemäß \eqref{eq:rahmen} zu klären.
 
-Der 2$^\circ$-Feinsweep (\texttt{data/finesweep\_2deg\_120\_240.csv}, 441 Konfigurationen um $(120^\circ,240^\circ)$) liefert ein Maximum der \emph{Minimalkraft} von $5{,}3304\,\mathrm N$ genau an der Triphasik bei diesem weichen Kontakt; entlang $\phi_3=240^\circ$ fällt $F_{c,\min}$ mit etwa $0{,}23\,\mathrm N$ je Grad zu kleineren und $0{,}19\,\mathrm N$ je Grad zu größeren $\phi_2$ ab, und 90{,}7\,\% des Fensters sind liftoff-frei. Das Exposé nennt an einer Stelle ein Minimum; diese Formulierung ist nicht zu übernehmen. Der Wert ist eine parametergebundene Simulationsangabe, kein allgemeines PCMMS-Ergebnis.
+Der 2$^\circ$-Feinsweep (\texttt{data/finesweep\_2deg\_120\_240.csv}, 441 Konfigurationen um $(120^\circ,240^\circ)$) liefert ein Maximum der \emph{Minimalkraft} von $5{,}3304\,\mathrm N$ genau an der Triphasik bei diesem weichen Kontakt; entlang $\phi_3=240^\circ$ fällt $F_{c,\min}$ mit etwa $0{,}23\,\mathrm N$ je Grad zu kleineren und $0{,}19\,\mathrm N$ je Grad zu größeren $\phi_2$ ab, und 90{,}7\,\% des Fensters sind liftoff-frei. Die Referenz ist dabei ein Resonanzfall: Die zweite Harmonische liegt auf der Kontaktresonanz (Abschnitt~\ref{sec:kontaktuebertragung}), was die Flanken der Zeltkurve überhöht (Arbeitspapier v2.4, Anhang~B.3). Das Exposé nennt an einer Stelle ein Minimum; diese Formulierung ist nicht zu übernehmen. Der Wert ist eine parametergebundene Simulationsangabe, kein allgemeines PCMMS-Ergebnis.
 
 \subsection{Linie-B-Daten und Reproduzierbarkeit}\label{app:linieb}
 Für \texttt{sweep\_13x13\_drift\_v2.csv} sind \texttt{v\_d\_mps} und \texttt{v\_d\_mmps} dieselbe Driftgeschwindigkeit in verschiedenen Einheiten. \texttt{F\_bar\_A\_N} bezeichnet die modellierte gebundene mittlere Reaktionskraft, \texttt{tau\_s} die modellierte Relaxationszeit und \texttt{rho} die Mediendichte. Sie werden als $v_d$, $\overline F_A$, $\tau_{\mathrm{relax}}$ und $\rho_{\mathrm{med}}$ geführt. Die gemittelte stationäre Bilanz ist von der zeitintegrierten Kontrolle zu unterscheiden. Alte Driftkarten mit unzureichendem Einschwingen werden nicht mit den korrigierten Karten vermischt.
@@ -808,7 +884,7 @@ Die direkte zweite Differenz ist von einer zweimal angewandten zentralen ersten 
 
 
 \section{Projektgrundlagen und Literaturanschluss}\label{app:quellen}
-Die Codezuordnung und die Parametersätze in Anhang~\ref{app:code} beziehen sich auf den veröffentlichten Repository-Stand 2026-09 (\texttt{matthias-frueh/phase-controlled-multi-mass-systems}, GitHub-Tag \texttt{2026-09}, Zenodo-DOI \href{https://doi.org/10.5281/zenodo.22864178}{10.5281/zenodo.22864178}) sowie auf die in Abschnitt~\ref{app:linieb} genannten Linie-B-Datensätze, die nicht Teil dieses Repository-Stands sind, und auf die Nachrechnung vom 13.~September 2026 im Hauptzweig (Abschnitt~\ref{app:nachrechnung}). Die Angaben beschreiben numerische Referenzfälle. Eine experimentelle Validierung ist mit dieser Fassung nicht verbunden; die Nachrechnung ist ein Simulationslauf.
+Die Codezuordnung und die Parametersätze in Anhang~\ref{app:code} beziehen sich auf den veröffentlichten Repository-Stand 2026-09 (\texttt{matthias-frueh/phase-controlled-multi-mass-systems}, GitHub-Tag \texttt{2026-09}, Zenodo-DOI \href{https://doi.org/10.5281/zenodo.22864178}{10.5281/zenodo.22864178}) sowie auf die in Abschnitt~\ref{app:linieb} genannten Linie-B-Datensätze, die nicht Teil dieses Repository-Stands sind, und auf die Nachrechnung vom 13.~September 2026 sowie die Gegenprobe vom 26.~September 2026 im Hauptzweig (Abschnitte~\ref{app:nachrechnung} und~\ref{app:gegenprobe}). Die Angaben beschreiben numerische Referenzfälle. Eine experimentelle Validierung ist mit dieser Fassung nicht verbunden; Nachrechnung und Gegenprobe sind Simulationsläufe.
 
 Die folgenden Primärarbeiten bilden einen fachlichen Anschluss, nicht einen Nachweis des PCMMS-Aufbaus. Perret-Liaudet und Rigaud untersuchen Spektren und Statistik eines Hertz-Kontakts mit möglichem Kontaktverlust \cite{perret}. Wakou, Ochiai und Isobe behandeln die Schwerpunktdynamik eines granularen Systems mit einem Langevin-Ansatz \cite{wakou}. Umbanhowar und van Hecke untersuchen nichtlineare Kraftdynamik in schwach vibrierten granularen Packungen \cite{umbanhowar}. Anregung, Geometrie und Material unterscheiden sich von PCMMS. Konkrete Schiefe-/Liftoff-Zahlen werden deshalb nicht als allgemeine Kalibrierskala übernommen.
 Die bibliografischen Angaben und diese begrenzte Einordnung wurden anhand der Primärquellen-Einträge geprüft. Bei Perret-Liaudet und Rigaud ist 2003 das Zeitschriftenjahr; 2007 bezeichnet die arXiv-Bereitstellung. Die Schwerpunktbilanz dieses Verzeichnisses wird unabhängig davon in Abschnitt~\ref{sec:bilanz} hergeleitet.
