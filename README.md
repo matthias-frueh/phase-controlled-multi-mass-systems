@@ -55,7 +55,7 @@ solche Verschiebung; sie wurde als Kontaktmodell-Artefakt erkannt, zurückgezoge
 Die Präregistrierung v2 für die Messkampagne liegt als [Entwurf](docs/praeregistrierung_v2_entwurf.md) vor (nicht eingefroren, nicht registriert).
 
 Das Arbeitspapier v2.4 liegt mit Quellen und Nachrechnung in [`docs/arbeitspapier/`](docs/arbeitspapier/), das
-Symbol- und Formelverzeichnis v2.6 in [`docs/formelverzeichnis/`](docs/formelverzeichnis/).
+Symbol- und Formelverzeichnis v2.7 in [`docs/formelverzeichnis/`](docs/formelverzeichnis/).
 
 ## Simulationsstand
 
