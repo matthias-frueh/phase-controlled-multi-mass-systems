@@ -34,7 +34,7 @@ Lizenz dieses Ordners: CC BY 4.0, siehe [`../LICENSE-CC-BY-4.0`](../LICENSE-CC-B
   September-Dokumenten ist diese Größe als Asymmetrieverhältnis A definiert (Codevariable `peak_ratio`).
   Eine v2 mit Änderungsvermerk liegt als [Entwurf](praeregistrierung_v2_entwurf.md) vor (nicht eingefroren,
   nicht registriert).
-- Das **Arbeitspapier** v2.3 liegt in [`arbeitspapier/`](arbeitspapier/) (die zwei Skripte der Nachrechnung dort
+- Das **Arbeitspapier** v2.4 liegt in [`arbeitspapier/`](arbeitspapier/) (die Skripte der Nachrechnung und der Gegenprobe dort
   unter MIT), das **Symbol- und Formelverzeichnis** in der aktuellen Fassung v2.6 in
   [`formelverzeichnis/`](formelverzeichnis/).
 - Der **Literaturabgleich** ist ein Arbeitsdokument für die nächste Fassung des Forschungsrahmens (v3.6);

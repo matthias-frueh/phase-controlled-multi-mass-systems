@@ -14,7 +14,7 @@
 \hypersetup{
   pdftitle={Wellenformstatistik der unilateralen Kontaktkraft in phasenkontrollierten Mehrmassensystemen},
   pdfauthor={Matthias Früh},
-  pdfsubject={PCMMS -- Prä-experimentelles Arbeitspapier, Version 2.3},
+  pdfsubject={PCMMS -- Prä-experimentelles Arbeitspapier, Version 2.4},
   pdfkeywords={PCMMS, Kontaktkraft, Wellenformstatistik, Phasensteuerung, Arbeitspapier}
 }
 
@@ -41,7 +41,7 @@ in phasenkontrollierten Mehrmassensystemen
 \begin{minipage}{0.9\textwidth}
 \centering
 Prä-experimenteller Arbeitsstand\\[0.3cm]
-Version 2.3 -- 25. September 2026\\[0.6cm]
+Version 2.4 -- 26. September 2026\\[0.6cm]
 \small
 Korrigierte Fassung: Basislinienresiduum als Randterm des Auswertefensters.\\
 Numerische Ergebnisse und Messkonzept; eigene experimentelle Nachweise stehen aus.
@@ -93,10 +93,12 @@ Fenstern ohne ganze Orbitperioden und bei aperiodischer Bewegung, fällt
 mit der Fensterlänge ab, kann als phasenabhängiger Effekt erscheinen und
 ist die quantitative Signatur des zurückgezogenen Befunds. Die vier
 Funktionale sind nicht unabhängig; nur die minimale Kontaktkraft trägt
-eigenständige Information. Negative Schiefe tritt nur auf, wenn kein
-Modulpaar gleichphasig läuft --- eine mit drei Messungen prüfbare
-Vorhersage, nach Stichproben gültig in einem Bereich der
-Kontaktsteifigkeit und -dämpfung. Und mit sinusförmigem Antrieb kollabiert die gesamte
+eigenständige Information. Das Vorzeichen der Schiefe ist keine
+Eigenschaft der Phasenlage allein: Im Raster tritt negative Schiefe nur
+ohne gleichphasiges Modulpaar auf, doch der Referenzparametersatz liegt
+auf der Kontaktresonanz der zweiten Harmonischen, und schon bei gut
+$5\,\%$ geringerer Kontaktsteifigkeit und gleichem Dämpfungsgrad ist ein
+einzelnes Modul im Dauerkontakt linksschief. Und mit sinusförmigem Antrieb kollabiert die gesamte
 Phasenkarte auf die resultierende Amplitude: Die Asymmetrie des
 Bahnprofils ist die Quelle der Phasenabhängigkeit, ein Antrieb mit
 asymmetrischem Profil zwingend.
@@ -153,9 +155,12 @@ spanning whole orbit periods and from aperiodic motion, decays with
 window length, can masquerade as a phase-dependent effect and is the
 quantitative signature of the withdrawn result. The four functionals are not
 independent; only the minimum contact force carries separate
-information. Negative skewness occurs only when no pair of modules is in
-phase --- a prediction testable with three measurements, valid --- on the basis of
-sampled cases --- within a range of contact stiffness and damping. With sinusoidal drive the
+information. The sign of the skewness is not a property of
+the phase configuration alone: in the grid, negative skewness occurs only
+when no pair of modules is in phase, but the reference parameter set sits
+on the contact resonance of the second harmonic, and a contact stiffness
+lower by just over $5\,\%$ at equal damping ratio already makes a single
+module under permanent contact negatively skewed. With sinusoidal drive the
 entire phase map collapses onto the resultant amplitude: the asymmetry
 of the motion profile is the source of the phase dependence, and a drive
 producing an asymmetric profile is mandatory.
@@ -216,6 +221,29 @@ adaptivem Burn-in vom 13.~September 2026. Übrige Inhalte sind gegenüber
 v2.2 unverändert. Die neuen Symbole stehen im Symbolverzeichnis dieses Papiers und folgen
 dem Formelverzeichnis v2.6.
 
+Die Fassung v2.4 vom 26.~September 2026 zieht die Vorzeichenregel der
+Schiefe als Aussage über den Mechanismus zurück und korrigiert die
+Zuordnung der Kontaktresonanz: Beim Referenzparametersatz liegt nicht die
+dritte, sondern die zweite Harmonische auf der Kontakteigenfrequenz.
+Anlass ist eine Gegenprobe mit einem einzelnen Modul, die in früheren
+Fassungen als offener Punkt geführt war. Betroffen sind Kurzfassung,
+Abstract, Abschnitt~\ref{sec:vorhersage-schiefe},
+Abschnitt~\ref{sec:kontaktschnittstelle}, Abschnitt~\ref{sec:sinus-sweep},
+Abschnitt~\ref{sec:sens-k}, Abschnitt~\ref{sec:befunde},
+Abschnitt~\ref{sec:weiterfuehrend} und die
+Anhänge~\ref{sec:anh-liftoff-frei}, \ref{sec:anh-kontaktmodell} und
+\ref{sec:anh-grenzen}. Außerdem ist das Vorzeichen in der Näherung des
+steifen Grenzfalls berichtigt, $N(t) \approx Mg + (M/3)\sum
+\ddot{z}_{\mathrm{egg}}$ gemäß Gleichung~\eqref{eq:bewegung}. Die Zahlen
+des $19\times19$-Rasters bleiben unverändert. Neu sind die
+Triadenzerlegung der Schiefe im Dauerkontakt
+(Gleichung~\eqref{eq:triaden}) und der Hinweis auf bistabile
+Satelliteninseln der Phasenebene. Prüfskript und Ausgabe der Gegenprobe
+liegen dem Quellpaket dieser Fassung bei (Ordner
+\texttt{gegenprobe\_2026-09-26}); übernommene Werte der Prüfung zu
+PR~\#4 stammen aus \texttt{pcmms\_pruefung\_pr4\_linearloeser.py}. Die
+mit v2.4 neuen Symbole führt das Formelverzeichnis v2.6 noch nicht.
+
 Der in der Arbeit zitierte Repository-Stand 2026-09 ist über
 \href{https://doi.org/10.5281/zenodo.22864178}{doi:10.5281/zenodo.22864178}
 referenziert. Dieser DOI bezeichnet das Repository-Paket, nicht das
@@ -227,9 +255,10 @@ zugänglich. Datensatz, Skripte und Ergebnisnotiz der Nachrechnung vom
 nicht enthalten.
 
 Die begleitende Liste offener Punkte führt die noch ausstehenden
-Projekt- und Versuchsentscheidungen fort. Die Fassungen v2.2 und v2.3 enthalten keine erneute vollständige
-Literaturprüfung. v2.3 übernimmt Zahlen aus der genannten Nachrechnung;
-Karten und Abbildungen stammen weiterhin aus dem Archivlauf.
+Projekt- und Versuchsentscheidungen fort. Die Fassungen v2.2 bis v2.4 enthalten keine erneute vollständige
+Literaturprüfung. v2.3 übernimmt Zahlen aus der genannten Nachrechnung,
+v2.4 aus der Gegenprobe vom 26.~September 2026 und der Prüfung zu
+PR~\#4; Karten und Abbildungen stammen weiterhin aus dem Archivlauf.
 
 \clearpage
 
@@ -258,6 +287,11 @@ $k$, $c$, $\zeta$ & Kontaktsteifigkeit, Kontaktdämpfung, Dämpfungsgrad \\
 $R$ & Resultierende Amplitude $|1+e^{i\varphi_2}+e^{i\varphi_3}|$ bei Sinusprofil \\
 $R_c$, $R_c^{\text{qs}}$ & Liftoff-Schwelle bei Sinusprofil, dynamisch und quasistatisch \\
 $T$ & Transmissibilität des Kontakts \\
+$j$ & Ordnung einer Harmonischen der Anregungsfrequenz \\
+$\hat{N}_j$, $\hat{N}_j^{(1)}$ & Komplexe $j$-te Harmonische der Kontaktkraft; bei einem einzeln laufenden Modul \\
+$\Phi_j$ & Phasenfaktor der Konfiguration, $1 + e^{-ij\varphi_2} + e^{-ij\varphi_3}$ \\
+$T_j$, $\tilde{T}_j$, $r_j$ & Transmissibilität der $j$-ten Harmonischen, Betrag und komplex; $r_j = jf/f_n$ \\
+$s$ & Hubfaktor, bezogen auf die synchrone Anregung aller drei Module \\
 
 \multicolumn{2}{l}{\emph{Bahnprofil}} \\
 $r_{\text{top}}$, $r_{\text{bot}}$ & Amplituden der Halte- und Rückholphase \\
@@ -1741,58 +1775,151 @@ Abbruch der Kampagne aus; sie wird nie als positiver Befund berichtet.
 Jedes Funktional wird einzeln geprüft; die Multiplizität der Tests wird
 nach den Vorgaben des Kapitels~\ref{chap:statistik} berücksichtigt.
 
-\section{Eine konkrete Vorhersage: das Vorzeichen der Schiefe}
+\section{Das Vorzeichen der Schiefe}
 \label{sec:vorhersage-schiefe}
 
-Die Hypothesen des vorigen Abschnitts sind allgemein gehalten. Das
-Modell erlaubt darüber hinaus eine Vorhersage, die qualitativ ist, mit
-wenigen Konfigurationen prüfbar und bei Verfehlung eindeutig:
+Frühere Fassungen formulierten an dieser Stelle eine qualitative
+Vorhersage: Die Schiefe werde nur negativ, wenn keine zwei Module
+gleichphasig laufen, und das sei mit drei Messungen prüfbar. Eine
+Gegenprobe mit einem einzelnen Modul widerlegt diese Regel als Aussage
+über den Mechanismus; sie wird zurückgezogen. Erhalten bleibt ein Befund
+des Referenzrasters. An die Stelle der Regel tritt eine Vorhersage, die
+an die gemessene Kontaktübertragung gebunden ist.
 
-\begin{quote}
-Die Schiefe $\gamma_1$ der Kontaktkraftverteilung wird nur dann negativ,
-wenn keine zwei Module in der Phase zusammenfallen. Im synchronen Fall
-und in jeder Konfiguration, in der zwei der drei Module gleichphasig
-laufen, bleibt $\gamma_1$ positiv.
-\end{quote}
+\paragraph{Befund im Raster.}
+Im Sweep nach Kapitel~\ref{chap:simulation} tritt negative Schiefe in
+$36$ der $361$ Konfigurationen auf; in keiner davon ist ein Paar von
+Modulen gleichphasig, der kleinste paarweise Phasenabstand beträgt dort
+mindestens $56{,}8^\circ$. Auf der Diagonale $\varphi_2 = \varphi_3$ und
+in der Zeile $\varphi_2 = 0$ --- also überall dort, wo zwei Module
+synchron laufen --- liegt die Schiefe zwischen $+0{,}60$ und $+1{,}72$.
+Der synchrone Fall $\varphi_2 = \varphi_3 = 0$ liefert
+$\gamma_1 = +1{,}71$. Alle $55$ Konfigurationen mit gleichphasigem Paar
+heben dabei ab, $\lambda = 18$ bis $76\,\%$.
 
-Im Sweep nach Kapitel~\ref{chap:simulation} ist dies ohne Ausnahme
-erfüllt. Negative Schiefe tritt in $36$ der $361$ Konfigurationen auf;
-in keiner davon ist ein Paar von Modulen gleichphasig, der kleinste
-paarweise Phasenabstand beträgt dort mindestens $56{,}8^\circ$. Auf der
-Diagonale $\varphi_2 = \varphi_3$ und in der Zeile $\varphi_2 = 0$ ---
-also überall dort, wo zwei Module synchron laufen --- liegt die Schiefe
-zwischen $+0{,}60$ und $+1{,}72$. Der synchrone Fall
-$\varphi_2 = \varphi_3 = 0$ liefert $\gamma_1 = +1{,}71$.
+\paragraph{Triadenzerlegung im Dauerkontakt.}
+Solange der Kontakt nicht abhebt, ist das Modell linear, und das dritte
+zentrale Moment der Kontaktkraft zerfällt exakt in Beiträge von
+Harmonischentriaden. Mit
+$N(t) = Mg + \sum_{j \neq 0} \hat{N}_j\, e^{ij\omega t}$ und
+$\hat{N}_{-j} = \hat{N}_j^{*}$ gilt
+\begin{equation}
+  \bigl\langle (N - Mg)^{3} \bigr\rangle
+  = 6 \sum_{j \geq 1} \operatorname{Re}\bigl(\hat{N}_j^{2}\,\hat{N}_{2j}^{*}\bigr)
+  + 12 \sum_{1 \leq j < l} \operatorname{Re}\bigl(\hat{N}_j\,\hat{N}_l\,\hat{N}_{j+l}^{*}\bigr).
+  \label{eq:triaden}
+\end{equation}
+Eine einzelne Harmonische liefert keinen Beitrag; daher ist
+$\gamma_1 = 0$ beim sinusförmigen Profil im Dauerkontakt
+(Abschnitt~\ref{sec:sinus-sweep}). Das Vorzeichen jedes Terms hängt an
+seiner Triadenphase, für die Triade aus erster und zweiter Harmonischer
+an $\arg(\hat{N}_1^{2}\hat{N}_2^{*})$. Diese Phase setzt sich additiv aus
+drei Anteilen zusammen. Das Bahnprofil nach
+Gleichung~\eqref{eq:eggprofil} besteht aus zwei in sich symmetrischen
+Halbwellen und ist zeitumkehrsymmetrisch; seine Triadenphasen sind $0$
+oder $\pi$, für die Triade aus erster und zweiter Harmonischer null, und
+auf starrer Auflage ist ein einzelnes Modul rechtsschief,
+$\gamma_1 = +0{,}76$. Die nachgiebige Auflage addiert
+$\arg(\tilde{T}_1^{2}\tilde{T}_2^{*})$ mit der komplexen
+Transmissibilität $\tilde{T}_j$ nach
+Gleichung~\eqref{eq:transmissibilitaet-j}. Die Phasenkonfiguration
+multipliziert die Harmonische eines einzeln laufenden Moduls mit
+$\Phi_j = 1 + e^{-ij\varphi_2} + e^{-ij\varphi_3}$,
+$\hat{N}_j = \Phi_j\, \hat{N}_j^{(1)}$, und addiert
+$\arg(\Phi_1^{2}\Phi_2^{*})$. Im synchronen Fall und bei
+$(0^\circ, 180^\circ)$ ist dieser Anteil null; dort bestimmen Profil und
+Kontakt das Vorzeichen der Triade allein.
 
-Die physikalische Lesart: Zwei gleichphasige Module wirken wie ein
-einzelnes mit doppelter Masse. Die Kontaktkraft folgt dann im
-Wesentlichen einem Profil mit langer Haltephase und kurzer, hoher
-Spitze --- rechtsschief. Erst wenn alle drei Module gegeneinander
-versetzt sind, kann sich die Spitze über den Zyklus verteilen und die
-Verteilung nach links kippen.
+\paragraph{Gegenprobe mit einem einzelnen Modul.}
+Frühere Fassungen lasen den Rasterbefund so: Zwei gleichphasige Module
+wirkten wie ein einzelnes mit doppelter Masse, und ein Profil mit langer
+Haltephase und kurzer, hoher Spitze sei rechtsschief. Das trifft nur auf
+starrer Auflage zu. Beim Referenzparametersatz liegt die zweite
+Harmonische auf der Kontaktresonanz
+(Anhang~\ref{sec:anh-kontaktmodell}), und die Auflage trägt
+$\arg(\tilde{T}_1^{2}\tilde{T}_2^{*}) = +82^\circ$ zur Triadenphase bei
+--- $8^\circ$ vor dem Vorzeichenwechsel. Ein einzelnes Modul ist im
+Dauerkontakt entsprechend nur schwach rechtsschief, $\gamma_1 = +0{,}14$;
+die Triade aus erster und zweiter Harmonischer liefert dort $61\,\%$ des
+dritten Moments. Bei festem $\zeta$ ist ein einzelnes Modul im
+Dauerkontakt zwischen $3f/f_n = 1{,}561$ und $2{,}669$ sowie oberhalb von
+$3{,}280$ linksschief (geprüft bis $3f/f_n = 8$), bei $10\,\mathrm{Hz}$
+also unter anderem für $3\,240 < k < 9\,480\,\mathrm{N/m}$; bei
+$k = 10^{4}\,\mathrm{N/m}$ genügt dafür ein Dämpfungsgrad unter
+$0{,}056$. Die Näherung aus erster und zweiter Harmonischer allein setzt
+die erste Grenze bei $1{,}542$; die übrigen Triaden verschieben sie wenig.
 
-Die Vorhersage gilt nicht für beliebig weichen Kontakt. Nach
-Abschnitt~\ref{sec:sens-k} hält sie in den geprüften Stichproben für
-$3f/f_n \lesssim 2{,}8$ und bricht, sobald die Anregung oberhalb der
-Kontaktresonanz liegt und der Kontakt die Profilform nur noch gefiltert
-überträgt. Sie ist damit eine Aussage über das Zusammenspiel
-von Profil und Kontaktdynamik, nicht über das Profil allein.
+Tabelle~\ref{tab:gegenprobe} verfolgt ein einzelnes Modul mit wachsendem
+Hub durch den Liftoff-Bereich. Beim Referenzparametersatz bleibt die
+Schiefe positiv, erreicht bei $40\,\%$ des synchronen Hubs aber
+$-0{,}006$. Bei $k = 6\,944\,\mathrm{N/m}$ und gleichem $\zeta$
+($3f/f_n = 1{,}82$) ist schon ein Modul mit Referenzhub linksschief,
+$\gamma_1 = -0{,}38$ bei $\lambda = 9\,\%$. Dort wird auch die
+Zweiergruppe $(0^\circ, 180^\circ)$ bei vollem Hub negativ,
+$\gamma_1 = -0{,}21$ bei $\lambda = 27\,\%$, und $(0^\circ, 190^\circ)$
+ergibt $-0{,}31$; beide Werte ändern sich bei halbiertem Zeitschritt
+nicht. Das ist eine Konfiguration mit gleichphasigem Modulpaar und
+negativer Schiefe innerhalb des Bereichs, für den frühere Fassungen die
+Regel als gültig ausgewiesen hatten.
 
-Die Vorhersage setzt das asymmetrische Bahnprofil voraus. Mit
-sinusförmigem Profil ist die Kontaktkraft unterhalb der Liftoff-Schwelle
-eine reine Sinusschwingung um $Mg$ und damit symmetrisch verteilt,
-$\gamma_1 = 0$; negative Schiefe tritt dann nirgends auf
-(Abschnitt~\ref{sec:sinus-sweep}). Die Vorhersage ist also zugleich
-eine Aussage über die Profilasymmetrie: Sie ist nur mit einem Antrieb
-prüfbar, der diese Asymmetrie erzeugt.
+\begin{table}[htbp]
+  \centering
+  \begin{tabular}{lrrrr}
+    \hline
+    & \multicolumn{2}{c}{$k = 10^{4}\,\mathrm{N/m}$} & \multicolumn{2}{c}{$k = 6\,944\,\mathrm{N/m}$} \\
+    & \multicolumn{2}{c}{$3f/f_n = 1{,}52$} & \multicolumn{2}{c}{$3f/f_n = 1{,}82$} \\
+    Hubfaktor $s$ & $\gamma_1$ & $\lambda$ / \% & $\gamma_1$ & $\lambda$ / \% \\
+    \hline
+    $0{,}25$             & $+0{,}143$ & $0{,}0$  & $-0{,}398$ & $0{,}0$  \\
+    $1/3$, ein Modul     & $+0{,}090$ & $17{,}9$ & $-0{,}384$ & $9{,}0$  \\
+    $0{,}40$             & $-0{,}006$ & $23{,}8$ & $-0{,}210$ & $21{,}1$ \\
+    $0{,}50$             & $+0{,}491$ & $25{,}8$ & $+1{,}336$ & $69{,}2$ \\
+    $0{,}60$             & $+1{,}659$ & $75{,}1$ & $+1{,}363$ & $69{,}8$ \\
+    $1$, synchron        & $+1{,}705$ & $75{,}8$ & $+1{,}422$ & $71{,}0$ \\
+    \hline
+  \end{tabular}
+  \caption{Einzelnes Modul mit wachsendem Hub, $\zeta = 0{,}099$.
+  $s$ ist die Bahnbeschleunigung, bezogen auf die synchrone Anregung
+  aller drei Module: $s = 1/3$ entspricht einem Modul mit Referenzhub,
+  $s = 1$ dem synchronen Fall. Festschritt-RK4 mit
+  $\Delta t = 5\cdot10^{-5}\,\mathrm{s}$, $20\,\mathrm{s}$ simuliert,
+  ausgewertet die letzten $4\,\mathrm{s}$. Bis $s = 0{,}25$ besteht
+  Dauerkontakt; dort ist $\gamma_1$ vom Hub unabhängig.}
+  \label{tab:gegenprobe}
+\end{table}
 
-Die Vorhersage ist mit drei Messungen prüfbar: einer synchronen
-Konfiguration, einer Zweiergruppe und einer vollständig dephasierten. Sie
-ist widerlegt, wenn eine Zweiergruppe negative Schiefe zeigt, oder wenn
-keine der vom Modell als negativ ausgewiesenen Konfigurationen in der
-Messung negativ ausfällt. Sie erfordert weder den vollständigen Sweep
-noch eine Nachweisschwelle im Sinne des folgenden Abschnitts, da sie
-ein Vorzeichen betrifft und keinen Betrag.
+\paragraph{Folgerung.}
+Das Vorzeichenmuster des Referenzrasters folgt aus zwei Umständen, die
+mit Dephasierung als solcher nichts zu tun haben: Gleichphasige
+Konfigurationen heben bei vollem Hub ab, und im Dauerkontakt folgt ihr
+Vorzeichen einem Kontaktanteil, der beim Referenzparametersatz knapp auf
+der rechtsschiefen Seite liegt. Das Vorzeichen der Schiefe ist damit eine
+von Kontaktsteifigkeit und -dämpfung abhängige Eigenschaft der
+Wellenform und kein Indikator für Mehrmodul-Dephasierung. Beim
+Referenzparametersatz tritt negative Schiefe im Raster nur bei echter
+Dephasierung auf; gegenüber einer Änderung der Kontaktdynamik um wenige
+Prozent ist diese Zuordnung nicht robust. Die früher genannte Gültigkeit
+für $3f/f_n \lesssim 2{,}8$ beruhte auf Stichproben, die das Band
+übersprangen, in dem die Regel scheitert (Abschnitt~\ref{sec:sens-k}).
+
+\paragraph{Prüfbarkeit.}
+Prüfbar bleibt eine Vorhersage, die an die gemessene Kontaktübertragung
+gebunden ist. Läufe mit je einem bewegten Modul liefern die Harmonischen
+$\hat{N}_j^{(1)}$. Solange der Kontakt linear überträgt, folgt daraus mit
+$\hat{N}_j = \Phi_j\, \hat{N}_j^{(1)}$ und
+Gleichung~\eqref{eq:triaden} das Vorzeichen der Schiefe jeder
+Kombinationskonfiguration im Dauerkontakt, ohne $k$ und $c$ zu kennen.
+Der Entwurf der Präregistrierung v2 vom 25.~September 2026 geht diesen
+Weg: Hypothese H4 prüft das gemessene Vorzeichen gegen die
+Überlagerungsvorhersage. Trennscharf ist $(0^\circ, 180^\circ)$, weil
+dort der Konfigurationsanteil der Triade aus erster und zweiter
+Harmonischer verschwindet: Im Dauerkontakt ergibt sich
+$\gamma_1 = +0{,}04$ bei $k = 10^{4}$ und $-0{,}39$ bei
+$6\,944\,\mathrm{N/m}$, bei vollem Hub mit Abheben $+0{,}71$ und
+$-0{,}21$. Ein einzelnes gemessenes Vorzeichen ohne gemessene
+Kontaktübertragung erlaubt keinen Schluss auf die Phasenlage. Die
+Vorhersage setzt weiterhin ein Bahnprofil mit mehreren Harmonischen
+voraus; mit sinusförmigem Antrieb ist sie gegenstandslos.
 
 \section{Nachweisschwelle}
 \label{sec:threshold}
@@ -1990,6 +2117,7 @@ Wellenformfunktionale in einen schmalen Bereich zusammendrücken und die
 Unterscheidung der Regime verhindern.
 
 \section{Kontaktschnittstelle}
+\label{sec:kontaktschnittstelle}
 
 Als einseitiger Kontakt dient ein weiches Elastomerpad oder eine
 kalibrierte Feder mit bekannter Steifigkeit $k$ und Dämpfung $c$. Beide
@@ -1998,7 +2126,9 @@ $f_n = \sqrt{k/M}/(2\pi)$, und diese bestimmt zweierlei: die Steilheit
 der Kraftflanke beim Wiedereintritt in den Kontakt und das Verhältnis
 $3f/f_n$, das nach Anhang~\ref{app:simulation} darüber entscheidet, ob
 das System quasistatisch arbeitet. Bei den Simulationswerten ist
-$f_n \approx 19{,}7\,\mathrm{Hz}$ und $3f/f_n \approx 1{,}5$.
+$f_n \approx 19{,}7\,\mathrm{Hz}$ und $3f/f_n \approx 1{,}5$; damit liegt die
+zweite Harmonische der Anregung auf der Kontakteigenfrequenz,
+$2f/f_n = 1{,}013$ (Anhang~\ref{sec:anh-kontaktmodell}).
 
 $k$ und $c$ sind vor der Kampagne durch statische Belastung und
 Ausschwingversuch zu bestimmen und im Parametersatz festzuhalten. Ein
@@ -3764,9 +3894,11 @@ Schwingerreger mit einstellbarer Amplitude äquivalent. Die
 Phasenkonfiguration $(\varphi_2, \varphi_3)$ trägt dann keine
 Information, die nicht in $R$ enthalten wäre; ein Raster über der
 Phasenebene misst dieselbe eindimensionale Kurve vielfach. Die
-Vorhersage zum Vorzeichen der Schiefe nach
-Abschnitt~\ref{sec:vorhersage-schiefe} ist mit diesem Antrieb nicht
-prüfbar, weil der Fall $\gamma_1 < 0$ nicht auftritt. Und die
+Aussagen zum Vorzeichen der Schiefe nach
+Abschnitt~\ref{sec:vorhersage-schiefe} sind mit diesem Antrieb
+gegenstandslos: Im Dauerkontakt gibt es nur eine Harmonische und damit
+keine Triade, $\gamma_1 = 0$, und oberhalb der Schwelle ist $\gamma_1$
+durchweg positiv. Und die
 Anordnung reproduziert im Ergebnis das Experiment von Rigaud und
 Perret-Liaudet \cite{rigaud2003} --- harmonisch angeregter unilateraler
 Kontakt mit variabler Amplitude --- statt die in
@@ -3829,28 +3961,34 @@ dem $19\times19$-Raster ist entsprechend eingeschränkt.
 
 Vier Befunde, in der Reihenfolge ihrer Bedeutung für die Auslegung.
 
-\paragraph{Die Vorzeichenregel hat einen Gültigkeitsbereich.}
-Für $k \geq 3\cdot10^{3}\,\mathrm{N/m}$, also $3f/f_n \leq 2{,}8$, tritt
-negative Schiefe in keiner Konfiguration mit gleichphasigem Modulpaar
-auf; die Vorhersage aus Abschnitt~\ref{sec:vorhersage-schiefe} hält über
-anderthalb Dekaden. Bei $k = 10^{3}\,\mathrm{N/m}$ bricht sie: 16 der 34
-Konfigurationen mit negativer Schiefe enthalten ein synchrones Paar. Der
-Grund ist die Lage der Anregung zur Kontaktresonanz. Bei
-$k = 10^{3}\,\mathrm{N/m}$ liegt $f_n = 6{,}2\,\mathrm{Hz}$ unterhalb
-der Anregungsfrequenz; der Kontakt arbeitet im Isolationsbereich mit
-einer Transmissibilität von rund $0{,}66$. Der Rahmen bewegt sich dann
-weitgehend mit den inneren Massen mit, und der Kontakt überträgt nur
-einen gedämpften, zu höheren Harmonischen hin zunehmend abgeflachten
-Anteil der Trägheitskraft. Die Kontaktkraft variiert entsprechend wenig
---- $N_{\max}$ erreicht nur das $1{,}9$-fache der Basislinie ---, ihre
-Schiefe bleibt klein, $|\gamma_1| \leq 0{,}33$, und deren Vorzeichen ist
-nicht mehr an die Phasenpaarung gebunden. Im entgegengesetzten Grenzfall
-des steifen Kontakts, $3f/f_n \to 0$, überträgt die Unterlage die
-Trägheitskraft nahezu unverzögert, $N(t) \approx Mg - (M/3)\sum
-\ddot{z}_{\mathrm{egg}}$, und dort hält die Regel. Die Vorzeichenregel
-ist also keine Eigenschaft des Profils allein, sondern des Zusammenspiels
-von Profil und Kontaktdynamik --- und sie gilt nur, wo der Kontakt die
-Profilform überträgt statt sie zu filtern.
+\paragraph{Die Stichprobe in $k$ überspringt ein Vorzeichenband.}
+Bei $k = 3\cdot10^{3}$ bis $10^{5}\,\mathrm{N/m}$ tritt negative Schiefe
+in keiner Konfiguration mit gleichphasigem Modulpaar auf, bei
+$k = 10^{3}\,\mathrm{N/m}$ in 16 von 34. Frühere Fassungen folgerten
+daraus einen Gültigkeitsbereich $3f/f_n \leq 2{,}8$ über anderthalb
+Dekaden. Das trägt nicht. Die fünf Steifigkeiten liegen bei
+$3f/f_n = 4{,}81$; $2{,}77$; $1{,}52$; $0{,}88$ und $0{,}48$. Ein
+einzelnes Modul ist im Dauerkontakt bei festem $\zeta$ zwischen
+$3f/f_n = 1{,}561$ und $2{,}669$ sowie oberhalb von $3{,}280$
+linksschief, sonst rechtsschief (Abschnitt~\ref{sec:vorhersage-schiefe}).
+Vier der fünf Stichproben liegen in rechtsschiefen Bändern, zwei davon
+knapp: $1{,}52$ unmittelbar unter der Grenze bei $1{,}561$, $2{,}77$ im
+schmalen Band zwischen $2{,}669$ und $3{,}280$. Die einzige Stichprobe im
+linksschiefen Bereich ist $k = 10^{3}\,\mathrm{N/m}$ --- die, an der die
+Regel brach. Eine zusätzliche Stichprobe im Band,
+$k = 6\,944\,\mathrm{N/m}$ bei $3f/f_n = 1{,}82$, ergibt an der
+Zweiergruppe $(0^\circ, 180^\circ)$ bei vollem Hub $\gamma_1 = -0{,}21$.
+Bei $k = 10^{3}\,\mathrm{N/m}$ kommt der Isolationsbereich hinzu:
+$f_n = 6{,}2\,\mathrm{Hz}$ liegt unterhalb der Anregungsfrequenz, die
+Transmissibilität beträgt rund $0{,}66$, der Rahmen bewegt sich
+weitgehend mit den inneren Massen mit, und die Kontaktkraft variiert
+wenig --- $N_{\max}$ erreicht nur das $1{,}9$-fache der Basislinie,
+$|\gamma_1| \leq 0{,}33$. Im Grenzfall des steifen Kontakts,
+$3f/f_n \to 0$, überträgt die Unterlage die Trägheitskraft nahezu
+unverzögert, $N(t) \approx Mg + (M/3)\sum \ddot{z}_{\mathrm{egg}}$ nach
+Gleichung~\eqref{eq:bewegung}, und ein einzelnes Modul ist rechtsschief.
+Das Vorzeichen der Schiefe ist also keine Eigenschaft des Profils allein,
+sondern von Profil, Kontaktübertragung und Phasenlage zusammen.
 
 \paragraph{Die Spitzenkraft wächst steil mit der Steifigkeit.}
 $\max N_{\max}/Mg$ steigt von $1{,}9$ bei $k = 10^{3}$ auf $26$ bei
@@ -3868,31 +4006,40 @@ Konfigurationen ab, negative Schiefe tritt nirgends auf, und die
 Spannweite der Schiefe ist die kleinste der Serie. Die Resonanz
 verwischt die Regime. Ein Aufbau, dessen Kontakteigenfrequenz nahe $f$
 liegt, ist für die Fragestellung ungeeignet, unabhängig von seiner
-sonstigen Qualität.
+sonstigen Qualität. Das gilt für die Resonanz der Grundfrequenz. Der
+Basisparametersatz liegt auf der Resonanz der zweiten Harmonischen,
+$2f/f_n = 1{,}013$; dort bleibt die Struktur erhalten, wird aber von
+dieser einen Harmonischen geprägt (Anhang~\ref{sec:anh-kontaktmodell}).
 
 \paragraph{Steifer Kontakt schärft die Regime.}
 Mit wachsendem $k$ wird die negative Schiefe ausgeprägter --- von
 $-0{,}13$ bei $10^{4}$ auf $-0{,}95$ bei $10^{5}$ --- und die
-liftoff-freie Insel um die triphasische Konfiguration größer. Das
-Signal, das die Vorzeichenregel prüft, wird also mit der Steifigkeit
-deutlicher. Der Preis ist die Spitzenkraft, und die Flanke: Bandbreite
+liftoff-freie Insel um die triphasische Konfiguration größer. Die
+negative Schiefe dephasierter Konfigurationen wird also mit der
+Steifigkeit deutlicher. Der Preis ist die Spitzenkraft, und die Flanke: Bandbreite
 und Abtastrate skalieren nach Abschnitt~\ref{sec:bandbreite} mit $f_n$.
 
-\paragraph{Anhaltspunkte für ein Auslegungsfenster.}
-Aus den vier Befunden ergeben sich Anhaltspunkte für ein Fenster in
-$3f/f_n$ --- Anhaltspunkte, weil fünf Steifigkeiten auf einem
-$7\times7$-Raster kein durchgehend abgesichertes Fenster in Steifigkeit,
-Dämpfung und Phasenlage begründen. Oberhalb von etwa
-$3$ ist der Kontakt zu weich: Die Anregung liegt über der
-Kontaktresonanz, der Kontakt filtert die Profilform, wenig Liftoff,
-Schiefe klein und ohne Vorzeichenbindung, Regel ungültig. Um $3f/f_n \approx 3$ liegt die
-Resonanz, die alles verwischt. Unterhalb von etwa $1$ ist der Kontakt
-steif: Regel robust, Signal deutlich, aber Spitzenkraft und Bandbreite
-teuer. Der Basisparametersatz mit $3f/f_n = 1{,}5$ liegt im Fenster;
-$k = 3\cdot10^{4}\,\mathrm{N/m}$ mit $3f/f_n = 0{,}88$ würde das
-Vorzeichensignal vervierfachen und die Spitzenkraft verdoppeln. Diese
-Abwägung ist vor der Wahl des Kontaktelements zu treffen, und sie ist
-mit den Zahlen der Tabelle~\ref{tab:sens-k} treffbar.
+\paragraph{Resonanzlinien statt Fenster.}
+Die $j$-te Harmonische der Anregung trifft die Kontaktresonanz bei
+$3f/f_n = 3/j$: bei $3$ die Grundfrequenz, bei $1{,}5$ die zweite, bei
+$1$ die dritte Harmonische. Der Bereich $1 \lesssim 3f/f_n \lesssim 3$,
+den frühere Fassungen als Auslegungsfenster führten, wird von den Linien
+$j = 3$ und $j = 1$ begrenzt und von der Linie $j = 2$ geteilt; der
+Basisparametersatz liegt auf ihr. Welche Linie wirkt, hängt von der
+Phasenlage ab: Am Triphasik-Punkt bleiben nur Vielfache der dritten
+Harmonischen, dort ist $3f/f_n = 1$ kritisch; abseits davon wirken vor
+allem die Linien $j = 1$ und $j = 2$. Oberhalb von etwa $3$ filtert der
+Kontakt die Profilform, unterhalb von etwa $1$ schärfen sich die Regime
+zum Preis von Spitzenkraft und Bandbreite.
+$k = 3\cdot10^{4}\,\mathrm{N/m}$ mit $3f/f_n = 0{,}88$ würde die negative
+Schiefe dephasierter Konfigurationen vervierfachen und die Spitzenkraft
+verdoppeln, liegt aber nahe der Linie $j = 3$: $N_{\min}$ am
+Triphasik-Punkt fällt dort auf rund $1{,}5\,\mathrm{N}$, gegenüber
+$5{,}33\,\mathrm{N}$ bei $k = 10^{4}\,\mathrm{N/m}$. Fünf Steifigkeiten
+auf einem $7\times7$-Raster begründen kein abgesichertes Fenster. Die
+Abwägung ist nach Messung von $k$ und $c$ mit den Zahlen der
+Tabelle~\ref{tab:sens-k} und dem Abstand zu den Resonanzlinien zu
+treffen.
 
 \subsection*{Dämpfung}
 
@@ -3932,17 +4079,17 @@ null. Die liftoff-freie Insel um die triphasische Konfiguration setzt
 also eine Mindestdämpfung voraus; ein sehr schwach gedämpfter Kontakt
 prellt sie weg.
 
-\paragraph{Die Vorzeichenregel hat auch in der Dämpfung einen
-Gültigkeitsbereich.} Bei $\zeta = 0{,}20$ zeigt die Zweiergruppe
-$\gamma_1 = -0{,}07$: eine Konfiguration mit gleichphasigem Modulpaar
-und schwach negativer Schiefe, im Widerspruch zur Regel. Die Verletzung
-ist klein, aber sie ist eine. An den vier geprüften Punkten hält die
-Regel für $\zeta \lesssim 0{,}1$ und darüber nicht; für sämtliche
-Phasenlagen ist sie damit nicht belegt. Zusammen mit dem Befund zur
-Steifigkeit gilt: Die Vorhersage aus
-Abschnitt~\ref{sec:vorhersage-schiefe} ist nach den Stichproben an
-einen Bereich in $(k, \zeta)$ gebunden, dessen Grenzen vor der Kampagne
-durch Ausschwingversuch und eine dichtere Abtastung zu bestimmen sind.
+\paragraph{Auch die Dämpfung verschiebt das Vorzeichen.} Bei
+$\zeta = 0{,}20$ zeigt die Zweiergruppe $\gamma_1 = -0{,}07$: eine
+Konfiguration mit gleichphasigem Modulpaar und schwach negativer
+Schiefe. Im Dauerkontakt ist ein einzelnes Modul bei
+$k = 10^{4}\,\mathrm{N/m}$ unterhalb von $\zeta = 0{,}056$ linksschief und
+darüber rechtsschief (Abschnitt~\ref{sec:vorhersage-schiefe}); der
+Referenzwert $\zeta = 0{,}10$ liegt knapp doppelt so hoch. Das
+Vorzeichen der Schiefe hängt damit an $k$ und $\zeta$ zugleich. Beide
+Größen sind vor der Kampagne durch statische Belastung und
+Ausschwingversuch zu bestimmen und gehen in die Vorhersage ein; als
+Gültigkeitsgrenzen einer Regel sind sie nicht zu behandeln.
 
 \paragraph{Die Spitzenkraft hängt nicht monoton von der Dämpfung ab.}
 Im synchronen Fall erreicht $N_{\max}$ bei $\zeta = 0{,}05$ das
@@ -4606,13 +4753,16 @@ Liftoff-Anteil und Asymmetrieverhältnis korrelieren jedoch mit
 $r \geq 0{,}93$; nur die minimale Kontaktkraft trägt eigenständige
 Information.
 
-\paragraph{Das Vorzeichen der Schiefe ist eine prüfbare Vorhersage.}
-Negative Schiefe tritt nur auf, wenn kein
-Modulpaar gleichphasig läuft. Die Regel hält in den geprüften
-Stichproben für $3f/f_n \lesssim 2{,}8$ und $\zeta \lesssim 0{,}1$ und
-bricht, sobald der Kontakt die Profilform filtert statt sie zu
-übertragen. Sie ist mit drei Messungen prüfbar und benötigt keine
-Nachweisschwelle.
+\paragraph{Das Vorzeichen der Schiefe ist eine Kontakteigenschaft.} Es
+zeigt keine Mehrmodul-Dephasierung an, auch wenn im Referenzraster
+negative Schiefe nur ohne gleichphasiges Modulpaar auftritt. Die
+Gegenprobe mit einem einzelnen Modul zeigt, warum: Gleichphasige Konfigurationen heben bei vollem Hub ab, und
+im Dauerkontakt folgt ihr Vorzeichen der Kontaktübertragung, die beim
+Referenzparametersatz knapp auf der rechtsschiefen Seite liegt. Schon bei
+gut $5\,\%$ geringerer Steifigkeit ist ein einzelnes Modul im
+Dauerkontakt linksschief, und bei $k = 6\,944\,\mathrm{N/m}$ wird eine
+Zweiergruppe bei vollem Hub negativ. Prüfbar bleibt eine Vorhersage, die
+aus gemessenen Einzelmodul-Harmonischen durch Überlagerung gewonnen wird.
 
 \paragraph{Die Profilasymmetrie ist die Quelle der Phasenabhängigkeit.}
 Mit sinusförmigem Antrieb kollabiert die Phasenkarte auf die
@@ -4621,11 +4771,14 @@ das Dreimodulsystem wird einem einzelnen Schwingerreger äquivalent. Für
 den Aufbau ist ein Antrieb mit asymmetrischem Profil zwingend; Exzenter
 und Kurbel bei konstanter Drehzahl scheiden aus.
 
-\paragraph{Die Kontaktsteifigkeit gibt Anhaltspunkte für ein
-Auslegungsfenster.} Zu weich filtert der Kontakt die Profilform, nahe
-der Resonanz verwischen die Regime, zu steif wachsen Spitzenkraft und
-Bandbreite. Der Basisparametersatz mit $3f/f_n = 1{,}5$ liegt nach den
-Stichproben im Fenster; abgesichert ist es nicht.
+\paragraph{Die Kontaktsteifigkeit wirkt über Resonanzlinien.} Die
+$j$-te Harmonische trifft die Kontaktresonanz bei $3f/f_n = 3/j$. Der
+Basisparametersatz liegt auf der Linie der zweiten Harmonischen; sie
+prägt Zeltsteigung, liftoff-freien Anteil und Vorzeichen der Schiefe. Zu
+weich filtert der Kontakt die Profilform, an der Linie der Grundfrequenz
+verwischen die Regime, zu steif wachsen Spitzenkraft und Bandbreite. Ein
+zusammenhängendes Auslegungsfenster $1 \lesssim 3f/f_n \lesssim 3$ gibt
+es nicht.
 
 \paragraph{Drei Zahlen binden die Messtechnik.} Die Nennlast ist am
 Spitzenwert zu bemessen: $20\,\mathrm{kg}$ bei ungemessener Dämpfung,
@@ -4662,6 +4815,7 @@ Artefaktanalyse nicht.
 Dieser Beitrag bleibt unabhängig vom Ausgang des Experiments gültig.
 
 \section{Weiterführende Arbeiten}
+\label{sec:weiterfuehrend}
 
 Die offenen Punkte sind konkret und in ihrer Reihenfolge bestimmt.
 
@@ -4671,8 +4825,9 @@ Die offenen Punkte sind konkret und in ihrer Reihenfolge bestimmt.
       die Fragestellung überhaupt trägt. Die Abweichung des real
       erzeugten Profils vom Modellprofil ist zu vermessen und in die
       Simulation zurückzuführen.
-\item \textbf{Wahl des Kontaktelements.} Innerhalb des Fensters
-      $1 \lesssim 3f/f_n \lesssim 3$ ist die Steifigkeit gegen
+\item \textbf{Wahl des Kontaktelements.} Mit Abstand zu den
+      Resonanzlinien $3f/f_n = 3/j$, $j = 1, 2, 3$
+      (Abschnitt~\ref{sec:sens-k}), ist die Steifigkeit gegen
       Spitzenkraft und Bandbreite abzuwägen; $k$ und $c$ sind vor der
       Kampagne durch statische Belastung und Ausschwingversuch zu
       bestimmen.
@@ -4682,9 +4837,13 @@ Die offenen Punkte sind konkret und in ihrer Reihenfolge bestimmt.
       nicht von unzureichender Auflösung unterscheidbar ist.
 \item \textbf{Leerlauf mit blockierter Aktuierung.} Er trennt die
       Artefaktklasse, die die Kontrollgröße nicht erfasst.
-\item \textbf{Vorzeichenprüfung.} Drei Konfigurationen --- synchron,
-      Zweiergruppe, dephasiert --- prüfen die Vorhersage aus
-      Abschnitt~\ref{sec:vorhersage-schiefe}, bevor der Sweep beginnt.
+\item \textbf{Einzelmodulläufe vor dem Sweep.} Läufe mit je einem
+      bewegten Modul liefern dessen Harmonische und damit die
+      Kontaktübertragung. Aus ihnen wird das Vorzeichen der Schiefe für
+      Kombinationskonfigurationen durch Überlagerung vorhergesagt, im
+      Dauerkontakt nach Gleichung~\eqref{eq:triaden}, und geprüft ---
+      etwa an $(0^\circ, 180^\circ)$, deren Vorzeichen zwischen
+      $k = 10^{4}$ und $6\,944\,\mathrm{N/m}$ wechselt.
 \item \textbf{Dynamische Kalibrierung.} Die Übertragung der statischen
       Kennlinie auf einen zyklisch abhebenden Kontakt bleibt ungelöst.
       Bis dahin sind $N_{\max}$ und $A$ nur relativ auslegbar.
@@ -4839,6 +4998,7 @@ Abschnitt~\ref{sec:track1-sim} zeigt den Abfall mit der Fensterlänge,
 $T_w^{-0{,}945}$.
 
 \section{Liftoff-freie Konfigurationen}
+\label{sec:anh-liftoff-frei}
 
 Zwölf der $361$ Rasterpunkte weisen keinen Kontaktverlust auf.
 
@@ -4875,8 +5035,13 @@ $\varphi_2 \in [94{,}7^\circ,\, 265{,}3^\circ]$.
 
 Bemerkenswert ist das Vorzeichen der Schiefe: In allen zwölf Fällen ist
 $\gamma_1 < 0$, während der Median über das gesamte Raster bei $+0{,}87$
-liegt. Der Übergang vom intermittierenden zum dauernden Kontakt kehrt die
-Schiefe der Kontaktkraftverteilung um.
+liegt. Im Raster fallen Dauerkontakt und negative Schiefe also zusammen.
+Eine allgemeine Umkehrregel folgt daraus nicht: Ein einzelnes Modul ist
+im Dauerkontakt beim Referenzparametersatz rechtsschief,
+$\gamma_1 = +0{,}14$ (Abschnitt~\ref{sec:vorhersage-schiefe}). Die zwölf
+Punkte sind zugleich genau die Rasterpunkte, an denen die lineare
+Kontaktlösung existiert; keiner liegt in einer der bistabilen
+Satelliteninseln (Anhang~\ref{sec:anh-grenzen}).
 
 \section{Korrelationsstruktur der Zielfunktionale}
 \label{sec:korrelation}
@@ -5002,6 +5167,7 @@ langsam nach oben, schnell nach unten --- ist damit vollständig durch
 $\beta_h$ bestimmt.
 
 \section{Kontaktmodell}
+\label{sec:anh-kontaktmodell}
 
 Der Kontakt zur Unterlage wird als unilaterale Feder mit viskoser
 Dämpfung modelliert, bei null abgeschnitten:
@@ -5025,14 +5191,39 @@ Das Verhältnis $3f/f_n$ bestimmt, wie nah das System am quasistatischen
 Grenzfall liegt. Für $3f/f_n \ll 1$ ist der Kontakt steif gegenüber der
 Anregung: Die Unterlage überträgt die Trägheitskraft der inneren Massen
 nahezu unverzögert, und die Kontaktkraft folgt dem Profil,
-$N(t) \approx Mg - (M/3)\sum \ddot{z}_{\mathrm{egg}}$. Für
-$3f/f_n \gg 1$ liegt die Anregung oberhalb der Kontaktresonanz; der
-Rahmen bewegt sich mit den Massen, und der Kontakt überträgt nur einen
-gedämpften Anteil. Bei den hier verwendeten Werten ist
-$3f/f_n \approx 1{,}5$, das System arbeitet also in keinem der beiden
-Grenzfälle, sondern im Übergangsbereich nahe der Resonanz des
-Kontakts mit der dritten Harmonischen. Das ist bei der Übertragung auf die Auslegung
-der Apparatur zu beachten.
+$N(t) \approx Mg + (M/3)\sum \ddot{z}_{\mathrm{egg}}$ nach
+Gleichung~\eqref{eq:bewegung}. Für $3f/f_n \gg 1$ liegt die Anregung
+oberhalb der Kontaktresonanz; der Rahmen bewegt sich mit den Massen, und
+der Kontakt überträgt nur einen gedämpften Anteil. Bei den hier
+verwendeten Werten ist $3f/f_n \approx 1{,}5$, das System arbeitet also
+in keinem der beiden Grenzfälle.
+
+Maßgeblich ist die Lage der einzelnen Harmonischen. Im Dauerkontakt
+überträgt die Auflage die $j$-te Harmonische mit der komplexen
+Transmissibilität
+\begin{equation}
+  \tilde{T}_j = \frac{1 + 2i\zeta r_j}{1 - r_j^{2} + 2i\zeta r_j},
+  \qquad r_j = \frac{jf}{f_n},
+  \label{eq:transmissibilitaet-j}
+\end{equation}
+deren Betrag $T_j = |\tilde{T}_j|$ Gleichung~\eqref{eq:transmissibilitaet}
+mit $r = r_j$ entspricht. Die $j$-te Harmonische trifft die Resonanz bei
+$3f/f_n = 3/j$. Beim Referenzparametersatz liegt die zweite Harmonische
+auf der Resonanz, $2f/f_n = 1{,}013$ und $T_2 = 5{,}03$, gegenüber
+$T_1 = 1{,}34$ und $T_3 = 0{,}78$; die dritte liegt $52\,\%$ oberhalb.
+Frühere Fassungen ordneten die Resonanz an dieser Stelle der dritten
+Harmonischen zu; das war falsch. Am Triphasik-Punkt heben sich die
+Harmonischen auf, deren Ordnung kein Vielfaches von drei ist; dort ist
+die Linie $j = 3$ maßgeblich, und bei festem $\zeta$ hebt der
+Triphasik-Punkt selbst für $k = 21\,500$ bis $26\,250\,\mathrm{N/m}$ ab.
+Abseits davon prägt die zweite Harmonische die Phasenkarte: Ohne ihre
+Resonanzüberhöhung, $\tilde{T}_2 := 1$ gesetzt, wären die
+$2^\circ$-Sekanten der Zeltkurve entlang $\varphi_3 = 240^\circ$ zum
+Triphasik-Punkt statt $0{,}212$ und $0{,}195\,\mathrm{N/^\circ}$ nur
+$0{,}046$ und $0{,}032\,\mathrm{N/^\circ}$, und der liftoff-freie Anteil
+der Phasenebene im $1^\circ$-Raster stiege von $4{,}24$ auf $35{,}3\,\%$
+(starre Auflage: $76{,}6\,\%$). Das ist bei der Übertragung auf die
+Auslegung der Apparatur zu beachten.
 
 \section{Numerik}
 \label{sec:anh-numerik}
@@ -5090,6 +5281,7 @@ Schärfe. Diese Übereinstimmung stützt die Deutung, dass beide Residuen
 denselben numerischen Ursprung haben.
 
 \section{Bekannte Grenzen des Modells}
+\label{sec:anh-grenzen}
 
 \begin{itemize}
 \item Der Kontakt ist linear-elastisch mit viskoser Dämpfung. Hertz'sche
@@ -5105,6 +5297,19 @@ denselben numerischen Ursprung haben.
 \item Der Simulationsparametersatz weicht von den Auslegungswerten der
       geplanten Apparatur ab; siehe den Hinweis in
       Kapitel~\ref{chap:simulation}.
+\item Der eingeschwungene Zustand ist nicht überall eindeutig. In sechs
+      kleinen Satelliteninseln der Phasenebene, zusammen $0{,}34\,\%$ des
+      $1^\circ$-Rasters, koexistieren ein Dauerkontaktorbit und ein
+      springender Zustand: Bei $(35^\circ, 116^\circ)$ liefert der Start
+      aus dem statischen Gleichgewicht $\lambda = 75{,}82\,\%$, der Start
+      auf dem linearen Kontaktorbit $\lambda = 0$. Der Kontaktorbit ist
+      als Lösung des gedämpften linearen Systems lokal stabil; welcher
+      Zustand sich einstellt, hängt dort vom Anfangszustand ab. In den
+      beiden Hauptgebieten um den Triphasik-Punkt kehrten Stichproben mit
+      einer Anfangsgeschwindigkeit von $3\,\mathrm{m/s}$ in den
+      Dauerkontakt zurück. Kein Punkt des $19\times19$-Rasters liegt in
+      einer Insel; die Rasterwerte gelten für den Start aus dem
+      statischen Gleichgewicht (Tabelle~\ref{tab:numerik}).
 \end{itemize}
 
 

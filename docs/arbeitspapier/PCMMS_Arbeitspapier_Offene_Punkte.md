@@ -6,7 +6,7 @@ Historischer Ausgangsstand: 05.09.2026 · Quelle: PCMMS_Dissertation_v2.tex, **9
 
 - [x] 1 Sinus-Profil-Sweep → Kap. 11, Phasenkarte kollabiert auf R; Nocke zwingend
 - [x] 2 Sensitivität k (5 Steifigkeiten, 7×7) und ζ (5 Werte, 4 Regimepunkte)
-      → Auslegungsfenster 1 ≲ 3f/f_n ≲ 3, ζ ≲ 0,1; Vorzeichenregel hat Gültigkeitsbereich
+      → ~~Auslegungsfenster 1 ≲ 3f/f_n ≲ 3, ζ ≲ 0,1; Vorzeichenregel hat Gültigkeitsbereich~~ mit v2.4 zurückgezogen
 - [x] 3 Symbolverzeichnis: 23 Einträge ergänzt
 - [x] 4 Fazit: sechs Befunde, sieben konkrete weiterführende Arbeiten
 - [x] 5 Protokoll angeglichen: ≥100 Zyklen, Konvergenznachweis, drei Pflichtläufe
@@ -31,7 +31,7 @@ Historischer Ausgangsstand: 05.09.2026 · Quelle: PCMMS_Dissertation_v2.tex, **9
 
 12. Laborplan V1: Antrieb mit **asymmetrischem Profil** (Nocke oder programmierbarer Aktor); Exzenter/Kurbel bei konstanter Drehzahl ausgeschlossen (Punkt 18).
 13. Laborplan V1: Wägezelle von 3–5 kg auf **20 kg** bei ungemessener Dämpfung; 10 kg erst nach nachgewiesenem ζ ≥ 0,1 (Punkt 20).
-14. Kontaktelement: k und ζ vor der Kampagne messen; Fenster 1 ≲ 3f/f_n ≲ 3, ζ ≲ 0,1.
+14. Kontaktelement: k und ζ vor der Kampagne messen; ~~Fenster 1 ≲ 3f/f_n ≲ 3, ζ ≲ 0,1~~ Abstand zu den Resonanzlinien 3f/f_n = 3/j (v2.4).
 
 ## Stand des Dokuments
 
@@ -109,3 +109,14 @@ Offen:
 - 34 Befunde der Regimeanalyse (Zeitschrittabhängigkeit an Regimegrenzen, Bistabilität der Satelliteninseln) erst nach Abschluss mit exaktem Ereignislöser aufnehmen.
 
 Aktuelle Ausgabe: 103 Seiten · XeLaTeX/BibTeX · keine unaufgelösten Verweise.
+
+## Stand 26.09.2026 — Arbeitspapier v2.4
+
+- [x] 35 Vorzeichenregel der Schiefe als Mechanismusaussage zurückgezogen; Abschnitt 4.8 neu mit Triadenzerlegung (Gl. 4.15) und Einzelmodul-Gegenprobe (Tab. 4.1). Belege: gegenprobe_2026-09-26/.
+- [x] 36 Zweite statt dritte Harmonische auf der Kontaktresonanz (2f/f_n = 1,013); Auslegungsfenster durch Resonanzlinien 3f/f_n = 3/j ersetzt.
+- [x] 37 Starrgrenzfall: N ≈ Mg + (M/3)Σz̈ (Punkt 16 hatte „−“).
+- [x] 38 Bistabile Satelliteninseln als Modellgrenze (Anhang B.6); kein Rasterpunkt betroffen.
+
+39. Formelverzeichnis v2.7: Symbole j, N̂_j, N̂_j⁽¹⁾, Φ_j, T_j, T̃_j, r_j, s und Gl. 4.15, B.6 aufnehmen.
+40. Abbildung γ₁ des Einzelmoduls über 3f/f_n mit Resonanzlinien erwägen (Daten: gegenprobe_2026-09-26, Abschnitt B).
+41. Nachrechnung nahe der Liftoff-Grenze mit ereignislokalisierendem Löser.
