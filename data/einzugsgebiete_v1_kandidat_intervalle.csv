@@ -1,0 +1,748 @@
+laufart,gesetz,zeta,t0_T,attraktor,dv_von,dv_bis,punkte
+L1,Kelvin-Voigt,0.05,0,K,-1,-0.59375,10
+L1,Kelvin-Voigt,0.05,0,H1,-0.590625,-0.5,5
+L1,Kelvin-Voigt,0.05,0,K,-0.496875,0.43125,24
+L1,Kelvin-Voigt,0.05,0,H1,0.434375,0.509375,6
+L1,Kelvin-Voigt,0.05,0,K,0.5125,0.734375,9
+L1,Kelvin-Voigt,0.05,0,H1,0.7375,0.75,2
+L1,Kelvin-Voigt,0.05,0,K,0.753125,0.990625,11
+L1,Kelvin-Voigt,0.05,0,H1,0.99375,1,2
+L1,Kelvin-Voigt,0.05,0.0625,K,-1,-0.85625,6
+L1,Kelvin-Voigt,0.05,0.0625,H1,-0.853125,-0.840625,4
+L1,Kelvin-Voigt,0.05,0.0625,K,-0.8375,-0.584375,9
+L1,Kelvin-Voigt,0.05,0.0625,H1,-0.58125,-0.4875,5
+L1,Kelvin-Voigt,0.05,0.0625,K,-0.484375,0.415625,23
+L1,Kelvin-Voigt,0.05,0.0625,H1,0.41875,0.5,4
+L1,Kelvin-Voigt,0.05,0.0625,K,0.503125,0.84375,13
+L1,Kelvin-Voigt,0.05,0.0625,H1,0.846875,0.85,2
+L1,Kelvin-Voigt,0.05,0.0625,K,0.853125,1,7
+L1,Kelvin-Voigt,0.05,0.125,K,-1,-0.571875,11
+L1,Kelvin-Voigt,0.05,0.125,H1,-0.56875,-0.484375,6
+L1,Kelvin-Voigt,0.05,0.125,K,-0.48125,0.4125,21
+L1,Kelvin-Voigt,0.05,0.125,H1,0.415625,0.49375,7
+L1,Kelvin-Voigt,0.05,0.125,K,0.496875,1,12
+L1,Kelvin-Voigt,0.05,0.1875,K,-1,-0.55,10
+L1,Kelvin-Voigt,0.05,0.1875,H1,-0.546875,-0.49375,6
+L1,Kelvin-Voigt,0.05,0.1875,K,-0.490625,0.415625,23
+L1,Kelvin-Voigt,0.05,0.1875,H1,0.41875,0.478125,5
+L1,Kelvin-Voigt,0.05,0.1875,K,0.48125,1,13
+L1,Kelvin-Voigt,0.05,0.25,K,-1,-0.95625,4
+L1,Kelvin-Voigt,0.05,0.25,H1,-0.953125,-0.946875,3
+L1,Kelvin-Voigt,0.05,0.25,K,-0.94375,0.690625,38
+L1,Kelvin-Voigt,0.05,0.25,H1,0.69375,0.703125,3
+L1,Kelvin-Voigt,0.05,0.25,K,0.70625,1,9
+L1,Kelvin-Voigt,0.05,0.3125,K,-1,-0.959375,4
+L1,Kelvin-Voigt,0.05,0.3125,H1,-0.95625,-0.94375,3
+L1,Kelvin-Voigt,0.05,0.3125,K,-0.940625,-0.809375,8
+L1,Kelvin-Voigt,0.05,0.3125,H1,-0.80625,-0.79375,3
+L1,Kelvin-Voigt,0.05,0.3125,K,-0.790625,1,39
+L1,Kelvin-Voigt,0.05,0.375,K,-1,-0.965625,4
+L1,Kelvin-Voigt,0.05,0.375,H1,-0.9625,-0.95,2
+L1,Kelvin-Voigt,0.05,0.375,K,-0.946875,0.94375,44
+L1,Kelvin-Voigt,0.05,0.375,H1,0.946875,0.971875,5
+L1,Kelvin-Voigt,0.05,0.375,K,0.975,1,2
+L1,Kelvin-Voigt,0.05,0.4375,K,-1,0.9875,42
+L1,Kelvin-Voigt,0.05,0.4375,H1,0.990625,1,3
+L1,Kelvin-Voigt,0.05,0.5,K,-1,1,41
+L1,Kelvin-Voigt,0.05,0.5625,K,-1,-0.7625,7
+L1,Kelvin-Voigt,0.05,0.5625,H1,-0.759375,-0.740625,5
+L1,Kelvin-Voigt,0.05,0.5625,K,-0.7375,0.6375,31
+L1,Kelvin-Voigt,0.05,0.5625,H1,0.640625,0.65625,4
+L1,Kelvin-Voigt,0.05,0.5625,K,0.659375,1,10
+L1,Kelvin-Voigt,0.05,0.625,K,-1,0.834375,40
+L1,Kelvin-Voigt,0.05,0.625,H1,0.8375,0.85,2
+L1,Kelvin-Voigt,0.05,0.625,K,0.853125,1,7
+L1,Kelvin-Voigt,0.05,0.6875,K,-1,-0.725,7
+L1,Kelvin-Voigt,0.05,0.6875,H1,-0.721875,-0.69375,5
+L1,Kelvin-Voigt,0.05,0.6875,K,-0.690625,0.8375,35
+L1,Kelvin-Voigt,0.05,0.6875,H1,0.840625,0.853125,4
+L1,Kelvin-Voigt,0.05,0.6875,K,0.85625,1,6
+L1,Kelvin-Voigt,0.05,0.75,K,-1,0.571875,35
+L1,Kelvin-Voigt,0.05,0.75,H1,0.575,0.6,2
+L1,Kelvin-Voigt,0.05,0.75,K,0.603125,1,12
+L1,Kelvin-Voigt,0.05,0.8125,K,-1,-0.65625,10
+L1,Kelvin-Voigt,0.05,0.8125,H1,-0.653125,-0.609375,5
+L1,Kelvin-Voigt,0.05,0.8125,K,-0.60625,0.53125,26
+L1,Kelvin-Voigt,0.05,0.8125,H1,0.534375,0.56875,5
+L1,Kelvin-Voigt,0.05,0.8125,K,0.571875,1,11
+L1,Kelvin-Voigt,0.05,0.875,K,-1,-0.625,9
+L1,Kelvin-Voigt,0.05,0.875,H1,-0.621875,-0.5625,6
+L1,Kelvin-Voigt,0.05,0.875,K,-0.559375,0.490625,26
+L1,Kelvin-Voigt,0.05,0.875,H1,0.49375,0.540625,5
+L1,Kelvin-Voigt,0.05,0.875,K,0.54375,1,11
+L1,Kelvin-Voigt,0.05,0.9375,K,-1,-0.60625,11
+L1,Kelvin-Voigt,0.05,0.9375,H1,-0.603125,-0.525,4
+L1,Kelvin-Voigt,0.05,0.9375,K,-0.521875,0.45625,24
+L1,Kelvin-Voigt,0.05,0.9375,H1,0.459375,0.521875,7
+L1,Kelvin-Voigt,0.05,0.9375,K,0.525,1,11
+"Schnitt (100°,240°)",Kelvin-Voigt,0.05,0,K,-1,1,41
+"Schnitt (100°,240°)",Kelvin-Voigt,0.05,0.0625,K,-1,1,41
+"Schnitt (100°,240°)",Kelvin-Voigt,0.05,0.125,K,-1,1,41
+"Schnitt (100°,240°)",Kelvin-Voigt,0.05,0.1875,K,-1,1,41
+"Schnitt (100°,240°)",Kelvin-Voigt,0.05,0.25,K,-1,1,41
+"Schnitt (100°,240°)",Kelvin-Voigt,0.05,0.3125,K,-1,1,41
+"Schnitt (100°,240°)",Kelvin-Voigt,0.05,0.375,K,-1,1,41
+"Schnitt (100°,240°)",Kelvin-Voigt,0.05,0.4375,K,-1,1,41
+"Schnitt (100°,240°)",Kelvin-Voigt,0.05,0.5,K,-1,1,41
+"Schnitt (100°,240°)",Kelvin-Voigt,0.05,0.5625,K,-1,1,41
+"Schnitt (100°,240°)",Kelvin-Voigt,0.05,0.625,K,-1,1,41
+"Schnitt (100°,240°)",Kelvin-Voigt,0.05,0.6875,K,-1,1,41
+"Schnitt (100°,240°)",Kelvin-Voigt,0.05,0.75,K,-1,1,41
+"Schnitt (100°,240°)",Kelvin-Voigt,0.05,0.8125,K,-1,1,41
+"Schnitt (100°,240°)",Kelvin-Voigt,0.05,0.875,K,-1,1,41
+"Schnitt (100°,240°)",Kelvin-Voigt,0.05,0.9375,K,-1,1,41
+"Schnitt (102°,240°)",Kelvin-Voigt,0.05,0,K,-1,1,41
+"Schnitt (102°,240°)",Kelvin-Voigt,0.05,0.0625,K,-1,1,41
+"Schnitt (102°,240°)",Kelvin-Voigt,0.05,0.125,K,-1,1,41
+"Schnitt (102°,240°)",Kelvin-Voigt,0.05,0.1875,K,-1,1,41
+"Schnitt (102°,240°)",Kelvin-Voigt,0.05,0.25,K,-1,1,41
+"Schnitt (102°,240°)",Kelvin-Voigt,0.05,0.3125,K,-1,1,41
+"Schnitt (102°,240°)",Kelvin-Voigt,0.05,0.375,K,-1,1,41
+"Schnitt (102°,240°)",Kelvin-Voigt,0.05,0.4375,K,-1,1,41
+"Schnitt (102°,240°)",Kelvin-Voigt,0.05,0.5,K,-1,1,41
+"Schnitt (102°,240°)",Kelvin-Voigt,0.05,0.5625,K,-1,1,41
+"Schnitt (102°,240°)",Kelvin-Voigt,0.05,0.625,K,-1,1,41
+"Schnitt (102°,240°)",Kelvin-Voigt,0.05,0.6875,K,-1,1,41
+"Schnitt (102°,240°)",Kelvin-Voigt,0.05,0.75,K,-1,1,41
+"Schnitt (102°,240°)",Kelvin-Voigt,0.05,0.8125,K,-1,1,41
+"Schnitt (102°,240°)",Kelvin-Voigt,0.05,0.875,K,-1,1,41
+"Schnitt (102°,240°)",Kelvin-Voigt,0.05,0.9375,K,-1,1,41
+"Schnitt (104°,240°)",Kelvin-Voigt,0.05,0,K,-1,1,41
+"Schnitt (104°,240°)",Kelvin-Voigt,0.05,0.0625,K,-1,1,41
+"Schnitt (104°,240°)",Kelvin-Voigt,0.05,0.125,K,-1,1,41
+"Schnitt (104°,240°)",Kelvin-Voigt,0.05,0.1875,K,-1,1,41
+"Schnitt (104°,240°)",Kelvin-Voigt,0.05,0.25,K,-1,1,41
+"Schnitt (104°,240°)",Kelvin-Voigt,0.05,0.3125,K,-1,1,41
+"Schnitt (104°,240°)",Kelvin-Voigt,0.05,0.375,K,-1,1,41
+"Schnitt (104°,240°)",Kelvin-Voigt,0.05,0.4375,K,-1,1,41
+"Schnitt (104°,240°)",Kelvin-Voigt,0.05,0.5,K,-1,1,41
+"Schnitt (104°,240°)",Kelvin-Voigt,0.05,0.5625,K,-1,1,41
+"Schnitt (104°,240°)",Kelvin-Voigt,0.05,0.625,K,-1,1,41
+"Schnitt (104°,240°)",Kelvin-Voigt,0.05,0.6875,K,-1,1,41
+"Schnitt (104°,240°)",Kelvin-Voigt,0.05,0.75,K,-1,1,41
+"Schnitt (104°,240°)",Kelvin-Voigt,0.05,0.8125,K,-1,1,41
+"Schnitt (104°,240°)",Kelvin-Voigt,0.05,0.875,K,-1,1,41
+"Schnitt (104°,240°)",Kelvin-Voigt,0.05,0.9375,K,-1,1,41
+"Schnitt (106°,240°)",Kelvin-Voigt,0.05,0,K,-1,1,41
+"Schnitt (106°,240°)",Kelvin-Voigt,0.05,0.0625,K,-1,1,41
+"Schnitt (106°,240°)",Kelvin-Voigt,0.05,0.125,K,-1,1,41
+"Schnitt (106°,240°)",Kelvin-Voigt,0.05,0.1875,K,-1,1,41
+"Schnitt (106°,240°)",Kelvin-Voigt,0.05,0.25,K,-1,1,41
+"Schnitt (106°,240°)",Kelvin-Voigt,0.05,0.3125,K,-1,1,41
+"Schnitt (106°,240°)",Kelvin-Voigt,0.05,0.375,K,-1,1,41
+"Schnitt (106°,240°)",Kelvin-Voigt,0.05,0.4375,K,-1,1,41
+"Schnitt (106°,240°)",Kelvin-Voigt,0.05,0.5,K,-1,1,41
+"Schnitt (106°,240°)",Kelvin-Voigt,0.05,0.5625,K,-1,1,41
+"Schnitt (106°,240°)",Kelvin-Voigt,0.05,0.625,K,-1,1,41
+"Schnitt (106°,240°)",Kelvin-Voigt,0.05,0.6875,K,-1,1,41
+"Schnitt (106°,240°)",Kelvin-Voigt,0.05,0.75,K,-1,1,41
+"Schnitt (106°,240°)",Kelvin-Voigt,0.05,0.8125,K,-1,1,41
+"Schnitt (106°,240°)",Kelvin-Voigt,0.05,0.875,K,-1,1,41
+"Schnitt (106°,240°)",Kelvin-Voigt,0.05,0.9375,K,-1,1,41
+"Schnitt (108°,240°)",Kelvin-Voigt,0.05,0,K,-1,1,41
+"Schnitt (108°,240°)",Kelvin-Voigt,0.05,0.0625,K,-1,1,41
+"Schnitt (108°,240°)",Kelvin-Voigt,0.05,0.125,K,-1,1,41
+"Schnitt (108°,240°)",Kelvin-Voigt,0.05,0.1875,K,-1,1,41
+"Schnitt (108°,240°)",Kelvin-Voigt,0.05,0.25,K,-1,1,41
+"Schnitt (108°,240°)",Kelvin-Voigt,0.05,0.3125,K,-1,1,41
+"Schnitt (108°,240°)",Kelvin-Voigt,0.05,0.375,K,-1,1,41
+"Schnitt (108°,240°)",Kelvin-Voigt,0.05,0.4375,K,-1,1,41
+"Schnitt (108°,240°)",Kelvin-Voigt,0.05,0.5,K,-1,1,41
+"Schnitt (108°,240°)",Kelvin-Voigt,0.05,0.5625,K,-1,1,41
+"Schnitt (108°,240°)",Kelvin-Voigt,0.05,0.625,K,-1,1,41
+"Schnitt (108°,240°)",Kelvin-Voigt,0.05,0.6875,K,-1,1,41
+"Schnitt (108°,240°)",Kelvin-Voigt,0.05,0.75,K,-1,1,41
+"Schnitt (108°,240°)",Kelvin-Voigt,0.05,0.8125,K,-1,1,41
+"Schnitt (108°,240°)",Kelvin-Voigt,0.05,0.875,K,-1,1,41
+"Schnitt (108°,240°)",Kelvin-Voigt,0.05,0.9375,K,-1,1,41
+"Schnitt (110°,240°)",Kelvin-Voigt,0.05,0,K,-1,1,41
+"Schnitt (110°,240°)",Kelvin-Voigt,0.05,0.0625,K,-1,1,41
+"Schnitt (110°,240°)",Kelvin-Voigt,0.05,0.125,K,-1,1,41
+"Schnitt (110°,240°)",Kelvin-Voigt,0.05,0.1875,K,-1,1,41
+"Schnitt (110°,240°)",Kelvin-Voigt,0.05,0.25,K,-1,1,41
+"Schnitt (110°,240°)",Kelvin-Voigt,0.05,0.3125,K,-1,1,41
+"Schnitt (110°,240°)",Kelvin-Voigt,0.05,0.375,K,-1,1,41
+"Schnitt (110°,240°)",Kelvin-Voigt,0.05,0.4375,K,-1,1,41
+"Schnitt (110°,240°)",Kelvin-Voigt,0.05,0.5,K,-1,1,41
+"Schnitt (110°,240°)",Kelvin-Voigt,0.05,0.5625,K,-1,1,41
+"Schnitt (110°,240°)",Kelvin-Voigt,0.05,0.625,K,-1,1,41
+"Schnitt (110°,240°)",Kelvin-Voigt,0.05,0.6875,K,-1,1,41
+"Schnitt (110°,240°)",Kelvin-Voigt,0.05,0.75,K,-1,1,41
+"Schnitt (110°,240°)",Kelvin-Voigt,0.05,0.8125,K,-1,1,41
+"Schnitt (110°,240°)",Kelvin-Voigt,0.05,0.875,K,-1,1,41
+"Schnitt (110°,240°)",Kelvin-Voigt,0.05,0.9375,K,-1,1,41
+"Schnitt (112°,240°)",Kelvin-Voigt,0.05,0,K,-1,1,41
+"Schnitt (112°,240°)",Kelvin-Voigt,0.05,0.0625,K,-1,1,41
+"Schnitt (112°,240°)",Kelvin-Voigt,0.05,0.125,K,-1,1,41
+"Schnitt (112°,240°)",Kelvin-Voigt,0.05,0.1875,K,-1,1,41
+"Schnitt (112°,240°)",Kelvin-Voigt,0.05,0.25,K,-1,1,41
+"Schnitt (112°,240°)",Kelvin-Voigt,0.05,0.3125,K,-1,1,41
+"Schnitt (112°,240°)",Kelvin-Voigt,0.05,0.375,K,-1,1,41
+"Schnitt (112°,240°)",Kelvin-Voigt,0.05,0.4375,K,-1,1,41
+"Schnitt (112°,240°)",Kelvin-Voigt,0.05,0.5,K,-1,1,41
+"Schnitt (112°,240°)",Kelvin-Voigt,0.05,0.5625,K,-1,1,41
+"Schnitt (112°,240°)",Kelvin-Voigt,0.05,0.625,K,-1,1,41
+"Schnitt (112°,240°)",Kelvin-Voigt,0.05,0.6875,K,-1,1,41
+"Schnitt (112°,240°)",Kelvin-Voigt,0.05,0.75,K,-1,1,41
+"Schnitt (112°,240°)",Kelvin-Voigt,0.05,0.8125,K,-1,1,41
+"Schnitt (112°,240°)",Kelvin-Voigt,0.05,0.875,K,-1,1,41
+"Schnitt (112°,240°)",Kelvin-Voigt,0.05,0.9375,K,-1,1,41
+"Schnitt (114°,240°)",Kelvin-Voigt,0.05,0,K,-1,1,41
+"Schnitt (114°,240°)",Kelvin-Voigt,0.05,0.0625,K,-1,1,41
+"Schnitt (114°,240°)",Kelvin-Voigt,0.05,0.125,K,-1,1,41
+"Schnitt (114°,240°)",Kelvin-Voigt,0.05,0.1875,K,-1,1,41
+"Schnitt (114°,240°)",Kelvin-Voigt,0.05,0.25,K,-1,1,41
+"Schnitt (114°,240°)",Kelvin-Voigt,0.05,0.3125,K,-1,1,41
+"Schnitt (114°,240°)",Kelvin-Voigt,0.05,0.375,K,-1,1,41
+"Schnitt (114°,240°)",Kelvin-Voigt,0.05,0.4375,K,-1,1,41
+"Schnitt (114°,240°)",Kelvin-Voigt,0.05,0.5,K,-1,1,41
+"Schnitt (114°,240°)",Kelvin-Voigt,0.05,0.5625,K,-1,1,41
+"Schnitt (114°,240°)",Kelvin-Voigt,0.05,0.625,K,-1,1,41
+"Schnitt (114°,240°)",Kelvin-Voigt,0.05,0.6875,K,-1,1,41
+"Schnitt (114°,240°)",Kelvin-Voigt,0.05,0.75,K,-1,1,41
+"Schnitt (114°,240°)",Kelvin-Voigt,0.05,0.8125,K,-1,1,41
+"Schnitt (114°,240°)",Kelvin-Voigt,0.05,0.875,K,-1,1,41
+"Schnitt (114°,240°)",Kelvin-Voigt,0.05,0.9375,K,-1,1,41
+"Schnitt (116°,240°)",Kelvin-Voigt,0.05,0,K,-1,1,41
+"Schnitt (116°,240°)",Kelvin-Voigt,0.05,0.0625,K,-1,1,41
+"Schnitt (116°,240°)",Kelvin-Voigt,0.05,0.125,K,-1,1,41
+"Schnitt (116°,240°)",Kelvin-Voigt,0.05,0.1875,K,-1,1,41
+"Schnitt (116°,240°)",Kelvin-Voigt,0.05,0.25,K,-1,1,41
+"Schnitt (116°,240°)",Kelvin-Voigt,0.05,0.3125,K,-1,1,41
+"Schnitt (116°,240°)",Kelvin-Voigt,0.05,0.375,K,-1,1,41
+"Schnitt (116°,240°)",Kelvin-Voigt,0.05,0.4375,K,-1,1,41
+"Schnitt (116°,240°)",Kelvin-Voigt,0.05,0.5,K,-1,1,41
+"Schnitt (116°,240°)",Kelvin-Voigt,0.05,0.5625,K,-1,1,41
+"Schnitt (116°,240°)",Kelvin-Voigt,0.05,0.625,K,-1,1,41
+"Schnitt (116°,240°)",Kelvin-Voigt,0.05,0.6875,K,-1,1,41
+"Schnitt (116°,240°)",Kelvin-Voigt,0.05,0.75,K,-1,1,41
+"Schnitt (116°,240°)",Kelvin-Voigt,0.05,0.8125,K,-1,1,41
+"Schnitt (116°,240°)",Kelvin-Voigt,0.05,0.875,K,-1,1,41
+"Schnitt (116°,240°)",Kelvin-Voigt,0.05,0.9375,K,-1,1,41
+"Schnitt (118°,240°)",Kelvin-Voigt,0.05,0,K,-1,1,41
+"Schnitt (118°,240°)",Kelvin-Voigt,0.05,0.0625,K,-1,1,41
+"Schnitt (118°,240°)",Kelvin-Voigt,0.05,0.125,K,-1,1,41
+"Schnitt (118°,240°)",Kelvin-Voigt,0.05,0.1875,K,-1,1,41
+"Schnitt (118°,240°)",Kelvin-Voigt,0.05,0.25,K,-1,1,41
+"Schnitt (118°,240°)",Kelvin-Voigt,0.05,0.3125,K,-1,1,41
+"Schnitt (118°,240°)",Kelvin-Voigt,0.05,0.375,K,-1,1,41
+"Schnitt (118°,240°)",Kelvin-Voigt,0.05,0.4375,K,-1,1,41
+"Schnitt (118°,240°)",Kelvin-Voigt,0.05,0.5,K,-1,1,41
+"Schnitt (118°,240°)",Kelvin-Voigt,0.05,0.5625,K,-1,1,41
+"Schnitt (118°,240°)",Kelvin-Voigt,0.05,0.625,K,-1,1,41
+"Schnitt (118°,240°)",Kelvin-Voigt,0.05,0.6875,K,-1,1,41
+"Schnitt (118°,240°)",Kelvin-Voigt,0.05,0.75,K,-1,1,41
+"Schnitt (118°,240°)",Kelvin-Voigt,0.05,0.8125,K,-1,1,41
+"Schnitt (118°,240°)",Kelvin-Voigt,0.05,0.875,K,-1,1,41
+"Schnitt (118°,240°)",Kelvin-Voigt,0.05,0.9375,K,-1,1,41
+"Schnitt (120°,240°)",Kelvin-Voigt,0.05,0,K,-1,1,41
+"Schnitt (120°,240°)",Kelvin-Voigt,0.05,0.0625,K,-1,1,41
+"Schnitt (120°,240°)",Kelvin-Voigt,0.05,0.125,K,-1,1,41
+"Schnitt (120°,240°)",Kelvin-Voigt,0.05,0.1875,K,-1,1,41
+"Schnitt (120°,240°)",Kelvin-Voigt,0.05,0.25,K,-1,1,41
+"Schnitt (120°,240°)",Kelvin-Voigt,0.05,0.3125,K,-1,1,41
+"Schnitt (120°,240°)",Kelvin-Voigt,0.05,0.375,K,-1,1,41
+"Schnitt (120°,240°)",Kelvin-Voigt,0.05,0.4375,K,-1,1,41
+"Schnitt (120°,240°)",Kelvin-Voigt,0.05,0.5,K,-1,1,41
+"Schnitt (120°,240°)",Kelvin-Voigt,0.05,0.5625,K,-1,1,41
+"Schnitt (120°,240°)",Kelvin-Voigt,0.05,0.625,K,-1,1,41
+"Schnitt (120°,240°)",Kelvin-Voigt,0.05,0.6875,K,-1,1,41
+"Schnitt (120°,240°)",Kelvin-Voigt,0.05,0.75,K,-1,1,41
+"Schnitt (120°,240°)",Kelvin-Voigt,0.05,0.8125,K,-1,1,41
+"Schnitt (120°,240°)",Kelvin-Voigt,0.05,0.875,K,-1,1,41
+"Schnitt (120°,240°)",Kelvin-Voigt,0.05,0.9375,K,-1,1,41
+"Schnitt (122°,240°)",Kelvin-Voigt,0.05,0,K,-1,1,41
+"Schnitt (122°,240°)",Kelvin-Voigt,0.05,0.0625,K,-1,1,41
+"Schnitt (122°,240°)",Kelvin-Voigt,0.05,0.125,K,-1,1,41
+"Schnitt (122°,240°)",Kelvin-Voigt,0.05,0.1875,K,-1,1,41
+"Schnitt (122°,240°)",Kelvin-Voigt,0.05,0.25,K,-1,1,41
+"Schnitt (122°,240°)",Kelvin-Voigt,0.05,0.3125,K,-1,1,41
+"Schnitt (122°,240°)",Kelvin-Voigt,0.05,0.375,K,-1,1,41
+"Schnitt (122°,240°)",Kelvin-Voigt,0.05,0.4375,K,-1,1,41
+"Schnitt (122°,240°)",Kelvin-Voigt,0.05,0.5,K,-1,1,41
+"Schnitt (122°,240°)",Kelvin-Voigt,0.05,0.5625,K,-1,1,41
+"Schnitt (122°,240°)",Kelvin-Voigt,0.05,0.625,K,-1,1,41
+"Schnitt (122°,240°)",Kelvin-Voigt,0.05,0.6875,K,-1,1,41
+"Schnitt (122°,240°)",Kelvin-Voigt,0.05,0.75,K,-1,1,41
+"Schnitt (122°,240°)",Kelvin-Voigt,0.05,0.8125,K,-1,1,41
+"Schnitt (122°,240°)",Kelvin-Voigt,0.05,0.875,K,-1,1,41
+"Schnitt (122°,240°)",Kelvin-Voigt,0.05,0.9375,K,-1,1,41
+"Schnitt (124°,240°)",Kelvin-Voigt,0.05,0,K,-1,1,41
+"Schnitt (124°,240°)",Kelvin-Voigt,0.05,0.0625,K,-1,1,41
+"Schnitt (124°,240°)",Kelvin-Voigt,0.05,0.125,K,-1,1,41
+"Schnitt (124°,240°)",Kelvin-Voigt,0.05,0.1875,K,-1,1,41
+"Schnitt (124°,240°)",Kelvin-Voigt,0.05,0.25,K,-1,1,41
+"Schnitt (124°,240°)",Kelvin-Voigt,0.05,0.3125,K,-1,1,41
+"Schnitt (124°,240°)",Kelvin-Voigt,0.05,0.375,K,-1,1,41
+"Schnitt (124°,240°)",Kelvin-Voigt,0.05,0.4375,K,-1,1,41
+"Schnitt (124°,240°)",Kelvin-Voigt,0.05,0.5,K,-1,1,41
+"Schnitt (124°,240°)",Kelvin-Voigt,0.05,0.5625,K,-1,1,41
+"Schnitt (124°,240°)",Kelvin-Voigt,0.05,0.625,K,-1,1,41
+"Schnitt (124°,240°)",Kelvin-Voigt,0.05,0.6875,K,-1,1,41
+"Schnitt (124°,240°)",Kelvin-Voigt,0.05,0.75,K,-1,1,41
+"Schnitt (124°,240°)",Kelvin-Voigt,0.05,0.8125,K,-1,1,41
+"Schnitt (124°,240°)",Kelvin-Voigt,0.05,0.875,K,-1,1,41
+"Schnitt (124°,240°)",Kelvin-Voigt,0.05,0.9375,K,-1,1,41
+"Schnitt (126°,240°)",Kelvin-Voigt,0.05,0,K,-1,1,41
+"Schnitt (126°,240°)",Kelvin-Voigt,0.05,0.0625,K,-1,1,41
+"Schnitt (126°,240°)",Kelvin-Voigt,0.05,0.125,K,-1,1,41
+"Schnitt (126°,240°)",Kelvin-Voigt,0.05,0.1875,K,-1,1,41
+"Schnitt (126°,240°)",Kelvin-Voigt,0.05,0.25,K,-1,1,41
+"Schnitt (126°,240°)",Kelvin-Voigt,0.05,0.3125,K,-1,1,41
+"Schnitt (126°,240°)",Kelvin-Voigt,0.05,0.375,K,-1,1,41
+"Schnitt (126°,240°)",Kelvin-Voigt,0.05,0.4375,K,-1,1,41
+"Schnitt (126°,240°)",Kelvin-Voigt,0.05,0.5,K,-1,1,41
+"Schnitt (126°,240°)",Kelvin-Voigt,0.05,0.5625,K,-1,1,41
+"Schnitt (126°,240°)",Kelvin-Voigt,0.05,0.625,K,-1,1,41
+"Schnitt (126°,240°)",Kelvin-Voigt,0.05,0.6875,K,-1,1,41
+"Schnitt (126°,240°)",Kelvin-Voigt,0.05,0.75,K,-1,1,41
+"Schnitt (126°,240°)",Kelvin-Voigt,0.05,0.8125,K,-1,1,41
+"Schnitt (126°,240°)",Kelvin-Voigt,0.05,0.875,K,-1,1,41
+"Schnitt (126°,240°)",Kelvin-Voigt,0.05,0.9375,K,-1,1,41
+"Schnitt (128°,240°)",Kelvin-Voigt,0.05,0,K,-1,1,41
+"Schnitt (128°,240°)",Kelvin-Voigt,0.05,0.0625,K,-1,1,41
+"Schnitt (128°,240°)",Kelvin-Voigt,0.05,0.125,K,-1,1,41
+"Schnitt (128°,240°)",Kelvin-Voigt,0.05,0.1875,K,-1,1,41
+"Schnitt (128°,240°)",Kelvin-Voigt,0.05,0.25,K,-1,1,41
+"Schnitt (128°,240°)",Kelvin-Voigt,0.05,0.3125,K,-1,1,41
+"Schnitt (128°,240°)",Kelvin-Voigt,0.05,0.375,K,-1,1,41
+"Schnitt (128°,240°)",Kelvin-Voigt,0.05,0.4375,K,-1,1,41
+"Schnitt (128°,240°)",Kelvin-Voigt,0.05,0.5,K,-1,1,41
+"Schnitt (128°,240°)",Kelvin-Voigt,0.05,0.5625,K,-1,1,41
+"Schnitt (128°,240°)",Kelvin-Voigt,0.05,0.625,K,-1,1,41
+"Schnitt (128°,240°)",Kelvin-Voigt,0.05,0.6875,K,-1,1,41
+"Schnitt (128°,240°)",Kelvin-Voigt,0.05,0.75,K,-1,1,41
+"Schnitt (128°,240°)",Kelvin-Voigt,0.05,0.8125,K,-1,1,41
+"Schnitt (128°,240°)",Kelvin-Voigt,0.05,0.875,K,-1,1,41
+"Schnitt (128°,240°)",Kelvin-Voigt,0.05,0.9375,K,-1,1,41
+"Schnitt (130°,240°)",Kelvin-Voigt,0.05,0,K,-1,1,41
+"Schnitt (130°,240°)",Kelvin-Voigt,0.05,0.0625,K,-1,1,41
+"Schnitt (130°,240°)",Kelvin-Voigt,0.05,0.125,K,-1,1,41
+"Schnitt (130°,240°)",Kelvin-Voigt,0.05,0.1875,K,-1,1,41
+"Schnitt (130°,240°)",Kelvin-Voigt,0.05,0.25,K,-1,1,41
+"Schnitt (130°,240°)",Kelvin-Voigt,0.05,0.3125,K,-1,1,41
+"Schnitt (130°,240°)",Kelvin-Voigt,0.05,0.375,K,-1,1,41
+"Schnitt (130°,240°)",Kelvin-Voigt,0.05,0.4375,K,-1,1,41
+"Schnitt (130°,240°)",Kelvin-Voigt,0.05,0.5,K,-1,1,41
+"Schnitt (130°,240°)",Kelvin-Voigt,0.05,0.5625,K,-1,1,41
+"Schnitt (130°,240°)",Kelvin-Voigt,0.05,0.625,K,-1,1,41
+"Schnitt (130°,240°)",Kelvin-Voigt,0.05,0.6875,K,-1,1,41
+"Schnitt (130°,240°)",Kelvin-Voigt,0.05,0.75,K,-1,1,41
+"Schnitt (130°,240°)",Kelvin-Voigt,0.05,0.8125,K,-1,1,41
+"Schnitt (130°,240°)",Kelvin-Voigt,0.05,0.875,K,-1,1,41
+"Schnitt (130°,240°)",Kelvin-Voigt,0.05,0.9375,K,-1,1,41
+"Schnitt (132°,240°)",Kelvin-Voigt,0.05,0,K,-1,1,41
+"Schnitt (132°,240°)",Kelvin-Voigt,0.05,0.0625,K,-1,1,41
+"Schnitt (132°,240°)",Kelvin-Voigt,0.05,0.125,K,-1,1,41
+"Schnitt (132°,240°)",Kelvin-Voigt,0.05,0.1875,K,-1,1,41
+"Schnitt (132°,240°)",Kelvin-Voigt,0.05,0.25,K,-1,1,41
+"Schnitt (132°,240°)",Kelvin-Voigt,0.05,0.3125,K,-1,1,41
+"Schnitt (132°,240°)",Kelvin-Voigt,0.05,0.375,K,-1,1,41
+"Schnitt (132°,240°)",Kelvin-Voigt,0.05,0.4375,K,-1,1,41
+"Schnitt (132°,240°)",Kelvin-Voigt,0.05,0.5,K,-1,1,41
+"Schnitt (132°,240°)",Kelvin-Voigt,0.05,0.5625,K,-1,1,41
+"Schnitt (132°,240°)",Kelvin-Voigt,0.05,0.625,K,-1,1,41
+"Schnitt (132°,240°)",Kelvin-Voigt,0.05,0.6875,K,-1,1,41
+"Schnitt (132°,240°)",Kelvin-Voigt,0.05,0.75,K,-1,1,41
+"Schnitt (132°,240°)",Kelvin-Voigt,0.05,0.8125,K,-1,1,41
+"Schnitt (132°,240°)",Kelvin-Voigt,0.05,0.875,K,-1,1,41
+"Schnitt (132°,240°)",Kelvin-Voigt,0.05,0.9375,K,-1,1,41
+"Schnitt (134°,240°)",Kelvin-Voigt,0.05,0,K,-1,1,41
+"Schnitt (134°,240°)",Kelvin-Voigt,0.05,0.0625,K,-1,1,41
+"Schnitt (134°,240°)",Kelvin-Voigt,0.05,0.125,K,-1,1,41
+"Schnitt (134°,240°)",Kelvin-Voigt,0.05,0.1875,K,-1,1,41
+"Schnitt (134°,240°)",Kelvin-Voigt,0.05,0.25,K,-1,1,41
+"Schnitt (134°,240°)",Kelvin-Voigt,0.05,0.3125,K,-1,1,41
+"Schnitt (134°,240°)",Kelvin-Voigt,0.05,0.375,K,-1,1,41
+"Schnitt (134°,240°)",Kelvin-Voigt,0.05,0.4375,K,-1,1,41
+"Schnitt (134°,240°)",Kelvin-Voigt,0.05,0.5,K,-1,1,41
+"Schnitt (134°,240°)",Kelvin-Voigt,0.05,0.5625,K,-1,1,41
+"Schnitt (134°,240°)",Kelvin-Voigt,0.05,0.625,K,-1,1,41
+"Schnitt (134°,240°)",Kelvin-Voigt,0.05,0.6875,K,-1,1,41
+"Schnitt (134°,240°)",Kelvin-Voigt,0.05,0.75,K,-1,1,41
+"Schnitt (134°,240°)",Kelvin-Voigt,0.05,0.8125,K,-1,1,41
+"Schnitt (134°,240°)",Kelvin-Voigt,0.05,0.875,K,-1,1,41
+"Schnitt (134°,240°)",Kelvin-Voigt,0.05,0.9375,K,-1,1,41
+"Schnitt (136°,240°)",Kelvin-Voigt,0.05,0,K,-1,1,41
+"Schnitt (136°,240°)",Kelvin-Voigt,0.05,0.0625,K,-1,1,41
+"Schnitt (136°,240°)",Kelvin-Voigt,0.05,0.125,K,-1,1,41
+"Schnitt (136°,240°)",Kelvin-Voigt,0.05,0.1875,K,-1,1,41
+"Schnitt (136°,240°)",Kelvin-Voigt,0.05,0.25,K,-1,1,41
+"Schnitt (136°,240°)",Kelvin-Voigt,0.05,0.3125,K,-1,1,41
+"Schnitt (136°,240°)",Kelvin-Voigt,0.05,0.375,K,-1,1,41
+"Schnitt (136°,240°)",Kelvin-Voigt,0.05,0.4375,K,-1,1,41
+"Schnitt (136°,240°)",Kelvin-Voigt,0.05,0.5,K,-1,1,41
+"Schnitt (136°,240°)",Kelvin-Voigt,0.05,0.5625,K,-1,1,41
+"Schnitt (136°,240°)",Kelvin-Voigt,0.05,0.625,K,-1,1,41
+"Schnitt (136°,240°)",Kelvin-Voigt,0.05,0.6875,K,-1,1,41
+"Schnitt (136°,240°)",Kelvin-Voigt,0.05,0.75,K,-1,1,41
+"Schnitt (136°,240°)",Kelvin-Voigt,0.05,0.8125,K,-1,1,41
+"Schnitt (136°,240°)",Kelvin-Voigt,0.05,0.875,K,-1,1,41
+"Schnitt (136°,240°)",Kelvin-Voigt,0.05,0.9375,K,-1,1,41
+"Schnitt (138°,240°)",Kelvin-Voigt,0.05,0,K,-1,1,41
+"Schnitt (138°,240°)",Kelvin-Voigt,0.05,0.0625,K,-1,1,41
+"Schnitt (138°,240°)",Kelvin-Voigt,0.05,0.125,K,-1,1,41
+"Schnitt (138°,240°)",Kelvin-Voigt,0.05,0.1875,K,-1,1,41
+"Schnitt (138°,240°)",Kelvin-Voigt,0.05,0.25,K,-1,1,41
+"Schnitt (138°,240°)",Kelvin-Voigt,0.05,0.3125,K,-1,1,41
+"Schnitt (138°,240°)",Kelvin-Voigt,0.05,0.375,K,-1,1,41
+"Schnitt (138°,240°)",Kelvin-Voigt,0.05,0.4375,K,-1,1,41
+"Schnitt (138°,240°)",Kelvin-Voigt,0.05,0.5,K,-1,1,41
+"Schnitt (138°,240°)",Kelvin-Voigt,0.05,0.5625,K,-1,1,41
+"Schnitt (138°,240°)",Kelvin-Voigt,0.05,0.625,K,-1,1,41
+"Schnitt (138°,240°)",Kelvin-Voigt,0.05,0.6875,K,-1,1,41
+"Schnitt (138°,240°)",Kelvin-Voigt,0.05,0.75,K,-1,1,41
+"Schnitt (138°,240°)",Kelvin-Voigt,0.05,0.8125,K,-1,1,41
+"Schnitt (138°,240°)",Kelvin-Voigt,0.05,0.875,K,-1,1,41
+"Schnitt (138°,240°)",Kelvin-Voigt,0.05,0.9375,K,-1,1,41
+"Schnitt (140°,240°)",Kelvin-Voigt,0.05,0,K,-1,1,41
+"Schnitt (140°,240°)",Kelvin-Voigt,0.05,0.0625,K,-1,1,41
+"Schnitt (140°,240°)",Kelvin-Voigt,0.05,0.125,K,-1,1,41
+"Schnitt (140°,240°)",Kelvin-Voigt,0.05,0.1875,K,-1,1,41
+"Schnitt (140°,240°)",Kelvin-Voigt,0.05,0.25,K,-1,1,41
+"Schnitt (140°,240°)",Kelvin-Voigt,0.05,0.3125,K,-1,1,41
+"Schnitt (140°,240°)",Kelvin-Voigt,0.05,0.375,K,-1,1,41
+"Schnitt (140°,240°)",Kelvin-Voigt,0.05,0.4375,K,-1,1,41
+"Schnitt (140°,240°)",Kelvin-Voigt,0.05,0.5,K,-1,1,41
+"Schnitt (140°,240°)",Kelvin-Voigt,0.05,0.5625,K,-1,1,41
+"Schnitt (140°,240°)",Kelvin-Voigt,0.05,0.625,K,-1,1,41
+"Schnitt (140°,240°)",Kelvin-Voigt,0.05,0.6875,K,-1,1,41
+"Schnitt (140°,240°)",Kelvin-Voigt,0.05,0.75,K,-1,1,41
+"Schnitt (140°,240°)",Kelvin-Voigt,0.05,0.8125,K,-1,1,41
+"Schnitt (140°,240°)",Kelvin-Voigt,0.05,0.875,K,-1,1,41
+"Schnitt (140°,240°)",Kelvin-Voigt,0.05,0.9375,K,-1,1,41
+"Pilot (110°,250°)",Kelvin-Voigt,0.05,0,K,-1,1,41
+"Pilot (110°,250°)",Kelvin-Voigt,0.05,0.0625,K,-1,1,41
+"Pilot (110°,250°)",Kelvin-Voigt,0.05,0.125,K,-1,1,41
+"Pilot (110°,250°)",Kelvin-Voigt,0.05,0.1875,K,-1,1,41
+"Pilot (110°,250°)",Kelvin-Voigt,0.05,0.25,K,-1,1,41
+"Pilot (110°,250°)",Kelvin-Voigt,0.05,0.3125,K,-1,1,41
+"Pilot (110°,250°)",Kelvin-Voigt,0.05,0.375,K,-1,1,41
+"Pilot (110°,250°)",Kelvin-Voigt,0.05,0.4375,K,-1,1,41
+"Pilot (110°,250°)",Kelvin-Voigt,0.05,0.5,K,-1,1,41
+"Pilot (110°,250°)",Kelvin-Voigt,0.05,0.5625,K,-1,1,41
+"Pilot (110°,250°)",Kelvin-Voigt,0.05,0.625,K,-1,1,41
+"Pilot (110°,250°)",Kelvin-Voigt,0.05,0.6875,K,-1,1,41
+"Pilot (110°,250°)",Kelvin-Voigt,0.05,0.75,K,-1,1,41
+"Pilot (110°,250°)",Kelvin-Voigt,0.05,0.8125,K,-1,1,41
+"Pilot (110°,250°)",Kelvin-Voigt,0.05,0.875,K,-1,1,41
+"Pilot (110°,250°)",Kelvin-Voigt,0.05,0.9375,K,-1,1,41
+"Pilot (130°,230°)",Kelvin-Voigt,0.05,0,K,-1,1,41
+"Pilot (130°,230°)",Kelvin-Voigt,0.05,0.0625,K,-1,1,41
+"Pilot (130°,230°)",Kelvin-Voigt,0.05,0.125,K,-1,1,41
+"Pilot (130°,230°)",Kelvin-Voigt,0.05,0.1875,K,-1,1,41
+"Pilot (130°,230°)",Kelvin-Voigt,0.05,0.25,K,-1,1,41
+"Pilot (130°,230°)",Kelvin-Voigt,0.05,0.3125,K,-1,1,41
+"Pilot (130°,230°)",Kelvin-Voigt,0.05,0.375,K,-1,1,41
+"Pilot (130°,230°)",Kelvin-Voigt,0.05,0.4375,K,-1,1,41
+"Pilot (130°,230°)",Kelvin-Voigt,0.05,0.5,K,-1,1,41
+"Pilot (130°,230°)",Kelvin-Voigt,0.05,0.5625,K,-1,1,41
+"Pilot (130°,230°)",Kelvin-Voigt,0.05,0.625,K,-1,1,41
+"Pilot (130°,230°)",Kelvin-Voigt,0.05,0.6875,K,-1,1,41
+"Pilot (130°,230°)",Kelvin-Voigt,0.05,0.75,K,-1,1,41
+"Pilot (130°,230°)",Kelvin-Voigt,0.05,0.8125,K,-1,1,41
+"Pilot (130°,230°)",Kelvin-Voigt,0.05,0.875,K,-1,1,41
+"Pilot (130°,230°)",Kelvin-Voigt,0.05,0.9375,K,-1,1,41
+"Pilot (110°,252°)",Kelvin-Voigt,0.05,0,K,-1,1,41
+"Pilot (110°,252°)",Kelvin-Voigt,0.05,0.0625,K,-1,1,41
+"Pilot (110°,252°)",Kelvin-Voigt,0.05,0.125,K,-1,1,41
+"Pilot (110°,252°)",Kelvin-Voigt,0.05,0.1875,K,-1,1,41
+"Pilot (110°,252°)",Kelvin-Voigt,0.05,0.25,K,-1,1,41
+"Pilot (110°,252°)",Kelvin-Voigt,0.05,0.3125,K,-1,1,41
+"Pilot (110°,252°)",Kelvin-Voigt,0.05,0.375,K,-1,1,41
+"Pilot (110°,252°)",Kelvin-Voigt,0.05,0.4375,K,-1,1,41
+"Pilot (110°,252°)",Kelvin-Voigt,0.05,0.5,K,-1,1,41
+"Pilot (110°,252°)",Kelvin-Voigt,0.05,0.5625,K,-1,1,41
+"Pilot (110°,252°)",Kelvin-Voigt,0.05,0.625,K,-1,1,41
+"Pilot (110°,252°)",Kelvin-Voigt,0.05,0.6875,K,-1,1,41
+"Pilot (110°,252°)",Kelvin-Voigt,0.05,0.75,K,-1,1,41
+"Pilot (110°,252°)",Kelvin-Voigt,0.05,0.8125,K,-1,1,41
+"Pilot (110°,252°)",Kelvin-Voigt,0.05,0.875,K,-1,1,41
+"Pilot (110°,252°)",Kelvin-Voigt,0.05,0.9375,K,-1,1,41
+"synchron (0°,0°)",Kelvin-Voigt,0.05,0,H2,-1,-0.940625,4
+"synchron (0°,0°)",Kelvin-Voigt,0.05,0,H1,-0.9375,-0.825,5
+"synchron (0°,0°)",Kelvin-Voigt,0.05,0,K,-0.821875,-0.784375,6
+"synchron (0°,0°)",Kelvin-Voigt,0.05,0,H1,-0.78125,-0.33125,13
+"synchron (0°,0°)",Kelvin-Voigt,0.05,0,K,-0.328125,0.29375,17
+"synchron (0°,0°)",Kelvin-Voigt,0.05,0,H1,0.296875,0.678125,11
+"synchron (0°,0°)",Kelvin-Voigt,0.05,0,K,0.68125,0.7125,4
+"synchron (0°,0°)",Kelvin-Voigt,0.05,0,H1,0.715625,0.8125,6
+"synchron (0°,0°)",Kelvin-Voigt,0.05,0,H2,0.815625,1,7
+"synchron (0°,0°)",Kelvin-Voigt,0.05,0.0625,H2,-1,-0.915625,5
+"synchron (0°,0°)",Kelvin-Voigt,0.05,0.0625,K,-0.9125,-0.90625,2
+"synchron (0°,0°)",Kelvin-Voigt,0.05,0.0625,H1,-0.903125,-0.3,14
+"synchron (0°,0°)",Kelvin-Voigt,0.05,0.0625,K,-0.296875,0.2625,16
+"synchron (0°,0°)",Kelvin-Voigt,0.05,0.0625,H1,0.265625,0.7875,15
+"synchron (0°,0°)",Kelvin-Voigt,0.05,0.0625,H2,0.790625,1,7
+"synchron (0°,0°)",Kelvin-Voigt,0.05,0.125,H2,-1,-0.90625,5
+"synchron (0°,0°)",Kelvin-Voigt,0.05,0.125,K,-0.903125,-0.903125,1
+"synchron (0°,0°)",Kelvin-Voigt,0.05,0.125,H1,-0.9,-0.784375,5
+"synchron (0°,0°)",Kelvin-Voigt,0.05,0.125,K,-0.78125,-0.740625,5
+"synchron (0°,0°)",Kelvin-Voigt,0.05,0.125,H1,-0.7375,-0.278125,14
+"synchron (0°,0°)",Kelvin-Voigt,0.05,0.125,K,-0.275,0.240625,14
+"synchron (0°,0°)",Kelvin-Voigt,0.05,0.125,H1,0.24375,0.6375,11
+"synchron (0°,0°)",Kelvin-Voigt,0.05,0.125,K,0.640625,0.675,4
+"synchron (0°,0°)",Kelvin-Voigt,0.05,0.125,H1,0.678125,0.74375,7
+"synchron (0°,0°)",Kelvin-Voigt,0.05,0.125,K,0.746875,0.75,2
+"synchron (0°,0°)",Kelvin-Voigt,0.05,0.125,H1,0.753125,0.775,4
+"synchron (0°,0°)",Kelvin-Voigt,0.05,0.125,H2,0.778125,1,8
+"synchron (0°,0°)",Kelvin-Voigt,0.05,0.1875,H2,-1,-0.90625,5
+"synchron (0°,0°)",Kelvin-Voigt,0.05,0.1875,H1,-0.903125,-0.78125,6
+"synchron (0°,0°)",Kelvin-Voigt,0.05,0.1875,K,-0.778125,-0.734375,5
+"synchron (0°,0°)",Kelvin-Voigt,0.05,0.1875,H1,-0.73125,-0.265625,14
+"synchron (0°,0°)",Kelvin-Voigt,0.05,0.1875,K,-0.2625,0.228125,13
+"synchron (0°,0°)",Kelvin-Voigt,0.05,0.1875,H1,0.23125,0.628125,12
+"synchron (0°,0°)",Kelvin-Voigt,0.05,0.1875,K,0.63125,0.66875,5
+"synchron (0°,0°)",Kelvin-Voigt,0.05,0.1875,H1,0.671875,0.771875,7
+"synchron (0°,0°)",Kelvin-Voigt,0.05,0.1875,H2,0.775,1,6
+"synchron (0°,0°)",Kelvin-Voigt,0.05,0.25,H2,-1,-0.915625,5
+"synchron (0°,0°)",Kelvin-Voigt,0.05,0.25,H1,-0.9125,-0.784375,6
+"synchron (0°,0°)",Kelvin-Voigt,0.05,0.25,K,-0.78125,-0.7375,4
+"synchron (0°,0°)",Kelvin-Voigt,0.05,0.25,H1,-0.734375,-0.2625,14
+"synchron (0°,0°)",Kelvin-Voigt,0.05,0.25,K,-0.259375,0.221875,15
+"synchron (0°,0°)",Kelvin-Voigt,0.05,0.25,H1,0.225,0.628125,11
+"synchron (0°,0°)",Kelvin-Voigt,0.05,0.25,K,0.63125,0.66875,5
+"synchron (0°,0°)",Kelvin-Voigt,0.05,0.25,H1,0.671875,0.740625,6
+"synchron (0°,0°)",Kelvin-Voigt,0.05,0.25,K,0.74375,0.75,2
+"synchron (0°,0°)",Kelvin-Voigt,0.05,0.25,H1,0.753125,0.778125,5
+"synchron (0°,0°)",Kelvin-Voigt,0.05,0.25,H2,0.78125,1,7
+"synchron (0°,0°)",Kelvin-Voigt,0.05,0.3125,H2,-1,-0.934375,4
+"synchron (0°,0°)",Kelvin-Voigt,0.05,0.3125,H1,-0.93125,-0.79375,6
+"synchron (0°,0°)",Kelvin-Voigt,0.05,0.3125,K,-0.790625,-0.74375,5
+"synchron (0°,0°)",Kelvin-Voigt,0.05,0.3125,H1,-0.740625,-0.26875,14
+"synchron (0°,0°)",Kelvin-Voigt,0.05,0.3125,K,-0.265625,0.225,13
+"synchron (0°,0°)",Kelvin-Voigt,0.05,0.3125,H1,0.228125,0.634375,14
+"synchron (0°,0°)",Kelvin-Voigt,0.05,0.3125,K,0.6375,0.675,3
+"synchron (0°,0°)",Kelvin-Voigt,0.05,0.3125,H1,0.678125,0.746875,8
+"synchron (0°,0°)",Kelvin-Voigt,0.05,0.3125,K,0.75,0.75625,2
+"synchron (0°,0°)",Kelvin-Voigt,0.05,0.3125,H1,0.759375,0.79375,5
+"synchron (0°,0°)",Kelvin-Voigt,0.05,0.3125,H2,0.796875,1,6
+"synchron (0°,0°)",Kelvin-Voigt,0.05,0.375,H2,-1,-0.965625,4
+"synchron (0°,0°)",Kelvin-Voigt,0.05,0.375,H1,-0.9625,-0.903125,6
+"synchron (0°,0°)",Kelvin-Voigt,0.05,0.375,K,-0.9,-0.890625,3
+"synchron (0°,0°)",Kelvin-Voigt,0.05,0.375,H1,-0.8875,-0.803125,7
+"synchron (0°,0°)",Kelvin-Voigt,0.05,0.375,K,-0.8,-0.753125,5
+"synchron (0°,0°)",Kelvin-Voigt,0.05,0.375,H1,-0.75,-0.278125,13
+"synchron (0°,0°)",Kelvin-Voigt,0.05,0.375,K,-0.275,0.23125,13
+"synchron (0°,0°)",Kelvin-Voigt,0.05,0.375,H1,0.234375,0.640625,13
+"synchron (0°,0°)",Kelvin-Voigt,0.05,0.375,K,0.64375,0.684375,5
+"synchron (0°,0°)",Kelvin-Voigt,0.05,0.375,H1,0.6875,0.796875,7
+"synchron (0°,0°)",Kelvin-Voigt,0.05,0.375,K,0.8,0.8125,2
+"synchron (0°,0°)",Kelvin-Voigt,0.05,0.375,H1,0.815625,0.815625,1
+"synchron (0°,0°)",Kelvin-Voigt,0.05,0.375,H2,0.81875,1,6
+"synchron (0°,0°)",Kelvin-Voigt,0.05,0.4375,K,-1,-1,1
+"synchron (0°,0°)",Kelvin-Voigt,0.05,0.4375,H1,-0.996875,-0.809375,10
+"synchron (0°,0°)",Kelvin-Voigt,0.05,0.4375,K,-0.80625,-0.75625,5
+"synchron (0°,0°)",Kelvin-Voigt,0.05,0.4375,H1,-0.753125,-0.290625,13
+"synchron (0°,0°)",Kelvin-Voigt,0.05,0.4375,K,-0.2875,0.240625,15
+"synchron (0°,0°)",Kelvin-Voigt,0.05,0.4375,H1,0.24375,0.646875,13
+"synchron (0°,0°)",Kelvin-Voigt,0.05,0.4375,K,0.65,0.690625,4
+"synchron (0°,0°)",Kelvin-Voigt,0.05,0.4375,H1,0.69375,0.846875,8
+"synchron (0°,0°)",Kelvin-Voigt,0.05,0.4375,H2,0.85,0.96875,5
+"synchron (0°,0°)",Kelvin-Voigt,0.05,0.4375,H1,0.971875,1,3
+"synchron (0°,0°)",Kelvin-Voigt,0.05,0.5,K,-1,-0.99375,2
+"synchron (0°,0°)",Kelvin-Voigt,0.05,0.5,H1,-0.990625,-0.8125,8
+"synchron (0°,0°)",Kelvin-Voigt,0.05,0.5,K,-0.809375,-0.753125,7
+"synchron (0°,0°)",Kelvin-Voigt,0.05,0.5,H1,-0.75,-0.309375,12
+"synchron (0°,0°)",Kelvin-Voigt,0.05,0.5,K,-0.30625,0.25625,14
+"synchron (0°,0°)",Kelvin-Voigt,0.05,0.5,H1,0.259375,0.646875,14
+"synchron (0°,0°)",Kelvin-Voigt,0.05,0.5,K,0.65,0.69375,4
+"synchron (0°,0°)",Kelvin-Voigt,0.05,0.5,H1,0.696875,0.840625,7
+"synchron (0°,0°)",Kelvin-Voigt,0.05,0.5,K,0.84375,0.85,2
+"synchron (0°,0°)",Kelvin-Voigt,0.05,0.5,H1,0.853125,0.984375,9
+"synchron (0°,0°)",Kelvin-Voigt,0.05,0.5,K,0.9875,1,2
+"synchron (0°,0°)",Kelvin-Voigt,0.05,0.5625,H1,-1,-0.80625,7
+"synchron (0°,0°)",Kelvin-Voigt,0.05,0.5625,K,-0.803125,-0.728125,6
+"synchron (0°,0°)",Kelvin-Voigt,0.05,0.5625,H1,-0.725,-0.3375,10
+"synchron (0°,0°)",Kelvin-Voigt,0.05,0.5625,K,-0.334375,0.275,16
+"synchron (0°,0°)",Kelvin-Voigt,0.05,0.5625,H1,0.278125,0.63125,12
+"synchron (0°,0°)",Kelvin-Voigt,0.05,0.5625,K,0.634375,0.690625,6
+"synchron (0°,0°)",Kelvin-Voigt,0.05,0.5625,H1,0.69375,0.778125,5
+"synchron (0°,0°)",Kelvin-Voigt,0.05,0.5625,K,0.78125,0.8,3
+"synchron (0°,0°)",Kelvin-Voigt,0.05,0.5625,H1,0.803125,0.8875,7
+"synchron (0°,0°)",Kelvin-Voigt,0.05,0.5625,K,0.890625,0.925,4
+"synchron (0°,0°)",Kelvin-Voigt,0.05,0.5625,H1,0.928125,1,5
+"synchron (0°,0°)",Kelvin-Voigt,0.05,0.625,H1,-1,-0.790625,7
+"synchron (0°,0°)",Kelvin-Voigt,0.05,0.625,K,-0.7875,-0.66875,6
+"synchron (0°,0°)",Kelvin-Voigt,0.05,0.625,H1,-0.665625,-0.39375,9
+"synchron (0°,0°)",Kelvin-Voigt,0.05,0.625,K,-0.390625,0.315625,19
+"synchron (0°,0°)",Kelvin-Voigt,0.05,0.625,H1,0.31875,0.590625,10
+"synchron (0°,0°)",Kelvin-Voigt,0.05,0.625,K,0.59375,0.68125,5
+"synchron (0°,0°)",Kelvin-Voigt,0.05,0.625,H1,0.684375,0.778125,6
+"synchron (0°,0°)",Kelvin-Voigt,0.05,0.625,K,0.78125,0.809375,5
+"synchron (0°,0°)",Kelvin-Voigt,0.05,0.625,H1,0.8125,1,6
+"synchron (0°,0°)",Kelvin-Voigt,0.05,0.6875,K,-1,-0.896875,4
+"synchron (0°,0°)",Kelvin-Voigt,0.05,0.6875,H1,-0.89375,-0.75,6
+"synchron (0°,0°)",Kelvin-Voigt,0.05,0.6875,K,-0.746875,0.378125,28
+"synchron (0°,0°)",Kelvin-Voigt,0.05,0.6875,H1,0.38125,0.46875,6
+"synchron (0°,0°)",Kelvin-Voigt,0.05,0.6875,K,0.471875,0.65625,7
+"synchron (0°,0°)",Kelvin-Voigt,0.05,0.6875,H1,0.659375,0.771875,8
+"synchron (0°,0°)",Kelvin-Voigt,0.05,0.6875,K,0.775,0.81875,4
+"synchron (0°,0°)",Kelvin-Voigt,0.05,0.6875,H1,0.821875,0.909375,6
+"synchron (0°,0°)",Kelvin-Voigt,0.05,0.6875,K,0.9125,1,4
+"synchron (0°,0°)",Kelvin-Voigt,0.05,0.75,H1,-1,-0.9625,3
+"synchron (0°,0°)",Kelvin-Voigt,0.05,0.75,K,-0.959375,-0.859375,7
+"synchron (0°,0°)",Kelvin-Voigt,0.05,0.75,H1,-0.85625,-0.671875,7
+"synchron (0°,0°)",Kelvin-Voigt,0.05,0.75,K,-0.66875,0.6,28
+"synchron (0°,0°)",Kelvin-Voigt,0.05,0.75,H1,0.603125,0.74375,9
+"synchron (0°,0°)",Kelvin-Voigt,0.05,0.75,K,0.746875,0.88125,6
+"synchron (0°,0°)",Kelvin-Voigt,0.05,0.75,H1,0.884375,0.9375,5
+"synchron (0°,0°)",Kelvin-Voigt,0.05,0.75,K,0.940625,0.99375,6
+"synchron (0°,0°)",Kelvin-Voigt,0.05,0.75,H1,0.996875,1,2
+"synchron (0°,0°)",Kelvin-Voigt,0.05,0.8125,K,-1,-0.99375,2
+"synchron (0°,0°)",Kelvin-Voigt,0.05,0.8125,H1,-0.990625,-0.571875,13
+"synchron (0°,0°)",Kelvin-Voigt,0.05,0.8125,K,-0.56875,0.515625,26
+"synchron (0°,0°)",Kelvin-Voigt,0.05,0.8125,H1,0.51875,0.878125,11
+"synchron (0°,0°)",Kelvin-Voigt,0.05,0.8125,K,0.88125,0.91875,5
+"synchron (0°,0°)",Kelvin-Voigt,0.05,0.8125,H1,0.921875,0.996875,7
+"synchron (0°,0°)",Kelvin-Voigt,0.05,0.8125,K,1,1,1
+"synchron (0°,0°)",Kelvin-Voigt,0.05,0.875,H1,-1,-0.946875,3
+"synchron (0°,0°)",Kelvin-Voigt,0.05,0.875,K,-0.94375,-0.9,4
+"synchron (0°,0°)",Kelvin-Voigt,0.05,0.875,H1,-0.896875,-0.465625,15
+"synchron (0°,0°)",Kelvin-Voigt,0.05,0.875,K,-0.4625,0.425,20
+"synchron (0°,0°)",Kelvin-Voigt,0.05,0.875,H1,0.428125,0.79375,13
+"synchron (0°,0°)",Kelvin-Voigt,0.05,0.875,K,0.796875,0.834375,5
+"synchron (0°,0°)",Kelvin-Voigt,0.05,0.875,H1,0.8375,0.928125,5
+"synchron (0°,0°)",Kelvin-Voigt,0.05,0.875,K,0.93125,0.93125,1
+"synchron (0°,0°)",Kelvin-Voigt,0.05,0.875,H1,0.934375,0.934375,1
+"synchron (0°,0°)",Kelvin-Voigt,0.05,0.875,H2,0.9375,1,3
+"synchron (0°,0°)",Kelvin-Voigt,0.05,0.9375,H2,-1,-0.98125,3
+"synchron (0°,0°)",Kelvin-Voigt,0.05,0.9375,H1,-0.978125,-0.95625,4
+"synchron (0°,0°)",Kelvin-Voigt,0.05,0.9375,K,-0.953125,-0.946875,3
+"synchron (0°,0°)",Kelvin-Voigt,0.05,0.9375,H1,-0.94375,-0.86875,6
+"synchron (0°,0°)",Kelvin-Voigt,0.05,0.9375,K,-0.865625,-0.825,4
+"synchron (0°,0°)",Kelvin-Voigt,0.05,0.9375,H1,-0.821875,-0.38125,14
+"synchron (0°,0°)",Kelvin-Voigt,0.05,0.9375,K,-0.378125,0.346875,20
+"synchron (0°,0°)",Kelvin-Voigt,0.05,0.9375,H1,0.35,0.721875,11
+"synchron (0°,0°)",Kelvin-Voigt,0.05,0.9375,K,0.725,0.759375,4
+"synchron (0°,0°)",Kelvin-Voigt,0.05,0.9375,H1,0.7625,0.859375,6
+"synchron (0°,0°)",Kelvin-Voigt,0.05,0.9375,H2,0.8625,1,5
+"(0°,180°)",Kelvin-Voigt,0.05,0,K,-1,-0.89375,4
+"(0°,180°)",Kelvin-Voigt,0.05,0,H1,-0.890625,-0.846875,5
+"(0°,180°)",Kelvin-Voigt,0.05,0,K,-0.84375,-0.634375,9
+"(0°,180°)",Kelvin-Voigt,0.05,0,H1,-0.63125,-0.459375,8
+"(0°,180°)",Kelvin-Voigt,0.05,0,K,-0.45625,0.396875,22
+"(0°,180°)",Kelvin-Voigt,0.05,0,H1,0.4,0.54375,6
+"(0°,180°)",Kelvin-Voigt,0.05,0,K,0.546875,0.721875,8
+"(0°,180°)",Kelvin-Voigt,0.05,0,H1,0.725,0.765625,4
+"(0°,180°)",Kelvin-Voigt,0.05,0,K,0.76875,0.840625,6
+"(0°,180°)",Kelvin-Voigt,0.05,0,H1,0.84375,0.85625,3
+"(0°,180°)",Kelvin-Voigt,0.05,0,K,0.859375,0.95,5
+"(0°,180°)",Kelvin-Voigt,0.05,0,H1,0.953125,1,5
+"(0°,180°)",Kelvin-Voigt,0.05,0.0625,K,-1,-0.88125,5
+"(0°,180°)",Kelvin-Voigt,0.05,0.0625,H1,-0.878125,-0.85,3
+"(0°,180°)",Kelvin-Voigt,0.05,0.0625,K,-0.846875,-0.625,9
+"(0°,180°)",Kelvin-Voigt,0.05,0.0625,H1,-0.621875,-0.446875,8
+"(0°,180°)",Kelvin-Voigt,0.05,0.0625,K,-0.44375,0.384375,22
+"(0°,180°)",Kelvin-Voigt,0.05,0.0625,H1,0.3875,0.534375,7
+"(0°,180°)",Kelvin-Voigt,0.05,0.0625,K,0.5375,0.725,6
+"(0°,180°)",Kelvin-Voigt,0.05,0.0625,H1,0.728125,0.75625,5
+"(0°,180°)",Kelvin-Voigt,0.05,0.0625,K,0.759375,0.89375,8
+"(0°,180°)",Kelvin-Voigt,0.05,0.0625,H1,0.896875,0.90625,3
+"(0°,180°)",Kelvin-Voigt,0.05,0.0625,K,0.909375,1,5
+"(0°,180°)",Kelvin-Voigt,0.05,0.125,K,-1,-0.875,4
+"(0°,180°)",Kelvin-Voigt,0.05,0.125,H1,-0.871875,-0.846875,5
+"(0°,180°)",Kelvin-Voigt,0.05,0.125,K,-0.84375,-0.61875,9
+"(0°,180°)",Kelvin-Voigt,0.05,0.125,H1,-0.615625,-0.44375,7
+"(0°,180°)",Kelvin-Voigt,0.05,0.125,K,-0.440625,0.378125,21
+"(0°,180°)",Kelvin-Voigt,0.05,0.125,H1,0.38125,0.53125,7
+"(0°,180°)",Kelvin-Voigt,0.05,0.125,K,0.534375,0.725,7
+"(0°,180°)",Kelvin-Voigt,0.05,0.125,H1,0.728125,0.75,4
+"(0°,180°)",Kelvin-Voigt,0.05,0.125,K,0.753125,0.896875,10
+"(0°,180°)",Kelvin-Voigt,0.05,0.125,H1,0.9,0.915625,3
+"(0°,180°)",Kelvin-Voigt,0.05,0.125,K,0.91875,1,4
+"(0°,180°)",Kelvin-Voigt,0.05,0.1875,K,-1,-0.978125,4
+"(0°,180°)",Kelvin-Voigt,0.05,0.1875,H1,-0.975,-0.94375,3
+"(0°,180°)",Kelvin-Voigt,0.05,0.1875,K,-0.940625,-0.8625,6
+"(0°,180°)",Kelvin-Voigt,0.05,0.1875,H1,-0.859375,-0.840625,5
+"(0°,180°)",Kelvin-Voigt,0.05,0.1875,K,-0.8375,-0.6,7
+"(0°,180°)",Kelvin-Voigt,0.05,0.1875,H1,-0.596875,-0.453125,10
+"(0°,180°)",Kelvin-Voigt,0.05,0.1875,K,-0.45,0.384375,20
+"(0°,180°)",Kelvin-Voigt,0.05,0.1875,H1,0.3875,0.51875,6
+"(0°,180°)",Kelvin-Voigt,0.05,0.1875,K,0.521875,1,12
+"(0°,180°)",Kelvin-Voigt,0.05,0.25,K,-1,-0.971875,3
+"(0°,180°)",Kelvin-Voigt,0.05,0.25,H1,-0.96875,-0.93125,5
+"(0°,180°)",Kelvin-Voigt,0.05,0.25,K,-0.928125,-0.565625,12
+"(0°,180°)",Kelvin-Voigt,0.05,0.25,H1,-0.5625,-0.475,4
+"(0°,180°)",Kelvin-Voigt,0.05,0.25,K,-0.471875,0.396875,24
+"(0°,180°)",Kelvin-Voigt,0.05,0.25,H1,0.4,0.490625,5
+"(0°,180°)",Kelvin-Voigt,0.05,0.25,K,0.49375,0.925,11
+"(0°,180°)",Kelvin-Voigt,0.05,0.25,H1,0.928125,0.9625,5
+"(0°,180°)",Kelvin-Voigt,0.05,0.25,K,0.965625,1,4
+"(0°,180°)",Kelvin-Voigt,0.05,0.3125,K,-1,-0.978125,4
+"(0°,180°)",Kelvin-Voigt,0.05,0.3125,H1,-0.975,-0.91875,4
+"(0°,180°)",Kelvin-Voigt,0.05,0.3125,K,-0.915625,-0.825,5
+"(0°,180°)",Kelvin-Voigt,0.05,0.3125,H1,-0.821875,-0.796875,5
+"(0°,180°)",Kelvin-Voigt,0.05,0.3125,K,-0.79375,0.6875,34
+"(0°,180°)",Kelvin-Voigt,0.05,0.3125,H1,0.690625,0.709375,5
+"(0°,180°)",Kelvin-Voigt,0.05,0.3125,K,0.7125,0.7875,5
+"(0°,180°)",Kelvin-Voigt,0.05,0.3125,H1,0.790625,0.834375,6
+"(0°,180°)",Kelvin-Voigt,0.05,0.3125,K,0.8375,0.928125,5
+"(0°,180°)",Kelvin-Voigt,0.05,0.3125,H1,0.93125,0.971875,6
+"(0°,180°)",Kelvin-Voigt,0.05,0.3125,K,0.975,1,2
+"(0°,180°)",Kelvin-Voigt,0.05,0.375,K,-1,-0.990625,3
+"(0°,180°)",Kelvin-Voigt,0.05,0.375,H1,-0.9875,-0.934375,5
+"(0°,180°)",Kelvin-Voigt,0.05,0.375,K,-0.93125,-0.803125,8
+"(0°,180°)",Kelvin-Voigt,0.05,0.375,H1,-0.8,-0.775,2
+"(0°,180°)",Kelvin-Voigt,0.05,0.375,K,-0.771875,0.7875,36
+"(0°,180°)",Kelvin-Voigt,0.05,0.375,H1,0.790625,0.840625,6
+"(0°,180°)",Kelvin-Voigt,0.05,0.375,K,0.84375,0.925,4
+"(0°,180°)",Kelvin-Voigt,0.05,0.375,H1,0.928125,1,5
+"(0°,180°)",Kelvin-Voigt,0.05,0.4375,H1,-1,-0.971875,3
+"(0°,180°)",Kelvin-Voigt,0.05,0.4375,K,-0.96875,0.821875,41
+"(0°,180°)",Kelvin-Voigt,0.05,0.4375,H1,0.825,0.85625,3
+"(0°,180°)",Kelvin-Voigt,0.05,0.4375,K,0.859375,0.925,5
+"(0°,180°)",Kelvin-Voigt,0.05,0.4375,H1,0.928125,1,5
+"(0°,180°)",Kelvin-Voigt,0.05,0.5,H1,-1,-0.99375,2
+"(0°,180°)",Kelvin-Voigt,0.05,0.5,K,-0.990625,-0.784375,9
+"(0°,180°)",Kelvin-Voigt,0.05,0.5,H1,-0.78125,-0.746875,4
+"(0°,180°)",Kelvin-Voigt,0.05,0.5,K,-0.74375,0.640625,33
+"(0°,180°)",Kelvin-Voigt,0.05,0.5,H1,0.64375,0.66875,4
+"(0°,180°)",Kelvin-Voigt,0.05,0.5,K,0.671875,0.84375,8
+"(0°,180°)",Kelvin-Voigt,0.05,0.5,H1,0.846875,0.865625,4
+"(0°,180°)",Kelvin-Voigt,0.05,0.5,K,0.86875,1,5
+"(0°,180°)",Kelvin-Voigt,0.05,0.5625,H1,-1,-1,1
+"(0°,180°)",Kelvin-Voigt,0.05,0.5625,K,-0.996875,-0.78125,10
+"(0°,180°)",Kelvin-Voigt,0.05,0.5625,H1,-0.778125,-0.7375,4
+"(0°,180°)",Kelvin-Voigt,0.05,0.5625,K,-0.734375,0.63125,32
+"(0°,180°)",Kelvin-Voigt,0.05,0.5625,H1,0.634375,0.66875,5
+"(0°,180°)",Kelvin-Voigt,0.05,0.5625,K,0.671875,1,9
+"(0°,180°)",Kelvin-Voigt,0.05,0.625,K,-1,-0.775,6
+"(0°,180°)",Kelvin-Voigt,0.05,0.625,H1,-0.771875,-0.725,5
+"(0°,180°)",Kelvin-Voigt,0.05,0.625,K,-0.721875,0.621875,33
+"(0°,180°)",Kelvin-Voigt,0.05,0.625,H1,0.625,0.6625,3
+"(0°,180°)",Kelvin-Voigt,0.05,0.625,K,0.665625,1,10
+"(0°,180°)",Kelvin-Voigt,0.05,0.6875,H1,-1,-0.990625,3
+"(0°,180°)",Kelvin-Voigt,0.05,0.6875,K,-0.9875,-0.759375,9
+"(0°,180°)",Kelvin-Voigt,0.05,0.6875,H1,-0.75625,-0.7,3
+"(0°,180°)",Kelvin-Voigt,0.05,0.6875,K,-0.696875,0.60625,31
+"(0°,180°)",Kelvin-Voigt,0.05,0.6875,H1,0.609375,0.653125,5
+"(0°,180°)",Kelvin-Voigt,0.05,0.6875,K,0.65625,1,10
+"(0°,180°)",Kelvin-Voigt,0.05,0.75,K,-1,-0.725,7
+"(0°,180°)",Kelvin-Voigt,0.05,0.75,H1,-0.721875,-0.653125,8
+"(0°,180°)",Kelvin-Voigt,0.05,0.75,K,-0.65,0.571875,28
+"(0°,180°)",Kelvin-Voigt,0.05,0.75,H1,0.575,0.628125,4
+"(0°,180°)",Kelvin-Voigt,0.05,0.75,K,0.63125,1,10
+"(0°,180°)",Kelvin-Voigt,0.05,0.8125,K,-1,-0.69375,8
+"(0°,180°)",Kelvin-Voigt,0.05,0.8125,H1,-0.690625,-0.59375,6
+"(0°,180°)",Kelvin-Voigt,0.05,0.8125,K,-0.590625,0.521875,28
+"(0°,180°)",Kelvin-Voigt,0.05,0.8125,H1,0.525,0.6,3
+"(0°,180°)",Kelvin-Voigt,0.05,0.8125,K,0.603125,0.790625,10
+"(0°,180°)",Kelvin-Voigt,0.05,0.8125,H1,0.79375,0.8125,3
+"(0°,180°)",Kelvin-Voigt,0.05,0.8125,K,0.815625,1,7
+"(0°,180°)",Kelvin-Voigt,0.05,0.875,K,-1,-0.921875,4
+"(0°,180°)",Kelvin-Voigt,0.05,0.875,H1,-0.91875,-0.865625,6
+"(0°,180°)",Kelvin-Voigt,0.05,0.875,K,-0.8625,-0.671875,7
+"(0°,180°)",Kelvin-Voigt,0.05,0.875,H1,-0.66875,-0.53125,7
+"(0°,180°)",Kelvin-Voigt,0.05,0.875,K,-0.528125,0.46875,24
+"(0°,180°)",Kelvin-Voigt,0.05,0.875,H1,0.471875,0.578125,6
+"(0°,180°)",Kelvin-Voigt,0.05,0.875,K,0.58125,1,11
+"(0°,180°)",Kelvin-Voigt,0.05,0.9375,K,-1,-0.903125,6
+"(0°,180°)",Kelvin-Voigt,0.05,0.9375,H1,-0.9,-0.85,2
+"(0°,180°)",Kelvin-Voigt,0.05,0.9375,K,-0.846875,-0.65,8
+"(0°,180°)",Kelvin-Voigt,0.05,0.9375,H1,-0.646875,-0.484375,9
+"(0°,180°)",Kelvin-Voigt,0.05,0.9375,K,-0.48125,0.425,21
+"(0°,180°)",Kelvin-Voigt,0.05,0.9375,H1,0.428125,0.559375,8
+"(0°,180°)",Kelvin-Voigt,0.05,0.9375,K,0.5625,0.728125,7
+"(0°,180°)",Kelvin-Voigt,0.05,0.9375,H1,0.73125,0.778125,5
+"(0°,180°)",Kelvin-Voigt,0.05,0.9375,K,0.78125,1,7

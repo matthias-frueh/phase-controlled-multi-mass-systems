@@ -1,0 +1,7 @@
+laufart,gesetz,zeta,attraktor,zustand,periode,aufsetzer_je_periode,lambda_pct,F_max_N,stossspitze_N,mu_max,newton,aufsetzphasen_T,zellen_raster
+L1,Kelvin-Voigt,0.05,K,Kontaktast,1,0,0,8.64128,,0.000502686,geschlossen,,1513
+L1,Kelvin-Voigt,0.05,H1,Hüpfen,1,1,97.9787,481.88,481.88,0.857674,konvergiert,0.0609,95
+"Schnitt (100°,240°)",Kelvin-Voigt,0.05,K,Kontaktast,1,0,0,7.22245,,0.000502686,geschlossen,,1608
+"Schnitt (120°,240°)",Kelvin-Voigt,0.05,K,Kontaktast,1,0,0,6.96903,,0.000502686,geschlossen,,1608
+"Schnitt (140°,240°)",Kelvin-Voigt,0.05,K,Kontaktast,1,0,0,7.24701,,0.000502686,geschlossen,,1608
+"Pilot (110°,252°)",Kelvin-Voigt,0.05,K,Kontaktast,1,0,0,7.27046,,0.000502686,geschlossen,,1608

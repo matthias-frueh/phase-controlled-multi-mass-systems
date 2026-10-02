@@ -1,0 +1,32 @@
+laufart,gesetz,zeta,attraktor,zustand,periode,aufsetzer_je_periode,lambda_pct,F_max_N,stossspitze_N,mu_max,newton,aufsetzphasen_T,zellen_raster
+L1,Kelvin-Voigt,0.05,K,Kontaktast,1,0,0,8.64128,,0.000502686,geschlossen,,619
+L1,Kelvin-Voigt,0.05,H1,Hüpfen,1,1,97.9787,481.88,481.88,0.857674,konvergiert,0.0609,37
+"Schnitt (100°,240°)",Kelvin-Voigt,0.05,K,Kontaktast,1,0,0,7.22245,,0.000502686,geschlossen,,656
+"Schnitt (102°,240°)",Kelvin-Voigt,0.05,K,Kontaktast,1,0,0,7.19571,,0.000502686,geschlossen,,656
+"Schnitt (104°,240°)",Kelvin-Voigt,0.05,K,Kontaktast,1,0,0,7.16904,,0.000502686,geschlossen,,656
+"Schnitt (106°,240°)",Kelvin-Voigt,0.05,K,Kontaktast,1,0,0,7.14187,,0.000502686,geschlossen,,656
+"Schnitt (108°,240°)",Kelvin-Voigt,0.05,K,Kontaktast,1,0,0,7.11421,,0.000502686,geschlossen,,656
+"Schnitt (110°,240°)",Kelvin-Voigt,0.05,K,Kontaktast,1,0,0,7.08678,,0.000502686,geschlossen,,656
+"Schnitt (112°,240°)",Kelvin-Voigt,0.05,K,Kontaktast,1,0,0,7.0607,,0.000502686,geschlossen,,656
+"Schnitt (114°,240°)",Kelvin-Voigt,0.05,K,Kontaktast,1,0,0,7.03669,,0.000502686,geschlossen,,656
+"Schnitt (116°,240°)",Kelvin-Voigt,0.05,K,Kontaktast,1,0,0,7.01418,,0.000502686,geschlossen,,656
+"Schnitt (118°,240°)",Kelvin-Voigt,0.05,K,Kontaktast,1,0,0,6.99193,,0.000502686,geschlossen,,656
+"Schnitt (120°,240°)",Kelvin-Voigt,0.05,K,Kontaktast,1,0,0,6.96903,,0.000502686,geschlossen,,656
+"Schnitt (122°,240°)",Kelvin-Voigt,0.05,K,Kontaktast,1,0,0,6.98287,,0.000502686,geschlossen,,656
+"Schnitt (124°,240°)",Kelvin-Voigt,0.05,K,Kontaktast,1,0,0,7.01402,,0.000502686,geschlossen,,656
+"Schnitt (126°,240°)",Kelvin-Voigt,0.05,K,Kontaktast,1,0,0,7.04901,,0.000502686,geschlossen,,656
+"Schnitt (128°,240°)",Kelvin-Voigt,0.05,K,Kontaktast,1,0,0,7.096,,0.000502686,geschlossen,,656
+"Schnitt (130°,240°)",Kelvin-Voigt,0.05,K,Kontaktast,1,0,0,7.13152,,0.000502686,geschlossen,,656
+"Schnitt (132°,240°)",Kelvin-Voigt,0.05,K,Kontaktast,1,0,0,7.15521,,0.000502686,geschlossen,,656
+"Schnitt (134°,240°)",Kelvin-Voigt,0.05,K,Kontaktast,1,0,0,7.16925,,0.000502686,geschlossen,,656
+"Schnitt (136°,240°)",Kelvin-Voigt,0.05,K,Kontaktast,1,0,0,7.17954,,0.000502686,geschlossen,,656
+"Schnitt (138°,240°)",Kelvin-Voigt,0.05,K,Kontaktast,1,0,0,7.2016,,0.000502686,geschlossen,,656
+"Schnitt (140°,240°)",Kelvin-Voigt,0.05,K,Kontaktast,1,0,0,7.24701,,0.000502686,geschlossen,,656
+"Pilot (110°,250°)",Kelvin-Voigt,0.05,K,Kontaktast,1,0,0,7.2465,,0.000502686,geschlossen,,656
+"Pilot (130°,230°)",Kelvin-Voigt,0.05,K,Kontaktast,1,0,0,7.15695,,0.000502686,geschlossen,,656
+"Pilot (110°,252°)",Kelvin-Voigt,0.05,K,Kontaktast,1,0,0,7.27046,,0.000502686,geschlossen,,656
+"synchron (0°,0°)",Kelvin-Voigt,0.05,K,Kontaktast,1,0,0,13.1709,,0.000502686,geschlossen,,282
+"synchron (0°,0°)",Kelvin-Voigt,0.05,H1,Hüpfen,1,1,97.9872,483.665,483.665,0.858233,konvergiert,0.2485,319
+"synchron (0°,0°)",Kelvin-Voigt,0.05,H2,Hüpfen,2,0.5,98.9952,968.649,968.649,0.858439,konvergiert,0.1721,55
+"(0°,180°)",Kelvin-Voigt,0.05,K,Kontaktast,1,0,0,9.69275,,0.000502686,geschlossen,,564
+"(0°,180°)",Kelvin-Voigt,0.05,H1,Hüpfen,1,1,97.9811,482.394,482.394,0.857835,konvergiert,0.0633,92

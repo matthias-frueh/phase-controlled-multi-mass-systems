@@ -1,0 +1,6 @@
+laufart,gesetz,zeta,attraktor,zustand,periode,aufsetzer_je_periode,lambda_pct,F_max_N,stossspitze_N,mu_max,newton,aufsetzphasen_T,zellen_raster
+L1,Hunt-Crossley,0.05,K,Kontaktast,1,0,0,8.74532,,0.785479,konvergiert,,80
+"Schnitt (120°,240°)",Hunt-Crossley,0.05,K,Kontaktast,1,0,0,7.13467,,0.785479,konvergiert,,67
+"Schnitt (120°,240°)",Hunt-Crossley,0.05,H1,Hüpfen,1,3,95.672,272.543,272.543,0.785479,konvergiert,0.2800;0.6133;0.9467,13
+"synchron (0°,0°)",Hunt-Crossley,0.05,K,Kontaktast,1,0,0,13.1963,,0.785479,konvergiert,,27
+"synchron (0°,0°)",Hunt-Crossley,0.05,H1,Hüpfen,1,1,98.8574,1052.25,1052.25,0.785479,konvergiert,0.2487,53
