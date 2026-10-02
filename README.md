@@ -23,9 +23,12 @@ beobachtete Abweichung des Zeitmittels gilt als Apparaturfehler. Der Untersuchun
 Wellenform, nicht das Mittel.
 
 Ausdrücklich **nicht** behauptet werden: reaktionsloser Antrieb, Gravitationsmodifikation,
-Gewichtsreduktion, Verschiebung des Zeitmittels. Ein früherer Simulationszyklus (v3a–v3d) berichtete eine
-solche Verschiebung; sie wurde als Kontaktmodell-Artefakt erkannt, zurückgezogen und archiviert
-([`docs/archiv_vermerk_kernhypothese_v3.md`](docs/archiv_vermerk_kernhypothese_v3.md)). Die alten Gleichungen bleiben als Nulllinie dokumentiert.
+Gewichtsreduktion, Verschiebung des Zeitmittels. Frühere Aussagen zu einer Mittelwertverschiebung, zu
+einer gerichteten Netto-Impulsübertragung ohne äußeren Partner und zu einer allgemeinen Vorzeichenregel
+der Schiefe sind zurückgezogen. Die Mittelwertverschiebung des Simulationszyklus v3a–v3d war ein Artefakt
+eines Kontaktmodells mit vorgeschriebener Eindrückung
+([`docs/archiv_vermerk_kernhypothese_v3.md`](docs/archiv_vermerk_kernhypothese_v3.md)); die Vorzeichenregel
+ist mit dem Arbeitspapier v2.4 (Abschnitt 4.8) zurückgezogen. Die alten Gleichungen bleiben als Nulllinie dokumentiert.
 
 ## Zwei Forschungslinien
 

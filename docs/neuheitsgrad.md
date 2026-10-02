@@ -124,7 +124,10 @@ Verstoß (S1, dort §9.2).
 
 Das ist messtechnisch erheblich sauberer, als eine scheinbare Mittelwertabweichung als neues
 physikalisches Ergebnis zu interpretieren — ein Fehler, den dieses Projekt in einer früheren
-Fassung selbst gemacht und dokumentiert korrigiert hat.
+Fassung selbst gemacht und dokumentiert korrigiert hat. Ursache war dort ein Kontaktmodell mit
+vorgeschriebener Eindrückung ([`archiv_vermerk_kernhypothese_v3.md`](archiv_vermerk_kernhypothese_v3.md)).
+Zurückgezogen sind auch frühere Aussagen zu einer gerichteten Netto-Impulsübertragung ohne äußeren
+Partner und zu einer allgemeinen Vorzeichenregel der Schiefe.
 
 ---
 

@@ -37,7 +37,9 @@ Mittelwertabweichung gilt per Protokoll als Apparaturfehler. Nach dem
 Kontrollschwelle ε_ctrl den Lauf ungültig; angehalten wird die Messung erst bei einem reproduzierbaren
 Verstoß (S1, dort §9.2). Linie B behauptet Nettobewegung, benennt aber den Reaktionspartner (Luft) und
 sagt vorher, dass der Effekt im Vakuum exakt verschwindet. Eine frühere Fassung behauptete tatsächlich eine
-Mittelwertverschiebung — sie wurde zurückgezogen, dokumentiert und archiviert.
+Mittelwertverschiebung — sie wurde zurückgezogen, dokumentiert und archiviert (Ursache: Kontaktmodell mit
+vorgeschriebener Eindrückung; `archiv_vermerk_kernhypothese_v3.md`). Zurückgezogen ist auch die frühere
+allgemeine Vorzeichenregel der Schiefe.
 
 **4 · Warum schwankt die Kraft bei festem Mittel?**
 

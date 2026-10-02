@@ -90,8 +90,10 @@ Antriebsbehauptung hinein, die dort nicht steht.
 **Eine dritte Hypothese wurde verworfen.** Eine frühere Fassung postulierte eine persistente
 Verschiebung des Zeitmittels (F̄ < M·g − ε). Sie ist durch den Schwerpunktsatz a priori ausgeschlossen,
 nicht erst empirisch offen. Die zugehörigen Simulationsbefunde erwiesen sich als Artefakt eines
-Kontaktmodells mit vorgeschriebener Eindrückung. Der Rückzug ist dokumentiert und die betroffenen
-Dokumente sind mit Archivvermerk versehen.
+Kontaktmodells mit vorgeschriebener Eindrückung. Der Rückzug ist dokumentiert
+([`archiv_vermerk_kernhypothese_v3.md`](archiv_vermerk_kernhypothese_v3.md)). Zurückgezogen sind ebenso
+frühere Aussagen zu einer gerichteten Netto-Impulsübertragung ohne äußeren Partner und zu einer
+allgemeinen Vorzeichenregel der Schiefe (Arbeitspapier v2.4, Abschnitt 4.8).
 
 ---
 
@@ -233,8 +235,8 @@ die ein reaktionsloser Antrieb nicht machen könnte. Wie Kraft und Drift von der
 vom noch offenen Kraftmodell bei kleiner Keulegan-Carpenter-Zahl ab.
 
 Eine frühere Fassung des Projekts behauptete tatsächlich eine Mittelwertverschiebung. Sie wurde
-zurückgezogen, der Rückzug ist dokumentiert und die betroffenen Dokumente sind entsprechend
-gekennzeichnet.
+zurückgezogen; Ursache war ein Kontaktmodell mit vorgeschriebener Eindrückung
+([`archiv_vermerk_kernhypothese_v3.md`](archiv_vermerk_kernhypothese_v3.md)).
 
 ### „Warum schwankt die Kraft, wenn der Mittelwert fest ist?"
 

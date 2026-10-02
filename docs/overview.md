@@ -14,6 +14,10 @@ Lizenz dieses Ordners: CC BY 4.0, siehe [`../LICENSE-CC-BY-4.0`](../LICENSE-CC-B
 6. `neuheitsgrad.md`, `einordnung.md`, `zehn_fragen.md` — Abgrenzung und Antworten auf die üblichen Einwände.
 7. `archiv_vermerk_kernhypothese_v3.md` — der dokumentierte Rückzug der früheren Hypothese.
 
+**Zurückgezogen** sind frühere Aussagen zu einer Mittelwertverschiebung (Ursache: Kontaktmodell mit
+vorgeschriebener Eindrückung; Archiv-Vermerk), zu einer gerichteten Netto-Impulsübertragung ohne äußeren
+Partner und zu einer allgemeinen Vorzeichenregel der Schiefe (Arbeitspapier v2.4, Abschnitt 4.8).
+
 ## Verbindliche Begriffe
 
 - **⟨N⟩ = M·g** ist Erhaltungssatz; ⟨N⟩ wird in jedem Lauf bestimmt, aber als Kontrollgröße, nicht als
@@ -54,3 +58,7 @@ Lizenz dieses Ordners: CC BY 4.0, siehe [`../LICENSE-CC-BY-4.0`](../LICENSE-CC-B
 Arbeitsstände in Bearbeitung (Forschungsrahmen v3.6), Linie-B-Skripte
 und -Notizen, Labor- und Messtechnikplanung. Sie folgen, sobald sie den Stand der abgelegten Dokumente
 erreicht haben.
+
+Außerhalb des Repositorys kursierende ältere Fassungen sind überholt: das Arbeitsmanuskript v2.1 (früher
+als Dissertation geführt), die Exposés vom Mai und Juli 2026, ältere Präsentationen, FAQ und Kurzpapiere.
+Sie enthalten teils zurückgezogene Aussagen. Maßgeblich sind die Fassungen in diesem Repository.

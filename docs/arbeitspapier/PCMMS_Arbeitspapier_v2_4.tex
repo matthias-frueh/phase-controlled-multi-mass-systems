@@ -92,8 +92,10 @@ $0{,}01\,\%$ bleibt, sondern ein Randterm des Auswertefensters: die
 Änderung der Schwerpunktsgeschwindigkeit über das Fenster, bezogen auf
 $g$ und Fensterlänge. Er entsteht bei unvollständigem Einschwingen, bei
 Fenstern ohne ganze Orbitperioden und bei aperiodischer Bewegung, fällt
-mit der Fensterlänge ab, kann als phasenabhängiger Effekt erscheinen und
-ist die quantitative Signatur des zurückgezogenen Befunds. Die vier
+mit der Fensterlänge ab und kann als phasenabhängiger Effekt erscheinen.
+Er erklärt die Restabweichungen der korrigierten Rechnungen; der
+zurückgezogene Befund einer Mittelwertverschiebung selbst ging auf ein
+Kontaktmodell mit vorgeschriebener Eindrückung zurück. Die vier
 Funktionale sind nicht unabhängig; nur die minimale Kontaktkraft trägt
 eigenständige Information. Das Vorzeichen der Schiefe ist keine
 Eigenschaft der Phasenlage allein: Im Raster tritt negative Schiefe nur
@@ -160,8 +162,10 @@ $0{.}01\,\%$, but a boundary term of the evaluation window: the change of
 the centre-of-mass velocity across the window, divided by $g$ times the
 window length. It arises from incomplete transients, from windows not
 spanning whole orbit periods and from aperiodic motion, decays with
-window length, can masquerade as a phase-dependent effect and is the
-quantitative signature of the withdrawn result. The four functionals are not
+window length and can masquerade as a phase-dependent effect. It
+explains the residual deviations of the corrected computations; the
+withdrawn mean-shift result itself came from a contact model with a
+prescribed indentation. The four functionals are not
 independent; only the minimum contact force carries separate
 information. The sign of the skewness is not a property of
 the phase configuration alone: in the grid, negative skewness occurs only
@@ -293,7 +297,12 @@ in Kurzfassung, Abstract, Abschnitt~\ref{sec:beitrag},
 Kapitel~\ref{chap:stand} und Kapitel~\ref{chap:fazit} auf Suchbefunde
 zurückgenommen, Kandidaten zu Impact-Oszillatoren als bibliografisch
 ungeprüft notiert und Anhang~\ref{app:recherche} mit dem
-Literaturverzeichnis abgeglichen. Das Arbeitsmanuskript v2.1 (früher
+Literaturverzeichnis abgeglichen. Die Begründung des Rückzugs der
+Mittelwertverschiebung ist vereinheitlicht: Ursache war ein Kontaktmodell
+mit vorgeschriebener Eindrückung; der Randterm des Auswertefensters
+erklärt nur die späteren Restabweichungen (Kurzfassung, Abstract,
+Abschnitt~\ref{sec:track1-sim}, Kapitel~\ref{chap:diskussion}
+und~\ref{chap:fazit}). Das Arbeitsmanuskript v2.1 (früher
 \emph{Dissertation}) ist fachlich überholt: Es enthält Aussagen, die die
 Fassungen v2.3 und v2.4 zurückziehen.
 
@@ -2075,9 +2084,12 @@ und kein nachgelagerter Auswerteschritt.
   \item Eine Ablehnung von $H_{0}^{\mathrm{ctrl}}$ ist nie ein positives
         Ergebnis.
   \item An keiner Stelle wird behauptet, die zeitgemittelte Kontaktkraft
-        lasse sich durch innere Bewegung verändern. Wo frühere Phasen
-        dieses Projekts das Gegenteil behauptet haben, ist die Behauptung
-        zurückgezogen und der Rückzug dokumentiert.
+        lasse sich durch innere Bewegung verändern. Frühere Aussagen zu
+        einer Mittelwertverschiebung, zu einer gerichteten
+        Netto-Impulsübertragung ohne äußeren Partner und zu einer
+        allgemeinen Vorzeichenregel der Schiefe sind zurückgezogen; der
+        Rückzug ist dokumentiert (Archiv-Vermerk Kernhypothese~v3 im
+        Repository; Abschnitt~\ref{sec:vorhersage-schiefe}).
 \end{itemize}
 
 \section{Stellung innerhalb der Arbeit}
@@ -3799,17 +3811,21 @@ Sollwert als konfigurationsabhängiger Effekt erschienen wäre.
 
 \paragraph{Bezug zum zurückgezogenen Ergebnis.}
 Eine frühere Phase dieses Projekts berichtete eine persistente
-Mittelwertverschiebung der Kontaktkraft.
-Tabelle~\ref{tab:residual-strat} ist die quantitative Signatur des dafür
-verantwortlichen Mechanismus: ein konfigurationsabhängiger Randterm des Auswertefensters, der bei
-Dauerkontakt verschwindet und bei starker Intermittenz den
+Mittelwertverschiebung der Kontaktkraft (Simulationszyklus v3a--v3d).
+Ursache war ein Kontaktmodell, das die Eindrückung der Unterlage direkt
+aus der Beschleunigung vorschrieb ($-ma/k$), statt sie als Zustandsgröße
+zu integrieren; das Ergebnis ist zurückgezogen (Archiv-Vermerk
+Kernhypothese~v3 im Repository). Tabelle~\ref{tab:residual-strat} zeigt
+den Mechanismus, der danach in der korrigierten Engine Restabweichungen
+erzeugt: einen konfigurationsabhängigen Randterm des Auswertefensters,
+der bei Dauerkontakt verschwindet und bei starker Intermittenz den
 Sub-Prozent-Bereich erreicht. Da der Liftoff-Anteil und mit ihm
 Einschwingdauer und Periodizität von der Phasenkonfiguration abhängen,
 erscheint dieser Randterm beim Vergleich von Konfigurationen über den
 Intermittenzbereich hinweg als systematischer, phasenabhängiger Effekt
 --- und ist doch nur die Impulsänderung über ein endliches, teils zu früh
-geöffnetes Fenster. Auf dieser Grundlage wurde das frühere Ergebnis
-zurückgezogen.
+geöffnetes Fenster. Er zeigt, wie eine scheinbare Mittelwertverschiebung
+auch ohne Modellfehler entstehen kann.
 
 \paragraph{Folge für die Messkampagne.}
 Daraus folgen drei Festlegungen. Erstens erfordern Konfigurationen mit
@@ -4658,8 +4674,10 @@ Der methodisch erhebliche Teil ist nicht der Wert, sondern die Art seines
 Zustandekommens: Der Befund wurde durch eine Größe erzeugt, deren
 richtige Antwort vorab bekannt war. Ohne diese Konstruktion wäre der
 Randterm nicht als solcher erkennbar gewesen, sondern hätte
-als konfigurationsabhängiger Effekt erscheinen können. Genau das ist in
-einer früheren Phase dieses Projekts geschehen.
+als konfigurationsabhängiger Effekt erscheinen können. In einer früheren
+Phase dieses Projekts erschien eine scheinbare Mittelwertverschiebung als
+Effekt; ihre Ursache war dort ein Modellfehler, die vorgeschriebene
+Eindrückung des Kontaktmodells.
 
 \vspace{0.5em}
 
@@ -4737,9 +4755,9 @@ verfälschen dennoch das Ergebnis:
 \end{itemize}
 
 Die Kontrolle ist damit eine \emph{notwendige}, keine hinreichende
-Bedingung. Sie schließt eine Fehlerklasse sicher aus --- diejenige, die
-in diesem Projekt tatsächlich zu einem zurückgezogenen Befund geführt hat
---- und lässt andere offen.
+Bedingung. Sie erkennt eine Fehlerklasse --- Verschiebungen des
+Zeitmittels, wie sie in diesem Projekt einem zurückgezogenen Befund
+zugrunde lagen --- und lässt andere offen.
 
 \vspace{0.5em}
 
@@ -4967,9 +4985,11 @@ Auswertefensters, die Impulsänderung des Schwerpunkts über das Fenster.
 Er entsteht bei unvollständigem Einschwingen, bei Fenstern ohne ganze
 Orbitperioden und bei aperiodischer Bewegung und fällt mit der
 Fensterlänge; die Integration trägt unter $0{,}01\,\%$ bei. Da der
-Liftoff-Anteil von der Phasenlage abhängt, erschien dieser Randterm in
-einer früheren Projektphase als phasenabhängiger Effekt. Die Größe mit bekannter Antwort hat ihn als Artefakt
-ausgewiesen.
+Liftoff-Anteil von der Phasenlage abhängt, kann dieser Randterm als
+phasenabhängiger Effekt erscheinen; die Größe mit bekannter Antwort weist
+ihn als Artefakt aus. Die früher berichtete Mittelwertverschiebung ging
+dagegen auf ein Kontaktmodell mit vorgeschriebener Eindrückung zurück und
+ist zurückgezogen.
 
 \paragraph{Die Wellenformfunktionale sind nicht entartet, aber auch
 nicht unabhängig.} Sie variieren über den Phasenraum um Faktoren,

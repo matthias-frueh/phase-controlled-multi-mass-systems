@@ -163,7 +163,10 @@ Beide Linien sind erhaltungskonform. Keine ist widerlegt. Sie dürfen nicht verm
 
 Eine frühere Fassung des Projekts prüfte eine andere Hypothese: ob sich der **Mittelwert** der
 äußeren Kraft dauerhaft verschieben könne. Diese Interpretation wurde analytisch und numerisch
-verworfen — sie war ein Artefakt des damals verwendeten Kontaktmodells.
+verworfen — sie war ein Artefakt des damals verwendeten Kontaktmodells, das die Eindrückung der
+Unterlage vorschrieb ([`archiv_vermerk_kernhypothese_v3.md`](archiv_vermerk_kernhypothese_v3.md)).
+Zurückgezogen sind ebenso frühere Aussagen zu einer gerichteten Netto-Impulsübertragung ohne äußeren
+Partner und zu einer allgemeinen Vorzeichenregel der Schiefe.
 
 Die älteren Gleichungen bleiben dokumentiert. Nicht als heutige Aussage, sondern als archivierte
 Nulllinie, ausdrücklich als überholt gekennzeichnet. Sie halten fest, welche Grenze das Projekt

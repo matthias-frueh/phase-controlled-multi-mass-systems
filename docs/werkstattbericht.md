@@ -44,7 +44,7 @@ Sie waren ein Rechenartefakt. Das damalige Kontaktmodell schrieb die Eindrückun
 
 Ein zweiter Fehler steckte im Bewegungsprofil selbst. Die Trajektorie der Innenmassen bestand aus einer langsamen Halte- und einer schnellen Rückführphase; an der Naht dazwischen sprang die Geschwindigkeit. Ein Geschwindigkeitssprung bedeutet einen Dirac-Stoß in der Beschleunigung, und der schlug als Bias von −0,808 N durch. Bemerkenswert daran ist, wo der Fehler sitzt: nicht im Zeitschritt, sondern im Modell. Man kann die Integration beliebig verfeinern, der Bias bleibt. Er verschwindet erst, wenn das Profil stetig differenzierbar gemacht wird — hier über die Bedingung R_bot = R_top · T_fast / T_hold.
 
-Beide Korrekturen zusammen haben die ursprüngliche Hypothese erledigt. Die betroffenen Stände sind archiviert und werden nicht mehr zitiert.
+Beide Korrekturen zusammen haben die ursprüngliche Hypothese erledigt. Die betroffenen Stände sind archiviert und werden nicht mehr zitiert ([`archiv_vermerk_kernhypothese_v3.md`](archiv_vermerk_kernhypothese_v3.md)). Später zurückgezogen wurde auch eine allgemeine Vorzeichenregel der Schiefe: Das Vorzeichen hängt von der Kontaktübertragung ab (Arbeitspapier v2.4, Abschnitt 4.8).
 
 ---
 
