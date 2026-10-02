@@ -312,6 +312,19 @@ def test_startzustaende():
         el.startzustand(el.referenz(0.0, 0.0), 'orbit')
 
 
+@pytest.mark.parametrize('hub, t0_T', [((8e-3,) * 3, 0.25), ((8e-3,) * 3, 0.375), ((8e-3,) * 3, 0.75),
+                                       ((8e-3,) * 3, 0.875), ((8e-3, 0.0, 0.0), 0.875)])
+def test_startzustand_hunt_crossley_am_kandidaten(v1, hub, t0_T):
+    """Abnahmebefund: Ab der Ruhelage divergierte Newton für Hunt-Crossley am steifen Kandidaten an diesen
+    Wurfphasen (synchron und L1) in den Flug, und startzustand meldete fälschlich „kein Kontaktast“. Mit dem
+    Start am Kelvin-Voigt-Orbit gleicher Tangentensteifigkeit: Fixpunkt ohne Flugphase."""
+    hc = el.hc_aequivalent(v1.mit(hub=hub), 0.05)
+    t0 = t0_T * hc.T
+    zs = el.startzustand(hc, 'orbit', t0)
+    r = el.simulate(hc, *zs, t0, 1)
+    assert r['tflug'][0] == 0.0 and abs(r['PX'][1] - zs[0]) < 1e-12 and abs(r['PV'][1] - zs[1]) < 1e-10
+
+
 def test_kenngroessen_fenster_und_kurzer_lauf():
     """Auswertefenster außerhalb des Laufs wird abgelehnt (früher stilles Umwickeln des Slice). Periodenerkennung
     auch bei kurzen Läufen: (120°, 240°) ist nach 3 s auf dem Kontaktast (|μ|³⁰ ≈ 1e-16), also P1."""

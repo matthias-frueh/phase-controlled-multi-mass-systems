@@ -534,8 +534,21 @@ def startzustand(sy, art='std', t0=0.0):
         if sy.gesetz == 'kv' and math.isfinite(sy.wd):
             zs, _, ok = kontaktorbit(sy, t0)
         else:
-            zs = newton(sy, (sy.ruhelage(), 0.0), t0, iters=6)['z']
-            ok = simulate(sy, *zs, t0, 1)['tflug'][0] == 0
+            ok = False
+            if sy.gesetz == 'hc':
+                # Newton ab dem Kelvin-Voigt-Orbit gleicher Tangentensteifigkeit, um die Differenz der statischen
+                # Einfederungen verschoben; ab der Ruhelage divergiert Newton am steifen Kandidaten je nach
+                # Wurfphase in den Flug.
+                kv = sy.mit(gesetz='kv', K=sy.M * sy.w_k ** 2)
+                if math.isfinite(kv.wd):
+                    zk, _, okk = kontaktorbit(kv, t0)
+                    if okk:
+                        o = newton(sy, zk + np.array([sy.ruhelage() - kv.ruhelage(), 0.0]), t0, iters=12)
+                        zs = o['z']
+                        ok = o['konvergiert'] and simulate(sy, *zs, t0, 1)['tflug'][0] == 0
+            if not ok:
+                zs = newton(sy, (sy.ruhelage(), 0.0), t0, iters=6)['z']
+                ok = simulate(sy, *zs, t0, 1)['tflug'][0] == 0
         if not ok:
             raise ValueError('kein Kontaktast an diesem Punkt: Start auf dem Orbit nicht möglich '
                              '(Start in der Ruhelage: start="std", CLI --start std)')
