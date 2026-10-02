@@ -5,8 +5,9 @@
 **Zahlen, die man parat haben sollte**
 M·g = 6,3765 N · 361 Konfigurationen im Grobraster, 441 im 2°-Feinraster · Streuung des Zeitmittels
 0,07 % · Liftoff 0 – 76,2 % · Schiefe −0,29 … +1,98 · Spitzenkraft bis 50,6 N ·
-F_min-Maximum 5,330 N exakt bei (120°, 240°), Steigung 0,21 N/° (Resonanzwert von K = 10⁴ N/m; bei festem ζ
-und K = 3·10⁴ … 10⁷ N/m 0,09–0,12 N/°) · alles Simulation
+F_min-Maximum 5,330 N exakt bei (120°, 240°), Steigung 0,21 N/° (beides Werte des weichen Referenzkontakts
+K = 10⁴ N/m, keine Vorhersage für V1; bei festem ζ und K = 3·10⁴ … 10⁷ N/m 0,09–0,12 N/°) · geprüft wird
+die Lage der Spitze · alles Simulation
 
 ---
 
@@ -41,22 +42,26 @@ Mittelwertverschiebung — sie wurde zurückgezogen, dokumentiert und archiviert
 
 Weil der Mittelwert das Integral betrifft, nicht den Verlauf. Beim Liftoff ist die Kraft phasenweise
 exakt null; die fehlende Fläche wird durch Spitzen kompensiert. In der Simulation: 50,6 N Spitze bei
-6,38 N Mittel — Faktor acht, bei 0,07 % Streuung des Mittels. Perret-Liaudet & Rigaud zeigen
-experimentell dasselbe bei bis zu 15 % Kontaktverlust.
+6,38 N Mittel — Faktor acht, bei 0,07 % Streuung des Mittels. Das folgt aus dem Schwerpunktsatz.
+Perret-Liaudet & Rigaud (2003) bieten fachlichen Anschluss (Spektren und Statistik eines Hertz-Kontakts mit
+möglichem Kontaktverlust), keinen Nachweis für PCMMS.
 
 **5 · Rechnet ihr nicht nur vorwärts, was ihr selbst vorgegeben habt?**
 
-Der härteste Einwand. Antwort: Die Messung prüft nicht die Simulation, sondern das **Kontaktmodell**.
-Gerechnet wird mit linear-elastischem Kontakt plus viskoser Dämpfung, unilateral abgeschnitten —
-ohne Hertz'sche Nichtlinearität, Rauheit, Stoßverluste. Die Frage lautet nicht „bestätigt das
-Experiment die Simulation", sondern **„überlebt die vorhergesagte Phasenabhängigkeit den Übergang
-zum realen Kontakt?"** Dieses Projekt hat an genau der Stelle schon einmal ein Artefakt produziert.
+Der härteste Einwand. Antwort: Die Messung prüft zuerst, ob die Auflagekraft der **Überlagerung der
+Einzelmodulantworten** folgt, also Linearität und Modulunabhängigkeit der gesamten Kette aus Mechanik und
+Messung. Die Vorhersage stammt aus gemessenen Einzelmodulläufen, nicht aus der Simulation. Das
+Kontaktmodell wird nur dort geprüft, wo es sich von der starren Auflage unterscheidet; in einem steifen
+Aufbau ist das wenig. Gerechnet wird mit linear-elastischem Kontakt plus viskoser Dämpfung, unilateral
+abgeschnitten — ohne Hertz'sche Nichtlinearität, Rauheit, Stoßverluste. Dieses Projekt hat an der Stelle
+des Kontaktmodells schon einmal ein Artefakt produziert.
 
 **6 · Warum keine Messdaten?**
 
 Weil das Projekt prä-experimentell ist und das so benannt wird. Präregistrierung, Artefaktkatalog,
 Entscheidungsregeln und Abbruchkriterien stehen *vor* der ersten Messung. In der experimentellen
-Mechanik ist das unüblich — und es ist der Teil, der auch bei einem Null-Ergebnis Bestand hat.
+Mechanik ist das nach meinem Eindruck selten; geprüft habe ich das nicht. Verwertbar bleibt dieser Teil
+auch bei einem Null-Ergebnis, sofern die Präzision eine Entscheidung erlaubt.
 
 **7 · Was, wenn nichts herauskommt?**
 

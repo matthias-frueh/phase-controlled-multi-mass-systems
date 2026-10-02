@@ -30,8 +30,10 @@ Lizenz dieses Ordners: CC BY 4.0, siehe [`../LICENSE-CC-BY-4.0`](../LICENSE-CC-B
 ## Hinweise zu einzelnen Dateien
 
 - Die **Präregistrierung** ist unverändert vom Juni 2026 und wird nicht nachträglich editiert. Sie
-  nennt als dritte Observable das „Spitzen-zu-Mittel-Verhältnis“; in Engine, Daten und allen
-  September-Dokumenten ist diese Größe als Asymmetrieverhältnis A definiert (Codevariable `peak_ratio`).
+  nennt als dritte Observable das „Spitzen-zu-Mittel-Verhältnis“ (Peak-to-Mean, im Formelverzeichnis
+  Π_N = F_max/⟨F⟩). Engine, Daten und die September-Dokumente verwenden stattdessen das
+  Asymmetrieverhältnis A = (F_max − M·g)/(M·g − F_min); die Codevariable `peak_ratio` berechnet A, nicht Π_N.
+  Die drei Bezeichnungen meinen also zwei verschiedene Größen.
   Eine v2 mit Änderungsvermerk liegt als [Entwurf](praeregistrierung_v2_entwurf.md) vor (nicht eingefroren,
   nicht registriert).
 - Das **Arbeitspapier** v2.4 liegt in [`arbeitspapier/`](arbeitspapier/) (die Skripte der Nachrechnung und der Gegenprobe dort
@@ -41,7 +43,10 @@ Lizenz dieses Ordners: CC BY 4.0, siehe [`../LICENSE-CC-BY-4.0`](../LICENSE-CC-B
   die dort genannte Fassung v3.5 ist noch nicht im Repository abgelegt, weil sie vor der Umstellung auf
   Linie A als primäre Linie entstand.
 - Das **Exposé** und die Kurznotizen beziehen alle Zahlen auf den Parametersatz der Engine
-  (`../data/README.md`). Die Auslegung eines physischen Aufbaus ist davon getrennt und offen.
+  (`../data/README.md`). Dieser Referenzsatz hat einen weichen Kontakt (K = 10⁴ N/m); Leitzahlen wie
+  5,33 N, Zeltsteilheit und positive Schiefe am Triphasik-Punkt sind dessen Effekte und keine Vorhersagen für
+  einen Aufbau. Die Auslegung eines physischen Aufbaus ist davon getrennt und offen; die offenen
+  Entscheidungen des Autors stehen im Exposé, Abschnitt „Nächster Schritt“.
 - Alle Zahlen in den Dokumenten sind Simulationsergebnisse. Messdaten existieren nicht.
 
 ## Was nicht im Repository liegt

@@ -60,12 +60,14 @@ Simulationsengine, die Präsentationen.
 ### Linie B — Medium-gekoppelte Fortbewegung (optional, separater Aufbau)
 
 Der Körper hängt frei oder an einer Torsionswaage. Gefragt ist, ob phasenkontrollierte Innenbewegung
-über den **quadratischen Luftwiderstand** eine gerichtete Nettobewegung erzeugt — bilanziell
+über die **Kopplung an die umgebende Luft** eine gerichtete Nettobewegung erzeugt — bilanziell
 geschlossen, weil der Impuls messbar an die Luft geht. Im Vakuum verschwindet der Effekt exakt; das
-ist Teil der Hypothese, nicht ihr Widerspruch.
+ist Teil der Hypothese, nicht ihr Widerspruch. Welches Kraftmodell bei der vorliegenden kleinen
+Keulegan-Carpenter-Zahl gilt, ist offen; ein quasistationäres quadratisches Widerstandsgesetz ist dort
+nicht begründet.
 
-Hierzu gehören: der Forschungsrahmen v3.5, der Drift-Sweep, die Medienkopplungsmodelle, der
-Ballon-Demonstrator.
+Hierzu gehören: der Forschungsrahmen v3.5 (korrekturbedürftig; Nachfolger v3.6 in Arbeit), der
+Drift-Sweep, die Medienkopplungsmodelle, der Ballon-Demonstrator.
 
 **Warum die Trennung wichtig ist:** Linie A ist erhaltungssicher im starken Sinne — der Effekt ist
 ein Formeffekt bei festgelegtem Mittelwert, es gibt nichts zu bezweifeln außer der Messbarkeit.
@@ -96,8 +98,9 @@ Dokumente sind mit Archivvermerk versehen.
 ## 4 · Aktueller Stand
 
 **Vorhanden:** 361 Konfigurationen im Grobraster, 441 im 2°-Feinraster um den Triphasik-Punkt,
-Präregistrierung mit Abbruchkriterien, Artefakt-Taxonomie, Auswerteplan, Schwellen als Formel
-(3·σ̂_ref; die Zahlenwerte folgen erst aus der Referenzmessung).
+Präregistrierung mit Abbruchkriterien (v1 als nicht extern registrierte Arbeitsfassung, v2 als Entwurf,
+nicht eingefroren), Artefakt-Taxonomie, Auswerteplan, Schwellen als Formel (3·σ̂_ref; die Zahlenwerte
+folgen erst aus der Referenzmessung).
 
 **Nicht vorhanden:** jede Messung und damit auch der Auswertecode für Messdaten. Das Projekt ist prä-experimentell. Alle Zahlen sind numerisch.
 
@@ -112,11 +115,13 @@ Präregistrierung mit Abbruchkriterien, Artefakt-Taxonomie, Auswerteplan, Schwel
 | Spitzenkraft | bis 50,55 N bei ⟨F⟩ = 6,38 N |
 | max \|⟨F⟩ − M·g\| im Feinfenster | 1,90 · 10⁻⁴ N |
 
-**Die schärfste prüfbare Vorhersage:** Bei festem φ₃ = 240° und Variation von φ₂ durchläuft F_min
-eine Zeltkurve mit scharfem Maximum von 5,330 N exakt bei φ₂ = 120°, abfallend auf 0,77 N bei 100°
-und 1,62 N bei 140°. Steigung 0,21 N pro Grad bei K = 10⁴ N/m; das ist ein Resonanzwert, weil die zweite
-Harmonische mit 2f/f_n = 1,013 auf der Kontaktresonanz liegt (bei festem ζ und K = 3·10⁴ … 10⁷ N/m:
-0,09–0,12 N pro Grad). Nach dem [Entwurf](praeregistrierung_v2_entwurf.md) der Präregistrierung v2 wird
+**Die Prüfgröße:** Geprüft wird die Lage der Zeltspitze gegen die Superpositionsvorhersage aus
+Einzelmodulmessungen. In der Simulation des Referenzsatzes durchläuft F_min bei festem φ₃ = 240° und
+Variation von φ₂ eine Zeltkurve mit Maximum 5,330 N bei φ₂ = 120°, abfallend auf 0,77 N bei 100° und
+1,62 N bei 140°. Der Wert 5,33 N illustriert den Referenzsatz (K = 10⁴ N/m) und ist keine Vorhersage für V1;
+am steifen V1-Kandidaten der Auslegung beträgt die Spannweite der Zeltkurve 0,56 N. Die Steigung von
+0,21 N pro Grad ist ein Resonanzwert, weil die zweite Harmonische mit 2f/f_n = 1,013 auf der
+Kontaktresonanz liegt (bei festem ζ und K = 3·10⁴ … 10⁷ N/m: 0,09–0,12 N pro Grad). Nach dem [Entwurf](praeregistrierung_v2_entwurf.md) der Präregistrierung v2 wird
 die Zeltkurve statistisch gegen eine Vorhersage aus Messungen an der Apparatur geprüft: F_min − ⟨F_N⟩ mit
 standardisierten Residuen, die Lage der Spitze mit einem Zeltfit und Bootstrap-Intervall (dort §8.3–§8.6).
 
@@ -200,7 +205,7 @@ Die Kombination, nicht das Einzelteil:
 
 > vorgegebenes individuelles Bahnprofil · kontrollierte relative Phase · gemeinsamer Rahmen ·
 > unilaterale Stützfläche · zeitaufgelöste Kraftmessung · analytisch festgelegte ⟨F_N⟩ = M·g-Nullbasis ·
-> vollständige Präregistrierung mit Abbruchkriterien vor der Messung
+> eine Präregistrierung im Entwurf (v2, nicht eingefroren; v1 als nicht extern registrierte Arbeitsfassung)
 
 Diese Zusammenstellung als **Messproblem** habe ich in der Literatur nicht gefunden. Das ist eine
 Nischenbehauptung, keine Entdeckungsbehauptung — und sie ist widerlegbar, indem jemand die Arbeit
@@ -216,8 +221,9 @@ Abweichung über der Kontrollschwelle ε_ctrl den Lauf ungültig; angehalten wir
 reproduzierbaren Verstoß (S1, dort §9.2).
 
 Linie B behauptet eine Nettobewegung, benennt aber den Reaktionspartner explizit — die umgebende
-Luft — und sagt vorher, dass der Effekt im Vakuum exakt verschwindet und mit der Mediendichte
-skaliert. Das ist genau die Vorhersage, die ein reaktionsloser Antrieb nicht machen könnte.
+Luft — und sagt vorher, dass der Effekt im Vakuum exakt verschwindet. Das ist genau die Vorhersage,
+die ein reaktionsloser Antrieb nicht machen könnte. Wie Kraft und Drift von der Dichte abhängen, hängt
+vom noch offenen Kraftmodell bei kleiner Keulegan-Carpenter-Zahl ab.
 
 Eine frühere Fassung des Projekts behauptete tatsächlich eine Mittelwertverschiebung. Sie wurde
 zurückgezogen, der Rückzug ist dokumentiert und die betroffenen Dokumente sind entsprechend
@@ -230,15 +236,17 @@ die Kraft phasenweise exakt null; die fehlende Fläche muss durch Spitzen kompen
 Simulation erreicht die Spitzenkraft 50,6 N bei einem Zeitmittel von 6,38 N — Faktor acht, bei einer
 Streuung des Mittelwerts von 0,07 %.
 
-Das ist kein Sonderfall: Perret-Liaudet & Rigaud zeigen für den stoßenden Hertz-Kontakt experimentell,
-dass das Zeitmittel bei bis zu 15 % Kontaktverlust an der statischen Last bleibt.
+Das ist kein Sonderfall, sondern folgt aus dem Schwerpunktsatz (Abschnitt 2). Fachlicher Anschluss:
+Perret-Liaudet & Rigaud (2003) untersuchen Spektren und Statistik eines Hertz-Kontakts mit möglichem
+Kontaktverlust; ein Nachweis für den PCMMS-Aufbau ist das nicht.
 
 ### „Warum keine Messdaten?"
 
 Weil das Projekt prä-experimentell ist und das so benannt wird. Die Reihenfolge ist bewusst:
 Präregistrierung, Artefaktkatalog, Entscheidungsregeln und Abbruchkriterien stehen **vor** der ersten
-Messung. In der experimentellen Mechanik ist das unüblich — und genau deshalb ist es der Teil der
-Arbeit, der auch dann Bestand hat, wenn die Physik nichts hergibt.
+Messung. Präregistrierung ist in der experimentellen Mechanik nach meinem Eindruck selten; geprüft habe
+ich das nicht. Dieser Teil der Arbeit bleibt auch bei einem Nullausgang verwertbar, sofern die Präzision
+eine Entscheidung erlaubt.
 
 ### „Was ist, wenn nichts herauskommt?"
 
@@ -267,8 +275,9 @@ das Projekt behauptet es nicht, es untersucht die Grundlage.
 
 Die faire Antwort: Die Physik ist unstrittig; Simulationscode und Simulationsdaten liegen in diesem
 Repository (`code/`, `data/`) und sind nachrechenbar. Was fehlt, ist die Messung, und das steht in jedem Dokument. Was das Projekt anbietet, ist
-keine Entdeckung, sondern eine vollständig vorbereitete, falsifizierbare Messfrage mitsamt
-Auswerteplan — und die Bereitschaft, ein Null-Ergebnis zu veröffentlichen.
+keine Entdeckung, sondern eine falsifizierbare Messfrage mit einem Auswerteplan im Entwurf; Arbeitspunkt,
+Antrieb, Geometrie und Messkette sind noch festzulegen — und die Bereitschaft, ein Null-Ergebnis zu
+veröffentlichen.
 
 ---
 

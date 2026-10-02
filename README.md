@@ -77,7 +77,8 @@ Kürzel v3a auch den zurückgezogenen Simulationszyklus v3a–v3d bezeichnet. Mi
 ([`docs/archiv_vermerk_kernhypothese_v3.md`](docs/archiv_vermerk_kernhypothese_v3.md)).
 
 - **19×19-Phasensweep** (361 Konfigurationen, [`data/sweep_19x19.csv`](data/sweep_19x19.csv)): ⟨F⟩ im Median 6,3765 N = M·g
-  (Spannweite 6,333–6,383 N durch Einschwing- und Endlich-Fenster-Effekte bei hohem Liftoff) · Schiefe −0,29 … +1,98 ·
+  (Spannweite 6,333–6,383 N durch den Randterm des Auswertefensters bei hohem Liftoff; der Tiefstwert bei
+  (0°, 208,4°) ist ein Artefakt der Festschritt-Integration, siehe [`data/README.md`](data/README.md)) · Schiefe −0,29 … +1,98 ·
   Liftoff 0–76,2 % · F_max bis 50,6 N. Nur 12 Rasterpunkte um (120°, 240°) und (240°, 120°) sind liftoff-frei.
   Im Liftoff-Bereich ist die Karte nicht eindeutig: Physikalisch gleiche Konfigurationen (Module nur umbenannt)
   können in verschiedenen stationären Zuständen landen, etwa (0°, 113,7°) mit 75,6 % und (246,3°, 246,3°) mit
@@ -87,9 +88,15 @@ Kürzel v3a auch den zurückgezogenen Simulationszyklus v3a–v3d bezeichnet. Mi
   zu kleineren φ₂ und ≈ 0,19 N je Grad zu größeren φ₂ · 90,7 % des Fensters liftoff-frei · |⟨F⟩ − M·g| ≤ 0,2 mN durchgehend.
   Die Steigung ist ein Resonanzwert von K = 10⁴ N/m: Die zweite Harmonische liegt mit 2f/f_n = 1,013 auf der
   Kontaktresonanz (|H₂| = 5,03); bei festem ζ und K = 3·10⁴ … 10⁷ N/m beträgt sie 0,09–0,12 N je Grad
-  (`python3 code/linear_solver.py --harmonics`).
-- Ein Sinusprofil liefert ohne Liftoff keine Schiefe; das asymmetrische Bewegungsprofil ist für das
-  Zielsignal zwingend.
+  (`python3 code/linear_solver.py --harmonics`). Auch die Höhe der Spitze und die positive Schiefe am
+  Triphasik-Punkt sind Effekte des weichen Referenzkontakts (Übertragung der dritten und sechsten Harmonischen).
+  Am steifen V1-Kandidaten der Auslegung beträgt die Spannweite der Zeltkurve 0,56 N statt 4,56 N
+  (`python3 code/auslegung.py --candidate`). Die Zahlen illustrieren den Referenzsatz; Vorhersagen für V1 sind
+  sie nicht.
+- Ein Sinusprofil liefert ohne Liftoff keine Schiefe. Das asymmetrische Profil ist nötig für Schiefe im
+  Dauerkontakt und für die Harmonischen N₂, N₃. Phasenabhängigkeit und Zeltspitze treten auch beim Sinusprofil
+  auf; bei starrer Auflage ist die Steigung am Knick mit dem Egg-Profil etwa doppelt so groß
+  (`python3 code/linear_solver.py --section --rigid --mu 0.462`, mit und ohne `--sinus`).
 - **Kontaktast analytisch:** Ohne Abheben ist das Modell linear. [`code/linear_solver.py`](code/linear_solver.py)
   berechnet die stationäre Lösung exakt aus Fourier-Reihe des Profils und Übertragungsfunktion des Kontakts
   (ca. 1 ms je Punkt) und trifft alle liftoff-freien Punkte der drei Datensätze auf ≤ 6·10⁻⁶. Die Phasenlage
@@ -108,7 +115,9 @@ Kürzel v3a auch den zurückgezogenen Simulationszyklus v3a–v3d bezeichnet. Mi
   linearen Orbit aus bleibt er in Kontakt (`python3 code/linear_solver.py --contact`). Die Bistabilität bleibt
   über 200 s und bei halbiertem Zeitschritt bestehen: Bei (35°, 116°) ergibt der Standardstart λ = 75,82 % bzw.
   75,81 % (Δt = 50 bzw. 25 µs), F_max 39,49 bzw. 39,48 N; der Start auf dem linearen Orbit λ = 0 %, F_max 19,81 N.
-  Reproduzierbar mit `--contact --long` (ca. 20–25 min).
+  Reproduzierbar mit `--contact --long` (ca. 20–25 min). Diese Aussagen gelten für den weichen Referenzkontakt.
+  Bei steifem Kontakt sind im Modell auch aus dem Kontaktast heraus Hüpfzustände mit Stoßspitzen von einigen
+  100 N möglich ([`docs/einzugsgebiete_v1_kandidat.md`](docs/einzugsgebiete_v1_kandidat.md)).
 
 ### Abbildungen
 
@@ -145,6 +154,8 @@ Spitzen um 40 N, triphasisch bleibt die Kraft in einem schmalen Band um M·g.*
 
 Die Auslegung eines physischen Aufbaus (Bewegungsprofil, Wägezellen, Kalibrierung bei intermittierendem
 Kontakt) ist davon getrennt und offen; siehe [`docs/expose_2026-09.md`](docs/expose_2026-09.md), Abschnitt „Nächster Schritt“.
+Dort sind die offenen Entscheidungen des Autors zu Antrieb, Hardwarestand, Geometrie, Kontakt und Dämpfung,
+Umfang von E1, Messkette und institutioneller Anbindung mit ihren Optionen aufgeführt.
 
 ## Nachrechnen
 

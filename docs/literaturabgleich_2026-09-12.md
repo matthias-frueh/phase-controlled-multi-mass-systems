@@ -257,7 +257,7 @@ Der Code trennt daher bei **geometrischer Öffnung oder nichtpositiver ungekappt
 17. Teidelt et al. (2012): dynamischer Stick-Slip-Kontakt in Mikroantrieben.
 18. Papangelo & Ciavarella (2015): Grenzen quasistatischer Analyse für einen Coulomb-Reibungsoszillator unter harmonischer Last.
 
-**PCMMS-Regime:** Linie A liegt nach eigenem Befund im dynamischen Nachbarbereich (`3f/f_n ≈ 1,5`), einschließlich dynamischer Liftoff-Schwelle `R_c ≈ 1,45` und dem kontrollierten Befund `gamma_1 = 0` ohne Liftoff bei Sinusprofilen. Deshalb sind Refs. 16–18 für die unmittelbare Regime-Abgrenzung wichtiger als das quasistatische Lubricants-Paper allein.
+**PCMMS-Regime:** Linie A liegt nach eigenem Befund im dynamischen Nachbarbereich (`3f/f_n ≈ 1,5`), einschließlich dynamischer Liftoff-Schwelle `R_c ≈ 1,45` und dem kontrollierten Befund `gamma_1 = 0` ohne Liftoff bei Sinusprofilen. Deshalb sind Refs. 16–18 für die unmittelbare Regime-Abgrenzung wichtiger als das quasistatische Lubricants-Paper allein. *Nachtrag Oktober 2026:* Das gilt für den Simulationsreferenzsatz. Für V1 verlangt der Entwurf der Präregistrierung v2 Dauerkontakt und Resonanzabstand (dort §5.3); dort trägt die Regime-Abgrenzung nicht, und die Abgrenzung beruht auf der Architektur (innere Anregung, nur Normalkraft, keine Reibung).
 
 **Änderungsvorschlag:** Forschungsstand und §17 müssen Architektur **und** Regime getrennt vergleichen.
 
@@ -354,7 +354,7 @@ Die Erzeugung gerichteter Antworten durch phasenverschobene periodische Anregung
 
 ### 6.2 Regime-Abgrenzung der Kontaktmechanik
 
-Das quasistatische Modell von Madatov, Li und Popov vernachlässigt die Indenterträgheit und setzt kontinuierlichen Kontakt voraus. Damit dient es als mechanistischer Kontrast, deckt jedoch das für PCMMS Linie A relevante dynamische Regime nicht ab. Die von den Autoren selbst genannten dynamischen Nachbararbeiten berücksichtigen Systemmasse und -steifigkeit, Frequenzverhältnisse, Resonanzen oder dynamischen Stick-Slip-Kontakt und diskutieren die Grenzen quasistatischer Näherungen. Diese Nachbarschaft ist für PCMMS wesentlich, weil die eigenen Simulationen mit `3f/f_n ≈ 1,5`, einer dynamischen Liftoff-Schwelle von ungefähr `R_c ≈ 1,45` und explizitem Kontaktverlust gerade außerhalb der quasistatischen Dauer-Kontakt-Annahme liegen. Architekturähnlichkeit und Regimeähnlichkeit sind deshalb getrennt zu bewerten.
+Das quasistatische Modell von Madatov, Li und Popov vernachlässigt die Indenterträgheit und setzt kontinuierlichen Kontakt voraus. Damit dient es als mechanistischer Kontrast, deckt jedoch das für PCMMS Linie A relevante dynamische Regime nicht ab. Die von den Autoren selbst genannten dynamischen Nachbararbeiten berücksichtigen Systemmasse und -steifigkeit, Frequenzverhältnisse, Resonanzen oder dynamischen Stick-Slip-Kontakt und diskutieren die Grenzen quasistatischer Näherungen. Diese Nachbarschaft ist für den Simulationsreferenzsatz wesentlich, weil er mit `3f/f_n ≈ 1,5`, einer dynamischen Liftoff-Schwelle von ungefähr `R_c ≈ 1,45` und explizitem Kontaktverlust gerade außerhalb der quasistatischen Dauer-Kontakt-Annahme liegt. Der geplante Versuch V1 soll dagegen nach dem Entwurf der Präregistrierung v2 im Dauerkontakt und mit Resonanzabstand messen; dort beruht die Abgrenzung auf der Architektur (innere Anregung, nur Normalkraft, keine Reibung), nicht auf dem Regime. Architekturähnlichkeit und Regimeähnlichkeit sind deshalb getrennt zu bewerten. *(Nachtrag Oktober 2026)*
 
 ### 6.3 Kontaktmodell und numerische Absicherung
 

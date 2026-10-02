@@ -38,15 +38,21 @@ RK4, Δt = 50 µs · 15 s je Konfiguration, davon 5 s Einschwingen; ausgewertet 
 Erzeugt mit [`../code/pcmms_v3a_phasen_sweep.py`](../code/pcmms_v3a_phasen_sweep.py) (N_GRID = 19). Raster über [0°, 360°)² mit Schrittweite
 360°/19 = 18,947° ohne doppelten Randpunkt (`endpoint=False`). Die Punkte (120°, 240°) und (240°, 120°)
 liegen deshalb nicht exakt auf dem Raster.
-Kennzahlen: ⟨F⟩ Median 6,3765 N, Spannweite 6,3330–6,3832 N (Einschwing- und Endlich-Fenster-Effekte bei
-hohem Liftoff) · Schiefe −0,288 … +1,979 · Liftoff 0–76,2 % · F_max bis 50,55 N · F_min bis 2,88 N ·
+Kennzahlen: ⟨F⟩ Median 6,3765 N, Spannweite 6,3330–6,3832 N (Randterm des Auswertefensters bei hohem
+Liftoff; zum Tiefstwert siehe unten) · Schiefe −0,288 … +1,979 · Liftoff 0–76,2 % · F_max bis 50,55 N · F_min bis 2,88 N ·
 12 Rasterpunkte liftoff-frei.
-Bekannte Eigenheiten: Das Minimum 6,3330 N bei (0°, 208,421°) stammt aus einem Einschwingvorgang, der nach 5 s
-noch nicht abgeklungen ist; im stationären Zustand liegt ⟨F⟩ dort bei M·g − 0,5 mN und F_max bei 38,5 N statt
-44,1 N. Im Liftoff-Bereich ist die Karte nicht eindeutig: Die Umbenennung der Module ändert die Physik nicht,
+Bekannte Eigenheiten: Das Minimum 6,3330 N bei (0°, 208,421°) ist ein Artefakt der Festschritt-Integration
+(RK4, Δt = 50 µs). In der Engine schwingt die Bahn dort scheinbar länger als 5 s ein; wie lange, hängt von der
+letzten Stelle der Phasenangabe und vom Zeitschritt ab. Ereignisgenau gerechnet
+([`../code/ereignisloeser.py`](../code/ereignisloeser.py), Test `test_hotspot_fenster_5_15`) liegt die Bahn ab
+etwa 5 s auf dem stationären Orbit; im Fenster 5–15 s gilt ⟨F⟩ − M·g = +0,02 mN, Liftoff 75,08 % und
+F_max 38,5 N statt 44,1 N. Die rund −0,5 mN, die die Engine dort in späten Fenstern liefert, sind der Rest der
+Rechteckmittelung bei Δt = 50 µs (bei halbiertem Zeitschritt etwa ±0,03 mN), kein stabiles Plateau; im
+stationären Zustand gilt ⟨F⟩ = M·g. Im Liftoff-Bereich ist die Karte nicht eindeutig: Die Umbenennung der Module ändert die Physik nicht,
 trotzdem landen gleichwertige Rasterpunkte teils in verschiedenen stationären Zuständen, etwa (0°, 113,684°)
 mit 75,6 % und (246,316°, 246,316°) mit 18,2 % Liftoff. Die Werte einzelner Liftoff-Punkte hängen damit von der
-Startbedingung ab (Start in statischer Ruhelage bei t = 0).
+Startbedingung ab. Gestartet wird bei t = 0 mit statisch eingedrückter Feder (z₀ = −M·g/K); die Module haben
+dabei schon ihre Profilgeschwindigkeit, ein Gleichgewichtszustand ist der Start also nicht.
 Eine Nachrechnung dieses Rasters mit adaptivem Burn-in (13.09.2026) liegt unter
 [`../docs/arbeitspapier/nachrechnung_2026-09-13/`](../docs/arbeitspapier/nachrechnung_2026-09-13/).
 
