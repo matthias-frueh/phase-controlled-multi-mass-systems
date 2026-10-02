@@ -1,7 +1,7 @@
 # PCMMS — Präregistrierung v2, Technischer Anhang
 
 **Matthias Früh · ORCID 0009-0005-9984-4207**
-Stand: 28. September 2026 · gleichrangiger Teil von Teil A, Entwurf — nicht eingefroren, nicht registriert
+Stand: 28. September 2026, überarbeitet 2. Oktober 2026 (A3, A4: Einordnung der Vorzeichenregel) · gleichrangiger Teil von Teil A, Entwurf — nicht eingefroren, nicht registriert
 
 Dieser Anhang gehört zu `praeregistrierung_v2_entwurf.md` (Hauptdokument, Dateiname vorläufig, §12; Verweise
 „§“ beziehen sich darauf) und wird mit ihm eingefroren und registriert. Er enthält den Änderungsvermerk
@@ -212,15 +212,17 @@ K = 10⁴ N/m, C = 16 N·s/m (ζ = 0,099228), f_n = 19,74 Hz, M·g = 6,3765 N.
   Exposés sind die 20°-Sekanten 0,228 und 0,186 N/°. Die Referenz ist ein Resonanzfall: 2f/f_n = 1,013,
   |H₂| = 5,03. Bei festem ζ und K = 3·10⁴ … 10⁷ N/m betragen die 2°-Sekanten 0,09–0,12 N/°. Die
   Simulationswerte sind keine Vorhersage für einen realen Aufbau.
-- **Schiefe und Vorzeichenregel.** Die Regel des Exposés (negative Schiefe nur bei echter Dephasierung;
-  synchron und bei Zweiergruppen-Phasung positiv) ist bei K = 10⁴ N/m auf den geprüften Linien nicht
-  widerlegt: Auf den Linien φ₂ = 0°, φ₃ = 0° und φ₂ = φ₃ des 19×19-Rasters (55 Punkte, darunter die
-  synchrone Phasung) ist γ₁ ≥ +0,596; alle 36 negativen Werte liegen bei dephasierten Konfigurationen.
-  Das Raster stammt aus der nichtlinearen Engine und enthält Liftoff-Punkte, deren Einzelwerte von der
-  Startbedingung abhängen (README); der Befund ist deshalb ein Hinweis, kein Beweis. Das
-  Vorzeichen an einem einzelnen dephasierten Punkt hängt aber vom Kontakt ab: Am Triphasik-Punkt ist
-  γ₁ = +0,067 bei K = 10⁴ N/m und −0,450 bei starrer Auflage (A2.3). Die Regel sagt dafür kein Vorzeichen
-  voraus; H4 prüft deshalb gegen die Superpositionsvorhersage.
+- **Schiefe: Referenzbefund und Geltungsbereich.** Auf den Linien φ₂ = 0°, φ₃ = 0° und φ₂ = φ₃ des
+  19×19-Referenzrasters (55 Punkte, darunter die synchrone Phasung) ist γ₁ ≥ +0,596; alle 36 negativen
+  Werte liegen bei dephasierten Konfigurationen. Diese Zahlen beschreiben ausschließlich das gespeicherte
+  Raster beim oben genannten Parametersatz. Es stammt aus der nichtlinearen Engine und enthält
+  Liftoff-Punkte, deren Einzelwerte von der Startbedingung abhängen (README).
+  Die frühere allgemeine Vorzeichenregel ist mit Arbeitspapier v2.4 als Mechanismus-Aussage
+  zurückgezogen: Bei geänderter Kontaktübertragung können schon einzelne Module und Zweiergruppen
+  im Dauerkontakt negative Schiefe zeigen. Auch am Triphasik-Punkt hängt das Vorzeichen vom Kontakt ab:
+  γ₁ = +0,067 bei K = 10⁴ N/m und −0,450 bei starrer Auflage (A2.3).
+  H4 bleibt bestehen und prüft das Vorzeichen gegen die Superpositionsvorhersage aus gemessenen
+  Einzelmodulantworten, nicht gegen eine allgemeine Zuordnung von Phasenklasse und Vorzeichen.
 - **Kontaktast.** Bei der Referenz besitzen 4,24 % des Phasenraums (1°-Raster) einen Kontaktast: zwei
   Hauptgebiete um (120°, 240°) und (240°, 120°) mit 2 × 2524 Punkten (3,90 %), in allen Proben monostabil,
   und sechs Satelliteninseln mit 6 × 74 Punkten (0,34 %), die bistabil sind: Bei (35°, 116°) ergibt der
@@ -279,8 +281,10 @@ Auslegungsregeln wirken; es ist keine Vorhersage.
   §5.1 aus der größten erwarteten Zellkraft bestimmt; die „mindestens 10 kg“ des Exposés sind dort nicht
   hergeleitet.
 - **Schiefe.** Auf dem Schnitt ist γ₁ überall negativ (−0,450 bei 120°, −0,793 bei 100° und 140°), bei
-  synchroner Phasung +0,755, bei (0°, 180°) +0,986; das stimmt mit der Vorzeichenregel des Exposés überein,
-  wie bei K = 10⁴ N/m auf den geprüften Linien (A3).
+  synchroner Phasung +0,755, bei (0°, 180°) +0,986. Diese Vorzeichen gelten für das hier berechnete
+  Beispiel mit starrer Auflage und μ = 0,4. Sie bestätigen keine allgemeine Vorzeichenregel; diese
+  ist mit Arbeitspapier v2.4 als Mechanismus-Aussage zurückgezogen (A3). H4 prüft weiterhin gegen die
+  Superpositionsvorhersage aus gemessenen Einzelmodulantworten.
 - **Endliche Steifigkeit.** Bei K = 10⁶ N/m (ζ fest) weichen die Beträge der ersten drei Harmonischen um
   0,3 %, 1,0 % und 2,4 % vom starren Wert ab (bei 19 Hz um 0,9 %, 3,8 % und 9,1 %), die der sechsten und
   neunten bei 10 Hz um 10 % und 26 % (|H| = 1,101 und 1,259; |H(3ω)| = 1,024). F_min bei 120° liegt deshalb
@@ -757,7 +761,7 @@ Hauptdokument; A0–A9, Tab. C, Tab. F und Z Anhang.
 | 4,24 %; 2 × 2524 Punkte (3,90 %); 6 × 74 Punkte (0,34 %); λ = 75,82 % bzw. 0 % bei (35°, 116°); 76,6 % starr; 48,6 % bei μ = 0,5 (Repo) | A3 | `python3 code/linear_solver.py --contact`; `python3 -c "print(round(100*5048/360**2,2), round(100*444/360**2,2))"`; Monostabilität: `python3 code/linear_solver.py --contact --grid` (ca. 6–8 min) |
 | ζ = 0,099228; M·g = 6,3765 N | A3, Z | `python3 -c "print(round(16/(2*(1e4*0.65)**0.5),6), round(0.65*9.81,4))"` |
 | γ₁ = +0,067 (K = 10⁴ N/m) und −0,450 (starr) am Triphasik-Punkt; A 0,6529 starr μ = 0,4 | §1; A2.3, A3, A4 | `python3 code/linear_solver.py --point 120 240`; `python3 code/linear_solver.py --point 120 240 --rigid` (ebenso mit `--mu 0.4`) |
-| Vorzeichenregel: 55 Punkte auf φ₂ = 0°, φ₃ = 0°, φ₂ = φ₃, γ₁ ≥ +0,596, davon 0 negativ; 36 negative Werte insgesamt | §1; A3 | `python3 -c "import pandas as pd,numpy as np;d=pd.read_csv('data/sweep_19x19.csv');a,b=d.phi2_deg,d.phi3_deg;m=np.isclose(a,0)+np.isclose(b,0)+np.isclose(a,b);print(m.sum(),round(d.F_skew[m].min(),3),int((d.F_skew[m]<0).sum()),int((d.F_skew<0).sum()))"` |
+| Schiefe des Referenzrasters: 55 Punkte auf φ₂ = 0°, φ₃ = 0°, φ₂ = φ₃, γ₁ ≥ +0,596, davon 0 negativ; 36 negative Werte insgesamt | §1; A3 | `python3 -c "import pandas as pd,numpy as np;d=pd.read_csv('data/sweep_19x19.csv');a,b=d.phi2_deg,d.phi3_deg;m=np.isclose(a,0)+np.isclose(b,0)+np.isclose(a,b);print(m.sum(),round(d.F_skew[m].min(),3),int((d.F_skew[m]<0).sum()),int((d.F_skew<0).sum()))"` |
 | s_m = −0,196, +0,206, −0,011 N/°, Summe −5·10⁻⁵ | A2.2 | `python3 -c "import sys; sys.path.insert(0,'code'); import linear_solver as L; t,N=L.waveform(120,240); d=(L.waveform(120.0001,240)[1]-L.waveform(119.9999,240)[1])/0.0002; i=[j for j in range(len(N)) if N[j]<=N[j-1] and N[j]<=N[(j+1)%len(N)]]; i=sorted(sorted(i,key=lambda j:N[j])[:3]); print([round(float(d[j]),3) for j in i], round(float(sum(d[j] for j in i)),5))"` |
 | lokale Steigungen 0,207 und 0,196 N/°; F_min 5,3097 / 5,3304 / 5,3108 N bei 119,9° / 120° / 120,1° | A2.2 | `python3 code/linear_solver.py --point 119.9 240`, ebenso `120 240`, `120.1 240`; `python3 -c "print(round((5.330390-5.309711)/0.1,3), round((5.330390-5.310811)/0.1,3))"` |
 | Schiefeformel: cos(2ϑ₃ − ϑ₆) = −1,000 bzw. +0,912; γ₁(k ≤ 6) = −0,3775 bzw. +0,0658 | A2.3 | `python3 -c "import sys;sys.path.insert(0,'code');import linear_solver as L,numpy as np;P,n=L.profile_spectrum();[print(K,[round(float(v),4) for v in (np.cos(2*np.angle(X[3])-np.angle(X[6])),0.75*abs(X[3])**2*abs(X[6])*np.cos(2*np.angle(X[3])-np.angle(X[6]))/((abs(X[3])**2+abs(X[6])**2)/2)**1.5)]) for K,C in ((None,0.0),(1e4,16.0)) for X in [P*L.transfer(K,C,P.size)[0]]]"`; Gegenprobe BL(6; `None,0,0.4`) und BL(6; `1e4,16,1.0`), Zeile 120° |
