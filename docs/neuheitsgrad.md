@@ -1,7 +1,7 @@
 # Gibt es das nicht schon? — Zum Neuheitsgrad von PCMMS
 
 **Phase-Controlled Multi-Mass Systems · Phasenkontrollierte Mehrmassensysteme**
-Matthias Früh · ORCID 0009-0005-9984-4207 · Stand September 2026 · Nachtrag 20.09.2026 (§10)
+Matthias Früh · ORCID 0009-0005-9984-4207 · Stand September 2026 · Nachtrag 20.09.2026 (§10) · Nachträge 2. Oktober 2026
 
 *Antwort auf die häufigste und berechtigtste Rückfrage.*
 

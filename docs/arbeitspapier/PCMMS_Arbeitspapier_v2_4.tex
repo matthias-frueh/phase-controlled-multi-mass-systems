@@ -87,13 +87,16 @@ liefert vier Befunde, die den Aufbau binden. Das Residuum gegen die
 Basislinie liegt bei Dauerkontakt unter der Rundungsgrenze des
 Datensatzes von $0{,}2\,\mathrm{ppm}$. Größere Werte
 --- im Archivlauf bis $0{,}68\,\%$, nach adaptivem Burn-in bis
-$0{,}37\,\%$ --- sind kein Fehler der Integration, deren Anteil unter
-$0{,}01\,\%$ bleibt, sondern ein Randterm des Auswertefensters: die
+$0{,}37\,\%$ --- sind ein Randterm des Auswertefensters: die
 Änderung der Schwerpunktsgeschwindigkeit über das Fenster, bezogen auf
-$g$ und Fensterlänge. Er entsteht bei unvollständigem Einschwingen, bei
+$g$ und Fensterlänge. Der Quadraturanteil der Mittelung bleibt unter
+$0{,}01\,\%$. Der Randterm entsteht bei unvollständigem Einschwingen, bei
 Fenstern ohne ganze Orbitperioden und bei aperiodischer Bewegung, fällt
 mit der Fensterlänge ab und kann als phasenabhängiger Effekt erscheinen.
-Er erklärt die Restabweichungen der korrigierten Rechnungen; der
+Den Archiv-Höchstwert von $0{,}68\,\%$ erzeugt ein Einschwingen, das die
+Festschritt-Integration künstlich verlängert; ereignisgenau gerechnet
+weicht das Zeitmittel dort um $+0{,}02\,\mathrm{mN}$ ab. Der Randterm
+erklärt die Restabweichungen der korrigierten Rechnungen; der
 zurückgezogene Befund einer Mittelwertverschiebung selbst ging auf ein
 Kontaktmodell mit vorgeschriebener Eindrückung zurück. Die vier
 Funktionale sind nicht unabhängig; nur die minimale Kontaktkraft trägt
@@ -157,13 +160,17 @@ four findings that bind the design. The residual against the baseline
 stays below the rounding limit of the data set, $0{.}2\,\mathrm{ppm}$,
 under permanent contact. Larger values --- up to
 $0{.}68\,\%$ in the archived run and up to $0{.}37\,\%$ after adaptive
-burn-in --- are not an integration error, whose share stays below
-$0{.}01\,\%$, but a boundary term of the evaluation window: the change of
+burn-in --- are a boundary term of the evaluation window: the change of
 the centre-of-mass velocity across the window, divided by $g$ times the
-window length. It arises from incomplete transients, from windows not
-spanning whole orbit periods and from aperiodic motion, decays with
-window length and can masquerade as a phase-dependent effect. It
-explains the residual deviations of the corrected computations; the
+window length. The quadrature share of the averaging stays below
+$0{.}01\,\%$. The boundary term arises from incomplete transients, from
+windows not spanning whole orbit periods and from aperiodic motion,
+decays with window length and can masquerade as a phase-dependent
+effect. The archived maximum of $0{.}68\,\%$ stems from a transient that
+the fixed-step integration prolongs artificially; with event-accurate
+integration the time mean there deviates by $+0{.}02\,\mathrm{mN}$. The
+boundary term explains the residual deviations of the corrected
+computations; the
 withdrawn mean-shift result itself came from a contact model with a
 prescribed indentation. The four functionals are not
 independent; only the minimum contact force carries separate
@@ -284,8 +291,11 @@ Kapitel~\ref{chap:rahmen} und~\ref{chap:frage}); die Definition von
 $F_{\min} - \langle N \rangle$ (Abschnitt~\ref{sec:target-quantities});
 Antrieb, Auslegungsbedingung, Kontakt, Kraftbereich und Nennlast mit den
 offenen Entscheidungen zum Aufbau (Kapitel~\ref{chap:system},
-Abschnitt~\ref{sec:offene-entscheidungen}); der Wert am Punkt
-$(0^\circ, 208{,}4^\circ)$ als Artefakt der Festschritt-Integration, die
+Abschnitt~\ref{sec:offene-entscheidungen}) sowie der Kraftaufnehmer
+(Kapitel~\ref{chap:messsystem}); der Wert am Punkt
+$(0^\circ, 208{,}4^\circ)$ als Folge eines von der Festschritt-Integration
+künstlich verlängerten Einschwingens (auch in Kurzfassung, Abstract und
+Fazit), die
 Rundungsgrenze von $0{,}2\,\mathrm{ppm}$, der Exponent $-0{,}945$, die
 vollständige Symmetriegruppe $S_3$ und die Einordnung der Referenzzahlen
 als Effekte des weichen Kontakts (Kapitel~\ref{chap:simulation}); die
@@ -2298,9 +2308,11 @@ Im weichen Referenzkontakt mit Liftoff variieren die Funktionale um
 Faktoren (Tabelle~\ref{tab:functional-range}): Liftoff von null bis rund
 drei Vierteln des Zyklus, Schiefe von $-0{,}3$ bis $+2{,}0$. Im
 Dauerkontakt mit Resonanzabstand, wie ihn der Entwurf der
-Präregistrierung v2 verlangt, ist das Signal viel kleiner: Am steifen
-V1-Kandidaten der Auslegung beträgt die Spannweite der Zeltkurve
-$0{,}56\,\mathrm{N}$ statt $4{,}56\,\mathrm{N}$
+Präregistrierung v2 verlangt, ist das Signal viel kleiner: Am
+V1-Kandidaten der Auslegung (steifer Kontakt, von $0{,}650\,\mathrm{kg}$
+bewegen sich nur die $0{,}300\,\mathrm{kg}$ der Module, Hub
+$8\,\mathrm{mm}$) beträgt die Spannweite der Zeltkurve
+$0{,}56\,\mathrm{N}$, im Referenzsatz $4{,}56\,\mathrm{N}$
 (\texttt{code/auslegung.py --candidate}), und die Präzisionsbedingungen
 der Präregistrierung liegen im Bereich einiger $10\,\mathrm{mN}$ (dort
 Anhang A4). Die Apparatur muss dann wiederholbar und präzise sein.
@@ -2378,11 +2390,11 @@ Autors; dieses Papier legt keine davon fest.
       Zellkanäle sind die Untergrenze. Ob ein Wegkanal die
       Kontaktsteifigkeit genau genug bestimmt und welche Hilfskanäle
       nötig sind, ist offen; davon hängt die Kanalzahl ab.
-\item \textbf{Institutionelle Anbindung.} Nach eigener Festlegung finden
-      vor einer Anbindung keine Experimente statt. Wird die Festlegung
-      beibehalten, ist die Anbindung Voraussetzung für die erste
-      Messphase; wird sie geändert, braucht es einen eigenen Messplatz
-      sowie externe Kalibrierung und Begutachtung.
+\item \textbf{Institutionelle Anbindung.} Ob Experimente erst nach einer
+      Anbindung beginnen, entscheidet der Autor. Beginnen sie erst
+      danach, ist die Anbindung Voraussetzung für die erste Messphase;
+      beginnen sie vorher, braucht es einen eigenen Messplatz sowie
+      externe Kalibrierung und Begutachtung.
 \end{itemize}
 
 \section{Zwischenfazit}
@@ -2426,8 +2438,11 @@ Rauschen, Drift und Verzerrung ein.
 
 \section{Kraftaufnehmer}
 
-Vorgesehen ist eine Wägezelle nach dem Dehnungsmessstreifenprinzip in
-Biegebalkenbauform. Maßgebliche Eigenschaften sind Empfindlichkeit,
+Die Laborvariante sieht eine Wägezelle nach dem
+Dehnungsmessstreifenprinzip in Biegebalkenbauform vor. Zahl, Bauform und
+Anordnung der Zellen sind offen
+(Abschnitt~\ref{sec:offene-entscheidungen}). Maßgebliche Eigenschaften
+sind Empfindlichkeit,
 Auflösung, Bandbreite sowie Linearität und Hysterese.
 
 Die Nennlast ist nicht hergeleitet (Abschnitt~\ref{sec:auslegung-sim});
@@ -3775,7 +3790,9 @@ Der Randterm hat drei Ursachen:
   Phase, $7{,}1\,\mathrm{s}$ beim Datensatzwert $208{,}421^\circ$,
   $4{,}5\,\mathrm{s}$ bei halbiertem Zeitschritt). Ereignisgenau gerechnet
   (\texttt{code/ereignisloeser.py}) liegt die Bahn nach etwa
-  $5\,\mathrm{s}$ auf demselben Orbit der Periode~1; im Fenster
+  $5\,\mathrm{s}$ bis auf eine Wiederkehrtoleranz von $1\,\mathrm{mm/s}$
+  auf demselben Orbit der Periode~1 (mit strengem Wiederkehrkriterium
+  nach etwa $9\,\mathrm{s}$); im Fenster
   $5$--$15\,\mathrm{s}$ weicht das Zeitmittel um $+0{,}02\,\mathrm{mN}$
   von $Mg$ ab statt um $-43{,}5\,\mathrm{mN}$. Auch $\lambda = 74{,}3\,\%$
   und $N_{\max} = 44{,}1\,\mathrm{N}$ der Archivzeile sind Werte der
@@ -3994,12 +4011,17 @@ Triphasik-Punkt ($\gamma_1 = +0{,}067$) gehen auf die Übertragung der
 dritten und sechsten Harmonischen zurück, die Steilheit der Flanken auf
 die Lage der zweiten Harmonischen auf der Kontaktresonanz
 (Abschnitt~\ref{sec:sens-k}, Anhang~\ref{sec:anh-kontaktmodell}). Bei
-steifem Kontakt ändern sich alle drei: Am steifen V1-Kandidaten der
-Auslegung beträgt die Spannweite der Zeltkurve $0{,}56\,\mathrm{N}$ statt
-$4{,}56\,\mathrm{N}$ (\texttt{code/auslegung.py --candidate}), und bei
-starrer Auflage ist die Schiefe am Triphasik-Punkt negativ
-($\gamma_1 = -0{,}45$). Die Zahlen illustrieren den Referenzsatz; eine
-Vorhersage für den Aufbau sind sie nicht.
+steifem Kontakt ändern sich alle drei; bei starrer Auflage ist die
+Schiefe am Triphasik-Punkt negativ ($\gamma_1 = -0{,}45$). Am
+V1-Kandidaten der Auslegung beträgt die Spannweite der Zeltkurve
+$0{,}56\,\mathrm{N}$, im Referenzsatz $4{,}56\,\mathrm{N}$
+(\texttt{code/auslegung.py --candidate}). Dieser Vergleich trennt den
+Einfluss des Kontakts nicht: Der Kandidat unterscheidet sich auch in
+der bewegten Masse (im Referenzsatz bewegt sich die ganze Masse mit den
+Modulen, beim Kandidaten $0{,}300$ von $0{,}650\,\mathrm{kg}$) und im
+Hub ($8\,\mathrm{mm}$ statt $7{,}7\,\mathrm{mm}$). Die Zahlen
+illustrieren den Referenzsatz; eine Vorhersage für den Aufbau sind sie
+nicht.
 
 \section{Sweep mit sinusförmigem Bahnprofil}
 \label{sec:sinus-sweep}
@@ -4665,8 +4687,9 @@ einen Randterm fest: die Änderung der Schwerpunktsgeschwindigkeit,
 bezogen auf $g$ und Fensterlänge (Gleichung~\eqref{eq:randterm}). Der
 Randterm fällt exakt mit $T_w^{-1}$; der angepasste Exponent $-0{,}945$
 enthält zusätzlich den Quadraturanteil, der unter $0{,}01\,\%$ bleibt.
-Der Höchstwert des Archivs ist ein Artefakt der Festschritt-Integration;
-ereignisgenau weicht das Zeitmittel dort um $+0{,}02\,\mathrm{mN}$ ab. Bei
+Auch der Höchstwert des Archivs ist ein Randterm; das lange Einschwingen,
+das ihn erzeugt, ist aber ein Artefakt der Festschritt-Integration.
+Ereignisgenau weicht das Zeitmittel dort um $+0{,}02\,\mathrm{mN}$ ab. Bei
 aperiodischer Bewegung bleibt der Randterm im $10$-s-Fenster bis
 $0{,}37\,\%$.
 
@@ -4984,7 +5007,10 @@ sind der Randterm des
 Auswertefensters, die Impulsänderung des Schwerpunkts über das Fenster.
 Er entsteht bei unvollständigem Einschwingen, bei Fenstern ohne ganze
 Orbitperioden und bei aperiodischer Bewegung und fällt mit der
-Fensterlänge; die Integration trägt unter $0{,}01\,\%$ bei. Da der
+Fensterlänge; der Quadraturanteil der Mittelung bleibt unter
+$0{,}01\,\%$. Den Höchstwert des Archivlaufs erzeugt ein Einschwingen,
+das die Festschritt-Integration künstlich verlängert; ereignisgenau
+gerechnet weicht das Zeitmittel dort um $+0{,}02\,\mathrm{mN}$ ab. Da der
 Liftoff-Anteil von der Phasenlage abhängt, kann dieser Randterm als
 phasenabhängiger Effekt erscheinen; die Größe mit bekannter Antwort weist
 ihn als Artefakt aus. Die früher berichtete Mittelwertverschiebung ging
@@ -5674,7 +5700,7 @@ Felder im Literaturverzeichnis.
     \hline
     Umbanhowar/van Hecke 2005 & APS & DOI & --- \\
     Rigaud/Perret-Liaudet 2003 (T.\,1) & ScienceDirect & --- & Seiten 289--307 \\
-    Perret-Liaudet/Rigaud 2003 (T.\,2) & ScienceDirect, arXiv & DOI & Seiten und DOI nach Formelverzeichnis v2.7 nachgetragen, gegen die Verlagsseite zu prüfen \\
+    Perret-Liaudet/Rigaud 2003 (T.\,2) & ScienceDirect, arXiv & --- & Seiten und DOI aus dem Formelverzeichnis v2.7 ins Literaturverzeichnis übernommen, ungeprüft; gegen die Verlagsseite zu prüfen \\
     Perret-Liaudet/Rigaud 2006 & ScienceDirect & --- & Jahr 2006, nicht 2003 \\
     Perret-Liaudet/Rigaud 2007 & ASME & DOI & --- \\
     Wakou/Ochiai/Isobe 2008 & J-STAGE, arXiv & --- & --- \\

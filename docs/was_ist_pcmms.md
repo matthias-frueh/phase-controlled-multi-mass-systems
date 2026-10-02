@@ -1,7 +1,7 @@
 # Was ist PCMMS?
 
 **Phase-Controlled Multi-Mass Systems · Phasenkontrollierte Mehrmassensysteme**
-Matthias Früh · ORCID 0009-0005-9984-4207 · Stand September 2026
+Matthias Früh · ORCID 0009-0005-9984-4207 · Stand September 2026 · Nachträge 2. Oktober 2026
 
 *Für Leser ohne Vorwissen. Ersetzt die frühere Erklärfassung desselben Monats.*
 

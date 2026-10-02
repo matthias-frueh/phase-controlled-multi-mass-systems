@@ -2,7 +2,7 @@
 
 **Phase-Controlled Multi-Mass Systems**\
 Matthias Früh · Gravidon Systemics Research · ORCID [0009-0005-9984-4207](https://orcid.org/0009-0005-9984-4207)\
-Stand: 28. September 2026 · Status: prä-experimentell (Simulation; keine Messdaten)
+Stand: 28. September 2026, Nachträge 2. Oktober 2026 · Status: prä-experimentell (Simulation; keine Messdaten)
 
 ---
 
@@ -93,9 +93,11 @@ Kürzel v3a auch den zurückgezogenen Simulationszyklus v3a–v3d bezeichnet. Mi
   Kontaktresonanz (|H₂| = 5,03); bei festem ζ und K = 3·10⁴ … 10⁷ N/m beträgt sie 0,09–0,12 N je Grad
   (`python3 code/linear_solver.py --harmonics`). Auch die Höhe der Spitze und die positive Schiefe am
   Triphasik-Punkt sind Effekte des weichen Referenzkontakts (Übertragung der dritten und sechsten Harmonischen).
-  Am steifen V1-Kandidaten der Auslegung beträgt die Spannweite der Zeltkurve 0,56 N statt 4,56 N
-  (`python3 code/auslegung.py --candidate`). Die Zahlen illustrieren den Referenzsatz; Vorhersagen für V1 sind
-  sie nicht.
+  Am V1-Kandidaten der Auslegung (steifer Kontakt, von 0,650 kg bewegen sich nur die 0,300 kg der Module,
+  Hub 8 mm) beträgt die Spannweite der Zeltkurve 0,56 N, im Referenzsatz 4,56 N
+  (`python3 code/auslegung.py --candidate`); der Vergleich trennt den Einfluss des Kontakts nicht von dem der
+  bewegten Masse und des Hubs. Die Zahlen illustrieren
+  den Referenzsatz; Vorhersagen für V1 sind sie nicht.
 - Ein Sinusprofil liefert ohne Liftoff keine Schiefe. Das asymmetrische Profil ist nötig für Schiefe im
   Dauerkontakt und für die Harmonischen N₂, N₃. Phasenabhängigkeit und Zeltspitze treten auch beim Sinusprofil
   auf; bei starrer Auflage ist die Steigung am Knick mit dem Egg-Profil etwa doppelt so groß
