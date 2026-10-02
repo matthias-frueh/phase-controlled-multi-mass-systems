@@ -205,8 +205,9 @@ Formulierungen einer Begutachtung stand. Ein erster Schritt liegt seit dem 12.09
 
 ## 10 · Nachtrag 20.09.2026 — erster Literaturabgleich
 
-Der Literaturabgleich vom 12.09.2026 (`literaturabgleich_2026-09-12.md`, 12 verifizierte Referenzen, davon 10 mit
-DOI und zwei arXiv-Preprints ohne DOI; dazu ein Kurzvorläufer mit offener DOI) verschiebt den Neuheitsstatus in einem Punkt nach unten und präzisiert ihn in einem anderen:
+Der Literaturabgleich vom 12.09.2026 (`literaturabgleich_2026-09-12.md`, 12 Referenzen mit Prüfvermerk des
+Dokuments, davon 10 mit DOI und zwei arXiv-Preprints ohne DOI; dazu ein Kurzvorläufer mit offener DOI; der
+Prüfweg ist im Repository nicht dokumentiert, und ins Arbeitspapier sind die Einträge noch nicht übernommen) verschiebt den Neuheitsstatus in einem Punkt nach unten und präzisiert ihn in einem anderen:
 
 - **Nach unten:** Phasenabhängige Gleichrichtung periodischer Anregungen ist als Ratchet- und
   Symmetriebrechungsproblem etabliert (Flach, Yevtushenko & Zolotaryuk 2000; Denisov, Flach & Hänggi
@@ -224,8 +225,11 @@ DOI und zwei arXiv-Preprints ohne DOI; dazu ein Kurzvorläufer mit offener DOI) 
   Anregung, nur Normalkraft, keine Reibung), nicht auf dem Regime. Architekturähnlichkeit und
   Regimeähnlichkeit sind getrennt zu bewerten.
 
-Der Strang der vibrationsgetriebenen Mehrmodul-Roboter (Fang, Xu und Mitarbeiter; Chernousko;
-Wiercigroch und Mitarbeiter) ist im Abgleich noch nicht aufgenommen; §9 gilt dafür weiter.
+Der Strang der vibrationsgetriebenen Mehrmodul-Roboter (Fang, Xu und Mitarbeiter, im Projekt auch als
+„Fudan-Gruppe“ geführt; Chernousko; Wiercigroch und Mitarbeiter) ist im Abgleich noch nicht aufgenommen
+und bibliografisch ungeprüft; §9 gilt dafür weiter. Dasselbe gilt für Impact-Oszillatoren und Grazing,
+Haptik, Kapselroboter, dynamisches Wägen und Metrologie. Bis zu einer Recherche in diesen Feldern trifft
+das Projekt keine Aussage, ein Gegenstand sei dort nicht behandelt.
 
 ---
 

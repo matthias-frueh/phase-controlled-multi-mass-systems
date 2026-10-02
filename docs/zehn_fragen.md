@@ -13,11 +13,12 @@ die Lage der Spitze · alles Simulation
 
 **1 · Gibt es das nicht schon?**
 
-Die Bausteine ja, die Kombination nein. Interne Massen, Mehrmodulsysteme, Phasendifferenz als
-Stellgröße, Liftoff, 2D-Parameterkarten — alles besetzt. Aber: Wer die Kontaktkraft als Zielgröße
-nimmt (Perret-Liaudet & Rigaud, Umbanhowar & van Hecke), hat keine Mehrmassen-Phasensteuerung. Wer
-Mehrmassen-Phasensteuerung betreibt (z. B. die Gruppe um Fang und Xu, Fudan), optimiert Geschwindigkeit.
-PCMMS sitzt im Schnitt.
+Die Bausteine ja; die Kombination habe ich in einer gezielten, nicht systematischen Suche nicht gefunden.
+Interne Massen, Mehrmodulsysteme, Phasendifferenz als Stellgröße, Liftoff, 2D-Parameterkarten — alles
+besetzt. Wer die Kontaktkraft als Zielgröße nimmt (Perret-Liaudet & Rigaud, Umbanhowar & van Hecke), hat
+keine Mehrmassen-Phasensteuerung. Wer Mehrmassen-Phasensteuerung betreibt (z. B. Arbeiten von Fang, Xu
+u. a., im Projekt als „Fudan-Gruppe“ geführt; Kandidat, bibliografisch ungeprüft), optimiert nach diesen
+Angaben Geschwindigkeit. PCMMS sitzt im Schnitt, soweit die Suche reicht.
 
 **2 · Was ist konkret der Beitrag?**
 

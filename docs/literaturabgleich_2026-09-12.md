@@ -154,7 +154,7 @@
 
 **Namensprüfung:** Erstautor der Arbeit von 2018 ist **Mikhail Popov (M. Popov)**, nicht V. L. Popov. V. L. Popov ist Mitautor der Arbeit von 2026; deren Erstautor ist **Ibrohim Madatov** (v1 dieser Datei: „Islam“ – falsch). Der Journaltitel der Arbeit von 2018 lautet „Multimode …“, die arXiv-Fassung „Multi-mode …“.
 
-**Prüfstand 12.09.2026:** Alle Einträge in 1.1 gegen Verlags- bzw. arXiv-Seiten geprüft (Autoren, Jahr, Band, Seiten/Artikelnummer, DOI). Die DOI von Papangelo/Ciavarella ist am 12.09.2026 geklärt: 10.1016/j.jsv.2014.11.028 (ScienceDirect-Verlagstreffer, übereinstimmend mit der Crossref-Referenz in Chaos 35, 053126 (2025)); die Angabe …2014.10.034 aus v1 war falsch. Damit ist in 1.1 nichts mehr offen.
+**Prüfstand 12.09.2026:** Alle Einträge in 1.1 gegen Verlags- bzw. arXiv-Seiten geprüft (Autoren, Jahr, Band, Seiten/Artikelnummer, DOI). Die DOI von Papangelo/Ciavarella ist am 12.09.2026 geklärt: 10.1016/j.jsv.2014.11.028 (ScienceDirect-Verlagstreffer, übereinstimmend mit der Crossref-Referenz in Chaos 35, 053126 (2025)); die Angabe …2014.10.034 aus v1 war falsch. Damit ist in 1.1 nichts mehr offen. *Nachtrag Oktober 2026:* Offen bleiben Band und Seiten von `Feng2026EnergyPhase`; `Feng2026PhaseSpace` und `Feng2026Harmonic` liegen nur als arXiv-Preprints vor; der Prüfweg (Verlags- und arXiv-Seiten) ist im Repository nicht nachvollziehbar dokumentiert. Die Einträge stehen weder im Literaturverzeichnis noch im Text des Arbeitspapiers v2.4; vor einer Übernahme sind sie gegen die Primärquellen zu prüfen.
 
 ### 1.2 Nachzutragen (aus der Referenzliste des Lubricants-Papers; DOI offen)
 

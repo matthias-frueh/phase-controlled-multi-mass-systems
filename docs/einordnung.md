@@ -133,27 +133,32 @@ Die mechanischen Grundelemente von PCMMS sind alle besetzt. Das ist bekannt und 
 
 ### Direkte Nachbarn
 
-**Fudan-Gruppe (Fang, Xu, Diao) — Mehrmodul-Vibrationsroboter.** Die Gruppe um Fang und Xu untersucht
-Dynamik und Phasenkoordination von Mehrmodul-Vibrationsrobotern mit linearen und nichtlinearen
-Verbindungen und sucht Phasendifferenzen, die die mittlere Dauergeschwindigkeit maximieren.
-Dieselbe Gruppe behandelt stückweise-glatte Mehrmodulsysteme mit Trockenreibung und
-diskontinuitätsinduzierte Gleitbifurkationen (*Commun. Nonlinear Sci. Numer. Simul.* 114, 106704,
-2022). Diao, Zhang & Fang optimieren die Lokomotionsleistung bi-objektiv (*Arch. Appl. Mech.* 91,
-2073–2088, 2021).
+**Mehrmodul-Vibrationsroboter (Arbeiten von Fang, Xu u. a.; im Projekt als „Fudan-Gruppe“ geführt) —
+Kandidat, bibliografisch ungeprüft.** Arbeiten um Fang und Xu untersuchen Dynamik und Phasenkoordination
+von Mehrmodul-Vibrationsrobotern mit linearen und nichtlinearen Verbindungen und suchen
+Phasendifferenzen, die die mittlere Dauergeschwindigkeit maximieren. Genannt werden außerdem
+stückweise-glatte Mehrmodulsysteme mit Trockenreibung und diskontinuitätsinduzierte Gleitbifurkationen
+(*Commun. Nonlinear Sci. Numer. Simul.* 114, 106704, 2022) und eine bi-objektive Optimierung der
+Lokomotionsleistung durch Diao, Zhang & Fang (*Arch. Appl. Mech.* 91, 2073–2088, 2021). Diese Angaben
+sind nicht gegen die Primärquellen geprüft; in anderen Projektunterlagen stehen dazu abweichende
+Arbeitsangaben, und das Arbeitspapier v2.4 (Anhang C) führt die Zuordnung zu einer Arbeitsgruppe als nicht
+bestätigt.
 
-**Das ist der engste Nachbar überhaupt** — gleicher mechanischer Unterbau, gleicher Phasenbegriff.
+**Bestätigen sich die Angaben, wäre das ein sehr naher Nachbar** — gleicher mechanischer Unterbau, gleicher
+Phasenbegriff.
 
 **Chernousko und Nachfolger — Optimierung vibrationsgetriebener Systeme.** Die klassische Linie:
 optimale Innenmassenbewegung für maximale Dauergeschwindigkeit unter anisotroper Trockenreibung.
 
-**M-Runners (DLR + TUM, Albu-Schäffer).** Intrinsische Dynamik elastischer Roboter — Bewegung
+**M-Runners (DLR + TUM, Albu-Schäffer; ohne Fundstelle, zu prüfen).** Intrinsische Dynamik elastischer Roboter — Bewegung
 entsteht aus dem Zusammenspiel bewegter Massen und elastischer Elemente statt aus Servoregelung.
 Der Roboter BERT nutzt Eigenschwingungen. Mechanische Bewegungserzeugung über Strukturdynamik statt
 über Servoregelung ist damit etablierter, aktiv betriebener Forschungsstand — angrenzend, aber kein
 Vorläufer von PCMMS: dort geht es um Energieeffizienz der Bewegung, nicht um die Kontaktkraft.
 
 **Vibro-impact-Forschung.** Intermittierender Kontakt, Liftoff, Normalkraftdynamik bei starker
-Vibrationsanregung — etabliert, mit aktuellen Arbeiten zu Crawl-/Flug-Regimen bei Bürstenrobotern.
+Vibrationsanregung — etabliert; dazu gehören Impact-Oszillatoren, Hüpfzustände und Grazing. Arbeiten zu
+Crawl-/Flug-Regimen bei Bürstenrobotern sind ohne Fundstelle genannt und zu prüfen.
 
 ### Was daraus folgt
 
@@ -179,23 +184,24 @@ Die Bausteine ja, die Fragestellung nein — aber die Abgrenzung braucht zwei Sc
 
 **Schritt 1: Wer die Kontaktkraft als Zielgröße nimmt, hat keine Mehrmassen-Phasensteuerung.**
 Perret-Liaudet & Rigaud untersuchen die Normalkraft eines stoßenden Hertz-Kontakts unter
-Zufallsanregung als primäre Observable und zeigen, dass Schiefe und Kontaktverlust die
-Zustandsinformation tragen. Umbanhowar & van Hecke messen Kraftdynamik bei sub-nm-Relativbewegung.
+Zufallsanregung als primäre Observable und werten Spektralinhalte und Statistiken der übertragenen
+Normalkraft aus. Umbanhowar & van Hecke messen Kraftdynamik bei sub-nm-Relativbewegung.
 Beide behandeln die Kraft selbst — aber an einem Einzelkontakt beziehungsweise einer granularen
 Packung, ohne mehrere individuell phasengesteuerte Innenmassen als Stellgröße.
 
 **Schritt 2: Wer Mehrmassen-Phasensteuerung betreibt, optimiert Geschwindigkeit.**
 In den für PCMMS direkt relevanten Mehrmodul-Vibrationsrobotik-Arbeiten wird die Kraftdynamik
 überwiegend als *Mechanismus* der Lokomotion behandelt; zentrale Zielgrößen sind Lokomotionsleistung,
-mittlere Dauergeschwindigkeit und Bewegungsregime. Wenn die Gruppe um Fang und Xu Phasendifferenzen zwischen
-Modulen optimiert, dann für maximale Geschwindigkeit. Diao et al. optimieren die Lokomotionsleistung
-bi-objektiv. Dieselbe Gruppe analysiert Gleitbifurkationen unter Trockenreibung — auch dort ist die
-mittlere Geschwindigkeit die zentrale Größe.
+mittlere Dauergeschwindigkeit und Bewegungsregime. Nach den (ungeprüften) Angaben oben werden dort
+Phasendifferenzen zwischen Modulen für maximale Geschwindigkeit optimiert, die Lokomotionsleistung
+bi-objektiv (Diao et al.) und Gleitbifurkationen unter Trockenreibung — auch dort mit der mittleren
+Geschwindigkeit als zentraler Größe.
 
 **PCMMS Linie A sitzt im Schnitt beider Mengen:** mehrere individuell phasengesteuerte Innenmassen
 *und* die zeitaufgelöste Kontaktkraft als primäre Zielgröße, bei absichtlich stationärem Körper.
-Der Aufbau ähnelt Schritt 2, die Fragestellung ähnelt Schritt 1 — die Kombination habe ich nicht
-gefunden.
+Der Aufbau ähnelt Schritt 2, die Fragestellung ähnelt Schritt 1 — die Kombination habe ich in einer
+gezielten, nicht systematischen Suche nicht gefunden. Haptik, Kapselroboter, Impact-Oszillatoren,
+dynamisches Wägen und Metrologie sind dabei noch nicht durchsucht.
 
 Das ist eine schwächere und damit haltbarere Behauptung als „niemand untersucht Kontaktkräfte".
 
@@ -207,7 +213,8 @@ Die Kombination, nicht das Einzelteil:
 > unilaterale Stützfläche · zeitaufgelöste Kraftmessung · analytisch festgelegte ⟨F_N⟩ = M·g-Nullbasis ·
 > eine Präregistrierung im Entwurf (v2, nicht eingefroren; v1 als nicht extern registrierte Arbeitsfassung)
 
-Diese Zusammenstellung als **Messproblem** habe ich in der Literatur nicht gefunden. Das ist eine
+Diese Zusammenstellung als **Messproblem** habe ich in einer gezielten, nicht systematischen Suche nicht
+gefunden; das ist ein Suchbefund, kein Nachweis einer Lücke. Das ist eine
 Nischenbehauptung, keine Entdeckungsbehauptung — und sie ist widerlegbar, indem jemand die Arbeit
 zeigt, die es schon gibt.
 
