@@ -179,10 +179,11 @@ Entscheidungsrelevant; die vollständige Tabelle steht im Anhang A1.
 
 ### 5.1 Aufbau
 
-Experiment V1 mit drei Wägezellen im Dreieck, optischem Wegkanal, drei Phasenencodern mit Indeximpuls,
-Beschleunigungssensor und Temperatur (Kanäle: A9.1), mit Nocke oder programmierbarem Aktuator für das Profil.
-Das Exposé nennt die drei Wägezellen im Dreieck; Wegkanal, Phasenencoder, Beschleunigungssensor und
-Temperaturfühler stehen dort als erwogen, die Kanalzahl als offen.
+Teil A geht für V1 von drei Wägezellen im Dreieck, optischem Wegkanal, drei Phasenencodern mit Indeximpuls,
+Beschleunigungssensor und Temperatur aus (Kanäle: A9.1), mit Nocke oder programmierbarem Aktuator für das
+Profil; festgelegt ist dieser Kanalsatz damit nicht. Das Exposé nennt die drei Wägezellen im Dreieck;
+Wegkanal, Phasenencoder, Beschleunigungssensor und Temperaturfühler stehen dort als erwogen, die Kanalzahl
+als offen.
 Zusätzlich verlangt Teil A: kinematische Lagerung der Füße und eine festgelegte, dokumentierte
 Kabelschlaufe; feste Verstärkung ohne Softwarefilter, automatische Nullpunktnachführung,
 Stillstandserkennung, adaptive Filter oder Bereichsumschaltung; gleiche analoge Anti-Aliasing-Filter in
