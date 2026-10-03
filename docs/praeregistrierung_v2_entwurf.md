@@ -1,7 +1,7 @@
 # PCMMS — Präregistrierung v2 (Entwurf)
 
 **Matthias Früh · ORCID 0009-0005-9984-4207**
-Stand: 25. September 2026, überarbeitet 2. Oktober 2026 (§1: Einordnung der Vorzeichenregel; Entwurf 10/2026: Entscheidungsregeln, Identifizierbarkeit und Kontrollen, Anhang A0) und 3. Oktober 2026 (§5.1, §12: Verweise auf das Exposé; Kurzfassung, §2–§4, §5.2, §7, §8.7, §11, §12: Auftrieb und Bestimmung von M; §3, §5.2–§5.5, §6, §8.4–§8.6, §8.8, §8.10, §9.1–§9.4, §12: offene Festlegungen nach Entscheidungsgruppen und an den Regelstellen gekennzeichnet, Klarstellungen) · Teil A, Entwurf — nicht eingefroren, nicht registriert
+Stand: 25. September 2026, überarbeitet 2. Oktober 2026 (§1: Einordnung der Vorzeichenregel; Entwurf 10/2026: Entscheidungsregeln, Identifizierbarkeit und Kontrollen, Anhang A0) und 3. Oktober 2026 (§5.1, §12: Verweise auf das Exposé; Kurzfassung, §2–§4, §5.2, §7, §8.7, §11, §12: Auftrieb und Bestimmung von M; §3, §5.2–§5.5, §6, §8.4–§8.6, §8.8, §8.10, §9.1–§9.4, §12: offene Festlegungen nach Entscheidungsgruppen und an den Regelstellen gekennzeichnet, Klarstellungen; Kurzfassung, §2–§4, §5.4, §8.2, §8.5–§8.8, §9.3, §9.4, §12, Anhang: Teilentscheidungen des Autors zur Entscheidungslogik von H2 und H3, zum Niveau der H2-Intervalle, zur Laufzahlbedingung und zur Berichtsform) · Teil A, Entwurf — nicht eingefroren, nicht registriert
 
 Teil A besteht aus diesem Hauptdokument und dem gleichrangigen *Technischen Anhang*
 (`praeregistrierung_v2_anhang.md`, im Folgenden „Anhang“). Es gibt keine Messdaten. Jede Zahl ist ein
@@ -17,17 +17,18 @@ solange er auf allen Auflagepunkten Kontakt hält. Primär geprüft werden an 21
 der Spitze der Zeltkurve (H2), also des Maximums von F_min (Minimum von N über einen Zyklus) entlang des
 Schnitts; bei identischen Modulen hat F_min am Triphasik-Punkt (120°, 240°) einen Knick mit relativem
 Maximum. Sekundär geprüft werden die Superposition je Wägezelle (H1Z), ein Kontaktmodell mit einem
-Freiheitsgrad an den Einzelmodulläufen (H3) und das Vorzeichen der Schiefe (H4). ⟨N⟩, die statische
+Freiheitsgrad an den Einzelmodulläufen (H3; im steifen Aufbau vor allem eine Prüfung von Masse, Profil und
+Kalibrierung) und das Vorzeichen der Schiefe (H4). ⟨N⟩, die statische
 Last des ruhenden Körpers (Gewicht abzüglich Luftauftrieb), ist Kontrollgröße (H0), kein Ergebnis. Die
 Vorhersagen entstehen aus Messungen an der
 Apparatur selbst (Phase 0) und werden vor Phase 1 in Teil B registriert; eine gleich gebildete zweite
-Vorhersage aus Kontrollläufen der Phase 1 dient als Driftkontrolle. H1 wird mit einem Äquivalenztest und
-einem Mindesteffekttest entschieden; die Ausgänge „äquivalent“, „relevant abweichend“ und „nicht
-entscheidbar“ schließen sich aus. Zusatzläufe bei einer zweiten Amplitude oder Frequenz ordnen eine
+Vorhersage aus Kontrollläufen der Phase 1 dient als Driftkontrolle. H1 und H2 werden, wie H1Z und H3, mit
+einem Äquivalenztest und einem Mindesteffekttest entschieden; die Ausgänge „bestätigt“, „falsifiziert“ und
+„nicht entscheidbar“ schließen sich aus. Zusatzläufe bei einer zweiten Amplitude oder Frequenz ordnen eine
 Abweichung, soweit möglich, einer Ursachenklasse zu, die registrierte Kontrolle E3 aus den drei Zellkräften
 einem Modul; Kontakt- und Messkettennichtlinearität bleiben ununterscheidbar. Jeder Ausgang, auch
-„nicht entscheidbar“, wird veröffentlicht. Vor dem Einfrieren fehlen vor allem die Werkzeuge und die
-offenen Festlegungen aus §12.
+„nicht entscheidbar“ (stets mit Grund), wird veröffentlicht. Vor dem Einfrieren fehlen vor allem die
+Werkzeuge und die offenen Festlegungen aus §12.
 
 ---
 
@@ -115,7 +116,8 @@ Körper auf der Auflage bewegt, an einem nichtlinearen Kontakt scheitern; in ein
 überwiegend ein Test der Apparatur und wird so benannt. H2 zeigt Kopplungen, nicht konstante Phasenfehler
 oder nicht erfasste Modulunterschiede. Über den Kontakt sagt H3 nur bei Harmonischen etwas aus, bei denen
 sich Kontaktmodell und starre Auflage nachweisbar unterscheiden (§8.7). In einem steifen Aufbau ist das für
-k ≤ 3 kaum der Fall (A4); H3 prüft dann Masse, Profil und Kalibrierung. Ob H3 dafür um eine Prüfung über
+k ≤ 3 kaum der Fall (A4); H3 prüft dann Masse, Profil und Kalibrierung. Eine Bestätigung bei der Testvariante
+±10 % (§3) ist keine Bestätigung des Kontaktgesetzes oder des Kontaktmodells. Ob H3 dafür um eine Prüfung über
 die Betriebsimpedanz des Kontakts ergänzt wird, ist offen (§8.7, §12). Welcher Ursache eine Abweichung von
 H1 zuzuordnen ist, klären die Identifizierbarkeitsläufe und E3 nur teilweise (§5.5, §8.10): Sie
 unterscheiden Ursachen nach ihrer Skalierung mit der Amplitude und nach dem Modul, nicht nach dem Ort im
@@ -128,7 +130,7 @@ konfirmatorisch geprüft.
 
 Alle konfirmatorischen Hypothesen beziehen sich auf den Arbeitspunkt f (§5.3) und auf auswertbare
 Konfigurationen (§9.1); Sollphasen sind Profilphasen; α = 0,05 je Familie. Die Entscheidungsregeln stehen
-vollständig in §9.3.
+vollständig in §9.3; „nicht entscheidbar“ wird stets mit Grund berichtet.
 
 **H0 — Nullkontrolle.** Für jeden Lauf gilt |Δ⟨N⟩| ≤ ε_ctrl (§8.8). ⟨N⟩ ist die statische Last
 des ruhenden Körpers: das Gewicht von Bauteilen und Innenluft abzüglich des Auftriebs in der Außenluft,
@@ -153,8 +155,11 @@ Abweichung gegen beide Vorhersagen nachweislich größer als die Relevanzgrenze 
 
 **H2 — Zeltspitze (primär).** Die Lage φ₂* des F_min-Maximums aus einem Zeltfit mit zwei Geraden (Schätzer
 offen, §12) in einem festen Fitfenster (§8.6) stimmt mit der Lage überein, die derselbe Fit an der Vorhersage
-ergibt; bestätigt
-nur bei einer Halbbreite des Intervalls von höchstens 1° (Rolle dieser Bedingung und Logik von H2 offen, §12).
+ergibt. Entschieden wird wie bei H1 mit Äquivalenzlogik: Bestätigt ist H2 nur, wenn die Intervalle [a⁰, b⁰]
+und [a¹, b¹] der Spitzenabweichung gegen ŷ⁰ und ŷ¹ (95 %, Intervalltyp und Rückfall nach §8.6) beide in der
+Äquivalenzgrenze ±δ_H2 liegen (Testvariante ±1°, offen, §12); falsifiziert ist H2 nur, wenn beide auf
+derselben Seite außerhalb von ±δ_H2 liegen (δ_H2 ist zugleich Relevanzgrenze). Sonst ist H2 nicht
+entscheidbar.
 
 **H1Z — Superposition je Zelle (sekundär).** Wie H1, aber für jede der drei Zellkräfte: F_min,c − ⟨N_c⟩
 sowie Real- und Imaginärteil von N_c,1, N_c,2, N_c,3 an den 21 Schnittpunkten gegen die zellweise
@@ -164,9 +169,13 @@ aus derselben Zelle stammen.
 
 **H3 — Kontaktmodell (sekundär).** Das 1-FG-Modell sagt mit den in P0.1–P0.5 unabhängig gemessenen
 Größen Real- und Imaginärteil von N_k⁽ʲ⁾, k = 1 … 3, der Einzelmodul-Kontrollläufe der Phase 1 voraus
-(18 Tests, §8.7); bestätigt nur, wenn jedes Intervall in ±10 % der vorhergesagten Amplitude liegt (PB3; Logik
-offen, §12).
-In einem steifen Aufbau prüft H3 vor allem Masse, Profil und Kalibrierung (§8.7).
+(18 Tests, §8.7). Entschieden wird wie bei H1 mit Äquivalenzlogik: Bestätigt ist H3 nur, wenn jedes der 18
+Intervalle r ± t(0,95; ν_eff)·u_c in der Äquivalenzgrenze ±δ_H3·|N̂_k⁽ʲ⁾| liegt (PB3, §8.5; Testvariante ±10 %,
+offen, §12), ohne die Bedingung „kein |z| > c“; falsifiziert ist H3 nur, wenn an einem Test |r| − c·u_c größer
+als die Relevanzgrenze von H3 ist (mindestens δ_H3·|N̂_k⁽ʲ⁾|, Wert offen, §12). Sonst ist H3 nicht
+entscheidbar. Eine Bestätigung bei der Testvariante ±10 % ist keine Bestätigung des Kontaktgesetzes oder des
+Kontaktmodells; in einem steifen Aufbau prüft H3 vor allem Masse, Profil und Kalibrierung, weil der
+Kontaktanteil dort für k ≤ 3 weit unter 10 % liegt (§8.7, A4).
 
 **H4 — Vorzeichen der Schiefe (sekundär).** An jeder Konfiguration der Prüfmenge V hat die gemessene
 Schiefe das Vorzeichen der Vorhersage γ̂₁ (einseitig, höchstens 23 Tests). V enthält die Schnittpunkte
@@ -220,6 +229,7 @@ Entscheidungsrelevant; die vollständige Tabelle steht im Anhang A1.
 | Δ_park, G_F, G_x | Toleranz der Parkposition [Teil B]; Übertragung der Kraftkette (P0.4) und des Wegkanals (P0.5) |
 | u_c, u_c,erw | u_c: Unsicherheit einer Differenz Messung − Vorhersage (§8.3); erwartet: u_c,erw² = s_q²/n_min + u²(ŷ_q), s_q gepoolt aus den Pilotläufen [Teil B] |
 | Δ_q, Δ_rel | Äquivalenzgrenze Δ_q = 0,25·D_q und Relevanzgrenze Δ_rel ≥ Δ_q der Falsifikation (§8.5) [Teil B] |
+| δ_H2, δ_H3 | Äquivalenzgrenzen von H2 (Spitzenabweichung in Grad, zugleich Relevanzgrenze, §8.6) und H3 (Anteil von \|N̂_k⁽ʲ⁾\|, PB3, §8.5); Relevanzgrenze von H3 mindestens δ_H3·\|N̂_k⁽ʲ⁾\|; Testvarianten ±1° bzw. ±10 %, Werte und Relevanzgrenze von H3 offen (§12) |
 | N_c,k, F_min,c | Harmonische und Minimum der bandbegrenzten Konfigurationsmittelkurve der Zelle c (H1Z) |
 | Ĉⱼ,ₖ, Δφⱼ^Z, q_Z | Zeiger von Modul j aus den drei Zellkräften (A2.7); Δφⱼ^Z: Abweichung der daraus bestimmten Profilphase von der Encoderphase; q_Z: Abweichung der gegenläufigen Komponente des Kippmoments von ihrer Vorhersage, bezogen auf die gleichlaufende (E3, §8.10) |
 
@@ -354,12 +364,16 @@ verwendet. s_q ist je Größe das quadratische Mittel der Streuungen über die P
 für T_a aus ganzen Zyklen aufsteigend, soweit die Aufnahme reicht, wird s_q(T_a) aus den auf die ersten
 Zyklen gekürzten Pilotläufen gebildet. n_min und n₀ ≥ 20 minimieren N_K·n_min + 3·n₀ (Zielfunktion offen, §12;
 bei Gleichstand
-das kleinere n_min) unter der Bedingung, dass die Planungssimulation (§12, Punkt 8) H1 bei exakter Superposition
-nach den Regeln von §8.5 und §9.3 mit Wahrscheinlichkeit ≥ 0,8 bestätigt und die erwartete H2-Halbbreite
-≤ 1° ist, mit Streuungen an ihrer oberen 80-%-Vertrauensgrenze (Fassung der Bedingungen offen, §12: Logik von H2
-und H3, Laufzahl von H1). Zusätzlich gilt n_min ≥ (3/SNR)² mit
-SNR = s̄·1°/s_F, s̄ dem Mittel der beiden Flankensteigungen des Zeltfits an der Vorhersage im Fitfenster und
-s_F der Pilotstreuung von F_min − ⟨N⟩ (Faustregel für die H2-Halbbreite, A9.2); SNR steht in Teil B. Das
+das kleinere n_min) unter der gemeinsamen Bedingung P(H1 und H2 bestätigt | exakt) ≥ 0,8: Die Planungssimulation
+(§12, Punkt 8) bestätigt bei exakter Superposition H1 und H2 nach den Regeln von §8.5, §8.6 und §9.3 zusammen
+mit Wahrscheinlichkeit ≥ 0,8, mit Streuungen an ihrer oberen 80-%-Vertrauensgrenze (eine zusätzliche
+Power-Bedingung ist offen, §12: Laufzahl von H1). Die Einhaltung wird mit Werkzeug 8 geprüft (A9.11). Mit der
+gemeinsamen Bedingung ist P(H2 bestätigt | exakt) ≥ 0,8 bei der geplanten Laufzahl von selbst erfüllt; wie das
+Kriterium „H2 auch bei hoher Präzision entscheidbar“ (A9.11) zu lesen ist, bleibt offen (§12). Zusätzlich gilt
+n_min ≥ (3·1°/(SNR·δ_H2))², also eine erwartete H2-Halbbreite ≤ δ_H2 (notwendig, weil ein breiteres Intervall
+nicht in ±δ_H2 liegen kann; bei der Testvariante δ_H2 = 1° gilt n_min ≥ (3/SNR)²), mit SNR = s̄·1°/s_F, s̄ dem
+Mittel der beiden Flankensteigungen des Zeltfits an der Vorhersage im Fitfenster und s_F der Pilotstreuung von
+F_min − ⟨N⟩ (Faustregel für die H2-Halbbreite, A9.2); SNR steht in Teil B. Das
 erste Paar (k, T_a), das damit n ≤ n_max erfüllt, legt k_max = k, T_a, n_min und n₀ fest; alle k ≤ k_max
 werden verwendet. Gibt es keines, ist f unzulässig. **Rauschbias:** Für jeden Schnittpunkt wird
 b_i = E[min N̄_Messung] − E[min N̂] aus den Rauschkovarianzen simuliert, mit getrennten Rauschmodellen für
@@ -526,8 +540,8 @@ Einzelmodulläufen der Phase 0 ist die registrierte Vorhersage; **ŷ¹** entsteh
 Kontrollläufen der Phase 1 und folgt einer Drift. Eine Abweichung zählt nur, wenn sie gegen beide besteht.
 Die Differenz Phase 1 − Phase 0 der 21 Einzelmodulgrößen wird mit Welch-t-Test, zweiseitig, Bonferroni
 über 21, α = 0,05, berichtet. Zeigt ein Kontrolllauf der Phase 1 Einzelzell-Liftoff (ausgenommen Läufe, die
-nach G5, G8 oder G10 ungültig sind), ist ŷ¹ ungültig, und H1 und H2 sind nicht entscheidbar. Für ŷ⁰ schließt
-§5.3 (a) Liftoff aus.
+nach G5, G8 oder G10 ungültig sind), ist ŷ¹ ungültig, und H1 und H2 sind nicht entscheidbar (Grund: Datenlage).
+Für ŷ⁰ schließt §5.3 (a) Liftoff aus.
 
 ### 8.3 Unsicherheiten
 
@@ -574,7 +588,9 @@ beiden Primärhypothesen fälschlich zu verwerfen, ist höchstens 0,10, für H1�
   bzw. Δ_q/5,21 (ν = 19). Sie gilt für 294 als unabhängig angenommene Intervalle: 147 Tests gegen ŷ⁰
   und ŷ¹. Gegen eine Vorhersage allein wären es Δ_q/4,82 bzw. Δ_q/5,00; die zweite Vorhersage senkt die
   Bestätigungswahrscheinlichkeit (A8). Gerechnet wird mit derselben Bandbegrenzung wie die Messung (A4, A8).
-  Welche Größe bindet, hängt vom Rauschmodell ab (A8); maßgeblich ist die Planungssimulation (§5.4).
+  Welche Größe bindet, hängt vom Rauschmodell ab (A8); maßgeblich ist die Planungssimulation (§5.4). Die
+  gemeinsame Bedingung von §5.4 für H1 und H2 verlangt mindestens die Präzision, mit der H1 allein mit
+  Wahrscheinlichkeit 0,8 bestätigt wird.
 - **Mindesteffekt (H1):** Ein Test ist relevant abweichend, wenn |r⁰| − c·u_c⁰ > Δ_rel,q und
   |r¹| − c·u_c¹ > Δ_rel,q mit gleichem Vorzeichen von r⁰ und r¹ (c nach §8.4). Δ_rel,q [Teil B] folgt einer in
   Teil A festgelegten Regel; Vorschlag: Δ_rel,q = Δ_q (Optionen: A8, offen, §12). Jede zulässige Regel
@@ -585,7 +601,12 @@ beiden Primärhypothesen fälschlich zu verwerfen, ist höchstens 0,10, für H1�
   um Δ_q ab. Eine Grenze aus der Zellstruktur über den Schnitt (0,25·D_c,q) taugt nicht für jede Geometrie:
   Sitzen die Module über den Zellen, hängt die Zellkraft kaum von der Phasenlage ab (A2.5), und D_c,q wird
   nahezu null. Die Laufzahl richtet sich nicht nach H1Z; ihre Bestätigungswahrscheinlichkeit steht in Teil B.
-- **PB3 (H3):** Intervall in ±0,10·|N̂_k⁽ʲ⁾| (Rolle offen, §12: Entscheidungslogik von H2 und H3).
+- **PB3 (H3, Äquivalenztest):** Für jeden der 18 Tests liegt [r − t_eq·u_c, r + t_eq·u_c], t_eq = t(0,95; ν_eff),
+  in [−Δ, +Δ] mit Δ = δ_H3·|N̂_k⁽ʲ⁾| (Testvariante δ_H3 = 10 %, offen, §12), ohne die Bedingung „kein |z| > c“.
+  Bei dieser Testvariante wird eine Bestätigung von H3 nicht als Bestätigung des Kontaktgesetzes oder des
+  Kontaktmodells bezeichnet (§8.7).
+- **Mindesteffekt (H3):** Ein Test ist relevant abweichend, wenn |r| − c·u_c (c nach §8.4) größer als die
+  Relevanzgrenze von H3 ist; sie ist gleich Δ oder größer (offen, §12).
 - **H4:** Aufnahme in V bei |γ̂₁| ≥ (c₄ + 1,645)·u_c,erw(γ₁), c₄ = t(1 − 0,05/23; n_min − 1).
 
 ### 8.6 Zeltfit (H2)
@@ -597,16 +618,19 @@ ergibt φ̂₂*. W ist um einen Schnittpunkt zentriert, der allein aus der Vorhe
 dem Zeltfit (Fassungen: A9.6; offen, §12), bei Gleichstand der kleinere, und am Schnittrand abgeschnitten. Die
 Halbbreite w hängt nicht von u_c,erw
 ab; Vorschlag: w = 6° fest (Alternativen: w = 8° fest oder ein Kriterium über den Spitzenfehler, A9.6;
-offen, §12). Liegen auf einer Seite weniger als zwei Punkte, ist H2 nicht entscheidbar (zu ausgefallenen Punkten in W
-siehe §9.3; offen, §12). Das 95-%-Intervall
+offen, §12). Liegen auf einer Seite weniger als zwei Punkte, ist H2 nicht entscheidbar (Grund: Datenlage; zu
+ausgefallenen Punkten in W siehe §9.3; offen, §12). Das 95-%-Intervall
 der Differenz entsteht aus 10 000 Bootstrap-Replikaten über alle Läufe, getrennt gegen ŷ⁰ und ŷ¹, als
 Perzentilintervall. Über den Intervalltyp entscheidet die Überdeckung in der Kalibriersimulation mit der
 Schwelle 0,936 (0,95 minus zwei Monte-Carlo-Standardfehler bei 1000 Kampagnen) [Teil B]: Erreicht das
 Perzentilintervall sie, gilt es. Sonst gilt das BCa-Intervall, wenn es sie erreicht. Erreicht keines sie, gilt
 das Perzentilintervall mit dem kleinsten Nominalniveau aus 0,96, 0,97, 0,98 und 0,99, dessen simulierte
 Überdeckung 0,936 erreicht (kalibrierte Verbreiterung). Reicht auch 0,99 nicht, ist H2 nicht entscheidbar
-(Rückfallkette und Bezugswert der Überdeckung offen, §12).
-Suchschritt, Gleichstand, Replikate: A9.6.
+(Grund: Verfahren; Rückfallkette und Bezugswert der Überdeckung offen, §12). H2 wird mit Äquivalenzlogik
+entschieden (§9.3): bestätigt, wenn die Intervalle gegen ŷ⁰ und ŷ¹ ([a⁰, b⁰], [a¹, b¹]) beide in ±δ_H2 liegen,
+falsifiziert, wenn beide auf derselben Seite außerhalb von ±δ_H2 liegen, sonst nicht entscheidbar. δ_H2 ist
+Äquivalenz- und zugleich Relevanzgrenze (Testvariante δ_H2 = 1°, die halbe Schrittweite des Schnitts; offen,
+§12). Suchschritt, Gleichstand, Replikate: A9.6.
 
 ### 8.7 H3
 
@@ -614,12 +638,17 @@ N̂_k⁽ʲ⁾ = G_F(kω)·m_j·H(kω)·a_k⁽ʲ⁾ mit H(ω) = (K + iωC)/(K −
 Fortpflanzung mit Unsicherheit (A9.7); M ist hier die träge Masse, mit der P0.4 angepasst wird, einschließlich
 m_L (A2.1); Messwerte sind die Mittel der gültigen Phase-1-Kontrollläufe. Eine
 Harmonische prüft den Kontakt nur, wenn |N̂_k⁽ʲ⁾ − G_F·m_j·a_k⁽ʲ⁾| > Δ (PB3); sonst prüft H3 Masse, Profil und
-Kalibrierung. Teil B nennt den Fall je k. Vor dem Datenschluss wird die H3-Vorhersage nicht mit gemessenen
-Einzelmodul-Harmonischen verglichen; der Vergleich mit Phase 0 wird danach berichtet.
+Kalibrierung. Teil B nennt den Fall je k. Bei der Testvariante δ_H3 = 10 % (offen, §12) wird eine Bestätigung von
+H3 nicht als Bestätigung des Kontaktgesetzes oder des Kontaktmodells bezeichnet; im steifen Aufbau liegt der
+Kontaktanteil |N̂_k⁽ʲ⁾ − G_F·m_j·a_k⁽ʲ⁾|/|N̂_k⁽ʲ⁾| = |H(kω) − 1|/|H(kω)| für k ≤ 3 weit darunter (unten). Den
+Kontakt prüfte erst Fassung I (unten, offen) oder eine Äquivalenzgrenze unter dem Kontaktanteil. Vor dem
+Datenschluss wird die H3-Vorhersage nicht mit gemessenen Einzelmodul-Harmonischen verglichen; der Vergleich
+mit Phase 0 wird danach berichtet.
 
 **Reichweite im steifen Aufbau (offen – Entscheidung des Autors, §12).** Bei K = 10⁶ N/m weichen |N₁|, |N₂|,
-|N₃| nur um 0,3 %, 1,0 % und 2,4 % vom starren Wert ab (A4), weit unter PB3. H3 prüft dann für k ≤ 3 nicht den
-Kontakt. Zwei Fassungen stehen zur Wahl:
+|N₃| nur um 0,3 %, 1,0 % und 2,4 % vom starren Wert ab (|H(kω)| − 1, A4); der Kontaktanteil (oben) beträgt
+0,3 %, 1,0 % und 2,3 % (A4, A9.7). Beides liegt weit unter der Testvariante δ_H3 = 10 %. H3 prüft dann für
+k ≤ 3 nicht den Kontakt. Zwei Fassungen stehen zur Wahl:
 
 - **Fassung K (Kennzeichnung):** H3 bleibt wie oben und wird ausdrücklich als Prüfung von Masse, Profil und
   Kalibrierung berichtet; eine Bestätigung sagt dann nichts über das Kontaktmodell. Kein zusätzlicher Kanal.
@@ -641,8 +670,11 @@ Wert aus einer Simulation ohne Zusatzstreuung, α = 0,05), gilt ε_ctrl = 3·σ�
 (Zelle) vom vorangehenden gültigen Referenzlauf abweicht. Er wird sofort wiederholt;
 überschreitet die Wiederholung im selben Kanal wieder die Schwelle, greift S1, sonst ist der alarmierte
 Lauf ungültig und die Wiederholung ersetzt ihn. Berichtet wird ein Welch-t-Test von Δ⟨N⟩ der
-Kombinationsläufe gegen die Referenzläufe (A9.8; Form der Aussage offen, §12: Nullkontroll-Sammeltest), ohne
-Einfluss auf H1–H4.
+Kombinationsläufe gegen die Referenzläufe (A9.8), ohne Einfluss auf H1–H4: Differenz, 95-%-Intervall [L, U]
+und Lage zu ±ε_ctrl mit dem Vermerk „Einzellauftoleranz, keine Äquivalenzgrenze für das Mittel“, dazu genau
+eine von zwei Aussagen: bei 0 ∉ [L, U] „Unterschied nachgewiesen“, sonst „kein Unterschied nachgewiesen,
+Gleichheit nicht nachgewiesen“. Eine Gleichheitsaussage gibt es nicht; sie bräuchte eine eigene, vorab
+begründete Grenze.
 
 ### 8.9 Sensitivitätsanalysen
 
@@ -695,7 +727,8 @@ unbestimmt (A9.13). Auffällig heißt:
 unbestimmt: nicht entscheidbar, kein Hinweis auf korrekte Funktion. Auch ein
 Phasenversatz unter 0,1° kann H1 verletzen: Im Beispiel A4 ergeben 0,05° an einem Modul 1,75 mN in F_min − ⟨N⟩
 (Tabelle C). E3 berichtet solche Werte mit Unsicherheit; auffällig sind erst Werte über der Schwelle.
-**Erreichbarkeit der Schwellen:** Die Schwellen sind fest, die Unsicherheit nicht. Im Beispiel A4 mit Modulen
+**Erreichbarkeit der Schwellen:** Im Vorschlag sind die Schwellen fest (offen, §12), die Unsicherheit nicht. Im
+Beispiel A4 mit Modulen
 über den Zellen (Einzelmodul-Harmonische 1,30 N) kann E3a nur dann „unauffällig“ ergeben, wenn eine
 Zellharmonische je Komponente auf etwa 1 mN bestimmt ist und u(Δδⱼ) deutlich unter 0,1° liegt (bei
 1,645·u(Δδⱼ) ≤ 0,05° etwa 0,03°). Bei 1 mN in Messung und Vorhersage beträgt q_Z bei exakter Superposition im
@@ -788,37 +821,47 @@ beendet Phase 1 als abgebrochene Kampagne.
 | Hypothese | falsifiziert, wenn | bestätigt, wenn | sonst |
 |---|---|---|---|
 | H1 | relevant abweichend: an einem Test \|r⁰\| − c·u_c⁰ > Δ_rel und \|r¹\| − c·u_c¹ > Δ_rel, gleiches Vorzeichen | äquivalent: alle 21 Punkte auswertbar, PB1 gegen ŷ⁰ und ŷ¹ (§8.5) | nicht entscheidbar |
-| H2 | 0 ∉ [a⁰, b⁰] und 0 ∉ [a¹, b¹], auf derselben Seite | 0 ∈ [a⁰, b⁰] und 0 ∈ [a¹, b¹], (b⁰ − a⁰)/2 ≤ 1° | nicht entscheidbar; Zusatz „Drift der Einzelmodulbasis“ wie bei H1 |
+| H2 | a⁰, a¹ > δ_H2 oder b⁰, b¹ < −δ_H2 (beide Intervalle auf derselben Seite außerhalb von ±δ_H2) | [a⁰, b⁰] und [a¹, b¹] in [−δ_H2, +δ_H2] (δ_H2: Testvariante ±1°, offen, §12) | nicht entscheidbar; Zusätze wie bei H1 |
 | H1Z | wie H1, an einem Test einer Zelle mit Δ_c,rel (§8.5) | wie H1 für alle 441 Tests mit Δ_c,q, alle 21 Punkte auswertbar | nicht entscheidbar; Zusätze wie bei H1 |
-| H3 | ein \|z\| > c | kein \|z\| > c, PB3, je Modul ≥ n_min gültige Kontrollläufe | nicht entscheidbar |
+| H3 | an einem Test \|r\| − c·u_c > Relevanzgrenze von H3 (mindestens δ_H3·\|N̂_k⁽ʲ⁾\|; offen, §12) | jedes der 18 Intervalle r ± t(0,95; ν_eff)·u_c in ±δ_H3·\|N̂_k⁽ʲ⁾\| (PB3; δ_H3: Testvariante ±10 %, offen, §12), je Modul ≥ n_min gültige Kontrollläufe | nicht entscheidbar |
 | H4 | an einem i ∈ V: sgn(γ̂₁,i)·γ̄₁,i < −c·u(γ̄₁,i) | V nicht leer, an jedem i ∈ V: sgn(γ̂₁,i)·γ̄₁,i > c·u(γ̄₁,i) | nicht entscheidbar |
 
-z⁰, z¹: standardisierte Residuen gegen ŷ⁰, ŷ¹ (§8.4); [a⁰, b⁰], [a¹, b¹]: Intervalle von §8.6. **Zusätze
-bei H1** (beschreibend, sie ändern den Ausgang nicht; ob eine nachgewiesene Drift den Ausgang ändert, ist
-offen, §12: Driftbehandlung): „Abweichung nachgewiesen, kleiner als Δ_rel“, wenn an
-einem Test |z⁰| > c und |z¹| > c mit gleichem Vorzeichen auftreten, ohne dass er relevant abweicht; „Drift der
-Einzelmodulbasis“, wenn ein |z⁰| > c ohne gleichsinniges |z¹| > c auftritt oder umgekehrt (Definition des
-Drift-Zusatzes offen,
-§12). H2 ist nur entscheidbar, wenn alle Punkte von W auswertbar sind (offen, §12: Vollständigkeit bei H2).
+z⁰, z¹: standardisierte Residuen gegen ŷ⁰, ŷ¹ (§8.4), bei H3 z = r/u_c gegen N̂_k⁽ʲ⁾ (§8.4, §8.7); [a⁰, b⁰],
+[a¹, b¹]: 95-%-Intervalle der Spitzenabweichung gegen ŷ⁰ bzw. ŷ¹ (§8.6; bei kalibrierter Verbreiterung mit dem
+dort bestimmten Nominalniveau). δ_H2 ist bei H2 Äquivalenz- und Relevanzgrenze, δ_H3 bei H3 die
+Äquivalenzgrenze als Anteil der vorhergesagten Amplitude (PB3). δ_H2 (Testvariante ±1°) und δ_H3
+(Testvariante ±10 %) sind nicht festgelegt (offen, §12), ebenso die Relevanzgrenze von H3 (mindestens
+δ_H3·|N̂_k⁽ʲ⁾|); Begründung in Tabelle F, Prüfung vor dem Einfrieren mit der Planungs- und Kalibriersimulation
+(Werkzeug 8, §12). **Zusätze bei H1, H1Z, H2 und H3** (beschreibend, sie ändern den Ausgang nicht; ob eine
+nachgewiesene Drift den Ausgang ändert, ist offen, §12: Driftbehandlung): Ist eine Abweichung nachgewiesen,
+lautet der Zusatz neben „bestätigt“ „Abweichung nachgewiesen, innerhalb der Äquivalenzgrenze“ und neben „nicht
+entscheidbar“ „Abweichung nachgewiesen, Relevanz offen“, jeweils mit den Vertrauensgrenzen der größten
+Abweichung. Nachgewiesen ist eine Abweichung bei H1 und H1Z, wenn an einem Test |z⁰| > c und |z¹| > c mit
+gleichem Vorzeichen auftreten, bei H2, wenn 0 ∉ [a⁰, b⁰], 0 ∉ [a¹, b¹] und beide auf derselben Seite liegen, und bei
+H3, wenn an einem Test |z| > c auftritt. Der Zusatz „Drift der Einzelmodulbasis“ (H1; bei H1Z und H2 wie
+bei H1) steht, wenn ein |z⁰| > c ohne gleichsinniges |z¹| > c auftritt oder umgekehrt (Definition des
+Drift-Zusatzes offen, §12). H2 ist nur entscheidbar, wenn alle Punkte von W auswertbar sind (sonst Grund:
+Datenlage; offen, §12: Vollständigkeit bei H2).
 γ̄₁,i: gemessene Schiefe der
 Konfigurationsmittelkurve, u(γ̄₁,i) ihre Bootstrap-Unsicherheit (Anteil A, §8.3); bei H4 ist
 c = t(1 − 0,05/23; n_i − 1), V enthält nur auswertbare Konfigurationen. H1′, H2′ wie H1, H2 mit eigenen
 Familien. H0 wird nicht im Sinn eines Effekts entschieden. Zuordnung und E3 (§8.10) ändern keinen Ausgang;
 sie werden neben dem Ausgang berichtet.
 
-**Bedeutung der Ausgänge.** Bei H1 und H1Z heißt „bestätigt“: Äquivalenz nachgewiesen (jedes Intervall
-innerhalb der Äquivalenzgrenze), „falsifiziert“: relevante Abweichung nachgewiesen. Bei H2 und H3 heißt
-„bestätigt“ in diesem Entwurf: kein Unterschied nachgewiesen, zusammen mit einer Präzisionsbedingung (H2:
-Halbbreite des Intervalls gegen ŷ⁰ höchstens 1°, es liegt damit in ±2°; H3: jedes Intervall in ±10 % der
-vorhergesagten Amplitude, PB3);
-„falsifiziert“ heißt dort: Abweichung nachgewiesen, ohne Relevanzgrenze. Die Logik von H2 und H3 ist offen
-(§12). Bei H4 heißt „bestätigt“: V ist nicht leer, und an jeder Konfiguration von V ist
+**Bedeutung der Ausgänge.** Bei H1, H1Z, H2 und H3 heißt „bestätigt“: Äquivalenz nachgewiesen (jedes
+Intervall innerhalb der Äquivalenzgrenze), „falsifiziert“: relevante Abweichung nachgewiesen (nachweislich
+größer als die Relevanzgrenze; bei H2 ist δ_H2 beides). „H3 bestätigt“ bei der Testvariante ±10 % ist keine
+Bestätigung des Kontaktgesetzes oder des Kontaktmodells: Im steifen Aufbau liegt der Kontaktanteil für k ≤ 3
+weit unter 10 % (§8.7); H3 prüft dann Masse, Profil und Kalibrierung, nicht den Kontakt. Den Kontakt prüfte
+erst Fassung I (§8.7; offen, §12) oder eine Äquivalenzgrenze unter dem Kontaktanteil. Bei H4 heißt
+„bestätigt“: V ist nicht leer, und an jeder Konfiguration von V ist
 das vorhergesagte Vorzeichen nachgewiesen; „falsifiziert“: an einer Konfiguration von V ist das entgegengesetzte
 Vorzeichen nachgewiesen. „Nicht entscheidbar“ heißt bei
 keiner Hypothese, dass die Vorhersage gilt; ohne nachgewiesene Abweichung bedeutet es nur „kein Unterschied
-nachgewiesen“. Neben „nicht entscheidbar“ bedeutet der Zusatz „Abweichung nachgewiesen, kleiner als Δ_rel“
-nur, dass die Abweichung nicht nachweislich größer als Δ_rel ist; Wortlaut und Angabe des Grundes sind offen
-(§12).
+nachgewiesen“; es ist keine Gegenaussage zu „bestätigt“ oder „falsifiziert“. „Nicht entscheidbar“ wird immer
+mit seinem Grund berichtet: Präzision, Graubereich, Drift, Datenlage oder Verfahren (§9.4). Der Zusatz
+„Abweichung nachgewiesen, Relevanz offen“ bedeutet nur, dass die Abweichung nicht nachweislich größer als die
+Relevanzgrenze ist; sie kann darüber liegen.
 
 ### 9.4 Ergebnislogik
 
@@ -826,7 +869,8 @@ nur, dass die Abweichung nicht nachweislich größer als Δ_rel ist; Wortlaut un
 |---|---|---|
 | S1 | Apparaturfehler oder Transiente | Fehlersuche |
 | H1 falsifiziert (relevant abweichend) | Abweichung über Δ_rel: Kontakt nichtlinear, Module gekoppelt, Messkette oder Phasenmessung fehlerhaft; im steifen Aufbau überwiegend Apparatur (§2) | veröffentlichen; Ursachenanalyse; Einordnung mit T2 des Literaturabgleichs, T0/T1 bei Zellminima nahe F_LO |
-| Zusatz „Abweichung nachgewiesen, kleiner als Δ_rel“ | nachgewiesene Verletzung der Superposition; neben „äquivalent“ innerhalb der Äquivalenzgrenze, neben „nicht entscheidbar“ nur nicht nachweislich größer als Δ_rel (§9.3); Apparatur und Physik nicht getrennt | berichten; Ursachenanalyse; der Ausgang von H1 bleibt |
+| Zusatz „Abweichung nachgewiesen, innerhalb der Äquivalenzgrenze“ (neben „bestätigt“; H1, H1Z, H2, H3) | nachgewiesene Abweichung innerhalb der Äquivalenzgrenze: bei H1 und H1Z eine Verletzung der Superposition, bei H2 eine Spitzenverschiebung innerhalb ±δ_H2, bei H3 eine Abweichung von der H3-Vorhersage innerhalb ±δ_H3·\|N̂_k⁽ʲ⁾\|; Apparatur und Physik nicht getrennt | berichten mit den Vertrauensgrenzen der größten Abweichung; Ursachenanalyse; der Ausgang bleibt |
+| Zusatz „Abweichung nachgewiesen, Relevanz offen“ (neben „nicht entscheidbar“) | nachgewiesene Abweichung, nicht nachweislich größer als die Relevanzgrenze; sie kann darüber liegen (§9.3) | berichten mit den Vertrauensgrenzen der größten Abweichung und dem Grund von „nicht entscheidbar“; Ursachenanalyse; der Ausgang bleibt |
 | Zuordnung p = 2 | Hinweis auf eine Nichtlinearität zweiter Ordnung von Kontakt oder Messkette (nicht getrennt; bei zweiter Frequenz skaliert ein Kontaktresiduum im steifen Bereich stärker als s², A2.6) oder auf eine mit der Last wachsende Kopplung | berichten; Klirrwerte aus P0.4 und, falls vorhanden, P0.12 heranziehen |
 | Zuordnung p = 1 | Hinweis auf eine konfigurationsabhängige Kopplung fester relativer Stärke, etwa Aktorkopplung oder lastabhängigen Phasenversatz | berichten; E3 nennt gegebenenfalls das Modul |
 | Zuordnung p = 0 | Hinweis auf eine von der Amplitude unabhängige Störung, etwa Drift oder Einstreuung | berichten; D2_K, Blindkanal, ŷ⁰ gegen ŷ¹ heranziehen |
@@ -834,19 +878,20 @@ nur, dass die Abweichung nicht nachweislich größer als Δ_rel ist; Wortlaut un
 | E3a auffällig an Modul j | Hinweis auf eine Abweichung der Phasenmessung (Encoder, Δδⱼ) oder einen lastabhängigen Phasenversatz an Modul j, auf eine Kalibrierung (T) außerhalb ihrer Unsicherheit oder auf eine Nichtlinearität, die sich auf die Modulzeiger abbildet; betrifft die Abszisse von H2 | berichten, bei H2 vermerken; Ursachenanalyse |
 | E3b auffällig | Hinweis auf eine Änderung der Ungleichheit der Module (Amplitude oder Phase) zwischen Einzelmodul- und Kombinationsläufen, eine Änderung der Kalibrierung oder eine Nichtlinearität; konstante Kalibrierfehler der Zellen heben sich auf (§8.10) | berichten; mit H1Z am Triphasik-Punkt vergleichen; Ursachenanalyse |
 | H1 bestätigt, H1Z falsifiziert | Abweichung, die sich in der Summe aufhebt, etwa in einer Zellkette, der Lagerung oder einem Kippkontakt; oder eine Abweichung, die an der Summe innerhalb von Δ_q bleibt und je Zelle Δ_c,rel überschreitet, etwa in einer Zelle oder bei G0 an einem Modul (Folge der Grenzen Δ_q/3, §8.5) | berichten; der Ausgang von H1 bleibt |
-| H2 falsifiziert | Kopplung, Phasenfehler oder nicht erfasste Modulunterschiede | veröffentlichen; Ursachenanalyse |
+| H2 falsifiziert | Spitzenverschiebung nachweislich über δ_H2: Kopplung, Phasenfehler oder nicht erfasste Modulunterschiede | veröffentlichen; Ursachenanalyse |
+| H1 bestätigt, H2 falsifiziert | Spitzenverschiebung nachweislich über δ_H2, Kurve innerhalb der H1-Äquivalenz; kein Widerspruch, wenn δ_H2 an der Spitze strenger ist als Δ_q von F_min − ⟨N⟩ (im Beispiel A4 entspräche Δ_q an der Spitze einer Verschiebung von etwa 3,8°) | beide berichten; E3a heranziehen |
+| H1 falsifiziert, H2 bestätigt | relevante Abweichung an mindestens einem Test, Spitzenlage nachweislich innerhalb ±δ_H2 | beide berichten; Ursachenanalyse wie bei H1 falsifiziert |
 | H1, H2 bestätigt, H3 falsifiziert | Superposition trägt, 1-FG-Modell nicht; im steifen Aufbau in Fassung K: Masse, Profil oder Kalibrierung (§8.7) | Modellrevision bzw. Prüfung von Masse, Profil und Kalibrierung; K-Tabelle des Werkstattberichts nicht übertragen |
 | H3 falsifiziert, H1 falsifiziert oder nicht entscheidbar | Befunde nicht trennbar | berichten |
 | H1 bestätigt, H4 falsifiziert | Harmonische über k = 3 weichen ab | explorativ untersuchen |
-| H1, H2, H3 bestätigt | Kontaktast in diesem Aufbau verstanden; im steifen Aufbau in Fassung K ohne Aussage über das Kontaktmodell (§8.7) | E1, E2; externe Replikation |
-| nicht entscheidbar | Präzision reicht nicht, Basis gedriftet, Abweichung zwischen Äquivalenz- und Relevanzgrenze oder ŷ¹ ungültig (§8.2) | veröffentlichen; neuer Teil B und neue Phase 1 |
+| H1, H2, H3 bestätigt | Superposition und Spitzenlage im Kontaktast dieses Aufbaus bestätigt, Einzelmodul-Harmonische innerhalb ±δ_H3·\|N̂_k⁽ʲ⁾\| der H3-Vorhersage; bei der Testvariante ±10 % keine Bestätigung des Kontaktgesetzes oder des Kontaktmodells (§9.3), im steifen Aufbau eine Prüfung von Masse, Profil und Kalibrierung; über den Kontakt sagt erst Fassung I oder eine Äquivalenzgrenze unter dem Kontaktanteil etwas (§8.7, §9.3) | E1, E2; externe Replikation |
+| nicht entscheidbar (mit Grund, §9.3) | Präzision: die Präzision reicht für die Äquivalenz nicht (bei H4: V leer oder ein Vorzeichen nicht nachgewiesen); Graubereich: Abweichung zwischen Äquivalenz- und Relevanzgrenze; Drift: Basis gedriftet; Datenlage: Punkte nicht auswertbar (§9.1), zu wenige Punkte im Fitfenster (§8.6), ŷ¹ ungültig (§8.2, H1 und H2) oder bei H3 weniger als n_min gültige Kontrollläufe je Modul; Verfahren: kein gültiges Ergebnis des Verfahrens, etwa kein Intervall von §8.6 mit ausreichender Überdeckung | veröffentlichen mit Grund; neuer Teil B und neue Phase 1 |
 | Abbruch nach S2 | Kontaktannahme verletzt | veröffentlichen; neuer Teil B |
 | kein zulässiger Arbeitspunkt | Phase 0 findet kein f, das die Bedingungen aus §5.3 erfüllt | veröffentlichen (§5.3) |
-| H1′/H2′ widersprechen H1/H2 (Bedeutung von „widersprechen“ offen, §12) | nicht erfasster Modulunterschied oder Drift | Primärentscheidung bleibt; berichten |
+| H1′/H2′ widersprechen H1/H2 (nur „bestätigt“ gegen „falsifiziert“ derselben Hypothese auf beiden Schnitten; „nicht entscheidbar“ ist keine Gegenaussage) | nicht erfasster Modulunterschied oder Drift | Primärentscheidung bleibt; berichten |
 
-Eine Zeile für widersprüchliche Primärausgänge (etwa H1 äquivalent, H2 falsifiziert) ist offen (§12). Jeder
-Ausgang wird veröffentlicht, auch „nicht entscheidbar“ und „kein zulässiger Arbeitspunkt“. Kein
-Ausgang wird als Verschiebung von ⟨N⟩ gedeutet.
+Jeder Ausgang wird veröffentlicht, auch „nicht entscheidbar“ (mit Grund) und „kein zulässiger Arbeitspunkt“.
+Kein Ausgang wird als Verschiebung von ⟨N⟩ gedeutet.
 
 ---
 
@@ -911,15 +956,22 @@ Woodward-Effekt). Simulationszahlen sind keine Vorhersage für den Aufbau. Linie
    entscheidbar“ der erwartete Ausgang (§8.5). Je Szenario 1000 Kampagnen über mehrere Präzisionsstufen für
    Fehlerraten, den kritischen Wert c von H1 und H1Z, Überdeckung, Power, n_min, n₀, Rauschbias, das Quantil
    für ε_ctrl, die Trefferquote der Zuordnung sowie die Fehlalarmrate und die Raten „unauffällig“ und
-   „unbestimmt“ von E3 (A9.11). Erfüllt die Simulation die Kriterien von A9.11 nicht, werden die Regeln von
-   §8.4–§8.6 bzw. §5.5 und §8.10 vor dem Einfrieren überarbeitet (Eintrag in A0).
+   „unbestimmt“ von E3 (A9.11). Geprüft werden auch die Laufzahlbedingung von §5.4 (H1 und H2 bei exakter
+   Superposition gemeinsam mit Wahrscheinlichkeit ≥ 0,8 bestätigt), die Grenzen δ_H2 und δ_H3 (Testvarianten
+   und Alternativen) und die Relevanzgrenze von H3 (offen, unten). Erfüllt die Simulation die Kriterien von
+   A9.11 nicht, werden die Regeln von §8.4–§8.6 bzw. §5.5 und §8.10 vor dem Einfrieren überarbeitet
+   (Eintrag in A0).
 
 **Offene Festlegungen der Entscheidungsregeln und Kontrollen (Entwurf 10/2026).** Geordnet nach dem
 Zeitpunkt, zu dem sie getroffen werden können: (I) unabhängig von der Hardware, (II) abhängig vom späteren
 Aufbau, (III) erst nach Phase 0 oder Piloten mit Messwerten. Die Festlegungen der Gruppen (I) und (II) sind vor
 dem Einfrieren zu wählen, gestützt auf die Planungs- und Kalibriersimulation mit angenommenen Rauschmodellen
 (Werkzeug 8); die gewählte Fassung und ihr Grund kommen in A0. Die Werte der Gruppe (III) legt Teil B nach
-diesen Regeln fest. Wo der Entwurf eine Option als Vorschlag führt, ist sie so bezeichnet; festgelegt ist keine.
+diesen Regeln fest. Wo der Entwurf eine Option als Vorschlag führt, ist sie so bezeichnet. Entschieden ist nur,
+was als „entschieden“ gekennzeichnet ist (Teilentscheidung des Autors vom 03.10.2026, umgesetzt im Entwurf; gilt
+bis zum Einfrieren als Entwurf); alles Übrige ist offen, ausdrücklich auch δ_H2 (Testvariante ±1°), δ_H3
+(Testvariante ±10 %), die Relevanzgrenze von H3 und die Lesart des Kriteriums „H2 auch bei hoher Präzision
+entscheidbar“ (A9.11).
 
 **(I) Unabhängig von der Hardware entscheidbar.**
 
@@ -928,17 +980,19 @@ diesen Regeln fest. Wo der Entwurf eine Option als Vorschlag führt, ist sie so 
 | Regel für Δ_rel (§8.5) | (a) Δ_rel,q = Δ_q (Vorschlag): kleinster Wert, der die Ausgänge disjunkt hält; jede nachgewiesene Abweichung über ein Viertel der Struktur falsifiziert. (b) Δ_rel,q = κ·Δ_q mit festem κ > 1: Falsifikation erst bei größerer Abweichung, mehr „nicht entscheidbar“. (c) Δ_rel,q = max(Δ_q; Δ_phys,q), Δ_phys,q die Abweichung einer vorab benannten kleinsten relevanten Alternative (etwa einer Aktorkopplung bestimmter Größe), mit dem Auslegungswerkzeug berechnet: physikalisch begründet, verlangt aber eine vorab festgelegte Alternative und ihr Modell |
 | Äquivalenzgrenze Δ_q (§8.5, Tabelle F) | Der Faktor 0,25 in Δ_q = 0,25·D_q bestimmt, was „äquivalent“ heißt; Δ_rel bestimmt nur die Falsifikation. (a) 0,25 wie bisher; (b) ein kleinerer Faktor: strengere Bestätigung, die nötige Laufzahl wächst mit dem Kehrwert seines Quadrats. Schätzung: Punktwert aus ŷ⁰ wie bisher, untere Vertrauensgrenze von D_q oder D_q aus dem Auslegungswerkzeug mit den Ergebnissen von P0.1–P0.5 (unabhängig von den Kraftdaten der Einzelmodulläufe, aber modellabhängig); die Prüfung auch gegen ŷ¹ begrenzt den Einfluss des Schätzfehlers. Ob die Kalibriersimulation Δ_q wie die Auswertung aus dem simulierten ŷ⁰ schätzt und so den Schätzfehler erfasst, legt A9.11 bisher nicht fest |
 | D für Re und Im N_k (§8.5) | Fassung A (bisher): D = max_i \|N̂_k,i\|. Unter Lauf-zu-Lauf-Streuung der Module kann dann Re/Im N₁ die Bestätigung binden, weil die Struktur von N₁ auf dem Schnitt klein ist, seine Streuung aber mit der Einzelmodulamplitude wächst (A8); Folge: mehr Läufe. Fassung B: Durchmesser der Zeigermenge; im Beispiel A4 etwa doppelte Grenze für N₁ und N₂, kleinere für N₃ (A8) |
-| Entscheidungslogik von H2 und H3 (§9.3) | (a) Signifikanzlogik wie bisher: bestätigt bei 0 ∈ Intervall (H2) bzw. kein \|z\| > c (H3), zusammen mit der Präzisionsbedingung (Halbbreite ≤ 1° bzw. PB3; der Intervalltyp von PB3 ist unter (a) nicht festgelegt). Das ist eine Nicht-Ablehnung, wie sie A8 für H1 verwirft: Bei hoher Präzision falsifiziert schon eine kleine, irrelevante Abweichung. Die H2-Halbbreite beträgt etwa 3/(SNR·√n) (A9.2); bei großem SNR ist sie weit kleiner als 1°, und dann falsifiziert schon eine Spitzenverschiebung dieser Größe H2. (b) Äquivalenzlogik wie bei H1: H2 bestätigt, wenn [a⁰, b⁰] und [a¹, b¹] in ±δ_H2 liegen (etwa δ_H2 = 1°, die bisherige Halbbreitengrenze, oder kleiner), falsifiziert, wenn beide auf derselben Seite außerhalb von ±δ_H2 liegen; H3 bestätigt, wenn jedes Intervall r ± t(0,95; ν_eff)·u_c in ±0,10·\|N̂_k⁽ʲ⁾\| liegt (PB3 als Äquivalenzgrenze), ohne „kein \|z\| > c“; H3 falsifiziert, wenn ein Test nachweislich außerhalb einer Relevanzgrenze liegt (etwa \|r\| − c·u_c > 0,10·\|N̂_k⁽ʲ⁾\|, PB3 auch als Relevanzgrenze). Folge: Bestätigung wird mit wachsender Präzision nicht unwahrscheinlicher; δ_H2 und eine Relevanzgrenze für H3 brauchen eine Begründung vor dem Einfrieren, und die Kalibriersimulation muss sie prüfen. Offen ist unter (b) auch das Niveau der H2-Intervalle: 95-%-Perzentilintervalle wie bisher (A9.6) oder 90 % wie der TOST von PB1. Unter (b) ist ebenso die Laufzahlbedingung von §5.4 (erwartete H2-Halbbreite ≤ 1°) neu zu fassen: (i) zwei getrennte Bedingungen P(H1 bestätigt \| exakt) ≥ 0,8 und P(H2 bestätigt \| exakt) ≥ 0,8 (bei Unabhängigkeit gemeinsam nur 0,8²) oder (ii) eine gemeinsame Bedingung P(H1 und H2 bestätigt \| exakt) ≥ 0,8; offen ist dann auch die Lesart von „H2 auch bei hoher Präzision entscheidbar“ (A9.11): P(H2 bestätigt \| exakt) ≥ 0,8 bei der geplanten Laufzahl, eine Obergrenze für die Rate „nicht entscheidbar“ oder nur die Überdeckung 0,936. Dieser Entwurf führt (a) |
+| Entscheidungslogik von H2 und H3, Niveau der H2-Intervalle, Laufzahlbedingung (§3, §5.4, §8.5, §8.6, §9.3) | **Entschieden** (Teilentscheidung des Autors vom 03.10.2026, umgesetzt im Entwurf; gilt bis zum Einfrieren als Entwurf): Äquivalenzlogik wie bei H1. H2 ist bestätigt, wenn [a⁰, b⁰] und [a¹, b¹] in ±δ_H2 liegen, falsifiziert, wenn beide auf derselben Seite außerhalb von ±δ_H2 liegen (δ_H2 ist zugleich Relevanzgrenze), sonst nicht entscheidbar; die bisherige Bestätigungsbedingung „0 ∈ Intervall und Halbbreite ≤ 1°“ entfällt. H3 ist bestätigt, wenn jedes Intervall r ± t(0,95; ν_eff)·u_c in ±δ_H3·\|N̂_k⁽ʲ⁾\| liegt (PB3 als Äquivalenzgrenze), ohne „kein \|z\| > c“, falsifiziert, wenn an einem Test \|r\| − c·u_c größer als die Relevanzgrenze von H3 ist, sonst nicht entscheidbar. H2 behält das Niveau 95 % (Intervalltyp und Rückfallkette wie bisher in §8.6, mit der Schwelle 0,936; ihre Fassung bleibt offen, Zeile „Intervall von H2 und Rückfälle“); die Option 90 % entfällt. In §5.4 tritt an die Stelle von „erwartete H2-Halbbreite ≤ 1°“ die gemeinsame Bedingung P(H1 und H2 bestätigt \| exakt) ≥ 0,8; ihre Einhaltung prüft Werkzeug 8. Grund: Unter der bisherigen Signifikanzlogik (kein Unterschied nachgewiesen, zusammen mit einer Präzisionsbedingung) falsifizierte bei hoher Präzision schon eine kleine, irrelevante Abweichung; die H2-Halbbreite beträgt etwa 3/(SNR·√n) (A9.2) und ist bei großem SNR weit kleiner als 1°. Unter Äquivalenzlogik wird die Bestätigung mit wachsender Präzision nicht unwahrscheinlicher. 95 %, weil die Überdeckungsschwelle 0,936 und die Stufen 0,96–0,99 von §8.6 für 95 % gebaut sind und das strengere Niveau die Enge des Perzentil-Bootstraps bei kleinem n teilweise ausgleicht; eine gemeinsame Bedingung, weil zwei getrennte Bedingungen je ≥ 0,8 bei Unabhängigkeit gemeinsam nur 0,8² ergäben. Folge: Kleine nachgewiesene Abweichungen falsifizieren H2 und H3 nicht mehr; sie erscheinen als Zusatz, bei H2 gegebenenfalls auch in E3a. Offen bleiben die Grenzen und die Lesart von A9.11 (die beiden folgenden Zeilen) |
+| Grenzen von H2 und H3 (§3, §4, §5.4, §8.5–§8.7, §9.3, Tabelle F) | Offen; bis zur Entscheidung als Testvarianten geführt, festgelegt ist keine. δ_H2 (Äquivalenz- und Relevanzgrenze von H2): Testvariante ±1° (bisher die Grenze der Halbbreite, halbe Schrittweite des Schnitts; im Beispiel A4 an der Spitze strenger als die H1-Äquivalenz, §9.4); Alternative 0,5° (gleich δφ_tol, G2), wenn H2 Spitzenverschiebungen dieser Größe falsifizieren soll, oder ein anderer begründeter Wert. Spitzenverschiebungen innerhalb ±δ_H2, etwa aus Kopplungen, falsifizieren H2 nicht; nachgewiesen erscheinen sie als Zusatz. Mit δ_H2 ändert sich die daran gekoppelte Faustregel n_min ≥ (3·1°/(SNR·δ_H2))² von §5.4 (bei 1° die bisherige Regel n_min ≥ (3/SNR)²). δ_H3 (Äquivalenzgrenze von H3, PB3): Testvariante ±10 % der vorhergesagten Amplitude; Alternative eine Grenze unter dem Kontaktanteil \|H − 1\|/\|H\| (§8.7), wenn H3 den Kontakt prüfen soll, mit entsprechend genauerer Bestimmung von Masse, Profil und Kalibrierung. Relevanzgrenze von H3: gleich δ_H3 (falsifiziert bei \|r\| − c·u_c > δ_H3·\|N̂_k⁽ʲ⁾\|) oder größer. Ein mit ±10 % bestätigtes H3 ist keine Bestätigung des Kontaktgesetzes oder des Kontaktmodells: Im steifen Aufbau liegt der Kontaktanteil bei k ≤ 3 weit unter 10 % (bei K = 10⁶ N/m, §8.7); H3 prüft dann Masse, Profil und Kalibrierung. Den Kontakt prüfte erst Fassung I (Gruppe II) oder eine Grenze unter dem Kontaktanteil. Die Grenzen brauchen vor dem Einfrieren eine Begründung in Tabelle F und eine Prüfung mit Werkzeug 8 |
+| Lesart von „H2 auch bei hoher Präzision entscheidbar“ (A9.11) | Offen: (a) P(H2 bestätigt \| exakt) ≥ 0,8 bei der geplanten Laufzahl; mit der gemeinsamen Bedingung von §5.4 ist das von selbst erfüllt, weil P(H1 und H2 bestätigt) nicht größer ist als P(H2 bestätigt); (b) eine Obergrenze für die Rate „nicht entscheidbar“; (c) nur die Überdeckung 0,936 (§8.6) |
 | H2-Fitfenster (§8.6, A9.6) | (a) w = 6° fest (Vorschlag): drei Punkte je Seite; im Beispiel A4 knicken die Flanken bei etwa ±6° (A4). (b) w = 8° fest: mehr Punkte und kleinere Halbbreite, aber ein größerer Formfehler des Zelts, der Messung und Vorhersage gleich trifft. (c) das größte w ∈ {4°, 6°, …, 20°}, bei dem der Zeltfit an der Vorhersage die Spitze um höchstens 0,1° gegen das Maximum der fein gerechneten Vorhersage verschiebt: passt sich der Form an, braucht die Vorhersage auf einem feinen Phasenraster. Mittelpunkt von W (die bisherige Fassung war zirkulär, A0): (i) Schnittpunkt mit dem größten vorhergesagten F̂_min − N_s: eindeutig, auch wenn die fein gerechnete Vorhersage zwei nahezu gleich hohe Maxima hat; (ii) Schnittpunkt, der dem auf einem Raster von 0,01° über den ganzen Schnitt bestimmten Maximum von F̂_min − N_s am nächsten liegt: folgt der vorhergesagten Spitzenlage zwischen den Schnittpunkten, kann aber bei zwei nahezu gleich hohen Maxima (etwa wenn nur das Modul mit veränderlicher Phase abweicht) zwischen den Schnittpunkten beiderseits der Spitze wechseln und braucht das feine Raster |
 | Schätzer der Spitzenlage von H2 (§3, §8.6, A9.6) | (a) stetiges Zelt wie bisher: Beim nahezu symmetrischen Zelt (steifer Aufbau, zeitumkehrsymmetrisches Profil) folgt es kleinen echten Verschiebungen nicht (tote Zone) und kann zweigipflig werden, wenn nur das Modul mit veränderlicher Phase abweicht; die Kalibriersimulation müsste diese Fälle mit beiden Mustern ungleicher Module enthalten (in A9.11 bisher nicht verlangt). (b) Schnittpunkt zweier getrennt angepasster Flankengeraden ohne den Mittelpunkt: keine tote Zone, eingipflig, aber eine andere Zielgröße (Symmetriemitte der Flanken statt Lage des Maximums) und im asymmetrischen Fall unpräziser. (c) (a) mit registrierter Umstellung auf (b) vor dem Einfrieren, wenn die Kalibriersimulation Zweigipfligkeit oder verfehlte Überdeckung zeigt |
-| Intervall von H2 und Rückfälle (§8.6, A9.6, A9.11) | (a) wie bisher: Perzentil, dann BCa, dann Perzentil mit kalibriertem Nominalniveau 0,96–0,99, sonst „H2 nicht entscheidbar“; die BCa-Stufe korrigiert Verzerrung und Schiefe, nicht die Enge des Bootstraps bei kleinem n. (b) wie (a) ohne die BCa-Stufe, BCa als Sensitivitätsanalyse; verfehlt das Perzentilintervall die Überdeckung, bleibt nur die Verbreiterung, auch bei schiefer Verteilung von Δφ*. (c) sofort „nicht entscheidbar“, wenn das Perzentilintervall die Überdeckung 0,936 verfehlt: ohne Rückfallstufe, jede verfehlte Überdeckung macht H2 „nicht entscheidbar“. (d) Schätzwert ± t·Bootstrap-Standardfehler: setzt eine annähernd symmetrische Verteilung von Δφ* voraus. Offen ist auch der Bezugswert der simulierten Überdeckung: Lage des Maximums der rauschfreien Kurve oder Wert des registrierten Schätzers an den rauschfreien Kurven, dann mit einem eigenen Kriterium der Empfindlichkeit gegen kleine echte Verschiebungen |
+| Intervall von H2 und Rückfälle (§8.6, A9.6, A9.11) | Das Grundniveau 95 % ist entschieden (Zeile „Entscheidungslogik von H2 und H3, …“ oben); offen sind Intervalltyp und Rückfallkette nach (a)–(d) sowie der Bezugswert der Überdeckung. (a) wie bisher: Perzentil, dann BCa, dann Perzentil mit kalibriertem Nominalniveau 0,96–0,99, sonst „H2 nicht entscheidbar (Grund: Verfahren)“; die BCa-Stufe korrigiert Verzerrung und Schiefe, nicht die Enge des Bootstraps bei kleinem n. (b) wie (a) ohne die BCa-Stufe, BCa als Sensitivitätsanalyse; verfehlt das Perzentilintervall die Überdeckung, bleibt nur die Verbreiterung, auch bei schiefer Verteilung von Δφ*. (c) sofort „nicht entscheidbar“, wenn das Perzentilintervall die Überdeckung 0,936 verfehlt: ohne Rückfallstufe, jede verfehlte Überdeckung macht H2 „nicht entscheidbar“. (d) Schätzwert ± t·Bootstrap-Standardfehler: setzt eine annähernd symmetrische Verteilung von Δφ* voraus. Offen ist auch der Bezugswert der simulierten Überdeckung: Lage des Maximums der rauschfreien Kurve oder Wert des registrierten Schätzers an den rauschfreien Kurven, dann mit einem eigenen Kriterium der Empfindlichkeit gegen kleine echte Verschiebungen |
 | Driftbehandlung (§8.2, §9.1 G7, §9.3) | Logik: (a) wie bisher kann H1 trotz nachgewiesener Drift der Einzelmodulbasis „äquivalent“ sein, die Drift erscheint als Zusatz; (b) jede nachgewiesene Drift ergibt „nicht entscheidbar“ (das bestraft Präzision). Drift-Zusatz: (a) über ein einseitiges \|z⁰\| > c bzw. \|z¹\| > c wie bisher (benennt jede einseitige Abweichung als Drift); (b) über den Welch-Vergleich Phase 1 − Phase 0 der Einzelmodulgrößen (§8.2): bestimmt den Zusatz auch für H2, für das er heute nicht eigens definiert ist (§9.3 verweist auf H1, dessen Fassung auf z⁰ und z¹ beruht); eine einseitige Abweichung an einer Konfiguration bleibt dann ohne Zusatz, wenn der Welch-Vergleich keine Differenz nachweist. Temperaturfenster G7: (a) wie bisher; bei hoher Präzision kann der Term mit u_c,erw viele Läufe ungültig machen, ohne den H1-Ausgang zu schützen; (b) zweistufig: ungültig ab 10⁻³ Empfindlichkeitsänderung, das engere Band markiert Läufe; Läufe mit einer Empfindlichkeitsänderung zwischen dem engeren Band und 10⁻³ gehen in die Ausgänge ein; dann entweder Zusätze, Zuordnung und E3 ohne markierte Läufe (sie beruhen dann auf anderen Läufen als der Ausgang, an den die Zusätze gekoppelt sind) oder alle Auswertungen aus denselben gültigen Läufen und ohne markierte Läufe als Sensitivitätsanalyse; (c) Temperaturkorrektur mit TK_C nach registrierter Regel |
 | Wiederaufnahme nach einem mechanischen Eingriff (§9.2) | (a) wie bisher Welch-t mit Bonferroni über 21: Fortsetzung bei „kein Unterschied nachgewiesen“, Ende von Phase 1 bei signifikanter Differenz, auch wenn sie klein und für H1 unerheblich ist; (b) Äquivalenzprüfung: Fortsetzung, wenn jede Differenz nachweislich innerhalb einer vorab festgelegten Toleranz liegt (etwa eines Bruchteils von Δ_q), Ende, wenn eine nachweislich darüber liegt, sonst Nachmessung bis zu einer festen Zahl; die Toleranz braucht eine Begründung vor dem Einfrieren, Nachmessungen verlängern die Unterbrechung, und offen ist, was gilt, wenn auch danach weder Einhaltung noch Überschreitung nachgewiesen ist; (c) kein Test, nur Protokoll: keine Unterbrechung und kein Ende von Phase 1 wegen einer kleinen Differenz; ob der Eingriff die Einzelmodulbasis geändert hat, wird nicht geprüft. Eine Änderung wirkt gegen ŷ⁰ weiter. ŷ¹ gleicht sie nur aus, soweit Kontroll- und Kombinationsläufe vor und nach dem Eingriff im selben Verhältnis liegen. Sie erscheint dann als Zusatz „Drift der Einzelmodulbasis“ und kann die Äquivalenz gegen ŷ⁰ und damit eine Bestätigung von H1 und H2 verhindern („nicht entscheidbar“, §8.2, §9.3) |
-| Wortlaut der Zusätze und Gründe für „nicht entscheidbar“ (§9.3, §9.4) | Der Zusatz „Abweichung nachgewiesen, kleiner als Δ_rel“ trifft nur neben „äquivalent“ zu; neben „nicht entscheidbar“ ist die Abweichung nur nicht nachweislich größer als Δ_rel und kann darüber liegen. (a) Wortlaut wie bisher; (b) je Ausgang: „Abweichung nachgewiesen, innerhalb der Äquivalenzgrenze“ bzw. „Abweichung nachgewiesen, Relevanz offen“, dazu die Vertrauensgrenzen der größten Abweichung; (c) ein Wortlaut: „Abweichung nachgewiesen, nicht nachweislich relevant“. „Nicht entscheidbar“: (a) ohne weitere Angabe wie bisher; (b) mit Pflichtangabe des Grundes (Präzision, Graubereich, Drift, Datenlage, Verfahren); (c) Datengründe als eigener Ausgang „nicht auswertbar“. Oberbegriffe: (a) „bestätigt“, „falsifiziert“ und „nicht entscheidbar“ für alle Hypothesen wie bisher, mit je Logik verschiedener Bedeutung; (b) je Logik umbenannt. Nullkontroll-Sammeltest (§8.8, A9.8): (a) nur Zahlen wie bisher (Differenz, 95-%-Intervall, Lage zu ±ε_ctrl als Einzellauftoleranz); (b) vier sich ausschließende Aussagen nach Lage des Intervalls [L, U]: in ±ε_ctrl „innerhalb ±ε_ctrl nachgewiesen“ (mit Vermerk, ob 0 ∉ [L, U]); ganz außerhalb ±ε_ctrl „Unterschied größer als ε_ctrl nachgewiesen“; sonst bei 0 ∉ [L, U] „Unterschied nachgewiesen, Größe gegenüber ε_ctrl offen“; sonst (0 ∈ [L, U]) „kein Unterschied nachgewiesen, Einhaltung von ±ε_ctrl nicht nachgewiesen“; (c) eine eigene, begründete Grenze für den Sammeltest statt ε_ctrl. Offen sind auch eine §9.4-Zeile für widersprüchliche Primärausgänge (etwa „H1 äquivalent, H2 falsifiziert“) und die Bedeutung von „widersprechen“ bei H1′/H2′ (nur bestätigt gegen falsifiziert oder auch gegen nicht entscheidbar) |
-| Rückfall für H1 und Präzisionsstufen der Kalibrierung (§8.4, §8.5, A9.11) | Für H2 gibt es eine registrierte Rückfallkette, für H1 nicht. Zeigt die Simulation mit den Pilotkovarianzen in Teil B P(bestätigt \| Größe an ±Δ_q) > 0,05 oder P(falsifiziert \| Abweichung < Δ_rel) > 0,05: (a) nur berichten wie bisher; (b) t_eq bzw. c registriert aus derselben Simulation kalibrieren; (c) der betroffene Ausgang von H1 lautet dann „nicht entscheidbar (Verfahren)“: die Bestätigung, wenn P(bestätigt \| Größe an ±Δ_q) > 0,05, die Falsifikation, wenn P(falsifiziert \| Abweichung < Δ_rel) > 0,05. Präzisionsstufen der Kriterien vor dem Einfrieren: (a) alle Stufen mit der dort nach §5.4 geplanten Laufzahl; (b) nur bis zu einer festgelegten Streuung; (c) feste Laufzahl |
+| Wortlaut der Zusätze, Gründe für „nicht entscheidbar“, Oberbegriffe, Nullkontroll-Sammeltest, gemischte Ausgänge, „widersprechen“ (§8.8, §9.3, §9.4, A9.8) | **Entschieden** (Teilentscheidung des Autors vom 03.10.2026, umgesetzt im Entwurf; gilt bis zum Einfrieren als Entwurf). Zusatz je Ausgang bei H1, H1Z, H2 und H3: neben „bestätigt“ „Abweichung nachgewiesen, innerhalb der Äquivalenzgrenze“, neben „nicht entscheidbar“ „Abweichung nachgewiesen, Relevanz offen“, dazu die Vertrauensgrenzen der größten Abweichung; der Zusatz „Abweichung nachgewiesen, kleiner als Δ_rel“ entfällt. „Nicht entscheidbar“ steht immer mit Grund (Präzision, Graubereich, Drift, Datenlage, Verfahren). Die Oberbegriffe „bestätigt“, „falsifiziert“ und „nicht entscheidbar“ bleiben; bei H4 behalten sie ihre eigene Bedeutung (§9.3). Nullkontroll-Sammeltest: Differenz, 95-%-Intervall [L, U] und Lage zu ±ε_ctrl mit dem Vermerk „Einzellauftoleranz, keine Äquivalenzgrenze für das Mittel“, dazu genau eine von zwei Aussagen: bei 0 ∉ [L, U] „Unterschied nachgewiesen“, sonst „kein Unterschied nachgewiesen, Gleichheit nicht nachgewiesen“; eine Gleichheitsaussage gibt es nicht (sie bräuchte eine eigene, vorab begründete Grenze). §9.4 führt eine eigene Zeile für gemischte Primärausgänge (etwa „H1 bestätigt, H2 falsifiziert“). „Widersprechen“ heißt nur „bestätigt“ gegen „falsifiziert“ derselben Hypothese auf beiden Schnitten (H1/H1′, H2/H2′); „nicht entscheidbar“ ist keine Gegenaussage. Grund: Der bisherige Zusatz traf nur neben „bestätigt“ zu; neben „nicht entscheidbar“ ist die Abweichung nur nicht nachweislich größer als Δ_rel und kann darüber liegen. Ohne Grund und Wortregel ließen sich „nicht entscheidbar“ und „kein Unterschied nachgewiesen“ als Übereinstimmung lesen. Nicht gewählt: ein einziger Wortlaut „nicht nachweislich relevant“, ein eigener Ausgang „nicht auswertbar“, je Logik umbenannte Oberbegriffe und vier Aussagen des Sammeltests nach Lage zu ±ε_ctrl |
+| Rückfall für H1 und Präzisionsstufen der Kalibrierung (§8.4, §8.5, A9.11) | Für H2 gibt es eine registrierte Rückfallkette, für H1 nicht. Zeigt die Simulation mit den Pilotkovarianzen in Teil B P(bestätigt \| Größe an ±Δ_q) > 0,05 oder P(falsifiziert \| Abweichung < Δ_rel) > 0,05: (a) nur berichten wie bisher; (b) t_eq bzw. c registriert aus derselben Simulation kalibrieren; (c) der betroffene Ausgang von H1 lautet dann „nicht entscheidbar (Grund: Verfahren)“: die Bestätigung, wenn P(bestätigt \| Größe an ±Δ_q) > 0,05, die Falsifikation, wenn P(falsifiziert \| Abweichung < Δ_rel) > 0,05. Präzisionsstufen der Kriterien vor dem Einfrieren: (a) alle Stufen mit der dort nach §5.4 geplanten Laufzahl; (b) nur bis zu einer festgelegten Streuung; (c) feste Laufzahl |
 | Rauschmodelle, kritischer Wert und Laufzahl von H1 (§5.4, §8.4, A9.5, A9.11) | Rauschmodelle: (a) in Teil B festgelegt wie bisher; (b) als Liste schon in Teil A benannt, Teil B setzt nur die Parameter. c: (a) Quantil aus der Kalibriersimulation mit den Rauschkovarianzen von Teil B wie bisher; (b) größtes Quantil über die benannten Rauschmodelle: weniger abhängig von einem einzelnen Modell, verlangt die Liste aus (b); c ist mindestens so groß wie das Quantil eines einzelnen Modells, Falsifikation, Zusätze und Auslösung der Zuordnung werden dadurch seltener, und die Power gegen 2·Δ_rel (A9.11) sinkt; die Bestätigung (PB1 mit t_eq) hängt nicht von c ab. Laufzahl: (a) wie bisher, die Power gegen 2·Δ_rel ist nur Kalibrierkriterium (A9.11); (b) zusätzlich P(falsifiziert \| größtes Residuum 2·Δ_rel) ≥ 0,8 als Bedingung in §5.4: kann n_min erhöhen. Offen ist auch, ob b̂⁰, b̂¹ und c nach dem Datenschluss mit den tatsächlichen Laufzahlen (abweichende Zahl gültiger Kombinationsläufe, vorzeitiger Datenschluss) registriert neu berechnet werden oder die Werte aus Teil B fest bleiben |
 | Vollständigkeit bei H2 (§8.6, §9.3, A9.6, Tabelle F) | §9.3 verlangt, dass alle Punkte von W auswertbar sind; §8.6 und A9.6 verlangen am Schnittrand nur mindestens zwei Punkte je Seite von W. (a) alle Punkte von W auswertbar (§9.3) wie bisher: ein Ausfall in W macht H2 nicht entscheidbar; (b) Fit mit den auswertbaren Punkten von W, wenn je Seite mindestens zwei bleiben (die Zwei-Punkte-Regel gälte dann auch für ausgefallene Punkte): weniger Ausfälle von H2, aber ein Fit mit weniger Punkten; (c) W bei Ausfall erweitern: macht das Fenster datenabhängig |
-| Nachweis und Folge der Phase-0-Schwellen (§5.2, A9.2, Tabelle F) | Nachweisform: (a) Schätzwert unter der Schwelle (eine zu grobe Prüfung besteht dann zufällig); (b) obere 95-%-Vertrauensgrenze unter der Schwelle, mit den Stufen „Einhaltung nachgewiesen“ (obere Grenze unter der Schwelle), „Überschreitung nachgewiesen“ (untere Grenze über der Schwelle) und „nicht entscheidbar“ (weder Einhaltung noch Überschreitung nachgewiesen); verlangt eine Prüfunsicherheit deutlich unter der jeweiligen Schwelle, 0,3·u_c,erw bzw. 0,1·Δ_q. Offen ist auch, welches u_c,erw,q gilt (kleinstes über die H1-Größen; für Zellprüfungen Summen- oder Zellgrößen). Folge einer verfehlten Schwelle: (a) Bericht und Szenario in der Kalibriersimulation wie bisher; (b) Phase 0 wird nicht abgeschlossen; (c) nach Wirkung: Phase 0 wird nicht abgeschlossen, wenn das Szenario bei sonst exakter Superposition die Bestätigungswahrscheinlichkeit von H1 unter die Bedingung von §5.4 senkt oder Zusätze und Zuordnung mit einer Rate über 0,05 auslöst; offen ist auch, ob die Fehlerraten von H1 mit dem Artefakt auf die physikalische Abweichung bezogen werden. Eine Falsifikation allein durch das Artefakt setzt bei sonst exakter Superposition ein Artefakt etwa in der Größe von Δ_rel voraus. Lineare Schwelle: (a) 0,1·Δ_q wie bisher; (b) zusätzlich ≤ 0,01·min_j\|N̂_k⁽ʲ⁾\| für die Harmonischen, weil lineare Einflüsse H3 treffen, nicht H1; (c) Korrektur über die Laststellen aus P0.1 |
+| Nachweis und Folge der Phase-0-Schwellen (§5.2, A9.2, Tabelle F) | Nachweisform: (a) Schätzwert unter der Schwelle (eine zu grobe Prüfung besteht dann zufällig); (b) obere 95-%-Vertrauensgrenze unter der Schwelle, mit den Stufen „Einhaltung nachgewiesen“ (obere Grenze unter der Schwelle), „Überschreitung nachgewiesen“ (untere Grenze über der Schwelle) und „nicht entscheidbar“ (weder Einhaltung noch Überschreitung nachgewiesen); verlangt eine Prüfunsicherheit deutlich unter der jeweiligen Schwelle, 0,3·u_c,erw bzw. 0,1·Δ_q. Offen ist auch, welches u_c,erw,q gilt (kleinstes über die H1-Größen; für Zellprüfungen Summen- oder Zellgrößen). Folge einer verfehlten Schwelle: (a) Bericht und Szenario in der Kalibriersimulation wie bisher; (b) Phase 0 wird nicht abgeschlossen; (c) nach Wirkung: Phase 0 wird nicht abgeschlossen, wenn das Szenario bei sonst exakter Superposition die gemeinsame Bestätigungswahrscheinlichkeit von H1 und H2 unter die Bedingung von §5.4 senkt oder Zusätze und Zuordnung mit einer Rate über 0,05 auslöst; offen ist auch, ob die Fehlerraten von H1 mit dem Artefakt auf die physikalische Abweichung bezogen werden. Eine Falsifikation allein durch das Artefakt setzt bei sonst exakter Superposition ein Artefakt etwa in der Größe von Δ_rel voraus. Lineare Schwelle: (a) 0,1·Δ_q wie bisher; (b) zusätzlich ≤ 0,01·min_j\|N̂_k⁽ʲ⁾\| für die Harmonischen, weil lineare Einflüsse H3 treffen, nicht H1; (c) Korrektur über die Laststellen aus P0.1 |
 | Einstellung 2 und Kraftskala s (§5.5) | (a) s ≈ 0,5 (Vorschlag): kleinere Last, Bedingung (a) aus §5.3 und G6 bleiben bei linearer Skalierung gewahrt; die vorhergesagten Residuen der Klassen p = 1 und p = 2 unterscheiden sich um s·(1 − s) = 0,25 des Residuums der Haupteinstellung. (b) s ≈ 1,4: Unterschied s·(s − 1) = 0,56 des Residuums der Haupteinstellung; gemessen am Rauschen trennt (b) p = 1 und p = 2 nur bei kraftunabhängigem Rauschen besser, bei kraftproportionalem schlechter; höhere Last; Bedingung (a) aus §5.3, G6 und der Abstand zum Abheben unter Störungen sind bei Einstellung 2 neu nachzuweisen. (c) Grundsatz s < 1 mit einem zulässigen Bereich um 0,5; ist kein s im Bereich erreichbar (etwa bei f nahe f_u), entfallen die Identifizierbarkeitsläufe. Ob Einstellung 2 eine Amplitude oder eine Frequenz ist, folgt aus dem Antrieb (II); bei zweiter Frequenz skaliert ein Kontaktresiduum im steifen Bereich stärker als s² (A2.6) |
 | Punkte I (§5.5) | (a) 116°, 120°, 124° (Vorschlag): um den Triphasik-Punkt, wo F_min auf dem Schnitt am größten ist, im Fitfenster von H2; N_I = 3, Phase 1 etwa 21–23 % länger. (b) 116° … 124° in 2°-Schritten, N_I = 5: mehr Terme für χ²_p, Phase 1 etwa 29–31 % länger. (c) 100°, 120°, 140°: über den ganzen Schnitt; die Ränder haben die kleinste F_min und bei s > 1 den kleinsten Abstand zum Abheben. Für die Zuordnung zählen die Residuen in Re und Im N₁, N₂, N₃ an den Punkten I (A9.13; F_min − ⟨N⟩ geht nicht ein). Bei gleichen Modulen verschwinden die Residuen einer Abweichung, die alle Module gleich trifft (Kopplung fester relativer Stärke, quadratische Kennlinie), am Triphasik-Punkt in N₁ und N₂ und wachsen zum Schnittrand. Für die Kopplung fester relativer Stärke sind sie proportional zu \|1 + e^{−ikφ₂} + e^{−ik·240°}\|, bei k = 1 also 0,07 bei 116° und 124° und 0,35 bei 100° und 140° (Z). In N₃ sind sie am Triphasik-Punkt am größten. Ein Phasenversatz eines Moduls ergibt in N_k ein Residuum, dessen Betrag nicht von φ₂ abhängt. Alle 21 Punkte auch bei Einstellung 2 zu messen, ist wegen der Messzeit nicht geführt. Offen ist auch, ob die Wahl als Regel in Teil A steht oder in Teil B fällt (A1, A9.3) |
 | Paarläufe (§5.5) | (a) Verzicht (Vorschlag): Paarläufe trennen die Skalierungsklassen nicht; die Zuordnung zu einem Modul liefert E3 ohne Zusatzläufe. Aufgegeben werden die Prüfung der Paaradditivität und die Zuordnung einer nichtlinearen Wechselwirkung zu einem Paar; E3 leistet beides nicht. (b) drei Paarkonfigurationen je Block, je zwei Module im Phasenabstand des Triphasik-Punkts, das dritte geparkt: prüfen die Paaradditivität (A2.6) und ordnen eine Wechselwirkung einem Paar zu; Phase 1 etwa 9 % länger als mit drei Punkten I; jede Paarkonfiguration muss (a) aus §5.3 erfüllen. (c) Verzicht in Phase 1 und eine explorative Nachmessung der Paare nach dem Datenschluss, nur wenn H1 eine Abweichung zeigt, vor der Wiederholung von D1, D2 und Zellnullpunkt; setzt voraus, dass der Aufbau bis dahin unverändert steht |
@@ -955,7 +1009,7 @@ diesen Regeln fest. Wo der Entwurf eine Option als Vorschlag führt, ist sie so 
 
 | Festlegung | Optionen und Folgen |
 |---|---|
-| Fassung von H3 (§8.7) | Fassung K (Kennzeichnung) oder Fassung I (Betriebsimpedanz); hängt am Entscheid über Messkette und Wegkanal (unten). Fassung I braucht einen Wegkanal mit Nanometerauflösung und Bezugspunkt unterhalb der Zellen, eine Korrektur der Kippbewegung und für C eine hohe Phasengenauigkeit zwischen Kraft- und Wegkanal; ihre Entscheidungsregel wird mit der Wahl ergänzt. Eine Ausdehnung von H3 auf höhere Harmonische (k ≤ k_max), an denen der Kontakt sichtbar wird, bräuchte dieselbe Auflösung im Profilweg und bleibt wegen der Kippmoden nahe diesen Frequenzen schwer deutbar |
+| Fassung von H3 (§8.7) | Fassung K (Kennzeichnung) oder Fassung I (Betriebsimpedanz); hängt am Entscheid über Messkette und Wegkanal (unten). Ein mit der Testvariante ±10 % für δ_H3 bestätigtes H3 ist keine Bestätigung des Kontaktgesetzes oder des Kontaktmodells; den Kontakt prüfte erst die Ergänzung nach Fassung I oder ein δ_H3 unter dem Kontaktanteil (unter (I), Zeile „Grenzen von H2 und H3“). Fassung I braucht einen Wegkanal mit Nanometerauflösung und Bezugspunkt unterhalb der Zellen, eine Korrektur der Kippbewegung und für C eine hohe Phasengenauigkeit zwischen Kraft- und Wegkanal; ihre Entscheidungsregel wird mit der Wahl ergänzt. Eine Ausdehnung von H3 auf höhere Harmonische (k ≤ k_max), an denen der Kontakt sichtbar wird, bräuchte dieselbe Auflösung im Profilweg und bleibt wegen der Kippmoden nahe diesen Frequenzen schwer deutbar |
 | Art von Einstellung 2, zweiter Nockensatz und Linearitätslauf P0.12 (§5.2, §5.5, A9.2) | Programmierbarer Aktor: zweite Amplitude, P0.12 möglich; Profiltreue bei beiden Amplituden in P0.5 nachzuweisen, ohne vorhandenen Aktor mit Beschaffung (Hardwarestand Linearaktor). Nocke: (a) zweite Frequenz ohne Umbau; die Klassen gelten dann nur bezogen auf das gemessene s, frequenzabhängige Mechanismen (2f-Anteil des Lastmoments, Faktor 1 − H(kω) beim Kontakt, A2.6) können die Zuordnung verfälschen, und ohne (d) entfällt P0.12; (b) zweiter Nockensatz, Umschaltungen in der Randomisierung (etwa 190 je Kampagne); Kriterium der Wiederholbarkeit in P0.5′ offen: (i) wie bisher streut Δδⱼ höchstens um u(Δδⱼ) und x_k⁽ʲ⁾ höchstens um seine Unsicherheit aus P0.5 (§5.5, A9.2); Maßstab ist dabei die Anforderung an die Profilphase, ob die Umschaltstreuung eine H1-Signatur über der Nachweisgrenze erzeugt, wird nicht geprüft (im Beispiel A4 ergeben 0,05° an einem Modul 1,75 mN in F_min − ⟨N⟩, Tabelle C); (ii) zusätzlich die Wirkung der Umschaltstreuung gegen die Schwellen von §5.2 und eine bleibende Verschiebung gegenüber P0.8: bezieht die Prüfung auf H1, verlangt aber eine Umrechnung der Streuung in Kraftgrößen; (c) Umschaltungen gebündelt je Block: etwa vier Umschaltungen je Block, die Reihenfolge ist dann nur innerhalb der Gruppen zufällig, und eine Drift im Block kann die Zuordnung beeinflussen; (d) Sinussatz nur für P0.12, eingesetzt direkt nach der Endmontage vor der ersten Profil- und Einzelmodulmessung; f ist dann noch nicht gewählt, Frequenzen und Bezugsamplitude folgen vorher, etwa aus dem Auslegungswerkzeug bei f_zul. Mit nur einem Sinussatz ist das Amplitudenverhältnis 2 nur über ein Frequenzverhältnis √2 erreichbar; eine Kettennichtlinearität wächst dann vierfach, eine Kontaktnichtlinearität stärker. Offen sind auch, ob §9.2 planmäßige Umschaltungen ausdrücklich ausnimmt (§5.2 zählt sie nicht als Veränderung), und die Bezugsamplitude von P0.12 (beim Aktor etwa die Betriebslast je Zelle bei f) |
 | Betriebslastprüfung in P0.4 (§5.2, A9.2) | Anregung: klirrarmer Erreger mit belegtem Klirr bei der genutzten Kraft oder Referenzaufnehmer im Kraftpfad mit belegtem Eigenklirr. Die nötige Erregerkraft hängt von der Lage der Module ab (bei G60h verteilt sich die Kraft über einer Modulposition auf zwei Zellen) und davon, ob Zusatzkonfigurationen zur Betriebslast zählen (A1). Der Zeitpunkt der Prüfung ist eine Regel und steht unter (I), Zeile Klirrkriterium |
 
@@ -977,7 +1031,8 @@ Ihre Folgen für die Entscheidungsregeln und für Identifizierbarkeitsläufe und
 wählenden Regeln: Δ_q, Δ_rel und
 D_k je Größe; c und Prüfrate; b̂⁰, b̂¹ und u(b̂); n_min, n₀, n, k_max und f; u_c,erw und die daraus folgenden
 Schwellen
-(§5.2, G7); Intervalltyp und Nominalniveau von H2; das gemessene s; ob E3 dreiwertig oder nur beschreibend
+(§5.2, G7); Intervalltyp von H2 und bei kalibrierter Verbreiterung sein Nominalniveau (Grundniveau 95 % in
+Teil A, §8.6); das gemessene s; ob E3 dreiwertig oder nur beschreibend
 ausgewertet wird; T_Lauf und p̂; M (bei Konvention (b) mit dem Luftzustand bei P0.2).
 
 **Weitere Klärungen:** mechanische Ausführung von D2 (Abkoppeln und Fixieren der Massen, auch für D2_K) und
