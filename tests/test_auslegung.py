@@ -6,6 +6,9 @@ Restmasse als Scheibe mit ρ₀ = R_c/2). Toleranzen: Vergleiche mit linear_solv
 gleiches Raster; tatsächlich ≈ 1e-14 N), Referenzzahlen auf eine halbe Einheit ihrer letzten angegebenen Stelle
 (plus 1/5 als Reserve für Rundung, z. B. μ = 0,4615 statt 3·0,1/0,65 in der Nachrechnung). Als Regressionswert
 gekennzeichnete Zahlen stammen aus dem Werkzeug selbst und sichern nur gegen unbeabsichtigte Änderungen.
+Zugesetzte Luftmasse (test_luft_*): ohne Luft bitgleich mit dem bisherigen Modell, analytische 1-FG-Übertragung mit
+M + m_L, unabhängige Zeitbereichsintegration (scipy.signal.lsim) und eine nichtlineare RK4-Zeitbereichsrechnung
+der Nachrechnung 10/2026 (Modell im Docstring des Tests, vier Stellen).
 Langsame Prüfungen (@slow) laufen nur mit PCMMS_SLOW=1.
 """
 import json
@@ -463,6 +466,277 @@ def test_cli_text_und_vorrang(capsys, monkeypatch):
                                   ['--zeta', '0', '--K', str(M * (2 * np.pi * 120) ** 2)]])
 def test_cli_fehler(argv):
     """Ungültige Eingaben enden mit argparse-Fehler (Exit-Code 2) statt Traceback oder stillem Unsinn."""
+    with pytest.raises(SystemExit) as e:
+        al.main(argv + ['--candidate'])
+    assert e.value.code == 2
+
+
+# ── zugesetzte Luftmasse (träge, nicht schwer) ──────────────────────────────────────────────────────────
+GRENZFAELLE = dict(V1_G0={}, V1_G60h=dict(geometrie_name='G60h'), V1_zentral=dict(geometrie_name='zentral'),
+                   starr=dict(K=None), referenz=al.REFERENZ, sinus=dict(profil_art='sinus', f=12.0),
+                   ungleich=dict(k_rel=(1e6, 0.25e6, 0.25e6)), C_fest=dict(C=40.0, zeta=None))
+
+
+def _gleich(x, y):
+    if isinstance(x, dict):
+        return x.keys() == y.keys() and all(_gleich(x[k], y[k]) for k in x)
+    if isinstance(x, (list, tuple)):
+        return len(x) == len(y) and all(_gleich(u, v) for u, v in zip(x, y))
+    return np.array_equal(np.asarray(x), np.asarray(y), equal_nan=np.asarray(x).dtype.kind in 'fc')
+
+
+def _halbe_stelle(x, stellen=4):
+    """Halbe Einheit der letzten von `stellen` geltenden Ziffern plus 1/5 Reserve (wie die übrigen Referenzzahlen)."""
+    return 0.6 * 10.0 ** (np.floor(np.log10(abs(x))) - stellen + 1)
+
+
+@pytest.mark.parametrize('name', list(GRENZFAELLE))
+def test_luft_grenzfall_bitgleich(name):
+    """m_luft = J_luft = 0 (auch an einem anderen Angriffspunkt) ist das bisherige Modell: alle Laufarten, Zellen,
+    Kennzahlen und die Prüfung bitgleich mit dem Aufruf ohne die neuen Parameter; Massenmatrix, 1-FG-Übertragung,
+    f_n, ζ und C sind exakt die Formeln ohne Luft. Die Zahlenwerte selbst sichern die übrigen Tests dieser Datei."""
+    kw = GRENZFAELLE[name]
+    a = al.Aufbau(**kw)
+    b = al.Aufbau(**kw, m_luft=0.0, J_luft=0.0, xy_luft=(0.03, -0.02))
+    assert not a.luft and not b.luft and a.M_traege == a.M
+    km = a.kmax_standard()
+    ba, bb = al.bewerte(a, km), al.bewerte(b, km)
+    assert _gleich(ba, bb)
+    assert _gleich(al.pruefung(a, km, bew=ba), al.pruefung(b, km, bew=bb))
+    ka, kb = a.kennzahlen(), b.kennzahlen()
+    assert ka.pop('xy_luft') is not None and _gleich(ka, {k: v for k, v in kb.items() if k != 'xy_luft'})
+    b0 = np.r_[1.0, 0.0, 0.0]
+    Mq = a.m0 * np.outer(b0, b0) + np.einsum('j,ja,jb->ab', a.m, a.b, a.b)
+    Mq[1:, 1:] += a.m0 * 0.05 ** 2 * np.eye(2)
+    assert np.array_equal(a.Mq, Mq) and np.array_equal(b.Mq, Mq)
+    if not a.starr:
+        H = (a.K + 1j * a.w * a.C) / (a.K - a.M * a.w ** 2 + 1j * a.w * a.C)
+        assert np.array_equal(a.Rs1, a.m[:, None] * a.a * H) and np.array_equal(b.Rs1, a.Rs1)
+        assert a.f_n == np.sqrt(a.K / a.M) / (2 * np.pi) and a.zeta == a.C / (2 * np.sqrt(a.K * a.M)) == a.zeta_M
+        if kw.get('C') is None:
+            assert a.C == 2 * (kw.get('zeta') or 0.05) * np.sqrt(a.K * a.M)
+
+
+@pytest.mark.parametrize('geo', ['zentral', 'G0'])
+def test_luft_hub_analytisch(geo):
+    """Symmetrische Lage, m_L = 30 g, J_L = 2e-5 kg·m²: N_k = H_a(kω)·Σ_j w_j·m_j·a_k⁽ʲ⁾·e^{−ikφ_j} mit
+    H_a = (K + iωC)/(K − (M + m_L)·ω² + iωC) auf ≤ 1e-12 relativ (k = 1 … 40, auch Einzelmodullauf); J_L wirkt
+    nicht auf die Summe, die 1-FG-Kontrolle rechnet mit M + m_L. f_n sinkt um √(M/(M + m_L)); ζ = 0,05 ist der
+    Dämpfungsgrad mit der trägen Masse (C = 2ζ√(K·(M + m_L))), ζ_M = C/(2√(K·M)); ε, μ und M bleiben."""
+    m_a, kout = 0.03, 40
+    a0 = al.Aufbau(geometrie_name=geo)
+    a = al.Aufbau(geometrie_name=geo, m_luft=m_a, J_luft=2e-5)
+    phi = np.array([(0.0, 120.0, 240.0), (0.0, 110.0, 250.0), (0.0, 0.0, 0.0), (0.0, 100.0, 240.0), (0.0, 0.0, 0.0)])
+    w = np.array([(1, 1, 1)] * 4 + [(0, 1, 0)], float)
+    r = a.loesen(phi, w, kout=kout)
+    k = np.arange(1, kout + 1)
+    om = 2 * np.pi * a.f * k
+    K, C = 1.5e6, 2 * 0.05 * np.sqrt(1.5e6 * (M + m_a))
+    Ha = (K + 1j * om * C) / (K - (M + m_a) * om ** 2 + 1j * om * C)
+    ak = 2 * 8e-3 * a.f ** 2 * (np.fft.rfft(al.profil()) / al.N_FEIN)[1:kout + 1]
+    S = np.einsum('rj,rjk->rk', w * 0.1, ak * np.exp(-1j * np.radians(phi)[:, :, None] * k))
+    soll = Ha * S
+    assert np.abs(r['Nk'] - soll).max() <= 1e-12 * np.abs(soll).max()
+    assert r['voll']['abw_1FG'].max() < 1e-9
+    assert np.abs(r['Nk'] - a0.loesen(phi, w, kout=kout)['Nk']).max() > 1e-3          # Luft wirkt
+    kz, kz0 = a.kennzahlen(), a0.kennzahlen()
+    assert kz['f_n'] == pytest.approx(kz0['f_n'] * np.sqrt(M / (M + m_a)), rel=1e-12)
+    assert kz['f_hub'] == pytest.approx(kz['f_n'], rel=1e-9)
+    assert a.C == pytest.approx(C, rel=1e-12) and kz['zeta'] == pytest.approx(0.05, rel=1e-12)
+    assert kz['zeta_M'] == pytest.approx(0.05 * np.sqrt((M + m_a) / M), rel=1e-12)
+    assert (kz['M'], kz['eps'], kz['mu']) == (kz0['M'], kz0['eps'], kz0['mu'])
+    assert kz['M_traege'] == pytest.approx(M + m_a, rel=1e-15) and kz['m_luft'] == m_a
+    c = al.Aufbau(geometrie_name=geo, m_luft=m_a, C=50.0, zeta=None)
+    assert c.zeta == pytest.approx(50.0 / (2 * np.sqrt(K * (M + m_a))), rel=1e-12)
+
+
+def test_luft_statik_und_mittelwert():
+    """Unsymmetrisch (G60h, ungleiche Zellen, Luft außerhalb des Zellschwerpunkts, J_L als 2 × 2): statische
+    Zelllasten F₀, ε und μ hängen nicht von m_L ab (nur Gewicht); ⟨N⟩ = M·g und ⟨F_c⟩ = F₀,c gelten exakt
+    (Gleichanteil der Übertragung null; auf dem Raster N_θ ungebändert bis auf die Rückfaltung der Harmonischen
+    k = 2000, 4000, … ≈ 1e-10 relativ, wie ohne Luft), Σ F_c = N. Bei starrer Auflage wirkt m_L nicht (bitgleich)."""
+    kw = dict(geometrie_name='G60h', k_rel=(1.0, 0.5, 0.8))
+    luft = dict(m_luft=0.03, J_luft=[[3e-5, 1e-5], [1e-5, 2e-5]], xy_luft=(0.02, -0.01))
+    a0, a = al.Aufbau(**kw), al.Aufbau(**kw, **luft)
+    assert np.array_equal(a.F0, a0.F0) and a.MG == a0.MG
+    L = al.laufarten()
+    r = a.loesen([x[2] for x in L], [x[3] for x in L], kmax=12)
+    assert not a.Rs[:, 0].any() and not a.Rc[:, :, 0].any()
+    for name, tol in (('voll', 1e-9), ('band', 1e-14)):
+        assert np.abs(r[name]['N'].mean(-1) / a.MG - 1).max() < tol
+        assert np.abs(r[name]['Fz'].mean(-1) - a.F0).max() < tol * 10
+        assert np.abs(r[name]['Fz'].sum(1) - r[name]['N']).max() < 1e-12
+    r0 = a0.loesen([x[2] for x in L], [x[3] for x in L], kmax=12)
+    assert np.abs(r['voll']['Fz'] - r0['voll']['Fz']).max() > 1e-3
+    kz, kz0 = a.kennzahlen(), a0.kennzahlen()
+    assert (kz['eps'], kz['mu'], kz['eps_spitze']) == (kz0['eps'], kz0['mu'], kz0['eps_spitze'])
+    s0, s = al.Aufbau(K=None, **kw), al.Aufbau(K=None, **kw, **luft)
+    assert _gleich(al.bewerte(s0), al.bewerte(s))
+
+
+def test_luft_kippfrequenzen():
+    """V1 (G0) analytisch, Formel aus test_kippfrequenzen erweitert: f_Hub = √(K/(M + m_L))/2π,
+    f_Kipp = √(K·R_c²/(2·(J + J_L)))/2π mit J = m₀ρ₀² + Σ m_j R_c²/2; Quetschfilm-Scheibe J_L = m_L·R²/12
+    (R = 0,113 m, m_L = 30 g). m_L im Zellschwerpunkt ändert f_Kipp nicht, J_L allein nicht f_Hub; J_L als
+    diag(J_α, J_β) trennt die beiden Kippmoden. Außerhalb des Zellschwerpunkts koppelt m_L Hub und Kippen."""
+    K, R, m_a = 1.5e6, 0.1, 0.03
+    J, J_a = 0.35 * 0.05 ** 2 + 0.3 * R ** 2 / 2, m_a * 0.113 ** 2 / 12
+    fk = lambda Jl: np.sqrt(K * R ** 2 / (2 * (J + Jl))) / (2 * np.pi)          # noqa: E731
+    kz0 = al.Aufbau().kennzahlen()
+    kz = al.Aufbau(m_luft=m_a, J_luft=J_a).kennzahlen()
+    assert kz['f_hub'] == pytest.approx(np.sqrt(K / (M + m_a)) / (2 * np.pi), rel=1e-9)
+    assert kz['f_kipp'] == pytest.approx([fk(J_a)] * 2, rel=1e-9) and fk(J_a) < kz0['f_kipp'][0]
+    assert al.Aufbau(m_luft=m_a).kennzahlen()['f_kipp'] == pytest.approx(kz0['f_kipp'], rel=1e-12)
+    kz2 = al.Aufbau(J_luft=np.diag([1e-5, 4e-5])).kennzahlen()
+    assert kz2['f_hub'] == pytest.approx(kz0['f_hub'], rel=1e-12)
+    assert sorted(kz2['f_kipp']) == pytest.approx([fk(4e-5), fk(1e-5)], rel=1e-9)
+    ex = al.Aufbau(m_luft=m_a, xy_luft=(0.05, 0.0))
+    assert ex.kennzahlen()['f1'] < kz['f_hub'] and ex.loesen([(110.0, 250.0)])['voll']['abw_1FG'][0] > 1e-3
+
+
+def _zellen_lsim(kc, phi, C, m_a, J_a, xy_a, n=16000):
+    """Unabhängig aufgebaute 3-FG-Bewegungsgleichung (V1, G0, Scheibe ρ₀ = R_c/2) mit zugesetzter Luftmasse
+    m_a·b_a·b_aᵀ + diag(0, J_a), Zeitbereich mit scipy.signal.lsim über vier Perioden aus der Ruhelage."""
+    ang = np.radians([0.0, 120.0, 240.0])
+    B = np.c_[np.ones(3), 0.1 * np.cos(ang), 0.1 * np.sin(ang)]
+    m, m0, cc = np.full(3, 0.1), 0.35, kc / kc.sum() * C
+    ba = np.r_[1.0, xy_a]
+    Mq = np.diag([m0, m0 * 0.05 ** 2, m0 * 0.05 ** 2]) + sum(mj * np.outer(bj, bj) for mj, bj in zip(m, B))
+    Mq = Mq + m_a * np.outer(ba, ba) + np.block([[np.zeros((1, 1)), np.zeros((1, 2))], [np.zeros((2, 1)), J_a]])
+    Kq, Cq, Mi = B.T @ (kc[:, None] * B), B.T @ (cc[:, None] * B), np.linalg.inv(Mq)
+    A = np.block([[np.zeros((3, 3)), np.eye(3)], [-Mi @ Kq, -Mi @ Cq]])
+    Bu = np.vstack([np.zeros((3, 3)), -Mi @ B.T])
+    Cy = np.hstack([-kc[:, None] * B, -cc[:, None] * B])
+    f = 10.0
+    t = np.arange(4 * n + 1) / (n * f)
+    s = (f * t[:, None] - phi / 360.0) % 1.0
+    th, tf = al.THOLD, 1 - al.THOLD
+    acc = 8e-3 * f ** 2 * np.where(s < th, -np.pi ** 2 / th * np.sin(np.pi * s / th),
+                                    np.pi ** 2 / tf * np.sin(np.pi * (s - th) / tf))
+    _, y, _ = signal.lsim(signal.StateSpace(A, Bu, Cy, np.zeros((3, 3))), m * acc, t)
+    F0 = np.linalg.solve(B.T, al.G * np.r_[0.65, 0.0, 0.0])                      # nur Gewicht
+    return (F0 + y[-n - 1:-1:al.OVERSAMPLE]).T
+
+
+def test_luft_ungleiche_zellen_zeitbereich():
+    """K_c = 1e6 / 0,25e6 / 0,25e6 N/m (V1, G0, ζ = 0,05 mit M + m_L), m_L = 30 g bei (20 mm, −15 mm),
+    J_L = diag(3e-5, 5e-5) kg·m², Pilot (130°, 230°): Zellkräfte und Summe gleich der unabhängig aufgebauten
+    Zeitbereichsintegration (scipy.signal.lsim, wie test_ungleiche_zellen_zeitbereich) auf ≤ 2e-5 N; ⟨N⟩ = M·g."""
+    kc, m_a, J_a, xy_a = np.array([1e6, 0.25e6, 0.25e6]), 0.03, np.diag([3e-5, 5e-5]), np.array([0.02, -0.015])
+    phi = np.array([0.0, 130.0, 230.0])
+    a = al.Aufbau(K=kc.sum(), k_rel=kc, m_luft=m_a, J_luft=J_a, xy_luft=xy_a)
+    C = 2 * 0.05 * np.sqrt(kc.sum() * (M + m_a))
+    assert a.C == pytest.approx(C, rel=1e-12)
+    r = a.loesen([phi])
+    Fz = _zellen_lsim(kc, phi, C, m_a, J_a, xy_a)
+    assert np.abs(Fz - r['voll']['Fz'][0]).max() < 2e-5
+    assert np.abs(Fz.sum(0) - r['voll']['N'][0]).max() < 2e-5
+    assert r['voll']['N'][0].mean() == pytest.approx(a.MG, rel=1e-9)
+    r0 = al.Aufbau(K=kc.sum(), k_rel=kc).loesen([phi])
+    assert np.abs(r['voll']['Fz'][0] - r0['voll']['Fz'][0]).max() > 1e-2           # Luftwirkung ≫ Toleranz
+
+
+def test_luft_gegen_zeitbereich_nachrechnung():
+    """F_min-Verschiebung durch m_L = 4,60 g bzw. 1,94 g (freie Scheibe (8/3)·ρ_L·R³ für Kästen 20 × 20 bzw.
+    15 × 15 cm) gegen die unabhängige nichtlineare RK4-Zeitbereichsrechnung der Nachrechnung 10/2026 (Δt = 50 µs,
+    (M + m_L)·ẍ = N − M·g − Σ m_j·a_j, N = −K·x − C·ẋ für x < 0 und N > 0, sonst 0 wie die Engine, C fest mit
+    ζ = 0,0992 bezogen auf M), Schnittpunkte φ₂ = 120°, 100°, 140° bei φ₃ = 240°: resonante Referenz μ = 1,
+    K = 1e4 N/m und A4-konsistent μ = 0,4, K = 1e5 und 1e6 N/m."""
+    zeta = 16.0 / (2 * np.sqrt(1e4 * M))
+    pts = [(120.0, 240.0), (100.0, 240.0), (140.0, 240.0)]
+    soll = {(1e4, 1.0, 4.60e-3): (1.242e-2, -9.541e-3, 6.391e-2),
+            (1e4, 1.0, 1.94e-3): (5.274e-3, -4.807e-3, 2.636e-2),
+            (1e5, 0.4, 4.60e-3): (-4.735e-3, 3.676e-4, -6.070e-3),
+            (1e5, 0.4, 1.94e-3): (-2.065e-3, 1.067e-4, -2.603e-3),
+            (1e6, 0.4, 4.60e-3): (-5.088e-4, -3.392e-4, -1.360e-4)}
+    for (K, mu, m_a), werte in soll.items():
+        C = 2 * zeta * np.sqrt(K * M)
+        r0, r = satz(mu, K, C).loesen(pts)['voll'], satz(mu, K, C, m_luft=m_a).loesen(pts)['voll']
+        for d, v in zip(r['F_min'] - r0['F_min'], werte):
+            assert d == pytest.approx(v, abs=_halbe_stelle(v)), (K, mu, m_a, v)
+        assert np.abs(r['N'].mean(-1) - M * al.G).max() < 1e-9
+
+
+def test_luft_normierte_antwort_unveraendert():
+    """Mit ρ = f/f_n und ζ auf M + m_L bezogen ist N/(M·g) = 1 + ε·g̃(t; φ, ρ, ζ) dieselbe Funktion wie ohne Luft
+    (ε auf das Gewicht bezogen): bei gleichem ρ (K·(M + m_L)/M) und ζ gleiche Summenkraft; die ρ-Bänder rechnen mit
+    K = (M + m_L)·(2πf/ρ)² und ergeben dieselbe Fensterbreite."""
+    a0 = al.Aufbau(geometrie_name='zentral')
+    a = al.Aufbau(geometrie_name='zentral', m_luft=0.03, K=a0.K * (M + 0.03) / M)
+    assert a.rho == pytest.approx(a0.rho, rel=1e-12) and a.kmax_standard() == a0.kmax_standard()
+    assert np.abs(a.loesen(PUNKTE)['voll']['N'] - a0.loesen(PUNKTE)['voll']['N']).max() < 1e-12 * a0.MG
+    b0 = al.rho_baender(a0, rho_min=0.065, rho_max=0.065)
+    b = al.rho_baender(al.Aufbau(geometrie_name='zentral', m_luft=0.03), rho_min=0.065, rho_max=0.065)
+    assert b['breite'] == pytest.approx(b0['breite'], abs=1e-9) and len(b['baender']) == 1
+
+
+def test_luft_ungueltige_eingaben():
+    """Klare ValueError: negative oder nicht endliche m_luft, J_luft nicht symmetrisch positiv semidefinit, falsche
+    Form von J_luft oder xy_luft (J0 wird ebenso geprüft, ein Skalar gilt für beide Achsen); gemessene Harmonische
+    zusammen mit m_luft > 0 oder J_luft ≠ 0 (die Messung enthält die Luft schon)."""
+    for kw in (dict(m_luft=-1e-3), dict(m_luft=np.nan), dict(m_luft=np.inf), dict(J_luft=-1e-6),
+               dict(J_luft=[[1e-5, 1e-6], [0.0, 1e-5]]), dict(J_luft=[[1e-5, 2e-5], [2e-5, 1e-5]]),
+               dict(J_luft=[1e-5, 1e-5]), dict(xy_luft=(0.0,)), dict(xy_luft=(0.0, np.nan)), dict(J0=-1e-4)):
+        with pytest.raises(ValueError):
+            al.Aufbau(**kw)
+    j = al.Aufbau(J0=1e-4, m0=0.35)
+    assert np.array_equal(j.Mq[1:, 1:], al.Aufbau(J0=1e-4 * np.eye(2)).Mq[1:, 1:])
+    m = al.Aufbau()
+    with pytest.raises(ValueError, match='Luftmasse'):
+        al.Aufbau(N_mess=2 * m.Rs[:, 1:10], m_luft=5e-3)
+    with pytest.raises(ValueError, match='Luftmasse'):
+        al.Aufbau(N_mess_zellen=2 * m.Rc[:, :, 1:10], J_luft=1e-5)
+
+
+def test_flaechentraegheit_skalar_und_rundung():
+    """J0 und J_luft: ein Skalar ist J·I für beide Kippachsen (bis 6a9a1cd wurde ein skalares J0 auf alle vier
+    Einträge des Kippblocks addiert, also auch auf die Kopplung; behoben), am symmetrischen V1 (G0) also zwei gleiche
+    Kippfrequenzen. Exakt symmetrische Matrizen bleiben bitgleich, rundungsbedingte Unsymmetrie (≤ 1e-9·max|J|)
+    wird symmetrisiert, deutliche Unsymmetrie abgelehnt."""
+    assert np.array_equal(al._flaechentraegheit(1e-3, 'J0'), 1e-3 * np.eye(2))
+    a, a0 = al.Aufbau(J0=1e-3), al.Aufbau(J0=0.0)
+    d = a.Mq - a0.Mq
+    assert np.array_equal(d - np.diag(np.diag(d)), np.zeros((3, 3)))             # keine Kopplung durch J0
+    assert np.diag(d) == pytest.approx([0.0, 1e-3, 1e-3], abs=1e-15)
+    fk = a.kennzahlen()['f_kipp']
+    assert fk[0] == pytest.approx(fk[1], rel=1e-9) and fk[0] == pytest.approx(275.66, abs=0.006)  # Regressionswert
+    J = np.array([[2.5e-3, 1e-4], [1e-4, 1.5e-3]])
+    assert np.array_equal(al._flaechentraegheit(J, 'J0'), J)
+    assert np.array_equal(al.Aufbau(J0=J).Mq, al.Aufbau(J0=J.tolist()).Mq)
+    Jr = J.copy()
+    Jr[1, 0] *= 1 + 1e-13
+    s = al._flaechentraegheit(Jr, 'J0')
+    assert np.array_equal(s, s.T) and s[0, 1] == pytest.approx(1e-4, rel=1e-12)
+    Jd = J.copy()
+    Jd[1, 0] *= 1 + 1e-4
+    for kw in (dict(J0=Jd), dict(J_luft=Jd)):
+        with pytest.raises(ValueError, match='symmetrische'):
+            al.Aufbau(**kw)
+
+
+def test_luft_cli(capsys):
+    """--m-luft [g] und --J-luft [kg·m²]: mit 0 gleiche JSON-Ausgabe wie ohne; 30 g am V1-Kandidaten senken f_n um
+    √(0,65/0,68), die kleinste Zellreserve auf 41,04 % (Regressionswert, (a) bleibt erfüllt); die Textausgabe nennt
+    m_luft, J_luft, träge Masse und beide Dämpfungsgrade."""
+    al.main(['--candidate', '--json'])
+    ohne = json.loads(capsys.readouterr().out)
+    al.main(['--candidate', '--json', '--m-luft', '0', '--J-luft', '0'])
+    assert json.loads(capsys.readouterr().out) == ohne
+    al.main(['--candidate', '--json', '--m-luft', '30'])
+    out = json.loads(capsys.readouterr().out)
+    kz = out['kennzahlen']
+    assert kz['m_luft'] == pytest.approx(0.03, rel=1e-12) and kz['M'] == pytest.approx(M, rel=1e-12)
+    assert kz['f_n'] == pytest.approx(ohne['kennzahlen']['f_n'] * np.sqrt(0.65 / 0.68), rel=1e-12)
+    assert out['pruefung']['a']['ok'] and out['pruefung']['a']['reserve_zelle'] == pytest.approx(0.41040, abs=1e-5)
+    al.main(['--point', '120', '240', '--m-luft', '30', '--J-luft', '3.2e-5'])
+    txt = capsys.readouterr().out
+    assert 'm_luft = 30 g, J_luft = 3.2e-05 kg·m²' in txt and 'träge M + m_luft = 0.6800 kg' in txt
+    assert 'ζ = 0.0500 (auf M bezogen 0.0511)' in txt
+
+
+@pytest.mark.parametrize('argv', [['--m-luft', '-1'], ['--m-luft', 'nan'], ['--m-luft', 'inf'], ['--J-luft', '-1e-5']])
+def test_luft_cli_fehler(argv):
+    """Negative oder nicht endliche Luftgrößen enden mit argparse-Fehler (Exit-Code 2)."""
     with pytest.raises(SystemExit) as e:
         al.main(argv + ['--candidate'])
     assert e.value.code == 2

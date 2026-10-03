@@ -9,18 +9,18 @@ J Module mit Masse m_j, Hub h_j (Spitze-Spitze), Profilphase φ_j und Profil a_j
 (Laufgewicht w_j = 0) steht still, seine Masse bleibt an Bord. Solange keine Zelle abhebt, ist das Modell
 linear; für die Harmonische k der Anregungsfrequenz f (ω = 2πf) gilt im eingeschwungenen Zustand
   Zellen, 3 FG (Hub z, Neigungen α, β; senkrechte Lage eines Körperpunkts w = z + α·x + β·y):
-      M_q·q̈ + C_q·q̇ + K_q·q = −Σ_j w_j·m_j·a_j(t)·b_j,     M_q = M₀ + Σ_j m_j·b_j·b_jᵀ,  K_q = Σ_c K_c·B_c·B_cᵀ
+      M_q·q̈ + C_q·q̇ + K_q·q = −Σ_j w_j·m_j·a_j(t)·b_j,   M_q = M₀ + Σ_j m_j·b_j·b_jᵀ + M_L,  K_q = Σ_c K_c·B_c·B_cᵀ
       F_c,k = Σ_j T_cj(kω)·w_j·m_j·a_k⁽ʲ⁾·e^{−ikφ_j},      T(ω) = diag(K_c + iωC_c)·B·Z(ω)⁻¹·bᵀ
   mit Z(ω) = K_q − ω²·M_q + iω·C_q, den Zeilen B_c = (1, x_c, y_c) der Zellen, b_j = (1, X_j, Y_j) der Module,
-  M₀ dem Anteil der Restmasse und K = Σ K_c, C = Σ C_c. Starre Auflage: T = B⁻ᵀ·bᵀ (Hebelgesetz).
-  Summe N = Σ_c F_c (was die Zellen zusammen messen). Statische Zelllasten F₀ aus Bᵀ·F₀ = g·(M, Σ m·x, Σ m·y);
-  Momente M_x = Σ F_c·y_c, M_y = −Σ F_c·x_c.
+  M₀ dem Anteil der Restmasse, M_L dem der zugesetzten Luftmasse (unten) und K = Σ K_c, C = Σ C_c. Starre
+  Auflage: T = B⁻ᵀ·bᵀ (Hebelgesetz). Summe N = Σ_c F_c (was die Zellen zusammen messen). Statische Zelllasten
+  F₀ aus Bᵀ·F₀ = g·(M, Σ m·x, Σ m·y) (nur Gewicht); Momente M_x = Σ F_c·y_c, M_y = −Σ F_c·x_c.
   Kontrolle 1 FG (Präreg A2.1, §8.7, linear_solver.py): N_k = H(kω)·Σ_j w_j·m_j·a_k⁽ʲ⁾·e^{−ikφ_j},
-  H(ω) = (K + iωC)/(K − M·ω² + iωC). Bei symmetrischer Lage (gleiche Zellen, Σ m_j·b_j ∥ (1, 0, 0)) entkoppeln
-  Hub und Kippen, dann ist N = N_1FG; sonst wird max_t |N − N_1FG| (abw_1FG) ausgewiesen und gewarnt, wenn er
-  0,1·u_c übersteigt. Kontaktast: N > 0 und K-gewichtete Zelleinfederung Σ k_c·w_c < 0 (valid, im 1-FG-Fall wie
-  linear_solver.py); je Zelle F_c > 0 (valid_zellen; im Maximum von w_c ist ẇ_c = 0, also F_c = −K_c·w_c, und
-  F_c > 0 erzwingt w_c < 0).
+  H(ω) = (K + iωC)/(K − (M + m_L)·ω² + iωC). Bei symmetrischer Lage (gleiche Zellen, Σ m_j·b_j + m_L·b_L ∥
+  (1, 0, 0)) entkoppeln Hub und Kippen, dann ist N = N_1FG; sonst wird max_t |N − N_1FG| (abw_1FG) ausgewiesen
+  und gewarnt, wenn er 0,1·u_c übersteigt. Kontaktast: N > 0 und K-gewichtete Zelleinfederung Σ k_c·w_c < 0
+  (valid, im 1-FG-Fall wie linear_solver.py); je Zelle F_c > 0 (valid_zellen; im Maximum von w_c ist ẇ_c = 0,
+  also F_c = −K_c·w_c, und F_c > 0 erzwingt w_c < 0).
 Gemessene Einzelmodul-Harmonische (Präreg §8.2; Python: Aufbau(N_mess=…, N_mess_zellen=…)) ersetzen Profil und
 Übertragung: N_k = Σ_j w_j·N_k⁽ʲ⁾·e^{−ikφ_j}. Alle Phasen sind Profilphasen φ_j^P = φ_j + Δδ_j (Präreg A1). Auf
 den eigenen Indeximpuls bezogene Harmonische werden mit delta_delta = (Δδ₁, Δδ₂, Δδ₃) [°] intern mit e^{+ikΔδ_j}
@@ -29,8 +29,38 @@ Konventionen wie Präreg A1: N_k = (2/N_θ)·Σ_n N(θ_n)·e^{−ikθ_n}, N_θ =
 Spektrum wird achtfach feiner gebildet (wie linear_solver.py). Bandbegrenzt heißt k ≤ k_max (Vorgabe
 max(k_b, 3), k_b = ⌊f₁/(2f)⌋), ungebändert das volle Spektrum; Bedingung (a) wird ungebändert geprüft.
 
-Kennzahlen: f_n = √(K/M)/2π, ρ = f/f_n, ζ = C/(2√(K·M)); ε = −min_t Σ_j m_j·a_j(t)/(M·g) bei synchroner
-Phasung (identische Egg-Module: ε = μ·π²·Hub·f²/(THOLD·g)); im Kontaktast ist N/(M·g) = 1 + ε·g̃(t; φ, ρ, ζ).
+Zugesetzte Luftmasse (Aufbau(m_luft=…, J_luft=…, xy_luft=…), --m-luft, --J-luft; Vorgabe 0 = bisheriges Modell,
+bitgleich). Die Luft um den Körper und ein Quetschfilm unter seinem Boden wirken auf die Körperbewegung als
+zusätzliche Trägheit, nicht als Gewicht. Impulssatz (x Körperlage, e_j Modulweg relativ zum Körper, Reaktion des
+Mediums −m_L·ẍ): M·ẍ + Σ_j m_j·ë_j = N − M·g − m_L·ẍ, also (M + m_L)·ẍ + C·ẋ + K·x = −Σ_j m_j·ë_j und
+N = M·g + (M + m_L)·ẍ + Σ_j m_j·ë_j; ⟨N⟩ = M·g bleibt exakt. Im 3-FG-Modell greift m_L im Punkt (x_L, y_L) an
+(xy_luft, Vorgabe Zellschwerpunkt); J_L ist die zugesetzte Flächenträgheit um diesen Punkt (Skalar für beide
+Kippachsen oder 2 × 2), M_L = m_L·b_L·b_Lᵀ + diag(0, J_L) mit b_L = (1, x_L, y_L). Getrennt geführt werden das
+Gewicht M·g (statische Zelllasten F₀, Einfederung M·g/K, ε, μ, Reserven) und die träge Masse M + m_L (M_q, H,
+f_n, ζ, Moden). ζ ist der Dämpfungsgrad der Hubmode mit der trägen Masse, wie ihn eine Ausschwingmessung liefert:
+bei Vorgabe von ζ ist C = 2ζ·√(K·(M + m_L)); ausgegeben werden ζ und ζ_M = C/(2√(K·M)). So bezogen bleibt
+N/(M·g) = 1 + ε·g̃(t; φ, ρ, ζ) dieselbe Funktion; ε bleibt auf das Gewicht bezogen, weil die Luft keine Vorlast
+trägt (starr und quasistatisch ist N von m_L unabhängig, bei starrer Auflage wirkt m_L nicht). J_L wird als
+Flächenträgheit [kg·m²] angegeben, nicht als Trägheitsradius, weil J_L/m_L von der Strömung abhängt
+(Quetschfilm-Scheibe R²/12, freie Scheibe 2R²/15). Annahmen: m_L frequenzunabhängig (Wert bei der maßgeblichen
+Frequenz einsetzen), inkompressibel, ohne Schallabstrahlung und ohne eigene Luftdämpfung (Quetschfilmdämpfung
+gegebenenfalls in C); die Gegenfläche des Films liegt nicht im gemessenen Kraftpfad. Wird M aus den gewogenen
+Bauteilmassen (oder aus der statischen Zelllast) gebildet, gehört die Luft in einem geschlossenen Gehäuse,
+ρ_L·V_innen, zu m_L (ihre Flächenträgheit zu J_L): Ihr Gewicht hebt der Auftrieb auf, ihre Trägheit bleibt, weil
+sie sich bei Wellenlängen ≫ Gehäuse mit dem Körper bewegt (Kasten 20 × 20 × 10 cm ≈ 4,8 g, 15 × 15 × 8 cm
+≈ 2,2 g). Den Auftrieb auf das Materialvolumen vernachlässigt das Modell. Gemessene
+Übertragungen (N_mess, N_mess_zellen) enthalten die Luft schon und werden mit m_luft > 0 oder J_luft ≠ 0
+abgelehnt. Größenordnung der Mediumsreaktion (Nachrechnung 10/2026, nur Orientierung, keine Vorgabe): freie
+Scheibe (8/3)·ρ_L·R³ ≈ 2–5 g (Kasten 15–20 cm); mit Bodenspalt h Quetschfilm π·ρ_L·R⁴/(8h) und
+J_L = m_L·R²/12, bei R = 0,113 m 8 g (h = 10 mm) bis 30 g (h = 3 mm, mit Zähigkeit). Wirkung: f_n sinkt mit
+√(M/(M + m_L)); am V1-Kandidaten (G0, ζ fest) bei 5 g / 30 g um 0,4 / 2,2 %, kleinste Zellreserve
+41,14 → 41,12 / 41,04 %, ΔF_Zelt +0,3 / +1,7 %; ab m_L ≈ 9,6 g sinkt k_b von 12 auf 11, weil f₁ nur 0,7 %
+über 12·2f liegt (ΔF_Zelt bleibt ungebändert bestimmt). Nahe einer Resonanz ist die Wirkung groß
+(Simulationsreferenz, 2f ≈ f_n: 4,6 g verschieben F_min(140°, 240°) um 64 mN).
+
+Kennzahlen: f_n = √(K/(M + m_L))/2π, ρ = f/f_n, ζ = C/(2√(K·(M + m_L))) (ohne Luft m_L = 0); ε =
+−min_t Σ_j m_j·a_j(t)/(M·g) bei synchroner Phasung (identische Egg-Module: ε = μ·π²·Hub·f²/(THOLD·g)); im
+Kontaktast ist N/(M·g) = 1 + ε·g̃(t; φ, ρ, ζ).
 Abhebeschwelle eines Laufs: ε_c = ε·F₀/(F₀ − F_min) (Summe F₀ = M·g, Zelle: statische Zelllast). Moden aus
 M_q⁻¹·K_q (Hub und zwei Kippmoden), f₁ = kleinste Mode.
 Laufarten (Präreg §5.3, §5.4, §6): Einzelmodulläufe L₁–L₃, Paare (zwei Module, Abstand Δ), synchron (0°, 0°),
@@ -53,7 +83,8 @@ Aufruf:
   python3 auslegung.py --bands                      zu meidende ρ-Bänder bei ζ = 0,02 (ca. 30 s)
   python3 auslegung.py --reference --point 120 240  Simulationsreferenz (Abgleich mit linear_solver.py)
 Optionen: --m (drei Modulmassen, kg), --hub (mm, Spitze-Spitze, ein Wert oder drei), --m0, --f, --K / --Kcells /
---rigid, --C / --zeta, --kmax, --sinus, --thold, --geometry G0|G60h|zentral, --Rc, --rho0, --df-req, --nu, --json.
+--rigid, --C / --zeta, --kmax, --sinus, --thold, --geometry G0|G60h|zentral, --Rc, --rho0, --m-luft (g),
+--J-luft (kg·m²), --df-req, --nu, --json.
 Vorgabe ist der V1-Kandidat: 3 × 100 g, 8 mm, M = 0,65 kg, 10 Hz, K = 1,5·10⁶ N/m, ζ = 0,05, G0 mit
 R_c = 100 mm, ρ₀ = R_c/2. Geometrien: Zellen auf R_c bei 0°, 120°, 240°; G0 Module über den Zellen (Präreg
 A2.5), G60h Module um 60° gedreht auf R_c/2 (Kantenmitten), zentral alle Module im Zellschwerpunkt
@@ -65,12 +96,15 @@ Abgleich (tests/test_auslegung.py): Summe gleich linear_solver.solve() auf ≤ 1
 auch bei μ = 0,4, 12 Hz, Sinus und starrer Auflage; V1-Kandidat, ε- und Hubfenster und K-Untergrenze wie
 die Nachrechnung 10/2026 (exakte Zeitbereichslösung des 1-FG-Modells); Zellreserven, Zellminima und
 Kippfrequenzen wie das unabhängig hergeleitete 3-FG-Modell derselben Nachrechnung (5 Stellen); unsymmetrische
-Zellsteifigkeiten gegen eine Zeitbereichsintegration (scipy.signal.lsim) auf ≤ 2e-5 N.
+Zellsteifigkeiten gegen eine Zeitbereichsintegration (scipy.signal.lsim) auf ≤ 2e-5 N. Zugesetzte Luftmasse:
+m_luft = J_luft = 0 bitgleich mit dem bisherigen Modell; 1-FG-Übertragung mit M + m_L auf ≤ 1e-12 relativ;
+F_min-Verschiebungen wie die RK4-Zeitbereichsrechnung der Nachrechnung 10/2026 (4 Stellen); unsymmetrisch
+mit Luft außerhalb des Zellschwerpunkts gegen scipy.signal.lsim.
 Beispiel --candidate (G0): f_n = 241,8 Hz, f_Kipp = 282,8 Hz, ε = 0,5715; kleinste Reserve der Summe 42,6 %
 (synchron), kleinste Zellreserve 41,1 % (Schnitt, φ₂ = 100°); ΔF_Zelt = 0,560 N; (a), (b), robust und Signal erfüllt.
 Grenzen: Kelvin-Voigt-Kontakt je Zelle (Dämpfung wie die Steifigkeit verteilt, also ζ_Kipp = ζ·f_Kipp/f_Hub),
-flacher starrer Körper ohne Horizontal-FG, ideal geführte Module; Abheben und Hüpfzustände rechnet nur die
-Zeitintegration.
+flacher starrer Körper ohne Horizontal-FG, ideal geführte Module, zugesetzte Luft als frequenzunabhängige
+Masse; Abheben und Hüpfzustände rechnet nur die Zeitintegration.
 
 Matthias Früh · PCMMS · Oktober 2026
 """
@@ -179,18 +213,36 @@ def _gewichte(v, name, streng=True):
     return v / v.sum()
 
 
+def _flaechentraegheit(J, name):
+    """Flächenträgheit gegen die beiden Kippungen [kg·m²]: Skalar (gleich für beide Achsen, also J·I) oder
+    symmetrische, positiv semidefinite 2 × 2-Matrix. Rundungsbedingte Unsymmetrie (bis 1e-9·max|J|, etwa aus
+    gerechneten Trägheitstensoren) wird symmetrisiert; exakt symmetrische Eingaben bleiben bitgleich."""
+    J = np.asarray(J, float)
+    J = J * np.eye(2) if J.ndim == 0 else J
+    ok = J.shape == (2, 2) and np.isfinite(J).all() and np.abs(J - J.T).max() <= 1e-9 * np.abs(J).max()
+    J = 0.5 * (J + J.T) if ok else J
+    if not ok or np.linalg.eigvalsh(J).min() < -1e-12 * np.abs(J).max():
+        raise ValueError(f'{name}: Skalar ≥ 0 oder symmetrische, positiv semidefinite 2 × 2-Matrix [kg·m²] erwartet')
+    return J
+
+
 class Aufbau:
     """Modulsatz, Kontakt und Geometrie eines Arbeitspunkts (SI, Phasen in Grad). K = None: starre Auflage.
-    C hat Vorrang vor zeta (C = 2ζ√(K·M)). k_rel, c_rel: Aufteilung von K und C auf die drei Zellen
-    (Vorgabe je ein Drittel). N_mess (J × k) bzw. N_mess_zellen (J × 3 × k): gemessene komplexe Harmonische
-    k = 1 … der Einzelmodulläufe in Präreg-Konvention; sie ersetzen die Modellantwort von Summe bzw. Zellen
-    (ohne N_mess ist die Summe Σ_c N_mess_zellen). delta_delta: Δδ_j [°], wenn die Messwerte auf den eigenen
-    Indeximpuls bezogen sind (Drehung mit e^{+ikΔδ_j} auf die Profilphase)."""
+    C hat Vorrang vor zeta (C = 2ζ√(K·(M + m_luft))). k_rel, c_rel: Aufteilung von K und C auf die drei Zellen
+    (Vorgabe je ein Drittel). J0: Flächenträgheit der Restmasse um xy0 [kg·m², Skalar für beide Kippachsen oder
+    symmetrische 2 × 2], Vorrang vor rho0. N_mess (J × k) bzw. N_mess_zellen (J × 3 × k): gemessene komplexe
+    Harmonische k = 1 … der Einzelmodulläufe in Präreg-Konvention; sie ersetzen die Modellantwort von Summe bzw.
+    Zellen (ohne N_mess ist die Summe Σ_c N_mess_zellen). delta_delta: Δδ_j [°], wenn die Messwerte auf den eigenen
+    Indeximpuls bezogen sind (Drehung mit e^{+ikΔδ_j} auf die Profilphase). Zugesetzte Luftmasse: m_luft [kg] und
+    J_luft [kg·m², Skalar oder 2 × 2 in der Reihenfolge (α, β) wie J0] im Punkt xy_luft (Vorgabe Zellschwerpunkt),
+    nur träge, nicht schwer; Vorgabe 0 (bisheriges Modell). Gemessene Harmonische enthalten die Luft schon, daher
+    nicht zusammen mit m_luft > 0 oder J_luft ≠ 0."""
 
     def __init__(self, m=KANDIDAT['m'], hub=KANDIDAT['hub'], m0=KANDIDAT['m0'], f=KANDIDAT['f'],
                  K=KANDIDAT['K'], C=None, zeta=KANDIDAT['zeta'], profil_art='egg', thold=THOLD,
                  geometrie_name='G0', R_c=R_ZELLE, zellen=None, module=None, rho0=None, J0=None,
-                 xy0=(0.0, 0.0), k_rel=None, c_rel=None, N_mess=None, N_mess_zellen=None, delta_delta=None):
+                 xy0=(0.0, 0.0), k_rel=None, c_rel=None, N_mess=None, N_mess_zellen=None, delta_delta=None,
+                 m_luft=0.0, J_luft=0.0, xy_luft=None):
         self._kw = {k: v for k, v in locals().items() if k != 'self'}
         self.m = np.atleast_1d(np.asarray(m, float))
         nmod = self.m.size
@@ -204,35 +256,53 @@ class Aufbau:
             raise ValueError('m₀ ≥ 0, f > 0, R_c > 0, K > 0 (oder None), C ≥ 0 und ζ ≥ 0 erwartet')
         if profil_art == 'egg' and not 0 < thold < 1:
             raise ValueError(f'Halteanteil 0 < THOLD < 1 erwartet, nicht {thold}')
+        if not 0 <= m_luft < np.inf:
+            raise ValueError(f'zugesetzte Luftmasse 0 ≤ m_luft < ∞ [kg] erwartet, nicht {m_luft}')
         self.hub = np.broadcast_to(hub, (nmod,)).astype(float)
         self.m0, self.f, self.thold, self.profil_art = float(m0), float(f), float(thold), profil_art
-        self.M = self.m0 + self.m.sum()
+        self.M = self.m0 + self.m.sum()                 # schwere Masse: Gewicht M·g, F₀, ε, μ
         self.MG = self.M * G
         self.mu = self.m.sum() / self.M
+        self.m_luft = float(m_luft)
+        self.J_luft = _flaechentraegheit(J_luft, 'J_luft')
+        self.luft = self.m_luft > 0 or bool(self.J_luft.any())
+        if self.luft and (N_mess is not None or N_mess_zellen is not None):
+            raise ValueError('gemessene Harmonische enthalten die zugesetzte Luftmasse bereits; m_luft = J_luft = 0 '
+                             'setzen')
+        self.M_traege = self.M + self.m_luft             # träge Masse des Hubs: M_q, H, f_n, ζ
         self.starr = K is None
         zg, mg = geometrie(geometrie_name, R_c) if zellen is None or module is None else (None, None)
         self.zellen = np.asarray(zg if zellen is None else zellen, float).reshape(3, 2)
         self.module = np.asarray(mg if module is None else module, float).reshape(nmod, 2)
+        self.xy_luft = self.zellen.mean(0) if xy_luft is None else np.asarray(xy_luft, float)
+        if self.xy_luft.shape != (2,) or not np.isfinite(self.xy_luft).all():
+            raise ValueError('xy_luft: Angriffspunkt (x, y) [m] der zugesetzten Luftmasse erwartet')
         self.k_rel = _gewichte(k_rel, 'k_rel')
         self.c_rel = self.k_rel if c_rel is None else _gewichte(c_rel, 'c_rel', streng=False)
         if self.starr:
-            self.K, self.C, self.f_n, self.zeta = np.inf, 0.0, np.inf, np.nan
+            self.K, self.C, self.f_n, self.zeta, self.zeta_M = np.inf, 0.0, np.inf, np.nan, np.nan
         else:
             self.K = float(K)
-            self.C = float(C) if C is not None else (2 * zeta * np.sqrt(self.K * self.M) if zeta is not None else 0.0)
-            self.f_n = np.sqrt(self.K / self.M) / (2 * np.pi)
-            self.zeta = self.C / (2 * np.sqrt(self.K * self.M))
+            self.C = float(C) if C is not None else \
+                (2 * zeta * np.sqrt(self.K * self.M_traege) if zeta is not None else 0.0)
+            self.f_n = np.sqrt(self.K / self.M_traege) / (2 * np.pi)
+            self.zeta = self.C / (2 * np.sqrt(self.K * self.M_traege))
+            self.zeta_M = self.C / (2 * np.sqrt(self.K * self.M))
         self.rho = self.f / self.f_n
-        # Massenmatrix des 3-FG-Modells und statische Zelllasten
+        # Massenmatrix des 3-FG-Modells und statische Zelllasten (nur Gewicht)
         self.B = np.c_[np.ones(3), self.zellen]
         if abs(np.linalg.det(self.B)) <= 1e-9 * max(np.abs(self.zellen).max(), 1e-12) ** 2:
             raise ValueError('die drei Zellen liegen auf einer Geraden')
         self.b = np.c_[np.ones(nmod), self.module]
         b0 = np.r_[1.0, np.asarray(xy0, float)]
         rho0 = 0.5 * R_c if rho0 is None else rho0
-        J0 = self.m0 * rho0 ** 2 * np.eye(2) if J0 is None else np.asarray(J0, float)
+        J0 = self.m0 * rho0 ** 2 * np.eye(2) if J0 is None else _flaechentraegheit(J0, 'J0')
         self.Mq = self.m0 * np.outer(b0, b0) + np.einsum('j,ja,jb->ab', self.m, self.b, self.b)
         self.Mq[1:, 1:] += J0
+        if self.luft:
+            bl = np.r_[1.0, self.xy_luft]
+            self.Mq += self.m_luft * np.outer(bl, bl)
+            self.Mq[1:, 1:] += self.J_luft
         self.F0 = np.linalg.solve(self.B.T, G * (self.m0 * b0 + self.m @ self.b))
         if not self.starr and self.C == 0:              # ungedämpft: keine Harmonische darf eine Mode treffen
             fm = np.r_[self.f_n, self.moden()[0]]
@@ -249,7 +319,7 @@ class Aufbau:
         self.a = (self.hub * self.f ** 2)[:, None] * a1[None, :]
         self.w = 2 * np.pi * self.f * np.arange(a1.size)
         H = np.ones(a1.size, complex) if self.starr else \
-            (self.K + 1j * self.w * self.C) / (self.K - self.M * self.w ** 2 + 1j * self.w * self.C)
+            (self.K + 1j * self.w * self.C) / (self.K - self.M_traege * self.w ** 2 + 1j * self.w * self.C)
         ma = self.m[:, None] * self.a
         BX, T = self._uebertragung()
         self.Rc = np.einsum('kcj,jk->jck', T, ma)                                # Zellen je Modul (eigener Takt)
@@ -306,7 +376,7 @@ class Aufbau:
         q = (self.m * self.hub).sum() * self.f ** 2 * profil(N_FEIN, self.profil_art, self.thold)  # Σ m_j a_j, synchron
         K_ref = 1.0 if self.starr else self.K
         fm, ha = self.moden(K_ref)
-        f1_ref = min(np.sqrt(K_ref / self.M) / (2 * np.pi), fm.min())
+        f1_ref = min(np.sqrt(K_ref / self.M_traege) / (2 * np.pi), fm.min())
         i_hub = int(np.argmax(ha))
         skal = np.inf if self.starr else 1.0
         f1 = skal * f1_ref
@@ -315,7 +385,8 @@ class Aufbau:
                     f_hub=skal * fm[i_hub], f_kipp=skal * np.delete(fm, i_hub), f1=f1, rho1=self.f / f1,
                     r3=3 * self.f / f1, k_b=None if self.starr else int(np.floor(f1 / (2 * self.f))),
                     F0=self.F0, K_min_b=K_ref * (6 * self.f / f1_ref) ** 2,
-                    K_min_robust=K_ref * (20 * self.f / f1_ref) ** 2)
+                    K_min_robust=K_ref * (20 * self.f / f1_ref) ** 2, m_luft=self.m_luft, J_luft=self.J_luft,
+                    xy_luft=self.xy_luft, M_traege=self.M_traege, zeta_M=self.zeta_M)
 
     def kmax_standard(self, kmax=None):
         """k_max = Vorgabe, sonst max(k_b, 3) (Präreg §5.3 c); starr: ungebändert (None)."""
@@ -474,12 +545,12 @@ def fenster(aufbau, zetas=(0.02, 0.05, 0.1, 0.2), kmax=None, df_req=DF_REQ, rese
 def rho_baender(aufbau, zeta=0.02, rho_min=0.01, rho_max=1 / 6, schritt=0.001, breite_min=0.15, kmax=None,
                 df_req=DF_REQ, reserve_min=RESERVE_MIN, paar_schritt=30.0, menge='zusatz'):
     """ρ = f/f_n, in denen das ε-Fenster der Laufmenge bei ζ schmaler als breite_min ist (Resonanz hoher
-    Profilharmonischer; K = M·(2πf/ρ)², übrige Parameter wie der Aufbau). Vorgabe ZUSATZ wie die Nachrechnung
-    10/2026, damit (0°,0°) und (0°,180°) messbar bleiben. Rückgabe: Raster, Breiten, Bänder [(ρ_lo, ρ_hi)]."""
+    Profilharmonischer; K = (M + m_luft)·(2πf/ρ)², übrige Parameter wie der Aufbau). Vorgabe ZUSATZ wie die
+    Nachrechnung 10/2026, damit (0°,0°) und (0°,180°) messbar bleiben. Rückgabe: Raster, Breiten, Bänder."""
     rhos = np.arange(rho_min, rho_max + 1e-12, schritt)
     breite = []
     for rho in rhos:
-        a = aufbau.mit(K=aufbau.M * (2 * np.pi * aufbau.f / rho) ** 2, zeta=zeta)
+        a = aufbau.mit(K=aufbau.M_traege * (2 * np.pi * aufbau.f / rho) ** 2, zeta=zeta)
         e = _fenster_eins(a, a.kmax_standard(kmax), df_req, reserve_min, paar_schritt)
         breite.append(e['eps_max'][menge] - e['eps_sig'])
     breite = np.array(breite)
@@ -567,10 +638,17 @@ def _json(o):
 
 def _drucke_kennzahlen(a, kz):
     K = 'starr' if a.starr else f'{a.K:.4g} N/m'
+    J = a.J_luft
+    Jt = f'{J[0, 0]:.4g}' if J[0, 1] == 0 and J[0, 0] == J[1, 1] else f'({J[0, 0]:.4g}, {J[1, 1]:.4g}, {J[0, 1]:.4g})'
     print(f'Aufbau: m_j = {", ".join(f"{1e3 * v:.1f}" for v in a.m)} g, Hub = '
           f'{", ".join(f"{1e3 * v:.3f}" for v in a.hub)} mm (Spitze-Spitze), m₀ = {a.m0:.3f} kg, M = {a.M:.4f} kg, '
-          f'μ = {a.mu:.4f}, f = {a.f:g} Hz, K = {K}, C = {a.C:.4g} N·s/m, Profil {a.profil_art}')
-    print(f'f_n = {kz["f_n"]:.2f} Hz, ρ = {kz["rho"]:.4f}, ζ = {kz["zeta"]:.4f}; ε = {kz["eps"]:.4f} '
+          f'μ = {a.mu:.4f}, f = {a.f:g} Hz, K = {K}, C = {a.C:.4g} N·s/m, Profil {a.profil_art}; zugesetzte Luft '
+          f'm_luft = {1e3 * a.m_luft:g} g, J_luft = {Jt} kg·m²'
+          + (f' (träge M + m_luft = {a.M_traege:.4f} kg, Gewicht M·g = {a.MG:.4f} N; Angriff ('
+             + ', '.join(f'{round(1e3 * v, 1) + 0.0:g}' for v in a.xy_luft) + ') mm'
+             + ('; bei starrer Auflage ohne Wirkung)' if a.starr else ')') if a.luft else ''))
+    zm = f' (auf M bezogen {kz["zeta_M"]:.4f})' if a.luft and not a.starr else ''
+    print(f'f_n = {kz["f_n"]:.2f} Hz, ρ = {kz["rho"]:.4f}, ζ = {kz["zeta"]:.4f}{zm}; ε = {kz["eps"]:.4f} '
           f'(Lastspitze {kz["eps_spitze"]:.4f}); f_Hub = {kz["f_hub"]:.2f} Hz, f_Kipp = '
           f'{", ".join(f"{v:.2f}" for v in kz["f_kipp"])} Hz, f₁ = {kz["f1"]:.2f} Hz, 3f/f₁ = {kz["r3"]:.4f}, '
           f'k_b = {kz["k_b"]}; statische Zelllasten {", ".join(f"{v:.4f}" for v in a.F0)} N')
@@ -665,13 +743,18 @@ def main(argv=None):
     ap.add_argument('--Kcells', nargs=3, type=float, help='Steifigkeit je Zelle [N/m] (ersetzt --K)')
     ap.add_argument('--rigid', action='store_true', help='starre Auflage')
     ap.add_argument('--C', type=float, help='Dämpfung gesamt [N·s/m]')
-    ap.add_argument('--zeta', type=float, help='Dämpfungsgrad, C = 2ζ√(K·M)')
+    ap.add_argument('--zeta', type=float, help='Dämpfungsgrad der Hubmode, C = 2ζ√(K·(M + m_luft))')
     ap.add_argument('--kmax', type=int, help='Bandbegrenzung (Vorgabe max(k_b, 3))')
     ap.add_argument('--sinus', action='store_true')
     ap.add_argument('--thold', type=float, default=THOLD)
     ap.add_argument('--geometry', default='G0', choices=('G0', 'G60h', 'zentral'))
     ap.add_argument('--Rc', type=float, default=R_ZELLE, help='Zellradius [m]')
     ap.add_argument('--rho0', type=float, help='Trägheitsradius der Restmasse [m] (Vorgabe R_c/2)')
+    ap.add_argument('--m-luft', type=float, default=0.0,
+                    help='zugesetzte Luftmasse des Körpers [g], nur träge, kein Gewicht (Vorgabe 0)')
+    ap.add_argument('--J-luft', type=float, default=0.0,
+                    help='zugesetzte Flächenträgheit gegen Kippen [kg·m²] um den Zellschwerpunkt, beide Achsen '
+                         '(Vorgabe 0; Quetschfilm-Scheibe mit Radius R: m_luft·R²/12)')
     ap.add_argument('--zetas', nargs='+', type=float, default=[0.02, 0.05, 0.1, 0.2])
     ap.add_argument('--df-req', type=float, default=DF_REQ, help='Signalschwelle ΔF_Zelt [N]')
     ap.add_argument('--nu', type=float, default=np.inf, help='Freiheitsgrade ν für c der PB1-Anforderung (Vorgabe ∞)')
@@ -684,7 +767,9 @@ def main(argv=None):
              (a.C is not None and a.C < 0, '--C ≥ 0'), (a.zeta is not None and a.zeta < 0, '--zeta ≥ 0'),
              (a.kmax is not None and a.kmax < 1, '--kmax ≥ 1'), (not 0 < a.thold < 1, '0 < --thold < 1'),
              (a.Rc <= 0, '--Rc > 0'), (a.rho0 is not None and a.rho0 < 0, '--rho0 ≥ 0'),
-             (min(a.zetas) < 0, '--zetas ≥ 0'), (a.df_req <= 0, '--df-req > 0'), (a.nu <= 0, '--nu > 0')]
+             (min(a.zetas) < 0, '--zetas ≥ 0'), (a.df_req <= 0, '--df-req > 0'), (a.nu <= 0, '--nu > 0'),
+             (not 0 <= a.m_luft < np.inf, '--m-luft ≥ 0 (endlich, in g)'),
+             (not 0 <= a.J_luft < np.inf, '--J-luft ≥ 0 (endlich, in kg·m²)')]
     for falsch, text in pruef:
         if falsch:
             ap.error(text)
@@ -707,7 +792,7 @@ def main(argv=None):
         kw['C'], kw['zeta'] = a.C, None
     try:
         aufbau = Aufbau(**kw, profil_art='sinus' if a.sinus else 'egg', thold=a.thold, geometrie_name=a.geometry,
-                        R_c=a.Rc, rho0=a.rho0, k_rel=k_rel)
+                        R_c=a.Rc, rho0=a.rho0, k_rel=k_rel, m_luft=1e-3 * a.m_luft, J_luft=a.J_luft)
     except ValueError as e:
         ap.error(str(e))
     kz = aufbau.kennzahlen()
