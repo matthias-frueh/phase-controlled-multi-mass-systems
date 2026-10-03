@@ -1,7 +1,7 @@
 # PCMMS — Präregistrierung v2, Technischer Anhang
 
 **Matthias Früh · ORCID 0009-0005-9984-4207**
-Stand: 28. September 2026, überarbeitet 2. Oktober 2026 (A3, A4: Einordnung der Vorzeichenregel; Entwurf 10/2026: Entscheidungsregeln, Identifizierbarkeit und Kontrollen, A0) und 3. Oktober 2026 (A0, A4, Z: Verweise auf das Exposé) · gleichrangiger Teil von Teil A, Entwurf — nicht eingefroren, nicht registriert
+Stand: 28. September 2026, überarbeitet 2. Oktober 2026 (A3, A4: Einordnung der Vorzeichenregel; Entwurf 10/2026: Entscheidungsregeln, Identifizierbarkeit und Kontrollen, A0) und 3. Oktober 2026 (A0, A4, Z: Verweise auf das Exposé; A0, A1, A2.1, A9.2, Tabellen C und F, Z: Auftrieb und Bestimmung von M) · gleichrangiger Teil von Teil A, Entwurf — nicht eingefroren, nicht registriert
 
 Dieser Anhang gehört zu `praeregistrierung_v2_entwurf.md` (Hauptdokument, Dateiname vorläufig, §12; Verweise
 „§“ beziehen sich darauf) und wird mit ihm eingefroren und registriert. Er enthält den Änderungsvermerk
@@ -51,7 +51,7 @@ H2-Fenster, die Fassung von H3 und die Entscheidungslogik von H2 und H3 (§12).
 **Entwurf 10/2026: Identifizierbarkeit und Kontrollen.** Vor dem Einfrieren ergänzt, begründet mit
 Rechnungen am Modell und Abschätzungen mit angenommenen Maßen, nicht mit Messdaten. Bisher ordnete keine
 registrierte Regel eine H1-Abweichung einer Ursache zu (§9.4), und mehrere Quellen fehlten in Tabelle C.
-Neu sind: H0 als scheinbares Gewicht (§3); Tabelle C mit Luft am Körper, Auftrieb, Elektrostatik,
+Neu sind: H0 mit ⟨N⟩ als statischer Last (§3); Tabelle C mit Luft am Körper, Auftrieb, Elektrostatik,
 Kabelkräften, Aktorkopplung, lastabhängigem Phasenversatz und gemeinsamer Versorgung, je mit Größenordnung,
 Signatur und Kontrolle; Identifizierbarkeitsläufe bei einer zweiten Einstellung an mindestens drei
 Schnittpunkten mit eigener Vorhersage, D2 in Kombinationskonfiguration und P0.4 unter Betriebslast mit
@@ -65,9 +65,16 @@ Modulunterschiede und Kalibrierfehler der Zellen bewerten; E3b ist deshalb von H
 Die Betriebslastprüfung von P0.4 läuft nach der Wahl von f, mit der Last je Zelle (§5.2). Kontakt- und
 Messkettennichtlinearität sind ausdrücklich nicht trennbar.
 Die Kampagne wird länger (§5.3 c, §6, A9.12), die Bonferroni-Schranke über die Familien steigt durch H1Z auf
-0,25. Offen sind Einstellung 2 und s, die Punkte I, Paarläufe, die Schwelle des Klirrkriteriums, die
+0,25. Offen sind die Bestimmung von M (P0.2), Einstellung 2 und s, die Punkte I, Paarläufe, die Schwelle des Klirrkriteriums, die
 Grenzen von H1Z, die Schwellen von E3 und alle Teile, die vom Antrieb, vom Hardwarestand des Linearaktors,
 von der Lage von Zellen und Modulen und von der Messkette abhängen (§12).
+
+**Entwurf 10/2026: Auftrieb und Bestimmung von M (Nachtrag 3. Oktober 2026).** ⟨N⟩ heißt statische Last
+statt scheinbares Gewicht. Der frühere Ausdruck M·g − ρ_L·g·V mit dem Körpervolumen V zog bei M aus der
+statischen Zelllast den Auftrieb doppelt ab (0,021–0,047 N) und ließ bei M aus der Bauteilwägung das Gewicht der
+Innenluft weg. Kein Hypothesentest war betroffen, weil H0 Δ⟨N⟩ prüft. Beide zulässigen Konventionen für M
+stehen getrennt (§3, §4, P0.2, A1, A9.2, Tabelle C, Tabelle F, Z), mit den Bezeichnungen aus
+`code/auslegung.py`; die Wahl ist offen (§12).
 
 **Folgen für andere Dokumente** (§12; am 25.09.2026 nachgezogen, soweit „erledigt“ vermerkt):
 
@@ -126,7 +133,7 @@ von der Lage von Zellen und Modulen und von der Messkette abhängen (§12).
 | Konfigurationsmittelkurve | Mittel der Mittelkurven aller gültigen Läufe einer Konfiguration, jeder Lauf gleich gewichtet |
 | N_k | komplexe Harmonische k ≥ 1: N_k = (2/N_θ)·Σₙ N̄(θₙ)·e^{−ikθₙ}; \|N_k\| ist die Amplitude wie in `linear_solver.py --section` |
 | ⟨N⟩ | Zeitmittel über eine ganze Zahl vollständiger Zyklen im Auswertefenster (= Gleichanteil der Mittelkurve) |
-| scheinbares Gewicht | M·g − ρ_L·g·V zuzüglich gleichbleibender äußerer Kräfte (etwa elektrostatischer); ρ_L Dichte der Luft, V Volumen des Körpers; unter H0 gleich ⟨N⟩ (§3) |
+| statische Last, M, m_L | statische Last: Σ_c F_c,stat, Summe der Zellanzeigen bei ruhendem Körper mit geparkten Modulen gegen den Nullpunkt bei abgehobenem Körper (P0.1); physikalisch das Gewicht von Bauteilen und Innenluft abzüglich des Auftriebs ρ_L·g·V_außen in der Außenluft, zuzüglich gleichbleibender äußerer Kräfte (Kabel, Elektrostatik); unter H0 gleich ⟨N⟩ (§3). M nach einer von zwei Konventionen (offen, §12): (a) Summe der wahren Bauteilmassen ohne Luft (A9.2): statische Last ≈ M·g − ρ_L·g·V_Mat + (ρ_innen − ρ_L)·g·V_innen zuzüglich gleichbleibender äußerer Kräfte, mitbewegte Luft m_L = ρ_L·V_innen + m_hyd; (b) M = Σ_c F_c,stat/g aus P0.2: statische Last = M·g im Zustand von P0.2, Auftrieb, Innenluft und gleichbleibende äußere Kräfte sind enthalten und werden nicht noch einmal abgezogen, m_L = ρ_L·V_außen + m_hyd. V_außen Außenvolumen, V_innen eingeschlossene Luft, V_Mat = V_außen − V_innen Materialvolumen, ρ_L und ρ_innen Dichte der Außen- bzw. Innenluft, m_hyd hydrodynamisch mitbewegte Luft (Tabelle C); Bezeichnungen wie in `code/auslegung.py` |
 | N_c,k, F_min,c, Δ_c,q, Δ_c,rel,q | Harmonische und Minimum der bandbegrenzten Konfigurationsmittelkurve der Zelle c; Äquivalenz- und Relevanzgrenze von H1Z (§8.5) |
 | T(kω), Ĉⱼ,ₖ | Übertragungsmatrix von den Modulkräften zu den Zellkräften bei der Harmonischen k: Statik der Dreipunktlagerung mit Zelllagen und relativen Zellverstärkungen aus P0.1, G_F je Zelle und Kippmoden aus P0.4 (A2.7); Ĉⱼ,ₖ = [T(kω)⁻¹·(N₁,ₖ, N₂,ₖ, N₃,ₖ)ᵀ]ⱼ, Zeiger von Modul j aus den Zellen |
 | φⱼ^{P,Z}, Δφⱼ^Z | Profilphase von Modul j aus den Zellen, arg Ĉ₁,₁ − arg Ĉⱼ,₁; Abweichung Δφⱼ^Z = φⱼ^{P,Z} − φ̄ⱼ^P (E3a, §8.10) |
@@ -135,7 +142,7 @@ von der Lage von Zellen und Modulen und von der Messkette abhängen (§12).
 | Betriebslast (P0.4) | je Zelle die größte vorhergesagte Harmonische der Zellkraft bei der Anregungsfrequenz in den Kombinations- und Einzelmodulläufen bei f (§5.2, A9.2) |
 | F_min, F_max | Minimum und Maximum der bandbegrenzten Konfigurationsmittelkurve auf ihren N_θ Stützstellen; konfirmatorisch verglichen wird F_min − ⟨N⟩. Zyklusweise Minima und Minima ungefilterter Kurven sind nicht konfirmatorisch und werden nur beschreibend berichtet (E4) |
 | γ₁ | Schiefe m₃/m₂^{3/2} der Konfigurationsmittelkurve über ihre N_θ Stützstellen (wie `scipy.stats.skew` in `linear_solver.py`) |
-| A | (F_max − ⟨N⟩)/(⟨N⟩ − F_min), unter H0 mit ⟨N⟩ gleich dem scheinbaren Gewicht; Codevariable `peak_ratio`; beschreibend |
+| A | (F_max − ⟨N⟩)/(⟨N⟩ − F_min), unter H0 mit ⟨N⟩ gleich der statischen Last; Codevariable `peak_ratio`; beschreibend |
 | λ | Anteil der Rohwerte im Auswertefenster mit N < F_LO,Σ; explorativ |
 | σ_c, σ_Σ, F_LO,c, F_LO,Σ | Standardabweichung der Rohwerte von Zelle c bzw. der Summe in Referenzläufen; Liftoff-Schwellen 5·σ_c bzw. 5·σ_Σ über dem Nullpunkt (P0.1) |
 | Einzelzell-Liftoff | mindestens ein Rohwert N_c < F_LO,c im ganzen Lauf einschließlich Rampe und Einschwingzeit |
@@ -179,7 +186,9 @@ Solange der Körper nicht abhebt, ist das Modell der Referenz-Engine linear (Doc
     M·ẍ + C·ẋ + K·x = −μ·M·ā(t),     N(t) = M·g − K·x − C·ẋ
 
 mit ā(t) dem Mittel der drei Modulbeschleunigungen und μ dem Anteil der Masse, der sich mit den Modulen
-bewegt. Für die k-te Harmonische der Anregungsfrequenz f (ω = 2πf) gilt
+bewegt. M·g ist hier die statische Last (bei Konvention b exakt, bei a bis auf die Auftriebsterme, A1). In
+H(ω) steht M für die träge Masse, mit der auch P0.4 angepasst wird; mitbewegte Luft (m_L, A1) gehört dazu,
+ist linear und zeitinvariant und lässt die Superposition unberührt. Für die k-te Harmonische der Anregungsfrequenz f (ω = 2πf) gilt
 
     N_k = μ·M · H(kω) · P_k · (1 + e^{−ikφ₂} + e^{−ikφ₃}) / 3,     H(ω) = (K + iωC) / (K − M·ω² + iωC)
 
@@ -647,6 +656,20 @@ und S3 sind obere Schranken, keine Raten des Verfahrens.
   Ebene und relative Zellverstärkungen mit Unsicherheit (Ziel ≤ 0,1 mm bzw. ≤ 0,1 %), Eingang von T(kω) für
   E3 (A2.7); Einfluss von Laststelle und Querkraft je ≤ 0,1·Δ_q, Superpositionsfehler der Elektronik
   ≤ 0,3·u_c,erw (Nachweis in Teil B; §5.2).
+- **P0.2** Wägung vor der Endmontage. m_j: bewegte Masse jedes Moduls einschließlich mitbewegter Kabel und
+  Messmarken, durch Bauteilwägung; der konventionelle Wägewert genügt (Abweichung von der wahren Masse
+  höchstens etwa 10⁻³ relativ, klein gegen PB3). M nach der offenen Konvention (§12, A1): (a) Summe der Massen
+  aller Teile, die auf den Zellen ruhen und sich mit dem Körper bewegen, als wahre Massen ohne Luft. Eine mit
+  Stahlgewichten (8000 kg/m³) justierte Waage zeigt den konventionellen Wägewert
+  m·(1 − ρ_L/ρ_Mat + ρ_L/8000 kg/m³); er wird mit der Werkstoffdichte jedes Teils auf die wahre Masse
+  umgerechnet, sonst würde der Materialauftrieb zum Teil doppelt abgezogen (Z). (b) M = Σ_c F_c,stat/g mit
+  F_c,stat der Anzeige der Zelle c bei aufgesetztem, ruhendem Körper mit geparkten Modulen gegen den
+  Nullpunkt bei abgehobenem Körper (P0.1), dazu Luftdruck, Lufttemperatur und Feuchte. Offen ist, welcher
+  Wert von g gilt (örtlich bestimmt oder Kalibrierung in Masseeinheiten) und ob eine Gesamtwägung des
+  geschlossenen Körpers auf einer getrennten Waage als beschreibende Kontrolle dient. Bei (b) gilt M für den
+  Zustand bei P0.2; Endmontage, Kabelführung und Messmarken ändern die statische Last danach noch, die
+  Wiederholung des Zellnullpunkts nach dem Datenschluss (§5.2) ergibt eine zweite Bestimmung, die nur
+  beschreibend berichtet wird. In keinem Fall wird von M = Σ_c F_c,stat/g ein Auftrieb abgezogen.
 - **P0.3** D1; D2ⱼ für jeden Antrieb bei jeder Frequenz des 1-Hz-Rasters im Bereich (d); D2_K an den Punkten
   I in deren Sollphasung bei denselben Frequenzen. Wechselwirkung der Antriebe: D2_K − Σⱼ D2ⱼ·e^{−ikφⱼ} je
   Harmonischer, ausgewertet bei f mit k_max, in N und je Zelle, ≤ 0,3·u_c,erw (§5.2). Statische Summe und
@@ -1018,12 +1041,12 @@ einschließlich der Regeln für c (§8.4) und den Intervalltyp mit Rückfall (§
 heraus; *linear* heißt linear und zeitinvariant, also keine H1-Signatur (A2.1), wohl aber eine Wirkung auf H3
 und absolute Größen; *H1* kann die Superposition verletzen (nichtlinear, zeitveränderlich oder
 Wechselwirkung). Die Größenordnungen sind Modellabschätzungen mit angenommenen Maßen (Grundfläche des
-Körpers 0,04 m², Volumen 1,8–4 l, M = 0,650 kg) oder Rechnungen im Beispiel A4, keine Messwerte (Z).
+Körpers 0,04 m², Außenvolumen V_außen 1,8–4 l, M = 0,650 kg) oder Rechnungen im Beispiel A4, keine Messwerte (Z).
 
 | Quelle | Wirkung | Signatur | Größenordnung (Modellabschätzung) | Kontrolle |
 |---|---|---|---|---|
-| Luft am Körper: zugesetzte Masse, Quetschfilm im Bodenspalt | zusätzliche mitbewegte Masse und Dämpfung, verschiebt f_n; kleiner Gleichanteil aus der Trägheit der Spaltströmung | linear; der quadratische Anteil gibt einen Gleichanteil (H0) und Mischterme gleicher Größe (H1), beide vernachlässigbar | zugesetzte Masse ≈ 4,6 g (0,7 % von M); mit Bodenspalt 8 g (10 mm) bis 30 g (3 mm), Dämpfung 0,04 bzw. 0,6 N·s/m; Gleichanteil (Skala, obere Abschätzung, Spalt 3 mm, Beispiel A4): bei K = 10⁵ N/m etwa 4·10⁻⁶ N im Einzelmodullauf und 3·10⁻⁵ N bei synchroner Phasung, bei K = 10⁶ N/m unter 10⁻⁶ N | Spalt ≥ 10 mm oder offene Grundplatte, sonst Spaltvariation in P0.3 (§5.1, A9.2); in P0.4 und den Einzelmodulläufen enthalten; als Zusatzmasse im Auslegungswerkzeug |
-| Auftrieb, Luftdichte | ⟨N⟩ ist das scheinbare Gewicht; es ändert sich mit Luftdruck, Temperatur und Feuchte | H0 | ρ_L·g·V ≈ 0,021–0,047 N; 1 % Dichteänderung ≈ 0,2–0,5 mN | H0 als scheinbares Gewicht (§3); Referenzläufe mit Interpolation; Luftdruck, Lufttemperatur, Feuchte je Lauf (A9.10) |
+| Luft am Körper: zugesetzte Masse, Quetschfilm im Bodenspalt | zusätzliche mitbewegte Masse und Dämpfung, verschiebt f_n; kleiner Gleichanteil aus der Trägheit der Spaltströmung | linear; der quadratische Anteil gibt einen Gleichanteil (H0) und Mischterme gleicher Größe (H1), beide vernachlässigbar | hydrodynamische Zusatzmasse m_hyd ≈ 4,6 g (0,7 % von M); mit Bodenspalt 8 g (10 mm) bis 30 g (3 mm), Dämpfung 0,04 bzw. 0,6 N·s/m; dazu der Luftanteil von m_L nach der Konvention für M (A1): bei (b) ρ_L·V_außen ≈ 2,2–4,8 g, bei (a) die Innenluft eines geschlossenen Gehäuses ρ_L·V_innen (höchstens so groß), bei offenem Gehäuse 0; Gleichanteil (Skala, obere Abschätzung, Spalt 3 mm, Beispiel A4): bei K = 10⁵ N/m etwa 4·10⁻⁶ N im Einzelmodullauf und 3·10⁻⁵ N bei synchroner Phasung, bei K = 10⁶ N/m unter 10⁻⁶ N | Spalt ≥ 10 mm oder offene Grundplatte, sonst Spaltvariation in P0.3 (§5.1, A9.2); in P0.4 und den Einzelmodulläufen enthalten; als Zusatzmasse m_L im Auslegungswerkzeug (`--m-luft`), nach der Konvention für M |
+| Auftrieb, Luftdichte | Der Auftrieb ist Teil der statischen Last und damit von ⟨N⟩; er ändert sich mit Luftdruck, Temperatur und Feuchte. Bei M aus der statischen Zelllast (Konvention b) ist er in M·g enthalten und wird nicht abgezogen; bei M aus wahren Bauteilmassen (a) wirken ρ_L·g·V_Mat und, bei ungleicher Dichte innen und außen, (ρ_innen − ρ_L)·g·V_innen (A1) | H0 | auf das Außenvolumen ρ_L·g·V_außen ≈ 0,021–0,047 N, auf das Materialvolumen ρ_L·g·V_Mat ≈ 1–6 mN; Änderung bei 1 % Dichteänderung ≈ 0,2–0,5 mN (dicht verschlossenes Gehäuse) bzw. ≈ 0,01–0,06 mN (offenes oder belüftetes Gehäuse) | Konvention für M (§12, P0.2); Referenzläufe mit Interpolation; Luftdruck, Lufttemperatur, Feuchte je Lauf (A9.10), bei (b) auch bei P0.2 |
 | Elektrostatische Aufladung | Gleich- und Driftanteil; Modulation durch bewegte Teile gegenüber Gegenflächen | H0; Modulation etwa linear | Plattennäherung σ²A/(2ε₀) = 2·10⁻⁵ … 0,2 N für σ = 10⁻⁷ … 10⁻⁵ C/m², über vier Dekaden offen; Modulation ≈ 0,04 mN (10 cm², 100 V, 1 mm) | leitfähige, geerdete Oberflächen (§5.1); Feuchte je Lauf; ein Ionisator nur, wenn vor Phase 0 festgelegt; D1, Referenzläufe, G1, Nullpunktalarm, S1 |
 | Kabelkräfte | Steifigkeit der Schlaufe; Reibung und Hysterese; Kabel an bewegten Modulen (etwa für Sensoren) | linear (Steifigkeit); H1 (Hysterese, Reibung) | Schlaufe mit 100 N/m bei der Einfederung eines Einzelmodullaufs im Beispiel A4: 0,13 mN bei K = 10⁶ N/m (1,30 µm) bis 1,3 mN bei K = 10⁵ N/m (13,3 µm) | festgelegte Schlaufe mit Fotodokumentation (A9.1); P0.3: zwei Lagen, statischer Nebenschluss ≤ 0,1·Δ_q, Umkehrspanne ≤ 0,3·u_c,erw; Kabel an Modulen: Masse in m_j (P0.2), Führung wie die Schlaufe, in den Einzelmodulläufen enthalten |
 | Aktorkopplung | Amplitude oder Profil eines Moduls ändern sich unter der Last der anderen | H1 | 0,1 % Abweichung in den Kombinationsläufen ergibt 1,22 mN in F_min − ⟨N⟩, 1 % ergibt 12,2 mN (Beispiel A4, k_max = 9) | Gegenstand von H1; Identifizierbarkeitsläufe (Klasse p = 1, bei lastabhängiger Stärke p = 2); E3 (Amplitudenverhältnisse, E3b); Modulkinematik in Phase 1, falls vorgesehen (offen, §12) |
@@ -1041,6 +1064,7 @@ Gewählte Zahlenwerte ohne Messung, je mit einer Zeile Begründung.
 |---|---|---|
 | α = 0,05 je Familie | §3, §8.4 | übliche Irrtumswahrscheinlichkeit; jede Hypothese wird für sich berichtet |
 | 25 % der statischen Zelllast als Mindestabstand | §5.3 (a) | Nahe am Abheben wird ein realer Kontakt nichtlinear, und im Liftoff-Bereich ist der Zustand nicht eindeutig |
+| Bestimmung von M: Konvention (a) Bauteilwägung oder (b) statische Zelllast (offen, §12) | §3, §5.2 P0.2; A1, A9.2 | (a) macht M zur Eigenschaft des Körpers und braucht wahre Massen, V_Mat und V_innen; (b) misst die statische Last mit denselben Zellen und derselben Kalibrierung wie ⟨N⟩, ohne Annahme über Volumina und Dichten. In keinem Fall wird von M = Σ_c F_c,stat/g ein Auftrieb noch einmal abgezogen |
 | Faktor 2 Resonanzabstand (k·f ≤ f₁/2) | §5.3 (b) | begrenzt \|H\| auf 1,33 und die Frequenzempfindlichkeit auf 0,67 (A6) |
 | Δ_q = 0,25·D_q | §8.5 PB1 | Eine Bestätigung muss die vorhergesagte Struktur auf ein Viertel auflösen, nicht nur ihr Vorhandensein zeigen |
 | t_eq = t(0,95; ν_eff), ohne Mehrfachkorrektur | §8.5 PB1 | TOST je Test auf α = 0,05; das Intersection-Union-Prinzip hält α für die gemeinsame Bestätigung (A8) |
@@ -1118,7 +1142,7 @@ Gewählte Zahlenwerte ohne Messung, je mit einer Zeile Begründung.
 | P(unauffällig \| exakt) ≥ 0,8 für E3, sonst nur beschreibend | A9.11 | dieselbe Power wie für H1 und die Zuordnung; ohne sie wäre „unbestimmt“ der erwartete Ausgang |
 | Bonferroni über die E3-Prüfungen, einseitig α = 0,05 | §8.10, A9.13 | „auffällig“ soll bei korrekter Funktion selten sein, obwohl viele Konfigurationen geprüft werden |
 | Zelllage ≤ 0,1 mm, relative Zellverstärkung ≤ 0,1 % (Ziel) | P0.1 | Beitrag zur E3a-Prüfgröße etwa 0,017° je Zelllagefehler (A2.7, Beispiel G0, Zellradius 0,1 m), klein gegen 0,1° |
-| Spalt ≥ 10 mm oder offene Grundplatte | §5.1 | Quetschfilm-Trägheit dann höchstens etwa 8 g, Gleichanteil vernachlässigbar (Tabelle C) |
+| Spalt ≥ 10 mm oder offene Grundplatte | §5.1 | Quetschfilm-Trägheit (Teil von m_hyd) dann höchstens etwa 8 g, Gleichanteil vernachlässigbar (Tabelle C) |
 | Sinusanregung bei f, 2f, 3f in Höhe der Betriebslast je Zelle, über den Modulpositionen, nach P0.9; Linearitätslauf mit Amplitudenverhältnis 2 | §5.2, P0.4, P0.12 | prüft die Linearität jeder Zelle bei ihrer Last im Betrieb, die erst mit f feststeht; Verhältnis 2 wie in P0.4, gerade Harmonische dann vierfach bei quadratischer Kennlinie |
 | mindestens fünf Umschaltungen je Richtung bei zweitem Nockensatz; Streuung von Δδⱼ ≤ u(Δδⱼ) | P0.5′ | die Umschaltung wird in Phase 1 etwa neunmal je Block nötig; ihre Streuung soll nicht größer sein als die zugelassene Unsicherheit der Profilphase |
 
@@ -1193,9 +1217,10 @@ Hauptdokument; A0–A9, Tab. C, Tab. F und Z Anhang.
 | Aufwärmen: ohne Drift nach zehn Referenzläufen etwa 6·10⁻⁴ ohne zwei aufeinanderfolgende mit Differenz < σ̂_ref (σ̂_ref = √1,5·σ) | A8, Tab. F | `python3 -c "import numpy as np; g=np.random.default_rng(3); R=g.standard_normal((10**6,10)); print(float('%.1g'%(1-(abs(np.diff(R,axis=1))<1.5**0.5).any(1).mean())))"` |
 | Normierung für ε_ctrl: Var(Δ⟨N⟩) = σ²(1 + β² + (1 − β)²), 1,5σ² bei β = 0,5 | §8.8; A1, A9.8 | `python3 -c "b=0.5; print(1+b*b+(1-b)**2)"` |
 | Kopplung im Beispiel A4 (starr, μ = 0,4, 10 Hz, k_max = 9): größtes \|F_min − ⟨N⟩\| 1,2157 N; 0,1 % / 1 % Abweichung der Kombinationsläufe → 1,22 / 12,2 mN, 0,9 / 9,4 % von 0,1293 N; Phasenversatz 0,05° an Modul 2 → 1,75 mN bei 120° | §8.10; A4, Tab. C | `python3 -c "import sys;sys.path.insert(0,'code');import linear_solver as L,numpy as np;P,n=L.profile_spectrum();k=np.arange(1,10);N=2*0.4*L.M*P[1:10]/3/n;t=2*np.pi*np.arange(2000)/2000;c=lambda X:(X.real@np.cos(np.outer(k,t))-X.imag@np.sin(np.outer(k,t))).min();f=lambda p,d=0:c(N+N*np.exp(-1j*k*np.radians(p+d))+N*np.exp(-1j*k*np.radians(240)));p=np.arange(100,141,2.);F=np.array([f(x) for x in p]);D=np.array([f(x,0.05) for x in p])-F;m=abs(F).max();print(round(m,4),round(m,2),round(10*m,1),round(100*m*1e-3/0.1293,1),round(100*m*1e-2/0.1293,1),round(1e3*abs(D).max(),2),p[abs(D).argmax()])"` |
-| Luft am Körper (Grundfläche 0,04 m², R = 0,113 m, ρ_L = 1,2 kg/m³, μ_L = 1,8·10⁻⁵ Pa·s, 10 Hz): zugesetzte Masse (8/3)·ρ_L·R³ = 4,6 g (0,71 % von 0,650 kg); Quetschfilm mit exakter Impedanz iωπρ_LR⁴/(8hΦ), Φ = 1 − tanh(x)/x, x = h·√(iω/ν)/2: Trägheit 8,2 / 30,1 g, Dämpfung 0,038 / 0,58 N·s/m (h = 10 / 3 mm) | Tab. C, Tab. F | `python3 -c "import numpy as np; r,m,w=1.2,1.8e-5,2*np.pi*10; R=(0.04/np.pi)**0.5; print(round(R,4), round(1e3*8/3*r*R**3,1), round(100*8/3*r*R**3/0.65,2)); [print(h, round(1e3*Z.imag/w,1), round(Z.real,3)) for h in (0.01,0.003) for x in [np.sqrt(1j*w*r/m)*h/2] for Z in [1j*w*np.pi*r*R**4/(8*h*(1-np.tanh(x)/x))]]"` |
+| Luft am Körper (Grundfläche 0,04 m², R = 0,113 m, ρ_L = 1,2 kg/m³, μ_L = 1,8·10⁻⁵ Pa·s, 10 Hz): zugesetzte Masse (8/3)·ρ_L·R³ = 4,6 g (0,71 % von 0,650 kg); Quetschfilm mit exakter Impedanz iωπρ_LR⁴/(8hΦ), Φ = 1 − tanh(x)/x, x = h·√(iω/ν)/2: Trägheit 8,2 / 30,1 g, Dämpfung 0,038 / 0,58 N·s/m (h = 10 / 3 mm); Luftanteil von m_L bei Konvention (b) ρ_L·V_außen = 2,2 / 4,8 g (V_außen = 1,8 / 4 l), bei (a) Innenluft höchstens so groß | Tab. C, Tab. F; A1 | `python3 -c "import numpy as np; r,m,w=1.2,1.8e-5,2*np.pi*10; R=(0.04/np.pi)**0.5; print(round(R,4), round(1e3*8/3*r*R**3,1), round(100*8/3*r*R**3/0.65,2)); [print(h, round(1e3*Z.imag/w,1), round(Z.real,3)) for h in (0.01,0.003) for x in [np.sqrt(1j*w*r/m)*h/2] for Z in [1j*w*np.pi*r*R**4/(8*h*(1-np.tanh(x)/x))]]"`; `python3 -c "print([round(1.2*V*1e3,1) for V in (1.8e-3,4e-3)])"` |
 | Gleichanteil des Quetschfilms, Skala πρ_LR⁴⟨ż²⟩/(16h²) mit h = 3 mm (ζ fest, μ = 0,4, 10 Hz): K = 10⁶ N/m Einzelmodullauf 2,7·10⁻⁸ N (\|x₁\| = 1,30 µm), synchron 2,4·10⁻⁷ N, beide unter 10⁻⁶ N; K = 10⁵ N/m Einzelmodullauf 3,8·10⁻⁶ N (\|x₁\| = 13,3 µm), synchron 3,4·10⁻⁵ N; Kabelschlaufe 100 N/m · 13,3 µm = 1,33 mN | Tab. C | `python3 -c "import sys;sys.path.insert(0,'code');import linear_solver as L,numpy as np;P,n=L.profile_spectrum();R=(0.04/np.pi)**0.5;w=2*np.pi*10*np.arange(P.size);[print(K,round(1e6*abs(x[1]),2),'%.1e'%(np.pi*1.2*R**4*0.5*np.sum(abs(w*x)**2)/(16*0.003**2)),round(1e3*100*abs(x[1]),2)) for K in (1e6,1e5) for Y in [L.transfer(K,L.c_for(K,0.099228),P.size)[1]] for f in (1/3,1) for x in [2*0.4*L.M*f*P*Y/n]]"` |
-| Auftrieb ρ_L·g·V = 0,021 / 0,047 N (V = 1,8 / 4 l), 1 % Dichteänderung 0,21 / 0,47 mN; Elektrostatik σ²A/(2ε₀) = 2,3·10⁻⁵ / 2,3·10⁻³ / 0,23 N (σ = 10⁻⁷ / 10⁻⁶ / 10⁻⁵ C/m², A = 0,04 m²), Modulation ε₀AU²/(2d²) = 0,044 mN (10 cm², 100 V, 1 mm); Kabelschlaufe 100 N/m · 1,30 µm = 0,13 mN; Spitzengeschwindigkeit des Profils 0,24 m/s (Hub 7,69 mm, 10 Hz), Luftwiderstand je Modul 0,035 mN (10 cm², c_w = 1) | §3; Tab. C | `python3 -c "import sys;sys.path.insert(0,'code');import numpy as np;from finesweep import z_egg_zdd;g=9.81;print([round(1.2*g*V,4) for V in (1.8e-3,4e-3)],[round(1e3*0.012*g*V,2) for V in (1.8e-3,4e-3)],['%.2g'%(s*s*0.04/(2*8.854e-12)) for s in (1e-7,1e-6,1e-5)],round(1e3*8.854e-12*1e-3*1e4/2e-6,3),round(1e3*100*1.30e-6,2));t=np.arange(200000)*(0.1/200000);v=np.cumsum(z_egg_zdd(t))*(0.1/200000);v-=v.mean();u=abs(v).max();print(round(u,2),round(1e3*0.5*1.2*1e-3*u*u,3))"` |
+| Auftrieb auf das Außenvolumen ρ_L·g·V_außen = 0,021 / 0,047 N (V_außen = 1,8 / 4 l), 1 % Dichteänderung 0,21 / 0,47 mN (dicht verschlossenes Gehäuse); Elektrostatik σ²A/(2ε₀) = 2,3·10⁻⁵ / 2,3·10⁻³ / 0,23 N (σ = 10⁻⁷ / 10⁻⁶ / 10⁻⁵ C/m², A = 0,04 m²), Modulation ε₀AU²/(2d²) = 0,044 mN (10 cm², 100 V, 1 mm); Kabelschlaufe 100 N/m · 1,30 µm = 0,13 mN; Spitzengeschwindigkeit des Profils 0,24 m/s (Hub 7,69 mm, 10 Hz), Luftwiderstand je Modul 0,035 mN (10 cm², c_w = 1) | §3; Tab. C | `python3 -c "import sys;sys.path.insert(0,'code');import numpy as np;from finesweep import z_egg_zdd;g=9.81;print([round(1.2*g*V,4) for V in (1.8e-3,4e-3)],[round(1e3*0.012*g*V,2) for V in (1.8e-3,4e-3)],['%.2g'%(s*s*0.04/(2*8.854e-12)) for s in (1e-7,1e-6,1e-5)],round(1e3*8.854e-12*1e-3*1e4/2e-6,3),round(1e3*100*1.30e-6,2));t=np.arange(200000)*(0.1/200000);v=np.cumsum(z_egg_zdd(t))*(0.1/200000);v-=v.mean();u=abs(v).max();print(round(u,2),round(1e3*0.5*1.2*1e-3*u*u,3))"` |
+| Auftrieb auf das Materialvolumen und konventioneller Wägewert (Konvention a; M = 0,650 kg, einheitlich Stahl 8000 / Aluminium 2700 / Kunststoff 1200 kg/m³): V_Mat = 0,081 / 0,241 / 0,542 l, ρ_L·g·V_Mat = 0,96 / 2,83 / 6,38 mN, bei 1 % Dichteänderung 0,01 / 0,028 / 0,064 mN (offenes oder belüftetes Gehäuse); konventioneller minus wahrer Wägewert 0 / −0,19 / −0,55 g | §3, P0.2; A1, A9.2, Tab. C | `python3 -c "g=9.81;M=0.65;[print(r,round(1e3*M/r,3),round(1e3*1.2*g*M/r,2),round(1e3*0.012*g*M/r,3),round(1e3*M*(1.2/8000-1.2/r),2)) for r in (8000,2700,1200)]"` |
 | Zelllagefehler (Statik der Dreipunktlagerung, Zellradius 0,1 m, G0, Triphasik-Punkt, Rekonstruktion mit nominaler Lage): 1 mm radial −0,662 % am eigenen Modul, −0,165 % und ±0,165° an den Nachbarn; 1 mm tangential 0,29 % und 0,29° an den Nachbarn; 0,1 mm radial 0,0165° (linear) | A2.7, Tab. F | `python3 -c "import numpy as np;a=np.radians([90,210,330]);C=0.1*np.c_[np.cos(a),np.sin(a)];S=lambda p,Q:np.linalg.solve(np.vstack([np.ones(3),Q.T]),np.r_[1,p]);e=np.exp(-1j*np.radians([0,120,240]));[print(np.round(100*(abs(r)-1),3),np.round(-np.degrees(np.angle(r)),3)) for d in (np.r_[np.cos(a[1]),np.sin(a[1])],np.r_[-np.sin(a[1]),np.cos(a[1])]) for Q in [C+np.outer([0,1,0],1e-3*d)] for r in [np.c_[[S(C[j],Q) for j in range(3)]].T@e/e]];print(round(0.165*0.1,4))"` |
 | Gegenkomponente am Triphasik-Punkt: \|R₋₁\|/\|R₊₁\| = 3,3·10⁻³ bei 1 % Amplitude, 5,8·10⁻⁴ bei 0,1° Phase eines Moduls, gleich \|ε\|/3 | §8.10; A2.7, Tab. F | `python3 -c "import numpy as np;th=np.radians([90,210,330]);q=lambda F:(lambda a,b:min(a,b)/max(a,b))(abs((F*np.exp(-1j*th)).sum()),abs((F*np.exp(1j*th)).sum()));e=np.exp(-1j*np.radians([0,120,240]));print('%.1e'%q(e*[1.01,1,1]),'%.1e'%q(e*[np.exp(-1j*np.radians(0.1)),1,1]),'%.1e'%(0.01/3),'%.1e'%(np.radians(0.1)/3))"` |
 | Aufwand der Identifizierbarkeitsläufe: (N_K + N_I + 8)/(N_K + 5) = 1,231 / 1,308 (N_K = 21; N_I = 3 / 5) und 1,214 / 1,286 (N_K = 23); Paarläufe zusätzlich 1,094 bzw. 1,088; Residuenverhältnis bei s = 0,5: 1 : 0,5 : 0,25; Abstand der Klassen p = 1 und 2: s·(1 − s) = 0,25 (s = 0,5), s·(s − 1) = 0,56 (s = 1,4) | §5.5, §6, §12; A2.6, Tab. F | `python3 -c "print([round((k+i+8)/(k+5),3) for k in (21,23) for i in (3,5)], round((21+3+3+8)/(21+3+8),3), round((23+3+3+8)/(23+3+8),3), [0.5**p for p in (0,1,2)], 0.5*(1-0.5), round(1.4*(1.4-1),2))"` |

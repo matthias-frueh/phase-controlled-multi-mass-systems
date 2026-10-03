@@ -1,7 +1,7 @@
 # PCMMS — Präregistrierung v2 (Entwurf)
 
 **Matthias Früh · ORCID 0009-0005-9984-4207**
-Stand: 25. September 2026, überarbeitet 2. Oktober 2026 (§1: Einordnung der Vorzeichenregel; Entwurf 10/2026: Entscheidungsregeln, Identifizierbarkeit und Kontrollen, Anhang A0) und 3. Oktober 2026 (§5.1, §12: Verweise auf das Exposé) · Teil A, Entwurf — nicht eingefroren, nicht registriert
+Stand: 25. September 2026, überarbeitet 2. Oktober 2026 (§1: Einordnung der Vorzeichenregel; Entwurf 10/2026: Entscheidungsregeln, Identifizierbarkeit und Kontrollen, Anhang A0) und 3. Oktober 2026 (§5.1, §12: Verweise auf das Exposé; §3, §4, §5.2, §12: Auftrieb und Bestimmung von M) · Teil A, Entwurf — nicht eingefroren, nicht registriert
 
 Teil A besteht aus diesem Hauptdokument und dem gleichrangigen *Technischen Anhang*
 (`praeregistrierung_v2_anhang.md`, im Folgenden „Anhang“). Es gibt keine Messdaten. Jede Zahl ist ein
@@ -17,8 +17,8 @@ solange er auf allen Auflagepunkten Kontakt hält. Primär geprüft werden an 21
 der Spitze der Zeltkurve (H2), also des Maximums von F_min (Minimum von N über einen Zyklus) entlang des
 Schnitts; bei identischen Modulen hat F_min am Triphasik-Punkt (120°, 240°) einen Knick mit relativem
 Maximum. Sekundär geprüft werden die Superposition je Wägezelle (H1Z), ein Kontaktmodell mit einem
-Freiheitsgrad an den Einzelmodulläufen (H3) und das Vorzeichen der Schiefe (H4). ⟨N⟩, das scheinbare
-Gewicht des Körpers, ist Kontrollgröße (H0), kein Ergebnis. Die Vorhersagen entstehen aus Messungen an der
+Freiheitsgrad an den Einzelmodulläufen (H3) und das Vorzeichen der Schiefe (H4). ⟨N⟩, die statische
+Last des ruhenden Körpers (Gewicht abzüglich Luftauftrieb), ist Kontrollgröße (H0), kein Ergebnis. Die Vorhersagen entstehen aus Messungen an der
 Apparatur selbst (Phase 0) und werden vor Phase 1 in Teil B registriert; eine gleich gebildete zweite
 Vorhersage aus Kontrollläufen der Phase 1 dient als Driftkontrolle. H1 wird mit einem Äquivalenztest und
 einem Mindesteffekttest entschieden; die Ausgänge „äquivalent“, „relevant abweichend“ und „nicht
@@ -100,7 +100,8 @@ bleibt:
    die Einzelmodulantwort aus unabhängig gemessenen Parametern voraus? (H3)
 4. Hat die Schiefe dort, wo die Superposition ein deutliches Vorzeichen vorhersagt, dieses Vorzeichen? (H4)
 
-Dabei bleibt ⟨N⟩ innerhalb der Kontrollschwelle gleich der statischen Last, dem scheinbaren Gewicht (H0).
+Dabei weicht ⟨N⟩ von der statischen Last, gemessen in den Referenzläufen, um nicht mehr als die
+Kontrollschwelle ab (H0).
 
 **Grundlage.** Im Kontaktast ist das Modell linear; jede Harmonische ist die Summe der
 Einzelmodulantworten, N_k = Σⱼ N_k⁽ʲ⁾·e^{−ikφⱼ} (φ₁ = 0), ohne K, C oder μ zu kennen (Anhang A2.1). Dass
@@ -128,10 +129,14 @@ Alle konfirmatorischen Hypothesen beziehen sich auf den Arbeitspunkt f (§5.3) u
 Konfigurationen (§9.1); Sollphasen sind Profilphasen; α = 0,05 je Familie. Die Entscheidungsregeln stehen
 vollständig in §9.3.
 
-**H0 — Nullkontrolle.** Für jeden Lauf gilt |Δ⟨N⟩| ≤ ε_ctrl (§8.8). ⟨N⟩ ist das scheinbare Gewicht:
-M·g abzüglich des Auftriebs ρ_L·g·V des Körpervolumens V in Luft der Dichte ρ_L, dazu gleichbleibende
-äußere Kräfte, etwa elektrostatische. Gleichbleibende Anteile fallen in Δ⟨N⟩ heraus; geprüft wird ihre
-Änderung gegen die Referenzläufe (Tabelle C). Ein Verstoß ist ein Apparaturfehler oder eine Transiente, nie
+**H0 — Nullkontrolle.** Für jeden Lauf gilt |Δ⟨N⟩| ≤ ε_ctrl (§8.8). ⟨N⟩ ist die statische Last
+des ruhenden Körpers: das Gewicht von Bauteilen und Innenluft abzüglich des Auftriebs in der Außenluft,
+dazu gleichbleibende äußere Kräfte, etwa elektrostatische (A1). Wie sie zu M·g steht, hängt von der
+Bestimmung von M ab (offen, §12). Mit M aus der statischen Zelllast (Konvention b, M = Σ_c F_c,stat/g aus
+P0.2) ist sie M·g; Auftrieb und Innenluft sind darin enthalten und werden nicht noch einmal abgezogen. Mit
+M als Summe der wahren Bauteilmassen (Konvention a) ist sie M·g − ρ_L·g·V_Mat + (ρ_innen − ρ_L)·g·V_innen.
+Gleichbleibende Anteile fallen in Δ⟨N⟩ heraus; geprüft wird ihre Änderung gegen die Referenzläufe, etwa
+die des Auftriebs mit der Luftdichte (Tabelle C). Ein Verstoß ist ein Apparaturfehler oder eine Transiente, nie
 ein Effekt; er macht den Lauf ungültig (G1) und kann den Messbetrieb stoppen (S1).
 
 **H1 — Superposition (primär).** An jedem der 21 Schnittpunkte stimmen F_min − ⟨N⟩ sowie Real- und
@@ -197,7 +202,8 @@ Entscheidungsrelevant; die vollständige Tabelle steht im Anhang A1.
 | Mittelkurve | phasensynchrones Mittel der vollständigen Zyklen im Auswertefenster eines Laufs, N_θ = 2000 Stützstellen, Harmonische k ≤ k_max |
 | Konfigurationsmittelkurve | Mittel der Mittelkurven aller gültigen Läufe einer Konfiguration, gleich gewichtet |
 | N_k | (2/N_θ)·Σₙ N̄(θₙ)·e^{−ikθₙ}, k ≥ 1 |
-| ⟨N⟩, N_s | Zeitmittel über die ganzen Zyklen des Auswertefensters, unter H0 gleich dem scheinbaren Gewicht (§3); N_s: ⟨N⟩ in Referenzläufen |
+| ⟨N⟩, N_s | Zeitmittel über die ganzen Zyklen des Auswertefensters, unter H0 gleich der statischen Last (§3, A1); N_s: ⟨N⟩ in Referenzläufen |
+| statische Last, M, m_L | statische Last: Summe der Zellanzeigen Σ_c F_c,stat bei ruhendem Körper mit geparkten Modulen gegen den Nullpunkt bei abgehobenem Körper; M nach Konvention (a) als Summe der wahren Bauteilmassen oder (b) als Σ_c F_c,stat/g aus P0.2 (offen, §12); m_L: mitbewegte Luft ohne Gewicht, bei (a) ρ_L·V_innen + m_hyd, bei (b) ρ_L·V_außen + m_hyd (A1) |
 | F_min, F_max, γ₁ | Minimum, Maximum, Schiefe m₃/m₂^{3/2} der bandbegrenzten Konfigurationsmittelkurve; verglichen wird F_min − ⟨N⟩; zyklusweise Minima und Minima ungefilterter Kurven sind nicht konfirmatorisch (E4) |
 | Δ⟨N⟩, σ̂_ref | Δ⟨N⟩ = ⟨N⟩_Lauf − N_s,int, mit N_s,int linear interpoliert zwischen den beiden einschließenden Referenzläufen. σ̂_ref: Standardabweichung derselben Statistik für mindestens 42 Referenzläufe der Phase 0, jeder gegen seine Nachbarn (leave-one-out); σ̂_ref,c je Zelle. ε_ctrl: §8.8 |
 | Einzelzell-Liftoff | ein Rohwert N_c < F_LO,c = Nullpunkt + 5·σ_c (σ_c: Rauschen der Zelle c in Referenzläufen) im ganzen Lauf einschließlich Rampe und Einschwingzeit |
@@ -245,7 +251,7 @@ nach dem Datenschluss wiederholt. Verfahren im Einzelnen: A9.2.
 | Nr. | Schritt | Ergebnis (→ Teil B) |
 |---|---|---|
 | P0.1 | statische Kalibrierung (Orientierung DKD-R 3-3), Nullpunkt, Laststellen (mindestens fünf, bekannte Lage), Querkraft, Elektronik | Kennlinien, Unsicherheiten; Zelllagen und relative Zellverstärkungen (für E3); Laststelle, Querkraft je ≤ 0,1·Δ_q; Superpositionsfehler der Elektronik ≤ 0,3·u_c,erw |
-| P0.2 | Wägung | M, m_j, μ |
+| P0.2 | Wägung vor der Endmontage: m_j durch Bauteilwägung; M nach der offenen Konvention (§12, A9.2) | M, m_j, μ; bei Konvention (b) F_c,stat mit Luftdruck, Lufttemperatur und Feuchte |
 | P0.3 | D1; D2ⱼ je Antrieb auf dem 1-Hz-Raster; D2_K an den Punkten I; Kabelschlaufe in zwei Lagen; gegebenenfalls Spaltvariation | Störsignaturen; Wechselwirkung der Antriebe in D2_K ≤ 0,3·u_c,erw; statischer Nebenschluss ≤ 0,1·Δ_q; Umkehrspanne ≤ 0,3·u_c,erw |
 | — | **Endmontage** | — |
 | P0.4 | Übertragungsfunktion je Zelle und Summe, zwei Amplituden, exzentrische Anregung (Orientierung DKD-R 3-10 Blatt 1 und 2); Betriebslastprüfung: nach P0.9 Sinusanregung bei f, 2f, 3f über den Modulpositionen in Höhe der Betriebslast je Zelle (unten) | K, C, f_n, ζ; Moden f_m, ζ_m; G_F(ω); Linearität; Schein-Oberwellen ≤ 0,3·u_c,erw (Klirrkriterium) |
@@ -460,8 +466,8 @@ und das des registrierten Codes wird daneben berichtet. Sonst bleibt der registr
 ## 7 · Artefakte und Kontrollen
 
 Die Regel aus v1 §6 gilt weiter: Was nicht durch Referenz, Dummy und Wiederholung überlebt, wird
-verworfen. Alle Quellen mit ihrer Kontrolle: Anhang, Tabelle C. Ergänzt sind Luft am Körper, Auftrieb,
-Elektrostatik, Kabelkräfte, Aktorkopplung, lastabhängiger Phasenversatz und gemeinsame Versorgung, je mit
+verworfen. Alle Quellen mit ihrer Kontrolle: Anhang, Tabelle C. Ergänzt sind Luft am Körper,
+Änderungen des Auftriebs mit der Luftdichte, Elektrostatik, Kabelkräfte, Aktorkopplung, lastabhängiger Phasenversatz und gemeinsame Versorgung, je mit
 Größenordnung (Modellabschätzung), Signatur und Kontrolle. Lineare, zeitinvariante Einflüsse erzeugen keine
 H1-Signatur, gleich wie groß sie sind (A2.1); sie betreffen H0, H3 und absolute Größen. Eine H1-Signatur
 entsteht nur durch Nichtlinearität, durch eine Änderung zwischen Einzelmodul- und Kombinationsläufen oder
@@ -806,7 +812,7 @@ berichtet. Das Protokoll wird vollständig mit den Ergebnissen veröffentlicht.
 ## 11 · Abgrenzung
 
 Kein reaktionsloser Antrieb, keine Gewichtsreduktion, keine Gravitationsmodifikation, keine Verschiebung
-des Zeitmittels, keine neue Physik; ⟨N⟩ gleich dem scheinbaren Gewicht (§3, H0) ist Erhaltungssatz, jede
+des Zeitmittels, keine neue Physik; ⟨N⟩ gleich der statischen Last (§3, H0) ist Erhaltungssatz, jede
 Abweichung ein Apparaturfehler. Kein Bezug zu postulierten neuen Antriebsmechanismen (v1: EM-Drive,
 Woodward-Effekt). Simulationszahlen sind keine Vorhersage für den Aufbau. Linie B ist nicht Gegenstand.
 
@@ -859,6 +865,7 @@ gewählte Fassung und ihr Grund kommen in A0.
 | Schwelle des Klirrkriteriums und von P0.12 (§5.2) | (a) 0,3·u_c,erw (Vorschlag) wie die übrigen nichtlinearen Schwellen; Anregung bzw. Referenzaufnehmer müssen Oberwellen dieser Größe bei Betriebslast auflösen. (b) 0,3·c·u_c,erw: um den Faktor c (etwa 4) weniger streng; eine Kettennichtlinearität bis etwa 0,3 der Nachweisgrenze bliebe zulässig |
 | Grenzen von H1Z (§8.5) | (a) Δ_c,q = Δ_q/3 und Δ_c,rel,q = Δ_rel,q/3 (Vorschlag): unabhängig von der Geometrie; je Zelle strenger als H1 an der Summe, H1Z wird häufiger nicht entscheidbar. Der Ausgang „H1 bestätigt, H1Z falsifiziert“ ist dann mehrdeutig: Er kann eine Abweichung bedeuten, die sich in der Summe aufhebt, oder eine, die in einer Zelle sitzt und an der Summe innerhalb von Δ_q bleibt (§9.4). (b) 0,25·D_c,q aus der Zellstruktur: bei Modulen über den Zellen (G0) nahezu null und dann nicht anwendbar. (c) H1Z nur beschreibend, ohne Äquivalenztest: einfacher, aber ohne Bestätigung |
 | Schwellen von E3 (§8.10) | (a) fest 0,1° und q_tol = 5,8·10⁻⁴ (Vorschlag), mit Rückfall auf eine nur beschreibende Auswertung, wenn das Kriterium von A9.11 verfehlt wird: Die Schwellen haben eine feste Bedeutung (Anforderung an die Profilphase), verlangen aber im Beispiel A4 Zellharmonische auf etwa 1 mN bzw. einige Zehntel mN und u(Δδⱼ) deutlich unter 0,1°; nahe der Auslegungsgrenze von u_c ist E3 fast immer unbestimmt. (b) Schwellen als Vielfaches der erwarteten Unsicherheit [Teil B], mit einem Faktor, der vor dem Einfrieren in der Kalibriersimulation festgelegt wird: E3 bleibt bei jeder Präzision entscheidbar, die Schwelle hat aber keine feste Bedeutung und kann über der Wirkung liegen, die H2 betrifft. (c) E3 nur beschreibend: Werte mit Unsicherheit, ohne Aussage „auffällig“ oder „unauffällig“ |
+| Bestimmung von M (§3 H0, P0.2; A1, A9.2) | (a) Summe der wahren Bauteilmassen ohne Luft (konventionelle Wägewerte mit der Werkstoffdichte umgerechnet): statische Last ≈ M·g − ρ_L·g·V_Mat + (ρ_innen − ρ_L)·g·V_innen, m_L = ρ_L·V_innen + m_hyd; M ist vom Luftzustand und von statischen Nebenkräften unabhängig, braucht aber Volumina und Dichten der Teile. (b) M = Σ_c F_c,stat/g gegen den Nullpunkt bei abgehobenem Körper: statische Last = M·g, Auftrieb und Innenluft enthalten, kein weiterer Abzug, m_L = ρ_L·V_außen + m_hyd; dieselben Zellen und dieselbe Kalibrierung wie ⟨N⟩, statische Nebenkräfte (Kabel, Ladung) gehen aber in M ein. Zu (b) gehören die Festlegung von g (örtlich bestimmt oder Kalibrierung in Masseeinheiten), der Bezugszustand (P0.2) und gegebenenfalls eine Gesamtwägung des geschlossenen Körpers als beschreibende Kontrolle. Kein Hypothesentest benutzt den Absolutwert M·g; H0 prüft Δ⟨N⟩ |
 
 **Offene Hardwareentscheidungen (offen – Entscheidung des Autors).** Dieser Entwurf legt sie nicht fest.
 Ihre Folgen für die Entscheidungsregeln und für Identifizierbarkeitsläufe und Kontrollen:
@@ -872,6 +879,7 @@ Ihre Folgen für die Entscheidungsregeln und für Identifizierbarkeitsläufe und
 | Hardwarestand Linearaktor | Frühere Fassungen des Arbeitspapiers (bis zur PDF-Fassung v2.4) nannten einen vorhandenen programmierbaren Linearaktor; der heutige Quelltext führt den Hardwarestand als offen, der Bestand belegt ihn nicht. Vorhanden oder nicht vorhanden | wie Antrieb | entscheidet, ob die Option programmierbarer Aktor ohne Beschaffung besteht, und damit über zweite Amplitude und P0.12 ohne zweiten Nockensatz |
 | Lage von Zellen und Modulen | Module über den Zellen (G0) oder um 60° gedreht auf halbem Zellradius (G60h) | bestimmt Zellkräfte (§5.3 a) und Superposition je Zelle; die Regeln für H1 an der Summe bleiben gleich | E3 (A2.7): bei G0 misst jede Zelle ein Modul, eine Zellverstärkung ist von der Skala des Moduls darüber nur über P0.1 zu trennen; bei G60h mit k = 1, 2 trennbar, bei unbekannter Zelllage aber mit deren radialer Lage vermischt. H1Z: bei G0 wirkt eine Zellkennlinie weder auf H1 noch auf H1Z; die Grenzen von H1Z (oben) hängen an der Lage |
 | Ort von Phase 0 (institutionelle Anbindung) | Messplatz und Kalibrierung bei einer Einrichtung; oder eigener Messplatz mit externer Kalibrierung | bestimmt T_verfügbar und damit n_max (§5.3 c) | bestimmt, ob die zusätzliche Zeit der Identifizierbarkeitsläufe verfügbar ist (§6) |
+| Gehäuse des Körpers | dicht verschlossen, belüftet oder offen | bei Konvention (a) bestimmt es, ob Innenluft als Auftriebsterm und als mitbewegte Masse zählt (A1); 1 % Dichteänderung ändert die statische Last um etwa 0,2–0,5 mN (dicht) bzw. 0,01–0,06 mN (offen oder belüftet; Tabelle C) | Luftanteil der mitbewegten Masse m_L (Tabelle C); belüftet zusätzlich ein Temperaturgang von etwa 0,07–0,16 mN je K Unterschied innen–außen |
 
 **Weitere Klärungen:** mechanische Ausführung von D2 (Abkoppeln und Fixieren der Massen, auch für D2_K) und
 der Parkposition; Lage von Zellen und Modulen (bestimmt die Zellkräfte, A2.5, und E3, A2.7); genauer
