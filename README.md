@@ -48,11 +48,12 @@ solche Verschiebung; sie wurde als Kontaktmodell-Artefakt erkannt, zurückgezoge
 | [`docs/neuheitsgrad.md`](docs/neuheitsgrad.md) | Was daran nicht neu ist — und was übrig bleibt |
 | [`docs/literaturabgleich_2026-09-12.md`](docs/literaturabgleich_2026-09-12.md) | Abgleich mit der Ratchet-, Tribologie- und Kontaktdynamik-Literatur, 12 verifizierte Referenzen, davon 10 mit DOI |
 | [`docs/archiv_vermerk_kernhypothese_v3.md`](docs/archiv_vermerk_kernhypothese_v3.md) | Dokumentierter Rückzug der früheren Hypothese |
-| [`code/`](code/) | Simulations-Engine ([`pcmms_v3a_phasen_sweep.py`](code/pcmms_v3a_phasen_sweep.py)), 2°-Feinsweep ([`finesweep.py`](code/finesweep.py)), analytische Lösung für den liftoff-freien Bereich ([`linear_solver.py`](code/linear_solver.py)) und Abbildungen ([`plot_figures.py`](code/plot_figures.py)) |
+| [`code/`](code/) | Simulations-Engine ([`pcmms_v3a_phasen_sweep.py`](code/pcmms_v3a_phasen_sweep.py)), 2°-Feinsweep ([`finesweep.py`](code/finesweep.py)), analytische Lösung für den liftoff-freien Bereich ([`linear_solver.py`](code/linear_solver.py)), Auslegungswerkzeug für den Arbeitspunkt mit Zellkräften ([`auslegung.py`](code/auslegung.py); Präregistrierung v2 §12, Werkzeug 2), ereignisgenauer Löser mit Einzugsprüfung für Liftoff und Hüpfzustände ([`ereignisloeser.py`](code/ereignisloeser.py)), Attraktorkarten des V1-Kandidaten ([`einzugsgebiete.py`](code/einzugsgebiete.py); Ergebnisse in [`docs/einzugsgebiete_v1_kandidat.md`](docs/einzugsgebiete_v1_kandidat.md)) und Abbildungen ([`plot_figures.py`](code/plot_figures.py)); Tests in [`tests/`](tests/) |
 | [`docs/figures/`](docs/figures/) | Abbildungen aus den Simulationsdaten, je in heller und dunkler Fassung |
-| [`data/`](data/) | Simulationsausgaben: 19×19-Phasensweep und 2°-Feinsweep ([`data/README.md`](data/README.md)) |
+| [`data/`](data/) | Simulationsausgaben: 19×19-Phasensweep, 2°-Feinsweep und Attraktorkarten des V1-Kandidaten ([`data/README.md`](data/README.md)) |
 
 Die Präregistrierung v2 für die Messkampagne liegt als [Entwurf](docs/praeregistrierung_v2_entwurf.md) vor (nicht eingefroren, nicht registriert).
+Die Abnahme der Werkzeuge für Auslegung und ereignisgenaue Rechnung dokumentiert [`docs/abnahme_ap02_ap03.md`](docs/abnahme_ap02_ap03.md).
 
 Das Arbeitspapier v2.4 liegt mit Quellen und Nachrechnung in [`docs/arbeitspapier/`](docs/arbeitspapier/), das
 Symbol- und Formelverzeichnis v2.7 in [`docs/formelverzeichnis/`](docs/formelverzeichnis/).
@@ -154,6 +155,9 @@ python3 ../code/finesweep.py --validate      # prüft die Feinsweep-Engine gegen
 python3 ../code/pcmms_v3a_phasen_sweep.py    # voller 19×19-Sweep, schreibt nach ~/pcmms_outputs_v3a_sweep
 python3 ../code/linear_solver.py --validate  # analytische Lösung gegen alle drei Datensätze (ca. 5 s)
 python3 ../code/plot_figures.py              # Abbildungen nach docs/figures/ (ca. 40 s)
+python3 ../code/auslegung.py --candidate     # Auslegung des V1-Kandidaten: Laufarten, Zellreserven, Prüfung §5.3 (ca. 2 s)
+python3 ../code/ereignisloeser.py --point 35 116 --orbit   # ereignisgenau: Satelliteninsel, beide Zustände (ca. 5 s)
+cd .. && python3 -m pytest tests -q          # Testsuite (ca. 40 s; lange Tests mit PCMMS_SLOW=1)
 ```
 
 Der vollständige 19×19-Sweep braucht je nach Rechner 30–60 Minuten; das Skript ist checkpoint-fest.

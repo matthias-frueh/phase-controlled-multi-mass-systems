@@ -69,3 +69,23 @@ die Zeigersumme R. Das erzeugende Skript (Sinus-Variante der Engine) ist noch ni
 Die Sinusamplitude ist nicht mit abgelegt; rekonstruiert aus den Daten beträgt sie (RTOP + RBOT)/2 ≈ 3,85 mm,
 also derselbe Hub von 7,69 mm Spitze-Spitze wie beim Egg-Profil. Mit dieser Amplitude reproduziert die Engine
 die liftoff-freien Punkte auf 10⁻⁵ N.
+
+### `einzugsgebiete_v1_kandidat*.csv` — Attraktorkarten des V1-Kandidaten (ereignisgenau)
+Andere Parameter als oben: V1-Kandidat aus [`../code/auslegung.py`](../code/auslegung.py) (Restmasse 0,350 kg,
+drei Module à 0,100 kg, M = 0,650 kg, Egg-Profil THOLD = 0,65, Hub 8 mm Spitze-Spitze, f = 10 Hz,
+K = 1,5·10⁶ N/m, ζ = 0,05, Kelvin-Voigt), gerechnet mit dem ereignisgenauen Löser
+[`../code/ereignisloeser.py`](../code/ereignisloeser.py) über [`../code/einzugsgebiete.py`](../code/einzugsgebiete.py).
+Jede Zeile der Rasterdateien ist ein Wurf (Geschwindigkeitsstoß Δv zur Wurfphase t₀/T auf den Kontaktast) mit allen
+Konfigurationsspalten und dem Endzustand (`attraktor`, `periode`, `lambda_pct`, `F_max_N`, `stossspitze_N`, Kraftspitzen
+im ganzen Lauf). Methode, Ergebnisse und Grenzen: [`../docs/einzugsgebiete_v1_kandidat.md`](../docs/einzugsgebiete_v1_kandidat.md).
+
+| Dateien | Inhalt |
+|---|---|
+| `einzugsgebiete_v1_kandidat.csv` | Hauptraster: 27 Laufarten × 16 Wurfphasen × Δv = −1 … +1 m/s (Schritt 0,05), 17 712 Zellen |
+| `…_grenzen.csv`, `…_intervalle.csv` | Zustandswechsel per Bisektion (≤ 0,005 m/s); Δv-Intervalle je Laufart, Wurfphase und Attraktor |
+| `…_attraktoren.csv`, `…_kennwerte.csv` | gefundene Attraktoren je Laufart; Kennwerte (Anteile, untere Einhüllende des Hüpfens, Rückkehr-Inseln) |
+| `…_zeta*.csv` | ζ = 0,02 / 0,10 / 0,20 für sechs Laufarten, 8 Wurfphasen, Schritt 0,1 m/s |
+| `…_hc*.csv` | Hunt-Crossley-Gegenstück (n = 1,5) für drei Laufarten, Δv = +0,1 … +1,0 m/s |
+| `…_fein*.csv` | Feinprüfung Δv-Schritt 0,01 m/s für L1, drei Schnittpunkte und einen Piloten, 8 Wurfphasen |
+
+Das Einzugsgebiet ist nicht monoton; die Dateien `…_intervalle.csv` geben deshalb Intervalle und keine Schwelle an.

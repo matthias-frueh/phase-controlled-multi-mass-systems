@@ -1,7 +1,7 @@
 # PCMMS — Präregistrierung v2 (Entwurf)
 
 **Matthias Früh · ORCID 0009-0005-9984-4207**
-Stand: 25. September 2026 · Teil A, Entwurf — nicht eingefroren, nicht registriert
+Stand: 25. September 2026, überarbeitet 2. Oktober 2026 (§1: Einordnung der Vorzeichenregel) · Teil A, Entwurf — nicht eingefroren, nicht registriert
 
 Teil A besteht aus diesem Hauptdokument und dem gleichrangigen *Technischen Anhang*
 (`praeregistrierung_v2_anhang.md`, im Folgenden „Anhang“). Es gibt keine Messdaten. Jede Zahl ist ein
@@ -66,11 +66,14 @@ abhängen, die erst Phase 0 misst. Die Bezeichnung H1 ist neu belegt. Alle Ände
 **Vorhersagen des Exposés.** Von der Zeltkurve wird die Lage der Spitze registriert (H2), vorhergesagt aus
 Messungen an der Apparatur. Höhe und Steigungen der Simulation (5,3304 N; 2°-Sekanten 118° → 120° bzw.
 122° → 120°: 0,212 bzw. 0,195 N/°) werden nicht registriert, weil sie für K = 10⁴ N/m gelten, einen
-Resonanzfall (Anhang A3). Die Vorzeichenregel der Schiefe ist auf den geprüften Linien nicht widerlegt:
-synchron und bei Zweiergruppen-Phasung positiv, negativ nur bei Dephasierung (A3). Das Vorzeichen an einem
-einzelnen dephasierten Punkt hängt aber vom Kontakt ab (Triphasik-Punkt: γ₁ = +0,067 bei K = 10⁴ N/m,
-−0,450 bei starrer Auflage); statt der Regel registriert v2 deshalb H4, geprüft gegen die
-Superpositionsvorhersage.
+Resonanzfall (Anhang A3). Die frühere allgemeine Vorzeichenregel der Schiefe — negative Schiefe nur bei
+Dephasierung ohne gleichphasiges Modulpaar — ist mit Arbeitspapier v2.4 als Aussage über den Mechanismus
+zurückgezogen. Schon ein einzelnes Modul kann bei geänderter Kontaktübertragung im Dauerkontakt
+linksschief werden. Die positiven Werte auf den geprüften Linien des Referenzrasters (A3) bleiben
+beschränkte Simulationsbefunde und begründen keine allgemeine Regel. Auch das Vorzeichen an einem
+einzelnen dephasierten Punkt hängt vom Kontakt ab (Triphasik-Punkt: γ₁ = +0,067 bei K = 10⁴ N/m,
+−0,450 bei starrer Auflage). Statt der zurückgezogenen Regel sieht v2 weiterhin H4 vor: das Vorzeichen
+wird gegen die Superpositionsvorhersage aus den gemessenen Einzelmodulantworten geprüft.
 
 **Schwellen.** ε_ctrl wird hier mit einer Definition von σ̂_ref festgelegt (§4, §8.8). Die Einordnung (§4)
 nannte die Form 3·σ̂_ref; der Literaturabgleich (§4.2, T3) ordnete 3·σ̂_ref je Funktional ε_phys zu und nannte
