@@ -39,17 +39,53 @@ Integration:
   Übergänge: Schaltfunktion auf einem Raster h = min(T/10000, 2π/(300·ω_n)) abgetastet, erster Vorzeichenwechsel
   mit brentq (xtol 1e-15 s) auf der geschlossenen bzw. dichten Lösung – auch kurze Ausflüge innerhalb eines
   Integratorschritts.
-Ausgaben je Periode: ∫(N − M·g)^p dt (p = 1…3, Gauß-Legendre mit 8 Knoten je ≤ 100 µs) → exaktes Zeitmittel
-und Schiefe; exakte Flugzeit → λ; F_min, F_max (Rasterextremum mit Brent nachgeschärft); Aufsetzer mit Zeit,
-Aufprall- und Ablösegeschwindigkeit und Stoßspitze; Poincaré-Schnitt (x, ẋ, v_S) zu Periodenbeginn; Randterm
-R = M·Δv_S/T_w mit ⟨N⟩ = M·g + R exakt. Parallel Stichproben im Raster der Engine (Δt = T/2000) für den
-direkten Vergleich mit den CSV-Daten; Zustand und Kraft zu beliebigen Zeiten mit abtasten(). Darauf aufbauend:
+Ausgaben je Periode: ∫(N − M·g)^p dt (p = 1…3, Gauß-Legendre mit 8 Knoten je ≤ 100 µs) → Zeitmittel und
+Schiefe ohne Abtastfehler; ereignisgenaue Flugzeit → λ; F_min, F_max (Rasterextremum mit Brent nachgeschärft);
+Aufsetzer mit Zeit, Aufprall- und Ablösegeschwindigkeit und Stoßspitze; Poincaré-Schnitt (x, ẋ, v_S) zu
+Periodenbeginn; Randterm R = M·Δv_S/T_w. Die Identität ⟨N⟩ = M·g + R (Impulssatz) gilt exakt; numerisch bleibt
+der Quadraturrest: Kelvin-Voigt geschlossen ≤ 1e-12 N, über solve_ivp ≤ 1e-10 N, Hunt-Crossley durch δⁿ am
+Kontaktrand begrenzt (≈ 5e-7 N mit 8 Knoten, für die Kenngrößen ohne Belang). Parallel Stichproben im Raster der
+Engine (Δt = T/2000) für den direkten Vergleich mit den CSV-Daten; Zustand und Kraft zu beliebigen Zeiten mit
+abtasten(). Darauf aufbauend:
 Periodenerkennung P1/Pn/irregulär, Newton-Schießverfahren auf die p-fache Periodenabbildung,
 Floquet-Multiplikatoren (zentrale Differenzen; die Jacobi-Matrix enthält die Stoß- und Ablösezeitpunkte,
 anders als die der RK4-Abbildung), Einzugsprüfung: Start auf dem Kontaktast (oder in der statischen Ruhelage)
 zur Wurfphase t₀, Geschwindigkeitsstoß Δv (Stoßimpuls M·Δv), Endzustand Kontaktast oder Hüpfen, kritische
 Wurfgeschwindigkeit (Raster, dann Bisektion), Stoßspitzen; Anlauf über eine Frequenzrampe
 ρ(t) = (1 − cos(πt/T_r))/2 mit Profilzeit Θ = ∫ρ dt.
+
+Numerische Kontrolle (konvergenz(), --konvergenz; ersetzt die für Festschritt-Integratoren gedachte Δt/2-Kontrolle):
+Der Löser hat keinen Zeitschritt. Seine numerischen Parameter sind das Abtastraster h der Schaltfunktion (nur die
+Erkennung; die Zeitpunkte setzt brentq auf der geschlossenen bzw. dichten Lösung, bei solve_ivp schon dessen
+Ereignissuche), rtol von solve_ivp, die Gauß-Legendre-Quadratur der Periodenintegrale und der Differenzenschritt
+der Floquet-Matrix. Die Studie verfeinert sie an Hüpforbits (V1 synchron H1 beider Gesetze, H2, L1, Insel,
+Referenz-P2, Hunt-Crossley-Dreifachstoß bei (120°, 240°)), Kontaktorbits, dem Einzelstoß (gegen die geschlossenen
+Formeln in stoss_geschlossen) und einem Wurf an der Einzugsgrenze (V1 synchron, t₀ = 0); Kriterien in
+KONV_SCHRANKE und KONV_REST (Zeitpunkte 1e-9 s, Kräfte 1e-6 relativ, gleiche Ereigniszahl, gleicher Endzustand,
+Rest 1e-12 / 1e-10 / 1e-6 N). Die Absicht der Δt/2-Kontrolle prüft rk4_festschritt() (Schema der Engine,
+Δt = T/2000 … T/16000) an denselben Fällen. Befund: Geschlossen ändern h × 2 … 1/8 Zeitpunkte um ≤ 4e-16 s und
+Kräfte um ≤ 1e-14 relativ. solve_ivp konvergiert für Kelvin-Voigt etwa mit Ordnung 1 in rtol gegen die geschlossene
+Lösung (rtol 1e-11: ≤ 7e-13 s, ≤ 2e-11 relativ). Für Hunt-Crossley fehlt eine geschlossene Lösung; Referenz ist
+rtol 1e-13, weil DOP853 in rtol nicht monoton konvergiert (rtol 1e-12 ist nicht genauer als 1e-11). Die Änderung
+bei rtol 1e-11 beträgt ≤ 5e-12 s bzw. 2e-10 relativ; der zweite Integrationsweg der Tests bestätigt sie als Fehler
+(≤ 6e-12 s, 2e-10). √|det J| trifft den Liouville-Wert exp(−0,75·α·g·p·T) auf ≤ 1,3e-7 (mit zehnfachem
+Differenzenschritt 9e-7); alle Hunt-Crossley-Orbits der Studie haben ein komplex konjugiertes Paar, also
+|μ| = √|det J|. Die Identität ⟨N⟩ = M·g + R begrenzt bei
+Hunt-Crossley die Quadratur (δ^1,5 am Kontaktrand: Rest 5e-7 N mit 8, 2e-8 N mit 16 Knoten), bei Kelvin-Voigt die
+Rundung bzw. rtol. Die RK4 hat im Kontaktast Ordnung 4, wenn die Knickstellen des Profils auf dem Raster liegen,
+sonst im Mittel ≈ 2 (Simpson-Fehler des Knicks, abhängig von seiner Lage im Schritt). Im Hüpfbereich springt die
+Kelvin-Voigt-Kraft beim Aufsetzen um C·|ẋ|: nach einer Periode asymptotisch Ordnung 1 (Kraftsprung im Schritt),
+beobachtete Steigungen 0,3 … 3,3, nicht monoton. Über viele Perioden ist der RK4-Orbit dort nicht periodisch:
+Stoßspitze bei Δt bis ≈ 6e-3 relativ, Aufsetzzeit bis ±8e-4 s, bei Δt/8 noch ±1e-4 s und 7e-4. Die Einzugsgrenze
+verschiebt sich bei Δt um 1,6e-4 m/s. Mit Hunt-Crossley (Kraft stetig beim Aufsetzen) ist der RK4-Orbit spätestens
+ab Δt/2 periodisch. Eine Δt/2-Differenz schätzt den Fehler im Kelvin-Voigt-Hüpfbereich also nicht; sie misst die
+Streuung eines unregelmäßigen RK4-Attraktors. Ersetzt wird sie durch die Verfeinerung der eigenen Parameter und
+Gegenproben: Kelvin-Voigt über zwei Integrationswege im Modul (geschlossen gegen solve_ivp; beide teilen
+Modellfunktionen, Ereignissuche und Auswertung, prüfen also die Integration, nicht den Modellaufbau); beide Gesetze
+über einen unabhängig geschriebenen zweiten Weg in den Tests (Engine-Profil, eigene Kontaktregeln, Radau;
+Kelvin-Voigt gegen die geschlossene Lösung ≤ 1e-15 s); Hunt-Crossley zusätzlich über exakte Invarianten
+(Liouville-Determinante, Einzelstoß geschlossen). Die unabhängige Nachrechnung der Abnahme (eigener
+Ereignisintegrator, nicht im Repo) fand dieselben Abweichungen.
 
 Aufruf:
   python3 ereignisloeser.py --point 35 116 [--start std|imp|orbit] [--t-sim 15 --t-eval 10]
@@ -65,6 +101,8 @@ Aufruf:
                                         Einzelstoß beider Kontaktgesetze bei 0,5 m/s mit Energiebilanz
   python3 ereignisloeser.py --point 35 116 --rampe 2
                                         Anlauf mit Frequenzrampe T_r = 2 s statt Standardstart
+  python3 ereignisloeser.py --konvergenz [FALL …]
+                                        Konvergenzstudie mit Ergebnistabellen; ohne FALL alle zwölf Fälle (ca. 2,5 min)
 Optionen: --K, --zeta oder --C, --f, --hub, --sinus, --law kv|hc|beide, --hc-n, --hc-vref, --wurfphase, --dv,
 --vmin, --vmax; mit --start std beginnt die Einzugsprüfung in der statischen Ruhelage (wie die Nachrechnung 10/2026).
 Die Einzugsprüfung startet standardmäßig auf dem Kontaktast; an Punkten ohne Kontaktast (z. B. (0°, 0°) der
@@ -74,7 +112,7 @@ einzeiligen Meldung und Rückgabewert 2. Überkritische Dämpfung (ζ ≥ 1) rec
 
 Rechenzeit (ein Kern): Kelvin-Voigt geschlossen 5–8 ms je Periode (15-s-Langlauf ≈ 1 s, Kontaktast direkt
 ≈ 20 ms); solve_ivp (Hunt-Crossley, Rampe) ≈ 25 ms je Periode im Hüpfzustand, ≈ 0,1 s je Periode im Dauerkontakt
-des steifen Kandidaten.
+des steifen Kandidaten; Festschritt-RK4 ≈ 1,5 µs je Schritt.
 
 Abgleich (tests/test_ereignisloeser.py; Referenzwerte aus der Nachrechnung 10/2026 mit einem unabhängig
 geschriebenen halbanalytischen Löser): Kontaktast gegen linear_solver auf ≤ 1e-6 N (Wellenform 1,3e-7 N;
@@ -90,6 +128,8 @@ Wurf aus der Ruhelage bei t₀ = 0: 0,25 m/s kehrt zurück, 0,30 m/s hüpft mit 
 Gegenproben der Integrationswege: DOP853 gegen geschlossen und Hunt-Crossley (n = 1, α = 0) gegen Kelvin-Voigt
 (C = 0) auf ≤ 1e-10 m; Einzelstoß: Stoßzahl gegen die geschlossenen Formeln auf ≤ 1e-8 (Kelvin-Voigt auch
 überkritisch, ζ = 1…2, über solve_ivp), Energiebilanz ≤ 1e-7.
+Konvergenzstudie: 53 von 53 Kriteriengruppen erfüllt, davon 20 Kontrollen der Erkennung (Raster h; bei 12 mit
+solve_ivp ohne Einfluss auf die Zeitpunkte); Tabellen mit --konvergenz, langer Test.
 Am Kandidaten liefert Hunt-Crossley (n = 1,5) bei t₀ = 0 dieselbe Hüpfschwelle (0,29–0,30 m/s), aber
 Stoßspitzen um 1050 N statt 484 N: Stöße von einigen 10² N sind in beiden Gesetzen belastbar, der Einzelwert
 hängt vom Kontaktgesetz ab.
@@ -97,6 +137,7 @@ hängt vom Kontaktgesetz ab.
 Matthias Früh · PCMMS · Oktober 2026
 """
 import argparse
+import contextlib
 import math
 import os
 import sys
@@ -300,6 +341,11 @@ def _verfeinern(sy, fn, a, b, sgn):
     return -sgn * r.fun, r.x
 
 
+def _h_standard(sy):
+    """Standard-Abtastraster der Schaltfunktion, min(T/10000, 2π/(300·ω_k)); simulate und Konvergenzstudie."""
+    return min(sy.T / 10000, 2 * math.pi / (300 * sy.w_k))
+
+
 def simulate(sy, x0, v0, t0=0.0, n_per=150, methode='auto', h=None, rampe=0.0, keep=False, rtol=1e-11,
              auswertung=True):
     """n_per Perioden ab t0 (Zustand x0, v0). Rückgabe dict mit Feldern je Periode (D1…D3 = ∫(N − Mg)^p dt,
@@ -312,7 +358,7 @@ def simulate(sy, x0, v0, t0=0.0, n_per=150, methode='auto', h=None, rampe=0.0, k
         raise ValueError('geschlossene Lösung nur für Kelvin-Voigt, unterkritisch')
     if rampe > 0 and (t0 != 0.0 or abs(rampe / (2 * T) - round(rampe / (2 * T))) > 1e-9):
         raise ValueError('Rampe nur ab t0 = 0 und mit T_r/2 als Vielfachem von T')
-    h = min(T / 10000, 2 * math.pi / (300 * sy.w_k)) if h is None else h
+    h = _h_standard(sy) if h is None else h
     dt_gl, dt_s = min(T / 1000, 2 * math.pi / (20 * sy.w_k)), T / N_STICH
     names = ('D1', 'D2', 'D3', 'tflug', 'Fmax', 'Fmin', 'ntd', 'S1', 'S2', 'S3', 'Smin', 'Smax', 'Slo', 'Sn')
     R = {k: np.zeros(n_per) for k in names}
@@ -431,8 +477,10 @@ def simulate(sy, x0, v0, t0=0.0, n_per=150, methode='auto', h=None, rampe=0.0, k
 
 
 def kenngroessen(r, c0=0, c1=None):
-    """Kenngrößen im Fenster der Perioden [c0, c1): exakt (Zeitmittel, Schiefe, λ, F_min, F_max, Randterm R,
-    Rest ⟨N⟩ − M·g − R, Aufsetzer je Periode) und aus den Engine-Stichproben (Endung _s)."""
+    """Kenngrößen im Fenster der Perioden [c0, c1): ereignisgenau (Zeitmittel, Schiefe, λ, F_min, F_max, Randterm
+    R, Rest ⟨N⟩ − M·g − R, Aufsetzer je Periode) und aus den Engine-Stichproben (Endung _s). Der Rest misst die
+    Quadratur: Kelvin-Voigt geschlossen ≤ 1e-12 N, über solve_ivp ≤ 1e-10 N, Hunt-Crossley durch δⁿ am
+    Kontaktrand begrenzt (≈ 5e-7 N mit 8 Gauß-Knoten; für die Kenngrößen ohne Belang)."""
     c1 = len(r['D1']) if c1 is None else c1
     if not 0 <= c0 < c1 <= len(r['D1']):
         raise ValueError(f'Auswertefenster der Perioden [{c0}, {c1}) liegt nicht im Lauf (0 … {len(r["D1"])})')
@@ -634,16 +682,17 @@ def hc_aequivalent(sy, zeta, n=1.5, v_ref=0.5):
     return sy.mit(gesetz='hc', K=Kh, alpha=alpha, n=n)
 
 
-def stoss(sy, v_in):
+def stoss(sy, v_in, h_fak=1.0, **kw):
     """Einzelstoß ohne Schwerkraft und Anregung: Aufsetzen bei x = 0 mit ẋ = −v_in. Rückgabe Stoßzahl e,
     Stoßspitze, Kontaktdauer, Energieverlust ΔE, Dämpfungsarbeit D und die bei der Ablösung in der
-    eingedrückten Feder verbliebene Energie U (Energiebilanz ΔE = D + U)."""
+    eingedrückten Feder verbliebene Energie U (Energiebilanz ΔE = D + U). h_fak skaliert das Abtastraster
+    (Standard T/40000 der Hilfsperiode), kw geht an simulate (methode, rtol; Konvergenzstudie)."""
     if not v_in > 0:
         raise ValueError('Aufprallgeschwindigkeit v_in muss positiv sein')
     n = 1.0 if sy.gesetz == 'kv' else sy.n
     dm = ((n + 1) * sy.M * v_in**2 / (2 * sy.K)) ** (1.0 / (n + 1))     # größte Eindrückung ohne Dämpfung
     s0 = sy.mit(phis=(), m_mod=(), m0=sy.M, hub=0.0, g=0.0, f=v_in / (12.0 * dm))
-    r = simulate(s0, 0.0, -v_in, 0.0, 1, keep=True, h=s0.T / 40000)
+    r = simulate(s0, 0.0, -v_in, 0.0, 1, keep=True, h=h_fak * (s0.T / 40000), **kw)
     a = r['aufsetzer'][0]
     D = 0.0
     for (_, e, kon, fn) in r['stuecke']:
@@ -666,6 +715,577 @@ def abtasten(sy, r, t):
             out[0, sel], out[1, sel] = fn(t[sel] - ta)
             out[2, sel] = sy.kraft(out[0, sel], out[1, sel]) if kon else 0.0
     return out
+
+
+# ── Konvergenzstudie (Abnahme AP-03) ─────────────────────────────────────────
+KONV_H = (2.0, 1.0, 0.5, 0.25, 0.125)           # Faktoren auf das Abtastraster h der Schaltfunktion
+KONV_RTOL = (1e-8, 1e-9, 1e-10, 1e-11, 1e-12)   # solve_ivp, Standard 1e-11
+KONV_RTOL_REF_HC = 1e-13                         # Referenz für Hunt-Crossley (keine geschlossene Lösung)
+KONV_GL = (8, 16, 32)                            # Gauß-Legendre-Knoten je Teilintervall, Standard 8
+KONV_DZ = (10.0, 1.0, 0.1)                       # Faktoren auf die Differenzenschritte der Floquet-Matrix
+KONV_DT = (1, 2, 4, 8)                           # Festschritt-RK4 mit Δt = T/(2000·m)
+KONV_RK4_FENSTER = (40, 100)                     # RK4-Orbit: Perioden 40·p … 100·p ab dem exakten Fixpunkt
+KONV_NORM = (1e-9, 1e-7)                         # Zustandsabweichungen in Einheiten von 1e-9 m bzw. 1e-7 m/s
+KONV_SCHRANKE = dict(zeit=1e-9, lam=1e-6, n=0.0, F=1e-6, z=1.0, mu=1e-6, det=1e-6, e=1e-9, schiefe=1e-6)
+KONV_REST = dict(exakt=1e-12, ivp=1e-10, hc=1e-6)   # |⟨N⟩ − M·g − R| [N]: geschlossen, solve_ivp, Hunt-Crossley
+KONV_WURF = (0.29375, 0.296875)                  # Grenzklammer K | H1 der Karte, V1 synchron, t₀ = 0 [m/s]
+GESETZ = {'kv': 'Kelvin-Voigt', 'hc': 'Hunt-Crossley'}
+KONV_FAELLE = ('v1-h1', 'v1-h1-hc', 'v1-h2', 'l1-h1', 'hc-dreifach', 'insel', 'ref-p2', 'insel-k', 'v1-k',
+               'v1-k-hc', 'stoss', 'wurf')
+
+
+@contextlib.contextmanager
+def _gauss(n):
+    """Periodenintegrale vorübergehend mit n statt 8 Gauß-Legendre-Knoten je Teilintervall (Konvergenzstudie)."""
+    global GL_X, GL_W
+    alt = GL_X, GL_W
+    GL_X, GL_W = np.polynomial.legendre.leggauss(n)
+    try:
+        yield
+    finally:
+        GL_X, GL_W = alt
+
+
+def rk4_festschritt(sy, x0, v0, t0=0.0, n_per=1, n_schritt=N_STICH):
+    """Festschritt-RK4 wie die Engine (finesweep.run), für das verallgemeinerte Modell; Gegenprobe der
+    Konvergenzstudie. Δt = T/n_schritt, Kontaktkraft in jeder Stufe kraftbasiert (N, wenn s(x, ẋ) > 0, sonst 0),
+    Kraftstichprobe zu Schrittbeginn; Q an Stütz- und Mittelpunkten einer Periode vorab (Δt teilt T). Keine
+    Ereignissuche: Übergänge nachträglich zwischen zwei Stichproben, bei x = 0 über kubische Hermite-Interpolation
+    von x, sonst (kraftbasierte Ablösung) linear in ψ. Rückgabe je Periode F_min, F_max (Stichproben), Liftoff-
+    Anteil lo (Stichproben mit N < 1e-9 N wie die Engine, in %), Zahl der Aufsetzer; Poincaré-Schnitt PX, PV;
+    Aufsetzer (t_auf, t_ab, größte Stichprobe der Kontaktphase); Stichprobenzeiten t und Kräfte N der letzten
+    Periode."""
+    T, M_, g = sy.T, sy.M, sy.g
+    dt = T / n_schritt
+    tg = t0 + np.arange(n_schritt + 1) * dt
+    qa, qm = ((sy._profil(np.mod(np.subtract.outer(tt, sy.tau), T), 2) @ sy.m / M_).tolist()
+              for tt in (tg, tg[:-1] + 0.5 * dt))
+    Kc, Cc, c, n = sy.K, sy.C, 1.5 * sy.alpha, sy.n
+    if sy.gesetz == 'kv':
+        def psi(x, v):
+            return -Kc * x - Cc * v
+
+        def kraft(x, v):
+            F = -Kc * x - Cc * v
+            return F if (x < 0.0 and F > 0.0) else 0.0
+    else:
+        def psi(x, v):
+            return 1.0 - c * v
+
+        def kraft(x, v):
+            p = 1.0 - c * v
+            return Kc * (-x) ** n * p if (x < 0.0 and p > 0.0) else 0.0
+    h2 = 0.5 * dt
+    x, v = float(x0), float(v0)
+    kon = x < 0.0 and psi(x, v) > 0.0
+    PX, PV, Fmin, Fmax, lo, ntd, auf, N_last = [x], [v], [], [], [], [], [], []
+    xp = vp = pp = None
+    for cyc in range(n_per):
+        fmin, fmax, nlo, nt = math.inf, -math.inf, 0, 0
+        letzte = cyc == n_per - 1
+        for i in range(n_schritt):
+            F1, ps = kraft(x, v), psi(x, v)
+            k = x < 0.0 and ps > 0.0
+            if k != kon:
+                t1 = t0 + (cyc * n_schritt + i) * dt
+                if (xp < 0.0) != (x < 0.0):
+                    def hx(u, a=xp, b=x, va=vp, vb=v):
+                        return ((2 * u - 3) * u * u + 1) * a + ((u - 2) * u + 1) * u * dt * va \
+                            + (3 - 2 * u) * u * u * b + (u - 1) * u * u * dt * vb
+                    th = t1 - dt + dt * brentq(hx, 0.0, 1.0, xtol=1e-15)
+                else:
+                    th = t1 - dt * ps / (ps - pp)
+                if k:
+                    nt += 1
+                    auf.append([th, math.nan, -math.inf])
+                elif auf:
+                    auf[-1][1] = th
+                kon = k
+            if kon and auf:
+                auf[-1][2] = max(auf[-1][2], F1)
+            fmin, fmax = min(fmin, F1), max(fmax, F1)
+            nlo += F1 < 1e-9
+            if letzte:
+                N_last.append(F1)
+            xp, vp, pp = x, v, ps
+            a1 = -g + F1 / M_ - qa[i]
+            x2, v2 = x + h2 * v, v + h2 * a1
+            a2 = -g + kraft(x2, v2) / M_ - qm[i]
+            x3, v3 = x + h2 * v2, v + h2 * a2
+            a3 = -g + kraft(x3, v3) / M_ - qm[i]
+            x4, v4 = x + dt * v3, v + dt * a3
+            a4 = -g + kraft(x4, v4) / M_ - qa[i + 1]
+            x += dt * (v + 2 * v2 + 2 * v3 + v4) / 6.0
+            v += dt * (a1 + 2 * a2 + 2 * a3 + a4) / 6.0
+        Fmin.append(fmin)
+        Fmax.append(fmax)
+        lo.append(100.0 * nlo / n_schritt)
+        ntd.append(nt)
+        PX.append(x)
+        PV.append(v)
+    return dict(Fmin=np.array(Fmin), Fmax=np.array(Fmax), lo=np.array(lo), ntd=np.array(ntd), PX=np.array(PX),
+                PV=np.array(PV), aufsetzer=np.array(auf, float).reshape(-1, 3), N=np.array(N_last),
+                t=t0 + (n_per - 1) * T + np.arange(n_schritt) * dt, dt=dt)
+
+
+def stoss_geschlossen(sy, v_in):
+    """Einzelstoß ohne Schwerkraft geschlossen (Gegenprobe zu stoss). Kelvin-Voigt, ζ < 1: x = −(v/ω_d)·e^{−σt}·
+    sin ω_d t, N = v·e^{−σt}·(A·sin ω_d t + C·cos ω_d t), A = (K − C·σ)/ω_d; Ablösung bei N = 0, Spitze bei
+    tan ω_d t* = (ω_d·A − σ·C)/(σ·A + ω_d·C). Hunt-Crossley: Phasenbahn geschlossen, δ(u)^{n+1} = (n + 1)·M/(K_h·c²)·
+    [c·(v − u) − ln((1 + c·v)/(1 + c·u))], u = δ̇, c = 1,5·α; Spitze von N = K_h·δⁿ·(1 + c·u) über −e·v < u < v
+    (Brent), e = e_hc(α, v). Rückgabe e, F_spitze, t_kontakt (Hunt-Crossley: nan)."""
+    if sy.gesetz == 'kv':
+        if not math.isfinite(sy.wd):
+            raise ValueError('geschlossener Einzelstoß nur für Kelvin-Voigt mit ζ < 1')
+        sig, wd, Cc = sy.sig, sy.wd, sy.C
+        A, zeta = (sy.K - Cc * sig) / wd, sig / math.sqrt(sy.wn2)
+        N = (lambda t: v_in * math.exp(-sig * t) * (A * math.sin(wd * t) + Cc * math.cos(wd * t)))
+        ts = (math.pi - math.atan2(2 * zeta * math.sqrt(1 - zeta**2), 1 - 2 * zeta**2)) / wd
+        tp = math.atan2(wd * A - sig * Cc, sig * A + wd * Cc) % math.pi / wd
+        return dict(e=e_kv_geklippt(zeta), F_spitze=max(N(tp), N(0.0)), t_kontakt=ts)
+    c, n = 1.5 * sy.alpha, sy.n
+    if not c > 0:
+        raise ValueError('geschlossener Einzelstoß für Hunt-Crossley nur mit α > 0')
+    e = e_hc(sy.alpha, v_in)
+
+    def N(u):
+        w = (n + 1) * sy.M / (sy.K * c * c) * (c * (v_in - u) - math.log((1 + c * v_in) / (1 + c * u)))
+        return sy.K * max(w, 0.0) ** (n / (n + 1)) * (1 + c * u)
+    r = minimize_scalar(lambda u: -N(u), bounds=(-e * v_in, v_in), method='bounded', options=dict(xatol=1e-14))
+    return dict(e=e, F_spitze=-r.fun, t_kontakt=float('nan'))
+
+
+def konvergenzfaelle():
+    """Fälle der Konvergenzstudie: Schlüssel → (Titel, System, Startwert des Orbits bei t₀ = 0, Periode p, Art).
+    Startwerte aus der Nachrechnung (Newton ab einem Wurf), gerundet; konvergenz() verfeinert sie mit Newton.
+    Kontaktorbits starten über startzustand(…, 'orbit')."""
+    v1 = kandidat()
+    hc = hc_aequivalent(v1, 0.05)
+    ins = referenz(35.0, 116.0)
+    return {
+        'v1-h1': ('V1 synchron H1', v1, (0.011162887152837, -0.353323297643222), 1, 'orbit'),
+        'v1-h1-hc': ('V1 synchron H1', hc, (0.011275301783076, -0.357367368159638), 1, 'orbit'),
+        'v1-h2': ('V1 synchron H2 (P2)', v1, (0.017045390354313, -0.918725059105659), 2, 'orbit'),
+        'l1-h1': ('V1 L1 H1', v1.mit(hub=(8e-3, 0.0, 0.0)), (0.002981786906330, -0.459915567710732), 1, 'orbit'),
+        'hc-dreifach': ('V1 (120°, 240°) Dreifachstoß', hc_aequivalent(kandidat(120.0, 240.0), 0.05),
+                        (0.000528329423548, 0.119181717967402), 1, 'orbit'),
+        'insel': ('Insel (35°, 116°) Hüpfzustand', ins, (0.010100852515791, -0.170573995226107), 1, 'orbit'),
+        'ref-p2': ('Referenz (0°, 0°) P2', referenz(0.0, 0.0), (0.015344207917147, -0.460306765112737), 2, 'orbit'),
+        'insel-k': ('Insel (35°, 116°) Kontaktorbit', ins, None, 1, 'kontakt'),
+        'v1-k': ('V1 synchron Kontaktast', v1, None, 1, 'kontakt'),
+        'v1-k-hc': ('V1 synchron Kontaktast', hc, None, 1, 'kontakt'),
+        'stoss': ('Einzelstoß 0,5 m/s, V1', v1, None, 0, 'stoss'),
+        'wurf': ('V1 synchron, Wurf an der Einzugsgrenze (t₀ = 0)', v1, None, 0, 'wurf'),
+    }
+
+
+def _konv_messung(sy, z, t0, p, floquet=True, dz=1.0, **kw):
+    """Kenngrößen eines Laufs über p Perioden ab z mit den numerischen Optionen kw; mit floquet zusätzlich ein
+    Newton-Schritt bei diesen Optionen (Fixpunkt z*, größter Floquet-Multiplikator |μ|, |det J| = |μ₁|·|μ₂|,
+    komplex konjugiertes Paar ja/nein)."""
+    r = simulate(sy, z[0], z[1], t0, p, **kw)
+    k = kenngroessen(r)
+    a = r['aufsetzer'][np.isfinite(r['aufsetzer'][:, 1])]
+    m = dict(zeit=np.concatenate([a[:, 0], a[:, 2]]) - t0, lam=k['liftoff'], n=float(r['ntd'].sum()),
+             F=np.concatenate([a[:, 5], [k['F_max'], k['F_min']]]), rest=k['rest'], schiefe=k['F_skew'])
+    if floquet:
+        o = newton(sy, z, t0, p, iters=1, dz=(1e-9 * dz, 1e-7 * dz), **kw)
+        mu = np.abs(o['mu'])
+        m.update(z=o['z'], mu=float(mu.max()), det=float(np.prod(mu)),
+                 komplex=bool(np.any(np.abs(np.imag(o['mu'])) > 0)))
+    return m
+
+
+def _konv_d(a, b):
+    """Größte Abweichung zweier Felder; andere Länge (Ereigniszahl) oder einseitig nan: unendlich."""
+    a, b = np.atleast_1d(np.asarray(a, float)), np.atleast_1d(np.asarray(b, float))
+    if a.shape != b.shape:
+        return math.inf
+    e = np.where(np.isnan(a) & np.isnan(b), 0.0, np.where(np.isnan(a) | np.isnan(b), math.inf, np.abs(a - b)))
+    return float(e.max()) if e.size else 0.0
+
+
+def _konv_abw(m, ref, F_ref, det_ex=None, groessen=None):
+    """Abweichung einer Stufe von der Referenz je Größe: Zeitpunkte [s], λ [%-Punkte], Aufsetzer, Kräfte relativ
+    zu F_ref, rest (Wert selbst, die Identität verlangt 0), Schiefe relativ, Fixpunkt normiert (KONV_NORM), |μ|
+    gegen die Referenzstufe, √|det J| gegen den exakten Wert √det_ex (Liouville), wo bekannt."""
+    out = dict(zeit=_konv_d(m['zeit'], ref['zeit']), lam=abs(m['lam'] - ref['lam']), n=abs(m['n'] - ref['n']),
+               F=_konv_d(m['F'], ref['F']) / F_ref, rest=abs(m['rest']),
+               schiefe=abs(m['schiefe'] - ref['schiefe']) / abs(ref['schiefe']))
+    if 'z' in m and 'z' in ref:
+        out['z'] = max(abs(m['z'][0] - ref['z'][0]) / KONV_NORM[0], abs(m['z'][1] - ref['z'][1]) / KONV_NORM[1])
+        out['mu'] = abs(m['mu'] - ref['mu'])
+        if det_ex is not None:
+            out['det'] = abs(math.sqrt(m['det']) - math.sqrt(det_ex))
+    return {q: out[q] for q in (groessen or out) if q in out}
+
+
+def _konv_gruppe(fall, titel, sy, weg, variation, stufen, werte, krit, schranke, ref=None, ordnung=True):
+    """Ergebnis einer Variation: Werte je Größe über die Stufen, Kriterium auf den Stufen mit krit = True;
+    ordnung=False, wo eine Steigung keine Aussage hat (Referenz nicht exakt, Streuung statt Fehler)."""
+    g = dict(fall=fall, titel=titel, gesetz=GESETZ[sy.gesetz], weg=weg, variation=variation, stufen=stufen,
+             werte=werte, krit=krit, schranke=schranke, ref=ref or {}, ordnung={})
+    if ordnung and variation in ('rtol', 'Δt'):      # Ordnung: Ausgleichsgerade im doppelt logarithmischen Maß
+        par = np.log(KONV_RTOL) if variation == 'rtol' else -np.log(KONV_DT)
+        for q, w in werte.items():
+            w = np.asarray(w, float)
+            sel = (w > 0) & np.isfinite(w)
+            if sel.sum() >= 3:
+                g['ordnung'][q] = float(np.polyfit(par[sel], np.log(w[sel]), 1)[0])
+    g['aend'] = {q: max([w[i] for i in range(len(w)) if krit[i]], default=0.0) for q, w in werte.items()}
+    g['ok'] = None if schranke is None else all(g['aend'][q] <= s for q, s in schranke.items() if q in werte)
+    return g
+
+
+def _konv_orbit(fall, titel, sy, z0, p, art, t0=0.0):
+    """Ereignislöser an einem periodischen Orbit: Abtastraster, rtol, Quadratur und Differenzenschritt variiert,
+    jeweils ab demselben Startzustand über p Perioden; dazu die RK4-Gegenprobe. Referenz: Kelvin-Voigt geschlossen,
+    Hunt-Crossley solve_ivp mit rtol 1e-11 (Raster, Quadratur, dz) bzw. KONV_RTOL_REF_HC (rtol-Stufen: Änderung,
+    kein Fehler). Exakt bekannt ist det J = exp(∫Spur dt) (Liouville): Kelvin-Voigt im Dauerkontakt
+    exp(−C·p·T/M); Hunt-Crossley exp(−1,5·α·g·p·T) für jeden periodischen Orbit, weil über jede geschlossene
+    Kontaktphase ∫K_h·δⁿ·δ̇ dt = 0 und am Orbit ∫N dt = M·g·p·T ist (Sprungmatrizen gibt es nicht, N verschwindet
+    am Rand). |μ| = √|det J| gilt nur für ein komplex konjugiertes Paar (ref['komplex'])."""
+    kv = sy.gesetz == 'kv'
+    std = dict(methode='exakt' if kv else 'ivp')
+    z = startzustand(sy, 'orbit', t0) if art == 'kontakt' else newton(sy, z0, t0, p, **std)['z']
+    det_ex = (math.exp(-sy.C * p * sy.T / sy.M) if kv and art == 'kontakt' else
+              None if kv else math.exp(-1.5 * sy.alpha * sy.g * p * sy.T))
+    hs = _h_standard(sy)
+    cache = {}
+
+    def mess(methode, hf=1.0, rtol=1e-11):
+        key = (methode, hf, rtol if methode == 'ivp' else None)
+        if key not in cache:
+            cache[key] = _konv_messung(sy, z, t0, p, methode=methode, h=hf * hs, rtol=rtol)
+        return cache[key]
+    ref = mess(std['methode'])
+    F_ref = float(np.max(ref['F']))
+    out = []
+
+    def schr(weg):
+        s = dict(KONV_SCHRANKE, rest=KONV_REST[weg if kv else 'hc'])
+        return {q: s[q] for q in ('zeit', 'lam', 'n', 'F', 'rest', 'z', 'mu', 'det', 'schiefe')}
+
+    def gruppe(weg, variation, stufen, ms, ref_g, krit, groessen=None, ordnung=True):
+        werte = {}
+        for m in ms:
+            for q, w in _konv_abw(m, ref_g, F_ref, det_ex, groessen).items():
+                werte.setdefault(q, []).append(w)
+        out.append(_konv_gruppe(fall, titel, sy, weg, variation, stufen, werte, krit,
+                                {q: s for q, s in schr(weg).items() if q in werte}, ordnung=ordnung))
+    lab_h = [f'h×{f:g}' for f in KONV_H]
+    if kv:
+        gruppe('exakt', 'h', lab_h, [mess('exakt', f) for f in KONV_H], ref, [True] * len(KONV_H))
+    ms = [mess('ivp', 1.0, rt) for rt in KONV_RTOL]
+    ref_rt = ref if kv else mess('ivp', 1.0, KONV_RTOL_REF_HC)
+    gruppe('ivp', 'rtol', [f'{rt:.0e}' for rt in KONV_RTOL], ms, ref_rt, [rt <= 1e-11 for rt in KONV_RTOL],
+           ordnung=kv)
+    gruppe('ivp', 'h', lab_h, [mess('ivp', f) for f in KONV_H], mess('ivp'), [True] * len(KONV_H))
+    ms = []
+    for n in KONV_GL:
+        with _gauss(n):
+            ms.append(_konv_messung(sy, z, t0, p, floquet=False, **std))
+    werte = dict(rest=[abs(m['rest']) for m in ms],
+                 schiefe=[abs(m['schiefe'] - ms[-1]['schiefe']) / abs(ms[-1]['schiefe']) for m in ms])
+    s = schr(std['methode'])
+    out.append(_konv_gruppe(fall, titel, sy, std['methode'], 'Quadratur', [f'{n} Knoten' for n in KONV_GL], werte,
+                            [True] * len(KONV_GL), dict(rest=s['rest'], schiefe=s['schiefe'])))
+    ms = [mess(std['methode']) if f == 1.0 else _konv_messung(sy, z, t0, p, dz=f, **std) for f in KONV_DZ]
+    gruppe(std['methode'], 'dz', [f'dz×{f:g}' for f in KONV_DZ], ms, ref, [True] * len(KONV_DZ),
+           ('z', 'mu', 'det'))
+    for g in out:
+        g['ref'].update(mu=ref['mu'], komplex=ref['komplex'], det_ex=det_ex,
+                        det=ref['det'] if kv else ref_rt['det'], z=tuple(z), F=F_ref, std=std['methode'],
+                        rtol_ref=None if kv else KONV_RTOL_REF_HC)
+    out += _konv_rk4(fall, titel, sy, z, p, art, t0)
+    return out
+
+
+def _konv_rk4(fall, titel, sy, z, p, art, t0=0.0):
+    """Festschritt-RK4 mit Δt = T/2000 … T/16000 ab dem exakten Orbitzustand gegen den Ereignislöser. Kontaktast:
+    Kraftstichproben N(t_k) gegen die exakte Lösung (Integrationsfehler), F_min/F_max der Stichproben gegen die
+    exakten Extrema (mit Abtastfehler), ẋ nach einer Periode. Hüpforbit: eine Periode (Fehler von Aufsetz- und
+    Ablösezeit, Stoßspitze als größte Stichprobe, ẋ) und ein Lauf über die Perioden KONV_RK4_FENSTER (in
+    Vielfachen von p) mit der Streuung je Periode gegen den exakten Orbit: kleinste und größte Abweichung von
+    Aufsetzzeit und Stoßspitze, Perioden mit anderer Stoßzahl, Spanne von ẋ im Poincaré-Schnitt (≈ 0: der
+    RK4-Orbit ist periodisch). Im Kelvin-Voigt-Hüpfbereich ist er das nicht; der Wert einer einzelnen Periode ist
+    dort eine Stichprobe der Streuung, keine Ordnung in Δt. Stoßspitzen der RK4 sind Stichproben im Raster Δt
+    (Abtastfehler bis ≈ (ω·Δt)²/8 relativ)."""
+    kw = dict(rtol=KONV_RTOL_REF_HC) if sy.gesetz == 'hc' else {}
+    r = simulate(sy, z[0], z[1], t0, p, keep=True, **kw)
+    k = kenngroessen(r)
+    a = r['aufsetzer'][np.isfinite(r['aufsetzer'][:, 1])]
+    lab = ['Δt' if m == 1 else f'Δt/{m}' for m in KONV_DT]
+
+    def v_end(o):
+        return abs(o['PV'][p] - r['PV'][-1])
+    if art == 'kontakt':
+        werte = dict(N_k=[], F_min=[], F_max=[], v_end=[])
+        for m in KONV_DT:
+            o = rk4_festschritt(sy, z[0], z[1], t0, 1, N_STICH * m)
+            werte['N_k'].append(float(np.abs(o['N'] - abtasten(sy, r, o['t'])[2]).max()))
+            werte['F_min'].append(abs(o['Fmin'][0] - k['F_min']))
+            werte['F_max'].append(abs(o['Fmax'][0] - k['F_max']))
+            werte['v_end'].append(v_end(o))
+        return [_konv_gruppe(fall, titel, sy, 'RK4', 'Δt', lab, werte, [True] * len(lab), None)]
+    n0, n1 = KONV_RK4_FENSTER
+    Tp, ta_ex, pk_ex = p * sy.T, a[:, 0] - t0, a[:, 5]
+    w1 = dict(zeit_auf=[], zeit_ab=[], F=[], v_end=[])
+    w2 = dict(zeit_auf=[], F=[], n=[], v_spanne=[])
+    streu = dict(zeit_auf=[], F=[])
+    for m in KONV_DT:
+        o = rk4_festschritt(sy, z[0], z[1], t0, n1 * p, N_STICH * m)
+        b = o['aufsetzer']
+        blk = np.floor((b[:, 0] - t0) / Tp).astype(int)
+        b1 = b[blk == 0]
+        w1['zeit_auf'].append(_konv_d(b1[:, 0], a[:, 0]))
+        w1['zeit_ab'].append(_konv_d(b1[:, 1], a[:, 2]))
+        w1['F'].append(_konv_d(b1[:, 2], pk_ex) / pk_ex.max())
+        w1['v_end'].append(v_end(o))
+        d_t, d_F, anders = [], [], 0
+        for j in range(n0, n1):
+            bj = b[blk == j]
+            if bj.shape[0] != a.shape[0]:
+                anders += 1
+                continue
+            d_t.append(bj[:, 0] - t0 - j * Tp - ta_ex)
+            d_F.append(bj[:, 2] / pk_ex - 1.0)
+        for q, d in (('zeit_auf', d_t), ('F', d_F)):
+            d = np.concatenate(d) if d else np.array([np.nan])
+            streu[q].append((float(d.min()), float(d.max())))
+            w2[q].append(float(np.abs(d).max()))
+        w2['n'].append(float(anders))
+        w2['v_spanne'].append(float(np.ptp(o['PV'][n0 * p:n1 * p + 1:p])))
+    g2 = _konv_gruppe(fall, titel, sy, f'RK4, Perioden {n0 * p}–{n1 * p}', 'Δt', lab, w2, [True] * len(lab), None,
+                      ordnung=False)
+    g2['streuung'] = streu
+    return [_konv_gruppe(fall, titel, sy, 'RK4, eine Periode', 'Δt', lab, w1, [True] * len(lab), None), g2]
+
+
+def _konv_stoss(fall, titel, sy_kv, v_in=0.5):
+    """Einzelstoß beider Kontaktgesetze gegen die geschlossenen Formeln (stoss_geschlossen) über Raster und rtol."""
+    zeta = sy_kv.C / (2 * math.sqrt(sy_kv.K * sy_kv.M))
+    out = []
+    for sy in (sy_kv, hc_aequivalent(sy_kv, zeta)):
+        gs = stoss_geschlossen(sy, v_in)
+        kv = sy.gesetz == 'kv'
+        schr = dict(e=KONV_SCHRANKE['e'], F=KONV_SCHRANKE['F'], zeit=KONV_SCHRANKE['zeit'])
+        if not kv:
+            del schr['zeit']
+
+        def abw(o):
+            w = dict(e=abs(o['e'] - gs['e']), F=abs(o['F_spitze'] - gs['F_spitze']) / gs['F_spitze'])
+            if kv:
+                w['zeit'] = abs(o['t_kontakt'] - gs['t_kontakt'])
+            return w
+
+        def gruppe(weg, variation, stufen, os_, krit):
+            werte = {}
+            for o in os_:
+                for q, w in abw(o).items():
+                    werte.setdefault(q, []).append(w)
+            out.append(_konv_gruppe(fall, titel, sy, weg, variation, stufen, werte, krit, schr,
+                                    ref=dict(e=gs['e'], F=gs['F_spitze'], zeit=gs['t_kontakt'])))
+        lab_h = [f'h×{f:g}' for f in KONV_H]
+        if kv:
+            gruppe('exakt', 'h', lab_h, [stoss(sy, v_in, f, methode='exakt') for f in KONV_H], [True] * len(KONV_H))
+        gruppe('ivp', 'rtol', [f'{rt:.0e}' for rt in KONV_RTOL],
+               [stoss(sy, v_in, methode='ivp', rtol=rt) for rt in KONV_RTOL], [rt <= 1e-11 for rt in KONV_RTOL])
+        gruppe('ivp', 'h', lab_h, [stoss(sy, v_in, f, methode='ivp') for f in KONV_H], [True] * len(KONV_H))
+    return out
+
+
+def _konv_wurf(fall, titel, sy, t0=0.0, dv_nah=1e-6, tol=1e-7, tol_rk4=2e-6, breite_rk4=2e-3):
+    """Wurf an der Einzugsgrenze K | H1 (Klammer KONV_WURF der Karte): Grenze bei Standardeinstellung per
+    Bisektion auf tol; Endzustand der Würfe v_g ∓ dv_nah über Raster und rtol; RK4: eigene Grenzlage je Δt
+    (Bisektion in v_g ± breite_rk4 auf tol_rk4). Läufe wie die Karte: 80 Perioden, Klassifikation über die
+    letzten 20."""
+    z = startzustand(sy, 'orbit', t0)
+
+    def zustand(dv, **kw):
+        return wurf(sy, dv, t0, z=z, n_per=80, n_eval=20, **kw)['zustand']
+
+    def rk4_huepft(dv, m):
+        return rk4_festschritt(sy, z[0], z[1] + dv, t0, 80, N_STICH * m)['lo'][-20:].sum() > 0
+
+    def bisektion(lo, hi, huepft, tol_):
+        if huepft(lo) or not huepft(hi):
+            raise RuntimeError(f'Klammer [{lo}, {hi}] trennt Kontaktast und Hüpfen nicht')
+        while hi - lo > tol_:
+            mid = 0.5 * (lo + hi)
+            lo, hi = (lo, mid) if huepft(mid) else (mid, hi)
+        return lo, hi
+    lo, hi = bisektion(*KONV_WURF, lambda dv: zustand(dv) == 'Hüpfen', tol)
+    vg = 0.5 * (lo + hi)
+    hs = _h_standard(sy)
+    stufen = [('exakt', f'h×{f:g}', dict(methode='exakt', h=f * hs)) for f in KONV_H] + \
+             [('ivp', f'rtol {rt:.0e}', dict(methode='ivp', rtol=rt)) for rt in (1e-8, 1e-10, 1e-12)]
+    erg = [(zustand(vg - dv_nah, **kw), zustand(vg + dv_nah, **kw)) for _, _, kw in stufen]
+    werte = dict(zustand=[0.0 if e == ('Kontaktast', 'Hüpfen') else 1.0 for e in erg])
+    g = _konv_gruppe(fall, titel, sy, 'exakt/ivp', 'h, rtol', [f'{w} {s}' for w, s, _ in stufen], werte,
+                     [True] * len(stufen), dict(zustand=0.0), ref=dict(v_g=vg, klammer=(lo, hi), dv=dv_nah))
+    g['zustaende'] = erg
+    grenzen = []
+    for m in KONV_DT:
+        a, b = bisektion(vg - breite_rk4, vg + breite_rk4, lambda dv: rk4_huepft(dv, m), tol_rk4)
+        grenzen.append(0.5 * (a + b))
+    lab = ['Δt' if m == 1 else f'Δt/{m}' for m in KONV_DT]
+    g2 = _konv_gruppe(fall, titel, sy, 'RK4', 'Δt', lab, dict(grenze=[abs(x - vg) for x in grenzen]),
+                      [True] * len(lab), None, ref=dict(v_g=vg, tol=tol_rk4))
+    g2['grenzen'] = grenzen
+    return [g, g2]
+
+
+def konvergenz(faelle=None, log=None):
+    """Konvergenzstudie des ereignisgenauen Lösers (Abnahme AP-03, Ersatz der Δt/2-Kontrolle). Je Fall
+    (konvergenzfaelle) werden die numerischen Parameter verfeinert und die Kenngrößen gegen die Standardeinstellung
+    (Kelvin-Voigt geschlossen, Hunt-Crossley solve_ivp mit rtol 1e-11) bzw. gegen exakte Werte verglichen:
+    Abtastraster h × 2 … 1/8 (geschlossen und solve_ivp; prüft die Erkennung, die Zeitpunkte setzt brentq bzw. die
+    Ereignissuche von solve_ivp), rtol 1e-8 … 1e-12 (Kelvin-Voigt gegen die geschlossene Lösung, Hunt-Crossley
+    gegen rtol KONV_RTOL_REF_HC), Quadratur 8/16/32 Knoten, Differenzenschritt der Floquet-Matrix × 10 / 0,1,
+    √|det J| gegen den Liouville-Wert; dazu Festschritt-RK4 (Δt = T/2000 … T/16000) als Gegenprobe. Kriterien
+    KONV_SCHRANKE und KONV_REST auf allen Raster-, Quadratur- und dz-Stufen und auf rtol ≤ 1e-11. Rückgabe Liste
+    von Gruppen (eine je Fall und Variation) mit Werten je Größe und Stufe, größter Änderung, Ordnung (nur wo sie
+    eine Aussage hat) und erfüllt (None: informativ)."""
+    alle = konvergenzfaelle()
+    out = []
+    for key in (faelle or list(alle)):
+        titel, sy, z0, p, art = alle[key]
+        if art in ('orbit', 'kontakt'):
+            out += _konv_orbit(key, titel, sy, z0, p, art)
+        elif art == 'stoss':
+            out += _konv_stoss(key, titel, sy)
+        else:
+            out += _konv_wurf(key, titel, sy)
+        if log:
+            log(key)
+    return out
+
+
+def _fz(x):
+    return '0' if x == 0 else ('≠' if x == math.inf else f'{x:.1e}')
+
+
+def _ausgabe_konvergenz(gruppen):
+    """Ergebnistabellen der Konvergenzstudie (Markdown)."""
+    G = {'zeit': 'Zeitpunkte [s]', 'lam': 'λ [%-P.]', 'n': 'Aufsetzer', 'F': 'Kräfte [rel.]', 'rest': 'Rest [N]',
+         'schiefe': 'Schiefe [rel.]', 'z': 'z* [norm.]', 'mu': '|μ|', 'det': '√|det J| − exakt'}
+    orb = [g for g in gruppen if g['fall'] not in ('stoss', 'wurf')]
+    print('Konvergenzstudie des ereignisgenauen Lösers. Stufen: Abtastraster h × 2 … 1/8, solve_ivp rtol 1e-8 … '
+          '1e-12, Quadratur 8/16/32 Knoten, Floquet-Differenzenschritt × 10/1/0,1; Gegenprobe Festschritt-RK4 mit '
+          f'Δt = T/{N_STICH} … T/{8 * N_STICH}. Zustand normiert auf {KONV_NORM[0]:g} m bzw. {KONV_NORM[1]:g} m/s; '
+          '„≠“: andere Ereigniszahl.')
+    print('\nA. Größte Änderung je Größe (Raster-, Quadratur- und dz-Stufen: gegen die Standardeinstellung; rtol: '
+          'Stufen ≤ 1e-11, Kelvin-Voigt gegen die geschlossene Lösung, Hunt-Crossley gegen rtol '
+          f'{KONV_RTOL_REF_HC:.0e} (Änderung, kein Fehler); √|det J| gegen den Liouville-Wert (Hunt-Crossley, '
+          'Kelvin-Voigt im Dauerkontakt). Raster h: Kontrolle der Erkennung; die Zeitpunkte setzt brentq, bei '
+          'solve_ivp schon dessen Ereignissuche)\n')
+    print('| Fall | Gesetz | Weg, Variation | ' + ' | '.join(G.values()) + ' | erfüllt |')
+    print('|---' * (len(G) + 4) + '|')
+    sch = dict(KONV_SCHRANKE, rest=KONV_REST['exakt'])
+    print('| Schranke | | | ' + ' | '.join(
+        f'{sch[q]:g}' + (f" (ivp {KONV_REST['ivp']:g}, HC {KONV_REST['hc']:g})" if q == 'rest' else '')
+        for q in G) + ' | |')
+    for g in orb:
+        if g['schranke'] is None:
+            continue
+        art = '; Erkennung' if g['variation'] == 'h' else ''
+        print(f"| {g['titel']} | {g['gesetz']} | {g['weg']}, {g['variation']} ({len(g['stufen'])} Stufen{art}) | "
+              + ' | '.join(_fz(g['aend'][q]) if q in g['aend'] else '–' for q in G)
+              + f" | {'ja' if g['ok'] else 'NEIN'} |")
+    rt = [g for g in orb if g['variation'] == 'rtol']
+    if rt:
+        print('\nB. solve_ivp: Abweichung je rtol. Kelvin-Voigt: Fehler gegen die geschlossene Lösung und beobachtete '
+              'Ordnung in rtol (Steigung der Ausgleichsgeraden, log–log). Hunt-Crossley: Änderung gegen rtol '
+              f'{KONV_RTOL_REF_HC:.0e}, ohne Ordnung (keine exakte Lösung; DOP853 konvergiert in rtol nicht monoton). '
+              '√|det J| gegen den Liouville-Wert\n')
+        print('| Fall | Gesetz | Größe | ' + ' | '.join(rt[0]['stufen']) + ' | Ordnung |')
+        print('|---' * (len(KONV_RTOL) + 4) + '|')
+        for g in rt:
+            for q in ('zeit', 'F', 'rest', 'z', 'mu', 'det'):
+                if q in g['werte']:
+                    o = g['ordnung'].get(q)
+                    print(f"| {g['titel']} | {g['gesetz']} | {G[q]} | " + ' | '.join(_fz(w) for w in g['werte'][q])
+                          + f" | {'–' if o is None else f'{o:.2f}'} |")
+    qd = [g for g in orb if g['variation'] == 'Quadratur']
+    if qd:
+        print('\nC. Quadratur der Periodenintegrale: |Rest| = |⟨N⟩ − M·g − R| [N] und Änderung der Schiefe gegen '
+              '32 Knoten\n')
+        print('| Fall | Gesetz | ' + ' | '.join(f'Rest {s}' for s in qd[0]['stufen'])
+              + ' | ' + ' | '.join(f'Schiefe {s}' for s in qd[0]['stufen'][:-1]) + ' |')
+        print('|---' * (2 * len(KONV_GL) + 1) + '|')
+        for g in qd:
+            print(f"| {g['titel']} | {g['gesetz']} | " + ' | '.join(_fz(w) for w in g['werte']['rest']) + ' | '
+                  + ' | '.join(_fz(w) for w in g['werte']['schiefe'][:-1]) + ' |')
+    rk = [g for g in orb if g['weg'].startswith('RK4')]
+    if rk:
+        E = {'N_k': 'max |N_k − N(t_k)| [N]', 'F_min': 'F_min Stichproben − exakt [N]',
+             'F_max': 'F_max Stichproben − exakt [N]', 'v_end': 'ẋ nach dem Lauf [m/s]',
+             'zeit_auf': 'Aufsetzzeit [s]', 'zeit_ab': 'Ablösezeit [s]', 'F': 'Stoßspitze (Stichprobe) [rel.]',
+             'n': 'Perioden mit anderer Stoßzahl', 'v_spanne': 'Spanne ẋ im Poincaré-Schnitt [m/s]'}
+        n0, n1 = KONV_RK4_FENSTER
+        print('\nD. Gegenprobe Festschritt-RK4 (Engine-Schema, kraftbasierte Kontaktregel) gegen den Ereignislöser, '
+              'ab dem exakten Orbitzustand. Eine Periode: Fehler, Ordnung = Steigung der Ausgleichsgeraden über '
+              f'Δt … Δt/8 (log–log). Perioden {n0}·p … {n1}·p: kleinste … größte Abweichung je Periode vom exakten '
+              'Orbit (Streuung, keine Ordnung); Spanne ẋ ≈ 0 heißt: der RK4-Orbit ist periodisch. Stoßspitzen sind '
+              'Stichproben im Raster Δt (Abtastfehler bis ≈ (ω·Δt)²/8)\n')
+        print('| Fall | Gesetz | Lauf | Größe | ' + ' | '.join(rk[0]['stufen']) + ' | Ordnung | monoton |')
+        print('|---' * (len(KONV_DT) + 6) + '|')
+        for g in rk:
+            for q, w in g['werte'].items():
+                o = g['ordnung'].get(q)
+                if q in g.get('streuung', {}):
+                    zellen = [f'{a:+.1e} … {b:+.1e}' for a, b in g['streuung'][q]]
+                    mono = '–'
+                else:
+                    zellen = [f'{x:g}' if q == 'n' else _fz(x) for x in w]
+                    mono = '–' if 'streuung' in g else ('ja' if all(b < a for a, b in zip(w[:-1], w[1:])) else 'nein')
+                print(f"| {g['titel']} | {g['gesetz']} | {g['weg']} | {E[q]} | " + ' | '.join(zellen)
+                      + f" | {'–' if o is None else f'{o:.2f}'} | {mono} |")
+    st = [g for g in gruppen if g['fall'] == 'stoss']
+    if st:
+        print('\nE. Einzelstoß 0,5 m/s gegen die geschlossenen Formeln (Stoßzahl e, Stoßspitze relativ, Kontaktdauer '
+              '[s]); Kriterium auf Raster-Stufen und rtol ≤ 1e-11\n')
+        print('| Gesetz | Größe | geschlossen | Weg, Variation | Abweichung je Stufe | größte Änderung | Schranke | '
+              'erfüllt |')
+        print('|---' * 8 + '|')
+        for g in st:
+            for q, w in g['werte'].items():
+                print(f"| {g['gesetz']} | {dict(e='e', F='Stoßspitze', zeit='Kontaktdauer')[q]} | "
+                      f"{g['ref'][q]:.10g} | {g['weg']}, {g['variation']} | "
+                      + ' · '.join(f'{s} {_fz(x)}' for s, x in zip(g['stufen'], w))
+                      + f" | {_fz(g['aend'][q])} | {g['schranke'][q]:g} | "
+                      f"{'ja' if g['aend'][q] <= g['schranke'][q] else 'NEIN'} |")
+    wu = [g for g in gruppen if g['fall'] == 'wurf']
+    if wu:
+        g, g2 = wu
+        r = g['ref']
+        print(f"\nF. Wurf an der Einzugsgrenze K | H1, V1 synchron, t₀ = 0, Start auf dem Kontaktast: Grenze "
+              f"v_g = {r['v_g']:.7f} m/s (Bisektion bei Standardeinstellung, Klammer "
+              f"{r['klammer'][1] - r['klammer'][0]:.1e} m/s)\n")
+        print(f"| Stufe | Endzustand v_g − {r['dv']:g} m/s | Endzustand v_g + {r['dv']:g} m/s | erfüllt |")
+        print('|---|---|---|---|')
+        for s, (a, b), w in zip(g['stufen'], g['zustaende'], g['werte']['zustand']):
+            print(f"| {s} | {a} | {b} | {'ja' if w == 0 else 'NEIN'} |")
+        print("\n| RK4 | Grenzlage [m/s] | Verschiebung gegen v_g [m/s] |\n|---|---|---|")
+        for s, x, w in zip(g2['stufen'], g2['grenzen'], g2['werte']['grenze']):
+            print(f'| {s} | {x:.6f} | {w:.1e} (Bisektion auf {g2["ref"]["tol"]:g}) |')
+    print('\n' + konv_zaehlung(gruppen))
+
+
+def konv_zaehlung(gruppen):
+    """Zählung der Kriteriengruppen nach Art der Variation. Rastergruppen prüfen nur die Erkennung (die Zeitpunkte
+    setzt brentq auf der geschlossenen bzw. dichten Lösung, bei solve_ivp schon dessen Ereignissuche)."""
+    krit = [g for g in gruppen if g['ok'] is not None]
+    art = {}
+    for g in krit:
+        v = 'h-ivp' if g['variation'] == 'h' and g['weg'] == 'ivp' else g['variation']
+        art[v] = art.get(v, 0) + 1
+    h = art.get('h', 0) + art.get('h-ivp', 0)
+    return (f"Kriterien: {sum(g['ok'] for g in krit)} von {len(krit)} Gruppen erfüllt; davon {h} Rastergruppen "
+            f"(Kontrolle der Erkennung, {art.get('h-ivp', 0)} davon solve_ivp, wo h die Zeitpunkte nicht beeinflusst), "
+            f"{art.get('rtol', 0)} rtol, {art.get('Quadratur', 0)} Quadratur, {art.get('dz', 0)} Differenzenschritt, "
+            f"{art.get('h, rtol', 0)} Endzustand an der Einzugsgrenze.")
 
 
 # ── Kommandos ────────────────────────────────────────────────────────────────
@@ -729,6 +1349,8 @@ def main():
     ap.add_argument('--dv', type=float, default=0.02, help='Raster der Wurfgeschwindigkeit [m/s]')
     ap.add_argument('--vmin', type=float, help='kleinster Wurf (Standard: --dv)')
     ap.add_argument('--vmax', type=float, default=0.6)
+    ap.add_argument('--konvergenz', nargs='*', metavar='FALL',
+                    help='Konvergenzstudie des Lösers (ohne FALL alle, ca. 2,5 min); Fälle: ' + ', '.join(KONV_FAELLE))
     a = ap.parse_args()
     for name, val, null_ok in (('--K', a.K, False), ('--f', a.f, False), ('--t-sim', a.t_sim, False),
                                ('--t-eval', a.t_eval, False), ('--dv', a.dv, False), ('--stoss', a.stoss, False),
@@ -741,6 +1363,13 @@ def main():
         ap.error('--t-eval darf nicht größer als --t-sim sein')
     if a.einzug and (a.dv if a.vmin is None else a.vmin) > a.vmax:
         ap.error('leeres Wurfraster: --vmin (Standard --dv) größer als --vmax')
+    if a.konvergenz is not None:
+        fremd = [f for f in a.konvergenz if f not in KONV_FAELLE]
+        if fremd:
+            ap.error(f'--konvergenz: unbekannter Fall {fremd[0]} (möglich: {", ".join(KONV_FAELLE)})')
+        _ausgabe_konvergenz(konvergenz(a.konvergenz or None,
+                                       log=lambda k: print(f'… {k} gerechnet', file=sys.stderr, flush=True)))
+        return
     if not (a.point or a.orbit or a.einzug or a.stoss is not None or a.rampe):
         ap.print_help()
         return

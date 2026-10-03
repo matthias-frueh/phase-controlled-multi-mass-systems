@@ -3,7 +3,8 @@
 Referenzwerte ohne Quellenangabe im Test stammen aus der Nachrechnung 10/2026 mit einem unabhängig geschriebenen
 halbanalytischen Löser (abschnittsweise geschlossene Lösung, Ereignisse per Abtastung und brentq) und einem
 DOP853-Ereignislöser; Toleranzen: letzte angegebene Stelle der Referenz, höchstens 0,1 %.
-Schnelle Tests laufen standardmäßig (zusammen ca. 25 s); langsame (@slow, ca. 35 s) mit PCMMS_SLOW=1.
+Schnelle Tests laufen standardmäßig (zusammen ca. 40 s); langsame (@slow, ca. 3 min, davon 2,3 min die volle
+Konvergenzstudie) mit PCMMS_SLOW=1.
 
 Matthias Früh · PCMMS · Oktober 2026
 """
@@ -404,12 +405,276 @@ def test_cli_laeufe(monkeypatch, capsys, args, erwartet):
     (('--candidate', '--stoss', '-0.5'), '--stoss'),
     (('--point', '0', '0', '--f', '0'), '--f'),
     (('--point', '35', '116', '--rampe', '0.15', '--t-sim', '1'), 'Rampe'),
+    (('--konvergenz', 'stoss', 'gibtsnicht'), '--konvergenz'),
 ])
 def test_cli_fehleingaben(monkeypatch, capsys, args, meldung):
     """Fehleingaben und Punkte ohne Kontaktast enden mit einer einzeiligen Meldung und Rückgabewert 2 (jede andere
     Ausnahme ließe den Test scheitern)."""
     rc, _, err = _cli(monkeypatch, capsys, *args)
     assert rc == 2 and meldung in err.strip().splitlines()[-1]
+
+
+# ── numerische Konvergenz (Ersatz der Δt/2-Kontrolle) ───────────────────────
+V1_H1 = (0.011162887152837, -0.353323297643222)          # Hüpforbit H1 bei t₀ = 0 (gerundet, Newton verfeinert)
+V1_H1_HC = (0.011275301783076, -0.357367368159638)
+V_GRENZE = 0.2944898                                      # Einzugsgrenze K | H1, V1 synchron, t₀ = 0, vom Kontaktast
+
+
+@pytest.fixture(scope='module')
+def v1_h1(v1):
+    o = el.newton(v1, V1_H1, 0.0, 1)
+    assert o['konvergiert']
+    return o['z']
+
+
+@pytest.fixture(scope='module')
+def v1_hc(v1):
+    return el.hc_aequivalent(v1, 0.05)
+
+
+@pytest.fixture(scope='module')
+def v1_h1_hc(v1_hc):
+    o = el.newton(v1_hc, V1_H1_HC, 0.0, 1)
+    assert o['konvergiert']
+    return o['z']
+
+
+def test_abtastraster_standard(v1, v1_h1):
+    """Die Stufe „h × 1“ der Studie ist die Standardeinstellung von simulate (gemeinsame Funktion _h_standard)."""
+    a = el.simulate(v1, *v1_h1, 0.0, 1)
+    b = el.simulate(v1, *v1_h1, 0.0, 1, h=el._h_standard(v1))
+    assert np.array_equal(a['aufsetzer'], b['aufsetzer']) and a['PV'][-1] == b['PV'][-1]
+    assert el._h_standard(v1) == min(v1.T / 10000, 2 * math.pi / (300 * v1.w_k))
+
+
+def test_konvergenz_kelvin_voigt_kontaktwechsel(v1, v1_h1):
+    """Hüpforbit H1 des V1-Kandidaten über eine Periode: Aufsetz- und Ablösezeit, Stoßspitze, λ, Zahl der Aufsetzer
+    und Zustand ändern sich geschlossen unter h × 2 und h/2 nur auf Rundungsniveau (h dient nur der Erkennung, die
+    Zeitpunkte setzt brentq auf der geschlossenen Lösung); solve_ivp liegt bei rtol 1e-11 und 1e-12 innerhalb
+    1e-12 s bzw. 1e-10 relativ an der geschlossenen Lösung (Konvergenzstudie: --konvergenz v1-h1). Rest der
+    Identität ⟨N⟩ = M·g + R: geschlossen ≤ 1e-12 N, solve_ivp ≤ 1e-10 N (KONV_REST)."""
+    hs = el._h_standard(v1)
+    ref = el._konv_messung(v1, v1_h1, 0.0, 1, floquet=False)
+    assert ref['n'] == 1 and ref['F'][0] == pytest.approx(483.66, abs=0.01) and abs(ref['rest']) <= 1e-12
+    for kw, tol_t, tol_F, tol_r in ((dict(h=2 * hs), 1e-15, 1e-13, 1e-12), (dict(h=hs / 2), 1e-15, 1e-13, 1e-12),
+                                    (dict(methode='ivp'), 1e-12, 1e-10, 1e-10),
+                                    (dict(methode='ivp', rtol=1e-12), 1e-12, 1e-10, 1e-10)):
+        m = el._konv_messung(v1, v1_h1, 0.0, 1, floquet=False, **kw)
+        d = el._konv_abw(m, ref, float(ref['F'].max()))
+        assert d['n'] == 0 and d['zeit'] <= tol_t and d['F'] <= tol_F, kw
+        assert d['lam'] <= 100 * tol_t / v1.T and d['rest'] <= tol_r, kw
+
+
+def test_konvergenz_hunt_crossley(v1_hc, v1_h1_hc):
+    """Hunt-Crossley-Hüpforbit H1 (solve_ivp, keine geschlossene Lösung): rtol 1e-11 (Standard) gegen die Referenz
+    rtol 1e-13 ändert Zeitpunkte um ≤ 1e-11 s und die Stoßspitze um ≤ 1e-9 relativ (rtol 1e-12 ist keine
+    brauchbare Referenz: DOP853 konvergiert in rtol nicht monoton). Liouville: det J = exp(−1,5·α·g·p·T) für jeden
+    periodischen Hunt-Crossley-Orbit; hier ein komplex konjugiertes Paar, also |μ| = √|det J|, beides auf 1e-6.
+    Kontrolle der Erkennung: h/2 ändert nichts (solve_ivp findet die Ereignisse selbst). Die Identität
+    ⟨N⟩ = M·g + R begrenzt hier die Quadratur (δ^1,5 am Kontaktrand): Rest 4,8e-7 N mit 8 Gauß-Knoten,
+    1,7e-8 N mit 16."""
+    hc, z = v1_hc, v1_h1_hc
+    ref = el._konv_messung(hc, z, 0.0, 1, rtol=el.KONV_RTOL_REF_HC)
+    F = float(ref['F'].max())
+    assert F == pytest.approx(1052.25, abs=0.01)
+    w_det = math.exp(-0.75 * hc.alpha * hc.g * 1 * hc.T)
+    m = el._konv_messung(hc, z, 0.0, 1)
+    for x in (ref, m):
+        assert x['komplex'] and math.sqrt(x['det']) == pytest.approx(w_det, abs=1e-6)
+        assert x['mu'] == pytest.approx(math.sqrt(x['det']), abs=1e-12)
+    d = el._konv_abw(m, ref, F, det_ex=w_det**2)
+    assert d['n'] == 0 and d['zeit'] <= 1e-11 and d['F'] <= 1e-9 and d['lam'] <= 1e-8 and d['det'] <= 1e-6
+    d = el._konv_abw(el._konv_messung(hc, z, 0.0, 1, floquet=False, h=el._h_standard(hc) / 2), m, F)
+    assert d['n'] == 0 and d['zeit'] == 0.0 and d['F'] <= 1e-14
+    assert 1e-7 < abs(m['rest']) < 1e-6
+    with el._gauss(16):
+        assert abs(el._konv_messung(hc, z, 0.0, 1, floquet=False)['rest']) < 5e-8
+    assert el.GL_X.size == 8                                    # Knotentabelle zurückgesetzt
+
+
+def _zweiter_weg(sy, z, t0, n_per, rtol=1e-12):
+    """Unabhängig geschriebener Ereignisintegrator als Gegenprobe (Testhilfe): Modulbeschleunigung aus dem
+    Egg-Profil der Engine (finesweep.z_egg_zdd, auf den Hub je Modul skaliert), eigene Kraftgesetze, Kontaktregeln
+    und Knickstellen, implizites Radau-Verfahren (Ordnung 5) statt DOP853; Übergänge als Ereignisse von solve_ivp,
+    Stoßspitze mit Brent auf der dichten Lösung. Aus dem Modul stammen nur die Parameter und der Startzustand.
+    Rückgabe Aufsetz- und Ablösezeiten, Stoßspitzen je Kontaktphase, Endzustand."""
+    from scipy.integrate import solve_ivp
+    from scipy.optimize import minimize_scalar
+    assert sy.profil == 'egg' and sy.f == fs.F_HZ
+    T = 1.0 / sy.f
+    tau = np.mod(np.asarray(sy.phis) / (360.0 * sy.f), T)
+    w = np.asarray(sy.m) * np.asarray(sy.hub) / (fs.RTOP / fs.THOLD) / sy.M
+    kv, c = sy.gesetz == 'kv', 1.5 * sy.alpha
+
+    def N(x, v):
+        return -sy.K * x - sy.C * v if kv else sy.K * np.maximum(-x, 0.0) ** sy.n * (1.0 - c * v)
+
+    def psi(y):
+        return -sy.K * y[0] - sy.C * y[1] if kv else 1.0 - c * y[1]
+
+    def ereignis(f, richtung):
+        f.terminal, f.direction = True, richtung
+        return f
+    knicke = np.unique(np.concatenate([tau, np.mod(tau + fs.THOLD * T, T)]))
+    grenzen = sorted(b for b in {t0 + k * T + q for k in range(n_per + 1) for q in knicke} | {t0 + n_per * T}
+                     if t0 < b <= t0 + n_per * T)
+    t, y = t0, np.array(z, float)
+    kontakt = bool(y[0] < 0 and psi(y) > 0)
+    auf, ab, spitzen, best = [], [], [], -np.inf
+    for tb in grenzen:
+        while tb - t > 1e-13:
+            k = kontakt
+            evs = [ereignis(lambda tt, yy: yy[0], 1), ereignis(lambda tt, yy: psi(yy), -1)] if k else \
+                [ereignis(lambda tt, yy: yy[0], -1)]
+            sol = solve_ivp(lambda tt, yy: (yy[1], -sy.g + (N(yy[0], yy[1]) if k else 0.0) / sy.M
+                                            - float(w @ fs.z_egg_zdd(tt - tau))),
+                            (t, tb), y, method='Radau', rtol=rtol, atol=(1e-16, 1e-13), events=evs, dense_output=True)
+            if k:
+                tt = np.linspace(sol.t[0], sol.t[-1], 2001)
+                Nt = N(*sol.sol(tt))
+                j = int(np.argmax(Nt))
+                r = minimize_scalar(lambda s: -float(N(*sol.sol(s))), bounds=(tt[max(j - 1, 0)], tt[min(j + 1, 2000)]),
+                                    method='bounded', options=dict(xatol=1e-14))
+                best = max(best, -r.fun, float(Nt[j]))
+            t, y = float(sol.t[-1]), sol.y[:, -1].copy()
+            if sol.status != 1:
+                t = tb
+                continue
+            if k:
+                ab.append(t)
+                spitzen.append(best)
+                best = -np.inf
+            else:
+                auf.append(t)
+            kontakt = not k
+    return dict(auf=np.array(auf), ab=np.array(ab), F=np.array(spitzen), z=y)
+
+
+def _gegen_zweiten_weg(sy, z, p, **kw):
+    """Größte Abweichung des Moduls (Optionen kw) vom zweiten Weg: Zeitpunkte [s], Stoßspitzen relativ, ẋ [m/s]."""
+    r = el.simulate(sy, *z, 0.0, p, **kw)
+    a = r['aufsetzer'][np.isfinite(r['aufsetzer'][:, 1])]
+    o = _zweiter_weg(sy, z, 0.0, p)
+    assert o['auf'].size == o['ab'].size == a.shape[0] >= 1
+    return (max(np.abs(o['auf'] - a[:, 0]).max(), np.abs(o['ab'] - a[:, 2]).max()),
+            float(np.abs(o['F'] / a[:, 5] - 1).max()), abs(o['z'][1] - r['PV'][-1]))
+
+
+def test_zweiter_integrationsweg(v1, v1_h1, v1_hc, v1_h1_hc):
+    """Gegenprobe mit einem unabhängig geschriebenen Integrator (_zweiter_weg: Engine-Profil, Radau). Kelvin-Voigt
+    gegen die geschlossene Lösung prüft die Testhilfe selbst (Zeitpunkte ≤ 1e-14 s, Stoßspitze ≤ 1e-12). Hunt-
+    Crossley hat im Modul nur solve_ivp: der Standard rtol 1e-11 liegt ≤ 1e-11 s bzw. ≤ 1e-9 relativ am zweiten
+    Weg (beobachtet 7e-13 s, 5e-11), die Referenz rtol 1e-13 der Studie ≤ 3e-12 s."""
+    dt_, dF, dv = _gegen_zweiten_weg(v1, v1_h1, 1)
+    assert dt_ <= 1e-14 and dF <= 1e-12 and dv <= 1e-12
+    dt_, dF, dv = _gegen_zweiten_weg(v1_hc, v1_h1_hc, 1)
+    assert dt_ <= 1e-11 and dF <= 1e-9 and dv <= 1e-9
+    dt_, dF, _ = _gegen_zweiten_weg(v1_hc, v1_h1_hc, 1, rtol=el.KONV_RTOL_REF_HC)
+    assert dt_ <= 3e-12 and dF <= 1e-10
+
+
+def test_gauss_knoten_zurueckgesetzt():
+    """Die Quadraturvariation der Studie setzt die Knoten auch nach einem Fehler zurück."""
+    alt = el.GL_X
+    with pytest.raises(RuntimeError):
+        with el._gauss(16):
+            assert el.GL_X.size == 16
+            raise RuntimeError
+    assert el.GL_X is alt
+
+
+@pytest.mark.parametrize('sy, ordnung, je_schritt', [(el.kandidat(), (3.7, 4.3), True),
+                                                     (el.referenz(35.0, 116.0), (1.0, 3.0), False)])
+def test_rk4_kontaktast_ordnung(sy, ordnung, je_schritt):
+    """Festschritt-RK4 (Engine-Schema) auf dem Kontaktast, eine Periode ab dem exakten Orbit, Fehler der
+    Kraftstichproben gegen die geschlossene Lösung: synchron liegen die Knickstellen des Egg-Profils (Ruck springt)
+    auf dem Raster, dann Ordnung 4 (Faktor ≈ 16 je Halbierung); an der Insel (35°, 116°) liegen sie zwischen den
+    Stützstellen, die Ordnung fällt im Mittel auf ≈ 2 (Simpson-Fehler des Knicks, abhängig von seiner Lage im Schritt:
+    je Halbierung 3,0 / 2,0 / 1,0). Bei Δt = T/2000 ist der Fehler ≤ 3e-6 N."""
+    zs, _, ok = el.kontaktorbit(sy)
+    assert ok
+    r = el.simulate(sy, *zs, 0.0, 1, keep=True)
+    e = []
+    for m in (1, 2, 4, 8):
+        o = el.rk4_festschritt(sy, *zs, 0.0, 1, 2000 * m)
+        assert o['lo'][0] == 0.0 and o['ntd'][0] == 0
+        e.append(float(np.abs(o['N'] - el.abtasten(sy, r, o['t'])[2]).max()))
+    p = math.log2(e[0] / e[-1]) / 3
+    assert e[0] <= 3e-6 and ordnung[0] <= p <= ordnung[1], (e, p)
+    if je_schritt:
+        assert all(ordnung[0] <= math.log2(a / b) <= ordnung[1] for a, b in zip(e[:-1], e[1:]))
+
+
+def test_rk4_huepforbit_ordnung(v1, v1_h1, v1_hc, v1_h1_hc):
+    """Hüpforbit H1 über eine Periode ab dem exakten Fixpunkt: Kelvin-Voigt springt beim Aufsetzen um C·|ẋ| (≈ 52 N),
+    der Fehler der RK4 in ẋ ist bei Δt = T/2000 ≥ 1e-4 m/s, bei Δt/8 noch ≥ 1e-5 m/s und fällt nicht monoton
+    (asymptotisch Ordnung 1, der Fehlerbeiwert hängt von der Lage des Sprungs im Schritt ab) – eine Δt/2-Differenz
+    schätzt ihn nicht zuverlässig. Hunt-Crossley (Kraft stetig beim Aufsetzen) konvergiert schneller (≤ 1e-6 m/s bei
+    Δt/8). Ereignislöser: Rundungsniveau."""
+    fehler = {}
+    for name, sy, z in (('kv', v1, v1_h1), ('hc', v1_hc, v1_h1_hc)):
+        r = el.simulate(sy, *z, 0.0, 1, **({} if name == 'kv' else dict(rtol=el.KONV_RTOL_REF_HC)))
+        fehler[name] = [abs(el.rk4_festschritt(sy, *z, 0.0, 1, 2000 * m)['PV'][-1] - r['PV'][-1]) for m in (1, 2, 4, 8)]
+    e = fehler['kv']
+    assert e[0] >= 1e-4 and min(e) >= 1e-5 and not all(b < a for a, b in zip(e[:-1], e[1:])), e
+    e = fehler['hc']
+    assert e[0] <= 2e-4 and e[-1] <= 1e-6, e
+
+
+def test_rk4_orbit_streut_bei_kelvin_voigt(v1, v1_h1, v1_hc, v1_h1_hc):
+    """Langer RK4-Lauf ab dem exakten Fixpunkt, Perioden 40–100: Mit Kelvin-Voigt ist der RK4-Orbit nicht periodisch;
+    die Aufsetzzeit streut bei Δt = T/2000 um einige 1e-4 s um den exakten Wert, die Stoßspitze um einige 1e-3. Der
+    Wert einer einzelnen Periode (früher Periode 39) ist eine Stichprobe dieser Streuung, kein Fehler mit einer
+    Ordnung in Δt. Hunt-Crossley: bei Δt/2 periodisch (Spanne von ẋ im Poincaré-Schnitt ≤ 1e-8 m/s), mit einer
+    Abweichung der Aufsetzzeit von ≈ 1e-6 s."""
+    def lauf(sy, z, n_schritt, **kw):
+        a = el.simulate(sy, *z, 0.0, 1, **kw)['aufsetzer'][0]
+        o = el.rk4_festschritt(sy, *z, 0.0, 100, n_schritt)
+        b = o['aufsetzer'][40:100]
+        assert np.array_equal(np.floor(b[:, 0] / sy.T + 1e-9), np.arange(40, 100))   # ein Stoß je Periode
+        return b[:, 0] - np.arange(40, 100) * sy.T - a[0], b[:, 2] / a[5] - 1.0, np.ptp(o['PV'][40:101])
+    d_t, d_F, v_sp = lauf(v1, v1_h1, 2000)
+    assert np.ptp(d_t) > 3e-4 and np.ptp(d_F) > 3e-3 and v_sp > 1e-3
+    assert d_t.min() < 0 < d_t.max() and d_F.min() < 0 < d_F.max()
+    d_t, d_F, v_sp = lauf(v1_hc, v1_h1_hc, 4000, rtol=el.KONV_RTOL_REF_HC)
+    assert v_sp < 1e-8 and np.ptp(d_t) < 1e-9 and 1e-7 < abs(d_t).max() < 1e-5
+
+
+def test_einzelstoss_konvergenz_geschlossen():
+    """Einzelstoß 0,5 m/s beider Kontaktgesetze gegen die geschlossenen Formeln über Abtastraster (× 2 … 1/8) und
+    rtol: Stoßzahl ≤ 1e-9, Stoßspitze ≤ 1e-6 relativ, Kontaktdauer (Kelvin-Voigt) ≤ 1e-9 s; Kriterium auf allen
+    Raster-Stufen und rtol ≤ 1e-11 (bei rtol 1e-8 liegt die Stoßzahl noch bei ≈ 5e-9)."""
+    g = el.konvergenz(['stoss'])
+    assert len(g) == 5 and all(x['ok'] for x in g)
+    gs = el.stoss_geschlossen(el.kandidat(), 0.5)
+    o = el.stoss(el.kandidat(), 0.5)
+    assert o['e'] == pytest.approx(gs['e'], abs=1e-14)
+    assert o['F_spitze'] == pytest.approx(gs['F_spitze'], rel=1e-12)
+    assert o['t_kontakt'] == pytest.approx(gs['t_kontakt'], abs=1e-15)
+
+
+def test_wurf_an_der_einzugsgrenze(v1):
+    """Würfe 1e-5 m/s unter und über der Einzugsgrenze K | H1 (V1 synchron, t₀ = 0, vom Kontaktast; Grenze
+    0,2944898 m/s, Bisektion der Konvergenzstudie): Endzustand unter h × 2 und h/2 unverändert. Die Festschritt-RK4
+    mit Δt = T/2000 lässt schon den Wurf 1e-4 m/s unter der Grenze hüpfen, mit Δt/2 nicht."""
+    z = el.startzustand(v1, 'orbit', 0.0)
+    hs = el._h_standard(v1)
+    for h in (2 * hs, hs / 2):
+        for dv, zust in ((V_GRENZE - 1e-5, 'Kontaktast'), (V_GRENZE + 1e-5, 'Hüpfen')):
+            assert el.wurf(v1, dv, 0.0, z=z, n_per=80, n_eval=20, h=h)['zustand'] == zust, (h, dv)
+    for m, huepft in ((1, True), (2, False)):
+        o = el.rk4_festschritt(v1, z[0], z[1] + V_GRENZE - 1e-4, 0.0, 80, 2000 * m)
+        assert (o['lo'][-20:].sum() > 0) == huepft, m
+
+
+def test_cli_konvergenz(monkeypatch, capsys):
+    """Kommandozeile: Teilstudie (Einzelstoß, Kontaktorbit der Insel) mit allen Tabellen und erfüllten Kriterien."""
+    rc, out, err = _cli(monkeypatch, capsys, '--konvergenz', 'stoss', 'insel-k')
+    assert rc == 0, err
+    for txt in ('A. Größte Änderung', 'B. solve_ivp', 'C. Quadratur', 'D. Gegenprobe Festschritt-RK4',
+                'E. Einzelstoß', 'Kriterien: 10 von 10 Gruppen erfüllt; davon 5 Rastergruppen'):
+        assert txt in out, txt
+    assert 'insel-k gerechnet' in err
 
 
 # ── langsame Prüfungen (PCMMS_SLOW=1) ───────────────────────────────────────
@@ -455,3 +720,60 @@ def test_v1_hunt_crossley_rueckkehr(v1):
     solve_ivp, ca. 5 s Rechenzeit)."""
     w = el.wurf(el.hc_aequivalent(v1, 0.05), 0.25, 0.0, start='ruhe', n_per=40, n_eval=10)
     assert w['zustand'] == 'Kontaktast'
+
+
+@slow
+def test_zweiter_integrationsweg_alle_huepforbits():
+    """Zweiter Integrationsweg (_zweiter_weg) an den übrigen Hüpforbits der Studie, je p Perioden ab dem Fixpunkt:
+    Kelvin-Voigt (H2, L1, Insel, Referenz-P2) gegen die geschlossene Lösung ≤ 1e-14 s und ≤ 1e-12 relativ;
+    Hunt-Crossley-Dreifachstoß bei (120°, 240°): Standard rtol 1e-11 ≤ 1e-11 s und ≤ 1e-9 relativ (beobachtet
+    5,8e-12 s, 2,0e-10), Referenz rtol 1e-13 ≤ 3e-12 s (ca. 8 s)."""
+    F = el.konvergenzfaelle()
+    for fall in ('v1-h2', 'l1-h1', 'insel', 'ref-p2', 'hc-dreifach'):
+        _, sy, z0, p, _ = F[fall]
+        kv = sy.gesetz == 'kv'
+        z = el.newton(sy, z0, 0.0, p, methode='exakt' if kv else 'ivp')['z']
+        dt_, dF, _ = _gegen_zweiten_weg(sy, z, p)
+        assert (dt_ <= 1e-14 and dF <= 1e-12) if kv else (dt_ <= 1e-11 and dF <= 1e-9), (fall, dt_, dF)
+        if not kv:
+            dt_, dF, _ = _gegen_zweiten_weg(sy, z, p, rtol=el.KONV_RTOL_REF_HC)
+            assert dt_ <= 3e-12 and dF <= 1e-10, (fall, dt_, dF)
+
+
+@slow
+def test_konvergenzstudie_voll():
+    """Volle Konvergenzstudie (--konvergenz, ca. 2,5 min): alle 53 Kriteriengruppen erfüllt (davon 20 Kontrollen der
+    Erkennung). Geschlossen ändert das Abtastraster Zeitpunkte und Kräfte nur auf Rundungsniveau. Hunt-Crossley:
+    Änderung gegen rtol 1e-13 ohne Ordnung, √|det J| am Liouville-Wert. RK4 im Kontaktast: Ordnung 4, wenn die
+    Knickstellen des Profils auf dem Raster liegen (synchron), sonst im Mittel 2 (Insel). Im Hüpfbereich mit
+    Kelvin-Voigt ist die Stoßspitze der RK4 nach einer Periode bei Δt = T/2000 um ≥ 1e-4 relativ falsch und
+    konvergiert nicht monoton; über die Perioden 40–100 ist der RK4-Orbit nicht periodisch (Spanne von ẋ im
+    Poincaré-Schnitt auch bei Δt/8 ≥ 1e-5 m/s, Aufsetzzeit bei Δt um > 1e-5 s gestreut). Hunt-Crossley: RK4-Orbit ab
+    Δt/2 periodisch. An der Einzugsgrenze bleibt der Endzustand ±1e-6 m/s um v_g = 0,2944898 m/s in allen Stufen
+    gleich; die RK4-Grenze liegt bei Δt um > 1e-4 m/s daneben, bei Δt/8 noch um einige 1e-6 m/s."""
+    g = el.konvergenz()
+    krit = [x for x in g if x['ok'] is not None]
+    assert len(krit) == 53 and all(x['ok'] for x in krit), [(x['fall'], x['weg'], x['variation']) for x in krit
+                                                            if not x['ok']]
+    assert 'davon 20 Rastergruppen' in el.konv_zaehlung(g) and '12 davon solve_ivp' in el.konv_zaehlung(g)
+    for x in g:
+        if x['weg'] == 'exakt' and x['variation'] == 'h':
+            assert x['aend']['zeit'] <= 1e-15 and x['aend']['F'] <= 1e-13, x['fall']
+        if x['gesetz'] == 'Hunt-Crossley' and x['variation'] == 'rtol' and 'det' in x['werte']:
+            assert x['ordnung'] == {} and x['aend']['det'] <= 1e-6 and x['ref']['komplex'], x['fall']
+    rk = {(x['fall'], x['weg']): x for x in g if x['weg'].startswith('RK4')}
+    assert 3.8 < rk[('v1-k', 'RK4')]['ordnung']['N_k'] < 4.2
+    assert 1.7 < rk[('insel-k', 'RK4')]['ordnung']['N_k'] < 2.3
+    for f, p in (('v1-h1', 1), ('v1-h2', 2), ('l1-h1', 1), ('insel', 1), ('ref-p2', 2)):
+        w = rk[(f, 'RK4, eine Periode')]['werte']['F']
+        if f != 'ref-p2':
+            assert w[0] >= 1e-4 and not all(b < a for a, b in zip(w[:-1], w[1:])), f
+        lang = rk[(f, f'RK4, Perioden {40 * p}–{100 * p}')]
+        assert lang['ordnung'] == {} and min(lang['werte']['v_spanne']) >= 1e-5, f
+        assert lang['werte']['zeit_auf'][0] > 1e-5 and lang['werte']['n'] == [0.0] * 4, f
+    for f in ('v1-h1-hc', 'hc-dreifach'):
+        assert max(rk[(f, 'RK4, Perioden 40–100')]['werte']['v_spanne'][1:]) < 1e-8, f
+    wu = [x for x in g if x['fall'] == 'wurf']
+    assert wu[0]['ok'] and wu[0]['ref']['v_g'] == pytest.approx(V_GRENZE, abs=2e-7)
+    s = wu[1]['werte']['grenze']
+    assert s[0] > 1e-4 and s[-1] < 2e-5
