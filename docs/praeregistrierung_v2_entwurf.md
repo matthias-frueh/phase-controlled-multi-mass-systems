@@ -1,7 +1,7 @@
 # PCMMS — Präregistrierung v2 (Entwurf)
 
 **Matthias Früh · ORCID 0009-0005-9984-4207**
-Stand: 25. September 2026, überarbeitet 2. Oktober 2026 (§1: Einordnung der Vorzeichenregel) · Teil A, Entwurf — nicht eingefroren, nicht registriert
+Stand: 25. September 2026, überarbeitet 2. Oktober 2026 (§1: Einordnung der Vorzeichenregel) und 3. Oktober 2026 (§5.1, §12: Verweise auf das Exposé) · Teil A, Entwurf — nicht eingefroren, nicht registriert
 
 Teil A besteht aus diesem Hauptdokument und dem gleichrangigen *Technischen Anhang*
 (`praeregistrierung_v2_anhang.md`, im Folgenden „Anhang“). Es gibt keine Messdaten. Jede Zahl ist ein
@@ -179,8 +179,10 @@ Entscheidungsrelevant; die vollständige Tabelle steht im Anhang A1.
 
 ### 5.1 Aufbau
 
-Experiment V1 wie im Exposé (drei Wägezellen im Dreieck, optischer Wegkanal, drei Phasenencoder mit
-Indeximpuls, Beschleunigungssensor, Temperatur), mit Nocke oder programmierbarem Aktuator für das Profil.
+Experiment V1 mit drei Wägezellen im Dreieck, optischem Wegkanal, drei Phasenencodern mit Indeximpuls,
+Beschleunigungssensor und Temperatur (Kanäle: A9.1), mit Nocke oder programmierbarem Aktuator für das Profil.
+Das Exposé legt diese Kanäle nicht fest: Wegkanal, Encoder und Hilfskanäle stehen dort als erwogen, die
+Kanalzahl als offen.
 Zusätzlich verlangt Teil A: kinematische Lagerung der Füße und eine festgelegte, dokumentierte
 Kabelschlaufe; feste Verstärkung ohne Softwarefilter, automatische Nullpunktnachführung,
 Stillstandserkennung, adaptive Filter oder Bereichsumschaltung; gleiche analoge Anti-Aliasing-Filter in
@@ -565,4 +567,5 @@ Profilasymmetrie berührt v2 nicht, weil f nach §5.3 gewählt und das Profil ge
 
 **Folgen für andere Dokumente:** Liste im Anhang A0. Die dort genannten Stellen in README, `overview.md`,
 Exposé, Werkstattbericht, Literaturabgleich, `einordnung.md`, `zehn_fragen.md` und `neuheitsgrad.md` sind
-nachgezogen; offen ist die Kanalzahl im Exposé („11 Kanäle“ bei neun aufgezählten).
+nachgezogen. Die Kanalzahl führt das Exposé seit den Nachträgen vom 2. Oktober 2026 als offen, abhängig
+von Messkette und Wegkanal (zuvor „11 Kanäle“ bei neun aufgezählten).
