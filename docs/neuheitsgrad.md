@@ -1,7 +1,7 @@
 # Gibt es das nicht schon? — Zum Neuheitsgrad von PCMMS
 
 **Phase-Controlled Multi-Mass Systems · Phasenkontrollierte Mehrmassensysteme**
-Matthias Früh · ORCID 0009-0005-9984-4207 · Stand September 2026 · Nachtrag 20.09.2026 (§10)
+Matthias Früh · ORCID 0009-0005-9984-4207 · Stand September 2026 · Nachtrag 20.09.2026 (§10) · Nachträge 2. Oktober 2026
 
 *Antwort auf die häufigste und berechtigtste Rückfrage.*
 
@@ -94,12 +94,14 @@ Für die Primärstudie von PCMMS wird diese Rückkopplung bewusst aus der ersten
 entfernt:
 
 - Der Körper steht still. Die äußere Bewegung ist kein Zielparameter.
-- Die Phasenkonfiguration ist die einzige unabhängige Variable.
+- Die Phasenkonfiguration ist die einzige planmäßig variierte Größe.
 - Gemessen wird die zeitaufgelöste Kontaktkraft.
 
-Damit ist die beobachtete Änderung der kontrollierten Phasenvariation direkt zuzuordnen.
+Ob beobachtete Änderungen der Phasenvariation allein zuzuordnen sind, prüfen Kontroll- und
+Identifizierbarkeitsläufe. Aktorkopplung, lastabhängiger Phasenversatz und Nichtlinearitäten der Messkette
+können ähnliche Signaturen erzeugen.
 
-**Das ist kein Perspektivwechsel. Das ist ein Kontrollversuch.**
+**Angelegt ist ein Kontrollversuch; die Zuordnung selbst ist damit noch nicht gezeigt.**
 
 ---
 
@@ -107,7 +109,9 @@ Damit ist die beobachtete Änderung der kontrollierten Phasenvariation direkt zu
 
 Der Zyklus- beziehungsweise Langzeitmittelwert der Kontaktkraft ist durch die Schwerpunktbilanz
 festgelegt. PCMMS verwendet ihn ausdrücklich **nicht als Entdeckungsgröße**, sondern als
-Kontrollkanal für Mess- und Auswertekette.
+Kontrollkanal für das erste Moment: Er zeigt Gleichanteil, Drift und gleichrichtende Nichtlinearitäten der
+Mess- und Auswertekette an. Lineare dynamische Verzerrungen der Wellenform erkennt er nicht; Kalibrierung
+und Prüfung der dynamischen Messkette ersetzt er nicht.
 
 ```
 Mittelwert  =  bekannte Basislinie   (Prüfgröße)
@@ -122,7 +126,10 @@ Verstoß (S1, dort §9.2).
 
 Das ist messtechnisch erheblich sauberer, als eine scheinbare Mittelwertabweichung als neues
 physikalisches Ergebnis zu interpretieren — ein Fehler, den dieses Projekt in einer früheren
-Fassung selbst gemacht und dokumentiert korrigiert hat.
+Fassung selbst gemacht und dokumentiert korrigiert hat. Ursache war dort ein Kontaktmodell mit
+vorgeschriebener Eindrückung ([`archiv_vermerk_kernhypothese_v3.md`](archiv_vermerk_kernhypothese_v3.md)).
+Zurückgezogen sind auch frühere Aussagen zu einer gerichteten Netto-Impulsübertragung ohne äußeren
+Partner und zu einer allgemeinen Vorzeichenregel der Schiefe.
 
 ---
 
@@ -130,18 +137,23 @@ Fassung selbst gemacht und dokumentiert korrigiert hat.
 
 Besonders scharf wird die Frage dort, wo das Modell für eine Phasenvariation einen
 charakteristischen Verlauf des Kraftminimums vorhersagt. Am Auslöschungspunkt zeigt die numerische
-Untersuchung eine ausgeprägte **Zeltform in F_min**.
+Untersuchung des Referenzsatzes (weicher Kontakt, K = 10⁴ N/m) eine ausgeprägte **Zeltform in F_min** mit
+einer Spannweite von 4,56 N; am V1-Kandidaten der Auslegung (steifer Kontakt, von 0,650 kg bewegen sich nur
+die 0,300 kg der Module, Hub 8 mm) sind es 0,56 N. Nach dem Entwurf der Präregistrierung v2 wird nur die
+Lage der Spitze geprüft (H2), nicht Höhe und Steigungen der Simulation.
 
 Damit lässt sich die experimentelle Frage einfach formulieren:
 
 > Wenn die Phasenlage systematisch verändert wird — erscheint dann dieselbe charakteristische
 > Struktur in der gemessenen Kraftkurve?
 
-Das Ergebnis kann positiv, negativ oder inkonklusiv sein. Gerade weil die Form **vor** der Messung
-aus dem Modell hervorgeht, ist sie wissenschaftlich interessanter als eine nachträglich ausgewählte
-Kennzahl.
+Das Ergebnis kann positiv, negativ oder inkonklusiv sein. Gerade weil die Vorhersage **vor** den
+Kombinationsmessungen festliegt — nach dem Entwurf der Präregistrierung v2 aus gemessenen
+Einzelmodulantworten, nicht aus den Simulationszahlen —, ist sie wissenschaftlich interessanter als eine
+nachträglich ausgewählte Kennzahl.
 
-**Wichtig zur Einordnung:** F_min ist die scharfe experimentelle Prüfform, nicht der Neuheitskern.
+**Wichtig zur Einordnung:** F_min ist eine anschauliche experimentelle Prüfgröße, nicht der Neuheitskern;
+ausgewertet wird sie mit einem vorab festgelegten Schätzer und Unsicherheiten.
 Die methodische Behauptung bleibt die Wellenformstatistik der unilateralen Kontaktkraft als Zielgröße;
 nach dem [Entwurf](praeregistrierung_v2_entwurf.md) der Präregistrierung v2 ist die Schiefe γ₁ allerdings
 sekundär, primär sind F_min − ⟨F_N⟩ und die ersten drei Harmonischen der Kontaktkraft (dort §3).
@@ -159,7 +171,7 @@ Sondern die Zusammenstellung:
 > vorgegebenes individuelles Bahnprofil · kontrollierte relative Phase zwischen mehreren Modulen ·
 > gemeinsamer Rahmen · unilaterale Stützfläche · zeitaufgelöste Kontaktkraft als primäre Zielgröße ·
 > absichtlich stillstehender Körper · analytisch festgelegte ⟨F_N⟩ = M·g-Nullbasis ·
-> vollständige Präregistrierung mit Abbruchkriterien vor der Messung
+> eine Präregistrierung im Entwurf (v2, nicht eingefroren; v1 als nicht extern registrierte Arbeitsfassung)
 
 Das ist eine **Nischenbehauptung, keine Entdeckungsbehauptung** — und damit haltbarer als die
 Aussage, niemand untersuche Kontaktkräfte.
@@ -201,8 +213,9 @@ Formulierungen einer Begutachtung stand. Ein erster Schritt liegt seit dem 12.09
 
 ## 10 · Nachtrag 20.09.2026 — erster Literaturabgleich
 
-Der Literaturabgleich vom 12.09.2026 (`literaturabgleich_2026-09-12.md`, 12 verifizierte Referenzen, davon 10 mit
-DOI und zwei arXiv-Preprints ohne DOI; dazu ein Kurzvorläufer mit offener DOI) verschiebt den Neuheitsstatus in einem Punkt nach unten und präzisiert ihn in einem anderen:
+Der Literaturabgleich vom 12.09.2026 (`literaturabgleich_2026-09-12.md`, 12 Referenzen mit Prüfvermerk des
+Dokuments, davon 10 mit DOI und zwei arXiv-Preprints ohne DOI; dazu ein Kurzvorläufer mit offener DOI; der
+Prüfweg ist im Repository nicht dokumentiert, und ins Arbeitspapier sind die Einträge noch nicht übernommen) verschiebt den Neuheitsstatus in einem Punkt nach unten und präzisiert ihn in einem anderen:
 
 - **Nach unten:** Phasenabhängige Gleichrichtung periodischer Anregungen ist als Ratchet- und
   Symmetriebrechungsproblem etabliert (Flach, Yevtushenko & Zolotaryuk 2000; Denisov, Flach & Hänggi
@@ -213,12 +226,18 @@ DOI und zwei arXiv-Preprints ohne DOI; dazu ein Kurzvorläufer mit offener DOI) 
 - **Präzisiert:** Der eigenständige Untersuchungsgegenstand liegt in intern angeregten
   Mehrmassensystemen, der getrennten Steuerung von Profil und Phase, der Wellenformstatistik
   unilateraler Kontaktkräfte und — nur in Linie B — einer expliziten Mediumkopplung. Das
-  quasistatische Modell von Madatov, Li & Popov setzt Dauerkontakt ohne Trägheit voraus; Linie A liegt
-  mit 3f/f_n ≈ 1,5, dynamischer Liftoff-Schwelle und explizitem Kontaktverlust außerhalb dieser
-  Annahme. Architekturähnlichkeit und Regimeähnlichkeit sind getrennt zu bewerten.
+  quasistatische Modell von Madatov, Li & Popov setzt Dauerkontakt ohne Trägheit voraus. Der
+  Simulationsreferenzsatz liegt mit 3f/f_n ≈ 1,5, dynamischer Liftoff-Schwelle und explizitem
+  Kontaktverlust außerhalb dieser Annahme. Für V1 verlangt der Entwurf der Präregistrierung v2 dagegen
+  Dauerkontakt und Resonanzabstand (dort §5.3); dort beruht die Abgrenzung auf der Architektur (innere
+  Anregung, nur Normalkraft, keine Reibung), nicht auf dem Regime. Architekturähnlichkeit und
+  Regimeähnlichkeit sind getrennt zu bewerten.
 
-Der Strang der vibrationsgetriebenen Mehrmodul-Roboter (Fang, Xu und Mitarbeiter; Chernousko;
-Wiercigroch und Mitarbeiter) ist im Abgleich noch nicht aufgenommen; §9 gilt dafür weiter.
+Der Strang der vibrationsgetriebenen Mehrmodul-Roboter (Fang, Xu und Mitarbeiter, im Projekt auch als
+„Fudan-Gruppe“ geführt; Chernousko; Wiercigroch und Mitarbeiter) ist im Abgleich noch nicht aufgenommen
+und bibliografisch ungeprüft; §9 gilt dafür weiter. Dasselbe gilt für Impact-Oszillatoren und Grazing,
+Haptik, Kapselroboter, dynamisches Wägen und Metrologie. Bis zu einer Recherche in diesen Feldern trifft
+das Projekt keine Aussage, ein Gegenstand sei dort nicht behandelt.
 
 ---
 

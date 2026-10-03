@@ -5,18 +5,20 @@
 **Zahlen, die man parat haben sollte**
 M·g = 6,3765 N · 361 Konfigurationen im Grobraster, 441 im 2°-Feinraster · Streuung des Zeitmittels
 0,07 % · Liftoff 0 – 76,2 % · Schiefe −0,29 … +1,98 · Spitzenkraft bis 50,6 N ·
-F_min-Maximum 5,330 N exakt bei (120°, 240°), Steigung 0,21 N/° (Resonanzwert von K = 10⁴ N/m; bei festem ζ
-und K = 3·10⁴ … 10⁷ N/m 0,09–0,12 N/°) · alles Simulation
+F_min-Maximum 5,330 N exakt bei (120°, 240°), Steigung 0,21 N/° (beides Werte des weichen Referenzkontakts
+K = 10⁴ N/m, keine Vorhersage für V1; bei festem ζ und K = 3·10⁴ … 10⁷ N/m 0,09–0,12 N/°) · geprüft wird
+die Lage der Spitze · alles Simulation
 
 ---
 
 **1 · Gibt es das nicht schon?**
 
-Die Bausteine ja, die Kombination nein. Interne Massen, Mehrmodulsysteme, Phasendifferenz als
-Stellgröße, Liftoff, 2D-Parameterkarten — alles besetzt. Aber: Wer die Kontaktkraft als Zielgröße
-nimmt (Perret-Liaudet & Rigaud, Umbanhowar & van Hecke), hat keine Mehrmassen-Phasensteuerung. Wer
-Mehrmassen-Phasensteuerung betreibt (z. B. die Gruppe um Fang und Xu, Fudan), optimiert Geschwindigkeit.
-PCMMS sitzt im Schnitt.
+Die Bausteine ja; die Kombination habe ich in einer gezielten, nicht systematischen Suche nicht gefunden.
+Interne Massen, Mehrmodulsysteme, Phasendifferenz als Stellgröße, Liftoff, 2D-Parameterkarten — alles
+besetzt. Wer die Kontaktkraft als Zielgröße nimmt (Perret-Liaudet & Rigaud, Umbanhowar & van Hecke), hat
+keine Mehrmassen-Phasensteuerung. Wer Mehrmassen-Phasensteuerung betreibt (z. B. Arbeiten von Fang, Xu
+u. a., im Projekt als „Fudan-Gruppe“ geführt; Kandidat, bibliografisch ungeprüft), optimiert nach diesen
+Angaben Geschwindigkeit. PCMMS sitzt im Schnitt, soweit die Suche reicht.
 
 **2 · Was ist konkret der Beitrag?**
 
@@ -35,28 +37,35 @@ Mittelwertabweichung gilt per Protokoll als Apparaturfehler. Nach dem
 Kontrollschwelle ε_ctrl den Lauf ungültig; angehalten wird die Messung erst bei einem reproduzierbaren
 Verstoß (S1, dort §9.2). Linie B behauptet Nettobewegung, benennt aber den Reaktionspartner (Luft) und
 sagt vorher, dass der Effekt im Vakuum exakt verschwindet. Eine frühere Fassung behauptete tatsächlich eine
-Mittelwertverschiebung — sie wurde zurückgezogen, dokumentiert und archiviert.
+Mittelwertverschiebung — sie wurde zurückgezogen, dokumentiert und archiviert (Ursache: Kontaktmodell mit
+vorgeschriebener Eindrückung; `archiv_vermerk_kernhypothese_v3.md`). Zurückgezogen ist auch die frühere
+allgemeine Vorzeichenregel der Schiefe.
 
 **4 · Warum schwankt die Kraft bei festem Mittel?**
 
 Weil der Mittelwert das Integral betrifft, nicht den Verlauf. Beim Liftoff ist die Kraft phasenweise
 exakt null; die fehlende Fläche wird durch Spitzen kompensiert. In der Simulation: 50,6 N Spitze bei
-6,38 N Mittel — Faktor acht, bei 0,07 % Streuung des Mittels. Perret-Liaudet & Rigaud zeigen
-experimentell dasselbe bei bis zu 15 % Kontaktverlust.
+6,38 N Mittel — Faktor acht, bei 0,07 % Streuung des Mittels. Das folgt aus dem Schwerpunktsatz.
+Perret-Liaudet & Rigaud (2003) bieten fachlichen Anschluss (Spektren und Statistik eines Hertz-Kontakts mit
+möglichem Kontaktverlust), keinen Nachweis für PCMMS.
 
 **5 · Rechnet ihr nicht nur vorwärts, was ihr selbst vorgegeben habt?**
 
-Der härteste Einwand. Antwort: Die Messung prüft nicht die Simulation, sondern das **Kontaktmodell**.
-Gerechnet wird mit linear-elastischem Kontakt plus viskoser Dämpfung, unilateral abgeschnitten —
-ohne Hertz'sche Nichtlinearität, Rauheit, Stoßverluste. Die Frage lautet nicht „bestätigt das
-Experiment die Simulation", sondern **„überlebt die vorhergesagte Phasenabhängigkeit den Übergang
-zum realen Kontakt?"** Dieses Projekt hat an genau der Stelle schon einmal ein Artefakt produziert.
+Der härteste Einwand. Antwort: Die Messung prüft zuerst, ob die Auflagekraft der **Überlagerung der
+Einzelmodulantworten** folgt, also Linearität und Modulunabhängigkeit der gesamten Kette aus Mechanik und
+Messung. Nach dem Entwurf der Präregistrierung v2 entsteht die Vorhersage aus separat gemessenen
+Einzelmodulläufen, nicht aus der Simulation; Messdaten gibt es noch nicht. Das
+Kontaktmodell wird nur dort geprüft, wo es sich von der starren Auflage unterscheidet; in einem steifen
+Aufbau ist das wenig. Gerechnet wird mit linear-elastischem Kontakt plus viskoser Dämpfung, unilateral
+abgeschnitten — ohne Hertz'sche Nichtlinearität, Rauheit, Stoßverluste. Dieses Projekt hat an der Stelle
+des Kontaktmodells schon einmal ein Artefakt produziert.
 
 **6 · Warum keine Messdaten?**
 
 Weil das Projekt prä-experimentell ist und das so benannt wird. Präregistrierung, Artefaktkatalog,
 Entscheidungsregeln und Abbruchkriterien stehen *vor* der ersten Messung. In der experimentellen
-Mechanik ist das unüblich — und es ist der Teil, der auch bei einem Null-Ergebnis Bestand hat.
+Mechanik ist das nach meinem Eindruck selten; geprüft habe ich das nicht. Verwertbar bleibt dieser Teil
+auch bei einem Null-Ergebnis, sofern die Präzision eine Entscheidung erlaubt.
 
 **7 · Was, wenn nichts herauskommt?**
 
@@ -83,9 +92,9 @@ behauptet es nicht.
 **10 · Warum ohne Institut ernst nehmen?**
 
 Die Physik ist unstrittig; Code und Simulationsdaten liegen in diesem Repository. Was fehlt, ist die Messung,
-und das steht in jedem Dokument. Angeboten wird keine Entdeckung, sondern eine vorbereitete,
-falsifizierbare Messfrage samt Auswerteplan — und die Bereitschaft, ein Null-Ergebnis zu
-veröffentlichen.
+und das steht in jedem Dokument. Angeboten wird keine Entdeckung, sondern eine falsifizierbare Messfrage
+mit einem Auswerteplan im Entwurf (Arbeitspunkt, Antrieb, Geometrie und Messkette sind noch festzulegen) —
+und die Bereitschaft, ein Null-Ergebnis zu veröffentlichen.
 
 ---
 

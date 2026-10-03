@@ -2,7 +2,7 @@
 
 **Phase-Controlled Multi-Mass Systems**\
 Matthias Früh · Gravidon Systemics Research · ORCID [0009-0005-9984-4207](https://orcid.org/0009-0005-9984-4207)\
-Stand: 28. September 2026 · Status: prä-experimentell (Simulation; keine Messdaten)
+Stand: 28. September 2026, Nachträge 2. Oktober 2026 · Status: prä-experimentell (Simulation; keine Messdaten)
 
 ---
 
@@ -23,9 +23,12 @@ beobachtete Abweichung des Zeitmittels gilt als Apparaturfehler. Der Untersuchun
 Wellenform, nicht das Mittel.
 
 Ausdrücklich **nicht** behauptet werden: reaktionsloser Antrieb, Gravitationsmodifikation,
-Gewichtsreduktion, Verschiebung des Zeitmittels. Ein früherer Simulationszyklus (v3a–v3d) berichtete eine
-solche Verschiebung; sie wurde als Kontaktmodell-Artefakt erkannt, zurückgezogen und archiviert
-([`docs/archiv_vermerk_kernhypothese_v3.md`](docs/archiv_vermerk_kernhypothese_v3.md)). Die alten Gleichungen bleiben als Nulllinie dokumentiert.
+Gewichtsreduktion, Verschiebung des Zeitmittels. Frühere Aussagen zu einer Mittelwertverschiebung, zu
+einer gerichteten Netto-Impulsübertragung ohne äußeren Partner und zu einer allgemeinen Vorzeichenregel
+der Schiefe sind zurückgezogen. Die Mittelwertverschiebung des Simulationszyklus v3a–v3d war ein Artefakt
+eines Kontaktmodells mit vorgeschriebener Eindrückung
+([`docs/archiv_vermerk_kernhypothese_v3.md`](docs/archiv_vermerk_kernhypothese_v3.md)); die Vorzeichenregel
+ist mit dem Arbeitspapier v2.4 (Abschnitt 4.8) zurückgezogen. Die alten Gleichungen bleiben als Nulllinie dokumentiert.
 
 ## Zwei Forschungslinien
 
@@ -46,7 +49,7 @@ solche Verschiebung; sie wurde als Kontaktmodell-Artefakt erkannt, zurückgezoge
 | [`docs/praeregistrierung_2026-06.md`](docs/praeregistrierung_2026-06.md) | Präregistrierung mit Falsifikationskriterien (Juni 2026, unverändert) |
 | [`docs/einordnung.md`](docs/einordnung.md), [`docs/zehn_fragen.md`](docs/zehn_fragen.md) | Einordnung, Abgrenzung, Antworten auf die üblichen Einwände |
 | [`docs/neuheitsgrad.md`](docs/neuheitsgrad.md) | Was daran nicht neu ist — und was übrig bleibt |
-| [`docs/literaturabgleich_2026-09-12.md`](docs/literaturabgleich_2026-09-12.md) | Abgleich mit der Ratchet-, Tribologie- und Kontaktdynamik-Literatur, 12 verifizierte Referenzen, davon 10 mit DOI |
+| [`docs/literaturabgleich_2026-09-12.md`](docs/literaturabgleich_2026-09-12.md) | Abgleich mit der Ratchet-, Tribologie- und Kontaktdynamik-Literatur, 12 Referenzen mit Prüfvermerk des Dokuments, davon 10 mit DOI; noch nicht ins Arbeitspapier übernommen |
 | [`docs/archiv_vermerk_kernhypothese_v3.md`](docs/archiv_vermerk_kernhypothese_v3.md) | Dokumentierter Rückzug der früheren Hypothese |
 | [`code/`](code/) | Simulations-Engine ([`pcmms_v3a_phasen_sweep.py`](code/pcmms_v3a_phasen_sweep.py)), 2°-Feinsweep ([`finesweep.py`](code/finesweep.py)), analytische Lösung für den liftoff-freien Bereich ([`linear_solver.py`](code/linear_solver.py)), Auslegungswerkzeug für den Arbeitspunkt mit Zellkräften ([`auslegung.py`](code/auslegung.py); Präregistrierung v2 §12, Werkzeug 2), ereignisgenauer Löser mit Einzugsprüfung für Liftoff und Hüpfzustände ([`ereignisloeser.py`](code/ereignisloeser.py)), Attraktorkarten des V1-Kandidaten ([`einzugsgebiete.py`](code/einzugsgebiete.py); Ergebnisse in [`docs/einzugsgebiete_v1_kandidat.md`](docs/einzugsgebiete_v1_kandidat.md)) und Abbildungen ([`plot_figures.py`](code/plot_figures.py)); Tests in [`tests/`](tests/) |
 | [`docs/figures/`](docs/figures/) | Abbildungen aus den Simulationsdaten, je in heller und dunkler Fassung |
@@ -56,7 +59,9 @@ Die Präregistrierung v2 für die Messkampagne liegt als [Entwurf](docs/praeregi
 Die Abnahme der Werkzeuge für Auslegung und ereignisgenaue Rechnung dokumentiert [`docs/abnahme_ap02_ap03.md`](docs/abnahme_ap02_ap03.md).
 
 Das Arbeitspapier v2.4 liegt mit Quellen und Nachrechnung in [`docs/arbeitspapier/`](docs/arbeitspapier/), das
-Symbol- und Formelverzeichnis v2.7 in [`docs/formelverzeichnis/`](docs/formelverzeichnis/).
+Symbol- und Formelverzeichnis v2.7 in [`docs/formelverzeichnis/`](docs/formelverzeichnis/). Die PDFs geben den Stand
+vom 26.09. bzw. 28.09.2026 wieder; die Nachträge vom 2. Oktober 2026 stehen bisher nur im Quelltext (`.tex`, siehe
+die README-Dateien beider Ordner).
 
 ## Simulationsstand
 
@@ -77,7 +82,8 @@ Kürzel v3a auch den zurückgezogenen Simulationszyklus v3a–v3d bezeichnet. Mi
 ([`docs/archiv_vermerk_kernhypothese_v3.md`](docs/archiv_vermerk_kernhypothese_v3.md)).
 
 - **19×19-Phasensweep** (361 Konfigurationen, [`data/sweep_19x19.csv`](data/sweep_19x19.csv)): ⟨F⟩ im Median 6,3765 N = M·g
-  (Spannweite 6,333–6,383 N durch Einschwing- und Endlich-Fenster-Effekte bei hohem Liftoff) · Schiefe −0,29 … +1,98 ·
+  (Spannweite 6,333–6,383 N durch den Randterm des Auswertefensters bei hohem Liftoff; der Tiefstwert bei
+  (0°, 208,4°) ist ein Artefakt der Festschritt-Integration, siehe [`data/README.md`](data/README.md)) · Schiefe −0,29 … +1,98 ·
   Liftoff 0–76,2 % · F_max bis 50,6 N. Nur 12 Rasterpunkte um (120°, 240°) und (240°, 120°) sind liftoff-frei.
   Im Liftoff-Bereich ist die Karte nicht eindeutig: Physikalisch gleiche Konfigurationen (Module nur umbenannt)
   können in verschiedenen stationären Zuständen landen, etwa (0°, 113,7°) mit 75,6 % und (246,3°, 246,3°) mit
@@ -87,9 +93,25 @@ Kürzel v3a auch den zurückgezogenen Simulationszyklus v3a–v3d bezeichnet. Mi
   zu kleineren φ₂ und ≈ 0,19 N je Grad zu größeren φ₂ · 90,7 % des Fensters liftoff-frei · |⟨F⟩ − M·g| ≤ 0,2 mN durchgehend.
   Die Steigung ist ein Resonanzwert von K = 10⁴ N/m: Die zweite Harmonische liegt mit 2f/f_n = 1,013 auf der
   Kontaktresonanz (|H₂| = 5,03); bei festem ζ und K = 3·10⁴ … 10⁷ N/m beträgt sie 0,09–0,12 N je Grad
-  (`python3 code/linear_solver.py --harmonics`).
-- Ein Sinusprofil liefert ohne Liftoff keine Schiefe; das asymmetrische Bewegungsprofil ist für das
-  Zielsignal zwingend.
+  (`python3 code/linear_solver.py --harmonics`). Auch die Höhe der Spitze und die positive Schiefe am
+  Triphasik-Punkt sind Effekte des weichen Referenzkontakts (Übertragung der dritten und sechsten Harmonischen).
+  Am V1-Kandidaten der Auslegung (steifer Kontakt, von 0,650 kg bewegen sich nur die 0,300 kg der Module,
+  Hub 8 mm) beträgt die Spannweite der Zeltkurve 0,56 N (`python3 code/auslegung.py --candidate`), im
+  Referenzsatz 4,56 N ([Präregistrierung v2, Anhang A4](docs/praeregistrierung_v2_anhang.md);
+  `python3 code/linear_solver.py --section`); der Vergleich trennt den Einfluss des Kontakts nicht von dem der
+  bewegten Masse und des Hubs. Die Zahlen des Referenzsatzes illustrieren das Modell; Vorhersagen für V1 sind
+  weder sie noch der Auslegungswert des Kandidaten.
+- **Profil und Harmonische, allgemein (linearer Dauerkontakt):** Ein halbwellensymmetrisches Profil,
+  a(t + T/2) = −a(t), enthält keine geraden Harmonischen. Schiefe und N₂ setzen daher ein Profil ohne
+  Halbwellensymmetrie voraus; ohne gerade Harmonische gibt es keine Triade j + l = k und damit keine Schiefe.
+  Eine dritte Harmonische ist mit Halbwellensymmetrie vereinbar. N₃ setzt einen dritten Anregungsanteil voraus,
+  der nach Überlagerung der Module und Kontaktübertragung übrig bleibt; ein nicht sinusförmiges Profil enthält
+  ihn nicht zwangsläufig.
+- **Egg- und Sinusprofil im Modell:** Das Egg-Profil enthält zweite und dritte Harmonische; im Dauerkontakt
+  treten damit Schiefe, N₂ und N₃ auf, soweit die Phasenlage sie nicht auslöscht. Das Sinusprofil enthält nur
+  die Grundwelle und liefert ohne Liftoff weder Schiefe noch N₂ oder N₃. Phasenabhängigkeit und Zeltspitze treten
+  auch beim Sinusprofil auf; bei starrer Auflage ist die Steigung am Knick mit dem Egg-Profil etwa doppelt so groß
+  (`python3 code/linear_solver.py --section --rigid --mu 0.462`, mit und ohne `--sinus`).
 - **Kontaktast analytisch:** Ohne Abheben ist das Modell linear. [`code/linear_solver.py`](code/linear_solver.py)
   berechnet die stationäre Lösung exakt aus Fourier-Reihe des Profils und Übertragungsfunktion des Kontakts
   (ca. 1 ms je Punkt) und trifft alle liftoff-freien Punkte der drei Datensätze auf ≤ 6·10⁻⁶. Die Phasenlage
@@ -108,7 +130,9 @@ Kürzel v3a auch den zurückgezogenen Simulationszyklus v3a–v3d bezeichnet. Mi
   linearen Orbit aus bleibt er in Kontakt (`python3 code/linear_solver.py --contact`). Die Bistabilität bleibt
   über 200 s und bei halbiertem Zeitschritt bestehen: Bei (35°, 116°) ergibt der Standardstart λ = 75,82 % bzw.
   75,81 % (Δt = 50 bzw. 25 µs), F_max 39,49 bzw. 39,48 N; der Start auf dem linearen Orbit λ = 0 %, F_max 19,81 N.
-  Reproduzierbar mit `--contact --long` (ca. 20–25 min).
+  Reproduzierbar mit `--contact --long` (ca. 20–25 min). Diese Aussagen gelten für den weichen Referenzkontakt.
+  Bei steifem Kontakt sind im Modell auch aus dem Kontaktast heraus Hüpfzustände mit Stoßspitzen von einigen
+  100 N möglich ([`docs/einzugsgebiete_v1_kandidat.md`](docs/einzugsgebiete_v1_kandidat.md)).
 
 ### Abbildungen
 
@@ -145,6 +169,8 @@ Spitzen um 40 N, triphasisch bleibt die Kraft in einem schmalen Band um M·g.*
 
 Die Auslegung eines physischen Aufbaus (Bewegungsprofil, Wägezellen, Kalibrierung bei intermittierendem
 Kontakt) ist davon getrennt und offen; siehe [`docs/expose_2026-09.md`](docs/expose_2026-09.md), Abschnitt „Nächster Schritt“.
+Dort sind die offenen Entscheidungen des Autors zu Antrieb, Hardwarestand, Geometrie, Kontakt und Dämpfung,
+Umfang von E1, Messkette und institutioneller Anbindung mit ihren Optionen aufgeführt.
 
 ## Nachrechnen
 

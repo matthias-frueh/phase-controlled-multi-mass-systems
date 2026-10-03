@@ -1,6 +1,6 @@
 # PCMMS — Literaturabgleich für Forschungsrahmen v3.6 und Arbeitspapier
 
-**Stand:** 12. September 2026 – Version v3 (Korrekturläufe; Änderungslog in §8) · Repository-Fassung 20.09.2026: organisatorische Punkte (Einreichungswege) entfernt, Zieltext (B) als „Arbeitspapier“ bezeichnet, sonst unverändert · 25.09.2026: Schwellen in §4.2 (T3) an den Entwurf der Präregistrierung v2 angepasst  
+**Stand:** 12. September 2026 – Version v3 (Korrekturläufe; Änderungslog in §8) · Repository-Fassung 20.09.2026: organisatorische Punkte (Einreichungswege) entfernt, Zieltext (B) als „Arbeitspapier“ bezeichnet, sonst unverändert · 25.09.2026: Schwellen in §4.2 (T3) an den Entwurf der Präregistrierung v2 angepasst · Nachträge 2. Oktober 2026: Prüfstand in §1.1 ergänzt (offene Angaben, Prüfweg); Regime-Abgrenzung in §2.6 und §6.2 für V1 an den Entwurf der Präregistrierung v2 angepasst  
 **Autor des PCMMS-Korpus:** Matthias Früh  
 **Funktion:** Einmal geschriebener Arbeitsabgleich für zwei Zieltexte: (A) `PCMMS_Forschungsrahmen_v3.6` und (B) Forschungsstand des Arbeitspapiers.  
 **Status:** Literatur- und Änderungsgrundlage; keine experimentelle Evidenz und kein Ersatz für Primärmessungen.
@@ -154,7 +154,7 @@
 
 **Namensprüfung:** Erstautor der Arbeit von 2018 ist **Mikhail Popov (M. Popov)**, nicht V. L. Popov. V. L. Popov ist Mitautor der Arbeit von 2026; deren Erstautor ist **Ibrohim Madatov** (v1 dieser Datei: „Islam“ – falsch). Der Journaltitel der Arbeit von 2018 lautet „Multimode …“, die arXiv-Fassung „Multi-mode …“.
 
-**Prüfstand 12.09.2026:** Alle Einträge in 1.1 gegen Verlags- bzw. arXiv-Seiten geprüft (Autoren, Jahr, Band, Seiten/Artikelnummer, DOI). Die DOI von Papangelo/Ciavarella ist am 12.09.2026 geklärt: 10.1016/j.jsv.2014.11.028 (ScienceDirect-Verlagstreffer, übereinstimmend mit der Crossref-Referenz in Chaos 35, 053126 (2025)); die Angabe …2014.10.034 aus v1 war falsch. Damit ist in 1.1 nichts mehr offen.
+**Prüfstand 12.09.2026:** Alle Einträge in 1.1 gegen Verlags- bzw. arXiv-Seiten geprüft (Autoren, Jahr, Band, Seiten/Artikelnummer, DOI). Die DOI von Papangelo/Ciavarella ist am 12.09.2026 geklärt: 10.1016/j.jsv.2014.11.028 (ScienceDirect-Verlagstreffer, übereinstimmend mit der Crossref-Referenz in Chaos 35, 053126 (2025)); die Angabe …2014.10.034 aus v1 war falsch. Damit ist in 1.1 nichts mehr offen. *Nachtrag Oktober 2026:* Offen bleiben Band und Seiten von `Feng2026EnergyPhase`; `Feng2026PhaseSpace` und `Feng2026Harmonic` liegen nur als arXiv-Preprints vor; der Prüfweg (Verlags- und arXiv-Seiten) ist im Repository nicht nachvollziehbar dokumentiert. Die Einträge stehen weder im Literaturverzeichnis noch im Text des Arbeitspapiers v2.4; vor einer Übernahme sind sie gegen die Primärquellen zu prüfen.
 
 ### 1.2 Nachzutragen (aus der Referenzliste des Lubricants-Papers; DOI offen)
 
@@ -257,7 +257,7 @@ Der Code trennt daher bei **geometrischer Öffnung oder nichtpositiver ungekappt
 17. Teidelt et al. (2012): dynamischer Stick-Slip-Kontakt in Mikroantrieben.
 18. Papangelo & Ciavarella (2015): Grenzen quasistatischer Analyse für einen Coulomb-Reibungsoszillator unter harmonischer Last.
 
-**PCMMS-Regime:** Linie A liegt nach eigenem Befund im dynamischen Nachbarbereich (`3f/f_n ≈ 1,5`), einschließlich dynamischer Liftoff-Schwelle `R_c ≈ 1,45` und dem kontrollierten Befund `gamma_1 = 0` ohne Liftoff bei Sinusprofilen. Deshalb sind Refs. 16–18 für die unmittelbare Regime-Abgrenzung wichtiger als das quasistatische Lubricants-Paper allein.
+**PCMMS-Regime:** Linie A liegt nach eigenem Befund im dynamischen Nachbarbereich (`3f/f_n ≈ 1,5`), einschließlich dynamischer Liftoff-Schwelle `R_c ≈ 1,45` und dem kontrollierten Befund `gamma_1 = 0` ohne Liftoff bei Sinusprofilen. Deshalb sind Refs. 16–18 für die unmittelbare Regime-Abgrenzung wichtiger als das quasistatische Lubricants-Paper allein. *Nachtrag Oktober 2026:* Das gilt für den Simulationsreferenzsatz. Für V1 verlangt der Entwurf der Präregistrierung v2 Dauerkontakt und Resonanzabstand (dort §5.3); dort trägt die Regime-Abgrenzung nicht, und die Abgrenzung beruht auf der Architektur (innere Anregung, nur Normalkraft, keine Reibung).
 
 **Änderungsvorschlag:** Forschungsstand und §17 müssen Architektur **und** Regime getrennt vergleichen.
 
@@ -354,7 +354,7 @@ Die Erzeugung gerichteter Antworten durch phasenverschobene periodische Anregung
 
 ### 6.2 Regime-Abgrenzung der Kontaktmechanik
 
-Das quasistatische Modell von Madatov, Li und Popov vernachlässigt die Indenterträgheit und setzt kontinuierlichen Kontakt voraus. Damit dient es als mechanistischer Kontrast, deckt jedoch das für PCMMS Linie A relevante dynamische Regime nicht ab. Die von den Autoren selbst genannten dynamischen Nachbararbeiten berücksichtigen Systemmasse und -steifigkeit, Frequenzverhältnisse, Resonanzen oder dynamischen Stick-Slip-Kontakt und diskutieren die Grenzen quasistatischer Näherungen. Diese Nachbarschaft ist für PCMMS wesentlich, weil die eigenen Simulationen mit `3f/f_n ≈ 1,5`, einer dynamischen Liftoff-Schwelle von ungefähr `R_c ≈ 1,45` und explizitem Kontaktverlust gerade außerhalb der quasistatischen Dauer-Kontakt-Annahme liegen. Architekturähnlichkeit und Regimeähnlichkeit sind deshalb getrennt zu bewerten.
+Das quasistatische Modell von Madatov, Li und Popov vernachlässigt die Indenterträgheit und setzt kontinuierlichen Kontakt voraus. Damit dient es als mechanistischer Kontrast, deckt jedoch das dynamische Regime des Simulationsreferenzsatzes nicht ab. Die von den Autoren selbst genannten dynamischen Nachbararbeiten berücksichtigen Systemmasse und -steifigkeit, Frequenzverhältnisse, Resonanzen oder dynamischen Stick-Slip-Kontakt und diskutieren die Grenzen quasistatischer Näherungen. Diese Nachbarschaft ist für den Simulationsreferenzsatz wesentlich, weil er mit `3f/f_n ≈ 1,5`, einer dynamischen Liftoff-Schwelle von ungefähr `R_c ≈ 1,45` und explizitem Kontaktverlust gerade außerhalb der quasistatischen Dauer-Kontakt-Annahme liegt. Der geplante Versuch V1 soll dagegen nach dem Entwurf der Präregistrierung v2 im Dauerkontakt und mit Resonanzabstand messen; dort beruht die Abgrenzung auf der Architektur (innere Anregung, nur Normalkraft, keine Reibung), nicht auf dem Regime. Architekturähnlichkeit und Regimeähnlichkeit sind deshalb getrennt zu bewerten. *(Nachtrag Oktober 2026)*
 
 ### 6.3 Kontaktmodell und numerische Absicherung
 

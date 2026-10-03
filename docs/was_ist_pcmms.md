@@ -1,7 +1,7 @@
 # Was ist PCMMS?
 
 **Phase-Controlled Multi-Mass Systems · Phasenkontrollierte Mehrmassensysteme**
-Matthias Früh · ORCID 0009-0005-9984-4207 · Stand September 2026
+Matthias Früh · ORCID 0009-0005-9984-4207 · Stand September 2026 · Nachträge 2. Oktober 2026
 
 *Für Leser ohne Vorwissen. Ersetzt die frühere Erklärfassung desselben Monats.*
 
@@ -105,16 +105,17 @@ Verlauf voraus: eine **Zeltform** mit ausgeprägter Spitze an der symmetrischen 
 Phasenlage verändern  →  Minimum steigt und fällt  →  charakteristische Zeltform
 ```
 
-Diese Form ist vor der Messung aus dem Modell festgelegt, nicht nachträglich ausgewählt.
-Entscheidend ist deshalb nicht, ob sich *irgendetwas* ändert, sondern ob **genau diese Struktur**
-reproduzierbar auftritt.
+Die Vorhersage liegt vor den Kombinationsmessungen fest und wird nicht nachträglich ausgewählt. Nach dem
+Entwurf der Präregistrierung v2 entsteht sie aus der Überlagerung separat gemessener Einzelmodulantworten,
+nicht aus den Zahlen der Simulation. Entscheidend ist deshalb nicht, ob sich *irgendetwas* ändert, sondern ob
+**genau diese Struktur** reproduzierbar auftritt.
 
 - Erscheint sie: das stützt die Modellbeschreibung.
 - Erscheint sie nicht: die Vorhersage ist falsifiziert — oder Modell, Aufbau und Messkette müssen
   geprüft werden.
 
-F_min ist die scharfe Prüfform, weil sie ohne Statistik ablesbar ist. Der Gegenstand bleibt die
-Wellenformstatistik insgesamt.
+F_min ist eine anschauliche Prüfgröße; ausgewertet wird sie mit einem vorab festgelegten Schätzer und
+Unsicherheiten. Der Gegenstand bleibt die Wellenformstatistik insgesamt.
 
 ---
 
@@ -131,13 +132,12 @@ mehreren Modulen und die zeitaufgelöste Kontaktkraft als *primäre Zielgröße*
 stillstehendem Körper. Ausführlich behandelt im Dokument zum Neuheitsgrad.
 
 **Die Attribution.** Weil der Körper sich nicht bewegt, entfällt die Rückkopplung zwischen Kraft,
-Reibung und Bewegung. Die Phasenkonfiguration ist die einzige unabhängige Variable. Beobachtete
-Änderungen sind ihr direkt zuzuordnen.
+Reibung und Bewegung. Die Phasenkonfiguration ist die einzige planmäßig variierte Größe. Ob beobachtete
+Änderungen ihr allein zuzuordnen sind, prüfen Kontroll- und Identifizierbarkeitsläufe.
 
-**Die Anwendungsnähe.** Intermittierender Kontakt bestimmt Verschleiß, Geräusch und
-Positioniergenauigkeit — in Lagerungen, Vibrationsförderern, Werkzeugmaschinen, Prüfständen. Wer
-F_min gezielt einstellen kann, kann Kontaktverlust vermeiden, wo er schadet, und herbeiführen, wo
-er nützt.
+**Mögliche Anschlussfelder.** Intermittierender Kontakt spielt eine Rolle für Verschleiß, Geräusch und
+Positioniergenauigkeit — in Lagerungen, Vibrationsförderern, Werkzeugmaschinen, Prüfständen. Ein Nutzen
+der Phasensteuerung ist dort nicht gezeigt; dafür wären Zielgröße und Vergleichssteuerung festzulegen.
 
 Ob daraus eine reproduzierbare, quantitativ beschreibbare Systematik wird, entscheidet das
 Experiment.
@@ -149,10 +149,11 @@ Experiment.
 **Linie A — Wellenformstatistik (primär).** Alles bisher Beschriebene. Der Körper steht still.
 
 **Linie B — medium-gekoppelte Fortbewegung (optional, eigener Aufbau).** Der Körper hängt frei.
-Untersucht wird, ob die Innenbewegung über den Luftwiderstand eine gerichtete Nettobewegung
-erzeugt. Der Reaktionspartner wird ausdrücklich benannt: die umgebende Luft. Vorhergesagt wird,
-dass der Effekt mit der Luftdichte skaliert und im Vakuum exakt verschwindet — genau das, was ein
-reaktionsloser Antrieb nicht vorhersagen könnte.
+Untersucht wird, ob die Innenbewegung über die Kopplung an die umgebende Luft eine gerichtete
+Nettobewegung erzeugt. Der Reaktionspartner wird ausdrücklich benannt: das Medium. Im Vakuum
+verschwindet der Effekt — genau das, was ein reaktionsloser Antrieb nicht vorhersagen könnte. Wie Kraft
+und Drift von der Dichte abhängen, hängt vom noch offenen Kraftmodell bei kleiner Keulegan-Carpenter-Zahl
+ab; eine Skalierung mit der Dichte ist modellabhängig und keine feste Vorhersage.
 
 Beide Linien sind erhaltungskonform. Keine ist widerlegt. Sie dürfen nicht vermischt werden.
 
@@ -162,7 +163,10 @@ Beide Linien sind erhaltungskonform. Keine ist widerlegt. Sie dürfen nicht verm
 
 Eine frühere Fassung des Projekts prüfte eine andere Hypothese: ob sich der **Mittelwert** der
 äußeren Kraft dauerhaft verschieben könne. Diese Interpretation wurde analytisch und numerisch
-verworfen — sie war ein Artefakt des damals verwendeten Kontaktmodells.
+verworfen — sie war ein Artefakt des damals verwendeten Kontaktmodells, das die Eindrückung der
+Unterlage vorschrieb ([`archiv_vermerk_kernhypothese_v3.md`](archiv_vermerk_kernhypothese_v3.md)).
+Zurückgezogen sind ebenso frühere Aussagen zu einer allgemeinen Vorzeichenregel der Schiefe
+(Arbeitspapier v2.4, Abschnitt 4.8) und zu einer gerichteten Netto-Impulsübertragung ohne äußeren Partner.
 
 Die älteren Gleichungen bleiben dokumentiert. Nicht als heutige Aussage, sondern als archivierte
 Nulllinie, ausdrücklich als überholt gekennzeichnet. Sie halten fest, welche Grenze das Projekt
@@ -192,11 +196,13 @@ Gegenstand ist nüchterner:
 
 ## 10 · Stand
 
-Prä-experimentell. Die Simulationsseite ist abgeschlossen: ein 19×19-Phasensweep und ein Feinsweep
-mit 2°-Raster um die symmetrische Konfiguration. **Eigene Messdaten existieren nicht.**
+Prä-experimentell. Simulationsstand: ein 19×19-Phasensweep, ein Feinsweep mit 2°-Raster um die
+symmetrische Konfiguration, ein ereignisgenauer Löser und Attraktorkarten für einen Auslegungskandidaten.
+Arbeitspunkt, Antrieb, Geometrie und Messkette sind noch nicht festgelegt. **Eigene Messdaten existieren nicht.**
 
-Ein Null-Ergebnis — die Formsteuerung ist an realer Hardware nicht auflösbar — ist vorab als
-vollwertiges Resultat definiert, nicht als Scheitern.
+Ein Null-Ergebnis ist vorab als vollwertiges Resultat definiert, nicht als Scheitern, sofern die
+erreichte Präzision eine Entscheidung erlaubt. Reicht sie nicht, ist der Ausgang unbestimmt; auch er
+wird veröffentlicht.
 
 ---
 

@@ -2,7 +2,7 @@
 
 ### Ein Werkstattbericht zu phasenkontrollierten Mehrmassensystemen
 
-*Matthias Früh · Gravidon Systemics Research · ORCID 0009-0005-9984-4207 · September 2026*
+*Matthias Früh · Gravidon Systemics Research · ORCID 0009-0005-9984-4207 · September 2026 · Nachträge 2. Oktober 2026*
 
 ---
 
@@ -20,7 +20,7 @@ Das ist kein Ergebnis, das man erst herausfinden müsste. Es folgt aus dem Schwe
 
 Für die Versuchsplanung ist das eine gute Nachricht. Man hat damit eine Größe, deren Sollwert exakt bekannt ist. Weicht der gemessene Mittelwert davon ab, hat man ein Problem in der Messkette — Drift, Kalibrierfehler, ein zu kurzes Auswertefenster. Der Mittelwert wird damit vom Erkenntniskanal zum Kontrollkanal. Eine Abweichung ist ein Prüfanlass, kein Befund.
 
-In der Simulation lässt sich das direkt beobachten. Im Feinsweep um die interessante Phasenkonfiguration bleibt der Mittelwert über 441 Konfigurationen hinweg zwischen 6,376330 und 6,376690 N, also innerhalb von ±0,2 mN um den Sollwert. Im Grobsweep über den gesamten Phasenraum dagegen streut er zwischen 6,333041 und 6,383209 N. Die Abweichung von bis zu 43,5 mN tritt ausschließlich dort auf, wo der Körper zyklisch abhebt und die Kraft zwischen null und mehreren Dutzend Newton springt — dort ist ein Einschwingvorgang nach 5 Sekunden nicht immer abgeklungen, und manche Antworten wiederholen sich erst nach zwei oder drei Anregungsperioden, sodass ein 10-Sekunden-Fenster nicht auf ganze Perioden fällt. Der Kontrollkanal funktioniert, aber seine Empfindlichkeit hängt vom Betriebsregime ab. Wer eine Schwelle für ihn festlegt, ohne die Fensterlänge mitzudenken, bekommt Fehlalarme genau an den interessanten Punkten.
+In der Simulation lässt sich das direkt beobachten. Im Feinsweep um die interessante Phasenkonfiguration bleibt der Mittelwert über 441 Konfigurationen hinweg zwischen 6,376330 und 6,376690 N, also innerhalb von ±0,2 mN um den Sollwert. Im Grobsweep über den gesamten Phasenraum dagegen streut er zwischen 6,333041 und 6,383209 N. Die Abweichungen treten ausschließlich dort auf, wo der Körper zyklisch abhebt und die Kraft zwischen null und mehreren Dutzend Newton springt. Dort bleibt ein Randterm des Auswertefensters: Ein Einschwingvorgang ist nach 5 Sekunden nicht immer abgeklungen, und manche Antworten wiederholen sich erst nach mehreren Anregungsperioden, sodass ein 10-Sekunden-Fenster nicht auf ganze Perioden fällt. Der größte Wert, −43,5 mN bei (0°, 208,4°), ist allerdings ein Artefakt der Festschritt-Integration (RK4, 50 µs): Ereignisgenau gerechnet ist die Bahn dort nach etwa 5 Sekunden eingeschwungen (Wiederkehrtoleranz 1 mm/s; mit strengerem Wiederkehrkriterium (10⁻⁸ bzw. 10⁻⁹ m/s) nach 9 bis 10 Sekunden), und das Fenstermittel weicht nur um +0,02 mN ab (`code/ereignisloeser.py`). Der Kontrollkanal funktioniert, aber seine Empfindlichkeit hängt vom Betriebsregime ab. Wer eine Schwelle für ihn festlegt, ohne die Fensterlänge mitzudenken, bekommt Fehlalarme genau an den interessanten Punkten.
 
 ---
 
@@ -28,11 +28,11 @@ In der Simulation lässt sich das direkt beobachten. Im Feinsweep um die interes
 
 Wenn die Fläche unter der Kurve festliegt, bleibt die Form. Und die ist alles andere als starr.
 
-Der Kontakt ist einseitig: die Unterlage kann drücken, nicht ziehen. Sobald die Innendynamik den Körper stärker nach oben beschleunigt, als die Schwerkraft ihn hält, hebt er ab und die Kraft ist exakt null. Diese Nullphasen müssen anderswo im Zyklus durch Kraftspitzen kompensiert werden, sonst stimmt der Mittelwert nicht. Aus einer harmlosen Sinusanregung wird so eine stark verzerrte, unsymmetrische Kraftzeitreihe.
+Der Kontakt ist einseitig: die Unterlage kann drücken, nicht ziehen. Sobald die Innendynamik den Körper stärker nach oben beschleunigt, als die Schwerkraft ihn hält, hebt er ab und die Kraft ist exakt null. Diese Nullphasen müssen anderswo im Zyklus durch Kraftspitzen kompensiert werden, sonst stimmt der Mittelwert nicht. Aus einer periodischen Profilanregung wird so eine stark verzerrte, unsymmetrische Kraftzeitreihe.
 
 Wie stark, hängt an der Phasenlage. Über 361 Konfigurationen des Grobsweeps — bei 10 Hz, 7,7 mm Hub und einer angesetzten Kontaktsteifigkeit von 10 000 N/m, mit der gesamten Masse in den drei bewegten Modulen (ein ruhendes Gehäuse ist im Modell nicht enthalten) — bewegt sich die Schiefe der Kraftverteilung zwischen −0,2880 und +1,9790. Der Anteil der Zykluszeit ohne Kontakt reicht bis 76,22 %. Die Spitzenkraft erreicht 50,5521 N, also fast das Achtfache der statischen Last. Die Minimalkraft liegt zwischen null und 2,8821 N.
 
-Grob lassen sich drei Regime unterscheiden. Bei synchronen Phasen arbeiten alle drei Massen gleichzeitig, der Körper hüpft, die Schiefe ist hoch. Bei der triphasischen Konfiguration — 120° und 240° Versatz — löschen sich die Beiträge weitgehend aus, der Kontakt reißt nie ab. Dazwischen liegt ein Übergangsbereich mit kontinuierlicher Modulation und negativer Schiefe.
+Grob lassen sich drei Regime unterscheiden. Bei synchronen Phasen arbeiten alle drei Massen gleichzeitig, der Körper hüpft, die Schiefe ist hoch. Bei der triphasischen Konfiguration — 120° und 240° Versatz — löschen sich die Beiträge weitgehend aus; im Referenzmodell reißt der Kontakt dort nicht ab. Das hängt von der Kontaktsteifigkeit ab (siehe unten) und von der Auflage: Steht der Körper auf drei Zellen mit den Modulen über den Zellen, heben im Modell die Zellen auch dort ab (Arbeitspapier v2.4, Anhang B.6, im Quelltext mit den Nachträgen vom 2. Oktober 2026). Dazwischen liegt ein Übergangsbereich mit kontinuierlicher Modulation und negativer Schiefe.
 
 ---
 
@@ -44,7 +44,7 @@ Sie waren ein Rechenartefakt. Das damalige Kontaktmodell schrieb die Eindrückun
 
 Ein zweiter Fehler steckte im Bewegungsprofil selbst. Die Trajektorie der Innenmassen bestand aus einer langsamen Halte- und einer schnellen Rückführphase; an der Naht dazwischen sprang die Geschwindigkeit. Ein Geschwindigkeitssprung bedeutet einen Dirac-Stoß in der Beschleunigung, und der schlug als Bias von −0,808 N durch. Bemerkenswert daran ist, wo der Fehler sitzt: nicht im Zeitschritt, sondern im Modell. Man kann die Integration beliebig verfeinern, der Bias bleibt. Er verschwindet erst, wenn das Profil stetig differenzierbar gemacht wird — hier über die Bedingung R_bot = R_top · T_fast / T_hold.
 
-Beide Korrekturen zusammen haben die ursprüngliche Hypothese erledigt. Die betroffenen Stände sind archiviert und werden nicht mehr zitiert.
+Beide Korrekturen zusammen haben die ursprüngliche Hypothese erledigt. Die betroffenen Stände sind archiviert und werden nicht mehr zitiert ([`archiv_vermerk_kernhypothese_v3.md`](archiv_vermerk_kernhypothese_v3.md)). Später zurückgezogen wurde auch eine allgemeine Vorzeichenregel der Schiefe: Das Vorzeichen hängt von der Kontaktübertragung ab (Arbeitspapier v2.4, Abschnitt 4.8).
 
 ---
 
@@ -85,6 +85,6 @@ Das ist weniger, als eine Veröffentlichung üblicherweise beansprucht, aber es 
 
 Offen ist einiges, und das gehört dazu. Zwei Schwellenwerte des Auswerteverfahrens sind bisher nicht verbindlich festgelegt, ε_ctrl für den Kontrollkanal und ε_phys für die Wellenformgrößen. Der Entwurf v2 legt ε_ctrl mit einer Formel fest, deren Zahlenwert erst aus Vormessungen an der Apparatur folgt, und ersetzt ε_phys durch standardisierte Residuen und eine Äquivalenzbedingung. Zwischen den Rechnungen und der älteren Textdokumentation besteht eine unentschiedene Diskrepanz bei Frequenz und Profilasymmetrie. Und die schwierigste Frage ist eine metrologische: Wie kalibriert man eine Kraftmesskette für einen Kontakt, der zyklisch abhebt? Statische Rückführbarkeit ist Standard, die Übertragung auf intermittierenden Kontakt ist es nicht.
 
-Getrennt davon läuft eine zweite, ausdrücklich optionale Untersuchung mit eigenem Aufbau: ein frei beweglicher Körper, der über die Kopplung an das umgebende Medium eine gerichtete Nettodrift erfahren könnte. Die Simulationen liefern dort Werte zwischen −0,104 und +0,692 mm/s. Der Effekt skaliert mit der Dichte des Mediums und verschwindet im Vakuum, weil der Reaktionspartner fehlt. Diese Linie hat mit der stationären Wellenformmessung nichts zu tun und wird nicht mit ihr vermischt.
+Getrennt davon läuft eine zweite, ausdrücklich optionale Untersuchung mit eigenem Aufbau: ein frei beweglicher Körper, der über die Kopplung an das umgebende Medium eine gerichtete Nettodrift erfahren könnte. Frühere Simulationen lieferten dort Werte zwischen −0,104 und +0,692 mm/s; nach einer späteren Nachrechnung (Linie-B-Unterlagen, noch nicht im Repository) sind das Fensterwerte vor dem Einschwingen, nicht die stationäre Drift des Modells. Im Vakuum verschwindet der Effekt, weil der Reaktionspartner fehlt. Wie Kraft und Drift von der Dichte des Mediums abhängen, hängt vom noch offenen Kraftmodell bei kleiner Keulegan-Carpenter-Zahl ab. Diese Linie hat mit der stationären Wellenformmessung nichts zu tun und wird nicht mit ihr vermischt.
 
 Bleibt der Teil, der sich am schlechtesten in eine Ergebnisliste schreiben lässt: Von den vier ursprünglichen Ergebnisständen ist keiner übrig geblieben. Die Arbeit, die sie erzeugt hat, war trotzdem nicht umsonst — sie hat den Modellfehler sichtbar gemacht, der sie erzeugt hat. Das ist der übliche Verlauf. Nur steht es selten in den Veröffentlichungen.

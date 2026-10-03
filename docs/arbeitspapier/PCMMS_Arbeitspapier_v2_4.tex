@@ -68,8 +68,9 @@ Konfiguration auf $Mg$ fest. Eine zustandsabhängige Differenz
 zeitgemittelter Kräfte ist deshalb als Effektgröße nicht verfügbar; eine
 frühere Phase des Projekts, die eine solche Differenz berichtet hatte,
 wurde zurückgezogen. Der Rahmen kehrt die Rolle dieser Größe um: Ihr
-wahrer Wert ist bekannt, und sie dient als In-situ-Kontrolle der
-vollständigen Auswertekette. Die Zielgrößen sind Funktionale der
+wahrer Wert ist bekannt, und sie dient als Kontrolle auf Gleichanteil,
+Drift und gleichrichtende Nichtlinearitäten der Auswertekette. Lineare
+dynamische Verzerrungen der Wellenform erkennt sie nicht. Die Zielgrößen sind Funktionale der
 Wellenform --- Schiefe, Liftoff-Anteil, Asymmetrieverhältnis, minimale
 Kontaktkraft ---, die der Erhaltungssatz frei lässt. Die Auswertung ist
 zweispurig: erst Qualifikation der Apparatur gegen die bekannte
@@ -83,15 +84,21 @@ Abhängigkeit ohne Mechanismusbehauptung.
 
 Die Simulationsstudie über ein $19\times19$-Raster der relativen Phasen
 liefert vier Befunde, die den Aufbau binden. Das Residuum gegen die
-Basislinie liegt bei Dauerkontakt bei $0{,}2\,\mathrm{ppm}$. Größere Werte
+Basislinie liegt bei Dauerkontakt unter der Rundungsgrenze des
+Datensatzes von $0{,}2\,\mathrm{ppm}$. Größere Werte
 --- im Archivlauf bis $0{,}68\,\%$, nach adaptivem Burn-in bis
-$0{,}37\,\%$ --- sind kein Fehler der Integration, deren Anteil unter
-$0{,}01\,\%$ bleibt, sondern ein Randterm des Auswertefensters: die
+$0{,}37\,\%$ --- sind ein Randterm des Auswertefensters: die
 Änderung der Schwerpunktsgeschwindigkeit über das Fenster, bezogen auf
-$g$ und Fensterlänge. Er entsteht bei unvollständigem Einschwingen, bei
+$g$ und Fensterlänge. Der Quadraturanteil der Mittelung bleibt unter
+$0{,}01\,\%$. Der Randterm entsteht bei unvollständigem Einschwingen, bei
 Fenstern ohne ganze Orbitperioden und bei aperiodischer Bewegung, fällt
-mit der Fensterlänge ab, kann als phasenabhängiger Effekt erscheinen und
-ist die quantitative Signatur des zurückgezogenen Befunds. Die vier
+mit der Fensterlänge ab und kann als phasenabhängiger Effekt erscheinen.
+Den Archiv-Höchstwert von $0{,}68\,\%$ erzeugt ein Einschwingen, das die
+Festschritt-Integration künstlich verlängert; ereignisgenau gerechnet
+weicht das Zeitmittel dort um $+0{,}02\,\mathrm{mN}$ ab. Der Randterm
+erklärt die Restabweichungen der korrigierten Rechnungen; der
+zurückgezogene Befund einer Mittelwertverschiebung selbst ging auf ein
+Kontaktmodell mit vorgeschriebener Eindrückung zurück. Die vier
 Funktionale sind nicht unabhängig; nur die minimale Kontaktkraft trägt
 eigenständige Information. Das Vorzeichen der Schiefe ist keine
 Eigenschaft der Phasenlage allein: Im Raster tritt negative Schiefe nur
@@ -99,9 +106,16 @@ ohne gleichphasiges Modulpaar auf, doch der Referenzparametersatz liegt
 auf der Kontaktresonanz der zweiten Harmonischen, und schon bei gut
 $5\,\%$ geringerer Kontaktsteifigkeit und gleichem Dämpfungsgrad ist ein
 einzelnes Modul im Dauerkontakt linksschief. Und mit sinusförmigem Antrieb kollabiert die gesamte
-Phasenkarte auf die resultierende Amplitude: Die Asymmetrie des
-Bahnprofils ist die Quelle der Phasenabhängigkeit, ein Antrieb mit
-asymmetrischem Profil zwingend.
+Phasenkarte auf die resultierende Amplitude: Im Dauerkontakt liefert das
+Sinusprofil, das nur die Grundwelle enthält, weder Schiefe noch zweite
+oder dritte Harmonische; das asymmetrische Profil des Modells enthält
+beide Harmonischen und erzeugt Schiefe. Phasenabhängigkeit und Zeltspitze
+treten auch beim Sinusprofil auf. Allgemein schließt im linearen
+Dauerkontakt ein halbwellensymmetrisches Profil gerade Harmonische und
+damit Schiefe aus; eine dritte Harmonische ist mit ihm vereinbar. Sie setzt
+einen dritten Anregungsanteil voraus, der nach Überlagerung und
+Kontaktübertragung übrig bleibt; ein nicht sinusförmiges Profil enthält
+ihn nicht zwangsläufig.
 
 Die Grenze des Rahmens wird benannt. Die Kontrolle prüft das erste
 Moment; phasenkorrelierte Einkopplung, symmetrische Kettenfehler und
@@ -109,10 +123,12 @@ amplitudenabhängige Kennlinien bestehen sie und verfälschen dennoch die
 Wellenform. Sie sind nur durch Versuchsanordnung zu behandeln, vor allem
 durch Leerläufe mit bestromter, aber blockierter Aktuierung.
 
-Die Arbeit behauptet keine neue Physik. Ihr Beitrag ist methodisch und
-eng: die Verwendung einer erhaltungsgarantierten Nullgröße als Prüfmittel
-gegen die eigene Messkette, und die Wellenform der Kontaktkraft als
-entworfene Zielgröße einer Phasensteuerung innerer Massen.
+Die Arbeit behauptet keine neue Physik. Ihr möglicher Beitrag ist
+methodisch und eng: die Verwendung einer erhaltungsgarantierten Nullgröße
+als Prüfmittel gegen die eigene Messkette, und die Wellenform der
+Kontaktkraft als entworfene Zielgröße einer Phasensteuerung innerer
+Massen. Ob beides in Metrologie, Wägetechnik oder benachbarten Feldern
+schon beschrieben ist, ist ohne systematische Recherche offen.
 
 \clearpage
 
@@ -131,7 +147,9 @@ every internal configuration; a state-dependent difference of
 time-averaged forces is therefore unavailable as an effect quantity, and
 an earlier project stage that had reported one has been withdrawn. The
 framework inverts the role of this quantity: its true value is known,
-and it serves as an in-situ control of the complete evaluation chain.
+and it serves as a check of the evaluation chain for offsets, drift and
+rectifying nonlinearities; it does not detect linear dynamic distortions
+of the waveform.
 The target quantities are functionals of the waveform --- skewness,
 liftoff fraction, asymmetry ratio, minimum contact force --- which the
 conservation law leaves free. Evaluation proceeds on two tracks,
@@ -145,15 +163,22 @@ dependence without a claimed mechanism.
 
 A simulation study over a $19\times19$ grid of relative phases yields
 four findings that bind the design. The residual against the baseline
-is $0{.}2\,\mathrm{ppm}$ under permanent contact. Larger values --- up to
+stays below the rounding limit of the data set, $0{.}2\,\mathrm{ppm}$,
+under permanent contact. Larger values --- up to
 $0{.}68\,\%$ in the archived run and up to $0{.}37\,\%$ after adaptive
-burn-in --- are not an integration error, whose share stays below
-$0{.}01\,\%$, but a boundary term of the evaluation window: the change of
+burn-in --- are a boundary term of the evaluation window: the change of
 the centre-of-mass velocity across the window, divided by $g$ times the
-window length. It arises from incomplete transients, from windows not
-spanning whole orbit periods and from aperiodic motion, decays with
-window length, can masquerade as a phase-dependent effect and is the
-quantitative signature of the withdrawn result. The four functionals are not
+window length. The quadrature share of the averaging stays below
+$0{.}01\,\%$. The boundary term arises from incomplete transients, from
+windows not spanning whole orbit periods and from aperiodic motion,
+decays with window length and can masquerade as a phase-dependent
+effect. The archived maximum of $0{.}68\,\%$ stems from a transient that
+the fixed-step integration prolongs artificially; with event-accurate
+integration the time mean there deviates by $+0{.}02\,\mathrm{mN}$. The
+boundary term explains the residual deviations of the corrected
+computations; the
+withdrawn mean-shift result itself came from a contact model with a
+prescribed indentation. The four functionals are not
 independent; only the minimum contact force carries separate
 information. The sign of the skewness is not a property of
 the phase configuration alone: in the grid, negative skewness occurs only
@@ -161,9 +186,16 @@ when no pair of modules is in phase, but the reference parameter set sits
 on the contact resonance of the second harmonic, and a contact stiffness
 lower by just over $5\,\%$ at equal damping ratio already makes a single
 module under permanent contact negatively skewed. With sinusoidal drive the
-entire phase map collapses onto the resultant amplitude: the asymmetry
-of the motion profile is the source of the phase dependence, and a drive
-producing an asymmetric profile is mandatory.
+entire phase map collapses onto the resultant amplitude: under permanent
+contact the sinusoidal profile, which contains only the fundamental,
+yields neither skewness nor second or third harmonics, whereas the
+model's asymmetric profile contains both harmonics and produces skewness.
+Phase dependence and the tent peak also occur with a sinusoidal profile.
+In general, under linear permanent contact, a half-wave symmetric profile
+excludes even harmonics and hence skewness; a third harmonic is
+compatible with it. It requires a third-harmonic excitation component
+that survives superposition and contact transfer; a non-sinusoidal
+profile does not necessarily contain one.
 
 The limit of the framework is stated. The control tests the first
 moment; phase-correlated coupling, symmetric chain errors and
@@ -171,10 +203,12 @@ amplitude-dependent transfer pass it and still corrupt the waveform.
 They are addressed by experimental design, above all by idle runs with
 energised but blocked actuation.
 
-No new physics is claimed. The contribution is methodological and
-narrow: the use of a conservation-guaranteed null as a check on one's
+No new physics is claimed. The possible contribution is methodological
+and narrow: the use of a conservation-guaranteed null as a check on one's
 own measurement chain, and the contact-force waveform as the designed
-target of phase control over internal masses.
+target of phase control over internal masses. Whether either has been
+described in metrology, weighing technology or neighbouring fields is
+open without a systematic literature search.
 
 \clearpage
 
@@ -260,6 +294,59 @@ Literaturprüfung. v2.3 übernimmt Zahlen aus der genannten Nachrechnung,
 v2.4 aus der Gegenprobe vom 26.~September 2026 und der Prüfung zu
 PR~\#4; Karten und Abbildungen stammen weiterhin aus dem Archivlauf.
 
+Nachträge vom 2.~Oktober 2026 (Quelltext; die PDF-Fassung ist noch nicht
+neu gesetzt, eine neue Versionsnummer ist nicht vergeben). Sie
+übernehmen Ergebnisse einer Nachrechnung mit ereignisgenauem Löser und
+berichtigen überzogene Formulierungen. Durch Tests des Repositorys
+(\texttt{tests/test\_ereignisloeser.py}) belegt sind die ereignisgenauen
+Werte am Punkt $(0^\circ, 208{,}4^\circ)$ ($+0{,}02\,\mathrm{mN}$,
+$75{,}08\,\%$, $38{,}5\,\mathrm{N}$) und das Einschwingen nach etwa
+$5\,\mathrm{s}$ mit loser Wiederkehrtoleranz; die Dauer von $9$ bis
+$10\,\mathrm{s}$ mit strengerem Wiederkehrkriterium ist mit den in
+Abschnitt~\ref{sec:track1-sim} angegebenen Toleranzen über die Funktion
+\texttt{periode} von \texttt{code/ereignisloeser.py} reproduzierbar. Die
+Einschwingdauern der Festschritt-Rechnung bei geänderter Phasenangabe
+oder halbiertem Zeitschritt, der Quadraturanteil von rund
+$-80\,\mathrm{ppm}$, die
+Mehrstabilität an mindestens $99$ Rasterpunkten und die Stichproben zu
+den Periodenangaben stammen aus der Nachrechnung und liegen nicht als
+eigenes Skript im Repository. Betroffen sind: die Reichweite der
+Kontrollgröße (Kurzfassung, Abstract, Abschnitt~\ref{sec:beitrag},
+Kapitel~\ref{chap:rahmen}, \ref{chap:frage}, \ref{chap:statistik}
+und~\ref{chap:diskussion}); die Definition von
+$F_{\min} - \langle N \rangle$ (Abschnitt~\ref{sec:target-quantities});
+Antrieb, Auslegungsbedingung, Kontakt, Kraftbereich und Nennlast mit den
+offenen Entscheidungen zum Aufbau (Kapitel~\ref{chap:system},
+Abschnitt~\ref{sec:offene-entscheidungen}) sowie Kraftaufnehmer und
+Hilfskanäle (Kapitel~\ref{chap:messsystem}), die Nennlast auch in
+Abschnitt~\ref{sec:sens-k} und Abschnitt~\ref{sec:befunde}; der Wert am Punkt
+$(0^\circ, 208{,}4^\circ)$ als Folge eines von der Festschritt-Integration
+künstlich verlängerten Einschwingens (auch in Kurzfassung, Abstract und
+Fazit), die
+Rundungsgrenze von $0{,}2\,\mathrm{ppm}$, der Exponent $-0{,}945$, die
+vollständige Symmetriegruppe $S_3$ und die Einordnung der Referenzzahlen
+als Effekte des weichen Kontakts (Kapitel~\ref{chap:simulation}; teils
+auch Kapitel~\ref{chap:diskussion} und Anhang~\ref{app:daten}); die
+Anfangsbedingung, die Mehrstabilität im Liftoff-Bereich und die Grenze des
+eindimensionalen Modells (Anhang~\ref{app:simulation}); die Aussagen zum
+Bahnprofil in Kurzfassung, Abstract, Abschnitt~\ref{sec:vorhersage-schiefe},
+Kapitel~\ref{chap:system}, Abschnitt~\ref{sec:sinus-sweep},
+Abschnitt~\ref{sec:befunde} und Abschnitt~\ref{sec:weiterfuehrend}.
+Außerdem sind Lücken- und Beitragsaussagen
+in Kurzfassung, Abstract, Abschnitt~\ref{sec:beitrag},
+Kapitel~\ref{chap:stand} und Kapitel~\ref{chap:fazit} auf Suchbefunde
+zurückgenommen, Kandidaten zu Impact-Oszillatoren als bibliografisch
+ungeprüft notiert und Anhang~\ref{app:recherche} mit dem
+Literaturverzeichnis abgeglichen. Die Begründung des Rückzugs der
+Mittelwertverschiebung ist vereinheitlicht: Ursache war ein Kontaktmodell
+mit vorgeschriebener Eindrückung; der Randterm des Auswertefensters
+erklärt nur die späteren Restabweichungen (Kurzfassung, Abstract,
+Abschnitt~\ref{sec:track1-sim}, Kapitel~\ref{chap:diskussion}
+und~\ref{chap:fazit}); die Liste zurückgezogener Aussagen in
+Kapitel~\ref{chap:frage} ist vervollständigt. Das Arbeitsmanuskript v2.1 (früher
+\emph{Dissertation}) ist fachlich überholt: Es enthält Aussagen, die die
+Fassungen v2.3 und v2.4 zurückziehen.
+
 \clearpage
 
 \chapter*{Symbolverzeichnis}
@@ -280,6 +367,7 @@ $\gamma_1$ & Schiefe der Kontaktkraftverteilung \\
 $\lambda$ & Liftoff-Anteil \\
 $A$ & Asymmetrieverhältnis $(N_{\max}-Mg)/(Mg-N_{\min})$ \\
 $N_{\min}$, $N_{\max}$ & Minimale und maximale Kontaktkraft \\
+$F_{\min} - \langle N \rangle$ & Minimalkraft der bandbegrenzten Mittelkurve relativ zum Laufmittel (Präregistrierung v2), Abschnitt~\ref{sec:target-quantities} \\
 $N_{\text{thr}}$ & Operative Kontaktschwelle zur Liftoff-Erkennung \\
 $f$, $T$ & Anregungsfrequenz, Anregungsperiode \\
 $f_n$ & Kontakteigenfrequenz $\sqrt{k/M}/(2\pi)$ \\
@@ -474,9 +562,11 @@ Kapitel~\ref{chap:fazit} fasst zusammen und benennt weiterführende Arbeiten.
 \section{Beitrag dieser Arbeit}
 \label{sec:beitrag}
 
-Die vorliegende Arbeit leistet einen methodischen Beitrag zur
+Die vorliegende Arbeit zielt auf einen methodischen Beitrag zur
 experimentellen Untersuchung kleiner Kraftabweichungen in mechanisch
-gekoppelten Systemen. Im Mittelpunkt steht nicht der Nachweis eines
+gekoppelten Systemen. Die Elemente unten sind überwiegend bekannte
+Verfahren, angewandt auf diesen Aufbau; ob einzelne darüber hinausgehen,
+ist ohne systematische Recherche offen (Anhang~\ref{app:recherche}). Im Mittelpunkt steht nicht der Nachweis eines
 physikalischen Effekts, sondern die Konstruktion eines Messrahmens, in
 dem die Unterscheidung zwischen einer erhaltenen und einer freien Größe
 operativ wird.
@@ -491,9 +581,11 @@ Die wesentlichen Beiträge sind die folgenden.
         fest. Der Rahmen nutzt dies als messtechnisches Gut statt es als
         Hindernis zu behandeln: Die Differenz der zeitgemittelten Kräfte
         zwischen zwei Zuständen wird als Kontrollgröße ausgewertet, deren
-        wahrer Wert unabhängig vom Experiment exakt bekannt ist. Damit
-        wird die vollständige Auswertekette gegen eine bekannte
-        Grundwahrheit geprüft, in situ und ohne Zweitapparatur.
+        wahrer Wert unabhängig vom Experiment exakt bekannt ist. Sie
+        dient als Kontrolle auf Gleichanteil, Drift und gleichrichtende
+        Nichtlinearitäten der Auswertekette. Lineare dynamische
+        Verzerrungen der Wellenform erkennt sie nicht; sie ersetzt weder
+        die Kalibrierung noch die Prüfung der dynamischen Messkette.
 
   \item \textbf{Wellenformfunktionale der unilateralen Kontaktkraft als
         entworfene Zielgrößen.}
@@ -560,14 +652,13 @@ Die wesentlichen Beiträge sind die folgenden.
         Zielsignatur nachbilden können, vorab zu benennen und durch das
         Versuchsdesign zu trennen statt durch nachträgliche Argumentation.
 
-  \item \textbf{Rückwirkende Anwendung auf frühere eigene Ergebnisse.}
-        Angewandt auf eine frühere Projektphase, in der eine persistente
-        Mittelwertverschiebung berichtet worden war, hat der Rahmen die
-        berichtete Größe als Integrationsartefakt des Kontaktmodells
-        identifiziert. Die frühere Hypothese wurde zurückgezogen und der
-        Rückzug dokumentiert. Dies wird als Beitrag geführt und nicht
-        weggelassen: Es ist der einzige Fall, in dem der Rahmen gegen ein
-        Falsch-Positiv geprüft wurde, und er hat bestanden.
+  \item \textbf{Erfahrung aus einem eigenen zurückgezogenen Ergebnis.}
+        Eine frühere Mittelwertverschiebung erwies sich als Artefakt
+        eines Kontaktmodells mit vorgeschriebener Eindrückung und wurde
+        zurückgezogen; der Rückzug ist dokumentiert. Die Korrektur war
+        nachträglich und numerisch, ein Test des Messrahmens an einer
+        Apparatur hat nicht stattgefunden. Diese Erfahrung motiviert
+        Kontrollgröße und Randtermdiagnose.
 
 \end{itemize}
 
@@ -587,8 +678,9 @@ Die vorliegende Arbeit berührt vier Gebiete, die je für sich gut besetzt
 sind: die Dynamik gekoppelter Mehrkörpersysteme, das nichtlineare
 Verhalten unilateraler Kontakte, die Präzisionsmessung kleiner Kräfte und
 den statistischen Nachweis schwacher Signale. Der folgende Überblick
-ordnet die Arbeit in diese Gebiete ein und benennt am Ende die Lücke, die
-sie zu schließen beansprucht.
+ordnet die Arbeit in diese Gebiete ein und benennt am Ende die
+Konstellation, die sie untersucht. Ob dort eine Lücke besteht, ist ohne
+systematische Recherche offen.
 
 Die Darstellung erhebt keinen Anspruch auf eine systematische
 Übersichtsarbeit. Sie ist eine gezielte Recherche entlang der vier
@@ -625,7 +717,9 @@ des Arbeitsorgans --- geradlinig, elliptisch, kreisförmig --- über
 Drehrichtung, Frequenz und Anfangsphase jedes Rotors einstellen lässt
 \cite{gurskyi2023}. In der Haptik werden mehrere exzentrische
 Rotationsmassen phasensynchronisiert betrieben, um gezielt
-asymmetrische Beschleunigungsverläufe zu erzeugen.
+asymmetrische Beschleunigungsverläufe zu erzeugen. Für diese Angabe
+liegt keine geprüfte Fundstelle vor; die Haptik ist in den Suchbegriffen
+von Anhang~\ref{app:recherche} nicht enthalten.
 
 Eine zweite, benachbarte Linie kommt aus der Robotik. In der
 Bewegungsplanung für Laufmaschinen werden Bewegung und Kontaktkraft
@@ -686,6 +780,20 @@ ein aufgelegtes Gewicht erzeugt. Die veränderten Parameter sind
 Anregungsniveau und Anregungsfrequenz. Die innere Konfiguration des
 belasteten Körpers ist kein Freiheitsgrad des Versuchs.
 
+Im Liftoff-Bereich ist das Modell dieser Arbeit ein Impact-Oszillator
+unter Fußpunkterregung. Hüpfzustände, koexistierende Zustände und
+Grazing-Übergänge gehören zur bekannten Dynamik dieser Systemklasse und
+sind kein Befund dieser Arbeit. Für einen Abschnitt zu diesem Strang sind
+Kandidaten notiert, die bibliografisch noch nicht geprüft und deshalb
+nicht im Literaturverzeichnis sind: Arbeiten von Holmes (1982), Shaw und
+Holmes (1983), Nordmark (1991), Luck und Mehta (1993), Müller (1995),
+de Weger et al.\ (2000) und eine Arbeit in Int.\ J.\ Mech.\ Sci.\ 127
+(2017), deren Autoren zu ermitteln sind; dazu Hunt und Crossley (1975)
+für das nichtlineare Kontaktgesetz. Ebenfalls zu prüfen ist, wie die
+Arbeit von Perret-Liaudet und Rigaud zur superharmonischen Resonanz
+\cite{perretliaudet2007} mit der Lage $2f/f_n \approx 1$ des
+Referenzsatzes zusammenhängt.
+
 \section{Kraftverläufe an der Auflage schwingungsangeregter Systeme}
 
 Dass die Kraft an der Auflagefläche eines schwingungsangeregten Körpers
@@ -734,13 +842,17 @@ Modellierung und Kalibrierung von Messsystemen sind in
 Behandlung der Messunsicherheit folgt den Leitlinien
 in \cite{nist1994}.
 
-Für die vorliegende Arbeit ist eine Lücke dieser Literatur erheblich:
-Die Rückführbarkeit der Kraftmessung ist für statische und
-quasistatische Lasten ausgearbeitet, nicht jedoch für einen Kontakt, der
-innerhalb eines Anregungszyklus vollständig abhebt und wieder
-eintritt. Die Übertragung einer statischen Kalibrierkennlinie auf einen
-solchen Betrieb ist eine Annahme und keine abgesicherte Eigenschaft. Auf
-diesen Punkt kommt die Arbeit in der Diskussion der Grenzen zurück.
+Für die vorliegende Arbeit ist ein Punkt erheblich, den die hier
+zitierten Lehrbücher nicht behandeln: Die Rückführbarkeit der
+Kraftmessung ist dort für statische und quasistatische Lasten
+ausgearbeitet. Verfahren zur dynamischen Kalibrierung einachsig
+belasteter Kraftaufnehmer gibt es (etwa die Richtlinie DKD-R 3-10, die
+der Entwurf der Präregistrierung v2 nennt); sie sind hier nicht
+ausgewertet. Offen ist ihre Übertragung auf einen Kontakt, der innerhalb
+eines Anregungszyklus vollständig abhebt und wieder eintritt. Die
+Übertragung einer statischen Kalibrierkennlinie auf einen solchen Betrieb
+ist eine Annahme und keine abgesicherte Eigenschaft. Auf diesen Punkt
+kommt die Arbeit in der Diskussion der Grenzen zurück.
 
 \section{Statistischer Nachweis kleiner Signale}
 
@@ -756,10 +868,11 @@ Solche Verfahren sind unverzichtbar, wenn die unmittelbare Beobachtung
 eines Signals nicht möglich ist und Schlüsse aus statistischen
 Eigenschaften gezogen werden müssen. Sie setzen jedoch durchweg voraus,
 dass die geprüfte Nullhypothese eine offene empirische Frage betrifft.
-Der Fall, dass der wahre Wert der geprüften Größe durch einen
+Den Fall, dass der wahre Wert der geprüften Größe durch einen
 Erhaltungssatz vorab feststeht und der Test deshalb nicht die Physik,
-sondern die Messkette prüft, wird in dieser Literatur nicht gesondert
-behandelt.
+sondern die Messkette prüft, behandeln die hier zitierten Lehrbücher
+nicht gesondert. Metrologie- und Wägetechnikliteratur ist noch nicht
+ausgewertet; eine fehlende Fundstelle belegt keine Neuheit.
 
 \section{Experimentelle Artefakte und systematische Fehler}
 
@@ -776,7 +889,7 @@ Nanometerbereich erhebliche Änderungen der Bodenkraft hervorrufen
 einschlägig: Er beziffert, wie klein eine unbeabsichtigte Bewegung im
 Aufbau sein darf, um noch als vernachlässigbar zu gelten.
 
-\section{Forschungslücke und Einordnung}
+\section{Einordnung und mögliche Lücke}
 
 Die Bestandteile des hier verfolgten Zugangs sind sämtlich besetzt, und
 zwar dichter, als frühere Fassungen dieses Projekts annahmen. Die
@@ -793,9 +906,10 @@ bereits; von zwei bislang unverbundenen Literaturlagern kann keine Rede
 sein. Nichts davon ist neu, und die vorliegende Arbeit behauptet es
 auch nicht.
 
-Die Lücke liegt in der Verbindung, und sie ist eng. Nach dem Ergebnis
-der oben beschriebenen Recherche ist die folgende Konstellation nicht
-systematisch untersucht:
+Wenn es eine Lücke gibt, liegt sie in der Verbindung, und sie ist eng.
+In den gesichteten Arbeiten (gezielte Recherche, Anhang~\ref{app:recherche})
+wurde die folgende Konstellation nicht gefunden; ob sie anderswo
+untersucht ist, ist ohne systematische Recherche offen:
 
 \begin{itemize}
 \item die Wellenformstatistik der unilateralen Kontaktkraft als
@@ -808,16 +922,17 @@ systematisch untersucht:
       In-situ-Kontrolle der Auswertekette.
 \end{itemize}
 
-Der letzte Punkt ist der eigenständigste, und er ist enger, als es
-zunächst scheint. Dass das Zeitmittel der Kontaktkraft durch den
-Schwerpunktsatz festgelegt ist und die Information in der Abweichung
-liegt, ist bei Wakou, Ochiai und Isobe ausgesprochen
-\cite{wakou2008}; bei Rigaud und Perret-Liaudet wird das Mittel durch
-die äußere Vorspannung gesetzt. Nicht ausgenutzt ist in den gesichteten
-Arbeiten, dass eine so festgelegte Größe als Prüfmittel gegen die eigene
-Messkette dienen kann --- dass also die bekannte Antwort nicht
-übergangen, sondern gemessen wird, um die Kette zu qualifizieren, bevor
-die offenen Größen ausgewertet werden.
+Der letzte Punkt ist enger, als es zunächst scheint. Dass das Zeitmittel
+der Kontaktkraft durch den Schwerpunktsatz festgelegt ist und die
+Information in der Abweichung liegt, ist bei Wakou, Ochiai und Isobe
+ausgesprochen \cite{wakou2008}; bei Rigaud und Perret-Liaudet wird das
+Mittel durch die äußere Vorspannung gesetzt. In den gesichteten Arbeiten
+wurde nicht gefunden, dass eine so festgelegte Größe als Prüfmittel gegen
+die eigene Messkette dient. Metrologie- und Wägetechnikliteratur ist noch
+nicht ausgewertet; dort liegt die Verwendung einer bekannten Last als
+Kontrolle nahe, etwa bei der statischen Kalibrierung mit Gewichtsstücken.
+Die Suchbegriffe der Recherche decken außerdem Haptik, vibrationsgetriebene
+Roboter, Impact-Oszillatoren und dynamisches Wägen nicht ab.
 
 Der Beitrag der Arbeit ist damit methodisch und eng begrenzt. Sie
 verbindet bekannte Elemente zu einem Messrahmen, in dem eine
@@ -1293,10 +1408,13 @@ Zuständen $A$ und $B$,
 bleibt im Rahmen erhalten, jedoch mit umgekehrter Rolle. Ihr wahrer Wert
 ist nach Gleichung~\eqref{eq:baseline-ch3} null. Sie wird deshalb als
 \textbf{Kontrollgröße mit bekannter Grundwahrheit} geführt und dient als
-In-situ-Spezifitätsprüfung der vollständigen Auswertekette: Anregung,
-innere Dynamik, Sensor, Signalaufbereitung, Fensterung, Aggregation und
-statistische Entscheidung werden sämtlich auf eine Größe angewandt,
-deren richtige Antwort vorab bekannt ist.
+In-situ-Spezifitätsprüfung der Auswertekette für das erste Moment:
+Anregung, innere Dynamik, Sensor, Signalaufbereitung, Fensterung,
+Aggregation und statistische Entscheidung werden sämtlich auf eine Größe
+angewandt, deren richtige Antwort vorab bekannt ist. Sie erkennt
+Gleichanteil, Drift und gleichrichtende Nichtlinearitäten, nicht aber
+lineare dynamische Verzerrungen der Wellenform
+(Abschnitt~\ref{sec:kontrollgrenze}).
 
 Diese Konstruktion liefert drei Eigenschaften, die in der
 Kleinsignal-Kraftmessung sonst schwer zu erreichen sind:
@@ -1660,7 +1778,9 @@ zweifach:
         Aggregation, statistischer Test --- wird auf eine Größe
         angewandt, deren richtige Antwort vorab feststeht. Ein von null
         verschiedenes Ergebnis kennzeichnet einen Fehler in dieser Kette
-        und sonst nichts.
+        und sonst nichts. Ein Ergebnis von null schließt Fehler, die nur
+        die Wellenform betreffen, nicht aus
+        (Abschnitt~\ref{sec:kontrollgrenze}).
   \item \textbf{Kalibrierung der Nachweisschwelle.} Die Streuung von
         $\Delta \bar{F}^{(i)}_{\mathrm{Zustand}}$ über Wiederholungen
         liefert die empirische Grundlage der Nachweisschwelle nach
@@ -1703,6 +1823,23 @@ festgeschrieben wird.
 \end{equation}
 
 \paragraph{Minimale Kontaktkraft.} $N_{\min} = \min_{t} N(t)$.
+
+\paragraph{Minimalkraft relativ zum Laufmittel.} Der Entwurf der
+Präregistrierung v2 wertet nicht $N_{\min}$ selbst aus, sondern die
+Differenz
+\[
+  F_{\min} - \langle N \rangle ,
+\]
+mit $F_{\min}$ dem Minimum der Konfigurationsmittelkurve: Die Läufe einer
+Konfiguration werden phasensynchron über ganze Zyklen gemittelt und auf
+die Harmonischen bis zur Ordnung $k_{\max}$ begrenzt. $\langle N\rangle$
+ist das Zeitmittel über die ganzen Zyklen des Auswertefensters. Die Größe
+ist eine Differenz zum gemessenen Laufmittel, nicht zu $Mg$; sie braucht
+deshalb keine absolute Kalibrierung. Von $N_{\min}$ unterscheidet sie
+sich durch die Bandbegrenzung und die Mittelung über Läufe, vom Nenner
+$Mg - N_{\min}$ in Gleichung~\eqref{eq:asym-ratio} zusätzlich durch Bezug
+und Vorzeichen. Zyklusweise Minima sind kein Ersatz: Sie sind durch das
+Rauschen nach unten verzerrt.
 
 \medskip
 \noindent
@@ -1811,12 +1948,19 @@ $\hat{N}_{-j} = \hat{N}_j^{*}$ gilt
 \end{equation}
 Eine einzelne Harmonische liefert keinen Beitrag; daher ist
 $\gamma_1 = 0$ beim sinusförmigen Profil im Dauerkontakt
-(Abschnitt~\ref{sec:sinus-sweep}). Das Vorzeichen jedes Terms hängt an
+(Abschnitt~\ref{sec:sinus-sweep}). Allgemeiner verschwinden alle Terme,
+wenn $N$ nur ungerade Harmonische enthält, weil $2j$ und $j + l$ für
+ungerade $j$, $l$ gerade sind. Das ist der Fall, wenn das Profil
+halbwellensymmetrisch ist, $\ddot{z}(t + T/2) = -\ddot{z}(t)$; Schiefe
+setzt im Dauerkontakt also ein Profil ohne Halbwellensymmetrie voraus.
+Das Vorzeichen jedes Terms hängt an
 seiner Triadenphase, für die Triade aus erster und zweiter Harmonischer
 an $\arg(\hat{N}_1^{2}\hat{N}_2^{*})$. Diese Phase setzt sich additiv aus
 drei Anteilen zusammen. Das Bahnprofil nach
-Gleichung~\eqref{eq:eggprofil} besteht aus zwei in sich symmetrischen
-Halbwellen und ist zeitumkehrsymmetrisch; seine Triadenphasen sind $0$
+Gleichung~\eqref{eq:eggprofil} besteht aus zwei in sich symmetrischen,
+ungleich langen Halbwellen ($\beta_h = 0{,}65$); es ist
+zeitumkehrsymmetrisch, aber nicht halbwellensymmetrisch, und enthält
+gerade wie ungerade Harmonische. Seine Triadenphasen sind $0$
 oder $\pi$, für die Triade aus erster und zweiter Harmonischer null, und
 auf starrer Auflage ist ein einzelnes Modul rechtsschief,
 $\gamma_1 = +0{,}76$. Die nachgiebige Auflage addiert
@@ -1987,9 +2131,12 @@ und kein nachgelagerter Auswerteschritt.
   \item Eine Ablehnung von $H_{0}^{\mathrm{ctrl}}$ ist nie ein positives
         Ergebnis.
   \item An keiner Stelle wird behauptet, die zeitgemittelte Kontaktkraft
-        lasse sich durch innere Bewegung verändern. Wo frühere Phasen
-        dieses Projekts das Gegenteil behauptet haben, ist die Behauptung
-        zurückgezogen und der Rückzug dokumentiert.
+        lasse sich durch innere Bewegung verändern. Frühere Aussagen zu
+        einer Mittelwertverschiebung, zu einer gerichteten
+        Netto-Impulsübertragung ohne äußeren Partner und zu einer
+        allgemeinen Vorzeichenregel der Schiefe sind zurückgezogen; der
+        Rückzug ist dokumentiert (Archiv-Vermerk Kernhypothese~v3 im
+        Repository; Abschnitt~\ref{sec:vorhersage-schiefe}).
 \end{itemize}
 
 \section{Stellung innerhalb der Arbeit}
@@ -2040,8 +2187,8 @@ erfüllen muss. Der Aufbau ist zum Stand dieser Arbeit nicht ausgeführt.
     Basislinie $Mg$ & $\approx 6{,}4\,\mathrm{N}$ & folgt \\
     Modulmasse & $50$ bis $150\,\mathrm{g}$ je Modul & Auslegung \\
     Antriebsfrequenz $f$ & $10\,\mathrm{Hz}$ & Auslegung, entspricht Simulation \\
-    Hub & einige mm, Modellbezug $r_{\mathrm{top}} \approx 5\,\mathrm{mm}$ & Auslegung \\
-    Kontakt & Elastomerpad oder Feder, $k$, $c$ bekannt & Auslegung \\
+    Hub (Spitze-Spitze) & einige mm, Modell $r_{\mathrm{top}} + r_{\mathrm{bot}} \approx 7{,}7\,\mathrm{mm}$ ($r_{\mathrm{top}} = 5\,\mathrm{mm}$) & Auslegung \\
+    Kontakt & Elastomerpad oder Feder, $k$, $c$ bekannt & offen (Abschnitt~\ref{sec:offene-entscheidungen}) \\
     Steuergröße & $(\varphi_2, \varphi_3)$ & --- \\
     \hline
   \end{tabular}%
@@ -2099,28 +2246,52 @@ Phasenkarte degeneriert zu einer einparametrigen Schar in der
 resultierenden Amplitude, negative Schiefe tritt nirgends auf, und das
 Dreimodulsystem wird einem einzelnen Schwingerreger äquivalent.
 
-Für den Aufbau ist damit ein Antrieb zwingend, der ein asymmetrisches
-Profil erzeugt. Eine Nocke ist eine Möglichkeit; ein programmierbarer
-Linearaktor, wie er im Projekt für die Phasensteuerung bereits vorliegt,
-eine andere mit dem Vorteil, dass das Profil nachträglich veränderbar
-bleibt. Exzenter und Kurbel bei konstanter Drehzahl scheiden als Antrieb
-der Hauptkampagne aus; sie bleiben für einen Referenzlauf nützlich, der
-den Beitrag der Profilasymmetrie in der Messung beziffert.
+Allgemein gilt im linearen Dauerkontakt: Ein halbwellensymmetrisches
+Profil enthält keine geraden Harmonischen und erzeugt keine Schiefe
+(Gleichung~\eqref{eq:triaden}). Für Schiefe und für die zweite
+Harmonische braucht der Aufbau deshalb einen Antrieb, der ein Profil
+ohne Halbwellensymmetrie erzeugt. Eine dritte Harmonische ist mit
+Halbwellensymmetrie vereinbar; sie setzt einen dritten Anregungsanteil
+des Profils voraus, der nach Überlagerung der Module und
+Kontaktübertragung übrig bleibt. Ein nicht sinusförmiges Profil enthält
+ihn nicht zwangsläufig. Im Modell enthält das asymmetrische Profil zweite
+und dritte Harmonische, das Sinusprofil nur die Grundwelle.
+Phasenabhängigkeit und Zeltspitze treten
+auch beim Sinusprofil auf; bei starrer Auflage ist die Steigung am Knick
+mit dem asymmetrischen Profil etwa doppelt so groß
+(\texttt{code/linear\_solver.py --section --rigid --mu 0.462}, mit und
+ohne \texttt{--sinus}). Welcher Antrieb gewählt wird, ist offen und eine
+Entscheidung des Autors (Abschnitt~\ref{sec:offene-entscheidungen}): eine
+Nocke oder ein programmierbarer Aktor. Ob im Projekt bereits ein
+programmierbarer Linearaktor vorliegt, wie frühere Fassungen an dieser
+Stelle angaben, ist ebenfalls offen und zu klären. Exzenter und Kurbel
+bei konstanter Drehzahl eignen sich für einen Referenzlauf, der den
+Beitrag der Profilasymmetrie in der Messung beziffert.
 
 \paragraph{Auslegungsbedingung.}
-Frequenz, Masse und Kontaktsteifigkeit sind so abzustimmen, dass in einem
-Teil der Phasenlagen tatsächlich Liftoff auftritt. Wo dieser Bereich
-liegt, gibt die Simulation vorab an: Bei den Parametern der
-Tabelle~\ref{tab:sim-params} sind nur $12$ von $361$ Konfigurationen
-liftoff-frei. Ein Aufbau, in dem der Kontakt nie abhebt, würde die
-Wellenformfunktionale in einen schmalen Bereich zusammendrücken und die
-Unterscheidung der Regime verhindern.
+Frühere Fassungen verlangten hier, Frequenz, Masse und Kontaktsteifigkeit
+so abzustimmen, dass in einem Teil der Phasenlagen Liftoff auftritt. Bei
+der Frequenz der konfirmatorischen Läufe ist das mit dem Entwurf der
+Präregistrierung v2 unvereinbar: Dort misst V1 konfirmatorisch nur im
+Dauerkontakt und mit Resonanzabstand (dort Abschnitt~5.3). Liegen die
+Module über den Zellen, trägt jede Zelle bei jeder Phasung $Mg/3$ und die
+Trägheitskraft ihres Moduls (dort Anhang~A2.5); im quasistatischen
+Bereich ist dann die gesamte Phasenebene im Kontakt (am V1-Kandidaten
+kleinste Zellreserve $41{,}1\,\%$, \texttt{code/auslegung.py --candidate}).
+Für andere Lagen von Zellen und Modulen ist das offen. Liftoff ist so nur
+in explorativen Läufen (E1) erreichbar. Ob und in welchem Umfang E1 Teil
+von V1 ist, ist offen (Abschnitt~\ref{sec:offene-entscheidungen}). Die Regimekarten dieses
+Papiers gelten für den weichen Referenzkontakt mit Liftoff; in einem Aufbau
+im Dauerkontakt ist die Spannweite der Funktionale wesentlich kleiner.
 
 \section{Kontaktschnittstelle}
 \label{sec:kontaktschnittstelle}
 
-Als einseitiger Kontakt dient ein weiches Elastomerpad oder eine
-kalibrierte Feder mit bekannter Steifigkeit $k$ und Dämpfung $c$. Beide
+Die Laborvariante sieht als einseitigen Kontakt ein weiches Elastomerpad
+oder eine kalibrierte Feder mit bekannter Steifigkeit $k$ und Dämpfung
+$c$ vor; der Entwurf der Präregistrierung v2 geht dagegen von steifen
+Wägezellen aus. Kontakt und Dämpfungsziel sind offen
+(Abschnitt~\ref{sec:offene-entscheidungen}). Beide
 Größen bestimmen die Kontakteigenfrequenz
 $f_n = \sqrt{k/M}/(2\pi)$, und diese bestimmt zweierlei: die Steilheit
 der Kraftflanke beim Wiedereintritt in den Kontakt und das Verhältnis
@@ -2155,21 +2326,23 @@ Die Simulationsstudie liefert drei Zahlen, die den Aufbau unmittelbar
 binden.
 
 \paragraph{Kraftbereich.}
-Die Spitzenkontaktkraft erreicht im Sweep das $7{,}9$-fache der
-Basislinie, also rund $51\,\mathrm{N}$. Eine Messdose mit
-$5\,\mathrm{kg}$ Nennlast, wie sie die Laborvariante vorsieht, endet bei
-$49\,\mathrm{N}$ und geriete an der Spitze in die Sättigung --- und zwar
-ausgerechnet in den Konfigurationen mit dem höchsten Liftoff-Anteil, die
-für die Regimeunterscheidung am wichtigsten sind. Die Nennlast ist am
-Maximum von $N(t)$ zu bemessen, nicht an $Mg$. Die Auslegung ist zweistufig. Solange der Dämpfungsgrad des
-Kontaktelements nicht gemessen ist, gilt der ungünstigste geprüfte Fall:
-Nach Abschnitt~\ref{sec:sens-k} erreicht die Spitze bei
-$\zeta = 0{,}05$ das $16$-fache der Basislinie, rund $101\,\mathrm{N}$.
-Erforderlich ist dann eine Dose mit $20\,\mathrm{kg}$ Nennlast. Ist
-$\zeta \geq 0{,}1$ durch Ausschwingversuch nachgewiesen, genügt
-$10\,Mg$, also $10\,\mathrm{kg}$. Die Nennlast darf in keinem Fall
-unter dem für den gemessenen Dämpfungsgrad simulierten Spitzenwert
-liegen, und der Auflösungsverlust um $Mg$ ist hinzunehmen.
+Die Spitzenkontaktkraft erreicht im Sweep des weichen Referenzkontakts
+das $7{,}9$-fache der Basislinie, also rund $51\,\mathrm{N}$, bei
+$\zeta = 0{,}05$ das $16$-fache, rund $101\,\mathrm{N}$
+(Abschnitt~\ref{sec:sens-k}). Eine Messdose mit $5\,\mathrm{kg}$
+Nennlast, wie sie die Laborvariante vorsieht, geriete schon dort in die
+Sättigung. Die Nennlast ist am Maximum von $N(t)$ zu bemessen, nicht an
+$Mg$. Eine Zahl folgt aus diesen Werten aber nicht. Bei steifem Kontakt
+erreichen Hüpfzustände und Liftoff-Läufe im Modell Summenkräfte von
+einigen $100\,\mathrm{N}$ bis etwa $1\,\mathrm{kN}$ (Kelvin-Voigt; mit
+Hunt-Crossley bis $2{,}6\,\mathrm{kN}$), auch aus dem
+Dauerkontakt heraus nach einer Störung
+(\texttt{code/ereignisloeser.py}, \texttt{docs/einzugsgebiete\_v1\_kandidat.md}),
+und die Kräfte im Dauerkontakt --- wenige Newton je Zelle --- bestimmen
+sie nicht. Die Nennlast ist deshalb nicht hergeleitet. Sie hängt von
+offenen Entscheidungen ab (Kontakt, Dämpfungsziel, Umfang von E1,
+Schutzkonzept; Abschnitt~\ref{sec:offene-entscheidungen}) und wird hier
+nicht festgelegt. Eine höhere Nennlast kostet Auflösung um $Mg$.
 
 \paragraph{Flankensteilheit.}
 Die Anstiegszeit der Kraft beim Wiedereintritt in den Kontakt beträgt
@@ -2181,12 +2354,19 @@ Anforderungen an Bandbreite und Abtastrate sind in
 Abschnitt~\ref{sec:bandbreite} ausgeführt.
 
 \paragraph{Spannweite der Zielgrößen.}
-Die Funktionale variieren im Modell um Faktoren
-(Tabelle~\ref{tab:functional-range}). Das gesuchte Signal ist damit
-eine Größe erster Ordnung --- Liftoff von null bis rund drei Vierteln
-des Zyklus, Schiefe von $-0{,}3$ bis $+2{,}0$ --- und keine
-Millinewton-Jagd. Die Apparatur muss nicht vor allem präzise sein,
-sondern vor allem wiederholbar.
+Im weichen Referenzkontakt mit Liftoff variieren die Funktionale um
+Faktoren (Tabelle~\ref{tab:functional-range}): Liftoff von null bis rund
+drei Vierteln des Zyklus, Schiefe von $-0{,}3$ bis $+2{,}0$. Im
+Dauerkontakt mit Resonanzabstand, wie ihn der Entwurf der
+Präregistrierung v2 verlangt, ist das Signal viel kleiner: Am
+V1-Kandidaten der Auslegung (steifer Kontakt, von $0{,}650\,\mathrm{kg}$
+bewegen sich nur die $0{,}300\,\mathrm{kg}$ der Module, Hub
+$8\,\mathrm{mm}$) beträgt die Spannweite der Zeltkurve
+$0{,}56\,\mathrm{N}$ (\texttt{code/auslegung.py --candidate}), im
+Referenzsatz $4{,}56\,\mathrm{N}$ (Präregistrierung v2, Anhang A4;
+\texttt{code/linear\_solver.py --section}), und die Präzisionsbedingungen
+der Präregistrierung liegen im Bereich einiger $10\,\mathrm{mN}$ (dort
+Anhang A4). Die Apparatur muss dann wiederholbar und präzise sein.
 
 \section{Kontrolle der Versuchsbedingungen}
 
@@ -2226,6 +2406,56 @@ quantifizieren --- Nichtlinearität des Pads, Rauschen des Wandlers ---
 und die dynamische Kalibrierung bei intermittierendem Kontakt leisten.
 Für den Nachweis der Struktur reicht sie; für die absolute Auslegung von
 $N_{\max}$ und $A$ nicht.
+
+\section{Offene Entscheidungen zum Aufbau}
+\label{sec:offene-entscheidungen}
+
+Die folgenden Fragen sind nicht entschieden. Sie sind Entscheidungen des
+Autors; dieses Papier legt keine davon fest.
+
+\begin{itemize}
+\item \textbf{Antrieb.} Nocke: fester Hub; eine zweite Amplitude oder ein
+      Sinuslauf nur mit einem zweiten Nockensatz vor der Endmontage; der
+      Folger braucht Vorspannung oder Formschluss, sobald die
+      Profilbeschleunigung $g$ übersteigt. Programmierbarer Aktor:
+      Profilvarianten ohne Umbau; Profiltreue und Bandbreite sind
+      nachzuweisen.
+\item \textbf{Hardwarestand Linearaktor.} Frühere Fassungen nannten einen
+      im Projekt vorhandenen programmierbaren Linearaktor. Ob er existiert
+      und für den Aufbau taugt, ist zu klären.
+\item \textbf{Geometrie.} Module über den Zellen (G0) oder um $60^\circ$
+      gedreht auf halbem Zellradius (G60h). Zellreserve, Kippmoden und
+      Trennbarkeit der Zellverstärkungen hängen davon ab; Module außerhalb
+      des Stützdreiecks senken die Zellreserve stark.
+\item \textbf{Kontakt und Dämpfungsziel.} Steifer Kontakt mit hoher
+      Dämpfung unterdrückt im Kelvin-Voigt-Modell Hüpfzustände (bei
+      $\zeta = 0{,}20$ hüpft keine der sechs geprüften Laufarten); das
+      Ergebnis hängt vom Kontaktgesetz ab (mit Hunt-Crossley hüpft
+      $(120^\circ, 240^\circ)$ schon bei $\zeta = 0{,}05$), und auch
+      Würfe, die in den Kontakt zurückkehren, erzeugen im Modell
+      $\approx 1\,\mathrm{kN}$ je $\mathrm{m/s}$ Wurfgeschwindigkeit, mit
+      Hunt-Crossley bis $2{,}6\,\mathrm{kN}$ bei $1\,\mathrm{m/s}$
+      (\texttt{docs/einzugsgebiete\_v1\_kandidat.md}). Ein Elastomer bringt
+      Asymmetrie und Temperaturgang. Bei geringer Dämpfung entfallen
+      synchrone und Liftoff-Läufe oder werden streng begrenzt. Ein weicher
+      Kontakt wie in der Laborvariante setzt einen gemessenen
+      Dämpfungsgrad voraus.
+\item \textbf{Umfang von E1.} Liftoff-Läufe in V1 streichen, eine eigene
+      weiche Kontaktstufe vorsehen, oder Zellen und Anschlag für
+      Summenkräfte von einigen $100\,\mathrm{N}$ auslegen und den
+      Auflösungsverlust hinnehmen.
+\item \textbf{Messkette und Wegkanal.} Für V1 nach dem Entwurf der
+      Präregistrierung v2 (drei Wägezellen) sind drei simultane,
+      gleichspannungsfähige Zellkanäle die Untergrenze; die Laborvariante
+      sieht eine einzelne Zelle vor. Ob ein Wegkanal die
+      Kontaktsteifigkeit genau genug bestimmt und welche Hilfskanäle
+      nötig sind, ist offen; davon hängt die Kanalzahl ab.
+\item \textbf{Institutionelle Anbindung.} Ob Experimente erst nach einer
+      Anbindung beginnen, entscheidet der Autor. Beginnen sie erst
+      danach, ist die Anbindung Voraussetzung für die erste Messphase;
+      beginnen sie vorher, braucht es einen eigenen Messplatz sowie
+      externe Kalibrierung und Begutachtung.
+\end{itemize}
 
 \section{Zwischenfazit}
 
@@ -2268,15 +2498,17 @@ Rauschen, Drift und Verzerrung ein.
 
 \section{Kraftaufnehmer}
 
-Vorgesehen ist eine Wägezelle nach dem Dehnungsmessstreifenprinzip in
-Biegebalkenbauform. Maßgebliche Eigenschaften sind Empfindlichkeit,
+Die Laborvariante sieht eine Wägezelle nach dem
+Dehnungsmessstreifenprinzip in Biegebalkenbauform vor. Zahl, Bauform und
+Anordnung der Zellen sind offen
+(Abschnitt~\ref{sec:offene-entscheidungen}). Maßgebliche Eigenschaften
+sind Empfindlichkeit,
 Auflösung, Bandbreite sowie Linearität und Hysterese.
 
-Die Nennlast folgt aus Abschnitt~\ref{sec:auslegung-sim}: bei
-ungemessener Dämpfung $20\,\mathrm{kg}$, bei nachgewiesenem
-$\zeta \geq 0{,}1$ mindestens $10\,Mg$, also rund $65\,\mathrm{N}$
-oder eine Dose mit $10\,\mathrm{kg}$ Nennlast. Eine Dose mit $5\,\mathrm{kg}$ erreicht die
-im Modell auftretenden Spitzen nicht. Da die Auflösung einer
+Die Nennlast ist nicht hergeleitet (Abschnitt~\ref{sec:auslegung-sim});
+sie hängt von Kontakt, Dämpfungsziel und Umfang von E1 ab. Eine Dose mit
+$5\,\mathrm{kg}$ erreicht schon die Spitzen des weichen Referenzkontakts
+nicht. Da die Auflösung einer
 Dehnungsmessstreifen-Zelle relativ zur Nennlast skaliert, kostet die
 höhere Nennlast Auflösung im Bereich um $Mg$; dieser Verlust ist
 hinzunehmen, weil ein in die Sättigung laufender Spitzenwert nicht
@@ -2445,7 +2677,9 @@ tatsächlich erforderliche Auflösung.
 
 \section{Hilfskanäle}
 
-Zwei Hilfskanäle werden synchron zum Kraftsignal aufgezeichnet.
+In der Laborvariante sind zwei Hilfskanäle vorgesehen, die synchron zum
+Kraftsignal aufgezeichnet werden; welche Hilfskanäle V1 braucht, ist offen
+(Abschnitt~\ref{sec:offene-entscheidungen}).
 
 Ein \textbf{Beschleunigungsaufnehmer am Gehäuse} liefert eine
 unabhängige Prüfung des Liftoffs: Während der Kontakt abgehoben ist,
@@ -3117,7 +3351,7 @@ folgt unter $H_{0}^{\mathrm{ctrl}}$ einer Student-$t$-Verteilung mit
 $N-1$ Freiheitsgraden. Da der wahre Wert von $\mu_{\Delta}$ nach
 Gleichung~\eqref{eq:baseline-ch3} null ist, entscheidet dieser Test keine
 physikalische Frage. Er misst das Falsch-Positiv-Verhalten der
-vollständigen Schlusskette gegen eine bekannte Grundwahrheit.
+Schlusskette für das erste Moment gegen eine bekannte Grundwahrheit.
 
 Die Auslegung ist gegenüber dem üblichen Hypothesentest umgekehrt, und
 sie folgt einer Äquivalenzlogik, nicht einer Signifikanzlogik. Der
@@ -3503,7 +3737,9 @@ Abbildung~\ref{fig:residuum} zeigt den Zusammenhang im Einzelnen. Das
 Residuum überspannt zwischen Dauerkontakt und stark intermittierendem
 Kontakt vier Größenordnungen. Bei Dauerkontakt gewinnt
 die Auswertekette die Basislinie auf $0{,}2\,\mathrm{ppm}$ zurück; das
-ist der numerische Boden der Integration. Bei starker Intermittenz wächst
+ist die Rundung der sechsstelligen Datensatzwerte
+($10^{-6}\,\mathrm{N} \approx 0{,}16\,\mathrm{ppm}$), nicht der numerische
+Boden der Integration. Bei starker Intermittenz wächst
 das Residuum auf $0{,}68\,\%$, mit den größten Werten bei
 Liftoff-Anteilen oberhalb von $70\,\%$.
 
@@ -3546,7 +3782,10 @@ dargestellten Verlauf.
   \end{tabular}
   \caption{Basislinienresiduum bei $(\varphi_2, \varphi_3) =
   (0{,}0^\circ,\, 208{,}4^\circ)$, $\lambda = 74{,}3\,\%$, in
-  Abhängigkeit von der Länge des Auswertefensters.}
+  Abhängigkeit von der Länge des Auswertefensters. Werte der
+  Festschritt-Integration (RK4, $\Delta t = 50\,\mu\mathrm{s}$) mit
+  Rechteckmittelung; das lange Einschwingen an diesem Punkt ist ein
+  Artefakt dieser Integration (Text).}
   \label{tab:konvergenz}
 \end{table}
 
@@ -3554,14 +3793,17 @@ dargestellten Verlauf.
   \centering
   \includegraphics[width=0.72\textwidth]{Plots/konvergenz_residuum.pdf}
   \caption{Doppeltlogarithmische Darstellung des Residuums gegen die
-  Fensterlänge. Der angepasste Exponent beträgt $-0{,}945$; die gestrichelte Gerade zeigt $\propto T_w^{-1}$. Die Achsenbeschriftung
+  Fensterlänge. Der angepasste Exponent beträgt $-0{,}945$; er mischt den Randterm ($\propto T_w^{-1}$) mit dem Quadraturanteil. Die gestrichelte Gerade zeigt $\propto T_w^{-1}$. Die Achsenbeschriftung
   $T$ entspricht $T_w$.}
   \label{fig:konvergenz}
 \end{figure}
 
-Das Residuum fällt mit $T_w^{-0{,}945}$, also praktisch mit $T_w^{-1}$,
-wie Gleichung~\eqref{eq:randterm} es für eine beschränkte
-Geschwindigkeitsänderung verlangt. Ein Integrationsfehler, der je
+Der Randterm $\delta_w$ fällt exakt mit $T_w^{-1}$, wie
+Gleichung~\eqref{eq:randterm} es für eine beschränkte
+Geschwindigkeitsänderung verlangt. Der angepasste Exponent $-0{,}945$
+entsteht, weil der Quadraturanteil $\delta_Q$ hinzukommt, hier rund
+$-80\,\mathrm{ppm}$; er hängt von der Einschwingrealisierung ab und ist
+von der Ordnung $\Delta t$. Ein Integrationsfehler, der je
 Zeitschritt entsteht, bliebe von der Fensterlänge unabhängig. In der Kontrollkonfiguration mit
 Dauerkontakt ist das Residuum bei $10\,\mathrm{s}$ wie bei
 $70\,\mathrm{s}$ unverändert null.
@@ -3599,13 +3841,32 @@ Der Randterm hat drei Ursachen:
 
 \begin{enumerate}
   \item \emph{Unvollständiges Einschwingen.} Der Archivlauf öffnete das
-  Fenster nach festen $5\,\mathrm{s}$. An der Konfiguration von
-  Tabelle~\ref{tab:konvergenz} dauert der Übergang $18{,}8\,\mathrm{s}$;
-  danach liegt ein Orbit der Periode~1 vor, und der Randterm beträgt
-  $-2\,\mathrm{ppm}$. Der Wert $-6816\,\mathrm{ppm}$ war Einschwingen.
-  \item \emph{Fenster ohne ganze Orbitperioden.} Bei Orbits der
-  Periode~3, 6 oder 30 verschwindet der Randterm, sobald das Fenster
-  ganze Orbitperioden umfasst.
+  Fenster nach festen $5\,\mathrm{s}$; wo die Bahn dann noch einschwingt,
+  bleibt ein Randterm. In der Festschritt-Rechnung ist auch der Wert
+  $-6816\,\mathrm{ppm}$ an der Konfiguration von
+  Tabelle~\ref{tab:konvergenz} ein solcher Randterm. Das lange
+  Einschwingen selbst ist dort aber ein Artefakt der Festschritt-RK4: Seine
+  Dauer hängt von der letzten Stelle der Phasenangabe und vom Zeitschritt
+  ab ($18{,}8\,\mathrm{s}$ bei $\varphi_3 = 208{,}42105263157893^\circ$,
+  $9{,}7\,\mathrm{s}$ bei einer um eine Einheit der letzten Stelle größeren
+  Phase, $7{,}1\,\mathrm{s}$ beim Datensatzwert $208{,}421^\circ$,
+  $4{,}5\,\mathrm{s}$ bei halbiertem Zeitschritt). Ereignisgenau gerechnet
+  (\texttt{code/ereignisloeser.py}) liegt die Bahn nach etwa
+  $5\,\mathrm{s}$ bis auf eine Wiederkehrtoleranz von $1\,\mathrm{mm/s}$
+  auf dem Orbit der Periode~1, in den auch die Festschritt-Rechnung nach
+  dem Einschwingen gelangt (mit strengerem Wiederkehrkriterium
+  ($10^{-8}$ bzw. $10^{-9}\,\mathrm{m/s}$) nach $9$ bis $10\,\mathrm{s}$); im Fenster
+  $5$--$15\,\mathrm{s}$ weicht das Zeitmittel um $+0{,}02\,\mathrm{mN}$
+  von $Mg$ ab statt um $-43{,}5\,\mathrm{mN}$. Auch $\lambda = 74{,}3\,\%$
+  und $N_{\max} = 44{,}1\,\mathrm{N}$ der Archivzeile sind Werte der
+  Festschritt-Rechnung; ereignisgenau gelten $75{,}08\,\%$ und
+  $38{,}5\,\mathrm{N}$.
+  \item \emph{Fenster ohne ganze Orbitperioden.} Bei Orbits höherer
+  Periode verschwindet der Randterm, sobald das Fenster ganze
+  Orbitperioden umfasst. Die Periodenangaben der Festschritt-Rechnung
+  (etwa 3, 6 oder 30) sind dabei nicht belastbar; an Stichproben
+  erwiesen sich einzelne ereignisgenau als instabile oder aperiodische
+  Zustände, die der feste Zeitschritt künstlich stabilisiert.
   \item \emph{Aperiodische Bewegung.} Hier bleibt $\delta_w$ bei jedem
   Fenster von der Ordnung $\Delta v_S/(g\,T_w)$, im Fenster von
   $10\,\mathrm{s}$ bis $0{,}37\,\%$.
@@ -3623,24 +3884,28 @@ Sollwert als konfigurationsabhängiger Effekt erschienen wäre.
   \includegraphics[width=0.72\textwidth]{Plots/residuum_liftoff.pdf}
   \caption{Betrag des relativen Residuums $|\delta|$ nach
   Gleichung~\eqref{eq:residual-def} gegen den Liftoff-Anteil, für alle 361 Konfigurationen des Archivlaufs (Burn-in fest $5\,\mathrm{s}$). Logarithmische Ordinate. Bei Dauerkontakt liegt
-  das Residuum am numerischen Boden der Integration; mit wachsender
+  das Residuum an der Rundungsgrenze des Datensatzes; mit wachsender
   Intermittenz steigt es um vier Größenordnungen.}
   \label{fig:residuum}
 \end{figure}
 
 \paragraph{Bezug zum zurückgezogenen Ergebnis.}
 Eine frühere Phase dieses Projekts berichtete eine persistente
-Mittelwertverschiebung der Kontaktkraft.
-Tabelle~\ref{tab:residual-strat} ist die quantitative Signatur des dafür
-verantwortlichen Mechanismus: ein konfigurationsabhängiger Randterm des Auswertefensters, der bei
-Dauerkontakt verschwindet und bei starker Intermittenz den
+Mittelwertverschiebung der Kontaktkraft (Simulationszyklus v3a--v3d).
+Ursache war ein Kontaktmodell, das die Eindrückung der Unterlage direkt
+aus der Beschleunigung vorschrieb ($-ma/k$), statt sie als Zustandsgröße
+zu integrieren; das Ergebnis ist zurückgezogen (Archiv-Vermerk
+Kernhypothese~v3 im Repository). Tabelle~\ref{tab:residual-strat} zeigt
+den Mechanismus, der danach in der korrigierten Engine Restabweichungen
+erzeugt: einen konfigurationsabhängigen Randterm des Auswertefensters,
+der bei Dauerkontakt verschwindet und bei starker Intermittenz den
 Sub-Prozent-Bereich erreicht. Da der Liftoff-Anteil und mit ihm
 Einschwingdauer und Periodizität von der Phasenkonfiguration abhängen,
 erscheint dieser Randterm beim Vergleich von Konfigurationen über den
 Intermittenzbereich hinweg als systematischer, phasenabhängiger Effekt
 --- und ist doch nur die Impulsänderung über ein endliches, teils zu früh
-geöffnetes Fenster. Auf dieser Grundlage wurde das frühere Ergebnis
-zurückgezogen.
+geöffnetes Fenster. Er zeigt, wie eine scheinbare Mittelwertverschiebung
+auch ohne Modellfehler entstehen kann.
 
 \paragraph{Folge für die Messkampagne.}
 Daraus folgen drei Festlegungen. Erstens erfordern Konfigurationen mit
@@ -3661,15 +3926,55 @@ die Schranke nach Gleichung~\eqref{eq:randterm} wird je Konfiguration
 angegeben.
 
 \section{Symmetrieprüfung}
+\label{sec:symmetrie}
 
-Das Modell ist gegenüber der Vertauschung der beiden relativen Phasen
-$(\varphi_2, \varphi_3) \rightarrow (\varphi_3, \varphi_2)$ invariant, da
-die drei Module nominell identisch sind. Dies liefert eine zweite Prüfung
-mit bekannter Antwort, unabhängig von der Basislinienprüfung.
+Bei identischen Modulen ist das Modell, unabhängig von der Masse des
+starren Rahmens, unter der Gruppe $S_3$ der Modulumbenennungen
+invariant. Jede
+Umbenennung bildet $(\varphi_2, \varphi_3)$ auf eine gleichwertige
+Konfiguration ab, zusammen mit einer Zeitverschiebung um
+$\tau_{\mathrm{ref}} = \varphi_{\mathrm{ref}}/(2\pi f)$.
+Tabelle~\ref{tab:s3} führt alle sechs Bilder auf; die Winkel gelten
+modulo $360^\circ$. Das gilt für jedes Profil, auch mit Liftoff.
 
-Über die $171$ nichtdiagonalen Rasterpaare beträgt die mittlere Differenz
-in $\langle N \rangle$ zwischen vertauschten Konfigurationen exakt null,
-das Maximum $7{,}5\,\mathrm{mN}$. Die von null verschiedenen Fälle
+\begin{table}[htbp]
+  \centering
+  \begin{tabular}{llc}
+    \hline
+    Umbenennung & Bild von $(\varphi_2, \varphi_3)$ & $\varphi_{\mathrm{ref}}$ \\
+    \hline
+    Identität                       & $(\varphi_2,\ \varphi_3)$              & $0$ \\
+    Module 2 und 3 vertauscht       & $(\varphi_3,\ \varphi_2)$              & $0$ \\
+    Module 1 und 2 vertauscht       & $(-\varphi_2,\ \varphi_3 - \varphi_2)$ & $\varphi_2$ \\
+    zyklisch, Bezugsmodul 2         & $(\varphi_3 - \varphi_2,\ -\varphi_2)$ & $\varphi_2$ \\
+    Module 1 und 3 vertauscht       & $(\varphi_2 - \varphi_3,\ -\varphi_3)$ & $\varphi_3$ \\
+    zyklisch, Bezugsmodul 3         & $(-\varphi_3,\ \varphi_2 - \varphi_3)$ & $\varphi_3$ \\
+    \hline
+  \end{tabular}
+  \caption{Die sechs gleichwertigen Bilder einer Phasenkonfiguration
+  (Gruppe $S_3$). $\varphi_{\mathrm{ref}}$ ist die Phase des Moduls, das
+  nach der Umbenennung Modul~1, also Bezugsmodul, ist.}
+  \label{tab:s3}
+\end{table}
+
+Invariant sind $\langle N \rangle$, $\gamma_1$, $\lambda$, $N_{\min}$,
+$N_{\max}$, $A$, die Beträge $|\hat{N}_j|$ und die ganze
+Kraftverteilung. Die Phasen der Harmonischen gehen über in
+$\arg\hat{N}_j + j\varphi_{\mathrm{ref}}$ (Konvention nach
+Gleichung~\eqref{eq:triaden}); die Triadenphasen bleiben erhalten. Die
+Verschiebung $(\varphi_2 + 120^\circ, \varphi_3 + 120^\circ)$ gehört nicht
+zur Gruppe und ist keine Invarianz; sie bildet nur an einzelnen
+Ausnahmepunkten gleichwertige Konfigurationen aufeinander ab. Bei
+Mehrstabilität gilt die Invarianz je Zustand; welcher Zustand sich
+einstellt, kann von der Startphase abhängen, die bei der Umbenennung mit
+verschoben werden muss.
+
+Geprüft ist auf dem Raster die Vertauschung der Module 2 und 3, die ohne
+Zeitverschiebung auskommt. Über die $171$ Rasterpaare beträgt die
+mittlere Differenz in $\langle N \rangle$ zwischen vertauschten
+Konfigurationen $+5{,}3\cdot10^{-6}\,\mathrm{N}$; exakt null ist sie
+nur trivial, wenn man jedes Paar in beiden Reihenfolgen zählt. Das
+Maximum beträgt $7{,}5\,\mathrm{mN}$. Die von null verschiedenen Fälle
 konzentrieren sich in derselben Region hohen Liftoffs, die in
 Abschnitt~\ref{sec:track1-sim} identifiziert wurde, was mit einem
 numerischen statt einem strukturellen Ursprung vereinbar ist.
@@ -3717,7 +4022,8 @@ Auslegungsgrundlage für die Spezifikation der Messtechnik.
 
 Zwei Merkmale sind für die Versuchsauslegung erheblich.
 
-Erstens variieren die Funktionale um Faktoren und nicht um Prozente. Die
+Erstens variieren die Funktionale im weichen Referenzkontakt um Faktoren
+und nicht um Prozente. Die
 Spitzenkontaktkraft überstreicht über das Raster einen Faktor von $5{,}3$
 und erreicht im Maximum das Achtfache der Basislinie, während das
 Zeitmittel innerhalb von $0{,}07\,\%$ festliegt. Dies ist die
@@ -3762,6 +4068,25 @@ $|\langle N \rangle - Mg| \le 0{,}2\,\mathrm{mN}$ gilt im gesamten
 Fenster. Der Feinsweep bestätigt damit den Befund des Grobrasters und
 liefert die Breite der Dauerkontaktregion, die das $18{,}9^\circ$-Raster
 nicht auflöst.
+
+Diese Referenzzahlen sind Effekte des weichen Referenzkontakts. Die Höhe
+der Spitze ($5{,}33\,\mathrm{N}$) und die positive Schiefe am
+Triphasik-Punkt ($\gamma_1 = +0{,}067$) gehen auf die Übertragung der
+dritten und sechsten Harmonischen zurück, die Steilheit der Flanken auf
+die Lage der zweiten Harmonischen auf der Kontaktresonanz
+(Abschnitt~\ref{sec:sens-k}, Anhang~\ref{sec:anh-kontaktmodell}). Bei
+steifem Kontakt ändern sich alle drei; bei starrer Auflage ist die
+Schiefe am Triphasik-Punkt negativ ($\gamma_1 = -0{,}45$). Am
+V1-Kandidaten der Auslegung beträgt die Spannweite der Zeltkurve
+$0{,}56\,\mathrm{N}$ (\texttt{code/auslegung.py --candidate}), im
+Referenzsatz $4{,}56\,\mathrm{N}$ (Präregistrierung v2, Anhang A4;
+\texttt{code/linear\_solver.py --section}). Dieser Vergleich trennt den
+Einfluss des Kontakts nicht: Der Kandidat unterscheidet sich auch in
+der bewegten Masse (im Referenzsatz bewegt sich die ganze Masse mit den
+Modulen, beim Kandidaten $0{,}300$ von $0{,}650\,\mathrm{kg}$) und im
+Hub ($8\,\mathrm{mm}$ statt $7{,}7\,\mathrm{mm}$). Die Zahlen
+illustrieren den Referenzsatz; eine Vorhersage für den Aufbau sind sie
+nicht.
 
 \section{Sweep mit sinusförmigem Bahnprofil}
 \label{sec:sinus-sweep}
@@ -3902,13 +4227,19 @@ durchweg positiv. Und die
 Anordnung reproduziert im Ergebnis das Experiment von Rigaud und
 Perret-Liaudet \cite{rigaud2003} --- harmonisch angeregter unilateraler
 Kontakt mit variabler Amplitude --- statt die in
-Kapitel~\ref{chap:stand} benannte Lücke zu adressieren.
+Kapitel~\ref{chap:stand} beschriebene Konstellation zu untersuchen.
 
-Die Asymmetrie des Bahnprofils ist demnach kein Detail der Umsetzung,
-sondern die Quelle der gesamten Phasenabhängigkeit jenseits der
-Amplitude. Für die Laborvariante folgt: Ein Antrieb, der ein asymmetrisches Profil
-erzeugt --- Nocke oder programmierbarer Aktor ---, ist zwingend;
-Exzenter und Kurbel bei konstanter Drehzahl scheiden aus. Der Sinus-Sweep behält
+Die Oberwellen des asymmetrischen Bahnprofils sind demnach kein Detail
+der Umsetzung, sondern im Modell die Quelle der Phasenabhängigkeit
+jenseits der resultierenden Amplitude. Phasenabhängigkeit über $R$ und
+die Zeltspitze bleiben auch mit sinusförmigem Profil erhalten. Allgemein
+braucht die Laborvariante im Dauerkontakt für Schiefe und für die zweite
+Harmonische einen Antrieb, der ein Profil ohne Halbwellensymmetrie
+erzeugt; eine dritte Harmonische setzt einen dritten Anregungsanteil
+voraus, der nach Überlagerung und Kontaktübertragung übrig bleibt und den
+ein nicht sinusförmiges Profil nicht zwangsläufig enthält. Ob Nocke oder
+programmierbarer Aktor, ist offen
+(Abschnitt~\ref{sec:offene-entscheidungen}). Der Sinus-Sweep behält
 dennoch einen Nutzen: Er ist die Referenz, gegen die der Beitrag der
 Profilasymmetrie in der Messung beziffert werden kann, und er liefert
 mit Gleichung~\eqref{eq:Rc-dyn} eine aus Transmissibilität und
@@ -3992,12 +4323,12 @@ sondern von Profil, Kontaktübertragung und Phasenlage zusammen.
 
 \paragraph{Die Spitzenkraft wächst steil mit der Steifigkeit.}
 $\max N_{\max}/Mg$ steigt von $1{,}9$ bei $k = 10^{3}$ auf $26$ bei
-$k = 10^{5}$, näherungsweise proportional zu $\sqrt{k}$. Die
-Nennlastforderung aus Abschnitt~\ref{sec:auslegung-sim} ist damit an
-$k$ gebunden: Ein Metallkontakt statt eines Elastomerpads verlangt eine
-um eine Größenordnung höhere Nennlast --- bei
-$k = 10^{5}\,\mathrm{N/m}$ rund $170\,\mathrm{N}$ --- und verliert
-entsprechend Auflösung um $Mg$.
+$k = 10^{5}$, näherungsweise proportional zu $\sqrt{k}$, bei
+$k = 10^{5}\,\mathrm{N/m}$ rund $170\,\mathrm{N}$. Die Spitzenkraft ist
+damit an $k$ gebunden. Diese Werte stammen aus Läufen ohne Störung; bei
+steifem Kontakt sind nach einer Störung Hüpfzustände mit weit höheren
+Spitzen möglich. Eine Nennlast folgt daraus nicht
+(Abschnitt~\ref{sec:auslegung-sim}).
 
 \paragraph{Nahe der Kontaktresonanz verschwindet die Struktur.}
 Bei $k = 3\cdot10^{3}\,\mathrm{N/m}$ liegt $f_n$ mit $10{,}8\,\mathrm{Hz}$
@@ -4094,12 +4425,10 @@ Gültigkeitsgrenzen einer Regel sind sie nicht zu behandeln.
 \paragraph{Die Spitzenkraft hängt nicht monoton von der Dämpfung ab.}
 Im synchronen Fall erreicht $N_{\max}$ bei $\zeta = 0{,}05$ das
 $15{,}9$-fache der Basislinie, rund $101\,\mathrm{N}$ --- mehr als bei
-schwächerer wie bei stärkerer Dämpfung. Die Nennlastforderung aus
-Abschnitt~\ref{sec:auslegung-sim} ist daher am schwach gedämpften
-Fall zu bemessen: Eine Dose mit $10\,\mathrm{kg}$ Nennlast reicht bei
-$\zeta = 0{,}10$, wird bei $\zeta = 0{,}05$ überschritten. Da $\zeta$
-eines Elastomerpads vor der Messung nur ungefähr bekannt ist, ist die
-Reserve entsprechend zu wählen.
+schwächerer wie bei stärkerer Dämpfung. Die Spitzenkraft hängt also
+vom Dämpfungsgrad ab, der vor der Messung nur ungefähr bekannt ist; eine
+Nennlast ist damit nicht hergeleitet
+(Abschnitt~\ref{sec:auslegung-sim}).
 
 \section{Was dieses Kapitel nicht belegt}
 
@@ -4111,10 +4440,10 @@ Reserve entsprechend zu wählen.
         Phasenabhängigkeit den Übergang zum realen Kontakt übersteht.
         Übereinstimmung zwischen Messung und Simulation ist nicht das
         Erfolgskriterium; das Überleben der qualitativen Struktur ist es.
-  \item \textbf{Numerische Residuen sind keine Nachweisgrenzen.} Der
-        Boden von $0{,}2\,\mathrm{ppm}$ aus
-        Abschnitt~\ref{sec:track1-sim} ist eine Eigenschaft des
-        Integrators. Er trägt keine Information über die erreichbare
+  \item \textbf{Numerische Residuen sind keine Nachweisgrenzen.} Die
+        Grenze von $0{,}2\,\mathrm{ppm}$ aus
+        Abschnitt~\ref{sec:track1-sim} ist eine Eigenschaft der gerundeten
+        Datensatzwerte. Sie trägt keine Information über die erreichbare
         Messauflösung. Die Schwelle $\varepsilon_{\mathrm{phys}}$ wird
         empirisch aus der Wiederholpräzision der Referenz bestimmt und
         aus nichts sonst.
@@ -4418,24 +4747,28 @@ Zwei Befunde liegen vor. Beide sind Modellaussagen und keine Messungen.
 
 \textbf{Das Fenstermittel trägt bei intermittierendem Kontakt einen
 Randterm.} Über die $361$ Konfigurationen des Rasters gewinnt die Kette
-die erhaltene Basislinie bei Dauerkontakt auf $0{,}2\,\mathrm{ppm}$
-zurück; im Archivlauf erreichte das Residuum bei Liftoff-Anteilen
+die erhaltene Basislinie bei Dauerkontakt bis auf die Rundung des
+Datensatzes ($0{,}2\,\mathrm{ppm}$) zurück; im Archivlauf erreichte das Residuum bei Liftoff-Anteilen
 oberhalb von $50\,\%$ bis $0{,}68\,\%$. Der Schwerpunktsatz lässt bei
 hohem Liftoff keine Ausnahme zu, legt aber für jedes endliche Fenster
 einen Randterm fest: die Änderung der Schwerpunktsgeschwindigkeit,
-bezogen auf $g$ und Fensterlänge (Gleichung~\eqref{eq:randterm}). Das
-Residuum fällt mit $T_w^{-0{,}945}$, also praktisch mit $T_w^{-1}$,
-während ein Integrationsfehler von der Fensterlänge unabhängig wäre; der
-Quadraturanteil bleibt unter $0{,}01\,\%$. Der Höchstwert des Archivs war
-Einschwingen; bei aperiodischer Bewegung bleibt der Randterm im
-$10$-s-Fenster bis $0{,}37\,\%$.
+bezogen auf $g$ und Fensterlänge (Gleichung~\eqref{eq:randterm}). Der
+Randterm fällt exakt mit $T_w^{-1}$; der angepasste Exponent $-0{,}945$
+enthält zusätzlich den Quadraturanteil, der unter $0{,}01\,\%$ bleibt.
+Auch der Höchstwert des Archivs ist ein Randterm; das lange Einschwingen,
+das ihn erzeugt, ist aber ein Artefakt der Festschritt-Integration.
+Ereignisgenau weicht das Zeitmittel dort um $+0{,}02\,\mathrm{mN}$ ab. Bei
+aperiodischer Bewegung bleibt der Randterm im $10$-s-Fenster bis
+$0{,}37\,\%$.
 
 Der methodisch erhebliche Teil ist nicht der Wert, sondern die Art seines
 Zustandekommens: Der Befund wurde durch eine Größe erzeugt, deren
 richtige Antwort vorab bekannt war. Ohne diese Konstruktion wäre der
 Randterm nicht als solcher erkennbar gewesen, sondern hätte
-als konfigurationsabhängiger Effekt erscheinen können. Genau das ist in
-einer früheren Phase dieses Projekts geschehen.
+als konfigurationsabhängiger Effekt erscheinen können. In einer früheren
+Phase dieses Projekts erschien eine scheinbare Mittelwertverschiebung als
+Effekt; ihre Ursache war dort ein Modellfehler, die vorgeschriebene
+Eindrückung des Kontaktmodells.
 
 \vspace{0.5em}
 
@@ -4456,9 +4789,9 @@ Die Grenzen dieser Befunde sind schärfer als ihre Aussage.
       Hertz'sche Nichtlinearität, Rauheit oder Stoßverluste. Ob die im
       Modell gefundene Struktur den Übergang zum realen Kontakt
       übersteht, ist gerade die offene Frage.
-\item \textbf{Das numerische Residuum ist keine Nachweisgrenze.} Der
-      Boden von $0{,}2\,\mathrm{ppm}$ bei Dauerkontakt ist eine
-      Eigenschaft des Integrators, der Anstieg bei Intermittenz eine
+\item \textbf{Das numerische Residuum ist keine Nachweisgrenze.} Die
+      Grenze von $0{,}2\,\mathrm{ppm}$ bei Dauerkontakt ist eine
+      Eigenschaft der gerundeten Datensatzwerte, der Anstieg bei Intermittenz eine
       Eigenschaft der gewählten Fensterlänge. Beides sagt nichts über
       die erreichbare Messauflösung.
 \item \textbf{Die Parametersätze sind nicht abgeglichen.} Die Simulation
@@ -4476,8 +4809,8 @@ Der zentrale methodische Zug dieser Arbeit ist die Verwendung einer
 erhaltungsgarantierten Nullgröße als In-situ-Kontrolle. Seine Stärke ist
 unmittelbar: Er liefert eine Nullreferenz ohne Zweitapparatur, ohne
 Referenznormal und ohne Modellannahme, und er misst das
-Falsch-Positiv-Verhalten der vollständigen Auswertekette gegen eine
-bekannte Antwort.
+Falsch-Positiv-Verhalten der Auswertekette für das erste Moment gegen
+eine bekannte Antwort.
 
 Seine Grenze ist ebenso unmittelbar und wird hier ausdrücklich benannt,
 weil sie die Reichweite des gesamten Rahmens bestimmt.
@@ -4513,9 +4846,9 @@ verfälschen dennoch das Ergebnis:
 \end{itemize}
 
 Die Kontrolle ist damit eine \emph{notwendige}, keine hinreichende
-Bedingung. Sie schließt eine Fehlerklasse sicher aus --- diejenige, die
-in diesem Projekt tatsächlich zu einem zurückgezogenen Befund geführt hat
---- und lässt andere offen.
+Bedingung. Sie erkennt eine Fehlerklasse --- Verschiebungen des
+Zeitmittels, wie sie in diesem Projekt einem zurückgezogenen Befund
+zugrunde lagen --- und lässt andere offen.
 
 \vspace{0.5em}
 
@@ -4736,15 +5069,21 @@ aus der Simulationsstudie nach Kapitel~\ref{chap:simulation} und sind
 Modellaussagen. Sechs davon binden die Auslegung des Experiments.
 
 \paragraph{Die Kontrollgröße hat einen Fenstereffekt sichtbar
-gemacht.} Das Basislinienresiduum liegt bei Dauerkontakt bei
-$0{,}2\,\mathrm{ppm}$. Größere Werte sind der Randterm des
+gemacht.} Das Basislinienresiduum liegt bei Dauerkontakt unter der
+Rundungsgrenze des Datensatzes von $0{,}2\,\mathrm{ppm}$. Größere Werte
+sind der Randterm des
 Auswertefensters, die Impulsänderung des Schwerpunkts über das Fenster.
 Er entsteht bei unvollständigem Einschwingen, bei Fenstern ohne ganze
 Orbitperioden und bei aperiodischer Bewegung und fällt mit der
-Fensterlänge; die Integration trägt unter $0{,}01\,\%$ bei. Da der
-Liftoff-Anteil von der Phasenlage abhängt, erschien dieser Randterm in
-einer früheren Projektphase als phasenabhängiger Effekt. Die Größe mit bekannter Antwort hat ihn als Artefakt
-ausgewiesen.
+Fensterlänge; der Quadraturanteil der Mittelung bleibt unter
+$0{,}01\,\%$. Den Höchstwert des Archivlaufs erzeugt ein Einschwingen,
+das die Festschritt-Integration künstlich verlängert; ereignisgenau
+gerechnet weicht das Zeitmittel dort um $+0{,}02\,\mathrm{mN}$ ab. Da der
+Liftoff-Anteil von der Phasenlage abhängt, kann dieser Randterm als
+phasenabhängiger Effekt erscheinen; die Größe mit bekannter Antwort weist
+ihn als Artefakt aus. Die früher berichtete Mittelwertverschiebung ging
+dagegen auf ein Kontaktmodell mit vorgeschriebener Eindrückung zurück und
+ist zurückgezogen.
 
 \paragraph{Die Wellenformfunktionale sind nicht entartet, aber auch
 nicht unabhängig.} Sie variieren über den Phasenraum um Faktoren,
@@ -4764,12 +5103,20 @@ Dauerkontakt linksschief, und bei $k = 6\,944\,\mathrm{N/m}$ wird eine
 Zweiergruppe bei vollem Hub negativ. Prüfbar bleibt eine Vorhersage, die
 aus gemessenen Einzelmodul-Harmonischen durch Überlagerung gewonnen wird.
 
-\paragraph{Die Profilasymmetrie ist die Quelle der Phasenabhängigkeit.}
+\paragraph{Die Oberwellen des Profils tragen die Phasenabhängigkeit jenseits der Amplitude.}
 Mit sinusförmigem Antrieb kollabiert die Phasenkarte auf die
 resultierende Amplitude $R$, negative Schiefe tritt nirgends auf, und
-das Dreimodulsystem wird einem einzelnen Schwingerreger äquivalent. Für
-den Aufbau ist ein Antrieb mit asymmetrischem Profil zwingend; Exzenter
-und Kurbel bei konstanter Drehzahl scheiden aus.
+das Dreimodulsystem wird einem einzelnen Schwingerreger äquivalent.
+Phasenabhängigkeit über $R$ und die Zeltspitze bleiben erhalten. Im
+Dauerkontakt liefert das Sinusprofil weder Schiefe noch zweite oder
+dritte Harmonische; das asymmetrische Profil des Modells enthält beide
+Harmonischen und erzeugt Schiefe. Allgemein schließt im linearen
+Dauerkontakt ein halbwellensymmetrisches Profil gerade Harmonische und
+damit Schiefe aus; eine dritte Harmonische ist mit ihm vereinbar und setzt
+einen dritten Anregungsanteil voraus, der nach Überlagerung und
+Kontaktübertragung übrig bleibt. Ein nicht sinusförmiges Profil enthält
+ihn nicht zwangsläufig. Welcher Antrieb das benötigte Profil erzeugt, ist
+offen (Abschnitt~\ref{sec:offene-entscheidungen}).
 
 \paragraph{Die Kontaktsteifigkeit wirkt über Resonanzlinien.} Die
 $j$-te Harmonische trifft die Kontaktresonanz bei $3f/f_n = 3/j$. Der
@@ -4780,10 +5127,11 @@ verwischen die Regime, zu steif wachsen Spitzenkraft und Bandbreite. Ein
 zusammenhängendes Auslegungsfenster $1 \lesssim 3f/f_n \lesssim 3$ gibt
 es nicht.
 
-\paragraph{Drei Zahlen binden die Messtechnik.} Die Nennlast ist am
-Spitzenwert zu bemessen: $20\,\mathrm{kg}$ bei ungemessener Dämpfung,
-$10\,\mathrm{kg}$ erst nach nachgewiesenem $\zeta \geq 0{,}1$, bei
-steifem Kontakt entsprechend mehr. Bandbreite und Abtastrate folgen der
+\paragraph{Drei Forderungen binden die Messtechnik.} Die Nennlast ist am
+Spitzenwert zu bemessen; eine Zahl ist nicht hergeleitet, weil sie von
+Kontakt, Dämpfungsziel und Umfang von E1 abhängt und bei steifem Kontakt
+Hüpfzustände von einigen $100\,\mathrm{N}$ möglich sind
+(Abschnitt~\ref{sec:auslegung-sim}). Bandbreite und Abtastrate folgen der
 Kontakteigenfrequenz, $B \geq 10\,f_n$ und $f_s \geq 10\,B$. Die
 Fensterlänge ist durch Konvergenznachweis zu bestimmen, nicht
 anzunehmen.
@@ -4797,7 +5145,7 @@ sind vollständige Ausgänge.
 
 \section{Methodischer Beitrag}
 
-Der wesentliche Beitrag dieser Arbeit ist methodisch. Die einzelnen
+Der mögliche Beitrag dieser Arbeit ist methodisch. Die einzelnen
 Elemente sind in Abschnitt~\ref{sec:beitrag} aufgeführt; hervorzuheben
 ist der konstruktive Kern:
 
@@ -4812,7 +5160,11 @@ Abschnitt~\ref{sec:kontrollgrenze} begrenzt worden: Die Kontrolle gilt
 für die Klasse von Größen, der sie selbst angehört, und ersetzt die
 Artefaktanalyse nicht.
 
-Dieser Beitrag bleibt unabhängig vom Ausgang des Experiments gültig.
+Ob dieser Zugang in Metrologie, Wägetechnik oder benachbarten Feldern
+schon beschrieben ist, ist nicht recherchiert; er ist deshalb als
+methodischer Baustein mit ungeklärter Neuheit zu lesen. Verwertbar bleibt
+er auch bei einem Nullausgang, sofern die erreichte Präzision eine
+Entscheidung erlaubt.
 
 \section{Weiterführende Arbeiten}
 \label{sec:weiterfuehrend}
@@ -4820,12 +5172,16 @@ Dieser Beitrag bleibt unabhängig vom Ausgang des Experiments gültig.
 Die offenen Punkte sind konkret und in ihrer Reihenfolge bestimmt.
 
 \begin{enumerate}
-\item \textbf{Antrieb mit asymmetrischem Profil.} Nocke oder
-      programmierbarer Aktor --- die Voraussetzung dafür, dass der Aufbau
-      die Fragestellung überhaupt trägt. Die Abweichung des real
-      erzeugten Profils vom Modellprofil ist zu vermessen und in die
-      Simulation zurückzuführen.
-\item \textbf{Wahl des Kontaktelements.} Mit Abstand zu den
+\item \textbf{Antrieb (offen, Entscheidung des Autors).} Nocke oder
+      programmierbarer Aktor (Abschnitt~\ref{sec:offene-entscheidungen});
+      im linearen Dauerkontakt ist für Schiefe und für die zweite
+      Harmonische ein Profil ohne Halbwellensymmetrie nötig; eine dritte
+      Harmonische setzt einen dritten Anregungsanteil voraus, der nach
+      Überlagerung und Kontaktübertragung übrig bleibt und den ein nicht
+      sinusförmiges Profil nicht zwangsläufig enthält. Die
+      Abweichung des real erzeugten Profils vom Modellprofil ist zu
+      vermessen und in die Simulation zurückzuführen.
+\item \textbf{Wahl des Kontaktelements (offen, Entscheidung des Autors).} Mit Abstand zu den
       Resonanzlinien $3f/f_n = 3/j$, $j = 1, 2, 3$
       (Abschnitt~\ref{sec:sens-k}), ist die Steifigkeit gegen
       Spitzenkraft und Bandbreite abzuwägen; $k$ und $c$ sind vor der
@@ -4891,7 +5247,11 @@ $\lambda$ um mehr als $0{,}5$ Prozentpunkte an $11$ Punkten, $\gamma_1$
 um mehr als $0{,}02$ an $7$, $N_{\max}$ um mehr als $0{,}2\,\mathrm{N}$ an
 $9$ und $A$ um mehr als $0{,}05$ an $6$. Am Punktpaar
 $(0^\circ; 208{,}4^\circ)$/$(208{,}4^\circ; 0^\circ)$ ist das Archiv
-einschwing-kontaminiert.
+einschwing-kontaminiert; das lange Einschwingen ist dort ein Artefakt der
+Festschritt-Integration. Ereignisgenau gelten $\lambda = 75{,}08\,\%$,
+$N_{\max} = 38{,}5\,\mathrm{N}$ und $\langle N\rangle - Mg =
++0{,}02\,\mathrm{mN}$ im Fenster $5$--$15\,\mathrm{s}$
+(\texttt{code/ereignisloeser.py}).
 
 \begin{table}[htbp]
   \centering
@@ -4991,11 +5351,13 @@ $167$ positiv und $16$ null bei der Auflösung der Datei von
 $10^{-6}\,\mathrm{N}$. Die großen Werte sind Randterme nach
 Gleichung~\eqref{eq:randterm}: Am Punktpaar
 $(0^\circ; 208{,}4^\circ)$/$(208{,}4^\circ; 0^\circ)$ stammen sie aus
-unvollständigem Einschwingen, am Paar
+einem Einschwingen, das die Festschritt-Integration künstlich verlängert
+(Abschnitt~\ref{sec:track1-sim}), am Paar
 $(284{,}2^\circ; 303{,}2^\circ)$/$(303{,}2^\circ; 284{,}2^\circ)$ aus
 aperiodischer Bewegung. Die Konvergenzrechnung in
-Abschnitt~\ref{sec:track1-sim} zeigt den Abfall mit der Fensterlänge,
-$T_w^{-0{,}945}$.
+Abschnitt~\ref{sec:track1-sim} zeigt den Abfall mit der Fensterlänge:
+Der Randterm fällt mit $T_w^{-1}$, der angepasste Exponent $-0{,}945$
+enthält den Quadraturanteil.
 
 \section{Liftoff-freie Konfigurationen}
 \label{sec:anh-liftoff-frei}
@@ -5026,8 +5388,9 @@ Zwölf der $361$ Rasterpunkte weisen keinen Kontaktverlust auf.
   \label{tab:liftoff-frei}
 \end{table}
 
-Zwei Beobachtungen: Die Menge ist unter Vertauschung von $\varphi_2$ und
-$\varphi_3$ abgeschlossen, wie es die Symmetrie des Modells verlangt. Und
+Zwei Beobachtungen: Die Menge ist unter allen sechs Abbildungen der
+Gruppe $S_3$ abgeschlossen (Tabelle~\ref{tab:s3}), wie es die Symmetrie
+des Modells verlangt. Und
 sie zerfällt in nur zwei Wertepaare. Das Grobraster trifft die Struktur
 also an wenigen, weit auseinanderliegenden Punkten und bildet ihren
 Verlauf nicht ab. Alle zwölf Punkte liegen in
@@ -5240,7 +5603,7 @@ Auslegung der Apparatur zu beachten.
     Simulierte Dauer    & $T_{\mathrm{sim}}$ & $15\,\mathrm{s}$ \\
     Verworfener Anteil  & $T_{\mathrm{burn}}$& $5\,\mathrm{s}$ \\
     Ausgewertete Dauer  & ---                & $10\,\mathrm{s}$, entspricht $100$ Zyklen \\
-    Anfangsbedingung    & $z_0$              & $-Mg/k$, statisches Gleichgewicht \\
+    Anfangsbedingung    & $z_0$              & $-Mg/k$; kein Gleichgewicht (Text) \\
     \hline
   \end{tabular}
   \caption{Numerische Parameter.}
@@ -5253,9 +5616,16 @@ kurzen Kontaktphasen muss der Wiedereintritt in den Kontakt aufgelöst
 werden. Der Burn-in von $5\,\mathrm{s}$ entspricht $50$ Anregungszyklen
 und ist damit deutlich länger als die Abklingzeit der
 Kontakteigenschwingung. Für den Dauerkontakt genügt das. Im
-Liftoff-Bereich dauern Übergänge an einzelnen Konfigurationen bis etwa
-$40\,\mathrm{s}$; dort ist das Archivfenster teilweise
-einschwing-kontaminiert (Abschnitt~\ref{sec:track1-sim}).
+Liftoff-Bereich dauerten Übergänge in der Festschritt-Rechnung
+(Nachrechnung mit adaptivem Burn-in vom 13.~September 2026) an einzelnen
+Konfigurationen bis etwa $40\,\mathrm{s}$; dort ist das Archivfenster teilweise
+einschwing-kontaminiert (Abschnitt~\ref{sec:track1-sim}). Die
+Anfangsbedingung ist kein Gleichgewichtszustand: Nur die Feder ist
+statisch eingedrückt; die Module haben bei $t = 0$ bereits ihre
+Profilgeschwindigkeit, und der Schwerpunkt startet je nach Konfiguration
+mit bis zu $0{,}24\,\mathrm{m/s}$. Einschwingdauern und Periodenangaben
+der Festschritt-RK4 im Liftoff-Bereich sind nicht belastbar; dafür ist
+ein ereignisgenauer Löser nötig (\texttt{code/ereignisloeser.py}).
 
 \section{Verifikation}
 
@@ -5267,11 +5637,13 @@ Konfiguration gelten. Das Ergebnis ist in
 Tabelle~\ref{tab:residuum-anhang} geschichtet dargestellt und in
 Abschnitt~\ref{sec:track1-sim} erörtert.
 
-\paragraph{Vertauschungssymmetrie.}
-Da die drei Module nominell identisch sind, muss das Modell gegenüber
-$(\varphi_2, \varphi_3) \rightarrow (\varphi_3, \varphi_2)$ invariant
-sein. Über die $171$ nichtdiagonalen Rasterpaare beträgt die mittlere
-Differenz in $\langle N \rangle$ exakt null, das Maximum
+\paragraph{Symmetrie.}
+Da die drei Module nominell identisch sind, ist das Modell unter allen
+sechs Abbildungen der Gruppe $S_3$ invariant (Tabelle~\ref{tab:s3}). Auf
+dem Raster geprüft ist die Vertauschung
+$(\varphi_2, \varphi_3) \rightarrow (\varphi_3, \varphi_2)$: Über die
+$171$ Rasterpaare beträgt die mittlere Differenz in
+$\langle N \rangle$ $+5{,}3\cdot10^{-6}\,\mathrm{N}$, das Maximum
 $7{,}5\,\mathrm{mN}$. Die von null verschiedenen Fälle liegen
 sämtlich im Bereich hohen Liftoffs.
 
@@ -5293,23 +5665,35 @@ denselben numerischen Ursprung haben.
 \item Das Modell ist eindimensional. Laterale Freiheitsgrade, Kippen und
       die daraus folgende Einkopplung in den Normalkanal sind nicht
       abgebildet, obwohl sie in der Apparatur die Schwelle
-      $\varepsilon_{\perp}$ erforderlich machen.
+      $\varepsilon_{\perp}$ erforderlich machen. Der Dauerkontakt am
+      Triphasik-Punkt beim Referenzsatz ($\lambda = 0$,
+      $N_{\min} = 5{,}33\,\mathrm{N}$) gilt für einen nicht kippenden
+      Körper bzw. eine Einpunktauflage. Steht der Körper auf drei Zellen
+      mit den Modulen über den Zellen und bewegt sich wie im
+      Referenzsatz die gesamte Masse mit den Modulen, zerfällt das System
+      in drei synchron laufende Einzelsysteme; dann heben die Zellen auch
+      am Triphasik-Punkt ab.
 \item Der Simulationsparametersatz weicht von den Auslegungswerten der
       geplanten Apparatur ab; siehe den Hinweis in
       Kapitel~\ref{chap:simulation}.
 \item Der eingeschwungene Zustand ist nicht überall eindeutig. In sechs
       kleinen Satelliteninseln der Phasenebene, zusammen $0{,}34\,\%$ des
       $1^\circ$-Rasters, koexistieren ein Dauerkontaktorbit und ein
-      springender Zustand: Bei $(35^\circ, 116^\circ)$ liefert der Start
-      aus dem statischen Gleichgewicht $\lambda = 75{,}82\,\%$, der Start
-      auf dem linearen Kontaktorbit $\lambda = 0$. Der Kontaktorbit ist
-      als Lösung des gedämpften linearen Systems lokal stabil; welcher
-      Zustand sich einstellt, hängt dort vom Anfangszustand ab. In den
-      beiden Hauptgebieten um den Triphasik-Punkt kehrten Stichproben mit
-      einer Anfangsgeschwindigkeit von $3\,\mathrm{m/s}$ in den
-      Dauerkontakt zurück. Kein Punkt des $19\times19$-Rasters liegt in
-      einer Insel; die Rasterwerte gelten für den Start aus dem
-      statischen Gleichgewicht (Tabelle~\ref{tab:numerik}).
+      springender Zustand: Bei $(35^\circ, 116^\circ)$ liefert der
+      Standardstart $\lambda = 75{,}82\,\%$, der Start auf dem linearen
+      Kontaktorbit $\lambda = 0$. Der Kontaktorbit ist als Lösung des
+      gedämpften linearen Systems lokal stabil; welcher Zustand sich
+      einstellt, hängt dort vom Anfangszustand ab. In den beiden
+      Hauptgebieten um den Triphasik-Punkt kehrten Stichproben mit einer
+      Anfangsgeschwindigkeit von $3\,\mathrm{m/s}$ in den Dauerkontakt
+      zurück. Kein Punkt des $19\times19$-Rasters liegt in einer Insel.
+      Für den Kontaktast gilt das; im Liftoff-Bereich koexistieren aber
+      verbreitet mehrere stabile Zustände, an mindestens $99$ von $361$
+      Rasterpunkten bei drei verschiedenen Starts (Festschritt-RK4). Die Rasterwerte sind
+      dort die vom Standardstart ausgewählten Zustände
+      (Tabelle~\ref{tab:numerik}). Bei steifem Kontakt zieht auch der
+      Kontaktast nicht mehr global an
+      (\texttt{docs/einzugsgebiete\_v1\_kandidat.md}).
 \end{itemize}
 
 
@@ -5319,9 +5703,9 @@ denselben numerischen Ursprung haben.
 \chapter{Dokumentation der Literaturrecherche}
 \label{app:recherche}
 
-Die Lückenbehauptung in Kapitel~\ref{chap:stand} ist nur so belastbar
-wie die Recherche, auf der sie beruht. Dieser Anhang legt Umfang und
-Methode offen, damit ihre Reichweite beurteilt werden kann.
+Die Aussagen zum Forschungsstand in Kapitel~\ref{chap:stand} sind nur so
+belastbar wie die Recherche, auf der sie beruhen. Dieser Anhang legt
+Umfang und Methode offen, damit ihre Reichweite beurteilt werden kann.
 
 \section{Art der Recherche}
 
@@ -5376,10 +5760,13 @@ sinnvoll, deutscher Form:
 
 \section{Verifikation je Eintrag}
 
-Jede der 21 Quellen im Literaturverzeichnis wurde einzeln geprüft. Als
-verifiziert gilt ein Eintrag, wenn Autoren, Titel, Erscheinungsort und
-Jahr auf der Seite des Verlags oder Repositoriums bestätigt sind und,
-soweit vergeben, der DOI aufgelöst wurde.
+Jede der 21 Literaturquellen im Literaturverzeichnis wurde einzeln
+geprüft; hinzu kommt der Eintrag für den Repository-Stand
+\cite{frueh2026repo}. Als verifiziert gilt ein Eintrag, wenn Autoren,
+Titel, Erscheinungsort und Jahr auf der Seite des Verlags oder
+Repositoriums bestätigt sind und, soweit vergeben, der DOI aufgelöst
+wurde. Die Prüfung belegt diese Angaben, nicht die Vollständigkeit der
+Felder im Literaturverzeichnis.
 
 \begin{table}[htbp]
   \centering
@@ -5391,7 +5778,7 @@ soweit vergeben, der DOI aufgelöst wurde.
     \hline
     Umbanhowar/van Hecke 2005 & APS & DOI & --- \\
     Rigaud/Perret-Liaudet 2003 (T.\,1) & ScienceDirect & --- & Seiten 289--307 \\
-    Perret-Liaudet/Rigaud 2003 (T.\,2) & ScienceDirect, arXiv & --- & Seitenzahl nicht ermittelt \\
+    Perret-Liaudet/Rigaud 2003 (T.\,2) & ScienceDirect, arXiv & --- & Seiten und DOI aus dem Formelverzeichnis v2.7 ins Literaturverzeichnis übernommen, ungeprüft; gegen die Verlagsseite zu prüfen \\
     Perret-Liaudet/Rigaud 2006 & ScienceDirect & --- & Jahr 2006, nicht 2003 \\
     Perret-Liaudet/Rigaud 2007 & ASME & DOI & --- \\
     Wakou/Ochiai/Isobe 2008 & J-STAGE, arXiv & --- & --- \\
@@ -5409,7 +5796,7 @@ soweit vergeben, der DOI aufgelöst wurde.
     Kay 1998 & Pearson & ISBN & --- \\
     Lanczos 1986 & Dover & ISBN & Nachdruck 1970 \\
     Montgomery/Runger 2014 & Wiley & --- & US-Ausgabe 2013 \\
-    Shabana 2010 & Wiley & ISBN & Jahr korrigiert, nicht 2013 \\
+    Shabana 2010 & Wiley & --- & Jahr korrigiert, nicht 2013; ISBN im Literaturverzeichnis fehlt, zu prüfen \\
     Taylor/Kuyatt 1994 & NIST & DOI & 1994 Edition \\
     \hline
   \end{tabular}%
@@ -5417,6 +5804,19 @@ soweit vergeben, der DOI aufgelöst wurde.
   \caption{Verifikationsstand aller Literatureinträge.}
   \label{tab:verifikation}
 \end{table}
+
+\paragraph{Abgleich mit dem Literaturverzeichnis (Oktober 2026).}
+Im Literaturverzeichnis fehlen weiterhin Angaben: vier Bücher ohne ISBN
+oder DOI (de Silva, Doebelin, Montgomery/Runger, Shabana) und fünf
+Artikel ohne DOI (Rigaud/Perret-Liaudet 2003 T.\,1, Perret-Liaudet/Rigaud
+2006, Wakou et al.\ 2008, Chatzinikolaidis et al.\ 2020 und 2021). Sie
+sind als zu prüfen markiert und nicht ergänzt, weil die Angaben im
+Projekt nicht belegt sind. Für Perret-Liaudet/Rigaud 2003 T.\,2 sind
+Seiten und DOI aus dem Formelverzeichnis v2.7 übernommen. Die
+13 Einträge des Literaturabgleichs vom 12.~September 2026 (Ratchet- und
+Tribologieliteratur, Kontaktmodelle, Kapselroboter) sind weder im
+Literaturverzeichnis noch in Kapitel~\ref{chap:stand} enthalten; vor einer
+Übernahme sind sie gegen die Primärquellen zu prüfen.
 
 \section{Nicht aufgenommene Angaben}
 
@@ -5433,24 +5833,37 @@ verifizieren ließen:
       von 2023 wurde stattdessen aufgenommen.
 \item Eine Zuschreibung von Arbeiten zur Mehrmassen-Phasensteuerung an
       eine Gruppe der Fudan-Universität --- nicht bestätigt, nicht
-      aufgenommen.
+      aufgenommen. In anderen Projektunterlagen stehen dazu abweichende,
+      nicht abgeglichene Arbeitsangaben (Arbeiten von Fang, Xu und
+      Mitarbeitern), teils mit widersprüchlichem Prüfvermerk; die
+      Dokumente des Repositorys führen sie als Kandidaten, bibliografisch
+      ungeprüft.
 \end{itemize}
 
-Ebenso nicht aufgenommen: die in einem Projektdokument geführte Angabe,
+Ebenso nicht aufgenommen: die in Projektdokumenten geführte Angabe,
 Perret-Liaudet und Rigaud hätten $\langle N \rangle = Mg$ bei bis zu
-$15\,\%$ Kontaktverlust gezeigt. Die Arbeit von 2007 existiert und ist
-zitiert; die spezifische Zahl ließ sich in ihr nicht belegen.
+$15\,\%$ Kontaktverlust gezeigt. Geprüft wurde dafür die Arbeit von 2007
+\cite{perretliaudet2007}, in der sich die Zahl nicht belegen ließ. Die
+Angabe bezog sich aber vermutlich auf Teil~2 von 2003
+\cite{perretliaudet2003} (Zufallsanregung), dessen arXiv-Fassung 2007
+bereitgestellt wurde. Dort ist sie ungeprüft. Bis zu einer Prüfung in
+Teil~2 gilt sie als ungeprüft und wird in den aktiven Projektdokumenten
+nicht als Beleg geführt.
 
-\section{Folgerung für die Lückenbehauptung}
+\section{Folgerung für die Aussagen zum Forschungsstand}
 
 Die Aussage in Kapitel~\ref{chap:stand}, die dort beschriebene
-Konstellation sei ``nach dem Ergebnis der oben beschriebenen
-Recherche'' nicht systematisch untersucht, ist mit dem hier
-dokumentierten Umfang zu lesen: eine gezielte Suche entlang von vier
+Konstellation sei in den gesichteten Arbeiten nicht gefunden worden, ist
+mit dem hier dokumentierten Umfang zu lesen: eine gezielte Suche entlang von vier
 Begriffsfeldern, verifiziert auf Verlagsseiten, ohne systematische
-Datenbankabfrage. Vor einer Einreichung wäre die Recherche in
-mindestens einer bibliographischen Fachdatenbank mit dokumentierter
-Suchstrategie zu wiederholen.
+Datenbankabfrage. Die Suchbegriffe decken Haptik, vibrationsgetriebene
+Roboter und Kapselsysteme, Impact-Oszillatoren und Grazing, dynamisches
+Wägen und Metrologie nicht ab, obwohl Kapitel~\ref{chap:stand} mehrere
+dieser Nachbarstränge selbst nennt. Eine Lücke ist damit nicht
+belegt; Kapitel~\ref{chap:stand} formuliert die Konstellation deshalb als
+Suchbefund. Vor einer Einreichung wäre die Recherche in mindestens einer
+bibliographischen Fachdatenbank mit dokumentierter Suchstrategie zu
+wiederholen.
 
 
 % ------------------------------------------------------

@@ -1,7 +1,7 @@
 # PCMMS — Präregistrierung v2, Technischer Anhang
 
 **Matthias Früh · ORCID 0009-0005-9984-4207**
-Stand: 28. September 2026, überarbeitet 2. Oktober 2026 (A3, A4: Einordnung der Vorzeichenregel) · gleichrangiger Teil von Teil A, Entwurf — nicht eingefroren, nicht registriert
+Stand: 28. September 2026, überarbeitet 2. Oktober 2026 (A3, A4: Einordnung der Vorzeichenregel) und 3. Oktober 2026 (A0, A4, Z: Verweise auf das Exposé) · gleichrangiger Teil von Teil A, Entwurf — nicht eingefroren, nicht registriert
 
 Dieser Anhang gehört zu `praeregistrierung_v2_entwurf.md` (Hauptdokument, Dateiname vorläufig, §12; Verweise
 „§“ beziehen sich darauf) und wird mit ihm eingefroren und registriert. Er enthält den Änderungsvermerk
@@ -46,8 +46,9 @@ externe Registrierung, Datenmanagement und Abweichungsprotokoll. Die Bezeichnung
 - **Exposé:** „braucht keine Statistik“, „direkt am Kraftsignal ablesbar“ (v2 entscheidet mit Residuen und
   Bootstrap); Ziel „Nachweis oder Falsifikation der F_min-Zeltkurve“ (v2: nur Lage der Spitze); die
   Vorzeichenregel „werden in die vorgesehene v2 der Präregistrierung aufgenommen“ (v2 registriert
-  stattdessen H4); „11 Kanäle“ bei neun aufgezählten; „noch nicht präregistriert“. Erledigt bis auf
-  „11 Kanäle“; ob die Zahl oder die Aufzählung zu ändern ist, ist offen.
+  stattdessen H4); „11 Kanäle“ bei neun aufgezählten; „noch nicht präregistriert“. Erledigt; „11 Kanäle“
+  ist mit den Nachträgen vom 2. Oktober 2026 durch „Kanalzahl offen“ ersetzt (abhängig von Messkette und
+  Wegkanal).
 - **Werkstattbericht:** „präregistriert“ (v1 war eine nicht extern registrierte Arbeitsfassung); „Zwei
   Schwellenwerte des Auswerteverfahrens sind nicht festgelegt“; „Steigung, die man gegen ein Messrauschen
   halten kann“ (v2 registriert nur die Lage der Spitze). Erledigt.
@@ -278,8 +279,8 @@ Auslegungsregeln wirken; es ist keine Vorhersage.
   12,0163 N, (0°, 180°) 9,1241 N, ein Einzelmodullauf 8,2564 N. Im Zellmodell trägt jede Zelle höchstens
   12,0163/3 = 4,0054 N bei einer statischen Zelllast von 2,1255 N. Im Liftoff-Bereich (E1) sind weit
   höhere Spitzen möglich; die Simulation mit μ = 1 und K = 10⁴ N/m erreicht 50,6 N. Die Nennlast wird nach
-  §5.1 aus der größten erwarteten Zellkraft bestimmt; die „mindestens 10 kg“ des Exposés sind dort nicht
-  hergeleitet.
+  §5.1 aus der größten erwarteten Zellkraft bestimmt und ist noch nicht hergeleitet. Das Exposé nennt seit
+  den Nachträgen vom 2. Oktober 2026 keine Zahl mehr (zuvor „mindestens 10 kg“, dort nicht hergeleitet).
 - **Schiefe.** Auf dem Schnitt ist γ₁ überall negativ (−0,450 bei 120°, −0,793 bei 100° und 140°), bei
   synchroner Phasung +0,755, bei (0°, 180°) +0,986. Diese Vorzeichen gelten für das hier berechnete
   Beispiel mit starrer Auflage und μ = 0,4. Sie bestätigen keine allgemeine Vorzeichenregel; diese
@@ -804,4 +805,4 @@ Hauptdokument; A0–A9, Tab. C, Tab. F und Z Anhang.
 | e⁻¹⁰ ≈ 4,5·10⁻⁵; 57 gepoolte Freiheitsgrade; MAD-Faktor 1,4826 | Tab. F | `python3 -c "import math; from scipy.stats import norm; print(round(math.exp(-10),7), 3*(20-1), round(1/norm.ppf(0.75),4))"` |
 | Aufwärmen: ohne Drift nach zehn Referenzläufen etwa 6·10⁻⁴ ohne zwei aufeinanderfolgende mit Differenz < σ̂_ref (σ̂_ref = √1,5·σ) | A8, Tab. F | `python3 -c "import numpy as np; g=np.random.default_rng(3); R=g.standard_normal((10**6,10)); print(float('%.1g'%(1-(abs(np.diff(R,axis=1))<1.5**0.5).any(1).mean())))"` |
 | Normierung für ε_ctrl: Var(Δ⟨N⟩) = σ²(1 + β² + (1 − β)²), 1,5σ² bei β = 0,5 | §8.8; A1, A9.8 | `python3 -c "b=0.5; print(1+b*b+(1-b)**2)"` |
-| Zitate: 10 kg und „11 Kanäle“ bei neun aufgezählten (drei Zellen, Weg, drei Encoder, Beschleunigung, Temperatur; Exposé); 50,6 N, 7,69 mm, 0,650 kg, 16 N·s/m (README); 2,2 Hz (zehn_fragen); 0,2–0,5 % (v1); Ausgabe 2019 (DKD-R 3-10 Blatt 2; PTB-OAR, Websuche, kein Befehl) | §12; A0, A3, A4 | `grep -n -e "10 kg" -e "11 Kanäle" docs/expose_2026-09.md`; `grep -n -A1 "11 Kanäle:" docs/expose_2026-09.md`; `grep -n -e "50,6 N" -e "7,69 mm" -e "0,650 kg" -e "16 N·s/m" README.md`; `grep -n "2,2 Hz" docs/zehn_fragen.md`; `grep -n "0,2–0,5" docs/praeregistrierung_2026-06.md` |
+| Zitate: drei Wägezellen im Dreieck genannt; Wegkanal, Encoder und Hilfskanäle erwogen, Kanalzahl offen, Nennlast nicht hergeleitet (Exposé, Nachträge vom 2. Oktober 2026); historisch 10 kg und „11 Kanäle“ bei neun aufgezählten (drei Zellen, Weg, drei Encoder, Beschleunigung, Temperatur; Exposé im Stand des Tags `stand-2026-09-28`); 50,6 N, 7,69 mm, 0,650 kg, 16 N·s/m (README); 2,2 Hz (zehn_fragen); 0,2–0,5 % (v1); Ausgabe 2019 (DKD-R 3-10 Blatt 2; PTB-OAR, Websuche, kein Befehl) | §5.1, §12; A0, A3, A4 | `grep -n -e "Erwogen" -e "Kanalzahl" -e "Nennlast der" -e "nicht hergeleitet" docs/expose_2026-09.md`; historisch (Git-Klon mit Tags): `git grep -n -e "10 kg" -e "11 Kanäle" stand-2026-09-28 -- docs/expose_2026-09.md`; `git grep -n -A1 "11 Kanäle:" stand-2026-09-28 -- docs/expose_2026-09.md`; `grep -n -e "50,6 N" -e "7,69 mm" -e "0,650 kg" -e "16 N·s/m" README.md`; `grep -n "2,2 Hz" docs/zehn_fragen.md`; `grep -n "0,2–0,5" docs/praeregistrierung_2026-06.md` |

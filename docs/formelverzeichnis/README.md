@@ -2,7 +2,11 @@
 
 **Symbolverzeichnis und Formelzeichen im PCMMS-Forschungsrahmen** – Kontaktkraft, Wellenformstatistik und Messmodell. Arbeitsstand 28.09.2026.
 
-- PDF: [`PCMMS_Formelverzeichnis_v2_7.pdf`](PCMMS_Formelverzeichnis_v2_7.pdf)
+- PDF: [`PCMMS_Formelverzeichnis_v2_7.pdf`](PCMMS_Formelverzeichnis_v2_7.pdf) – Stand 28.09.2026. Der Quelltext enthält
+  zusätzlich die Nachträge vom 2. Oktober 2026 (u. a. Rückzugsvermerk, Linie C, Status der Architekturebenen,
+  Literaturhinweise); die PDF ist noch nicht neu gesetzt, eine neue Versionsnummer ist nicht vergeben
+  ([Offene Punkte des Arbeitspapiers](../arbeitspapier/PCMMS_Arbeitspapier_Offene_Punkte.md), Nr. 43). Maßgeblich für
+  den aktuellen Text ist der Quelltext.
 - Quelle: [`PCMMS_Formelverzeichnis_v2_7.tex`](PCMMS_Formelverzeichnis_v2_7.tex)
 
 Gegenüber v2.6 neu: die Größen aus [Arbeitspapier v2.4](../arbeitspapier/) – Ordnung m einer Harmonischen, komplexe Harmonische der Kontaktkraft, Phasenfaktor Φ_m, Kontaktübertragung H_c mit Frequenzverhältnis ϱ_m und Hubfaktor ξ_A. Dazu die Triadenzerlegung des dritten Moments im Dauerkontakt (Abschnitt 5.8), die Kontaktübertragung (Abschnitt 7.4), die Gegenprobe vom 26.09.2026 in der Codezuordnung (Anhang B.3) und die Zuordnung der neuen Zeichen des Arbeitspapiers (Anhang A). Die Definitionen der v2.6 bleiben unverändert.

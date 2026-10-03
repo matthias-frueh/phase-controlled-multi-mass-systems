@@ -1,6 +1,6 @@
 # Wegweiser durch die Dokumente
 
-Stand: 25. September 2026. Diese Datei ersetzt die Übersicht vom April 2026.
+Stand: 25. September 2026, Nachträge 2. Oktober 2026. Diese Datei ersetzt die Übersicht vom April 2026.
 
 Lizenz dieses Ordners: CC BY 4.0, siehe [`../LICENSE-CC-BY-4.0`](../LICENSE-CC-BY-4.0). Namensnennung: „Matthias Früh, PCMMS“, https://github.com/matthias-frueh/phase-controlled-multi-mass-systems
 
@@ -13,6 +13,11 @@ Lizenz dieses Ordners: CC BY 4.0, siehe [`../LICENSE-CC-BY-4.0`](../LICENSE-CC-B
 5. `literaturabgleich_2026-09-12.md` — wo PCMMS in der Ratchet-, Tribologie- und Kontaktdynamik-Literatur steht.
 6. `neuheitsgrad.md`, `einordnung.md`, `zehn_fragen.md` — Abgrenzung und Antworten auf die üblichen Einwände.
 7. `archiv_vermerk_kernhypothese_v3.md` — der dokumentierte Rückzug der früheren Hypothese.
+
+**Zurückgezogen** sind frühere Aussagen zu einer Mittelwertverschiebung (Ursache: Kontaktmodell mit
+vorgeschriebener Eindrückung; Archiv-Vermerk), zu einer gerichteten Netto-Impulsübertragung ohne äußeren
+Partner (vgl. Archiv-Vermerk, Abschnitt „Gültiger Nachfolger“) und zu einer allgemeinen Vorzeichenregel der
+Schiefe (Arbeitspapier v2.4, Abschnitt 4.8).
 
 ## Verbindliche Begriffe
 
@@ -30,18 +35,25 @@ Lizenz dieses Ordners: CC BY 4.0, siehe [`../LICENSE-CC-BY-4.0`](../LICENSE-CC-B
 ## Hinweise zu einzelnen Dateien
 
 - Die **Präregistrierung** ist unverändert vom Juni 2026 und wird nicht nachträglich editiert. Sie
-  nennt als dritte Observable das „Spitzen-zu-Mittel-Verhältnis“; in Engine, Daten und allen
-  September-Dokumenten ist diese Größe als Asymmetrieverhältnis A definiert (Codevariable `peak_ratio`).
+  nennt als dritte Observable das „Spitzen-zu-Mittel-Verhältnis“ (Peak-to-Mean, im Formelverzeichnis
+  Π_N = F_max/⟨F⟩). Engine, Daten und die September-Dokumente verwenden stattdessen das
+  Asymmetrieverhältnis A = (F_max − M·g)/(M·g − F_min); die Codevariable `peak_ratio` berechnet A, nicht Π_N.
+  Spitzen-zu-Mittel-Verhältnis (Π_N) einerseits und Asymmetrieverhältnis A (`peak_ratio`) andererseits
+  sind also zwei verschiedene Größen.
   Eine v2 mit Änderungsvermerk liegt als [Entwurf](praeregistrierung_v2_entwurf.md) vor (nicht eingefroren,
   nicht registriert).
 - Das **Arbeitspapier** v2.4 liegt in [`arbeitspapier/`](arbeitspapier/) (die Skripte der Nachrechnung und der Gegenprobe dort
-  unter MIT), das **Symbol- und Formelverzeichnis** in der aktuellen Fassung v2.7 in
-  [`formelverzeichnis/`](formelverzeichnis/).
+  unter MIT), das **Symbol- und Formelverzeichnis** in der Fassung v2.7 in
+  [`formelverzeichnis/`](formelverzeichnis/). Die PDFs geben den Stand vom 26.09. bzw. 28.09.2026 wieder; die
+  Nachträge vom 2. Oktober 2026 stehen bisher nur im Quelltext (`.tex`, siehe die README-Dateien beider Ordner).
 - Der **Literaturabgleich** ist ein Arbeitsdokument für die nächste Fassung des Forschungsrahmens (v3.6);
   die dort genannte Fassung v3.5 ist noch nicht im Repository abgelegt, weil sie vor der Umstellung auf
   Linie A als primäre Linie entstand.
 - Das **Exposé** und die Kurznotizen beziehen alle Zahlen auf den Parametersatz der Engine
-  (`../data/README.md`). Die Auslegung eines physischen Aufbaus ist davon getrennt und offen.
+  (`../data/README.md`). Dieser Referenzsatz hat einen weichen Kontakt (K = 10⁴ N/m); Leitzahlen wie
+  5,33 N, Zeltsteilheit und positive Schiefe am Triphasik-Punkt sind dessen Effekte und keine Vorhersagen für
+  einen Aufbau. Die Auslegung eines physischen Aufbaus ist davon getrennt und offen; die offenen
+  Entscheidungen des Autors stehen im Exposé, Abschnitt „Nächster Schritt“.
 - Alle Zahlen in den Dokumenten sind Simulationsergebnisse. Messdaten existieren nicht.
 
 ## Was nicht im Repository liegt
@@ -49,3 +61,7 @@ Lizenz dieses Ordners: CC BY 4.0, siehe [`../LICENSE-CC-BY-4.0`](../LICENSE-CC-B
 Arbeitsstände in Bearbeitung (Forschungsrahmen v3.6), Linie-B-Skripte
 und -Notizen, Labor- und Messtechnikplanung. Sie folgen, sobald sie den Stand der abgelegten Dokumente
 erreicht haben.
+
+Außerhalb des Repositorys kursierende ältere Fassungen sind überholt: das Arbeitsmanuskript v2.1 (früher
+als Dissertation geführt), die Exposés vom Mai und Juli 2026, ältere Präsentationen, FAQ und Kurzpapiere.
+Sie enthalten teils zurückgezogene Aussagen. Maßgeblich sind die Fassungen in diesem Repository.
