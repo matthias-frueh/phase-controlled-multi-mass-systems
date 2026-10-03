@@ -20,11 +20,11 @@ Historischer Ausgangsstand: 05.09.2026 · Quelle: PCMMS_Dissertation_v2.tex, **9
 8. ~~Recherche dokumentieren~~ **erledigt 05.09.** — Anhang C: Art, Zeitraum,
    Quellen, Suchbegriffe, Verifikationstabelle aller 21 Einträge, nicht
    aufgenommene Angaben. Keine TODO-Marke mehr im Quelltext.
-   *Nachtrag 02.10.2026:* Die Verifikation belegt Autoren, Titel, Erscheinungsort
-   und Jahr, nicht die Vollständigkeit der Felder. Im Literaturverzeichnis fehlen
-   bei mehreren Einträgen ISBN oder DOI; Seiten und DOI von Perret-Liaudet/Rigaud
-   2003 (Teil 2) sind aus dem Formelverzeichnis v2.7 übernommen und ungeprüft
-   (Anhang C, Punkt 42).
+   *Nachtrag 03.10.2026 (zu den Nachträgen vom 02.10.2026):* Die Verifikation
+   belegt Autoren, Titel, Erscheinungsort und Jahr, nicht die Vollständigkeit
+   der Felder. Im Literaturverzeichnis fehlen bei mehreren Einträgen ISBN oder
+   DOI; Seiten und DOI von Perret-Liaudet/Rigaud 2003 (Teil 2) sind aus dem
+   Formelverzeichnis v2.7 übernommen und ungeprüft (Anhang C, Punkt 42).
 9. Parameterabgleich: Forschungsrahmen v3_5 (2,2 Hz / 0,80) gegen Simulation
    und Laborplan (10 Hz / 0,65). Nur noch: Forschungsrahmen nachziehen?
 10. ~~„Yoshimura et al. 2008" im Messtechnik-Konzept v2 streichen —
@@ -51,7 +51,7 @@ Historischer Ausgangsstand: 05.09.2026 · Quelle: PCMMS_Dissertation_v2.tex, **9
 ## Stand des Dokuments
 
 101 Seiten · 21 Literatureinträge, ~~alle verifiziert~~ geprüft auf Autoren, Titel, Erscheinungsort und Jahr,
-nicht auf Vollständigkeit der Felder (Nachtrag 02.10.2026, Punkt 8) · 9 Abbildungen · 48 Gleichungen
+nicht auf Vollständigkeit der Felder (Abgleich 03.10.2026, Punkt 8) · 9 Abbildungen · 48 Gleichungen
 · 3 Datensätze (sweep_19x19.csv, sweep_7x7_sinus.csv, sens_k_*.csv)
 · kompiliert mit pdflatex/bibtex ohne Warnung · keine unaufgelöste Referenz
 
@@ -117,7 +117,7 @@ Aktuelle Ausgabe: 101 Seiten · 22 Literatureinträge · 9 Abbildungen · XeLaTe
 - [x] 26 Deutung des Basislinienresiduums korrigiert (Kurzfassung, Abstract, 7.8, 9.4, 11.2, 12.2, A.1, A.4, B.4). „Langsame Modulation“ ersetzt durch den Randterm des Auswertefensters, δ = δ_w + δ_Q mit δ_w = Δv_S/(g·T_w), Schranke |δ_w| ≤ 2·v_S,max/(g·T_w) (Gl. 9.3). Neue Tabelle 9.4 mit der Zerlegung aus der Nachrechnung vom 13.09.2026: 315/24/22 Konfigurationen stationär/grenzwertig/nicht stationär, max |δ_w| = 3714 ppm, δ_Q Median 0, max 93 ppm.
 - [x] 27 Faktenfehler behoben: „Sämtliche 361 Residuen negativ“ → gemischt, 178 negativ, 167 positiv, 16 null (sweep_19x19.csv). „Mittleres absolutes Residuum 29 ppm“ → Median 29 ppm, Mittelwert 133 ppm. Anzahl λ > 50 % in Tab. 9.2 und A.4 nachgetragen (146).
 - [x] 28 Archiv-Höchstwert −6816 ppm als Einschwingen ausgewiesen: ~~Übergang 18,8 s~~, danach Periode 1, δ_w = −2 ppm. Hinweis zur Einschwingkontamination des Archivs im Datensatz-Anhang (λ > 0,5 %-Pkt an 11 Punkten, γ₁ > 0,02 an 7, N_max > 0,2 N an 9, A > 0,05 an 6).
-      *Nachtrag 02.10.2026:* Die Einschwingdauer ist ein Artefakt der Festschritt-RK4; sie hängt von der letzten Stelle der Phasenangabe und vom Zeitschritt ab (18,8 / 9,7 / 7,1 / 4,5 s). Ereignisgenau gerechnet (`code/ereignisloeser.py`) liegt die Bahn nach etwa 5 s auf demselben Orbit der Periode 1 (Wiederkehrtoleranz 1 mm/s; mit strengem Kriterium nach etwa 9 s), und das Zeitmittel weicht im Fenster 5–15 s um +0,02 mN von Mg ab.
+      *Nachtrag 03.10.2026 (zu den Nachträgen vom 02.10.2026):* Die Einschwingdauer ist ein Artefakt der Festschritt-RK4; sie hängt von der letzten Stelle der Phasenangabe und vom Zeitschritt ab (18,8 / 9,7 / 7,1 / 4,5 s). Ereignisgenau gerechnet (`code/ereignisloeser.py`) liegt die Bahn nach etwa 5 s auf demselben Orbit der Periode 1 (Wiederkehrtoleranz 1 mm/s; mit strengem Kriterium nach etwa 9 s), und das Zeitmittel weicht im Fenster 5–15 s um +0,02 mN von Mg ab.
 - [x] 29 Symbolverzeichnis des Papiers um δ_w, δ_Q, Δv_S, v_S,max, T_w ergänzt; Bezeichnungen an das Formelverzeichnis angeglichen.
 - [x] 30 Belegordner `nachrechnung_2026-09-13` im Quellpaket: Datensatz, 100-s-Klassifikation, Skripte (nur Pfade angepasst), Engine, Ergebnisnotiz.
 
@@ -135,7 +135,7 @@ Aktuelle Ausgabe: 103 Seiten · XeLaTeX/BibTeX · keine unaufgelösten Verweise.
 - [x] 36 Zweite statt dritte Harmonische auf der Kontaktresonanz (2f/f_n = 1,013); Auslegungsfenster durch Resonanzlinien 3f/f_n = 3/j ersetzt.
 - [x] 37 Starrgrenzfall: N ≈ Mg + (M/3)Σz̈ (Punkt 16 hatte „−“).
 - [x] 38 Bistabile Satelliteninseln als Modellgrenze (Anhang B.6); kein Rasterpunkt betroffen.
-      *Nachtrag 02.10.2026:* Das gilt für die Satelliteninseln des Kontaktasts. Im Liftoff-Bereich koexistieren verbreitet mehrere stabile Zustände (mindestens 99 von 361 Rasterpunkten bei drei Starts, Festschritt-RK4); die Rasterwerte sind dort die vom Standardstart gewählten Zustände (Anhang B.6).
+      *Nachtrag 03.10.2026 (zu den Nachträgen vom 02.10.2026):* Das gilt für die Satelliteninseln des Kontaktasts. Im Liftoff-Bereich koexistieren verbreitet mehrere stabile Zustände (mindestens 99 von 361 Rasterpunkten bei drei Starts, Festschritt-RK4); die Rasterwerte sind dort die vom Standardstart gewählten Zustände (Anhang B.6).
 
 39. ~~Formelverzeichnis v2.7: Symbole j, N̂_j, N̂_j⁽¹⁾, Φ_j, T_j, T̃_j, r_j, s und Gl. 4.15, B.6 aufnehmen~~ **erledigt 28.09.**
 40. Abbildung γ₁ des Einzelmoduls über 3f/f_n mit Resonanzlinien erwägen (Daten: gegenprobe_2026-09-26, Abschnitt B).
