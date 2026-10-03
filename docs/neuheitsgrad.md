@@ -109,7 +109,9 @@ können ähnliche Signaturen erzeugen.
 
 Der Zyklus- beziehungsweise Langzeitmittelwert der Kontaktkraft ist durch die Schwerpunktbilanz
 festgelegt. PCMMS verwendet ihn ausdrücklich **nicht als Entdeckungsgröße**, sondern als
-Kontrollkanal für Mess- und Auswertekette.
+Kontrollkanal für das erste Moment: Er zeigt Gleichanteil, Drift und gleichrichtende Nichtlinearitäten der
+Mess- und Auswertekette an. Lineare dynamische Verzerrungen der Wellenform erkennt er nicht; Kalibrierung
+und Prüfung der dynamischen Messkette ersetzt er nicht.
 
 ```
 Mittelwert  =  bekannte Basislinie   (Prüfgröße)
@@ -135,7 +137,10 @@ Partner und zu einer allgemeinen Vorzeichenregel der Schiefe.
 
 Besonders scharf wird die Frage dort, wo das Modell für eine Phasenvariation einen
 charakteristischen Verlauf des Kraftminimums vorhersagt. Am Auslöschungspunkt zeigt die numerische
-Untersuchung eine ausgeprägte **Zeltform in F_min**.
+Untersuchung des Referenzsatzes (weicher Kontakt, K = 10⁴ N/m) eine ausgeprägte **Zeltform in F_min** mit
+einer Spannweite von 4,56 N; am V1-Kandidaten der Auslegung (steifer Kontakt, von 0,650 kg bewegen sich nur
+die 0,300 kg der Module, Hub 8 mm) sind es 0,56 N. Nach dem Entwurf der Präregistrierung v2 wird nur die
+Lage der Spitze geprüft (H2), nicht Höhe und Steigungen der Simulation.
 
 Damit lässt sich die experimentelle Frage einfach formulieren:
 

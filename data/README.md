@@ -45,10 +45,10 @@ Bekannte Eigenheiten: Das Minimum 6,3330 N bei (0°, 208,421°) ist ein Artefakt
 (RK4, Δt = 50 µs). In der Engine schwingt die Bahn dort scheinbar länger als 5 s ein; wie lange, hängt von der
 letzten Stelle der Phasenangabe und vom Zeitschritt ab. Ereignisgenau gerechnet
 ([`../code/ereignisloeser.py`](../code/ereignisloeser.py), Test `test_hotspot_fenster_5_15`) liegt die Bahn ab
-etwa 5 s auf dem stationären Orbit (Wiederkehrtoleranz 1 mm/s; mit strengem Kriterium nach etwa 9 s); im
+etwa 5 s auf dem stationären Orbit (Wiederkehrtoleranz 1 mm/s; mit strengerem Wiederkehrkriterium (10⁻⁸ bzw. 10⁻⁹ m/s) nach 9 bis 10 s); im
 Fenster 5–15 s gilt ⟨F⟩ − M·g = +0,02 mN, Liftoff 75,08 % und F_max 38,5 N statt 44,1 N. Die rund −0,5 mN,
 die die Engine dort in späten Fenstern liefert, sind der Rest der Rechteckmittelung bei Δt = 50 µs (bei
-halbiertem Zeitschritt etwa ±0,03 mN, je nach Fenster), kein stabiles Plateau; im
+halbiertem Zeitschritt je nach Fenster zwischen etwa −0,07 und +0,05 mN), kein stabiles Plateau; im
 stationären Zustand gilt ⟨F⟩ = M·g. Im Liftoff-Bereich ist die Karte nicht eindeutig: Die Umbenennung der Module ändert die Physik nicht,
 trotzdem landen gleichwertige Rasterpunkte teils in verschiedenen stationären Zuständen, etwa (0°, 113,684°)
 mit 75,6 % und (246,316°, 246,316°) mit 18,2 % Liftoff. Die Werte einzelner Liftoff-Punkte hängen damit von der

@@ -53,7 +53,8 @@ möglichem Kontaktverlust), keinen Nachweis für PCMMS.
 
 Der härteste Einwand. Antwort: Die Messung prüft zuerst, ob die Auflagekraft der **Überlagerung der
 Einzelmodulantworten** folgt, also Linearität und Modulunabhängigkeit der gesamten Kette aus Mechanik und
-Messung. Die Vorhersage stammt aus gemessenen Einzelmodulläufen, nicht aus der Simulation. Das
+Messung. Nach dem Entwurf der Präregistrierung v2 entsteht die Vorhersage aus separat gemessenen
+Einzelmodulläufen, nicht aus der Simulation; Messdaten gibt es noch nicht. Das
 Kontaktmodell wird nur dort geprüft, wo es sich von der starren Auflage unterscheidet; in einem steifen
 Aufbau ist das wenig. Gerechnet wird mit linear-elastischem Kontakt plus viskoser Dämpfung, unilateral
 abgeschnitten — ohne Hertz'sche Nichtlinearität, Rauheit, Stoßverluste. Dieses Projekt hat an der Stelle
@@ -91,9 +92,9 @@ behauptet es nicht.
 **10 · Warum ohne Institut ernst nehmen?**
 
 Die Physik ist unstrittig; Code und Simulationsdaten liegen in diesem Repository. Was fehlt, ist die Messung,
-und das steht in jedem Dokument. Angeboten wird keine Entdeckung, sondern eine vorbereitete,
-falsifizierbare Messfrage samt Auswerteplan — und die Bereitschaft, ein Null-Ergebnis zu
-veröffentlichen.
+und das steht in jedem Dokument. Angeboten wird keine Entdeckung, sondern eine falsifizierbare Messfrage
+mit einem Auswerteplan im Entwurf (Arbeitspunkt, Antrieb, Geometrie und Messkette sind noch festzulegen) —
+und die Bereitschaft, ein Null-Ergebnis zu veröffentlichen.
 
 ---
 

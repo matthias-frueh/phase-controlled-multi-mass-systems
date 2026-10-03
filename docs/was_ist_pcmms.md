@@ -165,8 +165,8 @@ Eine frühere Fassung des Projekts prüfte eine andere Hypothese: ob sich der **
 äußeren Kraft dauerhaft verschieben könne. Diese Interpretation wurde analytisch und numerisch
 verworfen — sie war ein Artefakt des damals verwendeten Kontaktmodells, das die Eindrückung der
 Unterlage vorschrieb ([`archiv_vermerk_kernhypothese_v3.md`](archiv_vermerk_kernhypothese_v3.md)).
-Zurückgezogen sind ebenso frühere Aussagen zu einer gerichteten Netto-Impulsübertragung ohne äußeren
-Partner und zu einer allgemeinen Vorzeichenregel der Schiefe.
+Zurückgezogen sind ebenso frühere Aussagen zu einer allgemeinen Vorzeichenregel der Schiefe
+(Arbeitspapier v2.4, Abschnitt 4.8) und zu einer gerichteten Netto-Impulsübertragung ohne äußeren Partner.
 
 Die älteren Gleichungen bleiben dokumentiert. Nicht als heutige Aussage, sondern als archivierte
 Nulllinie, ausdrücklich als überholt gekennzeichnet. Sie halten fest, welche Grenze das Projekt
@@ -200,8 +200,9 @@ Prä-experimentell. Simulationsstand: ein 19×19-Phasensweep, ein Feinsweep mit 
 symmetrische Konfiguration, ein ereignisgenauer Löser und Attraktorkarten für einen Auslegungskandidaten.
 Arbeitspunkt, Antrieb, Geometrie und Messkette sind noch nicht festgelegt. **Eigene Messdaten existieren nicht.**
 
-Ein Null-Ergebnis — die Formsteuerung ist an realer Hardware nicht auflösbar — ist vorab als
-vollwertiges Resultat definiert, nicht als Scheitern.
+Ein Null-Ergebnis ist vorab als vollwertiges Resultat definiert, nicht als Scheitern, sofern die
+erreichte Präzision eine Entscheidung erlaubt. Reicht sie nicht, ist der Ausgang unbestimmt; auch er
+wird veröffentlicht.
 
 ---
 

@@ -93,7 +93,7 @@ nicht erst empirisch offen. Die zugehörigen Simulationsbefunde erwiesen sich al
 Kontaktmodells mit vorgeschriebener Eindrückung. Der Rückzug ist dokumentiert
 ([`archiv_vermerk_kernhypothese_v3.md`](archiv_vermerk_kernhypothese_v3.md)). Zurückgezogen sind ebenso
 frühere Aussagen zu einer gerichteten Netto-Impulsübertragung ohne äußeren Partner und zu einer
-allgemeinen Vorzeichenregel der Schiefe (Arbeitspapier v2.4, Abschnitt 4.8).
+allgemeinen Vorzeichenregel der Schiefe, Letztere mit dem Arbeitspapier v2.4 (Abschnitt 4.8).
 
 ---
 
@@ -120,10 +120,12 @@ folgen erst aus der Referenzmessung).
 **Die Prüfgröße:** Geprüft wird die Lage der Zeltspitze gegen die Superpositionsvorhersage aus
 Einzelmodulmessungen. In der Simulation des Referenzsatzes durchläuft F_min bei festem φ₃ = 240° und
 Variation von φ₂ eine Zeltkurve mit Maximum 5,330 N bei φ₂ = 120°, abfallend auf 0,77 N bei 100° und
-1,62 N bei 140°. Der Wert 5,33 N illustriert den Referenzsatz (K = 10⁴ N/m) und ist keine Vorhersage für V1;
-am steifen V1-Kandidaten der Auslegung beträgt die Spannweite der Zeltkurve 0,56 N. Die Steigung von
-0,21 N pro Grad ist ein Resonanzwert, weil die zweite Harmonische mit 2f/f_n = 1,013 auf der
-Kontaktresonanz liegt (bei festem ζ und K = 3·10⁴ … 10⁷ N/m: 0,09–0,12 N pro Grad). Nach dem [Entwurf](praeregistrierung_v2_entwurf.md) der Präregistrierung v2 wird
+1,62 N bei 140°. Der Wert 5,33 N und die Spannweite von 4,56 N illustrieren den Referenzsatz (K = 10⁴ N/m)
+und sind keine Vorhersage für V1. Die Steigung von 0,21 N pro Grad ist ein Resonanzwert, weil die zweite
+Harmonische mit 2f/f_n = 1,013 auf der Kontaktresonanz liegt (bei festem ζ und K = 3·10⁴ … 10⁷ N/m:
+0,09–0,12 N pro Grad). Am V1-Kandidaten der Auslegung (steifer Kontakt, von 0,650 kg bewegen sich nur die
+0,300 kg der Module, Hub 8 mm) beträgt die Spannweite der Zeltkurve 0,56 N; der Vergleich trennt den
+Einfluss des Kontakts nicht von dem der bewegten Masse und des Hubs. Nach dem [Entwurf](praeregistrierung_v2_entwurf.md) der Präregistrierung v2 wird
 die Zeltkurve statistisch gegen eine Vorhersage aus Messungen an der Apparatur geprüft: F_min − ⟨F_N⟩ mit
 standardisierten Residuen, die Lage der Spitze mit einem Zeltfit und Bootstrap-Intervall (dort §8.3–§8.6).
 
@@ -149,7 +151,7 @@ bestätigt.
 **Bestätigen sich die Angaben, wäre das ein sehr naher Nachbar** — gleicher mechanischer Unterbau, gleicher
 Phasenbegriff.
 
-**Chernousko und Nachfolger — Optimierung vibrationsgetriebener Systeme.** Die klassische Linie:
+**Chernousko und Nachfolger — Optimierung vibrationsgetriebener Systeme (ohne Fundstelle, zu prüfen).** Die klassische Linie:
 optimale Innenmassenbewegung für maximale Dauergeschwindigkeit unter anisotroper Trockenreibung.
 
 **M-Runners (DLR + TUM, Albu-Schäffer; ohne Fundstelle, zu prüfen).** Intrinsische Dynamik elastischer Roboter — Bewegung
@@ -187,7 +189,8 @@ Die Bausteine ja, die Fragestellung nein — aber die Abgrenzung braucht zwei Sc
 **Schritt 1: Wer die Kontaktkraft als Zielgröße nimmt, hat keine Mehrmassen-Phasensteuerung.**
 Perret-Liaudet & Rigaud untersuchen die Normalkraft eines stoßenden Hertz-Kontakts unter
 Zufallsanregung als primäre Observable und werten Spektralinhalte und Statistiken der übertragenen
-Normalkraft aus. Umbanhowar & van Hecke messen Kraftdynamik bei sub-nm-Relativbewegung.
+Normalkraft aus. Umbanhowar & van Hecke messen große Änderungen der oszillierenden Bodenkraft bei
+Relativbewegungen unter zwei Nanometern.
 Beide behandeln die Kraft selbst — aber an einem Einzelkontakt beziehungsweise einer granularen
 Packung, ohne mehrere individuell phasengesteuerte Innenmassen als Stellgröße.
 
@@ -321,5 +324,7 @@ Kraftmessbarkeit ist das Problem — statische Rückführbarkeit ist über DKD-R
 zur dynamischen Kalibrierung einachsig belasteter Kraftaufnehmer beschreibt DKD-R 3-10 — sondern
 die Übertragung auf einen Kontakt, der zyklisch abhebt.
 
-**Simulationsresiduen lassen sich beliebig klein rechnen.** Der numerische Boden von 2·10⁻⁴ N sagt
-nichts über die erreichbare Messauflösung. Physikalisch zählt erst die gemessene Größe.
+**Simulationsresiduen lassen sich beliebig klein rechnen.** Die Abweichung des Zeitmittels im Feinfenster
+liegt ohne Liftoff an der Rundungsgrenze der Datensätze (≤ 10⁻⁶ N); die größeren Werte bis 1,9·10⁻⁴ N an
+Konfigurationen mit Liftoff sind ein Randterm des Auswertefensters. Beides sagt nichts über die erreichbare
+Messauflösung. Physikalisch zählt erst die gemessene Größe.

@@ -59,7 +59,9 @@ Die Präregistrierung v2 für die Messkampagne liegt als [Entwurf](docs/praeregi
 Die Abnahme der Werkzeuge für Auslegung und ereignisgenaue Rechnung dokumentiert [`docs/abnahme_ap02_ap03.md`](docs/abnahme_ap02_ap03.md).
 
 Das Arbeitspapier v2.4 liegt mit Quellen und Nachrechnung in [`docs/arbeitspapier/`](docs/arbeitspapier/), das
-Symbol- und Formelverzeichnis v2.7 in [`docs/formelverzeichnis/`](docs/formelverzeichnis/).
+Symbol- und Formelverzeichnis v2.7 in [`docs/formelverzeichnis/`](docs/formelverzeichnis/). Die PDFs geben den Stand
+vom 26.09. bzw. 28.09.2026 wieder; die Nachträge vom 2. Oktober 2026 stehen bisher nur im Quelltext (`.tex`, siehe
+die README-Dateien beider Ordner).
 
 ## Simulationsstand
 
@@ -94,10 +96,11 @@ Kürzel v3a auch den zurückgezogenen Simulationszyklus v3a–v3d bezeichnet. Mi
   (`python3 code/linear_solver.py --harmonics`). Auch die Höhe der Spitze und die positive Schiefe am
   Triphasik-Punkt sind Effekte des weichen Referenzkontakts (Übertragung der dritten und sechsten Harmonischen).
   Am V1-Kandidaten der Auslegung (steifer Kontakt, von 0,650 kg bewegen sich nur die 0,300 kg der Module,
-  Hub 8 mm) beträgt die Spannweite der Zeltkurve 0,56 N, im Referenzsatz 4,56 N
-  (`python3 code/auslegung.py --candidate`); der Vergleich trennt den Einfluss des Kontakts nicht von dem der
-  bewegten Masse und des Hubs. Die Zahlen illustrieren
-  den Referenzsatz; Vorhersagen für V1 sind sie nicht.
+  Hub 8 mm) beträgt die Spannweite der Zeltkurve 0,56 N (`python3 code/auslegung.py --candidate`), im
+  Referenzsatz 4,56 N ([Präregistrierung v2, Anhang A4](docs/praeregistrierung_v2_anhang.md);
+  `python3 code/linear_solver.py --section`); der Vergleich trennt den Einfluss des Kontakts nicht von dem der
+  bewegten Masse und des Hubs. Die Zahlen des Referenzsatzes illustrieren das Modell; Vorhersagen für V1 sind
+  weder sie noch der Auslegungswert des Kandidaten.
 - Ein Sinusprofil liefert ohne Liftoff keine Schiefe. Das asymmetrische Profil ist nötig für Schiefe im
   Dauerkontakt und für die Harmonischen N₂, N₃. Phasenabhängigkeit und Zeltspitze treten auch beim Sinusprofil
   auf; bei starrer Auflage ist die Steigung am Knick mit dem Egg-Profil etwa doppelt so groß

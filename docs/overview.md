@@ -16,7 +16,8 @@ Lizenz dieses Ordners: CC BY 4.0, siehe [`../LICENSE-CC-BY-4.0`](../LICENSE-CC-B
 
 **Zurückgezogen** sind frühere Aussagen zu einer Mittelwertverschiebung (Ursache: Kontaktmodell mit
 vorgeschriebener Eindrückung; Archiv-Vermerk), zu einer gerichteten Netto-Impulsübertragung ohne äußeren
-Partner und zu einer allgemeinen Vorzeichenregel der Schiefe (Arbeitspapier v2.4, Abschnitt 4.8).
+Partner (vgl. Archiv-Vermerk, Abschnitt „Gültiger Nachfolger“) und zu einer allgemeinen Vorzeichenregel der
+Schiefe (Arbeitspapier v2.4, Abschnitt 4.8).
 
 ## Verbindliche Begriffe
 
@@ -37,12 +38,14 @@ Partner und zu einer allgemeinen Vorzeichenregel der Schiefe (Arbeitspapier v2.4
   nennt als dritte Observable das „Spitzen-zu-Mittel-Verhältnis“ (Peak-to-Mean, im Formelverzeichnis
   Π_N = F_max/⟨F⟩). Engine, Daten und die September-Dokumente verwenden stattdessen das
   Asymmetrieverhältnis A = (F_max − M·g)/(M·g − F_min); die Codevariable `peak_ratio` berechnet A, nicht Π_N.
-  Die drei Bezeichnungen meinen also zwei verschiedene Größen.
+  Spitzen-zu-Mittel-Verhältnis (Π_N) einerseits und Asymmetrieverhältnis A (`peak_ratio`) andererseits
+  sind also zwei verschiedene Größen.
   Eine v2 mit Änderungsvermerk liegt als [Entwurf](praeregistrierung_v2_entwurf.md) vor (nicht eingefroren,
   nicht registriert).
 - Das **Arbeitspapier** v2.4 liegt in [`arbeitspapier/`](arbeitspapier/) (die Skripte der Nachrechnung und der Gegenprobe dort
-  unter MIT), das **Symbol- und Formelverzeichnis** in der aktuellen Fassung v2.7 in
-  [`formelverzeichnis/`](formelverzeichnis/).
+  unter MIT), das **Symbol- und Formelverzeichnis** in der Fassung v2.7 in
+  [`formelverzeichnis/`](formelverzeichnis/). Die PDFs geben den Stand vom 26.09. bzw. 28.09.2026 wieder; die
+  Nachträge vom 2. Oktober 2026 stehen bisher nur im Quelltext (`.tex`, siehe die README-Dateien beider Ordner).
 - Der **Literaturabgleich** ist ein Arbeitsdokument für die nächste Fassung des Forschungsrahmens (v3.6);
   die dort genannte Fassung v3.5 ist noch nicht im Repository abgelegt, weil sie vor der Umstellung auf
   Linie A als primäre Linie entstand.
