@@ -106,10 +106,16 @@ ohne gleichphasiges Modulpaar auf, doch der Referenzparametersatz liegt
 auf der Kontaktresonanz der zweiten Harmonischen, und schon bei gut
 $5\,\%$ geringerer Kontaktsteifigkeit und gleichem Dämpfungsgrad ist ein
 einzelnes Modul im Dauerkontakt linksschief. Und mit sinusförmigem Antrieb kollabiert die gesamte
-Phasenkarte auf die resultierende Amplitude: Im Dauerkontakt entstehen
-Schiefe und die zweite und dritte Harmonische erst mit dem asymmetrischen
-Profil (für die dritte genügt ein nicht sinusförmiges); Phasenabhängigkeit
-und Zeltspitze treten auch beim Sinusprofil auf.
+Phasenkarte auf die resultierende Amplitude: Im Dauerkontakt liefert das
+Sinusprofil, das nur die Grundwelle enthält, weder Schiefe noch zweite
+oder dritte Harmonische; das asymmetrische Profil des Modells enthält
+beide Harmonischen und erzeugt Schiefe. Phasenabhängigkeit und Zeltspitze
+treten auch beim Sinusprofil auf. Allgemein schließt im linearen
+Dauerkontakt ein halbwellensymmetrisches Profil gerade Harmonische und
+damit Schiefe aus; eine dritte Harmonische ist mit ihm vereinbar. Sie setzt
+einen dritten Anregungsanteil voraus, der nach Überlagerung und
+Kontaktübertragung übrig bleibt; ein nicht sinusförmiges Profil enthält
+ihn nicht zwangsläufig.
 
 Die Grenze des Rahmens wird benannt. Die Kontrolle prüft das erste
 Moment; phasenkorrelierte Einkopplung, symmetrische Kettenfehler und
@@ -181,9 +187,15 @@ on the contact resonance of the second harmonic, and a contact stiffness
 lower by just over $5\,\%$ at equal damping ratio already makes a single
 module under permanent contact negatively skewed. With sinusoidal drive the
 entire phase map collapses onto the resultant amplitude: under permanent
-contact, skewness and the second and third harmonics only arise with the
-asymmetric profile (a non-sinusoidal profile suffices for the third), while
-phase dependence and the tent peak also occur with a sinusoidal profile.
+contact the sinusoidal profile, which contains only the fundamental,
+yields neither skewness nor second or third harmonics, whereas the
+model's asymmetric profile contains both harmonics and produces skewness.
+Phase dependence and the tent peak also occur with a sinusoidal profile.
+In general, under linear permanent contact, a half-wave symmetric profile
+excludes even harmonics and hence skewness; a third harmonic is
+compatible with it. It requires a third-harmonic excitation component
+that survives superposition and contact transfer; a non-sinusoidal
+profile does not necessarily contain one.
 
 The limit of the framework is stated. The control tests the first
 moment; phase-correlated coupling, symmetric chain errors and
@@ -317,7 +329,8 @@ als Effekte des weichen Kontakts (Kapitel~\ref{chap:simulation}; teils
 auch Kapitel~\ref{chap:diskussion} und Anhang~\ref{app:daten}); die
 Anfangsbedingung, die Mehrstabilität im Liftoff-Bereich und die Grenze des
 eindimensionalen Modells (Anhang~\ref{app:simulation}); die Aussagen zum
-Bahnprofil in Kurzfassung, Abstract, Abschnitt~\ref{sec:sinus-sweep},
+Bahnprofil in Kurzfassung, Abstract, Abschnitt~\ref{sec:vorhersage-schiefe},
+Kapitel~\ref{chap:system}, Abschnitt~\ref{sec:sinus-sweep},
 Abschnitt~\ref{sec:befunde} und Abschnitt~\ref{sec:weiterfuehrend}.
 Außerdem sind Lücken- und Beitragsaussagen
 in Kurzfassung, Abstract, Abschnitt~\ref{sec:beitrag},
@@ -1935,12 +1948,19 @@ $\hat{N}_{-j} = \hat{N}_j^{*}$ gilt
 \end{equation}
 Eine einzelne Harmonische liefert keinen Beitrag; daher ist
 $\gamma_1 = 0$ beim sinusförmigen Profil im Dauerkontakt
-(Abschnitt~\ref{sec:sinus-sweep}). Das Vorzeichen jedes Terms hängt an
+(Abschnitt~\ref{sec:sinus-sweep}). Allgemeiner verschwinden alle Terme,
+wenn $N$ nur ungerade Harmonische enthält, weil $2j$ und $j + l$ für
+ungerade $j$, $l$ gerade sind. Das ist der Fall, wenn das Profil
+halbwellensymmetrisch ist, $\ddot{z}(t + T/2) = -\ddot{z}(t)$; Schiefe
+setzt im Dauerkontakt also ein Profil ohne Halbwellensymmetrie voraus.
+Das Vorzeichen jedes Terms hängt an
 seiner Triadenphase, für die Triade aus erster und zweiter Harmonischer
 an $\arg(\hat{N}_1^{2}\hat{N}_2^{*})$. Diese Phase setzt sich additiv aus
 drei Anteilen zusammen. Das Bahnprofil nach
-Gleichung~\eqref{eq:eggprofil} besteht aus zwei in sich symmetrischen
-Halbwellen und ist zeitumkehrsymmetrisch; seine Triadenphasen sind $0$
+Gleichung~\eqref{eq:eggprofil} besteht aus zwei in sich symmetrischen,
+ungleich langen Halbwellen ($\beta_h = 0{,}65$); es ist
+zeitumkehrsymmetrisch, aber nicht halbwellensymmetrisch, und enthält
+gerade wie ungerade Harmonische. Seine Triadenphasen sind $0$
 oder $\pi$, für die Triade aus erster und zweiter Harmonischer null, und
 auf starrer Auflage ist ein einzelnes Modul rechtsschief,
 $\gamma_1 = +0{,}76$. Die nachgiebige Auflage addiert
@@ -2226,11 +2246,17 @@ Phasenkarte degeneriert zu einer einparametrigen Schar in der
 resultierenden Amplitude, negative Schiefe tritt nirgends auf, und das
 Dreimodulsystem wird einem einzelnen Schwingerreger äquivalent.
 
-Im Dauerkontakt braucht der Aufbau deshalb für Schiefe und für die
-zweite Harmonische einen Antrieb, der ein Profil ohne
-Halbwellensymmetrie erzeugt; für die dritte Harmonische genügt ein nicht
-sinusförmiges Profil. Das asymmetrische Profil des Modells liefert
-beides. Phasenabhängigkeit und Zeltspitze treten
+Allgemein gilt im linearen Dauerkontakt: Ein halbwellensymmetrisches
+Profil enthält keine geraden Harmonischen und erzeugt keine Schiefe
+(Gleichung~\eqref{eq:triaden}). Für Schiefe und für die zweite
+Harmonische braucht der Aufbau deshalb einen Antrieb, der ein Profil
+ohne Halbwellensymmetrie erzeugt. Eine dritte Harmonische ist mit
+Halbwellensymmetrie vereinbar; sie setzt einen dritten Anregungsanteil
+des Profils voraus, der nach Überlagerung der Module und
+Kontaktübertragung übrig bleibt. Ein nicht sinusförmiges Profil enthält
+ihn nicht zwangsläufig. Im Modell enthält das asymmetrische Profil zweite
+und dritte Harmonische, das Sinusprofil nur die Grundwelle.
+Phasenabhängigkeit und Zeltspitze treten
 auch beim Sinusprofil auf; bei starrer Auflage ist die Steigung am Knick
 mit dem asymmetrischen Profil etwa doppelt so groß
 (\texttt{code/linear\_solver.py --section --rigid --mu 0.462}, mit und
@@ -4203,13 +4229,15 @@ Perret-Liaudet \cite{rigaud2003} --- harmonisch angeregter unilateraler
 Kontakt mit variabler Amplitude --- statt die in
 Kapitel~\ref{chap:stand} beschriebene Konstellation zu untersuchen.
 
-Die Asymmetrie des Bahnprofils ist demnach kein Detail der Umsetzung,
-sondern die Quelle der Phasenabhängigkeit jenseits der resultierenden
-Amplitude. Phasenabhängigkeit über $R$ und die Zeltspitze bleiben auch
-mit sinusförmigem Profil erhalten. Im Dauerkontakt braucht die
-Laborvariante für Schiefe und für die zweite Harmonische einen Antrieb, der
-ein asymmetrisches Profil erzeugt, für die dritte ein nicht sinusförmiges
-Profil; ob Nocke oder
+Die Oberwellen des asymmetrischen Bahnprofils sind demnach kein Detail
+der Umsetzung, sondern im Modell die Quelle der Phasenabhängigkeit
+jenseits der resultierenden Amplitude. Phasenabhängigkeit über $R$ und
+die Zeltspitze bleiben auch mit sinusförmigem Profil erhalten. Allgemein
+braucht die Laborvariante im Dauerkontakt für Schiefe und für die zweite
+Harmonische einen Antrieb, der ein Profil ohne Halbwellensymmetrie
+erzeugt; eine dritte Harmonische setzt einen dritten Anregungsanteil
+voraus, der nach Überlagerung und Kontaktübertragung übrig bleibt und den
+ein nicht sinusförmiges Profil nicht zwangsläufig enthält. Ob Nocke oder
 programmierbarer Aktor, ist offen
 (Abschnitt~\ref{sec:offene-entscheidungen}). Der Sinus-Sweep behält
 dennoch einen Nutzen: Er ist die Referenz, gegen die der Beitrag der
@@ -5075,15 +5103,20 @@ Dauerkontakt linksschief, und bei $k = 6\,944\,\mathrm{N/m}$ wird eine
 Zweiergruppe bei vollem Hub negativ. Prüfbar bleibt eine Vorhersage, die
 aus gemessenen Einzelmodul-Harmonischen durch Überlagerung gewonnen wird.
 
-\paragraph{Die Profilasymmetrie trägt die Phasenabhängigkeit jenseits der Amplitude.}
+\paragraph{Die Oberwellen des Profils tragen die Phasenabhängigkeit jenseits der Amplitude.}
 Mit sinusförmigem Antrieb kollabiert die Phasenkarte auf die
 resultierende Amplitude $R$, negative Schiefe tritt nirgends auf, und
 das Dreimodulsystem wird einem einzelnen Schwingerreger äquivalent.
 Phasenabhängigkeit über $R$ und die Zeltspitze bleiben erhalten. Im
-Dauerkontakt entstehen Schiefe und die zweite und dritte Harmonische erst
-mit dem asymmetrischen Profil (für die dritte genügt ein nicht
-sinusförmiges); welcher Antrieb es erzeugt, ist offen
-(Abschnitt~\ref{sec:offene-entscheidungen}).
+Dauerkontakt liefert das Sinusprofil weder Schiefe noch zweite oder
+dritte Harmonische; das asymmetrische Profil des Modells enthält beide
+Harmonischen und erzeugt Schiefe. Allgemein schließt im linearen
+Dauerkontakt ein halbwellensymmetrisches Profil gerade Harmonische und
+damit Schiefe aus; eine dritte Harmonische ist mit ihm vereinbar und setzt
+einen dritten Anregungsanteil voraus, der nach Überlagerung und
+Kontaktübertragung übrig bleibt. Ein nicht sinusförmiges Profil enthält
+ihn nicht zwangsläufig. Welcher Antrieb das benötigte Profil erzeugt, ist
+offen (Abschnitt~\ref{sec:offene-entscheidungen}).
 
 \paragraph{Die Kontaktsteifigkeit wirkt über Resonanzlinien.} Die
 $j$-te Harmonische trifft die Kontaktresonanz bei $3f/f_n = 3/j$. Der
@@ -5141,9 +5174,11 @@ Die offenen Punkte sind konkret und in ihrer Reihenfolge bestimmt.
 \begin{enumerate}
 \item \textbf{Antrieb (offen, Entscheidung des Autors).} Nocke oder
       programmierbarer Aktor (Abschnitt~\ref{sec:offene-entscheidungen});
-      im Dauerkontakt ist für Schiefe und für die zweite Harmonische ein
-      Profil ohne Halbwellensymmetrie nötig, für die dritte ein nicht
-      sinusförmiges Profil. Die
+      im linearen Dauerkontakt ist für Schiefe und für die zweite
+      Harmonische ein Profil ohne Halbwellensymmetrie nötig; eine dritte
+      Harmonische setzt einen dritten Anregungsanteil voraus, der nach
+      Überlagerung und Kontaktübertragung übrig bleibt und den ein nicht
+      sinusförmiges Profil nicht zwangsläufig enthält. Die
       Abweichung des real erzeugten Profils vom Modellprofil ist zu
       vermessen und in die Simulation zurückzuführen.
 \item \textbf{Wahl des Kontaktelements (offen, Entscheidung des Autors).} Mit Abstand zu den

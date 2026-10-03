@@ -101,9 +101,16 @@ Kürzel v3a auch den zurückgezogenen Simulationszyklus v3a–v3d bezeichnet. Mi
   `python3 code/linear_solver.py --section`); der Vergleich trennt den Einfluss des Kontakts nicht von dem der
   bewegten Masse und des Hubs. Die Zahlen des Referenzsatzes illustrieren das Modell; Vorhersagen für V1 sind
   weder sie noch der Auslegungswert des Kandidaten.
-- Ein Sinusprofil liefert ohne Liftoff keine Schiefe. Das asymmetrische Profil ist nötig für Schiefe im
-  Dauerkontakt und für die Harmonischen N₂, N₃. Phasenabhängigkeit und Zeltspitze treten auch beim Sinusprofil
-  auf; bei starrer Auflage ist die Steigung am Knick mit dem Egg-Profil etwa doppelt so groß
+- **Profil und Harmonische, allgemein (linearer Dauerkontakt):** Ein halbwellensymmetrisches Profil,
+  a(t + T/2) = −a(t), enthält keine geraden Harmonischen. Schiefe und N₂ setzen daher ein Profil ohne
+  Halbwellensymmetrie voraus; ohne gerade Harmonische gibt es keine Triade j + l = k und damit keine Schiefe.
+  Eine dritte Harmonische ist mit Halbwellensymmetrie vereinbar. N₃ setzt einen dritten Anregungsanteil voraus,
+  der nach Überlagerung der Module und Kontaktübertragung übrig bleibt; ein nicht sinusförmiges Profil enthält
+  ihn nicht zwangsläufig.
+- **Egg- und Sinusprofil im Modell:** Das Egg-Profil enthält zweite und dritte Harmonische; im Dauerkontakt
+  treten damit Schiefe, N₂ und N₃ auf, soweit die Phasenlage sie nicht auslöscht. Das Sinusprofil enthält nur
+  die Grundwelle und liefert ohne Liftoff weder Schiefe noch N₂ oder N₃. Phasenabhängigkeit und Zeltspitze treten
+  auch beim Sinusprofil auf; bei starrer Auflage ist die Steigung am Knick mit dem Egg-Profil etwa doppelt so groß
   (`python3 code/linear_solver.py --section --rigid --mu 0.462`, mit und ohne `--sinus`).
 - **Kontaktast analytisch:** Ohne Abheben ist das Modell linear. [`code/linear_solver.py`](code/linear_solver.py)
   berechnet die stationäre Lösung exakt aus Fourier-Reihe des Profils und Übertragungsfunktion des Kontakts
