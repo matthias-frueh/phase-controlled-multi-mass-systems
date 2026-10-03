@@ -106,10 +106,10 @@ ohne gleichphasiges Modulpaar auf, doch der Referenzparametersatz liegt
 auf der Kontaktresonanz der zweiten Harmonischen, und schon bei gut
 $5\,\%$ geringerer Kontaktsteifigkeit und gleichem Dämpfungsgrad ist ein
 einzelnes Modul im Dauerkontakt linksschief. Und mit sinusförmigem Antrieb kollabiert die gesamte
-Phasenkarte auf die resultierende Amplitude: Das asymmetrische Profil ist
-nötig für Schiefe im Dauerkontakt und für die zweite und dritte
-Harmonische; Phasenabhängigkeit und Zeltspitze treten auch beim
-Sinusprofil auf.
+Phasenkarte auf die resultierende Amplitude: Im Dauerkontakt entstehen
+Schiefe und die zweite und dritte Harmonische erst mit dem asymmetrischen
+Profil (für die dritte genügt ein nicht sinusförmiges); Phasenabhängigkeit
+und Zeltspitze treten auch beim Sinusprofil auf.
 
 Die Grenze des Rahmens wird benannt. Die Kontrolle prüft das erste
 Moment; phasenkorrelierte Einkopplung, symmetrische Kettenfehler und
@@ -180,10 +180,10 @@ when no pair of modules is in phase, but the reference parameter set sits
 on the contact resonance of the second harmonic, and a contact stiffness
 lower by just over $5\,\%$ at equal damping ratio already makes a single
 module under permanent contact negatively skewed. With sinusoidal drive the
-entire phase map collapses onto the resultant amplitude: an asymmetric
-profile is needed for skewness under permanent contact and for the second
-and third harmonics, while phase dependence and the tent peak also occur
-with a sinusoidal profile.
+entire phase map collapses onto the resultant amplitude: under permanent
+contact, skewness and the second and third harmonics only arise with the
+asymmetric profile (a non-sinusoidal profile suffices for the third), while
+phase dependence and the tent peak also occur with a sinusoidal profile.
 
 The limit of the framework is stated. The control tests the first
 moment; phase-correlated coupling, symmetric chain errors and
@@ -285,24 +285,41 @@ PR~\#4; Karten und Abbildungen stammen weiterhin aus dem Archivlauf.
 Nachträge vom 2.~Oktober 2026 (Quelltext; die PDF-Fassung ist noch nicht
 neu gesetzt, eine neue Versionsnummer ist nicht vergeben). Sie
 übernehmen Ergebnisse einer Nachrechnung mit ereignisgenauem Löser und
-berichtigen überzogene Formulierungen. Betroffen sind: die Reichweite der
+berichtigen überzogene Formulierungen. Durch Tests des Repositorys
+(\texttt{tests/test\_ereignisloeser.py}) belegt sind die ereignisgenauen
+Werte am Punkt $(0^\circ, 208{,}4^\circ)$ ($+0{,}02\,\mathrm{mN}$,
+$75{,}08\,\%$, $38{,}5\,\mathrm{N}$) und das Einschwingen nach etwa
+$5\,\mathrm{s}$ mit loser Wiederkehrtoleranz; die Dauer von $9$ bis
+$10\,\mathrm{s}$ mit strengerem Wiederkehrkriterium ist mit den in
+Abschnitt~\ref{sec:track1-sim} angegebenen Toleranzen über die Funktion
+\texttt{periode} von \texttt{code/ereignisloeser.py} reproduzierbar. Die
+Einschwingdauern der Festschritt-Rechnung bei geänderter Phasenangabe
+oder halbiertem Zeitschritt, der Quadraturanteil von rund
+$-80\,\mathrm{ppm}$, die
+Mehrstabilität an mindestens $99$ Rasterpunkten und die Stichproben zu
+den Periodenangaben stammen aus der Nachrechnung und liegen nicht als
+eigenes Skript im Repository. Betroffen sind: die Reichweite der
 Kontrollgröße (Kurzfassung, Abstract, Abschnitt~\ref{sec:beitrag},
-Kapitel~\ref{chap:rahmen} und~\ref{chap:frage}); die Definition von
+Kapitel~\ref{chap:rahmen}, \ref{chap:frage}, \ref{chap:statistik}
+und~\ref{chap:diskussion}); die Definition von
 $F_{\min} - \langle N \rangle$ (Abschnitt~\ref{sec:target-quantities});
 Antrieb, Auslegungsbedingung, Kontakt, Kraftbereich und Nennlast mit den
 offenen Entscheidungen zum Aufbau (Kapitel~\ref{chap:system},
-Abschnitt~\ref{sec:offene-entscheidungen}) sowie der Kraftaufnehmer
-(Kapitel~\ref{chap:messsystem}); der Wert am Punkt
+Abschnitt~\ref{sec:offene-entscheidungen}) sowie Kraftaufnehmer und
+Hilfskanäle (Kapitel~\ref{chap:messsystem}), die Nennlast auch in
+Abschnitt~\ref{sec:sens-k} und Abschnitt~\ref{sec:befunde}; der Wert am Punkt
 $(0^\circ, 208{,}4^\circ)$ als Folge eines von der Festschritt-Integration
 künstlich verlängerten Einschwingens (auch in Kurzfassung, Abstract und
 Fazit), die
 Rundungsgrenze von $0{,}2\,\mathrm{ppm}$, der Exponent $-0{,}945$, die
 vollständige Symmetriegruppe $S_3$ und die Einordnung der Referenzzahlen
-als Effekte des weichen Kontakts (Kapitel~\ref{chap:simulation}); die
+als Effekte des weichen Kontakts (Kapitel~\ref{chap:simulation}; teils
+auch Kapitel~\ref{chap:diskussion} und Anhang~\ref{app:daten}); die
 Anfangsbedingung, die Mehrstabilität im Liftoff-Bereich und die Grenze des
 eindimensionalen Modells (Anhang~\ref{app:simulation}); die Aussagen zum
-Bahnprofil in Kurzfassung, Abschnitt~\ref{sec:sinus-sweep} und
-Abschnitt~\ref{sec:befunde}. Außerdem sind Lücken- und Beitragsaussagen
+Bahnprofil in Kurzfassung, Abstract, Abschnitt~\ref{sec:sinus-sweep},
+Abschnitt~\ref{sec:befunde} und Abschnitt~\ref{sec:weiterfuehrend}.
+Außerdem sind Lücken- und Beitragsaussagen
 in Kurzfassung, Abstract, Abschnitt~\ref{sec:beitrag},
 Kapitel~\ref{chap:stand} und Kapitel~\ref{chap:fazit} auf Suchbefunde
 zurückgenommen, Kandidaten zu Impact-Oszillatoren als bibliografisch
@@ -312,7 +329,8 @@ Mittelwertverschiebung ist vereinheitlicht: Ursache war ein Kontaktmodell
 mit vorgeschriebener Eindrückung; der Randterm des Auswertefensters
 erklärt nur die späteren Restabweichungen (Kurzfassung, Abstract,
 Abschnitt~\ref{sec:track1-sim}, Kapitel~\ref{chap:diskussion}
-und~\ref{chap:fazit}). Das Arbeitsmanuskript v2.1 (früher
+und~\ref{chap:fazit}); die Liste zurückgezogener Aussagen in
+Kapitel~\ref{chap:frage} ist vervollständigt. Das Arbeitsmanuskript v2.1 (früher
 \emph{Dissertation}) ist fachlich überholt: Es enthält Aussagen, die die
 Fassungen v2.3 und v2.4 zurückziehen.
 
@@ -336,7 +354,7 @@ $\gamma_1$ & Schiefe der Kontaktkraftverteilung \\
 $\lambda$ & Liftoff-Anteil \\
 $A$ & Asymmetrieverhältnis $(N_{\max}-Mg)/(Mg-N_{\min})$ \\
 $N_{\min}$, $N_{\max}$ & Minimale und maximale Kontaktkraft \\
-$F_{\min} - \langle N \rangle$ & Minimalkraft der bandbegrenzten Mittelkurve relativ zum Laufmittel (Präregistrierung v2), Gleichung~\eqref{eq:fmin-rel} \\
+$F_{\min} - \langle N \rangle$ & Minimalkraft der bandbegrenzten Mittelkurve relativ zum Laufmittel (Präregistrierung v2), Abschnitt~\ref{sec:target-quantities} \\
 $N_{\text{thr}}$ & Operative Kontaktschwelle zur Liftoff-Erkennung \\
 $f$, $T$ & Anregungsfrequenz, Anregungsperiode \\
 $f_n$ & Kontakteigenfrequenz $\sqrt{k/M}/(2\pi)$ \\
@@ -1796,10 +1814,9 @@ festgeschrieben wird.
 \paragraph{Minimalkraft relativ zum Laufmittel.} Der Entwurf der
 Präregistrierung v2 wertet nicht $N_{\min}$ selbst aus, sondern die
 Differenz
-\begin{equation}
+\[
   F_{\min} - \langle N \rangle ,
-  \label{eq:fmin-rel}
-\end{equation}
+\]
 mit $F_{\min}$ dem Minimum der Konfigurationsmittelkurve: Die Läufe einer
 Konfiguration werden phasensynchron über ganze Zyklen gemittelt und auf
 die Harmonischen bis zur Ordnung $k_{\max}$ begrenzt. $\langle N\rangle$
@@ -2209,9 +2226,11 @@ Phasenkarte degeneriert zu einer einparametrigen Schar in der
 resultierenden Amplitude, negative Schiefe tritt nirgends auf, und das
 Dreimodulsystem wird einem einzelnen Schwingerreger äquivalent.
 
-Für Schiefe im Dauerkontakt und für die zweite und dritte Harmonische
-braucht der Aufbau deshalb einen Antrieb, der ein Profil ohne
-Halbwellensymmetrie erzeugt. Phasenabhängigkeit und Zeltspitze treten
+Im Dauerkontakt braucht der Aufbau deshalb für Schiefe und für die
+zweite Harmonische einen Antrieb, der ein Profil ohne
+Halbwellensymmetrie erzeugt; für die dritte Harmonische genügt ein nicht
+sinusförmiges Profil. Das asymmetrische Profil des Modells liefert
+beides. Phasenabhängigkeit und Zeltspitze treten
 auch beim Sinusprofil auf; bei starrer Auflage ist die Steigung am Knick
 mit dem asymmetrischen Profil etwa doppelt so groß
 (\texttt{code/linear\_solver.py --section --rigid --mu 0.462}, mit und
@@ -2226,12 +2245,16 @@ Beitrag der Profilasymmetrie in der Messung beziffert.
 \paragraph{Auslegungsbedingung.}
 Frühere Fassungen verlangten hier, Frequenz, Masse und Kontaktsteifigkeit
 so abzustimmen, dass in einem Teil der Phasenlagen Liftoff auftritt. Bei
-derselben Frequenz ist das mit dem Entwurf der Präregistrierung v2
-unvereinbar: Dort misst V1 konfirmatorisch nur im Dauerkontakt und mit
-Resonanzabstand (dort Abschnitt~5.3). Im quasistatischen Bereich ist dann die
-gesamte Phasenebene im Kontakt, und Liftoff ist nur in explorativen
-Läufen (E1) erreichbar. Ob und in welchem Umfang E1 Teil von V1 ist, ist
-offen (Abschnitt~\ref{sec:offene-entscheidungen}). Die Regimekarten dieses
+der Frequenz der konfirmatorischen Läufe ist das mit dem Entwurf der
+Präregistrierung v2 unvereinbar: Dort misst V1 konfirmatorisch nur im
+Dauerkontakt und mit Resonanzabstand (dort Abschnitt~5.3). Liegen die
+Module über den Zellen, trägt jede Zelle bei jeder Phasung $Mg/3$ und die
+Trägheitskraft ihres Moduls (dort Anhang~A2.5); im quasistatischen
+Bereich ist dann die gesamte Phasenebene im Kontakt (am V1-Kandidaten
+kleinste Zellreserve $41{,}1\,\%$, \texttt{code/auslegung.py --candidate}).
+Für andere Lagen von Zellen und Modulen ist das offen. Liftoff ist so nur
+in explorativen Läufen (E1) erreichbar. Ob und in welchem Umfang E1 Teil
+von V1 ist, ist offen (Abschnitt~\ref{sec:offene-entscheidungen}). Die Regimekarten dieses
 Papiers gelten für den weichen Referenzkontakt mit Liftoff; in einem Aufbau
 im Dauerkontakt ist die Spannweite der Funktionale wesentlich kleiner.
 
@@ -2285,7 +2308,8 @@ Nennlast, wie sie die Laborvariante vorsieht, geriete schon dort in die
 Sättigung. Die Nennlast ist am Maximum von $N(t)$ zu bemessen, nicht an
 $Mg$. Eine Zahl folgt aus diesen Werten aber nicht. Bei steifem Kontakt
 erreichen Hüpfzustände und Liftoff-Läufe im Modell Summenkräfte von
-einigen $100\,\mathrm{N}$ bis etwa $1\,\mathrm{kN}$, auch aus dem
+einigen $100\,\mathrm{N}$ bis etwa $1\,\mathrm{kN}$ (Kelvin-Voigt; mit
+Hunt-Crossley bis $2{,}6\,\mathrm{kN}$), auch aus dem
 Dauerkontakt heraus nach einer Störung
 (\texttt{code/ereignisloeser.py}, \texttt{docs/einzugsgebiete\_v1\_kandidat.md}),
 und die Kräfte im Dauerkontakt --- wenige Newton je Zelle --- bestimmen
@@ -2312,8 +2336,9 @@ Präregistrierung v2 verlangt, ist das Signal viel kleiner: Am
 V1-Kandidaten der Auslegung (steifer Kontakt, von $0{,}650\,\mathrm{kg}$
 bewegen sich nur die $0{,}300\,\mathrm{kg}$ der Module, Hub
 $8\,\mathrm{mm}$) beträgt die Spannweite der Zeltkurve
-$0{,}56\,\mathrm{N}$, im Referenzsatz $4{,}56\,\mathrm{N}$
-(\texttt{code/auslegung.py --candidate}), und die Präzisionsbedingungen
+$0{,}56\,\mathrm{N}$ (\texttt{code/auslegung.py --candidate}), im
+Referenzsatz $4{,}56\,\mathrm{N}$ (Präregistrierung v2, Anhang A4;
+\texttt{code/linear\_solver.py --section}), und die Präzisionsbedingungen
 der Präregistrierung liegen im Bereich einiger $10\,\mathrm{mN}$ (dort
 Anhang A4). Die Apparatur muss dann wiederholbar und präzise sein.
 
@@ -2377,7 +2402,14 @@ Autors; dieses Papier legt keine davon fest.
       Trennbarkeit der Zellverstärkungen hängen davon ab; Module außerhalb
       des Stützdreiecks senken die Zellreserve stark.
 \item \textbf{Kontakt und Dämpfungsziel.} Steifer Kontakt mit hoher
-      Dämpfung unterdrückt im Modell Hüpfzustände; ein Elastomer bringt
+      Dämpfung unterdrückt im Kelvin-Voigt-Modell Hüpfzustände (bei
+      $\zeta = 0{,}20$ hüpft keine der sechs geprüften Laufarten); das
+      Ergebnis hängt vom Kontaktgesetz ab (mit Hunt-Crossley hüpft
+      $(120^\circ, 240^\circ)$ schon bei $\zeta = 0{,}05$), und auch
+      Würfe, die in den Kontakt zurückkehren, erzeugen im Modell
+      $\approx 1\,\mathrm{kN}$ je $\mathrm{m/s}$ Wurfgeschwindigkeit, mit
+      Hunt-Crossley bis $2{,}6\,\mathrm{kN}$ bei $1\,\mathrm{m/s}$
+      (\texttt{docs/einzugsgebiete\_v1\_kandidat.md}). Ein Elastomer bringt
       Asymmetrie und Temperaturgang. Bei geringer Dämpfung entfallen
       synchrone und Liftoff-Läufe oder werden streng begrenzt. Ein weicher
       Kontakt wie in der Laborvariante setzt einen gemessenen
@@ -2386,8 +2418,10 @@ Autors; dieses Papier legt keine davon fest.
       weiche Kontaktstufe vorsehen, oder Zellen und Anschlag für
       Summenkräfte von einigen $100\,\mathrm{N}$ auslegen und den
       Auflösungsverlust hinnehmen.
-\item \textbf{Messkette und Wegkanal.} Drei simultane, gleichspannungsfähige
-      Zellkanäle sind die Untergrenze. Ob ein Wegkanal die
+\item \textbf{Messkette und Wegkanal.} Für V1 nach dem Entwurf der
+      Präregistrierung v2 (drei Wägezellen) sind drei simultane,
+      gleichspannungsfähige Zellkanäle die Untergrenze; die Laborvariante
+      sieht eine einzelne Zelle vor. Ob ein Wegkanal die
       Kontaktsteifigkeit genau genug bestimmt und welche Hilfskanäle
       nötig sind, ist offen; davon hängt die Kanalzahl ab.
 \item \textbf{Institutionelle Anbindung.} Ob Experimente erst nach einer
@@ -2617,7 +2651,9 @@ tatsächlich erforderliche Auflösung.
 
 \section{Hilfskanäle}
 
-Zwei Hilfskanäle werden synchron zum Kraftsignal aufgezeichnet.
+In der Laborvariante sind zwei Hilfskanäle vorgesehen, die synchron zum
+Kraftsignal aufgezeichnet werden; welche Hilfskanäle V1 braucht, ist offen
+(Abschnitt~\ref{sec:offene-entscheidungen}).
 
 Ein \textbf{Beschleunigungsaufnehmer am Gehäuse} liefert eine
 unabhängige Prüfung des Liftoffs: Während der Kontakt abgehoben ist,
@@ -3791,8 +3827,9 @@ Der Randterm hat drei Ursachen:
   $4{,}5\,\mathrm{s}$ bei halbiertem Zeitschritt). Ereignisgenau gerechnet
   (\texttt{code/ereignisloeser.py}) liegt die Bahn nach etwa
   $5\,\mathrm{s}$ bis auf eine Wiederkehrtoleranz von $1\,\mathrm{mm/s}$
-  auf demselben Orbit der Periode~1 (mit strengem Wiederkehrkriterium
-  nach etwa $9\,\mathrm{s}$); im Fenster
+  auf dem Orbit der Periode~1, in den auch die Festschritt-Rechnung nach
+  dem Einschwingen gelangt (mit strengerem Wiederkehrkriterium
+  ($10^{-8}$ bzw. $10^{-9}\,\mathrm{m/s}$) nach $9$ bis $10\,\mathrm{s}$); im Fenster
   $5$--$15\,\mathrm{s}$ weicht das Zeitmittel um $+0{,}02\,\mathrm{mN}$
   von $Mg$ ab statt um $-43{,}5\,\mathrm{mN}$. Auch $\lambda = 74{,}3\,\%$
   und $N_{\max} = 44{,}1\,\mathrm{N}$ der Archivzeile sind Werte der
@@ -3865,8 +3902,9 @@ angegeben.
 \section{Symmetrieprüfung}
 \label{sec:symmetrie}
 
-Bei identischen Modulen und masselosem starrem Rahmen ist das Modell
-unter der Gruppe $S_3$ der Modulumbenennungen invariant. Jede
+Bei identischen Modulen ist das Modell, unabhängig von der Masse des
+starren Rahmens, unter der Gruppe $S_3$ der Modulumbenennungen
+invariant. Jede
 Umbenennung bildet $(\varphi_2, \varphi_3)$ auf eine gleichwertige
 Konfiguration ab, zusammen mit einer Zeitverschiebung um
 $\tau_{\mathrm{ref}} = \varphi_{\mathrm{ref}}/(2\pi f)$.
@@ -4014,8 +4052,9 @@ die Lage der zweiten Harmonischen auf der Kontaktresonanz
 steifem Kontakt ändern sich alle drei; bei starrer Auflage ist die
 Schiefe am Triphasik-Punkt negativ ($\gamma_1 = -0{,}45$). Am
 V1-Kandidaten der Auslegung beträgt die Spannweite der Zeltkurve
-$0{,}56\,\mathrm{N}$, im Referenzsatz $4{,}56\,\mathrm{N}$
-(\texttt{code/auslegung.py --candidate}). Dieser Vergleich trennt den
+$0{,}56\,\mathrm{N}$ (\texttt{code/auslegung.py --candidate}), im
+Referenzsatz $4{,}56\,\mathrm{N}$ (Präregistrierung v2, Anhang A4;
+\texttt{code/linear\_solver.py --section}). Dieser Vergleich trennt den
 Einfluss des Kontakts nicht: Der Kandidat unterscheidet sich auch in
 der bewegten Masse (im Referenzsatz bewegt sich die ganze Masse mit den
 Modulen, beim Kandidaten $0{,}300$ von $0{,}650\,\mathrm{kg}$) und im
@@ -4167,9 +4206,10 @@ Kapitel~\ref{chap:stand} beschriebene Konstellation zu untersuchen.
 Die Asymmetrie des Bahnprofils ist demnach kein Detail der Umsetzung,
 sondern die Quelle der Phasenabhängigkeit jenseits der resultierenden
 Amplitude. Phasenabhängigkeit über $R$ und die Zeltspitze bleiben auch
-mit sinusförmigem Profil erhalten. Für Schiefe im Dauerkontakt und für
-die zweite und dritte Harmonische braucht die Laborvariante einen
-Antrieb, der ein asymmetrisches Profil erzeugt; ob Nocke oder
+mit sinusförmigem Profil erhalten. Im Dauerkontakt braucht die
+Laborvariante für Schiefe und für die zweite Harmonische einen Antrieb, der
+ein asymmetrisches Profil erzeugt, für die dritte ein nicht sinusförmiges
+Profil; ob Nocke oder
 programmierbarer Aktor, ist offen
 (Abschnitt~\ref{sec:offene-entscheidungen}). Der Sinus-Sweep behält
 dennoch einen Nutzen: Er ist die Referenz, gegen die der Beitrag der
@@ -5039,9 +5079,10 @@ aus gemessenen Einzelmodul-Harmonischen durch Überlagerung gewonnen wird.
 Mit sinusförmigem Antrieb kollabiert die Phasenkarte auf die
 resultierende Amplitude $R$, negative Schiefe tritt nirgends auf, und
 das Dreimodulsystem wird einem einzelnen Schwingerreger äquivalent.
-Phasenabhängigkeit über $R$ und die Zeltspitze bleiben erhalten. Das
-asymmetrische Profil ist nötig für Schiefe im Dauerkontakt und für die
-zweite und dritte Harmonische; welcher Antrieb es erzeugt, ist offen
+Phasenabhängigkeit über $R$ und die Zeltspitze bleiben erhalten. Im
+Dauerkontakt entstehen Schiefe und die zweite und dritte Harmonische erst
+mit dem asymmetrischen Profil (für die dritte genügt ein nicht
+sinusförmiges); welcher Antrieb es erzeugt, ist offen
 (Abschnitt~\ref{sec:offene-entscheidungen}).
 
 \paragraph{Die Kontaktsteifigkeit wirkt über Resonanzlinien.} Die
@@ -5100,8 +5141,9 @@ Die offenen Punkte sind konkret und in ihrer Reihenfolge bestimmt.
 \begin{enumerate}
 \item \textbf{Antrieb (offen, Entscheidung des Autors).} Nocke oder
       programmierbarer Aktor (Abschnitt~\ref{sec:offene-entscheidungen});
-      für Schiefe im Dauerkontakt und für die zweite und dritte
-      Harmonische ist ein Profil ohne Halbwellensymmetrie nötig. Die
+      im Dauerkontakt ist für Schiefe und für die zweite Harmonische ein
+      Profil ohne Halbwellensymmetrie nötig, für die dritte ein nicht
+      sinusförmiges Profil. Die
       Abweichung des real erzeugten Profils vom Modellprofil ist zu
       vermessen und in die Simulation zurückzuführen.
 \item \textbf{Wahl des Kontaktelements (offen, Entscheidung des Autors).} Mit Abstand zu den
@@ -5526,7 +5568,7 @@ Auslegung der Apparatur zu beachten.
     Simulierte Dauer    & $T_{\mathrm{sim}}$ & $15\,\mathrm{s}$ \\
     Verworfener Anteil  & $T_{\mathrm{burn}}$& $5\,\mathrm{s}$ \\
     Ausgewertete Dauer  & ---                & $10\,\mathrm{s}$, entspricht $100$ Zyklen \\
-    Anfangsbedingung    & $z_0$              & $-Mg/k$, Feder statisch eingedrückt; Module mit Profilgeschwindigkeit, kein Gleichgewicht \\
+    Anfangsbedingung    & $z_0$              & $-Mg/k$; kein Gleichgewicht (Text) \\
     \hline
   \end{tabular}
   \caption{Numerische Parameter.}
@@ -5539,8 +5581,9 @@ kurzen Kontaktphasen muss der Wiedereintritt in den Kontakt aufgelöst
 werden. Der Burn-in von $5\,\mathrm{s}$ entspricht $50$ Anregungszyklen
 und ist damit deutlich länger als die Abklingzeit der
 Kontakteigenschwingung. Für den Dauerkontakt genügt das. Im
-Liftoff-Bereich dauern Übergänge an einzelnen Konfigurationen bis etwa
-$40\,\mathrm{s}$; dort ist das Archivfenster teilweise
+Liftoff-Bereich dauerten Übergänge in der Festschritt-Rechnung
+(Nachrechnung mit adaptivem Burn-in vom 13.~September 2026) an einzelnen
+Konfigurationen bis etwa $40\,\mathrm{s}$; dort ist das Archivfenster teilweise
 einschwing-kontaminiert (Abschnitt~\ref{sec:track1-sim}). Die
 Anfangsbedingung ist kein Gleichgewichtszustand: Nur die Feder ist
 statisch eingedrückt; die Module haben bei $t = 0$ bereits ihre
@@ -5755,10 +5798,11 @@ verifizieren ließen:
       von 2023 wurde stattdessen aufgenommen.
 \item Eine Zuschreibung von Arbeiten zur Mehrmassen-Phasensteuerung an
       eine Gruppe der Fudan-Universität --- nicht bestätigt, nicht
-      aufgenommen. In anderen Projektdokumenten stehen dazu mehrere
-      verschiedene, nicht abgeglichene Arbeitsangaben (Arbeiten von Fang,
-      Xu und Mitarbeitern) mit widersprüchlichem Prüfvermerk; sie werden
-      dort als Kandidaten geführt, bibliografisch ungeprüft.
+      aufgenommen. In anderen Projektunterlagen stehen dazu abweichende,
+      nicht abgeglichene Arbeitsangaben (Arbeiten von Fang, Xu und
+      Mitarbeitern), teils mit widersprüchlichem Prüfvermerk; die
+      Dokumente des Repositorys führen sie als Kandidaten, bibliografisch
+      ungeprüft.
 \end{itemize}
 
 Ebenso nicht aufgenommen: die in Projektdokumenten geführte Angabe,

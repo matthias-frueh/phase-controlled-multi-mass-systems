@@ -117,7 +117,7 @@ Aktuelle Ausgabe: 101 Seiten · 22 Literatureinträge · 9 Abbildungen · XeLaTe
 - [x] 26 Deutung des Basislinienresiduums korrigiert (Kurzfassung, Abstract, 7.8, 9.4, 11.2, 12.2, A.1, A.4, B.4). „Langsame Modulation“ ersetzt durch den Randterm des Auswertefensters, δ = δ_w + δ_Q mit δ_w = Δv_S/(g·T_w), Schranke |δ_w| ≤ 2·v_S,max/(g·T_w) (Gl. 9.3). Neue Tabelle 9.4 mit der Zerlegung aus der Nachrechnung vom 13.09.2026: 315/24/22 Konfigurationen stationär/grenzwertig/nicht stationär, max |δ_w| = 3714 ppm, δ_Q Median 0, max 93 ppm.
 - [x] 27 Faktenfehler behoben: „Sämtliche 361 Residuen negativ“ → gemischt, 178 negativ, 167 positiv, 16 null (sweep_19x19.csv). „Mittleres absolutes Residuum 29 ppm“ → Median 29 ppm, Mittelwert 133 ppm. Anzahl λ > 50 % in Tab. 9.2 und A.4 nachgetragen (146).
 - [x] 28 Archiv-Höchstwert −6816 ppm als Einschwingen ausgewiesen: ~~Übergang 18,8 s~~, danach Periode 1, δ_w = −2 ppm. Hinweis zur Einschwingkontamination des Archivs im Datensatz-Anhang (λ > 0,5 %-Pkt an 11 Punkten, γ₁ > 0,02 an 7, N_max > 0,2 N an 9, A > 0,05 an 6).
-      *Nachtrag 03.10.2026 (zu den Nachträgen vom 02.10.2026):* Die Einschwingdauer ist ein Artefakt der Festschritt-RK4; sie hängt von der letzten Stelle der Phasenangabe und vom Zeitschritt ab (18,8 / 9,7 / 7,1 / 4,5 s). Ereignisgenau gerechnet (`code/ereignisloeser.py`) liegt die Bahn nach etwa 5 s auf demselben Orbit der Periode 1 (Wiederkehrtoleranz 1 mm/s; mit strengem Kriterium nach etwa 9 s), und das Zeitmittel weicht im Fenster 5–15 s um +0,02 mN von Mg ab.
+      *Nachtrag 03.10.2026 (zu den Nachträgen vom 02.10.2026):* Die Einschwingdauer ist ein Artefakt der Festschritt-RK4; sie hängt von der letzten Stelle der Phasenangabe und vom Zeitschritt ab (18,8 / 9,7 / 7,1 / 4,5 s). Ereignisgenau gerechnet (`code/ereignisloeser.py`) liegt die Bahn nach etwa 5 s auf demselben Orbit der Periode 1 (Wiederkehrtoleranz 1 mm/s; mit strengerem Wiederkehrkriterium (10⁻⁸ bzw. 10⁻⁹ m/s) nach 9 bis 10 s), und das Zeitmittel weicht im Fenster 5–15 s um +0,02 mN von Mg ab.
 - [x] 29 Symbolverzeichnis des Papiers um δ_w, δ_Q, Δv_S, v_S,max, T_w ergänzt; Bezeichnungen an das Formelverzeichnis angeglichen.
 - [x] 30 Belegordner `nachrechnung_2026-09-13` im Quellpaket: Datensatz, 100-s-Klassifikation, Skripte (nur Pfade angepasst), Engine, Ergebnisnotiz.
 
@@ -156,3 +156,5 @@ Repository geschlossen), 12, 13, 18, 20, 28, 38 und „Stand des Dokuments“ (0
     (Kap. 2.3) vor einer Aufnahme gegen die Primärquellen prüfen.
 43. Quelltext und PDF von Arbeitspapier v2.4 und Formelverzeichnis v2.7 weichen seit den Nachträgen
     vom 2. Oktober 2026 voneinander ab. Neusatz und Versionsnummer sind offen (Entscheidung des Autors).
+    Titelblatt (Arbeitspapier) und Datum (Formelverzeichnis) nennen weiter 26.09. bzw. 28.09.2026 und sind
+    beim Neusatz anzupassen.
