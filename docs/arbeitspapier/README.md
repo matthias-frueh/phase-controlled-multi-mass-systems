@@ -2,7 +2,10 @@
 
 **Wellenformstatistik der unilateralen Kontaktkraft in phasenkontrollierten Mehrmassensystemen** – Messrahmen, numerische Referenzfälle und Artefaktkontrolle. Prä-experimentelles Arbeitspapier, Stand 26.09.2026; eigene Messdaten liegen nicht vor.
 
-- PDF: [`PCMMS_Arbeitspapier_v2_4.pdf`](PCMMS_Arbeitspapier_v2_4.pdf)
+- PDF: [`PCMMS_Arbeitspapier_v2_4.pdf`](PCMMS_Arbeitspapier_v2_4.pdf) – Stand 26.09.2026. Der Quelltext enthält zusätzlich die
+  Nachträge vom 2. Oktober 2026 (begrenzte Aussagen, Literatur- und Rückzugsvermerke, offene Hardwareentscheidungen);
+  die PDF ist noch nicht neu gesetzt, eine neue Versionsnummer ist nicht vergeben
+  ([Offene Punkte](PCMMS_Arbeitspapier_Offene_Punkte.md), Nr. 43). Maßgeblich für den aktuellen Text ist der Quelltext.
 - Quelle: `PCMMS_Arbeitspapier_v2_4.tex`, `references.bib`, Abbildungen in `Plots/`
 - Belege der Korrektur in v2.4: [`gegenprobe_2026-09-26/`](gegenprobe_2026-09-26/)
 - Belege der Korrektur in v2.3: [`nachrechnung_2026-09-13/`](nachrechnung_2026-09-13/)
