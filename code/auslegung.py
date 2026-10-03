@@ -31,28 +31,73 @@ max(k_b, 3), k_b = ⌊f₁/(2f)⌋), ungebändert das volle Spektrum; Bedingung 
 
 Zugesetzte Luftmasse (Aufbau(m_luft=…, J_luft=…, xy_luft=…), --m-luft, --J-luft; Vorgabe 0 = bisheriges Modell,
 bitgleich). Die Luft um den Körper und ein Quetschfilm unter seinem Boden wirken auf die Körperbewegung als
-zusätzliche Trägheit, nicht als Gewicht. Impulssatz (x Körperlage, e_j Modulweg relativ zum Körper, Reaktion des
-Mediums −m_L·ẍ): M·ẍ + Σ_j m_j·ë_j = N − M·g − m_L·ẍ, also (M + m_L)·ẍ + C·ẋ + K·x = −Σ_j m_j·ë_j und
+zusätzliche Trägheit, nicht als Gewicht; hinzu kommt ein Luftanteil, der davon abhängt, wie M bestimmt wird
+(Gehäuseluft bzw. Ausgleich des Auftriebs, unten „Bestimmung von M“). Impulssatz (x Körperlage, e_j Modulweg relativ
+zum Körper, −m_L·ẍ die nicht in M enthaltene Trägheit):
+M·ẍ + Σ_j m_j·ë_j = N − M·g − m_L·ẍ, also (M + m_L)·ẍ + C·ẋ + K·x = −Σ_j m_j·ë_j und
 N = M·g + (M + m_L)·ẍ + Σ_j m_j·ë_j; ⟨N⟩ = M·g bleibt exakt. Im 3-FG-Modell greift m_L im Punkt (x_L, y_L) an
 (xy_luft, Vorgabe Zellschwerpunkt); J_L ist die zugesetzte Flächenträgheit um diesen Punkt (Skalar für beide
 Kippachsen oder 2 × 2), M_L = m_L·b_L·b_Lᵀ + diag(0, J_L) mit b_L = (1, x_L, y_L). Getrennt geführt werden das
 Gewicht M·g (statische Zelllasten F₀, Einfederung M·g/K, ε, μ, Reserven) und die träge Masse M + m_L (M_q, H,
 f_n, ζ, Moden). ζ ist der Dämpfungsgrad der Hubmode mit der trägen Masse, wie ihn eine Ausschwingmessung liefert:
 bei Vorgabe von ζ ist C = 2ζ·√(K·(M + m_L)); ausgegeben werden ζ und ζ_M = C/(2√(K·M)). So bezogen bleibt
-N/(M·g) = 1 + ε·g̃(t; φ, ρ, ζ) dieselbe Funktion; ε bleibt auf das Gewicht bezogen, weil die Luft keine Vorlast
-trägt (starr und quasistatisch ist N von m_L unabhängig, bei starrer Auflage wirkt m_L nicht). J_L wird als
-Flächenträgheit [kg·m²] angegeben, nicht als Trägheitsradius, weil J_L/m_L von der Strömung abhängt
-(Quetschfilm-Scheibe R²/12, freie Scheibe 2R²/15). Annahmen: m_L frequenzunabhängig (Wert bei der maßgeblichen
-Frequenz einsetzen), inkompressibel, ohne Schallabstrahlung und ohne eigene Luftdämpfung (Quetschfilmdämpfung
-gegebenenfalls in C); die Gegenfläche des Films liegt nicht im gemessenen Kraftpfad. Wird M aus den gewogenen
-Bauteilmassen (oder aus der statischen Zelllast) gebildet, gehört die Luft in einem geschlossenen Gehäuse,
-ρ_L·V_innen, zu m_L (ihre Flächenträgheit zu J_L): Ihr Gewicht hebt der Auftrieb auf, ihre Trägheit bleibt, weil
-sie sich bei Wellenlängen ≫ Gehäuse mit dem Körper bewegt (Kasten 20 × 20 × 10 cm ≈ 4,8 g, 15 × 15 × 8 cm
-≈ 2,2 g). Den Auftrieb auf das Materialvolumen vernachlässigt das Modell. Gemessene
-Übertragungen (N_mess, N_mess_zellen) enthalten die Luft schon und werden mit m_luft > 0 oder J_luft ≠ 0
-abgelehnt. Größenordnung der Mediumsreaktion (Nachrechnung 10/2026, nur Orientierung, keine Vorgabe): freie
-Scheibe (8/3)·ρ_L·R³ ≈ 2–5 g (Kasten 15–20 cm); mit Bodenspalt h Quetschfilm π·ρ_L·R⁴/(8h) und
-J_L = m_L·R²/12, bei R = 0,113 m 8 g (h = 10 mm) bis 30 g (h = 3 mm, mit Zähigkeit). Wirkung: f_n sinkt mit
+N/(M·g) = 1 + ε·g̃(t; φ, ρ, ζ) dieselbe Funktion; ε bleibt auf das Gewicht bezogen, weil m_L kein Gewicht hat und
+keine Vorlast trägt (starr und quasistatisch ist N von m_L unabhängig, bei starrer Auflage wirkt m_L nicht). J_L wird
+als Flächenträgheit [kg·m²] angegeben, nicht als Trägheitsradius, weil J/m von der Strömung bzw. der Gehäuseform
+abhängt (Quetschfilm-Scheibe R²/12, freie Scheibe 2R²/15). Annahmen: m_L frequenzunabhängig (Wert bei der
+maßgeblichen Frequenz einsetzen), inkompressibel, ohne Schallabstrahlung und ohne eigene Luftdämpfung
+(Quetschfilmdämpfung gegebenenfalls in C); die Gegenfläche des Films liegt nicht im gemessenen Kraftpfad. Gemessene
+Übertragungen (N_mess, N_mess_zellen) enthalten die Luft schon und werden mit m_luft > 0 oder J_luft ≠ 0 abgelehnt.
+Bestimmung von M und Zuordnung der Luft. Das Modell kennt eine Masse M = m₀ + Σ m_j für das Gewicht M·g; die gesamte
+wirksame träge Masse (Bauteile, mitbewegte Innenluft, hydrodynamische Zusatzmasse) ist M + m_L, m_L also diese träge
+Masse abzüglich M. Die hydrodynamische Zusatzmasse m_hyd (Reaktion der Außenluft, Quetschfilm) hat kein Gewicht,
+erscheint in keiner Wägung und keiner statischen Zelllast und gehört immer zu m_L. Volumina: V_Mat Materialvolumen
+(Bauteile und Gehäusewände), V_innen freies Luftvolumen im geschlossenen Gehäuse, V_außen = V_Mat + V_innen das von
+der Außenhaut umschlossene Volumen; ρ_L ≈ 1,2 kg/m³. Die Innenluft folgt der Hubbewegung bei Wellenlängen ≫ Gehäuse
+wie ein starrer Körper (bei relativ zum Gehäuse ruhenden Einbauten ist ihr Impuls für jede inkompressible
+Innenströmung ρ_L·V_innen·ẋ; zur Modulbewegung unten); ein leerer Kasten mit Innenmaß 20 × 20 × 10 cm enthält
+≈ 4,8 g, 15 × 15 × 8 cm ≈ 2,2 g, abzüglich Bauteilvolumen etwas weniger.
+  (a) M aus den gewogenen Bauteilmassen: m₀ + Σ m_j = Summe der Massen aller Teile, die auf den Zellen ruhen und sich
+      mit dem Körper bewegen, einschließlich der Module, ohne Luft. Die Innenluft fehlt in M; ihre Trägheit gehört
+      zu m_L, m_L = ρ_L·V_innen + m_hyd. Dass ihr Gewicht in M·g fehlen darf, setzt gleiche Luftdichte innen und
+      außen voraus: Nur dann hebt der Auftrieb auf V_innen ihr Gewicht genau auf. Belüftetes Gehäuse: 1 K
+      Temperaturunterschied ändert die Dichte um ≈ 0,34 % (bei 4,8 g Innenluft weicht M·g dann um ≈ 0,016 g·g von
+      der statischen Zelllast ab); dicht verschlossenes Gehäuse: die Innendichte bleibt auf dem Wert beim
+      Verschließen, maßgeblich ist die Änderung der Außendichte seither (1 hPa ≈ 0,1 %, 1 K ≈ 0,34 %). Den Auftrieb
+      auf das Materialvolumen, ρ_L·V_Mat·g (relativ ρ_L/ρ_Mat: 1,5·10⁻⁴ Stahl, 4,4·10⁻⁴ Aluminium, ≈ 10⁻³
+      Kunststoff), vernachlässigt dieser Weg: M·g und damit ⟨N⟩ liegen um ρ_L·V_Mat·g über der realen statischen
+      Zelllast, die träge Masse ist richtig. Gemeint sind wahre Massen. Eine mit Stahlgewichten (8000 kg/m³)
+      justierte Waage zeigt den konventionellen Wägewert m·(1 − ρ_L/ρ_Mat + ρ_L/8000 kg/m³); er enthält den
+      Materialauftrieb nur, soweit er den gleich schwerer Stahlgewichte übersteigt (Stahl ≈ 0, Aluminium ≈ 2/3,
+      Kunststoff ≈ 85 %). Soweit er enthalten ist, verschiebt sich die Abweichung vom Gewicht in die Trägheit; M·g
+      liegt dann für jeden Werkstoff um ≈ 1,5·10⁻⁴·M·g über der statischen Zelllast.
+  (b) M aus der statischen Zelllast: M = Σ_c F_c,stat/g mit F_c,stat = Anzeige der Zelle c (als Kraft) bei
+      aufgesetztem, ruhendem Körper minus Anzeige im Nullpunkt, in dem genau die in (a) gezählten Teile fehlen;
+      m₀ = M − Σ m_j (ebenso, wenn der geschlossene Körper als Ganzes gewogen wird). M·g ist dann das wirksame
+      Gewicht: Gewicht der Bauteile und der Innenluft abzüglich des Auftriebs ρ_L·V_außen·g (Dichte der Außenluft).
+      Das gilt ohne Annahme über die Dichten (für den Zustand bei der Messung), sofern die Zelllast keine weiteren
+      statischen Kräfte enthält (Kabel, Elektrostatik; sie gingen mit F/g in M und in die träge Masse ein). Zeigt die
+      Zelle oder Waage Masseeinheiten nach Justierung mit Stahlgewichten, ist M um ≈ 1,5·10⁻⁴ relativ zu groß
+      (Faktor 1/(1 − ρ_L/8000 kg/m³)). Die Innenluft steckt mit Gewicht und Hubträgheit in M. Der Auftrieb mindert
+      das Gewicht, nicht die Trägheit; deshalb ist m_L = ρ_L·V_außen + m_hyd. Das zählt die Innenluft nicht doppelt:
+      ρ_L·V_außen ersetzt nur den Auftrieb, um den M kleiner ist als die bewegte Masse. Setzt man vereinfachend
+      m_L = ρ_L·V_innen + m_hyd, fehlt der Trägheit ρ_L·V_Mat.
+Mit vernachlässigtem Materialauftrieb ergeben beide Wege dasselbe m_L = ρ_L·V_innen + m_hyd. Im 3-FG-Modell greift
+jeder Anteil von m_L in seinem Schwerpunkt an; xy_luft ist ihr massengewichteter Schwerpunkt, J_L ihre Kippträgheit
+um diesen Punkt einschließlich der Steiner-Anteile. In (a) sind die Anteile die Innenluft (im Schwerpunkt von
+V_innen, mit ihrer verminderten Eigenträgheit, unten) und m_hyd (mit J_hyd); in (b) sind es ρ_L·V_außen (im
+Auftriebsmittelpunkt, nur als Punktmasse) und m_hyd, (x₀, y₀) folgt aus der Verteilung der F_c,stat, und die
+Kippträgheit der Innenluft gehört mit der Restmasse zu J₀ (die Vorgabe J₀ = m₀·ρ₀² zählt sie starr). Beim Kippen
+dreht die nahezu reibungsfreie Innenluft nicht starr mit: Ihre Eigenträgheit liegt unter dem Starrkörperwert, beim
+leeren Kasten 20 × 20 × 10 cm mit Kippachse parallel zu einer 20-cm-Kante (ideale Strömung) bei ≈ 0,45 des starren
+Drehträgheitsmoments m·(a² + c²)/12 (a = 20 cm, c = 10 cm), bei 4,8 g ≈ 9·10⁻⁶ kg·m²; exakt ist nur der
+Steiner-Anteil ihres Schwerpunkts. Unabhängig von der Bestimmung von M vernachlässigt das Modell die Verdrängung der
+Innenluft durch die bewegten Module: Bei inkompressibler Luft im starren Gehäuse ist die Anregung (in
+Bewegungsgleichung und N) Σ_j (m_j − ρ_L·V_j)·ë_j statt Σ_j m_j·ë_j, mit der Dichte der Innenluft und dem Volumen V_j
+des bewegten Teils von Modul j; relativ ρ_L/ρ_j mit ρ_j = m_j/V_j.
+Größenordnung von m_hyd (Mediumsreaktion, Nachrechnung 10/2026, nur Orientierung, keine Vorgabe): freie Scheibe
+(8/3)·ρ_L·R³ ≈ 2–5 g (Kasten 15–20 cm); mit Bodenspalt h Quetschfilm m_hyd = π·ρ_L·R⁴/(8h) mit Kippanteil
+J_hyd = m_hyd·R²/12, bei R = 0,113 m 8 g (h = 10 mm) bis 30 g (h = 3 mm, mit Zähigkeit). Wirkung: f_n sinkt mit
 √(M/(M + m_L)); am V1-Kandidaten (G0, ζ fest) bei 5 g / 30 g um 0,4 / 2,2 %, kleinste Zellreserve
 41,14 → 41,12 / 41,04 %, ΔF_Zelt +0,3 / +1,7 %; ab m_L ≈ 9,6 g sinkt k_b von 12 auf 11, weil f₁ nur 0,7 %
 über 12·2f liegt (ΔF_Zelt bleibt ungebändert bestimmt). Nahe einer Resonanz ist die Wirkung groß
@@ -754,7 +799,7 @@ def main(argv=None):
                     help='zugesetzte Luftmasse des Körpers [g], nur träge, kein Gewicht (Vorgabe 0)')
     ap.add_argument('--J-luft', type=float, default=0.0,
                     help='zugesetzte Flächenträgheit gegen Kippen [kg·m²] um den Zellschwerpunkt, beide Achsen '
-                         '(Vorgabe 0; Quetschfilm-Scheibe mit Radius R: m_luft·R²/12)')
+                         '(Vorgabe 0; Quetschfilmanteil einer Scheibe mit Radius R: m_hyd·R²/12)')
     ap.add_argument('--zetas', nargs='+', type=float, default=[0.02, 0.05, 0.1, 0.2])
     ap.add_argument('--df-req', type=float, default=DF_REQ, help='Signalschwelle ΔF_Zelt [N]')
     ap.add_argument('--nu', type=float, default=np.inf, help='Freiheitsgrade ν für c der PB1-Anforderung (Vorgabe ∞)')
