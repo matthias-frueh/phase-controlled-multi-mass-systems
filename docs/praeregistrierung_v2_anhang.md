@@ -1,7 +1,7 @@
 # PCMMS — Präregistrierung v2, Technischer Anhang
 
 **Matthias Früh · ORCID 0009-0005-9984-4207**
-Stand: 28. September 2026, überarbeitet 2. Oktober 2026 (A3, A4: Einordnung der Vorzeichenregel; Entwurf 10/2026: Entscheidungsregeln, Identifizierbarkeit und Kontrollen, A0) und 3. Oktober 2026 (A0, A4, Z: Verweise auf das Exposé; A0, A1, A2.1, A9.2, Tabellen C und F, Z: Auftrieb und Bestimmung von M) · gleichrangiger Teil von Teil A, Entwurf — nicht eingefroren, nicht registriert
+Stand: 28. September 2026, überarbeitet 2. Oktober 2026 (A3, A4: Einordnung der Vorzeichenregel; Entwurf 10/2026: Entscheidungsregeln, Identifizierbarkeit und Kontrollen, A0) und 3. Oktober 2026 (A0, A4, Z: Verweise auf das Exposé; A0, A1, A2.1, A9.2, A9.7, Tabellen C und F, Z: Auftrieb und Bestimmung von M; A0, A1, A2.6, A8, A9.2, A9.5, A9.6, A9.8, A9.11–A9.13, Tabelle F, Z: offene Festlegungen gekennzeichnet, Klarstellungen) · gleichrangiger Teil von Teil A, Entwurf — nicht eingefroren, nicht registriert
 
 Dieser Anhang gehört zu `praeregistrierung_v2_entwurf.md` (Hauptdokument, Dateiname vorläufig, §12; Verweise
 „§“ beziehen sich darauf) und wird mit ihm eingefroren und registriert. Er enthält den Änderungsvermerk
@@ -65,7 +65,8 @@ Modulunterschiede und Kalibrierfehler der Zellen bewerten; E3b ist deshalb von H
 Die Betriebslastprüfung von P0.4 läuft nach der Wahl von f, mit der Last je Zelle (§5.2). Kontakt- und
 Messkettennichtlinearität sind ausdrücklich nicht trennbar.
 Die Kampagne wird länger (§5.3 c, §6, A9.12), die Bonferroni-Schranke über die Familien steigt durch H1Z auf
-0,25. Offen sind die Bestimmung von M (P0.2), Einstellung 2 und s, die Punkte I, Paarläufe, die Schwelle des Klirrkriteriums, die
+0,25. Offen sind die Bestimmung von M (P0.2), Einstellung 2 und s, die Punkte I, Paarläufe, die Schwelle des
+Klirrkriteriums, die
 Grenzen von H1Z, die Schwellen von E3 und alle Teile, die vom Antrieb, vom Hardwarestand des Linearaktors,
 von der Lage von Zellen und Modulen und von der Messkette abhängen (§12).
 
@@ -73,8 +74,26 @@ von der Lage von Zellen und Modulen und von der Messkette abhängen (§12).
 statt scheinbares Gewicht. Der frühere Ausdruck M·g − ρ_L·g·V mit dem Körpervolumen V zog bei M aus der
 statischen Zelllast den Auftrieb doppelt ab (0,021–0,047 N) und ließ bei M aus der Bauteilwägung das Gewicht der
 Innenluft weg. Kein Hypothesentest war betroffen, weil H0 Δ⟨N⟩ prüft. Beide zulässigen Konventionen für M
-stehen getrennt (§3, §4, P0.2, A1, A9.2, Tabelle C, Tabelle F, Z), mit den Bezeichnungen aus
-`code/auslegung.py`; die Wahl ist offen (§12).
+stehen getrennt (§3, §4, P0.2, A1, A2.1, A9.2, Tabelle C, Tabelle F, Z), mit den Bezeichnungen aus
+`code/auslegung.py`; die Wahl ist offen (§12). Kurzfassung, §2, §7 und §11 verwenden den Begriff statische Last.
+Zugleich ordnet §12 die offenen Festlegungen nach dem Zeitpunkt,
+zu dem sie getroffen werden können (unabhängig von der Hardware, abhängig vom Aufbau, erst nach Phase 0), und
+nennt weitere offene Punkte mit Optionen, ohne eine zu wählen: Äquivalenzgrenze, Schätzer und Intervall von
+H2, Driftbehandlung, Wiederaufnahme nach einem Eingriff, Wortlaut der Zusätze, Rückfall für H1, Nachweis und
+Folge der Phase-0-Schwellen, Zuordnung, Läufe bei Einstellung 2, D2_K, Messzeit, Betriebslastprüfung, Art von
+Einstellung 2 mit zweitem Nockensatz und Linearitätslauf, Rauschmodelle und kritischer Wert von H1,
+Vollständigkeit bei H2, Mittelpunkt des H2-Fitfensters, Zielfunktion der Laufzahlplanung, Nullkontroll-Sammeltest
+sowie das Gehäuse des Körpers (Hardware). Ergänzt sind weitere Optionen bei Einstellung 2 und s, Paarläufen,
+Klirrschwelle, Grenzen von H1Z und E3 und bei der Entscheidungslogik von H2 und H3 sowie Angaben zu den Punkten I
+und zu Fassung I von H3; die bisherigen Vorschläge sind unverändert. Die offenen Punkte sind zusätzlich an ihren
+Regelstellen und in Tabelle F mit „offen, §12“ gekennzeichnet; vollständig führt sie §12. Berichtigt ist die
+zirkuläre Mittelpunktregel des
+H2-Fitfensters (der Schnittpunkt nächst φ̂₂*, das erst der Fit in W ergibt); ihre Fassung ist offen (§8.6, A9.6,
+§12). Klargestellt sind die Bedeutung der Ausgänge (§9.3, §9.4), die Skalierung eines Kontaktresiduums bei
+zweiter Frequenz über den Faktor 1 − H(kω) (§5.5, §8.10, A2.6), die träge Masse in H(ω) (§8.7, A2.1), der
+Linearitätslauf mit einer Nocke und der Faktor der Justiergewichte bei Kalibrierung in Masseeinheiten (A9.2),
+planmäßige Umschaltungen eines zweiten Nockensatzes (§5.5) und „reproduziert“ statt „bestätigt“ bei Alarmen
+und Kontrollläufen (§9.2, A8, A9.12, Tabelle F, Z).
 
 **Folgen für andere Dokumente** (§12; am 25.09.2026 nachgezogen, soweit „erledigt“ vermerkt):
 
@@ -133,7 +152,7 @@ stehen getrennt (§3, §4, P0.2, A1, A9.2, Tabelle C, Tabelle F, Z), mit den Bez
 | Konfigurationsmittelkurve | Mittel der Mittelkurven aller gültigen Läufe einer Konfiguration, jeder Lauf gleich gewichtet |
 | N_k | komplexe Harmonische k ≥ 1: N_k = (2/N_θ)·Σₙ N̄(θₙ)·e^{−ikθₙ}; \|N_k\| ist die Amplitude wie in `linear_solver.py --section` |
 | ⟨N⟩ | Zeitmittel über eine ganze Zahl vollständiger Zyklen im Auswertefenster (= Gleichanteil der Mittelkurve) |
-| statische Last, M, m_L | statische Last: Σ_c F_c,stat, Summe der Zellanzeigen bei ruhendem Körper mit geparkten Modulen gegen den Nullpunkt bei abgehobenem Körper (P0.1); physikalisch das Gewicht von Bauteilen und Innenluft abzüglich des Auftriebs ρ_L·g·V_außen in der Außenluft, zuzüglich gleichbleibender äußerer Kräfte (Kabel, Elektrostatik); unter H0 gleich ⟨N⟩ (§3). M nach einer von zwei Konventionen (offen, §12): (a) Summe der wahren Bauteilmassen ohne Luft (A9.2): statische Last ≈ M·g − ρ_L·g·V_Mat + (ρ_innen − ρ_L)·g·V_innen zuzüglich gleichbleibender äußerer Kräfte, mitbewegte Luft m_L = ρ_L·V_innen + m_hyd; (b) M = Σ_c F_c,stat/g aus P0.2: statische Last = M·g im Zustand von P0.2, Auftrieb, Innenluft und gleichbleibende äußere Kräfte sind enthalten und werden nicht noch einmal abgezogen, m_L = ρ_L·V_außen + m_hyd. V_außen Außenvolumen, V_innen eingeschlossene Luft, V_Mat = V_außen − V_innen Materialvolumen, ρ_L und ρ_innen Dichte der Außen- bzw. Innenluft, m_hyd hydrodynamisch mitbewegte Luft (Tabelle C); Bezeichnungen wie in `code/auslegung.py` |
+| statische Last, M, m_L | statische Last: Σ_c F_c,stat, Summe der Zellanzeigen bei ruhendem Körper mit geparkten Modulen gegen den Nullpunkt bei abgehobenem Körper (P0.1); physikalisch das Gewicht von Bauteilen und Innenluft abzüglich des Auftriebs ρ_L·g·V_außen in der Außenluft, zuzüglich gleichbleibender äußerer Kräfte (Kabel, Elektrostatik); unter H0 gleich ⟨N⟩ (§3). M nach einer von zwei Konventionen (offen, §12): (a) Summe der wahren Bauteilmassen ohne Luft (A9.2): statische Last ≈ M·g − ρ_L·g·V_Mat + (ρ_innen − ρ_L)·g·V_innen zuzüglich gleichbleibender äußerer Kräfte, mitbewegte Luft m_L = ρ_L·V_innen + m_hyd; (b) M = Σ_c F_c,stat/g aus P0.2: statische Last = M·g im Zustand von P0.2; Auftrieb, Innenluft und gleichbleibende äußere Kräfte sind enthalten und werden nicht noch einmal abgezogen; m_L = ρ_L·V_außen + m_hyd; ρ_L·V_außen ersetzt den Auftrieb, um den M kleiner ist als die Masse von Bauteilen und Innenluft; die Innenluft steckt schon in M. In beiden Konventionen ist m_L die träge Masse ohne Gewicht, die nicht in M enthalten ist. V_außen Außenvolumen, V_innen eingeschlossene Luft, V_Mat = V_außen − V_innen Materialvolumen, ρ_L und ρ_innen Dichte der Außen- bzw. Innenluft, m_hyd hydrodynamisch mitbewegte Luft (Tabelle C); Bezeichnungen wie in `code/auslegung.py` |
 | N_c,k, F_min,c, Δ_c,q, Δ_c,rel,q | Harmonische und Minimum der bandbegrenzten Konfigurationsmittelkurve der Zelle c; Äquivalenz- und Relevanzgrenze von H1Z (§8.5) |
 | T(kω), Ĉⱼ,ₖ | Übertragungsmatrix von den Modulkräften zu den Zellkräften bei der Harmonischen k: Statik der Dreipunktlagerung mit Zelllagen und relativen Zellverstärkungen aus P0.1, G_F je Zelle und Kippmoden aus P0.4 (A2.7); Ĉⱼ,ₖ = [T(kω)⁻¹·(N₁,ₖ, N₂,ₖ, N₃,ₖ)ᵀ]ⱼ, Zeiger von Modul j aus den Zellen |
 | φⱼ^{P,Z}, Δφⱼ^Z | Profilphase von Modul j aus den Zellen, arg Ĉ₁,₁ − arg Ĉⱼ,₁; Abweichung Δφⱼ^Z = φⱼ^{P,Z} − φ̄ⱼ^P (E3a, §8.10) |
@@ -186,9 +205,11 @@ Solange der Körper nicht abhebt, ist das Modell der Referenz-Engine linear (Doc
     M·ẍ + C·ẋ + K·x = −μ·M·ā(t),     N(t) = M·g − K·x − C·ẋ
 
 mit ā(t) dem Mittel der drei Modulbeschleunigungen und μ dem Anteil der Masse, der sich mit den Modulen
-bewegt. M·g ist hier die statische Last (bei Konvention b exakt, bei a bis auf die Auftriebsterme, A1). In
-H(ω) steht M für die träge Masse, mit der auch P0.4 angepasst wird; mitbewegte Luft (m_L, A1) gehört dazu,
-ist linear und zeitinvariant und lässt die Superposition unberührt. Für die k-te Harmonische der Anregungsfrequenz f (ω = 2πf) gilt
+bewegt; μ·M = Σⱼ m_j. M·g steht hier für die statische Last (bei Konvention b gleich ihr im Zustand von P0.2, bei a
+bis auf die Auftriebs- und Innenluftterme und die gleichbleibenden äußeren Kräfte, A1). In H(ω) steht M für die
+träge Masse, mit der auch P0.4 angepasst wird; m_L (A1) gehört dazu,
+ist linear und zeitinvariant und lässt die Superposition unberührt. Für die k-te Harmonische der
+Anregungsfrequenz f (ω = 2πf) gilt
 
     N_k = μ·M · H(kω) · P_k · (1 + e^{−ikφ₂} + e^{−ikφ₃}) / 3,     H(ω) = (K + iωC) / (K − M·ω² + iωC)
 
@@ -270,9 +291,14 @@ Antriebe. Werden alle Modulkräfte um den Faktor s skaliert, bei gleicher Form, 
   Residuum der Mischterm β·[(Σⱼ yⱼ)² − Σⱼ yⱼ²] = 2β·Σ_{j<l} yⱼ·y_l; der statische Anteil fällt heraus. Er
   skaliert mit s². Das gilt für die Kennlinie einer Zelle, die Kräfte mehrerer Module trägt (bei Modulen
   über den Zellen nicht, A2.5), ebenso für einen Kontakt, dessen Kraft nichtlinear von der Einfederung
-  abhängt. Beide skalieren mit s². Ihre Verteilung über die Harmonischen unterscheidet sich nur über die
-  Kontaktübertragung H(kω), die beim Kontakt zusätzlich eingeht; das nutzen die registrierten Läufe nicht
-  konfirmatorisch. Sie sind deshalb nicht unterscheidbar.
+  abhängt. Beide skalieren bei zweiter Amplitude mit s² und sind dann nicht unterscheidbar. Beim Kontakt geht
+  zusätzlich der Faktor 1 − H(kω) ein, mit dem ein Kontaktresiduum an die Zellen gelangt (im steifen Bereich
+  ≈ −M·(kω)²/K); er verteilt das Residuum anders über die Harmonischen und wächst bei zweiter Frequenz mit
+  festem Hub mit (kω)², also mit s. Ein Kontaktresiduum skaliert dann im steifen Bereich stärker als s² (etwa
+  mit s³) und fällt aus den Klassen (als Skalierung; die Zuordnung nach A9.13 weist es erst bei großer
+  Abweichung als „nicht zuordenbar“ aus, bei mittlerer kann sie es p = 2 zuordnen, A9.11), ein Kettenresiduum
+  skaliert weiter mit s²; das nutzen die registrierten
+  Läufe nicht konfirmatorisch.
 - **Kopplung fester relativer Stärke.** Weicht die Antwort im Kombinationslauf um einen festen Bruchteil x
   von der im Einzelmodullauf ab, ist das Residuum x·ŷ; es skaliert mit s.
 - **Von der Amplitude unabhängige Störung** (Drift, Einstreuung): Das Residuum skaliert nicht.
@@ -281,7 +307,7 @@ Antriebe. Werden alle Modulkräfte um den Faktor s skaliert, bei gleicher Form, 
 
 Die Klasse beschreibt also die Skalierung, nicht den Mechanismus. Bei einer zweiten Frequenz mit festem Hub
 skaliert die Profilbeschleunigung mit f², und s wird aus den Einzelmodulläufen gemessen. Frequenzabhängige
-Mechanismen (H(kω), Lastmoment einer Nocke) verschieben dann die Exponenten; das prüft die
+Mechanismen (1 − H(kω) beim Kontakt, Lastmoment einer Nocke) verschieben dann die Exponenten; das prüft die
 Kalibriersimulation (A9.11). Mit s = 0,5 verhalten sich die Residuen der drei Klassen wie 1 : 0,5 : 0,25.
 
 **Paaradditivität.** Mischterme zweiter Ordnung addieren sich über die Modulpaare: Das Residuum einer
@@ -594,7 +620,7 @@ und S3 sind obere Schranken, keine Raten des Verfahrens.
 - **S1 über G1:** Der erste Lauf wird mit der ungünstigsten Lage angesetzt, die Wiederholung liegt mittig
   zwischen den frischen Referenzläufen R₂ und R₃; beide Prüfungen sind bei gegebenem σ̂_ref unabhängig. Die
   Vorprüfung wird nicht berücksichtigt; sie senkt die Rate nur. Schranke je Lauf: 2,5·10⁻⁴.
-- **S1 über Nullpunktalarme:** Alarm und Bestätigung teilen den vorangehenden Referenzlauf und sind
+- **S1 über Nullpunktalarme:** Alarm und Wiederholung teilen den vorangehenden Referenzlauf und sind
   deshalb korreliert. Schranke je Referenzlauf und Kanal: 7,3·10⁻⁴ (Monte Carlo); vier Kanäle (Summe und
   drei Zellen).
 - **S1 über eine Kampagne:** Bei 20 Blöcken mit 23 Konfigurationen und drei
@@ -608,7 +634,7 @@ und S3 sind obere Schranken, keine Raten des Verfahrens.
   erhöhen die Schranke je Lauf wie oben.
 - **S3:** Die Statistik (x − x̄₀)/(s·√(1 + 1/n₀ⱼ)) ist t-verteilt mit n₀ⱼ − 1 Freiheitsgraden; mit
   c_S = t(1 − 0,05/42; n₀ⱼ − 1) (bei n₀ⱼ = 20: 3,503) löst ein Kontrollsatz über die 21 Größen mit höchstens
-  5 % aus (Bonferroni-Schranke, exakt je Größe). Bestätigung durch die sofortige Wiederholung: höchstens
+  5 % aus (Bonferroni-Schranke, exakt je Größe). Reproduktion durch die sofortige Wiederholung: höchstens
   9,5·10⁻⁴ je Kontrollsatz (Bonferroni über 21 Größen; der Summand je Größe per Monte Carlo, weil erste
   Messung und Wiederholung dasselbe Phase-0-Mittel teilen). Über die 21 Kontrollsätze einer solchen Kampagne
   höchstens 0,020.
@@ -655,33 +681,39 @@ und S3 sind obere Schranken, keine Raten des Verfahrens.
   Linearitäts- und Umkehrspanne, Kriechen, Kalibrierunsicherheit, Nullpunkt je Zelle; Zelllagen in der
   Ebene und relative Zellverstärkungen mit Unsicherheit (Ziel ≤ 0,1 mm bzw. ≤ 0,1 %), Eingang von T(kω) für
   E3 (A2.7); Einfluss von Laststelle und Querkraft je ≤ 0,1·Δ_q, Superpositionsfehler der Elektronik
-  ≤ 0,3·u_c,erw (Nachweis in Teil B; §5.2).
+  ≤ 0,3·u_c,erw (Nachweis in Teil B; §5.2; Nachweisform, Folge und lineare Schwelle offen, §12).
 - **P0.2** Wägung vor der Endmontage. m_j: bewegte Masse jedes Moduls einschließlich mitbewegter Kabel und
   Messmarken, durch Bauteilwägung; der konventionelle Wägewert genügt (Abweichung von der wahren Masse
   höchstens etwa 10⁻³ relativ, klein gegen PB3). M nach der offenen Konvention (§12, A1): (a) Summe der Massen
   aller Teile, die auf den Zellen ruhen und sich mit dem Körper bewegen, als wahre Massen ohne Luft. Eine mit
   Stahlgewichten (8000 kg/m³) justierte Waage zeigt den konventionellen Wägewert
-  m·(1 − ρ_L/ρ_Mat + ρ_L/8000 kg/m³); er wird mit der Werkstoffdichte jedes Teils auf die wahre Masse
+  m·(1 − ρ_L/ρ_Mat + ρ_L/(8000 kg/m³)); er wird mit der Werkstoffdichte jedes Teils auf die wahre Masse
   umgerechnet, sonst würde der Materialauftrieb zum Teil doppelt abgezogen (Z). (b) M = Σ_c F_c,stat/g mit
   F_c,stat der Anzeige der Zelle c bei aufgesetztem, ruhendem Körper mit geparkten Modulen gegen den
   Nullpunkt bei abgehobenem Körper (P0.1), dazu Luftdruck, Lufttemperatur und Feuchte. Offen ist, welcher
-  Wert von g gilt (örtlich bestimmt oder Kalibrierung in Masseeinheiten) und ob eine Gesamtwägung des
+  Wert von g gilt (örtlich bestimmt oder Kalibrierung in Masseeinheiten; zeigen die Zellen nach Justierung mit
+  Stahlgewichten Masseeinheiten an, ist Σ_c F_c,stat/g die angezeigte Masse mal (1 − ρ_L/(8000 kg/m³)), also
+  um etwa 1,5·10⁻⁴ kleiner: ein Skalenfaktor der Kalibrierung, der in H1 und H2 herausfällt, kein Auftrieb des
+  Körpers; §8.3, Z) und ob eine Gesamtwägung des
   geschlossenen Körpers auf einer getrennten Waage als beschreibende Kontrolle dient. Bei (b) gilt M für den
   Zustand bei P0.2; Endmontage, Kabelführung und Messmarken ändern die statische Last danach noch, die
   Wiederholung des Zellnullpunkts nach dem Datenschluss (§5.2) ergibt eine zweite Bestimmung, die nur
   beschreibend berichtet wird. In keinem Fall wird von M = Σ_c F_c,stat/g ein Auftrieb abgezogen.
 - **P0.3** D1; D2ⱼ für jeden Antrieb bei jeder Frequenz des 1-Hz-Rasters im Bereich (d); D2_K an den Punkten
   I in deren Sollphasung bei denselben Frequenzen. Wechselwirkung der Antriebe: D2_K − Σⱼ D2ⱼ·e^{−ikφⱼ} je
-  Harmonischer, ausgewertet bei f mit k_max, in N und je Zelle, ≤ 0,3·u_c,erw (§5.2). Statische Summe und
+  Harmonischer, ausgewertet bei f mit k_max, in N und je Zelle, ≤ 0,3·u_c,erw (§5.2; Fassung von D2_K offen,
+  §12). Statische Summe und
   Umkehrspanne mit der Kabelschlaufe in Soll- und in einer zweiten Lage; statischer Nebenschlusseinfluss
-  ≤ 0,1·Δ_q, Umkehrspanne ≤ 0,3·u_c,erw (§5.2). Spalt zwischen Körperboden und Unterlage dokumentiert. Ist er
+  ≤ 0,1·Δ_q, Umkehrspanne ≤ 0,3·u_c,erw (§5.2; Nachweisform, Folge und lineare Schwelle offen, §12). Spalt
+  zwischen Körperboden und Unterlage dokumentiert. Ist er
   kleiner als 10 mm und die Grundplatte geschlossen (§5.1), zusätzlich Einzelmodulläufe je Modul bei der
   Sollhöhe und einer zweiten Spalthöhe (Spaltvariation); die Änderung von N_k ist linear und muss
   ≤ 0,1·Δ_q sein, die von ⟨N⟩ wird berichtet.
 - **Endmontage.** Zeitpunkt protokolliert, Fotos. Danach bis zum Datenschluss kein Abheben des Körpers,
   kein Lösen von Massen, Kabeln oder Encodern. Nicht als Veränderung zählen das Ausrichten des
   berührungslosen Wegkanals zwischen P0.5 und Phase 1, das Ankoppeln und Lösen der Anregung in P0.4, auch
-  für die Betriebslastprüfung nach P0.9, und für P0.5 angebrachte Messmarken, die bis zum Datenschluss
+  für die Betriebslastprüfung nach P0.9 (Zeitpunkt offen, §12), und für P0.5 angebrachte Messmarken, die bis zum
+  Datenschluss
   bleiben; falls vorgesehen (offen, §12), auch die Umschaltung auf einen vor der Endmontage eingebauten
   zweiten Nockensatz ohne Lösen von Massen, Kabeln oder Encodern. Bei Randomisierung nach §6 wäre sie in
   Phase 1 im Mittel etwa neunmal je Block nötig (N_K = 23, N_I = 3), bei n = 20 etwa 190-mal; ihre
@@ -696,7 +728,8 @@ und S3 sind obere Schranken, keine Raten des Verfahrens.
   Übertragungsfunktion in einem festgelegten Frequenzband, gewichtet mit der Kohärenz (Verfahren im
   eingefrorenen Code), alle in N oder N_c sichtbaren Moden f_m, ζ_m, Übertragung der Kraftkette G_F(ω) je
   Zelle und Summe. **Betriebslastprüfung (unter Betriebslast).** Zeitpunkt: nach P0.9, weil die Last von f
-  abhängt; bei zweiter Frequenz auch bei Einstellung 2. Das Ergebnis wird vor P0.11 hinterlegt wie das von
+  abhängt (offen, §12: Zeile „Schwelle des Klirrkriteriums und von P0.12“); bei zweiter Frequenz auch bei
+  Einstellung 2. Das Ergebnis wird vor P0.11 hinterlegt wie das von
   P0.12; es ist keine Eingangsgröße der Vorhersagen. Sinusanregung bei f, 2f und 3f, je einzeln, Module
   geparkt, nacheinander über jeder der drei Modulpositionen. Die Kraftamplitude ist die Betriebslast je
   Zelle: die größte vorhergesagte Harmonische der Zellkraft bei der Anregungsfrequenz in den Kombinations-
@@ -714,7 +747,7 @@ und S3 sind obere Schranken, keine Raten des Verfahrens.
   x_k⁽ʲ⁾ und a_k⁽ʲ⁾ = −(kω)²·x_k⁽ʲ⁾ bezogen auf den eigenen Indeximpuls; Δδⱼ mit u(Δδⱼ) ≤ 0,1°; Übertragung
   des Wegkanals G_x(ω); Parkposition. Dieselben Größen bei Einstellung 2 (P0.5′); bei einem
   programmierbaren Aktor wird dabei die Profiltreue bei beiden Amplituden nachgewiesen. Bei einem zweiten
-  Nockensatz (offen, §12) wird in P0.5′ mindestens fünfmal in jede Richtung umgeschaltet; Kriterium: Δδⱼ
+  Nockensatz (offen, §12) wird in P0.5′ mindestens fünfmal in jede Richtung umgeschaltet; Kriterium (offen, §12): Δδⱼ
   streut über die Umschaltungen höchstens um u(Δδⱼ), x_k⁽ʲ⁾ höchstens um seine Unsicherheit aus P0.5. Wird
   das verfehlt, ist die Option nicht zulässig, und Einstellung 2 ist eine zweite Frequenz.
 - **P0.6** Sollphasen aller Konfigurationen; Wiederholbarkeit des Indeximpulses je Encoder; statischer
@@ -724,16 +757,20 @@ und S3 sind obere Schranken, keine Raten des Verfahrens.
   der Rampe beginnen (Kürzen auf die ersten Zyklen); dazu muss T_e + T_a ≤ T_e,P + T_a,P sein.
 - **P0.7** Mindestens 42 Referenzläufe, verschachtelt mit P0.8–P0.10 bei jeder gemessenen Frequenz, je einer
   nach zwölf anderen Läufen; σ̂_ref und σ̂_ref,c aus den Läufen bei f.
-- **Einstellung 2 (§5.5).** Nach der Wahl von f: P0.5′, dann je Modul n₀′ ≥ 20 Einzelmodulläufe Lⱼ′,
+- **Einstellung 2 (§5.5).** Nach der Wahl von f: P0.5′, dann je Modul n₀′ ≥ 20 Einzelmodulläufe Lⱼ′ (Umfang
+  offen, §12),
   verschachtelt mit Referenzläufen wie P0.7. Die P0.5′-Ergebnisse werden hinterlegt, bevor Kraftdaten der
   Lⱼ′ ausgewertet werden. Ergebnis: ŷ⁰′ an den Punkten I, s mit Unsicherheit, die Streuungen für die Planung
-  der Zuordnung; Bedingung (a) bei Einstellung 2 mit den eigenen Daten.
+  der Zuordnung; Bedingung (a) bei Einstellung 2 mit den eigenen Daten (Folge bei Verfehlen offen, §12).
 - **P0.12 Linearitätslauf** (antriebsabhängig, offen, §5.5, §12). Einzelmodulläufe jedes Moduls mit Sinus-
-  oder ungerade-harmonischem Profil bei zwei Amplituden im Verhältnis 2, Profil in P0.5 mitgemessen.
+  oder ungerade-harmonischem Profil bei zwei Amplituden im Verhältnis 2 (bei einer Nocke mit nur einem
+  Sinussatz über ein Frequenzverhältnis √2; dann wächst eine Kettennichtlinearität vierfach, eine
+  Kontaktnichtlinearität stärker), Profil in P0.5 mitgemessen.
   Kriterium: Die geraden Harmonischen k = 2, 4, … ≤ k_max in N und je Zelle, abzüglich G_F·m_j·H·a_k⁽ʲ⁾ aus
-  der Profilmessung, betragen höchstens 0,3·u_c,erw. Bei Überschreitung wird ihre Skalierung mit der
+  der Profilmessung, betragen höchstens 0,3·u_c,erw (Schwelle offen, §12). Bei Überschreitung wird ihre
+  Skalierung mit der
   Amplitude (vierfach bei quadratischer Kennlinie, A2.6) in Teil B berichtet, und das Ergebnis geht als
-  Szenario in die Kalibriersimulation ein.
+  Szenario in die Kalibriersimulation ein (Nachweisform und Folge offen, §12).
 - **Reihenfolge der Schwellen.** (1) G2–G10 auf die Phase-0-Läufe anwenden, mit σ_tol und σ_Δ aus allen
   Läufen der jeweiligen Art (Median bzw. MAD, G2, G4). (2) ε_ctrl nach §8.8 und A9.8 aus den danach
   gültigen Läufen. (3) G1 anwenden. p̂ ist der Anteil der danach ungültigen Pilotläufe; alle Streuungen
@@ -749,7 +786,8 @@ und S3 sind obere Schranken, keine Raten des Verfahrens.
 - **k_max, T_a und Laufzahl** (§5.4), in dieser Reihenfolge: Für k = k_b, k_b − 1, …, 3 und je k für T_a =
   N_z/f mit N_z = 1, 2, …, solange T_e + T_a ≤ T_e,P + T_a,P: (i) s_q(T_a) aus den Pilotläufen, gekürzt auf
   die ersten N_z Zyklen; (ii) T_e und T_Lauf mit den Moden bis k·f; (iii) Planungssimulation: n₀ ≥ 20 und
-  n_min minimieren N_K·n_min + 3·n₀ unter den Bedingungen von §5.4 (Bestätigung nach §8.5 und §9.3,
+  n_min minimieren N_K·n_min + 3·n₀ (Zielfunktion und Fassung der Bedingungen offen, §12) unter den
+  Bedingungen von §5.4 (Bestätigung nach §8.5 und §9.3,
   H2-Halbbreite, n_min ≥ (3/SNR)²), bei Gleichstand das kleinere n_min; (iv) Rauschbias b̂_i⁰ mit diesen
   n_min und n₀, b̂_i¹ mit n_min und n + d Kontrollläufen je Modul, jeweils mit Unsicherheit; (v) n = n_min + r
   ≤ n_max (§5.3 c) prüfen. Das erste Paar (k, T_a), das (v) erfüllt, legt k_max, T_a, n_min und n₀ fest.
@@ -814,7 +852,8 @@ Zurücklegen ziehen (Phase 0 für ŷ⁰, Phase-1-Kontrollläufe für ŷ¹), ρ�
 Var_B, für lineare und nichtlineare Größen gleich. Ein eigener Phasenterm entfällt, weil die Vorhersage mit
 den gemessenen Zeigern derselben Läufe gebildet wird. Für F_min − ⟨N⟩ wird r⁰ um b̂_i⁰ und r¹ um b̂_i¹
 korrigiert, und u_c² = Var_A + Var_B + u²(b̂_i) mit dem jeweiligen b̂_i. u(b̂_i) kombiniert quadratisch den
-Monte-Carlo-Fehler und die halbe Spannweite von b̂_i über die in Teil B festgelegten Rauschmodelle, diese als
+Monte-Carlo-Fehler und die halbe Spannweite von b̂_i über die in Teil B festgelegten Rauschmodelle (Festlegung
+in Teil B oder als Liste in Teil A offen, §12), diese als
 Rechteckverteilung (geteilt durch √3). ν_eff nach §8.3: n_A = gültige Läufe der Konfiguration (H3: gültige
 Phase-1-Kontrollläufe des Moduls), n_B = min_j der gültigen Einzelmodulläufe der jeweiligen Basis, Monte Carlo
 mit ν = ∞, also ν_eff = (n_A − 1)·u_c⁴/Var_A² in H3. H1Z, die Zuordnung und E3 verwenden dieselben
@@ -822,15 +861,20 @@ Replikate; bei Einstellung 2 treten Lⱼ′ an die Stelle der Lⱼ.
 
 ### A9.6 Zeltfit
 
-φ* wird in Schritten von 0,001° über [min W, max W] gesucht; für jedes φ* werden F*, s_L, s_R ungewichtet
+Schätzer wie §8.6 (offen, §12): φ* wird in Schritten von 0,001° über [min W, max W] gesucht; für jedes φ* werden
+F*, s_L, s_R ungewichtet
 nach der Methode der kleinsten Quadrate bestimmt; gewählt wird φ* mit der kleinsten Residuenquadratsumme,
-bei Gleichstand das kleinste. Fitfenster: Mittelpunkt ist der Schnittpunkt, der φ̂₂* aus Teil B am nächsten
-liegt, bei Gleichstand der kleinere; W sind die Schnittpunkte in [Mittelpunkt − w, Mittelpunkt + w], am
+bei Gleichstand das kleinste. Fitfenster: Der Mittelpunkt folgt allein aus der Vorhersage in Teil B, nicht aus
+φ̂₂*, das erst der Fit in W ergibt. Offen (§12): (i) der Schnittpunkt mit dem größten vorhergesagten
+F̂_min − N_s oder (ii) der Schnittpunkt, der dem auf einem Raster von 0,01° über den ganzen Schnitt bestimmten
+Maximum von F̂_min − N_s am nächsten liegt; jeweils bei Gleichstand der kleinere. W sind die Schnittpunkte in
+[Mittelpunkt − w, Mittelpunkt + w], am
 Schnittrand abgeschnitten. w hängt nicht von u_c,erw ab. Vorschlag (offen, §12): w = 6° fest. Alternativen:
 w = 8° fest; oder w ist der größte Wert aus {4°, 6°, …, 20°}, für den der Zeltfit an der Vorhersage bei den
 Sollphasen die Spitzenlage um höchstens 0,1° gegen das Maximum von F̂_min − N_s verschiebt, das der
 registrierte Code auf einem Raster von 0,01° in φ₂ (φ₃ = 240°) innerhalb von W bestimmt. Hat W auf einer
-Seite des Mittelpunkts weniger als zwei Punkte, ist H2 nicht entscheidbar. Bleibt φ* bei einem nahezu
+Seite des Mittelpunkts weniger als zwei Punkte, ist H2 nicht entscheidbar (zu ausgefallenen Punkten in W:
+§9.3; offen, §12). Bleibt φ* bei einem nahezu
 symmetrischen Zelt auf einem Schnittpunkt hängen, hat Δφ* eine Punktmasse; die Kalibriersimulation prüft
 die Überdeckung auch in diesem Fall (A9.11). Abszisse ist die gemessene Profilphase
 φ̄₂^P = −arg ρ₂₁ + Δδ₂ (A1). Intervall: In jedem von 10 000 Replikaten werden die Läufe jeder Konfiguration
@@ -839,13 +883,14 @@ wiederholt und Δφ* = φ₂*,Messung − φ̂₂* gebildet; [a, b] sind das 2,5
 (Perzentilintervall), getrennt für ŷ⁰ ([a⁰, b⁰]) und ŷ¹ ([a¹, b¹]). Erreicht die simulierte Überdeckung des
 Perzentilintervalls 0,936 nicht, gilt das BCa-Intervall, wenn es 0,936 erreicht; sonst das Perzentilintervall
 mit dem kleinsten Nominalniveau aus 0,96, 0,97, 0,98 und 0,99, das 0,936 erreicht (Quantile (1 − Niveau)/2 und
-(1 + Niveau)/2). Reicht keines, ist H2 nicht entscheidbar (§8.6, Teil B).
+(1 + Niveau)/2). Reicht keines, ist H2 nicht entscheidbar (§8.6, Teil B; Rückfallkette und Bezugswert der
+Überdeckung offen, §12).
 
 ### A9.7 Monte-Carlo-Fortpflanzung (H3)
 
 a_k⁽ʲ⁾ = −(kω)²·x_k⁽ʲ⁾ aus P0.5, korrigiert um G_x; G_F ist die komplexe Übertragung der Kraftkette relativ
 zur Zeitbasis der Indeximpulse (P0.4); alles bezogen auf den eigenen Indeximpuls und bei der gemessenen
-Frequenz. 10 000 Ziehungen aus den Unsicherheiten von K und C (Kovarianz der Anpassung), M und m_j, x_k⁽ʲ⁾,
+Frequenz. 10 000 Ziehungen aus den Unsicherheiten von K und C (Kovarianz der Anpassung), M + m_L und m_j, x_k⁽ʲ⁾,
 G_F, G_x, f und gegebenenfalls der D2-Signatur; Vorhersage und u(ŷ) sind Mittelwert und
 Standardabweichung von Real- und Imaginärteil. Konfirmatorisch ist H3, weil kein Modellparameter aus
 Kraftdaten der Einzelmodulläufe bestimmt wird und die Parameter vor jeder Auswertung dieser Daten
@@ -860,7 +905,8 @@ Harmonische zu; dann gilt §8.7 (Fassung K oder I, offen).
 Zusammenfassender Test: Welch-Satterthwaite-t-Test von Δ⟨N⟩ aller Kombinationsläufe gegen Δ⟨N⟩ der
 Referenzläufe von Phase 1 (leave-one-out), zweiseitig, α = 0,05; einbezogen sind alle Läufe, die nicht aus
 anderen Gründen als G1 ungültig sind. Berichtet werden Differenz, 95-%-Intervall und dessen Lage zu
-±ε_ctrl. Die Differenz zweier Referenzläufe streut √(4/3)-mal so stark wie die Leave-one-out-Statistik
+±ε_ctrl (Form der Aussage offen, §12: Nullkontroll-Sammeltest). Die Differenz zweier Referenzläufe streut
+√(4/3)-mal so stark wie die Leave-one-out-Statistik
 (Varianz 2σ² gegen 1,5σ²); daher die Schwelle 3·√(4/3)·σ̂_ref des Nullpunktalarms. Ein Zellalarm weist auch
 auf einen verrutschten Fuß hin. Der Randterm aus der Impulsänderung des Schwerpunkts über das Fenster
 (Literaturabgleich §4.2, T3) ist bei ganzen Zyklen im stationären Zustand null; er wird aus Weg- und
@@ -901,11 +947,13 @@ Literaturabgleichs) oder mit eingebauter Modulkopplung müssen H1 falsifizieren,
 mindestens 2·Δ_rel beträgt (Power-Kriterium unten); knapp über Δ_rel ist „nicht entscheidbar“ zu erwarten.
 Vor Teil B zusätzlich je Szenario 1000 synthetische Kampagnen mit den geplanten n, n₀ und den
 Pilotstreuungen, mit getrennten Rauschmodellen für Einzelmodul- und Kombinationsläufe; dieselbe Simulation
-liefert n_min, n₀, den Rauschbias b̂⁰ und b̂¹ und c (§8.4). Den kritischen Wert für ε_ctrl liefert eine eigene
+liefert n_min, n₀, den Rauschbias b̂⁰ und b̂¹ und c (§8.4; ob sie nach dem Datenschluss mit den tatsächlichen
+Laufzahlen neu berechnet werden, ist offen, §12). Den kritischen Wert für ε_ctrl liefert eine eigene
 Simulation nach A9.8.
 
-Kriterien vor dem Einfrieren (Kalibrierung mit angenommenen Rauschmodellen über mehrere Präzisionsstufen,
-von reinem Sensorrauschen bis zu mehreren Prozent Lauf-zu-Lauf-Streuung je Modul) und in Teil B (mit den
+Kriterien vor dem Einfrieren (Kalibrierung mit angenommenen Rauschmodellen über mehrere Präzisionsstufen
+(Umfang der Stufen und Laufzahl je Stufe offen, §12), von reinem Sensorrauschen bis zu mehreren Prozent
+Lauf-zu-Lauf-Streuung je Modul) und in Teil B (mit den
 Pilotkovarianzen):
 
 - P(falsifiziert | exakte Superposition oder lineares, zeitinvariantes Artefakt) ≤ 0,05;
@@ -916,7 +964,8 @@ Pilotkovarianzen):
 - P(falsifiziert | Kopplung, deren größtes Residuum mindestens 2·Δ_rel beträgt) ≥ 0,8 bei der geplanten
   Laufzahl;
 - H2 auch bei hoher Präzision entscheidbar; das nach §8.6 gewählte Intervall erreicht die simulierte
-  Überdeckung 0,936 (dieselbe Schwelle wie §8.6), notfalls mit kalibrierter Verbreiterung; auch bei
+  Überdeckung 0,936 (dieselbe Schwelle wie §8.6; Bezugswert der Überdeckung offen, §12), notfalls mit
+  kalibrierter Verbreiterung; auch bei
   symmetrischem Zelt geprüft;
 - berichtet, ohne Bedingung: Rate „nicht entscheidbar“, Power gegen Kopplung und Hertz-Kontakt,
   Bestätigungswahrscheinlichkeit von H4; der Anteil der Kampagnen mit mindestens einem |z⁰| > c bei exakter
@@ -929,7 +978,8 @@ Stärke mit der Last wächst; quadratische Kettenkennlinie; Hertzscher Kontakt i
 lastabhängiger Phasenversatz eines Moduls; Wechselwirkung der Antriebe; Zelllage- und
 Zellverstärkungsfehler innerhalb und außerhalb der Unsicherheit aus P0.1. Kriterien:
 
-- Zuordnung: Trefferquote ≥ 0,8 bei der geplanten Laufzahl für 0,1 % Aktorkopplung (Klasse p = 1) und für
+- Zuordnung (Kriterium offen, §12: feste Anker oder Zuordnungsgrenze): Trefferquote ≥ 0,8 bei der geplanten
+  Laufzahl für 0,1 % Aktorkopplung (Klasse p = 1) und für
   eine Kettennichtlinearität mit mindestens 1 mN größtem H1-Residuum (Klasse p = 2); berichtet: Rate einer
   falschen Klasse und von „nicht zuordenbar“, auch für Hertz-Kontakt und lastabhängige Kopplung;
 - H1Z: P(falsifiziert | exakte Superposition oder lineares, zeitinvariantes Artefakt) ≤ 0,05; berichtet:
@@ -938,7 +988,8 @@ Zellverstärkungsfehler innerhalb und außerhalb der Unsicherheit aus P0.1. Krit
   P(unauffällig | exakte Superposition, Kalibrierung innerhalb ihrer Unsicherheit) ≥ 0,8; berichtet: Rate
   „unbestimmt“ und Rate „auffällig“ bei 0,1° und 0,3° Phasenversatz eines Moduls. Die Laufzahl richtet sich
   nicht nach E3. Verfehlt E3 eines der beiden Kriterien in Teil B mit den Pilotkovarianzen, werden die
-  E3-Prüfgrößen nur beschreibend mit Unsicherheit berichtet, ohne dreiwertige Aussage (§8.10). Vor dem
+  E3-Prüfgrößen nur beschreibend mit Unsicherheit berichtet, ohne dreiwertige Aussage (§8.10; Rückfall je
+  Prüfgröße oder für E3 als Ganzes offen, §12). Vor dem
   Einfrieren zeigt die Kalibrierung über die Präzisionsstufen, ab welcher Unsicherheit der Zellharmonischen
   das Kriterium erreichbar ist.
 
@@ -947,7 +998,8 @@ Erfüllt die Kalibrierung vor dem Einfrieren ein Kriterium nicht, werden die Reg
 geänderter Einstellung 2 oder geänderten Punkten I nicht, wird sie nur beschreibend berichtet. Für das
 E3-Kriterium „unauffällig“, das von der erst in Phase 0 bekannten Präzision abhängt, gilt stattdessen der
 Rückfall oben. In Teil B werden die Ergebnisse berichtet; die Regeln bleiben, wie in Teil A festgelegt,
-einschließlich der Regeln für c (§8.4) und den Intervalltyp mit Rückfall (§8.6).
+einschließlich der Regeln für c (§8.4) und den Intervalltyp mit Rückfall (§8.6); offen sind ein Rückfall für H1 und
+die Fassung dieser Regeln (§12).
 
 ### A9.12 Phase 1 im Ablauf
 
@@ -957,10 +1009,12 @@ einschließlich der Regeln für c (§8.4) und den Intervalltyp mit Rückfall (§
   Referenzläufe liegt. Läufe je Kampagne: (N_K + N_I + 8)·n + 8·d, dazu Aufwärm- und Wiederholungsläufe;
   je Block N_K + N_I Konfigurationen, der Referenzlauf der Blockmitte und ein Kontrollsatz aus sieben
   Läufen, je Messtag ein weiterer Kontrollsatz und der Schlussreferenzlauf. In §5.3 (c) steht dafür 18·d
-  (acht Läufe und höchstens zehn Aufwärmläufe je Tag) und der Faktor 1/(1 − p̂). Ohne
+  (acht Läufe und höchstens zehn Aufwärmläufe je Tag) und der Faktor 1/(1 − p̂) (Zeitformel offen, §12: Messzeit
+  der Identifizierbarkeitsläufe). Ohne
   Identifizierbarkeitsläufe wären es (N_K + 5)·n + 5·d.
 - **Phase 0 bei Einstellung 2.** P0.5′, 3·n₀′ Einzelmodulläufe und nach je zwölf Läufen ein Referenzlauf,
-  dazu D2_K in P0.3, die Betriebslastprüfung von P0.4 nach P0.9 und gegebenenfalls P0.12 und die Prüfung
+  dazu D2_K in P0.3, die Betriebslastprüfung von P0.4 nach P0.9 (Zeitpunkt offen, §12) und gegebenenfalls P0.12
+  und die Prüfung
   der Umschaltung eines zweiten Nockensatzes in P0.5′ (A9.2).
 - **Wiederholungsplatz.** Ein vor Beginn des Schlusskontrollsatzes als ungültig erkannter Lauf einer
   Konfiguration wird an einem Platz wiederholt, den der Generator von §6 gleichverteilt unter den offenen
@@ -971,12 +1025,14 @@ einschließlich der Regeln für c (§8.4) und den Intervalltyp mit Rückfall (§
   noch nicht begonnen hat; danach festgestellte Verstöße werden weder wiederholt noch nach S1 geprüft. X′
   wird auch jenseits der Wiederholungsgrenze gemessen und zählt als Wiederholung. S1 greift nur bei einem
   G1-Verstoß von X′.
-- **Kontrollläufe.** Ein aus anderem Grund als G1 ungültiger Kontrolllauf (bei R auch ein unbestätigter
+- **Kontrollläufe.** Ein aus anderem Grund als G1 ungültiger Kontrolllauf (bei R auch ein nicht reproduzierter
   Nullpunktalarm, §8.8) wird sofort wiederholt, höchstens zweimal; ist auch die zweite Wiederholung
   ungültig, wird angehalten und nach §9.2 verfahren. Für L₁′, L₂′, L₃′ gilt das nicht: Nach zwei ungültigen
-  Wiederholungen fehlt der Lauf, und der Block wird fortgesetzt.
+  Wiederholungen fehlt der Lauf, und der Block wird fortgesetzt (Mindestzahl gültiger L′ je Modul offen, §12).
 - **Nach S2.** Die Konfiguration bleibt in den Blöcken und wird weiter gemessen, geht aber in keinen Test
-  ein (§9.1); betrifft S2 ein Lⱼ, ist ŷ¹ ungültig (§8.2), betrifft es ein Lⱼ′, ist ŷ¹′ ungültig. Ein zweites
+  ein (§9.1); betrifft S2 ein Lⱼ, ist ŷ¹ ungültig (§8.2), betrifft es ein Lⱼ′, ist ŷ¹′ ungültig (ob S2 für L′
+  gilt und welche Folge das für die Zuordnung hat,
+  ist offen, §12). Ein zweites
   S2 ohne festgestellten Apparaturfehler beendet Phase 1 (§9.2).
 
 ### A9.13 Zuordnung und E3 im Einzelnen
@@ -987,9 +1043,11 @@ einschließlich der Regeln für c (§8.4) und den Intervalltyp mit Rückfall (§
   und ŷ¹′, Unsicherheiten nach §8.3. F_min − ⟨N⟩ geht nicht ein, weil das Minimum nicht linear von der Kurve
   abhängt.
 - **Anpassungsmaß.** χ²_p = Σ_{i,q} (r′_iq − s^p·r_iq)²/(u′²_iq + s^{2p}·u²_iq) für p = 0, 1, 2, mit
-  m = 6·N_I Termen, verglichen mit dem 95-%-Quantil von χ²(m). Die Terme sind korreliert; ob das Quantil die
+  m = 6·N_I Termen (ob m fest bleibt, wenn ein Punkt von I nicht auswertbar ist, ist offen, §12), verglichen mit
+  dem 95-%-Quantil von χ²(m). Die Terme sind korreliert; ob das Quantil die
   Rate falscher Zuordnungen begrenzt, prüft die Kalibriersimulation (A9.11).
-- **Regel.** Zugeordnet ist Klasse p, wenn χ²_p unter dem Quantil liegt und χ²_{p′} für beide anderen p′
+- **Regel** (Regel und Auslöser offen, §12). Zugeordnet ist Klasse p, wenn χ²_p unter dem Quantil liegt und
+  χ²_{p′} für beide anderen p′
   darüber, gegen ŷ⁰, ŷ⁰′ und gegen ŷ¹, ŷ¹′ dieselbe Klasse; sonst „nicht zuordenbar“. Voraussetzung ist an
   einem Punkt von I ein |z⁰| > c mit gleichsinnigem |z¹| > c (§8.10).
 - **Modulzeiger.** Je Konfiguration Ĉₖ = T(kω)⁻¹·(N₁,ₖ, N₂,ₖ, N₃,ₖ)ᵀ für k = 1, 2 aus den Zellzeigern der
@@ -1008,7 +1066,8 @@ einschließlich der Regeln für c (§8.4) und den Intervalltyp mit Rückfall (§
   auch aus u(Δδⱼ) (normalverteilt, je Modul eine Ziehung für alle Konfigurationen) und aus der Quantisierung
   der Zeitstempel (Rechteckverteilung). Auffällig:
   |x̂| − z_B·u(x̂) > Schwelle, z_B das einseitige Bonferroni-Quantil zu α = 0,05 über alle E3-Prüfungen
-  (zwei je auswertbarer Konfiguration und E3b). Unauffällig: |x̂| + 1,645·u(x̂) ≤ Schwelle für alle Prüfungen.
+  (zwei je auswertbarer Konfiguration und E3b; Zahl der Prüfungen offen, §12). Unauffällig: |x̂| + 1,645·u(x̂) ≤
+  Schwelle für alle Prüfungen.
   Sonst unbestimmt.
 
 ---
@@ -1064,32 +1123,32 @@ Gewählte Zahlenwerte ohne Messung, je mit einer Zeile Begründung.
 |---|---|---|
 | α = 0,05 je Familie | §3, §8.4 | übliche Irrtumswahrscheinlichkeit; jede Hypothese wird für sich berichtet |
 | 25 % der statischen Zelllast als Mindestabstand | §5.3 (a) | Nahe am Abheben wird ein realer Kontakt nichtlinear, und im Liftoff-Bereich ist der Zustand nicht eindeutig |
-| Bestimmung von M: Konvention (a) Bauteilwägung oder (b) statische Zelllast (offen, §12) | §3, §5.2 P0.2; A1, A9.2 | (a) macht M zur Eigenschaft des Körpers und braucht wahre Massen, V_Mat und V_innen; (b) misst die statische Last mit denselben Zellen und derselben Kalibrierung wie ⟨N⟩, ohne Annahme über Volumina und Dichten. In keinem Fall wird von M = Σ_c F_c,stat/g ein Auftrieb noch einmal abgezogen |
+| Bestimmung von M: Konvention (a) Bauteilwägung oder (b) statische Zelllast (offen, §12) | §3, §5.2 P0.2; A1, A9.2 | (a) macht M zur Eigenschaft des Körpers und braucht wahre Massen, V_Mat und V_innen; (b) misst die statische Last mit denselben Zellen und derselben Kalibrierung wie ⟨N⟩, ohne Annahme über Volumina und Dichten für die statische Last; statische Nebenkräfte (Kabel, Ladung) und der Luftzustand bei P0.2 gehen aber in M ein, und M gilt für den Zustand vor der Endmontage. Für die träge Masse M + m_L braucht (b) V_außen (m_L = ρ_L·V_außen + m_hyd), (a) V_innen. In keinem Fall wird von M = Σ_c F_c,stat/g ein Auftrieb noch einmal abgezogen |
 | Faktor 2 Resonanzabstand (k·f ≤ f₁/2) | §5.3 (b) | begrenzt \|H\| auf 1,33 und die Frequenzempfindlichkeit auf 0,67 (A6) |
-| Δ_q = 0,25·D_q | §8.5 PB1 | Eine Bestätigung muss die vorhergesagte Struktur auf ein Viertel auflösen, nicht nur ihr Vorhandensein zeigen |
+| Δ_q = 0,25·D_q (Faktor und Schätzung offen, §12) | §8.5 PB1 | Eine Bestätigung muss die vorhergesagte Struktur auf ein Viertel auflösen, nicht nur ihr Vorhandensein zeigen |
 | t_eq = t(0,95; ν_eff), ohne Mehrfachkorrektur | §8.5 PB1 | TOST je Test auf α = 0,05; das Intersection-Union-Prinzip hält α für die gemeinsame Bestätigung (A8) |
 | Regel für Δ_rel: Vorschlag Δ_rel,q = Δ_q (offen, §12) | §8.5 | kleinster Wert, mit dem „äquivalent“ und „relevant abweichend“ disjunkt sind (A8) |
 | D für Re und Im N_k: Fassung A oder B (offen, §12) | §8.5 | A: bisherige Fassung; B: Durchmesser der Zeigermenge, analog zur Spannweite bei F_min (A8) |
-| c von H1 als 95-%-Quantil von max\|z⁰\|, in beide Richtungen | §8.4 | hält die Rate „mindestens ein \|z⁰\| > c“ bei 0,05 trotz korrelierter Tests (A8) |
-| Faktor 3 in n_min ≥ (3/SNR)² | §5.4 | H2-Halbbreite etwa 3/(SNR·√n) für n₀ = n in einer Vorabsimulation des Zeltfits mit weißem Restrauschen außerhalb des Repositorys; Werkzeug 8 wiederholt sie |
-| Δ = 0,10·\|N̂_k⁽ʲ⁾\| | §8.5 PB3 | Ein Modelltest mit gröberer Auflösung unterscheidet nichts |
-| Halbbreite ≤ 1° | §3 H2 | halbe Schrittweite des Schnitts |
+| c von H1 als 95-%-Quantil von max\|z⁰\|, in beide Richtungen (Rauschmodelle für c offen, §12) | §8.4 | hält die Rate „mindestens ein \|z⁰\| > c“ bei 0,05 trotz korrelierter Tests (A8) |
+| Faktor 3 in n_min ≥ (3/SNR)² (Fassung der Bedingungen offen, §12) | §5.4 | H2-Halbbreite etwa 3/(SNR·√n) für n₀ = n in einer Vorabsimulation des Zeltfits mit weißem Restrauschen außerhalb des Repositorys; Werkzeug 8 wiederholt sie |
+| Δ = 0,10·\|N̂_k⁽ʲ⁾\| (Rolle offen, §12: Entscheidungslogik von H2 und H3) | §8.5 PB3 | Ein Modelltest mit gröberer Auflösung unterscheidet nichts |
+| Halbbreite ≤ 1° (Rolle offen, §12: Entscheidungslogik von H2) | §3 H2 | halbe Schrittweite des Schnitts |
 | (c₄ + 1,645)·u_c,erw für V | §8.5 | bestätigt ein zutreffendes Vorzeichen an der Schwelle mit etwa 93 % je Punkt (n_min = 20, A8) |
 | k_max ≥ 3 | §5.4 | H1 prüft N₃ |
 | 0,1·u_c,erw für die Frequenztoleranz | G3 | systematischer Beitrag klein gegen die Unsicherheit |
-| Rauschbias: halbe Spannweite über die Rauschmodelle als Rechteckverteilung | §5.4, A9.5 | Modellunsicherheit des Bias ohne Annahme über das wahre Rauschmodell |
-| 0,1·Δ_q für Laststelle, Querkraft, statischen Nebenschluss | §5.2 | lineare, zeitinvariante Einflüsse erzeugen keine H1-Signatur (A2.1); klein gegen die Äquivalenzgrenze |
-| 0,3·u_c,erw für Superpositionsfehler der Elektronik, Umkehrspanne, Wechselwirkung der Antriebe in D2_K, Schein-Oberwellen in P0.4, gerade Harmonische in P0.12, Empfindlichkeitsänderung (G7) | §5.2, G7 | nichtlineare oder zeitveränderliche Einflüsse können eine H1-Signatur erzeugen; 0,3·u_c,erw ist klein gegen die Nachweisgrenze c·u_c (Schwelle für P0.4 und P0.12 offen, §12) |
+| Rauschbias: halbe Spannweite über die Rauschmodelle als Rechteckverteilung (Rauschmodelle offen, §12) | §5.4, A9.5 | Modellunsicherheit des Bias ohne Annahme über das wahre Rauschmodell |
+| 0,1·Δ_q für Laststelle, Querkraft, statischen Nebenschluss (offen, §12) | §5.2 | lineare, zeitinvariante Einflüsse erzeugen keine H1-Signatur (A2.1); klein gegen die Äquivalenzgrenze |
+| 0,3·u_c,erw für Superpositionsfehler der Elektronik, Umkehrspanne, Wechselwirkung der Antriebe in D2_K, Schein-Oberwellen in P0.4, gerade Harmonische in P0.12, Empfindlichkeitsänderung (G7) (Nachweisform und Folge offen, §12; Fassung von D2_K offen, §12) | §5.2, G7 | nichtlineare oder zeitveränderliche Einflüsse können eine H1-Signatur erzeugen; 0,3·u_c,erw ist klein gegen die Nachweisgrenze c·u_c (Schwelle für P0.4 und P0.12 offen, §12) |
 | \|D2_k\| ≤ 0,01·min_j \|N̂_k⁽ʲ⁾\| für D2ⱼ | §5.2 | ein Zehntel der H3-Grenze; ein D2-Signal eines einzelnen Antriebs betrifft H1 nicht, weil es in den Einzelmodulläufen mitgemessen wird |
 | ε_ctrl = 3·σ̂_ref bzw. 3·σ̂_betr | §8.8 | Form aus Einordnung §4; seltene Fehlausschlüsse (A8) |
 | Nullpunktalarm 3·√(4/3)·σ̂_ref | §8.8 | dieselbe Schwelle in Standardabweichungen wie G1 für die Differenz zweier Referenzläufe |
 | mindestens 42 Referenzläufe | §4, P0.7 | mindestens 40 Leave-one-out-Werte für σ̂_ref |
 | Referenzlauf nach je zwölf anderen Läufen in Phase 0 | P0.7 | etwa der Abstand in Phase 1 (Blockmitte, Kontrollsätze) |
 | 5·σ für F_LO | §4 | Rauschen löst praktisch keinen Liftoff-Befund aus |
-| c_S mit höchstens 5 % Fehlalarm je Kontrollsatz | §9.2 S3 | ein Kontrollsatz je Block; Bestätigung durch Wiederholung senkt die Rate weiter |
+| c_S mit höchstens 5 % Fehlalarm je Kontrollsatz | §9.2 S3 | ein Kontrollsatz je Block; Reproduktion durch Wiederholung senkt die Rate weiter |
 | σ_tol = dreifacher Median von σⱼ der Pilotläufe | G2 | robust gegen einzelne Ausreißer der Pilotläufe |
 | σ_Δ = 1,4826·MAD | G4 | robuste Standardabweichung aus allen Läufen einer Art, vor jeder Ausschlussentscheidung bestimmbar |
-| ΔT aus höchstens 0,1 % Empfindlichkeitsänderung und höchstens 0,3·u_c,erw in jeder Größe | G7 | klein gegen Δ_q und gegen die Nachweisgrenze; Antriebstemperaturen wirken über die Phase und werden von G2 erfasst |
+| ΔT aus höchstens 0,1 % Empfindlichkeitsänderung und höchstens 0,3·u_c,erw in jeder Größe (Form des Temperaturfensters offen, §12) | G7 | klein gegen Δ_q und gegen die Nachweisgrenze; Antriebstemperaturen wirken über die Phase und werden von G2 erfasst |
 | δφ_tol = 0,5° | G2 | ein Viertel der Schrittweite des Schnitts; die Vorhersage verwendet ohnehin die gemessenen Zeiger |
 | u(Δδⱼ) ≤ 0,1° | P0.5 | klein gegen δφ_tol und die H2-Halbbreite |
 | Zeitstempel-Quantisierung ≤ 0,01° | §5.1 | vernachlässigbar gegen u(Δδⱼ) |
@@ -1102,7 +1161,7 @@ Gewählte Zahlenwerte ohne Messung, je mit einer Zeile Begründung.
 | jeder Pilotabstand mindestens 10° von 120° | §5.4, A7 | keine Pilotkonfiguration ist zu einem Schnittpunkt äquivalent, auch nicht bei Phasenfehlern weit über δφ_tol; kein physikalisches Abstandsmaß |
 | Verdopplung von T_ramp bei Liftoff in der Rampe | §5.4 | endliche, eindeutige Anpassung |
 | mindestens 20 Einzelmodulläufe je Modul vor der Planung | P0.8 | Streuungen für die Planungssimulation |
-| Bestätigungswahrscheinlichkeit 0,8 bei oberer 80-%-Grenze der Streuungen | §5.3 (c), §5.4 | übliche Power, abgesichert gegen zu kleine Pilotstreuungen |
+| Bestätigungswahrscheinlichkeit 0,8 bei oberer 80-%-Grenze der Streuungen (Fassung der Bedingungen offen, §12) | §5.3 (c), §5.4 | übliche Power, abgesichert gegen zu kleine Pilotstreuungen |
 | Reserve r = ⌈n_min·p̂/(1 − p̂)⌉ + 2 | §5.4 | erwartete Ausfälle plus zwei |
 | höchstens zwei Wiederholungen je Konfiguration und Block, je Kontrolllauf | §6 | begrenzt die Blocklänge |
 | Ausnahme G5, G8, G10 bei Liftoff (Kontaktast, S2) | §4, §9.2 | Übersteuerung, äußere Störung und defekte Aufzeichnung sagen nichts über den Kontakt |
@@ -1115,11 +1174,11 @@ Gewählte Zahlenwerte ohne Messung, je mit einer Zeile Begründung.
 | 1000 synthetische Kampagnen je Szenario | §12, A9.11 | Standardfehler 0,0069 bei einer Rate von 0,05 |
 | 10 000 simulierte Datensätze für den kritischen Wert von ε_ctrl | A9.8 | 95-%-Quantil stabil |
 | Prüfschwelle 0,069 für das simulierte c | §8.4 | 0,05 plus zwei Standardfehler, die den Monte-Carlo-Fehler der Prüfung und den Schätzfehler von c (je 1000 Kampagnen) zusammenfassen (A8) |
-| Überdeckungsschwelle 0,936 für die Wahl des H2-Intervalls und als Kriterium | §8.6, A9.6, A9.11 | 0,95 minus zwei Monte-Carlo-Standardfehler bei 1000 Kampagnen |
-| Nominalniveaus 0,96, 0,97, 0,98, 0,99 für die kalibrierte Verbreiterung des H2-Intervalls | §8.6, A9.6 | endliche Liste in Schritten von 0,01; erreicht auch 0,99 die Überdeckung nicht, trägt das Intervall nicht, und H2 ist nicht entscheidbar |
-| Welch-Test mit α = 0,05 | §8.8 | berichtet, ohne Einfluss auf H1–H4 |
+| Überdeckungsschwelle 0,936 für die Wahl des H2-Intervalls und als Kriterium (Bezugswert der Überdeckung offen, §12) | §8.6, A9.6, A9.11 | 0,95 minus zwei Monte-Carlo-Standardfehler bei 1000 Kampagnen |
+| Nominalniveaus 0,96, 0,97, 0,98, 0,99 für die kalibrierte Verbreiterung des H2-Intervalls (Rückfallkette offen, §12) | §8.6, A9.6 | endliche Liste in Schritten von 0,01; erreicht auch 0,99 die Überdeckung nicht, trägt das Intervall nicht, und H2 ist nicht entscheidbar |
+| Welch-Test mit α = 0,05 (Form der Aussage offen, §12: Nullkontroll-Sammeltest) | §8.8 | berichtet, ohne Einfluss auf H1–H4 |
 | Streuungsvergleich für ε_ctrl mit α = 0,05 | §8.8, A9.8 | übliche Irrtumswahrscheinlichkeit; setzt ε_ctrl und damit G1 für alle Läufe |
-| Fitfenster: Vorschlag w = 6° fest (offen, §12); mindestens zwei Punkte je Seite | §8.6, A9.6 | unabhängig von u_c,erw, damit H2 bei hoher Präzision entscheidbar bleibt; drei Punkte je Flanke; ein Zelt braucht zwei Punkte je Flanke |
+| Fitfenster: Vorschlag w = 6° fest (offen, §12); mindestens zwei Punkte je Seite (Vollständigkeit bei Ausfällen offen, §12) | §8.6, A9.6 | unabhängig von u_c,erw, damit H2 bei hoher Präzision entscheidbar bleibt; drei Punkte je Flanke; ein Zelt braucht zwei Punkte je Flanke |
 | Spitzenfehler 0,1° und Raster 0,01° (Alternative zum festen Fenster) | A9.6 | Formfehler des Zelts klein gegen die H2-Halbbreite von 1° |
 | Suchschritt 0,001° | A9.6 | klein gegen die Halbbreite |
 | 1-Hz-Raster für f | §5.3 | endliche Suche; Kraft skaliert mit f² |
@@ -1133,18 +1192,18 @@ Gewählte Zahlenwerte ohne Messung, je mit einer Zeile Begründung.
 | Beispielspalten ν = 9, 19, 29 | A8 | n_min = 10, 20, 30 |
 | Einstellung 2 mit s ≈ 0,5 (Vorschlag, offen, §12) | §5.5 | kleinere Last: Bedingung (a) und G6 bleiben bei linearer Skalierung gewahrt; Residuenverhältnis der drei Klassen 1 : 0,5 : 0,25 (A2.6) |
 | mindestens drei Punkte I, Vorschlag 116°, 120°, 124° (offen, §12) | §5.5 | kleinste Zahl, mit der die Skalierung an mehreren Punkten geprüft wird; um den Triphasik-Punkt, wo F_min auf dem Schnitt am größten ist |
-| n₀′ ≥ 20 Einzelmodulläufe je Modul bei Einstellung 2; L₁′, L₂′, L₃′ in jedem Kontrollsatz | §5.5, §6 | eigene Vorhersage ŷ⁰′ wie in P0.8; ŷ¹′ folgt einer Drift wie ŷ¹ |
+| n₀′ ≥ 20 Einzelmodulläufe je Modul bei Einstellung 2; L₁′, L₂′, L₃′ in jedem Kontrollsatz (Umfang offen, §12) | §5.5, §6 | eigene Vorhersage ŷ⁰′ wie in P0.8; ŷ¹′ folgt einer Drift wie ŷ¹ |
 | Paarläufe: Verzicht (Vorschlag, offen, §12) | §5.5 | trennen die Skalierungsklassen nicht; Zuordnung zu einem Modul über E3 ohne Zusatzläufe; aufgegeben werden Paaradditivität und Zuordnung zu einem Paar |
-| α = 0,05 für das χ²-Quantil der Zuordnung; Trefferquote ≥ 0,8 | §8.10, A9.11, A9.13 | übliche Irrtumswahrscheinlichkeit und Power; die Raten prüft die Kalibriersimulation |
+| α = 0,05 für das χ²-Quantil der Zuordnung; Trefferquote ≥ 0,8 (Anker oder Zuordnungsgrenze offen, §12) | §8.10, A9.11, A9.13 | übliche Irrtumswahrscheinlichkeit und Power; die Raten prüft die Kalibriersimulation |
 | Δ_c,q = Δ_q/3, Δ_c,rel,q = Δ_rel,q/3 für H1Z (Vorschlag, offen, §12) | §8.5 | drei Zellen innerhalb ihrer Grenzen weichen zusammen höchstens um Δ_q ab; unabhängig von der Geometrie |
 | E3a-Schwelle 0,1° (Vorschlag, offen, §12) | §8.10 | gleich der Anforderung an die Profilphase in P0.5, klein gegen δφ_tol = 0,5° und die H2-Halbbreite; u(Δδⱼ) geht in die Unsicherheit ein, „unauffällig“ verlangt deshalb u(Δδⱼ) deutlich unter 0,1° |
 | q_tol = 5,8·10⁻⁴ (Vorschlag, offen, §12) | §8.10 | Wirkung von 0,1° an einem Modul auf die Gegenkomponente (A2.7), passend zur E3a-Schwelle; Differenz gegen die Vorhersage, weil eine absolute Schwelle zulässige konstante Modulunterschiede bewerten würde |
-| P(unauffällig \| exakt) ≥ 0,8 für E3, sonst nur beschreibend | A9.11 | dieselbe Power wie für H1 und die Zuordnung; ohne sie wäre „unbestimmt“ der erwartete Ausgang |
-| Bonferroni über die E3-Prüfungen, einseitig α = 0,05 | §8.10, A9.13 | „auffällig“ soll bei korrekter Funktion selten sein, obwohl viele Konfigurationen geprüft werden |
+| P(unauffällig \| exakt) ≥ 0,8 für E3, sonst nur beschreibend (Schwellen und Rückfall von E3 offen, §12) | A9.11 | dieselbe Power wie für H1 und die Zuordnung; ohne sie wäre „unbestimmt“ der erwartete Ausgang |
+| Bonferroni über die E3-Prüfungen, einseitig α = 0,05 (Zahl der Prüfungen offen, §12) | §8.10, A9.13 | „auffällig“ soll bei korrekter Funktion selten sein, obwohl viele Konfigurationen geprüft werden |
 | Zelllage ≤ 0,1 mm, relative Zellverstärkung ≤ 0,1 % (Ziel) | P0.1 | Beitrag zur E3a-Prüfgröße etwa 0,017° je Zelllagefehler (A2.7, Beispiel G0, Zellradius 0,1 m), klein gegen 0,1° |
 | Spalt ≥ 10 mm oder offene Grundplatte | §5.1 | Quetschfilm-Trägheit (Teil von m_hyd) dann höchstens etwa 8 g, Gleichanteil vernachlässigbar (Tabelle C) |
-| Sinusanregung bei f, 2f, 3f in Höhe der Betriebslast je Zelle, über den Modulpositionen, nach P0.9; Linearitätslauf mit Amplitudenverhältnis 2 | §5.2, P0.4, P0.12 | prüft die Linearität jeder Zelle bei ihrer Last im Betrieb, die erst mit f feststeht; Verhältnis 2 wie in P0.4, gerade Harmonische dann vierfach bei quadratischer Kennlinie |
-| mindestens fünf Umschaltungen je Richtung bei zweitem Nockensatz; Streuung von Δδⱼ ≤ u(Δδⱼ) | P0.5′ | die Umschaltung wird in Phase 1 etwa neunmal je Block nötig; ihre Streuung soll nicht größer sein als die zugelassene Unsicherheit der Profilphase |
+| Sinusanregung bei f, 2f, 3f in Höhe der Betriebslast je Zelle, über den Modulpositionen, nach P0.9 (Zeitpunkt offen, §12); Linearitätslauf mit Amplitudenverhältnis 2 (Zeitpunkt und Bezugsamplitude offen, §12) | §5.2, P0.4, P0.12 | prüft die Linearität jeder Zelle bei ihrer Last im Betrieb, die erst mit f feststeht; Verhältnis 2 wie in P0.4, gerade Harmonische dann vierfach bei quadratischer Kennlinie |
+| mindestens fünf Umschaltungen je Richtung bei zweitem Nockensatz; Streuung von Δδⱼ ≤ u(Δδⱼ) (Kriterium offen, §12) | P0.5′ | die Umschaltung wird in Phase 1 etwa neunmal je Block nötig; ihre Streuung soll nicht größer sein als die zugelassene Unsicherheit der Profilphase |
 
 ---
 
@@ -1211,7 +1270,7 @@ Hauptdokument; A0–A9, Tab. C, Tab. F und Z Anhang.
 | Aufnahmeschwelle für V: 4,881 (n_min = 20), 4,497 (ν → ∞); Bestätigung an der Schwelle etwa 93 % je Punkt (0,932), 95 % für ν → ∞, 23 unabhängige Punkte etwa 0,20 | A8, Tab. F | `python3 -c "from scipy.stats import norm,t,nct; c=t.ppf(1-0.05/23,19); c0=norm.ppf(1-0.05/23); p=nct.sf(c,19,c+1.645); print(round(c+1.645,3), round(c0+1.645,3), round(p,3), round(norm.sf(-1.645),3), round(p**23,2))"` |
 | Standardfehler 0,0069 (eine Rate aus 1000 Kampagnen), 0,0097 (Prüfrate mit aus 1000 Kampagnen geschätztem c); Schwelle 0,069; mit 0,05 plus zwei Standardfehlern nur der Prüfung überschritten in etwa 8 % (0,079) | §8.4; A8, Tab. F | `python3 -c "from scipy.stats import norm; print(round((0.05*0.95/1000)**0.5,4), round((0.05*0.95*2/1000)**0.5,4), round(0.05+2*(0.05*0.95*2/1000)**0.5,3), round(norm.sf(2*(0.05*0.95/1000)**0.5/(0.05*0.95*2/1000)**0.5),3))"` |
 | G1 0,61 % bis 1,5 % je Lauf; S1 über G1 2,5·10⁻⁴ je Lauf; Nullpunktalarm 7,3·10⁻⁴ je Referenzlauf und Kanal; Kampagne ≈ 0,25 (523 G1-Läufe, 42·4 Referenzkanäle), je weiterer Messtag ≈ 0,0066; mit Identifizierbarkeitsläufen ≈ 0,28 (646 G1-Läufe), je weiterer Messtag ≈ 0,007 | §9.2; A8 | `python3 -c "import numpy as np; from scipy.stats import norm; g=np.random.default_rng(1); R=g.standard_normal((400000,42)); s=(R[:,1:-1]-(R[:,:-2]+R[:,2:])/2).std(1,ddof=1); q=lambda v: 2*norm.sf(3*s/v**0.5); p1=(q(2)*q(1.5)).mean(); x,y,z=g.standard_normal((3,s.size)); t=3*(4/3)**0.5*s; p2=((abs(x-z)>t)&(abs(y-z)>t)).mean(); print(float('%.2g'%q(1.5).mean()), float('%.2g'%q(2).mean()), float('%.2g'%p1), float('%.2g'%p2), round(523*p1+168*p2,2), round(3*p1+8*p2,4), round(646*p1+168*p2,2), round(6*p1+8*p2,3))"` |
-| S3: c_S = 3,503 (n₀ⱼ = 20); höchstens 5 % je Kontrollsatz (exakt 0,05); Bestätigung höchstens 9,5·10⁻⁴; 21 Kontrollsätze höchstens 0,020 | §9.2; A8 | `python3 -c "import numpy as np; from scipy.stats import t; g=np.random.default_rng(2); n=2000000; c=t.ppf(1-0.05/42,19); Z=g.standard_normal((n,20)); m=Z.mean(1); u=Z.std(1,ddof=1)*(1+1/20)**0.5; x,y=g.standard_normal((2,n)); a=abs(x-m)>c*u; b=abs(y-m)>c*u; print(round(c,3), round(42*t.sf(c,19),4), round(21*a.mean(),4), float('%.2g'%(21*(a&b).mean())), round(21*21*(a&b).mean(),3))"` |
+| S3: c_S = 3,503 (n₀ⱼ = 20); höchstens 5 % je Kontrollsatz (exakt 0,05); Reproduktion höchstens 9,5·10⁻⁴; 21 Kontrollsätze höchstens 0,020 | §9.2; A8 | `python3 -c "import numpy as np; from scipy.stats import t; g=np.random.default_rng(2); n=2000000; c=t.ppf(1-0.05/42,19); Z=g.standard_normal((n,20)); m=Z.mean(1); u=Z.std(1,ddof=1)*(1+1/20)**0.5; x,y=g.standard_normal((2,n)); a=abs(x-m)>c*u; b=abs(y-m)>c*u; print(round(c,3), round(42*t.sf(c,19),4), round(21*a.mean(),4), float('%.2g'%(21*(a&b).mean())), round(21*21*(a&b).mean(),3))"` |
 | Varianzverhältnis 4/3 (2σ² gegen 1,5σ²) | §8.8; A9.8 | `python3 -c "print(2/(1+0.25+0.25))"` |
 | e⁻¹⁰ ≈ 4,5·10⁻⁵; 57 gepoolte Freiheitsgrade; MAD-Faktor 1,4826 | Tab. F | `python3 -c "import math; from scipy.stats import norm; print(round(math.exp(-10),7), 3*(20-1), round(1/norm.ppf(0.75),4))"` |
 | Aufwärmen: ohne Drift nach zehn Referenzläufen etwa 6·10⁻⁴ ohne zwei aufeinanderfolgende mit Differenz < σ̂_ref (σ̂_ref = √1,5·σ) | A8, Tab. F | `python3 -c "import numpy as np; g=np.random.default_rng(3); R=g.standard_normal((10**6,10)); print(float('%.1g'%(1-(abs(np.diff(R,axis=1))<1.5**0.5).any(1).mean())))"` |
@@ -1221,9 +1280,12 @@ Hauptdokument; A0–A9, Tab. C, Tab. F und Z Anhang.
 | Gleichanteil des Quetschfilms, Skala πρ_LR⁴⟨ż²⟩/(16h²) mit h = 3 mm (ζ fest, μ = 0,4, 10 Hz): K = 10⁶ N/m Einzelmodullauf 2,7·10⁻⁸ N (\|x₁\| = 1,30 µm), synchron 2,4·10⁻⁷ N, beide unter 10⁻⁶ N; K = 10⁵ N/m Einzelmodullauf 3,8·10⁻⁶ N (\|x₁\| = 13,3 µm), synchron 3,4·10⁻⁵ N; Kabelschlaufe 100 N/m · 13,3 µm = 1,33 mN | Tab. C | `python3 -c "import sys;sys.path.insert(0,'code');import linear_solver as L,numpy as np;P,n=L.profile_spectrum();R=(0.04/np.pi)**0.5;w=2*np.pi*10*np.arange(P.size);[print(K,round(1e6*abs(x[1]),2),'%.1e'%(np.pi*1.2*R**4*0.5*np.sum(abs(w*x)**2)/(16*0.003**2)),round(1e3*100*abs(x[1]),2)) for K in (1e6,1e5) for Y in [L.transfer(K,L.c_for(K,0.099228),P.size)[1]] for f in (1/3,1) for x in [2*0.4*L.M*f*P*Y/n]]"` |
 | Auftrieb auf das Außenvolumen ρ_L·g·V_außen = 0,021 / 0,047 N (V_außen = 1,8 / 4 l), 1 % Dichteänderung 0,21 / 0,47 mN (dicht verschlossenes Gehäuse); Elektrostatik σ²A/(2ε₀) = 2,3·10⁻⁵ / 2,3·10⁻³ / 0,23 N (σ = 10⁻⁷ / 10⁻⁶ / 10⁻⁵ C/m², A = 0,04 m²), Modulation ε₀AU²/(2d²) = 0,044 mN (10 cm², 100 V, 1 mm); Kabelschlaufe 100 N/m · 1,30 µm = 0,13 mN; Spitzengeschwindigkeit des Profils 0,24 m/s (Hub 7,69 mm, 10 Hz), Luftwiderstand je Modul 0,035 mN (10 cm², c_w = 1) | §3; Tab. C | `python3 -c "import sys;sys.path.insert(0,'code');import numpy as np;from finesweep import z_egg_zdd;g=9.81;print([round(1.2*g*V,4) for V in (1.8e-3,4e-3)],[round(1e3*0.012*g*V,2) for V in (1.8e-3,4e-3)],['%.2g'%(s*s*0.04/(2*8.854e-12)) for s in (1e-7,1e-6,1e-5)],round(1e3*8.854e-12*1e-3*1e4/2e-6,3),round(1e3*100*1.30e-6,2));t=np.arange(200000)*(0.1/200000);v=np.cumsum(z_egg_zdd(t))*(0.1/200000);v-=v.mean();u=abs(v).max();print(round(u,2),round(1e3*0.5*1.2*1e-3*u*u,3))"` |
 | Auftrieb auf das Materialvolumen und konventioneller Wägewert (Konvention a; M = 0,650 kg, einheitlich Stahl 8000 / Aluminium 2700 / Kunststoff 1200 kg/m³): V_Mat = 0,081 / 0,241 / 0,542 l, ρ_L·g·V_Mat = 0,96 / 2,83 / 6,38 mN, bei 1 % Dichteänderung 0,01 / 0,028 / 0,064 mN (offenes oder belüftetes Gehäuse); konventioneller minus wahrer Wägewert 0 / −0,19 / −0,55 g | §3, P0.2; A1, A9.2, Tab. C | `python3 -c "g=9.81;M=0.65;[print(r,round(1e3*M/r,3),round(1e3*1.2*g*M/r,2),round(1e3*0.012*g*M/r,3),round(1e3*M*(1.2/8000-1.2/r),2)) for r in (8000,2700,1200)]"` |
+| Justierung mit Stahlgewichten bei Konvention (b): Σ_c F_c,stat/g = angezeigte Masse·(1 − ρ_L/(8000 kg/m³)), Faktor 1,5·10⁻⁴, bei M = 0,650 kg 0,96 mN | A9.2, §12 | `python3 -c "print(1.2/8000, round(1e3*0.65*9.81*1.2/8000,2))"` |
+| Belüftetes Gehäuse, Temperaturunterschied ΔT innen–außen bei gleichem Druck: ρ_innen − ρ_L ≈ −ρ_L·ΔT/T; Änderung der statischen Last höchstens ρ_L·g·V_innen/T = 0,072 / 0,161 mN je K (obere Schranke mit V_innen ≤ V_außen = 1,8 / 4 l, T = 293 K) | §12 | `python3 -c "print([round(1e3*1.2*9.81*V/293.15,3) for V in (1.8e-3,4e-3)])"` |
 | Zelllagefehler (Statik der Dreipunktlagerung, Zellradius 0,1 m, G0, Triphasik-Punkt, Rekonstruktion mit nominaler Lage): 1 mm radial −0,662 % am eigenen Modul, −0,165 % und ±0,165° an den Nachbarn; 1 mm tangential 0,29 % und 0,29° an den Nachbarn; 0,1 mm radial 0,0165° (linear) | A2.7, Tab. F | `python3 -c "import numpy as np;a=np.radians([90,210,330]);C=0.1*np.c_[np.cos(a),np.sin(a)];S=lambda p,Q:np.linalg.solve(np.vstack([np.ones(3),Q.T]),np.r_[1,p]);e=np.exp(-1j*np.radians([0,120,240]));[print(np.round(100*(abs(r)-1),3),np.round(-np.degrees(np.angle(r)),3)) for d in (np.r_[np.cos(a[1]),np.sin(a[1])],np.r_[-np.sin(a[1]),np.cos(a[1])]) for Q in [C+np.outer([0,1,0],1e-3*d)] for r in [np.c_[[S(C[j],Q) for j in range(3)]].T@e/e]];print(round(0.165*0.1,4))"` |
 | Gegenkomponente am Triphasik-Punkt: \|R₋₁\|/\|R₊₁\| = 3,3·10⁻³ bei 1 % Amplitude, 5,8·10⁻⁴ bei 0,1° Phase eines Moduls, gleich \|ε\|/3 | §8.10; A2.7, Tab. F | `python3 -c "import numpy as np;th=np.radians([90,210,330]);q=lambda F:(lambda a,b:min(a,b)/max(a,b))(abs((F*np.exp(-1j*th)).sum()),abs((F*np.exp(1j*th)).sum()));e=np.exp(-1j*np.radians([0,120,240]));print('%.1e'%q(e*[1.01,1,1]),'%.1e'%q(e*[np.exp(-1j*np.radians(0.1)),1,1]),'%.1e'%(0.01/3),'%.1e'%(np.radians(0.1)/3))"` |
 | Aufwand der Identifizierbarkeitsläufe: (N_K + N_I + 8)/(N_K + 5) = 1,231 / 1,308 (N_K = 21; N_I = 3 / 5) und 1,214 / 1,286 (N_K = 23); Paarläufe zusätzlich 1,094 bzw. 1,088; Residuenverhältnis bei s = 0,5: 1 : 0,5 : 0,25; Abstand der Klassen p = 1 und 2: s·(1 − s) = 0,25 (s = 0,5), s·(s − 1) = 0,56 (s = 1,4) | §5.5, §6, §12; A2.6, Tab. F | `python3 -c "print([round((k+i+8)/(k+5),3) for k in (21,23) for i in (3,5)], round((21+3+3+8)/(21+3+8),3), round((23+3+3+8)/(23+3+8),3), [0.5**p for p in (0,1,2)], 0.5*(1-0.5), round(1.4*(1.4-1),2))"` |
+| Betrag \|1 + e^{−ikφ₂} + e^{−ik·240°}\| auf dem Schnitt (Residuum einer Kopplung fester relativer Stärke in N_k bei gleichen Modulen proportional dazu), k = 1 / 2 / 3: 100° und 140° 0,347 / 0,684 / 2,646; 116° und 124° 0,070 / 0,140 / 2,985; 120° 0 / 0 / 3 | §12 | `python3 -c "import numpy as np; [print(p,[float(round(abs(1+np.exp(-1j*k*np.radians(p))+np.exp(-1j*k*np.radians(240))),3)) for k in (1,2,3)]) for p in (100,116,120,124,140)]"` |
 | Betriebslast je Zelle (starr, μ = 0,4, 10 Hz, Module über den Zellen): Einzelmodul-Harmonische 1,30 / 0,43 / 0,18 N für k = 1, 2, 3; \|N₁\| auf dem Schnitt höchstens 0,45 N, mittig angeregt je Zelle 0,15 N, Verhältnis 8,6 (etwa ein Neuntel) | §5.2, §12; A9.2 | `python3 -c "import sys;sys.path.insert(0,'code');import linear_solver as L,numpy as np;P,n=L.profile_spectrum();p=np.radians(np.arange(100,141,2));N=[abs(2*0.4*L.M*P[k]/3/n) for k in (1,2,3)];S=abs(2*0.4*L.M*P[1]*(1+np.exp(-1j*p)+np.exp(-1j*np.radians(240)))/3/n).max();print([round(float(x),2) for x in N],round(float(S),2),round(float(S)/3,2),round(float(3*N[0]/S),1))"` |
 | Umschaltungen eines zweiten Nockensatzes bei Randomisierung nach §6 (R ohne Einstellung, n = 20, ein Messtag, 5000 Kampagnen): im Mittel 189 bzw. 188 je Kampagne (N_K = 23 bzw. 21, N_I = 3), 9,5 bzw. 9,4 je Block; N_I = 5: 12,4 je Block; Läufe bei Einstellung 2 je Block und Kontrollsatz zusammenhängend: 4,0 je Block | §5.2, §5.5, §6, §12; A9.2, Tab. F | `python3 -c "import numpy as np;g=np.random.default_rng(7);c=lambda q:int((np.diff(np.concatenate(q))!=0).sum());F=lambda NK,NI:c([g.permutation([1]*3+[2]*3)]+[a for _ in range(20) for a in (g.permutation([1]*NK+[2]*NI),g.permutation([1]*3+[2]*3))]);G=lambda m,r:(lambda i:[1]*i+[2]*m+[1]*(r-i))(int(g.integers(0,r+1)));B=lambda NK,NI:c([G(3,3)]+[a for _ in range(20) for a in (G(NI,NK),G(3,3))]);z=[float(np.mean([F(k,i) for _ in range(5000)])) for k,i in ((23,3),(21,3),(23,5))];b=float(np.mean([B(23,3) for _ in range(5000)]));print([round(v) for v in z],[round(v/20,1) for v in z],round(b/20,1))"` |
 | Gemeinsame Versorgung als Aktorkopplung (Beispiel A4, k_max = 9): 0,1 % Amplitude von Modul 1 / 2 / 3 nur in den Kombinationsläufen → 1,02 / 1,01 / 1,02 mN größtes \|ΔF_min\| auf dem Schnitt; aller Module 1,22 mN | Tab. C | `python3 -c "import sys;sys.path.insert(0,'code');import linear_solver as L,numpy as np;P,n=L.profile_spectrum();k=np.arange(1,10);N=2*0.4*L.M*P[1:10]/3/n;t=2*np.pi*np.arange(2000)/2000;c=lambda X:(X.real@np.cos(np.outer(k,t))-X.imag@np.sin(np.outer(k,t))).min();f=lambda p,a:c(a[0]*N+a[1]*N*np.exp(-1j*k*np.radians(p))+a[2]*N*np.exp(-1j*k*np.radians(240)));p=np.arange(100,141,2.);F=np.array([f(x,(1,1,1)) for x in p]);print([round(1e3*float(abs(np.array([f(x,a) for x in p])-F).max()),2) for a in ((1.001,1,1),(1,1.001,1),(1,1,1.001),(1.001,)*3)])"` |
