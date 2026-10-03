@@ -65,7 +65,8 @@ KONV_SCHRANKE und KONV_REST (Zeitpunkte 1e-9 s, Kräfte 1e-6 relativ, gleiche Er
 Rest 1e-12 / 1e-10 / 1e-6 N). Die Absicht der Δt/2-Kontrolle prüft rk4_festschritt() (Schema der Engine,
 Δt = T/2000 … T/16000) an denselben Fällen. Befund: Geschlossen ändern h × 2 … 1/8 Zeitpunkte um ≤ 4e-16 s und
 Kräfte um ≤ 1e-14 relativ. solve_ivp konvergiert für Kelvin-Voigt etwa mit Ordnung 1 in rtol gegen die geschlossene
-Lösung (rtol 1e-11: ≤ 7e-13 s, ≤ 2e-11 relativ). Für Hunt-Crossley fehlt eine geschlossene Lösung; Referenz ist
+Lösung (Hüpforbits, rtol 1e-11: ≤ 7e-13 s, ≤ 2e-11 relativ; im steifen Dauerkontakt begrenzt atol die Kraft auf
+≈ 1e-10 relativ, K·1e-15 m ≈ 1,5e-9 N). Für Hunt-Crossley fehlt eine geschlossene Lösung; Referenz ist
 rtol 1e-13, weil DOP853 in rtol nicht monoton konvergiert (rtol 1e-12 ist nicht genauer als 1e-11). Die Änderung
 bei rtol 1e-11 beträgt ≤ 5e-12 s bzw. 2e-10 relativ; der zweite Integrationsweg der Tests bestätigt sie als Fehler
 (≤ 6e-12 s, 2e-10). √|det J| trifft den Liouville-Wert exp(−0,75·α·g·p·T) auf ≤ 1,3e-7 (mit zehnfachem
