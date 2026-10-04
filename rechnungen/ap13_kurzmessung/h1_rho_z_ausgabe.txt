@@ -1,0 +1,10 @@
+(a1) Aufbau() V1-Kandidat G0 (3-FG, K = 1,5e6, zeta = 0,05)                  12.1 ms
+k_max (Vorgabe max(k_b, 3)) = 12
+(a2) loesen(): 21 Schnittpunkte + 3 Piloten, k <= k_max                      55.0 ms
+(a3) loesen(): 3 Einzelmodulläufe                                             5.4 ms
+(a4) Aufbau G60h + loesen (Schnitt, Piloten, Einzel)                         74.5 ms
+Ebene H, A9.5 mit ρ je Replikat, n = n0 = 20, n1 = 21, B = 1000: 0.299 s je Kampagne (max|z| 3.21)
+Ebene H, A9.5 mit ρ je Replikat, n = n0 = 40, n1 = 41, B = 1000: 0.409 s je Kampagne (max|z| 3.04)
+Ebene H, A9.5 mit ρ je Replikat, n = n0 = 80, n1 = 81, B = 1000: 0.613 s je Kampagne (max|z| 2.88)
+Ebene Z, f_s = 6400 Hz, 100 Zyklen, Summe + 3 Zellen, Kette A9.4: 59.5 ms je Lauf; rauschfrei max|Δ| Zellen 1.66e-05 N, Summe 4.88e-05 N
+Ebene Z, f_s = 8500 Hz, 100 Zyklen, Summe + 3 Zellen, Kette A9.4: 76.5 ms je Lauf; rauschfrei max|Δ| Zellen 9.39e-06 N, Summe 2.76e-05 N

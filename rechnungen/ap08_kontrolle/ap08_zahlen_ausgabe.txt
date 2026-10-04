@@ -1,0 +1,12 @@
+p je Test 0.9984831682116866
+neu   nu=inf R = 4.816  nu=19 R = 5.004  nu=37 R = 4.908
+alt   nu=inf R = 6.754  nu=19 R = 8.32
+t_eq inf/19/37 1.645 1.729 1.687
+Fehlbestätigung PB1 alt je Test am Rand: Phi(-c) = 0.00017
+k_max=9: D_F = 0.5173 Delta_F = 0.1293
+k=1: max|N_k| = 0.4504  Delta_A = 0.1126;  Spannweite Re = 0.7440, Im = 0.4832 -> Delta_B Re 0.1860, Im 0.1208; Einzelmodul |N_k| = 1.2970; Kammfaktor max = 0.1158
+k=2: max|N_k| = 0.2924  Delta_A = 0.0731;  Spannweite Re = 0.5020, Im = 0.2401 -> Delta_B Re 0.1255, Im 0.0600; Einzelmodul |N_k| = 0.4274; Kammfaktor max = 0.2280
+k=3: max|N_k| = 0.5533  Delta_A = 0.1383;  Spannweite Re = 0.1181, Im = 0.3155 -> Delta_B Re 0.0295, Im 0.0789; Einzelmodul |N_k| = 0.1844; Kammfaktor max = 1.0000
+nu=inf: notwendig u < Delta/t_eq = 78.6 mN; Auslegung u <= Delta/R = 26.9 mN; N1 (A): 23.4 mN
+nu=19: notwendig u < Delta/t_eq = 74.8 mN; Auslegung u <= Delta/R = 25.8 mN; N1 (A): 22.5 mN
+Überdeckungsschwelle 0,95 - 2 SE(1000): 0.936

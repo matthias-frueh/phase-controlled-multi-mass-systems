@@ -1,6 +1,8 @@
 # Rechnungen der Gesamtprojektanalyse 10/2026
 
-Rechen- und Prüfskripte mit ihren gespeicherten Ergebnissen aus der Gesamtprojektanalyse vom 1. bis 2. Oktober 2026.
+Rechen- und Prüfskripte mit ihren gespeicherten Ergebnissen aus der Gesamtprojektanalyse vom 1. bis 2. Oktober 2026,
+dazu die Kurzmessungen zum Plan des Pipelinetests und die Kontrollrechnung zur Entwurfsfassung der Entscheidungsregeln
+(`ap13_kurzmessung/`, `ap08_kontrolle/`, Stand 02.10.2026).
 **Alles ist Simulation oder Analytik, keine Messdaten.** Jede Gruppe liegt in einem eigenen Ordner mit den Skripten,
 den Ausgaben des ursprünglichen Laufs (`<skript>_ausgabe.txt` bzw. `.out`, dazu CSV, JSON, NPZ) und dem
 Protokoll `PROTOKOLL.md`, das die Befunde mit den Rechnungen verknüpft. Die Unterordner `verifikation/` enthalten
@@ -16,7 +18,8 @@ Lizenz: Skripte MIT ([`../LICENSE`](../LICENSE)); Protokolle, Ausgaben und Daten
   `code/linear_solver.py` und `code/pcmms_v3a_phasen_sweep.py` sind seit diesem Stand unverändert; die Daten
   `data/sweep_19x19.csv` und `data/finesweep_2deg_120_240.csv` ebenso. Die später hinzugekommenen Werkzeuge
   `code/auslegung.py`, `code/ereignisloeser.py` und `code/einzugsgebiete.py` wurden hier nicht benutzt; sie setzen
-  Befunde dieser Rechnungen um (3-FG-Zellmodell, ereignisgenauer Löser, Attraktorkarten).
+  Befunde dieser Rechnungen um (3-FG-Zellmodell, ereignisgenauer Löser, Attraktorkarten). Nur `ap13_kurzmessung/`
+  benutzt `code/auslegung.py` und `code/ereignisloeser.py`, im Stand vom 02./03.10.2026 (vor PR #14).
 - **Dokumentstand der Rechnungen:** Präregistrierung v2 vom 25./28.09.2026, Arbeitspapier v2.4, Formelverzeichnis
   v2.7. Die Präregistrierung ist seither überarbeitet (PR #14: Entscheidungsregeln als Arbeitsfestlegungen, M nach
   Konvention (b)); die Vorschläge in `statistik/PROTOKOLL.md` sind dort teilweise eingegangen. Maßgeblich ist der
@@ -149,11 +152,31 @@ Prüfung der vorhandenen Modelle. Das „Egg“-Profil von Linie B ist nicht das
 | Abhängigkeiten | `docs/arbeitspapier/`, `docs/formelverzeichnis/`, `docs/literaturabgleich_2026-09-12.md`; die Dissertation v2.1 liegt nicht im Repository, der Vergleich wird übersprungen und gemeldet. Die gespeicherte Ausgabe stammt vom vollständigen Lauf gegen den Stand `cd7be6a`; `references.bib` ist seither bereinigt (PR #13), ein Neustart meldet deshalb weniger fehlende Felder |
 | Grenzen | keine Websuche, keine Neuheitsaussage; nur formale Prüfung des Bestands |
 
+### `ap13_kurzmessung/` – Kurzmessungen zum Plan des Pipelinetests (AP-13)
+
+| | |
+|---|---|
+| Zweck | Laufzeiten und Plausibilität der Bausteine einer synthetischen Kampagne (Aufbau des V1-Kandidaten, Kampagne auf Ebene der Harmonischen mit Bootstrap, Lauf auf Zeitreihenebene, ereignisgenauer Löser), exakter Zeltfit nach A9.6 gegen Vollraster und unabhängige Fassung, H2-Kampagne, Hertz-Stressszenario; Grundlage von Abschnitt 4.1 in [`../docs/plan_ap13_pipelinetest.md`](../docs/plan_ap13_pipelinetest.md). Nur Planungszahlen |
+| Start | siehe [`ap13_kurzmessung/README.md`](ap13_kurzmessung/README.md); `OMP_NUM_THREADS=1` für vergleichbare Laufzeiten |
+| Abhängigkeiten | `code/auslegung.py`, `code/ereignisloeser.py`, `code/linear_solver.py`, `code/finesweep.py` |
+| Parameter | V1-Kandidat G0 aus `auslegung.py` (k_max = 12), Stufe L2, n = n₀ = 20, n₁ = 21; A4-Beispiel für den Hertz-Kontakt |
+| Grenzen | Laufzeiten maschinenabhängig (±20 %); Rauschmodelle sind Annahmen; Code-Stand vor PR #14 |
+
+### `ap08_kontrolle/` – Kontrollrechnung zur Entwurfsfassung der Entscheidungsregeln (AP-08)
+
+| | |
+|---|---|
+| Zweck | Fehlerraten der Entwurfsregel für H1 (Äquivalenztest, Mindesteffekttest, simuliertes c) gegen die registrierte Regel vom 25.09.2026 im A4-Beispiel über die Präzisionsstufen L0–L5; Zahlen der Entwurfstexte; Fassung A gegen B. Die Regel ist seit PR #14 als Arbeitsfestlegung in der Präregistrierung v2 |
+| Start | `sh run_ap08.sh 0 1 2 3 4 5` (je Stufe ≈ 2–3 min), `sh run_ap08_rand.sh 0 1 2 3`, `ap08_zahlen.py`, `ap08_durchmesser.py`; siehe [`ap08_kontrolle/README.md`](ap08_kontrolle/README.md) |
+| Abhängigkeiten | `code/linear_solver.py` |
+| Parameter | A4-Beispiel (starr, μ = 0,4, 10 Hz, k_max = 9), σ_h = 0,11 mN, n = n₀ = 20, n₁ = 21, B = 200, 400 Kalibrier- und 300 Szenariokampagnen je Stufe |
+| Grenzen | nur A4-Beispiel mit identischen Modulen, multiplikative Abweichungen, B = 200; keine Registrierungszahl |
+
 ## Nicht übernommen
 
 - Lesekorpus, Evidenzmatrix und Zwischenberichte der Analyse (Phasen P1, P4; Arbeitsdokumente, kein Rechenmaterial).
-  Hardwarekonzepte, der Plan des Pipelinetests und die Übersicht der Arbeitspakete folgen in einem eigenen
-  Dokumentpaket.
+  Konzepte, Plan des Pipelinetests und Bearbeitungsstand der Arbeitspakete liegen in `docs/`
+  ([`../docs/overview.md`](../docs/overview.md)).
 - Rohdaten über 2 MB (oben je Gruppe genannt, zusammen 232 MB) und drei leere Fehlprotokolle eines Fehlaufrufs.
 - Dokumente außerhalb des Repositorys, gegen die Aussagen geprüft wurden: in den Protokollen nur als
   „(Quelle außerhalb des Repositorys)“ gekennzeichnet.

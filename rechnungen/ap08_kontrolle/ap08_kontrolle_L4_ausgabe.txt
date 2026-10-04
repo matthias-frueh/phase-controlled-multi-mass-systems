@@ -1,0 +1,10 @@
+[  16.3 s] L4 mech 6 %/0,6°: c_sim(z0) = 3.877, c_sim(z1) = 3.837, c_B ≈ 3.952
+[  29.1 s] L4 exakt    0.000: neu A best 0.170 fals 0.000 (c_B 0.000) | B best 1.000 fals 0.000 | beide 0.000/0.000 | sig beide 0.000 | alt best 0.000 fals 0.000
+[  42.0 s] L4 kopplung 0.010: neu A best 0.180 fals 0.000 (c_B 0.000) | B best 1.000 fals 0.000 | beide 0.000/0.000 | sig beide 0.007 | alt best 0.000 fals 0.007
+[  54.2 s] L4 kopplung 0.030: neu A best 0.237 fals 0.000 (c_B 0.000) | B best 0.980 fals 0.000 | beide 0.000/0.000 | sig beide 0.510 | alt best 0.000 fals 0.463
+[  67.2 s] L4 kopplung 0.100: neu A best 0.000 fals 0.000 (c_B 0.000) | B best 0.000 fals 0.000 | beide 0.000/0.000 | sig beide 1.000 | alt best 0.000 fals 1.000
+[  79.6 s] L4 kopplung 0.106: neu A best 0.000 fals 0.000 (c_B 0.000) | B best 0.000 fals 0.000 | beide 0.000/0.000 | sig beide 1.000 | alt best 0.000 fals 1.000
+[  91.9 s] L4 kopplung 0.200: neu A best 0.000 fals 1.000 (c_B 1.000) | B best 0.000 fals 1.000 | beide 0.000/0.000 | sig beide 1.000 | alt best 0.000 fals 1.000
+[ 104.7 s] L4 kopplung 0.300: neu A best 0.000 fals 1.000 (c_B 1.000) | B best 0.000 fals 1.000 | beide 0.000/0.000 | sig beide 1.000 | alt best 0.000 fals 1.000
+[ 117.2 s] L4 N2       0.030: neu A best 0.227 fals 0.000 (c_B 0.000) | B best 1.000 fals 0.000 | beide 0.000/0.000 | sig beide 0.003 | alt best 0.000 fals 0.000
+[ 129.6 s] L4 drift    0.030: neu A best 0.260 fals 0.000 (c_B 0.000) | B best 0.990 fals 0.000 | beide 0.000/0.000 | sig beide 0.007 | alt best 0.000 fals 0.003

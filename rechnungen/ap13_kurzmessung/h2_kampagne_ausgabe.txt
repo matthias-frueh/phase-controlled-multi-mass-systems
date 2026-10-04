@@ -1,0 +1,9 @@
+k_max = 12; V1-G0, L2, n = n0 = 20, n1 = 21
+w =  6° (7 Punkte), B = 1000, drei Fits je Replikat: 0.15 s je Kampagne; Intervall gegen ŷ⁰ [-0.194, +0.000]°
+w =  6° (7 Punkte), B = 1000, drei Fits je Replikat, mit Jackknife (BCa): 0.20 s je Kampagne; Intervall gegen ŷ⁰ [-0.077, +0.119]°
+w =  8° (9 Punkte), B = 1000, drei Fits je Replikat: 0.17 s je Kampagne; Intervall gegen ŷ⁰ [-0.041, +0.010]°
+w =  8° (9 Punkte), B = 1000, drei Fits je Replikat, mit Jackknife (BCa): 0.26 s je Kampagne; Intervall gegen ŷ⁰ [-0.001, +0.001]°
+w = 20° (21 Punkte), B = 1000, drei Fits je Replikat: 0.39 s je Kampagne; Intervall gegen ŷ⁰ [+0.000, +0.001]°
+w = 20° (21 Punkte), B = 1000, drei Fits je Replikat, mit Jackknife (BCa): 0.70 s je Kampagne; Intervall gegen ŷ⁰ [+0.000, +0.001]°
+zum Vergleich Vollraster, w = 6°, B = 1000, ohne Jackknife: 8.4 s je Kampagne
+Plausibilität w = 6°, B = 400, 100 Kampagnen: Anteil 0 ∈ [a⁰, b⁰] = 0.99, 0 ∈ [a¹, b¹] = 0.98

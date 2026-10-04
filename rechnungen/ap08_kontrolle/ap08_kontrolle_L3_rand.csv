@@ -1,0 +1,3 @@
+level,rauschen,szenario,x,nkamp,c_sim0,c_sim1,best_A,fals_A,beide_A,best_B,fals_B,beide_B,sig_beide,fals_A_cB,sig_beide_cB,alt_fals,alt_best
+3,"mech 3 %/0,3°",kopplung,0.10638,400,3.8886998098066896,3.72686055539746,0.0,0.0,0.0,0.0,0.0,0.0,1.0,0.0,1.0,1.0,0.0
+3,"mech 3 %/0,3°",kopplung,0.115,400,3.8886998098066896,3.72686055539746,0.0,0.0,0.0,0.0,0.0,0.0,1.0,0.0,1.0,1.0,0.0

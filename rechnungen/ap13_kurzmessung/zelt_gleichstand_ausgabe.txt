@@ -1,0 +1,2 @@
+w=8 sym i=198: φ*_kand=119.961 RSS=3.626944e-05, φ*_prüf=128.046 RSS=8.030907e-02, rel=-1.00e+00
+571 Abweichungen; Prüferfassung mit relativ kleinerer RSS (> 1e-9) in 0; größtes (RSS_kand − RSS_prüf)/RSS = 5.22e-12

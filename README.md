@@ -2,7 +2,7 @@
 
 **Phase-Controlled Multi-Mass Systems**\
 Matthias Früh · Gravidon Systemics Research · ORCID [0009-0005-9984-4207](https://orcid.org/0009-0005-9984-4207)\
-Stand: 28. September 2026, Nachträge 2. Oktober 2026 · Status: prä-experimentell (Simulation; keine Messdaten)
+Stand: 28. September 2026, Nachträge 2. und 4. Oktober 2026 · Status: prä-experimentell (Simulation; keine Messdaten)
 
 ---
 
@@ -53,10 +53,14 @@ ist mit dem Arbeitspapier v2.4 (Abschnitt 4.8) zurückgezogen. Die alten Gleichu
 | [`docs/neuheitsgrad.md`](docs/neuheitsgrad.md) | Was daran nicht neu ist — und was übrig bleibt |
 | [`docs/literaturabgleich_2026-09-12.md`](docs/literaturabgleich_2026-09-12.md) | Abgleich mit der Ratchet-, Tribologie- und Kontaktdynamik-Literatur, 12 Referenzen mit Prüfvermerk des Dokuments, davon 10 mit DOI; noch nicht ins Arbeitspapier übernommen |
 | [`docs/archiv_vermerk_kernhypothese_v3.md`](docs/archiv_vermerk_kernhypothese_v3.md) | Dokumentierter Rückzug der früheren Hypothese |
+| [`docs/konzepte/`](docs/konzepte/) | Konzepte zu Laboraufbau, Messtechnik und Steuerung (Mai und September 2026): Laborplan V1, Mess- und Prüfrahmen, Mehrkanal-Messarchitektur; als Konzepte gekennzeichnet, nicht umgesetzt ([`docs/konzepte/README.md`](docs/konzepte/README.md)) |
+| [`docs/plan_ap13_pipelinetest.md`](docs/plan_ap13_pipelinetest.md) | Plan des Pipelinetests (Werkzeug 8 der Präregistrierung v2): Abnahmekriterien, Architektur, Szenarienkatalog, Rechenbudget; Plan, nicht umgesetzt |
+| [`docs/arbeitsplan_status.md`](docs/arbeitsplan_status.md) | Bearbeitungsstand der Arbeitspakete AP-01 bis AP-30 (vorhanden, vorläufig, in Bearbeitung, noch nicht umgesetzt, später) und offene Entscheidungen des Autors |
 | [`code/`](code/) | Simulations-Engine ([`pcmms_v3a_phasen_sweep.py`](code/pcmms_v3a_phasen_sweep.py)), 2°-Feinsweep ([`finesweep.py`](code/finesweep.py)), analytische Lösung für den liftoff-freien Bereich ([`linear_solver.py`](code/linear_solver.py)), Auslegungswerkzeug für den Arbeitspunkt mit Zellkräften ([`auslegung.py`](code/auslegung.py); Präregistrierung v2 §12, Werkzeug 2), ereignisgenauer Löser mit Einzugsprüfung für Liftoff und Hüpfzustände ([`ereignisloeser.py`](code/ereignisloeser.py)), Attraktorkarten des V1-Kandidaten ([`einzugsgebiete.py`](code/einzugsgebiete.py); Ergebnisse in [`docs/einzugsgebiete_v1_kandidat.md`](docs/einzugsgebiete_v1_kandidat.md)) und Abbildungen ([`plot_figures.py`](code/plot_figures.py)); Tests in [`tests/`](tests/) |
+| [`code/firmware/`](code/firmware/) | Firmware-Muster (ESP32) der Demonstratoren und Tischtests mit zwei Aktoren; keine V1-Firmware ([`code/firmware/README.md`](code/firmware/README.md)) |
 | [`docs/figures/`](docs/figures/) | Abbildungen aus den Simulationsdaten, je in heller und dunkler Fassung |
 | [`data/`](data/) | Simulationsausgaben: 19×19-Phasensweep, 2°-Feinsweep und Attraktorkarten des V1-Kandidaten ([`data/README.md`](data/README.md)) |
-| [`rechnungen/`](rechnungen/) | Rechen- und Prüfskripte der Gesamtprojektanalyse 10/2026 mit gespeicherten Ergebnissen und Protokollen: Auslegung, Engine-Prüfung, Kippmoment, Statistik, Symmetrie und Randterm, Linie-B-Kontrollrechnungen, Bewertungen ([`rechnungen/README.md`](rechnungen/README.md); Simulation und Analytik, historischer Stand 02.10.2026) |
+| [`rechnungen/`](rechnungen/) | Rechen- und Prüfskripte der Gesamtprojektanalyse 10/2026 mit gespeicherten Ergebnissen und Protokollen: Auslegung, Engine-Prüfung, Kippmoment, Statistik, Symmetrie und Randterm, Linie-B-Kontrollrechnungen, Bewertungen, dazu die Kurzmessungen zum Pipelinetest und die Kontrollrechnung zu den Entscheidungsregeln ([`rechnungen/README.md`](rechnungen/README.md); Simulation und Analytik, historischer Stand 02.10.2026) |
 
 Die Präregistrierung v2 für die Messkampagne liegt als [Entwurf](docs/praeregistrierung_v2_entwurf.md) vor (nicht eingefroren, nicht registriert).
 Die Abnahme der Werkzeuge für Auslegung und ereignisgenaue Rechnung dokumentiert [`docs/abnahme_ap02_ap03.md`](docs/abnahme_ap02_ap03.md).
@@ -173,7 +177,9 @@ Spitzen um 40 N, triphasisch bleibt die Kraft in einem schmalen Band um M·g.*
 Die Auslegung eines physischen Aufbaus (Bewegungsprofil, Wägezellen, Kalibrierung bei intermittierendem
 Kontakt) ist davon getrennt und offen; siehe [`docs/expose_2026-09.md`](docs/expose_2026-09.md), Abschnitt „Nächster Schritt“.
 Dort sind die offenen Entscheidungen des Autors zu Antrieb, Hardwarestand, Geometrie, Kontakt und Dämpfung,
-Umfang von E1, Messkette und institutioneller Anbindung mit ihren Optionen aufgeführt.
+Umfang von E1, Messkette und institutioneller Anbindung mit ihren Optionen aufgeführt. Die vorhandenen Konzepte zu
+Laboraufbau, Messtechnik und Steuerung liegen als Konzepte in [`docs/konzepte/`](docs/konzepte/), der
+Bearbeitungsstand aller Arbeitspakete in [`docs/arbeitsplan_status.md`](docs/arbeitsplan_status.md).
 
 ## Nachrechnen
 

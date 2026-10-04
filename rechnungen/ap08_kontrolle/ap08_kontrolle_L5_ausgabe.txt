@@ -1,0 +1,10 @@
+[  16.6 s] L5 mech 10 %/1°: c_sim(z0) = 3.916, c_sim(z1) = 3.864, c_B ≈ 3.952
+[  29.6 s] L5 exakt    0.000: neu A best 0.000 fals 0.000 (c_B 0.000) | B best 0.290 fals 0.000 | beide 0.000/0.000 | sig beide 0.003 | alt best 0.000 fals 0.003
+[  42.9 s] L5 kopplung 0.010: neu A best 0.000 fals 0.000 (c_B 0.000) | B best 0.290 fals 0.000 | beide 0.000/0.000 | sig beide 0.003 | alt best 0.000 fals 0.000
+[  55.7 s] L5 kopplung 0.030: neu A best 0.000 fals 0.000 (c_B 0.000) | B best 0.080 fals 0.000 | beide 0.000/0.000 | sig beide 0.083 | alt best 0.000 fals 0.063
+[  68.6 s] L5 kopplung 0.100: neu A best 0.000 fals 0.000 (c_B 0.000) | B best 0.000 fals 0.000 | beide 0.000/0.000 | sig beide 1.000 | alt best 0.000 fals 1.000
+[  81.0 s] L5 kopplung 0.106: neu A best 0.000 fals 0.000 (c_B 0.000) | B best 0.000 fals 0.000 | beide 0.000/0.000 | sig beide 1.000 | alt best 0.000 fals 1.000
+[  93.1 s] L5 kopplung 0.200: neu A best 0.000 fals 0.773 (c_B 0.717) | B best 0.000 fals 0.853 | beide 0.000/0.000 | sig beide 1.000 | alt best 0.000 fals 1.000
+[ 105.7 s] L5 kopplung 0.300: neu A best 0.000 fals 1.000 (c_B 1.000) | B best 0.000 fals 1.000 | beide 0.000/0.000 | sig beide 1.000 | alt best 0.000 fals 1.000
+[ 118.3 s] L5 N2       0.030: neu A best 0.000 fals 0.000 (c_B 0.000) | B best 0.307 fals 0.000 | beide 0.000/0.000 | sig beide 0.003 | alt best 0.000 fals 0.003
+[ 130.8 s] L5 drift    0.030: neu A best 0.000 fals 0.000 (c_B 0.000) | B best 0.177 fals 0.000 | beide 0.000/0.000 | sig beide 0.000 | alt best 0.000 fals 0.000

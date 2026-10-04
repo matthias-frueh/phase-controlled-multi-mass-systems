@@ -1,0 +1,10 @@
+[  16.3 s] L3 mech 3 %/0,3°: c_sim(z0) = 3.889, c_sim(z1) = 3.727, c_B ≈ 3.953
+[  29.3 s] L3 exakt    0.000: neu A best 1.000 fals 0.000 (c_B 0.000) | B best 1.000 fals 0.000 | beide 0.000/0.000 | sig beide 0.000 | alt best 0.900 fals 0.000
+[  42.5 s] L3 kopplung 0.010: neu A best 1.000 fals 0.000 (c_B 0.000) | B best 1.000 fals 0.000 | beide 0.000/0.000 | sig beide 0.117 | alt best 0.497 fals 0.093
+[  54.6 s] L3 kopplung 0.030: neu A best 1.000 fals 0.000 (c_B 0.000) | B best 1.000 fals 0.000 | beide 0.000/0.000 | sig beide 1.000 | alt best 0.000 fals 1.000
+[  67.2 s] L3 kopplung 0.100: neu A best 0.003 fals 0.000 (c_B 0.000) | B best 0.003 fals 0.000 | beide 0.000/0.000 | sig beide 1.000 | alt best 0.000 fals 1.000
+[  79.8 s] L3 kopplung 0.106: neu A best 0.000 fals 0.000 (c_B 0.000) | B best 0.000 fals 0.000 | beide 0.000/0.000 | sig beide 1.000 | alt best 0.000 fals 1.000
+[  91.8 s] L3 kopplung 0.200: neu A best 0.000 fals 1.000 (c_B 1.000) | B best 0.000 fals 1.000 | beide 0.000/0.000 | sig beide 1.000 | alt best 0.000 fals 1.000
+[ 104.2 s] L3 kopplung 0.300: neu A best 0.000 fals 1.000 (c_B 1.000) | B best 0.000 fals 1.000 | beide 0.000/0.000 | sig beide 1.000 | alt best 0.000 fals 1.000
+[ 116.4 s] L3 N2       0.030: neu A best 1.000 fals 0.000 (c_B 0.000) | B best 1.000 fals 0.000 | beide 0.000/0.000 | sig beide 0.023 | alt best 0.753 fals 0.013
+[ 128.9 s] L3 drift    0.030: neu A best 1.000 fals 0.000 (c_B 0.000) | B best 1.000 fals 0.000 | beide 0.000/0.000 | sig beide 0.013 | alt best 0.000 fals 0.003

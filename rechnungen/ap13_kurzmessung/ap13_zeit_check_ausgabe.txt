@@ -1,0 +1,4 @@
+(c) ein Lauf Zeitreihe (Summe + 3 Zellen, 6,4 kHz, 100 Zyklen) inkl. Kette A9.4       70.2 ms
+max|z| (exakt, 200 Kampagnen, B = 200): Median 3.04, q95 4.25
+c_B(nu=37) = 3.948
+Zeitreihe ohne Rauschen/Jitter gegen Harmonische: max|Δ| Zellen = 1.66e-05 N, Summe = 4.88e-05 N
