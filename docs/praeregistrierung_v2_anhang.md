@@ -1,7 +1,7 @@
 # PCMMS — Präregistrierung v2, Technischer Anhang
 
 **Matthias Früh · ORCID 0009-0005-9984-4207**
-Stand: 28. September 2026, überarbeitet 2. Oktober 2026 (A3, A4: Einordnung der Vorzeichenregel; Entwurf 10/2026: Entscheidungsregeln, Identifizierbarkeit und Kontrollen, A0), 3. Oktober 2026 (A0, A4, Z: Verweise auf das Exposé; A0, A1, A2.1, A9.2, A9.7, Tabellen C und F, Z: Auftrieb und Bestimmung von M; A0, A1, A2.6, A8, A9.2, A9.5, A9.6, A9.8, A9.11–A9.13, Tabelle F, Z: offene Festlegungen gekennzeichnet, Klarstellungen; A0, A1, A4, A8, A9.2, A9.3, A9.6–A9.8, A9.11, Tabelle F, Z: Teilentscheidungen des Autors zur Entscheidungslogik von H2 und H3, zum Niveau der H2-Intervalle, zur Laufzahlbedingung und zur Berichtsform) und 4. Oktober 2026 (A0, A1, A4, A8, A9.3, A9.9, A9.11, Tabellen C und F, Z: Teilentscheidungen des Autors zu Äquivalenzgrenze, Signalmaß und Relevanzgrenze von H1, zur Reichweite und zu Werkzeug 8) · gleichrangiger Teil von Teil A, Entwurf — nicht eingefroren, nicht registriert
+Stand: 28. September 2026, überarbeitet 2. Oktober 2026 (A3, A4: Einordnung der Vorzeichenregel; Entwurf 10/2026: Entscheidungsregeln, Identifizierbarkeit und Kontrollen, A0), 3. Oktober 2026 (A0, A4, Z: Verweise auf das Exposé; A0, A1, A2.1, A9.2, A9.7, Tabellen C und F, Z: Auftrieb und Bestimmung von M; A0, A1, A2.6, A8, A9.2, A9.5, A9.6, A9.8, A9.11–A9.13, Tabelle F, Z: offene Festlegungen gekennzeichnet, Klarstellungen; A0, A1, A4, A8, A9.2, A9.3, A9.6–A9.8, A9.11, Tabelle F, Z: Arbeitsfestlegungen des Autors zur Entscheidungslogik von H2 und H3, zum Niveau der H2-Intervalle, zur Laufzahlbedingung und zur Berichtsform) und 4. Oktober 2026 (A0, A1, A4, A8, A9.3, A9.9, A9.11, Tabellen C und F, Z: Arbeitsfestlegungen des Autors zu Äquivalenzgrenze, Signalmaß und Relevanzgrenze von H1, zur Reichweite und zu Werkzeug 8; A0, A1, A2.1, A8, A9.2, A9.3, A9.7, A9.8, A9.11, Tabellen C und F, Z: Bestimmung von M nach Konvention (b), die Festlegungen vom 3. und 4. Oktober 2026 als vorläufige Arbeitsfestlegungen, Werkzeug 2) · gleichrangiger Teil von Teil A, Entwurf — nicht eingefroren, nicht registriert
 
 Dieser Anhang gehört zu `praeregistrierung_v2_entwurf.md` (Hauptdokument, Dateiname vorläufig, §12; Verweise
 „§“ beziehen sich darauf) und wird mit ihm eingefroren und registriert. Er enthält den Änderungsvermerk
@@ -95,35 +95,35 @@ Linearitätslauf mit einer Nocke und der Faktor der Justiergewichte bei Kalibrie
 planmäßige Umschaltungen eines zweiten Nockensatzes (§5.5) und „reproduziert“ statt „bestätigt“ bei Alarmen
 und Kontrollläufen (§9.2, A8, A9.12, Tabelle F, Z).
 
-**Entwurf 10/2026: Teilentscheidungen (3. Oktober 2026).** Entscheidung des Autors, umgesetzt im Entwurf; sie gilt
-bis zum Einfrieren als Entwurf. (1) H2 und H3 werden wie H1 nach Äquivalenzlogik entschieden (§3, §8.5, §8.6, §8.7,
-§9.3, §9.4): bestätigt, wenn jedes Intervall in der Äquivalenzgrenze liegt (H2: [a⁰, b⁰] und [a¹, b¹] in ±δ_H2; H3:
-r ± t(0,95; ν_eff)·u_c in ±δ_H3·|N̂_k⁽ʲ⁾|, ohne „kein |z| > c“), falsifiziert nur bei nachgewiesener Abweichung über
-der Relevanzgrenze (H2: beide Intervalle auf derselben Seite außerhalb von ±δ_H2; H3: an einem Test |r| − c·u_c über
-der Relevanzgrenze von H3), sonst nicht entscheidbar. „0 ∈ Intervall und Halbbreite ≤ 1°“ entfällt als
-Bestätigungsregel. Grund: Die Bestätigung darf mit wachsender Präzision nicht unwahrscheinlicher werden (A8). (2) Die
-H2-Intervalle bleiben auf dem Niveau 95 % (§8.6, A9.6; Typ und Rückfallkette weiter offen, §12); die Option 90 %
-entfällt, weil die Überdeckungsschwelle 0,936 und die Verbreiterungsstufen für 95 % gebaut sind und der
-Perzentil-Bootstrap bei kleinem n eher zu eng ist. (3) Die Laufzahlplanung von §5.4 strebt gemeinsam P(H1 und H2
-bestätigt | exakte Superposition) ≥ 0,8 an, statt P(H1 bestätigt | exakt) ≥ 0,8 und eine erwartete H2-Halbbreite
-≤ 1° zu verlangen; die Einhaltung prüft Werkzeug 8 (A9.11). Zwei getrennte Bedingungen von je 0,8 ergäben bei
-Unabhängigkeit gemeinsam nur 0,8² = 0,64. Die SNR-Faustregel von §5.4 bleibt als notwendige Bedingung, an δ_H2
-gekoppelt: n_min ≥ (3·1°/(SNR·δ_H2))², bei der Testvariante δ_H2 = 1° wie bisher n_min ≥ (3/SNR)² (A9.2).
-(4) Berichtsform (§8.8, §9.3,
-§9.4, A8, A9.8): Zusatz je Ausgang (H1, H1Z, H2, H3) statt „Abweichung nachgewiesen, kleiner als Δ_rel“, „nicht
-entscheidbar“ stets mit Grund, eine Wortregel für den Nullkontroll-Sammeltest, eine Zeile für gemischte
-Primärausgänge, „widersprechen“ nur zwischen „bestätigt“ und „falsifiziert“ derselben Hypothese; die Oberbegriffe
-bleiben. Grund: Fehllesungen vermeiden; an der Auslegungsgrenze erhielte auch eine wahre Abweichung von 1,25·Δ_rel den
-alten Zusatz „kleiner als Δ_rel“ mit P = 0,986 (ein Test gegen eine Vorhersage, u_c = Δ_q/5,012, Δ_rel = Δ_q,
-c = c_B = 3,583, ν → ∞; Z). Offen bleiben δ_H2 (Testvariante ±1°), δ_H3 (Testvariante ±10 %), die
-Relevanzgrenze von H3 und die Lesart von „H2 auch bei hoher Präzision entscheidbar“ (A9.11); Begründung und
-Prüfung mit Werkzeug 8 vor dem Einfrieren (§12). Bei der
-Testvariante δ_H3 = 10 % wird eine Bestätigung von H3 nicht als Bestätigung des Kontaktgesetzes oder des
+**Entwurf 10/2026: Arbeitsfestlegungen zu H2, H3, Laufzahl und Berichtsform (3. Oktober 2026).** Vorläufige
+Arbeitsfestlegung des Autors (Status: Eintrag vom 4. Oktober 2026 zur Bestimmung von M), umgesetzt im Entwurf. (1)
+H2 und H3 werden wie H1 nach Äquivalenzlogik entschieden (§3, §8.5, §8.6, §8.7, §9.3, §9.4): bestätigt, wenn jedes
+Intervall in der Äquivalenzgrenze liegt (H2: [a⁰, b⁰] und [a¹, b¹] in ±δ_H2; H3:
+r ± t(0,95; ν_eff)·u_c in ±δ_H3·|N̂_k⁽ʲ⁾|, ohne „kein |z| > c“), falsifiziert nur bei nachgewiesener Abweichung
+über der Relevanzgrenze (H2:
+beide Intervalle auf derselben Seite außerhalb von ±δ_H2; H3: an einem Test |r| − c·u_c über der Relevanzgrenze von
+H3), sonst nicht entscheidbar. „0 ∈ Intervall und Halbbreite ≤ 1°“ entfällt als Bestätigungsregel. Grund: Die
+Bestätigung darf mit wachsender Präzision nicht unwahrscheinlicher werden (A8). (2) Die H2-Intervalle bleiben auf
+dem Niveau 95 % (§8.6, A9.6; Typ und Rückfallkette weiter offen, §12); die Option 90 % entfällt, weil die
+Überdeckungsschwelle 0,936 und die Verbreiterungsstufen für 95 % gebaut sind und der Perzentil-Bootstrap bei kleinem
+n eher zu eng ist. (3) Die Laufzahlplanung von §5.4 strebt gemeinsam P(H1 und H2 bestätigt | exakt) ≥ 0,8 an,
+statt P(H1 bestätigt | exakt) ≥ 0,8 und eine erwartete H2-Halbbreite ≤ 1° zu verlangen; die Einhaltung prüft
+Werkzeug 8 (A9.11). Zwei getrennte Bedingungen von je 0,8 ergäben bei Unabhängigkeit gemeinsam nur 0,8² = 0,64. Die
+SNR-Faustregel von §5.4 bleibt als notwendige Bedingung, an δ_H2 gekoppelt: n_min ≥ (3·1°/(SNR·δ_H2))², bei der
+Testvariante δ_H2 = 1° wie bisher n_min ≥ (3/SNR)² (A9.2). (4) Berichtsform (§8.8, §9.3, §9.4, A8, A9.8): Zusatz je
+Ausgang (H1, H1Z, H2, H3) statt „Abweichung nachgewiesen, kleiner als Δ_rel“, „nicht entscheidbar“ stets mit Grund,
+eine Wortregel für den Nullkontroll-Sammeltest, eine Zeile für gemischte Primärausgänge, „widersprechen“ nur
+zwischen „bestätigt“ und „falsifiziert“ derselben Hypothese; die Oberbegriffe bleiben. Grund: Fehllesungen
+vermeiden; an der Auslegungsgrenze erhielte auch eine wahre Abweichung von 1,25·Δ_rel den alten Zusatz „kleiner als
+Δ_rel“ mit P = 0,986 (ein Test gegen eine Vorhersage, u_c = Δ_q/5,012, Δ_rel = Δ_q, c = c_B = 3,583, ν → ∞; Z).
+Offen bleiben δ_H2 (Testvariante ±1°), δ_H3 (Testvariante ±10 %), die Relevanzgrenze von H3 und die Lesart von „H2
+auch bei hoher Präzision entscheidbar“ (A9.11); Begründung und Prüfung mit Werkzeug 8 vor dem Einfrieren (§12). Bei
+der Testvariante δ_H3 = 10 % wird eine Bestätigung von H3 nicht als Bestätigung des Kontaktgesetzes oder des
 Kontaktmodells bezeichnet; im steifen Aufbau prüft H3 dann Masse, Profil und Kalibrierung (A4, §8.7). Soweit die
-Einträge oben die hier entschiedenen Punkte als offen führen, gilt dieser Eintrag.
+Einträge oben die hier festgelegten Punkte als offen führen, gilt dieser Eintrag.
 
-**Entwurf 10/2026: Teilentscheidungen zu H1 (4. Oktober 2026).** Entscheidung des Autors, umgesetzt im Entwurf; sie
-gilt bis zum Einfrieren als Entwurf. (1) Äquivalenzgrenze (§3, §4, §8.5, A1, A9.3, Tabelle F): Δ_q = 0,25·D_q je
+**Entwurf 10/2026: Arbeitsfestlegungen zu H1 (4. Oktober 2026).** Vorläufige Arbeitsfestlegung des Autors (Status:
+nächster Eintrag), umgesetzt im Entwurf. (1) Äquivalenzgrenze (§3, §4, §8.5, A1, A9.3, Tabelle F): Δ_q = 0,25·D_q je
 Größe q, D_q als Punktwert aus ŷ⁰ [Teil B]. Grund: Eine Bestätigung muss die vorhergesagte Struktur auf ein Viertel
 auflösen; ein kleinerer Faktor erhöhte die nötige Laufzahl etwa mit dem Kehrwert seines Quadrats (0,1 statt 0,25:
 etwa 6-fach, Z). Der Punktwert ist dieselbe Größe, die die Auswertung verwendet; seinen Schätzfehler erfasst
@@ -157,7 +157,28 @@ berichtet); Bezugswert der wahren Abweichung sind die Grenzen aus
 der rauschfreien Vorhersage. Grund: Der Schätzfehler von D_q gehört zum Verfahren; ohne ihn gälten die Fehlerraten nur
 für bekannte Grenzen. Offen bleiben Rückfall, Präzisionsstufen, Rauschmodelle, kritischer Wert und Laufzahl von H1
 sowie die Grenzen von H1Z; deren Vorschläge Δ_q/3 und Δ_rel,q/3 fallen mit Δ_rel,q = Δ_q zusammen (§12). Soweit die
-Einträge oben die hier entschiedenen Punkte als offen führen, gilt dieser Eintrag.
+Einträge oben die hier festgelegten Punkte als offen führen, gilt dieser Eintrag.
+
+**Entwurf 10/2026: Bestimmung von M und Status der Arbeitsfestlegungen (4. Oktober 2026).** (1) Bestimmung von M
+(§3 H0, §4, P0.2, §8.7, §12, A1, A2.1, A9.2, A9.3, A9.7, Tabellen C und F): Konvention (b), M = Σ_c F_c,stat/g aus
+der statischen Zelllast bei P0.2; die Zellen sind in N kalibriert, g ist örtlich bestimmt und gilt einheitlich für
+Kalibrierung, M und alle Kräfte. Die statische Last ist das Gewicht M·g im Zustand bei P0.2; Auftrieb, Innenluft und
+gleichbleibende äußere Kräfte sind enthalten, ein zusätzlicher Auftriebsabzug entfällt. Gewicht M·g und träge Masse
+M + m_L (m_L = ρ_L·V_außen + m_hyd) bleiben getrennt. Eine Gesamtwägung des geschlossenen Körpers dient als
+beschreibende Kontrolle, wenn eine geeignete Waage verfügbar ist; sonst nennt Teil B den Verzicht mit Grund. Grund:
+M·g ist die statische Last selbst, mit denselben Zellen und derselben Kalibrierung wie ⟨N⟩ und ohne Annahme über
+Volumina und Dichten; kein Test benutzt den Absolutwert M·g, und die H3-Vorhersage hängt nicht an M, weil P0.4 K und
+C mit derselben trägen Masse anpasst (§8.7). Statische Nebenkräfte und der Luftzustand bei P0.2 gehen in M ein.
+Nicht gewählt: (a) Summe der wahren Bauteilmassen; ihre Rechnungen bleiben als Begründung in Z. (2) Status: Die
+Festlegungen vom 3. Oktober 2026 (Entscheidungslogik von H2 und H3, Niveau der H2-Intervalle, Laufzahlbedingung,
+Berichtsform), vom 4. Oktober 2026 zu H1 (Äquivalenzgrenze, Signalmaß, Relevanzgrenze, Reichweite, Werkzeug 8) und
+(1) sind vorläufige Arbeitsfestlegungen dieser Entwicklungsversion (§0, §12). Sie dürfen vor der endgültigen
+Präregistrierung anhand von Konstruktion, Messsystem und Pilotprüfungen am Aufbau überarbeitet werden; jede
+Überarbeitung kommt mit Grund in A0. Alle übrigen offenen Regeln und Hardwarewerte bleiben offen (§12). In Tabelle F
+und an den Regelstellen heißen diese Punkte „Arbeitsfestlegung, §12“. (3) Werkzeug 2: `code/auslegung.py` gibt PB1
+nach §8.5 aus (D für F_min aus der bandbegrenzten Kurve, für Re und Im N_k in Fassung B, notwendige Bedingung
+u_c < Δ_q/t_eq, Auslegungsgrenze nach A8); Fassung A und Faktor 0,1 erscheinen dort nur als Sensitivitätsangaben
+(§12). Soweit die Einträge oben die hier festgelegten Punkte als offen führen, gilt dieser Eintrag.
 
 **Folgen für andere Dokumente** (§12; am 25.09.2026 nachgezogen, soweit „erledigt“ vermerkt):
 
@@ -216,7 +237,7 @@ Einträge oben die hier entschiedenen Punkte als offen führen, gilt dieser Eint
 | Konfigurationsmittelkurve | Mittel der Mittelkurven aller gültigen Läufe einer Konfiguration, jeder Lauf gleich gewichtet |
 | N_k | komplexe Harmonische k ≥ 1: N_k = (2/N_θ)·Σₙ N̄(θₙ)·e^{−ikθₙ}; \|N_k\| ist die Amplitude wie in `linear_solver.py --section` |
 | ⟨N⟩ | Zeitmittel über eine ganze Zahl vollständiger Zyklen im Auswertefenster (= Gleichanteil der Mittelkurve) |
-| statische Last, M, m_L | statische Last: Σ_c F_c,stat, Summe der Zellanzeigen bei ruhendem Körper mit geparkten Modulen gegen den Nullpunkt bei abgehobenem Körper (P0.1); physikalisch das Gewicht von Bauteilen und Innenluft abzüglich des Auftriebs ρ_L·g·V_außen in der Außenluft, zuzüglich gleichbleibender äußerer Kräfte (Kabel, Elektrostatik); unter H0 gleich ⟨N⟩ (§3). M nach einer von zwei Konventionen (offen, §12): (a) Summe der wahren Bauteilmassen ohne Luft (A9.2): statische Last ≈ M·g − ρ_L·g·V_Mat + (ρ_innen − ρ_L)·g·V_innen zuzüglich gleichbleibender äußerer Kräfte, mitbewegte Luft m_L = ρ_L·V_innen + m_hyd; (b) M = Σ_c F_c,stat/g aus P0.2: statische Last = M·g im Zustand von P0.2; Auftrieb, Innenluft und gleichbleibende äußere Kräfte sind enthalten und werden nicht noch einmal abgezogen; m_L = ρ_L·V_außen + m_hyd; ρ_L·V_außen ersetzt den Auftrieb, um den M kleiner ist als die Masse von Bauteilen und Innenluft; die Innenluft steckt schon in M. In beiden Konventionen ist m_L die träge Masse ohne Gewicht, die nicht in M enthalten ist. V_außen Außenvolumen, V_innen eingeschlossene Luft, V_Mat = V_außen − V_innen Materialvolumen, ρ_L und ρ_innen Dichte der Außen- bzw. Innenluft, m_hyd hydrodynamisch mitbewegte Luft (Tabelle C); Bezeichnungen wie in `code/auslegung.py` |
+| statische Last, M, m_L | statische Last: Σ_c F_c,stat, Summe der Zellanzeigen bei ruhendem Körper mit geparkten Modulen gegen den Nullpunkt bei abgehobenem Körper (P0.1); physikalisch das Gewicht von Bauteilen und Innenluft abzüglich des Auftriebs ρ_L·g·V_außen in der Außenluft, zuzüglich gleichbleibender äußerer Kräfte (Kabel, Elektrostatik); unter H0 gleich ⟨N⟩ (§3). M = Σ_c F_c,stat/g aus P0.2 (Konvention b, Arbeitsfestlegung, §12; A9.2): Das Gewicht M·g ist die statische Last im Zustand von P0.2; Auftrieb, Innenluft und gleichbleibende äußere Kräfte sind enthalten und werden nicht noch einmal abgezogen. m_L = ρ_L·V_außen + m_hyd ist die träge Masse ohne Gewicht, die nicht in M enthalten ist; ρ_L·V_außen ersetzt den Auftrieb, um den M kleiner ist als die Masse von Bauteilen und Innenluft, die Innenluft steckt schon in M. Die träge Masse in H(ω) ist M + m_L. Nicht gewählt ist Konvention (a), M als Summe der wahren Bauteilmassen ohne Luft: statische Last ≈ M·g − ρ_L·g·V_Mat + (ρ_innen − ρ_L)·g·V_innen zuzüglich gleichbleibender äußerer Kräfte, m_L = ρ_L·V_innen + m_hyd. V_außen Außenvolumen, V_innen eingeschlossene Luft, V_Mat = V_außen − V_innen Materialvolumen, ρ_L und ρ_innen Dichte der Außen- bzw. Innenluft, m_hyd hydrodynamisch mitbewegte Luft (Tabelle C); Bezeichnungen wie in `code/auslegung.py` |
 | N_c,k, F_min,c, Δ_c,q, Δ_c,rel,q | Harmonische und Minimum der bandbegrenzten Konfigurationsmittelkurve der Zelle c; Äquivalenz- und Relevanzgrenze von H1Z (§8.5) |
 | T(kω), Ĉⱼ,ₖ | Übertragungsmatrix von den Modulkräften zu den Zellkräften bei der Harmonischen k: Statik der Dreipunktlagerung mit Zelllagen und relativen Zellverstärkungen aus P0.1, G_F je Zelle und Kippmoden aus P0.4 (A2.7); Ĉⱼ,ₖ = [T(kω)⁻¹·(N₁,ₖ, N₂,ₖ, N₃,ₖ)ᵀ]ⱼ, Zeiger von Modul j aus den Zellen |
 | φⱼ^{P,Z}, Δφⱼ^Z | Profilphase von Modul j aus den Zellen, arg Ĉ₁,₁ − arg Ĉⱼ,₁; Abweichung Δφⱼ^Z = φⱼ^{P,Z} − φ̄ⱼ^P (E3a, §8.10) |
@@ -237,7 +258,7 @@ Einträge oben die hier entschiedenen Punkte als offen führen, gilt dieser Eint
 | ν_eff | Welch–Satterthwaite, §8.3, A9.5 |
 | ŷ⁰, ŷ¹; z⁰, z¹ | Vorhersage aus den Einzelmodulläufen der Phase 0 bzw. aus den Kontrollläufen der Phase 1; standardisierte Residuen dagegen |
 | c, c_B, t_eq | c: kritischer Wert von H1, 95-%-Quantil von max_{i,q} \|z⁰_iq\| bei exakter Superposition aus der Kalibriersimulation (§8.4) [Teil B]; c_B = t(1 − 0,05/294; ν_eff): Bonferroni-Wert, für die Planung vor Teil B; t_eq = t(0,95; ν_eff): Quantil der Äquivalenztests von H1, H1Z und H3 (§8.5) |
-| D_q, Δ_q, Δ_rel,q | vorhergesagte Struktur über den Schnitt als Punktwert aus ŷ⁰: für F_min − ⟨N⟩ die Spannweite max_i F̂_min,i − min_i F̂_min,i, für Re und Im N_k der Durchmesser max_{i,i′} \|N̂_k,i − N̂_k,i′\| der vorhergesagten Zeigermenge (Fassung B; Fassung A, max_i \|N̂_k,i\|, nur als Sensitivitätsanalyse, A9.9); Äquivalenzgrenze Δ_q = 0,25·D_q (Sensitivitätsvariante 0,1·D_q) und Relevanzgrenze Δ_rel,q = Δ_q des Mindesteffekttests (§8.5) [Teil B] (entschieden, §12) |
+| D_q, Δ_q, Δ_rel,q | vorhergesagte Struktur über den Schnitt als Punktwert aus ŷ⁰: für F_min − ⟨N⟩ die Spannweite max_i F̂_min,i − min_i F̂_min,i, für Re und Im N_k der Durchmesser max_{i,i′} \|N̂_k,i − N̂_k,i′\| der vorhergesagten Zeigermenge (Fassung B; Fassung A, max_i \|N̂_k,i\|, nur als Sensitivitätsanalyse, A9.9); Äquivalenzgrenze Δ_q = 0,25·D_q (Sensitivitätsvariante 0,1·D_q) und Relevanzgrenze Δ_rel,q = Δ_q des Mindesteffekttests (§8.5) [Teil B] (Arbeitsfestlegung, §12) |
 | b̂_i⁰, b̂_i¹, u(b̂_i) | simulierter Rauschbias von F_min − ⟨N⟩ am Punkt i gegen ŷ⁰ (mit n₀ Einzelmodulläufen) bzw. ŷ¹ (mit n + d Kontrollläufen je Modul) und seine Unsicherheit (§5.4, A9.5) [Teil B] |
 | SNR | s̄·1°/s_F: mittlere Flankensteigung des Zeltfits an der Vorhersage im Fitfenster mal 1°, geteilt durch die Pilotstreuung von F_min − ⟨N⟩ (§5.4) [Teil B] |
 | N̂_k⁽ʲ⁾, δ_H3, Δ (H3) | H3-Vorhersage: Mittel der Monte-Carlo-Ziehungen von G_F(kω)·m_j·H(kω)·a_k⁽ʲ⁾ (§8.7, A9.7); Äquivalenzgrenze Δ = δ_H3·\|N̂_k⁽ʲ⁾\| (PB3) mit δ_H3 = 10 % (Testvariante, offen, §12); Relevanzgrenze von H3 gleich Δ oder größer (offen, §12) |
@@ -267,16 +288,15 @@ Einträge oben die hier entschiedenen Punkte als offen führen, gilt dieser Eint
 Solange der Körper nicht abhebt, ist das Modell der Referenz-Engine linear (Docstring von
 `code/linear_solver.py`):
 
-    M·ẍ + C·ẋ + K·x = −μ·M·ā(t),     N(t) = M·g − K·x − C·ẋ
+    (M + m_L)·ẍ + C·ẋ + K·x = −μ·M·ā(t),     N(t) = M·g − K·x − C·ẋ
 
 mit ā(t) dem Mittel der drei Modulbeschleunigungen und μ dem Anteil der Masse, der sich mit den Modulen
-bewegt; μ·M = Σⱼ m_j. M·g steht hier für die statische Last (bei Konvention b gleich ihr im Zustand von P0.2, bei a
-bis auf die Auftriebs- und Innenluftterme und die gleichbleibenden äußeren Kräfte, A1). In H(ω) steht M für die
-träge Masse, mit der auch P0.4 angepasst wird; m_L (A1) gehört dazu,
+bewegt; μ·M = Σⱼ m_j. M·g ist die statische Last, das Gewicht im Zustand von P0.2 (M = Σ_c F_c,stat/g, A1);
+M + m_L ist die träge Masse, mit der auch P0.4 angepasst wird (A1; in `linear_solver.py` ist m_L = 0). m_L
 ist linear und zeitinvariant und lässt die Superposition unberührt. Für die k-te Harmonische der
 Anregungsfrequenz f (ω = 2πf) gilt
 
-    N_k = μ·M · H(kω) · P_k · (1 + e^{−ikφ₂} + e^{−ikφ₃}) / 3,     H(ω) = (K + iωC) / (K − M·ω² + iωC)
+    N_k = μ·M · H(kω) · P_k · (1 + e^{−ikφ₂} + e^{−ikφ₃}) / 3,     H(ω) = (K + iωC) / (K − (M + m_L)·ω² + iωC)
 
 mit P_k den Fourier-Koeffizienten der Profilbeschleunigung. Die Phasenlage wirkt nur über den Kammfaktor
 (1 + e^{−ikφ₂} + e^{−ikφ₃})/3. Am Triphasik-Punkt (120°, 240°) verschwindet er für alle k, die kein
@@ -639,7 +659,7 @@ nötig. Die Zusatzbedingung machte die Bestätigung zur Nicht-Ablehnung: Bei ein
 Apparatur hätte seltener bestätigt. Mit dem Äquivalenztest geht die Bestätigungswahrscheinlichkeit in diesem
 Fall gegen eins. Eine reine Power-Bedingung ((c + 1,645)·u_c ≤ Δ und kein |z| > c; 1,645 = z₀,₉₅) ersetzt den
 Äquivalenztest nicht: Die Vertrauensgrenze der Abweichung könnte bei ν → ∞ bis 1,371·Δ reichen.
-Aus demselben Grund werden H2 und H3 nach Äquivalenzlogik entschieden (Entscheidung des Autors vom 3. Oktober
+Aus demselben Grund werden H2 und H3 nach Äquivalenzlogik entschieden (Arbeitsfestlegung des Autors vom 3. Oktober
 2026, §9.3). Ihre frühere Bestätigung bei 0 im Intervall (H2) bzw. ohne |z| > c (H3), zusammen mit einer
 Präzisionsbedingung, war ebenfalls eine Nicht-Ablehnung: Bei hoher Präzision falsifizierte schon eine kleine,
 irrelevante Abweichung. H3 prüft je Test das Intervall r ± t_eq·u_c gegen ±δ_H3·|N̂_k⁽ʲ⁾| (PB3) wie PB1. H2
@@ -667,18 +687,17 @@ der Kammfaktor |1 + e^{−ikφ₂} + e^{−ik·240°}|/3 den Betrag |N̂_k| auf 
 0,228 für k = 2; für k = 3 liegt er zwischen 0,882 und 1. Lauf-zu-Lauf-Streuung, die je Modul proportional zu
 dessen Antwort ist, streut N_k dagegen mit der vollen Einzelmodulamplitude. Unter solcher Streuung können
 deshalb Re und Im N₁ die Bestätigung binden, bei rein additivem Sensorrauschen eher F_min − ⟨N⟩. Für Re und Im
-N_k gilt Fassung B von D (§8.5; entschieden, §12): der Durchmesser der vorhergesagten Zeigermenge über den Schnitt,
-analog zur Spannweite bei F_min. Im Beispiel A4 (starr, μ = 0,4, 10 Hz) ist Δ_q für N₁, N₂, N₃ in Fassung B
+N_k gilt Fassung B von D (§8.5; Arbeitsfestlegung, §12): der Durchmesser der vorhergesagten Zeigermenge über den
+Schnitt, analog zur Spannweite bei F_min. Im Beispiel A4 (starr, μ = 0,4, 10 Hz) ist Δ_q für N₁, N₂, N₃ in Fassung B
 0,2218, 0,1374 und 0,0799 N, in Fassung A (D = max_i |N̂_k,i|, Sensitivitätsanalyse, A9.9) 0,1126, 0,0731 und
 0,1383 N. Grund der Wahl: Fassung B gibt allen 147 Größen dieselbe Bedeutung, ein Viertel der Änderung entlang des
-Schnitts. Fassung A behandelt die Harmonischen ungleich (Toleranz im Beispiel 12,7, 13,3 und 43,3 % der Änderung
-für N₁, N₂, N₃, Z) und lässt unter Lauf-zu-Lauf-Streuung je Modul Re und Im N₁ die Laufzahl stärker treiben
-(im Beispiel etwa halbe Grenze). Preis:
-Fassung B ist bei N₃ strenger, dessen Betrag auf dem Schnitt überwiegend nicht von der Phase abhängt. Die
-Auslegungsgrenze u_c ≤ Δ_q/5,012 ergibt im Beispiel für N₁, N₂, N₃ 0,0443, 0,0274 und 0,0159 N, gegen 0,0258 N für
-F_min − ⟨N⟩ (ν → ∞, Z); welche Größe bindet, hängt vom Rauschmodell ab. Fassung B bleibt auch, wenn die Grenze von
-N₃ bindet; dann werden die nötige Präzision und Laufzahl in der Planungssimulation geprüft (§5.4, A9.11). Ein
-Wechsel zu Fassung A ist nicht vorgesehen.
+Schnitts. Fassung A behandelt die Harmonischen ungleich (Toleranz im Beispiel 12,7, 13,3 und 43,3 % der Änderung für
+N₁, N₂, N₃, Z) und lässt unter Lauf-zu-Lauf-Streuung je Modul Re und Im N₁ die Laufzahl stärker treiben (im Beispiel
+etwa halbe Grenze). Preis: Fassung B ist bei N₃ strenger, dessen Betrag auf dem Schnitt überwiegend nicht von der
+Phase abhängt. Die Auslegungsgrenze u_c ≤ Δ_q/5,012 ergibt im Beispiel für N₁, N₂, N₃ 0,0443, 0,0274 und 0,0159 N,
+gegen 0,0258 N für F_min − ⟨N⟩ (ν → ∞, Z); welche Größe bindet, hängt vom Rauschmodell ab. Fassung B bleibt auch,
+wenn die Grenze von N₃ bindet; dann werden die nötige Präzision und Laufzahl in der Planungssimulation geprüft
+(§5.4, A9.11). Ein Wechsel zu Fassung A ist nicht vorgesehen.
 
 **Mindesteffekt und Disjunktheit.** „Relevant abweichend“ verlangt an einem Test |r| > Δ_rel + c·u_c,
 „äquivalent“ an jedem Test |r| ≤ Δ_q − t_eq·u_c, jeweils gegen beide Vorhersagen. Mit Δ_rel = Δ_q (Regel unten)
@@ -692,16 +711,16 @@ ist die Abweichung nur nicht nachweislich größer als Δ_rel und kann darüber 
 und Relevanzgrenze zugleich, bei H3 ist die Relevanzgrenze mindestens δ_H3·|N̂_k⁽ʲ⁾| (offen, §12); auch dort
 schließen sich „bestätigt“ und „falsifiziert“ aus.
 
-**Regel für Δ_rel (entschieden, §12).** Δ_rel,q = Δ_q für jede Größe q (Entscheidung des Autors vom 4. Oktober 2026,
-A0). Das ist der kleinste Wert, mit dem sich „äquivalent“ und „relevant abweichend“ ausschließen, ohne weiteren
-freien Faktor; Δ_rel ändert die Bestätigung nicht. „Relevant“ bedeutet dasselbe wie die Äquivalenzgrenze, ein
-Viertel der vorhergesagten Struktur. Abweichungen zwischen Δ_q − t_eq·u_c und Δ_q + c·u_c bleiben nicht
+**Regel für Δ_rel (Arbeitsfestlegung, §12).** Δ_rel,q = Δ_q für jede Größe q (Arbeitsfestlegung des Autors vom 4.
+Oktober 2026, A0). Das ist der kleinste Wert, mit dem sich „äquivalent“ und „relevant abweichend“ ausschließen, ohne
+weiteren freien Faktor; Δ_rel ändert die Bestätigung nicht. „Relevant“ bedeutet dasselbe wie die Äquivalenzgrenze,
+ein Viertel der vorhergesagten Struktur. Abweichungen zwischen Δ_q − t_eq·u_c und Δ_q + c·u_c bleiben nicht
 entscheidbar. Nicht gewählt: κ·Δ_q mit κ > 1 (mehr „nicht entscheidbar“ auch bei genau gemessenen Abweichungen) und
 max(Δ_q; Δ_phys,q) (verlangt eine vorab benannte Alternative mit Modell; im steifen Aufbau gleich Δ_q). Einwand: Δ_q
 ist ein Auflösungs-, kein physikalisches Relevanzkriterium. Antwort: Eine Falsifikation sagt nur, dass die
 Superposition über die registrierte Toleranz hinaus verletzt ist. Ob Apparatur oder Physik, klären Zuordnung und E3
-(§8.10), soweit sie es können; im steifen Aufbau überwiegt die Apparatur (§2). In den Sensitivitätsanalysen
-(Faktor 0,1; Fassung A) gilt ebenso Δ_rel,q = Δ_q (A9.9).
+(§8.10), soweit sie es können; im steifen Aufbau überwiegt die Apparatur (§2). In den Sensitivitätsanalysen (Faktor
+0,1; Fassung A) gilt ebenso Δ_rel,q = Δ_q (A9.9).
 
 **Aufnahmeschwelle für V.** Bei n_min = 20 ist (c₄ + 1,645)·u_c,erw = 4,881·u_c,erw, für ν → ∞
 4,497·u_c,erw. Liegt der wahre Wert an der Schwelle, bestätigt ein Punkt ein zutreffendes Vorzeichen mit
@@ -791,21 +810,23 @@ und S3 sind obere Schranken, keine Raten des Verfahrens.
   ≤ 0,3·u_c,erw (Nachweis in Teil B; §5.2; Nachweisform, Folge und lineare Schwelle offen, §12).
 - **P0.2** Wägung vor der Endmontage. m_j: bewegte Masse jedes Moduls einschließlich mitbewegter Kabel und
   Messmarken, durch Bauteilwägung; der konventionelle Wägewert genügt (Abweichung von der wahren Masse
-  höchstens etwa 10⁻³ relativ, klein gegen PB3). M nach der offenen Konvention (§12, A1): (a) Summe der Massen
-  aller Teile, die auf den Zellen ruhen und sich mit dem Körper bewegen, als wahre Massen ohne Luft. Eine mit
-  Stahlgewichten (8000 kg/m³) justierte Waage zeigt den konventionellen Wägewert
-  m·(1 − ρ_L/ρ_Mat + ρ_L/(8000 kg/m³)); er wird mit der Werkstoffdichte jedes Teils auf die wahre Masse
-  umgerechnet, sonst würde der Materialauftrieb zum Teil doppelt abgezogen (Z). (b) M = Σ_c F_c,stat/g mit
-  F_c,stat der Anzeige der Zelle c bei aufgesetztem, ruhendem Körper mit geparkten Modulen gegen den
-  Nullpunkt bei abgehobenem Körper (P0.1), dazu Luftdruck, Lufttemperatur und Feuchte. Offen ist, welcher
-  Wert von g gilt (örtlich bestimmt oder Kalibrierung in Masseeinheiten; zeigen die Zellen nach Justierung mit
-  Stahlgewichten Masseeinheiten an, ist Σ_c F_c,stat/g die angezeigte Masse mal (1 − ρ_L/(8000 kg/m³)), also
-  um etwa 1,5·10⁻⁴ kleiner: ein Skalenfaktor der Kalibrierung, der in H1 und H2 herausfällt, kein Auftrieb des
-  Körpers; §8.3, Z) und ob eine Gesamtwägung des
-  geschlossenen Körpers auf einer getrennten Waage als beschreibende Kontrolle dient. Bei (b) gilt M für den
-  Zustand bei P0.2; Endmontage, Kabelführung und Messmarken ändern die statische Last danach noch, die
-  Wiederholung des Zellnullpunkts nach dem Datenschluss (§5.2) ergibt eine zweite Bestimmung, die nur
-  beschreibend berichtet wird. In keinem Fall wird von M = Σ_c F_c,stat/g ein Auftrieb abgezogen.
+  höchstens etwa 10⁻³ relativ, klein gegen PB3). M = Σ_c F_c,stat/g (Konvention b, Arbeitsfestlegung, §12) mit
+  F_c,stat der Anzeige der Zelle c bei aufgesetztem, ruhendem Körper mit geparkten Modulen gegen den Nullpunkt bei
+  abgehobenem Körper (P0.1), dazu Luftdruck, Lufttemperatur und Feuchte. Die Zellen sind in N kalibriert (P0.1); g
+  ist der örtlich bestimmte Wert [Teil B], derselbe für die Gewichtskräfte der Kalibrierung, für M und für alle
+  Kräfte. Das Gewicht M·g ist die statische Last im Zustand bei P0.2; Auftrieb, Innenluft und gleichbleibende äußere
+  Kräfte sind darin enthalten, von M = Σ_c F_c,stat/g wird kein Auftrieb abgezogen. Die träge Masse ist M + m_L mit
+  m_L = ρ_L·V_außen + m_hyd (A1); statische Nebenkräfte (Kabel, Ladung) gehen mit F/g in M und damit in die träge
+  Masse ein. Ist eine geeignete Waage verfügbar, wird der geschlossene Körper bei P0.2 und gleichem Luftzustand auf
+  ihr gewogen und beschreibend mit M verglichen. Zeigt die Waage nach Justierung mit Stahlgewichten Masseeinheiten
+  an, wird ihre Anzeige mit (1 − ρ_L/(8000 kg/m³)) multipliziert, einem Skalenfaktor der Kalibrierung, keinem Auftrieb
+  des Körpers (Z); die Differenz zeigt die Summe aus statischen Nebenkräften und Kalibrierunterschied. Sonst nennt
+  Teil B den Verzicht mit Grund. M gilt für den Zustand bei P0.2; Endmontage, Kabelführung und Messmarken ändern die
+  statische Last danach noch, die Wiederholung des Zellnullpunkts nach dem Datenschluss (§5.2) ergibt eine zweite
+  Bestimmung, die nur beschreibend berichtet wird. Nicht gewählt ist Konvention (a), M als Summe der wahren Massen
+  aller Teile ohne Luft; sie verlangte, die konventionellen Wägewerte m·(1 − ρ_L/ρ_Mat + ρ_L/(8000 kg/m³)) einer mit
+  Stahlgewichten justierten Waage mit der Werkstoffdichte jedes Teils auf wahre Massen umzurechnen, sonst würde der
+  Materialauftrieb zum Teil doppelt abgezogen (Z).
 - **P0.3** D1; D2ⱼ für jeden Antrieb bei jeder Frequenz des 1-Hz-Rasters im Bereich (d); D2_K an den Punkten
   I in deren Sollphasung bei denselben Frequenzen. Wechselwirkung der Antriebe: D2_K − Σⱼ D2ⱼ·e^{−ikφⱼ} je
   Harmonischer, ausgewertet bei f mit k_max, in N und je Zelle, ≤ 0,3·u_c,erw (§5.2; Fassung von D2_K offen,
@@ -895,7 +916,7 @@ und S3 sind obere Schranken, keine Raten des Verfahrens.
   die ersten N_z Zyklen; (ii) T_e und T_Lauf mit den Moden bis k·f; (iii) Planungssimulation: n₀ ≥ 20 und
   n_min minimieren N_K·n_min + 3·n₀ (Zielfunktion und Laufzahl von H1 offen, §12) unter den
   Bedingungen von §5.4 (gemeinsame Bestätigung von H1 und H2 nach §8.5, §8.6 und §9.3 bei exakter
-  Superposition mit Wahrscheinlichkeit ≥ 0,8, entschieden, §12; n_min ≥ (3·1°/(SNR·δ_H2))², δ_H2 offen,
+  Superposition mit Wahrscheinlichkeit ≥ 0,8, Arbeitsfestlegung, §12; n_min ≥ (3·1°/(SNR·δ_H2))², δ_H2 offen,
   §12), bei Gleichstand das kleinere n_min; (iv) Rauschbias b̂_i⁰ mit diesen
   n_min und n₀, b̂_i¹ mit n_min und n + d Kontrollläufen je Modul, jeweils mit Unsicherheit; (v) n = n_min + r
   ≤ n_max (§5.3 c) prüfen. Das erste Paar (k, T_a), das (v) erfüllt, legt k_max, T_a, n_min und n₀ fest.
@@ -915,7 +936,8 @@ und S3 sind obere Schranken, keine Raten des Verfahrens.
    und Filtereinstellungen; Zyklenzahl der Profilmessung; Δδⱼ; f_u, f_zul, f, k_max; T_warm, T_park,
    T_ramp, T_e, T_e,P, T_a, T_a,P, T_ab, T_Lauf; σ_tol, δf_tol; T_P0, TK_C, ΔT; σ̂_ref, σ̂_ref,c, ε_ctrl
    (mit Prüfgröße, kritischem Wert und gegebenenfalls σ̂_betr), σ_c, σ_Σ, F_LO; σ_Δ; n₀, n_min, r, n, n_max,
-   d; T_verfügbar; Einstellung 2 (Amplitude oder Frequenz), s, I, N_I, n₀′; Spalt;
+   d; T_verfügbar; Einstellung 2 (Amplitude oder Frequenz), s, I, N_I, n₀′; Spalt; g (örtlich bestimmt), V_außen
+   und m_hyd (für m_L), Ergebnis der Gesamtwägung oder begründeter Verzicht (A9.2);
 3. die Einzelmodul-Mittelkurven N̄⁽ʲ⁾(θ), gesamt und je Zelle, mit ihren Bootstrap-Replikaten als Datei;
    zusammen mit dem registrierten Code legen sie die Vorhersage für jede gemessene Phasenlage fest;
 4. die Vorhersage bei den Sollphasen und dem Jitter aus P0.6: F̂_min − N_s, N̂_k (k = 1 … 3), γ̂₁, Â, F̂_max
@@ -1002,7 +1024,9 @@ Bezugswert der Überdeckung offen, §12).
 a_k⁽ʲ⁾ = −(kω)²·x_k⁽ʲ⁾ aus P0.5, korrigiert um G_x; G_F ist die komplexe Übertragung der Kraftkette relativ
 zur Zeitbasis der Indeximpulse (P0.4); alles bezogen auf den eigenen Indeximpuls und bei der gemessenen
 Frequenz. 10 000 Ziehungen aus den Unsicherheiten von K und C (Kovarianz der Anpassung), M + m_L und m_j, x_k⁽ʲ⁾,
-G_F, G_x, f und gegebenenfalls der D2-Signatur; Vorhersage und u(ŷ) sind Mittelwert und
+G_F, G_x, f und gegebenenfalls der D2-Signatur; K und C folgen je Ziehung aus der Anpassung von P0.4 mit der
+gezogenen trägen Masse M + m_L, H(kω) hängt dann nur von f_n und ζ ab, nicht von M (§12). Vorhersage und u(ŷ)
+sind Mittelwert und
 Standardabweichung von Real- und Imaginärteil. Konfirmatorisch ist H3, weil kein Modellparameter aus
 Kraftdaten der Einzelmodulläufe bestimmt wird und die Parameter vor jeder Auswertung dieser Daten
 hinterlegt sind (§5.2, je Frequenz). Vor dem Datenschluss wird die Vorhersage nicht mit gemessenen
@@ -1022,7 +1046,7 @@ Zusammenfassender Test: Welch-Satterthwaite-t-Test von Δ⟨N⟩ aller Kombinati
 Referenzläufe von Phase 1 (leave-one-out), zweiseitig, α = 0,05; einbezogen sind alle Läufe, die nicht aus
 anderen Gründen als G1 ungültig sind. Berichtet werden Differenz, 95-%-Intervall [L, U] und dessen Lage zu
 ±ε_ctrl mit dem Vermerk „Einzellauftoleranz, keine Äquivalenzgrenze für das Mittel“, dazu genau eine von zwei
-Aussagen (entschieden, §12: Nullkontroll-Sammeltest): bei 0 ∉ [L, U] „Unterschied nachgewiesen“, sonst „kein
+Aussagen (Arbeitsfestlegung, §12: Nullkontroll-Sammeltest): bei 0 ∉ [L, U] „Unterschied nachgewiesen“, sonst „kein
 Unterschied nachgewiesen, Gleichheit nicht nachgewiesen“. Eine Gleichheitsaussage gibt es nicht; sie bräuchte
 eine eigene, vorab begründete Grenze. Die Differenz zweier Referenzläufe streut
 √(4/3)-mal so stark wie die Leave-one-out-Statistik
@@ -1074,11 +1098,11 @@ Simulation nach A9.8.
 **Schätzung der Grenzen.** In jeder simulierten Kampagne werden D_q, Δ_q und Δ_rel,q wie in der Auswertung als
 Punktwert aus dem simulierten ŷ⁰ geschätzt, also aus den simulierten Einzelmodulläufen der Phase 0 dieser Kampagne,
 in Fassung B und in den Sensitivitätsvarianten (Faktor 0,1; Fassung A). Die Kriterien unten gelten für das
-vollständige Verfahren einschließlich dieser Schätzung (entschieden, §12): Die simulierte Auswertung verwendet die
-geschätzten Grenzen; Bezugswerte der wahren Abweichung in den Kriterien (etwa „eine Größe genau an der Grenze ±Δ_q“,
-„größte wahre Abweichung < Δ_rel“, „größtes Residuum mindestens 2·Δ_rel“) sind Δ_q und Δ_rel aus der rauschfreien
-Vorhersage des Szenarios. Zu den Szenarien gehören solche mit ungleichen Modulen, in denen N₃ unter Fassung B
-bindet; berichtet werden dann die nötige Präzision und Laufzahl.
+vollständige Verfahren einschließlich dieser Schätzung (Arbeitsfestlegung, §12): Die simulierte Auswertung verwendet
+die geschätzten Grenzen; Bezugswerte der wahren Abweichung in den Kriterien (etwa „eine Größe genau an der Grenze
+±Δ_q“, „größte wahre Abweichung < Δ_rel“, „größtes Residuum mindestens 2·Δ_rel“) sind Δ_q und Δ_rel aus der
+rauschfreien Vorhersage des Szenarios. Zu den Szenarien gehören solche mit ungleichen Modulen, in denen N₃ unter
+Fassung B bindet; berichtet werden dann die nötige Präzision und Laufzahl.
 
 Kriterien vor dem Einfrieren (Kalibrierung mit angenommenen Rauschmodellen über mehrere Präzisionsstufen
 (Umfang der Stufen und Laufzahl je Stufe offen, §12), von reinem Sensorrauschen bis zu mehreren Prozent
@@ -1088,7 +1112,7 @@ Pilotkovarianzen):
 - P(falsifiziert | exakte Superposition oder lineares, zeitinvariantes Artefakt) ≤ 0,05;
 - P(falsifiziert | größte wahre Abweichung < Δ_rel) ≤ 0,05;
 - P(bestätigt | eine Größe genau an der Grenze ±Δ_q) ≤ 0,05;
-- P(H1 und H2 bestätigt | exakt) ≥ 0,8 bei der nach §5.4 geplanten Laufzahl (gemeinsame Bedingung, entschieden,
+- P(H1 und H2 bestätigt | exakt) ≥ 0,8 bei der nach §5.4 geplanten Laufzahl (gemeinsame Bedingung, Arbeitsfestlegung,
   §12) und nicht fallend mit wachsender Präzision;
 - P(falsifiziert | Kopplung, deren größtes Residuum mindestens 2·Δ_rel beträgt) ≥ 0,8 bei der geplanten
   Laufzahl;
@@ -1237,8 +1261,8 @@ die Kopplungszahlen sind Rechenbeispiele, keine Vorhersagen für die reale Appar
 
 | Quelle | Wirkung | Signatur | Größenordnung (Modellabschätzung) | Kontrolle |
 |---|---|---|---|---|
-| Luft am Körper: zugesetzte Masse, Quetschfilm im Bodenspalt | zusätzliche mitbewegte Masse und Dämpfung, verschiebt f_n; kleiner Gleichanteil aus der Trägheit der Spaltströmung | linear; der quadratische Anteil gibt einen Gleichanteil (H0) und Mischterme gleicher Größe (H1), beide vernachlässigbar | hydrodynamische Zusatzmasse m_hyd ≈ 4,6 g (0,7 % von M); mit Bodenspalt 8 g (10 mm) bis 30 g (3 mm), Dämpfung 0,04 bzw. 0,6 N·s/m; dazu der Luftanteil von m_L nach der Konvention für M (A1): bei (b) ρ_L·V_außen ≈ 2,2–4,8 g, bei (a) die Innenluft eines geschlossenen Gehäuses ρ_L·V_innen (höchstens so groß), bei offenem Gehäuse 0; Gleichanteil (Skala, obere Abschätzung, Spalt 3 mm, Beispiel A4): bei K = 10⁵ N/m etwa 4·10⁻⁶ N im Einzelmodullauf und 3·10⁻⁵ N bei synchroner Phasung, bei K = 10⁶ N/m unter 10⁻⁶ N | Spalt ≥ 10 mm oder offene Grundplatte, sonst Spaltvariation in P0.3 (§5.1, A9.2); in P0.4 und den Einzelmodulläufen enthalten; als Zusatzmasse m_L im Auslegungswerkzeug (`--m-luft`), nach der Konvention für M |
-| Auftrieb, Luftdichte | Der Auftrieb ist Teil der statischen Last und damit von ⟨N⟩; er ändert sich mit Luftdruck, Temperatur und Feuchte. Bei M aus der statischen Zelllast (Konvention b) ist er in M·g enthalten und wird nicht abgezogen; bei M aus wahren Bauteilmassen (a) wirken ρ_L·g·V_Mat und, bei ungleicher Dichte innen und außen, (ρ_innen − ρ_L)·g·V_innen (A1) | H0 | auf das Außenvolumen ρ_L·g·V_außen ≈ 0,021–0,047 N, auf das Materialvolumen ρ_L·g·V_Mat ≈ 1–6 mN; Änderung bei 1 % Dichteänderung ≈ 0,2–0,5 mN (dicht verschlossenes Gehäuse) bzw. ≈ 0,01–0,06 mN (offenes oder belüftetes Gehäuse) | Konvention für M (§12, P0.2); Referenzläufe mit Interpolation; Luftdruck, Lufttemperatur, Feuchte je Lauf (A9.10), bei (b) auch bei P0.2 |
+| Luft am Körper: zugesetzte Masse, Quetschfilm im Bodenspalt | zusätzliche mitbewegte Masse und Dämpfung, verschiebt f_n; kleiner Gleichanteil aus der Trägheit der Spaltströmung | linear; der quadratische Anteil gibt einen Gleichanteil (H0) und Mischterme gleicher Größe (H1), beide vernachlässigbar | hydrodynamische Zusatzmasse m_hyd ≈ 4,6 g (0,7 % von M); mit Bodenspalt 8 g (10 mm) bis 30 g (3 mm), Dämpfung 0,04 bzw. 0,6 N·s/m; dazu der Luftanteil ρ_L·V_außen ≈ 2,2–4,8 g von m_L (A1); Gleichanteil (Skala, obere Abschätzung, Spalt 3 mm, Beispiel A4): bei K = 10⁵ N/m etwa 4·10⁻⁶ N im Einzelmodullauf und 3·10⁻⁵ N bei synchroner Phasung, bei K = 10⁶ N/m unter 10⁻⁶ N | Spalt ≥ 10 mm oder offene Grundplatte, sonst Spaltvariation in P0.3 (§5.1, A9.2); in P0.4 und den Einzelmodulläufen enthalten; als Zusatzmasse m_L = ρ_L·V_außen + m_hyd im Auslegungswerkzeug (`--m-luft`) |
+| Auftrieb, Luftdichte | Der Auftrieb ist Teil der statischen Last und damit von ⟨N⟩; er ändert sich mit Luftdruck, Temperatur und Feuchte. Mit M aus der statischen Zelllast (Konvention b, §12) ist er in M·g enthalten und wird nicht abgezogen (A1) | H0 | auf das Außenvolumen ρ_L·g·V_außen ≈ 0,021–0,047 N, auf das Materialvolumen ρ_L·g·V_Mat ≈ 1–6 mN (Unterschied zur nicht gewählten Bauteilwägung, A1); Änderung bei 1 % Dichteänderung ≈ 0,2–0,5 mN (dicht verschlossenes Gehäuse) bzw. ≈ 0,01–0,06 mN (offenes oder belüftetes Gehäuse) | M aus der statischen Zelllast (§12, P0.2); Referenzläufe mit Interpolation; Luftdruck, Lufttemperatur, Feuchte je Lauf (A9.10) und bei P0.2 |
 | Elektrostatische Aufladung | Gleich- und Driftanteil; Modulation durch bewegte Teile gegenüber Gegenflächen | H0; Modulation etwa linear | Plattennäherung σ²A/(2ε₀) = 2·10⁻⁵ … 0,2 N für σ = 10⁻⁷ … 10⁻⁵ C/m², über vier Dekaden offen; Modulation ≈ 0,04 mN (10 cm², 100 V, 1 mm) | leitfähige, geerdete Oberflächen (§5.1); Feuchte je Lauf; ein Ionisator nur, wenn vor Phase 0 festgelegt; D1, Referenzläufe, G1, Nullpunktalarm, S1 |
 | Kabelkräfte | Steifigkeit der Schlaufe; Reibung und Hysterese; Kabel an bewegten Modulen (etwa für Sensoren) | linear (Steifigkeit); H1 (Hysterese, Reibung) | Schlaufe mit 100 N/m bei der Einfederung eines Einzelmodullaufs im Beispiel A4: 0,13 mN bei K = 10⁶ N/m (1,30 µm) bis 1,3 mN bei K = 10⁵ N/m (13,3 µm) | festgelegte Schlaufe mit Fotodokumentation (A9.1); P0.3: zwei Lagen, statischer Nebenschluss ≤ 0,1·Δ_q, Umkehrspanne ≤ 0,3·u_c,erw; Kabel an Modulen: Masse in m_j (P0.2), Führung wie die Schlaufe, in den Einzelmodulläufen enthalten |
 | Aktorkopplung | Amplitude oder Profil eines Moduls ändern sich unter der Last der anderen | H1 | 0,1 % Abweichung in den Kombinationsläufen ergibt 1,22 mN in F_min − ⟨N⟩, 1 % ergibt 12,2 mN (Rechenbeispiel A4, k_max = 9) | Gegenstand von H1; Identifizierbarkeitsläufe (Klasse p = 1, bei lastabhängiger Stärke p = 2); E3 (Amplitudenverhältnisse, E3b); Modulkinematik in Phase 1, falls vorgesehen (offen, §12) |
@@ -1256,12 +1280,12 @@ Gewählte Zahlenwerte ohne Messung, je mit einer Zeile Begründung.
 |---|---|---|
 | α = 0,05 je Familie | §3, §8.4 | übliche Irrtumswahrscheinlichkeit; jede Hypothese wird für sich berichtet |
 | 25 % der statischen Zelllast als Mindestabstand | §5.3 (a) | Nahe am Abheben wird ein realer Kontakt nichtlinear, und im Liftoff-Bereich ist der Zustand nicht eindeutig |
-| Bestimmung von M: Konvention (a) Bauteilwägung oder (b) statische Zelllast (offen, §12) | §3, §5.2 P0.2; A1, A9.2 | (a) macht M zur Eigenschaft des Körpers und braucht wahre Massen, V_Mat und V_innen; (b) misst die statische Last mit denselben Zellen und derselben Kalibrierung wie ⟨N⟩, ohne Annahme über Volumina und Dichten für die statische Last; statische Nebenkräfte (Kabel, Ladung) und der Luftzustand bei P0.2 gehen aber in M ein, und M gilt für den Zustand vor der Endmontage. Für die träge Masse M + m_L braucht (b) V_außen (m_L = ρ_L·V_außen + m_hyd), (a) V_innen. In keinem Fall wird von M = Σ_c F_c,stat/g ein Auftrieb noch einmal abgezogen |
+| Bestimmung von M: Konvention (b), M = Σ_c F_c,stat/g aus P0.2, Zellen in N kalibriert, g örtlich bestimmt; Gesamtwägung als beschreibende Kontrolle, wenn eine geeignete Waage verfügbar ist (Arbeitsfestlegung, §12) | §3, §4, §5.2 P0.2; A1, A9.2 | misst die statische Last mit denselben Zellen und derselben Kalibrierung wie ⟨N⟩, ohne Annahme über Volumina und Dichten; kein zusätzlicher Auftriebsabzug; Gewicht M·g und träge Masse M + m_L (m_L = ρ_L·V_außen + m_hyd) getrennt. Statische Nebenkräfte (Kabel, Ladung) und der Luftzustand bei P0.2 gehen in M ein, M gilt für den Zustand vor der Endmontage. Nicht gewählt: (a) Bauteilwägung, sie braucht wahre Massen, V_Mat und V_innen |
 | Faktor 2 Resonanzabstand (k·f ≤ f₁/2) | §5.3 (b) | begrenzt \|H\| auf 1,33 und die Frequenzempfindlichkeit auf 0,67 (A6) |
-| Δ_q = 0,25·D_q, D_q als Punktwert aus ŷ⁰ (entschieden, §12); Sensitivitätsvariante 0,1·D_q | §8.5 PB1, A9.9 | Eine Bestätigung muss die vorhergesagte Struktur auf ein Viertel auflösen, nicht nur ihr Vorhandensein zeigen; ein kleinerer Faktor erhöhte die nötige Laufzahl etwa mit dem Kehrwert seines Quadrats (0,1: etwa 6-fach, Z). Punktwert: dieselbe Größe, die die Auswertung verwendet; ihren Schätzfehler erfasst Werkzeug 8 (A9.11), die Prüfung auch gegen ŷ¹ begrenzt ihn. Die Bestätigung ist damit eine grobe Modellübereinstimmung innerhalb registrierter Toleranzen: Im Beispiel A4 erreicht erst eine gemeinsame Kopplung aller Module von etwa 10,6 % die Grenze von F_min − ⟨N⟩ (Rechenbeispiel, keine Vorhersage für die reale Apparatur V1; A4, Z) |
-| t_eq = t(0,95; ν_eff), ohne Mehrfachkorrektur; ebenso für die H3-Intervalle r ± t_eq·u_c (entschieden, §12) | §8.5 PB1, PB3 | TOST je Test auf α = 0,05; das Intersection-Union-Prinzip hält α für die gemeinsame Bestätigung (A8) |
-| Δ_rel,q = Δ_q (entschieden, §12) | §8.5 | kleinster Wert, mit dem „äquivalent“ und „relevant abweichend“ disjunkt sind, ohne weiteren freien Faktor; ändert die Bestätigung nicht. Δ_q ist ein Auflösungs-, kein physikalisches Relevanzkriterium: Eine Falsifikation zeigt eine Verletzung der Superposition über die registrierte Toleranz hinaus (A8) |
-| D für Re und Im N_k: Fassung B, Durchmesser max_{i,i′} \|N̂_k,i − N̂_k,i′\| der Zeigermenge (entschieden, §12); Fassung A, max_i \|N̂_k,i\|, als Sensitivitätsanalyse | §8.5, A9.9 | analog zur Spannweite bei F_min, gleiche Bedeutung für alle 147 Größen; Fassung A behandelt die Harmonischen ungleich (Beispiel A4: Toleranz 12,7 / 13,3 / 43,3 % der Änderung entlang des Schnitts für N₁ / N₂ / N₃, Z) und lässt unter Lauf-zu-Lauf-Streuung Re und Im N₁ die Laufzahl stärker treiben (etwa halbe Grenze); B ist bei N₃ strenger und bleibt auch, wenn N₃ bindet (A8) |
+| Δ_q = 0,25·D_q, D_q als Punktwert aus ŷ⁰ (Arbeitsfestlegung, §12); Sensitivitätsvariante 0,1·D_q | §8.5 PB1, A9.9 | Eine Bestätigung muss die vorhergesagte Struktur auf ein Viertel auflösen, nicht nur ihr Vorhandensein zeigen; ein kleinerer Faktor erhöhte die nötige Laufzahl etwa mit dem Kehrwert seines Quadrats (0,1: etwa 6-fach, Z). Punktwert: dieselbe Größe, die die Auswertung verwendet; ihren Schätzfehler erfasst Werkzeug 8 (A9.11), die Prüfung auch gegen ŷ¹ begrenzt ihn. Die Bestätigung ist damit eine grobe Modellübereinstimmung innerhalb registrierter Toleranzen: Im Beispiel A4 erreicht erst eine gemeinsame Kopplung aller Module von etwa 10,6 % die Grenze von F_min − ⟨N⟩ (Rechenbeispiel, keine Vorhersage für die reale Apparatur V1; A4, Z) |
+| t_eq = t(0,95; ν_eff), ohne Mehrfachkorrektur; ebenso für die H3-Intervalle r ± t_eq·u_c (Arbeitsfestlegung, §12) | §8.5 PB1, PB3 | TOST je Test auf α = 0,05; das Intersection-Union-Prinzip hält α für die gemeinsame Bestätigung (A8) |
+| Δ_rel,q = Δ_q (Arbeitsfestlegung, §12) | §8.5 | kleinster Wert, mit dem „äquivalent“ und „relevant abweichend“ disjunkt sind, ohne weiteren freien Faktor; ändert die Bestätigung nicht. Δ_q ist ein Auflösungs-, kein physikalisches Relevanzkriterium: Eine Falsifikation zeigt eine Verletzung der Superposition über die registrierte Toleranz hinaus (A8) |
+| D für Re und Im N_k: Fassung B, Durchmesser max_{i,i′} \|N̂_k,i − N̂_k,i′\| der Zeigermenge (Arbeitsfestlegung, §12); Fassung A, max_i \|N̂_k,i\|, als Sensitivitätsanalyse | §8.5, A9.9 | analog zur Spannweite bei F_min, gleiche Bedeutung für alle 147 Größen; Fassung A behandelt die Harmonischen ungleich (Beispiel A4: Toleranz 12,7 / 13,3 / 43,3 % der Änderung entlang des Schnitts für N₁ / N₂ / N₃, Z) und lässt unter Lauf-zu-Lauf-Streuung Re und Im N₁ die Laufzahl stärker treiben (etwa halbe Grenze); B ist bei N₃ strenger und bleibt auch, wenn N₃ bindet (A8) |
 | c von H1 als 95-%-Quantil von max\|z⁰\|, in beide Richtungen (Rauschmodelle für c offen, §12) | §8.4 | hält die Rate „mindestens ein \|z⁰\| > c“ bei 0,05 trotz korrelierter Tests (A8) |
 | Faktor 3 in n_min ≥ (3·1°/(SNR·δ_H2))², bei der Testvariante δ_H2 = 1°: n_min ≥ (3/SNR)² (δ_H2 offen, §12) | §5.4 | H2-Halbbreite etwa 3/(SNR·√n) für n₀ = n in einer Vorabsimulation des Zeltfits mit weißem Restrauschen außerhalb des Repositorys; Werkzeug 8 wiederholt sie; notwendig, nicht hinreichend für die Bestätigung von H2 |
 | δ_H3 = 10 %, Δ = δ_H3·\|N̂_k⁽ʲ⁾\| als Äquivalenzgrenze von H3 (Testvariante, offen, §12; Relevanzgrenze von H3 offen, §12) | §8.5 PB3 | Ein Modelltest mit gröberer Auflösung unterscheidet nichts. Bei 10 % ist eine Bestätigung von H3 keine Bestätigung des Kontaktgesetzes oder des Kontaktmodells: Im steifen Aufbau liegt der Kontaktanteil \|H − 1\|/\|H\| = \|N̂_k⁽ʲ⁾ − G_F·m_j·a_k⁽ʲ⁾\|/\|N̂_k⁽ʲ⁾\| bei k ≤ 3 darunter (Beispiel A4, K = 10⁶ N/m, 10 Hz: 0,3 / 1,0 / 2,3 %, Z; Betrag gegen den starren Wert 0,3 / 1,0 / 2,4 %; §8.7, A9.7) |
@@ -1294,7 +1318,7 @@ Gewählte Zahlenwerte ohne Messung, je mit einer Zeile Begründung.
 | jeder Pilotabstand mindestens 10° von 120° | §5.4, A7 | keine Pilotkonfiguration ist zu einem Schnittpunkt äquivalent, auch nicht bei Phasenfehlern weit über δφ_tol; kein physikalisches Abstandsmaß |
 | Verdopplung von T_ramp bei Liftoff in der Rampe | §5.4 | endliche, eindeutige Anpassung |
 | mindestens 20 Einzelmodulläufe je Modul vor der Planung | P0.8 | Streuungen für die Planungssimulation |
-| gemeinsame Bestätigungswahrscheinlichkeit P(H1 und H2 bestätigt \| exakt) ≥ 0,8 bei oberer 80-%-Grenze der Streuungen (entschieden, §12; Laufzahl von H1 offen, §12) | §5.3 (c), §5.4, A9.11 | übliche Power, abgesichert gegen zu kleine Pilotstreuungen; gemeinsam, weil zwei getrennte 0,8-Bedingungen bei Unabhängigkeit zusammen nur etwa 0,64 ergäben (Z) |
+| gemeinsame Bestätigungswahrscheinlichkeit P(H1 und H2 bestätigt \| exakt) ≥ 0,8 bei oberer 80-%-Grenze der Streuungen (Arbeitsfestlegung, §12; Laufzahl von H1 offen, §12) | §5.3 (c), §5.4, A9.11 | übliche Power, abgesichert gegen zu kleine Pilotstreuungen; gemeinsam, weil zwei getrennte 0,8-Bedingungen bei Unabhängigkeit zusammen nur etwa 0,64 ergäben (Z) |
 | Reserve r = ⌈n_min·p̂/(1 − p̂)⌉ + 2 | §5.4 | erwartete Ausfälle plus zwei |
 | höchstens zwei Wiederholungen je Konfiguration und Block, je Kontrolllauf | §6 | begrenzt die Blocklänge |
 | Ausnahme G5, G8, G10 bei Liftoff (Kontaktast, S2) | §4, §9.2 | Übersteuerung, äußere Störung und defekte Aufzeichnung sagen nichts über den Kontakt |
@@ -1308,9 +1332,9 @@ Gewählte Zahlenwerte ohne Messung, je mit einer Zeile Begründung.
 | 10 000 simulierte Datensätze für den kritischen Wert von ε_ctrl | A9.8 | 95-%-Quantil stabil |
 | Prüfschwelle 0,069 für das simulierte c | §8.4 | 0,05 plus zwei Standardfehler, die den Monte-Carlo-Fehler der Prüfung und den Schätzfehler von c (je 1000 Kampagnen) zusammenfassen (A8) |
 | Überdeckungsschwelle 0,936 für die Wahl des H2-Intervalls und als Kriterium (Bezugswert der Überdeckung offen, §12) | §8.6, A9.6, A9.11 | 0,95 minus zwei Monte-Carlo-Standardfehler bei 1000 Kampagnen |
-| Niveau 95 % der H2-Intervalle, nicht 90 % wie der TOST von PB1 (entschieden, §12) | §8.6, A9.6 | Überdeckungsschwelle 0,936 und Nominalniveaus 0,96–0,99 sind für 95 % gebaut; je Seite 2,5 % statt 5 % gleicht die Enge des Perzentil-Bootstraps bei kleinem n teilweise aus |
+| Niveau 95 % der H2-Intervalle, nicht 90 % wie der TOST von PB1 (Arbeitsfestlegung, §12) | §8.6, A9.6 | Überdeckungsschwelle 0,936 und Nominalniveaus 0,96–0,99 sind für 95 % gebaut; je Seite 2,5 % statt 5 % gleicht die Enge des Perzentil-Bootstraps bei kleinem n teilweise aus |
 | Nominalniveaus 0,96, 0,97, 0,98, 0,99 für die kalibrierte Verbreiterung des H2-Intervalls (Rückfallkette offen, §12) | §8.6, A9.6 | endliche Liste in Schritten von 0,01; erreicht auch 0,99 die Überdeckung nicht, trägt das Intervall nicht, und H2 ist nicht entscheidbar (Grund: Verfahren) |
-| Welch-Test mit α = 0,05; Aussage „Unterschied nachgewiesen“ oder „kein Unterschied nachgewiesen, Gleichheit nicht nachgewiesen“ (entschieden, §12: Nullkontroll-Sammeltest) | §8.8, A9.8 | berichtet, ohne Einfluss auf H1–H4; ±ε_ctrl ist eine Einzellauftoleranz, keine Äquivalenzgrenze für das Mittel; eine Gleichheitsaussage bräuchte eine eigene, vorab begründete Grenze |
+| Welch-Test mit α = 0,05; Aussage „Unterschied nachgewiesen“ oder „kein Unterschied nachgewiesen, Gleichheit nicht nachgewiesen“ (Arbeitsfestlegung, §12: Nullkontroll-Sammeltest) | §8.8, A9.8 | berichtet, ohne Einfluss auf H1–H4; ±ε_ctrl ist eine Einzellauftoleranz, keine Äquivalenzgrenze für das Mittel; eine Gleichheitsaussage bräuchte eine eigene, vorab begründete Grenze |
 | Streuungsvergleich für ε_ctrl mit α = 0,05 | §8.8, A9.8 | übliche Irrtumswahrscheinlichkeit; setzt ε_ctrl und damit G1 für alle Läufe |
 | Fitfenster: Vorschlag w = 6° fest (offen, §12); mindestens zwei Punkte je Seite (Vollständigkeit bei Ausfällen offen, §12) | §8.6, A9.6 | unabhängig von u_c,erw, damit H2 bei hoher Präzision entscheidbar bleibt; drei Punkte je Flanke; ein Zelt braucht zwei Punkte je Flanke |
 | Spitzenfehler 0,1° und Raster 0,01° (Alternative zum festen Fenster) | A9.6 | Formfehler des Zelts klein gegen δ_H2 (Testvariante 1°, offen, §12) |
@@ -1419,9 +1443,9 @@ Hauptdokument; A0–A9, Tab. C, Tab. F und Z Anhang.
 | Kopplung im Beispiel A4 (starr, μ = 0,4, 10 Hz, k_max = 9): größtes \|F_min − ⟨N⟩\| 1,2157 N; 0,1 % / 1 % Abweichung der Kombinationsläufe → 1,22 / 12,2 mN, 0,9 / 9,4 % von 0,1293 N; Phasenversatz 0,05° an Modul 2 → 1,75 mN bei 120° | §8.10; A4, Tab. C | `python3 -c "import sys;sys.path.insert(0,'code');import linear_solver as L,numpy as np;P,n=L.profile_spectrum();k=np.arange(1,10);N=2*0.4*L.M*P[1:10]/3/n;t=2*np.pi*np.arange(2000)/2000;c=lambda X:(X.real@np.cos(np.outer(k,t))-X.imag@np.sin(np.outer(k,t))).min();f=lambda p,d=0:c(N+N*np.exp(-1j*k*np.radians(p+d))+N*np.exp(-1j*k*np.radians(240)));p=np.arange(100,141,2.);F=np.array([f(x) for x in p]);D=np.array([f(x,0.05) for x in p])-F;m=abs(F).max();print(round(m,4),round(m,2),round(10*m,1),round(100*m*1e-3/0.1293,1),round(100*m*1e-2/0.1293,1),round(1e3*abs(D).max(),2),p[abs(D).argmax()])"` |
 | Luft am Körper (Grundfläche 0,04 m², R = 0,113 m, ρ_L = 1,2 kg/m³, μ_L = 1,8·10⁻⁵ Pa·s, 10 Hz): zugesetzte Masse (8/3)·ρ_L·R³ = 4,6 g (0,71 % von 0,650 kg); Quetschfilm mit exakter Impedanz iωπρ_LR⁴/(8hΦ), Φ = 1 − tanh(x)/x, x = h·√(iω/ν)/2: Trägheit 8,2 / 30,1 g, Dämpfung 0,038 / 0,58 N·s/m (h = 10 / 3 mm); Luftanteil von m_L bei Konvention (b) ρ_L·V_außen = 2,2 / 4,8 g (V_außen = 1,8 / 4 l), bei (a) Innenluft höchstens so groß | Tab. C, Tab. F; A1 | `python3 -c "import numpy as np; r,m,w=1.2,1.8e-5,2*np.pi*10; R=(0.04/np.pi)**0.5; print(round(R,4), round(1e3*8/3*r*R**3,1), round(100*8/3*r*R**3/0.65,2)); [print(h, round(1e3*Z.imag/w,1), round(Z.real,3)) for h in (0.01,0.003) for x in [np.sqrt(1j*w*r/m)*h/2] for Z in [1j*w*np.pi*r*R**4/(8*h*(1-np.tanh(x)/x))]]"`; `python3 -c "print([round(1.2*V*1e3,1) for V in (1.8e-3,4e-3)])"` |
 | Gleichanteil des Quetschfilms, Skala πρ_LR⁴⟨ż²⟩/(16h²) mit h = 3 mm (ζ fest, μ = 0,4, 10 Hz): K = 10⁶ N/m Einzelmodullauf 2,7·10⁻⁸ N (\|x₁\| = 1,30 µm), synchron 2,4·10⁻⁷ N, beide unter 10⁻⁶ N; K = 10⁵ N/m Einzelmodullauf 3,8·10⁻⁶ N (\|x₁\| = 13,3 µm), synchron 3,4·10⁻⁵ N; Kabelschlaufe 100 N/m · 13,3 µm = 1,33 mN | Tab. C | `python3 -c "import sys;sys.path.insert(0,'code');import linear_solver as L,numpy as np;P,n=L.profile_spectrum();R=(0.04/np.pi)**0.5;w=2*np.pi*10*np.arange(P.size);[print(K,round(1e6*abs(x[1]),2),'%.1e'%(np.pi*1.2*R**4*0.5*np.sum(abs(w*x)**2)/(16*0.003**2)),round(1e3*100*abs(x[1]),2)) for K in (1e6,1e5) for Y in [L.transfer(K,L.c_for(K,0.099228),P.size)[1]] for f in (1/3,1) for x in [2*0.4*L.M*f*P*Y/n]]"` |
-| Auftrieb auf das Außenvolumen ρ_L·g·V_außen = 0,021 / 0,047 N (V_außen = 1,8 / 4 l), 1 % Dichteänderung 0,21 / 0,47 mN (dicht verschlossenes Gehäuse); Elektrostatik σ²A/(2ε₀) = 2,3·10⁻⁵ / 2,3·10⁻³ / 0,23 N (σ = 10⁻⁷ / 10⁻⁶ / 10⁻⁵ C/m², A = 0,04 m²), Modulation ε₀AU²/(2d²) = 0,044 mN (10 cm², 100 V, 1 mm); Kabelschlaufe 100 N/m · 1,30 µm = 0,13 mN; Spitzengeschwindigkeit des Profils 0,24 m/s (Hub 7,69 mm, 10 Hz), Luftwiderstand je Modul 0,035 mN (10 cm², c_w = 1) | §3; Tab. C | `python3 -c "import sys;sys.path.insert(0,'code');import numpy as np;from finesweep import z_egg_zdd;g=9.81;print([round(1.2*g*V,4) for V in (1.8e-3,4e-3)],[round(1e3*0.012*g*V,2) for V in (1.8e-3,4e-3)],['%.2g'%(s*s*0.04/(2*8.854e-12)) for s in (1e-7,1e-6,1e-5)],round(1e3*8.854e-12*1e-3*1e4/2e-6,3),round(1e3*100*1.30e-6,2));t=np.arange(200000)*(0.1/200000);v=np.cumsum(z_egg_zdd(t))*(0.1/200000);v-=v.mean();u=abs(v).max();print(round(u,2),round(1e3*0.5*1.2*1e-3*u*u,3))"` |
-| Auftrieb auf das Materialvolumen und konventioneller Wägewert (Konvention a; M = 0,650 kg, einheitlich Stahl 8000 / Aluminium 2700 / Kunststoff 1200 kg/m³): V_Mat = 0,081 / 0,241 / 0,542 l, ρ_L·g·V_Mat = 0,96 / 2,83 / 6,38 mN, bei 1 % Dichteänderung 0,01 / 0,028 / 0,064 mN (offenes oder belüftetes Gehäuse); konventioneller minus wahrer Wägewert 0 / −0,19 / −0,55 g | §3, P0.2; A1, A9.2, Tab. C | `python3 -c "g=9.81;M=0.65;[print(r,round(1e3*M/r,3),round(1e3*1.2*g*M/r,2),round(1e3*0.012*g*M/r,3),round(1e3*M*(1.2/8000-1.2/r),2)) for r in (8000,2700,1200)]"` |
-| Justierung mit Stahlgewichten bei Konvention (b): Σ_c F_c,stat/g = angezeigte Masse·(1 − ρ_L/(8000 kg/m³)), Faktor 1,5·10⁻⁴, bei M = 0,650 kg 0,96 mN | A9.2, §12 | `python3 -c "print(1.2/8000, round(1e3*0.65*9.81*1.2/8000,2))"` |
+| Auftrieb auf das Außenvolumen ρ_L·g·V_außen = 0,021 / 0,047 N (V_außen = 1,8 / 4 l), 1 % Dichteänderung 0,21 / 0,47 mN (dicht verschlossenes Gehäuse); Elektrostatik σ²A/(2ε₀) = 2,3·10⁻⁵ / 2,3·10⁻³ / 0,23 N (σ = 10⁻⁷ / 10⁻⁶ / 10⁻⁵ C/m², A = 0,04 m²), Modulation ε₀AU²/(2d²) = 0,044 mN (10 cm², 100 V, 1 mm); Kabelschlaufe 100 N/m · 1,30 µm = 0,13 mN; Spitzengeschwindigkeit des Profils 0,24 m/s (Hub 7,69 mm, 10 Hz), Luftwiderstand je Modul 0,035 mN (10 cm², c_w = 1) | §12; A0, Tab. C | `python3 -c "import sys;sys.path.insert(0,'code');import numpy as np;from finesweep import z_egg_zdd;g=9.81;print([round(1.2*g*V,4) for V in (1.8e-3,4e-3)],[round(1e3*0.012*g*V,2) for V in (1.8e-3,4e-3)],['%.2g'%(s*s*0.04/(2*8.854e-12)) for s in (1e-7,1e-6,1e-5)],round(1e3*8.854e-12*1e-3*1e4/2e-6,3),round(1e3*100*1.30e-6,2));t=np.arange(200000)*(0.1/200000);v=np.cumsum(z_egg_zdd(t))*(0.1/200000);v-=v.mean();u=abs(v).max();print(round(u,2),round(1e3*0.5*1.2*1e-3*u*u,3))"` |
+| Auftrieb auf das Materialvolumen und konventioneller Wägewert (Konvention a; M = 0,650 kg, einheitlich Stahl 8000 / Aluminium 2700 / Kunststoff 1200 kg/m³): V_Mat = 0,081 / 0,241 / 0,542 l, ρ_L·g·V_Mat = 0,96 / 2,83 / 6,38 mN, bei 1 % Dichteänderung 0,01 / 0,028 / 0,064 mN (offenes oder belüftetes Gehäuse); konventioneller minus wahrer Wägewert 0 / −0,19 / −0,55 g | §12; A0, A1, A9.2, Tab. C | `python3 -c "g=9.81;M=0.65;[print(r,round(1e3*M/r,3),round(1e3*1.2*g*M/r,2),round(1e3*0.012*g*M/r,3),round(1e3*M*(1.2/8000-1.2/r),2)) for r in (8000,2700,1200)]"` |
+| Justierung mit Stahlgewichten (Anzeige in Masseeinheiten, etwa bei der Gesamtwägung): F/g = angezeigte Masse·(1 − ρ_L/(8000 kg/m³)), F Kraft auf die Waage, vergleichbar mit M = Σ_c F_c,stat/g, keine wahre Masse; Faktor 1,5·10⁻⁴, bei M = 0,650 kg 0,96 mN | A9.2 | `python3 -c "print(1.2/8000, round(1e3*0.65*9.81*1.2/8000,2))"` |
 | Belüftetes Gehäuse, Temperaturunterschied ΔT innen–außen bei gleichem Druck: ρ_innen − ρ_L ≈ −ρ_L·ΔT/T; Änderung der statischen Last höchstens ρ_L·g·V_innen/T = 0,072 / 0,161 mN je K (obere Schranke mit V_innen ≤ V_außen = 1,8 / 4 l, T = 293 K) | §12 | `python3 -c "print([round(1e3*1.2*9.81*V/293.15,3) for V in (1.8e-3,4e-3)])"` |
 | Zelllagefehler (Statik der Dreipunktlagerung, Zellradius 0,1 m, G0, Triphasik-Punkt, Rekonstruktion mit nominaler Lage): 1 mm radial −0,662 % am eigenen Modul, −0,165 % und ±0,165° an den Nachbarn; 1 mm tangential 0,29 % und 0,29° an den Nachbarn; 0,1 mm radial 0,0165° (linear) | A2.7, Tab. F | `python3 -c "import numpy as np;a=np.radians([90,210,330]);C=0.1*np.c_[np.cos(a),np.sin(a)];S=lambda p,Q:np.linalg.solve(np.vstack([np.ones(3),Q.T]),np.r_[1,p]);e=np.exp(-1j*np.radians([0,120,240]));[print(np.round(100*(abs(r)-1),3),np.round(-np.degrees(np.angle(r)),3)) for d in (np.r_[np.cos(a[1]),np.sin(a[1])],np.r_[-np.sin(a[1]),np.cos(a[1])]) for Q in [C+np.outer([0,1,0],1e-3*d)] for r in [np.c_[[S(C[j],Q) for j in range(3)]].T@e/e]];print(round(0.165*0.1,4))"` |
 | Gegenkomponente am Triphasik-Punkt: \|R₋₁\|/\|R₊₁\| = 3,3·10⁻³ bei 1 % Amplitude, 5,8·10⁻⁴ bei 0,1° Phase eines Moduls, gleich \|ε\|/3 | §8.10; A2.7, Tab. F | `python3 -c "import numpy as np;th=np.radians([90,210,330]);q=lambda F:(lambda a,b:min(a,b)/max(a,b))(abs((F*np.exp(-1j*th)).sum()),abs((F*np.exp(1j*th)).sum()));e=np.exp(-1j*np.radians([0,120,240]));print('%.1e'%q(e*[1.01,1,1]),'%.1e'%q(e*[np.exp(-1j*np.radians(0.1)),1,1]),'%.1e'%(0.01/3),'%.1e'%(np.radians(0.1)/3))"` |

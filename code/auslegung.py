@@ -48,15 +48,16 @@ abhängt (Quetschfilm-Scheibe R²/12, freie Scheibe 2R²/15). Annahmen: m_L freq
 maßgeblichen Frequenz einsetzen), inkompressibel, ohne Schallabstrahlung und ohne eigene Luftdämpfung
 (Quetschfilmdämpfung gegebenenfalls in C); die Gegenfläche des Films liegt nicht im gemessenen Kraftpfad. Gemessene
 Übertragungen (N_mess, N_mess_zellen) enthalten die Luft schon und werden mit m_luft > 0 oder J_luft ≠ 0 abgelehnt.
-Bestimmung von M und Zuordnung der Luft. Das Modell kennt eine Masse M = m₀ + Σ m_j für das Gewicht M·g; die gesamte
-wirksame träge Masse (Bauteile, mitbewegte Innenluft, hydrodynamische Zusatzmasse) ist M + m_L, m_L also diese träge
-Masse abzüglich M. Die hydrodynamische Zusatzmasse m_hyd (Reaktion der Außenluft, Quetschfilm) hat kein Gewicht,
-erscheint in keiner Wägung und keiner statischen Zelllast und gehört immer zu m_L. Volumina: V_Mat Materialvolumen
-(Bauteile und Gehäusewände), V_innen freies Luftvolumen im geschlossenen Gehäuse, V_außen = V_Mat + V_innen das von
-der Außenhaut umschlossene Volumen; ρ_L ≈ 1,2 kg/m³. Die Innenluft folgt der Hubbewegung bei Wellenlängen ≫ Gehäuse
-wie ein starrer Körper (bei relativ zum Gehäuse ruhenden Einbauten ist ihr Impuls für jede inkompressible
-Innenströmung ρ_L·V_innen·ẋ; zur Modulbewegung unten); ein leerer Kasten mit Innenmaß 20 × 20 × 10 cm enthält
-≈ 4,8 g, 15 × 15 × 8 cm ≈ 2,2 g, abzüglich Bauteilvolumen etwas weniger.
+Bestimmung von M und Zuordnung der Luft. Die Präregistrierung v2 bestimmt M nach (b) aus der statischen Zelllast
+(Arbeitsfestlegung, §12); (a) ist zum Vergleich beschrieben. Das Modell kennt eine Masse M = m₀ + Σ m_j für das
+Gewicht M·g; die gesamte wirksame träge Masse (Bauteile, mitbewegte Innenluft, hydrodynamische Zusatzmasse) ist
+M + m_L, m_L also diese träge Masse abzüglich M. Die hydrodynamische Zusatzmasse m_hyd (Reaktion der Außenluft,
+Quetschfilm) hat kein Gewicht, erscheint in keiner Wägung und keiner statischen Zelllast und gehört immer zu m_L.
+Volumina: V_Mat Materialvolumen (Bauteile und Gehäusewände), V_innen freies Luftvolumen im geschlossenen Gehäuse,
+V_außen = V_Mat + V_innen das von der Außenhaut umschlossene Volumen; ρ_L ≈ 1,2 kg/m³. Die Innenluft folgt der
+Hubbewegung bei Wellenlängen ≫ Gehäuse wie ein starrer Körper (bei relativ zum Gehäuse ruhenden Einbauten ist ihr
+Impuls für jede inkompressible Innenströmung ρ_L·V_innen·ẋ; zur Modulbewegung unten); ein leerer Kasten mit Innenmaß
+20 × 20 × 10 cm enthält ≈ 4,8 g, 15 × 15 × 8 cm ≈ 2,2 g, abzüglich Bauteilvolumen etwas weniger.
   (a) M aus den gewogenen Bauteilmassen: m₀ + Σ m_j = Summe der Massen aller Teile, die auf den Zellen ruhen und sich
       mit dem Körper bewegen, einschließlich der Module, ohne Luft. Die Innenluft fehlt in M; ihre Trägheit gehört
       zu m_L, m_L = ρ_L·V_innen + m_hyd. Dass ihr Gewicht in M·g fehlen darf, setzt gleiche Luftdichte innen und
