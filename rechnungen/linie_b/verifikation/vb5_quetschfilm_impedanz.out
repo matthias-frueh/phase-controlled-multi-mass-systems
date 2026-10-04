@@ -1,0 +1,52 @@
+==============================================================================================================
+vb5 – Quetschfilm: exakte lineare Impedanz, Wirkung auf F_min, Gleichanteil
+==============================================================================================================
+Freie Scheibe (Gruppe): m_a = (8/3) rho R^3 = 4.593 g
+(1) Quetschfilm-Impedanz Z = c_eff + i omega m_eff, R = 0,1128 m:
+  h =  1.0 mm: reibungsfrei m_sq = pi rho R^4/(8h) = 76.29 g (11.74 % von M); zäh c_sq = 1.373e+01 N s/m
+       10 Hz: c = 1.376e+01 N s/m, m =  91.53 g (omega h^2/nu = 4)
+       20 Hz: c = 1.385e+01 N s/m, m =  91.47 g (omega h^2/nu = 8)
+       30 Hz: c = 1.399e+01 N s/m, m =  91.36 g (omega h^2/nu = 13)
+       60 Hz: c = 1.469e+01 N s/m, m =  90.85 g (omega h^2/nu = 25)
+  h =  3.0 mm: reibungsfrei m_sq = pi rho R^4/(8h) = 25.43 g (3.91 % von M); zäh c_sq = 5.086e-01 N s/m
+       10 Hz: c = 5.812e-01 N s/m, m =  30.04 g (omega h^2/nu = 38)
+       20 Hz: c = 7.119e-01 N s/m, m =  29.25 g (omega h^2/nu = 75)
+       30 Hz: c = 8.276e-01 N s/m, m =  28.66 g (omega h^2/nu = 113)
+       60 Hz: c = 1.087e+00 N s/m, m =  27.77 g (omega h^2/nu = 226)
+  h = 10.0 mm: reibungsfrei m_sq = pi rho R^4/(8h) = 7.63 g (1.17 % von M); zäh c_sq = 1.373e-02 N s/m
+       10 Hz: c = 3.801e-02 N s/m, m =   8.15 g (omega h^2/nu = 419)
+       20 Hz: c = 5.164e-02 N s/m, m =   8.00 g (omega h^2/nu = 838)
+       30 Hz: c = 6.213e-02 N s/m, m =   7.93 g (omega h^2/nu = 1257)
+       60 Hz: c = 8.584e-02 N s/m, m =   7.84 g (omega h^2/nu = 2513)
+
+(2) Wirkung auf N(t), lineare Dauerkontaktlösung mit analytischen a_k:
+  Abgleich m_a = 0: F_min(120,240) = 5.330390 N (linear_solver 5,330390 N)
+  K=1e4, mu=1:
+     freie Scheibe 4,60 g  : dF_min(100/120/140) = -9.53e-03 / +1.24e-02 / +6.39e-02 N; max |dF_min|/u_c(0,0327) = 1.95; Zeltdifferenz 120-100/120-140 +2.19e-02 / -5.15e-02 N
+     Quetschfilm h=10 mm   : dF_min(100/120/140) = -1.76e-03 / +2.14e-02 / +1.24e-01 N; max |dF_min|/u_c(0,0327) = 3.79; Zeltdifferenz 120-100/120-140 +2.32e-02 / -1.03e-01 N
+     Quetschfilm h=3 mm    : dF_min(100/120/140) = +1.72e-01 / +7.52e-02 / +5.77e-01 N; max |dF_min|/u_c(0,0327) = 17.64; Zeltdifferenz 120-100/120-140 -9.64e-02 / -5.02e-01 N
+     Quetschfilm h=1 mm    : dF_min(100/120/140) = +1.67e+00 / +2.34e-01 / +2.05e+00 N; max |dF_min|/u_c(0,0327) = 62.59; Zeltdifferenz 120-100/120-140 -1.44e+00 / -1.81e+00 N
+  K=1e5, mu=0,4:
+     freie Scheibe 4,60 g  : dF_min(100/120/140) = +3.64e-04 / -4.74e-03 / -6.07e-03 N; max |dF_min|/u_c(0,0327) = 0.19; Zeltdifferenz 120-100/120-140 -5.10e-03 / +1.33e-03 N
+     Quetschfilm h=10 mm   : dF_min(100/120/140) = +1.23e-03 / -6.98e-03 / -9.67e-03 N; max |dF_min|/u_c(0,0327) = 0.30; Zeltdifferenz 120-100/120-140 -8.21e-03 / +2.69e-03 N
+     Quetschfilm h=3 mm    : dF_min(100/120/140) = +1.32e-02 / -8.49e-03 / -2.45e-02 N; max |dF_min|/u_c(0,0327) = 0.75; Zeltdifferenz 120-100/120-140 -2.17e-02 / +1.60e-02 N
+     Quetschfilm h=1 mm    : dF_min(100/120/140) = +8.36e-02 / +1.28e-01 / +2.59e-02 N; max |dF_min|/u_c(0,0327) = 3.93; Zeltdifferenz 120-100/120-140 +4.48e-02 / +1.02e-01 N
+  K=1e6, mu=0,4:
+     freie Scheibe 4,60 g  : dF_min(100/120/140) = -3.36e-04 / -5.08e-04 / -1.47e-04 N; max |dF_min|/u_c(0,0327) = 0.02; Zeltdifferenz 120-100/120-140 -1.73e-04 / -3.61e-04 N
+     Quetschfilm h=10 mm   : dF_min(100/120/140) = -5.77e-04 / -8.68e-04 / -2.49e-04 N; max |dF_min|/u_c(0,0327) = 0.03; Zeltdifferenz 120-100/120-140 -2.92e-04 / -6.19e-04 N
+     Quetschfilm h=3 mm    : dF_min(100/120/140) = -2.22e-03 / -3.16e-03 / -9.95e-04 N; max |dF_min|/u_c(0,0327) = 0.10; Zeltdifferenz 120-100/120-140 -9.42e-04 / -2.17e-03 N
+     Quetschfilm h=1 mm    : dF_min(100/120/140) = -8.70e-03 / -7.62e-03 / -5.48e-03 N; max |dF_min|/u_c(0,0327) = 0.27; Zeltdifferenz 120-100/120-140 +1.08e-03 / -2.14e-03 N
+
+(3) Gleichanteil des Quetschfilms (reibungsfrei), K=1e4/mu=1 und K=1e5/mu=0,4, R = 0,1128 m:
+   K=1e4, mu=1 (100,240) h0 =  3.0 mm: z_pp = 0.9969 mm, <F>_A(p(R)=p0) = +5.139e-03 N, <F>_B(Eintrittsverlust) = +2.536e-04 N, Skala Gruppe = 5.161e-03 N (0.158 u_c)
+   K=1e4, mu=1 (100,240) h0 = 10.0 mm: z_pp = 0.9969 mm, <F>_A(p(R)=p0) = +4.622e-04 N, <F>_B(Eintrittsverlust) = +2.348e-05 N, Skala Gruppe = 4.645e-04 N (0.014 u_c)
+   K=1e4, mu=1 (120,240) h0 =  3.0 mm: z_pp = 0.2068 mm, <F>_A(p(R)=p0) = +8.041e-04 N, <F>_B(Eintrittsverlust) = -1.630e-05 N, Skala Gruppe = 8.010e-04 N (0.024 u_c)
+   K=1e4, mu=1 (120,240) h0 = 10.0 mm: z_pp = 0.2068 mm, <F>_A(p(R)=p0) = +7.216e-05 N, <F>_B(Eintrittsverlust) = -1.451e-06 N, Skala Gruppe = 7.209e-05 N (0.002 u_c)
+   K=1e4, mu=1 (140,240) h0 =  3.0 mm: z_pp = 0.9432 mm, <F>_A(p(R)=p0) = +5.184e-03 N, <F>_B(Eintrittsverlust) = +4.679e-04 N, Skala Gruppe = 5.161e-03 N (0.158 u_c)
+   K=1e4, mu=1 (140,240) h0 = 10.0 mm: z_pp = 0.9432 mm, <F>_A(p(R)=p0) = +4.636e-04 N, <F>_B(Eintrittsverlust) = +4.013e-05 N, Skala Gruppe = 4.645e-04 N (0.014 u_c)
+   K=1e5, mu=0,4 (100,240) h0 =  3.0 mm: z_pp = 0.0255 mm, <F>_A(p(R)=p0) = +6.736e-06 N, <F>_B(Eintrittsverlust) = +1.832e-06 N, Skala Gruppe = 6.745e-06 N (0.000 u_c)
+   K=1e5, mu=0,4 (100,240) h0 = 10.0 mm: z_pp = 0.0255 mm, <F>_A(p(R)=p0) = +6.068e-07 N, <F>_B(Eintrittsverlust) = +1.651e-07 N, Skala Gruppe = 6.071e-07 N (0.000 u_c)
+   K=1e5, mu=0,4 (120,240) h0 =  3.0 mm: z_pp = 0.0210 mm, <F>_A(p(R)=p0) = +1.160e-05 N, <F>_B(Eintrittsverlust) = +2.669e-06 N, Skala Gruppe = 1.162e-05 N (0.000 u_c)
+   K=1e5, mu=0,4 (120,240) h0 = 10.0 mm: z_pp = 0.0210 mm, <F>_A(p(R)=p0) = +1.045e-06 N, <F>_B(Eintrittsverlust) = +2.403e-07 N, Skala Gruppe = 1.046e-06 N (0.000 u_c)
+   K=1e5, mu=0,4 (140,240) h0 =  3.0 mm: z_pp = 0.0252 mm, <F>_A(p(R)=p0) = +6.732e-06 N, <F>_B(Eintrittsverlust) = +1.414e-06 N, Skala Gruppe = 6.745e-06 N (0.000 u_c)
+   K=1e5, mu=0,4 (140,240) h0 = 10.0 mm: z_pp = 0.0252 mm, <F>_A(p(R)=p0) = +6.067e-07 N, <F>_B(Eintrittsverlust) = +1.274e-07 N, Skala Gruppe = 6.071e-07 N (0.000 u_c)

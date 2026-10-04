@@ -1,0 +1,14 @@
+Rechenzeit 33 s
+Spalten v1-CSV: ['phi2_deg', 'phi3_deg', 'drift_mps', 'drift_mmps'] (169, 4)
+Abgleich mit archivierter v1-Karte (169 Punkte): max |Diff| = 4.928e-11 m/s; v1-CSV min/max = -0.104101/+0.691635 mm/s
+v_d_stat            : min -0.294477  max +1.054900  mittel +0.181271 mm/s, negativ 54/169
+v1fenster_rho1000   : min -0.104101  max +0.691635  mittel +0.100905 mm/s, negativ 54/169
+v1fenster_rho1p2    : min -0.000155  max +0.001359  mittel +0.000181 mm/s, negativ 54/169
+Fensterwert/stationär (rho=1000): 14.7 … 65.6 %
+Fensterwert/stationär (rho=1,2): 0.019 … 0.129 %
+Verhältnis Fensterwert rho=1000 / rho=1,2: 509 … 769 (rho-Verhältnis 833)
+Vorzeichen gleich (Fenster rho=1000 vs. stationär): True
+
+real	0m34.285s
+user	0m33.800s
+sys	0m0.178s

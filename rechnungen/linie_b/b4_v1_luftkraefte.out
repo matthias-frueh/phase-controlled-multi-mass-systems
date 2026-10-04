@@ -1,0 +1,138 @@
+==============================================================================================================
+Befund 4 – Luftkräfte im V1-Aufbau (Größenordnung), Vergleich u_c = 0,0327 N, 0,1*u_c = 3,27e-3 N
+==============================================================================================================
+Modulprofil: Hub = 7.69231e-03 m, v_max = 0.2417 m/s, a_min/a_max = -11.680/21.691 m/s^2, Ableitungsprüfung rel. 1.0e-04
+  <v|v|> = -8.882e-19 m^2/s^2 (Egg-Lageprofil: je Modul exakt 0, da v in jeder Phase symmetrisch), <v^3> = -2.22e-19
+  |v_k| (k=0..4) m/s : 3.0358e-18 2.3817e-01 3.9248e-02 1.1289e-02 1.2812e-03
+  |a_k| (k=0..4) m/s^2: 9.0006e-08 1.4965e+01 4.9321e+00 2.1280e+00 3.2200e-01
+
+--- (1) bewegtes Modul in offener Luft (obere Schranke; im geschlossenen Gehäuse intern) ---
+  Spalten: k =                                          0           1           2           3           4
+
+  Kugel R=1,45 cm (100 g Stahl): KC = 2 pi a/D = 0.833, KC_U = v_max T/D = 0.833, beta = 561, delta = 0.691 mm, delta/a = 0.180, Re_s = w a^2/nu = 62.0, Re_max = 467
+  zugesetzte Masse + Schicht |m_e a_k| N        0.000e+00   1.393e-04   4.352e-05   1.832e-05   2.732e-06
+  viskos (Stokes-Schicht) |c_v v_k| N           0.000e+00   2.576e-05   5.923e-06   2.074e-06   2.708e-07
+  quadratisch C_D=2 (Schranke) |F_k| N          5.997e-22   3.835e-05   1.036e-05   4.073e-06   2.209e-06
+  Schallabstrahlung |R_rad v_k| N               0.000e+00   1.074e-12   2.833e-12   4.125e-12   1.479e-12
+    zugesetzte Masse m_a = 0.0077 g; relativ zu m_j = 0,1 kg: 7.7e-05, zu M/3 = 0,2167 kg: 3.5e-05  (Fehler von H3-Vorhersage G_F m_j a_k in gleicher Höhe)
+
+  Kugel R=2,5 cm: KC = 2 pi a/D = 0.483, KC_U = v_max T/D = 0.483, beta = 1667, delta = 0.691 mm, delta/a = 0.180, Re_s = w a^2/nu = 62.0, Re_max = 806
+  zugesetzte Masse + Schicht |m_e a_k| N        0.000e+00   6.608e-04   2.107e-04   8.957e-05   1.343e-05
+  viskos (Stokes-Schicht) |c_v v_k| N           0.000e+00   7.511e-05   1.737e-05   6.096e-06   7.972e-07
+  quadratisch C_D=2 (Schranke) |F_k| N          1.775e-21   1.140e-04   3.078e-05   1.211e-05   6.568e-06
+  Schallabstrahlung |R_rad v_k| N               0.000e+00   2.822e-11   7.441e-11   1.084e-10   3.886e-11
+    zugesetzte Masse m_a = 0.0393 g; relativ zu m_j = 0,1 kg: 3.9e-04, zu M/3 = 0,2167 kg: 1.8e-04  (Fehler von H3-Vorhersage G_F m_j a_k in gleicher Höhe)
+
+  Scheibe breitseitig R=4 cm: KC = 2 pi a/D = 0.302, KC_U = v_max T/D = 0.302, beta = 4267, delta = 0.691 mm, delta/a = 0.180, Re_s = w a^2/nu = 62.0, Re_max = 1289
+  zugesetzte Masse + Schicht |m_e a_k| N        0.000e+00   3.252e-03   1.054e-03   4.512e-04   6.796e-05
+  viskos (Stokes-Schicht) |c_v v_k| N           0.000e+00   1.904e-04   4.414e-05   1.552e-05   2.030e-06
+  quadratisch C_D=2 (Schranke) |F_k| N          4.649e-21   2.918e-04   7.881e-05   3.100e-05   1.681e-05
+  Schallabstrahlung |R_rad v_k| N               0.000e+00   4.735e-10   1.248e-09   1.818e-09   6.520e-10
+    zugesetzte Masse m_a = 0.2048 g; relativ zu m_j = 0,1 kg: 2.0e-03, zu M/3 = 0,2167 kg: 9.5e-04  (Fehler von H3-Vorhersage G_F m_j a_k in gleicher Höhe)
+
+--- (2) Gehäuse auf dem Kontakt: Bewegung aus linearer Dauerkontaktlösung, zugesetzte Masse ---
+  Abgleich F_min(120,240): eigene lineare Lösung 5.330390 N, linear_solver 5.330390 N
+  Abgleich F_min(100,240): eigene lineare Lösung 0.767671 N, linear_solver 0.767691 N
+  Abgleich F_min(140,240): eigene lineare Lösung 1.617549 N, linear_solver 1.617558 N
+
+  Gehäuse 20x20x10 cm (A=0,04 m^2, V=4 l): Scheiben-Äquivalent R = 0.1128 m, m_a = (8/3) rho R^3 = 4.60 g = 0.71 % von M; f_n-Verschiebung = -0.352 %; statischer Auftrieb rho g V = 0.0471 N = 1.44 u_c
+    K=1e+04 (f_n= 19.74 Hz) Einzelmodul (L_j)   : z_pp = 1.7279 mm, |z''|max = 10.808 m/s^2, F_min = -2.0571 N [LIFTOFF (linear ungültig)]
+       |N_k| k=1..3: 4.344e+00 5.375e+00 3.584e-01 N
+       m_a*|z''_k| k=1..3: 7.84e-03 3.83e-02 5.60e-03 N | |dN_k| durch m_a: 1.05e-02 1.91e-01 4.31e-03 N | dF_min = -1.51e-02 N, dF_max = -5.55e-02 N
+       Quetschfilm-Trägheit, Skala Gleichanteil (h = 1/3/10 mm): 9.9e-02 1.1e-02 9.9e-04 N  (zdot_rms = 50.82 mm/s, w h^2/nu bei 1/3/10 mm, 20 Hz: 8/75/838)
+    K=1e+04 (f_n= 19.74 Hz) Triphasik (120,240) : z_pp = 0.2068 mm, |z''|max = 4.429 m/s^2, F_min = 5.3304 N [Dauerkontakt]
+       |N_k| k=1..3: 1.739e-15 4.545e-15 1.075e+00 N
+       m_a*|z''_k| k=1..3: 3.14e-18 3.23e-17 1.68e-02 N | |dN_k| durch m_a: 4.22e-18 1.62e-16 1.29e-02 N | dF_min = +1.24e-02 N, dF_max = -1.28e-02 N
+       Quetschfilm-Trägheit, Skala Gleichanteil (h = 1/3/10 mm): 7.2e-03 8.0e-04 7.2e-05 N  (zdot_rms = 13.75 mm/s, w h^2/nu bei 1/3/10 mm, 20 Hz: 8/75/838)
+    K=1e+04 (f_n= 19.74 Hz) (100,240)           : z_pp = 0.9969 mm, |z''|max = 9.550 m/s^2, F_min = 0.7677 N [Dauerkontakt]
+       |N_k| k=1..3: 1.509e+00 3.677e+00 9.482e-01 N
+       m_a*|z''_k| k=1..3: 2.72e-03 2.62e-02 1.48e-02 N | |dN_k| durch m_a: 3.66e-03 1.31e-01 1.14e-02 N | dF_min = -9.52e-03 N, dF_max = -1.71e-02 N
+       Quetschfilm-Trägheit, Skala Gleichanteil (h = 1/3/10 mm): 4.7e-02 5.2e-03 4.7e-04 N  (zdot_rms = 34.89 mm/s, w h^2/nu bei 1/3/10 mm, 20 Hz: 8/75/838)
+    K=1e+05 (f_n= 62.43 Hz) Einzelmodul (L_j)   : z_pp = 0.0785 mm, |z''|max = 1.278 m/s^2, F_min = 3.5932 N [Dauerkontakt]
+       |N_k| k=1..3: 3.328e+00 1.190e+00 5.977e-01 N
+       m_a*|z''_k| k=1..3: 6.04e-04 8.62e-04 9.72e-04 N | |dN_k| durch m_a: 6.20e-04 9.61e-04 1.26e-03 N | dF_min = -3.03e-03 N, dF_max = +1.55e-02 N
+       Quetschfilm-Trägheit, Skala Gleichanteil (h = 1/3/10 mm): 2.1e-04 2.4e-05 2.1e-06 N  (zdot_rms = 2.36 mm/s, w h^2/nu bei 1/3/10 mm, 20 Hz: 8/75/838)
+    K=1e+05 (f_n= 62.43 Hz) Triphasik (120,240) : z_pp = 0.0524 mm, |z''|max = 2.671 m/s^2, F_min = 3.4073 N [Dauerkontakt]
+       |N_k| k=1..3: 1.332e-15 1.006e-15 1.793e+00 N
+       m_a*|z''_k| k=1..3: 2.42e-19 7.29e-19 2.92e-03 N | |dN_k| durch m_a: 2.48e-19 8.13e-19 3.79e-03 N | dF_min = -1.18e-02 N, dF_max = +3.22e-02 N
+       Quetschfilm-Trägheit, Skala Gleichanteil (h = 1/3/10 mm): 6.5e-04 7.3e-05 6.5e-06 N  (zdot_rms = 4.14 mm/s, w h^2/nu bei 1/3/10 mm, 20 Hz: 8/75/838)
+    K=1e+05 (f_n= 62.43 Hz) (100,240)           : z_pp = 0.0637 mm, |z''|max = 2.136 m/s^2, F_min = 2.4882 N [Dauerkontakt]
+       |N_k| k=1..3: 1.156e+00 8.142e-01 1.581e+00 N
+       m_a*|z''_k| k=1..3: 2.10e-04 5.90e-04 2.57e-03 N | |dN_k| durch m_a: 2.15e-04 6.58e-04 3.34e-03 N | dF_min = +9.10e-04 N, dF_max = +2.71e-02 N
+       Quetschfilm-Trägheit, Skala Gleichanteil (h = 1/3/10 mm): 3.8e-04 4.2e-05 3.8e-06 N  (zdot_rms = 3.15 mm/s, w h^2/nu bei 1/3/10 mm, 20 Hz: 8/75/838)
+    K=1e+06 (f_n=197.41 Hz) Einzelmodul (L_j)   : z_pp = 0.0073 mm, |z''|max = 0.326 m/s^2, F_min = 3.8380 N [Dauerkontakt]
+       |N_k| k=1..3: 3.251e+00 1.080e+00 4.719e-01 N
+       m_a*|z''_k| k=1..3: 5.90e-05 7.84e-05 7.71e-05 N | |dN_k| durch m_a: 5.92e-05 7.92e-05 7.89e-05 N | dF_min = -3.58e-04 N, dF_max = -1.44e-03 N
+       Quetschfilm-Trägheit, Skala Gleichanteil (h = 1/3/10 mm): 1.5e-06 1.7e-07 1.5e-08 N  (zdot_rms = 0.20 mm/s, w h^2/nu bei 1/3/10 mm, 20 Hz: 8/75/838)
+    K=1e+06 (f_n=197.41 Hz) Triphasik (120,240) : z_pp = 0.0032 mm, |z''|max = 0.328 m/s^2, F_min = 4.3404 N [Dauerkontakt]
+       |N_k| k=1..3: 1.301e-15 9.129e-16 1.416e+00 N
+       m_a*|z''_k| k=1..3: 2.36e-20 6.63e-20 2.31e-04 N | |dN_k| durch m_a: 2.37e-20 6.70e-20 2.37e-04 N | dF_min = -1.27e-03 N, dF_max = +2.67e-03 N
+       Quetschfilm-Trägheit, Skala Gleichanteil (h = 1/3/10 mm): 2.0e-06 2.2e-07 2.0e-08 N  (zdot_rms = 0.23 mm/s, w h^2/nu bei 1/3/10 mm, 20 Hz: 8/75/838)
+    K=1e+06 (f_n=197.41 Hz) (100,240)           : z_pp = 0.0049 mm, |z''|max = 0.375 m/s^2, F_min = 3.1973 N [Dauerkontakt]
+       |N_k| k=1..3: 1.129e+00 7.386e-01 1.249e+00 N
+       m_a*|z''_k| k=1..3: 2.05e-05 5.36e-05 2.04e-04 N | |dN_k| durch m_a: 2.05e-05 5.42e-05 2.09e-04 N | dF_min = -8.39e-04 N, dF_max = -1.57e-03 N
+       Quetschfilm-Trägheit, Skala Gleichanteil (h = 1/3/10 mm): 1.9e-06 2.1e-07 1.9e-08 N  (zdot_rms = 0.22 mm/s, w h^2/nu bei 1/3/10 mm, 20 Hz: 8/75/838)
+    Kugel-Äquivalent R = 0.098 m, k=1: c_visc = 4.795e-03 N s/m (C = 16 N s/m), R_rad = 4.43e-07 N s/m
+    Kugel-Äquivalent R = 0.098 m, k=2: c_visc = 6.767e-03 N s/m (C = 16 N s/m), R_rad = 7.08e-06 N s/m
+    Kugel-Äquivalent R = 0.098 m, k=3: c_visc = 8.281e-03 N s/m (C = 16 N s/m), R_rad = 3.58e-05 N s/m
+    Quetschfilm unter Gehäuseboden, Spalt h =  1.0 mm: c_sq = 1.375e+01 N s/m = 85.94 % von C = 16 N s/m; Quetschzahl (20 Hz) = 3.46e-03
+    Quetschfilm unter Gehäuseboden, Spalt h =  3.0 mm: c_sq = 5.093e-01 N s/m = 3.18 % von C = 16 N s/m; Quetschzahl (20 Hz) = 3.84e-04
+    Quetschfilm unter Gehäuseboden, Spalt h = 10.0 mm: c_sq = 1.375e-02 N s/m = 0.09 % von C = 16 N s/m; Quetschzahl (20 Hz) = 3.46e-05
+    belüftetes Gehäuse, Innenluft + 1.0 K: Delta m g = 1.61e-04 N; Aussenluft-Dichte -0.34 %: Delta Auftrieb = 1.61e-04 N
+    belüftetes Gehäuse, Innenluft + 5.0 K: Delta m g = 8.03e-04 N; Aussenluft-Dichte -1.71 %: Delta Auftrieb = 8.03e-04 N
+    belüftetes Gehäuse, Innenluft +10.0 K: Delta m g = 1.61e-03 N; Aussenluft-Dichte -3.41 %: Delta Auftrieb = 1.61e-03 N
+    Luftdruck +-10 hPa: Delta Auftrieb = 4.71e-04 N
+
+  Gehäuse 15x15x8 cm (A=0,0225 m^2, V=1,8 l): Scheiben-Äquivalent R = 0.0846 m, m_a = (8/3) rho R^3 = 1.94 g = 0.30 % von M; f_n-Verschiebung = -0.149 %; statischer Auftrieb rho g V = 0.0212 N = 0.65 u_c
+    K=1e+04 (f_n= 19.74 Hz) Einzelmodul (L_j)   : z_pp = 1.7279 mm, |z''|max = 10.808 m/s^2, F_min = -2.0571 N [LIFTOFF (linear ungültig)]
+       |N_k| k=1..3: 4.344e+00 5.375e+00 3.584e-01 N
+       m_a*|z''_k| k=1..3: 3.31e-03 1.61e-02 2.36e-03 N | |dN_k| durch m_a: 4.44e-03 8.10e-02 1.83e-03 N | dF_min = -7.19e-03 N, dF_max = -2.25e-02 N
+       Quetschfilm-Trägheit, Skala Gleichanteil (h = 1/3/10 mm): 3.1e-02 3.5e-03 3.1e-04 N  (zdot_rms = 50.82 mm/s, w h^2/nu bei 1/3/10 mm, 20 Hz: 8/75/838)
+    K=1e+04 (f_n= 19.74 Hz) Triphasik (120,240) : z_pp = 0.2068 mm, |z''|max = 4.429 m/s^2, F_min = 5.3304 N [Dauerkontakt]
+       |N_k| k=1..3: 1.739e-15 4.545e-15 1.075e+00 N
+       m_a*|z''_k| k=1..3: 1.32e-18 1.36e-17 7.09e-03 N | |dN_k| durch m_a: 1.78e-18 6.85e-17 5.49e-03 N | dF_min = +5.27e-03 N, dF_max = -5.42e-03 N
+       Quetschfilm-Trägheit, Skala Gleichanteil (h = 1/3/10 mm): 2.3e-03 2.5e-04 2.3e-05 N  (zdot_rms = 13.75 mm/s, w h^2/nu bei 1/3/10 mm, 20 Hz: 8/75/838)
+    K=1e+04 (f_n= 19.74 Hz) (100,240)           : z_pp = 0.9969 mm, |z''|max = 9.550 m/s^2, F_min = 0.7677 N [Dauerkontakt]
+       |N_k| k=1..3: 1.509e+00 3.677e+00 9.482e-01 N
+       m_a*|z''_k| k=1..3: 1.15e-03 1.10e-02 6.26e-03 N | |dN_k| durch m_a: 1.54e-03 5.54e-02 4.84e-03 N | dF_min = -4.79e-03 N, dF_max = -6.53e-03 N
+       Quetschfilm-Trägheit, Skala Gleichanteil (h = 1/3/10 mm): 1.5e-02 1.6e-03 1.5e-04 N  (zdot_rms = 34.89 mm/s, w h^2/nu bei 1/3/10 mm, 20 Hz: 8/75/838)
+    K=1e+05 (f_n= 62.43 Hz) Einzelmodul (L_j)   : z_pp = 0.0785 mm, |z''|max = 1.278 m/s^2, F_min = 3.5932 N [Dauerkontakt]
+       |N_k| k=1..3: 3.328e+00 1.190e+00 5.977e-01 N
+       m_a*|z''_k| k=1..3: 2.55e-04 3.64e-04 4.10e-04 N | |dN_k| durch m_a: 2.61e-04 4.05e-04 5.32e-04 N | dF_min = -1.30e-03 N, dF_max = +6.55e-03 N
+       Quetschfilm-Trägheit, Skala Gleichanteil (h = 1/3/10 mm): 6.8e-05 7.5e-06 6.8e-07 N  (zdot_rms = 2.36 mm/s, w h^2/nu bei 1/3/10 mm, 20 Hz: 8/75/838)
+    K=1e+05 (f_n= 62.43 Hz) Triphasik (120,240) : z_pp = 0.0524 mm, |z''|max = 2.671 m/s^2, F_min = 3.4073 N [Dauerkontakt]
+       |N_k| k=1..3: 1.332e-15 1.006e-15 1.793e+00 N
+       m_a*|z''_k| k=1..3: 1.02e-19 3.08e-19 1.23e-03 N | |dN_k| durch m_a: 1.05e-19 3.43e-19 1.60e-03 N | dF_min = -5.16e-03 N, dF_max = +1.36e-02 N
+       Quetschfilm-Trägheit, Skala Gleichanteil (h = 1/3/10 mm): 2.1e-04 2.3e-05 2.1e-06 N  (zdot_rms = 4.14 mm/s, w h^2/nu bei 1/3/10 mm, 20 Hz: 8/75/838)
+    K=1e+05 (f_n= 62.43 Hz) (100,240)           : z_pp = 0.0637 mm, |z''|max = 2.136 m/s^2, F_min = 2.4882 N [Dauerkontakt]
+       |N_k| k=1..3: 1.156e+00 8.142e-01 1.581e+00 N
+       m_a*|z''_k| k=1..3: 8.84e-05 2.49e-04 1.08e-03 N | |dN_k| durch m_a: 9.08e-05 2.77e-04 1.41e-03 N | dF_min = +2.50e-04 N, dF_max = +1.14e-02 N
+       Quetschfilm-Trägheit, Skala Gleichanteil (h = 1/3/10 mm): 1.2e-04 1.3e-05 1.2e-06 N  (zdot_rms = 3.15 mm/s, w h^2/nu bei 1/3/10 mm, 20 Hz: 8/75/838)
+    K=1e+06 (f_n=197.41 Hz) Einzelmodul (L_j)   : z_pp = 0.0073 mm, |z''|max = 0.326 m/s^2, F_min = 3.8380 N [Dauerkontakt]
+       |N_k| k=1..3: 3.251e+00 1.080e+00 4.719e-01 N
+       m_a*|z''_k| k=1..3: 2.49e-05 3.31e-05 3.25e-05 N | |dN_k| durch m_a: 2.50e-05 3.34e-05 3.33e-05 N | dF_min = -1.56e-04 N, dF_max = -5.99e-04 N
+       Quetschfilm-Trägheit, Skala Gleichanteil (h = 1/3/10 mm): 4.8e-07 5.4e-08 4.8e-09 N  (zdot_rms = 0.20 mm/s, w h^2/nu bei 1/3/10 mm, 20 Hz: 8/75/838)
+    K=1e+06 (f_n=197.41 Hz) Triphasik (120,240) : z_pp = 0.0032 mm, |z''|max = 0.328 m/s^2, F_min = 4.3404 N [Dauerkontakt]
+       |N_k| k=1..3: 1.301e-15 9.129e-16 1.416e+00 N
+       m_a*|z''_k| k=1..3: 9.96e-21 2.80e-20 9.75e-05 N | |dN_k| durch m_a: 9.99e-21 2.82e-20 9.98e-05 N | dF_min = -5.29e-04 N, dF_max = +1.13e-03 N
+       Quetschfilm-Trägheit, Skala Gleichanteil (h = 1/3/10 mm): 6.3e-07 7.0e-08 6.3e-09 N  (zdot_rms = 0.23 mm/s, w h^2/nu bei 1/3/10 mm, 20 Hz: 8/75/838)
+    K=1e+06 (f_n=197.41 Hz) (100,240)           : z_pp = 0.0049 mm, |z''|max = 0.375 m/s^2, F_min = 3.1973 N [Dauerkontakt]
+       |N_k| k=1..3: 1.129e+00 7.386e-01 1.249e+00 N
+       m_a*|z''_k| k=1..3: 8.64e-06 2.26e-05 8.60e-05 N | |dN_k| durch m_a: 8.67e-06 2.29e-05 8.80e-05 N | dF_min = -3.49e-04 N, dF_max = -6.55e-04 N
+       Quetschfilm-Trägheit, Skala Gleichanteil (h = 1/3/10 mm): 5.9e-07 6.5e-08 5.9e-09 N  (zdot_rms = 0.22 mm/s, w h^2/nu bei 1/3/10 mm, 20 Hz: 8/75/838)
+    Kugel-Äquivalent R = 0.075 m, k=1: c_visc = 2.822e-03 N s/m (C = 16 N s/m), R_rad = 8.96e-08 N s/m
+    Kugel-Äquivalent R = 0.075 m, k=2: c_visc = 3.980e-03 N s/m (C = 16 N s/m), R_rad = 1.43e-06 N s/m
+    Kugel-Äquivalent R = 0.075 m, k=3: c_visc = 4.869e-03 N s/m (C = 16 N s/m), R_rad = 7.26e-06 N s/m
+    Quetschfilm unter Gehäuseboden, Spalt h =  1.0 mm: c_sq = 4.351e+00 N s/m = 27.19 % von C = 16 N s/m; Quetschzahl (20 Hz) = 1.94e-03
+    Quetschfilm unter Gehäuseboden, Spalt h =  3.0 mm: c_sq = 1.611e-01 N s/m = 1.01 % von C = 16 N s/m; Quetschzahl (20 Hz) = 2.16e-04
+    Quetschfilm unter Gehäuseboden, Spalt h = 10.0 mm: c_sq = 4.351e-03 N s/m = 0.03 % von C = 16 N s/m; Quetschzahl (20 Hz) = 1.94e-05
+    belüftetes Gehäuse, Innenluft + 1.0 K: Delta m g = 7.23e-05 N; Aussenluft-Dichte -0.34 %: Delta Auftrieb = 7.23e-05 N
+    belüftetes Gehäuse, Innenluft + 5.0 K: Delta m g = 3.61e-04 N; Aussenluft-Dichte -1.71 %: Delta Auftrieb = 3.61e-04 N
+    belüftetes Gehäuse, Innenluft +10.0 K: Delta m g = 7.23e-04 N; Aussenluft-Dichte -3.41 %: Delta Auftrieb = 7.23e-04 N
+    Luftdruck +-10 hPa: Delta Auftrieb = 2.12e-04 N
+
+--- (3) Überschläge außerhalb der Luftmechanik ---
+  Elektrostatik, Flächenladung 1e-07 C/m^2 auf 0,04 m^2 gegenüber geerdeter Fläche: F = sigma^2 A/(2 eps0) = 2.26e-05 N
+  Elektrostatik, Flächenladung 1e-06 C/m^2 auf 0,04 m^2 gegenüber geerdeter Fläche: F = sigma^2 A/(2 eps0) = 2.26e-03 N
+  Elektrostatik, Flächenladung 1e-05 C/m^2 auf 0,04 m^2 gegenüber geerdeter Fläche: F = sigma^2 A/(2 eps0) = 2.26e-01 N
+  Konvektion, Gehäusewand +5.0 K, L = 0.1 m: U ~ 0.129 m/s, Gr = 7.44e+05, delta ~ 3.4 mm, Wandschub ~ 6.84e-04 Pa x 0,08 m^2 = 5.5e-05 N

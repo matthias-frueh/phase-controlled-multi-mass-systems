@@ -1,0 +1,7 @@
+starr mu=0,4 Delta= 0.1173 u_c<= 0.0327
+K=1e4 mu=1 Delta= 1.1407 u_c<= 0.3184
+m=1.94 g: f_n-Verschiebung -0.149 %
+m=4.60 g: f_n-Verschiebung -0.352 %
+m=8.00 g: f_n-Verschiebung -0.610 %
+m=29.25 g: f_n-Verschiebung -2.177 %
+K fuer f1>=60 Hz: 92379.49719419637

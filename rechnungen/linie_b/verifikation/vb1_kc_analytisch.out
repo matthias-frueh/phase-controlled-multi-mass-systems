@@ -1,0 +1,14 @@
+====================================================================================================
+vb1 – KC/Kennzahlen Linie B analytisch
+====================================================================================================
+RATIO = 0.2000, M_tot = 0.75 kg
+Modulweg Schnellphase 1.33690 mm, Langsamphase 1.33690 mm (müssen gleich sein)
+Träger synchron: Spitze-Spitze 0.26738 mm, a = pp/2 = 0.13369 mm, U_max = 12.0000 mm/s, U_max/omega = 0.1910 mm
+  D = 0,2 m (Notiz)    D=0.2000: KC_a = 2 pi a/D = 0.00420, KC_U = U_max T/D = 0.00600, Re = 160.0, beta = 2.667e+04, beta_check Re/KC_U = 2.667e+04
+  D = sqrt(4A/pi)      D=0.1954: KC_a = 2 pi a/D = 0.00430, KC_U = U_max T/D = 0.00614, Re = 156.4, beta = 2.546e+04, beta_check Re/KC_U = 2.546e+04
+  D = sqrt(A)          D=0.1732: KC_a = 2 pi a/D = 0.00485, KC_U = U_max T/D = 0.00693, Re = 138.6, beta = 2e+04, beta_check Re/KC_U = 2e+04
+  Notizwert mit a = 0,3 mm, D = 0,2 m: KC = 0.00942
+  delta = sqrt(2 nu/omega) = 0.6910 mm; delta/D(0,2) = 3.455e-03; delta/a = 5.169; Re_s = omega a^2/nu = 0.0749
+  Wasser (nu = 1e-6): delta = 0.1784 mm
+  Raster 13x13: größte Trägeramplitude a = 0.13369 mm bei (np.float64(0.0), np.float64(0.0)), U_max = 12.000 mm/s; kleinste a = 16.260 µm; Median 0.0722 mm
+  Triphasik (120,240): a = 6.201 µm, KC_a(D=0,2) = 1.948e-04
