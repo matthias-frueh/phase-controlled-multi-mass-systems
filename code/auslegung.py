@@ -18,9 +18,9 @@ linear; für die Harmonische k der Anregungsfrequenz f (ω = 2πf) gilt im einge
   Kontrolle 1 FG (Präreg A2.1, §8.7, linear_solver.py): N_k = H(kω)·Σ_j w_j·m_j·a_k⁽ʲ⁾·e^{−ikφ_j},
   H(ω) = (K + iωC)/(K − (M + m_L)·ω² + iωC). Bei symmetrischer Lage (gleiche Zellen, Σ m_j·b_j + m_L·b_L ∥
   (1, 0, 0)) entkoppeln Hub und Kippen, dann ist N = N_1FG; sonst wird max_t |N − N_1FG| (abw_1FG) ausgewiesen
-  und gewarnt, wenn er 0,1·u_c übersteigt. Kontaktast: N > 0 und K-gewichtete Zelleinfederung Σ k_c·w_c < 0
-  (valid, im 1-FG-Fall wie linear_solver.py); je Zelle F_c > 0 (valid_zellen; im Maximum von w_c ist ẇ_c = 0,
-  also F_c = −K_c·w_c, und F_c > 0 erzwingt w_c < 0).
+  und gewarnt, wenn er 0,1·u_c (Auslegungsgrenze von PB1 für F_min, unten) übersteigt. Kontaktast: N > 0 und
+  K-gewichtete Zelleinfederung Σ k_c·w_c < 0 (valid, im 1-FG-Fall wie linear_solver.py); je Zelle F_c > 0
+  (valid_zellen; im Maximum von w_c ist ẇ_c = 0, also F_c = −K_c·w_c, und F_c > 0 erzwingt w_c < 0).
 Gemessene Einzelmodul-Harmonische (Präreg §8.2; Python: Aufbau(N_mess=…, N_mess_zellen=…)) ersetzen Profil und
 Übertragung: N_k = Σ_j w_j·N_k⁽ʲ⁾·e^{−ikφ_j}. Alle Phasen sind Profilphasen φ_j^P = φ_j + Δδ_j (Präreg A1). Auf
 den eigenen Indeximpuls bezogene Harmonische werden mit delta_delta = (Δδ₁, Δδ₂, Δδ₃) [°] intern mit e^{+ikΔδ_j}
@@ -100,7 +100,8 @@ Größenordnung von m_hyd (Mediumsreaktion, Nachrechnung 10/2026, nur Orientieru
 J_hyd = m_hyd·R²/12, bei R = 0,113 m 8 g (h = 10 mm) bis 30 g (h = 3 mm, mit Zähigkeit). Wirkung: f_n sinkt mit
 √(M/(M + m_L)); am V1-Kandidaten (G0, ζ fest) bei 5 g / 30 g um 0,4 / 2,2 %, kleinste Zellreserve
 41,14 → 41,12 / 41,04 %, ΔF_Zelt +0,3 / +1,7 %; ab m_L ≈ 9,6 g sinkt k_b von 12 auf 11, weil f₁ nur 0,7 %
-über 12·2f liegt (ΔF_Zelt bleibt ungebändert bestimmt). Nahe einer Resonanz ist die Wirkung groß
+über 12·2f liegt (ΔF_Zelt der Signalprüfung bleibt ungebändert bestimmt; D für F_min in PB1 ist bandbegrenzt
+und springt mit, u_c(F_min) 0,0293 → 0,0318 N). Nahe einer Resonanz ist die Wirkung groß
 (Simulationsreferenz, 2f ≈ f_n: 4,6 g verschieben F_min(140°, 240°) um 64 mN).
 
 Kennzahlen: f_n = √(K/(M + m_L))/2π, ρ = f/f_n, ζ = C/(2√(K·(M + m_L))) (ohne Luft m_L = 0); ε =
@@ -117,8 +118,13 @@ A9.2 „ohne Zusatzkonfigurationen“), getrennt je Zusatzkonfiguration, ob sie 
 wird; (b) 3f ≤ f₁/2; robust: f/f₁ ≤ 0,05 und ζ ≥ 0,02, sonst ρ-Bänder meiden, in denen hohe Profilharmonische
 die Kontaktresonanz treffen (ε-Fenster der Menge ZUSATZ bei ζ = 0,02 schmaler als 0,15); Signal: ΔF_Zelt
 (Spannweite von F_min auf dem Schnitt, kleinerer Wert von ungebändert und bandbegrenzt) ≥ 0,4693 N wie A4;
-PB1: u_c ≤ 0,25·D/c, c = t(1 − 0,05/294; ν) (H1, A8: 3,583 für ν → ∞, 4,356 für ν = 19), D = ΔF_Zelt bzw.
-max |N_k| auf dem Schnitt. Zeltsekanten sind 2°-Sekanten an 120° (bei verschobener Spitze auch negativ).
+PB1 (Präreg §8.5, A8): Δ_q = 0,25·D_q mit D = ΔF_Zelt der bandbegrenzten Kurve (k ≤ k_max) für F_min − ⟨N⟩ und für
+Re und Im N_k (k = 1 … 3) dem Durchmesser der Zeigermenge max_{i,i′} |N_k,i − N_k,i′| auf dem Schnitt (Fassung B);
+notwendig u_c < Δ_q/t_eq, t_eq = t(0,95; ν); Auslegungsgrenze u_c ≤ Δ_q/R(ν) für Bestätigungswahrscheinlichkeit
+0,8 bei exakter Superposition und 294 unabhängigen Intervallen (147 Tests gegen ŷ⁰ und ŷ¹; R = 5,012 für ν → ∞,
+5,208 für ν = 19). Nur berichtet, ohne Einfluss auf die Prüfung: Fassung A (D = max |N_k|) und Faktor 0,1.
+c_B = t(1 − 0,05/294; ν) bleibt der Planungswert des kritischen Werts von H1 (§8.4), nicht Teil von PB1.
+Zeltsekanten sind 2°-Sekanten an 120° (bei verschobener Spitze auch negativ).
 
 Aufruf:
   python3 auslegung.py --candidate                  V1-Kandidat: Kennzahlen, Laufarten, Prüfung §5.3
@@ -154,13 +160,14 @@ Masse; Abheben und Hüpfzustände rechnet nur die Zeitintegration.
 Matthias Früh · PCMMS · Oktober 2026
 """
 import argparse
+import functools
 import json
 import os
 import sys
 
 import numpy as np
 import scipy.fft as sfft
-from scipy import stats
+from scipy import integrate, optimize, stats
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
@@ -187,11 +194,37 @@ REFERENZ = dict(m=(M_REF / 3,) * 3, hub=HUB_REF, m0=0.0, f=F_HZ, K=K_REF, C=C_RE
 
 
 def c_pb1(nu=np.inf):
-    """Kritischer Wert der H1-Familie (147 Tests, zweiseitig, α = 0,05): t(1 − 0,05/294; ν), Präreg §8.4, A8."""
+    """Bonferroni-Wert der H1-Familie (147 Tests, zweiseitig, α = 0,05): c_B = t(1 − 0,05/294; ν), Präreg §8.4, A8;
+    Planungswert des kritischen Werts c (Mindesteffekt), seit der PB1-Fassung von §8.5 nicht mehr Teil von PB1."""
     return float(stats.t.ppf(1 - 0.05 / 294, nu))
 
 
 C_PB1 = c_pb1()                         # 3,583 (ν → ∞)
+FAKTOR_PB1 = 0.25                       # Δ_q = 0,25·D_q (Präreg §8.5, Arbeitsfestlegung)
+FAKTOR_SENS = 0.1                       # Sensitivitätsvariante (§8.9), nur berichtet
+P_PB1, M_PB1 = 0.8, 294                 # Bestätigungswahrscheinlichkeit bei exakter Superposition; 2 × 147 Intervalle
+
+
+def t_eq(nu=np.inf):
+    """Quantil der Äquivalenztests von PB1 (TOST je Test, α = 0,05): t(0,95; ν), Präreg §8.5."""
+    return float(stats.t.ppf(0.95, nu))
+
+
+@functools.lru_cache(maxsize=None)
+def r_pb1(nu=np.inf, p=P_PB1, m=M_PB1):
+    """Auslegungsgrenze von PB1 (Präreg §8.5, A8): kleinstes R = Δ_q/u_c, bei dem m unabhängige Intervalle
+    r ± t_eq·û bei exakter Superposition gemeinsam mit Wahrscheinlichkeit p in ±Δ_q liegen (je Intervall p^(1/m)).
+    ν → ∞ geschlossen t_eq + Φ⁻¹((1 + p^(1/m))/2); sonst mit χ²-verteiltem Schätzer û = s·u_c, ν·s² ~ χ²(ν),
+    integriert über den Träger von s (A8: 5,012 für ν → ∞, 5,208 für ν = 19). Ab ν > 10⁷ ist die Dichte von s für
+    die Quadratur zu schmal; dort gilt der Grenzwert (Unterschied < 10⁻⁵)."""
+    q, te = p ** (1 / m), t_eq(nu)
+    if nu > 1e7:
+        return float(te + stats.norm.ppf((1 + q) / 2))
+    dichte = lambda s: stats.chi2.pdf(nu * s * s, nu) * 2 * nu * s                         # noqa: E731
+    lo, hi = np.sqrt(stats.chi2.ppf(1e-16, nu) / nu), np.sqrt(stats.chi2.isf(1e-16, nu) / nu)   # Träger von s
+    f = lambda R: integrate.quad(lambda s: (2 * stats.norm.cdf(R - te * s) - 1) * dichte(s),  # noqa: E731
+                                 lo, min(hi, R / te), limit=400)[0] - q
+    return float(optimize.brentq(f, te * lo, te * hi + 10.0, xtol=1e-10))
 
 
 def profil(n=N_FEIN, art='egg', thold=THOLD):
@@ -520,7 +553,9 @@ def _kleinster(werte, idx, L):
 def bewerte(aufbau, kmax=None, paar_schritt=15.0, nu=np.inf):
     """Alle Laufarten: je Lauf Reserve der Summe (F_min/(M·g)) und jeder Zelle (F_c,min/F₀,c), ungebändert;
     je Gruppe und je Laufmenge (MENGEN) das Minimum mit bindendem Lauf; Schnittgrößen (ΔF_Zelt, 2°-Sekanten an
-    120°, Spitze, D_k, PB1-Anforderung mit c = t(1 − 0,05/294; ν))."""
+    120°, Spitze, D_k in Fassung B, PB1 nach Präreg §8.5: Δ_q = 0,25·D_q mit D = ΔF_Zelt der bandbegrenzten
+    Kurve für F_min, notwendige Bedingung u_c < Δ_q/t_eq, Auslegungsgrenze u_c ≤ Δ_q/R(ν); Fassung A und Faktor 0,1
+    nur unter 'sensitivitaet'). dF (kleinerer Wert von ungebändert und bandbegrenzt) gilt für die Signalprüfung."""
     L = laufarten(paar_schritt)
     r = aufbau.loesen([x[2] for x in L], [x[3] for x in L], kmax=kmax, kout=max(kmax or 0, 3))
     eps = aufbau.kennzahlen()['eps']
@@ -550,9 +585,19 @@ def bewerte(aufbau, kmax=None, paar_schritt=15.0, nu=np.inf):
         schnitt[name] = dict(F_min=fm, dF=fm.max() - fm.min(), s_L=(fm[I120] - fm[I120 - 1]) / 2,
                              s_R=(fm[I120] - fm[I120 + 1]) / 2, spitze=SCHNITT[np.argmax(fm)],
                              gamma1=r[name]['gamma1'][sch])
-    D = np.abs(r['Nk'][sch, :3]).max(0)
-    dF, c = min(schnitt['voll']['dF'], schnitt['band']['dF']), c_pb1(nu)
-    schnitt.update(dF=dF, D=D, nu=nu, c=c, uc_Fmin=0.25 * dF / c, uc_Nk=0.25 * D.min() / c)
+    Nk = r['Nk'][sch, :3]                                        # N₁ … N₃ der Schnittpunkte (komplex)
+    D = np.abs(Nk[:, None, :] - Nk[None, :, :]).max((0, 1))       # Fassung B: Durchmesser der Zeigermenge
+    D_A = np.abs(Nk).max(0)                                       # Fassung A (Sensitivitätsanalyse)
+    dF = min(schnitt['voll']['dF'], schnitt['band']['dF'])        # Signalprüfung (§5.3)
+    D_F = schnitt['band']['dF']                                   # PB1: F_min der bandbegrenzten Kurve (§8.5)
+    te, R = t_eq(nu), r_pb1(nu)
+    dq_F, dq_N = FAKTOR_PB1 * D_F, FAKTOR_PB1 * D
+    schnitt.update(dF=dF, D_Fmin=D_F, D=D, nu=nu, t_eq=te, R=R, c_B=c_pb1(nu), delta_Fmin=dq_F, delta_Nk=dq_N,
+                   uc_Fmin=dq_F / R, uc_Nk_k=dq_N / R, uc_Nk=dq_N.min() / R,
+                   uc_notw_Fmin=dq_F / te, uc_notw_Nk=dq_N.min() / te,
+                   sensitivitaet=dict(fassung_A=dict(D=D_A, uc_Nk=FAKTOR_PB1 * D_A.min() / R),
+                                      faktor_0_1=dict(uc_Fmin=FAKTOR_SENS * D_F / R,
+                                                      uc_Nk=FAKTOR_SENS * D.min() / R)))
     return dict(laeufe=laeufe, gruppen=gruppen, mengen=mengen, schnitt=schnitt, kmax=kmax, eps=eps, roh=r)
 
 
@@ -634,7 +679,8 @@ def pruefung(aufbau, kmax=None, df_req=DF_REQ, reserve_min=RESERVE_MIN, zeta_min
         signal=dict(ok=bool(s['dF'] >= df_req), dF=s['dF'], dF_voll=s['voll']['dF'], dF_band=s['band']['dF'],
                     df_req=df_req, s_L_band=s['band']['s_L'], s_R_band=s['band']['s_R'], s_L_voll=s['voll']['s_L'],
                     s_R_voll=s['voll']['s_R'], spitze_band=s['band']['spitze'], spitze_voll=s['voll']['spitze'],
-                    nu=s['nu'], c=s['c'], uc_Fmin=s['uc_Fmin'], uc_Nk=s['uc_Nk']),
+                    nu=s['nu'], t_eq=s['t_eq'], R=s['R'], uc_Fmin=s['uc_Fmin'], uc_Nk=s['uc_Nk'],
+                    uc_notw_Fmin=s['uc_notw_Fmin'], uc_notw_Nk=s['uc_notw_Nk'], sensitivitaet=s['sensitivitaet']),
         modell=dict(abw_1FG=abw['abw_1FG'], abw_1FG_band=abw['abw_1FG_band'], grenze=0.1 * s['uc_Fmin'],
                     warnung=bool(abw['abw_1FG'] > 0.1 * s['uc_Fmin'])))
 
@@ -716,9 +762,17 @@ def _drucke_laeufe(bew, alle=False):
           + ('' if km is None else f', {_band(km)}: {s["band"]["dF"]:.4f} N')
           + f'; 2°-Sekanten an 120° (ungebändert) {s["voll"]["s_L"]:.4f} / {s["voll"]["s_R"]:.4f} N/°; Spitze '
           f'{s["voll"]["spitze"]:g}° (ungebändert)' + ('' if km is None else f', {s["band"]["spitze"]:g}° ({_band(km)})')
-          + '; D_k = '
-          f'{", ".join(f"{v:.4f}" for v in s["D"])} N; PB1 u_c ≤ {s["uc_Fmin"]:.4f} N (F_min), {s["uc_Nk"]:.4f} N '
-          f'(N_k) mit c = {s["c"]:.3f} ({_nu(s["nu"])})')
+          + '; D_k (Fassung B) = '
+          f'{", ".join(f"{v:.4f}" for v in s["D"])} N')
+
+
+def _drucke_pb1(s):
+    sa, s1 = s['sensitivitaet']['fassung_A'], s['sensitivitaet']['faktor_0_1']
+    print(f'PB1 (§8.5, Δ_q = 0,25·D_q, N_k in Fassung B, {_nu(s["nu"])}): Auslegungsgrenze u_c ≤ Δ_q/R = '
+          f'{s["uc_Fmin"]:.4f} N (F_min), {s["uc_Nk"]:.4f} N (N_k) mit R = {s["R"]:.3f}; notwendig u_c < Δ_q/t_eq = '
+          f'{s["uc_notw_Fmin"]:.4f} N (F_min), {s["uc_notw_Nk"]:.4f} N (N_k) mit t_eq = {s["t_eq"]:.3f}')
+    print(f'    Sensitivität, nur berichtet: Fassung A u_c ≤ {sa["uc_Nk"]:.4f} N (N_k); Faktor 0,1 u_c ≤ '
+          f'{s1["uc_Fmin"]:.4f} N (F_min), {s1["uc_Nk"]:.4f} N (N_k)')
 
 
 def _drucke_pruefung(p):
@@ -742,8 +796,8 @@ def _drucke_pruefung(p):
     print(f'Signal ΔF_Zelt ≥ {s["df_req"]:.4f} N: {ja[s["ok"]]} ({s["dF"]:.4f} N'
           + ('' if p['b']['kmax'] is None else f'; ungebändert {s["dF_voll"]:.4f}, {kb} {s["dF_band"]:.4f}')
           + f'); Sekanten an 120° ({kb}) {s["s_L_band"]:.4f} / {s["s_R_band"]:.4f} N/°, '
-          f'Spitze {s["spitze_band"]:g}°; PB1 verlangt u_c ≤ {s["uc_Fmin"]:.4f} N (F_min) bzw. {s["uc_Nk"]:.4f} N '
-          f'(N_k), c = {s["c"]:.3f} ({_nu(s["nu"])})')
+          f'Spitze {s["spitze_band"]:g}°')
+    _drucke_pb1(s)
     m = p['modell']
     if m['warnung']:
         print(f'WARNUNG: Die 1-FG-Summe (Präreg A2.1, §8.7) weicht um bis zu {m["abw_1FG"]:.4f} N (k ≤ k_max '
@@ -802,7 +856,8 @@ def main(argv=None):
                          '(Vorgabe 0; Quetschfilmanteil einer Scheibe mit Radius R: m_hyd·R²/12)')
     ap.add_argument('--zetas', nargs='+', type=float, default=[0.02, 0.05, 0.1, 0.2])
     ap.add_argument('--df-req', type=float, default=DF_REQ, help='Signalschwelle ΔF_Zelt [N]')
-    ap.add_argument('--nu', type=float, default=np.inf, help='Freiheitsgrade ν für c der PB1-Anforderung (Vorgabe ∞)')
+    ap.add_argument('--nu', type=float, default=np.inf,
+                    help='Freiheitsgrade ν für t_eq und die Auslegungsgrenze R von PB1 (Vorgabe ∞)')
     ap.add_argument('--json', action='store_true', help='Ausgabe als JSON')
     a = ap.parse_args(argv)
     pruef = [(a.m is not None and min(a.m) <= 0, '--m: Massen > 0'),
@@ -812,7 +867,7 @@ def main(argv=None):
              (a.C is not None and a.C < 0, '--C ≥ 0'), (a.zeta is not None and a.zeta < 0, '--zeta ≥ 0'),
              (a.kmax is not None and a.kmax < 1, '--kmax ≥ 1'), (not 0 < a.thold < 1, '0 < --thold < 1'),
              (a.Rc <= 0, '--Rc > 0'), (a.rho0 is not None and a.rho0 < 0, '--rho0 ≥ 0'),
-             (min(a.zetas) < 0, '--zetas ≥ 0'), (a.df_req <= 0, '--df-req > 0'), (a.nu <= 0, '--nu > 0'),
+             (min(a.zetas) < 0, '--zetas ≥ 0'), (a.df_req <= 0, '--df-req > 0'), (not a.nu > 0, '--nu > 0'),
              (not 0 <= a.m_luft < np.inf, '--m-luft ≥ 0 (endlich, in g)'),
              (not 0 <= a.J_luft < np.inf, '--J-luft ≥ 0 (endlich, in kg·m²)')]
     for falsch, text in pruef:
