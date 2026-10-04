@@ -33,7 +33,9 @@ ist mit dem Arbeitspapier v2.4 (Abschnitt 4.8) zurückgezogen. Die alten Gleichu
 ## Zwei Forschungslinien
 
 - **Linie A (primär):** Wellenformstatistik der einseitigen Kontaktkraft eines *ruhenden* Körpers.
-  Kein Effektanspruch; ⟨N⟩ = M·g als Erhaltungs-Nullgröße. Alles in diesem Repository gehört zu Linie A.
+  Kein Effektanspruch; ⟨N⟩ = M·g als Erhaltungs-Nullgröße. Dokumente, Code und Daten dieses Repositorys gehören
+  zu Linie A; die Kontrollrechnungen zu Linie B in [`rechnungen/linie_b/`](rechnungen/linie_b/) sind als solche
+  gekennzeichnet.
 - **Linie B (optional, separate Apparatur):** gerichtete Nettobewegung durch Impulsübertrag an ein
   umgebendes Medium (Luft); das Medium ist der Reaktionspartner, das Vakuum der Nullfall. Linie B ist
   hier noch nicht abgelegt.
@@ -54,6 +56,7 @@ ist mit dem Arbeitspapier v2.4 (Abschnitt 4.8) zurückgezogen. Die alten Gleichu
 | [`code/`](code/) | Simulations-Engine ([`pcmms_v3a_phasen_sweep.py`](code/pcmms_v3a_phasen_sweep.py)), 2°-Feinsweep ([`finesweep.py`](code/finesweep.py)), analytische Lösung für den liftoff-freien Bereich ([`linear_solver.py`](code/linear_solver.py)), Auslegungswerkzeug für den Arbeitspunkt mit Zellkräften ([`auslegung.py`](code/auslegung.py); Präregistrierung v2 §12, Werkzeug 2), ereignisgenauer Löser mit Einzugsprüfung für Liftoff und Hüpfzustände ([`ereignisloeser.py`](code/ereignisloeser.py)), Attraktorkarten des V1-Kandidaten ([`einzugsgebiete.py`](code/einzugsgebiete.py); Ergebnisse in [`docs/einzugsgebiete_v1_kandidat.md`](docs/einzugsgebiete_v1_kandidat.md)) und Abbildungen ([`plot_figures.py`](code/plot_figures.py)); Tests in [`tests/`](tests/) |
 | [`docs/figures/`](docs/figures/) | Abbildungen aus den Simulationsdaten, je in heller und dunkler Fassung |
 | [`data/`](data/) | Simulationsausgaben: 19×19-Phasensweep, 2°-Feinsweep und Attraktorkarten des V1-Kandidaten ([`data/README.md`](data/README.md)) |
+| [`rechnungen/`](rechnungen/) | Rechen- und Prüfskripte der Gesamtprojektanalyse 10/2026 mit gespeicherten Ergebnissen und Protokollen: Auslegung, Engine-Prüfung, Kippmoment, Statistik, Symmetrie und Randterm, Linie-B-Kontrollrechnungen, Bewertungen ([`rechnungen/README.md`](rechnungen/README.md); Simulation und Analytik, historischer Stand 02.10.2026) |
 
 Die Präregistrierung v2 für die Messkampagne liegt als [Entwurf](docs/praeregistrierung_v2_entwurf.md) vor (nicht eingefroren, nicht registriert).
 Die Abnahme der Werkzeuge für Auslegung und ereignisgenaue Rechnung dokumentiert [`docs/abnahme_ap02_ap03.md`](docs/abnahme_ap02_ap03.md).

@@ -13,6 +13,8 @@ Lizenz dieses Ordners: CC BY 4.0, siehe [`../LICENSE-CC-BY-4.0`](../LICENSE-CC-B
 5. `literaturabgleich_2026-09-12.md` — wo PCMMS in der Ratchet-, Tribologie- und Kontaktdynamik-Literatur steht.
 6. `neuheitsgrad.md`, `einordnung.md`, `zehn_fragen.md` — Abgrenzung und Antworten auf die üblichen Einwände.
 7. `archiv_vermerk_kernhypothese_v3.md` — der dokumentierte Rückzug der früheren Hypothese.
+8. [`../rechnungen/README.md`](../rechnungen/README.md) — Rechen- und Prüfskripte der Gesamtprojektanalyse
+   10/2026 mit Ergebnissen und Protokollen (Simulation und Analytik, Stand 02.10.2026).
 
 **Zurückgezogen** sind frühere Aussagen zu einer Mittelwertverschiebung (Ursache: Kontaktmodell mit
 vorgeschriebener Eindrückung; Archiv-Vermerk), zu einer gerichteten Netto-Impulsübertragung ohne äußeren
