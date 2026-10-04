@@ -1,0 +1,8 @@
+=== AUS-13: E1 an V1-Parametern (μ = 0,4615, Hub 8 mm, K = 1,5e6 N/m, ζ = 0,05), synchron, Standardstart ===
+  f = 12 Hz: lineares F_min = +1.057 N; λ = 0.000 %, F_max = 16.3 N (3·Mg), Kontaktbeginne/Periode = 0.000  (1 s)
+  f = 13 Hz: lineares F_min = +0.139 N; λ = 0.000 %, F_max = 17.9 N (3·Mg), Kontaktbeginne/Periode = 0.000  (2 s)
+  f = 14 Hz: lineares F_min = -0.918 N; λ = 98.596 %, F_max = 700.5 N (110·Mg), Kontaktbeginne/Periode = 0.500  (3 s)
+  f = 16 Hz: lineares F_min = -3.161 N; λ = 98.233 %, F_max = 1120.8 N (176·Mg), Kontaktbeginne/Periode = 0.537  (4 s)
+  Kontrolle 14 Hz mit h/2: λ = 98.596 %, F_max = 703.0 N
+  Kontrolle 14 Hz, 30 s, Fenster 20–30 s: λ = 98.596 %, F_max = 698.1 N
+Rechenzeit 9 s

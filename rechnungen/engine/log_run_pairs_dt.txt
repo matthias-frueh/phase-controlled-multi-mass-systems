@@ -1,0 +1,2 @@
+Segment 0: 48 Läufe, 500 Zyklen, dt = 50.0 µs, 138 s
+Segment 1: 48 Läufe, 500 Zyklen, dt = 50.0 µs, 130 s

@@ -1,0 +1,4 @@
+RK4 200 s (442 s): lambda je 10 s: 44.46 43.84 43.84 43.84 43.84 43.84 43.84 43.83 43.84 43.84 43.84 43.84 43.84 43.84 43.84 43.84 43.84 43.84 43.84 43.85
+RK4 20-30 s: lambda 43.843 %, gamma1 +0.7073; Zustand bei 30 s z = -1.524806e-04, v = 0.055137
+exakt ab RK4-Zustand 30 s [171 s]: 30-35 s: lambda 43.866 %, gamma1 +0.7064 | 40-45 s: lambda 43.863 %, gamma1 +0.7067 | 55-60 s: lambda 43.822 %, gamma1 +0.7078
+exakt ab Standardstart [13 s]: 5-10 s: lambda 75.805 %, gamma1 +1.6966 | 15-20 s: lambda 75.805 %, gamma1 +1.6966

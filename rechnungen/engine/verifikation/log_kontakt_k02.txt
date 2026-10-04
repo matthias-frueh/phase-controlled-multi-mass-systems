@@ -1,0 +1,28 @@
+   (120,240) Phase 0 dz' +3.0: lam_end 0.0000, F_min_end 5.3304, lam_max 100.0
+   (120,240) Phase 0 dz' -3.0: lam_end 0.0000, F_min_end 5.3304, lam_max 100.0
+   (120,240) Phase 0 dz' +1.0: lam_end 0.0000, F_min_end 5.3304, lam_max 100.0
+   (120,240) Phase 0 dz' -1.0: lam_end 0.0000, F_min_end 5.3304, lam_max 100.0
+   (120,240) Phase 0 dz' +0.3: lam_end 0.0000, F_min_end 5.3304, lam_max 69.3
+   (120,240) Phase 0 dz' -0.3: lam_end 0.0000, F_min_end 5.3304, lam_max 38.9
+   (120,240) Phase 0.5 dz' +3.0: lam_end 0.0000, F_min_end 5.3304, lam_max 100.0
+   (120,240) Phase 0.5 dz' -3.0: lam_end 0.0000, F_min_end 5.3304, lam_max 100.0
+   (120,240) Phase 0.5 dz' +1.0: lam_end 0.0000, F_min_end 5.3304, lam_max 100.0
+   (120,240) Phase 0.5 dz' -1.0: lam_end 0.0000, F_min_end 5.3304, lam_max 98.4
+   (120,240) Phase 0.5 dz' +0.3: lam_end 0.0000, F_min_end 5.3304, lam_max 70.4
+   (120,240) Phase 0.5 dz' -0.3: lam_end 0.0000, F_min_end 5.3304, lam_max 42.7
+   (113.684,227.368) Phase 0 dz' +3.0: lam_end 0.0000, F_min_end 2.8821, lam_max 100.0
+   (113.684,227.368) Phase 0 dz' -3.0: lam_end 0.0000, F_min_end 2.8821, lam_max 100.0
+   (113.684,227.368) Phase 0 dz' +1.0: lam_end 0.0000, F_min_end 2.8821, lam_max 100.0
+   (113.684,227.368) Phase 0 dz' -1.0: lam_end 0.0000, F_min_end 2.8821, lam_max 97.8
+   (113.684,227.368) Phase 0 dz' +0.3: lam_end 0.0000, F_min_end 2.8821, lam_max 69.1
+   (113.684,227.368) Phase 0 dz' -0.3: lam_end 0.0000, F_min_end 2.8821, lam_max 41.0
+   (113.684,227.368) Phase 0.5 dz' +3.0: lam_end 0.0000, F_min_end 2.8821, lam_max 100.0
+   (113.684,227.368) Phase 0.5 dz' -3.0: lam_end 0.0000, F_min_end 2.8821, lam_max 100.0
+   (113.684,227.368) Phase 0.5 dz' +1.0: lam_end 0.0000, F_min_end 2.8821, lam_max 100.0
+   (113.684,227.368) Phase 0.5 dz' -1.0: lam_end 0.0000, F_min_end 2.8821, lam_max 99.4
+   (113.684,227.368) Phase 0.5 dz' +0.3: lam_end 0.0000, F_min_end 2.8821, lam_max 70.3
+   (113.684,227.368) Phase 0.5 dz' -0.3: lam_end 0.0000, F_min_end 2.8821, lam_max 43.9
+Kontrolle P_0 = 0.00e+00+0.00e+00j (analytisch 0), |P_1| = 7.482475, |P_2| = 2.466055 m/s^2
+(b) |mu| = exp(-C T/2M) = exp(-1.2308) = 0.2921; tau = 2M/C = 0.08125 s; 10 tau = 0.8125 s; zeta = 0.09923, f_n = 19.741 Hz, 1/(2 pi zeta f_n) = 0.08125 s
+(c) Stöße (120,240): ph0 +3.0: lam_end 0.000 (max 100 %); ph0 -3.0: lam_end 0.000 (max 100 %); ph0 +1.0: lam_end 0.000 (max 100 %); ph0 -1.0: lam_end 0.000 (max 100 %); ph0 +0.3: lam_end 0.000 (max 69 %); ph0 -0.3: lam_end 0.000 (max 39 %); ph0.5 +3.0: lam_end 0.000 (max 100 %); ph0.5 -3.0: lam_end 0.000 (max 100 %); ph0.5 +1.0: lam_end 0.000 (max 100 %); ph0.5 -1.0: lam_end 0.000 (max 98 %); ph0.5 +0.3: lam_end 0.000 (max 70 %); ph0.5 -0.3: lam_end 0.000 (max 43 %)  -> alle zurück in Kontakt: True
+(c) Stöße (113.684,227.368): ph0 +3.0: lam_end 0.000 (max 100 %); ph0 -3.0: lam_end 0.000 (max 100 %); ph0 +1.0: lam_end 0.000 (max 100 %); ph0 -1.0: lam_end 0.000 (max 98 %); ph0 +0.3: lam_end 0.000 (max 69 %); ph0 -0.3: lam_end 0.000 (max 41 %); ph0.5 +3.0: lam_end 0.000 (max 100 %); ph0.5 -3.0: lam_end 0.000 (max 100 %); ph0.5 +1.0: lam_end 0.000 (max 100 %); ph0.5 -1.0: lam_end 0.000 (max 99 %); ph0.5 +0.3: lam_end 0.000 (max 70 %); ph0.5 -0.3: lam_end 0.000 (max 44 %)  -> alle zurück in Kontakt: True

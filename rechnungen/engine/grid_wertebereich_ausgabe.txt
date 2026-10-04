@@ -1,0 +1,7 @@
+Archiv (CSV)           λ: Median  32.27 %, Max  76.22 % | γ1: Min -0.288, Median 0.866, Max 1.979 | A: Median 2.445, Max 6.928 | Fmax: Median 21.97, Max 50.55 N | λ > 74 %: 142 Punkte | γ1 < 0: 36
+std 5-15 s             λ: Median  32.27 %, Max  76.22 % | γ1: Min -0.288, Median 0.866, Max 1.979 | A: Median 2.445, Max 6.928 | Fmax: Median 21.97, Max 50.55 N | λ > 74 %: 138 Punkte | γ1 < 0: 36
+std 30-40 s            λ: Median  32.27 %, Max  76.22 % | γ1: Min -0.288, Median 0.866, Max 1.968 | A: Median 2.445, Max 6.928 | Fmax: Median 21.97, Max 50.55 N | λ > 74 %: 140 Punkte | γ1 < 0: 36
+imp 5-15 s             λ: Median  44.86 %, Max  76.22 % | γ1: Min -0.288, Median 1.012, Max 1.984 | A: Median 2.694, Max 7.081 | Fmax: Median 23.56, Max 51.53 N | λ > 74 %: 165 Punkte | γ1 < 0: 36
+imp 30-40 s            λ: Median  44.87 %, Max  76.21 % | γ1: Min -0.288, Median 1.012, Max 1.995 | A: Median 2.696, Max 6.928 | Fmax: Median 23.57, Max 50.55 N | λ > 74 %: 165 Punkte | γ1 < 0: 36
+ramp2 5-15 s           λ: Median  27.95 %, Max  76.22 % | γ1: Min -0.288, Median 0.784, Max 1.984 | A: Median 2.377, Max 7.091 | Fmax: Median 21.53, Max 51.59 N | λ > 74 %: 116 Punkte | γ1 < 0: 36
+ramp2 30-40 s          λ: Median  27.95 %, Max  76.22 % | γ1: Min -0.288, Median 0.785, Max 1.995 | A: Median 2.377, Max 6.904 | Fmax: Median 21.53, Max 50.40 N | λ > 74 %: 119 Punkte | γ1 < 0: 36

@@ -1,0 +1,5 @@
+Teil 1: 40 Zufallsfälle μ ∈ [0,2; 1], K ∈ [1e4; 3e6], ζ ∈ {0,02…0,2}, f ∈ {8…14} Hz: max|ΔF_min| = 2.5e-06 N, max|ΔF_max| (gültige Fälle) = 1.0e-06 N
+  (linear_solver: N = Mg + μ·M·irfft(P·Φ/3·H), H mit Gesamtmasse M; vk_lib: Q = Σ (μM/3)·a_j, Gesamtmasse M im Impulssatz – unabhängig hergeleitet)
+Teil 2: μ = 1.0: Kontaktanteil (1°-Raster, F_min > 0 und x_max < 0) = 4.24 %  (3 s)
+Teil 2: μ = 0.5: Kontaktanteil (1°-Raster, F_min > 0 und x_max < 0) = 48.59 %  (5 s)
+Teil 2: μ = 0.4: Kontaktanteil (1°-Raster, F_min > 0 und x_max < 0) = 71.84 %  (8 s)

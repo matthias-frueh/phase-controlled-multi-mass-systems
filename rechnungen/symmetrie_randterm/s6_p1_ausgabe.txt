@@ -1,0 +1,5 @@
+HS (0.0,208.421) p1 30-40 s: lambda 75.093 %, dv_S +4.94e-05 m/s, max|v_S| letzte Periode 0.3791 m/s, v_S(Zyklusbeginn) Streuung 30-40 s 4.02e-04 m/s, F_max 38.491 N, F_min 0.0000 N
+S0 (0.0,0.0) p1 30-40 s: lambda 75.786 %, dv_S -1.31e-04 m/s, max|v_S| letzte Periode 0.5282 m/s, v_S(Zyklusbeginn) Streuung 30-40 s 6.02e-02 m/s, F_max 41.124 N, F_min 0.0000 N
+L1 (157.3,264.0) p1 30-40 s: lambda 12.400 %, dv_S -3.88e-14 m/s, max|v_S| letzte Periode 0.1268 m/s, v_S(Zyklusbeginn) Streuung 30-40 s 6.43e-14 m/s, F_max 12.983 N, F_min 0.0000 N
+K1 (110.0,234.0) p1 30-40 s: lambda 0.000 %, dv_S +1.89e-15 m/s, max|v_S| letzte Periode 0.0309 m/s, v_S(Zyklusbeginn) Streuung 30-40 s 3.09e-14 m/s, F_max 8.578 N, F_min 3.9896 N
+Laufzeit 53 s

@@ -1,0 +1,2 @@
+[  13.4 s] L4 mech 6 % / 0,6°        kopplung x=0.20: P(fals)=1.000 P(best)=0.000 P(PB1)=0.000 P(IUT)=0.000 P(MET)=1.000 u_F=17.81 u_N2=9.16 mN nu_F=36.0 q95max|z0|=27.82 corr=0.99
+[  27.0 s] L4 mech 6 % / 0,6°        kopplung x=0.30: P(fals)=1.000 P(best)=0.000 P(PB1)=0.000 P(IUT)=0.000 P(MET)=1.000 u_F=16.98 u_N2=8.79 mN nu_F=33.9 q95max|z0|=41.22 corr=0.99

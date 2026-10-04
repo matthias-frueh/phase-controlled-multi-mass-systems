@@ -1,0 +1,13 @@
+=== Analytik zum Hüpfzustand (V1 synchron) ===
+  ζ = 0.02: e_KV(Formel) = 0.939
+     Existenz 1-periodischer Orbit (Flugzeit T, momentaner Stoß): nötig max ṡ ≥ gT(1−e)/(2(1+e)) = 0.0154 m/s; vorhanden μ·π·Hub·f = 0.1160 m/s → existiert; Aufprallgeschwindigkeit gT/(1+e) = 0.506 m/s, √(KM)·v = 500 N
+  ζ = 0.05: e_KV(Formel) = 0.854
+     Existenz 1-periodischer Orbit (Flugzeit T, momentaner Stoß): nötig max ṡ ≥ gT(1−e)/(2(1+e)) = 0.0385 m/s; vorhanden μ·π·Hub·f = 0.1160 m/s → existiert; Aufprallgeschwindigkeit gT/(1+e) = 0.529 m/s, √(KM)·v = 522 N
+  ζ = 0.1: e_KV(Formel) = 0.729
+     Existenz 1-periodischer Orbit (Flugzeit T, momentaner Stoß): nötig max ṡ ≥ gT(1−e)/(2(1+e)) = 0.0768 m/s; vorhanden μ·π·Hub·f = 0.1160 m/s → existiert; Aufprallgeschwindigkeit gT/(1+e) = 0.567 m/s, √(KM)·v = 560 N
+  ζ = 0.2: e_KV(Formel) = 0.527
+     Existenz 1-periodischer Orbit (Flugzeit T, momentaner Stoß): nötig max ṡ ≥ gT(1−e)/(2(1+e)) = 0.1521 m/s; vorhanden μ·π·Hub·f = 0.1160 m/s → existiert nicht; Aufprallgeschwindigkeit gT/(1+e) = 0.643 m/s, √(KM)·v = 635 N
+  KV-Stoß ζ = 0.02: v_in = 0.506 m/s → F_peak = 485 N (76·Mg), Kontaktdauer ≈ 2.04 ms
+  KV-Stoß ζ = 0.05: v_in = 0.529 m/s → F_peak = 486 N (76·Mg), Kontaktdauer ≈ 2.00 ms
+  KV-Stoß ζ = 0.1: v_in = 0.567 m/s → F_peak = 493 N (77·Mg), Kontaktdauer ≈ 1.95 ms
+Rechenzeit 0 s

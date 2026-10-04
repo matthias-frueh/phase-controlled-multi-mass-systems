@@ -1,0 +1,11 @@
+Lauf 19 s
+Fenster   5.0- 15.0 s: N1 = 6.333041 N  delta =   -6815.5 ppm  R =   -6737.7 ppm  Q+E =   -77.7 ppm  dv_S = -0.66097 m/s  R*T = -67377 ppm s
+Fenster   5.0- 35.0 s: N1 = 6.361711 N  delta =   -2319.3 ppm  R =   -2246.0 ppm  Q+E =   -73.3 ppm  dv_S = -0.66100 m/s  R*T = -67380 ppm s
+Fenster   5.0- 75.0 s: N1 = 6.369854 N  delta =   -1042.3 ppm  R =    -962.5 ppm  Q+E =   -79.8 ppm  dv_S = -0.66097 m/s  R*T = -67377 ppm s
+Fenster   5.0-155.0 s: N1 = 6.373122 N  delta =    -529.8 ppm  R =    -449.1 ppm  Q+E =   -80.7 ppm  dv_S = -0.66089 m/s  R*T = -67369 ppm s
+Fenster  25.0- 35.0 s: N1 = 6.376125 N  delta =     -58.9 ppm  R =      -0.4 ppm  Q+E =   -58.5 ppm  dv_S = -0.00004 m/s  R*T = -4 ppm s
+Fenster  45.0- 55.0 s: N1 = 6.376115 N  delta =     -60.4 ppm  R =      -1.9 ppm  Q+E =   -58.5 ppm  dv_S = -0.00019 m/s  R*T = -19 ppm s
+Fenster  95.0-105.0 s: N1 = 6.375922 N  delta =     -90.6 ppm  R =      +1.4 ppm  Q+E =   -92.0 ppm  dv_S = +0.00014 m/s  R*T = +14 ppm s
+Fenster 145.0-155.0 s: N1 = 6.376123 N  delta =     -59.1 ppm  R =      -0.6 ppm  Q+E =   -58.5 ppm  dv_S = -0.00006 m/s  R*T = -6 ppm s
+Tab. 9.3: 6,333041 / 6,361711 / 6,369854 / 6,373122 N
+Potenzfit delta: -0.9451; Potenzfit R: -1.00004; Spannweite R*T 0.017 %

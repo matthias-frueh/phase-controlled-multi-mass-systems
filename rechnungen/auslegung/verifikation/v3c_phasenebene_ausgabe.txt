@@ -1,0 +1,3 @@
+V1: min F_min = 2.7184 N (42.6 % Mg) bei (0°, 0°) [exakt synchron 2.7184 N]; Anteil F_min > 0: 100.0 %; Anteil F_min ≥ 0,25·Mg: 100.0 %  (25 s)
+V2: min F_min = 1.9775 N (31.0 % Mg) bei (0°, 0°) [exakt synchron 1.9775 N]; Anteil F_min > 0: 100.0 %; Anteil F_min ≥ 0,25·Mg: 100.0 %  (49 s)
+V3: min F_min = 2.7879 N (43.7 % Mg) bei (0°, 0°) [exakt synchron 2.7879 N]; Anteil F_min > 0: 100.0 %; Anteil F_min ≥ 0,25·Mg: 100.0 %  (72 s)

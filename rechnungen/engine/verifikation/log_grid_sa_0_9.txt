@@ -1,0 +1,9 @@
+Bahn 5 (Größe 3): ramp2 (14, 14): RK4-S 28.38 -> SA 28.400 % (P2, Blöcke 28.40 28.40 28.40 28.40) | std (14, 14): RK4-S 75.93 -> SA 75.924 % (P1, Blöcke 75.92 75.92 75.92 75.92)  getrennt: True
+Bahn 6 (Größe 3): std (13, 13): RK4-S 18.20 -> SA 18.224 % (P1, Blöcke 18.22 18.22 18.22 18.22) | imp (0, 6): RK4-S 75.59 -> SA 75.589 % (P1, Blöcke 75.59 75.59 75.59 75.59)  getrennt: True
+Bahn 13 (Größe 3): std (13, 0): RK4-S 43.64 -> SA 43.680 % (P-1, Blöcke 43.69 43.73 43.53 43.83) | imp (0, 13): RK4-S 75.70 -> SA 75.697 % (P1, Blöcke 75.70 75.70 75.70 75.70)  getrennt: True
+Bahn 21 (Größe 6): std (16, 15): RK4-S 70.77 -> SA 71.217 % (P3, Blöcke 71.52 70.63 70.91 71.52) | imp (15, 16): RK4-S 76.20 -> SA 76.195 % (P2, Blöcke 76.19 76.19 76.19 76.19)  getrennt: True
+Bahn 23 (Größe 6): ramp2 (5, 18): RK4-S 11.95 -> SA 11.973 % (P1, Blöcke 11.97 11.97 11.97 11.97) | std (14, 13): RK4-S 75.77 -> SA 75.764 % (P1, Blöcke 75.76 75.76 75.76 75.76)  getrennt: True
+Bahn 24 (Größe 6): std (1, 7): RK4-S 21.05 -> SA 21.069 % (P1, Blöcke 21.07 21.07 21.07 21.07) | imp (6, 18): RK4-S 75.32 -> SA 75.312 % (P1, Blöcke 75.31 75.31 75.31 75.31)  getrennt: True
+Bahn 31 (Größe 6): std (13, 18): RK4-S 44.60 -> SA 44.628 % (P1, Blöcke 44.63 44.63 44.63 44.63) | imp (5, 6): RK4-S 75.81 -> SA 75.805 % (P1, Blöcke 75.81 75.81 75.81 75.81)  getrennt: True
+Bahn 33 (Größe 6): std (1, 16): RK4-S 71.72 -> SA 71.944 % (P3, Blöcke 72.13 71.68 71.76 72.13) | imp (15, 18): RK4-S 76.20 -> SA 76.195 % (P2, Blöcke 76.19 76.19 76.19 76.19)  getrennt: True
+Bahn 35 (Größe 6): ramp2 (4, 2): RK4-S 71.04 -> SA 71.040 % (P3, Blöcke 71.09 71.10 70.99 71.09) | ramp2 (17, 15): RK4-S 76.22 -> SA 76.216 % (P-1, Blöcke 76.22 76.22 76.22 76.22)  getrennt: True

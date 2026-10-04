@@ -1,0 +1,19 @@
+RK4 (eigene Engine, frame), Fenster 32-42 s, Q in ppm von Mg:
+  dt/us              L1          K1          HS
+   50.00     -20.8400     +0.0000    -96.1934   E/N: +1.85e-07 +1.85e-07 +1.80e-07
+   25.00     -10.4352     +0.0000    -14.6729   E/N: +4.62e-08 +4.62e-08 +4.83e-08
+   12.50      +5.2227     +0.0000    -19.9391   E/N: -2.31e-08 -2.31e-08 -1.76e-08
+    6.25      +2.6149     +0.0000     -3.6733   E/N: +2.89e-09 +2.89e-09 +3.24e-09
+  HS-Observablen: lam 75.0915 -> 75.0820 -> 75.0846 -> 75.0853;  F_max 38.495 -> 38.483 -> 38.479 -> 38.477
+
+L1 exakt (10 s): <N> letzte Periode = 6.376499999995 N, (<N>-Mg)/Mg = -7.47e-07 ppm; Zustand bei 32,0/32,5/32,9 s: z = [-0.00071855 -0.00071855 -0.00071855], v = [0.04909548 0.04909548 0.04909548]
+  dt =  50.00 us: Q_abtast(exakt) =  -16.1511 ppm | Q_RK4 =  -20.8400 ppm | Aufsetzen theta = 0.241, J = 0.8007 N, Abtastmodell J(theta-1/2)/L  -16.2387 ppm, Stufenmodell  -20.9282 ppm, Schranke J/(3L) = 20.9282 ppm
+  dt =  25.00 us: Q_abtast(exakt) =   -0.5237 ppm | Q_RK4 =  -10.4352 ppm | Aufsetzen theta = 0.483, J = 0.8007 N, Abtastmodell J(theta-1/2)/L   -0.5425 ppm, Stufenmodell  -10.4641 ppm, Schranke J/(3L) = 10.4641 ppm
+  dt =  12.50 us: Q_abtast(exakt) =   +7.2975 ppm | Q_RK4 =   +5.2227 ppm | Aufsetzen theta = 0.965, J = 0.8007 N, Abtastmodell J(theta-1/2)/L   +7.3056 ppm, Stufenmodell   +5.2321 ppm, Schranke J/(3L) = 5.2321 ppm
+  dt =   6.25 us: Q_abtast(exakt) =   +3.3804 ppm | Q_RK4 =   +2.6149 ppm | Aufsetzen theta = 0.931, J = 0.8007 N, Abtastmodell J(theta-1/2)/L   +3.3816 ppm, Stufenmodell   +2.6160 ppm, Schranke J/(3L) = 2.6160 ppm
+
+K1 exakt (9 s): <N> letzte Periode = 6.376499999995 N, (<N>-Mg)/Mg = -8.38e-07 ppm; Zustand bei 32,0/32,5/32,9 s: z = [-0.00082527 -0.00082527 -0.00082527], v = [-0.00841958 -0.00841958 -0.00841958]
+  dt =  50.00 us: Q_abtast(exakt) =   +0.0000 ppm | Q_RK4 =   +0.0000 ppm
+  dt =  25.00 us: Q_abtast(exakt) =   +0.0000 ppm | Q_RK4 =   +0.0000 ppm
+  dt =  12.50 us: Q_abtast(exakt) =   +0.0000 ppm | Q_RK4 =   +0.0000 ppm
+  dt =   6.25 us: Q_abtast(exakt) =   -0.0000 ppm | Q_RK4 =   +0.0000 ppm

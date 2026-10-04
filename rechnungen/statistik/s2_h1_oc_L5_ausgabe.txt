@@ -1,0 +1,9 @@
+[  31.7 s] L5 mech 10 % / 1,0°       exakt    x=0.00: P(fals)=0.002 P(best)=0.000 P(PB1)=0.000 P(IUT)=0.000 P(MET)=0.000 u_F=32.54 u_N2=16.82 mN nu_F=37.1 q95max|z0|=3.95 corr=0.55
+[  61.5 s] L5 mech 10 % / 1,0°       kopplung x=0.01: P(fals)=0.000 P(best)=0.000 P(PB1)=0.000 P(IUT)=0.000 P(MET)=0.000 u_F=32.55 u_N2=16.88 mN nu_F=37.2 q95max|z0|=3.86 corr=0.59
+[  89.8 s] L5 mech 10 % / 1,0°       kopplung x=0.03: P(fals)=0.057 P(best)=0.000 P(PB1)=0.000 P(IUT)=0.000 P(MET)=0.000 u_F=31.89 u_N2=16.55 mN nu_F=37.1 q95max|z0|=4.77 corr=0.69
+[ 119.5 s] L5 mech 10 % / 1,0°       kopplung x=0.10: P(fals)=0.998 P(best)=0.000 P(PB1)=0.000 P(IUT)=0.000 P(MET)=0.000 u_F=30.77 u_N2=16.08 mN nu_F=37.0 q95max|z0|=9.30 corr=0.92
+[ 147.9 s] L5 mech 10 % / 1,0°       N2       x=0.01: P(fals)=0.002 P(best)=0.000 P(PB1)=0.000 P(IUT)=0.000 P(MET)=0.000 u_F=32.30 u_N2=16.87 mN nu_F=37.1 q95max|z0|=3.77 corr=0.56
+[ 179.0 s] L5 mech 10 % / 1,0°       N2       x=0.03: P(fals)=0.000 P(best)=0.000 P(PB1)=0.000 P(IUT)=0.000 P(MET)=0.000 u_F=32.34 u_N2=17.10 mN nu_F=37.1 q95max|z0|=3.83 corr=0.55
+[ 207.7 s] L5 mech 10 % / 1,0°       N2       x=0.10: P(fals)=0.013 P(best)=0.000 P(PB1)=0.000 P(IUT)=0.000 P(MET)=0.000 u_F=32.09 u_N2=17.79 mN nu_F=37.1 q95max|z0|=4.22 corr=0.65
+[ 237.2 s] L5 mech 10 % / 1,0°       drift    x=0.01: P(fals)=0.000 P(best)=0.000 P(PB1)=0.000 P(IUT)=0.000 P(MET)=0.000 u_F=32.56 u_N2=16.97 mN nu_F=37.1 q95max|z0|=3.93 corr=0.56
+[ 269.3 s] L5 mech 10 % / 1,0°       drift    x=0.03: P(fals)=0.002 P(best)=0.000 P(PB1)=0.000 P(IUT)=0.000 P(MET)=0.000 u_F=33.04 u_N2=17.08 mN nu_F=37.1 q95max|z0|=4.49 corr=0.49

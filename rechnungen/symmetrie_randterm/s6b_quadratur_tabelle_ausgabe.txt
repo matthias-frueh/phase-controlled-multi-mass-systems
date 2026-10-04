@@ -1,0 +1,98 @@
+
+=== HS (0.0, 208.421), Fenster 35-45 s (100 Perioden) ===
+Groesse                                 dt=50 us        dt=25 us      dt=12.5 us      dt=6.25 us
+Q Linksrechteck                         -54.3141        -6.28348        -18.8895        -2.09861
+Q Trapez                                -54.3141        -6.28348        -18.8895        -2.09861
+Q Modell RK4-Stufen                     -53.0084        -5.83313        -18.8028        -2.07114
+Q - Modell                              -1.30567       -0.450344      -0.0867668      -0.0274636
+Q Modell exakte Abtastung               -30.9871        -4.05521        -12.7503      -0.0287157
+Schranke J/3 je Aufsetzer                209.911         104.967         52.4883         26.2448
+delta RK4-gewichtet                    0.0921611        -1.50121       -0.410653       0.0876806
+R / N                                4.07616e-07    -9.62075e-06    -2.60096e-06      5.5586e-07
+E = N_RK4 - Mg - R / N               1.80049e-07     4.83057e-08    -1.75657e-08     3.23579e-09
+Anteil theta<1/2                            0.63            0.53            0.68            0.54
+Aufsetzer im Fenster                         100             100             100             100
+mittl. Sprung J / N                      8.03097         8.03189          8.0326          8.0328
+lambda / %                               75.0885         75.0845         75.0853         75.0851
+Schiefe                                  1.65801         1.65799         1.65799         1.65798
+F_max / N                                38.4934         38.4842         38.4786         38.4768
+F_min / N                                      0               0               0               0
+|N_1| / N                                11.9676         11.9681          11.968         11.9682
+|N_2| / N                                  9.821         9.82127         9.82122         9.82129
+/home/user/phase-controlled-multi-mass-systems/_analyse/p2/symmetrie_randterm/s6b_quadratur_tabelle.py:22: RuntimeWarning: invalid value encountered in log2
+  print('Ordnung E (log2 Verhaeltnis aufeinanderfolgender dt): ' + ' '.join(f'{np.log2(E[i] / E[i + 1]):.2f}' for i in range(3)))
+Ordnung E (log2 Verhaeltnis aufeinanderfolgender dt): 1.90 nan nan
+Ordnung der Schranke: 1.00 1.00 1.00
+|Q - Modell| je dt (ppm): 1.306 0.450 0.087 0.027;  Ordnung: 1.54 2.38 1.66
+Q/Schranke je dt: -0.259 -0.060 -0.360 -0.080
+
+=== S0 (0.0, 0.0), Fenster 35-45 s (100 Perioden) ===
+Groesse                                 dt=50 us        dt=25 us      dt=12.5 us      dt=6.25 us
+Q Linksrechteck                         -13.4924            6.82        -7.76371        -2.81756
+Q Trapez                                -13.4924            6.82        -7.76371        -2.81756
+Q Modell RK4-Stufen                     -11.7468         7.24078        -7.65451        -2.79171
+Q - Modell                              -1.74561       -0.420779       -0.109206      -0.0258545
+Q Modell exakte Abtastung                5.07899        -1.64406        -1.99152        -3.45942
+Schranke J/3 je Aufsetzer                222.508          111.26         55.6338         27.8174
+delta RK4-gewichtet                      1.32907       0.0271288       -0.293052       0.0679913
+R / N                                8.47481e-06     1.72987e-07    -1.86864e-06     4.33547e-07
+E = N_RK4 - Mg - R / N               4.03506e-13     2.71638e-14     4.19914e-15    -7.00773e-15
+Anteil theta<1/2                            0.53            0.47            0.57            0.55
+Aufsetzer im Fenster                         100             100             100             100
+mittl. Sprung J / N                      8.51294         8.51342         8.51397         8.51413
+lambda / %                               75.7855         75.7878         75.7876         75.7878
+Schiefe                                  1.70546         1.70545         1.70545         1.70545
+F_max / N                                 41.124         41.1183         41.1122         41.1095
+F_min / N                                      0               0               0               0
+|N_1| / N                                7.58123         7.57799         7.57908         7.57905
+|N_2| / N                                2.11383         2.12084         2.11835         2.11849
+Ordnung der Schranke: 1.00 1.00 1.00
+|Q - Modell| je dt (ppm): 1.746 0.421 0.109 0.026;  Ordnung: 2.05 1.95 2.08
+Q/Schranke je dt: -0.061 +0.061 -0.140 -0.101
+
+=== L1 (157.3, 264.0), Fenster 35-45 s (100 Perioden) ===
+Groesse                                 dt=50 us        dt=25 us      dt=12.5 us      dt=6.25 us
+Q Linksrechteck                           -20.84        -10.4352         5.22275         2.61488
+Q Trapez                                  -20.84        -10.4352         5.22275         2.61488
+Q Modell RK4-Stufen                     -20.7278        -10.3657         5.23415         2.61699
+Q - Modell                             -0.112259      -0.0694603      -0.0114016     -0.00211002
+Q Modell exakte Abtastung               -16.7595        -1.58864         7.07102         3.29702
+Schranke J/3 je Aufsetzer                20.8751         10.4377         5.21871         2.61281
+delta RK4-gewichtet                    0.0289975      0.00724936     -0.00362468     0.000453084
+R / N                                1.55154e-16     1.69587e-16     1.73195e-16     1.84019e-16
+E = N_RK4 - Mg - R / N               1.84902e-07     4.62255e-08    -2.31128e-08     2.88909e-09
+Anteil theta<1/2                               1               1               0               0
+Aufsetzer im Fenster                         100             100             100             100
+mittl. Sprung J / N                     0.798659        0.798674         0.79865        0.799707
+lambda / %                                  12.4            12.4         12.3875         12.3875
+Schiefe                                -0.168607       -0.168565       -0.168432       -0.168442
+F_max / N                                12.9831         12.9828         12.9833         12.9833
+F_min / N                                      0               0               0               0
+|N_1| / N                                2.69669         2.69661          2.6965         2.69652
+|N_2| / N                                4.56702         4.56672         4.56692           4.567
+Ordnung E (log2 Verhaeltnis aufeinanderfolgender dt): 2.00 nan nan
+Ordnung der Schranke: 1.00 1.00 1.00
+|Q - Modell| je dt (ppm): 0.112 0.069 0.011 0.002;  Ordnung: 0.69 2.61 2.43
+Q/Schranke je dt: -0.998 -1.000 +1.001 +1.001
+
+=== K1 (110.0, 234.0), Fenster 35-45 s (100 Perioden) ===
+Groesse                                 dt=50 us        dt=25 us      dt=12.5 us      dt=6.25 us
+Q Linksrechteck                      7.72499e-07     4.02546e-08     -1.2536e-09     1.23968e-08
+Q Trapez                             7.72499e-07     4.02546e-08     -1.2536e-09     1.23968e-08
+Q Modell RK4-Stufen                            0               0               0               0
+Q - Modell                           7.72499e-07     4.02546e-08     -1.2536e-09     1.23968e-08
+Q Modell exakte Abtastung                      0               0               0               0
+Schranke J/3 je Aufsetzer                      0               0               0               0
+delta RK4-gewichtet                    0.0289975      0.00724936     -0.00362468     0.000453076
+R / N                                2.11983e-17     1.21778e-17     3.11209e-17     1.68008e-17
+E = N_RK4 - Mg - R / N               1.84902e-07     4.62255e-08    -2.31128e-08     2.88904e-09
+Anteil theta<1/2                             nan             nan             nan             nan
+Aufsetzer im Fenster                           0               0               0               0
+mittl. Sprung J / N                            0               0               0               0
+lambda / %                                     0               0               0               0
+Schiefe                                 -0.18016        -0.18016        -0.18016        -0.18016
+F_max / N                                8.57755         8.57755         8.57756         8.57756
+F_min / N                                 3.9896          3.9896         3.98959         3.98959
+|N_1| / N                               0.644383        0.644382        0.644382        0.644382
+|N_2| / N                                1.70536         1.70536         1.70536         1.70536
+Ordnung E (log2 Verhaeltnis aufeinanderfolgender dt): 2.00 nan nan

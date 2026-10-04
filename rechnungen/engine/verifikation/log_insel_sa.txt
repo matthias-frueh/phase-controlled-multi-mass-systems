@@ -1,0 +1,8 @@
+SA std: lam 75.8154 %, gamma1 1.69813, F_min 0.0000, F_max 39.473 N, Aufsetzer/Zyklus 1.00; Periode 1, Einschwingen 7.9 s (Tol 1e-9 m/s)
+SA imp: lam 75.8154 %, gamma1 1.69813, F_min 0.0000, F_max 39.473 N, Aufsetzer/Zyklus 1.00; Periode 1, Einschwingen 7.9 s (Tol 1e-9 m/s)
+SA orb: lam 0.0000 %, gamma1 0.82305, F_min 0.3665, F_max 19.812 N, Aufsetzer/Zyklus 0.00; Periode 1, Einschwingen 0.0 s (Tol 1e-9 m/s)
+Floquet (std-Zustand): Fixpunkt z=10.100853 mm, z'=-0.170574 m/s, |mu| = 0.7426, 0.7426, Residuen 1e-11, 8e-13; Orbit: lam 75.8154 %, gamma1 1.69813, F_min 0.0000, F_max 39.473 N, Aufsetzer/Zyklus 1.00
+Floquet (orb-Zustand): Fixpunkt z=-1.944011 mm, z'=0.023026 m/s, |mu| = 0.2921, 0.2921, Residuen 1e-13; Orbit: lam 0.0000 %, gamma1 0.82305, F_min 0.3665, F_max 19.812 N, Aufsetzer/Zyklus 0.00
+Stöße Phase 0.0: +0.03: 0.00 %; -0.03: 0.00 %; +0.05: 0.00 %; -0.05: 0.00 %; +0.07: 0.00 %; -0.07: 0.00 %; +0.10: 0.00 %; -0.10: 75.82 %; +0.20: 0.00 %; -0.20: 75.82 %; +0.30: 0.00 %; -0.30: 75.82 %
+Stöße Phase 0.5: +0.03: 0.00 %; -0.03: 0.00 %; +0.05: 0.00 %; -0.05: 0.00 %; +0.07: 75.82 %; -0.07: 0.00 %; +0.10: 75.82 %; -0.10: 0.00 %; +0.20: 75.82 %; -0.20: 75.82 %; +0.30: 75.82 %; -0.30: 75.82 %
+M*g*T = 0.6377 N*s; M*0.05 = 0.0325, M*0.10 = 0.0650 N*s

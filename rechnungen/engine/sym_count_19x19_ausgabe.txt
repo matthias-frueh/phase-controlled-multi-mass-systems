@@ -1,0 +1,54 @@
+Gruppe geschlossen (6 Elemente). Bahnen: 70; Bahngrößen: {6: 51, 3: 18, 1: 1}
+F_skew   tol=0.0001  verletzte Punkte: (23)  18  (12) 106  (13) 106  volle Gruppe 150   verletzte Bahnen 29/70
+F_skew   tol=0.001   verletzte Punkte: (23)  16  (12)  54  (13)  52  volle Gruppe  72   verletzte Bahnen 14/70
+F_skew   tol=0.01    verletzte Punkte: (23)  12  (12)  38  (13)  38  volle Gruppe  60   verletzte Bahnen 12/70
+F_skew   tol=0.1     verletzte Punkte: (23)   0  (12)  28  (13)  28  volle Gruppe  42   verletzte Bahnen  8/70
+liftoff  tol=0.01    verletzte Punkte: (23)  16  (12) 114  (13) 116  volle Gruppe 160   verletzte Bahnen 30/70
+liftoff  tol=0.1     verletzte Punkte: (23)  14  (12)  42  (13)  42  volle Gruppe  60   verletzte Bahnen 12/70
+liftoff  tol=0.5     verletzte Punkte: (23)   6  (12)  36  (13)  32  volle Gruppe  56   verletzte Bahnen 11/70
+liftoff  tol=1       verletzte Punkte: (23)   4  (12)  32  (13)  28  volle Gruppe  48   verletzte Bahnen  9/70
+F_min    tol=0.0001  verletzte Punkte: (23)   0  (12)   4  (13)   4  volle Gruppe   6   verletzte Bahnen  1/70
+F_min    tol=0.001   verletzte Punkte: (23)   0  (12)   0  (13)   0  volle Gruppe   0   verletzte Bahnen  0/70
+F_min    tol=0.01    verletzte Punkte: (23)   0  (12)   0  (13)   0  volle Gruppe   0   verletzte Bahnen  0/70
+F_min    tol=0.1     verletzte Punkte: (23)   0  (12)   0  (13)   0  volle Gruppe   0   verletzte Bahnen  0/70
+F_mean   tol=1e-05   verletzte Punkte: (23) 148  (12) 264  (13) 260  volle Gruppe 321   verletzte Bahnen 62/70
+F_mean   tol=0.0001  verletzte Punkte: (23) 116  (12) 216  (13) 216  volle Gruppe 311   verletzte Bahnen 60/70
+F_mean   tol=0.001   verletzte Punkte: (23)  12  (12)  26  (13)  26  volle Gruppe  36   verletzte Bahnen  7/70
+F_max    tol=0.001   verletzte Punkte: (23) 114  (12) 206  (13) 212  volle Gruppe 272   verletzte Bahnen 54/70
+F_max    tol=0.01    verletzte Punkte: (23)  22  (12)  58  (13)  64  volle Gruppe  91   verletzte Bahnen 19/70
+F_max    tol=0.1     verletzte Punkte: (23)   4  (12)  38  (13)  38  volle Gruppe  60   verletzte Bahnen 12/70
+F_max    tol=1       verletzte Punkte: (23)   0  (12)  30  (13)  30  volle Gruppe  45   verletzte Bahnen  9/70
+
+Nur Generator (12) [P1-Prüfung], Anzahl Punkte mit |Δ| > tol:
+  F_skew     1e-06:326  1e-05:286  0.0001:106  0.001:54  0.01:38  0.05:30  0.1:28  0.5:20  1:6
+  liftoff    1e-06:234  1e-05:234  0.0001:234  0.001:204  0.01:114  0.05:74  0.1:42  0.5:36  1:32
+  F_min      1e-06:12  1e-05:10  0.0001:4  0.001:0  0.01:0  0.05:0  0.1:0  0.5:0  1:0
+  F_max      1e-06:340  1e-05:332  0.0001:308  0.001:206  0.01:58  0.05:42  0.1:38  0.5:30  1:30
+  F_mean     1e-06:302  1e-05:264  0.0001:216  0.001:26  0.01:8  0.05:0  0.1:0  0.5:0  1:0
+  peak_ratio 1e-06:340  1e-05:320  0.0001:226  0.001:78  0.01:40  0.05:34  0.1:30  0.5:30  1:28
+
+Bahnen nach Spannweite in lambda (Top 20):
+ bahn  groesse                                    punkte  lam_min  lam_max   d_lam   d_skew  d_Fmin    d_Fmax  d_Fmean
+    6        3                       (0,6) (6,0) (13,13)  18.2000  75.5920 57.3920 0.649163     0.0 17.121242 0.000225
+   49        6 (3,7) (4,16) (7,3) (12,15) (15,12) (16,4)  19.0000  75.6325 56.6325 0.951012     0.0 20.843212 0.000383
+   57        6 (3,15) (4,7) (7,4) (12,16) (15,3) (16,12)  22.3625  75.6615 53.2990 0.988564     0.0 18.144473 0.000335
+   45        6 (2,14) (5,7) (7,5) (12,17) (14,2) (17,12)  35.4195  75.6325 40.2130 0.750169     0.0 13.993599 0.005565
+   13        3                       (0,13) (6,6) (13,0)  43.5965  75.6985 32.1020 1.057615     0.0 17.512216 0.000264
+   31        6 (1,14) (5,6) (6,5) (13,18) (14,1) (18,13)  44.6000  75.8050 31.2050 1.011436     0.0 19.145443 0.000709
+   21        6 (1,4) (3,18) (4,1) (15,16) (16,15) (18,3)  71.2160  76.1965  4.9805 0.259530     0.0 10.017190 0.041389
+   33        6 (1,16) (3,4) (4,3) (15,18) (16,1) (18,15)  71.9410  76.1965  4.2555 0.260592     0.0 10.535791 0.006478
+   44        6 (2,13) (6,8) (8,6) (11,17) (13,2) (17,11)  35.5900  37.3210  1.7310 0.057468     0.0  0.016408 0.007209
+   11        3                       (0,11) (8,8) (11,0)  74.3490  75.0865  0.7375 0.013983     0.0  5.517200 0.043650
+   28        6 (1,11) (8,9) (9,8) (10,18) (11,1) (18,10)  37.3945  38.0885  0.6940 0.019691     0.0  0.175474 0.012972
+   10        3                       (0,10) (9,9) (10,0)  38.1335  38.5845  0.4510 0.020315     0.0  0.141582 0.013423
+   51        6 (3,9) (6,16) (9,3) (10,13) (13,10) (16,6)  28.5500  28.6500  0.1000 0.000142     0.0  0.001749 0.000699
+   41        6 (2,10) (8,17) (9,11) (10,2) (11,9) (17,8)  27.5865  27.6860  0.0995 0.008672     0.0  0.406792 0.000594
+   53        6 (3,11) (8,11) (8,16) (11,3) (11,8) (16,8)  24.9000  24.9500  0.0500 0.000034     0.0  0.000225 0.000004
+   38        6 (2,7) (5,17) (7,2) (12,14) (14,12) (17,5)  24.5500  24.6000  0.0500 0.000033     0.0  0.001070 0.000175
+   65        6 (5,10) (5,14) (9,14) (10,5) (14,5) (14,9)  15.8500  15.9000  0.0500 0.000323     0.0  0.001523 0.000364
+   60        6 (4,10) (6,15) (9,13) (10,4) (13,9) (15,6)  23.5000  23.5500  0.0500 0.000080     0.0  0.000317 0.000135
+   24        6 (1,7) (6,18) (7,1) (12,13) (13,12) (18,6)  21.0500  21.1000  0.0500 0.000030     0.0  0.000544 0.000329
+   39        6 (2,8) (6,17) (8,2) (11,13) (13,11) (17,6)  27.9500  28.0000  0.0500 0.000120     0.0  0.000709 0.000582
+
+(23)-Paare (171): mit irgendeiner Differenz > 0 bei CSV-Auflösung: 84; max |dF_mean| = 0.007542 N, max |d_lam| = 1.1665 %, max |d_skew| = 0.034663; Mittel dF_mean = 5.30e-06
+  Liftoff-Anteil der (23)-Paare mit Differenz: min 27.372

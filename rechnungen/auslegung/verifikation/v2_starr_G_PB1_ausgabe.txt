@@ -1,0 +1,34 @@
+=== Starre Grenzwerte G = (Mg − F_min)/(Mg·ε), direkt im Zeitbereich (μ = 1, Referenzhub, 10 Hz) ===
+ε(μ=1) = 1.19062; a_h·TH/TF (Rückholspitze) / a_h = 1.8571
+  Einzelmodul      G = 0.33333 (2000/Per.)  0.33333 (400 000/Per.);  Ĝ = 0.6190
+  Paar Δ=0         G = 0.66667 (2000/Per.)  0.66667 (400 000/Per.);  Ĝ = 1.2381
+  synchron         G = 1.00000 (2000/Per.)  1.00000 (400 000/Per.);  Ĝ = 1.8571
+  (0°,180°)        G = 0.44208 (2000/Per.)  0.44208 (400 000/Per.);  Ĝ = 0.9048
+  Pilot 110/250    G = 0.39589 (2000/Per.)  0.39589 (400 000/Per.);  Ĝ = 0.2257
+  Pilot 130/230    G = 0.34616 (2000/Per.)  0.34616 (400 000/Per.);  Ĝ = 0.2013
+  Pilot 110/252    G = 0.40479 (2000/Per.)  0.40479 (400 000/Per.);  Ĝ = 0.2330
+  Paare Δ = 0…359° (1°): max G = 0.66667 bei Δ = 0°
+  Schnitt: max G = 0.39535 (bei 140°), Spitze bei 120°, ΔG_Zelt = 0.15454 (2000/Per.), 0.15454 (400 000/Per.)
+  2°-Sekanten je Mg·ε: 0.015427 / 0.015428 1/°
+  D_k = max_Schnitt |N_k| / (Mg·ε): 0.148324 / 0.096283 / 0.182188; D_2/ΔF_Zelt = 0.6230
+
+=== AUS-03: PB1 im A4-Beispiel (starr, μ = 0,4) ===
+ε_A4 = 0.47625; F_min(120°) = 5.6452 N; F_min(100°) = 5.1759 N; ΔF_Zelt = 0.4693 N; Δ = 0,25·ΔF = 0.1173 N
+c(ν→∞) = 3.5826, c(19) = 4.3560; u_c ≤ 0.0327 N bzw. 0.0269 N (0.422 % Mg)
+N₂: D₂ = 0.2924 N → u_c ≤ 0.0204 N (ν→∞) bzw. 0.0168 N (ν=19); Verhältnis zu F_min-Anforderung 0.623
+2°-Sekante A4: 0.0468 N/°
+
+=== AUS-08: ε-Fenster und Hubfenster (starr) ===
+ε_sig = 0,4693/(Mg·ΔG) = 0.4763 (= ε_A4 = 0.4762: Kriterium ist "Signal mindestens wie A4")
+ε_max synchron (25 %): 0,75/G_syn = 0,750; PFLICHT: 0,75/max(G_Schnitt, G_Pilot, G_Einzel) = 1.853
+  3×100 g (μ = 0.4615), 10 Hz: Hub ∈ [6.67; 10.50] mm; bei Referenzhub ε = 0.550, ΔF_Zelt = 0.541 N, synchrone Reserve 45.0 %
+  3×50 g (μ = 0.2308), 10 Hz: Hub ∈ [13.33; 21.00] mm; bei Referenzhub ε = 0.275, ΔF_Zelt = 0.271 N, synchrone Reserve 72.5 %
+  3×150 g (μ = 0.6923), 10 Hz: Hub ∈ [4.44; 7.00] mm; bei Referenzhub ε = 0.824, ΔF_Zelt = 0.812 N, synchrone Reserve 17.6 %
+Bedingung (ii) 3f ≤ f_n/2 ⇔ K ≥ M·(12πf)² = 923.8·f² N/m; ρ ≤ 0,05 ⇔ K ≥ 10264·f² N/m (10 Hz: 1.026e+06 N/m)
+Index-Szenario: μ = 1 bei M = 1,95 kg (3×0,65 kg), 2,2 Hz, Referenzhub: ε = 0.0576, ΔF_Zelt = 0.170 N
+
+=== AUS-09: Zellmodell A2.5 (jedes Modul über einer Zelle, starr) ===
+  V1-Masse/Hub, Einzelmodul : kleinste Zellkraft / statische Zelllast = 0.4285 (1 − ε = 0.4285)
+  V1-Masse/Hub, synchron    : kleinste Zellkraft / statische Zelllast = 0.4285 (1 − ε = 0.4285)
+  V1-Masse/Hub, Triphasik   : kleinste Zellkraft / statische Zelllast = 0.4285 (1 − ε = 0.4285)
+  V1-Masse/Hub, (0,180)     : kleinste Zellkraft / statische Zelllast = 0.4285 (1 − ε = 0.4285)

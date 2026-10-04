@@ -1,0 +1,20 @@
+=== AUS-12: Wurfstarts aus der statischen Ruhelage bei t = 0, 16 s, Auswertung letzte 4 s ===
+  V1 synchron ζ = 0.02 ż₀ = 0.25 m/s: λ =   0.000 %  F_max =    13.25 N (2.1·Mg)  Kontaktbeginne/Periode = 0.00  Phase der Kontaktbeginne θ/T = nan ± 0.0e+00  (1 s)
+  V1 synchron ζ = 0.02 ż₀ = 0.30 m/s: λ =  97.950 %  F_max =   482.97 N (75.7·Mg)  Kontaktbeginne/Periode = 1.00  Phase der Kontaktbeginne θ/T = 0.2880 ± 5.8e-05  (2 s)
+  V1 synchron ζ = 0.02 ż₀ = 0.50 m/s: λ =  97.950 %  F_max =   483.02 N (75.7·Mg)  Kontaktbeginne/Periode = 1.00  Phase der Kontaktbeginne θ/T = 0.2880 ± 9.3e-05  (3 s)
+  V1 synchron ζ = 0.05 ż₀ = 0.25 m/s: λ =   0.000 %  F_max =    13.17 N (2.1·Mg)  Kontaktbeginne/Periode = 0.00  Phase der Kontaktbeginne θ/T = nan ± 0.0e+00  (4 s)
+  V1 synchron ζ = 0.05 ż₀ = 0.30 m/s: λ =  97.987 %  F_max =   483.66 N (75.9·Mg)  Kontaktbeginne/Periode = 1.00  Phase der Kontaktbeginne θ/T = 0.2485 ± 1.1e-09  (5 s)
+  V1 synchron ζ = 0.05 ż₀ = 0.50 m/s: λ =  97.987 %  F_max =   483.66 N (75.9·Mg)  Kontaktbeginne/Periode = 1.00  Phase der Kontaktbeginne θ/T = 0.2485 ± 7.1e-10  (6 s)
+  V1 synchron ζ = 0.1  ż₀ = 0.25 m/s: λ =   0.000 %  F_max =    13.15 N (2.1·Mg)  Kontaktbeginne/Periode = 0.00  Phase der Kontaktbeginne θ/T = nan ± 0.0e+00  (7 s)
+  V1 synchron ζ = 0.1  ż₀ = 0.30 m/s: λ =   0.000 %  F_max =    13.15 N (2.1·Mg)  Kontaktbeginne/Periode = 0.00  Phase der Kontaktbeginne θ/T = nan ± 0.0e+00  (8 s)
+  V1 synchron ζ = 0.1  ż₀ = 0.50 m/s: λ =  98.044 %  F_max =   486.75 N (76.3·Mg)  Kontaktbeginne/Periode = 1.00  Phase der Kontaktbeginne θ/T = 0.1797 ± 1.2e-13  (9 s)
+  V1 synchron ζ = 0.2  ż₀ = 0.25 m/s: λ =   0.000 %  F_max =    13.17 N (2.1·Mg)  Kontaktbeginne/Periode = 0.00  Phase der Kontaktbeginne θ/T = nan ± 0.0e+00  (10 s)
+  V1 synchron ζ = 0.2  ż₀ = 0.30 m/s: λ =   0.000 %  F_max =    13.17 N (2.1·Mg)  Kontaktbeginne/Periode = 0.00  Phase der Kontaktbeginne θ/T = nan ± 0.0e+00  (10 s)
+  V1 synchron ζ = 0.2  ż₀ = 0.50 m/s: λ =   0.000 %  F_max =    13.17 N (2.1·Mg)  Kontaktbeginne/Periode = 0.00  Phase der Kontaktbeginne θ/T = nan ± 0.0e+00  (11 s)
+  Kontrolle V1 synchron ζ = 0,05, ż₀ = 0,30, h/2: λ = 97.987 %, F_max = 483.66 N
+  Kontrolle V1 synchron ζ = 0,05, ż₀ = 0,30, 40 s: λ = 97.987 %, F_max = 483.66 N
+  V1 Triphasik ζ = 0.02 ż₀ = 0,50 m/s: λ = 0.000 %, F_max = 7.00 N, F_min = 5.3836 N
+  V1 Triphasik ζ = 0.1 ż₀ = 0,50 m/s: λ = 0.000 %, F_max = 6.96 N, F_min = 5.4170 N
+  V2 Triphasik ζ = 0,02 ż₀ = 0,50 m/s: λ = 0.000 %, F_max = 7.07 N, F_min = 5.2298 N
+  Referenz Triphasik ż₀ = 3 m/s: λ = 0.000 %, F_min = 5.3304 N
+Rechenzeit 18 s

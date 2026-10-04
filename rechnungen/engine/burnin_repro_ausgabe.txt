@@ -1,0 +1,3 @@
+(0,11) phi=(np.float64(0.0),np.float64(208.42105263157893)) t_burn=18.8 s k=1 delta=-64.7 R=-2.0 Q=-62.8 ppm lam=75.0880 skew=1.6580 Nmax=38.493
+(11,0) phi=(np.float64(208.42105263157893),np.float64(0.0)) t_burn=18.8 s k=3 delta=-67.1 R=-0.3 Q=-66.9 ppm lam=75.0925 skew=1.6580 Nmax=38.494
+(8,8) phi=(np.float64(151.57894736842104),np.float64(151.57894736842104)) t_burn=6.5 s k=3 delta=4.4 R=-0.2 Q=4.5 ppm lam=75.0905 skew=1.6580 Nmax=38.494

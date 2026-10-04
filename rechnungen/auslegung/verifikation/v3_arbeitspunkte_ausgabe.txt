@@ -1,0 +1,39 @@
+=== Teil A: exakte lineare Lösung je Lauftyp (Reserve = kleinstes F_min/Mg; Zelle = Summe/3 als Annahme) ===
+V      ζ      ε    f_n  3f/fn   Einz   Paar    Syn  0/180    Pil   Schn   ΔF_Z     s_L     s_R  Sp. Fmax/3   G120 γ1(120)   |H2|
+V1  0.02  0.571  241.8  0.124  80.6%  61.2%  41.8%  73.7%  76.3%  76.1%  0.533  0.0468  0.0562  120  4.418 0.2725  -0.492  1.007
+V1  0.05  0.571  241.8  0.124  80.9%  61.8%  42.6%  73.8%  75.7%  76.0%  0.560  0.0545  0.0571  120  4.390 0.2656  -0.492  1.007
+V1   0.1  0.571  241.8  0.124  80.9%  61.9%  42.8%  73.9%  75.6%  76.1%  0.562  0.0563  0.0562  120  4.383 0.2633  -0.491  1.007
+V2  0.02  0.686  312.1  0.115  76.4%  52.7%  29.1%  67.2%  69.3%  70.7%  0.724  0.0846  0.0666  120  4.901 0.2622  -0.484  1.006
+V2  0.05  0.686  312.1  0.115  77.0%  54.0%  31.0%  68.5%  70.5%  71.3%  0.678  0.0704  0.0669  120  4.860 0.2628  -0.485  1.006
+V2   0.1  0.686  312.1  0.115  77.1%  54.2%  31.3%  68.7%  70.8%  71.5%  0.674  0.0678  0.0672  120  4.843 0.2617  -0.484  1.006
+V3  0.02  0.560  341.9  0.123  81.0%  62.0%  43.0%  74.5%  76.7%  76.6%  0.519  0.0422  0.0509  120  4.370 0.2723  -0.493  1.007
+V3  0.05  0.560  341.9  0.123  81.2%  62.5%  43.7%  74.4%  76.2%  76.5%  0.546  0.0527  0.0551  120  4.340 0.2657  -0.492  1.007
+V3   0.1  0.560  341.9  0.123  81.3%  62.6%  43.9%  74.4%  76.1%  76.6%  0.550  0.0551  0.0550  120  4.338 0.2631  -0.490  1.007
+V4  0.02  0.571  111.7  0.269  77.4%  54.7%  32.1%  69.0%  69.3%  67.9%  1.127  0.0739  0.0885  120  4.561 0.2522  -0.445  1.033
+V4  0.05  0.571  111.7  0.269  79.6%  59.2%  38.8%  71.4%  74.0%  72.2%  0.791  0.0608  0.0632  120  4.513 0.2703  -0.510  1.033
+V4   0.1  0.571  111.7  0.269  80.6%  61.2%  41.8%  72.8%  74.0%  74.0%  0.629  0.0541  0.0534  120  4.467 0.2822  -0.589  1.033
+V5  0.02  1.029  312.1  0.115  64.5%  29.1%  -6.4%  50.7%  54.0%  56.0%  1.086  0.1269  0.0999  120  6.289 0.2622  -0.484  1.006
+V5  0.05  1.029  312.1  0.115  65.5%  31.0%  -3.5%  52.7%  55.8%  57.0%  1.016  0.1056  0.1003  120  6.227 0.2628  -0.485  1.006
+V5   0.1  1.029  312.1  0.115  65.7%  31.3%  -3.0%  53.0%  56.2%  57.2%  1.011  0.1016  0.1008  120  6.202 0.2617  -0.484  1.006
+Größte Abweichung zur Gruppe (a3b_vorschlaege.csv) über alle 15 Fälle: res_einzel 4.9e-07, res_paar 4.6e-07, res_synchron 4.6e-07, res_zweiergruppe 4.8e-07, res_pilot 4.3e-07, res_schnitt 4.8e-07, dF 4.8e-06, sL 4.2e-07, sR 4.1e-07, cellmax 4.8e-06, skew120 4.8e-07
+(Rechenzeit bisher 4 s)
+
+=== Teil B: Robustheit über K ∈ [0,70; 1,30]·K_nenn (Schritt 0,0025) × ζ ∈ {0,02; 0,05; 0,1; 0,2}, FFT-Löser ===
+Kontrolle FFT gegen exakt (V1, ζ = 0,02, alle 99 Läufe): max|ΔN| = 5.08e-07 N
+  V1 (ZUSATZ): fein: Reserve ≥ 39.6 % (bei k_f = 0.7000, ζ = 0.02), ΔF_Zelt ≥ 0.501 N (k_f = 0.7850, ζ = 0.02), Spitze ∈ [120.0]; grob (Schritt 0,05): Reserve ≥ 39.6 %, ΔF_Zelt ≥ 0.513 N, Spitze ∈ [120.0]
+      ζ = 0.02: Reserve min 39.6 %, ΔF_Zelt min 0.501 N, Anteil k_f mit ΔF_Zelt < 0,4693 N: 0.0 %, Spitze ≠ 120° bei 0.0 %
+      ζ = 0.05: Reserve min 42.1 %, ΔF_Zelt min 0.547 N, Anteil k_f mit ΔF_Zelt < 0,4693 N: 0.0 %, Spitze ≠ 120° bei 0.0 %
+  V2 (ZUSATZ): fein: Reserve ≥ 28.1 % (bei k_f = 0.7775, ζ = 0.02), ΔF_Zelt ≥ 0.633 N (k_f = 0.8750, ζ = 0.02), Spitze ∈ [120.0]; grob (Schritt 0,05): Reserve ≥ 28.5 %, ΔF_Zelt ≥ 0.639 N, Spitze ∈ [120.0]
+      ζ = 0.02: Reserve min 28.1 %, ΔF_Zelt min 0.633 N, Anteil k_f mit ΔF_Zelt < 0,4693 N: 0.0 %, Spitze ≠ 120° bei 0.0 %
+      ζ = 0.05: Reserve min 30.7 %, ΔF_Zelt min 0.656 N, Anteil k_f mit ΔF_Zelt < 0,4693 N: 0.0 %, Spitze ≠ 120° bei 0.0 %
+  V3 (ZUSATZ): fein: Reserve ≥ 41.3 % (bei k_f = 0.8800, ζ = 0.02), ΔF_Zelt ≥ 0.491 N (k_f = 0.7700, ζ = 0.02), Spitze ∈ [120.0]; grob (Schritt 0,05): Reserve ≥ 41.3 %, ΔF_Zelt ≥ 0.516 N, Spitze ∈ [120.0]
+      ζ = 0.02: Reserve min 41.3 %, ΔF_Zelt min 0.491 N, Anteil k_f mit ΔF_Zelt < 0,4693 N: 0.0 %, Spitze ≠ 120° bei 0.0 %
+      ζ = 0.05: Reserve min 43.4 %, ΔF_Zelt min 0.536 N, Anteil k_f mit ΔF_Zelt < 0,4693 N: 0.0 %, Spitze ≠ 120° bei 0.0 %
+  V4 (ZUSATZ): fein: Reserve ≥ 30.2 % (bei k_f = 0.9725, ζ = 0.02), ΔF_Zelt ≥ 0.273 N (k_f = 0.7000, ζ = 0.02), Spitze ∈ [102.0, 104.0, 106.0, 120.0]; grob (Schritt 0,05): Reserve ≥ 31.9 %, ΔF_Zelt ≥ 0.273 N, Spitze ∈ [106.0, 120.0]
+      ζ = 0.02: Reserve min 30.2 %, ΔF_Zelt min 0.273 N, Anteil k_f mit ΔF_Zelt < 0,4693 N: 35.3 %, Spitze ≠ 120° bei 10.4 %
+      ζ = 0.05: Reserve min 38.2 %, ΔF_Zelt min 0.428 N, Anteil k_f mit ΔF_Zelt < 0,4693 N: 9.1 %, Spitze ≠ 120° bei 0.0 %
+  V5 (PFLICHT): fein: Reserve ≥ 52.2 % (bei k_f = 0.7800, ζ = 0.02), ΔF_Zelt ≥ 0.949 N (k_f = 0.8750, ζ = 0.02), Spitze ∈ [120.0]; grob (Schritt 0,05): Reserve ≥ 53.2 %, ΔF_Zelt ≥ 0.958 N, Spitze ∈ [120.0]
+      ζ = 0.02: Reserve min 52.2 %, ΔF_Zelt min 0.949 N, Anteil k_f mit ΔF_Zelt < 0,4693 N: 0.0 %, Spitze ≠ 120° bei 0.0 %
+      ζ = 0.05: Reserve min 55.2 %, ΔF_Zelt min 0.985 N, Anteil k_f mit ΔF_Zelt < 0,4693 N: 0.0 %, Spitze ≠ 120° bei 0.0 %
+(Rechenzeit bisher 266 s)
+Rechenzeit 266 s

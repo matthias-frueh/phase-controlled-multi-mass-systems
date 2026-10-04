@@ -1,0 +1,24 @@
+=== A2  Lineares Dauerkontaktmodell mit μ: Abgleich und Skalierung ===
+(1) 384 Vergleiche (μ ∈ {0,25; 0,4; 0,7; 1}, K ∈ {1e4, 1e5, 1e6, starr}, ζ ∈ {0,02; 0,1}, f ∈ {8, 10, 14} Hz, je 4 Zufallsphasen), davon 280 mit Kontaktast:
+    max. Abweichung F_min_lin 1.5e-04, F_max 2.0e-06, skew 9.6e-07, z_max 7.0e-11  (N bzw. m bzw. dimensionslos; Ursache: analytische vs. FFT-Profilkoeffizienten)
+(2) (0, 120, 240): max_k |N_k − Φ_k·N_k^(1)| = 1.4e-17 N;  |Φ_1..4| = 0.000, 0.000, 3.000, 0.000
+(2) (0, 110, 250): max_k |N_k − Φ_k·N_k^(1)| = 2.8e-17 N;  |Φ_1..4| = 0.316, 0.532, 2.732, 1.347
+(2) (0, 0, 180): max_k |N_k − Φ_k·N_k^(1)| = 0.0e+00 N;  |Φ_1..4| = 1.000, 3.000, 1.000, 3.000
+(2) (0, 0, 0): max_k |N_k − Φ_k·N_k^(1)| = 0.0e+00 N;  |Φ_1..4| = 3.000, 3.000, 3.000, 3.000
+    Einzelmodul(μ = 0,4) gegen synchron(μ = 0,4/3): ΔF_min = 0.0e+00 N, ΔF_max = 0.0e+00 N
+    linear_solver synchron μ/3: F_min = 5.264385 N, eigenes Einzelmodul 5.264385 N
+(3) (0, 120, 240): Satz A (μ=1, f=10, K=1e4, Hub 7.69 mm) gegen B (μ=0,5, f=5, K=2500, Hub 61.54 mm), ε = 1.1906, ρ = 0.5066: max|N_A − N_B| = 0.0e+00 N
+(3) (0, 0, 0): Satz A (μ=1, f=10, K=1e4, Hub 7.69 mm) gegen B (μ=0,5, f=5, K=2500, Hub 61.54 mm), ε = 1.1906, ρ = 0.5066: max|N_A − N_B| = 0.0e+00 N
+    M = 0,65 → 1,3 kg bei gleichem ε, ρ, ζ (K verdoppelt): max|N_A/(M_A g) − N_B/(M_B g)| = 0.0e+00
+
+(4) Skalierung (ζ = 0,1 fest; „Einzel |N_k|“ = Betrag der Harmonischen eines Moduls):
+Fall                                    ε      ρ F_min120  ΔF_Zelt     s_L     s_R Spitze  syn_min  syn_max  ein_min    |N1|    |N2|    |N3|
+starr μ=0,4 10 Hz Hub_ref          0.4762  0.000   5.6452   0.4693  0.0469  0.0468    120   3.3397  12.0163   5.3642  1.2970  0.4274  0.1844
+starr μ=0,2 10 Hz Hub_ref          0.2381  0.000   6.0109   0.2346  0.0234  0.0234    120   4.8581   9.1964   5.8704  0.6485  0.2137  0.0922
+starr μ=0,4 10 Hz 2·Hub_ref        0.9525  0.000   4.9139   0.9386  0.0937  0.0937    120   0.3029  17.6560   4.3520  2.5939  0.8549  0.3688
+starr μ=0,4 14,14 Hz Hub_ref       0.9525  0.000   4.9139   0.9386  0.0937  0.0937    120   0.3029  17.6560   4.3520  2.5939  0.8549  0.3688
+K=1e6 μ=0,4 10 Hz Hub_ref          0.4762  0.051   5.5621   0.4680  0.0473  0.0464    120   3.3304  12.0486   5.3611  1.3003  0.4319  0.1888
+K=1e5 μ=0,4 10 Hz Hub_ref          0.4762  0.160   5.1919   0.4367  0.0366  0.0378    120   3.0402  12.4732   5.2644  1.3311  0.4761  0.2391
+K=1e4 μ=0,4 10 Hz Hub_ref          0.4762  0.507   5.9580   1.8148  0.0845  0.0776    120  -3.6919  17.2500   3.0204  1.7375  2.1343  0.1434
+K=1e4 μ=1 10 Hz Hub_ref (Ref.)     1.1906  0.507   5.3301   4.5370  0.2113  0.1940    120 -18.7945  33.5603  -2.0138  4.3438  5.3358  0.3585
+Normierte starre Kennzahlen (je Mg·ε): ΔG_Zelt = 0.15453, Sekanten 0.015428 / 0.015426 1/°, G_syn = 1.00000, G_ein = 0.33333, (F_max,syn − Mg)/(Mg ε) = 1.85714 (TH/TF = 1.85714)

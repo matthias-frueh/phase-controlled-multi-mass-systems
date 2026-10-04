@@ -1,0 +1,60 @@
+Profil: Spitzengeschwindigkeit e'(0) = RTOP*pi/(THOLD*T) = 0.24166 m/s; e'(Ende Halteast) = -0.24166, e'(Anfang schneller Ast) = -0.24166 m/s (C1-stetig)
+  (  0.000°,   0.000°): v_S(0) Standardstart = +0.2417 m/s, Anfangsimpuls M v_S = +157.1 mN·s (+24.6 % des Gewichtsimpulses je Zyklus); kinetische Energie 1/2 M v^2 = 18.980 mJ
+  (  0.000°, 208.421°): v_S(0) Standardstart = +0.1250 m/s, Anfangsimpuls M v_S = +81.3 mN·s (+12.7 % des Gewichtsimpulses je Zyklus); kinetische Energie 1/2 M v^2 = 5.081 mJ
+  (120.000°, 240.000°): v_S(0) Standardstart = -0.0023 m/s, Anfangsimpuls M v_S = -1.5 mN·s (-0.2 % des Gewichtsimpulses je Zyklus); kinetische Energie 1/2 M v^2 = 0.002 mJ
+  ( 35.000°, 116.000°): v_S(0) Standardstart = +0.0543 m/s, Anfangsimpuls M v_S = +35.3 mN·s (+5.5 % des Gewichtsimpulses je Zyklus); kinetische Energie 1/2 M v^2 = 0.957 mJ
+  (113.684°, 227.368°): v_S(0) Standardstart = -0.0130 m/s, Anfangsimpuls M v_S = -8.5 mN·s (-1.3 % des Gewichtsimpulses je Zyklus); kinetische Energie 1/2 M v^2 = 0.055 mJ
+  (100.000°, 240.000°): v_S(0) Standardstart = +0.0131 m/s, Anfangsimpuls M v_S = +8.5 mN·s (+1.3 % des Gewichtsimpulses je Zyklus); kinetische Energie 1/2 M v^2 = 0.056 mJ
+  Vergleich: Federenergie der statischen Einfederung 1/2 K (Mg/K)^2 = 2.033 mJ; Abhebeschwelle (ungedämpft) |v| > g/omega_n = 0.0791 m/s
+  1°-Raster: max v_S(0) = +0.2417 m/s bei (np.int64(0), np.int64(0))°, min -0.0806 m/s; Median |v_S(0)| = 0.0806 m/s
+Impulsbilanz Schwerpunkt über Zyklen 2..12 (Standardstart):
+  (0,0.000): M Δv_S = +0.016216886 N·s, ∫(N_RK4 - Mg) dt = +0.016216886 N·s, Differenz -3.41e-13 N·s; Linksrechteck ∫(N1 - Mg) = +0.015954424
+  (0,208.421): M Δv_S = -0.035194705 N·s, ∫(N_RK4 - Mg) dt = -0.035194525 N·s, Differenz -1.80e-07 N·s; Linksrechteck ∫(N1 - Mg) = -0.035466415
+  (120,240.000): M Δv_S = +0.000121484 N·s, ∫(N_RK4 - Mg) dt = +0.000121484 N·s, Differenz -3.88e-15 N·s; Linksrechteck ∫(N1 - Mg) = +0.000119149
+Bahnen mit Spannweite lambda > 3 %-Pkt: v_S(0) der Mitglieder im Hochzustand (lambda > 74 %) und sonst:
+ bahn  i2  i3    phi2    phi3     lam       vS0  hochzustand
+    6   0   6   0.000 113.684 75.5920  0.084322         True
+    6   6   0 113.684   0.000 75.5875  0.084322         True
+    6  13  13 246.316 246.316 18.2000  0.087724        False
+   49   3   7  56.842 132.632 75.6325  0.012639         True
+   49   4  16  75.789 303.158 19.0000  0.113514        False
+   49   7   3 132.632  56.842 75.6325  0.012639         True
+   49  12  15 227.368 284.211 19.0000  0.106101        False
+   49  15  12 284.211 227.368 19.0000  0.106101        False
+   49  16   4 303.158  75.789 19.0000  0.113514        False
+   57   3  15  56.842 284.211 22.3625  0.135203        False
+   57   4   7  75.789 132.632 75.6615 -0.024934         True
+   57   7   4 132.632  75.789 75.6610 -0.024934         True
+   57  12  16 227.368 303.158 22.3750  0.121985        False
+   57  15   3 284.211  56.842 22.3625  0.135203        False
+   57  16  12 303.158 227.368 22.3750  0.121985        False
+   45   2  14  37.895 265.263 35.4195  0.151468        False
+   45   5   7  94.737 132.632 75.6325 -0.056977         True
+   45   7   5 132.632  94.737 75.6320 -0.056977         True
+   45  12  17 227.368 322.105 75.6315  0.134123         True
+   45  14   2 265.263  37.895 35.4195  0.151468        False
+   45  17  12 322.105 227.368 75.6320  0.134123         True
+   13   0  13   0.000 246.316 43.6960  0.164692        False
+   13   6   6 113.684 113.684 75.6985 -0.073017         True
+   13  13   0 246.316   0.000 43.5965  0.164692        False
+   31   1  14  18.947 265.263 44.6500  0.176005        False
+   31   5   6  94.737 113.684 75.8050 -0.053527         True
+   31   6   5 113.684  94.737 75.8050 -0.053527         True
+   31  13  18 246.316 341.053 44.6000  0.162100        False
+   31  14   1 265.263  18.947 44.6500  0.176005        False
+   31  18  13 341.053 246.316 44.6000  0.162100        False
+   21   1   4  18.947  75.789 76.1950  0.127031         True
+   21   3  18  56.842 341.053 76.1960  0.170835         True
+   21   4   1  75.789  18.947 76.1935  0.127031         True
+   21  15  16 284.211 303.158 71.2160  0.181097        False
+   21  16  15 303.158 284.211 71.2165  0.181097        False
+   21  18   3 341.053  56.842 76.1965  0.170835         True
+   33   1  16  18.947 303.158 71.9445  0.210498        False
+   33   3   4  56.842  75.789 76.1965  0.067620         True
+   33   4   3  75.789  56.842 76.1950  0.067620         True
+   33  15  18 284.211 341.053 76.1930  0.200845         True
+   33  16   1 303.158  18.947 71.9410  0.210498        False
+   33  18  15 341.053 284.211 76.1940  0.200845         True
+  Hochzustand: n = 21, v_S(0) Mittel +0.0596, Spanne [-0.0730, +0.2008] m/s
+  übrige:      n = 21, v_S(0) Mittel +0.1492, Spanne [+0.0877, +0.2105] m/s
+  ganzes Raster: 142 Punkte mit lambda > 74 %, v_S(0) in [-0.0799, +0.2417]; Punkte mit v_S(0) > 0,1 m/s: 141, davon lambda > 74 %: 105

@@ -1,0 +1,2 @@
+ref (w = 16, SNR = 1, n = n0 = 20, 150 Kampagnen, B = 400): MC-Halbbreite 0.645°, mittlere Bootstrap-Halbbreite 0.624° (Median 0.622°), Überdeckung von 0: 0.947, P(Halbbreite ≤ 1°) = 1.000
+A4 (w = 6, SNR = 1, n = n0 = 20, 150 Kampagnen, B = 400): MC-Halbbreite 0.735°, mittlere Bootstrap-Halbbreite 0.696° (Median 0.686°), Überdeckung von 0: 0.927, P(Halbbreite ≤ 1°) = 0.980

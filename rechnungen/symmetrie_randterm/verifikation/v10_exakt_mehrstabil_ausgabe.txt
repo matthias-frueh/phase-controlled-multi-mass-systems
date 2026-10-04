@@ -1,0 +1,2 @@
+L4:g4 (117.1, 87.7) std t0 = +0.00000 s exakt [15 s]: lambda 75.805 %  gamma1 +1.6966  F_max 39.439 N  <N> 6.376500 N
+L4:g4 (117.1, 87.7) shift t0 = -0.06747 s exakt [18 s]: lambda 75.805 %  gamma1 +1.6966  F_max 39.439 N  <N> 6.376500 N

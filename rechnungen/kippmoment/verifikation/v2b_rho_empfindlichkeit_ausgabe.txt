@@ -1,0 +1,4 @@
+ρ_f = 0.3500 R_c | STEIF μ=0,462 G0: 10 Hz: 32.8…42.6 % (min bei (0,0,180), synchron 36.3 %) | 12 Hz: 12.2…20.0 % (min bei P130/230, synchron 15.3 %) || REF μ=0,462 G0 T: lineare Zelle min +0.3159 N (+14.9 %), N_min 5.8932 N
+ρ_f = 0.5000 R_c | STEIF μ=0,462 G0: 10 Hz: 35.2…42.7 % (min bei (0,0,180), synchron 36.3 %) | 12 Hz: 10.8…18.9 % (min bei P110/250, synchron 15.3 %) || REF μ=0,462 G0 T: lineare Zelle min -0.2168 N (-10.2 %), N_min 5.8932 N
+ρ_f = 0.6000 R_c | STEIF μ=0,462 G0: 10 Hz: 34.1…43.2 % (min bei (0,0,180), synchron 36.3 %) | 12 Hz: 2.8…16.3 % (min bei Schnitt, synchron 15.3 %) || REF μ=0,462 G0 T: lineare Zelle min -0.9678 N (-45.5 %), N_min 5.8932 N
+ρ_f = 0.7071 R_c | STEIF μ=0,462 G0: 10 Hz: 36.3…36.3 % (min bei P130/230, synchron 36.3 %) | 12 Hz: 15.3…15.3 % (min bei (0,0,180), synchron 15.3 %) || REF μ=0,462 G0 T: lineare Zelle min -1.7708 N (-83.3 %), N_min 5.8932 N

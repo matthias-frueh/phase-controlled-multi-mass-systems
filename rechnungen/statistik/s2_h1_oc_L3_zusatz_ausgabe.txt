@@ -1,0 +1,2 @@
+[  14.1 s] L3 mech 3 % / 0,3°        kopplung x=0.20: P(fals)=1.000 P(best)=0.000 P(PB1)=0.000 P(IUT)=0.000 P(MET)=1.000 u_F=8.89 u_N2=4.60 mN nu_F=36.0 q95max|z0|=54.19 corr=1.00
+[  28.1 s] L3 mech 3 % / 0,3°        kopplung x=0.30: P(fals)=1.000 P(best)=0.000 P(PB1)=0.000 P(IUT)=0.000 P(MET)=1.000 u_F=8.56 u_N2=4.40 mN nu_F=33.5 q95max|z0|=83.92 corr=1.00

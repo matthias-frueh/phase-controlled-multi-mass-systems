@@ -1,0 +1,94 @@
+=== 1. Egg-Profilbeschleunigung, Harmonische (Hub-Faktor 1, f = 10 Hz) ===
+ k   A_k [m/s²]   arg c_k [°]   A_k/A_1
+ 1     14.9649       63.00     1.0000
+ 2      4.9321      126.00     0.3296
+ 3      2.1280     -171.00     0.1422
+ 4      0.3220     -108.00     0.0215
+ 5      0.4419      135.00     0.0295
+ 6      0.3989     -162.00     0.0267
+ 7      0.0472      -99.00     0.0032
+ 8      0.1846      144.00     0.0123
+ 9      0.1592     -153.00     0.0106
+10      0.0000      -21.60     0.0000
+11      0.1054      153.00     0.0070
+12      0.0802     -144.00     0.0054
+RMS gesamt 11.2551 m/s²; Anteil Leistung k=1: 0.8839, k=2: 0.0960, k≡0 mod 3: 0.0186
+
+=== 2. Auswahlregel bei (φ₁, φ₂, φ₃) = (0°, 120°, 240°) ===
+Geometrie sinn = +1 (Module bei ψ = [0.0, 120.0, 240.0]°)
+ k  |Σ e^{-ikφ}|  |S_k| (links)  |S'_k| (rechts)
+ 1    0.000        3.000          0.000
+ 2    0.000        0.000          3.000
+ 3    3.000        0.000          0.000
+ 4    0.000        3.000          0.000
+ 5    0.000        0.000          3.000
+ 6    3.000        0.000          0.000
+ 7    0.000        3.000          0.000
+ 8    0.000        0.000          3.000
+ 9    3.000        0.000          0.000
+Geometrie sinn = -1 (Module bei ψ = [0.0, -120.0, -240.0]°)
+ k  |Σ e^{-ikφ}|  |S_k| (links)  |S'_k| (rechts)
+ 1    0.000        0.000          3.000
+ 2    0.000        3.000          0.000
+ 3    3.000        0.000          0.000
+ 4    0.000        0.000          3.000
+ 5    0.000        3.000          0.000
+ 6    3.000        0.000          0.000
+ 7    0.000        0.000          3.000
+ 8    0.000        3.000          0.000
+ 9    3.000        0.000          0.000
+
+=== 3. Moment am Triphasik-Punkt, quasistatisch (starre Auflage), Module über den Zellen ===
+μ=1.000 Egg voll : |M| min/mittel/max = 0.28819/0.49841/0.64529 N·m; max/min =    2.239; <Mx>,<My> = 8.5e-17,1.6e-07; Netto-Umläufe/Zyklus +0.998
+      k :  R+ [N·m]   R- [N·m]   (3/2)·m·A_k·R_m   Summe 2|N_k| [N]   (R±: Radien der umlaufenden Kreise)
+      1 :   0.48636    0.00000     0.48636         0.00000
+      2 :   0.00000    0.16029     0.16029         0.00000
+      3 :   0.00000    0.00000     0.06916         1.38317
+      4 :   0.01046    0.00000     0.01046         0.00000
+      5 :   0.00000    0.01436     0.01436         0.00000
+      6 :   0.00000    0.00000     0.01296         0.25925
+      7 :   0.00154    0.00000     0.00154         0.00000
+      8 :   0.00000    0.00600     0.00600         0.00000
+      9 :   0.00000    0.00000     0.00518         0.10350
+      Harmonische von |M(t)| ≠ 0 (k ≤ 12): [3, 6, 9, 12]
+      Summenkraft: N_max − N_min = 3.02194 N; Einzelzelle: F_max − F_min = 7.23048 N; F_min Zelle -0.40517 N (statisch 2.1255 N); Summe/3 min 1.51609 N
+μ=1.000 Egg k≤6  : |M| min/mittel/max = 0.30124/0.49839/0.64276 N·m; max/min =    2.134; <Mx>,<My> = 8.5e-17,-5.7e-17; Netto-Umläufe/Zyklus +0.999
+μ=1.000 Egg k≤3  : |M| min/mittel/max = 0.32607/0.49966/0.64665 N·m; max/min =    1.983; <Mx>,<My> = 8.5e-17,-2.8e-17; Netto-Umläufe/Zyklus +0.999
+μ=1.000 Egg k≤2  : |M| min/mittel/max = 0.32607/0.49966/0.64665 N·m; max/min =    1.983; <Mx>,<My> = 8.5e-17,-2.8e-17; Netto-Umläufe/Zyklus +0.999
+μ=1.000 Sinus    : |M| min/mittel/max = 0.49348/0.49348/0.49348 N·m; max/min =    1.000; <Mx>,<My> = 9.9e-17,-2.8e-17; Netto-Umläufe/Zyklus +1.000
+μ=0.462 Egg voll : |M| min/mittel/max = 0.13314/0.23027/0.29812 N·m; max/min =    2.239; <Mx>,<My> = 1.4e-17,7.6e-08; Netto-Umläufe/Zyklus +0.998
+      k :  R+ [N·m]   R- [N·m]   (3/2)·m·A_k·R_m   Summe 2|N_k| [N]   (R±: Radien der umlaufenden Kreise)
+      1 :   0.22470    0.00000     0.22470         0.00000
+      2 :   0.00000    0.07406     0.07406         0.00000
+      3 :   0.00000    0.00000     0.03195         0.63902
+      4 :   0.00483    0.00000     0.00483         0.00000
+      5 :   0.00000    0.00663     0.00663         0.00000
+      6 :   0.00000    0.00000     0.00599         0.11978
+      7 :   0.00071    0.00000     0.00071         0.00000
+      8 :   0.00000    0.00277     0.00277         0.00000
+      9 :   0.00000    0.00000     0.00239         0.04782
+      Harmonische von |M(t)| ≠ 0 (k ≤ 12): [3, 6, 9, 12]
+      Summenkraft: N_max − N_min = 1.39613 N; Einzelzelle: F_max − F_min = 3.34048 N; F_min Zelle 0.95633 N (statisch 2.1255 N); Summe/3 min 1.84395 N
+μ=0.462 Egg k≤6  : |M| min/mittel/max = 0.13917/0.23026/0.29695 N·m; max/min =    2.134; <Mx>,<My> = 1.4e-17,0.0e+00; Netto-Umläufe/Zyklus +0.999
+μ=0.462 Egg k≤3  : |M| min/mittel/max = 0.15064/0.23084/0.29875 N·m; max/min =    1.983; <Mx>,<My> = 0.0e+00,-7.1e-18; Netto-Umläufe/Zyklus +0.999
+μ=0.462 Egg k≤2  : |M| min/mittel/max = 0.15064/0.23084/0.29875 N·m; max/min =    1.983; <Mx>,<My> = 7.1e-18,0.0e+00; Netto-Umläufe/Zyklus +0.999
+μ=0.462 Sinus    : |M| min/mittel/max = 0.22799/0.22799/0.22799 N·m; max/min =    1.000; <Mx>,<My> = 0.0e+00,0.0e+00; Netto-Umläufe/Zyklus +1.000
+μ=0.400 Egg voll : |M| min/mittel/max = 0.11528/0.19937/0.25811 N·m; max/min =    2.239; <Mx>,<My> = 0.0e+00,6.5e-08; Netto-Umläufe/Zyklus +0.998
+      k :  R+ [N·m]   R- [N·m]   (3/2)·m·A_k·R_m   Summe 2|N_k| [N]   (R±: Radien der umlaufenden Kreise)
+      1 :   0.19454    0.00000     0.19454         0.00000
+      2 :   0.00000    0.06412     0.06412         0.00000
+      3 :   0.00000    0.00000     0.02766         0.55327
+      4 :   0.00419    0.00000     0.00419         0.00000
+      5 :   0.00000    0.00574     0.00574         0.00000
+      6 :   0.00000    0.00000     0.00519         0.10370
+      7 :   0.00061    0.00000     0.00061         0.00000
+      8 :   0.00000    0.00240     0.00240         0.00000
+      9 :   0.00000    0.00000     0.00207         0.04140
+      Harmonische von |M(t)| ≠ 0 (k ≤ 12): [3, 6, 9, 12]
+      Summenkraft: N_max − N_min = 1.20877 N; Einzelzelle: F_max − F_min = 2.89219 N; F_min Zelle 1.11323 N (statisch 2.1255 N); Summe/3 min 1.88174 N
+μ=0.400 Egg k≤6  : |M| min/mittel/max = 0.12050/0.19936/0.25710 N·m; max/min =    2.134; <Mx>,<My> = 7.1e-18,0.0e+00; Netto-Umläufe/Zyklus +0.999
+μ=0.400 Egg k≤3  : |M| min/mittel/max = 0.13043/0.19986/0.25866 N·m; max/min =    1.983; <Mx>,<My> = 1.4e-17,0.0e+00; Netto-Umläufe/Zyklus +0.999
+μ=0.400 Egg k≤2  : |M| min/mittel/max = 0.13043/0.19986/0.25866 N·m; max/min =    1.983; <Mx>,<My> = 1.4e-17,0.0e+00; Netto-Umläufe/Zyklus +0.999
+μ=0.400 Sinus    : |M| min/mittel/max = 0.19739/0.19739/0.19739 N·m; max/min =    1.000; <Mx>,<My> = 7.1e-18,-1.4e-17; Netto-Umläufe/Zyklus +1.000
+
+Drehsinn: R+ = links (gegen Uhrzeigersinn von oben, mathematisch positiv), R− = rechts.

@@ -1,0 +1,43 @@
+Minima bei θ = [117. 237. 357.] °, Werte [-0.698369 -0.698369 -0.698369] N (gleich tief)
+Korrelation des weißen Rauschens zwischen den Minima: 0.0000
+Modulbeiträge d_mj [N] =
+[[-1.016   0.1588  0.1588]
+ [ 0.1588 -1.016   0.1588]
+ [ 0.1588  0.1588 -1.016 ]]
+Phasensensitivität g_mj [N/rad] =
+[[ 0.     2.019 -2.019]
+ [-2.019  0.     2.019]
+ [ 2.019 -2.019 -0.   ]]
+
+1) Analytisch (erste Ordnung), n = 20; Quotient |b|/u_c,erw in Lesart (i) Präreg / (ii) Gruppe
+  weiss           n₀=20: b/σ-Einheit = +0.4152; |b|/u (i) = 0.309, (ii) = 0.414 → VERLETZT (i), VERLETZT (ii)
+  weiss           n₀=40: b/σ-Einheit = +0.1273; |b|/u (i) = 0.120, (ii) = 0.160 → VERLETZT (i), VERLETZT (ii)
+  weiss           n₀=60: b/σ-Einheit = -0.0001; |b|/u (i) = 0.000, (ii) = 0.000 → ok (i), ok (ii)
+  modul           n₀=20: b/σ-Einheit = +0.0000; |b|/u (i) = 0.000, (ii) = 0.000 → ok (i), ok (ii)
+  modul           n₀=40: b/σ-Einheit = -0.0651; |b|/u (i) = 0.229, (ii) = 0.345 → VERLETZT (i), VERLETZT (ii)
+  modul           n₀=60: b/σ-Einheit = -0.0940; |b|/u (i) = 0.350, (ii) = 0.529 → VERLETZT (i), VERLETZT (ii)
+  phase_beide     n₀=20: b/σ-Einheit = +0.0000; |b|/u (i) = 0.000, (ii) = 0.000 → ok (i), ok (ii)
+  phase_beide     n₀=40: b/σ-Einheit = -0.1939; |b|/u (i) = 0.248, (ii) = 0.426 → VERLETZT (i), VERLETZT (ii)
+  phase_beide     n₀=60: b/σ-Einheit = -0.2798; |b|/u (i) = 0.380, (ii) = 0.651 → VERLETZT (i), VERLETZT (ii)
+  phase_nur_komb  n₀=20: b/σ-Einheit = -0.5302; |b|/u (i) = 0.830, (ii) = 1.667 → VERLETZT (i), VERLETZT (ii)
+  phase_nur_komb  n₀=40: b/σ-Einheit = -0.5302; |b|/u (i) = 0.830, (ii) = 1.667 → VERLETZT (i), VERLETZT (ii)
+  phase_nur_komb  n₀=60: b/σ-Einheit = -0.5302; |b|/u (i) = 0.830, (ii) = 1.667 → VERLETZT (i), VERLETZT (ii)
+  jitter_rho      n₀=20: b/σ-Einheit = +0.0000; |b|/u (i) = nan, (ii) = nan → ok (i), ok (ii)
+  jitter_rho      n₀=40: b/σ-Einheit = +0.0000; |b|/u (i) = nan, (ii) = nan → ok (i), ok (ii)
+  jitter_rho      n₀=60: b/σ-Einheit = +0.0000; |b|/u (i) = nan, (ii) = nan → ok (i), ok (ii)
+
+3) Monte Carlo (Harmonische, R = 20 000 Kampagnen), n = 20; σ so, dass sd eines Minimums je Lauf ≈ 1 mN
+  weiss           n₀=20: Bias Mess -0.1907 mN, Vorh -0.3316 mN, b = +0.1409 mN; |b|/u (i) = 0.315, (ii) = 0.423
+  weiss           n₀=60: Bias Mess -0.1876 mN, Vorh -0.1901 mN, b = +0.0025 mN; |b|/u (i) = 0.008, (ii) = 0.011
+  modul           n₀=20: Bias Mess -0.2132 mN, Vorh -0.2155 mN, b = +0.0024 mN; |b|/u (i) = 0.007, (ii) = 0.011
+  modul           n₀=60: Bias Mess -0.2127 mN, Vorh -0.1222 mN, b = -0.0905 mN; |b|/u (i) = 0.352, (ii) = 0.528
+  phase_beide     n₀=20: Bias Mess -0.2324 mN, Vorh -0.2306 mN, b = -0.0018 mN; |b|/u (i) = 0.006, (ii) = 0.010
+  phase_beide     n₀=60: Bias Mess -0.2325 mN, Vorh -0.1333 mN, b = -0.0992 mN; |b|/u (i) = 0.383, (ii) = 0.662
+  phase_nur_komb  n₀=20: Bias Mess -0.1853 mN, Vorh -0.0000 mN, b = -0.1853 mN; |b|/u (i) = 0.826, (ii) = 1.679
+  phase_nur_komb  n₀=60: Bias Mess -0.1852 mN, Vorh -0.0000 mN, b = -0.1852 mN; |b|/u (i) = 0.831, (ii) = 1.669
+
+4) Modulunterschied (Amplitude von Modul 2, 3 um ±δ): Abstand zwischen tiefstem und zweittiefstem Minimum bei 120°
+  δ = 0.01 %: Minima [0. 0. 0.] mN über dem tiefsten
+  δ = 0.10 %: Minima [0. 1. 2.] mN über dem tiefsten
+  δ = 1.00 %: Minima [ 0. 12. 23.] mN über dem tiefsten
+  Auf dem 2°-Raster liegt die Spitze bei ungleichen Modulen i. A. zwischen zwei Punkten; am nächsten Punkt beträgt der Abstand der beiden konkurrierenden Minima ≈ (s_L + s_R)·|Δφ| = 0,069 N/°·|Δφ|, für |Δφ| gleichverteilt in [0, 1°]: P(Abstand < 2·0,3 mN) ≈ 0.009

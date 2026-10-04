@@ -1,0 +1,1 @@
+std: 88 Laeufe, 600 Perioden, 337 s

@@ -1,0 +1,4 @@
+SA (0,0) std: lam 75.7874 %, gamma1 1.7055, F_max 41.107; Periode 2 ab 7.4 s (Tol 1e-9/1e-11)
+   Floquet P2: |mu| = 0.5510, 0.5510; Residuen 4e-12 -> 7e-13
+   Newton P1 (Kontrolle): Residuen 2e+01 -> 7e-13, |mu| = 1.355, 0.414
+SA (0,0) imp: lam 75.7874 %, gamma1 1.7055, F_max 41.107; Periode 2 ab 8.9 s (Tol 1e-9/1e-11)

@@ -1,0 +1,17 @@
+RK4-S dt = 50.0 µs
+Insel: SA-Fixpunkt z = 10.100853 mm, z' = -0.170574 m/s, |mu|_SA = 0.7426, 0.7426
+   RK4-S-Endzustand: z' = -0.170617; Streuung z' (Zyklen 50–100) std 1.07e-04, Abstand zum SA-Fixpunkt 4.34e-05 m/s
+   s = 1e-10: |mu|_RK4 = 2.3097, 0.2386
+   s = 1e-08: |mu|_RK4 = 2.3098, 0.2386
+   s = 1e-06: |mu|_RK4 = 2.3098, 0.2386
+   s = 1e-05: |mu|_RK4 = 2.3098, 0.2386
+   s = 1e-04: |mu|_RK4 = 2.3098, 0.2386
+   s = 1e-03: |mu|_RK4 = 1.7676, 0.0259
+HotSpot: SA-Fixpunkt z = 0.232691 mm, z' = -0.499158 m/s, |mu|_SA = 0.7359, 0.7359
+   RK4-S-Endzustand: z' = -0.499161; Streuung z' (Zyklen 50–100) std 7.17e-05, Abstand zum SA-Fixpunkt 2.44e-06 m/s
+   s = 1e-10: |mu|_RK4 = 1.5644, 0.3460
+   s = 1e-08: |mu|_RK4 = 1.5645, 0.3460
+   s = 1e-06: |mu|_RK4 = 1.5645, 0.3460
+   s = 1e-05: |mu|_RK4 = 1.5645, 0.3460
+   s = 1e-04: |mu|_RK4 = 1.5645, 0.3460
+   s = 1e-03: |mu|_RK4 = 1.5645, 0.3460

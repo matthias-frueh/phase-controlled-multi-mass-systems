@@ -1,0 +1,9 @@
+RK4-S dt = 25.0 µs, Hot-Spot std
+  Fenster 5–15 s: Linksrechteck -0.0356 mN (-5.6 ppm), RK4-gew. +2.83 ppm, R +2.83 ppm, Q -8.41 ppm, lam 75.086, gamma1 1.6580, F_max 38.485
+  Fenster 5–55 s: Linksrechteck -0.0174 mN (-2.7 ppm), RK4-gew. +0.63 ppm, R +0.63 ppm, Q -3.35 ppm, lam 75.084, gamma1 1.6580, F_max 38.485
+  Fenster 5–115 s: Linksrechteck -0.0569 mN (-8.9 ppm), RK4-gew. +0.23 ppm, R +0.23 ppm, Q -9.15 ppm, lam 75.084, gamma1 1.6580, F_max 38.485
+  Fenster 30–60 s: Linksrechteck -0.0609 mN (-9.6 ppm), RK4-gew. +0.24 ppm, R +0.24 ppm, Q -9.79 ppm, lam 75.084, gamma1 1.6580, F_max 38.485
+  Fenster 30–100 s: Linksrechteck -0.0840 mN (-13.2 ppm), RK4-gew. +0.01 ppm, R +0.01 ppm, Q -13.19 ppm, lam 75.084, gamma1 1.6580, F_max 38.485
+  Fenster 60–110 s: Linksrechteck -0.0771 mN (-12.1 ppm), RK4-gew. +0.08 ppm, R +0.08 ppm, Q -12.17 ppm, lam 75.084, gamma1 1.6580, F_max 38.485
+  Fenster 20–120 s: Linksrechteck -0.0545 mN (-8.5 ppm), RK4-gew. -0.16 ppm, R -0.16 ppm, Q -8.39 ppm, lam 75.084, gamma1 1.6580, F_max 38.485
+  v_S(5 s) = -0.3743; Einschwingende (1e-3/1e-4): 4.5 s

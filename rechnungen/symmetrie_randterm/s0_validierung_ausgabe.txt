@@ -1,0 +1,29 @@
+Laufzeit sr_engine 47.8 s, finesweep 196.2 s (4 Punkte, 15 s)
+--- (0.0, 0.0)
+  F_mean   sr_engine 6.37641695243  finesweep 6.37641695243  diff -1.155e-14  CSV 6.376243
+  F_skew   sr_engine 1.70544706442  finesweep 1.70544706443  diff -9.831e-12  CSV 1.705483
+  liftoff  sr_engine 75.7885  finesweep 75.7885  diff +0.000e+00  CSV 75.7885
+  F_min    sr_engine 0  finesweep 0  diff +0.000e+00  CSV 0.0
+  F_max    sr_engine 41.1226019442  finesweep 41.1226019442  diff +0.000e+00  CSV 41.12326
+  mean_RK4 6.37650714079  mean_TR 6.37641695243  R +7.1408e-06 N
+--- (113.684, 227.368)
+  F_mean   sr_engine 6.37649992604  finesweep 6.37649992604  diff -5.151e-14  CSV 6.3765
+  F_skew   sr_engine -0.272972068616  finesweep -0.272972068616  diff -7.855e-13  CSV -0.272972
+  liftoff  sr_engine 0  finesweep 0  diff +0.000e+00  CSV 0.0
+  F_min    sr_engine 2.88213461273  finesweep 2.88213461273  diff +0.000e+00  CSV 2.882135
+  F_max    sr_engine 9.46218776754  finesweep 9.46218776754  diff +0.000e+00  CSV 9.462188
+  mean_RK4 6.37649992604  mean_TR 6.37649992604  R +3.6353e-16 N
+--- (151.579, 265.263)
+  F_mean   sr_engine 6.3763878519  finesweep 6.3763878519  diff -3.970e-13  CSV 6.376388
+  F_skew   sr_engine -0.288022723125  finesweep -0.288022723126  diff +4.290e-13  CSV -0.288023
+  liftoff  sr_engine 10.95  finesweep 10.95  diff +0.000e+00  CSV 10.95
+  F_min    sr_engine 0  finesweep 0  diff +0.000e+00  CSV 0.0
+  F_max    sr_engine 12.4142389939  finesweep 12.4142389939  diff +0.000e+00  CSV 12.414239
+  mean_RK4 6.37650021957  mean_TR 6.3763878519  R +4.1585e-16 N
+--- (246.316, 113.684)
+  F_mean   sr_engine 6.3764994379  finesweep 6.3764994379  diff -1.439e-13  CSV 6.376499
+  F_skew   sr_engine -0.272971596978  finesweep -0.272971596979  diff +4.364e-13  CSV -0.272972
+  liftoff  sr_engine 0  finesweep 0  diff +0.000e+00  CSV 0.0
+  F_min    sr_engine 2.88211358848  finesweep 2.88211358848  diff +0.000e+00  CSV 2.882114
+  F_max    sr_engine 9.46219448247  finesweep 9.46219448247  diff +0.000e+00  CSV 9.462194
+  mean_RK4 6.3764994379  mean_TR 6.3764994379  R -2.7727e-16 N

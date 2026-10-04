@@ -1,0 +1,4 @@
+dt = 50.00 us: M*mean_Simpson(abar) / N: HS +1.800e-07, S0 +4.061e-13, L1 +1.849e-07, K1 +1.849e-07, Tri +6.337e-15   | E aus Lauf: HS +1.800e-07, S0 +4.035e-13, L1 +1.849e-07, K1 +1.849e-07
+dt = 25.00 us: M*mean_Simpson(abar) / N: HS +4.831e-08, S0 +2.542e-14, L1 +4.623e-08, K1 +4.623e-08, Tri +9.607e-16   | E aus Lauf: HS +4.831e-08, S0 +2.716e-14, L1 +4.623e-08, K1 +4.623e-08
+dt = 12.50 us: M*mean_Simpson(abar) / N: HS -1.757e-08, S0 +1.774e-15, L1 -2.311e-08, K1 -2.311e-08, Tri +2.309e-16   | E aus Lauf: HS -1.757e-08, S0 +4.199e-15, L1 -2.311e-08, K1 -2.311e-08
+dt =  6.25 us: M*mean_Simpson(abar) / N: HS +3.236e-09, S0 +5.912e-16, L1 +2.889e-09, K1 +2.889e-09, Tri -5.542e-17   | E aus Lauf: HS +3.236e-09, S0 -7.008e-15, L1 +2.889e-09, K1 +2.889e-09

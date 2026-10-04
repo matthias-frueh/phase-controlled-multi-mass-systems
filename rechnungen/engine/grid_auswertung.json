@@ -1,0 +1,128 @@
+{
+ "sym": {
+  "imp|eng": {
+   "lam": 60,
+   "skew": 63,
+   "Fmax": 60,
+   "Fmean": 39,
+   "Fmin": 0,
+   "bahnen_lam": 11
+  },
+  "imp|late": {
+   "lam": 57,
+   "skew": 57,
+   "Fmax": 51,
+   "Fmean": 33,
+   "Fmin": 0,
+   "bahnen_lam": 10
+  },
+  "ramp2|eng": {
+   "lam": 37,
+   "skew": 37,
+   "Fmax": 51,
+   "Fmean": 52,
+   "Fmin": 0,
+   "bahnen_lam": 8
+  },
+  "ramp2|late": {
+   "lam": 18,
+   "skew": 20,
+   "Fmax": 26,
+   "Fmean": 33,
+   "Fmin": 0,
+   "bahnen_lam": 3
+  },
+  "std|eng": {
+   "lam": 55,
+   "skew": 59,
+   "Fmax": 63,
+   "Fmean": 36,
+   "Fmin": 0,
+   "bahnen_lam": 11
+  },
+  "std|late": {
+   "lam": 54,
+   "skew": 57,
+   "Fmax": 53,
+   "Fmean": 33,
+   "Fmin": 0,
+   "bahnen_lam": 10
+  }
+ },
+ "n_multi_bahnen": 20,
+ "n_multi_punkte": 108,
+ "robust_multi_3pp": [
+  [
+   5,
+   3
+  ],
+  [
+   6,
+   3
+  ],
+  [
+   13,
+   3
+  ],
+  [
+   21,
+   6
+  ],
+  [
+   23,
+   6
+  ],
+  [
+   24,
+   6
+  ],
+  [
+   31,
+   6
+  ],
+  [
+   33,
+   6
+  ],
+  [
+   35,
+   6
+  ],
+  [
+   37,
+   6
+  ],
+  [
+   38,
+   6
+  ],
+  [
+   44,
+   6
+  ],
+  [
+   45,
+   6
+  ],
+  [
+   48,
+   6
+  ],
+  [
+   49,
+   6
+  ],
+  [
+   56,
+   6
+  ],
+  [
+   57,
+   6
+  ],
+  [
+   58,
+   6
+  ]
+ ]
+}

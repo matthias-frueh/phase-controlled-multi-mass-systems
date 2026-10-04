@@ -1,0 +1,8 @@
+A4: starr, μ = 0,4, Referenzhub; ε(10 Hz) = 0.47625, ε(f) = ε(10 Hz)·(f/10)²
+  Schnitt      G = 0.39535: Liftoff ab f = 23.05 Hz (zwischen 23 und 24 Hz), 25-%-Grenze f = 19.96 Hz (ganzzahlig 19 Hz); F_max(10 Hz) = 7.0752 N
+  Einzelmodul  G = 0.33333: Liftoff ab f = 25.10 Hz (zwischen 25 und 26 Hz), 25-%-Grenze f = 21.74 Hz (ganzzahlig 21 Hz); F_max(10 Hz) = 8.2564 N
+  (0°,180°)    G = 0.44208: Liftoff ab f = 21.79 Hz (zwischen 21 und 22 Hz), 25-%-Grenze f = 18.87 Hz (ganzzahlig 18 Hz); F_max(10 Hz) = 9.1241 N
+  synchron     G = 1.00000: Liftoff ab f = 14.49 Hz (zwischen 14 und 15 Hz), 25-%-Grenze f = 12.55 Hz (ganzzahlig 12 Hz); F_max(10 Hz) = 12.0163 N
+  synchrone Reserve bei 10 Hz: 52.4 %
+  synchrone Reserve bei 12 Hz: 31.4 %
+  synchrone Reserve bei 13 Hz: 19.5 %

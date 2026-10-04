@@ -1,0 +1,2 @@
+[  14.8 s] L0 Sensor+Jitter          kopplung x=0.20: P(fals)=1.000 P(best)=0.000 P(PB1)=0.000 P(IUT)=0.000 P(MET)=1.000 u_F=0.24 u_N2=0.11 mN nu_F=34.3 q95max|z0|=2648.80 corr=1.00
+[  30.7 s] L0 Sensor+Jitter          kopplung x=0.30: P(fals)=1.000 P(best)=0.000 P(PB1)=0.000 P(IUT)=0.000 P(MET)=1.000 u_F=0.24 u_N2=0.11 mN nu_F=32.5 q95max|z0|=4064.69 corr=1.00

@@ -1,0 +1,14 @@
+Rampe Tr = 2.0 s, RK4-S dt = 25.0 µs, Laufzeit 204 s
+Insel    (  35.000, 116.000): RK4-S lam 20–30 s   0.000, 30–40 s   0.000 %, F_max  19.81, F_min 0.3665 | SA-Fortsetzung 45–50 s: lam   0.000 %, gamma1 0.8230, F_max 19.81, Periode 1
+HotSpot  (   0.000, 208.421): RK4-S lam 20–30 s  75.085, 30–40 s  75.085 %, F_max  38.49, F_min 0.0000 | SA-Fortsetzung 45–50 s: lam  75.085 %, gamma1 1.6580, F_max 38.47, Periode 1
+Sync     (   0.000,   0.000): RK4-S lam 20–30 s  75.788, 30–40 s  75.786 %, F_max  41.11, F_min 0.0000 | SA-Fortsetzung 45–50 s: lam  75.787 %, gamma1 1.7055, F_max 41.11, Periode 2
+P6A      (   0.000, 113.684): RK4-S lam 20–30 s  18.225, 30–40 s  18.225 %, F_max  22.11, F_min 0.0000 | SA-Fortsetzung 45–50 s: lam  18.224 %, gamma1 1.0384, F_max 22.11, Periode 1
+P6B      ( 246.316, 246.316): RK4-S lam 20–30 s  18.225, 30–40 s  18.225 %, F_max  22.11, F_min 0.0000 | SA-Fortsetzung 45–50 s: lam  18.224 %, gamma1 1.0384, F_max 22.11, Periode 1
+P13A     ( 113.684, 113.684): RK4-S lam 20–30 s  75.698, 30–40 s  75.696 %, F_max  39.30, F_min 0.0000 | SA-Fortsetzung 45–50 s: lam  75.697 %, gamma1 1.6907, F_max 39.29, Periode 1
+P13B     ( 246.316,   0.000): RK4-S lam 20–30 s  75.696, 30–40 s  75.698 %, F_max  39.30, F_min 0.0000 | SA-Fortsetzung 45–50 s: lam  75.697 %, gamma1 1.6907, F_max 39.29, Periode 1
+P49A     (  56.842, 132.632): RK4-S lam 20–30 s  19.025, 30–40 s  19.025 %, F_max  18.41, F_min 0.0000 | SA-Fortsetzung 45–50 s: lam  19.025 %, gamma1 0.7376, F_max 18.41, Periode 1
+P49B     ( 303.158,  75.789): RK4-S lam 20–30 s  19.025, 30–40 s  19.025 %, F_max  18.41, F_min 0.0000 | SA-Fortsetzung 45–50 s: lam  19.025 %, gamma1 0.7376, F_max 18.41, Periode 1
+P45A     ( 227.368, 322.105): RK4-S lam 20–30 s  35.454, 30–40 s  34.874 %, F_max  25.32, F_min 0.0000 | SA-Fortsetzung 45–50 s: lam  34.675 %, gamma1 0.9353, F_max 25.32, Periode -1
+P45B     ( 265.263,  37.895): RK4-S lam 20–30 s  75.629, 30–40 s  75.629 %, F_max  39.21, F_min 0.0000 | SA-Fortsetzung 45–50 s: lam  75.629 %, gamma1 1.6870, F_max 39.20, Periode 1
+P33A     (  18.947, 303.158): RK4-S lam 20–30 s  76.194, 30–40 s  76.193 %, F_max  40.01, F_min 0.0000 | SA-Fortsetzung 45–50 s: lam  76.195 %, gamma1 1.7184, F_max 39.99, Periode -1
+P33B     (  56.842,  75.789): RK4-S lam 20–30 s  76.192, 30–40 s  76.192 %, F_max  40.01, F_min 0.0000 | SA-Fortsetzung 45–50 s: lam  76.195 %, gamma1 1.7184, F_max 39.99, Periode -1

@@ -1,0 +1,90 @@
+=== A  S3-Gruppe ===
+max |abar_gA(t) - abar_A(t + tau_ref)| ueber 20 Zufallspunkte x 6 Elemente: 6.02e-14 m/s^2 (Skala der Beschleunigung 11.7 m/s^2)
+Zyklische Abstandsfolge (bis auf Rotation) fuer alle 6 Bilder gleich: ja (assert)
+Abgeschlossenheit: Bilder von (37,151): 6, nach erneuter Anwendung: 6
+Abstaende (37,151): (37.0, 114.0, 209.0); Spiegelbild (-37,-151): (209.0, 114.0, 37.0)  (umgekehrte Reihenfolge, gleiche Menge)
+Bahngroessen: (0,0) -> 1 ; (120,240) -> 2 ; (0,100) -> 3 ; (40,200) -> 6
+
+=== B  120-Grad-Verschiebung ===
+Raster 0.5 Grad: Punkte, an denen (phi2+120, phi3+120) zu (phi2, phi3) aequivalent ist: 6
+   ( 40.00, 200.00)  Abstaende (kanonisch) (np.float64(40.0), np.float64(160.0), np.float64(160.0))  -> realisiert durch S3-Element ['(123)']
+   ( 80.00, 160.00)  Abstaende (kanonisch) (np.float64(80.0), np.float64(80.0), np.float64(200.0))  -> realisiert durch S3-Element ['(132)']
+   (160.00,  80.00)  Abstaende (kanonisch) (np.float64(80.0), np.float64(80.0), np.float64(200.0))  -> realisiert durch S3-Element ['(123)']
+   (200.00,  40.00)  Abstaende (kanonisch) (np.float64(40.0), np.float64(160.0), np.float64(160.0))  -> realisiert durch S3-Element ['(132)']
+   (280.00, 320.00)  Abstaende (kanonisch) (np.float64(40.0), np.float64(40.0), np.float64(280.0))  -> realisiert durch S3-Element ['(123)']
+   (320.00, 280.00)  Abstaende (kanonisch) (np.float64(40.0), np.float64(40.0), np.float64(280.0))  -> realisiert durch S3-Element ['(132)']
+   |Phi_k(phi+120)|/|Phi_k(phi)| bei (0,0), k=1..9: 0.577 0.577 1.000 0.577 0.577 1.000 0.577 0.577 1.000
+   |Phi_k(phi+120)|/|Phi_k(phi)| bei (110,234), k=1..9: 10.839 6.192 1.000 2.279 2.724 1.000 1.093 1.812 1.000
+   |Phi_k(phi+120)|/|Phi_k(phi)| bei (157.3,264.0), k=1..9: 3.485 0.971 1.000 0.976 1.218 1.000 0.399 0.862 1.000
+   |Phi_k(phi+120)|/|Phi_k(phi)| bei (40,200), k=1..9: 1.000 1.000 nan 1.000 1.000 nan 1.000 1.000 1.000
+   |Phi_1| (0,0) = 3.0000, (120,120) = 1.7321 (= sqrt 3 = 1.7321)
+
+=== C  Zeitumkehrsymmetrie der Profile ===
+egg: beste Achse t0 = 0.3250 T, max|a(t0+s)-a(t0-s)| = 3.286e-14 m/s^2; Triadenphase arg(P1^2 P2*) = +0.0000 Grad; |P_1..4| = 14.965 4.932 2.128 0.322
+     Phasen der P_k relativ zur Achse (sollen 0 oder +-180 sein), k=1..6: +180.000 -0.000 +180.000 +0.000 +0.000 +180.000
+     Mittelwert der Profilbeschleunigung je Periode: -9.00e-08 m/s^2; Geschwindigkeitsamplitude RTOP*pi/(THOLD*T) = 0.2417 m/s, RBOT*pi/(TFAST*T) = 0.2417 m/s
+skew: beste Achse t0 = 0.3250 T, max|a(t0+s)-a(t0-s)| = 1.308e+01 m/s^2; Triadenphase arg(P1^2 P2*) = +55.6225 Grad; |P_1..4| = 14.212 18.950 0.000 0.000
+
+=== D  Lineares Modell: Spiegelung und Harmonischenphasen ===
+-- Profil egg, Referenz K=1e4,C=16
+   (110.0,234.0) vs Spiegel: Schiefe -0.18016/-0.26196  F_min 3.9896/3.6896  F_max 8.5776/8.7759  max d|N_k| 1.1e-15 N  Regel arg: 1.5e-13 Grad  (Kontaktast ja)
+   (128.0,246.0) vs Spiegel: Schiefe -0.34783/-0.17699  F_min 3.6700/3.7886  F_max 8.7840/8.6705  max d|N_k| 2.2e-15 N  Regel arg: 6.4e-14 Grad  (Kontaktast ja)
+   (114.0,252.0) vs Spiegel: Schiefe -0.11080/-0.34740  F_min 2.0178/1.7756  F_max 10.3705/10.3605  max d|N_k| 3.6e-15 N  Regel arg: 3.7e-14 Grad  (Kontaktast ja)
+   (100.0,240.0) vs Spiegel: Schiefe -0.34409/+0.05014  F_min 0.7677/1.6175  F_max 10.9548/11.2351  max d|N_k| 2.7e-15 N  Regel arg: 1.3e-13 Grad  (Kontaktast ja)
+-- Profil egg, C=0 (ungedaempft)
+   (110.0,234.0) vs Spiegel: Schiefe -0.01972/-0.01972  F_min -8.0606/-8.0606  F_max 19.2830/19.2830  max d|N_k| 1.1e-14 N  Regel arg: 1.5e-13 Grad  (Kontaktast nein)
+   (128.0,246.0) vs Spiegel: Schiefe -0.02139/-0.02139  F_min -4.3041/-4.3041  F_max 16.6955/16.6955  max d|N_k| 1.8e-14 N  Regel arg: 8.3e-14 Grad  (Kontaktast nein)
+   (114.0,252.0) vs Spiegel: Schiefe -0.00785/-0.00785  F_min -14.7616/-14.7616  F_max 26.9680/26.9680  max d|N_k| 2.5e-14 N  Regel arg: 3.7e-14 Grad  (Kontaktast nein)
+   (100.0,240.0) vs Spiegel: Schiefe -0.00750/-0.00750  F_min -23.1100/-23.1100  F_max 34.5543/34.5543  max d|N_k| 1.4e-14 N  Regel arg: 9.5e-14 Grad  (Kontaktast nein)
+-- Profil egg, starr (H=1)
+   (110.0,234.0) vs Spiegel: Schiefe -0.59946/-0.59946  F_min 3.8570/3.8570  F_max 7.7387/7.7387  max d|N_k| 4.4e-16 N  Regel arg: 1.7e-13 Grad  (Kontaktast ja)
+   (128.0,246.0) vs Spiegel: Schiefe -0.57846/-0.57846  F_min 3.7781/3.7781  F_max 7.7727/7.7727  max d|N_k| 7.8e-16 N  Regel arg: 6.5e-14 Grad  (Kontaktast ja)
+   (114.0,252.0) vs Spiegel: Schiefe -0.85035/-0.85035  F_min 3.4389/3.4389  F_max 8.0388/8.0388  max d|N_k| 1.1e-15 N  Regel arg: 3.7e-14 Grad  (Kontaktast ja)
+   (100.0,240.0) vs Spiegel: Schiefe -0.79324/-0.79324  F_min 3.3750/3.3750  F_max 8.1232/8.1232  max d|N_k| 1.6e-15 N  Regel arg: 1.2e-13 Grad  (Kontaktast ja)
+-- Profil skew, Referenz K=1e4,C=16
+   (110.0,234.0) vs Spiegel: Schiefe -0.00857/-0.01689  F_min -0.7020/-0.7763  F_max 13.2490/13.0540  max d|N_k| 6.2e-15 N  Regel arg: 1.3e-13 Grad  (Kontaktast nein)
+   (128.0,246.0) vs Spiegel: Schiefe -0.00022/+0.02263  F_min 0.9616/1.3034  F_max 11.7878/11.9396  max d|N_k| 8.0e-15 N  Regel arg: 8.3e-14 Grad  (Kontaktast ja)
+   (114.0,252.0) vs Spiegel: Schiefe +0.02666/+0.00689  F_min -4.1169/-4.7382  F_max 17.9381/17.7022  max d|N_k| 1.4e-14 N  Regel arg: 8.8e-14 Grad  (Kontaktast nein)
+   (100.0,240.0) vs Spiegel: Schiefe -0.01443/+0.01443  F_min -9.0625/-8.3456  F_max 21.0986/21.8155  max d|N_k| 5.3e-15 N  Regel arg: 1.0e-13 Grad  (Kontaktast nein)
+-- Profil skew, C=0 (ungedaempft)
+   (110.0,234.0) vs Spiegel: Schiefe -0.00027/-0.00008  F_min -43.4788/-43.3804  F_max 55.8365/56.0235  max d|N_k| 2.8e-14 N  Regel arg: 1.9e-13 Grad  (Kontaktast nein)
+   (128.0,246.0) vs Spiegel: Schiefe +0.00041/-0.00010  F_min -31.5406/-31.9229  F_max 44.7865/44.5850  max d|N_k| 5.7e-14 N  Regel arg: 6.7e-14 Grad  (Kontaktast nein)
+   (114.0,252.0) vs Spiegel: Schiefe +0.00001/+0.00045  F_min -72.5283/-71.9320  F_max 85.3009/85.6150  max d|N_k| 9.9e-14 N  Regel arg: 1.7e-14 Grad  (Kontaktast nein)
+   (100.0,240.0) vs Spiegel: Schiefe +0.00032/-0.00032  F_min -100.2768/-101.2242  F_max 113.9773/113.0299  max d|N_k| 1.4e-14 N  Regel arg: 1.2e-13 Grad  (Kontaktast nein)
+-- Profil skew, starr (H=1)
+   (110.0,234.0) vs Spiegel: Schiefe +0.17778/+0.05506  F_min 4.9158/4.7825  F_max 8.1156/8.0474  max d|N_k| 1.1e-15 N  Regel arg: 1.6e-13 Grad  (Kontaktast ja)
+   (128.0,246.0) vs Spiegel: Schiefe -0.26102/+0.06368  F_min 4.9830/5.1219  F_max 7.4219/7.6943  max d|N_k| 1.6e-15 N  Regel arg: 8.8e-14 Grad  (Kontaktast ja)
+   (114.0,252.0) vs Spiegel: Schiefe -0.00706/-0.27849  F_min 3.6594/3.4449  F_max 9.0801/8.6580  max d|N_k| 2.7e-15 N  Regel arg: 5.1e-14 Grad  (Kontaktast ja)
+   (100.0,240.0) vs Spiegel: Schiefe -0.20720/+0.20720  F_min 2.5423/3.2068  F_max 9.5462/10.2107  max d|N_k| 1.8e-15 N  Regel arg: 1.2e-13 Grad  (Kontaktast ja)
+-- S3-Regel arg N_k(gA) = arg N_k(A) + k*phi_ref an (110,234), k=1..6, Abweichung in Grad:
+   id     ( 110.0, 234.0) phi_ref=   0.0:  +0.0e+00 -0.0e+00 +0.0e+00 +3.1e-15 -0.0e+00 +0.0e+00   |N_k| max Abw. 0.0e+00 N
+   (23)   ( 234.0, 110.0) phi_ref=   0.0:  -1.7e-14 -0.0e+00 +0.0e+00 -9.3e-15 -0.0e+00 +0.0e+00   |N_k| max Abw. 1.1e-16 N
+   (12)   ( 250.0, 124.0) phi_ref= 110.0:  -5.8e-14 +1.0e-14 -2.5e-14 -5.9e-14 +1.2e-13 -3.9e-14   |N_k| max Abw. 1.8e-15 N
+   (123)  ( 124.0, 250.0) phi_ref= 110.0:  -5.8e-14 +1.0e-14 -2.5e-14 -7.1e-14 +1.2e-13 -3.9e-14   |N_k| max Abw. 1.8e-15 N
+   (13)   ( 236.0, 126.0) phi_ref= 234.0:  -2.3e-14 -1.0e-14 -9.9e-15 -1.6e-14 +2.2e-14 -1.3e-14   |N_k| max Abw. 4.4e-15 N
+   (132)  ( 126.0, 236.0) phi_ref= 234.0:  -2.3e-14 -1.0e-14 -9.9e-15 -1.6e-14 +2.2e-14 -1.1e-14   |N_k| max Abw. 4.4e-15 N
+   Triadenphase arg(N1^2 N2*) invariant: +62.3723 +62.3723 +62.3723 +62.3723 +62.3723 +62.3723
+   Spiegel: Triade A +62.372, A* +102.030; Transferanteil arg(H1^2 H2*) = +82.201 Grad -> Triade(A*) = 2*82.201 - Triade(A) = +102.030 (mod 360)
+
+=== E  Zeltschnitt phi3 = 240 Grad, Spiegelung = Spiegelung um phi2 = 120 Grad ===
+   Spiegel von (100,240) = (260,120); S3-Bahn enthaelt [(140.0, 240.0)]
+   Spiegel von (110,240) = (250,120); S3-Bahn enthaelt [(130.0, 240.0)]
+   Spiegel von (135,240) = (225,120); S3-Bahn enthaelt [(105.0, 240.0)]
+   Referenz K=1e4,C=16    F_min(120+d) - F_min(120-d), d=0..20: max |.| = 8.50e-01 N; Steigung 120->130: 0.1916 N/Grad, 120->110: 0.2246 N/Grad; F_min(120,240) = 5.3304 N
+                          dieselbe Differenz mit 8-fach feinerer Abtastung (16000/Periode): 8.50e-01 N
+   C=0 (ungedaempft)      F_min(120+d) - F_min(120-d), d=0..20: max |.| = 9.41e-05 N; Steigung 120->130: 1.4356 N/Grad, 120->110: 1.4356 N/Grad; F_min(120,240) = 5.3476 N
+                          dieselbe Differenz mit 8-fach feinerer Abtastung (16000/Periode): 1.77e-06 N
+   starr (H=1)            F_min(120+d) - F_min(120-d), d=0..20: max |.| = 4.98e-03 N; Steigung 120->130: 0.0836 N/Grad, 120->110: 0.0836 N/Grad; F_min(120,240) = 4.5483 N
+                          dieselbe Differenz mit 8-fach feinerer Abtastung (16000/Periode): 2.67e-04 N
+
+=== F  Datenpruefung der gespeicherten Karten ===
+Vertauschung (23), 171 Paare i<j: mittlere Differenz F_mean +5.304e-06 N, max |.| 0.0075 N, Paare mit |dF_mean| > 1e-6 N: 83
+   (ueber alle 342 geordneten Paare ist die mittlere Differenz per Konstruktion exakt 0)
+   volle S3-Gruppe, F_skew |Diff| > 0.001: 72 von 361 Punkten verletzt
+   volle S3-Gruppe, liftoff |Diff| > 0.1: 60 von 361 Punkten verletzt
+   volle S3-Gruppe, F_min |Diff| > 0.001: 0 von 361 Punkten verletzt
+   volle S3-Gruppe, F_max |Diff| > 0.01: 91 von 361 Punkten verletzt
+   liftoff-freie Punkte der Karte: 12; verschiedene (Schiefe, F_min)-Werte: 6
+   S3-Bahn (94.7, 227.4): 6 Punkte; Spannweite F_min 2.69e-04 N, Schiefe 2.10e-05, F_max 2.80e-04 N
+   S3-Bahn (113.7, 227.4): 6 Punkte; Spannweite F_min 2.10e-05 N, Schiefe 0.00e+00, F_max 1.50e-05 N
+Feinsweep 2 Grad (441 Punkte): 662 Paare (Punkt, S3-Bild) liegen beide im Fenster; max |Diff|: F_skew 2.00e-06, F_min 3.10e-05, F_max 2.50e-05, liftoff 0.00e+00, F_mean 1.00e-06

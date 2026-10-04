@@ -1,0 +1,6 @@
+=== A4 E1-Abschätzung: synchron an V1 (μ = 0.4615, Hub 8.0 mm, K = 1.5e+06, ζ = 0.05) über f ===
+  f = 12.0 Hz, ε = 0.823: linear F_min +1.057 N, F_max 16.29 N; RK4 λ = 0.00 %, F_max = 16.29 N (Zelle bei Summe/3: 5.43 N, 2.6·Mg)
+  f = 13.0 Hz, ε = 0.966: linear F_min +0.139 N, F_max 17.88 N; RK4 λ = 0.00 %, F_max = 17.88 N (Zelle bei Summe/3: 5.96 N, 2.8·Mg)
+  f = 14.0 Hz, ε = 1.120: linear F_min -0.918 N, F_max 19.95 N; RK4 λ = 96.96 %, F_max = 589.74 N (Zelle bei Summe/3: 196.58 N, 92.5·Mg)
+  f = 16.0 Hz, ε = 1.463: linear F_min -3.161 N, F_max 24.34 N; RK4 λ = 98.20 %, F_max = 991.39 N (Zelle bei Summe/3: 330.46 N, 155.5·Mg)
+Rechenzeit 148 s

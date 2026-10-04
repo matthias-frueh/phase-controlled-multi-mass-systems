@@ -1,0 +1,18 @@
+S0 exakt (18 s), v_S an Periodenbeginnen 10-25 s:
+  sigma_v alle = 2.990e-02 m/s
+  Periode 1: Mittel -0.248542 | std 2.99e-02
+  Periode 2: Mittel -0.218646 -0.278439 | std 1.04e-11 2.21e-11
+  Periode 3: Mittel -0.248542 -0.248542 -0.248542 | std 2.99e-02 2.99e-02 2.99e-02
+  Periode 4: Mittel -0.218646 -0.278439 -0.218646 -0.278439 | std 7.63e-12 1.68e-11 1.27e-11 2.64e-11
+  letzte 6 Werte: [-0.2186458 -0.2784392 -0.2186458 -0.2784392 -0.2186458 -0.2784392]
+  Fenster n = 100 Perioden (phasenstarr): max|dv_S| = 7.49e-11 m/s
+  Fenster n = 101 Perioden (phasenstarr): max|dv_S| = 5.98e-02 m/s
+HS exakt (22 s), v_S an Periodenbeginnen 10-25 s:
+  sigma_v alle = 2.135e-11 m/s
+  Periode 1: Mittel -0.374119 | std 2.14e-11
+  Periode 2: Mittel -0.374119 -0.374119 | std 1.43e-11 2.66e-11
+  Periode 3: Mittel -0.374119 -0.374119 -0.374119 | std 2.83e-11 1.20e-11 1.80e-11
+  Periode 4: Mittel -0.374119 -0.374119 -0.374119 -0.374119 | std 1.66e-11 2.66e-11 1.14e-11 2.65e-11
+  letzte 6 Werte: [-0.3741188 -0.3741188 -0.3741188 -0.3741188 -0.3741188 -0.3741188]
+  Fenster n = 100 Perioden (phasenstarr): max|dv_S| = 1.25e-10 m/s
+  Fenster n = 101 Perioden (phasenstarr): max|dv_S| = 1.25e-10 m/s

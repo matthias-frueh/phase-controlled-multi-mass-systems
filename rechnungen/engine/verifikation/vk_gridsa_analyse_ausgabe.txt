@@ -1,0 +1,35 @@
+SA-Raster: 361 von 361 Punkten
+SA 5–15 s gegen CSV (lambda): |d| > 0.01: 116, > 0.1: 20, > 1: 8, > 5: 3
+SA 5–15 s gegen CSV (<N>-Mg): |d| > 0.1 mN: 251, > 1 mN: 24, > 10 mN: 6
+SA 5–15 s gegen CSV (F_max): |d| > 0.1 N: 17, > 1 N: 9
+Kontaktpunkte (SA lambda = 0): 12; max |dF_min| gegen CSV 1.91e-05 N, max |dgamma1| 3.28e-07
+Punkte mit |dlambda| > 1 %-Pkt (CSV -> SA 5–15 s; RK4-S std 5–15 s):
+   (2,14) = (37.895,265.263): CSV 35.42, SA 75.63 (10–20 s 75.63), RK4-S 34.61; <N>-Mg CSV -5.50 mN, SA +0.001 mN
+   (2,13) = (37.895,246.316): CSV 35.80, SA 38.05 (10–20 s 37.73), RK4-S 37.74; <N>-Mg CSV -0.50 mN, SA -4.535 mN
+   (3,3) = (56.842,56.842): CSV 76.15, SA 70.00 (10–20 s 70.15), RK4-S 76.15; <N>-Mg CSV +0.04 mN, SA +9.270 mN
+   (6,8) = (113.684,151.579): CSV 37.32, SA 35.68 (10–20 s 36.17), RK4-S 36.18; <N>-Mg CSV +0.25 mN, SA +1.526 mN
+   (7,8) = (132.632,151.579): CSV 75.24, SA 74.15 (10–20 s 75.24), RK4-S 75.24; <N>-Mg CSV -0.48 mN, SA +20.264 mN
+   (8,7) = (151.579,132.632): CSV 75.24, SA 71.90 (10–20 s 75.24), RK4-S 75.24; <N>-Mg CSV -0.43 mN, SA +20.674 mN
+   (13,2) = (246.316,37.895): CSV 35.59, SA 38.05 (10–20 s 37.73), RK4-S 37.74; <N>-Mg CSV +6.71 mN, SA -4.535 mN
+   (14,2) = (265.263,37.895): CSV 35.42, SA 75.63 (10–20 s 75.63), RK4-S 35.20; <N>-Mg CSV -5.50 mN, SA +0.001 mN
+Hot-Spot (0,11): CSV <N>-Mg -43.459 mN, lambda 74.349, F_max 44.104 | SA +0.0205 mN, lambda 75.0847, F_max 38.489
+SA std, Fenster 5–15 s, verletzte Punkte/Bahnen (lambda): >0.1: 64/13  >0.5: 57/11  >1: 51/10  >5: 27/6; Median 32.26 %, lambda>74 %: 142
+SA std, Fenster 10–20 s, verletzte Punkte/Bahnen (lambda): >0.1: 54/11  >0.5: 52/11  >1: 45/9  >5: 33/7; Median 32.26 %, lambda>74 %: 143
+Bahnen verletzt (> 0,5 %-Pkt): CSV 11, SA 11, beide 9; nur CSV [11, 45], nur SA [10, 16]
+   Bahn 6: CSV 75.6 75.6 18.2 | SA 75.6 75.6 18.2
+   Bahn 10: CSV 38.1 38.6 38.3 | SA 38.7 38.6 38.2
+   Bahn 11: CSV 74.3 75.1 74.4 | SA 75.1 75.1 75.1
+   Bahn 13: CSV 43.7 75.7 43.6 | SA 43.6 75.7 43.7
+   Bahn 16: CSV 76.1 76.1 76.1 | SA 76.1 70.2 76.1
+   Bahn 21: CSV 76.2 76.2 76.2 71.2 71.2 76.2 | SA 76.2 76.2 76.2 71.1 71.1 76.2
+   Bahn 28: CSV 37.4 37.6 37.4 37.4 37.7 38.1 | SA 37.2 37.8 37.8 37.6 37.7 38.0
+   Bahn 31: CSV 44.6 75.8 75.8 44.6 44.6 44.6 | SA 44.6 75.8 75.8 44.6 44.6 44.6
+   Bahn 33: CSV 71.9 76.2 76.2 76.2 71.9 76.2 | SA 71.9 76.2 76.2 76.2 71.9 76.2
+   Bahn 44: CSV 35.8 37.3 36.2 35.7 35.6 36.9 | SA 37.7 36.2 35.6 35.4 37.7 36.1
+   Bahn 45: CSV 35.4 75.6 75.6 75.6 35.4 75.6 | SA 75.6 75.6 75.6 75.6 75.6 75.6
+   Bahn 49: CSV 75.6 19.0 75.6 19.0 19.0 19.0 | SA 75.6 19.0 75.6 19.0 19.0 19.0
+   Bahn 57: CSV 22.4 75.7 75.7 22.4 22.4 22.4 | SA 22.4 75.7 75.7 22.4 22.4 22.4
+(23)-Paare CSV: 72 von 171 mit Differenz > 0, > 0.01: 8, > 0.1: 7, max 1.166 %-Pkt
+(23)-Paare SA 5–15 s: 144 von 171 mit Differenz > 0, > 0.01: 6, > 0.1: 6, max 2.253 %-Pkt
+(23)-Paare SA 10–20 s: 135 von 171 mit Differenz > 0, > 0.01: 6, > 0.1: 5, max 0.772 %-Pkt
+(23)-Paare CSV F_mean: max 7.54 mN, Paare mit > 0: 83

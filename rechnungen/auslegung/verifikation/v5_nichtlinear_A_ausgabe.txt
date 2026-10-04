@@ -1,0 +1,24 @@
+=== AUS-11: Standardstart (x = −Mg/K, ẋ = 0, t = 0), 8 s, Auswertung letzte 5 s ===
+  V1 ζ=0.05 einzel         λ =   0.000 %  F_min =   5.1571 N (linear   5.1571, Δ = -4.4e-15)  F_max =    8.641 N (linear 8.641)  (0 s)
+  V1 ζ=0.05 paar 0         λ =   0.000 %  F_min =   3.9378 N (linear   3.9378, Δ = -8.4e-15)  F_max =   10.906 N (linear 10.906)  (1 s)
+  V1 ζ=0.05 paar 120       λ =   0.000 %  F_min =   4.6686 N (linear   4.6686, Δ = +4.5e-09)  F_max =    7.872 N (linear 7.872)  (1 s)
+  V1 ζ=0.05 paar 180       λ =   0.000 %  F_min =   5.4585 N (linear   5.4585, Δ = -7.1e-14)  F_max =    7.428 N (linear 7.428)  (1 s)
+  V1 ζ=0.05 synchron       λ =   0.000 %  F_min =   2.7184 N (linear   2.7184, Δ = -1.2e-14)  F_max =   13.170 N (linear 13.170)  (2 s)
+  V1 ζ=0.05 (0,180)        λ =   0.000 %  F_min =   4.7058 N (linear   4.7058, Δ = +7.6e-08)  F_max =    9.692 N (linear 9.692)  (2 s)
+  V1 ζ=0.05 pilot 110/250  λ =   0.000 %  F_min =   4.8572 N (linear   4.8572, Δ = -1.4e-08)  F_max =    7.246 N (linear 7.246)  (2 s)
+  V1 ζ=0.05 pilot 130/230  λ =   0.000 %  F_min =   5.0348 N (linear   5.0348, Δ = -4.9e-10)  F_max =    7.157 N (linear 7.157)  (3 s)
+  V1 ζ=0.05 schnitt 100    λ =   0.000 %  F_min =   4.8713 N (linear   4.8713, Δ = -9.3e-09)  F_max =    7.222 N (linear 7.222)  (3 s)
+  V1 ζ=0.05 schnitt 118    λ =   0.000 %  F_min =   5.2999 N (linear   5.2999, Δ = +1.7e-07)  F_max =    6.992 N (linear 6.992)  (3 s)
+  V1 ζ=0.05 schnitt 120    λ =   0.000 %  F_min =   5.4089 N (linear   5.4089, Δ = +5.9e-07)  F_max =    6.969 N (linear 6.969)  (4 s)
+  V1 ζ=0.05 schnitt 122    λ =   0.000 %  F_min =   5.2947 N (linear   5.2947, Δ = -4.3e-08)  F_max =    6.983 N (linear 6.983)  (4 s)
+  V1 ζ=0.05 schnitt 140    λ =   0.000 %  F_min =   4.8486 N (linear   4.8486, Δ = +9.1e-08)  F_max =    7.247 N (linear 7.247)  (5 s)
+  V1: max |ΔF_min| über Läufe mit λ = 0: 5.9e-07 N
+  V2 ζ=0.02 synchron       λ =   0.000 %  F_min =   1.8542 N (linear   1.8542, Δ = +8.8e-09)  F_max =   14.704 N (linear 14.704)  (5 s)
+  V2 ζ=0.02 schnitt 100    λ =   0.000 %  F_min =   4.5057 N (linear   4.5057, Δ = +3.4e-07)  F_max =    7.446 N (linear 7.446)  (5 s)
+  V2 ζ=0.02 schnitt 120    λ =   0.000 %  F_min =   5.2298 N (linear   5.2298, Δ = +1.3e-07)  F_max =    7.069 N (linear 7.069)  (6 s)
+  V2 ζ=0.02 schnitt 140    λ =   0.000 %  F_min =   4.5133 N (linear   4.5133, Δ = +1.4e-07)  F_max =    7.544 N (linear 7.544)  (6 s)
+  V2: max |ΔF_min| über Läufe mit λ = 0: 3.4e-07 N
+  V5 ζ=0.05 synchron       λ =  25.174 %  F_min =   0.0000 N (linear  -0.2221, Δ = +2.2e-01)  F_max =   19.221 N (linear 18.682)  (7 s)
+  V5 ζ=0.05 schnitt 120    λ =   0.000 %  F_min =   4.6526 N (linear   4.6526, Δ = +1.0e-06)  F_max =    7.408 N (linear 7.408)  (8 s)
+  V5: max |ΔF_min| über Läufe mit λ = 0: 1.0e-06 N
+Rechenzeit 8 s

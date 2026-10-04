@@ -1,0 +1,3 @@
+Teil C: V1 synchron 14 Hz, Standardstart, Δt = 17.86 µs: λ = 97.189 %, F_max = 359.98 N; 70 Kontaktbeginne in 5.0 s, Abstände [Perioden] [0.7018, 1.2975, 0.7027, 1.2972, 0.7025, 1.2992]
+Teil C: V2 (120°,240°) ζ = 0,02, ż₀ = 0,5 m/s, Δt = 10.42 µs: λ = 0.000 %, F_max = 7.07 N
+Rechenzeit 256 s
