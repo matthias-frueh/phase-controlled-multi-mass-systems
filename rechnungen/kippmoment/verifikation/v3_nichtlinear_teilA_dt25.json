@@ -1,0 +1,242 @@
+[
+ {
+  "fall": "REF mu=1.0 G0 (0, 120, 240) rho_f=0.5000R_c standard dt=25us",
+  "lam_zellen": [
+   75.7862,
+   75.7867,
+   75.788
+  ],
+  "lam_summe": 56.4435,
+  "N_min": 0.0,
+  "N_max": 24.9521,
+  "N_mean": 6.37656,
+  "N_skew": 1.0305,
+  "Fz_max3": [
+   41.116,
+   41.119,
+   41.117
+  ],
+  "Fz_skew": [
+   1.7054,
+   1.7054,
+   1.7054
+  ],
+  "periodizitaet_T": null
+ },
+ {
+  "fall": "REF mu=1.0 G0 (0, 110, 240) rho_f=0.5000R_c standard dt=25us",
+  "lam_zellen": [
+   75.786,
+   75.788,
+   75.7878
+  ],
+  "lam_summe": 37.054,
+  "N_min": 0.0,
+  "N_max": 24.95,
+  "N_mean": 6.37654,
+  "N_skew": 0.8342,
+  "Fz_max3": [
+   41.117,
+   41.117,
+   41.116
+  ],
+  "Fz_skew": [
+   1.7054,
+   1.7055,
+   1.7055
+  ],
+  "periodizitaet_T": null
+ },
+ {
+  "fall": "REF mu=0.462 G0 (0, 120, 240) rho_f=0.5000R_c standard dt=25us",
+  "lam_zellen": [
+   11.925,
+   11.95,
+   11.95
+  ],
+  "lam_summe": 0.0,
+  "N_min": 5.9639,
+  "N_max": 6.7297,
+  "N_mean": 6.37648,
+  "N_skew": 0.0216,
+  "Fz_max3": [
+   16.592,
+   16.591,
+   16.591
+  ],
+  "Fz_skew": [
+   0.6805,
+   0.6805,
+   0.6805
+  ],
+  "periodizitaet_T": null
+ },
+ {
+  "fall": "REF mu=0.462 G0 (0, 110, 240) rho_f=0.5000R_c standard dt=25us",
+  "lam_zellen": [
+   10.775,
+   17.25,
+   9.525
+  ],
+  "lam_summe": 0.0,
+  "N_min": 5.2102,
+  "N_max": 6.9832,
+  "N_mean": 6.37652,
+  "N_skew": -0.9969,
+  "Fz_max3": [
+   16.553,
+   17.435,
+   16.064
+  ],
+  "Fz_skew": [
+   0.6748,
+   0.715,
+   0.6539
+  ],
+  "periodizitaet_T": null
+ },
+ {
+  "fall": "REF mu=1.0 G60h (0, 120, 240) rho_f=0.5000R_c standard dt=25us",
+  "lam_zellen": [
+   22.3415,
+   22.35,
+   22.35
+  ],
+  "lam_summe": 0.0,
+  "N_min": 5.406,
+  "N_max": 7.3774,
+  "N_mean": 6.37652,
+  "N_skew": 0.0987,
+  "Fz_max3": [
+   12.068,
+   12.068,
+   12.069
+  ],
+  "Fz_skew": [
+   -0.4811,
+   -0.4811,
+   -0.4812
+  ],
+  "periodizitaet_T": null
+ },
+ {
+  "fall": "REF mu=1.0 G0 (0, 120, 240) rho_f=0.5000R_c lin_orbit dt=25us",
+  "lam_zellen": [
+   75.7883,
+   75.787,
+   75.7883
+  ],
+  "lam_summe": 37.0535,
+  "N_min": 0.0,
+  "N_max": 24.9533,
+  "N_mean": 6.37655,
+  "N_skew": 0.8341,
+  "Fz_max3": [
+   41.115,
+   41.118,
+   41.116
+  ],
+  "Fz_skew": [
+   1.7055,
+   1.7054,
+   1.7055
+  ],
+  "periodizitaet_T": null
+ },
+ {
+  "fall": "REF mu=1.0 G0 (0, 110, 240) rho_f=0.5000R_c lin_orbit dt=25us",
+  "lam_zellen": [
+   75.7855,
+   75.787,
+   75.7885
+  ],
+  "lam_summe": 37.0523,
+  "N_min": 0.0,
+  "N_max": 24.9486,
+  "N_mean": 6.37653,
+  "N_skew": 0.8342,
+  "Fz_max3": [
+   41.119,
+   41.118,
+   41.119
+  ],
+  "Fz_skew": [
+   1.7055,
+   1.7054,
+   1.7055
+  ],
+  "periodizitaet_T": null
+ },
+ {
+  "fall": "REF mu=0.462 G0 (0, 120, 240) rho_f=0.5000R_c lin_orbit dt=25us",
+  "lam_zellen": [
+   11.925,
+   11.95,
+   11.95
+  ],
+  "lam_summe": 0.0,
+  "N_min": 5.9639,
+  "N_max": 6.7297,
+  "N_mean": 6.37648,
+  "N_skew": 0.0216,
+  "Fz_max3": [
+   16.592,
+   16.591,
+   16.591
+  ],
+  "Fz_skew": [
+   0.6805,
+   0.6805,
+   0.6805
+  ],
+  "periodizitaet_T": null
+ },
+ {
+  "fall": "REF mu=0.462 G0 (0, 110, 240) rho_f=0.5000R_c lin_orbit dt=25us",
+  "lam_zellen": [
+   10.775,
+   17.25,
+   9.525
+  ],
+  "lam_summe": 0.0,
+  "N_min": 5.2102,
+  "N_max": 6.9832,
+  "N_mean": 6.37652,
+  "N_skew": -0.9969,
+  "Fz_max3": [
+   16.553,
+   17.435,
+   16.064
+  ],
+  "Fz_skew": [
+   0.6748,
+   0.715,
+   0.6539
+  ],
+  "periodizitaet_T": null
+ },
+ {
+  "fall": "REF mu=1.0 G60h (0, 120, 240) rho_f=0.5000R_c lin_orbit dt=25us",
+  "lam_zellen": [
+   22.3415,
+   22.35,
+   22.35
+  ],
+  "lam_summe": 0.0,
+  "N_min": 5.406,
+  "N_max": 7.3774,
+  "N_mean": 6.37652,
+  "N_skew": 0.0987,
+  "Fz_max3": [
+   12.068,
+   12.068,
+   12.069
+  ],
+  "Fz_skew": [
+   -0.4811,
+   -0.4811,
+   -0.4812
+  ],
+  "periodizitaet_T": null
+ }
+]

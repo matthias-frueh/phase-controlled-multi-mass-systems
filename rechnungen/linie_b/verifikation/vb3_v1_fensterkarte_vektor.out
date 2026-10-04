@@ -1,0 +1,10 @@
+====================================================================================================
+vb3 – v1-Fensterkarte, vektorisiert; Rechenzeit 9.4 s (2 rho) + 8.7 s (DT = 25 µs)
+====================================================================================================
+Abgleich archivierte v1-CSV (169 Punkte): max |Diff| = 4.928e-11 m/s; Archiv min/max = -0.104101/+0.691635 mm/s
+eigene Karte rho=1000 (DT 50 µs): min/max = -0.104101/+0.691635 mm/s, negativ 54/169
+DT = 25 µs gegen 50 µs: max |Diff| = 8.17e-10 m/s (rel. zur Spanne 1.0e-06)
+rho = 1,2: min/max = -0.0001550/+0.0013593 mm/s
+  Störungsrechnung 1. Ordnung (rho=1,2) gegen RK4: max rel. Abw. 6.43e-04; Störung min/max -0.0001550/+0.0013601 mm/s
+Verhältnis Fenster rho=1000 / rho=1,2: 508.8 … 769.3 (Dichteverhältnis 833.3)
+Verhältnis Fenster rho=1,2 / rho=0,12: 9.9942 … 9.9991 (Dichteverhältnis 10)

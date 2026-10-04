@@ -1,0 +1,30 @@
+=== A) Δ_q im A4-Beispiel (eigene Zeitbereichsrechnung) ===
+k_max = None: ΔF_Zelt = 0.4693 N → Δ(F_min) = 0.1173 N; max|N1|,|N2|,|N3| = 0.4504, 0.2924, 0.5533 N → Δ = 0.1126, 0.0731, 0.1383 N; F_min(120°) − ⟨N⟩ = -0.7313 N, F_min(100°) − ⟨N⟩ = -1.2006 N
+k_max = 9: ΔF_Zelt = 0.5173 N → Δ(F_min) = 0.1293 N; max|N1|,|N2|,|N3| = 0.4504, 0.2924, 0.5533 N → Δ = 0.1126, 0.0731, 0.1383 N; F_min(120°) − ⟨N⟩ = -0.6984 N, F_min(100°) − ⟨N⟩ = -1.2157 N
+   ν = inf: c = 3.583; notwendige Grenze Δ/c = 32.7 mN (volles Spektrum)
+   ν = 19: c = 4.356; notwendige Grenze Δ/c = 26.9 mN (volles Spektrum)
+
+=== B) P(PB1 ∧ kein |z| > c | exakt) je Test analytisch (ν = ∞ geschlossen, ν endlich Quadratur) ===
+ν = inf: c = 3.583; P(PB1) je Test bei R = c: 0.0000 (147 Tests: 0.00e+00); m = 1: R(0,8) = 4.864 → u ≤ 24.1 mN; m = 21: R(0,8) = 6.139 → u ≤ 19.1 mN; m = 147: R(0,8) = 6.754 → u ≤ 17.4 mN
+ν = 19: c = 4.356; P(PB1) je Test bei R = c: 0.2168 (147 Tests: 2.53e-98); m = 1: R(0,8) = 5.857 → u ≤ 20.0 mN; m = 21: R(0,8) = 7.470 → u ≤ 15.7 mN; m = 147: R(0,8) = 8.320 → u ≤ 14.1 mN
+ν = 37: c = 3.948; P(PB1) je Test bei R = c: 0.1472 (147 Tests: 4.89e-123); m = 1: R(0,8) = 5.331 → u ≤ 22.0 mN; m = 21: R(0,8) = 6.747 → u ≤ 17.4 mN; m = 147: R(0,8) = 7.487 → u ≤ 15.7 mN
+   geschlossen ν = ∞, m = 147: R = c + Φ⁻¹((1 + 0,8^(1/147))/2) = 6.754
+
+=== C) analytische u_q (Median über Punkte; in Klammern Bootstrap-Median der Gruppe, s2) und Δ_q/u_q ===
+Δ_q (k_max = 9) [mN]: F 129.3, 112.6, 73.1, 138.3 (F, N1, N2, N3)
+L0 Sensor+Jitter   u [mN]: F   0.28 (0.26), N1   0.18 (0.176), N2   0.13 (0.121), N3   0.09 (0.084) | min Δ/u: F  371.7, N1  561.9, N2  498.5, N3 1194.1 → bindend: F_min | P(bestätigt|exakt) analytisch ≈ 0.905
+L1 0,3 %/0,03°     u [mN]: F   1.03 (0.99), N1   1.53 (1.47), N2   0.53 (0.51), N3   0.25 (0.23) | min Δ/u: F  117.1, N1   66.8, N2  119.9, N3  453.3 → bindend: N1 | P(bestätigt|exakt) analytisch ≈ 0.905
+L2 1 %/0,1°        u [mN]: F   3.42 (3.3), N1   5.10 (4.94), N2   1.75 (1.7), N3   0.80 (0.77) | min Δ/u: F   35.4, N1   20.0, N2   36.1, N3  137.6 → bindend: N1 | P(bestätigt|exakt) analytisch ≈ 0.905
+L3 3 %/0,3°        u [mN]: F  10.24 (9.86), N1  15.30 (14.7), N2   5.26 (5.07), N3   2.40 (2.29) | min Δ/u: F   11.8, N1    6.7, N2   12.0, N3   45.9 → bindend: N1 | P(bestätigt|exakt) analytisch ≈ 0.797
+L4 6 %/0,6°        u [mN]: F  20.48 (19.6), N1  30.59 (29.5), N2  10.52 (10.1), N3   4.81 (4.56) | min Δ/u: F    5.9, N1    3.3, N2    6.0, N3   23.0 → bindend: N1 | P(bestätigt|exakt) analytisch ≈ 0.000
+L5 10 %/1°         u [mN]: F  34.14 (32.5), N1  50.99 (48.9), N2  17.53 (16.8), N3   8.01 (7.64) | min Δ/u: F    3.5, N1    2.0, N2    3.6, N3   13.8 → bindend: N1 | P(bestätigt|exakt) analytisch ≈ 0.000
+
+σ_a (σ_p = 10°·σ_a), bei dem P(bestätigt|exakt) = 0,8 (analytisch, ν = 37), und bindende Größe dort:
+   σ_a = 3.00 % (σ_p = 0.30°): u_F (Median) = 10.2 mN, u_N1 = 15.3 mN; min Δ/u: F 11.83, N1 6.69, N2 12.04, N3 45.99
+   nur F_min (21 Tests) bindend: σ_a = 5.47 % → u_F (Median) = 18.7 mN
+reines weißes Rauschen (σ_h = 1 mN): min Δ/u: F 96.4, N1 251.8, N2 163.5, N3 309.3; u_N2/u_F = 0.33
+reine Modulamplitude (σ_a = 1 %): min Δ/u: F 39.3, N1 20.2, N2 36.9, N3 138.1
+reine Modulphase (σ_p = 0,1°): min Δ/u: F 82.1, N1 115.9, N2 105.8, N3 263.8
+σ = 20 mN, f_s = 6400 Hz, T_a = 10 s: σ_h = sd(Re N_k) = 0.1118 mN; sd(F_min − ⟨N⟩) je Lauf = √k_max·σ_h = 0.335 mN
+σ = 5 mN, f_s = 6400 Hz, T_a = 10 s: σ_h = sd(Re N_k) = 0.0280 mN; sd(F_min − ⟨N⟩) je Lauf = √k_max·σ_h = 0.084 mN
+σ = 1 mN, f_s = 6400 Hz, T_a = 10 s: σ_h = sd(Re N_k) = 0.0056 mN; sd(F_min − ⟨N⟩) je Lauf = √k_max·σ_h = 0.017 mN

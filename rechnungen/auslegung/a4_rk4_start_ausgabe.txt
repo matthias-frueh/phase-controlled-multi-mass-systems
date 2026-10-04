@@ -1,0 +1,12 @@
+=== A4 Wurfstarts an V2 (ζ = 0,02): ż₀ = 0,5 / 1,5 m/s aus z = −Mg/K bei t = 0 ===
+  Einzelmodul    ż₀ = 0.5 m/s: λ = 98.088 %, F_min RK4 0.00000 N, linear 4.86909 N
+  synchron       ż₀ = 0.5 m/s: λ = 98.098 %, F_min RK4 0.00000 N, linear 1.85426 N
+  Schnitt 100°   ż₀ = 0.5 m/s: λ = 0.000 %, F_min RK4 4.50565 N, linear 4.50567 N
+  Schnitt 120°   ż₀ = 0.5 m/s: λ = 94.176 %, F_min RK4 0.00000 N, linear 5.22981 N
+  Schnitt 140°   ż₀ = 0.5 m/s: λ = 0.000 %, F_min RK4 4.51343 N, linear 4.51343 N
+  Einzelmodul    ż₀ = 1.5 m/s: λ = 25.122 %, F_min RK4 0.00000 N, linear 4.86909 N
+  synchron       ż₀ = 1.5 m/s: λ = 99.525 %, F_min RK4 0.00000 N, linear 1.85426 N
+  Schnitt 100°   ż₀ = 1.5 m/s: λ = 40.672 %, F_min RK4 0.00000 N, linear 4.50567 N
+  Schnitt 120°   ż₀ = 1.5 m/s: λ = 34.557 %, F_min RK4 0.00000 N, linear 5.22981 N
+  Schnitt 140°   ż₀ = 1.5 m/s: λ = 30.040 %, F_min RK4 0.00000 N, linear 4.51343 N
+Rechenzeit 26 s

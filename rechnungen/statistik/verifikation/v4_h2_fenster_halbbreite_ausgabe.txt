@@ -1,0 +1,37 @@
+=== 1) Rauschfrei: max. Abweichung der Vorhersage von der eigenen Zeltanpassung [mN] und φ* − 120° ===
+A4: 2°-Sekanten 0.0343/0.0343 N/° | w=4: 1.08 (+0.000°); w=6: 2.91 (+0.000°); w=8: 5.44 (+0.000°); w=10: 8.62 (+0.000°); w=12: 12.44 (+0.000°); w=14: 16.87 (+0.000°); w=16: 21.87 (+0.000°); w=18: 27.41 (+0.000°); w=20: 33.44 (+0.000°)
+ref: 2°-Sekanten 0.2118/0.1951 N/° | w=4: 1.05 (-0.044°); w=6: 3.85 (-0.065°); w=8: 5.35 (-0.087°); w=10: 8.44 (-0.110°); w=12: 11.76 (-0.132°); w=14: 15.46 (-0.154°); w=16: 21.74 (-0.176°); w=18: 29.36 (-0.198°); w=20: 38.49 (-0.219°)
+CSV (Engine, volles Spektrum): w=4: 1.02 (-0.044°); w=6: 3.74 (-0.064°); w=8: 5.20 (-0.085°); w=10: 7.99 (-0.107°); w=12: 11.08 (-0.128°); w=14: 15.37 (-0.150°); w=16: 21.65 (-0.171°); w=18: 29.31 (-0.192°); w=20: 38.48 (-0.212°)
+A4: Fenster (rauschfrei) nur bei u_c,erw ≥ 4·1.08 = 4.31 mN; bei n = n₀ = 20 (u_c,erw = σ_run·√(4/20)): σ_run ≥ 9.6 mN
+ref: Fenster (rauschfrei) nur bei u_c,erw ≥ 4·1.05 = 4.19 mN; bei n = n₀ = 20 (u_c,erw = σ_run·√(4/20)): σ_run ≥ 9.4 mN
+
+=== 2) Fensterwahl mit verrauschter Phase-0-Vorhersage (n = n₀ = 20, weiß; 1500 Ziehungen) ===
+A4 SNR=0.25 σ_run=  137.23 mN u_c,erw=  61.37 mN | w(rauschfrei)=12.0 | P(Fenster existiert)=0.975, P(w=4 zulässig)=0.975, Median Abw(w=4)/u_c,erw=0.023 | w4:0.11 w6:0.04 w10:0.03 w12:0.26 w14:0.41 w16:0.12 w18:0.01
+A4 SNR=0.50 σ_run=   68.61 mN u_c,erw=  30.69 mN | w(rauschfrei)=8.0 | P(Fenster existiert)=0.891, P(w=4 zulässig)=0.891, Median Abw(w=4)/u_c,erw=0.044 | w4:0.02 w8:0.05 w10:0.73 w12:0.09
+A4 SNR=1.00 σ_run=   34.31 mN u_c,erw=  15.34 mN | w(rauschfrei)=6.0 | P(Fenster existiert)=0.905, P(w=4 zulässig)=0.905, Median Abw(w=4)/u_c,erw=0.084 | w4:0.01 w6:0.52 w8:0.37
+A4 SNR=2.00 σ_run=   17.15 mN u_c,erw=   7.67 mN | w(rauschfrei)=4.0 | P(Fenster existiert)=0.943, P(w=4 zulässig)=0.943, Median Abw(w=4)/u_c,erw=0.164 | w4:0.53 w6:0.41
+A4 SNR=3.00 σ_run=   11.44 mN u_c,erw=   5.11 mN | w(rauschfrei)=4.0 | P(Fenster existiert)=0.860, P(w=4 zulässig)=0.857, Median Abw(w=4)/u_c,erw=0.242 | w4:0.84 w6:0.02
+A4 SNR=4.00 σ_run=    8.58 mN u_c,erw=   3.84 mN | w(rauschfrei)=nan | P(Fenster existiert)=0.257, P(w=4 zulässig)=0.257, Median Abw(w=4)/u_c,erw=0.311 | w4:0.26
+A4 SNR=8.00 σ_run=    4.29 mN u_c,erw=   1.92 mN | w(rauschfrei)=nan | P(Fenster existiert)=0.059, P(w=4 zulässig)=0.059, Median Abw(w=4)/u_c,erw=0.590 | w4:0.06
+A4 SNR=16.00 σ_run=    2.14 mN u_c,erw=   0.96 mN | w(rauschfrei)=nan | P(Fenster existiert)=0.001, P(w=4 zulässig)=0.001, Median Abw(w=4)/u_c,erw=1.155 | 
+A4 SNR=32.00 σ_run=    1.07 mN u_c,erw=   0.48 mN | w(rauschfrei)=nan | P(Fenster existiert)=0.000, P(w=4 zulässig)=0.000, Median Abw(w=4)/u_c,erw=2.276 | 
+A4 SNR=100.00 σ_run=    0.34 mN u_c,erw=   0.15 mN | w(rauschfrei)=nan | P(Fenster existiert)=0.000, P(w=4 zulässig)=0.000, Median Abw(w=4)/u_c,erw=7.033 | 
+ref SNR=0.25 σ_run=  813.89 mN u_c,erw= 363.98 mN | w(rauschfrei)=20.0 | P(Fenster existiert)=0.983, P(w=4 zulässig)=0.983, Median Abw(w=4)/u_c,erw=0.008 | w4:0.09 w6:0.07 w8:0.06 w10:0.05 w12:0.05 w14:0.05 w16:0.05 w18:0.07 w20:0.48
+ref SNR=0.50 σ_run=  406.94 mN u_c,erw= 181.99 mN | w(rauschfrei)=20.0 | P(Fenster existiert)=0.869, P(w=4 zulässig)=0.869, Median Abw(w=4)/u_c,erw=0.013 | w4:0.03 w6:0.02 w8:0.06 w10:0.06 w12:0.04 w14:0.05 w16:0.09 w18:0.16 w20:0.35
+ref SNR=1.00 σ_run=  203.47 mN u_c,erw=  91.00 mN | w(rauschfrei)=16.0 | P(Fenster existiert)=0.850, P(w=4 zulässig)=0.850, Median Abw(w=4)/u_c,erw=0.036 | w4:0.02 w6:0.03 w8:0.08 w10:0.11 w12:0.10 w14:0.20 w16:0.19 w18:0.09 w20:0.02
+ref SNR=2.00 σ_run=  101.74 mN u_c,erw=  45.50 mN | w(rauschfrei)=10.0 | P(Fenster existiert)=0.830, P(w=4 zulässig)=0.830, Median Abw(w=4)/u_c,erw=0.084 | w4:0.04 w6:0.11 w8:0.18 w10:0.26 w12:0.21 w14:0.02
+ref SNR=3.00 σ_run=   67.82 mN u_c,erw=  30.33 mN | w(rauschfrei)=8.0 | P(Fenster existiert)=0.814, P(w=4 zulässig)=0.814, Median Abw(w=4)/u_c,erw=0.125 | w4:0.13 w6:0.13 w8:0.33 w10:0.21 w12:0.01
+ref SNR=4.00 σ_run=   50.87 mN u_c,erw=  22.75 mN | w(rauschfrei)=8.0 | P(Fenster existiert)=0.759, P(w=4 zulässig)=0.759, Median Abw(w=4)/u_c,erw=0.122 | w4:0.17 w6:0.22 w8:0.36 w10:0.01
+ref SNR=8.00 σ_run=   25.43 mN u_c,erw=  11.37 mN | w(rauschfrei)=4.0 | P(Fenster existiert)=0.686, P(w=4 zulässig)=0.686, Median Abw(w=4)/u_c,erw=0.098 | w4:0.68
+ref SNR=16.00 σ_run=   12.72 mN u_c,erw=   5.69 mN | w(rauschfrei)=4.0 | P(Fenster existiert)=0.768, P(w=4 zulässig)=0.768, Median Abw(w=4)/u_c,erw=0.184 | w4:0.77
+ref SNR=32.00 σ_run=    6.36 mN u_c,erw=   2.84 mN | w(rauschfrei)=nan | P(Fenster existiert)=0.460, P(w=4 zulässig)=0.460, Median Abw(w=4)/u_c,erw=0.275 | w4:0.46
+ref SNR=100.00 σ_run=    2.03 mN u_c,erw=   0.91 mN | w(rauschfrei)=nan | P(Fenster existiert)=0.027, P(w=4 zulässig)=0.027, Median Abw(w=4)/u_c,erw=1.007 | w4:0.03
+
+=== 3) Halbbreite von Δφ* (q97,5 − q2,5)/2, n₀ = n, weiß, Fenster w fest wie angegeben; 1000 Kampagnen ===
+A4 SNR=1.0 n=20 w=6: HB = 0.698° → κ = HB·SNR·√n = 3.12; E[Δφ*] = +0.016°; P(Δφ* = 0 exakt) = 0.02; nur Messseite HB = 0.402°, P(φ*_Mess = 120° exakt) = 0.17
+A4 SNR=1.0 n=20 w=20: HB = 0.544° → κ = HB·SNR·√n = 2.43; E[Δφ*] = -0.005°; P(Δφ* = 0 exakt) = 0.39; nur Messseite HB = 0.032°, P(φ*_Mess = 120° exakt) = 0.91
+A4 SNR=2.0 n=10 w=20: HB = 0.297° → κ = HB·SNR·√n = 1.88; E[Δφ*] = -0.001°; P(Δφ* = 0 exakt) = 0.62; nur Messseite HB = 0.000°, P(φ*_Mess = 120° exakt) = 0.98
+ref SNR=1.0 n=20 w=16: HB = 0.642° → κ = HB·SNR·√n = 2.87; E[Δφ*] = +0.001°; P(Δφ* = 0 exakt) = 0.00; nur Messseite HB = 0.250°, P(φ*_Mess = 120° exakt) = 0.00
+ref SNR=0.5 n=20 w=20: HB = 1.197° → κ = HB·SNR·√n = 2.68; E[Δφ*] = +0.004°; P(Δφ* = 0 exakt) = 0.00; nur Messseite HB = 0.419°, P(φ*_Mess = 120° exakt) = 0.01
+ref SNR=2.0 n=5 w=16: HB = 0.608° → κ = HB·SNR·√n = 2.72; E[Δφ*] = -0.017°; P(Δφ* = 0 exakt) = 0.00; nur Messseite HB = 0.250°, P(φ*_Mess = 120° exakt) = 0.01
+A4 SNR=4.0 n=20 w=4: HB = 0.133° → κ = HB·SNR·√n = 2.38; E[Δφ*] = -0.002°; P(Δφ* = 0 exakt) = 0.15; nur Messseite HB = 0.103°, P(φ*_Mess = 120° exakt) = 0.41

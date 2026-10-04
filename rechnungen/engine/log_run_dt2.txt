@@ -1,0 +1,4 @@
+Segment 0: 40 Läufe, 250 Zyklen, dt = 25.0 µs, 179 s
+Segment 1: 40 Läufe, 250 Zyklen, dt = 25.0 µs, 124 s
+Segment 2: 40 Läufe, 250 Zyklen, dt = 25.0 µs, 130 s
+Segment 3: 40 Läufe, 250 Zyklen, dt = 25.0 µs, 172 s

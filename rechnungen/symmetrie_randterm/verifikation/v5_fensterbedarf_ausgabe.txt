@@ -1,0 +1,32 @@
+Kontrolle v_S-Rekonstruktion: |v_S(40 s) rekonstruiert - Engine| = 1.5e-12 m/s
+eps = 0.0001, eps*Mg = 0.638 mN
+Punkt  v_S,max  v_S,rms  (a)T_worst  (a)T_rms  sigma_v      (b-i)T     max|a_S|  (b-ii)T(100us)  mittl.|a_S|
+HS     0.3786   0.2281     771.9 s    328.9 s  7.35e-05  1.06e-01 s    49.39     5.035 s    14.90
+S0     0.5281   0.2342    1076.7 s    337.6 s  2.99e-02  4.31e+01 s    53.44     5.448 s    15.53
+L1     0.1268   0.0613     258.6 s     88.4 s  3.10e-17  4.47e-14 s    10.16     1.036 s     4.77
+K1     0.0310   0.0195      63.1 s     28.1 s  2.21e-17  3.19e-14 s     3.67     0.374 s     2.01
+
+Direkte Fensterung (Mittel der RK4-gewichteten Kraft) mit Zufallsstart; (i) Laenge = ganze Perioden,
+(ii) Laenge = T_w + U*T, U gleichverteilt (nicht phasenstarr); 2000 Fenster je T_w; |delta| in ppm:
+  HS: ganz T_w=1s: max 216, rms 31, Schranke 2v_max/(gT) 77255 | ganz T_w=5s: max 35, rms 6, Schranke 2v_max/(gT) 15451 | frei T_w=1s: max 73997, rms 31677, Schranke 2v_max/(gT) 77255 | frei T_w=2s: max 37365, rms 16133, Schranke 2v_max/(gT) 38628 | frei T_w=5s: max 14886, rms 6482, Schranke 2v_max/(gT) 15451
+  S0: ganz T_w=1s: max 361, rms 55, Schranke 2v_max/(gT) 107739 | ganz T_w=5s: max 95, rms 16, Schranke 2v_max/(gT) 21548 | frei T_w=1s: max 95823, rms 36973, Schranke 2v_max/(gT) 107739 | frei T_w=2s: max 49712, rms 18925, Schranke 2v_max/(gT) 53870 | frei T_w=5s: max 20233, rms 7522, Schranke 2v_max/(gT) 21548
+  L1: ganz T_w=1s: max 0, rms 0, Schranke 2v_max/(gT) 25856 | ganz T_w=5s: max 0, rms 0, Schranke 2v_max/(gT) 5171 | frei T_w=1s: max 20296, rms 8470, Schranke 2v_max/(gT) 25856 | frei T_w=2s: max 10277, rms 4257, Schranke 2v_max/(gT) 12928 | frei T_w=5s: max 4153, rms 1766, Schranke 2v_max/(gT) 5171
+  K1: ganz T_w=1s: max 0, rms 0, Schranke 2v_max/(gT) 6315 | ganz T_w=5s: max 0, rms 0, Schranke 2v_max/(gT) 1263 | frei T_w=1s: max 5958, rms 2705, Schranke 2v_max/(gT) 6315 | frei T_w=2s: max 3017, rms 1371, Schranke 2v_max/(gT) 3157 | frei T_w=5s: max 1223, rms 554, Schranke 2v_max/(gT) 1263
+
+Periodenstruktur v_S(Periodenbeginn), eigener 155-s-Lauf (frame), Zyklen 300-1550:
+  HS: sigma_v (alle Zyklen) = 8.24e-05 m/s
+     Periode 1: Teilfolgen-Mittel [-0.37413], Teilfolgen-std 8.24e-05 m/s
+     Periode 2: Teilfolgen-Mittel [-0.37413 -0.37413], Teilfolgen-std 8.16e-05 8.32e-05 m/s
+     Periode 3: Teilfolgen-Mittel [-0.37413 -0.37413 -0.37413], Teilfolgen-std 8.18e-05 8.03e-05 8.50e-05 m/s
+     phasenstarres Fenster n = 100 Perioden: rms|dv_S| = 1.17e-04, max = 3.52e-04 m/s -> |delta_w| rms 1.19 ppm, max 3.59 ppm; noetiges T_w fuer eps (max) = 0.36 s
+     phasenstarres Fenster n = 101 Perioden: rms|dv_S| = 1.21e-04, max = 4.00e-04 m/s -> |delta_w| rms 1.22 ppm, max 4.04 ppm; noetiges T_w fuer eps (max) = 0.41 s
+     phasenstarres Fenster n = 200 Perioden: rms|dv_S| = 1.16e-04, max = 3.91e-04 m/s -> |delta_w| rms 0.59 ppm, max 1.99 ppm; noetiges T_w fuer eps (max) = 0.40 s
+     phasenstarres Fenster n = 500 Perioden: rms|dv_S| = 1.16e-04, max = 3.44e-04 m/s -> |delta_w| rms 0.24 ppm, max 0.70 ppm; noetiges T_w fuer eps (max) = 0.35 s
+  S0: sigma_v (alle Zyklen) = 2.99e-02 m/s
+     Periode 1: Teilfolgen-Mittel [-0.24854], Teilfolgen-std 2.99e-02 m/s
+     Periode 2: Teilfolgen-Mittel [-0.21865 -0.27844], Teilfolgen-std 1.06e-04 2.48e-04 m/s
+     Periode 3: Teilfolgen-Mittel [-0.24846 -0.24862 -0.24856], Teilfolgen-std 2.99e-02 2.99e-02 2.99e-02 m/s
+     phasenstarres Fenster n = 100 Perioden: rms|dv_S| = 2.69e-04, max = 1.03e-03 m/s -> |delta_w| rms 2.74 ppm, max 10.53 ppm; noetiges T_w fuer eps (max) = 1.05 s
+     phasenstarres Fenster n = 101 Perioden: rms|dv_S| = 5.98e-02, max = 6.06e-02 m/s -> |delta_w| rms 603.49 ppm, max 611.46 ppm; noetiges T_w fuer eps (max) = 61.76 s
+     phasenstarres Fenster n = 200 Perioden: rms|dv_S| = 2.68e-04, max = 9.47e-04 m/s -> |delta_w| rms 1.37 ppm, max 4.83 ppm; noetiges T_w fuer eps (max) = 0.97 s
+     phasenstarres Fenster n = 500 Perioden: rms|dv_S| = 2.68e-04, max = 1.14e-03 m/s -> |delta_w| rms 0.55 ppm, max 2.32 ppm; noetiges T_w fuer eps (max) = 1.16 s

@@ -1,0 +1,12 @@
+=== A4c  Einzugsbereich des Kontaktasts (Wurfstart aus der statischen Ruhelage bei t = 0) ===
+  V1 synchron ζ=0,05       ż₀ = 0.25 m/s (h =   3.2 mm): λ =   0.000 %, F_max =    13.17 N
+  V1 synchron ζ=0,05       ż₀ = 0.30 m/s (h =   4.6 mm): λ =  97.990 %, F_max =   485.82 N
+  V1 synchron ζ=0,05       ż₀ = 0.35 m/s (h =   6.2 mm): λ =  97.990 %, F_max =   485.12 N
+  V1 synchron ζ=0,05       ż₀ = 0.40 m/s (h =   8.2 mm): λ =  97.984 %, F_max =   484.28 N
+  V1 synchron ζ=0,05       ż₀ = 0.45 m/s (h =  10.3 mm): λ =  97.991 %, F_max =   484.90 N
+  V2 (120°,240°) ζ=0,02    ż₀ = 0.10 m/s (h =   0.5 mm): λ =   0.000 %, F_max =     7.07 N
+  V2 (120°,240°) ζ=0,02    ż₀ = 0.20 m/s (h =   2.0 mm): λ =   0.000 %, F_max =     7.07 N
+  V2 (120°,240°) ζ=0,02    ż₀ = 0.30 m/s (h =   4.6 mm): λ =   0.000 %, F_max =     7.07 N
+  V2 (120°,240°) ζ=0,02    ż₀ = 0.40 m/s (h =   8.2 mm): λ =   0.000 %, F_max =     7.07 N
+  V2 (120°,240°) ζ=0,02    ż₀ = 0.50 m/s (h =  12.7 mm): λ =  94.175 %, F_max =   170.74 N
+Rechenzeit 113 s

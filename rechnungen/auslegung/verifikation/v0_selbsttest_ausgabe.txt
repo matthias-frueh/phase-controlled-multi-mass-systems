@@ -1,0 +1,9 @@
+(120,240) exakt F_min 5.330390 F_max 7.491922 mean 6.3765000 | linear_solver F_min_lin 5.330390 F_max 7.491922  per_err 2.2e-18
+(118,240) exakt F_min 4.905618 F_max 7.830301 mean 6.3765000 | linear_solver F_min_lin 4.905618 F_max 7.830301  per_err 6.1e-19
+(122,240) exakt F_min 4.940031 F_max 7.729198 mean 6.3765000 | linear_solver F_min_lin 4.940031 F_max 7.729198  per_err 2.1e-18
+(100,240) exakt F_min 0.767691 F_max 10.954789 mean 6.3765000 | linear_solver F_min_lin 0.767691 F_max 10.954789  per_err 3.8e-18
+(140,240) exakt F_min 1.617558 F_max 11.235140 mean 6.3765000 | linear_solver F_min_lin 1.617558 F_max 11.235140  per_err 2.1e-18
+(113.684,227.368) exakt F_min 2.882132 F_max 9.462190 mean 6.3765000 | linear_solver F_min_lin 2.882132 F_max 9.462190  per_err 3.0e-19
+V1 synchron exakt F_min 2.718413 F_max 13.170259 | FFT 2.718413 13.170259
+nichtlinear (120,240): λ = 0.000 %  F_min 5.330390  F_max 7.4919  (1.0 s)
+nichtlinear (0,0): λ = 75.787 %  F_min 0.000000  F_max 41.1073  (1.9 s)

@@ -1,0 +1,6 @@
+zeta=0.15: v0=0.5: lambda=98.1%, F_max=495 N | v0=0.7: lambda=0.0%, F_max=13 N | v0=1.0: lambda=98.1%, F_max=494 N
+zeta=0.16: v0=0.5: lambda=98.1%, F_max=496 N | v0=0.7: lambda=0.0%, F_max=13 N | v0=1.0: lambda=98.1%, F_max=496 N
+zeta=0.17: v0=0.5: lambda=98.1%, F_max=498 N | v0=0.7: lambda=0.0%, F_max=13 N | v0=1.0: lambda=0.0%, F_max=13 N
+zeta=0.18: v0=0.5: lambda=0.0%, F_max=13 N | v0=0.7: lambda=0.0%, F_max=13 N | v0=1.0: lambda=0.0%, F_max=13 N
+zeta=0.19: v0=0.5: lambda=0.0%, F_max=13 N | v0=0.7: lambda=0.0%, F_max=13 N | v0=1.0: lambda=0.0%, F_max=13 N
+zeta=0.2: v0=0.5: lambda=0.0%, F_max=13 N | v0=0.7: lambda=0.0%, F_max=13 N | v0=1.0: lambda=0.0%, F_max=13 N

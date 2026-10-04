@@ -1,0 +1,13 @@
+Modulkraftamplitude m*A*w^2 = 1.5791 N; Mg = 6.3765 N
+phi2=100.0  |Phi1|=0.3473  F_min-Mg=-0.5484 N
+phi2=110.0  |Phi1|=0.1743  F_min-Mg=-0.2753 N
+phi2=116.0  |Phi1|=0.0698  F_min-Mg=-0.1102 N
+phi2=118.0  |Phi1|=0.0349  F_min-Mg=-0.0551 N
+phi2=119.0  |Phi1|=0.0175  F_min-Mg=-0.0276 N
+phi2=120.0  |Phi1|=0.0000  F_min-Mg=-0.0000 N
+phi2=121.0  |Phi1|=0.0175  F_min-Mg=-0.0276 N
+phi2=122.0  |Phi1|=0.0349  F_min-Mg=-0.0551 N
+phi2=124.0  |Phi1|=0.0698  F_min-Mg=-0.1102 N
+phi2=130.0  |Phi1|=0.1743  F_min-Mg=-0.2753 N
+phi2=140.0  |Phi1|=0.3473  F_min-Mg=-0.5484 N
+Steigung rechts/links am Knick: 0.0276 / 0.0276 N/Grad (symmetrisch, starr)

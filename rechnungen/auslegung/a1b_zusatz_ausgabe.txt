@@ -1,0 +1,9 @@
+(a) Referenz   2°-Sekanten 118→120 / 122→120: 0.2124 / 0.1952 N/°
+(a) H_2 := 1   2°-Sekanten 118→120 / 122→120: 0.0458 / 0.0319 N/°
+
+(b) Massenszenarien (Egg-Profil TH = 0,65, starr):
+  Laborplan 3×50 g                           μ = 0.231, M = 0.650 kg, f = 10.0 Hz, Hub 7.69 mm: ε = 0.2748, ΔF_Zelt = 0.271 N, synchrone Reserve 1 − ε = 72.5 %; für ΔF_Zelt ≥ 0,4693 N nötig ε ≥ 0.4763 ⇒ Hub ≥ 13.3 mm
+  Laborplan 3×100 g                          μ = 0.462, M = 0.650 kg, f = 10.0 Hz, Hub 7.69 mm: ε = 0.5495, ΔF_Zelt = 0.541 N, synchrone Reserve 1 − ε = 45.0 %; für ΔF_Zelt ≥ 0,4693 N nötig ε ≥ 0.4763 ⇒ Hub ≥ 6.7 mm
+  Laborplan 3×150 g                          μ = 0.692, M = 0.650 kg, f = 10.0 Hz, Hub 7.69 mm: ε = 0.8243, ΔF_Zelt = 0.812 N, synchrone Reserve 1 − ε = 17.6 %; für ΔF_Zelt ≥ 0,4693 N nötig ε ≥ 0.4763 ⇒ Hub ≥ 4.4 mm
+  Index 01.09.: 3×0,650 kg, m0 = 0, 2,2 Hz   μ = 1.000, M = 1.950 kg, f = 2.2 Hz, Hub 7.69 mm: ε = 0.0576, ΔF_Zelt = 0.170 N, synchrone Reserve 1 − ε = 94.2 %; für ΔF_Zelt ≥ 0,4693 N nötig ε ≥ 0.1588 ⇒ Hub ≥ 21.2 mm
+  Verhältnis der Anregung (10/2,2)² = 20.66

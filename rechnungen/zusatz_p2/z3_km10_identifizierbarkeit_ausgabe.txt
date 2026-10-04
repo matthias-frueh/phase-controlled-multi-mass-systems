@@ -1,0 +1,178 @@
+=== (1) Konditionszahl von T(k w), k = 1, 2, 4, 5 ===
+ STARR mu=0.462 G0  : cond = [1. 1. 1. 1.]  (Singulaerwerte k=2: [1. 1. 1.])
+ STARR mu=0.462 G60h: cond = [2. 2. 2. 2.]  (Singulaerwerte k=2: [1.  0.5 0.5])
+ STEIF mu=0.462 G0  : cond = [1.002 1.008 1.034 1.056]  (Singulaerwerte k=2: [1.029 1.021 1.021])
+ STEIF mu=0.462 G60h: cond = [2.009 2.035 2.154 2.259]  (Singulaerwerte k=2: [1.029 0.505 0.505])
+ REF   mu=1.000 G0  : cond = [1. 1. 1. 1.]  (Singulaerwerte k=2: [5.03 5.03 5.03])
+ REF   mu=1.000 G60h: cond = [2.509 7.595 3.886 3.461]  (Singulaerwerte k=2: [5.03  0.662 0.662])
+ REF   mu=0.462 G0  : cond = [1.091 1.581 1.534 1.461]  (Singulaerwerte k=2: [5.03  3.182 3.182])
+ REF   mu=0.462 G60h: cond = [2.418 6.291 2.222 1.754]  (Singulaerwerte k=2: [5.03 0.8  0.8 ])
+
+=== (2) Rueckrechnung der Modulzeiger mit nominaler T (Triphasik-Punkt); je Modul d|g|/|g| [%] / d arg [deg] ===
+--- STARR mu=0.462 G0
+  Masse M2 +1 %              | k=1: M1 +0.000/+0.000  M2 +1.000/-0.000  M3 +0.000/-0.000 | k=2: M1 +0.000/+0.000  M2 +1.000/+0.000  M3 +0.000/+0.000
+  Hub M2 +1 %                | k=1: M1 +0.000/+0.000  M2 +1.000/-0.000  M3 +0.000/-0.000 | k=2: M1 +0.000/+0.000  M2 +1.000/+0.000  M3 +0.000/+0.000
+  Phase M2 +1 deg            | k=1: M1 +0.000/+0.000  M2 +0.000/-1.000  M3 +0.000/-0.000 | k=2: M1 +0.000/+0.000  M2 +0.000/-2.000  M3 +0.000/+0.000
+  Zellverst. Z2 +1 %         | k=1: M1 +0.000/+0.000  M2 +1.000/-0.000  M3 +0.000/-0.000 | k=2: M1 +0.000/+0.000  M2 +1.000/-0.000  M3 +0.000/+0.000
+  Zelle 2 radial +1 mm       | k=1: M1 -0.165/-0.165  M2 -0.662/-0.000  M3 -0.165/+0.165 | k=2: M1 -0.165/+0.165  M2 -0.662/-0.000  M3 -0.165/-0.165
+  Zelle 2 tangential +1 mm   | k=1: M1 -0.287/-0.287  M2 +0.000/+0.000  M3 +0.290/-0.286 | k=2: M1 -0.287/+0.287  M2 +0.000/-0.000  M3 +0.290/+0.286
+--- STARR mu=0.462 G60h
+  Masse M2 +1 %              | k=1: M1 -0.000/+0.000  M2 +1.000/-0.000  M3 -0.000/-0.000 | k=2: M1 +0.000/+0.000  M2 +1.000/+0.000  M3 +0.000/-0.000
+  Hub M2 +1 %                | k=1: M1 -0.000/+0.000  M2 +1.000/-0.000  M3 -0.000/-0.000 | k=2: M1 +0.000/+0.000  M2 +1.000/+0.000  M3 +0.000/-0.000
+  Phase M2 +1 deg            | k=1: M1 -0.000/+0.000  M2 +0.000/-1.000  M3 -0.000/-0.000 | k=2: M1 +0.000/+0.000  M2 -0.000/-2.000  M3 +0.000/-0.000
+  Zellverst. Z2 +1 %         | k=1: M1 +0.251/-0.247  M2 +0.251/+0.247  M3 +0.500/-0.000 | k=2: M1 +0.251/+0.247  M2 +0.251/-0.247  M3 +0.500/-0.000
+  Zelle 2 radial +1 mm       | k=1: M1 -0.165/+0.165  M2 -0.165/-0.165  M3 -0.662/+0.000 | k=2: M1 -0.165/-0.165  M2 -0.165/+0.165  M3 -0.662/-0.000
+  Zelle 2 tangential +1 mm   | k=1: M1 +0.290/-0.286  M2 -0.287/-0.287  M3 -0.000/-0.000 | k=2: M1 +0.290/+0.286  M2 -0.287/+0.287  M3 +0.000/-0.000
+--- STEIF mu=0.462 G0
+  Masse M2 +1 %              | k=1: M1 +0.000/+0.000  M2 +1.003/-0.000  M3 -0.000/+0.000 | k=2: M1 -0.000/+0.000  M2 +1.013/-0.000  M3 +0.000/+0.000
+  Hub M2 +1 %                | k=1: M1 +0.000/+0.000  M2 +1.000/-0.000  M3 +0.000/+0.000 | k=2: M1 +0.000/+0.000  M2 +1.000/+0.000  M3 +0.000/-0.000
+  Phase M2 +1 deg            | k=1: M1 +0.000/+0.000  M2 +0.000/-1.000  M3 +0.000/+0.000 | k=2: M1 +0.000/+0.000  M2 +0.000/-2.000  M3 +0.000/-0.000
+  Zellverst. Z2 +1 %         | k=1: M1 +0.000/+0.000  M2 +0.999/+0.000  M3 +0.000/-0.000 | k=2: M1 +0.001/-0.001  M2 +0.997/+0.000  M3 +0.001/+0.001
+  Zelle 2 radial +1 mm       | k=1: M1 -0.166/-0.165  M2 -0.671/+0.000  M3 -0.166/+0.165 | k=2: M1 -0.167/+0.167  M2 -0.699/+0.000  M3 -0.167/-0.167
+  Zelle 2 tangential +1 mm   | k=1: M1 -0.288/-0.289  M2 +0.000/+0.003  M3 +0.291/-0.287 | k=2: M1 -0.291/+0.294  M2 +0.000/-0.013  M3 +0.294/+0.292
+--- STEIF mu=0.462 G60h
+  Masse M2 +1 %              | k=1: M1 +0.000/+0.000  M2 +1.001/-0.000  M3 +0.000/-0.000 | k=2: M1 +0.000/+0.000  M2 +1.003/-0.000  M3 -0.000/-0.000
+  Hub M2 +1 %                | k=1: M1 +0.000/-0.000  M2 +1.000/-0.000  M3 +0.000/-0.000 | k=2: M1 +0.000/+0.000  M2 +1.000/+0.000  M3 +0.000/+0.000
+  Phase M2 +1 deg            | k=1: M1 +0.000/-0.000  M2 +0.000/-1.000  M3 +0.000/-0.000 | k=2: M1 +0.000/+0.000  M2 -0.000/-2.000  M3 +0.000/+0.000
+  Zellverst. Z2 +1 %         | k=1: M1 +0.251/-0.247  M2 +0.251/+0.247  M3 +0.501/-0.000 | k=2: M1 +0.249/+0.246  M2 +0.250/-0.246  M3 +0.503/-0.000
+  Zelle 2 radial +1 mm       | k=1: M1 -0.167/+0.166  M2 -0.167/-0.166  M3 -0.665/+0.000 | k=2: M1 -0.171/-0.170  M2 -0.171/+0.170  M3 -0.672/+0.000
+  Zelle 2 tangential +1 mm   | k=1: M1 +0.293/-0.286  M2 -0.290/-0.287  M3 +0.000/+0.000 | k=2: M1 +0.300/+0.286  M2 -0.298/+0.288  M3 +0.000/-0.001
+--- REF mu=1.0 G0
+  Masse M2 +1 %              | k=1: M1 +0.000/+0.000  M2 +1.344/-0.026  M3 +0.000/-0.000 | k=2: M1 +0.000/+0.000  M2 +0.213/-2.854  M3 +0.000/+0.000
+  Hub M2 +1 %                | k=1: M1 -0.000/+0.000  M2 +1.000/-0.000  M3 -0.000/-0.000 | k=2: M1 -0.000/+0.000  M2 +1.000/+0.000  M3 -0.000/+0.000
+  Phase M2 +1 deg            | k=1: M1 -0.000/+0.000  M2 +0.000/-1.000  M3 -0.000/-0.000 | k=2: M1 -0.000/+0.000  M2 -0.000/-2.000  M3 -0.000/+0.000
+  Zellverst. Z2 +1 %         | k=1: M1 -0.000/+0.000  M2 +1.000/-0.000  M3 -0.000/-0.000 | k=2: M1 -0.000/+0.000  M2 +1.000/-0.000  M3 -0.000/+0.000
+  Zelle 2 radial +1 mm       | k=1: M1 -0.233/-0.215  M2 -1.215/+0.043  M3 -0.207/+0.223 | k=2: M1 +1.317/+0.593  M2 +0.164/+4.773  M3 -1.562/+0.356
+  Zelle 2 tangential +1 mm   | k=1: M1 -0.405/-0.379  M2 +0.049/+0.194  M3 +0.368/-0.389 | k=2: M1 +2.287/+0.869  M2 -5.177/+0.404  M3 +2.488/-0.668
+--- REF mu=1.0 G60h
+  Masse M2 +1 %              | k=1: M1 +0.000/+0.000  M2 +1.069/-0.004  M3 -0.000/+0.000 | k=2: M1 -0.000/+0.000  M2 +1.320/-0.062  M3 -0.000/+0.000
+  Hub M2 +1 %                | k=1: M1 -0.000/+0.000  M2 +1.000/-0.000  M3 -0.000/+0.000 | k=2: M1 -0.000/-0.000  M2 +1.000/-0.000  M3 +0.000/+0.000
+  Phase M2 +1 deg            | k=1: M1 +0.000/+0.000  M2 +0.000/-1.000  M3 +0.000/+0.000 | k=2: M1 -0.000/+0.000  M2 +0.000/-2.000  M3 +0.000/+0.000
+  Zellverst. Z2 +1 %         | k=1: M1 +0.237/-0.230  M2 +0.231/+0.232  M3 +0.534/-0.002 | k=2: M1 +0.132/+0.181  M2 +0.208/-0.156  M3 +0.661/-0.025
+  Zelle 2 radial +1 mm       | k=1: M1 -0.201/+0.211  M2 -0.217/-0.206  M3 -0.706/+0.003 | k=2: M1 -0.467/-0.345  M2 -0.282/+0.405  M3 -0.874/+0.024
+  Zelle 2 tangential +1 mm   | k=1: M1 +0.369/-0.290  M2 -0.365/-0.283  M3 -0.000/+0.000 | k=2: M1 +0.656/+0.222  M2 -0.652/+0.338  M3 -0.000/+0.000
+
+=== (3) Rang der Jacobimatrix d(Beobachtung)/d(Parameter), 15 Parameter ===
+--- STARR mu=0.462 G0
+  Triphasik, k=1                          : Beob.   6, Rang  6/15, kleinster Singulaerwert>tol 1.14e-02 (groesster 1.51e-02); Nullraum-Dim 9
+      Nullrichtung: +0.76gam1 -0.61eps1 +0.15r1 -0.13t3
+      Nullrichtung: +0.76gam2 -0.61eps2 +0.15r2 +0.11t3
+      Nullrichtung: +0.76gam3 -0.62eps3 +0.14r3 -0.06t2
+      Nullrichtung: +0.87r1 +0.39eps1 -0.15del3 +0.15gam1
+      Nullrichtung: +0.87r2 +0.39eps2 +0.15gam2 +0.14del3
+      Nullrichtung: +0.87r3 +0.38eps3 +0.15gam3 +0.14eps2
+  Triphasik, k=1,2                        : Beob.  12, Rang  9/15, kleinster Singulaerwert>tol 3.78e-03 (groesster 1.65e-02); Nullraum-Dim 6
+      Nullrichtung: -0.74gam3 +0.61eps3 -0.17r2 -0.16r1
+      Nullrichtung: +0.53r3 +0.46eps1 +0.37r1 +0.36eps3
+      Nullrichtung: -0.65gam1 +0.51eps1 -0.35gam2 -0.24r1
+      Nullrichtung: +0.61eps2 -0.48gam2 +0.35r3 +0.34gam1
+      Nullrichtung: -0.52r1 +0.50t2 -0.36eps2 +0.33r3
+      Nullrichtung: -0.63r2 +0.50t3 -0.47t1 +0.23r1
+  Triphasik, k=1..5                       : Beob.  30, Rang 12/15, kleinster Singulaerwert>tol 8.66e-04 (groesster 1.75e-02); Nullraum-Dim 3
+      Nullrichtung: -0.71gam3 +0.71eps3
+      Nullrichtung: +0.71gam2 -0.71eps2
+      Nullrichtung: +0.71gam1 -0.71eps1
+  Triphasik k=1,2 + 3 Einzelmodullaeufe   : Beob.  48, Rang 12/15, kleinster Singulaerwert>tol 3.56e-03 (groesster 2.25e-02); Nullraum-Dim 3
+      Nullrichtung: -0.71gam3 +0.71eps3
+      Nullrichtung: +0.71gam2 -0.71eps2
+      Nullrichtung: -0.71gam1 +0.71eps1
+  ... + statische Gewichte (P0.1)         : Beob.  66, Rang 15/15, kleinster Singulaerwert>tol 5.13e-03 (groesster 2.27e-02); Nullraum-Dim 0
+--- STARR mu=0.462 G60h
+  Triphasik, k=1                          : Beob.   6, Rang  6/15, kleinster Singulaerwert>tol 5.88e-03 (groesster 1.16e-02); Nullraum-Dim 9
+      Nullrichtung: +0.87gam1 -0.29eps2 +0.25del1 -0.18del3
+      Nullrichtung: +0.86gam2 -0.29eps3 -0.22eps2 +0.20del2
+      Nullrichtung: +0.87gam3 -0.28eps1 +0.23del3 -0.17del2
+      Nullrichtung: +0.86r1 +0.43eps2 -0.15del1 +0.13gam1
+      Nullrichtung: +0.85r2 +0.44eps3 -0.13del2 +0.13eps2
+      Nullrichtung: +0.85r3 +0.44eps1 -0.14del3 +0.12t2
+  Triphasik, k=1,2                        : Beob.  12, Rang  9/15, kleinster Singulaerwert>tol 2.93e-03 (groesster 1.29e-02); Nullraum-Dim 6
+      Nullrichtung: +0.50gam2 -0.46eps2 +0.40t3 -0.36eps1
+      Nullrichtung: +0.61r1 +0.47gam1 +0.44r3 +0.41gam3
+      Nullrichtung: +0.52t2 -0.43gam3 -0.39t1 +0.36gam1
+      Nullrichtung: +0.54t1 -0.49t3 -0.34r3 +0.33gam1
+      Nullrichtung: -0.69r2 -0.41eps3 -0.29gam2 +0.26t2
+      Nullrichtung: -0.54r3 +0.53r1 -0.34r2 -0.29gam3
+  Triphasik, k=1..5                       : Beob.  30, Rang 12/15, kleinster Singulaerwert>tol 8.56e-04 (groesster 1.33e-02); Nullraum-Dim 3
+      Nullrichtung: +0.55gam2 -0.43eps1 -0.42eps2 +0.31gam1
+      Nullrichtung: +0.51gam1 -0.49r2 +0.43r1 -0.34eps3
+      Nullrichtung: +0.55gam3 +0.55r3 -0.35r1 -0.25gam1
+  Triphasik k=1,2 + 3 Einzelmodullaeufe   : Beob.  48, Rang 12/15, kleinster Singulaerwert>tol 3.13e-03 (groesster 1.69e-02); Nullraum-Dim 3
+      Nullrichtung: +0.52gam2 -0.47eps1 +0.41gam1 -0.37eps2
+      Nullrichtung: +0.54r2 -0.39gam1 +0.37gam2 +0.35eps3
+      Nullrichtung: +0.52gam3 +0.48r3 -0.47r1 -0.32gam1
+  ... + statische Gewichte (P0.1)         : Beob.  66, Rang 15/15, kleinster Singulaerwert>tol 3.92e-03 (groesster 1.88e-02); Nullraum-Dim 0
+--- STEIF mu=0.462 G0
+  Triphasik, k=1                          : Beob.   6, Rang  6/15, kleinster Singulaerwert>tol 1.14e-02 (groesster 1.51e-02); Nullraum-Dim 9
+      Nullrichtung: +0.76gam1 -0.61eps1 +0.15r1 -0.13t3
+      Nullrichtung: +0.76gam2 -0.61eps2 +0.15r2 +0.11t3
+      Nullrichtung: +0.76gam3 -0.62eps3 +0.14r3 -0.06t2
+      Nullrichtung: +0.87r1 +0.40eps1 +0.15gam1 -0.15del3
+      Nullrichtung: +0.87r2 +0.40eps2 +0.15gam2 +0.14del3
+      Nullrichtung: +0.86r3 +0.39eps3 +0.15gam3 +0.14eps2
+  Triphasik, k=1,2                        : Beob.  12, Rang 12/15, kleinster Singulaerwert>tol 3.74e-05 (groesster 1.67e-02); Nullraum-Dim 3
+      Nullrichtung: -0.66eps1 +0.66gam1 -0.22gam2 +0.22eps2
+      Nullrichtung: -0.49gam3 +0.49eps3 -0.45gam2 +0.45eps2
+      Nullrichtung: +0.49eps3 -0.49gam3 +0.49gam2 -0.49eps2
+  Triphasik, k=1..5                       : Beob.  30, Rang 14/15, kleinster Singulaerwert>tol 9.41e-06 (groesster 1.77e-02); Nullraum-Dim 1
+      Nullrichtung: +0.41gam1 -0.41eps1 -0.41eps2 +0.41gam2
+  Triphasik k=1,2 + 3 Einzelmodullaeufe   : Beob.  48, Rang 14/15, kleinster Singulaerwert>tol 1.03e-05 (groesster 2.27e-02); Nullraum-Dim 1
+      Nullrichtung: +0.41gam1 -0.41eps1 +0.41gam3 -0.41eps3
+  ... + statische Gewichte (P0.1)         : Beob.  66, Rang 15/15, kleinster Singulaerwert>tol 5.16e-03 (groesster 2.29e-02); Nullraum-Dim 0
+--- STEIF mu=0.462 G60h
+  Triphasik, k=1                          : Beob.   6, Rang  6/15, kleinster Singulaerwert>tol 5.91e-03 (groesster 1.17e-02); Nullraum-Dim 9
+      Nullrichtung: +0.87gam1 -0.29eps2 +0.25del1 -0.18del3
+      Nullrichtung: +0.86gam2 -0.29eps3 -0.22eps2 +0.20del2
+      Nullrichtung: +0.87gam3 -0.28eps1 +0.23del3 -0.17del2
+      Nullrichtung: +0.86r1 +0.43eps2 -0.15del1 +0.13gam1
+      Nullrichtung: +0.85r2 +0.44eps3 -0.13del2 +0.13eps2
+      Nullrichtung: +0.85r3 +0.44eps1 -0.14del3 +0.12t2
+  Triphasik, k=1,2                        : Beob.  12, Rang 12/15, kleinster Singulaerwert>tol 1.42e-05 (groesster 1.31e-02); Nullraum-Dim 3
+      Nullrichtung: +0.49gam1 -0.47r2 -0.43eps3 +0.37gam3
+      Nullrichtung: -0.51r1 +0.45gam2 -0.42eps2 +0.40gam3
+      Nullrichtung: -0.61r3 +0.38gam2 +0.37r2 -0.34eps1
+  Triphasik, k=1..5                       : Beob.  30, Rang 14/15, kleinster Singulaerwert>tol 1.78e-05 (groesster 1.35e-02); Nullraum-Dim 1
+      Nullrichtung: +0.41gam3 -0.41eps3 +0.41gam1 -0.41eps2
+  Triphasik k=1,2 + 3 Einzelmodullaeufe   : Beob.  48, Rang 14/15, kleinster Singulaerwert>tol 2.24e-05 (groesster 1.71e-02); Nullraum-Dim 1
+      Nullrichtung: +0.41gam3 +0.41gam1 -0.41eps3 -0.41eps1
+  ... + statische Gewichte (P0.1)         : Beob.  66, Rang 15/15, kleinster Singulaerwert>tol 3.92e-03 (groesster 1.89e-02); Nullraum-Dim 0
+
+=== (4) Modulzeiger aus Zellen: Standardunsicherheit bei weissem Zellrauschen ===
+  sigma_A=0.024 mN STARR G0   k=1: Modulamplitude 1.4980 N, u(Amplitude) 0.0240 mN, u(Phase) 0.00092 deg
+  sigma_A=0.024 mN STARR G0   k=2: Modulamplitude 0.4937 N, u(Amplitude) 0.0240 mN, u(Phase) 0.00279 deg
+  sigma_A=0.024 mN STARR G60h k=1: Modulamplitude 1.4980 N, u(Amplitude) 0.0416 mN, u(Phase) 0.00159 deg
+  sigma_A=0.024 mN STARR G60h k=2: Modulamplitude 0.4937 N, u(Amplitude) 0.0416 mN, u(Phase) 0.00482 deg
+  sigma_A=0.024 mN STEIF G0   k=1: Modulamplitude 1.4980 N, u(Amplitude) 0.0239 mN, u(Phase) 0.00091 deg
+  sigma_A=0.024 mN STEIF G0   k=2: Modulamplitude 0.4937 N, u(Amplitude) 0.0235 mN, u(Phase) 0.00272 deg
+  sigma_A=0.024 mN STEIF G60h k=1: Modulamplitude 1.4980 N, u(Amplitude) 0.0414 mN, u(Phase) 0.00158 deg
+  sigma_A=0.024 mN STEIF G60h k=2: Modulamplitude 0.4937 N, u(Amplitude) 0.0410 mN, u(Phase) 0.00476 deg
+  sigma_A=0.156 mN STARR G0   k=1: Modulamplitude 1.4980 N, u(Amplitude) 0.1560 mN, u(Phase) 0.00597 deg
+  sigma_A=0.156 mN STARR G0   k=2: Modulamplitude 0.4937 N, u(Amplitude) 0.1560 mN, u(Phase) 0.01810 deg
+  sigma_A=0.156 mN STARR G60h k=1: Modulamplitude 1.4980 N, u(Amplitude) 0.2702 mN, u(Phase) 0.01033 deg
+  sigma_A=0.156 mN STARR G60h k=2: Modulamplitude 0.4937 N, u(Amplitude) 0.2702 mN, u(Phase) 0.03136 deg
+  sigma_A=0.156 mN STEIF G0   k=1: Modulamplitude 1.4980 N, u(Amplitude) 0.1551 mN, u(Phase) 0.00593 deg
+  sigma_A=0.156 mN STEIF G0   k=2: Modulamplitude 0.4937 N, u(Amplitude) 0.1524 mN, u(Phase) 0.01769 deg
+  sigma_A=0.156 mN STEIF G60h k=1: Modulamplitude 1.4980 N, u(Amplitude) 0.2694 mN, u(Phase) 0.01030 deg
+  sigma_A=0.156 mN STEIF G60h k=2: Modulamplitude 0.4937 N, u(Amplitude) 0.2668 mN, u(Phase) 0.03096 deg
+
+=== (3b) Rang nur fuer {eps, delta, gamma} (9 Parameter, Zelllagen bekannt) ===
+  STARR G0   Triphasik, k=1                          : Rang 6/9, kleinster SW 1.06e-02; Null: +0.69gam1 -0.69eps1 -0.16gam2 +0.16eps2 | +0.69gam2 -0.69eps2 +0.16gam1 -0.16eps1 | +0.71gam3 -0.71eps3
+  STARR G0   Triphasik, k=1,2                        : Rang 6/9, kleinster SW 1.12e-02; Null: -0.71gam3 +0.71eps3 | -0.71gam1 +0.71eps1 | -0.71gam2 +0.71eps2
+  STARR G0   Triphasik, k=1..5                       : Rang 6/9, kleinster SW 1.13e-02; Null: -0.71gam2 +0.71eps2 | -0.71gam1 +0.71eps1 | +0.71gam3 -0.71eps3
+  STARR G0   Triphasik k=1,2 + 3 Einzelmodullaeufe   : Rang 6/9, kleinster SW 1.58e-02; Null: -0.71gam3 +0.71eps3 | +0.71gam2 -0.71eps2 | -0.71gam1 +0.71eps1
+  STARR G60h Triphasik, k=1                          : Rang 6/9, kleinster SW 4.73e-03; Null: +0.84gam1 -0.36eps2 +0.24del1 -0.24del3 | +0.82gam2 -0.41eps3 -0.20eps1 -0.20del1 | +0.83gam3 -0.38eps1 -0.24del2 +0.21del3
+  STARR G60h Triphasik, k=1,2                        : Rang 8/9, kleinster SW 3.10e-03; Null: +0.41gam3 +0.41gam1 -0.41eps3 -0.41eps1
+  STARR G60h Triphasik, k=1..5                       : Rang 8/9, kleinster SW 3.31e-03; Null: +0.41gam3 +0.41gam1 -0.41eps3 -0.41eps1
+  STARR G60h Triphasik k=1,2 + 3 Einzelmodullaeufe   : Rang 8/9, kleinster SW 5.64e-03; Null: +0.41gam3 +0.41gam1 +0.41gam2 -0.41eps3
+  STEIF G0   Triphasik, k=1                          : Rang 6/9, kleinster SW 1.06e-02; Null: +0.69gam1 -0.69eps1 -0.16gam2 +0.16eps2 | +0.68gam2 -0.68eps2 -0.16eps1 +0.16gam1 | +0.70gam3 -0.70eps3 -0.07eps2 +0.07gam2
+  STEIF G0   Triphasik, k=1,2                        : Rang 8/9, kleinster SW 9.79e-06; Null: +0.41gam3 -0.41eps3 +0.41gam2 -0.41eps2
+  STEIF G0   Triphasik, k=1..5                       : Rang 8/9, kleinster SW 1.94e-05; Null: +0.41gam3 -0.41eps3 +0.41gam2 -0.41eps2
+  STEIF G0   Triphasik k=1,2 + 3 Einzelmodullaeufe   : Rang 8/9, kleinster SW 1.77e-05; Null: +0.41gam3 -0.41eps3 +0.41gam2 -0.41eps2
+  STEIF G60h Triphasik, k=1                          : Rang 6/9, kleinster SW 4.75e-03; Null: +0.84gam1 -0.36eps2 +0.24del1 -0.24del3 | +0.82gam2 -0.41eps3 -0.20eps1 -0.20del1 | +0.83gam3 -0.38eps1 -0.24del2 +0.21del3
+  STEIF G60h Triphasik, k=1,2                        : Rang 8/9, kleinster SW 3.13e-03; Null: -0.41gam2 +0.41eps3 -0.41gam3 +0.41eps1
+  STEIF G60h Triphasik, k=1..5                       : Rang 8/9, kleinster SW 3.36e-03; Null: -0.41gam2 +0.41eps3 +0.41eps1 -0.41gam3
+  STEIF G60h Triphasik k=1,2 + 3 Einzelmodullaeufe   : Rang 8/9, kleinster SW 5.67e-03; Null: -0.41gam2 -0.41gam1 -0.41gam3 +0.41eps1
+
+=== (3c) G60h STARR: Zellverstaerkung Z2 +1 % mit reinem Modulfehler-Modell (eps_i, delta_i) angepasst ===
+  k=(1,): angepasst eps=[0.25 0.25 0.5 ] %, delta=[ 0.248 -0.248  0.   ] deg; Rest/Signal = 0.000; max Rest 0.00 mN (Zellzeiger-Komponente; Signal max 3.74 mN)
+  k=(1, 2): angepasst eps=[0.357 0.357 0.286] %, delta=[ 0.101 -0.101  0.   ] deg; Rest/Signal = 0.654; max Rest 1.54 mN (Zellzeiger-Komponente; Signal max 3.74 mN)
+  k=(1, 2, 4, 5): angepasst eps=[0.358 0.358 0.283] %, delta=[ 0.098 -0.098  0.   ] deg; Rest/Signal = 0.659; max Rest 1.51 mN (Zellzeiger-Komponente; Signal max 3.74 mN)

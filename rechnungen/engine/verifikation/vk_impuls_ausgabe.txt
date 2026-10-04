@@ -1,0 +1,14 @@
+e'(0) = RTOP*pi/(THOLD*T) = 0.241661 m/s;  RBOT*pi/(TFAST*T) = 0.241661 m/s (C1-Stetigkeit)
+numerisch: Integral a dt über Zyklus = -2.304e-12 m/s (muss 0 sein); v(0) mit periodischem e = 0.241661 m/s; max|v_num - e'_analyt| = 2.36e-12
+  v_S(0) bei (0, 0) = +0.2417 m/s
+  v_S(0) bei (0, 208.421) = +0.1250 m/s
+  v_S(0) bei (120, 240) = -0.0023 m/s
+  v_S(0) bei (35, 116) = +0.0543 m/s
+  v_S(0) bei (113.684, 227.368) = -0.0130 m/s
+  v_S(0) bei (100, 240) = +0.0131 m/s
+(0,0): M*v = 157.08 mN*s; M*g*T = 637.65 mN*s; Anteil 24.63 %; 1/2 M v^2 = 18.98 mJ; (Mg)^2/(2K) = 2.033 mJ
+1°-Raster: max +0.2417, min -0.0806 (bei (np.int64(126), np.int64(126))), Median |v_S(0)| 0.0806 m/s, Mittel v_S(0) +8.06e-02
+  Einzelmodul e'(-tau) über tau: max 0.2417, min -0.2417; Minimum der Summe = (V0 + 2*min)/3 = -0.0806
+  Impulsbilanz SA (0,0), Zyklen 2-12: int(N-Mg)dt = +1.616301e-02 N*s, M*dV_S = +1.616301e-02, Differenz -1.6e-16
+  Impulsbilanz SA (0,208.421), Zyklen 2-12: int(N-Mg)dt = -3.486703e-02 N*s, M*dV_S = -3.486703e-02, Differenz -9.7e-16
+  Impulsbilanz SA (120,240), Zyklen 2-12: int(N-Mg)dt = +1.214837e-04 N*s, M*dV_S = +1.214837e-04, Differenz -4.8e-16

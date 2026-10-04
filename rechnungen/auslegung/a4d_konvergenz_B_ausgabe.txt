@@ -1,0 +1,3 @@
+Teil B: V1 synchron ζ = 0,05, ż₀ = 0.30 m/s, Δt = 50.00 µs, 40 s: λ = 97.985 %, F_max = 485.39 N; 40 Kontaktbeginne in 4.0 s, Abstände [Perioden] [1.0035, 1.0, 0.998, 0.999, 1.0025, 1.002]
+Teil B: V1 synchron ζ = 0,05, ż₀ = 0.50 m/s, Δt = 50.00 µs, 40 s: λ = 97.993 %, F_max = 485.52 N; 40 Kontaktbeginne in 4.0 s, Abstände [Perioden] [1.002, 0.999, 1.001, 0.9995, 0.999, 1.001]
+Rechenzeit 119 s

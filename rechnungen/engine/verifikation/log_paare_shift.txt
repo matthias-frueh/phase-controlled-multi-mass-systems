@@ -1,0 +1,6 @@
+P6: A(0, 6) std vs. B(13, 13) mit t0 = -0.031579 s (ref3_12): lam A 75.5892, B 75.5892 %; max|dz'| Zyklen 0–50 6.6e-15, 0–300 5.2e-14 m/s
+P13: A(6, 6) std vs. B(13, 0) mit t0 = -0.031579 s (ref2_13): lam A 75.6974, B 75.6974 %; max|dz'| Zyklen 0–50 6.7e-15, 0–300 5.8e-14 m/s
+P49: A(3, 7) std vs. B(16, 4) mit t0 = -0.015789 s (ref2_13): lam A 75.6321, B 75.6321 %; max|dz'| Zyklen 0–50 1.2e-14, 0–300 2.6e-14 m/s
+P45: A(12, 17) std vs. B(14, 2) mit t0 = -0.089474 s (ref3_21): lam A 75.6288, B 75.6288 %; max|dz'| Zyklen 0–50 8.7e-06, 0–300 8.7e-06 m/s
+P11: A(0, 11) std vs. B(8, 8) mit t0 = -0.057895 s (ref3_12): lam A 75.0847, B 75.0847 %; max|dz'| Zyklen 0–50 6.3e-07, 0–300 6.3e-07 m/s
+P33: A(1, 16) std vs. B(3, 4) mit t0 = -0.084211 s (ref3_12): lam A 71.9438, B 71.9438 %; max|dz'| Zyklen 0–50 9.7e-14, 0–300 7.1e-13 m/s

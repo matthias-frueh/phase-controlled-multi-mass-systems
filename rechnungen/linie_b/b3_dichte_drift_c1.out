@@ -1,0 +1,41 @@
+(1) Quelltext drift_balance() (Kopie, unverändert):
+    def drift_balance(phi2_deg, phi3_deg, rho=RHO):
+        """Gibt (v_d, F_bar_A, tau) zurück.
+        v_d      : stationäre Drift aus <(v_d+v_osc)|v_d+v_osc|> = 0  (dichteunabhängig)
+        F_bar_A  : -C2*rho*<v_osc|v_osc|>, Gleichrichtungskraft bei vorgegebener Bewegung  <-- rho
+        tau      : M/(2*C2*rho*<|v_osc|>), Einschwingzeit der Drift  <-- rho
+        """
+        v = v_osc_profile(phi2_deg, phi3_deg)
+        amp = float(np.max(np.abs(v))) + 1e-9
+        vd = brentq(lambda x: float(np.mean((x + v) * np.abs(x + v))), -amp, amp, xtol=1e-15)  <-- v_d: rho kommt nicht vor
+        f_bar_a = -C2 * rho * float(np.mean(v * np.abs(v)))  <-- rho
+        tau = M_TOTAL / (2 * C2 * rho * float(np.mean(np.abs(v))))  <-- rho
+        return vd, f_bar_a, tau
+
+(2) drift_balance() über rho:
+          rho |  v_d mm/s (0,0) |   F_bar_A N |       tau s | v_d mm/s (120,240) |   F_bar_A N
+    1000.0000 |   +1.0549001614 |  +1.396e-04 |       5.844 |      -0.0810241947 |  -1.457e-06
+     100.0000 |   +1.0549001614 |  +1.396e-05 |       58.44 |      -0.0810241947 |  -1.457e-07
+       1.2000 |   +1.0549001614 |  +1.675e-07 |        4870 |      -0.0810241947 |  -1.749e-09
+       0.1200 |   +1.0549001614 |  +1.675e-08 |    4.87e+04 |      -0.0810241947 |  -1.749e-10
+       0.0012 |   +1.0549001614 |  +1.675e-10 |    4.87e+06 |      -0.0810241947 |  -1.749e-12
+
+(3) Modell B mit c1 > 0 (illustrativ, c1 = 6 pi mu R):
+  (0,0): c1 = 3.316e-05 N s/m, rho* = c1/(2 c2 <|v_osc|>) = 0.258 kg/m^3, v_d(c1=0) = +1.05490 mm/s
+     rho = 1000.0000: v_d = +1.054644 mm/s = 0.9998 * v_d(c1=0)
+     rho =  10.0000: v_d = +1.029854 mm/s = 0.9763 * v_d(c1=0)
+     rho =   2.4000: v_d = +0.957650 mm/s = 0.9078 * v_d(c1=0)
+     rho =   1.2000: v_d = +0.876461 mm/s = 0.8308 * v_d(c1=0)
+     rho =   0.6000: v_d = +0.748837 mm/s = 0.7099 * v_d(c1=0)
+     rho =   0.1200: v_d = +0.343854 mm/s = 0.3260 * v_d(c1=0)
+     rho =   0.0120: v_d = +0.048269 mm/s = 0.0458 * v_d(c1=0)
+     rho =   0.0012: v_d = +0.005028 mm/s = 0.0048 * v_d(c1=0)
+  (120,240): c1 = 3.316e-05 N s/m, rho* = c1/(2 c2 <|v_osc|>) = 1.856 kg/m^3, v_d(c1=0) = -0.08102 mm/s
+     rho = 1000.0000: v_d = -0.080876 mm/s = 0.9982 * v_d(c1=0)
+     rho =  10.0000: v_d = -0.068483 mm/s = 0.8452 * v_d(c1=0)
+     rho =   2.4000: v_d = -0.045911 mm/s = 0.5666 * v_d(c1=0)
+     rho =   1.2000: v_d = -0.032004 mm/s = 0.3950 * v_d(c1=0)
+     rho =   0.6000: v_d = -0.019923 mm/s = 0.2459 * v_d(c1=0)
+     rho =   0.1200: v_d = -0.004954 mm/s = 0.0611 * v_d(c1=0)
+     rho =   0.0120: v_d = -0.000524 mm/s = 0.0065 * v_d(c1=0)
+     rho =   0.0012: v_d = -0.000053 mm/s = 0.0007 * v_d(c1=0)

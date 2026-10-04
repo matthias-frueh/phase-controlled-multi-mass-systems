@@ -1,0 +1,26 @@
+Kontrolle P_0 = 0.00e+00+0.00e+00j (analytisch 0), |P_1| = 7.482475, |P_2| = 2.466055 m/s^2
+(b) |mu| = exp(-C T/2M) = exp(-1.2308) = 0.2921; tau = 2M/C = 0.08125 s; 10 tau = 0.8125 s; zeta = 0.09923, f_n = 19.741 Hz, 1/(2 pi zeta f_n) = 0.08125 s
+(a) (120,240): Stichproben 50 µs: gamma1 0.066794, F_min 5.33039, F_max 7.49192 N; 1 µs: F_min 5.33039, F_max 7.49192; max z -0.5373 mm; <N>-Mg 2.8e-14
+    SA std: lam 0.0000, gamma1 0.066794, F_min 5.33039, F_max 7.49192, |z'-z'_orb| am Ende 2.1e-14, Einschwingen <1e-6: 0.8 s, <1e-8: 1.2 s
+    SA imp: lam 0.0000, gamma1 0.066794, F_min 5.33039, F_max 7.49192, |z'-z'_orb| am Ende 2.1e-14, Einschwingen <1e-6: 0.8 s, <1e-8: 1.2 s
+    SA orb: lam 0.0000, gamma1 0.066794, F_min 5.33039, F_max 7.49192, |z'-z'_orb| am Ende 2.1e-14, Einschwingen <1e-6: 0.0 s, <1e-8: 0.0 s
+(a) (113.684,227.368): Stichproben 50 µs: gamma1 -0.272972, F_min 2.88213, F_max 9.46219 N; 1 µs: F_min 2.88212, F_max 9.46219; max z -0.2961 mm; <N>-Mg 8.1e-11
+    SA std: lam 0.0000, gamma1 -0.272972, F_min 2.88212, F_max 9.46219, |z'-z'_orb| am Ende 1.4e-15, Einschwingen <1e-6: 0.9 s, <1e-8: 1.2 s
+    SA imp: lam 0.0000, gamma1 -0.272972, F_min 2.88212, F_max 9.46219, |z'-z'_orb| am Ende 1.4e-15, Einschwingen <1e-6: 0.9 s, <1e-8: 1.2 s
+    SA orb: lam 0.0000, gamma1 -0.272972, F_min 2.88212, F_max 9.46219, |z'-z'_orb| am Ende 1.4e-15, Einschwingen <1e-6: 0.0 s, <1e-8: 0.0 s
+(a) (100,240): Stichproben 50 µs: gamma1 -0.344085, F_min 0.76769, F_max 10.95479 N; 1 µs: F_min 0.76767, F_max 10.95480; max z -0.0867 mm; <N>-Mg 7.1e-11
+    SA std: lam 0.0000, gamma1 -0.344085, F_min 0.76767, F_max 10.95480, |z'-z'_orb| am Ende 4.4e-15, Einschwingen <1e-6: 0.8 s, <1e-8: 1.2 s
+    SA imp: lam 0.0000, gamma1 -0.344085, F_min 0.76767, F_max 10.95480, |z'-z'_orb| am Ende 4.4e-15, Einschwingen <1e-6: 0.8 s, <1e-8: 1.1 s
+    SA orb: lam 0.0000, gamma1 -0.344085, F_min 0.76767, F_max 10.95480, |z'-z'_orb| am Ende 4.4e-15, Einschwingen <1e-6: 0.0 s, <1e-8: 0.0 s
+(a) (110,250): Stichproben 50 µs: gamma1 -0.229987, F_min 1.60156, F_max 10.63404 N; 1 µs: F_min 1.60154, F_max 10.63405; max z -0.1697 mm; <N>-Mg 1.9e-12
+    SA std: lam 0.0000, gamma1 -0.229987, F_min 1.60154, F_max 10.63405, |z'-z'_orb| am Ende 1.3e-14, Einschwingen <1e-6: 0.8 s, <1e-8: 1.1 s
+    SA imp: lam 0.0000, gamma1 -0.229987, F_min 1.60154, F_max 10.63405, |z'-z'_orb| am Ende 1.3e-14, Einschwingen <1e-6: 0.8 s, <1e-8: 1.0 s
+    SA orb: lam 0.0000, gamma1 -0.229987, F_min 1.60154, F_max 10.63405, |z'-z'_orb| am Ende 1.3e-14, Einschwingen <1e-6: 0.0 s, <1e-8: 0.0 s
+(a) (130,230): Stichproben 50 µs: gamma1 -0.127528, F_min 1.86994, F_max 10.12819 N; 1 µs: F_min 1.86994, F_max 10.12820; max z -0.1953 mm; <N>-Mg 9.3e-13
+    SA std: lam 0.0000, gamma1 -0.127528, F_min 1.86994, F_max 10.12820, |z'-z'_orb| am Ende 1.3e-14, Einschwingen <1e-6: 0.9 s, <1e-8: 1.3 s
+    SA imp: lam 0.0000, gamma1 -0.127528, F_min 1.86994, F_max 10.12820, |z'-z'_orb| am Ende 1.3e-14, Einschwingen <1e-6: 0.9 s, <1e-8: 1.2 s
+    SA orb: lam 0.0000, gamma1 -0.127528, F_min 1.86994, F_max 10.12820, |z'-z'_orb| am Ende 1.3e-14, Einschwingen <1e-6: 0.0 s, <1e-8: 0.0 s
+(a) (110,252): Stichproben 50 µs: gamma1 -0.178137, F_min 1.31637, F_max 10.95386 N; 1 µs: F_min 1.31635, F_max 10.95386; max z -0.1417 mm; <N>-Mg 1.2e-10
+    SA std: lam 0.0000, gamma1 -0.178137, F_min 1.31635, F_max 10.95386, |z'-z'_orb| am Ende 1.5e-14, Einschwingen <1e-6: 0.8 s, <1e-8: 1.2 s
+    SA imp: lam 0.0000, gamma1 -0.178137, F_min 1.31635, F_max 10.95386, |z'-z'_orb| am Ende 1.5e-14, Einschwingen <1e-6: 0.8 s, <1e-8: 1.0 s
+    SA orb: lam 0.0000, gamma1 -0.178137, F_min 1.31635, F_max 10.95386, |z'-z'_orb| am Ende 1.5e-14, Einschwingen <1e-6: 0.0 s, <1e-8: 0.0 s

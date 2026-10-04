@@ -1,0 +1,16 @@
+=== (0.0, 208.42105263157896) skalare Engine, dt = 50 µs, 60 s (7 s Rechenzeit)
+  Periode streng p = -1, eingeschwungen ab t = nan s; locker (1e-3 m/s, 1e-4 m) p = 1, ab 9.7 s
+  5-15 s (Engine/CSV)  ⟨F⟩−Mg =  -37.6087 mN (  -5898.0 ppm), R =   -5864.7 ppm, Q =  -33.31 ppm, N_RK4−Mg−R = +1.8e-07 N, λ = 67.3000 %, γ1 = 1.6771, Fmax = 44.599 N, Δż = -0.5753 m/s
+  5-55 s               ⟨F⟩−Mg =   -7.9109 mN (  -1240.6 ppm), R =   -1172.9 ppm, Q =  -67.72 ppm, N_RK4−Mg−R = +1.8e-07 N, λ = 73.5337 %, γ1 = 1.6645, Fmax = 44.599 N, Δż = -0.5753 m/s
+  20-30 s              ⟨F⟩−Mg =   -0.4311 mN (    -67.6 ppm), R =      -0.8 ppm, Q =  -66.87 ppm, N_RK4−Mg−R = +1.8e-07 N, λ = 75.0910 %, γ1 = 1.6580, Fmax = 38.495 N, Δż = -0.0001 m/s
+  18.8-28.8 s          ⟨F⟩−Mg =   -0.4222 mN (    -66.2 ppm), R =      +0.6 ppm, Q =  -66.87 ppm, N_RK4−Mg−R = +1.8e-07 N, λ = 75.0910 %, γ1 = 1.6580, Fmax = 38.495 N, Δż = +0.0001 m/s
+  30-40 s              ⟨F⟩−Mg =   -0.6377 mN (   -100.0 ppm), R =      +0.4 ppm, Q = -100.42 ppm, N_RK4−Mg−R = +1.8e-07 N, λ = 75.0915 %, γ1 = 1.6580, Fmax = 38.491 N, Δż = +0.0000 m/s
+  ż(5 s) = +0.0761 m/s, ż(15 s) = -0.4993, ż(55 s) = -0.4992, ż(115 s) = +nan
+=== (0.0, 208.42105263157896) skalare Engine, dt = 25 µs, 60 s (14 s Rechenzeit)
+  Periode streng p = -1, eingeschwungen ab t = nan s; locker (1e-3 m/s, 1e-4 m) p = 1, ab 10.2 s
+  5-15 s (Engine/CSV)  ⟨F⟩−Mg =  -33.6217 mN (  -5272.8 ppm), R =   -5273.8 ppm, Q =   +1.06 ppm, N_RK4−Mg−R = +4.8e-08 N, λ = 65.7203 %, γ1 = 1.6717, Fmax = 45.605 N, Δż = -0.5174 m/s
+  5-55 s               ⟨F⟩−Mg =   -6.7593 mN (  -1060.0 ppm), R =   -1054.8 ppm, Q =   -5.24 ppm, N_RK4−Mg−R = +4.8e-08 N, λ = 73.2115 %, γ1 = 1.6649, Fmax = 45.605 N, Δż = -0.5174 m/s
+  20-30 s              ⟨F⟩−Mg =   +0.0260 mN (     +4.1 ppm), R =      -0.2 ppm, Q =   +4.23 ppm, N_RK4−Mg−R = +4.8e-08 N, λ = 75.0838 %, γ1 = 1.6580, Fmax = 38.484 N, Δż = -0.0000 m/s
+  18.8-28.8 s          ⟨F⟩−Mg =   +0.0046 mN (     +0.7 ppm), R =      +0.7 ppm, Q =   +0.02 ppm, N_RK4−Mg−R = +4.8e-08 N, λ = 75.0842 %, γ1 = 1.6580, Fmax = 38.484 N, Δż = +0.0001 m/s
+  30-40 s              ⟨F⟩−Mg =   -0.0471 mN (     -7.4 ppm), R =      -1.1 ppm, Q =   -6.30 ppm, N_RK4−Mg−R = +4.8e-08 N, λ = 75.0850 %, γ1 = 1.6580, Fmax = 38.485 N, Δż = -0.0001 m/s
+  ż(5 s) = +0.0181 m/s, ż(15 s) = -0.4992, ż(55 s) = -0.4993, ż(115 s) = +nan

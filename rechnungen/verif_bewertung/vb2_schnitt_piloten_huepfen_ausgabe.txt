@@ -1,0 +1,18 @@
+n_per=2000 zeta=0.02
+   (0, 100, 240): shift270/v0.5:97.9%/482N
+   (0, 110, 240): shift90/v1.0:93.7%/162N; shift270/v1.0:93.7%/162N
+   (0, 120, 240): shift180/v0.8:93.7%/158N
+   (0, 140, 240): keine Hüpfzustände
+   (0, 110, 250): keine Hüpfzustände
+   (0, 130, 230): shift180/v0.5:93.7%/165N; shift270/v1.0:93.7%/165N
+   (0, 110, 252): shift180/v0.5:93.7%/163N; shift270/v0.8:97.9%/482N
+   (0, 0, 180): shift0/v0.5:97.9%/482N; shift0/v0.8:97.9%/483N; shift0/v1.0:99.0%/969N; shift90/v1.0:97.9%/483N; shift180/v0.5:97.9%/482N; shift180/v1.0:97.9%/483N; shift270/v0.5:97.9%/482N; shift270/v0.8:97.9%/482N; shift270/v1.0:99.0%/968N
+n_per=2000 zeta=0.05
+   (0, 100, 240): keine Hüpfzustände
+   (0, 110, 240): keine Hüpfzustände
+   (0, 120, 240): keine Hüpfzustände
+   (0, 140, 240): keine Hüpfzustände
+   (0, 110, 250): keine Hüpfzustände
+   (0, 130, 230): keine Hüpfzustände
+   (0, 110, 252): keine Hüpfzustände
+   (0, 0, 180): shift0/v0.5:98.0%/484N; shift0/v1.0:98.0%/485N

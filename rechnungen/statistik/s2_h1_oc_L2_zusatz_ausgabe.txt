@@ -1,0 +1,2 @@
+[  15.5 s] L2 mech 1 % / 0,1°        kopplung x=0.20: P(fals)=1.000 P(best)=0.000 P(PB1)=0.000 P(IUT)=0.000 P(MET)=1.000 u_F=2.99 u_N2=1.54 mN nu_F=36.0 q95max|z0|=158.61 corr=1.00
+[  31.6 s] L2 mech 1 % / 0,1°        kopplung x=0.30: P(fals)=1.000 P(best)=0.000 P(PB1)=0.000 P(IUT)=0.000 P(MET)=1.000 u_F=2.86 u_N2=1.47 mN nu_F=33.8 q95max|z0|=245.75 corr=1.00

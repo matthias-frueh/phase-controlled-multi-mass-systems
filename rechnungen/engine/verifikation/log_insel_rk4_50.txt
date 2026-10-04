@@ -1,0 +1,3 @@
+RK4-S dt=50.0 µs std: lam 75.8165 %, gamma1 1.69814, F_min 0.0000, F_max 39.494 N, Q -13.35 ppm, Poincaré-Streuung z' (std) 9.59e-05 m/s, Spannweite 4.68e-04 m/s
+RK4-S dt=50.0 µs imp: lam 75.8143 %, gamma1 1.69813, F_min 0.0000, F_max 39.495 N, Q +29.29 ppm, Poincaré-Streuung z' (std) 9.31e-05 m/s, Spannweite 4.43e-04 m/s
+RK4-S dt=50.0 µs orb: lam 0.0000 %, gamma1 0.82305, F_min 0.3665, F_max 19.812 N, Q +0.00 ppm, Poincaré-Streuung z' (std) 3.47e-18 m/s, Spannweite 0.00e+00 m/s

@@ -1,0 +1,11 @@
+f_n = 241.8 Hz, rho = 0.0414, C = 98.74 N s/m
+     (0, 0, 0): k=1: |R|=4669.06 mN, |M a_R|= 8.001 mN | k=2: |R|=1538.82 mN, |M a_R|=10.602 mN | k=3: |R|= 663.92 mN, |M a_R|=10.381 mN | k=6: |R|= 124.44 mN, |M a_R|= 8.164 mN | k=9: |R|=  49.68 mN, |M a_R|= 7.984 mN
+                max|M a_R(t)| (k <= 12) = 53.176 mN; erforderliche relative Genauigkeit der Modulbeschleunigung für 1 mN auf N_1: 0.021 %
+ (0, 120, 240): k=1: |R|=   0.00 mN, |M a_R|= 0.000 mN | k=2: |R|=   0.00 mN, |M a_R|= 0.000 mN | k=3: |R|= 663.92 mN, |M a_R|=10.381 mN | k=6: |R|= 124.44 mN, |M a_R|= 8.164 mN | k=9: |R|=  49.68 mN, |M a_R|= 7.984 mN
+                max|M a_R(t)| (k <= 12) = 34.686 mN; erforderliche relative Genauigkeit der Modulbeschleunigung für 1 mN auf N_1: 100000000000.000 %
+ (0, 100, 240): k=1: |R|= 540.52 mN, |M a_R|= 0.926 mN | k=2: |R|= 350.87 mN, |M a_R|= 2.417 mN | k=3: |R|= 585.52 mN, |M a_R|= 9.155 mN | k=6: |R|=  71.85 mN, |M a_R|= 4.714 mN | k=9: |R|=  16.56 mN, |M a_R|= 2.661 mN
+                max|M a_R(t)| (k <= 12) = 33.762 mN; erforderliche relative Genauigkeit der Modulbeschleunigung für 1 mN auf N_1: 0.185 %
+ (0, 140, 240): k=1: |R|= 540.52 mN, |M a_R|= 0.926 mN | k=2: |R|= 350.87 mN, |M a_R|= 2.417 mN | k=3: |R|= 585.52 mN, |M a_R|= 9.155 mN | k=6: |R|=  71.85 mN, |M a_R|= 4.714 mN | k=9: |R|=  16.56 mN, |M a_R|= 2.661 mN
+                max|M a_R(t)| (k <= 12) = 33.779 mN; erforderliche relative Genauigkeit der Modulbeschleunigung für 1 mN auf N_1: 0.185 %
+   Einzelmodul: k=1: |R|=1556.35 mN, |M a_R|= 2.667 mN | k=2: |R|= 512.94 mN, |M a_R|= 3.534 mN | k=3: |R|= 221.31 mN, |M a_R|= 3.460 mN | k=6: |R|=  41.48 mN, |M a_R|= 2.721 mN | k=9: |R|=  16.56 mN, |M a_R|= 2.661 mN
+                max|M a_R(t)| (k <= 12) = 17.725 mN; erforderliche relative Genauigkeit der Modulbeschleunigung für 1 mN auf N_1: 0.064 %

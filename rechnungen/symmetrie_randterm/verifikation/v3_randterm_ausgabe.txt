@@ -1,0 +1,83 @@
+Tab. 9.3 (AP v2.4, Z. 3540-3548): N = 6,333041 / 6,361711 / 6,369854 / 6,373122 N bei T_w = 10/30/70/150 s
+  delta/ppm = [-6815.5 -2319.3 -1042.3  -529.8]  Potenzfit-Exponent (log|delta| ~ log T_w): -0.9451
+  Fit delta = A/T + Q: A = -67356 ppm s, Q = -78.7 ppm, max|Residuum| = 4.6 ppm
+  synthetisch delta = -67377/T + (+0): Exponent -1.0000
+  synthetisch delta = -67377/T + (-40): Exponent -0.9718
+  synthetisch delta = -67377/T + (-78): Exponent -0.9470
+  synthetisch delta = -67377/T + (+78): Exponent -1.0632
+
+===== eigene Engine, Formulierung frame =====
+--- HS (0.0, 208.421000) ---
+  Fenster   5.0+ 10.0 s: N1 = 6.340927 N  delta =   -5578.8 ppm  R =   -5525.4  Q =   -53.4  E = +1.80e-07 N  dv_S = -0.54205 m/s  R*T = -55254 ppm s  lam 74.115 %
+  Fenster   5.0+ 30.0 s: N1 = 6.364226 N  delta =   -1924.9 ppm  R =   -1841.6  Q =   -83.3  E = +1.80e-07 N  dv_S = -0.54198 m/s  R*T = -55247 ppm s  lam 74.767 %
+  Fenster   5.0+ 70.0 s: N1 = 6.370996 N  delta =    -863.1 ppm  R =    -789.2  Q =   -73.9  E = +1.80e-07 N  dv_S = -0.54194 m/s  R*T = -55244 ppm s  lam 74.952 %
+  Fenster   5.0+150.0 s: N1 = 6.373659 N  delta =    -445.6 ppm  R =    -368.4  Q =   -77.1  E = +1.80e-07 N  dv_S = -0.54215 m/s  R*T = -55265 ppm s  lam 75.027 %
+  Fenster  25.0+ 10.0 s: N1 = 6.375858 N  delta =    -100.7 ppm  R =      -0.3  Q =  -100.4  E = +1.80e-07 N  dv_S = -0.00003 m/s  R*T = -3 ppm s  lam 75.093 %
+  Fenster  45.0+ 10.0 s: N1 = 6.376042 N  delta =     -71.8 ppm  R =      -0.7  Q =   -71.1  E = +1.80e-07 N  dv_S = -0.00007 m/s  R*T = -7 ppm s  lam 75.093 %
+  Fenster  95.0+ 10.0 s: N1 = 6.375940 N  delta =     -87.9 ppm  R =      -0.1  Q =   -87.8  E = +1.80e-07 N  dv_S = -0.00001 m/s  R*T = -1 ppm s  lam 75.090 %
+  Fenster 145.0+ 10.0 s: N1 = 6.376116 N  delta =     -60.3 ppm  R =      -1.8  Q =   -58.5  E = +1.80e-07 N  dv_S = -0.00018 m/s  R*T = -18 ppm s  lam 75.092 %
+  Potenzfit delta: -0.9363;  Potenzfit R: -0.99995;  Spannweite R*T: 0.039 %
+  Fit delta = A/T + Q: A = -54993 ppm s, Q = -81.9 ppm, max|Res| = 9.9 ppm
+  sigma_v (v_S an Periodenbeginnen 30-40 s) = 7.02e-05 m/s;  sigma_v 100-155 s = 7.75e-05 m/s
+--- HSx (0.0, 208.421053) ---
+  Fenster   5.0+ 10.0 s: N1 = 6.339292 N  delta =   -5835.2 ppm  R =   -5799.9  Q =   -35.3  E = +1.80e-07 N  dv_S = -0.56897 m/s  R*T = -57999 ppm s  lam 70.655 %
+  Fenster   5.0+ 30.0 s: N1 = 6.363867 N  delta =   -1981.1 ppm  R =   -1933.2  Q =   -48.0  E = +1.80e-07 N  dv_S = -0.56893 m/s  R*T = -57995 ppm s  lam 73.613 %
+  Fenster   5.0+ 70.0 s: N1 = 6.370856 N  delta =    -885.2 ppm  R =    -828.5  Q =   -56.7  E = +1.80e-07 N  dv_S = -0.56894 m/s  R*T = -57996 ppm s  lam 74.458 %
+  Fenster   5.0+150.0 s: N1 = 6.373626 N  delta =    -450.7 ppm  R =    -386.6  Q =   -64.1  E = +1.80e-07 N  dv_S = -0.56893 m/s  R*T = -57995 ppm s  lam 74.796 %
+  Fenster  25.0+ 10.0 s: N1 = 6.376262 N  delta =     -37.3 ppm  R =      +0.3  Q =   -37.6  E = +1.80e-07 N  dv_S = +0.00003 m/s  R*T = +3 ppm s  lam 75.092 %
+  Fenster  45.0+ 10.0 s: N1 = 6.376131 N  delta =     -57.8 ppm  R =      +0.6  Q =   -58.5  E = +1.80e-07 N  dv_S = +0.00006 m/s  R*T = +6 ppm s  lam 75.093 %
+  Fenster  95.0+ 10.0 s: N1 = 6.376233 N  delta =     -41.8 ppm  R =      -0.0  Q =   -41.8  E = +1.80e-07 N  dv_S = -0.00000 m/s  R*T = -0 ppm s  lam 75.088 %
+  Fenster 145.0+ 10.0 s: N1 = 6.376292 N  delta =     -32.7 ppm  R =      +0.6  Q =   -33.4  E = +1.80e-07 N  dv_S = +0.00006 m/s  R*T = +6 ppm s  lam 75.091 %
+  Potenzfit delta: -0.9479;  Potenzfit R: -1.00002;  Spannweite R*T: 0.006 %
+  Fit delta = A/T + Q: A = -57722 ppm s, Q = -61.6 ppm, max|Res| = 4.6 ppm
+  sigma_v (v_S an Periodenbeginnen 30-40 s) = 9.61e-05 m/s;  sigma_v 100-155 s = 8.31e-05 m/s
+--- S0 (0.0, 0.000000) ---
+  Fenster   5.0+ 10.0 s: N1 = 6.376389 N  delta =     -17.4 ppm  R =      -0.1  Q =   -17.4  E = +4.04e-13 N  dv_S = -0.00001 m/s  R*T = -1 ppm s  lam 75.787 %
+  Fenster   5.0+ 30.0 s: N1 = 6.376472 N  delta =      -4.4 ppm  R =      +0.0  Q =    -4.4  E = +4.08e-13 N  dv_S = +0.00001 m/s  R*T = +1 ppm s  lam 75.787 %
+  Fenster   5.0+ 70.0 s: N1 = 6.376423 N  delta =     -12.1 ppm  R =      +0.1  Q =   -12.3  E = +4.18e-13 N  dv_S = +0.00009 m/s  R*T = +9 ppm s  lam 75.787 %
+  Fenster   5.0+150.0 s: N1 = 6.376475 N  delta =      -3.9 ppm  R =      +0.0  Q =    -3.9  E = +4.12e-13 N  dv_S = +0.00000 m/s  R*T = +0 ppm s  lam 75.787 %
+  Fenster  25.0+ 10.0 s: N1 = 6.376390 N  delta =     -17.3 ppm  R =      +0.3  Q =   -17.6  E = +4.08e-13 N  dv_S = +0.00003 m/s  R*T = +3 ppm s  lam 75.787 %
+  Fenster  45.0+ 10.0 s: N1 = 6.376495 N  delta =      -0.8 ppm  R =      -1.0  Q =    +0.2  E = +4.09e-13 N  dv_S = -0.00010 m/s  R*T = -10 ppm s  lam 75.785 %
+  Fenster  95.0+ 10.0 s: N1 = 6.376418 N  delta =     -12.8 ppm  R =      +0.7  Q =   -13.5  E = +4.03e-13 N  dv_S = +0.00007 m/s  R*T = +7 ppm s  lam 75.789 %
+  Fenster 145.0+ 10.0 s: N1 = 6.376531 N  delta =      +4.8 ppm  R =      +0.3  Q =    +4.5  E = +4.07e-13 N  dv_S = +0.00003 m/s  R*T = +3 ppm s  lam 75.787 %
+  Potenzfit delta: -0.4017;  Potenzfit R: -1.12677;  Spannweite R*T: 409.023 %
+  Fit delta = A/T + Q: A = -116 ppm s, Q = -5.0 ppm, max|Res| = 5.5 ppm
+  sigma_v (v_S an Periodenbeginnen 30-40 s) = 2.99e-02 m/s;  sigma_v 100-155 s = 2.99e-02 m/s
+
+===== eigene Engine, Formulierung com =====
+--- HS (0.0, 208.421000) ---
+  Fenster   5.0+ 10.0 s: N1 = 6.340655 N  delta =   -5621.3 ppm  R =   -5611.3  Q =   -10.0  E = +2.58e-14 N  dv_S = -0.55047 m/s  R*T = -56113 ppm s  lam 55.950 %
+  Fenster   5.0+ 30.0 s: N1 = 6.364214 N  delta =   -1926.8 ppm  R =   -1870.5  Q =   -56.3  E = +3.25e-14 N  dv_S = -0.55050 m/s  R*T = -56116 ppm s  lam 68.712 %
+  Fenster   5.0+ 70.0 s: N1 = 6.370904 N  delta =    -877.7 ppm  R =    -801.6  Q =   -76.1  E = +3.33e-14 N  dv_S = -0.55043 m/s  R*T = -56109 ppm s  lam 72.358 %
+  Fenster   5.0+150.0 s: N1 = 6.373653 N  delta =    -446.5 ppm  R =    -374.1  Q =   -72.4  E = +4.39e-14 N  dv_S = -0.55048 m/s  R*T = -56114 ppm s  lam 73.816 %
+  Fenster  25.0+ 10.0 s: N1 = 6.376046 N  delta =     -71.2 ppm  R =      -0.2  Q =   -71.0  E = +3.43e-14 N  dv_S = -0.00002 m/s  R*T = -2 ppm s  lam 75.094 %
+  Fenster  45.0+ 10.0 s: N1 = 6.376007 N  delta =     -77.3 ppm  R =      -2.0  Q =   -75.3  E = +3.72e-14 N  dv_S = -0.00020 m/s  R*T = -20 ppm s  lam 75.093 %
+  Fenster  95.0+ 10.0 s: N1 = 6.376094 N  delta =     -63.7 ppm  R =      -1.0  Q =   -62.7  E = +3.87e-14 N  dv_S = -0.00010 m/s  R*T = -10 ppm s  lam 75.091 %
+  Fenster 145.0+ 10.0 s: N1 = 6.376272 N  delta =     -35.7 ppm  R =      -2.3  Q =   -33.4  E = +3.72e-14 N  dv_S = -0.00023 m/s  R*T = -23 ppm s  lam 75.091 %
+  Potenzfit delta: -0.9363;  Potenzfit R: -1.00001;  Spannweite R*T: 0.013 %
+  Fit delta = A/T + Q: A = -55404 ppm s, Q = -81.1 ppm, max|Res| = 5.1 ppm
+  sigma_v (v_S an Periodenbeginnen 30-40 s) = 7.35e-05 m/s;  sigma_v 100-155 s = 8.47e-05 m/s
+--- HSx (0.0, 208.421053) ---
+  Fenster   5.0+ 10.0 s: N1 = 6.342562 N  delta =   -5322.3 ppm  R =   -5279.1  Q =   -43.2  E = +3.75e-14 N  dv_S = -0.51788 m/s  R*T = -52791 ppm s  lam 72.772 %
+  Fenster   5.0+ 30.0 s: N1 = 6.364952 N  delta =   -1811.0 ppm  R =   -1760.4  Q =   -50.6  E = +3.56e-14 N  dv_S = -0.51809 m/s  R*T = -52813 ppm s  lam 74.318 %
+  Fenster   5.0+ 70.0 s: N1 = 6.371368 N  delta =    -804.9 ppm  R =    -754.6  Q =   -50.3  E = +2.99e-14 N  dv_S = -0.51815 m/s  R*T = -52819 ppm s  lam 74.759 %
+  Fenster   5.0+150.0 s: N1 = 6.373853 N  delta =    -415.1 ppm  R =    -352.0  Q =   -63.1  E = +2.89e-14 N  dv_S = -0.51795 m/s  R*T = -52798 ppm s  lam 74.936 %
+  Fenster  25.0+ 10.0 s: N1 = 6.376179 N  delta =     -50.3 ppm  R =      -0.2  Q =   -50.1  E = +3.78e-14 N  dv_S = -0.00002 m/s  R*T = -2 ppm s  lam 75.091 %
+  Fenster  45.0+ 10.0 s: N1 = 6.375807 N  delta =    -108.6 ppm  R =      +0.1  Q =  -108.7  E = +3.50e-14 N  dv_S = +0.00001 m/s  R*T = +1 ppm s  lam 75.092 %
+  Fenster  95.0+ 10.0 s: N1 = 6.375968 N  delta =     -83.4 ppm  R =      +0.3  Q =   -83.7  E = +3.86e-14 N  dv_S = +0.00003 m/s  R*T = +3 ppm s  lam 75.091 %
+  Fenster 145.0+ 10.0 s: N1 = 6.376183 N  delta =     -49.7 ppm  R =      +0.5  Q =   -50.2  E = +3.94e-14 N  dv_S = +0.00005 m/s  R*T = +5 ppm s  lam 75.090 %
+  Potenzfit delta: -0.9455;  Potenzfit R: -0.99993;  Spannweite R*T: 0.053 %
+  Fit delta = A/T + Q: A = -52632 ppm s, Q = -58.2 ppm, max|Res| = 6.0 ppm
+  sigma_v (v_S an Periodenbeginnen 30-40 s) = 8.64e-05 m/s;  sigma_v 100-155 s = 8.39e-05 m/s
+--- S0 (0.0, 0.000000) ---
+  Fenster   5.0+ 10.0 s: N1 = 6.376534 N  delta =      +5.3 ppm  R =      +1.4  Q =    +3.9  E = +2.46e-14 N  dv_S = +0.00014 m/s  R*T = +14 ppm s  lam 75.788 %
+  Fenster   5.0+ 30.0 s: N1 = 6.376556 N  delta =      +8.8 ppm  R =      +0.1  Q =    +8.7  E = +2.73e-14 N  dv_S = +0.00002 m/s  R*T = +2 ppm s  lam 75.788 %
+  Fenster   5.0+ 70.0 s: N1 = 6.376533 N  delta =      +5.2 ppm  R =      +0.6  Q =    +4.6  E = +2.72e-14 N  dv_S = +0.00040 m/s  R*T = +41 ppm s  lam 75.788 %
+  Fenster   5.0+150.0 s: N1 = 6.376431 N  delta =     -10.8 ppm  R =      +0.2  Q =   -11.0  E = +3.75e-14 N  dv_S = +0.00034 m/s  R*T = +34 ppm s  lam 75.789 %
+  Fenster  25.0+ 10.0 s: N1 = 6.376599 N  delta =     +15.6 ppm  R =      -2.1  Q =   +17.6  E = +3.01e-14 N  dv_S = -0.00020 m/s  R*T = -21 ppm s  lam 75.788 %
+  Fenster  45.0+ 10.0 s: N1 = 6.376349 N  delta =     -23.7 ppm  R =      -1.7  Q =   -22.0  E = +2.91e-14 N  dv_S = -0.00017 m/s  R*T = -17 ppm s  lam 75.788 %
+  Fenster  95.0+ 10.0 s: N1 = 6.376377 N  delta =     -19.3 ppm  R =      -1.4  Q =   -17.9  E = +2.79e-14 N  dv_S = -0.00013 m/s  R*T = -14 ppm s  lam 75.787 %
+  Fenster 145.0+ 10.0 s: N1 = 6.376224 N  delta =     -43.3 ppm  R =      +1.6  Q =   -44.9  E = +2.87e-14 N  dv_S = +0.00016 m/s  R*T = +16 ppm s  lam 75.792 %
+  Potenzfit delta: 0.1777;  Potenzfit R: -0.42401;  Spannweite R*T: 170.860 %
+  Fit delta = A/T + Q: A = 92 ppm s, Q = -1.4 ppm, max|Res| = 10.0 ppm
+  sigma_v (v_S an Periodenbeginnen 30-40 s) = 2.99e-02 m/s;  sigma_v 100-155 s = 2.99e-02 m/s

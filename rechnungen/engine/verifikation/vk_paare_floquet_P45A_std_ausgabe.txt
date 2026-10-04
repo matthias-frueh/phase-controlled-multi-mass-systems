@@ -1,0 +1,5 @@
+P45A_std P1: |mu| = 0.7409, 0.7409; Residuen 4e-12 -> 4e-13; Orbit lam 75.6288 %, gamma1 1.6870, F_max 39.20 N
+P6A_std P1: |mu| = 0.7405, 0.7405; Residuen 1e-11 -> 5e-13; Orbit lam 75.5892 %, gamma1 1.6876, F_max 39.21 N
+P6B_std P1: |mu| = 0.3655, 0.3655; Residuen 3e-13 -> 3e-13; Orbit lam 18.2243 %, gamma1 1.0384, F_max 22.11 N
+P49B_std P1: |mu| = 0.3691, 0.3691; Residuen 5e-13 -> 5e-13; Orbit lam 19.0250 %, gamma1 0.7376, F_max 18.41 N
+P49A_std P1: |mu| = 0.7409, 0.7409; Residuen 1e-11 -> 8e-13; Orbit lam 75.6321 %, gamma1 1.6887, F_max 39.23 N

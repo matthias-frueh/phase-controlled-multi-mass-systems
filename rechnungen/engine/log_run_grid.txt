@@ -1,0 +1,6 @@
+Segment 0: 361 Läufe, 200 Zyklen, dt = 50.0 µs, 126 s
+Segment 1: 361 Läufe, 200 Zyklen, dt = 50.0 µs, 135 s
+Segment 0: 361 Läufe, 200 Zyklen, dt = 50.0 µs, 120 s
+Segment 1: 361 Läufe, 200 Zyklen, dt = 50.0 µs, 126 s
+Segment 0: 361 Läufe, 200 Zyklen, dt = 50.0 µs, 125 s
+Segment 1: 361 Läufe, 200 Zyklen, dt = 50.0 µs, 112 s

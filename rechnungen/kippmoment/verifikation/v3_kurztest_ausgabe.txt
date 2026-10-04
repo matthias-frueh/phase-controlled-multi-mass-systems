@@ -1,0 +1,5 @@
+bis 0.1 s: max|3·F_1 − N_Engine(0,0)| = 2.132e-14 N
+bis 0.5 s: max|3·F_1 − N_Engine(0,0)| = 8.260e-13 N
+bis 1.0 s: max|3·F_1 − N_Engine(0,0)| = 1.909e-10 N
+Summe 3 Zellen − Engine(120,240), erste 0,05 s: 3.658e+00 N (vor erstem Zell-Liftoff gleich?)
+erster Zell-Liftoff bei t = 0.0108 s

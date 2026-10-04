@@ -1,0 +1,26 @@
+MEDIENKOPPLUNG v2 (M=1kg, A=0.02m^2, T=0.1s, rho=1.2)
+--------------------------------------------------------------------------------------------------------------
+Z zweistufig 80/20, Fa=5N        v_d= -0.0000 mm/s  <|v_osc|>= 100.0 mm/s  F_drag_drift=-9.24e-36 N  F_bar_A=-2.56e-20 N   (Nullbefund)
+  Kontrolle 50/50                v_d=  0.0000 mm/s  <|v_osc|>=  62.5 mm/s  F_drag_drift=+0.00e+00 N  F_bar_A=-1.49e-20 N
+S schiefe v (b=3, phi=pi/4)      v_d=  5.3119 mm/s  <|v_osc|>=  51.9 mm/s  F_drag_drift=+3.39e-07 N  F_bar_A=+6.67e-06 N
+  Kontrolle phi=pi/2             v_d=  0.0000 mm/s  <|v_osc|>=  50.7 mm/s  F_drag_drift=+0.00e+00 N  F_bar_A=-1.03e-19 N
+R richtungsabh. (1.5/0.5, 10N)   v_d=-72.4331 mm/s  <|v_osc|>= 200.0 mm/s  F_drag_drift=-3.15e-05 N  F_bar_A=-3.20e-04 N
+  Kontrolle c gleich             v_d= -0.0000 mm/s  <|v_osc|>= 100.0 mm/s  F_drag_drift=-9.24e-36 N  F_bar_A=-2.22e-20 N
+--------------------------------------------------------------------------------------------------------------
+Fall S: F_bar_A / F_drag_drift = 19.7 (~ 2<|v_osc|>/|v_d| = 19.5)
+Konfiguration D misst k<x> = F_bar_C ~ F_bar_A (Bedingungen (i)-(iii) der Notiz), nicht F_drag_drift.
+
+--- Mehrmassen-Realisierung (Fall S) ---
+  Masse1@10Hz: A1=1.27 cm, a=5.1 g
+  Masse2@20Hz: A2=0.19 cm, a=3.1 g (Phase steuert Schiefe)
+
+--- Reibungsboden vs. freie Drift ---
+  Praez.-Rollen  mu=1e-03: F_fric=9.8e-03 N
+  Luftlager      mu=1e-05: F_fric=9.8e-05 N
+  Luftlager top  mu=1e-06: F_fric=9.8e-06 N
+  Freie Drift in Luft zusätzlich durch tau ~ Stunden unpraktikabel; Aufhängung (Konfig. D).
+
+--- Pendelauslenkung (L=1 m, M=1 kg), bedingte Modellabschätzung ---
+  Fall S: aus F_bar_A 680 nm   (v1 aus F_drag_drift: 34.5 nm)
+  Fall R: aus F_bar_A -32.62 um   (v1 aus F_drag_drift: -3.21 um)
+  Gültig nur innerhalb des Zweiterm-Ansatzes mit stationärem C_D (Notiz §6 offen).

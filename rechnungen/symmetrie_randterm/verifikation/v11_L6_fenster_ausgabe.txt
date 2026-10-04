@@ -1,0 +1,12 @@
+L6:g0 Fenster 50-60 s (100 Perioden): delta  -5978.3 ppm, R  -5977.1 ppm, dv_S -0.5864 m/s, lam 71.584
+L6:g0 Fenster 45-60 s (150 Perioden): delta     -0.9 ppm, R     +0.5 ppm, dv_S +0.0001 m/s, lam 71.398
+L6:g0 Fenster 30-60 s (300 Perioden): delta     -9.9 ppm, R     +0.5 ppm, dv_S +0.0002 m/s, lam 71.397
+   L6:g0 Periode 1: std der Teilfolgen 2.75e-01
+   L6:g0 Periode 2: std der Teilfolgen 2.75e-01 2.75e-01
+   L6:g0 Periode 3: std der Teilfolgen 1.74e-04 4.72e-04 2.28e-03
+L6:g2 Fenster 50-60 s (100 Perioden): delta    -11.1 ppm, R     +2.6 ppm, dv_S +0.0003 m/s, lam 76.177
+L6:g2 Fenster 45-60 s (150 Perioden): delta     +7.4 ppm, R     +1.2 ppm, dv_S +0.0002 m/s, lam 76.176
+L6:g2 Fenster 30-60 s (300 Perioden): delta    +34.5 ppm, R     +0.7 ppm, dv_S +0.0002 m/s, lam 76.173
+   L6:g2 Periode 1: std der Teilfolgen 1.76e-04
+   L6:g2 Periode 2: std der Teilfolgen 1.64e-04 1.69e-04
+   L6:g2 Periode 3: std der Teilfolgen 1.76e-04 1.80e-04 1.71e-04

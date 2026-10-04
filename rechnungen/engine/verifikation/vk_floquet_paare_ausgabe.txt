@@ -1,0 +1,4 @@
+P33A std (P3): |mu| = 0.3538, 0.3538; Residuen 1e-12 -> 4e-13; Orbit lam 71.8573 %, gamma1 1.9758, F_max 50.53 N
+P33A imp (P1): |mu| = 0.9187, 0.6058; Residuen 3e-10 -> 9e-13; Orbit lam 76.1946 %, gamma1 1.7184, F_max 39.99 N
+P13B imp (P1): |mu| = 0.7415, 0.7415; Residuen 6e-12 -> 8e-14; Orbit lam 75.6974 %, gamma1 1.6907, F_max 39.29 N
+P6B std (P1): |mu| = 0.3655, 0.3655; Residuen 8e-14 -> 8e-14; Orbit lam 18.2243 %, gamma1 1.0384, F_max 22.11 N

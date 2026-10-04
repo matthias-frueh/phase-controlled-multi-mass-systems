@@ -1,0 +1,9 @@
+   Zyklus 50/400
+   Zyklus 100/400
+   Zyklus 150/400
+   Zyklus 200/400
+   Zyklus 250/400
+   Zyklus 300/400
+   Zyklus 350/400
+   Zyklus 400/400
+imp: fertig in 82 s

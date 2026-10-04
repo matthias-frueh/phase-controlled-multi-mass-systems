@@ -1,0 +1,4 @@
+std lam_max 76.22 Fmax_max 50.55 A_max 6.928 A_med 2.445 skew<0: 36 skew_med 0.866
+imp lam_max 76.22 Fmax_max 50.55 A_max 6.928 A_med 2.693 skew<0: 36 skew_med 1.012
+ramp2 lam_max 76.22 Fmax_max 50.40 A_max 6.904 A_med 2.377 skew<0: 36 skew_med 0.785
+SA std lam_max 76.22 Fmax_max 51.45 A_max 7.068 skew<0: 36 skew_med 0.866

@@ -1,0 +1,7 @@
+Gas    rho     nu [m^2/s]   delta(10 Hz) [mm]   sqrt(rho*mu)
+He     0.166   1.178e-04      1.94              1.806e-03
+Luft   1.204   1.503e-05      0.69              4.668e-03
+Ar     1.661   1.343e-05      0.65              6.086e-03
+CO2    1.842   7.980e-06      0.50              5.204e-03
+CO2/He: rho-Verhaeltnis 11.07; nu(He)/nu(CO2) 14.8; sqrt(rho mu)-Verhaeltnis 2.88
+Druckreihe (gleiches Gas): rho ~ p, mu ~ konst. -> rho- und mu-Abhaengigkeit sind nur mit Gas- UND Druckreihe trennbar.

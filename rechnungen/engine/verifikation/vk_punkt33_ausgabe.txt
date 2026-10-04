@@ -1,0 +1,1 @@
+SA (56.842,56.842) std 30–40 s: lam 70.6853 %, gamma1 1.9994, F_max 51.601 N, Periode -1 ab nan s

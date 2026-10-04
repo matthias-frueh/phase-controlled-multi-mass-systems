@@ -1,0 +1,43 @@
+=== A4b  Wurfstarts: Endzustand Kontaktast oder Hüpfen? ===
+  ζ = 0.02: Restitutionskoeffizient e = 0.939
+  ζ = 0.05: Restitutionskoeffizient e = 0.854
+  ζ = 0.1: Restitutionskoeffizient e = 0.729
+  ζ = 0.2: Restitutionskoeffizient e = 0.527
+R  Referenz (98°,240°), ż₀ = 3 m/s: λ = 0.000 %, F_min = 0.3131 N
+R  Referenz (120°,240°), ż₀ = 3 m/s: λ = 0.000 %, F_min = 5.3304 N
+R  Referenz (148°,240°), ż₀ = 3 m/s: λ = 0.000 %, F_min = 0.2999 N
+V1 ζ = 0.02 (120,240)  ż₀ = 0.05 m/s: λ =   0.000 %, F_min = 5.3836 N (linear 5.3836), F_max =     7.00 N (linear 7.00)
+V1 ζ = 0.02 (120,240)  ż₀ = 0.10 m/s: λ =   0.000 %, F_min = 5.3836 N (linear 5.3836), F_max =     7.00 N (linear 7.00)
+V1 ζ = 0.02 (120,240)  ż₀ = 0.20 m/s: λ =   0.000 %, F_min = 5.3836 N (linear 5.3836), F_max =     7.00 N (linear 7.00)
+V1 ζ = 0.02 (120,240)  ż₀ = 0.50 m/s: λ =   0.000 %, F_min = 5.3836 N (linear 5.3836), F_max =     7.00 N (linear 7.00)
+V1 ζ = 0.02 synchron   ż₀ = 0.05 m/s: λ =   0.000 %, F_min = 2.6686 N (linear 2.6686), F_max =    13.25 N (linear 13.25)
+V1 ζ = 0.02 synchron   ż₀ = 0.10 m/s: λ =   0.000 %, F_min = 2.6686 N (linear 2.6686), F_max =    13.25 N (linear 13.25)
+V1 ζ = 0.02 synchron   ż₀ = 0.20 m/s: λ =   0.000 %, F_min = 2.6686 N (linear 2.6686), F_max =    13.25 N (linear 13.25)
+V1 ζ = 0.02 synchron   ż₀ = 0.50 m/s: λ =  97.950 %, F_min = 0.0000 N (linear 2.6686), F_max =   483.86 N (linear 13.25)
+V1 ζ = 0.05 (120,240)  ż₀ = 0.05 m/s: λ =   0.000 %, F_min = 5.4089 N (linear 5.4089), F_max =     6.97 N (linear 6.97)
+V1 ζ = 0.05 (120,240)  ż₀ = 0.10 m/s: λ =   0.000 %, F_min = 5.4089 N (linear 5.4089), F_max =     6.97 N (linear 6.97)
+V1 ζ = 0.05 (120,240)  ż₀ = 0.20 m/s: λ =   0.000 %, F_min = 5.4089 N (linear 5.4089), F_max =     6.97 N (linear 6.97)
+V1 ζ = 0.05 (120,240)  ż₀ = 0.50 m/s: λ =   0.000 %, F_min = 5.4089 N (linear 5.4089), F_max =     6.97 N (linear 6.97)
+V1 ζ = 0.05 synchron   ż₀ = 0.05 m/s: λ =   0.000 %, F_min = 2.7184 N (linear 2.7184), F_max =    13.17 N (linear 13.17)
+V1 ζ = 0.05 synchron   ż₀ = 0.10 m/s: λ =   0.000 %, F_min = 2.7184 N (linear 2.7184), F_max =    13.17 N (linear 13.17)
+V1 ζ = 0.05 synchron   ż₀ = 0.20 m/s: λ =   0.000 %, F_min = 2.7184 N (linear 2.7184), F_max =    13.17 N (linear 13.17)
+V1 ζ = 0.05 synchron   ż₀ = 0.50 m/s: λ =  97.984 %, F_min = 0.0000 N (linear 2.7184), F_max =   486.10 N (linear 13.17)
+V1 ζ = 0.1  (120,240)  ż₀ = 0.05 m/s: λ =   0.000 %, F_min = 5.4170 N (linear 5.4170), F_max =     6.96 N (linear 6.96)
+V1 ζ = 0.1  (120,240)  ż₀ = 0.10 m/s: λ =   0.000 %, F_min = 5.4170 N (linear 5.4170), F_max =     6.96 N (linear 6.96)
+V1 ζ = 0.1  (120,240)  ż₀ = 0.20 m/s: λ =   0.000 %, F_min = 5.4170 N (linear 5.4170), F_max =     6.96 N (linear 6.96)
+V1 ζ = 0.1  (120,240)  ż₀ = 0.50 m/s: λ =   0.000 %, F_min = 5.4170 N (linear 5.4170), F_max =     6.96 N (linear 6.96)
+V1 ζ = 0.1  synchron   ż₀ = 0.05 m/s: λ =   0.000 %, F_min = 2.7306 N (linear 2.7306), F_max =    13.15 N (linear 13.15)
+V1 ζ = 0.1  synchron   ż₀ = 0.10 m/s: λ =   0.000 %, F_min = 2.7306 N (linear 2.7306), F_max =    13.15 N (linear 13.15)
+V1 ζ = 0.1  synchron   ż₀ = 0.20 m/s: λ =   0.000 %, F_min = 2.7306 N (linear 2.7306), F_max =    13.15 N (linear 13.15)
+V1 ζ = 0.1  synchron   ż₀ = 0.50 m/s: λ =  98.043 %, F_min = 0.0000 N (linear 2.7306), F_max =   489.77 N (linear 13.15)
+V1 ζ = 0.2  (120,240)  ż₀ = 0.05 m/s: λ =   0.000 %, F_min = 5.4271 N (linear 5.4271), F_max =     6.96 N (linear 6.96)
+V1 ζ = 0.2  (120,240)  ż₀ = 0.10 m/s: λ =   0.000 %, F_min = 5.4271 N (linear 5.4271), F_max =     6.96 N (linear 6.96)
+V1 ζ = 0.2  (120,240)  ż₀ = 0.20 m/s: λ =   0.000 %, F_min = 5.4271 N (linear 5.4271), F_max =     6.96 N (linear 6.96)
+V1 ζ = 0.2  (120,240)  ż₀ = 0.50 m/s: λ =   0.000 %, F_min = 5.4271 N (linear 5.4271), F_max =     6.96 N (linear 6.96)
+V1 ζ = 0.2  synchron   ż₀ = 0.05 m/s: λ =   0.000 %, F_min = 2.7290 N (linear 2.7290), F_max =    13.17 N (linear 13.17)
+V1 ζ = 0.2  synchron   ż₀ = 0.10 m/s: λ =   0.000 %, F_min = 2.7290 N (linear 2.7290), F_max =    13.17 N (linear 13.17)
+V1 ζ = 0.2  synchron   ż₀ = 0.20 m/s: λ =   0.000 %, F_min = 2.7290 N (linear 2.7290), F_max =    13.17 N (linear 13.17)
+V1 ζ = 0.2  synchron   ż₀ = 0.50 m/s: λ =   0.000 %, F_min = 2.7290 N (linear 2.7290), F_max =    13.17 N (linear 13.17)
+KV V2 ζ = 0,02 (120°,240°) ż₀ = 0,5 m/s, Δt = 41.67 µs: λ = 94.175 %, F_max = 170.74 N
+KV V2 ζ = 0,02 (120°,240°) ż₀ = 0,5 m/s, Δt = 20.83 µs: λ = 0.000 %, F_max = 7.07 N
+Rechenzeit 439 s

@@ -1,0 +1,14 @@
+=== (1) Triphasik-Punkt (120°, 240°), Referenz K = 1e4, C = 16, μ = 1 ===
+|Φ_k| für k = 1…6: 4.0e-16, 8.5e-16, 3.0e+00, 1.6e-15, 2.5e-16, 3.0e+00
+  Referenz             F_min(120°) = 5.330390 N, γ₁(120°) = +0.0668, 2°-Sekanten 0.2124/0.1952 N/°
+  H(2ω) := 1           F_min(120°) = 5.330390 N, γ₁(120°) = +0.0668, 2°-Sekanten 0.0458/0.0319 N/°
+  H(3ω) := 1           F_min(120°) = 5.028407 N, γ₁(120°) = +0.0452, 2°-Sekanten 0.1888/0.1874 N/°
+  H(6ω) := 1           F_min(120°) = 5.106833 N, γ₁(120°) = -0.2442, 2°-Sekanten 0.1816/0.1949 N/°
+  H(3ω), H(6ω) := 1    F_min(120°) = 4.741078 N, γ₁(120°) = -0.3748, 2°-Sekanten 0.1781/0.1856 N/°
+  starr                F_min(120°) = 4.548267 N, γ₁(120°) = -0.4498
+
+=== (2) Anteil zulässiger ρ ∈ (0, 1/6], Laufmenge ZUSATZ (Schnitt, Piloten, Einzelmodul, (0°,180°), synchron) ===
+  ζ = 0.02: zulässig 89.2 % von 157 Rasterpunkten; unzulässig z. B. ρ = 0.080, 0.081, 0.082, 0.105, 0.106, 0.107, 0.108, 0.109 …
+  ζ = 0.05: zulässig 94.3 % von 157 Rasterpunkten; unzulässig z. B. ρ = 0.158, 0.159, 0.160, 0.161, 0.162, 0.163, 0.164, 0.165 …
+  ζ = 0.1: zulässig 100.0 % von 157 Rasterpunkten; unzulässig z. B. ρ = 
+  ζ = 0.2: zulässig 100.0 % von 157 Rasterpunkten; unzulässig z. B. ρ = 

@@ -1,0 +1,24 @@
+Brueckenrauschen 1 kOhm: 4.07 nV/sqrt(Hz)
+ 1 mV/V, ADC 15 nV, f_s 2000: S = 101.9 uV/N, sigma_F =   4.82 mN, sigma_A = 0.0482 mN (analytisch e_n/(S sqrt T) = 0.0482 mN)
+ 1 mV/V, ADC 15 nV, f_s 3750: S = 101.9 uV/N, sigma_F =   6.60 mN, sigma_A = 0.0482 mN (analytisch e_n/(S sqrt T) = 0.0482 mN)
+ 1 mV/V, ADC 50 nV, f_s 2000: S = 101.9 uV/N, sigma_F =  15.56 mN, sigma_A = 0.1556 mN (analytisch e_n/(S sqrt T) = 0.1556 mN)
+ 1 mV/V, ADC 50 nV, f_s 3750: S = 101.9 uV/N, sigma_F =  21.31 mN, sigma_A = 0.1556 mN (analytisch e_n/(S sqrt T) = 0.1556 mN)
+ 2 mV/V, ADC 15 nV, f_s 2000: S = 203.9 uV/N, sigma_F =   2.41 mN, sigma_A = 0.0241 mN (analytisch e_n/(S sqrt T) = 0.0241 mN)
+ 2 mV/V, ADC 15 nV, f_s 3750: S = 203.9 uV/N, sigma_F =   3.30 mN, sigma_A = 0.0241 mN (analytisch e_n/(S sqrt T) = 0.0241 mN)
+ 2 mV/V, ADC 50 nV, f_s 2000: S = 203.9 uV/N, sigma_F =   7.78 mN, sigma_A = 0.0778 mN (analytisch e_n/(S sqrt T) = 0.0778 mN)
+ 2 mV/V, ADC 50 nV, f_s 3750: S = 203.9 uV/N, sigma_F =  10.65 mN, sigma_A = 0.0778 mN (analytisch e_n/(S sqrt T) = 0.0778 mN)
+sigma_F-Bereich 2.41 ... 21.31 mN; sigma_A-Bereich (beide f_s) 0.0241 ... 0.1556 mN
+Moment, Schaetzer wie KM-11 (sigma_A*R_c*sqrt(3/2)): 2.95 ... 19.06 uN m
+
+STARR mu=0.462 G0, Triphasik: Zelle A1 = 1.4980 N, A2 = 0.4937 N; u_c = 0.0327 N -> A1/u_c = 45.8, A2/u_c = 15.1
+  Zelle SS 3.3405 N, Summe SS 1.3967 N, Verhaeltnis 2.392
+  R+1 = 0.22470 N m, R-2 = 0.07406 N m; A1/sigma_A = 9626 ... 62137
+  Masse M2 +1 %: R-1 = 7.490e-04 N m; SNR (Schaetzer KM-11) 39 ... 254; SNR (optimaler Schaetzer) 56 ... 359
+  Leckage in N1 bei Zellverstaerkung +1 %: 2|dN1| = 0.0150 N
+A6: k_max = 2: f_s >= 1405 Hz (f = 10 Hz); bei 12 Hz 1686 Hz
+A6: k_max = 3: f_s >= 2107 Hz (f = 10 Hz); bei 12 Hz 2529 Hz
+A6: k_max = 5: f_s >= 3512 Hz (f = 10 Hz); bei 12 Hz 4215 Hz
+A6: k_max = 9: f_s >= 6322 Hz (f = 10 Hz); bei 12 Hz 7587 Hz
+Ellipse k=1 (nominal, Momente mit nominaler Lage): R-1/R+1 = 0.00000
+Ellipse k=1 (Zelle 2 radial +1 mm, Momente mit nominaler Lage): R-1/R+1 = 0.00332
+Vergleich Masse M2 +1 %: R-1/R+1 = 0.00333 (= eps/3 = 0.00333)

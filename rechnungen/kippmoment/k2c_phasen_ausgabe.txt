@@ -1,0 +1,19 @@
+STARR μ=0.462 k=1: links |P+|=0.22470 N·m arg=  -27.00°   rechts |P−|=0.00000 arg= -101.31°
+STARR μ=0.462 k=2: links |P+|=0.00000 N·m arg=  -90.00°   rechts |P−|=0.07406 arg=  144.00°
+STARR μ=0.462 k=3: links |P+|=0.00000 N·m arg=   83.48°   rechts |P−|=0.00000 arg=  149.74°
+STARR μ=0.462 k=4: links |P+|=0.00483 N·m arg=  162.00°   rechts |P−|=0.00000 arg=   82.65°
+STARR μ=0.462 k=5: links |P+|=0.00000 N·m arg=  -79.70°   rechts |P−|=0.00663 arg=  135.00°
+STARR μ=0.462 k=6: links |P+|=0.00000 N·m arg=   75.96°   rechts |P−|=0.00000 arg= -168.31°
+STEIF μ=0.462 k=1: links |P+|=0.22585 N·m arg=  -27.00°   rechts |P−|=0.00000 arg=  -90.00°
+STEIF μ=0.462 k=2: links |P+|=0.00000 N·m arg= -135.00°   rechts |P−|=0.07559 arg=  144.01°
+STEIF μ=0.462 k=3: links |P+|=0.00000 N·m arg= -135.00°   rechts |P−|=0.00000 arg= -163.07°
+STEIF μ=0.462 k=4: links |P+|=0.00526 N·m arg=  161.93°   rechts |P−|=0.00000 arg=   90.00°
+STEIF μ=0.462 k=5: links |P+|=0.00000 N·m arg=  -79.70°   rechts |P−|=0.00760 arg=  135.14°
+STEIF μ=0.462 k=6: links |P+|=0.00000 N·m arg=   68.20°   rechts |P−|=0.00000 arg= -167.91°
+REF μ=1.0 k=1: links |P+|=0.65161 N·m arg=  -28.96°   rechts |P−|=0.00000 arg= -102.53°
+REF μ=1.0 k=2: links |P+|=0.00000 N·m arg= -116.57°   rechts |P−|=0.80625 arg= -129.88°
+REF μ=1.0 k=3: links |P+|=0.00000 N·m arg=  -21.80°   rechts |P−|=0.00000 arg=   -7.59°
+REF μ=1.0 k=4: links |P+|=0.00360 N·m arg=   11.28°   rechts |P−|=0.00000 arg= -115.20°
+REF μ=1.0 k=5: links |P+|=0.00000 N·m arg=  131.19°   rechts |P−|=0.00296 arg=  -76.99°
+REF μ=1.0 k=6: links |P+|=0.00000 N·m arg=  -59.04°   rechts |P−|=0.00000 arg=  -28.30°
+(arg bei Betrag ≈ 0 ohne Bedeutung)

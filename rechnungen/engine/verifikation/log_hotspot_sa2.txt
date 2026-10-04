@@ -1,0 +1,10 @@
+SA Fenster 5–15 s: <N>-Mg = -0.0236 mN (-3.7 ppm), R = -3.7 ppm, Rest -1.4e-14 N, lam 75.0847 %, gamma1 1.6580, F_max 38.490
+SA Fenster 5–55 s: <N>-Mg = -0.0047 mN (-0.7 ppm), R = -0.7 ppm, Rest +1.6e-14 N, lam 75.0847 %, gamma1 1.6580, F_max 38.490
+SA Fenster 5–115 s: <N>-Mg = -0.0021 mN (-0.3 ppm), R = -0.3 ppm, Rest +1.8e-15 N, lam 75.0847 %, gamma1 1.6580, F_max 38.490
+SA Fenster 30–60 s: <N>-Mg = +0.0000 mN (+0.0 ppm), R = -0.0 ppm, Rest +9.0e-15 N, lam 75.0847 %, gamma1 1.6580, F_max 38.474
+SA Fenster 30–100 s: <N>-Mg = -0.0000 mN (-0.0 ppm), R = -0.0 ppm, Rest -1.4e-14 N, lam 75.0847 %, gamma1 1.6580, F_max 38.474
+SA Fenster 60–110 s: <N>-Mg = -0.0000 mN (-0.0 ppm), R = +0.0 ppm, Rest -2.3e-14 N, lam 75.0847 %, gamma1 1.6580, F_max 38.474
+SA Fenster 20–120 s: <N>-Mg = -0.0000 mN (-0.0 ppm), R = -0.0 ppm, Rest -6.8e-15 N, lam 75.0847 %, gamma1 1.6580, F_max 38.474
+v_S(5 s) = -0.3738, v_S(15 s) = -0.3741, v_S(55 s) = -0.3741, v_S(115 s) = -0.3741 m/s
+Einschwingende (Wiederkehr P1, |dz'|<1e-3, |dz|<1e-4): 5.0 s; streng (1e-8/1e-10): 9.3 s
+Floquet P1-Orbit: |mu| = 0.7359, 0.7359; Orbit lam 75.0847 %, gamma1 1.65798, F_max 38.474 N, v_S Zyklusbeginn -0.3741 m/s

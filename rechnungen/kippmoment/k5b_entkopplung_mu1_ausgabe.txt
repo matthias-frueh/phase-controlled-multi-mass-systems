@@ -1,0 +1,16 @@
+Engine (0°,0°): λ = 75.7885 %, F_max = 41.1226 N, F_min = 0.0000 N, Schiefe 1.7054
+3·Zelle 1 bei (0°,120°,240°): λ = 75.7865 %, F_max = 41.1227 N, Schiefe 1.7055; max|3·F_1 − N_Engine(0,0)| = 8.875e+00 N
+Zelle 2: λ = 75.7875 %, F_max·3 = 41.1284 N, max|3·F_j(t) − N_Engine(t − τ_j)| = 4.113e+01 N
+Zelle 3: λ = 75.7850 %, F_max·3 = 41.1235 N, max|3·F_j(t) − N_Engine(t − τ_j)| = 9.042e+00 N
+Summe (Triphasik, 3 Zellen): F_min 0.0000 N, F_max 24.9666 N, λ_Summe 56.441 %, Schiefe 1.0306  (Engine 1-FG am selben Punkt: F_min 5,3304 N, λ = 0)
+Engine (0°,0°): max|N(t) − N(t − 1T)| über die letzten 5 T = 4.112e+01 N
+Engine (0°,0°): max|N(t) − N(t − 2T)| über die letzten 5 T = 8.711e+00 N
+Engine (0°,0°): max|N(t) − N(t − 3T)| über die letzten 5 T = 4.112e+01 N
+Engine (0°,0°): max|N(t) − N(t − 4T)| über die letzten 5 T = 8.375e+00 N
+Engine (0°,0°): max|N(t) − N(t − 5T)| über die letzten 5 T = 4.112e+01 N
+Engine (0°,0°): max|N(t) − N(t − 6T)| über die letzten 5 T = 8.742e+00 N
+ab t = 0: max|3·F_1 − N_Engine(0,0)| bis t = 0.1 s: 8.527e-14 N
+ab t = 0: max|3·F_1 − N_Engine(0,0)| bis t = 0.5 s: 4.876e-12 N
+ab t = 0: max|3·F_1 − N_Engine(0,0)| bis t = 1.0 s: 7.797e-10 N
+ab t = 0: max|3·F_1 − N_Engine(0,0)| bis t = 2.0 s: 4.479e-06 N
+ab t = 0: max|3·F_1 − N_Engine(0,0)| bis t = 3.0 s: 1.417e-02 N

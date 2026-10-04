@@ -1,0 +1,3 @@
+Band lambda 74-77 %: 142 von 361 Punkten (39.3 %), Schiefe 1.65799 .. 1.71965
+lambda == 0: 12  F_min > 0: 12
+Vertauschung (23): 171 Paare i<j, mittlere Differenz +5.30e-06 N, max |Diff| 7.54 mN

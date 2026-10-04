@@ -1,0 +1,25 @@
+=== AUS-01: Kennzahlen Referenzsatz (eigene Rechnung) ===
+f_n = sqrt(K/M)/(2π) = 19.7407 Hz; f/f_n = 0.5066; 2f/f_n = 1.0131; 3f/f_n = 1.5197; f_n/2 = 9.870 Hz (Bedingung 3f ≤ f_n/2 verletzt um Faktor 3.04)
+  |H(1ω)| = 1.340
+  |H(2ω)| = 5.030
+  |H(3ω)| = 0.777
+  |H(4ω)| = 0.344
+ε_ref = μ·π²·Hub·f²/(TH·g) = 1.19062  (a_h = 11.6800 m/s²)
+Schnitt φ₂ = 100…140° (φ₃ = 240°), Stichprobe 2000/Periode: F_min(120°) = 5.330390 N, F_min(100°) = 0.7677 N, F_min(140°) = 1.6176 N, Maximum bei 120°
+  2°-Sekanten 118→120 / 122→120: 0.2124 / 0.1952 N/°; 20°-Sekanten: 0.2281 / 0.1856 N/°; ΔF_Zelt = 4.5627 N
+  F_min(120°) kontinuierlich (200 000/Periode): 5.330390 N
+
+=== AUS-02: Einzelmodul beim Referenzsatz ===
+linear (kontinuierlich): F_min = -2.0571 N, F_max = 15.473 N, x_max = 0.1934 mm
+Grenzen (N − Mg und x + Mg/K linear im Hub): F_min = 0 bei s = 0.7561; 25-%-Reserve bei s = 0.5671; x_max = 0 bei s = 0.7672
+nichtlinear, ereignisgesteuert exakt, Standardstart, 15 s, Fenster 5–15 s:
+  s = 0.700: λ = 0.000 %, F_min = 0.4729 N, F_max = 12.744 N, Kontaktbeginne im Fenster 0
+  s = 0.755: λ = 0.000 %, F_min = 0.0091 N, F_max = 13.244 N, Kontaktbeginne im Fenster 0
+  s = 0.760: λ = 1.931 %, F_min = 0.0000 N, F_max = 13.288 N, Kontaktbeginne im Fenster 100
+  s = 0.800: λ = 7.920 %, F_min = 0.0000 N, F_max = 13.610 N, Kontaktbeginne im Fenster 100
+  s = 0.900: λ = 13.988 %, F_min = 0.0000 N, F_max = 14.161 N, Kontaktbeginne im Fenster 100
+  s = 1.000: λ = 17.925 %, F_min = 0.0000 N, F_max = 14.429 N, Kontaktbeginne im Fenster 100
+  s = 1,000, 20 s, Fenster letzte 4 s: λ = 17.925 %
+  s = 1,000, Abtastschritt der Ereignissuche h/2: λ = 17.925 %
+Kontrolle Einzelmodul(μ=0,6) gegen synchron(μ=0,2): max|ΔN| = 1.78e-15 N
+Rechenzeit 5 s

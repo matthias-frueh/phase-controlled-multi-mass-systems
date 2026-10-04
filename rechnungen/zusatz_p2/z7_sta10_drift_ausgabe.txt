@@ -1,0 +1,48 @@
+=== (1) A4-Beispiel, k_max = 9 ===
+ F_min(120) = 5.6781 N, F_min(100) = 5.1608 N (Praereg A6: 5,6781 / 5,1608 N)
+ Delta_F = 129.3 mN, Delta_N1..3 = 112.6/73.1/138.3 mN
+ max|y|: F 1.2157 N; Re N1 0.4146, Im N1 0.3072, Re N2 0.2917, Im N2 0.2031, Re N3 0.5485, Im N3 0.2299
+
+=== (2) Kritischer Wert ===
+ nu = 19: c = 4.356
+ nu = 37: c = 3.948
+ nu = 1e+09: c = 3.583
+ Anzahl Tests: 147 (erwartet 147)
+
+=== (3) Erwartete z0 bei Drift zwischen Phase 0 und Phase 1 ===
+ Verstaerkung 0,1 % (G7)  L0: max z0 =   6.5 (Re N3), max z0(F_min) =   4.6, Tests mit E|z0| > c:  31/147
+ Verstaerkung 0,1 % (G7)  L1: max z0 =   2.4 (Re N3), max z0(F_min) =   1.2, Tests mit E|z0| > c:   0/147
+ Verstaerkung 0,1 % (G7)  L2: max z0 =   0.7 (Re N3), max z0(F_min) =   0.4, Tests mit E|z0| > c:   0/147
+ Verstaerkung 0,1 % (G7)  L3: max z0 =   0.2 (Re N3), max z0(F_min) =   0.1, Tests mit E|z0| > c:   0/147
+ Modulantwort 1 %         L0: max z0 =  65.3 (Re N3), max z0(F_min) =  46.4, Tests mit E|z0| > c: 117/147
+ Modulantwort 1 %         L1: max z0 =  23.5 (Re N3), max z0(F_min) =  12.2, Tests mit E|z0| > c:  58/147
+ Modulantwort 1 %         L2: max z0 =   7.1 (Re N3), max z0(F_min) =   3.7, Tests mit E|z0| > c:  21/147
+ Modulantwort 1 %         L3: max z0 =   2.4 (Re N3), max z0(F_min) =   1.2, Tests mit E|z0| > c:   0/147
+ Modulantwort 3 %         L0: max z0 = 195.9 (Re N3), max z0(F_min) = 139.2, Tests mit E|z0| > c: 139/147
+ Modulantwort 3 %         L1: max z0 =  70.6 (Re N3), max z0(F_min) =  36.7, Tests mit E|z0| > c:  96/147
+ Modulantwort 3 %         L2: max z0 =  21.3 (Re N3), max z0(F_min) =  11.1, Tests mit E|z0| > c:  55/147
+ Modulantwort 3 %         L3: max z0 =   7.2 (Re N3), max z0(F_min) =   3.7, Tests mit E|z0| > c:  21/147
+
+=== (4) Gauss/t-Naeherung, Tests unabhaengig, rho(z0, z1) = 0,5, nu = 37 ===
+ Drift   0 % L0: P(falsifiziert) = 0.0024, P(bestaetigt) = 0.908, P(PB1) = 1.000, P(ein |z0|>c) = 0.048, P(ein |z1|>c) = 0.047
+ Drift   0 % L1: P(falsifiziert) = 0.0022, P(bestaetigt) = 0.908, P(PB1) = 1.000, P(ein |z0|>c) = 0.046, P(ein |z1|>c) = 0.050
+ Drift   0 % L2: P(falsifiziert) = 0.0024, P(bestaetigt) = 0.906, P(PB1) = 1.000, P(ein |z0|>c) = 0.052, P(ein |z1|>c) = 0.047
+ Drift   0 % L3: P(falsifiziert) = 0.0024, P(bestaetigt) = 0.892, P(PB1) = 0.971, P(ein |z0|>c) = 0.051, P(ein |z1|>c) = 0.049
+ Drift   1 % L0: P(falsifiziert) = 0.0224, P(bestaetigt) = 0.000, P(PB1) = 1.000, P(ein |z0|>c) = 1.000, P(ein |z1|>c) = 0.048
+ Drift   1 % L1: P(falsifiziert) = 0.0167, P(bestaetigt) = 0.000, P(PB1) = 1.000, P(ein |z0|>c) = 1.000, P(ein |z1|>c) = 0.051
+ Drift   1 % L2: P(falsifiziert) = 0.0112, P(bestaetigt) = 0.000, P(PB1) = 1.000, P(ein |z0|>c) = 1.000, P(ein |z1|>c) = 0.048
+ Drift   1 % L3: P(falsifiziert) = 0.0060, P(bestaetigt) = 0.207, P(PB1) = 0.967, P(ein |z0|>c) = 0.781, P(ein |z1|>c) = 0.048
+ Drift   3 % L0: P(falsifiziert) = 0.0234, P(bestaetigt) = 0.000, P(PB1) = 1.000, P(ein |z0|>c) = 1.000, P(ein |z1|>c) = 0.050
+ Drift   3 % L1: P(falsifiziert) = 0.0226, P(bestaetigt) = 0.000, P(PB1) = 1.000, P(ein |z0|>c) = 1.000, P(ein |z1|>c) = 0.050
+ Drift   3 % L2: P(falsifiziert) = 0.0143, P(bestaetigt) = 0.000, P(PB1) = 1.000, P(ein |z0|>c) = 1.000, P(ein |z1|>c) = 0.047
+ Drift   3 % L3: P(falsifiziert) = 0.0101, P(bestaetigt) = 0.000, P(PB1) = 0.941, P(ein |z0|>c) = 1.000, P(ein |z1|>c) = 0.050
+ Analytische Obergrenze P(falsifiziert | Drift, alle z0 signifikant): 147 * P(t_37 > c) = 0.0250
+
+=== (5) PB1-Bindung: noetiges Delta/u fuer P(max_q(|r|/u) + c <= Delta/u) = 0,9 bei 21 bzw. 147 Tests ===
+ m = 21: Delta/u >= c + 2.81 = 6.75
+ m = 42: Delta/u >= c + 3.02 = 6.97
+ m = 147: Delta/u >= c + 3.38 = 7.33
+ F: Delta = 129.3 mN -> PB1 bindet ab u_F = 19.1 mN (u_c(F_min) ~ 19.1 mN; Verhaeltnis u_F/u_F aus s2 = 1.0)
+ N1: Delta = 112.6 mN -> PB1 bindet ab u_N1 = 16.7 mN (u_c(F_min) ~ 11.2 mN; Verhaeltnis u_N1/u_F aus s2 = 1.495)
+ N2: Delta = 73.1 mN -> PB1 bindet ab u_N2 = 10.8 mN (u_c(F_min) ~ 21.1 mN; Verhaeltnis u_N2/u_F aus s2 = 0.514)
+ N3: Delta = 138.3 mN -> PB1 bindet ab u_N3 = 20.5 mN (u_c(F_min) ~ 87.5 mN; Verhaeltnis u_N3/u_F aus s2 = 0.234)

@@ -1,0 +1,14 @@
+{"einzel": "phi=0 delay=0.0", "lam": 75.7875, "Fmax3": 41.1237, "skew": 1.7054, "per_T": 13.707, "per_2T": 0.048}
+{"einzel": "phi=120 delay=0.0", "lam": 75.786, "Fmax3": 41.1302, "skew": 1.7055, "per_T": 13.707, "per_2T": 2.968}
+{"einzel": "phi=240 delay=0.0", "lam": 75.786, "Fmax3": 41.1246, "skew": 1.7054, "per_T": 13.703, "per_2T": 2.827}
+{"einzel": "phi=0 delay=0.1", "lam": 75.788, "Fmax3": 41.1273, "skew": 1.7054, "per_T": 13.706, "per_2T": 2.915}
+{"einzel": "phi=120 delay=0.1", "lam": 75.7895, "Fmax3": 41.1297, "skew": 1.7055, "per_T": 13.709, "per_2T": 2.95}
+{"einzel": "phi=240 delay=0.1", "lam": 75.788, "Fmax3": 41.1232, "skew": 1.7055, "per_T": 13.707, "per_2T": 2.952}
+{"fall": "Summe aus Einzelschwingern, Verzögerungen (T·) = (0,0,0)", "lam_zellen": [75.7875, 75.786, 75.786], "lam_summe": 56.447, "N_min": 0.0, "N_max": 24.9723, "N_mean": 6.37653, "N_skew": 1.0306, "Fz_max3": [41.124, 41.13, 41.125], "Fz_skew": [1.7054, 1.7055, 1.7054]}
+{"fall": "Summe aus Einzelschwingern, Verzögerungen (T·) = (0,0,1)", "lam_zellen": [75.7875, 75.786, 75.788], "lam_summe": 37.0575, "N_min": 0.0, "N_max": 24.9723, "N_mean": 6.37654, "N_skew": 0.8345, "Fz_max3": [41.124, 41.13, 41.123], "Fz_skew": [1.7054, 1.7055, 1.7055]}
+{"fall": "Summe aus Einzelschwingern, Verzögerungen (T·) = (0,1,0)", "lam_zellen": [75.7875, 75.7895, 75.786], "lam_summe": 37.0565, "N_min": 0.0, "N_max": 24.9657, "N_mean": 6.37654, "N_skew": 0.8344, "Fz_max3": [41.124, 41.13, 41.125], "Fz_skew": [1.7054, 1.7055, 1.7054]}
+{"fall": "Summe aus Einzelschwingern, Verzögerungen (T·) = (0,1,1)", "lam_zellen": [75.7875, 75.7895, 75.788], "lam_summe": 37.058, "N_min": 0.0, "N_max": 24.9545, "N_mean": 6.37655, "N_skew": 0.834, "Fz_max3": [41.124, 41.13, 41.123], "Fz_skew": [1.7054, 1.7055, 1.7055]}
+{"fall": "Summe aus Einzelschwingern, Verzögerungen (T·) = (1,0,0)", "lam_zellen": [75.788, 75.786, 75.786], "lam_summe": 37.058, "N_min": 0.0, "N_max": 24.9687, "N_mean": 6.3765, "N_skew": 0.8343, "Fz_max3": [41.127, 41.13, 41.125], "Fz_skew": [1.7054, 1.7055, 1.7054]}
+{"fall": "Summe aus Einzelschwingern, Verzögerungen (T·) = (1,0,1)", "lam_zellen": [75.788, 75.786, 75.788], "lam_summe": 37.054, "N_min": 0.0, "N_max": 24.9656, "N_mean": 6.37651, "N_skew": 0.8343, "Fz_max3": [41.127, 41.13, 41.123], "Fz_skew": [1.7054, 1.7055, 1.7055]}
+{"fall": "Summe aus Einzelschwingern, Verzögerungen (T·) = (1,1,0)", "lam_zellen": [75.788, 75.7895, 75.786], "lam_summe": 37.0595, "N_min": 0.0, "N_max": 24.9756, "N_mean": 6.37651, "N_skew": 0.8346, "Fz_max3": [41.127, 41.13, 41.125], "Fz_skew": [1.7054, 1.7055, 1.7054]}
+{"fall": "Summe aus Einzelschwingern, Verzögerungen (T·) = (1,1,1)", "lam_zellen": [75.788, 75.7895, 75.788], "lam_summe": 56.4465, "N_min": 0.0, "N_max": 24.9756, "N_mean": 6.37651, "N_skew": 1.0306, "Fz_max3": [41.127, 41.13, 41.123], "Fz_skew": [1.7054, 1.7055, 1.7055]}

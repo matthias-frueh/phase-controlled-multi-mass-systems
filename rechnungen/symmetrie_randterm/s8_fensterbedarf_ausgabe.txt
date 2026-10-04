@@ -1,0 +1,19 @@
+eps = 0.0001, g = 9.81 m/s^2, M = 0.65 kg, Mg = 6.3765 N; Aufloesung eps*Mg = 0.638 mN
+Punkt              v_S,max   v_S,rms  | (a) T_w,worst  T_w,rms(1s)  T_w,rms(3s) | sigma_v(Zyklus)  (b-i) T_w   | max|a_S|  (b-ii) T_w bei dt_b=100us / 1ms
+HS (0,208.421)      0.3791   0.2281  |      772.9 s      328.9 s      986.7 s |  9.40e-05 m/s   1.35e-01 s |   49.4      5.04 s /   50.4 s
+S0 (0,0)            0.5282   0.2341  |     1076.8 s      337.5 s     1012.4 s |  2.99e-02 m/s   4.31e+01 s |   53.4      5.45 s /   54.5 s
+L1 (157.3,264)      0.1268   0.0613  |      258.6 s       88.4 s      265.1 s |  1.94e-14 m/s   2.79e-11 s |   10.2      1.04 s /   10.4 s
+K1 (110,234)        0.0309   0.0195  |       63.0 s       28.1 s       84.2 s |  3.47e-15 m/s   5.01e-12 s |    3.7      0.37 s /    3.7 s
+Hinweis (b-ii): Grenze im Flug (N = 0) -> a_S = -g exakt -> T_w >= dt_b/eps (dt_b = 100 us -> 1 s).
+(c) Einschwingen am Hot-Spot (Standardstart, Fenster ab 5 s): dv_S = -0.661 m/s -> T_w >= 674 s; Abklingzeit im Kontaktast 2M/C = 0.081 s
+
+(d) synthetisch: f(t) = J exp(-(t mod T)/tau), J = 8 N, tau = 20 ms, T = 0,1 s; exaktes Mittel 1.589219 N
+   f_s =  10000.00 Hz, Startphase 0.05: Mittel - exakt = +3.5781 mN (+561.1 ppm von Mg); Schranke J/(2 f_s T) = 4.000 mN
+   f_s =  10000.00 Hz, Startphase 0.50: Mittel - exakt = -0.0017 mN (-0.3 ppm von Mg); Schranke J/(2 f_s T) = 4.000 mN
+   f_s =  10000.00 Hz, Startphase 0.95: Mittel - exakt = -3.5734 mN (-560.4 ppm von Mg); Schranke J/(2 f_s T) = 4.000 mN
+   f_s =  10134.17 Hz, Startphase 0.05: Mittel - exakt = +0.0798 mN (+12.5 ppm von Mg); Schranke J/(2 f_s T) = 3.947 mN
+   f_s =  10134.17 Hz, Startphase 0.50: Mittel - exakt = -0.1554 mN (-24.4 ppm von Mg); Schranke J/(2 f_s T) = 3.947 mN
+   f_s =  10134.17 Hz, Startphase 0.95: Mittel - exakt = +0.2365 mN (+37.1 ppm von Mg); Schranke J/(2 f_s T) = 3.947 mN
+   f_s =   9973.00 Hz, Startphase 0.05: Mittel - exakt = -0.0000 mN (-0.0 ppm von Mg); Schranke J/(2 f_s T) = 4.011 mN
+   f_s =   9973.00 Hz, Startphase 0.50: Mittel - exakt = -0.3983 mN (-62.5 ppm von Mg); Schranke J/(2 f_s T) = 4.011 mN
+   f_s =   9973.00 Hz, Startphase 0.95: Mittel - exakt = -0.0000 mN (-0.0 ppm von Mg); Schranke J/(2 f_s T) = 4.011 mN

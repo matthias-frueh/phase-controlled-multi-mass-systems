@@ -1,0 +1,32 @@
+=== (a) Bahngroessen auf dem 1-Grad-Raster ===
+ Anzahl Punkte je Bahngroesse: {1: 1, 2: 2, 3: 1077, 6: 128520}
+ Groesse 1: [(0, 0)]
+ Groesse 2: [(120, 240), (240, 120)]
+ Groesse 3: 1077 Punkte, alle mit zwei gleichen Phasen (phi2=0, phi3=0 oder phi2=phi3): True
+ erwartet 3*359 = 1077
+ Abgeschlossenheit (50 Zufallspunkte, 36 Kompositionen): True
+
+=== (b) a_gA(t) gegen a_A(t + tau_ref) ===
+ max Abweichung ueber 20 Punkte x 6 Bilder: 4.8e-14 m/s^2
+
+=== (c) Lineares 1-FG-Modell (Referenz K, C, mu = 1): Phasenregel arg N_k(gA) = arg N_k(A) + k phi_ref ===
+ Punkt (110, 234): |N_1..3| = [0.64438 1.70536 1.05037] N; Triadenphase arg(N1^2 N2*) = 62.3723 deg
+  id     -> ( 110.0,  234.0): max|Phasenregel-Rest| = 0.0e+00 deg, max|d|N_k|| = 0.0e+00 N, Triade 62.3723 deg
+  (23)   -> ( 234.0,  110.0): max|Phasenregel-Rest| = 2.0e-14 deg, max|d|N_k|| = 1.1e-16 N, Triade 62.3723 deg
+  (12)   -> ( 250.0,  124.0): max|Phasenregel-Rest| = 1.2e-13 deg, max|d|N_k|| = 2.2e-16 N, Triade 62.3723 deg
+  (123)  -> ( 124.0,  250.0): max|Phasenregel-Rest| = 1.2e-13 deg, max|d|N_k|| = 2.2e-16 N, Triade 62.3723 deg
+  (13)   -> ( 236.0,  126.0): max|Phasenregel-Rest| = 1.2e-13 deg, max|d|N_k|| = 5.6e-16 N, Triade 62.3723 deg
+  (132)  -> ( 126.0,  236.0): max|Phasenregel-Rest| = 1.2e-13 deg, max|d|N_k|| = 5.6e-16 N, Triade 62.3723 deg
+
+=== (d) Eigene RK4-Engine (dt = 50 us), 30 s, Fenster 20-30 s ===
+ Laufzeit 163 s
+ -- aequivalenter Start
+   Basis (157.3, 264.0): lambda [12.4 12.4 12.4 12.4 12.4 12.4] %
+      max|d mean| 1.51e-14 N, max|d skew| 6.45e-13, max|d F_min| 0.00e+00 N, max|d F_max| 4.64e-13 N, max|d|N_k|| 8.29e-13 N, max|Phasenregel-Rest| 1.89e-11 deg
+   Basis (198.2, 267.4): lambda [18.2 18.2 18.2 18.2 18.2 18.2] %
+      max|d mean| 1.42e-13 N, max|d skew| 1.55e-13, max|d F_min| 0.00e+00 N, max|d F_max| 6.15e-13 N, max|d|N_k|| 1.16e-12 N, max|Phasenregel-Rest| 1.73e-11 deg
+ -- Standardstart
+   Basis (157.3, 264.0): lambda [12.4 12.4 12.4 12.4 12.4 12.4] %
+      max|d mean| 2.67e-04 N, max|d skew| 3.88e-04, max|d F_min| 0.00e+00 N, max|d F_max| 1.55e-03 N, max|d|N_k|| 8.40e-04 N, max|Phasenregel-Rest| 1.03e-02 deg
+   Basis (198.2, 267.4): lambda [18.2  18.2  18.15 18.15 18.15 18.15] %
+      max|d mean| 4.10e-04 N, max|d skew| 1.54e-04, max|d F_min| 0.00e+00 N, max|d F_max| 2.38e-03 N, max|d|N_k|| 1.86e-03 N, max|Phasenregel-Rest| 7.45e-02 deg

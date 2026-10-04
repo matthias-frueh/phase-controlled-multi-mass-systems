@@ -1,0 +1,8 @@
+abar_B(t) - abar_A(t+s) über 200 Zufallskonfigurationen x 6 Elemente: max 3.1e-13 m/s^2
+19er-Raster: 70 Bahnen, Größen {1: 1, 3: 18, 6: 51}
+  Paar P6: (0, 6) -> (13, 13) in derselben Bahn: True
+  Paar P13: (6, 6) -> (13, 0) in derselben Bahn: True
+  Paar P49: (3, 7) -> (16, 4) in derselben Bahn: True
+  Paar P45: (12, 17) -> (14, 2) in derselben Bahn: True
+  Paar P11: (0, 11) -> (8, 8) in derselben Bahn: True
+  Paar P33: (1, 16) -> (3, 4) in derselben Bahn: True

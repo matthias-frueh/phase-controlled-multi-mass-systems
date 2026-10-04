@@ -1,0 +1,39 @@
+====================================================================================================
+vb2 – Dichteabhängigkeit, unabhängige Implementierung
+====================================================================================================
+(a) Bilanz, Diskretisierung N je Periode (Mittelpunktsregel), c1 = 0, rho fällt heraus:
+   (0.0, 0.0): v_d = +1.0549010595 / +1.0549007602 / +1.0549007573 mm/s (N=2e3/2e4/2e5); Kleinsignal -<v|v|>/(2<|v|>) = +1.08747 mm/s
+      rho=   1e+03: F_bar_A = +1.3957e-04 N, tau = 5.844 s
+      rho=     1.2: F_bar_A = +1.6748e-07 N, tau = 4870 s
+      rho=   0.001: F_bar_A = +1.3957e-10 N, tau = 5.844e+06 s
+   (120.0, 240.0): v_d = -0.0810231579 / -0.0810235001 / -0.0810235035 mm/s (N=2e3/2e4/2e5); Kleinsignal -<v|v|>/(2<|v|>) = -0.08160 mm/s
+      rho=   1e+03: F_bar_A = -1.4573e-06 N, tau = 41.99 s
+      rho=     1.2: F_bar_A = -1.7488e-09 N, tau = 3.5e+04 s
+      rho=   0.001: F_bar_A = -1.4573e-12 N, tau = 4.199e+07 s
+   (221.54, 110.77): v_d = -0.1663201436 / -0.1663210823 / -0.1663210969 mm/s (N=2e3/2e4/2e5); Kleinsignal -<v|v|>/(2<|v|>) = -0.16921 mm/s
+      rho=   1e+03: F_bar_A = -3.3403e-06 N, tau = 37.99 s
+      rho=     1.2: F_bar_A = -4.0084e-09 N, tau = 3.166e+04 s
+      rho=   0.001: F_bar_A = -3.3403e-12 N, tau = 3.799e+07 s
+
+(b) periodische Lösung des integrierten Modells (DOP853 + Schießen):
+   (0.0, 0.0) rho= 1000.0: <V>_periodisch = +1.054895310 mm/s, Bilanz +1.054900760 mm/s, rel. Abw. -5.17e-06
+   (0.0, 0.0) rho=  100.0: <V>_periodisch = +1.054900640 mm/s, Bilanz +1.054900760 mm/s, rel. Abw. -1.14e-07
+   (0.0, 0.0) rho=    1.2: <V>_periodisch = +1.054900766 mm/s, Bilanz +1.054900760 mm/s, rel. Abw. +5.76e-09
+      Vergleich rho=1,2 gegen 1000: rel. +5.17e-06
+   (120.0, 240.0) rho= 1000.0: <V>_periodisch = -0.081023492 mm/s, Bilanz -0.081023500 mm/s, rel. Abw. -1.01e-07
+   (120.0, 240.0) rho=  100.0: <V>_periodisch = -0.081023506 mm/s, Bilanz -0.081023500 mm/s, rel. Abw. +7.88e-08
+   (120.0, 240.0) rho=    1.2: <V>_periodisch = -0.081023903 mm/s, Bilanz -0.081023500 mm/s, rel. Abw. +4.98e-06
+      Vergleich rho=1,2 gegen 1000: rel. +5.08e-06
+   (221.54, 110.77) rho= 1000.0: <V>_periodisch = -0.166321071 mm/s, Bilanz -0.166321082 mm/s, rel. Abw. -6.90e-08
+   (221.54, 110.77) rho=  100.0: <V>_periodisch = -0.166321112 mm/s, Bilanz -0.166321082 mm/s, rel. Abw. +1.81e-07
+   (221.54, 110.77) rho=    1.2: <V>_periodisch = -0.166321724 mm/s, Bilanz -0.166321082 mm/s, rel. Abw. +3.86e-06
+      Vergleich rho=1,2 gegen 1000: rel. +3.92e-06
+   Rechenzeit 22.0 s
+
+(c) Modell B mit linearem Zusatzterm c1 (ANNAHME c1 = 6 pi mu R, R = sqrt(A/pi); Variation x0,1 / x10):
+   (0.0, 0.0) c1 = 3.316e-06 N s/m: rho* = 0.026 kg/m^3; v_d/v_d(c1=0) bei rho = 1000/1,2/0,12/0,012: 1.0000 / 0.9801 / 0.8308 / 0.3260; d ln v_d/d ln rho (rho=1,2) = 0.020
+   (0.0, 0.0) c1 = 3.316e-05 N s/m: rho* = 0.258 kg/m^3; v_d/v_d(c1=0) bei rho = 1000/1,2/0,12/0,012: 0.9998 / 0.8308 / 0.3260 / 0.0458; d ln v_d/d ln rho (rho=1,2) = 0.170
+   (0.0, 0.0) c1 = 3.316e-04 N s/m: rho* = 2.583 kg/m^3; v_d/v_d(c1=0) bei rho = 1000/1,2/0,12/0,012: 0.9976 / 0.3260 / 0.0458 / 0.0048; d ln v_d/d ln rho (rho=1,2) = 0.679
+   (120.0, 240.0) c1 = 3.316e-06 N s/m: rho* = 0.186 kg/m^3; v_d/v_d(c1=0) bei rho = 1000/1,2/0,12/0,012: 0.9998 / 0.8676 / 0.3950 / 0.0611; d ln v_d/d ln rho (rho=1,2) = 0.133
+   (120.0, 240.0) c1 = 3.316e-05 N s/m: rho* = 1.856 kg/m^3; v_d/v_d(c1=0) bei rho = 1000/1,2/0,12/0,012: 0.9982 / 0.3950 / 0.0611 / 0.0065; d ln v_d/d ln rho (rho=1,2) = 0.606
+   (120.0, 240.0) c1 = 3.316e-04 N s/m: rho* = 18.565 kg/m^3; v_d/v_d(c1=0) bei rho = 1000/1,2/0,12/0,012: 0.9820 / 0.0611 / 0.0065 / 0.0007; d ln v_d/d ln rho (rho=1,2) = 0.939

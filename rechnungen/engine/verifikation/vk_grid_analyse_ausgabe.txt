@@ -1,0 +1,37 @@
+CSV (Standardstart, 5–15 s, Engine-Arithmetik):
+  liftoff  >0.01: 160/30  >0.1: 60/12  >0.5: 56/11  >1: 48/9
+  F_skew   >0.001: 72/14  >0.01: 60/12  >0.1: 42/8
+  F_min    >0.0001: 6/1  >0.001: 0/0
+  F_mean   >0.0001: 311/60  >0.001: 36/7
+  F_max    >0.01: 91/19  >0.1: 60/12  >1: 45/9
+  nur (12), lambda > 0.1: 42 Punkte
+  nur (12), lambda > 0.5: 36 Punkte
+  nur (12), lambda > 1.0: 32 Punkte
+
+Verletzte Punkte/Bahnen (lambda, volle Gruppe); a = 5–15 s, b = 30–40 s:
+  CSV       >0.1: 60/12  >0.5: 56/11  >1: 48/9  >5: 30/6   Median lambda 32.27 %, Punkte lambda>74 %: 142
+  std_a     >0.1: 70/14  >0.5: 66/13  >1: 60/12  >5: 39/8   Median lambda 32.27 %, Punkte lambda>74 %: 136
+  std_b     >0.1: 57/11  >0.5: 54/11  >1: 48/9  >5: 36/7   Median lambda 32.27 %, Punkte lambda>74 %: 140
+  imp_a     >0.1: 66/13  >0.5: 66/13  >1: 60/12  >5: 48/9   Median lambda 44.86 %, Punkte lambda>74 %: 159
+  imp_b     >0.1: 57/10  >0.5: 51/9  >1: 48/8  >5: 42/7   Median lambda 44.86 %, Punkte lambda>74 %: 165
+  ramp2_a   >0.1: 57/12  >0.5: 27/6  >1: 21/5  >5: 15/4   Median lambda 27.95 %, Punkte lambda>74 %: 116
+  ramp2_b   >0.1: 27/5  >0.5: 20/4  >1: 12/2  >5: 6/1   Median lambda 27.95 %, Punkte lambda>74 %: 119
+
+RK4-S std (5–15 s) gegen CSV: |dlambda| > 0.01: 27, > 1: 11, > 5: 5
+   (0,11) CSV 74.35 -> RK4-S 50.04 %
+   (1,12) CSV 75.24 -> RK4-S 65.73 %
+   (2,13) CSV 35.80 -> RK4-S 37.74 %
+   (6,8) CSV 37.32 -> RK4-S 36.18 %
+   (10,18) CSV 37.40 -> RK4-S 38.53 %
+   (11,0) CSV 74.35 -> RK4-S 42.72 %
+   (12,1) CSV 75.24 -> RK4-S 72.85 %
+   (12,17) CSV 75.63 -> RK4-S 35.33 %
+   (13,2) CSV 35.59 -> RK4-S 37.74 %
+   (17,11) CSV 36.87 -> RK4-S 35.79 %
+   (17,12) CSV 75.63 -> RK4-S 35.33 %
+RK4-S std: 5–15 s -> 30–40 s |dlambda| > 0.5: 13 Punkte
+
+lambda-Spannweite über Starts ['std', 'imp', 'ramp2'] (30–40 s): > 1 %-Pkt an 76 Punkten, > 5 an 70
+  Bahnen mit Lücke > 3.0 %-Pkt in lambda (Mitglieder x Starts): 18 Bahnen, 99 Punkte
+  Bahnen mit Lücke > 5.0 %-Pkt in lambda (Mitglieder x Starts): 17 Bahnen, 93 Punkte
+  Bahnen, in denen lambda > 74 % vorkommt: 40 von 70

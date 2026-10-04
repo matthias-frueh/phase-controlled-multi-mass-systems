@@ -1,0 +1,42 @@
+Rauschbias b = E[F_min(Messmittel)] − E[F_min(Vorhersage)], n = 20 Läufe je Punkt; R = 4000
+weiss  φ₂=120.0 n₀=20: sd_Mess=0.169 mN sd_Vorh=0.294 mN Bias_Mess=-0.185 Bias_Vorh=-0.327 b=+0.141 mN u_c,erw=0.339 mN |b|/u=0.417 VERLETZT
+weiss  φ₂=120.0 n₀=40: sd_Mess=0.170 mN sd_Vorh=0.205 mN Bias_Mess=-0.179 Bias_Vorh=-0.227 b=+0.047 mN u_c,erw=0.266 mN |b|/u=0.178 VERLETZT
+weiss  φ₂=120.0 n₀=60: sd_Mess=0.170 mN sd_Vorh=0.169 mN Bias_Mess=-0.189 Bias_Vorh=-0.187 b=-0.003 mN u_c,erw=0.240 mN |b|/u=0.011 ok
+weiss  φ₂=119.0 n₀=20: sd_Mess=0.216 mN sd_Vorh=0.380 mN Bias_Mess=-0.003 Bias_Vorh=-0.007 b=+0.004 mN u_c,erw=0.437 mN |b|/u=0.008 ok
+weiss  φ₂=119.0 n₀=40: sd_Mess=0.220 mN sd_Vorh=0.275 mN Bias_Mess=-0.003 Bias_Vorh=+0.005 b=-0.008 mN u_c,erw=0.352 mN |b|/u=0.023 ok
+weiss  φ₂=119.0 n₀=60: sd_Mess=0.226 mN sd_Vorh=0.225 mN Bias_Mess=+0.002 Bias_Vorh=+0.001 b=+0.001 mN u_c,erw=0.319 mN |b|/u=0.003 ok
+weiss  φ₂=118.0 n₀=20: sd_Mess=0.218 mN sd_Vorh=0.380 mN Bias_Mess=-0.005 Bias_Vorh=+0.002 b=-0.006 mN u_c,erw=0.439 mN |b|/u=0.014 ok
+weiss  φ₂=118.0 n₀=40: sd_Mess=0.229 mN sd_Vorh=0.274 mN Bias_Mess=+0.003 Bias_Vorh=+0.002 b=+0.001 mN u_c,erw=0.357 mN |b|/u=0.004 ok
+weiss  φ₂=118.0 n₀=60: sd_Mess=0.225 mN sd_Vorh=0.225 mN Bias_Mess=+0.002 Bias_Vorh=-0.004 b=+0.006 mN u_c,erw=0.318 mN |b|/u=0.019 ok
+weiss  φ₂=116.0 n₀=20: sd_Mess=0.224 mN sd_Vorh=0.389 mN Bias_Mess=+0.001 Bias_Vorh=+0.009 b=-0.008 mN u_c,erw=0.449 mN |b|/u=0.019 ok
+weiss  φ₂=116.0 n₀=40: sd_Mess=0.223 mN sd_Vorh=0.274 mN Bias_Mess=-0.006 Bias_Vorh=+0.003 b=-0.009 mN u_c,erw=0.353 mN |b|/u=0.025 ok
+weiss  φ₂=116.0 n₀=60: sd_Mess=0.220 mN sd_Vorh=0.224 mN Bias_Mess=+0.000 Bias_Vorh=+0.003 b=-0.003 mN u_c,erw=0.314 mN |b|/u=0.008 ok
+modul  φ₂=120.0 n₀=20: sd_Mess=0.458 mN sd_Vorh=0.469 mN Bias_Mess=-0.665 Bias_Vorh=-0.675 b=+0.010 mN u_c,erw=0.656 mN |b|/u=0.016 ok
+modul  φ₂=120.0 n₀=40: sd_Mess=0.465 mN sd_Vorh=0.329 mN Bias_Mess=-0.661 Bias_Vorh=-0.474 b=-0.187 mN u_c,erw=0.570 mN |b|/u=0.329 VERLETZT
+modul  φ₂=120.0 n₀=60: sd_Mess=0.452 mN sd_Vorh=0.263 mN Bias_Mess=-0.666 Bias_Vorh=-0.386 b=-0.281 mN u_c,erw=0.523 mN |b|/u=0.536 VERLETZT
+modul  φ₂=119.0 n₀=20: sd_Mess=0.701 mN sd_Vorh=0.707 mN Bias_Mess=+0.004 Bias_Vorh=-0.006 b=+0.010 mN u_c,erw=0.995 mN |b|/u=0.010 ok
+modul  φ₂=119.0 n₀=40: sd_Mess=0.706 mN sd_Vorh=0.486 mN Bias_Mess=+0.010 Bias_Vorh=-0.004 b=+0.014 mN u_c,erw=0.857 mN |b|/u=0.016 ok
+modul  φ₂=119.0 n₀=60: sd_Mess=0.687 mN sd_Vorh=0.408 mN Bias_Mess=+0.000 Bias_Vorh=+0.001 b=-0.001 mN u_c,erw=0.799 mN |b|/u=0.002 ok
+modul  φ₂=118.0 n₀=20: sd_Mess=0.678 mN sd_Vorh=0.694 mN Bias_Mess=+0.005 Bias_Vorh=+0.008 b=-0.003 mN u_c,erw=0.970 mN |b|/u=0.003 ok
+modul  φ₂=118.0 n₀=40: sd_Mess=0.687 mN sd_Vorh=0.486 mN Bias_Mess=-0.006 Bias_Vorh=+0.010 b=-0.016 mN u_c,erw=0.842 mN |b|/u=0.020 ok
+modul  φ₂=118.0 n₀=60: sd_Mess=0.684 mN sd_Vorh=0.404 mN Bias_Mess=+0.004 Bias_Vorh=-0.007 b=+0.011 mN u_c,erw=0.794 mN |b|/u=0.014 ok
+modul  φ₂=116.0 n₀=20: sd_Mess=0.699 mN sd_Vorh=0.690 mN Bias_Mess=+0.002 Bias_Vorh=+0.009 b=-0.007 mN u_c,erw=0.983 mN |b|/u=0.007 ok
+modul  φ₂=116.0 n₀=40: sd_Mess=0.695 mN sd_Vorh=0.484 mN Bias_Mess=-0.018 Bias_Vorh=-0.000 b=-0.018 mN u_c,erw=0.847 mN |b|/u=0.022 ok
+modul  φ₂=116.0 n₀=60: sd_Mess=0.700 mN sd_Vorh=0.396 mN Bias_Mess=-0.007 Bias_Vorh=+0.006 b=-0.013 mN u_c,erw=0.804 mN |b|/u=0.016 ok
+jitter φ₂=120.0 n₀=20: sd_Mess=0.110 mN sd_Vorh=0.000 mN Bias_Mess=-0.178 Bias_Vorh=+0.000 b=-0.178 mN u_c,erw=0.110 mN |b|/u=1.624 VERLETZT
+jitter φ₂=120.0 n₀=40: sd_Mess=0.111 mN sd_Vorh=0.000 mN Bias_Mess=-0.180 Bias_Vorh=+0.000 b=-0.180 mN u_c,erw=0.111 mN |b|/u=1.621 VERLETZT
+jitter φ₂=120.0 n₀=60: sd_Mess=0.112 mN sd_Vorh=0.000 mN Bias_Mess=-0.181 Bias_Vorh=+0.000 b=-0.181 mN u_c,erw=0.112 mN |b|/u=1.612 VERLETZT
+jitter φ₂=119.0 n₀=20: sd_Mess=0.219 mN sd_Vorh=0.000 mN Bias_Mess=-0.001 Bias_Vorh=+0.000 b=-0.001 mN u_c,erw=0.219 mN |b|/u=0.005 ok
+jitter φ₂=119.0 n₀=40: sd_Mess=0.217 mN sd_Vorh=0.000 mN Bias_Mess=-0.000 Bias_Vorh=+0.000 b=-0.000 mN u_c,erw=0.217 mN |b|/u=0.001 ok
+jitter φ₂=119.0 n₀=60: sd_Mess=0.220 mN sd_Vorh=0.000 mN Bias_Mess=+0.001 Bias_Vorh=+0.000 b=+0.001 mN u_c,erw=0.220 mN |b|/u=0.005 ok
+jitter φ₂=118.0 n₀=20: sd_Mess=0.215 mN sd_Vorh=0.000 mN Bias_Mess=-0.001 Bias_Vorh=+0.000 b=-0.001 mN u_c,erw=0.215 mN |b|/u=0.006 ok
+jitter φ₂=118.0 n₀=40: sd_Mess=0.215 mN sd_Vorh=0.000 mN Bias_Mess=+0.003 Bias_Vorh=+0.000 b=+0.003 mN u_c,erw=0.215 mN |b|/u=0.013 ok
+jitter φ₂=118.0 n₀=60: sd_Mess=0.210 mN sd_Vorh=0.000 mN Bias_Mess=+0.003 Bias_Vorh=+0.000 b=+0.003 mN u_c,erw=0.210 mN |b|/u=0.016 ok
+jitter φ₂=116.0 n₀=20: sd_Mess=0.201 mN sd_Vorh=0.000 mN Bias_Mess=-0.001 Bias_Vorh=+0.000 b=-0.001 mN u_c,erw=0.201 mN |b|/u=0.005 ok
+jitter φ₂=116.0 n₀=40: sd_Mess=0.199 mN sd_Vorh=0.000 mN Bias_Mess=+0.001 Bias_Vorh=+0.000 b=+0.001 mN u_c,erw=0.199 mN |b|/u=0.004 ok
+jitter φ₂=116.0 n₀=60: sd_Mess=0.200 mN sd_Vorh=0.000 mN Bias_Mess=-0.005 Bias_Vorh=+0.000 b=-0.005 mN u_c,erw=0.200 mN |b|/u=0.024 ok
+
+Bootstrap-z am Triphasik-Punkt (n = n₀ = 20, B = 400, 2000 Kampagnen)
+weiss : Mittel z = +0.371, sd z = 0.901, P(|z|>1,96) = 0.041, P(|z|>c=3.95) = 0.0000
+modul : Mittel z = -0.002, sd z = 0.880, P(|z|>1,96) = 0.025, P(|z|>c=3.95) = 0.0000
+jitter: Mittel z = -1.315, sd z = 0.663, P(|z|>1,96) = 0.159, P(|z|>c=3.95) = 0.0015
