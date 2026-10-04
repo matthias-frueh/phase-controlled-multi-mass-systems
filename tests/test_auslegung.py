@@ -136,12 +136,57 @@ def test_A4_A6_starr():
 
 
 def test_pb1_mit_nu():
-    """PB1-Anforderung u_c ≤ 0,25·ΔF_Zelt/c mit c = t(1 − 0,05/294; ν) (Präreg A8: 3,583 für ν → ∞, 4,356 für
-    ν = 19); A4-Beispiel: 0,0327 bzw. 0,0269 N (Nachrechnung 10/2026)."""
+    """PB1 nach Präreg §8.5 und A8: Δ_q = 0,25·D_q, notwendig u_c < Δ_q/t_eq (t_eq = 1,645 für ν → ∞, 1,729 für
+    ν = 19), Auslegungsgrenze u_c ≤ Δ_q/R (R = 5,012 bzw. 5,208 für 294 Intervalle). c_B = t(1 − 0,05/294; ν)
+    (3,583 bzw. 4,356) bleibt Planungswert des kritischen Werts. A4-Beispiel (starr, μ = 0,4, 10 Hz, k_max = 9):
+    D für F_min ist ΔF_Zelt der bandbegrenzten Kurve, 0,5173 N, also u_c(F_min) ≤ 0,0258 bzw. 0,0248 N und notwendig
+    u_c < 0,0786 bzw. 0,0748 N wie im Zahlennachweis; die Signalprüfung behält den kleineren Wert 0,4693 N
+    (ungebändert); in der Referenz mit k ≤ 3 ist die bandbegrenzte Spannweite kleiner und gilt ebenso. R ist
+    gegengeprüft: Grenzübergang ν → ∞, ν = 1 (n = 2 Läufe, R > 20) über die halbnormale Verteilung von s ohne
+    χ²-Dichte und Monte-Carlo-Probe der Bestätigungswahrscheinlichkeit eines Intervalls."""
     assert al.c_pb1() == pytest.approx(3.583, abs=5e-4) and al.c_pb1(19) == pytest.approx(4.356, abs=5e-4)
+    assert al.t_eq() == pytest.approx(1.645, abs=5e-4) and al.t_eq(19) == pytest.approx(1.729, abs=5e-4)
+    assert al.r_pb1() == pytest.approx(5.012, abs=5e-4) and al.r_pb1(19) == pytest.approx(5.208, abs=5e-4)
+    assert al.r_pb1(1e5) == pytest.approx(al.r_pb1(), abs=1e-4)                # Grenzübergang ν → ∞
+    assert al.r_pb1(9.9e6) == pytest.approx(al.r_pb1(), abs=1e-5)              # Quadratur unter der Umschaltung
+    from scipy import integrate, stats                                         # ν = 1 (n = 2 Läufe): s = |W|
+    R1, te1 = al.r_pb1(1), al.t_eq(1)                                          # halbnormal, ohne χ²-Dichte
+    p1 = integrate.quad(lambda w: (2 * stats.norm.cdf(R1 - te1 * w) - 1) * 2 * stats.norm.pdf(w), 0, R1 / te1)[0]
+    assert R1 > 20 and p1 == pytest.approx(0.8 ** (1 / 294), abs=1e-9)
+    rng = np.random.default_rng(0)
+    z, u = np.abs(rng.standard_normal(10 ** 6)), np.sqrt(rng.chisquare(19, 10 ** 6) / 19)
+    assert np.mean(z + al.t_eq(19) * u <= al.r_pb1(19, 0.8, 1)) == pytest.approx(0.8, abs=2e-3)
     a = satz(0.4)
-    assert al.bewerte(a)['schnitt']['uc_Fmin'] == pytest.approx(0.0327, abs=6e-5)
-    assert al.bewerte(a, nu=19)['schnitt']['uc_Fmin'] == pytest.approx(0.0269, abs=6e-5)
+    s, s19 = al.bewerte(a, 9)['schnitt'], al.bewerte(a, 9, nu=19)['schnitt']
+    assert s['dF'] == pytest.approx(0.4693, abs=6e-5) and s['D_Fmin'] == s['band']['dF']
+    assert s['D_Fmin'] == pytest.approx(0.5173, abs=6e-5)
+    r = al.bewerte(al.Aufbau(**al.REFERENZ), 3)['schnitt']      # Referenz (A4: 4,5627 N), k ≤ 3 kleiner
+    assert r['voll']['dF'] == pytest.approx(4.5627, abs=6e-5)
+    assert r['D_Fmin'] == r['band']['dF'] < r['voll']['dF'] - 0.02
+    assert s['uc_Fmin'] == pytest.approx(0.25 * s['D_Fmin'] / al.r_pb1(), rel=1e-12)
+    assert (s['uc_Fmin'], s19['uc_Fmin']) == pytest.approx((0.0258, 0.0248), abs=6e-5)
+    assert (s['uc_notw_Fmin'], s19['uc_notw_Fmin']) == pytest.approx((0.0786, 0.0748), abs=6e-5)
+
+
+def test_pb1_signalmass_fassung_b():
+    """D für Re und Im N_k nach Fassung B (Durchmesser der Zeigermenge über den Schnitt, Präreg §8.5): im A4-Beispiel
+    0,8872 / 0,5495 / 0,3194 N, also Δ_q = 0,2218 / 0,1374 / 0,0799 N wie im Zahlennachweis; N₃ bindet mit
+    u_c ≤ 0,0159 N (ν → ∞). Fassung A (0,4504 / 0,2924 / 0,5533 N) und Faktor 0,1 stehen nur unter
+    'sensitivitaet' und ändern weder die primären Grenzen noch die Prüfung."""
+    a = satz(0.4)
+    b = al.bewerte(a)
+    s = b['schnitt']
+    assert s['D'] == pytest.approx((0.8872, 0.5495, 0.3194), abs=6e-5)
+    assert s['delta_Nk'] == pytest.approx((0.2218, 0.1374, 0.0799), abs=6e-5)
+    assert s['uc_Nk_k'] == pytest.approx((0.0443, 0.0274, 0.0159), abs=6e-5)
+    assert s['uc_Nk'] == pytest.approx(s['uc_Nk_k'].min(), rel=1e-12)
+    sa, s1 = s['sensitivitaet']['fassung_A'], s['sensitivitaet']['faktor_0_1']
+    assert sa['D'] == pytest.approx((0.4504, 0.2924, 0.5533), abs=6e-5)
+    assert sa['uc_Nk'] == pytest.approx(0.25 * 0.2924 / al.r_pb1(), abs=6e-5)
+    assert (s1['uc_Fmin'], s1['uc_Nk']) == pytest.approx((0.4 * s['uc_Fmin'], 0.4 * s['uc_Nk']), rel=1e-12)
+    p = al.pruefung(a, bew=b)
+    assert (p['signal']['uc_Fmin'], p['signal']['uc_Nk']) == (s['uc_Fmin'], s['uc_Nk'])
+    assert p['modell']['grenze'] == pytest.approx(0.1 * s['uc_Fmin'], rel=1e-12)
 
 
 # ── Fenster, V1-Kandidat (Nachrechnung 10/2026) ──────────────────────────────────────────────────────
@@ -197,8 +242,8 @@ def test_v1_kandidat():
     assert b['schnitt']['voll']['dF'] == pytest.approx(0.560, abs=5e-4)
     assert b['schnitt']['band']['dF'] == pytest.approx(0.588, abs=5e-4)          # k ≤ 12
     assert (b['schnitt']['voll']['s_L'], b['schnitt']['voll']['s_R']) == pytest.approx((0.0545, 0.0571), abs=6e-5)
-    assert b['schnitt']['uc_Fmin'] == pytest.approx(0.039, abs=5e-4)
-    assert b['schnitt']['uc_Nk'] == pytest.approx(0.025, abs=5e-4)
+    assert b['schnitt']['uc_Fmin'] == pytest.approx(0.25 * 0.588 / 5.012, abs=5e-4)   # PB1 §8.5, k ≤ 12, A8
+    assert b['schnitt']['uc_Nk'] == pytest.approx(0.0194, abs=5e-4)                   # Fassung B, Regressionswert
     assert b['mengen']['alle']['Fz_max'] == pytest.approx(4.390, abs=5e-4)
     assert b['mengen']['alle']['alle_valid']
     g0 = al.bewerte(al.Aufbau(), 12)
@@ -392,7 +437,9 @@ def test_superposition_gemessener_einzelmodule():
 def test_indexbezogene_messung_mit_delta_delta():
     """Auf den Indeximpuls bezogene Harmonische N_k⁽ʲ⁾·e^{−ikΔδ_j} (Präreg A1: φ^P = φ + Δδ) mit delta_delta
     zurückgedreht geben die profilbezogene Superposition; ohne Drehung verschiebt schon Δδ₂ = 1° den Schnitt um
-    mehr als die PB1-Anforderung 0,039 N (Prüfbefund 10/2026: 0,0443 N)."""
+    mehr als die Auslegungsgrenze von PB1 für F_min (§8.5, am V1-Kandidaten mit k ≤ 12: 0,0293 N) und als die
+    frühere Anforderung 0,039 N
+    (Prüfbefund 10/2026: 0,0443 N)."""
     m = al.Aufbau()
     k = np.arange(1, 13)
     dd = np.array([0.0, 1.0, -2.5])
@@ -403,7 +450,8 @@ def test_indexbezogene_messung_mit_delta_delta():
     g = al.Aufbau(N_mess=Ns * idx, N_mess_zellen=Nc * idx[:, None, :], delta_delta=dd).loesen(pts)['voll']
     assert np.abs(g['N'] - soll['N']).max() < 1e-12 and np.abs(g['Fz'] - soll['Fz']).max() < 1e-12
     falsch = al.Aufbau(N_mess=Ns * idx[[0, 1, 0]]).loesen(pts)['voll']              # nur Δδ₂ = 1°, nicht gedreht
-    assert np.abs(falsch['F_min'] - soll['F_min']).max() > 0.039
+    verschiebung = np.abs(falsch['F_min'] - soll['F_min']).max()
+    assert verschiebung > 0.039 and verschiebung > al.bewerte(m, 12)['schnitt']['uc_Fmin']
 
 
 def test_ableitung_f():
@@ -455,6 +503,7 @@ def test_cli_text_und_vorrang(capsys, monkeypatch):
     al.main(['--candidate', '--hub', '8', '--Kcells', '1e6', '0.25e6', '0.25e6'])
     txt = capsys.readouterr().out
     assert 'Hub = 8.000, 8.000, 8.000 mm' in txt and 'K = 1.5e+06 N/m' in txt and 'WARNUNG' in txt
+    assert txt.count('PB1 (§8.5') == 1 and txt.count('Sensitivität, nur berichtet') == 1
     monkeypatch.setattr(sys, 'argv', ['auslegung.py', '--window', '--rigid', '--K', '1e6'])
     al.main()
     txt = capsys.readouterr().out
@@ -463,7 +512,7 @@ def test_cli_text_und_vorrang(capsys, monkeypatch):
 
 @pytest.mark.parametrize('argv', [['--kmax', '0'], ['--m', '0.1', '0.1'], ['--hub', '8', '8'], ['--f', '0'],
                                   ['--K=-1e6'], ['--Kcells', '1e6', '0', '0'], ['--thold', '1.2'],
-                                  ['--zeta', '0', '--K', str(M * (2 * np.pi * 120) ** 2)]])
+                                  ['--zeta', '0', '--K', str(M * (2 * np.pi * 120) ** 2)], ['--nu', 'nan']])
 def test_cli_fehler(argv):
     """Ungültige Eingaben enden mit argparse-Fehler (Exit-Code 2) statt Traceback oder stillem Unsinn."""
     with pytest.raises(SystemExit) as e:

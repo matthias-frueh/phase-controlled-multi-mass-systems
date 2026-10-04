@@ -1,8 +1,8 @@
 # Abnahme der Werkzeuge AP-02 und AP-03
 
 **Phasenkontrollierte Mehrmassensysteme · Phase-Controlled Multi-Mass Systems**
-Matthias Früh · Stand 3. Oktober 2026 · Branch `claude/unpack-project-dataset-8dzd9c`, Basis Tag
-`stand-2026-09-28` (= `main` `cd7be6a`)
+Matthias Früh · Stand 3. Oktober 2026, ergänzt 4. Oktober 2026 (PB1 nach Präreg §8.5, M nach (b), Testzahlen) ·
+Branch `claude/unpack-project-dataset-8dzd9c`, Basis Tag `stand-2026-09-28` (= `main` `cd7be6a`)
 
 *Nur Simulation, keine Messdaten.*
 
@@ -30,8 +30,8 @@ python3 code/ereignisloeser.py --konvergenz                # Konvergenzstudie mi
 
 | Lauf | Ergebnis und Dauer |
 |---|---|
-| schnelle Tests | 133 bestanden, 6 übersprungen (die langen), 58,6 s |
-| `PCMMS_SLOW=1` | 139 bestanden, 261,4 s |
+| schnelle Tests | 135 bestanden, 6 übersprungen (die langen), 61,1 s |
+| `PCMMS_SLOW=1` | 141 bestanden, 265,9 s |
 
 Die langen Tests (`@slow`, nur mit `PCMMS_SLOW=1`):
 
@@ -101,6 +101,7 @@ waren davon nicht betroffen, weil `einzugsgebiete.py` diesen Start schon verwend
 | f₁ = min(f_Hub, f_Kipp), Hub als Spitze-Spitze | Ausgabe `kennzahlen()`; `test_hub_ist_spitze_spitze` | erfüllt |
 | zu meidende ρ-Bänder für ζ < 0,1 um 1/7, 1/9, 1/12, 1/15, 1/18 | `rho_baender()` bei ζ = 0,02 (`test_rho_baender_punkte`, langer Test `test_rho_baender_raster`) | erfüllt für ζ = 0,02; weitere ζ nicht als eigene Ausgabe |
 | zugesetzte Luftmasse des Körpers als Zusatzmasse im Kontaktmodell | `Aufbau(m_luft, J_luft, xy_luft)`, CLI `--m-luft` (g), `--J-luft` (kg·m²); nur träge: M + m_L in Massenmatrix, Übertragung, f_n, ζ und Moden, das Gewicht M·g unverändert in F₀ (Bezug der Reserven), ε und μ; Vorgabe 0 gleich dem bisherigen Stand (`test_luft_grenzfall_bitgleich`, einmalig bitgleich gegen `6a9a1cd`); Hubübertragung analytisch auf ≈ 10⁻¹⁶ relativ, Zeitbereich gegen `scipy.signal.lsim` und gegen die RK4-Rechnung der Nachrechnung 10/2026 (`test_luft_*`, unten) | erfüllt als konfigurierbare Modellgröße; Wert für V1 offen (Vorgabe 0) |
+| PB1 nach Präregistrierung v2 §8.5: Δ_q = 0,25·D_q, D für F_min aus der bandbegrenzten Kurve, für Re und Im N_k in Fassung B; notwendige Bedingung u_c < Δ_q/t_eq; Auslegungsgrenze nach A8; Fassung A und Faktor 0,1 nur als Sensitivität | `bewerte()`, `pruefung()`, Text- und JSON-Ausgabe; Werte des Beispiels A4 wie im Zahlennachweis der Präregistrierung (`test_pb1_mit_nu`, `test_pb1_signalmass_fassung_b`) | erfüllt |
 
 **Zugesetzte Luftmasse.** Die Luft um den Körper und ein Quetschfilm unter seinem Boden wirken auf die Körperbewegung
 als zusätzliche Trägheit, nicht als Gewicht; hinzu kommt ein Luftanteil, der davon abhängt, wie M bestimmt wird
@@ -140,7 +141,7 @@ V_innen das von der Außenhaut umschlossene Volumen; ρ_L ≈ 1,2 kg/m³. Die In
 Wellenlängen ≫ Gehäuse wie ein starrer Körper (bei relativ zum Gehäuse ruhenden Einbauten ist ihr Impuls für jede
 inkompressible Innenströmung ρ_L·V_innen·ẋ; zur Modulbewegung unten); ein leerer Kasten mit Innenmaß
 20 × 20 × 10 cm enthält ≈ 4,8 g, 15 × 15 × 8 cm ≈ 2,2 g, abzüglich Bauteilvolumen etwas weniger. Wohin sie gehört,
-hängt davon ab, wie M bestimmt wird:
+hängt davon ab, wie M bestimmt wird; die Präregistrierung v2 verwendet (b) (Arbeitsfestlegung, §12):
 
 | Bestimmung von M | M·g ist | m_L | Voraussetzungen und Näherungen |
 |---|---|---|---|
@@ -182,7 +183,8 @@ angegeben), mit dem Werkzeug gerechnet; in allen Zeilen sind (a), (b), robust, �
 | 30 g, J_L = J_hyd = m_hyd·R²/12 = 3,2·10⁻⁵ kg·m² | 236,38 (f_Kipp 280,94 statt 282,83) | 11 | 41,075 % | 0,5697 | 5,4127 |
 
 Ab m_L = K/(2π·240 Hz)² − M = 9,64 g sinkt k_b von 12 auf 11, weil f₁ unter 12·2f fällt; die bandbegrenzten Größen
-springen dann (ΔF_Zelt für k ≤ k_max 0,587 → 0,637 N), maßgeblich bleibt der ungebänderte Wert. Nahe einer Resonanz
+springen dann (ΔF_Zelt für k ≤ k_max 0,587 → 0,637 N). Für das Signal bleibt der ungebänderte Wert maßgeblich;
+D für F_min in PB1 ist dagegen bandbegrenzt und springt mit, ebenso die Auslegungsgrenze. Nahe einer Resonanz
 ist die Wirkung größer: Am Simulationsreferenzsatz (μ = 1, K = 10⁴ N/m, 2f ≈ f_n) verschieben 4,6 g F_min(140°, 240°)
 um 64 mN.
 
