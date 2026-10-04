@@ -9,16 +9,17 @@ Prüft:
   5. FV v2.7 thebibliography gegen bib (Konsistenz Jahr/Seiten/DOI)
 Ausgabe: Text auf stdout.
 """
+import os
 import re
 from pathlib import Path
 
 REPO = Path(__file__).resolve().parents[2]
-TB = REPO / "_textbasis"
 AP = REPO / "docs/arbeitspapier/PCMMS_Arbeitspapier_v2_4.tex"
 BIB = REPO / "docs/arbeitspapier/references.bib"
 FV = REPO / "docs/formelverzeichnis/PCMMS_Formelverzeichnis_v2_7.tex"
 LA = REPO / "docs/literaturabgleich_2026-09-12.md"
-DISS = TB / "PCMMS_SORTIERT_A4/50_DISSERTATION_FORMELN_LITERATUR/Dissertation/Aktuell_Sync_erforderlich_v2_1/PCMMS_Dissertation_v2_1.tex.txt"
+# Dissertation v2.1: Quelle außerhalb des Repositorys; Pfad zur .tex-Datei bei Bedarf über PCMMS_DISS_TEX angeben
+DISS = Path(os.environ["PCMMS_DISS_TEX"]) if os.environ.get("PCMMS_DISS_TEX") else None
 
 
 def parse_bib(text):
@@ -45,8 +46,8 @@ def main():
     print("== 1. Zitierschlüssel ==")
     print(f"references.bib: {len(bib)} Einträge")
     for name, path in [("AP v2.4", AP), ("Diss v2.1", DISS)]:
-        if not path.exists():
-            print(f"{name}: Quelle nicht im Repository (lokaler Bestand), übersprungen")
+        if path is None or not path.exists():
+            print(f"{name}: Quelle außerhalb des Repositorys, übersprungen")
             continue
         c = cites(path.read_text(encoding="utf-8"))
         print(f"{name}: {len(c)} Schlüssel; nicht im bib: {sorted(c - set(bib))}; "

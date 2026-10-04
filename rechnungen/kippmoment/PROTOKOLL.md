@@ -1,6 +1,6 @@
 # P2 · Prüfgruppe „kippmoment“ – Einzelzellkräfte und Kippmoment bei drei Wägezellen im Dreieck
 
-> **Vermerk zur Übernahme (04.10.2026).** Protokoll aus der Gesamtprojektanalyse 10/2026, Stand 02.10.2026, unverändert bis auf Pfade und Quellenangaben. Geprüft wurde der Repository-Stand `cd7be6a` (28.09.2026) mit der Präregistrierung v2 vom 25./28.09.2026; die späteren Änderungen aus PR #13 und PR #14 (unter anderem Präregistrierung v2 mit Arbeitsfestlegungen, `code/auslegung.py`, `code/ereignisloeser.py`) sind nicht eingearbeitet. Alle Zahlen sind Simulation oder Analytik, keine Messdaten. Verweise wie „L1a-019“, „P1 §3“ oder „B01–B14“ zeigen auf Arbeitsdokumente der Analyse, die nicht im Repository liegen. Quellen außerhalb des Repositorys sind als „(lokaler Bestand, nicht im Repository)“ gekennzeichnet. Startbefehle und Grenzen je Gruppe: [`rechnungen/README.md`](../README.md).
+> **Vermerk zur Übernahme (04.10.2026).** Protokoll aus der Gesamtprojektanalyse 10/2026, Stand 02.10.2026, unverändert bis auf Pfade und Quellenangaben. Geprüft wurde der Repository-Stand `cd7be6a` (28.09.2026) mit der Präregistrierung v2 vom 25./28.09.2026; die späteren Änderungen aus PR #13 und PR #14 (unter anderem Präregistrierung v2 mit Arbeitsfestlegungen, `code/auslegung.py`, `code/ereignisloeser.py`) sind nicht eingearbeitet. Alle Zahlen sind Simulation oder Analytik, keine Messdaten. Verweise wie „L1a-019“, „P1 §3“ oder „B01–B14“ zeigen auf Arbeitsdokumente der Analyse, die nicht im Repository liegen. Quellen, die nicht im Repository liegen, sind als „(Quelle außerhalb des Repositorys)“ gekennzeichnet. Startbefehle und Grenzen je Gruppe: [`rechnungen/README.md`](../README.md).
 
 Stand 02.10.2026 · ursprünglich lokal, jetzt unter `rechnungen/` · Kennzeichnung: **[R]** eigene Rechnung, **[Q]** Quellenangabe, **[A]** Annahme.
 
@@ -35,7 +35,7 @@ Beispiel: `cd rechnungen/kippmoment && eval timeout 540 $PY k5_rk4_einseitig.py 
 
 **Frage.** Gibt es Lage von Zellen und Modulen, Plattenmaße, Massen, Trägheitsmomente?
 
-**Methode.** Gezielte Suche (grep) in docs/, (lokaler Bestand, nicht im Repository) (Messtechnik-Konzept `4c73fffc`, Präreg v2 + lokale Überarbeitung 01.10., Laborplan V1–V3, Exposé, Baustein 4, Schwellen_eps, Anforderungsprofil, S2-Visualisierungen, Formelverzeichnis v2.7).
+**Methode.** Gezielte Suche (grep) in docs/ und in Quellen außerhalb des Repositorys (Messtechnik-Konzept `4c73fffc`, Präreg v2 + lokale Überarbeitung 01.10., Laborplan V1–V3, Exposé, Baustein 4, Schwellen_eps, Anforderungsprofil, S2-Visualisierungen, Formelverzeichnis v2.7).
 
 **Ergebnis [Q].**
 - Präreg v2 Anhang A2.5 (Z. 192–201): Auslegungsannahme „starrer Körper auf drei Zellen, Schwerpunkt … über dem Flächenschwerpunkt des Zelldreiecks, jedes Modul über einer Zelle“; „die Lage ist offen (§12)“. Hauptdokument Z. 557–558: „Lage von Zellen und Modulen (bestimmt die Zellkräfte, A2.5, und E3)“ als offene Klärung. Die lokale Überarbeitung vom 01.10. ist hier unverändert.

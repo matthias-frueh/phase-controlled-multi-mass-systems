@@ -1,6 +1,6 @@
 # P2 · Gegenprüfung der Prüfgruppe „kippmoment“
 
-> **Vermerk zur Übernahme (04.10.2026).** Protokoll aus der Gesamtprojektanalyse 10/2026, Stand 02.10.2026, unverändert bis auf Pfade und Quellenangaben. Geprüft wurde der Repository-Stand `cd7be6a` (28.09.2026) mit der Präregistrierung v2 vom 25./28.09.2026; die späteren Änderungen aus PR #13 und PR #14 (unter anderem Präregistrierung v2 mit Arbeitsfestlegungen, `code/auslegung.py`, `code/ereignisloeser.py`) sind nicht eingearbeitet. Alle Zahlen sind Simulation oder Analytik, keine Messdaten. Verweise wie „L1a-019“, „P1 §3“ oder „B01–B14“ zeigen auf Arbeitsdokumente der Analyse, die nicht im Repository liegen. Quellen außerhalb des Repositorys sind als „(lokaler Bestand, nicht im Repository)“ gekennzeichnet. Startbefehle und Grenzen je Gruppe: [`rechnungen/README.md`](../../README.md).
+> **Vermerk zur Übernahme (04.10.2026).** Protokoll aus der Gesamtprojektanalyse 10/2026, Stand 02.10.2026, unverändert bis auf Pfade und Quellenangaben. Geprüft wurde der Repository-Stand `cd7be6a` (28.09.2026) mit der Präregistrierung v2 vom 25./28.09.2026; die späteren Änderungen aus PR #13 und PR #14 (unter anderem Präregistrierung v2 mit Arbeitsfestlegungen, `code/auslegung.py`, `code/ereignisloeser.py`) sind nicht eingearbeitet. Alle Zahlen sind Simulation oder Analytik, keine Messdaten. Verweise wie „L1a-019“, „P1 §3“ oder „B01–B14“ zeigen auf Arbeitsdokumente der Analyse, die nicht im Repository liegen. Quellen, die nicht im Repository liegen, sind als „(Quelle außerhalb des Repositorys)“ gekennzeichnet. Startbefehle und Grenzen je Gruppe: [`rechnungen/README.md`](../../README.md).
 
 Stand 02.10.2026 · ursprünglich lokal, jetzt unter `rechnungen/` · Rolle: unabhängiger Gegenprüfer (Ziel: Befunde widerlegen).
 Kennzeichnung: **[R]** eigene Rechnung, **[Q]** Quellenangabe, **[A]** Annahme.
@@ -100,8 +100,8 @@ STEIF-Fall für V1 maßgeblich ist (siehe KM-07).
 cd .
 sed -n 185,205p docs/praeregistrierung_v2_anhang.md
 sed -n 555,559p docs/praeregistrierung_v2_entwurf.md
-grep -n Trägheitsradius (lokaler Bestand, nicht im Repository)
-sed -n 40,62p (lokaler Bestand, nicht im Repository)
+grep -n Trägheitsradius <Datei außerhalb des Repositorys>
+sed -n 40,62p <Datei außerhalb des Repositorys>
 ```
 
 **Einschränkung.** Stichprobe, keine Vollsuche.

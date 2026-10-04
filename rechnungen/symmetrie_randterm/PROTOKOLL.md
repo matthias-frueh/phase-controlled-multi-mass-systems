@@ -1,6 +1,6 @@
 # P2 · Prüfgruppe „symmetrie_randterm“ · Protokoll
 
-> **Vermerk zur Übernahme (04.10.2026).** Protokoll aus der Gesamtprojektanalyse 10/2026, Stand 02.10.2026, unverändert bis auf Pfade und Quellenangaben. Geprüft wurde der Repository-Stand `cd7be6a` (28.09.2026) mit der Präregistrierung v2 vom 25./28.09.2026; die späteren Änderungen aus PR #13 und PR #14 (unter anderem Präregistrierung v2 mit Arbeitsfestlegungen, `code/auslegung.py`, `code/ereignisloeser.py`) sind nicht eingearbeitet. Alle Zahlen sind Simulation oder Analytik, keine Messdaten. Verweise wie „L1a-019“, „P1 §3“ oder „B01–B14“ zeigen auf Arbeitsdokumente der Analyse, die nicht im Repository liegen. Quellen außerhalb des Repositorys sind als „(lokaler Bestand, nicht im Repository)“ gekennzeichnet. Startbefehle und Grenzen je Gruppe: [`rechnungen/README.md`](../README.md).
+> **Vermerk zur Übernahme (04.10.2026).** Protokoll aus der Gesamtprojektanalyse 10/2026, Stand 02.10.2026, unverändert bis auf Pfade und Quellenangaben. Geprüft wurde der Repository-Stand `cd7be6a` (28.09.2026) mit der Präregistrierung v2 vom 25./28.09.2026; die späteren Änderungen aus PR #13 und PR #14 (unter anderem Präregistrierung v2 mit Arbeitsfestlegungen, `code/auslegung.py`, `code/ereignisloeser.py`) sind nicht eingearbeitet. Alle Zahlen sind Simulation oder Analytik, keine Messdaten. Verweise wie „L1a-019“, „P1 §3“ oder „B01–B14“ zeigen auf Arbeitsdokumente der Analyse, die nicht im Repository liegen. Quellen, die nicht im Repository liegen, sind als „(Quelle außerhalb des Repositorys)“ gekennzeichnet. Startbefehle und Grenzen je Gruppe: [`rechnungen/README.md`](../README.md).
 
 Stand 02.10.2026. Teil A: Symmetrien der Phasenebene. Teil B: Randterm und Fensterbilanz.
 
@@ -127,7 +127,7 @@ export PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=../../code
 
 ## SYM-03 „Zyklische Vertauschung (φ₂ + 120°, φ₃ + 120°)“
 
-**Frage.** Quellen L4-036 (Forschungslinie S. 7 §4), L7-019 (Auswertung v3a S. 2 §3) und L6a-063 (Patent X §5.2): Ist das eine Invarianz bzw. ein Selbsttest? Wann gilt sie zufällig?
+**Frage.** Quellen L4-036 (Forschungslinie S. 7 §4), L7-019 (Auswertung v3a S. 2 §3) und L6a-063 (Quelle außerhalb des Repositorys, §5.2): Ist das eine Invarianz bzw. ein Selbsttest? Wann gilt sie zufällig?
 
 **Analytisch.**
 - Die Abbildung ändert die Phasenmenge: {0, φ₂, φ₃} → {0, φ₂+120°, φ₃+120°}. Das ist in der Regel keine Umbenennung.
@@ -231,7 +231,7 @@ export PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=../../code
 - **AP Z. 1818 und FV refprofil („Egg zeitumkehrsymmetrisch, Triadenphasen 0 oder π“):** **korrekt**.
 - **FV Z. 541** („Spiegelung/Zeitumkehr muss bei Dämpfung und Kontakt keine identischen Kennzahlen liefern“): **korrekt**.
 - **Weder AP noch FV** nennen die volle Äquivalenzgruppe. Die Zeltasymmetrie wird in AP und FV als Befund geführt, ohne Bezug zur Spiegelung.
-- **Patent X §5.2:** Die 120°-Invarianz ist **falsch** (SYM-03). Die Paarvertauschung ist richtig.
+- **Quelle L6a-063 §5.2:** Die 120°-Invarianz ist **falsch** (SYM-03). Die Paarvertauschung ist richtig.
 - **Forschungslinie §4 und Auswertung v3a §3:** gleicher Fehler. In der Auswertung wird er zusätzlich als Zuverlässigkeitsbeleg verwendet.
 
 **Reproduktion.** Fundstellen per `grep -n` (siehe SYM-03, SYM-05). Zahlen aus `s3_analytik.py` (F).
@@ -445,13 +445,13 @@ export PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=../../code
   - FV v2.7 Z. 364/690: Φ_m = Σ_k e^{−imφ_k}, synchron Φ_m = n.
   - Beide normieren je Modul, ohne /3. **Bestätigt.**
   - `linear_solver.py` verwendet (1+…)/3 zusammen mit M·H·P_k. Das ist gleichwertig, weil N̂^{(1)} = (M/3)H·P_k (ein Modul der Masse M/3).
-  - Patent X normiert mit /3 (Quelle L6a-063).
+  - Quelle L6a-063 normiert mit /3.
 
 ---
 
 ## Korrekturen an Quellen (Kurzfassung)
 
-1. **Forschungslinie §4 S. 7, Auswertung v3a §3 S. 2, Patent X §5.2 und Anspruch 3:** Die 120°-Verschiebung ist keine Invarianz. Die richtige Gruppe ist S₃ (SYM-01). Die 120°-Verschiebung gilt nur an 6 Ausnahmepunkten und im Kontaktast für |N_{3j}|.
+1. **Forschungslinie §4 S. 7, Auswertung v3a §3 S. 2, Quelle L6a-063 (§5.2 und Nr. 3):** Die 120°-Verschiebung ist keine Invarianz. Die richtige Gruppe ist S₃ (SYM-01). Die 120°-Verschiebung gilt nur an 6 Ausnahmepunkten und im Kontaktast für |N_{3j}|.
 2. **AP v2.4 §8.4 und Anhang:** Nur (23) wird genannt; die volle S₃-Gruppe und die Phasenregel fehlen. „Mittlere Differenz exakt null“ ist bei Paaren i < j nicht exakt (+5,3·10⁻⁶ N). Die Verletzungen der vollen Gruppe entstehen durch die Startphase zusammen mit Mehrstabilität.
 3. **AP §8.3:** Das „0,2 ppm numerischer Boden“ ist CSV-Rundung (0,157 ppm je 10⁻⁶ N). Der Rest im Kontaktast ist der Simpson-Defekt E ≤ 0,09 ppm.
 4. **AP §8.3 und Tab. konvergenz:** Der Exponent −0,945 ist realisierungsabhängig (−0,936…−0,949). Q ist nicht streng konstant.

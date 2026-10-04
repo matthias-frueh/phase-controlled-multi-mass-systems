@@ -1,10 +1,10 @@
 # P2 · Prüfgruppe „statistik“ – Statistik und Identifizierbarkeit der Präregistrierung v2
 
-> **Vermerk zur Übernahme (04.10.2026).** Protokoll aus der Gesamtprojektanalyse 10/2026, Stand 02.10.2026, unverändert bis auf Pfade und Quellenangaben. Geprüft wurde der Repository-Stand `cd7be6a` (28.09.2026) mit der Präregistrierung v2 vom 25./28.09.2026; die späteren Änderungen aus PR #13 und PR #14 (unter anderem Präregistrierung v2 mit Arbeitsfestlegungen, `code/auslegung.py`, `code/ereignisloeser.py`) sind nicht eingearbeitet. Alle Zahlen sind Simulation oder Analytik, keine Messdaten. Verweise wie „L1a-019“, „P1 §3“ oder „B01–B14“ zeigen auf Arbeitsdokumente der Analyse, die nicht im Repository liegen. Quellen außerhalb des Repositorys sind als „(lokaler Bestand, nicht im Repository)“ gekennzeichnet. Startbefehle und Grenzen je Gruppe: [`rechnungen/README.md`](../README.md).
+> **Vermerk zur Übernahme (04.10.2026).** Protokoll aus der Gesamtprojektanalyse 10/2026, Stand 02.10.2026, unverändert bis auf Pfade und Quellenangaben. Geprüft wurde der Repository-Stand `cd7be6a` (28.09.2026) mit der Präregistrierung v2 vom 25./28.09.2026; die späteren Änderungen aus PR #13 und PR #14 (unter anderem Präregistrierung v2 mit Arbeitsfestlegungen, `code/auslegung.py`, `code/ereignisloeser.py`) sind nicht eingearbeitet. Alle Zahlen sind Simulation oder Analytik, keine Messdaten. Verweise wie „L1a-019“, „P1 §3“ oder „B01–B14“ zeigen auf Arbeitsdokumente der Analyse, die nicht im Repository liegen. Quellen, die nicht im Repository liegen, sind als „(Quelle außerhalb des Repositorys)“ gekennzeichnet. Startbefehle und Grenzen je Gruppe: [`rechnungen/README.md`](../README.md).
 
 Stand 02.10.2026 · ursprünglich lokal, jetzt unter `rechnungen/` · Kennzeichnung: **[R]** eigene Rechnung, **[Q]** Quellenangabe, **[A]** Annahme.
 Geprüfte Fassung: `docs/praeregistrierung_v2_entwurf.md` und `docs/praeregistrierung_v2_anhang.md` (Repo, Stand 25.09.2026),
-Abgleich mit der lokalen Überarbeitung vom 01.10.2026 (`(lokaler Bestand, nicht im Repository)`).
+Abgleich mit der lokalen Überarbeitung vom 01.10.2026 (Quelle außerhalb des Repositorys).
 
 ## Dateien und Reproduktion
 
@@ -48,7 +48,7 @@ den Mechanismus zurückgezogen“) und Anhang A3/A4 (dieselbe Einordnung; A4-Sch
 Vorzeichenregel“). §0, §3, §5.3, §5.4, §8, §9, A1, A2, A5–A9, Tabelle C/F und Z sind unverändert; insbesondere PB1, A8 und die
 Zahlen 0,0327/0,0269 N sind identisch. Alle folgenden Befunde gelten für beide Fassungen.
 
-**Reproduktion.** Textvergleich der Repo-Fassung mit der lokalen Überarbeitung vom 01.10.2026 (lokaler Bestand, nicht im Repository).
+**Reproduktion.** Textvergleich der Repo-Fassung mit der lokalen Überarbeitung vom 01.10.2026 (Quelle außerhalb des Repositorys).
 
 ---
 

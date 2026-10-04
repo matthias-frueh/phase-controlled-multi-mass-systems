@@ -23,11 +23,11 @@ Lizenz: Skripte MIT ([`../LICENSE`](../LICENSE)); Protokolle, Ausgaben und Daten
   Text in `docs/`, nicht das Protokoll.
 - **Historische Rechnungen:** Die Protokolle tragen einen Vermerk zur Übernahme. Sie sind nicht nachgeführt.
   Verweise wie „L1a-019“, „P1 §3“ oder „B01–B14“ zeigen auf Arbeitsdokumente der Analyse (Evidenzmatrix,
-  Zwischenberichte, Bündelliste), die nicht im Repository liegen; „(lokaler Bestand, nicht im Repository)“ steht
-  für Quellen außerhalb des Repositorys.
+  Zwischenberichte, Bündelliste), die nicht im Repository liegen; „(Quelle außerhalb des Repositorys)“ steht
+  für Dokumente, die nicht im Repository liegen.
 - **Übernommen wurden** nur Pfade (relativ zum Skript, Repo-Code über `PYTHONPATH`), die Startskripte in
-  `statistik/` und die Kopie der v1-Karte für Linie B. Die Ausgabedateien sind die unveränderten Originale; eine
-  Ausgabe enthält noch den damaligen absoluten Pfad in einer Warnzeile (`symmetrie_randterm/s6b_…_ausgabe.txt`).
+  `statistik/` und die Kopie der v1-Karte für Linie B. Die Ausgabedateien sind die unveränderten Originale bis auf eine
+  Warnzeile, in der der damalige absolute Pfad durch den Dateinamen ersetzt ist (`symmetrie_randterm/s6b_…_ausgabe.txt`).
 - **Prüfstand bei der Übernahme (04.10.2026):** alle 173 Skripte kompilieren (`py_compile`). 36 kurze Skripte
   wurden aus einer Kopie des Ordners gestartet: 29 geben Zeile für Zeile die gespeicherte Ausgabe wieder, zwei bis
   auf Laufzeit- und Warnzeilen (`linie_b/b2b_…`, `symmetrie_randterm/s6b_…`), eines mit erwarteter Abweichung
@@ -114,7 +114,7 @@ Prüfung der vorhandenen Modelle. Das „Egg“-Profil von Linie B ist nicht das
 |---|---|
 | Zweck | Kennzahlen des Trägers (Keulegan-Carpenter-Zahl, β), Gültigkeit des quasistationären Widerstandsmodells, periodische Lösung des integrierten Modells und Dichtevergleich, Reproduktion der v1-Fensterkarte und ihre Skalierung mit ρ, Luftkräfte auf Module und Körper des Linie-A-Aufbaus V1 (zugesetzte Masse, Quetschfilm, Auftrieb, Thermik, Elektrostatik) |
 | Modelle | `quelle_kopie/pcmms_fluid_drift_v2.py` und `quelle_kopie/pcmms_medienkopplung_modell_v2.py`: die korrigierten Fassungen vom 06.09.2026, byte-gleich mit dem Bestand, hier unverändert; Lauf des Modells in `b0_medienkopplung_modell_v2_lauf.out` |
-| Daten | `sweep_13x13_drift_v2.csv`: stationäre Driftkarte des v2-Modells (ρ = 1000 kg/m³, 169 Punkte, Simulation); `daten/sweep_13x13_drift_v1.csv`: **historische** v1-Karte aus dem Kernpaket vom 01.09.2026 (Fenstermittel 4–8 s, nicht eingeschwungen; nur als Vergleich für `b3b_…` und `verifikation/vb3_…`) |
+| Daten | `sweep_13x13_drift_v2.csv`: stationäre Driftkarte des v2-Modells (ρ = 1000 kg/m³, 169 Punkte, Simulation); `daten/sweep_13x13_drift_v1.csv`: **historische** v1-Karte, archivierter Stand vom 01.09.2026, Kopie aus einer Quelle außerhalb des Repositorys (Fenstermittel 4–8 s, nicht eingeschwungen; nur als Vergleich für `b3b_…` und `verifikation/vb3_…`) |
 | Start | `b1_kc_kennzahlen.py`, `b1b_kc_medienkopplung_fall_s.py`, `b2_fluid_drift_v2_kontrolle_an.py`, `b2b_periodische_loesung.py`, `b3_dichte_drift_c1.py`, `b3b_v1_fenster_karte.py`, `b4_v1_luftkraefte.py`; Ausgaben `.out` |
 | Abhängigkeiten | nur `quelle_kopie/`; `b4_v1_luftkraefte.py` zusätzlich `code/linear_solver.py` |
 | Parameter | Driftskript v2: M = 0,75 kg, RATIO = 0,2, C_D-Ansatz mit stationärem C_D, 13×13-Raster; V1-Luftkräfte mit angenommenen Maßen (Platte R = 4 cm, Gehäuse 15–20 cm, Spalt 1–10 mm) |
@@ -154,8 +154,6 @@ Prüfung der vorhandenen Modelle. Das „Egg“-Profil von Linie B ist nicht das
 - Lesekorpus, Evidenzmatrix und Zwischenberichte der Analyse (Phasen P1, P4; Arbeitsdokumente, kein Rechenmaterial).
   Hardwarekonzepte, der Plan des Pipelinetests und die Übersicht der Arbeitspakete folgen in einem eigenen
   Dokumentpaket.
-- Rechnungen zu Schutzrechtstexten (Rollen `ip_a`, `ip_b`, `verif_ip`): Ihre Quellen liegen nicht im Repository;
-  Übernahme ist Entscheidung des Autors.
 - Rohdaten über 2 MB (oben je Gruppe genannt, zusammen 232 MB) und drei leere Fehlprotokolle eines Fehlaufrufs.
-- Prüfung der Aussagen gegen Dokumente außerhalb des Repositorys (lokaler Bestand): in den Protokollen nur noch als
-  Verweis gekennzeichnet.
+- Dokumente außerhalb des Repositorys, gegen die Aussagen geprüft wurden: in den Protokollen nur als
+  „(Quelle außerhalb des Repositorys)“ gekennzeichnet.

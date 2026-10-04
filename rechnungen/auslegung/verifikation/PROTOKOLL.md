@@ -1,6 +1,6 @@
 # P2 · Gegenprüfung der Prüfgruppe „auslegung“ (Rolle: unabhängiger Gegenprüfer)
 
-> **Vermerk zur Übernahme (04.10.2026).** Protokoll aus der Gesamtprojektanalyse 10/2026, Stand 02.10.2026, unverändert bis auf Pfade und Quellenangaben. Geprüft wurde der Repository-Stand `cd7be6a` (28.09.2026) mit der Präregistrierung v2 vom 25./28.09.2026; die späteren Änderungen aus PR #13 und PR #14 (unter anderem Präregistrierung v2 mit Arbeitsfestlegungen, `code/auslegung.py`, `code/ereignisloeser.py`) sind nicht eingearbeitet. Alle Zahlen sind Simulation oder Analytik, keine Messdaten. Verweise wie „L1a-019“, „P1 §3“ oder „B01–B14“ zeigen auf Arbeitsdokumente der Analyse, die nicht im Repository liegen. Quellen außerhalb des Repositorys sind als „(lokaler Bestand, nicht im Repository)“ gekennzeichnet. Startbefehle und Grenzen je Gruppe: [`rechnungen/README.md`](../../README.md).
+> **Vermerk zur Übernahme (04.10.2026).** Protokoll aus der Gesamtprojektanalyse 10/2026, Stand 02.10.2026, unverändert bis auf Pfade und Quellenangaben. Geprüft wurde der Repository-Stand `cd7be6a` (28.09.2026) mit der Präregistrierung v2 vom 25./28.09.2026; die späteren Änderungen aus PR #13 und PR #14 (unter anderem Präregistrierung v2 mit Arbeitsfestlegungen, `code/auslegung.py`, `code/ereignisloeser.py`) sind nicht eingearbeitet. Alle Zahlen sind Simulation oder Analytik, keine Messdaten. Verweise wie „L1a-019“, „P1 §3“ oder „B01–B14“ zeigen auf Arbeitsdokumente der Analyse, die nicht im Repository liegen. Quellen, die nicht im Repository liegen, sind als „(Quelle außerhalb des Repositorys)“ gekennzeichnet. Startbefehle und Grenzen je Gruppe: [`rechnungen/README.md`](../../README.md).
 
 Stand 02.10.2026 · ursprünglich lokal, jetzt unter `rechnungen/` · nur Simulation/Analytik.
 
@@ -94,7 +94,7 @@ bei 10/12/13 Hz; F_max(10 Hz) 7,0752/8,2564/9,1241/12,0163 N. Reproduktion: `pyt
 ## AUS-05 · Massenkonflikt — **bestätigt**
 
 [Q] geöffnet: FV v2.7 Z. 840 („Restmasse $m_0=0$ … für $m_k=M/3$“); Laborplan V1 Z. 58 („je eine Modulmasse (~50–150 g) mit
-einigen mm Hub“); AP v2.4 Z. 2038–2041; `(lokaler Bestand, nicht im Repository)` Z. 65 („M = 0,650 kg je Modul · 3 Module · f = 2,2 Hz“).
+einigen mm Hub“); AP v2.4 Z. 2038–2041; (Quelle außerhalb des Repositorys) Z. 65 („M = 0,650 kg je Modul · 3 Module · f = 2,2 Hz“).
 [R]: ε = 0,275/0,550/0,824 (3×50/100/150 g, Referenzhub, 10 Hz), ΔF_Zelt 0,271/0,541/0,812 N, synchrone Reserve 72,5/45,0/17,6 %;
 3×50 g braucht Hub ≥ 13,33 mm; Index-Szenario (M = 1,95 kg, μ = 1, 2,2 Hz, TH-0,65-Profil [A]): ε = 0,0576, ΔF_Zelt = 0,170 N.
 

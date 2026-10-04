@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """P2 / linie_b / Befund 3 (Ergänzung): v1-Auswertung (Start aus der Ruhe, Mittel über 4–8 s, RK4, DT = 50 µs,
 wie pcmms_fluid_drift.py v1) für alle 169 Rasterpunkte bei rho = 1000 und rho = 1,2.
-Abgleich mit der archivierten v1-Karte sweep_13x13_drift.csv (Kernpaket 01.09.) und mit der stationären v2-Karte.
+Abgleich mit der archivierten v1-Karte sweep_13x13_drift.csv (Stand 01.09.2026, Kopie unter daten/sweep_13x13_drift_v1.csv) und mit der stationären v2-Karte.
 Zeigt, dass eine nicht eingeschwungene Fensterauswertung mit rho skaliert (t << tau: V ~ F_bar_A t / M)."""
 import os, sys, time
 import numpy as np
@@ -12,7 +12,7 @@ sys.path.insert(0, os.path.join(HERE, "quelle_kopie"))
 import pcmms_fluid_drift_v2 as fd           # noqa: E402
 from b2b_periodische_loesung import rdot_halbraster, NCYC, DT  # noqa: E402
 
-V1CSV = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'daten/sweep_13x13_drift_v1.csv')   # v1-Karte, Kopie aus dem Kernpaket 01.09.2026
+V1CSV = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'daten/sweep_13x13_drift_v1.csv')   # v1-Karte, Kopie des archivierten Stands vom 01.09.2026
 
 
 def fenster(R, c):

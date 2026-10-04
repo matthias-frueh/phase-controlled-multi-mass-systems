@@ -1,5 +1,5 @@
 """P3 bewertung_b, Kandidaten 15/86 (B12): Rastvariante im gedaechtnisfreien Modell A.
-Pruefung der Zahlen 0,462 / 0,364 / 0,222 / 0 (Archiv-Vermerk Gravion 28.09., §2.4) und
+Pruefung der Zahlen 0,462 / 0,364 / 0,222 / 0 (Archiv-Vermerk vom 28.09.2026, Quelle außerhalb des Repositorys, §2.4) und
 der geschlossenen Form. Hub (Weg 1, Halbsinus) ueber t_h, Rast t_r0, Rueckfuehrung (Weg 1)
 ueber t_r = 1 - t_h - t_r0. Gleichrichtung ~ <v|v|> (quadratischer, gedaechtnisfreier Widerstand).
 Geschlossen (gleiche Form fuer Hub und Rueckfuehrung): netto/hub = 1 - c_r/c_h * t_h/t_r.

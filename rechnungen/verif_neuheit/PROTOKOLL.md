@@ -1,6 +1,6 @@
 # P3 · Rolle „verif_neuheit“ – Prüfprotokoll (Gegenprüfung der Rolle „neuheit“)
 
-> **Vermerk zur Übernahme (04.10.2026).** Protokoll aus der Gesamtprojektanalyse 10/2026, Stand 02.10.2026, unverändert bis auf Pfade und Quellenangaben. Geprüft wurde der Repository-Stand `cd7be6a` (28.09.2026) mit der Präregistrierung v2 vom 25./28.09.2026; die späteren Änderungen aus PR #13 und PR #14 (unter anderem Präregistrierung v2 mit Arbeitsfestlegungen, `code/auslegung.py`, `code/ereignisloeser.py`) sind nicht eingearbeitet. Alle Zahlen sind Simulation oder Analytik, keine Messdaten. Verweise wie „L1a-019“, „P1 §3“ oder „B01–B14“ zeigen auf Arbeitsdokumente der Analyse, die nicht im Repository liegen. Quellen außerhalb des Repositorys sind als „(lokaler Bestand, nicht im Repository)“ gekennzeichnet. Startbefehle und Grenzen je Gruppe: [`rechnungen/README.md`](../README.md).
+> **Vermerk zur Übernahme (04.10.2026).** Protokoll aus der Gesamtprojektanalyse 10/2026, Stand 02.10.2026, unverändert bis auf Pfade und Quellenangaben. Geprüft wurde der Repository-Stand `cd7be6a` (28.09.2026) mit der Präregistrierung v2 vom 25./28.09.2026; die späteren Änderungen aus PR #13 und PR #14 (unter anderem Präregistrierung v2 mit Arbeitsfestlegungen, `code/auslegung.py`, `code/ereignisloeser.py`) sind nicht eingearbeitet. Alle Zahlen sind Simulation oder Analytik, keine Messdaten. Verweise wie „L1a-019“, „P1 §3“ oder „B01–B14“ zeigen auf Arbeitsdokumente der Analyse, die nicht im Repository liegen. Quellen, die nicht im Repository liegen, sind als „(Quelle außerhalb des Repositorys)“ gekennzeichnet. Startbefehle und Grenzen je Gruppe: [`rechnungen/README.md`](../README.md).
 
 Stand 02.10.2026 · ursprünglich lokal, jetzt unter `rechnungen/` · keine Websuche, Literatur nur aus dem Bestand.
 
@@ -13,11 +13,11 @@ Ergebnis und Arbeitsunterlagen der geprüften Rolle
 - Ergebnis-JSON der Rolle (im Auftrag)
 
 Kontext
-- `(Arbeitsdokument der Analyse, nicht im Repository)` §7, §8, §12 (gezielt)
-- `(Arbeitsdokument der Analyse, nicht im Repository)` (gezielte Zeilen: L1a-007/047, L1b-037, L2-070, L3-067, L4-003/076/077, L5a-092, L5b-027/034, L6a-005/006/012/035/038/044/048/063/064/066, L6b-043/054/055/069, L7-085; alle Zeilen mit Quelle „Forschungslinie_Gegenstand“)
-- `(Arbeitsdokument der Analyse, nicht im Repository)` (AUS-02/06/07/08/10/11/12/13/14, ENG-01/03/05/09, KM-04/09/10/12, SYM-01/02/03, STA-06/09/11/12, RT-01/03, LB-11/13), `P2_zwischenbericht.md` Z. 94–153, `empfehlungen.md` Z. 40–61, `auslegung/PROTOKOLL.md` Z. 143–152, 238–248, `auslegung/a3b_arbeitspunkte.py` (Definition ΔF_Zelt), `auslegung/mu_modell.py` Z. 144
-- `(Arbeitsdokument der Analyse, nicht im Repository)` (alle Titel; Details B01 Nr. 38/70, B02 Nr. 1/5/8, B04 Nr. 3, B07 Nr. 9/41, B08 Nr. 37, B10 Nr. 42/47, B13 Nr. 14/71)
-- Schwesterrollen zur Abgrenzung: `p3/zusatz_p2/PROTOKOLL.md` (KM-10/11/12, SYM-01), `p3/bewertung_a/b01_spiegelung_v1_ausgabe.txt` und PROTOKOLL Z. 42–50
+- (Quelle außerhalb des Repositorys) §7, §8, §12 (gezielt)
+- (Quelle außerhalb des Repositorys) (gezielte Zeilen: L1a-007/047, L1b-037, L2-070, L3-067, L4-003/076/077, L5a-092, L5b-027/034, L6a-005/006/012/035/038/044/048/063/064/066, L6b-043/054/055/069, L7-085; alle Zeilen mit Quelle „Forschungslinie_Gegenstand“)
+- (Quelle außerhalb des Repositorys) (AUS-02/06/07/08/10/11/12/13/14, ENG-01/03/05/09, KM-04/09/10/12, SYM-01/02/03, STA-06/09/11/12, RT-01/03, LB-11/13), `P2_zwischenbericht.md` Z. 94–153, `empfehlungen.md` Z. 40–61, `auslegung/PROTOKOLL.md` Z. 143–152, 238–248, `auslegung/a3b_arbeitspunkte.py` (Definition ΔF_Zelt), `auslegung/mu_modell.py` Z. 144
+- (Quelle außerhalb des Repositorys) (alle Titel; Details B01 Nr. 38/70, B02 Nr. 1/5/8, B04 Nr. 3, B07 Nr. 9/41, B08 Nr. 37, B10 Nr. 42/47, B13 Nr. 14/71)
+- Schwesterrollen zur Abgrenzung: `rechnungen/zusatz_p2/PROTOKOLL.md` (KM-10/11/12, SYM-01), `rechnungen/bewertung_a/b01_spiegelung_v1_ausgabe.txt` und PROTOKOLL Z. 42–50
 
 Literaturbestand und Beitragsbehauptungen (an der Fundstelle geprüft)
 - `docs/arbeitspapier/references.bib` (vollständig); Diss-v2.1-bib (Diff: identisch bis auf Kopf)
@@ -29,13 +29,13 @@ Literaturbestand und Beitragsbehauptungen (an der Fundstelle geprüft)
 - Regimeanalyse v1.2 §9 und §14
 - Projektbeschreibung August: Z. 422–492 (§12–13), 728–740 (§22.2), 262–275 (§7), 820–851 (§26.2)
 - Änderungslog Rework 20.09. Z. 40–72
-- Pitch 28.09. Folien 1–5; Master 28.09. Folien 4, 6, 9, 11, Z. 504, 604
-- Patent 1 korr. Z. 44–80; GM korr. Z. 55–70; Patent Z korr. Z. 85–105, 840–870; Businessplan korr. Z. 72–80, 316–323, 388–397
+- Präsentationen vom 28.09.2026 (Quelle außerhalb des Repositorys): erste Folien 1–5, zweite Folien 4, 6, 9, 11, Z. 504, 604
+- Weitere Quellen außerhalb des Repositorys (gezielte Zeilen)
 - Forschungsrahmen v3.5 Z. 28–58, 235–239, 340–346; Notiz Linie B v5.2 (Gliederung, §13)
-- SOT 01.10. (grep); Linie-A-Bericht 01.10. Z. 1–40 (`(lokaler Bestand, nicht im Repository)`)
-- Dissertation v2.1 (`…/Aktuell_Sync_erforderlich_v2_1/PCMMS_Dissertation_v2_1.tex.txt`) Z. 1930–1940, 2850–2860, 4525–4550 (grep Beitrag/Haptik)
-- Frühe Zenodo-Arbeiten (April 2026): `(lokaler Bestand, nicht im Repository)` (Kopf, §3.11), Preliminary Proposal Z. 30–40, „Measurement Framework …“ Z. 84–90; Zuordnung zu DOI über Exposé Juli `(lokaler Bestand, nicht im Repository)` Z. 264–276
-- Forschungslinie korrigiert `(lokaler Bestand, nicht im Repository)` Z. 222–345
+- SOT 01.10. (grep); Linie-A-Bericht 01.10. Z. 1–40 (Quelle außerhalb des Repositorys)
+- Dissertation v2.1 (Quelle außerhalb des Repositorys) Z. 1930–1940, 2850–2860, 4525–4550 (grep Beitrag/Haptik)
+- Frühe Zenodo-Arbeiten (April 2026): (Quelle außerhalb des Repositorys) (Kopf, §3.11), Preliminary Proposal Z. 30–40, „Measurement Framework …“ Z. 84–90; Zuordnung zu DOI über Exposé Juli (Quelle außerhalb des Repositorys) Z. 264–276
+- Forschungslinie korrigiert (Quelle außerhalb des Repositorys) Z. 222–345
 - `code/linear_solver.py` Docstring Z. 1–40
 
 ## 2 Eigene Rechnung
@@ -53,7 +53,6 @@ Aufruf mit `PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=../../code timeout 540`, Arbeit
 - Kategorienprüfung am eigenen Maßstab der Rolle: Wo die Rolle selbst „Standard“, „naheliegend“ oder „nicht recherchiert“ schreibt, trägt die Kategorie „methodischer_beitrag“ nicht (Anweisung §12 G: fehlende Fundstelle beweist keine Neuheit).
 - Literatur nur aus dem Bestand; Prüfvermerke des Bestands sind Behauptungen des Bestands.
 - Ergebnisse der Schwesterrollen (`zusatz_p2`, `bewertung_a`) nur als ergänzende Analyseergebnisse, nicht als Bestand.
-- Keine Rechtsberatung.
 
 ## 4 Hauptbefunde (Kurz)
 

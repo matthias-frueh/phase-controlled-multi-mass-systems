@@ -1,6 +1,6 @@
 # P3 · Rolle „verif_bewertung“ · Gegenprüfung der Bündelbewertung B01–B14
 
-> **Vermerk zur Übernahme (04.10.2026).** Protokoll aus der Gesamtprojektanalyse 10/2026, Stand 02.10.2026, unverändert bis auf Pfade und Quellenangaben. Geprüft wurde der Repository-Stand `cd7be6a` (28.09.2026) mit der Präregistrierung v2 vom 25./28.09.2026; die späteren Änderungen aus PR #13 und PR #14 (unter anderem Präregistrierung v2 mit Arbeitsfestlegungen, `code/auslegung.py`, `code/ereignisloeser.py`) sind nicht eingearbeitet. Alle Zahlen sind Simulation oder Analytik, keine Messdaten. Verweise wie „L1a-019“, „P1 §3“ oder „B01–B14“ zeigen auf Arbeitsdokumente der Analyse, die nicht im Repository liegen. Quellen außerhalb des Repositorys sind als „(lokaler Bestand, nicht im Repository)“ gekennzeichnet. Startbefehle und Grenzen je Gruppe: [`rechnungen/README.md`](../README.md).
+> **Vermerk zur Übernahme (04.10.2026).** Protokoll aus der Gesamtprojektanalyse 10/2026, Stand 02.10.2026, unverändert bis auf Pfade und Quellenangaben. Geprüft wurde der Repository-Stand `cd7be6a` (28.09.2026) mit der Präregistrierung v2 vom 25./28.09.2026; die späteren Änderungen aus PR #13 und PR #14 (unter anderem Präregistrierung v2 mit Arbeitsfestlegungen, `code/auslegung.py`, `code/ereignisloeser.py`) sind nicht eingearbeitet. Alle Zahlen sind Simulation oder Analytik, keine Messdaten. Verweise wie „L1a-019“, „P1 §3“ oder „B01–B14“ zeigen auf Arbeitsdokumente der Analyse, die nicht im Repository liegen. Quellen, die nicht im Repository liegen, sind als „(Quelle außerhalb des Repositorys)“ gekennzeichnet. Startbefehle und Grenzen je Gruppe: [`rechnungen/README.md`](../README.md).
 
 Stand 02.10.2026 · ursprünglich lokal, jetzt unter `rechnungen/` · nichts committet, keine Repo-Datei verändert, kein `__pycache__` im Repo-Baum (geprüft mit `find`), `git status --short` leer. Keine Websuche.
 Kennzeichnung: **[Q]** Quelle mit Fundstelle · **[R]** eigene Rechnung (Skript hier) · **[E]** eigene Einschätzung · **[A]** Annahme.
@@ -8,31 +8,31 @@ Kennzeichnung: **[Q]** Quelle mit Fundstelle · **[R]** eigene Rechnung (Skript 
 ## 1 Gelesen
 
 Kontext
-- `(Arbeitsdokument der Analyse, nicht im Repository)` §8–§13 (Z. 259–430).
-- `(Arbeitsdokument der Analyse, nicht im Repository)` vollständig; `p2/empfehlungen.md` vollständig; `p2/befunde.csv` AUS-08/12/13/14, ENG-05/10, STA-06/08/09/11/12, LB-10/11/13, KM-09/10/11/12, SYM-02 (mit Spalten verif_urteil/verif_korrektur).
-- `rechnungen/auslegung/mu_modell.py` (Modell, `rk4_mu`), `a4b_bistabilitaet.py` + Ausgabe; `p2/auslegung/verifikation/PROTOKOLL.md` Z. 150–151 und `v5_nichtlinear_D_ausgabe.txt` (Herkunft der Stoßabbildung).
-- `(Arbeitsdokument der Analyse, nicht im Repository)` (alle 14 Bündel, 88 Kandidaten, 8 P2-Stränge); `p3/zusatz_p2/PROTOKOLL.md` vollständig.
-- Ergebnisse der Rollen: `p3/bewertung_a/PROTOKOLL.md` + alle `*_ausgabe.txt`; `p3/bewertung_b/PROTOKOLL.md` + `b1`, `b3`, `b4`, `b5` Ausgaben.
+- (Quelle außerhalb des Repositorys) §8–§13 (Z. 259–430).
+- (Quelle außerhalb des Repositorys) vollständig; `p2/empfehlungen.md` vollständig; `p2/befunde.csv` AUS-08/12/13/14, ENG-05/10, STA-06/08/09/11/12, LB-10/11/13, KM-09/10/11/12, SYM-02 (mit Spalten verif_urteil/verif_korrektur).
+- `rechnungen/auslegung/mu_modell.py` (Modell, `rk4_mu`), `a4b_bistabilitaet.py` + Ausgabe; `rechnungen/auslegung/verifikation/PROTOKOLL.md` Z. 150–151 und `v5_nichtlinear_D_ausgabe.txt` (Herkunft der Stoßabbildung).
+- (Quelle außerhalb des Repositorys) (alle 14 Bündel, 88 Kandidaten, 8 P2-Stränge); `rechnungen/zusatz_p2/PROTOKOLL.md` vollständig.
+- Ergebnisse der Rollen: `rechnungen/bewertung_a/PROTOKOLL.md` + alle `*_ausgabe.txt`; `rechnungen/bewertung_b/PROTOKOLL.md` + `b1`, `b3`, `b4`, `b5` Ausgaben.
 
 Hauptquellen
 - Präreg v2 Entwurf `docs/praeregistrierung_v2_entwurf.md` Z. 82–565 (§2–§12).
 - Präreg-Anhang `docs/praeregistrierung_v2_anhang.md` A2.4–A2.5 (Z. 184–203), A4–A7 (Z. 238–360), A9.1–A9.2 (Z. 421–503), A9.7–A9.12 (Z. 565–645), Tabelle C (Z. 647–671).
 - AP v2.4 Z. 660–678 (Perret-Liaudet), 2090–2112 (Bahnprofil/Antrieb), 2440–2462 (Hilfskanäle); FV v2.7 Z. 796–816; `code/linear_solver.py` Z. 70–100, `code/finesweep.py` Z. 35–45; `docs/arbeitspapier/references.bib` Z. 116–140; `docs/arbeitspapier/PCMMS_Arbeitspapier_Offene_Punkte.md` (grep Nocke).
 
-Fundstellen (Stichprobe an der Originalstelle)
-- Archiv-Vermerk Gravion §2.1 (Z. 61–70), §9.1 (Z. 237–242) – formelalt, Adaptionsgesetz.
-- Kurzdossier `80_…/PCMMSKurzdossierFrueh2026.docx.txt` Z. 99–101, 166–176 (Pendeltest, Aktorwahl A7, Spiegelung A9).
-- `(lokaler Bestand, nicht im Repository)` Z. 155–167 (Abbruchkriterium).
-- `10_KERNRAHMEN/Bestand_Pruefen/PCMMS_Baustein14_…docx.txt` Z. 88–149 (Ring, Messkette), Z. 225–236 (§14.11 Selbsttäuschungskatalog).
-- `(lokaler Bestand, nicht im Repository)` §6.2 (Z. 355–361).
-- `(lokaler Bestand, nicht im Repository)` Z. 80–87; `(lokaler Bestand, nicht im Repository)` Z. 116.
-- `20_LINIE_A/CODE/Arbeitsstaende/pcmms_v3a_geglaettet.py.txt` (Docstring).
-- `(lokaler Bestand, nicht im Repository)` Z. 66–92; `(lokaler Bestand, nicht im Repository)` (Gliederung, §4–§5).
-- `(lokaler Bestand, nicht im Repository)` (Gliederung).
-- `(lokaler Bestand, nicht im Repository)` (Gliederung), `pcmms_lageregelung_3achs.py.txt` (Docstring).
+Fundstellen (Stichprobe an der Originalstelle; Dateinamen ohne Pfad sind Quellen außerhalb des Repositorys)
+- Archiv-Vermerk vom 28.09.2026 (Quelle außerhalb des Repositorys) §2.1 (Z. 61–70), §9.1 (Z. 237–242) – formelalt, Adaptionsgesetz.
+- Kurzdossier (Quelle außerhalb des Repositorys) Z. 99–101, 166–176 (Pendeltest, Aktorwahl A7, Spiegelung A9).
+- (Quelle außerhalb des Repositorys) Z. 155–167 (Abbruchkriterium).
+- `PCMMS_Baustein14_…docx.txt` Z. 88–149 (Ring, Messkette), Z. 225–236 (§14.11 Selbsttäuschungskatalog).
+- (Quelle außerhalb des Repositorys) §6.2 (Z. 355–361).
+- (Quelle außerhalb des Repositorys) Z. 80–87; (Quelle außerhalb des Repositorys) Z. 116.
+- `pcmms_v3a_geglaettet.py.txt` (Docstring).
+- (Quelle außerhalb des Repositorys) Z. 66–92; (Quelle außerhalb des Repositorys) (Gliederung, §4–§5).
+- (Quelle außerhalb des Repositorys) (Gliederung).
+- (Quelle außerhalb des Repositorys) (Gliederung), `pcmms_lageregelung_3achs.py.txt` (Docstring).
 - SOT 01.10. Z. 53 (Linie B → Forschungsrahmen v3_5).
 - Volltextsuche im Bestand: Linearaktor/Voice-Coil (nur Planungen V2/Forschungsrahmen), Nocke/Vorspannung/formschlüssig (keine Nockenfolger-Auslegung).
-- `(Arbeitsdokument der Analyse, nicht im Repository)` (Lesestatus für 30_, 50_-Dateien).
+- (Quelle außerhalb des Repositorys) (Lesestatus für Dateien des Bestands).
 
 ## 2 Vorgehen
 

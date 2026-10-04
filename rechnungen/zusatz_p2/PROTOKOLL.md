@@ -1,6 +1,6 @@
 # P3 · Rolle „zusatz_p2“ · Gegenprüfung der in P2 nicht verifizierten Befunde
 
-> **Vermerk zur Übernahme (04.10.2026).** Protokoll aus der Gesamtprojektanalyse 10/2026, Stand 02.10.2026, unverändert bis auf Pfade und Quellenangaben. Geprüft wurde der Repository-Stand `cd7be6a` (28.09.2026) mit der Präregistrierung v2 vom 25./28.09.2026; die späteren Änderungen aus PR #13 und PR #14 (unter anderem Präregistrierung v2 mit Arbeitsfestlegungen, `code/auslegung.py`, `code/ereignisloeser.py`) sind nicht eingearbeitet. Alle Zahlen sind Simulation oder Analytik, keine Messdaten. Verweise wie „L1a-019“, „P1 §3“ oder „B01–B14“ zeigen auf Arbeitsdokumente der Analyse, die nicht im Repository liegen. Quellen außerhalb des Repositorys sind als „(lokaler Bestand, nicht im Repository)“ gekennzeichnet. Startbefehle und Grenzen je Gruppe: [`rechnungen/README.md`](../README.md).
+> **Vermerk zur Übernahme (04.10.2026).** Protokoll aus der Gesamtprojektanalyse 10/2026, Stand 02.10.2026, unverändert bis auf Pfade und Quellenangaben. Geprüft wurde der Repository-Stand `cd7be6a` (28.09.2026) mit der Präregistrierung v2 vom 25./28.09.2026; die späteren Änderungen aus PR #13 und PR #14 (unter anderem Präregistrierung v2 mit Arbeitsfestlegungen, `code/auslegung.py`, `code/ereignisloeser.py`) sind nicht eingearbeitet. Alle Zahlen sind Simulation oder Analytik, keine Messdaten. Verweise wie „L1a-019“, „P1 §3“ oder „B01–B14“ zeigen auf Arbeitsdokumente der Analyse, die nicht im Repository liegen. Quellen, die nicht im Repository liegen, sind als „(Quelle außerhalb des Repositorys)“ gekennzeichnet. Startbefehle und Grenzen je Gruppe: [`rechnungen/README.md`](../README.md).
 
 Stand 02.10.2026 · ursprünglich lokal, jetzt unter `rechnungen/` · nichts committet, keine Repo-Datei verändert.
 Kennzeichnung: **[Q]** Quellenangabe mit Fundstelle, **[R]** eigene Rechnung in diesem Ordner, **[E]** eigene Einschätzung, **[A]** Annahme.
@@ -9,7 +9,7 @@ Geprüft: KM-02, KM-03, KM-10, KM-11, KM-12 (Gruppe kippmoment), RT-04, SYM-01 (
 
 ## 1 Gelesen
 
-- Befundtexte: `(Arbeitsdokument der Analyse, nicht im Repository)` (Zeilen KM-02, KM-03, KM-10, KM-11, KM-12, SYM-01, RT-04, STA-10).
+- Befundtexte: (Quelle außerhalb des Repositorys) (Zeilen KM-02, KM-03, KM-10, KM-11, KM-12, SYM-01, RT-04, STA-10).
 - Protokolle: `rechnungen/kippmoment/PROTOKOLL.md` (KM-01…KM-12, Korrekturtabelle), `rechnungen/symmetrie_randterm/PROTOKOLL.md`
   (SYM-01…SYM-05, RT-01…RT-05), `rechnungen/statistik/PROTOKOLL.md` (STA-00…STA-10).
 - Ausgaben der Gruppe (nur zum Vergleich der Zahlen): `k1_…`, `k3_…`, `k4_…`, `k6_…_ausgabe.txt`; `s9_archiv_zerlegung_ausgabe.txt`;
@@ -20,8 +20,8 @@ Geprüft: KM-02, KM-03, KM-10, KM-11, KM-12 (Gruppe kippmoment), RT-04, SYM-01 (
   A9.2 P0.1/P0.4 (Z. 451–472); `docs/arbeitspapier/PCMMS_Arbeitspapier_v2_4.tex` Z. 86, 3491 (Tab. residual-strat), 5293–5295;
   `code/finesweep.py`, `code/linear_solver.py`, `code/pcmms_v3a_phasen_sweep.py` (Parameter, Gleichung); `data/sweep_19x19.csv`, `data/README.md`;
   `docs/arbeitspapier/nachrechnung_2026-09-13/sweep_19x19_burnin_2026-09-13.csv` (Kopf, Zeilen (0,0), (0; 18,947));
-  `(lokaler Bestand, nicht im Repository)` §6 (Z. 103–116);
-  `(Arbeitsdokument der Analyse, nicht im Repository)` (L1a-018, L1a-042/043/044, L2-001, L4-026, L4-034, L4-036, L5a-065, L5a-068, L5a-072/073, L5b-057, L6a-063, L6b-046).
+  (Quelle außerhalb des Repositorys) §6 (Z. 103–116);
+  (Quelle außerhalb des Repositorys) (L1a-018, L1a-042/043/044, L2-001, L4-026, L4-034, L4-036, L5a-065, L5a-068, L5a-072/073, L5b-057, L6a-063, L6b-046).
 
 ## 2 Vorgehen
 

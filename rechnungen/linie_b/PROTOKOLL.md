@@ -1,8 +1,8 @@
 # P2 · Prüfgruppe linie_b · Protokoll (02.10.2026)
 
-> **Vermerk zur Übernahme (04.10.2026).** Protokoll aus der Gesamtprojektanalyse 10/2026, Stand 02.10.2026, unverändert bis auf Pfade und Quellenangaben. Geprüft wurde der Repository-Stand `cd7be6a` (28.09.2026) mit der Präregistrierung v2 vom 25./28.09.2026; die späteren Änderungen aus PR #13 und PR #14 (unter anderem Präregistrierung v2 mit Arbeitsfestlegungen, `code/auslegung.py`, `code/ereignisloeser.py`) sind nicht eingearbeitet. Alle Zahlen sind Simulation oder Analytik, keine Messdaten. Verweise wie „L1a-019“, „P1 §3“ oder „B01–B14“ zeigen auf Arbeitsdokumente der Analyse, die nicht im Repository liegen. Quellen außerhalb des Repositorys sind als „(lokaler Bestand, nicht im Repository)“ gekennzeichnet. Startbefehle und Grenzen je Gruppe: [`rechnungen/README.md`](../README.md).
+> **Vermerk zur Übernahme (04.10.2026).** Protokoll aus der Gesamtprojektanalyse 10/2026, Stand 02.10.2026, unverändert bis auf Pfade und Quellenangaben. Geprüft wurde der Repository-Stand `cd7be6a` (28.09.2026) mit der Präregistrierung v2 vom 25./28.09.2026; die späteren Änderungen aus PR #13 und PR #14 (unter anderem Präregistrierung v2 mit Arbeitsfestlegungen, `code/auslegung.py`, `code/ereignisloeser.py`) sind nicht eingearbeitet. Alle Zahlen sind Simulation oder Analytik, keine Messdaten. Verweise wie „L1a-019“, „P1 §3“ oder „B01–B14“ zeigen auf Arbeitsdokumente der Analyse, die nicht im Repository liegen. Quellen, die nicht im Repository liegen, sind als „(Quelle außerhalb des Repositorys)“ gekennzeichnet. Startbefehle und Grenzen je Gruppe: [`rechnungen/README.md`](../README.md).
 
-Ablage: `rechnungen/linie_b/` (ursprünglich lokal, jetzt unter `rechnungen/` über `.git/info/exclude`).
+Ablage: `rechnungen/linie_b/` (ursprünglich lokal, jetzt unter `rechnungen/`).
 Quellen nur gelesen. Die Linie-B-Skripte wurden unverändert nach `quelle_kopie/` kopiert und dort importiert.
 Kennzeichnung im Text: **[R]** eigene Rechnung, **[Q]** Quellenangabe mit Fundstelle, **[A]** Annahme.
 
@@ -15,7 +15,7 @@ export PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=../../code
 
 ## 0 Quellenstand
 
-- `pcmms_fluid_drift_v2.py` und `pcmms_medienkopplung_modell_v2.py` unter `(lokaler Bestand, nicht im Repository)` und unter `(lokaler Bestand, nicht im Repository)` sind **byte-identisch** (MD5 15bef4cf… bzw. d32ec03b…). Die Work-Folder-Kopien sind nur jünger datiert (26.09. gegenüber 06.09.). Verwendet wurde der gemeinsame Inhalt.
+- `pcmms_fluid_drift_v2.py` und `pcmms_medienkopplung_modell_v2.py` an zwei Ablageorten außerhalb des Repositorys sind **byte-identisch** (MD5 15bef4cf… bzw. d32ec03b…). Die Kopien am zweiten Ablageort sind nur jünger datiert (26.09. gegenüber 06.09.). Verwendet wurde der gemeinsame Inhalt.
 - Neu nachgerechnete Stellen: Notiz v5.2 §4.2, §4.3, §6, §7, §8; `PCMMS_Skriptkorrekturen_LinieB_2026-09-06.md` §1, §3; Werkstattbericht Z. 88; Präreg-Anhang A4, Tabelle C und Tabelle F.
 
 ## 1 Befunde
@@ -122,7 +122,7 @@ export PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=../../code
 
 ### LB-07 · v1-Fensterkarte reproduziert; Fensterwert skaliert mit ρ (neu)
 
-- **Methode [R]:** wie v1 (`pcmms_fluid_drift.py`: Start aus der Ruhe, Mittel 4–8 s, RK4, Δt = 50 µs), alle 169 Punkte, ρ = 1000 und 1,2. Abgleich mit der archivierten `sweep_13x13_drift.csv` (Kernpaket 01.09.).
+- **Methode [R]:** wie v1 (`pcmms_fluid_drift.py`: Start aus der Ruhe, Mittel 4–8 s, RK4, Δt = 50 µs), alle 169 Punkte, ρ = 1000 und 1,2. Abgleich mit der archivierten `sweep_13x13_drift.csv` (Stand 01.09.2026; Kopie unter `daten/sweep_13x13_drift_v1.csv`).
 - **Ergebnis:**
   - Die archivierte v1-Karte ist reproduziert, max. |Diff| = 4,9·10⁻¹¹ m/s.
   - Spanne **−0,104101 … +0,691635 mm/s**, genau die Zahlen des Werkstattberichts. Das entspricht 14,7–65,6 % des stationären Werts; die Vorzeichen sind überall gleich.

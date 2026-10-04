@@ -9,7 +9,7 @@ UNABHÄNGIGE IMPLEMENTIERUNG:
       (Diskretisierungsempfindlichkeit).
   (b) Für rho = 1,2 halbanalytische Störungsrechnung 1. Ordnung in c = C2 rho / M:
       V(t) ~ c * G(t), G(t) = int_0^t (-v_osc|v_osc|) ds  (gültig für t << tau). Fenstermittel = c * <G>_[4,8).
-  Abgleich mit der archivierten v1-CSV (Kernpaket 01.09., alle 10 Kopien MD5-gleich) und Verhältnis rho=1000/1,2.
+  Abgleich mit der archivierten v1-CSV (Stand 01.09.2026, Kopie unter ../daten/; alle 10 Kopien der Quelle außerhalb des Repositorys MD5-gleich) und Verhältnis rho=1000/1,2.
 """
 import os
 import time
@@ -17,7 +17,7 @@ import time
 import numpy as np
 import pandas as pd
 
-V1CSV = os.path.join(os.path.dirname(os.path.abspath(__file__)), '../daten/sweep_13x13_drift_v1.csv')   # v1-Karte, Kopie aus dem Kernpaket 01.09.2026
+V1CSV = os.path.join(os.path.dirname(os.path.abspath(__file__)), '../daten/sweep_13x13_drift_v1.csv')   # v1-Karte, Kopie des archivierten Stands vom 01.09.2026
 M_TOT, RATIO, C2 = 0.75, 0.2, 0.5 * 0.8 * 0.03
 F, HOLD, V_FAST = 10.0, 0.65, 0.06
 T = 1 / F

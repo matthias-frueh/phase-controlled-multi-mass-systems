@@ -19,7 +19,7 @@ F_max / N                                38.4934         38.4842         38.4786
 F_min / N                                      0               0               0               0
 |N_1| / N                                11.9676         11.9681          11.968         11.9682
 |N_2| / N                                  9.821         9.82127         9.82122         9.82129
-/home/user/phase-controlled-multi-mass-systems/_analyse/p2/symmetrie_randterm/s6b_quadratur_tabelle.py:22: RuntimeWarning: invalid value encountered in log2
+s6b_quadratur_tabelle.py:22: RuntimeWarning: invalid value encountered in log2
   print('Ordnung E (log2 Verhaeltnis aufeinanderfolgender dt): ' + ' '.join(f'{np.log2(E[i] / E[i + 1]):.2f}' for i in range(3)))
 Ordnung E (log2 Verhaeltnis aufeinanderfolgender dt): 1.90 nan nan
 Ordnung der Schranke: 1.00 1.00 1.00
