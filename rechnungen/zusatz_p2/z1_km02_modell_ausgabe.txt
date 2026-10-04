@@ -1,0 +1,40 @@
+=== (0) Egg-Beschleunigung: A_k = 2|c_k| analytisch gegen FFT (2^16 Punkte) ===
+ k=1: A_k = 14.9649 m/s^2 (FFT 14.9649), arg c_k =    63.00 deg
+ k=2: A_k = 4.9321 m/s^2 (FFT 4.9321), arg c_k =   126.00 deg
+ k=3: A_k = 2.1280 m/s^2 (FFT 2.1280), arg c_k =  -171.00 deg
+ k=4: A_k = 0.3220 m/s^2 (FFT 0.3220), arg c_k =  -108.00 deg
+ k=5: A_k = 0.4419 m/s^2 (FFT 0.4419), arg c_k =   135.00 deg
+ k=6: A_k = 0.3989 m/s^2 (FFT 0.3989), arg c_k =  -162.00 deg
+ k=7: A_k = 0.0472 m/s^2 (FFT 0.0472), arg c_k =   -99.00 deg
+ k=8: A_k = 0.1846 m/s^2 (FFT 0.1846), arg c_k =   144.00 deg
+ k=9: A_k = 0.1592 m/s^2 (FFT 0.1592), arg c_k =  -153.00 deg
+ c_0 analytisch = 0.00e+00 (Gleichanteil null, da RBOT = RTOP*TFAST/THOLD)
+
+=== (a) Summe der linearen Zellkraefte (eigenes Modell) gegen Engine finesweep.run(120, 240) ===
+ statische Zelllasten [2.1255 2.1255 2.1255] N (Summe 6.376500, M g = 6.376500)
+ Engine-Lauf 56 s; Engine F_min 5.330390, F_max 7.491922, mean 6.376500000, liftoff 0.000 %
+ eigenes Modell (2000 Stichproben/Periode wie Engine): F_min 5.330390, F_max 7.491922, mean 6.376500000
+ max|N_3FG,linear - N_Engine| ueber 0,3 s ab 5 s: 7.35e-09 N
+ Kopplung Hub-Kippen in Mq: 1.0e-17, in Kq: 1.3e-17
+ mu=1, G0: max|Mq - (M/3) Bc Bc^T| = 0.0e+00
+
+=== (b) Eigene lineare Loesung fuer die 12 Faelle aus k3 (F_min Zelle, R+1, R-2) ===
+ REF   mu=1.000 G0   phi=(0, 120, 240): F_min Zelle  -6.30814 N (2000/Periode), R+1 0.65161, R-2 0.80625 N m
+ REF   mu=1.000 G0   phi=(0, 110, 240): F_min Zelle  -6.30814 N (2000/Periode), R+1 0.64941, R-2 0.79537 N m
+ REF   mu=1.000 G60h phi=(0, 120, 240): F_min Zelle  -0.67509 N (2000/Periode), R+1 0.25967, R-2 0.10616 N m
+ REF   mu=1.000 G60h phi=(0, 110, 240): F_min Zelle  -1.16340 N (2000/Periode), R+1 0.25879, R-2 0.10472 N m
+ REF   mu=0.462 G0   phi=(0, 120, 240): F_min Zelle  -0.21684 N (2000/Periode), R+1 0.27587, R-2 0.23564 N m
+ REF   mu=0.462 G0   phi=(0, 110, 240): F_min Zelle  -0.45202 N (2000/Periode), R+1 0.27494, R-2 0.23246 N m
+ REF   mu=0.462 G60h phi=(0, 120, 240): F_min Zelle   0.76576 N (2000/Periode), R+1 0.12450, R-2 0.05921 N m
+ REF   mu=0.462 G60h phi=(0, 110, 240): F_min Zelle   0.58700 N (2000/Periode), R+1 0.12408, R-2 0.05841 N m
+ STEIF mu=0.462 G0   phi=(0, 120, 240): F_min Zelle   0.84977 N (2000/Periode), R+1 0.22585, R-2 0.07559 N m
+ STEIF mu=0.462 G0   phi=(0, 110, 240): F_min Zelle   0.82622 N (2000/Periode), R+1 0.22508, R-2 0.07457 N m
+ STEIF mu=0.462 G60h phi=(0, 120, 240): F_min Zelle   1.11161 N (2000/Periode), R+1 0.11265, R-2 0.03743 N m
+ STEIF mu=0.462 G60h phi=(0, 110, 240): F_min Zelle   1.14061 N (2000/Periode), R+1 0.11227, R-2 0.03692 N m
+
+=== (c) DOP853 (rtol 1e-10) bilateral gegen eigene lineare Loesung, letzte 2 Perioden nach 3 s ===
+ ('REF', 1.0, 'G0', (0, 120, 240)): max|F_DOP853 - F_linear| = 2.02e-08 N (7 s)
+ ('REF', 0.462, 'G0', (0, 110, 240)): max|F_DOP853 - F_linear| = 1.04e-08 N (7 s)
+ ('STEIF', 0.462, 'G60h', (0, 120, 240)): max|F_DOP853 - F_linear| = 3.39e-09 N (8 s)
+
+Laufzeit 78 s

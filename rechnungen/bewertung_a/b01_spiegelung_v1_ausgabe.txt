@@ -1,0 +1,12 @@
+              Referenz K=1e4, C=16, mu=1: max|dF_min| = 849.8665 mN (bei phi2 = 100°), max|d gamma1| = 0.39423; 2°-Sekanten L/R = 212.386/195.179 mN/°; Zeltspannweite 4562.7 mN; Kontaktast überall: True
+    V1 K=1,5e6, zeta=0,05, 3x100 g, 8 mm: max|dF_min| =  22.6836 mN (bei phi2 = 100°), max|d gamma1| = 0.00062; 2°-Sekanten L/R = 54.469/57.061 mN/°; Zeltspannweite 560.3 mN; Kontaktast überall: True
+                   V1 K=1,5e6, zeta=0,02: max|dF_min| =  43.9267 mN (bei phi2 = 112°), max|d gamma1| = 0.00329; 2°-Sekanten L/R = 46.764/56.189 mN/°; Zeltspannweite 532.8 mN; Kontaktast überall: True
+      V3 K=3e6, zeta=0,05, 3x50 g, 14 Hz: max|dF_min| =  16.5120 mN (bei phi2 = 100°), max|d gamma1| = 0.00074; 2°-Sekanten L/R = 52.694/55.115 mN/°; Zeltspannweite 546.3 mN; Kontaktast überall: True
+                        starr, mu wie V1: max|dF_min| =   2.3923 mN (bei phi2 = 114°), max|d gamma1| = 0.00002; 2°-Sekanten L/R = 56.226/56.211 mN/°; Zeltspannweite 563.2 mN; Kontaktast überall: True
+
+Bandbegrenzt (k <= k_max), Spiegelpaare (phi2, 240) <-> (240 - phi2, 240), phi2 = 100..118°:
+              Referenz K=1e4, C=16, mu=1: k_max=3: max|dF_min| 834.101 mN, max|d gamma1| 0.4064; k_max=6: max|dF_min| 856.721 mN, max|d gamma1| 0.3943; k_max=9: max|dF_min| 850.864 mN, max|d gamma1| 0.3942; k_max=12: max|dF_min| 848.841 mN, max|d gamma1| 0.3942
+    V1 K=1,5e6, zeta=0,05, 3x100 g, 8 mm: k_max=3: max|dF_min|   0.008 mN, max|d gamma1| 0.0000; k_max=6: max|dF_min|   0.017 mN, max|d gamma1| 0.0000; k_max=9: max|dF_min|   0.026 mN, max|d gamma1| 0.0000; k_max=12: max|dF_min|   0.053 mN, max|d gamma1| 0.0000
+                   V1 K=1,5e6, zeta=0,02: k_max=3: max|dF_min|   0.007 mN, max|d gamma1| 0.0000; k_max=6: max|dF_min|   0.014 mN, max|d gamma1| 0.0000; k_max=9: max|dF_min|   0.023 mN, max|d gamma1| 0.0000; k_max=12: max|dF_min|   0.031 mN, max|d gamma1| 0.0000
+      V3 K=3e6, zeta=0,05, 3x50 g, 14 Hz: k_max=3: max|dF_min|   0.008 mN, max|d gamma1| 0.0000; k_max=6: max|dF_min|   0.017 mN, max|d gamma1| 0.0000; k_max=9: max|dF_min|   0.025 mN, max|d gamma1| 0.0000; k_max=12: max|dF_min|   0.049 mN, max|d gamma1| 0.0000
+                        starr, mu wie V1: k_max=3: max|dF_min|   0.007 mN, max|d gamma1| 0.0000; k_max=6: max|dF_min|   0.012 mN, max|d gamma1| 0.0000; k_max=9: max|dF_min|   0.014 mN, max|d gamma1| 0.0000; k_max=12: max|dF_min|   0.020 mN, max|d gamma1| 0.0000

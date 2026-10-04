@@ -1,0 +1,15 @@
+== Profil ungerade
+  (  0,  0)  linear: g1=+4.39e-16 gerade/ungerade=1.7e-14 A=1.0000 | lin. Kopplung 1 %: g1=+4.3e-16 ger/ung=1.7e-14 | quadr. Kennlinie: g1=+1.278e-01 ger/ung=3.30e-02
+  (120,240)  linear: g1=-1.54e-15 gerade/ungerade=1.9e-14 A=1.0000 | lin. Kopplung 1 %: g1=-1.7e-15 ger/ung=1.9e-14 | quadr. Kennlinie: g1=+2.666e-02 ger/ung=1.26e-02
+  (110,250)  linear: g1=-6.31e-16 gerade/ungerade=1.5e-14 A=1.0000 | lin. Kopplung 1 %: g1=-7.4e-16 ger/ung=1.5e-14 | quadr. Kennlinie: g1=+3.780e-02 ger/ung=1.47e-02
+  ( 35,116)  linear: g1=+1.83e-16 gerade/ungerade=1.5e-14 A=1.0000 | lin. Kopplung 1 %: g1=-1.0e-16 ger/ung=1.5e-14 | quadr. Kennlinie: g1=+1.921e-02 ger/ung=9.11e-03
+  ( 60,200)  linear: g1=+1.17e-16 gerade/ungerade=1.5e-14 A=1.0000 | lin. Kopplung 1 %: g1=+5.8e-16 ger/ung=1.5e-14 | quadr. Kennlinie: g1=+3.905e-02 ger/ung=1.43e-02
+== Profil egg
+  (  0,  0)  linear: g1=+7.59e-01 gerade/ungerade=3.3e-01 A=1.8568 | lin. Kopplung 1 %: g1=+7.6e-01 ger/ung=3.3e-01 | quadr. Kennlinie: g1=+7.702e-01 ger/ung=3.35e-01
+  (120,240)  linear: g1=-4.92e-01 gerade/ungerade=2.1e-01 A=0.6136 | lin. Kopplung 1 %: g1=-4.9e-01 ger/ung=2.1e-01 | quadr. Kennlinie: g1=-4.903e-01 ger/ung=2.06e-01
+  (110,250)  linear: g1=-8.99e-01 gerade/ungerade=3.7e-01 A=0.5730 | lin. Kopplung 1 %: g1=-8.9e-01 ger/ung=3.6e-01 | quadr. Kennlinie: g1=-8.945e-01 ger/ung=3.74e-01
+  ( 35,116)  linear: g1=+1.00e-01 gerade/ungerade=1.2e-01 A=1.2266 | lin. Kopplung 1 %: g1=+1.0e-01 ger/ung=1.3e-01 | quadr. Kennlinie: g1=+1.068e-01 ger/ung=1.26e-01
+  ( 60,200)  linear: g1=+3.54e-01 gerade/ungerade=8.3e-01 A=1.2142 | lin. Kopplung 1 %: g1=+3.6e-01 ger/ung=8.3e-01 | quadr. Kennlinie: g1=+3.599e-01 ger/ung=8.34e-01
+== Skalierung der geraden Harmonischen mit der Amplitude (Profil ungerade, (110,250), eps2=0,002)
+  Hub 4 mm: |N_2| = 20.5455 mN
+  Hub 8 mm: |N_2| = 82.1819 mN

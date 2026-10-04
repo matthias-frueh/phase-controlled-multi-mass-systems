@@ -1,0 +1,10 @@
+(A) mu=1, G0, einseitig je Zelle, Triphasik-Phasen: |F_Zelle1 - F_Engine(0,0)/3|
+   bis 0.1 s: max 1.95e-14 N
+   bis 0.5 s: max 1.13e-12 N
+   bis 1.0 s: max 1.89e-10 N
+   Anteil Stichproben ohne Kontakt in Zelle 1 (1. s): 0.757
+
+(B) |M(t)| am Triphasik-Punkt, Egg, G0
+   STARR mu=0.462: |M| min 0.1331, max 0.2981 N m, max/min 2.24; Netto-Umlaeufe je Periode +1.00; Mittel Mx, My 0.0e+00, 1.4e-17
+   STEIF mu=0.462: |M| min 0.1136, max 0.3202 N m, max/min 2.82; Netto-Umlaeufe je Periode +1.00; Mittel Mx, My -7.1e-18, 1.4e-17
+   REF   mu=1.0: |M| min 0.1588, max 1.4568 N m, max/min 9.17; Netto-Umlaeufe je Periode -2.00; Mittel Mx, My -4.3e-17, -2.8e-17

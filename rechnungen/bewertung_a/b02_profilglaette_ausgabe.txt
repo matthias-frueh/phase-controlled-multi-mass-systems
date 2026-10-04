@@ -1,0 +1,12 @@
+--- ideales Egg: |P_k|/|P_1| bei k = 12/24: 5.36e-03/5.04e-04
+       starr: F_min(120) = 5.4989 N (k<=12: 5.5134), F_min(100) = 4.9357 N, Spitze bei 120°, dF_Zelt = 0.5632 N, synchron F_min = 2.7323 N (Reserve 42.9 % von Mg)
+   zeta=0,05: F_min(120) = 5.4088 N (k<=12: 5.4788), F_min(100) = 4.8712 N, Spitze bei 120°, dF_Zelt = 0.5603 N, synchron F_min = 2.7181 N (Reserve 42.6 % von Mg)
+   zeta=0,02: F_min(120) = 5.3835 N (k<=12: 5.4787), F_min(100) = 4.8806 N, Spitze bei 120°, dF_Zelt = 0.5328 N, synchron F_min = 2.6682 N (Reserve 41.8 % von Mg)
+--- Tiefpass k0 = 30: |P_k|/|P_1| bei k = 12/24: 4.57e-03/2.66e-04
+       starr: F_min(120) = 5.5135 N (k<=12: 5.5329), F_min(100) = 4.9431 N, Spitze bei 120°, dF_Zelt = 0.5703 N, synchron F_min = 2.7347 N (Reserve 42.9 % von Mg)
+   zeta=0,05: F_min(120) = 5.4555 N (k<=12: 5.5006), F_min(100) = 4.9098 N, Spitze bei 120°, dF_Zelt = 0.5629 N, synchron F_min = 2.7293 N (Reserve 42.8 % von Mg)
+   zeta=0,02: F_min(120) = 5.4428 N (k<=12: 5.5005), F_min(100) = 4.9139 N, Spitze bei 120°, dF_Zelt = 0.5490 N, synchron F_min = 2.7036 N (Reserve 42.4 % von Mg)
+--- Tiefpass k0 = 15: |P_k|/|P_1| bei k = 12/24: 2.84e-03/3.92e-05
+       starr: F_min(120) = 5.5769 N (k<=12: 5.5847), F_min(100) = 4.9674 N, Spitze bei 120°, dF_Zelt = 0.6095 N, synchron F_min = 2.7419 N (Reserve 43.0 % von Mg)
+   zeta=0,05: F_min(120) = 5.5426 N (k<=12: 5.5579), F_min(100) = 4.9537 N, Spitze bei 120°, dF_Zelt = 0.5928 N, synchron F_min = 2.7397 N (Reserve 43.0 % von Mg)
+   zeta=0,02: F_min(120) = 5.5410 N (k<=12: 5.5579), F_min(100) = 4.9536 N, Spitze bei 120°, dF_Zelt = 0.5899 N, synchron F_min = 2.7390 N (Reserve 43.0 % von Mg)

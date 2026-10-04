@@ -1,0 +1,4 @@
+TH=0.50: med(u)=+0.0000 (geschlossen -0.0000), gamma1=+0.0000, med/(-gamma1/6)=nan, gespiegelt med=-0.0000
+TH=0.65: med(u)=-0.3680 (geschlossen -0.3680), gamma1=+0.7550, med/(-gamma1/6)=2.92, gespiegelt med=+0.3680
+TH=0.80: med(u)=-0.3928 (geschlossen -0.3928), gamma1=+1.8006, med/(-gamma1/6)=1.31, gespiegelt med=+0.3928
+s_N/Mg fuer 0,2 % / 0,5 % Versatz: 0.54 / 1.36 %

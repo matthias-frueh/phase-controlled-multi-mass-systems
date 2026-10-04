@@ -1,0 +1,8 @@
+Fallhoehe  v0      F_peak(zeta=0,02/0,05/0,10)      v0*sqrt(K*M)
+    1 mm  0.140      140 N /    135 N /    127 N         138 N
+    3 mm  0.243      239 N /    229 N /    216 N         240 N
+   12 mm  0.485      471 N /    452 N /    427 N         479 N
+   18 mm  0.594      575 N /    552 N /    522 N         587 N
+zeta=0.02: e=0.939 (numerisch 0.939), Stoesse bis v<0,05 m/s: 37, Summe Flugzeiten ab 0,5 m/s: 1.51 s
+zeta=0.05: e=0.854 (numerisch 0.856), Stoesse bis v<0,05 m/s: 15, Summe Flugzeiten ab 0,5 m/s: 0.63 s
+zeta=0.10: e=0.729 (numerisch 0.740), Stoesse bis v<0,05 m/s: 8, Summe Flugzeiten ab 0,5 m/s: 0.35 s

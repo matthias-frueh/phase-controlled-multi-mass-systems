@@ -1,0 +1,23 @@
+P3 / bewertung_a – B03 (Kandidaten 10, 25, 51): Wie stark verletzt eine richtungsabhängige
+
+=== K = 1.5e+06 N/m, zeta = 0.05, C = 98.74 N s/m, f_n = 241.8 Hz, rho = 0.041, mu = 0,4615, Hub 8 mm, f = 10 Hz
+ a = 0.0: max|r(F_min-<N>)| =   0.0031 mN; max|r Re/Im N1| =   0.0000 mN, N2 =   0.0001 mN, N3 =   0.0001 mN; max|<N>-Mg| = 0.044 uN; Zeltspitze bei 120°, Spannweite 0.5603 N; Delta<delta> Einzel/synchron = +0.000/+0.000 nm; Konvergenz max 4.3e-14 N
+    bandbegrenzt max|r(F_min-<N>)| [mN]: k_max=3: 0.0001, k_max=6: 0.0003, k_max=9: 0.0004, k_max=12: 0.0006
+ a = 0.1: max|r(F_min-<N>)| =   2.1208 mN; max|r Re/Im N1| =   0.0004 mN, N2 =   0.0010 mN, N3 =   0.0055 mN; max|<N>-Mg| = 0.046 uN; Zeltspitze bei 120°, Spannweite 0.5603 N; Delta<delta> Einzel/synchron = -0.316/-0.947 nm; Konvergenz max 4.4e-14 N
+    bandbegrenzt max|r(F_min-<N>)| [mN]: k_max=3: 0.0049, k_max=6: 0.0111, k_max=9: 0.0341, k_max=12: 0.0712
+ a = 0.3: max|r(F_min-<N>)| =   6.3909 mN; max|r Re/Im N1| =   0.0011 mN, N2 =   0.0028 mN, N3 =   0.0165 mN; max|<N>-Mg| = 0.055 uN; Zeltspitze bei 120°, Spannweite 0.5603 N; Delta<delta> Einzel/synchron = -0.957/-2.871 nm; Konvergenz max 4.2e-14 N
+    bandbegrenzt max|r(F_min-<N>)| [mN]: k_max=3: 0.0148, k_max=6: 0.0328, k_max=9: 0.1035, k_max=12: 0.2144
+    Ort des größten F_min-Residuums: phi2 = 120°; Residuum synchron F_min: 0.0000 mN
+ a = 0.5: max|r(F_min-<N>)| =  10.6547 mN; max|r Re/Im N1| =   0.0019 mN, N2 =   0.0049 mN, N3 =   0.0275 mN; max|<N>-Mg| = 0.051 uN; Zeltspitze bei 120°, Spannweite 0.5605 N; Delta<delta> Einzel/synchron = -1.620/-4.860 nm; Konvergenz max 3.9e-14 N
+    bandbegrenzt max|r(F_min-<N>)| [mN]: k_max=3: 0.0248, k_max=6: 0.0541, k_max=9: 0.1731, k_max=12: 0.3566
+
+=== K = 1e+05 N/m, zeta = 0.05, C = 25.50 N s/m, f_n = 62.4 Hz, rho = 0.160, mu = 0,4615, Hub 8 mm, f = 10 Hz
+ a = 0.0: max|r(F_min-<N>)| =   0.0010 mN; max|r Re/Im N1| =   0.0000 mN, N2 =   0.0001 mN, N3 =   0.0001 mN; max|<N>-Mg| = 0.044 uN; Zeltspitze bei 120°, Spannweite 0.3841 N; Delta<delta> Einzel/synchron = -0.000/-0.000 nm; Konvergenz max 5.5e-09 N
+    bandbegrenzt max|r(F_min-<N>)| [mN]: k_max=3: 0.0002, k_max=6: 0.0010, k_max=9: 0.0010, k_max=12: 0.0010
+ a = 0.1: max|r(F_min-<N>)| =   4.1676 mN; max|r Re/Im N1| =   0.0367 mN, N2 =   0.0627 mN, N3 =   0.3523 mN; max|<N>-Mg| = 0.049 uN; Zeltspitze bei 120°, Spannweite 0.3838 N; Delta<delta> Einzel/synchron = -26.281/-78.844 nm; Konvergenz max 6.9e-09 N
+    bandbegrenzt max|r(F_min-<N>)| [mN]: k_max=3: 0.3499, k_max=6: 4.1903, k_max=9: 3.8795, k_max=12: 3.9018
+ a = 0.3: max|r(F_min-<N>)| =  13.1948 mN; max|r Re/Im N1| =   0.1088 mN, N2 =   0.1922 mN, N3 =   1.0270 mN; max|<N>-Mg| = 0.068 uN; Zeltspitze bei 120°, Spannweite 0.3827 N; Delta<delta> Einzel/synchron = -79.310/-237.931 nm; Konvergenz max 1.1e-08 N
+    bandbegrenzt max|r(F_min-<N>)| [mN]: k_max=3: 1.0197, k_max=6: 12.6866, k_max=9: 11.0680, k_max=12: 12.7387
+    Ort des größten F_min-Residuums: phi2 = 120°; Residuum synchron F_min: -0.0000 mN
+ a = 0.5: max|r(F_min-<N>)| =  23.4938 mN; max|r Re/Im N1| =   0.1795 mN, N2 =   0.3289 mN, N3 =   1.6480 mN; max|<N>-Mg| = 0.094 uN; Zeltspitze bei 120°, Spannweite 0.3818 N; Delta<delta> Einzel/synchron = -133.067/-399.202 nm; Konvergenz max 1.7e-08 N
+    bandbegrenzt max|r(F_min-<N>)| [mN]: k_max=3: 1.6407, k_max=6: 21.5972, k_max=9: 17.3162, k_max=12: 23.1641

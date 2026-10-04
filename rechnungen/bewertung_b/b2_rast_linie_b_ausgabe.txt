@@ -1,0 +1,6 @@
+Rast   Halbsinus  Trapez  konstant   geschlossen(Halbsinus)  geschlossen(konstant)
+0.0T  +0.462  +0.529  +0.564     +0.462                 +0.564
+0.1T  +0.364  +0.443  +0.484     +0.364                 +0.484
+0.2T  +0.222  +0.319  +0.370     +0.222                 +0.370
+0.3T  +0.000  +0.124  +0.189     +0.000                 +0.189
+Folgerung: im gedaechtnisfreien Modell faellt die Gleichrichtung streng monoton mit der Rast (analytisch 1 - c*t_h/t_r); ein Optimum bei endlicher Rast ist dort ausgeschlossen.

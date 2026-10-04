@@ -1,0 +1,89 @@
+== 1. Zitierschlüssel ==
+references.bib: 22 Einträge
+AP v2.4: 22 Schlüssel; nicht im bib: []; im bib, nicht zitiert: []
+Diss v2.1: 22 Schlüssel; nicht im bib: []; im bib, nicht zitiert: []
+
+== 2. Vollständigkeit je Eintrag ==
+beckwith2006             book       fehlt: -
+bendat2010               book       fehlt: -
+desilva2007              book       fehlt: doi/isbn
+doebelin2004             book       fehlt: doi/isbn
+featherstone2008         book       fehlt: -
+kay1998                  book       fehlt: -
+lanczos1986              book       fehlt: -  [note: Nachdruck der Ausgabe University of Toronto Press, 1970]
+montgomery2014           book       fehlt: doi/isbn  [note: Internationale Ausgabe; die US-Ausgabe der 6.~Auflage tr\"agt 2013]
+nist1994                 techreport fehlt: -
+shabana2010              book       fehlt: doi/isbn
+umbanhowar2005           article    fehlt: -
+rigaud2003               article    fehlt: doi
+perretliaudet2003        article    fehlt: pages, doi  [note: Preprint: arXiv:physics/0701033]
+perretliaudet2006        article    fehlt: doi
+wakou2008                article    fehlt: doi  [note: Preprint: arXiv:0801.4428]
+chen2019                 article    fehlt: -
+perretliaudet2007        article    fehlt: -
+osadchyy2023             article    fehlt: -
+gurskyi2023              article    fehlt: -
+chatzinikolaidis2020     article    fehlt: doi  [note: Preprint: arXiv:2007.11261]
+chatzinikolaidis2021     article    fehlt: doi  [note: Preprint: arXiv:2101.08246]
+frueh2026repo            misc       fehlt: -  [note: Software und Simulationsdaten, Version 2026-09]
+
+== 3. AP Anhang C, Tabelle tab:verifikation (Spalte DOI/ISBN) ==
+Jede der 21 Quellen im Literaturverzeichnis wurde einzeln geprüft. Als
+verifiziert gilt ein Eintrag, wenn Autoren, Titel, Erscheinungsort und
+Jahr auf der Seite des Verlags oder Repositoriums bestätigt sind und,
+soweit vergeben, der DOI aufgelöst wurde.
+
+\begin{table}[htbp]
+  \centering
+  \small
+  \resizebox{\textwidth}{!}{%
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{5.0cm} >{\raggedright\arraybackslash}p{2.7cm} l >{\raggedright\arraybackslash}p{5.6cm}@{}}
+    \hline
+    Eintrag | Verifiziert über | DOI/ISBN | Anmerkung
+\hline
+    Umbanhowar/van Hecke 2005 | APS | DOI | ---
+Rigaud/Perret-Liaudet 2003 (T.\,1) | ScienceDirect | --- | Seiten 289--307
+Perret-Liaudet/Rigaud 2003 (T.\,2) | ScienceDirect, arXiv | --- | Seitenzahl nicht ermittelt
+Perret-Liaudet/Rigaud 2006 | ScienceDirect | --- | Jahr 2006, nicht 2003
+Perret-Liaudet/Rigaud 2007 | ASME | DOI | ---
+Wakou/Ochiai/Isobe 2008 | J-STAGE, arXiv | --- | ---
+Chen et al.\ 2019 | Hindawi | DOI | ---
+Osadchyy et al.\ 2023 | MDPI, PMC | DOI | ---
+Gurskyi/Korendiy et al.\ 2023 | MDPI | DOI | Ersatz für nicht auffindbares ``Korendiy 2026''
+Chatzinikolaidis et al.\ 2020 | IEEE, arXiv | --- | ---
+Chatzinikolaidis/Li 2021 | IEEE, arXiv | --- | ---
+\hline
+    Beckwith et al.\ 2006 | Pearson | ISBN | 6.\ Aufl.; Paperback 2007
+Bendat/Piersol 2010 | Wiley | DOI | 4.\ Aufl.
+de Silva 2007 | CRC | --- | Untertitel korrigiert
+Doebelin 2004 | McGraw-Hill | --- | Original statt Manik-Adaption
+Featherstone 2008 | Springer | DOI | ---
+Kay 1998 | Pearson | ISBN | ---
+Lanczos 1986 | Dover | ISBN | Nachdruck 1970
+Montgomery/Runger 2014 | Wiley | --- | US-Ausgabe 2013
+Shabana 2010 | Wiley | ISBN | Jahr korrigiert, nicht 2013
+Taylor/Kuyatt 1994 | NIST | DOI | 1994 Edition
+Hinweis: shabana2010 im bib: ('book', {'author': 'Shabana, Ahmed A.', 'title': 'Computational Dynamics', 'edition': '3', 'publisher': 'Wiley', 'year': '2010'})
+
+== 4. BibTeX-Block Literaturabgleich 12.09. ==
+PopovLi2018                  in references.bib: False; im AP zitiert/erwähnt: False; vollständig
+MadatovLiPopov2026           in references.bib: False; im AP zitiert/erwähnt: False; vollständig
+Feng2026PhaseSpace           in references.bib: False; im AP zitiert/erwähnt: False; ohne DOI, ohne Journal (Preprint)
+Feng2026Harmonic             in references.bib: False; im AP zitiert/erwähnt: False; ohne DOI, ohne Journal (Preprint)
+Feng2026EnergyPhase          in references.bib: False; im AP zitiert/erwähnt: False; ohne Seiten/Artikelnr.
+FlachYevtushenkoZolotaryuk2000 in references.bib: False; im AP zitiert/erwähnt: False; vollständig
+DenisovFlachHanggi2014       in references.bib: False; im AP zitiert/erwähnt: False; vollständig
+ZigelmanEtAl2026             in references.bib: False; im AP zitiert/erwähnt: False; vollständig
+WangEtAl2026Capsule          in references.bib: False; im AP zitiert/erwähnt: False; vollständig
+MaoEtAl2017                  in references.bib: False; im AP zitiert/erwähnt: False; vollständig
+TeideltEtAl2012              in references.bib: False; im AP zitiert/erwähnt: False; vollständig
+PapangeloCiavarella2015      in references.bib: False; im AP zitiert/erwähnt: False; vollständig
+MadatovLiPopov2025AIP        in references.bib: False; im AP zitiert/erwähnt: False; ohne DOI
+Nachnamen im AP v2.4: {'Popov': 0, 'Madatov': 0, 'Flach': 2, 'Denisov': 0, 'Feng': 0, 'Zigelman': 0, 'Mao': 0, 'Teidelt': 0, 'Papangelo': 0, 'Wang': 0}
+
+== 5. FV v2.7 thebibliography ==
+FV perret:  J. Perret-Liaudet und E. Rigaud: \emph{Experiments and numerical results on nonlinear vibrations of an impacting Hertzian contact. Part 2: random excitation}. Journal of Sound and Vibration 265 (2003), 309--327. \href{h
+FV wakou:  J. Wakou, A. Ochiai und M. Isobe: \emph{A Langevin Approach to One-Dimensional Granular Media Fluidized by Vibrations}. 2008. \href{https://arxiv.org/abs/0801.4428}{arXiv:0801.4428}.
+FV umbanhowar:  P. Umbanhowar und M. van Hecke: \emph{Force Dynamics in Weakly Vibrated Granular Packings}. Physical Review E 72 (2005), 030301(R). \href{https://doi.org/10.1103/PhysRevE.72.030301}{DOI: 10.1103/PhysRevE.72.030301}. \hr
+AP-bib perretliaudet2003: ('article', {'author': 'Perret-Liaudet, Jo\\"el and Rigaud, Emmanuel', 'title': 'Experiments and numerical results on non-linear vibrations of an impacting {H}ertzian contact. {P}art 2: random excitation', 'journal': 'Journal of Sound and Vibration', 'volume': '265', 'number': '2', 'year': '2003', 'note': 'Preprint: arXiv:physics/0701033'})
+AP-bib wakou2008: ('article', {'author': "Wakou, Jun'ichi and Ochiai, Akinori and Isobe, Masaharu", 'title': 'A {L}angevin approach to one-dimensional granular media fluidized by vibrations', 'journal': 'Journal of the Physical Society of Japan', 'volume': '77', 'number': '3', 'pages': '034402', 'year': '2008', 'note': 'Preprint: arXiv:0801.4428'})
