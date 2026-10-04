@@ -1,0 +1,3 @@
+[  15.6 s] L2 mech 1 %/0,1°: c_sim(z0) = 3.858, c_sim(z1) = 3.945, c_B ≈ 3.952
+[  31.7 s] L2 kopplung 0.106: neu A best 0.000 fals 0.000 (c_B 0.000) | B best 0.000 fals 0.000 | beide 0.000/0.000 | sig beide 1.000 | alt best 0.000 fals 1.000
+[  48.3 s] L2 kopplung 0.115: neu A best 0.000 fals 0.367 (c_B 0.350) | B best 0.000 fals 0.367 | beide 0.000/0.000 | sig beide 1.000 | alt best 0.000 fals 1.000

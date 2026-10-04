@@ -1,0 +1,26 @@
+(a1) Aufbau() V1-Kandidat G0 (3-FG, K = 1,5e6, zeta = 0,05)                  12.3 ms
+k_max (Vorgabe max(k_b, 3)) = 12
+(a2) loesen(): 21 Schnittpunkte + 3 Piloten, k <= k_max                      62.5 ms
+(a3) loesen(): 3 Einzelmodulläufe                                             5.6 ms
+(a4) Aufbau G60h + loesen (Schnitt, Piloten, Einzel)                         81.8 ms
+(b) Kampagne Harmonische, 21 Punkte x 7 Größen, n = n0 = 20, n1 = 21, B = 200       40.4 ms
+(b) Kampagne Harmonische, 21 Punkte x 7 Größen, n = n0 = 20, n1 = 21, B = 1000      190.8 ms
+(c) ein Lauf Zeitreihe (Summe + 3 Zellen, 6,4 kHz, 100 Zyklen) inkl. Kette A9.4       75.4 ms
+(d1) Kontaktast Kelvin-Voigt geschlossen (Kandidat synchron)                  5.8 ms
+(d2) Wurf 0,4 m/s aus dem Kontaktast, 160 Perioden (Kelvin-Voigt)           981.4 ms
+(d3) 150 Perioden Kontaktast Kelvin-Voigt (Triphasik)                       883.5 ms
+(d4) Hunt-Crossley-Kontaktast per Newton (Triphasik, solve_ivp)            1477.6 ms
+(d5) Hunt-Crossley 10 Perioden im Dauerkontakt (solve_ivp)                  895.1 ms
+
+(a1) Aufbau() V1-Kandidat G0 (3-FG, K = 1,5e6, zeta = 0,05);0.0123
+(a2) loesen(): 21 Schnittpunkte + 3 Piloten, k <= k_max;0.0625
+(a3) loesen(): 3 Einzelmodulläufe;0.0056
+(a4) Aufbau G60h + loesen (Schnitt, Piloten, Einzel);0.0818
+(b) Kampagne Harmonische, 21 Punkte x 7 Größen, n = n0 = 20, n1 = 21, B = 200;0.0404
+(b) Kampagne Harmonische, 21 Punkte x 7 Größen, n = n0 = 20, n1 = 21, B = 1000;0.1908
+(c) ein Lauf Zeitreihe (Summe + 3 Zellen, 6,4 kHz, 100 Zyklen) inkl. Kette A9.4;0.0754
+(d1) Kontaktast Kelvin-Voigt geschlossen (Kandidat synchron);0.0058
+(d2) Wurf 0,4 m/s aus dem Kontaktast, 160 Perioden (Kelvin-Voigt);0.9814
+(d3) 150 Perioden Kontaktast Kelvin-Voigt (Triphasik);0.8835
+(d4) Hunt-Crossley-Kontaktast per Newton (Triphasik, solve_ivp);1.4776
+(d5) Hunt-Crossley 10 Perioden im Dauerkontakt (solve_ivp);0.8951

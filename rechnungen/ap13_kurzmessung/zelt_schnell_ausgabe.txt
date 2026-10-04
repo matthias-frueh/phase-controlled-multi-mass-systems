@@ -1,0 +1,27 @@
+Gleichheit Kandidatenverfahren gegen Vollraster (gleiche RSS-Funktion) und gegen Prüferfassung
+  w =  6°, asym         R = 300: Abweichungen gegen Vollraster 0, gegen Prüferfassung 0 (max |Δφ*| = 0.0000°)
+  w =  6°, sym          R = 300: Abweichungen gegen Vollraster 0, gegen Prüferfassung 0 (max |Δφ*| = 0.0000°)
+  w =  6°, sym_fein     R = 300: Abweichungen gegen Vollraster 0, gegen Prüferfassung 0 (max |Δφ*| = 0.0000°)
+zelt_schnell.py:35: RuntimeWarning: invalid value encountered in subtract
+  rss = syy - a * sy - b * suy
+  w =  6°, rauschen     R = 300: Abweichungen gegen Vollraster 0, gegen Prüferfassung 101 (max |Δφ*| = 2.2240°)
+  w =  6°, gerade       R = 300: Abweichungen gegen Vollraster 0, gegen Prüferfassung 170 (max |Δφ*| = 5.4990°)
+  w =  6°, knick_flach  R = 300: Abweichungen gegen Vollraster 0, gegen Prüferfassung 0 (max |Δφ*| = 0.0000°)
+  w =  8°, asym         R = 300: Abweichungen gegen Vollraster 0, gegen Prüferfassung 0 (max |Δφ*| = 0.0000°)
+  w =  8°, sym          R = 300: Abweichungen gegen Vollraster 0, gegen Prüferfassung 1 (max |Δφ*| = 8.0850°)
+  w =  8°, sym_fein     R = 300: Abweichungen gegen Vollraster 0, gegen Prüferfassung 0 (max |Δφ*| = 0.0000°)
+  w =  8°, rauschen     R = 300: Abweichungen gegen Vollraster 0, gegen Prüferfassung 86 (max |Δφ*| = 4.0930°)
+  w =  8°, gerade       R = 300: Abweichungen gegen Vollraster 0, gegen Prüferfassung 155 (max |Δφ*| = 2.1810°)
+  w =  8°, knick_flach  R = 300: Abweichungen gegen Vollraster 0, gegen Prüferfassung 0 (max |Δφ*| = 0.0000°)
+  w = 20°, asym         R = 100: Abweichungen gegen Vollraster 0, gegen Prüferfassung 0 (max |Δφ*| = 0.0000°)
+  w = 20°, sym          R = 100: Abweichungen gegen Vollraster 0, gegen Prüferfassung 0 (max |Δφ*| = 0.0000°)
+  w = 20°, sym_fein     R = 100: Abweichungen gegen Vollraster 0, gegen Prüferfassung 0 (max |Δφ*| = 0.0000°)
+  w = 20°, rauschen     R = 100: Abweichungen gegen Vollraster 0, gegen Prüferfassung 16 (max |Δφ*| = 2.0450°)
+  w = 20°, gerade       R = 100: Abweichungen gegen Vollraster 0, gegen Prüferfassung 42 (max |Δφ*| = 2.1900°)
+  w = 20°, knick_flach  R = 100: Abweichungen gegen Vollraster 0, gegen Prüferfassung 0 (max |Δφ*| = 0.0000°)
+  zusammen 4200 Replikate, 0 Abweichungen gegen Vollraster
+
+Laufzeit je Satz von 1000 Fits (ein Fit je Replikat)
+  w =  6° (7 Punkte): Kandidatenverfahren 7.5 ms, Vollraster 2.82 s
+  w =  8° (9 Punkte): Kandidatenverfahren 10.6 ms, Vollraster 3.70 s
+  w = 20° (21 Punkte): Kandidatenverfahren 37.0 ms, Vollraster 9.92 s

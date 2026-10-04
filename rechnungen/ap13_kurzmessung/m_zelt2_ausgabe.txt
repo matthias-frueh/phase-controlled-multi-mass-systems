@@ -1,0 +1,3 @@
+A9.6-Raster 0,001°, segmentweise, w=6 (7 Punkte), B=1000: 4.25 s je Fit-Satz; Median phi* 120.300
+A9.6-Raster 0,001°, segmentweise, w=8 (9 Punkte), B=1000: 3.42 s je Fit-Satz; Median phi* 120.300
+A9.6-Raster 0,001°, segmentweise, w=20 (21 Punkte), B=1000: 15.15 s je Fit-Satz; Median phi* 120.300
