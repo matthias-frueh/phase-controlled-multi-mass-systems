@@ -6,9 +6,12 @@ n3_rahmendynamik.py – Befund NR-08: Eigenmoden des gehaltenen Körpers und Üb
 2. Übertragung T(k·f) der Moduldyname auf die Nadeldyname: |T_ii| der sechs Komponenten und größtes
    Übersprechen, k = 1 … 6.
 3. Übersprechen in F_x, F_y, M_z am Triphasik-Punkt, wenn der Trägerschwerpunkt 30 mm über O liegt.
-4. Abweichung der Nadelkräfte mit Rahmendynamik vom starren Grenzfall; Auslegungsregel f₁ gegen k_max·f.
+4. Abweichung der Nadelkräfte mit Rahmendynamik vom starren Grenzfall; Auslegungsregel f₁ gegen k_max·f
+   (Einmassenschwinger-Näherung).
 
-Steifigkeiten, Trägheiten und ζ = 0,02 (tiefste Mode, steifigkeitsproportional) sind Annahmen.
+Rahmendynamik heißt hier: der Körper auf elastischen Nadeln (Halterungsmoden), Rahmenstruktur und Fundament starr
+und ortsfest. Maße, Steifigkeiten, Trägheiten und ζ = 0,02 (tiefste Mode, steifigkeitsproportional) sind Annahmen;
+alle Frequenzen und Übertragungswerte gelten für diese Beispielparameter.
 Laufzeit wenige Sekunden; schreibt keine Dateien.
 """
 import numpy as np
@@ -77,7 +80,7 @@ for name, R in faelle[:2]:
               + '   F_y ' + ' '.join(e(a) for a in amp[1, :3])
               + '   M_z ' + ' '.join(e(a) for a in amp[5, :3]))
 print('Mit dem Schwerpunkt über O koppelt das Kippen an waagerechte Beschleunigungen; F_x und F_y sind dann keine')
-print('reinen Nullkanäle mehr, sondern Rahmenkanäle (L3). Starrer Grenzfall: exakt null (n2, Abschnitt 2).')
+print('Nullkomponenten mehr (Kopplung über die Halterung, nicht L3). Starrer Grenzfall: exakt null (n2, Abschnitt 2).')
 
 # ───────────────────────────── 4. Nadelkräfte dynamisch gegen starr ─────────────────────────────
 kopf('4. Nadelkräfte mit Rahmendynamik gegen den starren Grenzfall (Belegung B), max. Abweichung über die Periode [N]')
@@ -89,4 +92,5 @@ print('\nAuslegungsregel (Einmassenschwinger, ohne Korrektur): |T − 1| ≈ (k�
 for eps in (1e-2, 1e-3):
     print(f'   ε = {eps:g}, k_max = 6, f = 10 Hz:  f₁ ≥ {60 / np.sqrt(eps):.0f} Hz')
 print('Mit gemessener Übertragung (dynamische Kalibrierung H_cal(f) des Gesamtaufbaus) begrenzt deren Unsicherheit,')
-print('nicht |T − 1|. Die Moden hängen von Körper, Nadeln und Rahmen ab und gehören zur Versuchskonfiguration.')
+print('nicht |T − 1|. Die Moden hängen von Körper und Nadeln ab (Rahmenstruktur hier starr) und gehören zur')
+print('Versuchskonfiguration.')

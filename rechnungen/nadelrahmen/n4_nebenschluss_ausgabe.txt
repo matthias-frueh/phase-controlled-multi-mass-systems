@@ -10,6 +10,9 @@ Basislinie: F_z = 6.3765 N, M_y = -0.06377 N·m; Vorhersage der Nadelmittel (sta
      1e-03     -1.996e-03   -2.827e-02      2.890e-02
      1e-02     -1.961e-02   -2.242e-01      2.412e-01
      1e-01     -1.667e-01   -7.391e-01      1.120e+00
+Der Fehlbetrag ist ein fester Anteil und im linearen Modell in allen Phasenlagen gleich (das Zeitmittel ist der
+statische Anteil). Differenztests zwischen Zuständen (Δ⟨w⟩, Δ⟨q_j⟩) zeigen ihn nicht; sichtbar ist er nur gegen
+eine unabhängig bekannte Basislinie (M, r_cm) und ein zutreffendes G, wie hier vorgegeben.
 
 ====================================================================================================
 2. Belegung B: relativer Fehler gemessener Harmonischer (starr), Triphasik-Punkt und Einzelmodul 1
@@ -21,7 +24,8 @@ Basislinie: F_z = 6.3765 N, M_y = -0.06377 N·m; Vorhersage der Nadelmittel (sta
      1e-03    1.996e-03    2.827e-02    1.996e-03    2.827e-02
      1e-02    1.961e-02    2.242e-01    1.961e-02    2.242e-01
      1e-01    1.667e-01    7.391e-01    1.667e-01    7.391e-01
-Faustformel: Kraftfehler ≈ 2κ (vier Nadeln quer gegen zwei axial in derselben Richtung);
+Faustformel für kleine κ (Belegung B, gleiche Quersteifigkeit in beiden Querrichtungen):
+Kraftfehler ≈ 2κ (vier Nadeln quer gegen zwei axial in derselben Richtung);
 Momentenfehler ≈ κ·(1 + 2·(D/A)²) = 29.1·κ: zwei Nadelpaare tragen quer mit dem Hebel D, eines mit A, axial nur ein Paar mit dem Hebel A.
 
 ====================================================================================================

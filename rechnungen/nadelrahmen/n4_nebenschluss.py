@@ -40,6 +40,9 @@ for kap in KAPPA:
     q = lam0[R.axial]
     print(f'   {kap:7.0e}   {(w[2] - basis[2]) / basis[2]:+12.3e}   {(w[4] - basis[4]) / basis[4]:+10.3e}   '
           f'{np.abs(q - q_vorhersage).max():12.3e}')
+print('Der Fehlbetrag ist ein fester Anteil und im linearen Modell in allen Phasenlagen gleich (das Zeitmittel ist der')
+print('statische Anteil). Differenztests zwischen Zuständen (Δ⟨w⟩, Δ⟨q_j⟩) zeigen ihn nicht; sichtbar ist er nur gegen')
+print('eine unabhängig bekannte Basislinie (M, r_cm) und ein zutreffendes G, wie hier vorgegeben.')
 
 kopf('2. Belegung B: relativer Fehler gemessener Harmonischer (starr), Triphasik-Punkt und Einzelmodul 1')
 print('     κ        F_z,3 (T)     R+₁ (T)      F_z,1 (E1)    M_y,1 (E1)')
@@ -58,7 +61,8 @@ for kap in KAPPA:
             a, b = w[i, k], W[i, k]
         zeile.append(abs(a - b) / abs(b))
     print(f'   {kap:7.0e}   ' + '   '.join(f'{z:10.3e}' for z in zeile))
-print('Faustformel: Kraftfehler ≈ 2κ (vier Nadeln quer gegen zwei axial in derselben Richtung);')
+print('Faustformel für kleine κ (Belegung B, gleiche Quersteifigkeit in beiden Querrichtungen):')
+print('Kraftfehler ≈ 2κ (vier Nadeln quer gegen zwei axial in derselben Richtung);')
 print(f'Momentenfehler ≈ κ·(1 + 2·(D/A)²) = {1 + 2 * (D_REF / A_REF) ** 2:.1f}·κ: zwei Nadelpaare tragen quer mit dem '
       f'Hebel D, eines mit A, axial nur ein Paar mit dem Hebel A.')
 

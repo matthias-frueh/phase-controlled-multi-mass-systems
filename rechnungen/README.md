@@ -180,11 +180,11 @@ Prüfung der vorhandenen Modelle. Das „Egg“-Profil von Linie B ist nicht das
 
 | | |
 |---|---|
-| Zweck | Konzeptrechnung zu [`../docs/konzepte/nadelrahmen_dreimassenkoerper_2026-10.md`](../docs/konzepte/nadelrahmen_dreimassenkoerper_2026-10.md): Rang, Vorspannraum und Formschluss der Nadelbelegungen; Vollmodell des gehaltenen Dreimassenkörpers (sechs Freiheitsgrade) mit Auswahlregeln aller sechs Lastkomponenten, Basislinie und Randterm, Nadelkräften, Zeltkurve und Modulzeigern; Rahmenmoden und Übertragung; ungemessene Querkräfte der Nadeln (Nadelregel) |
-| Start | `n1_geometrie.py` (≈ 10 s), `n2_vollmodell.py`, `n3_rahmendynamik.py`, `n4_nebenschluss.py` (je < 5 s); Gegenprüfung aus `verifikation/`: `v1_zeitbereich.py` (≈ 70 s), `v2_bilanz_rang.py` |
+| Zweck | Konzeptrechnung zu [`../docs/konzepte/nadelrahmen_dreimassenkoerper_2026-10.md`](../docs/konzepte/nadelrahmen_dreimassenkoerper_2026-10.md): Rang, Vorspannraum und Formschluss der Nadelbelegungen; Vollmodell des gehaltenen Dreimassenkörpers (sechs Freiheitsgrade) mit Auswahlregeln aller sechs Lastkomponenten, Basislinie und Randterm, Nadelkräften, Zeltkurve und Modulzeigern; Halterungsmoden und Übertragung; ungemessene Querkräfte der Nadeln (Nadelregel); Rang tatsächlicher Kalibrierlasten |
+| Start | `n1_geometrie.py` (≈ 10 s), `n2_vollmodell.py`, `n3_rahmendynamik.py`, `n4_nebenschluss.py` (je < 5 s), `n5_kalibrierrang.py` (< 1 s); Gegenprüfung aus `verifikation/`: `v1_zeitbereich.py` (≈ 70 s), `v2_bilanz_rang.py` |
 | Abhängigkeiten | `code/auslegung.py` (Profil, V1-Kandidat) |
-| Parameter | V1-Kandidat in Lage G0, Fixierstellen 150 mm von O, Versatz 40 mm, Nadelsteifigkeit 10⁶ bzw. 10⁷ N/m, ζ = 0,02 an der tiefsten Mode; alles Annahmen. Getestet mit Python 3.13, numpy 2.5, scipy 1.18 |
-| Grenzen | linear (kein Kontaktöffnen, kein Mikroschlupf), Rahmen starr und ortsfest, Nadelmassen und geometrische Steifigkeit vernachlässigt, Module senkrecht geführt, nur der V1-Kandidat gerechnet |
+| Parameter | V1-Kandidat in Lage G0, Angriffspunkte 150 mm von O, Versatz 40 mm, Nadelsteifigkeit 10⁶ bzw. 10⁷ N/m, ζ = 0,02 an der tiefsten Mode; Kalibrierlastsätze als Rechenbeispiele; alles Annahmen. Getestet mit Python 3.13, numpy 2.5, scipy 1.18 |
+| Grenzen | linear (kein Kontaktöffnen, kein Mikroschlupf), Rahmenstruktur und Fundament starr und ortsfest, ideale Kontakte ohne freie Kontaktmomente, Nadelmassen und geometrische Steifigkeit vernachlässigt, Module senkrecht geführt, nur der V1-Kandidat gerechnet; Modellrechnung, kein experimenteller Nachweis |
 
 ## Nicht übernommen
 

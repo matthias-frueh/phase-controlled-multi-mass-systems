@@ -22,7 +22,7 @@ T (0°, 120°, 240°)
   Mz     0.0000    0.0000    0.0000    0.0000    0.0000    0.0000  
   R+     0.2335    0.0000    0.0000    0.0050    0.0000    0.0000  
   R−     0.0000    0.0769    0.0000    0.0000    0.0069    0.0000  
-  max|F_x|, max|F_y|, max|M_z| über die Periode: 0.0e+00 (dynamische Nullkanäle bei senkrechter Modulführung)
+  max|F_x|, max|F_y|, max|M_z| über die Periode: 0.0e+00 (dynamische Nullkomponenten bei senkrechter Modulführung)
 
 Z (0°, 110°, 240°)
   Komp.  k=1       k=2       k=3       k=4       k=5       k=6     
@@ -34,7 +34,7 @@ Z (0°, 110°, 240°)
   Mz     0.0000    0.0000    0.0000    0.0000    0.0000    0.0000  
   R+     0.2327    0.0089    0.0057    0.0048    0.0019    0.0021  
   R−     0.0136    0.0759    0.0057    0.0011    0.0063    0.0021  
-  max|F_x|, max|F_y|, max|M_z| über die Periode: 0.0e+00 (dynamische Nullkanäle bei senkrechter Modulführung)
+  max|F_x|, max|F_y|, max|M_z| über die Periode: 0.0e+00 (dynamische Nullkomponenten bei senkrechter Modulführung)
 
 S (0°, 0°, 0°)
   Komp.  k=1       k=2       k=3       k=4       k=5       k=6     
@@ -46,7 +46,7 @@ S (0°, 0°, 0°)
   Mz     0.0000    0.0000    0.0000    0.0000    0.0000    0.0000  
   R+     0.0000    0.0000    0.0000    0.0000    0.0000    0.0000  
   R−     0.0000    0.0000    0.0000    0.0000    0.0000    0.0000  
-  max|F_x|, max|F_y|, max|M_z| über die Periode: 0.0e+00 (dynamische Nullkanäle bei senkrechter Modulführung)
+  max|F_x|, max|F_y|, max|M_z| über die Periode: 0.0e+00 (dynamische Nullkomponenten bei senkrechter Modulführung)
 
 E1 nur Modul 1
   Komp.  k=1       k=2       k=3       k=4       k=5       k=6     
@@ -58,7 +58,7 @@ E1 nur Modul 1
   Mz     0.0000    0.0000    0.0000    0.0000    0.0000    0.0000  
   R+     0.0778    0.0256    0.0111    0.0017    0.0023    0.0021  
   R−     0.0778    0.0256    0.0111    0.0017    0.0023    0.0021  
-  max|F_x|, max|F_y|, max|M_z| über die Periode: 0.0e+00 (dynamische Nullkanäle bei senkrechter Modulführung)
+  max|F_x|, max|F_y|, max|M_z| über die Periode: 0.0e+00 (dynamische Nullkomponenten bei senkrechter Modulführung)
 
 T, k = 1 … 12: F_z ≠ 0 nur für k = [3, 6, 9, 12]; M_x, M_y ≠ 0 nur für k = [1, 2, 4, 5, 7, 8, 11]
 Auswahlregel wie Prüfgruppe kippmoment (KM-03), hier für alle sechs Komponenten des gehaltenen Körpers.
@@ -72,7 +72,9 @@ r_cm = [5.0, -3.0, 20.0] mm:  ⟨w_mess⟩ = Fx=+0.00000  Fy=+0.00000  Fz=+6.376
                               Basislinie (M g e_z; r_cm × M g e_z) = Fx=+0.00000  Fy=+0.00000  Fz=+6.37650  Mx=-0.01913  My=-0.03188  Mz=+0.00000
 Mittel der Momente = r_cm × M g e_z = M g (y_cm, −x_cm, 0); hängt nur von der waagerechten Schwerpunktlage ab.
 Bei senkrechter Modulbewegung ist sie von der Phasenlage unabhängig: Δ⟨w⟩ zwischen Zuständen = 0 in allen
-sechs Komponenten, in B auch für jede einzelne Nadel (Befund NR-05).
+sechs Komponenten, in B auch für jede einzelne Nadel (Befund NR-05). Voraussetzungen: ganze Perioden, alle
+Lastpfade über die sechs Schnittstellen, Rahmen ortsfest, gleiche äußere Lasten; Einzelnadeln nur in B ohne
+Nebenpfade und mit unveränderter Geometrie G.
 
 ====================================================================================================
 4. Belegung B (versetzt, statisch bestimmt, A = 0.04 m): Nadelkräfte im starren Grenzfall [N]
@@ -105,9 +107,10 @@ S (0°, 0°, 0°)
   oben    -3.188   -6.572   -1.366     5.206   immer   2.335   0.769   0.332   0.050   0.069   0.062
   unten    3.188    1.366    6.572     5.206   nein    2.335   0.769   0.332   0.050   0.069   0.062
 
-Ost/West: ∓F_x/2 + M_z/(2A) → bei senkrechter Modulführung im starren Grenzfall lastfrei (Nullkanäle).
+Ost/West: ∓F_x/2 + M_z/(2A) → bei senkrechter Modulführung im starren Grenzfall lastfreie Kanäle.
 Nord/Süd: ∓F_y/2 + M_x/(2A) → nur k ≢ 0 (mod 3) am Triphasik-Punkt, Vorzeichenwechsel → zugfest nötig.
-oben/unten: ∓F_z/2 + M_y/(2A) → beide Klassen von Harmonischen; oben trägt im Mittel Zug (Mg/2).
+oben/unten: ∓F_z/2 + M_y/(2A) → beide Klassen von Harmonischen; oben trägt im Mittel Zug (Mg/2,
+Schwerpunkt in O).
 
 ====================================================================================================
 5. Belegung C (zentral, drei Kraftkomponenten je Nadel): Lastaufteilung und Vorspannbedarf, starr
@@ -191,8 +194,11 @@ Mit gefangenem Kugelgelenk (zugfest) entfällt beides; die Vorspannung ist dann 
 Spitze bei 120°: starr 5.4989 N, dynamisch 5.4206 N; Spannweite über den Schnitt starr 0.5632 N, dynamisch 0.5601 N
 F_z,min synchron (S) = 2.7323 N > 0: Der V1-Kandidat bleibt in allen Phasenlagen im Kontaktast (ε = 0.5715).
 Im starren Grenzfall ist F_z(t) = M g + Σ m_i s̈_i(t) dieselbe Funktion wie N(t) der starren Auflage, solange
-diese nicht abhebt; beim V1-Kandidaten also überall. Der Rahmen misst dort dieselbe vertikale Wellenform und
-zusätzlich die übrigen fünf Komponenten. Abheben gibt es im Rahmen nicht: F_z < 0 trägt die Nadel oben.
+diese nicht abhebt; beim V1-Kandidaten also überall. Verglichen ist nur dieser Fall: gleiche vorgeschriebene
+Modulbewegung, geschlossener Kontakt, starrer Grenzfall beider Aufbauten. Dann misst der Rahmen dieselbe
+vertikale Wellenform und zusätzlich die übrigen fünf Komponenten. Solange jede Nadel in ihrem Kontaktzustand
+bleibt (B zugfest, C mit ausreichender Vorspannung oder gefangenem Kugelgelenk), hebt im Rahmen nichts ab:
+F_z < 0 trägt dann die Nadel oben.
 
 ====================================================================================================
 7. Rückrechnung der drei Modulzeiger g_i,k = m_i·a_i,k aus (F_z, M_x, M_y) je Harmonischer
@@ -202,3 +208,7 @@ Matrix (F_z; M_x/R_m; M_y/R_m) = B·g, Kondition 1.4142 (Lage G0, R_m = 0,10 m)
   k = 2: |g_i/g_i,nom| = 1.00000  1.01000  1.00000   Phase [°] = +0.000  -2.000  +0.000
   k = 3: |g_i/g_i,nom| = 1.00000  1.01000  1.00000   Phase [°] = +0.000  -3.000  +0.000
 Störung: Modul 2 mit +1 % Masse und +1° Phase (φ₂ = 121°). Erwartet: Betrag 1,01, Phase −k·1° nur bei Modul 2.
+Konsistenzprüfung des Modells: Dieselbe Geometrie erzeugt und invertiert die Moduldyname (starrer Grenzfall,
+rauschfrei, Modullagen exakt bekannt). Rahmenübertragung, Rauschen, Kalibrier- und Lagefehler sind nicht
+enthalten; zurückgerechnet wird g_i,k = m_i·a_i,k (Masse und Amplitude nicht getrennt). Das ist kein
+experimenteller Nachweis.

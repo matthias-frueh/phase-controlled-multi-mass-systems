@@ -1,20 +1,24 @@
 """
 n1_geometrie.py – Befunde NR-01 bis NR-03: Was sechs Nadeln geometrisch leisten können.
 
-1. Rang, Nullraum (Vorspannzustände) und Kondition der Belegungen A, B, B2, Bg, C.
-2. Paarstruktur: Differenz und Summe gegenüberliegender Nadeln bei zentraler (A) und versetzter (B) Belegung;
-   blinde Lastrichtungen von A und Bg.
+1. Rang, Nullraum (Vorspannzustände) und Kondition der Belegungen A, B, B2, Bg, C; teilweise gleichseitige
+   Belegungen (ein bis drei Paare gleichseitig, übrige wie B).
+2. Paarstruktur axialer Nadeln: Differenz und Summe gegenüberliegender Nadeln bei zentraler (A) und versetzter (B)
+   Belegung; blinde Lastrichtungen von A und Bg.
 3. Statische Nadellasten der statisch bestimmten Belegung B unter dem Gewicht (Schwerpunktlagen als Beispiele).
-4. Formschluss mit einseitigen, reibungsfreien Druckspitzen: sechs Nadeln nie, sieben bei passender Lage,
-   zwölf (zwei je Fläche) im Beispiel; Zufallsstichprobe als Veranschaulichung des Satzes.
+4. Formschluss im Modell starrer Körper mit einseitigen, reibungsfreien Punktkontakten, die nur längs der
+   Nadelachse drücken (erste Ordnung, Halten gegen beliebige Lasten): sechs Nadeln nie, sieben bei passender Lage
+   (D7, eigenes Versatzmuster), zwölf (zwei je Fläche) im Beispiel; Belegung B mit einer siebten achsparallelen
+   Nadel nie; Zufallsstichprobe als Veranschaulichung des Satzes.
 5. Rang-Nullraum-Bilanz der drei Ausführungen mit sechs Nadeln.
 
-Alle Lagen sind Rechenbeispiele (D = 0,15 m Abstand der Fixierstellen von O, A = 0,04 m Versatz).
+Alle Lagen sind Rechenbeispiele (D = 0,15 m Abstand der Angriffspunkte von O, A = 0,04 m Versatz).
 Laufzeit wenige Sekunden; schreibt keine Dateien.
 """
+import itertools
 import numpy as np
-from nr_modell import (NAMEN, KOMP, AUSSEN, ACHSE, D_REF, A_REF, EX, EY, EZ, rahmen, nadel, Rahmen, formschluss,
-                       Koerper)
+from nr_modell import (NAMEN, KOMP, AUSSEN, ACHSE, D_REF, A_REF, EX, EY, EZ, rahmen, nadel, versatz, Rahmen,
+                       formschluss, Koerper)
 
 np.set_printoptions(precision=4, suppress=True, linewidth=150)
 
@@ -37,9 +41,19 @@ for v in ('A', 'B', 'B2', 'Bg', 'C'):
     r, nul, kA, _ = R.rang(A_REF)
     _, _, kD, _ = R.rang(D_REF)
     print(f'{v:8s}  {beschr[v]:22s}  {R.gem.sum():6d}      {r:3d}  {nul:6d}    {kA:9.3f}   {kD:9.3f}')
+print('\nTeilweise gleichseitig (gewählte Paare gleichseitig wie Bg, übrige wie B):')
+PAARE = (('Nord', 'Süd'), ('Ost', 'West'), ('oben', 'unten'))
+for n_gl in range(4):
+    raenge = []
+    for wahl in itertools.combinations(PAARE, n_gl):
+        gl = {nm for paar in wahl for nm in paar}
+        raenge.append(Rahmen([nadel(nm, versatz('Bg' if nm in gl else 'B', nm)) for nm in NAMEN]).rang(A_REF)[0])
+    print(f'   gleichseitige Paare: {n_gl}   Rang ' + '/'.join(str(r) for r in sorted(set(raenge)))
+          + f'   (Wahlen: {len(raenge)})')
+print('Jedes gleichseitige Paar kostet ein Moment: Rang 6, 5, 4, 3.')
 
 # ───────────────────────────── 2. Paarstruktur ─────────────────────────────
-kopf('2. Paarstruktur: Differenz = Kraft; Summe = Vorspannung (zentral) bzw. Moment (versetzt)')
+kopf('2. Paarstruktur axialer Nadeln: Differenz = Kraft; Summe = Vorspannung (zentral) bzw. Moment (versetzt)')
 RB, RA = rahmen('B'), rahmen('A')
 print('Spalten von G der Belegung B (Dyname einer Druckkraft von 1 N, Momente in N·m):')
 print('Nadel   Fixierstelle r [m]        Druckrichtung n   ' + '  '.join(f'{c:>7s}' for c in KOMP))
@@ -86,7 +100,9 @@ print('Gewicht in O: oben trägt Mg/2 Zug, unten Mg/2 Druck (das Moment My = 0 v
 print('Schwerpunkt auf der Wirkungslinie der unteren Nadel (x_cm = −A): oben lastfrei.')
 
 # ───────────────────────────── 4. Formschluss ─────────────────────────────
-kopf('4. Formschluss mit einseitigen, reibungsfreien Druckspitzen (jede Nadel kann nur drücken)')
+kopf('4. Formschluss im Modell: starrer Körper, reibungsfreie Druckspitzen nur längs der Achse, erste Ordnung')
+print('Halten gegen beliebige Lasten (vollständige räumliche Halterung). Unter vorgegebener Last, mit Haftreibung,')
+print('flächigem Kontakt oder Krümmungseffekten (höhere Ordnung) gelten andere Bedingungen; nicht gerechnet.')
 print('Satz: Spalten W positiv aufspannend ⇔ Rang 6 und ∃ λ > 0 mit W·λ = 0. Sechs Vektoren können den R⁶ nicht')
 print('positiv aufspannen: Wären sie aufspannend, wären sie eine Basis; −Σ G_j = Σ c_j G_j mit c_j ≥ 0 gäbe')
 print('Σ (1 + c_j) G_j = 0 mit positiven Gewichten, also lineare Abhängigkeit – Widerspruch. Mindestens sieben.')
@@ -102,19 +118,34 @@ for nm in NAMEN:
 R12 = Rahmen(n12, 'D12')
 ok, t, r, lam = formschluss(R12.Gm)
 print(f'{"D12 zwei je Fläche (±A)":36s}  {12:6d}  {r:4d}  {str(ok):11s}  {t:+.4f}')
-# sieben Druckspitzen: die sechs Nadeln der Festhaltung (versetzt) und eine zweite Nadel unten
+# sieben Druckspitzen mit eigenem Versatzmuster (50 mm; nicht die Lagen der Belegung B), zweite Nadel unten
 d = h = e = 0.05
 n7 = [nadel('Nord', r=(d, D_REF, h)), nadel('Süd', r=(-d, -D_REF, -h)), nadel('Ost', r=(D_REF, d, 0.0)),
       nadel('West', r=(-D_REF, -d, 0.0)), nadel('oben', r=(0.0, e, D_REF)), nadel('unten', r=(e, 0.0, -D_REF)),
       nadel('unten', r=(-e, 0.0, -D_REF))]
 R7 = Rahmen(n7, 'D7')
 ok7, t7, r7, lam7 = formschluss(R7.Gm)
-print(f'{"D7 sechs + zweite Nadel unten":36s}  {7:6d}  {r7:4d}  {str(ok7):11s}  {t7:+.4f}')
+print(f'{"D7 eigene Lagen + zweite Nadel unten":36s}  {7:6d}  {r7:4d}  {str(ok7):11s}  {t7:+.4f}')
 print('   Lagen D7 [m]: ' + '; '.join(f"{nd['name']} {vek(nd['r'], 2)}" for nd in n7))
 v7 = R7.nullraum()[:, 0]
 v7 = v7 / v7[0]
 print('   Nullraum D7 (einziger Vorspannzustand, auf Nord = 1 normiert): '
       + '  '.join(f'{x:.3f}' for x in v7) + f'   (Rang {R7.rang(D_REF)[0]}, Nullraum {R7.rang(D_REF)[1]})')
+
+# Belegung B mit einer siebten achsparallelen Nadel (Gitter auf jeder Fläche)
+gitter = np.linspace(-0.8 * D_REF, 0.8 * D_REF, 7)
+n_b7 = ok_b7 = 0
+for nm in NAMEN:
+    a = ACHSE[nm]
+    for u, v in itertools.product(gitter, gitter):
+        p = np.zeros(3)
+        p[[i for i in range(3) if i != a]] = (u, v)
+        p[a] = D_REF * AUSSEN[nm][a]
+        ok_b7 += formschluss(np.c_[RB.Gm, Rahmen([nadel(nm, r=p)]).Gm])[0]
+        n_b7 += 1
+print(f'\nB + siebte achsparallele Nadel (Gitter 7 × 7 auf jeder Fläche, ±0,8·D): Formschluss in {ok_b7}/{n_b7}')
+print('   In G_B⁻¹ (Abschnitt 2) hängt jedes Paar nur an einer Kraft und einem Moment. Eine achsparallele siebte Nadel')
+print('   erzeugt für mindestens ein Paar keines von beiden; der einzige Vorspannzustand hat dort Nullen.')
 
 rng = np.random.default_rng(11)
 treffer6 = treffer7 = rang6 = rang7 = 0

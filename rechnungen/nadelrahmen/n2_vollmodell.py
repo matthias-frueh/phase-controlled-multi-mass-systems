@@ -4,12 +4,12 @@ und zum Vergleich mit Rahmendynamik (Belegung B, k_a = 10⁶ N/m).
 
 1. Körper und Profil: V1-Kandidat (3 × 100 g, Hub 8 mm, m0 = 0,35 kg, 10 Hz, Egg) in Lage G0.
 2. Moduldyname je Komponente und Harmonischer für T, Z, S und Einzelmodul 1: Auswahlregeln, dynamische
-   Nullkanäle F_x, F_y, M_z, Umlaufsinn des Kippmoments.
+   Nullkomponenten F_x, F_y, M_z der Resultierenden, Umlaufsinn des Kippmoments.
 3. Basislinie der gemessenen Dyname: (M g e_z; r_cm × M g e_z), mit und ohne Schwerpunktversatz.
 4. Nadelkräfte der statisch bestimmten Belegung B: Mittel, Extremwerte, Zugbedarf, Harmonische je Nadel.
 5. Nadelkräfte der vorspannbaren Belegung C: Lastaufteilung und Vorspannbedarf (Druckkontakt, Reibkontakt).
 6. Zeltkurve im Rahmen: F_z,min entlang φ₃ = 240°, starr und mit Rahmendynamik; Kippmoment entlang des Schnitts.
-7. Rückrechnung der drei Modulzeiger aus (F_z, M_x, M_y) je Harmonischer.
+7. Rückrechnung der drei Modulzeiger aus (F_z, M_x, M_y) je Harmonischer (Konsistenzprüfung des Modells).
 
 Laufzeit wenige Sekunden; schreibt keine Dateien.
 """
@@ -57,7 +57,7 @@ for name, phi, aktiv in KONFIG:
     print('  R+     ' + '  '.join(f'{f(a):8s}' for a in np.abs(X + 1j * Y)))
     print('  R−     ' + '  '.join(f'{f(a):8s}' for a in np.abs(X - 1j * Y)))
     print(f'  max|F_x|, max|F_y|, max|M_z| über die Periode: '
-          f'{np.abs(zeit(W[[0, 1, 5]])).max():.1e} (dynamische Nullkanäle bei senkrechter Modulführung)')
+          f'{np.abs(zeit(W[[0, 1, 5]])).max():.1e} (dynamische Nullkomponenten bei senkrechter Modulführung)')
 W_T = kp.w_mod(T_KONFIG)
 nz = [k for k in range(1, 13) if abs(W_T[2, k]) > 1e-12]
 nm = [k for k in range(1, 13) if abs(W_T[3, k]) + abs(W_T[4, k]) > 1e-12]
@@ -76,7 +76,9 @@ for r_cm in ((0.0, 0.0, 0.0), (0.005, -0.003, 0.02)):
           + '  '.join(f'{c}={round(float(x), 5) + 0.0:+.5f}' for c, x in zip(KOMP, kb.basis())))
 print('Mittel der Momente = r_cm × M g e_z = M g (y_cm, −x_cm, 0); hängt nur von der waagerechten Schwerpunktlage ab.')
 print('Bei senkrechter Modulbewegung ist sie von der Phasenlage unabhängig: Δ⟨w⟩ zwischen Zuständen = 0 in allen')
-print('sechs Komponenten, in B auch für jede einzelne Nadel (Befund NR-05).')
+print('sechs Komponenten, in B auch für jede einzelne Nadel (Befund NR-05). Voraussetzungen: ganze Perioden, alle')
+print('Lastpfade über die sechs Schnittstellen, Rahmen ortsfest, gleiche äußere Lasten; Einzelnadeln nur in B ohne')
+print('Nebenpfade und mit unveränderter Geometrie G.')
 
 # ───────────────────────────── 4. Nadelkräfte B ─────────────────────────────
 kopf(f'4. Belegung B (versetzt, statisch bestimmt, A = {A_REF} m): Nadelkräfte im starren Grenzfall [N]')
@@ -90,9 +92,10 @@ for name, phi, aktiv in KONFIG[:3]:
         zug = 'immer' if q[j].max() < -1e-9 else ('zeitw.' if q[j].min() < -1e-9 else 'nein')
         print(f'  {nmn:6s} {f(q[j].mean(), 3):>7s}  {f(q[j].min(), 3):>7s}  {f(q[j].max(), 3):>7s}  '
               f'{f(q[j].max() - q[j].min(), 3):>8s}   {zug:6s} ' + '  '.join(f'{f(a, 3):>6s}' for a in amp[j]))
-print('\nOst/West: ∓F_x/2 + M_z/(2A) → bei senkrechter Modulführung im starren Grenzfall lastfrei (Nullkanäle).')
+print('\nOst/West: ∓F_x/2 + M_z/(2A) → bei senkrechter Modulführung im starren Grenzfall lastfreie Kanäle.')
 print('Nord/Süd: ∓F_y/2 + M_x/(2A) → nur k ≢ 0 (mod 3) am Triphasik-Punkt, Vorzeichenwechsel → zugfest nötig.')
-print('oben/unten: ∓F_z/2 + M_y/(2A) → beide Klassen von Harmonischen; oben trägt im Mittel Zug (Mg/2).')
+print('oben/unten: ∓F_z/2 + M_y/(2A) → beide Klassen von Harmonischen; oben trägt im Mittel Zug (Mg/2,')
+print('Schwerpunkt in O).')
 
 # ───────────────────────────── 5. Nadelkräfte C ─────────────────────────────
 kopf('5. Belegung C (zentral, drei Kraftkomponenten je Nadel): Lastaufteilung und Vorspannbedarf, starr')
@@ -143,8 +146,11 @@ fz_min_s = kp.MG + zeit(kp.w_mod(S_KONFIG)[2]).real.min()
 print(f'F_z,min synchron (S) = {fz_min_s:.4f} N > 0: Der V1-Kandidat bleibt in allen Phasenlagen im Kontaktast '
       f'(ε = {1 - fz_min_s / kp.MG:.4f}).')
 print('Im starren Grenzfall ist F_z(t) = M g + Σ m_i s̈_i(t) dieselbe Funktion wie N(t) der starren Auflage, solange')
-print('diese nicht abhebt; beim V1-Kandidaten also überall. Der Rahmen misst dort dieselbe vertikale Wellenform und')
-print('zusätzlich die übrigen fünf Komponenten. Abheben gibt es im Rahmen nicht: F_z < 0 trägt die Nadel oben.')
+print('diese nicht abhebt; beim V1-Kandidaten also überall. Verglichen ist nur dieser Fall: gleiche vorgeschriebene')
+print('Modulbewegung, geschlossener Kontakt, starrer Grenzfall beider Aufbauten. Dann misst der Rahmen dieselbe')
+print('vertikale Wellenform und zusätzlich die übrigen fünf Komponenten. Solange jede Nadel in ihrem Kontaktzustand')
+print('bleibt (B zugfest, C mit ausreichender Vorspannung oder gefangenem Kugelgelenk), hebt im Rahmen nichts ab:')
+print('F_z < 0 trägt dann die Nadel oben.')
 
 # ───────────────────────────── 7. Modulzeiger ─────────────────────────────
 kopf('7. Rückrechnung der drei Modulzeiger g_i,k = m_i·a_i,k aus (F_z, M_x, M_y) je Harmonischer')
@@ -162,3 +168,7 @@ for k in (1, 2, 3):
     print(f'  k = {k}: |g_i/g_i,nom| = ' + '  '.join(f'{abs(r):.5f}' for r in rel)
           + '   Phase [°] = ' + '  '.join(f'{round(float(np.degrees(np.angle(r))), 3) + 0.0:+.3f}' for r in rel))
 print('Störung: Modul 2 mit +1 % Masse und +1° Phase (φ₂ = 121°). Erwartet: Betrag 1,01, Phase −k·1° nur bei Modul 2.')
+print('Konsistenzprüfung des Modells: Dieselbe Geometrie erzeugt und invertiert die Moduldyname (starrer Grenzfall,')
+print('rauschfrei, Modullagen exakt bekannt). Rahmenübertragung, Rauschen, Kalibrier- und Lagefehler sind nicht')
+print('enthalten; zurückgerechnet wird g_i,k = m_i·a_i,k (Masse und Amplitude nicht getrennt). Das ist kein')
+print('experimenteller Nachweis.')

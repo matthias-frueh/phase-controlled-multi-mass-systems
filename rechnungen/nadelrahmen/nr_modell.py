@@ -11,8 +11,10 @@ Koordinaten und Bezeichnungen
 -----------------------------
 Rechtshändig: x nach Ost, y nach Nord, z nach oben; Bezugspunkt O = Rahmenmitte (nominale Körpermitte),
 ortsfest. Schwerkraft g = −g·e_z. Nadeln j in der Reihenfolge der Festhaltung vom 11.10.2026:
-Nord, Süd, Ost, West, oben, unten. Jede Nadel ist genau ein Lastpfad: Fixierstelle r_j am Körper, eine
-Kontaktfläche zu ihrer eigenen Messschnittstelle. Eigener Bezug je Nadel: lokales Dreibein (n_j, t_j1, t_j2)
+Nord, Süd, Ost, West, oben, unten. Jede Nadel ist genau ein Lastpfad: Fixierstelle am Körper, eine
+Kontaktfläche zu ihrer eigenen Messschnittstelle. Angriffspunkt r_j der Pfadkraft in der Bilanz: bei art 'a' ein
+Punkt der Wirkungslinie (Fixierstelle), bei art 'k' die Kugelgelenkmitte an der Schnittstelle (die Fixierstelle
+liegt dort um die Nadellänge weiter innen). Eigener Bezug je Nadel: lokales Dreibein (n_j, t_j1, t_j2)
 mit n_j = Druckrichtung auf den Körper (von der Schnittstelle zum Körper), t_j1 = nächste Achse zyklisch,
 t_j2 = n_j × t_j1.
 
@@ -39,13 +41,16 @@ Bewegungsgleichung (kleine Bewegung x = (u; θ) des Körpers, Rahmen starr und o
     w_g      = (−M g e_z; r_cm × (−M g e_z))                 Gewichtsdyname um O
     w_mod(t) = Σ_i m_i s̈_i(t)·(e_z; R_i × e_z)                 Dyname der Modul-Relativbeschleunigung
 Nadelkräfte λ_jc(t) = λ_V,jc − k_jc G_jcᵀ (x + β ẋ), λ_V Vorspannung im Nullraum von G (G·λ_V = 0).
-Gemessene Dyname: w_mess = G·λ = −w_g + w_mod + M6·ẍ; starrer Grenzfall (Rahmenmoden ≫ k·f):
-w_mess = −w_g + w_mod, unabhängig vom Kontakt. Je Harmonischer k (ω_k = 2πf·k), Z_k = K − ω_k² M6 + iω_k β K:
+Übertragene Dyname G·λ = −w_g + w_mod + M6·ẍ; gemessen wird G_m·λ_m (nur gemessene Komponenten), gleich G·λ,
+solange keine Nadel ungemessene Komponenten überträgt (Befund NR-07). Starrer Grenzfall (Halterungsmoden ≫ k·f):
+G·λ = −w_g + w_mod, unabhängig vom Kontakt. Je Harmonischer k (ω_k = 2πf·k), Z_k = K − ω_k² M6 + iω_k β K:
     λ_jc,k = k_jc (1 + iω_k β) G_jcᵀ Z_k⁻¹ w_mod,k,     w_mess,k = (1 + iω_k β) K Z_k⁻¹ w_mod,k.
-Dämpfung steifigkeitsproportional, β so, dass die tiefste Rahmenmode ζ hat (Annahme, Vorgabe ζ = 0,02).
+Halterungsmoden = Eigenmoden des Körpers auf den elastischen Nadeln; die Rahmenstruktur ist starr und ortsfest.
+Dämpfung steifigkeitsproportional, β so, dass die tiefste Halterungsmode ζ hat (Annahme, Vorgabe ζ = 0,02).
 Gültig, solange jede Nadel in ihrem Kontaktzustand bleibt (Druckspitze: λ_a > 0; Reibkontakt:
 |λ_t| ≤ μ_s·λ_a). Geometrische Steifigkeit aus Vorspannung und Gewicht und die Masse der Nadeln sind
-vernachlässigt (Annahmen).
+vernachlässigt; freie Kontaktmomente τ^c_j an den Schnittstellen sind nicht modelliert (ideale Gelenke, Spitzen und
+Kugelgelenke, τ^c_j = 0) (Annahmen).
 
 Einheiten SI; Phasen an den Schnittstellen in Grad.
 """
@@ -57,9 +62,9 @@ EX, EY, EZ = np.eye(3)
 AUSSEN = {'Nord': EY, 'Süd': -EY, 'Ost': EX, 'West': -EX, 'oben': EZ, 'unten': -EZ}   # Lage der Schnittstelle
 ACHSE = {'Nord': 1, 'Süd': 1, 'Ost': 0, 'West': 0, 'oben': 2, 'unten': 2}
 KOMP = ('Fx', 'Fy', 'Fz', 'Mx', 'My', 'Mz')
-D_REF, A_REF = 0.15, 0.04          # Abstand der Fixierstellen von O, Versatz der Wirkungslinien [m] (Beispiele)
+D_REF, A_REF = 0.15, 0.04          # Abstand der Angriffspunkte von O, Versatz der Wirkungslinien [m] (Beispiele)
 K_A_REF = 1e6                      # axiale Nadelsteifigkeit [N/m] (Beispiel)
-ZETA_REF = 0.02                    # Dämpfungsgrad der tiefsten Rahmenmode (Annahme)
+ZETA_REF = 0.02                    # Dämpfungsgrad der tiefsten Halterungsmode (Annahme)
 N_PER = 16000                      # Stützstellen je Periode (wie N_FEIN in code/auslegung.py)
 T_KONFIG = (0.0, 120.0, 240.0)     # Triphasik-Punkt
 Z_KONFIG = (0.0, 110.0, 240.0)     # Zeltschnittpunkt (wie Prüfgruppe kippmoment)
@@ -80,7 +85,8 @@ def dreibein(name):
 
 
 def nadel(name, versatz=(0.0, 0.0, 0.0), D=D_REF, art='a', k_a=K_A_REF, k_t=0.0, k_q=0.0, n=None, r=None):
-    """Eine Nadel mit Fixierstelle r = D·aussen + versatz (oder r direkt) und Druckrichtung n (Vorgabe −aussen).
+    """Eine Nadel mit Angriffspunkt r = D·aussen + versatz (oder r direkt) und Druckrichtung n (Vorgabe −aussen);
+    r ist bei art 'a' die Fixierstelle auf der Wirkungslinie, bei art 'k' die Kugelgelenkmitte.
     art 'a': eine gemessene axiale Komponente, k_q > 0 fügt zwei ungemessene Querkomponenten hinzu.
     art 'k': drei gemessene Kraftkomponenten (axial k_a, quer k_t)."""
     nn, t1, t2 = dreibein(name) if n is None else _dreibein_frei(n)
@@ -105,7 +111,7 @@ def _dreibein_frei(n):
 
 
 def versatz(variante, name, A=A_REF):
-    """Versatz der Fixierstelle aus der Flächenmitte für die vorgefertigten Belegungen."""
+    """Versatz des Angriffspunkts aus der Flächenmitte für die vorgefertigten Belegungen."""
     a, s = ACHSE[name], AUSSEN[name][ACHSE[name]]
     if variante in ('A', 'C'):
         return np.zeros(3)
@@ -123,7 +129,7 @@ def rahmen(variante, D=D_REF, A=A_REF, k_a=K_A_REF, k_t=0.0, k_q=0.0):
     'A'  zentral, axial: alle Wirkungslinien durch O (Rang 3)
     'B'  versetzt, axial, zyklisch gegensinnig (Rang 6, statisch bestimmt)
     'B2' versetzt, axial, andere zyklische Zuordnung (Rang 6)
-    'Bg' gleichseitig versetzt (Rang 3, Falle)
+    'Bg' gleichseitig versetzt (alle drei Paare: Rang 3; je gleichseitiges Paar ein Rang weniger)
     'C'  zentral, drei Kraftkomponenten je Nadel (Rang 6, Nullraum 12, vorspannbar)"""
     art = 'k' if variante == 'C' else 'a'
     return Rahmen([nadel(nm, versatz(variante, nm, A), D, art, k_a, k_t, k_q) for nm in NAMEN],
@@ -263,7 +269,7 @@ def beta_daempfung(koerper, rahmen_, zeta=ZETA_REF):
 def antwort(koerper, rahmen_, phi_deg=T_KONFIG, starr=False, zeta=ZETA_REF, aktiv=(1.0, 1.0, 1.0),
             vorspannung=None):
     """Komponentenkräfte λ (n_c × n_k, Spalte 0 = statischer Wert) für Gewicht und Modulbewegung.
-    starr: quasistatische Verteilung über die Steifigkeiten (Rahmenmoden ≫ k·f).
+    starr: quasistatische Verteilung über die Steifigkeiten (Halterungsmoden ≫ k·f).
     vorspannung: λ_V (n_c) im Nullraum von G (wird geprüft)."""
     Gx, k, K = rahmen_.G, rahmen_.k, rahmen_.K
     W = koerper.w_mod(phi_deg, aktiv)
