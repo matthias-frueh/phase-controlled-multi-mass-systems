@@ -15,8 +15,9 @@ Lizenz dieses Ordners: CC BY 4.0, siehe [`../LICENSE-CC-BY-4.0`](../LICENSE-CC-B
 7. `archiv_vermerk_kernhypothese_v3.md` — der dokumentierte Rückzug der früheren Hypothese.
 8. [`../rechnungen/README.md`](../rechnungen/README.md) — Rechen- und Prüfskripte der Gesamtprojektanalyse
    10/2026 mit Ergebnissen und Protokollen (Simulation und Analytik, Stand 02.10.2026).
-9. [`konzepte/README.md`](konzepte/README.md) — Konzepte zu Laboraufbau, Messtechnik und Steuerung (Mai und
-   September 2026), als Konzepte gekennzeichnet; Firmware-Muster in [`../code/firmware/`](../code/firmware/).
+9. [`konzepte/README.md`](konzepte/README.md) — Konzepte zu Laboraufbau, Messtechnik und Steuerung (Mai bis
+   Oktober 2026, darunter der Sechs-Nadel-Messrahmen mit eingebettetem Dreimassenkörper), als Konzepte
+   gekennzeichnet; Firmware-Muster in [`../code/firmware/`](../code/firmware/).
 10. [`plan_ap13_pipelinetest.md`](plan_ap13_pipelinetest.md) — Plan des Pipelinetests (Werkzeug 8 der Präregistrierung v2);
     Plan, nicht umgesetzt.
 11. [`arbeitsplan_status.md`](arbeitsplan_status.md) — Bearbeitungsstand der Arbeitspakete AP-01 bis AP-30 und offene
@@ -68,7 +69,7 @@ Schiefe (Arbeitspapier v2.4, Abschnitt 4.8).
 
 Arbeitsstände in Bearbeitung (Forschungsrahmen v3.6) und die Linie-B-Notizen; die Linie-B-Modelle v2 und ihre
 Kontrollrechnungen liegen in [`../rechnungen/linie_b/`](../rechnungen/linie_b/). Die Labor- und Messtechnikplanung liegt
-als Konzeptsammlung in [`konzepte/`](konzepte/) (Stand Mai und September 2026); die Planung von Räumen, Personal und
+als Konzeptsammlung in [`konzepte/`](konzepte/) (Stand Mai bis Oktober 2026); die Planung von Räumen, Personal und
 Kosten ist nicht Gegenstand des Repositorys.
 
 Außerhalb des Repositorys kursierende ältere Fassungen sind überholt: das Arbeitsmanuskript v2.1 (früher

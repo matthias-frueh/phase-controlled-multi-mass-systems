@@ -1,0 +1,38 @@
+
+====================================================================================================
+1. Belegung B: statischer Fehlbetrag der gemessenen (axialen) Dyname, Schwerpunkt x_cm = 10 mm
+====================================================================================================
+Basislinie: F_z = 6.3765 N, M_y = -0.06377 N·m; Vorhersage der Nadelmittel (statisch bestimmt): Nord=+0.000  Süd=+0.000  Ost=+0.000  West=+0.000  oben=-3.985  unten=+2.391
+     κ        ΔF_z/(M g)     ΔM_y/M_y     max|Δq_Nadel| [N]
+     1e-06     -2.000e-06   -2.912e-05      2.959e-05
+     1e-05     -2.000e-05   -2.912e-04      2.958e-04
+     1e-04     -2.000e-04   -2.904e-03      2.952e-03
+     1e-03     -1.996e-03   -2.827e-02      2.890e-02
+     1e-02     -1.961e-02   -2.242e-01      2.412e-01
+     1e-01     -1.667e-01   -7.391e-01      1.120e+00
+
+====================================================================================================
+2. Belegung B: relativer Fehler gemessener Harmonischer (starr), Triphasik-Punkt und Einzelmodul 1
+====================================================================================================
+     κ        F_z,3 (T)     R+₁ (T)      F_z,1 (E1)    M_y,1 (E1)
+     1e-06    2.000e-06    2.912e-05    2.000e-06    2.912e-05
+     1e-05    2.000e-05    2.912e-04    2.000e-05    2.912e-04
+     1e-04    2.000e-04    2.904e-03    2.000e-04    2.904e-03
+     1e-03    1.996e-03    2.827e-02    1.996e-03    2.827e-02
+     1e-02    1.961e-02    2.242e-01    1.961e-02    2.242e-01
+     1e-01    1.667e-01    7.391e-01    1.667e-01    7.391e-01
+Faustformel: Kraftfehler ≈ 2κ (vier Nadeln quer gegen zwei axial in derselben Richtung);
+Momentenfehler ≈ κ·(1 + 2·(D/A)²) = 29.1·κ: zwei Nadelpaare tragen quer mit dem Hebel D, eines mit A, axial nur ein Paar mit dem Hebel A.
+
+====================================================================================================
+3. Belegung A (zentral): Fehlbetrag in F_z; Momente vollständig in ungemessenen Pfaden
+====================================================================================================
+     κ        ΔF_z/(M g)    gemessener Anteil von R+₁ (T)
+     1e-06     -2.000e-06   0.0e+00
+     1e-05     -2.000e-05   0.0e+00
+     1e-04     -2.000e-04   0.0e+00
+     1e-03     -1.996e-03   0.0e+00
+     1e-02     -1.961e-02   0.0e+00
+     1e-01     -1.667e-01   0.0e+00
+Die zentrale Belegung hält die Drehungen nur über die ungemessene Quersteifigkeit; deren Kräfte bilden das
+Kippmoment vollständig ab, die axialen Schnittstellen sehen davon nichts.

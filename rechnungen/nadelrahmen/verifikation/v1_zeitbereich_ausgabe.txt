@@ -1,0 +1,17 @@
+Eigenfrequenzen [Hz]: [124.37, 147.22, 147.22, 279.18, 279.18, 279.18];  β = 5.1186e-05 s
+Vergleich mit nr_modell bei n Stützstellen je Periode (Profilreihe bis k = n/2), max|Δλ| über Nadeln und Zeit [N]
+Konfig.  Lösung        n = 4000     n = 16000    n = 64000  
+T        dynamisch     1.28e-05     8.00e-07     5.00e-08   (nfev 202706)
+         starr         8.39e-05     5.43e-06     3.40e-07   
+         Spanne λ_unten (Zeitbereich) -0.5630 … +5.6837 N
+Z        dynamisch     1.82e-05     1.14e-06     7.10e-08   (nfev 225650)
+         starr         9.19e-05     5.30e-06     5.59e-07   
+         Spanne λ_unten (Zeitbereich) -0.3417 … +5.5650 N
+S        dynamisch     1.82e-05     1.14e-06     7.11e-08   (nfev 202742)
+         starr         8.99e-07     5.62e-08     3.51e-09   
+         Spanne λ_unten (Zeitbereich) +1.3566 … +6.6101 N
+größte Abweichung bei n = 64000: 5.59e-07 N; kleinste Abnahme von n = 4000 auf 64000: Faktor 164.3
+Die Restabweichung ist der Abbruch der Fourier-Reihe des Profils (die Ableitung der Beschleunigung springt an den
+Phasennähten); sie fällt hier etwa wie 1/n² (Faktor 16 je vierfacher Stützstellenzahl). Bei S liegen die
+Vergleichszeitpunkte ohne Phasenverschiebung auf dem Stützstellenraster; dort ist die starre Reihe fast exakt.
+Urteil: bestätigt (Schwelle 1e-5 N bei n = 64000, Abnahme > 8)

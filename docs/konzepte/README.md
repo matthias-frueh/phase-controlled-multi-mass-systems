@@ -1,19 +1,21 @@
 # Konzepte zu Laboraufbau, Messtechnik und Steuerung
 
-Stand: 4. Oktober 2026. Lizenz dieses Ordners: CC BY 4.0, siehe [`../../LICENSE-CC-BY-4.0`](../../LICENSE-CC-BY-4.0). Namensnennung: „Matthias Früh, PCMMS“, https://github.com/matthias-frueh/phase-controlled-multi-mass-systems
+Stand: 4. Oktober 2026, Nachtrag 11. Oktober 2026. Lizenz dieses Ordners: CC BY 4.0, siehe [`../../LICENSE-CC-BY-4.0`](../../LICENSE-CC-BY-4.0). Namensnennung: „Matthias Früh, PCMMS“, https://github.com/matthias-frueh/phase-controlled-multi-mass-systems
 
 Dieser Ordner enthält die vorhandenen Konzeptdokumente des Projekts zu Laboraufbau, Messtechnik und Steuerung.
 Alle Dokumente sind **Konzepte**: Entwürfe aus dem Jahr 2026, nicht umgesetzt, nicht an Hardware geprüft; es gibt
 keine Messdaten. Maßgeblich für Hypothesen, Entscheidungsregeln und Auslegung sind die
 [Präregistrierung v2](../praeregistrierung_v2_entwurf.md) (Entwicklungsversion) und die Werkzeuge in
 [`../../code/`](../../code/); wo ein Konzept davon abweicht oder überholt ist, steht das im Vermerk am Kopf des
-Dokuments. Die Texte selbst sind bis auf Querverweise und die Kontaktzeile unverändert.
+Dokuments. Die Texte selbst sind bis auf Querverweise und die Kontaktzeile unverändert. Das Konzept zum
+Sechs-Nadel-Messrahmen (Oktober 2026) ist neu ausgearbeitet; sein Vermerk nennt Grundlage und Status.
 
 | Datei | Inhalt | Stand | Arbeitspaket | Status |
 |---|---|---|---|---|
 | [`laborplan_v1_2026-05.md`](laborplan_v1_2026-05.md) | Laborplan Variante 1 (kostengünstig): Messprinzip, mechanischer Aufbau, Aktuatorik, Kraftmessung, Kontrollen, Messablauf, Stückliste | Mai 2026 | AP-01, AP-04, AP-05, AP-06 | Konzept; Parameter, Antrieb, Messgrößen und Sicherheit durch Auslegungswerkzeug, Präregistrierung v2 und Arbeitsplan in Teilen überholt (Vermerk) |
 | [`messtechnik_anschluss_v2_2026-09.md`](messtechnik_anschluss_v2_2026-09.md) | Mess- und Prüfrahmen: Status, zentrale Aussagen, geplanter Prüfstand, gesuchte Anbindung | 1. September 2026 | AP-06, AP-18 | Konzept; eine Aussage zurückgezogen, eine Zahl als Artefakt erkannt (Vermerk) |
 | [`mehrkanal_messarchitektur_2026-05.md`](mehrkanal_messarchitektur_2026-05.md) | Konzeptbaustein Mehrkanal-Messarchitektur: Kraft-, Weg-, Referenz- und Rahmenkanal, Synchronisation, Verarbeitungskette, Detektionsstrategien | Mai 2026 | AP-06, AP-10 | Konzept; im Rahmen der zurückgezogenen Kernhypothese v3 entstanden, Architektur davon unabhängig; Driftabzug und Residuumslogik abweichend von der Präregistrierung v2 (Vermerk) |
+| [`nadelrahmen_dreimassenkoerper_2026-10.md`](nadelrahmen_dreimassenkoerper_2026-10.md) | Sechs-Nadel-Messrahmen (Nord, Süd, Ost, West, oben, unten) mit eingebettetem Dreimassenkörper: Nadelregel, Ausführungen kinematisch (B) und eingespannt (C), Formschluss, Vollmodell-Vorhersagen, Rahmendynamik, Änderungen gegenüber der Einzelauflage, Kanalplan | 11. Oktober 2026 | AP-27 (mit AP-04, AP-06) | Konzept; Rechnungen in [`../../rechnungen/nadelrahmen/`](../../rechnungen/nadelrahmen/PROTOKOLL.md) (Simulation, Analytik); Einspannen oder kinematische Lagerung bewusst offen |
 
 Steuerungssoftware: Die vorhandenen Firmware-Muster (ESP32) der Demonstratoren und Tischtests liegen in
 [`../../code/firmware/`](../../code/firmware/) mit eigener README.
