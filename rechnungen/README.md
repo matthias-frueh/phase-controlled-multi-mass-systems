@@ -2,7 +2,8 @@
 
 Rechen- und Prüfskripte mit ihren gespeicherten Ergebnissen aus der Gesamtprojektanalyse vom 1. bis 2. Oktober 2026,
 dazu die Kurzmessungen zum Plan des Pipelinetests und die Kontrollrechnung zur Entwurfsfassung der Entscheidungsregeln
-(`ap13_kurzmessung/`, `ap08_kontrolle/`, Stand 02.10.2026).
+(`ap13_kurzmessung/`, `ap08_kontrolle/`, Stand 02.10.2026) sowie die Konzeptrechnung zum Sechs-Nadel-Messrahmen
+(`nadelrahmen/`, Stand 11.10.2026).
 **Alles ist Simulation oder Analytik, keine Messdaten.** Jede Gruppe liegt in einem eigenen Ordner mit den Skripten,
 den Ausgaben des ursprünglichen Laufs (`<skript>_ausgabe.txt` bzw. `.out`, dazu CSV, JSON, NPZ) und dem
 Protokoll `PROTOKOLL.md`, das die Befunde mit den Rechnungen verknüpft. Die Unterordner `verifikation/` enthalten
@@ -24,6 +25,9 @@ Lizenz: Skripte MIT ([`../LICENSE`](../LICENSE)); Protokolle, Ausgaben und Daten
   v2.7. Die Präregistrierung ist seither überarbeitet (PR #14: Entscheidungsregeln als Arbeitsfestlegungen, M nach
   Konvention (b)); die Vorschläge in `statistik/PROTOKOLL.md` sind dort teilweise eingegangen. Maßgeblich ist der
   Text in `docs/`, nicht das Protokoll.
+- **Konzeptrechnung `nadelrahmen/` (11.10.2026):** neu entstanden, nicht Teil der Gesamtprojektanalyse; gerechnet mit
+  dem Code-Stand `499d4e0` (aus `code/auslegung.py` nur Profil und V1-Kandidat). Das Protokoll hat keinen
+  Übernahmevermerk.
 - **Historische Rechnungen:** Die Protokolle tragen einen Vermerk zur Übernahme. Sie sind nicht nachgeführt.
   Verweise wie „L1a-019“, „P1 §3“ oder „B01–B14“ zeigen auf Arbeitsdokumente der Analyse (Evidenzmatrix,
   Zwischenberichte, Bündelliste), die nicht im Repository liegen; „(Quelle außerhalb des Repositorys)“ steht
@@ -171,6 +175,16 @@ Prüfung der vorhandenen Modelle. Das „Egg“-Profil von Linie B ist nicht das
 | Abhängigkeiten | `code/linear_solver.py` |
 | Parameter | A4-Beispiel (starr, μ = 0,4, 10 Hz, k_max = 9), σ_h = 0,11 mN, n = n₀ = 20, n₁ = 21, B = 200, 400 Kalibrier- und 300 Szenariokampagnen je Stufe |
 | Grenzen | nur A4-Beispiel mit identischen Modulen, multiplikative Abweichungen, B = 200; keine Registrierungszahl |
+
+### `nadelrahmen/` – Dreimassenkörper im Sechs-Nadel-Messrahmen (Stand 11.10.2026)
+
+| | |
+|---|---|
+| Zweck | Konzeptrechnung zu [`../docs/konzepte/nadelrahmen_dreimassenkoerper_2026-10.md`](../docs/konzepte/nadelrahmen_dreimassenkoerper_2026-10.md): Rang, Vorspannraum und Formschluss der Nadelbelegungen; Vollmodell des gehaltenen Dreimassenkörpers (sechs Freiheitsgrade) mit Auswahlregeln aller sechs Lastkomponenten, Basislinie und Randterm, Nadelkräften, Zeltkurve und Modulzeigern; Halterungsmoden und Übertragung; ungemessene Querkräfte der Nadeln (Nadelregel); Rang tatsächlicher Kalibrierlasten |
+| Start | `n1_geometrie.py` (≈ 10 s), `n2_vollmodell.py`, `n3_rahmendynamik.py`, `n4_nebenschluss.py` (je < 5 s), `n5_kalibrierrang.py` (< 1 s); Gegenprüfung aus `verifikation/`: `v1_zeitbereich.py` (≈ 70 s), `v2_bilanz_rang.py` |
+| Abhängigkeiten | `code/auslegung.py` (Profil, V1-Kandidat) |
+| Parameter | V1-Kandidat in Lage G0, Angriffspunkte 150 mm von O, Versatz 40 mm, Nadelsteifigkeit 10⁶ bzw. 10⁷ N/m, ζ = 0,02 an der tiefsten Mode; Kalibrierlastsätze als Rechenbeispiele; alles Annahmen. Getestet mit Python 3.13, numpy 2.5, scipy 1.18 |
+| Grenzen | linear (kein Kontaktöffnen, kein Mikroschlupf), Rahmenstruktur und Fundament starr und ortsfest, ideale Kontakte ohne freie Kontaktmomente, Nadelmassen und geometrische Steifigkeit vernachlässigt, Module senkrecht geführt, nur der V1-Kandidat gerechnet; Modellrechnung, kein experimenteller Nachweis |
 
 ## Nicht übernommen
 

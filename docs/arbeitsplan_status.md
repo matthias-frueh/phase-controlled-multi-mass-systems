@@ -1,6 +1,6 @@
 # Arbeitspakete AP-01 bis AP-30: Bearbeitungsstand
 
-Stand: 4. Oktober 2026. Lizenz dieses Ordners: CC BY 4.0, siehe [`../LICENSE-CC-BY-4.0`](../LICENSE-CC-BY-4.0).
+Stand: 4. Oktober 2026, Nachtrag 11. Oktober 2026 (AP-27). Lizenz dieses Ordners: CC BY 4.0, siehe [`../LICENSE-CC-BY-4.0`](../LICENSE-CC-BY-4.0).
 Namensnennung: „Matthias Früh, PCMMS“, https://github.com/matthias-frueh/phase-controlled-multi-mass-systems
 
 Die Arbeitspakete folgen dem Arbeitsplan der Gesamtprojektanalyse vom Oktober 2026: 30 Pakete in fünf Stufen, S1 vor
@@ -49,7 +49,7 @@ Konzepte sind Konzepte, keine Umsetzung ([`konzepte/README.md`](konzepte/README.
 | AP-24 | Unabhängige Replikation an einer zweiten Apparatur | S4 | später | Präregistrierung v2 §10.1 |
 | AP-25 | Numerik der Linie A nacharbeiten (Karten als Attraktormengen, S₃-Prüfung, Liftoff-Kennzahlen als Spannen) | S4 | später | ereignisgenauer Löser (AP-03); Prüfrechnungen zu Engine, Symmetrie und Randterm ([`../rechnungen/engine/`](../rechnungen/engine/PROTOKOLL.md), [`../rechnungen/symmetrie_randterm/`](../rechnungen/symmetrie_randterm/PROTOKOLL.md)) |
 | AP-26 | Explorative Folgestudien an der Apparatur (Liftoff, Hysterese, Profilvarianten) | S4 | später | nur mit Schutzkonzept (AP-05) |
-| AP-27 | Räumliche Last, N Module, Regelung, Robotik | S4 | später | linearer Löser als Referenz für N = 3 |
+| AP-27 | Räumliche Last, N Module, Regelung, Robotik | S4 | später; Konzept des Messrahmens vorgezogen (11.10.2026) | linearer Löser als Referenz für N = 3; Konzept Sechs-Nadel-Messrahmen mit eingebettetem Dreimassenkörper ([`konzepte/nadelrahmen_dreimassenkoerper_2026-10.md`](konzepte/nadelrahmen_dreimassenkoerper_2026-10.md)) mit Rechnungen ([`../rechnungen/nadelrahmen/`](../rechnungen/nadelrahmen/PROTOKOLL.md)); Konzept- und Modellarbeit, kein Bauauftrag |
 | AP-28 | Linie B: Kraftmodell bei kleiner Keulegan-Carpenter-Zahl, Forschungsrahmen v3.6 | S5 | später | Kontrollrechnungen und Modelle v2 ([`../rechnungen/linie_b/`](../rechnungen/linie_b/PROTOKOLL.md), als Linie B gekennzeichnet); der Forschungsrahmen liegt nicht im Repository |
 | AP-29 | Linie C: Wiederaufnahmebedingungen | S5 | später (geparkt) | – |
 
@@ -64,6 +64,8 @@ Konzepte sind Konzepte, keine Umsetzung ([`konzepte/README.md`](konzepte/README.
 Sie werden hier nur geführt; aus ihnen entsteht kein Entwicklungsauftrag.
 
 - Antrieb (Nocke mit Folger oder programmierbarer Aktor) und tatsächlicher Hardwarestand (AP-01).
+- Messrahmen (AP-27): Kinematische Lagerung und Einspannung bleiben beide als anwendungsabhängige Möglichkeiten offen
+  (Vorgabe des Autors vom 11.10.2026); das Konzept dokumentiert beide, eine Bauentscheidung steht nicht an.
 - Geometrie G0 oder G60h, Zellwahl, Kontakt und Dämpfungsziel, Umfang von E1 und Nennlast (AP-04, AP-05).
 - Messkette: Kanalzahl, Wegkanal, Abtastrate (AP-06); Sensor der Modulkinematik (AP-07).
 - Institutionelle Anbindung als Tor zu Phase 0 oder eigener Messplatz (AP-18).

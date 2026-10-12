@@ -1,0 +1,36 @@
+
+====================================================================================================
+Teil A – Basislinie, Randterm und Einzelnadel-Mittel im Zeitbereich (Belegung B, starr)
+====================================================================================================
+M = 0.650 kg, r_cm = [6.462, -10.769, 25.385] mm, Basislinie = +0.000000  +0.000000  +6.376500  -0.068670  -0.041202  +0.000000
+T: max|⟨w⟩_ganz − Basislinie| = 2.00e-11;  Fenster 3,37 T: Abweichung F_z -6.707e-03 N, M_x -1.190e-03, M_y +1.120e-02 N·m; Randterm F_z -6.707e-03, M_x -1.190e-03, M_y +1.120e-02;  max|Abw − Randterm| = 1.7e-14
+Z: max|⟨w⟩_ganz − Basislinie| = 6.43e-11;  Fenster 3,37 T: Abweichung F_z -1.415e-02 N, M_x -1.190e-03, M_y +1.083e-02 N·m; Randterm F_z -1.415e-02, M_x -1.190e-03, M_y +1.083e-02;  max|Abw − Randterm| = 9.2e-15
+S: max|⟨w⟩_ganz − Basislinie| = 1.80e-10;  Fenster 3,37 T: Abweichung F_z -2.720e-01 N, M_x -1.388e-17, M_y -6.939e-18 N·m; Randterm F_z -2.720e-01, M_x -7.239e-19, M_y +8.043e-19;  max|Abw − Randterm| = 3.0e-14
+Einzelnadel-Mittel T [N]: -0.858375  -0.858375  +0.000000  +0.000000  -3.703275  +2.673225
+statisch bestimmt G⁻¹·Basislinie: -0.858375  -0.858375  +0.000000  +0.000000  -3.703275  +2.673225
+max|⟨q⟩_T − ⟨q⟩_S| = 1.0e-10 N, max|⟨q⟩_T − ⟨q⟩_Z| = 5.0e-11 N, max|⟨q⟩_T − G⁻¹·Basis| = 4.3e-11 N
+Über ganze Perioden ist das Mittel die Basislinie; über ein Teilfenster weicht es genau um die Impuls- bzw.
+Drallbilanz des Fensters ab (Randterm, Trapezregel für Mittel und Geschwindigkeit gleich gewählt).
+
+====================================================================================================
+Teil B – Rang und Nullraum exakt (rationale Arithmetik, Koordinaten in mm)
+====================================================================================================
+Belegung  Spalten  Rang exakt  Nullraum exakt  Rang nr_modell
+A               6           3               3  3
+B               6           6               0  6
+B2              6           6               0  6
+Bg              6           3               3  3
+C              18           6              12  6
+D7              7           6               1  –
+D12            12           6               6  –
+
+====================================================================================================
+Teil C – Formschluss mit einseitigen Druckspitzen, exakt
+====================================================================================================
+D7: Rang 6, Nullraum 1, Basisvektor (auf Nord = 1): ['1', '1', '1', '1', '2', '1', '1'] → alle positiv: True → Formschluss True
+D12: Rang 6; G·(1, …, 1) = ['0', '0', '0', '0', '0', '0'] → positiver Nullraumvektor → Formschluss True
+A: Rang 3, Nullraum 3 → Formschluss nur bei Rang 6 und positivem Nullraumvektor: False
+B: Rang 6, Nullraum 0 → Formschluss nur bei Rang 6 und positivem Nullraumvektor: False
+B2: Rang 6, Nullraum 0 → Formschluss nur bei Rang 6 und positivem Nullraumvektor: False
+Bg: Rang 3, Nullraum 3 → Formschluss nur bei Rang 6 und positivem Nullraumvektor: False
+C: Rang 6, Nullraum 12; G·λ_V für 1 N Druck auf allen sechs axialen Komponenten = ['0', '0', '0', '0', '0', '0'] → Vorspannung im Nullraum: True

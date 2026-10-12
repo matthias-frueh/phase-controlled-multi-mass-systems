@@ -1,0 +1,102 @@
+
+====================================================================================================
+1. Belegungen mit je einer Nadel pro Fläche: Rang, Nullraum, Kondition ([F; M/l_ref])
+====================================================================================================
+Belegung  Art je Nadel          gem. Komp.  Rang  Nullraum  Kond. l=A   Kond. l=D
+A         axial, zentral               6        3       3          inf         inf
+B         axial, versetzt zykl.        6        6       0        1.000       3.750
+B2        axial, versetzt zykl. 2       6        6       0        1.000       3.750
+Bg        axial, gleichseitig          6        3       3          inf         inf
+C         3 Kraftkomp., zentral       18        6      12        3.062       1.225
+
+Teilweise gleichseitig (gewählte Paare gleichseitig wie Bg, übrige wie B):
+   gleichseitige Paare: 0   Rang 6   (Wahlen: 1)
+   gleichseitige Paare: 1   Rang 5   (Wahlen: 3)
+   gleichseitige Paare: 2   Rang 4   (Wahlen: 3)
+   gleichseitige Paare: 3   Rang 3   (Wahlen: 1)
+Jedes gleichseitige Paar kostet ein Moment: Rang 6, 5, 4, 3.
+
+====================================================================================================
+2. Paarstruktur axialer Nadeln: Differenz = Kraft; Summe = Vorspannung (zentral) bzw. Moment (versetzt)
+====================================================================================================
+Spalten von G der Belegung B (Dyname einer Druckkraft von 1 N, Momente in N·m):
+Nadel   Fixierstelle r [m]        Druckrichtung n        Fx       Fy       Fz       Mx       My       Mz
+Nord    (+0.000, +0.150, +0.040)  (+0, -1, +0)        0.000   -1.000    0.000    0.040    0.000    0.000
+Süd     (+0.000, -0.150, -0.040)  (+0, +1, +0)        0.000    1.000    0.000    0.040    0.000    0.000
+Ost     (+0.150, +0.040, +0.000)  (-1, +0, +0)       -1.000    0.000    0.000    0.000    0.000    0.040
+West    (-0.150, -0.040, +0.000)  (+1, +0, +0)        1.000    0.000    0.000    0.000    0.000    0.040
+oben    (+0.040, +0.000, +0.150)  (+0, +0, -1)        0.000    0.000   -1.000    0.000    0.040    0.000
+unten   (-0.040, +0.000, -0.150)  (+0, +0, +1)        0.000    0.000    1.000    0.000    0.040    0.000
+
+B: Nadelkräfte aus der Dyname, q = G⁻¹·w (Zeilen: Nadeln; Spalten: Beitrag je Komponente):
+Nadel         Fx        Fy        Fz        Mx        My        Mz
+Nord       0.000    -0.500     0.000    12.500     0.000     0.000
+Süd        0.000     0.500     0.000    12.500     0.000     0.000
+Ost       -0.500     0.000     0.000     0.000     0.000    12.500
+West       0.500     0.000     0.000     0.000     0.000    12.500
+oben       0.000     0.000    -0.500     0.000    12.500     0.000
+unten      0.000     0.000     0.500     0.000    12.500     0.000
+
+B, geschlossen: Fx = q_West − q_Ost, Fy = q_Süd − q_Nord, Fz = q_unten − q_oben,
+               Mx = A·(q_Nord + q_Süd), My = A·(q_oben + q_unten), Mz = A·(q_Ost + q_West)
+   max. Abweichung von G: 0.0e+00
+
+A (zentral): Nullraum von G = Vorspannzustände (je Paar gleicher Druck):
+   Nord=+1.000  Süd=+1.000  Ost=+0.000  West=+0.000  oben=+0.000  unten=+0.000
+   Nord=+0.000  Süd=+0.000  Ost=+1.000  West=+1.000  oben=+0.000  unten=+0.000
+   Nord=+0.000  Süd=+0.000  Ost=+0.000  West=+0.000  oben=+1.000  unten=+1.000
+A: blinde Lastrichtungen (Linksnullraum, skaliert [F; M/A]):
+   Fx=+0.000  Fy=+0.000  Fz=+0.000  Mx=+1.000  My=+0.000  Mz=+0.000
+   Fx=+0.000  Fy=+0.000  Fz=+0.000  Mx=+0.000  My=+1.000  Mz=+0.000
+   Fx=+0.000  Fy=+0.000  Fz=+0.000  Mx=+0.000  My=+0.000  Mz=+1.000
+Bg (gleichseitig versetzt): blinde Lastrichtungen:
+   Fx=+0.707  Fy=+0.000  Fz=+0.000  Mx=+0.000  My=+0.000  Mz=+0.707
+   Fx=+0.000  Fy=+0.667  Fz=+0.234  Mx=+0.667  My=+0.234  Mz=+0.000
+   Fx=+0.000  Fy=-0.234  Fz=+0.667  Mx=-0.234  My=+0.667  Mz=+0.000
+
+====================================================================================================
+3. Statisch bestimmte Belegung B: Nadellasten unter dem Gewicht (V1-Kandidat, M = 0,65 kg)
+====================================================================================================
+Schwerpunkt r_cm [mm]             Nord      Süd      Ost     West     oben    unten   (N, + Druck, − Zug)
+(+0.0, +0.0, +0.0)               0.000    0.000    0.000    0.000   -3.188    3.188
+(-40.0, +0.0, +0.0)              0.000    0.000    0.000    0.000    0.000    6.377
+(+0.0, +10.0, +0.0)              0.797    0.797    0.000    0.000   -3.188    3.188
+Gewicht in O: oben trägt Mg/2 Zug, unten Mg/2 Druck (das Moment My = 0 verlangt q_oben = −q_unten).
+Schwerpunkt auf der Wirkungslinie der unteren Nadel (x_cm = −A): oben lastfrei.
+
+====================================================================================================
+4. Formschluss im Modell: starrer Körper, reibungsfreie Druckspitzen nur längs der Achse, erste Ordnung
+====================================================================================================
+Halten gegen beliebige Lasten (vollständige räumliche Halterung). Unter vorgegebener Last, mit Haftreibung,
+flächigem Kontakt oder Krümmungseffekten (höhere Ordnung) gelten andere Bedingungen; nicht gerechnet.
+Satz: Spalten W positiv aufspannend ⇔ Rang 6 und ∃ λ > 0 mit W·λ = 0. Sechs Vektoren können den R⁶ nicht
+positiv aufspannen: Wären sie aufspannend, wären sie eine Basis; −Σ G_j = Σ c_j G_j mit c_j ≥ 0 gäbe
+Σ (1 + c_j) G_j = 0 mit positiven Gewichten, also lineare Abhängigkeit – Widerspruch. Mindestens sieben.
+
+Beispiel                              Nadeln  Rang  Formschluss  t* (max. min λ bei Σλ = 1)
+A zentral                                  6     3  False        +0.1667
+B versetzt zyklisch                        6     6  False        -inf
+Bg gleichseitig                            6     3  False        +0.1667
+D12 zwei je Fläche (±A)                   12     6  True         +0.0833
+D7 eigene Lagen + zweite Nadel unten       7     6  True         +0.1250
+   Lagen D7 [m]: Nord (+0.05, +0.15, +0.05); Süd (-0.05, -0.15, -0.05); Ost (+0.15, +0.05, +0.00); West (-0.15, -0.05, +0.00); oben (+0.00, +0.05, +0.15); unten (+0.05, +0.00, -0.15); unten (-0.05, +0.00, -0.15)
+   Nullraum D7 (einziger Vorspannzustand, auf Nord = 1 normiert): 1.000  1.000  1.000  1.000  2.000  1.000  1.000   (Rang 6, Nullraum 1)
+
+B + siebte achsparallele Nadel (Gitter 7 × 7 auf jeder Fläche, ±0,8·D): Formschluss in 0/294
+   In G_B⁻¹ (Abschnitt 2) hängt jedes Paar nur an einer Kraft und einem Moment. Eine achsparallele siebte Nadel
+   erzeugt für mindestens ein Paar keines von beiden; der einzige Vorspannzustand hat dort Nullen.
+
+Zufallsstichprobe (2000 Lagen, je eine Nadel pro Fläche, Normalen achsparallel, Lage auf der Fläche gleichverteilt in ±0,8·D):
+   sechs Nadeln:  Rang 6 in 2000/2000, Formschluss in 0/2000
+   sieben Nadeln (zusätzlich eine auf zufälliger Fläche): Rang 6 in 2000/2000, Formschluss in 180/2000
+
+====================================================================================================
+5. Rang-Nullraum-Bilanz: übertragene Komponenten = Rang + Nullraum
+====================================================================================================
+Ausführung (sechs Nadeln)                     Komp.  Rang  Nullraum  Vorspannung  Momente  Einzelnadel-Nulltest
+A  axial, zentral                                 6     3         3  möglich      nein     nein
+B  axial, versetzt (zyklisch)                     6     6         0  unmöglich    ja       ja
+C  drei Kraftkomponenten, zentral                18     6        12  möglich      ja       nein
+A: Momente nicht gemessen und von den Nadeln nicht gehalten (Mechanismus in drei Drehrichtungen).
+B: statisch bestimmt; Nadeln müssen Zug und Druck tragen (Fixierstelle und Schnittstelle zugfest).
+C: statisch unbestimmt; Vorspannung (Einspannen) möglich, Nulltest nur für die sechs Resultierenden.

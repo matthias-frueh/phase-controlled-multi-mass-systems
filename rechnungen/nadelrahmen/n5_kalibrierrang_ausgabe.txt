@@ -1,0 +1,26 @@
+Lastsatz                                                                 Lasten Rang  Kond.  (Kraft in N, Moment/l_ref)
+--------------------------------------------------------------------------------------------------------------------------
+1. Eigengewicht des Prüflings (0,65 kg am Schwerpunkt r_cm = (5, −3, 20) mm)
+   eine Rahmenlage                                                          1     1        –  fehlen 5 Richtungen
+   zwei Lagen                                                               2     2        –  fehlen 4 Richtungen
+   drei Lagen, unabhängige Schwerkraftrichtungen                            3     3        –  fehlen 3 Richtungen
+   24 zufällige Lagen                                                      24     3        –  fehlen 3 Richtungen
+   drei Lagen + 0,5-kg-Stück an einem zweiten Punkt (40, 30, −50) mm        6     5        –  fehlt: Fx+0.04 Fy-0.08 Fz-0.02 Mx-0.41 My-0.39 Mz+0.82
+   drei Lagen + Stücke an zwei weiteren Punkten (nicht auf einer Geraden)    9     6     5.07
+2. Gewichtsstücke (1 kg) an zwölf Stellen, gleichverteilt in ±100 mm
+   eine Rahmenlage                                                         12     3        –  fehlen 3 Richtungen
+   zwei Lagen                                                              24     5        –  fehlt: Fx+1.00
+   drei Lagen, unabhängige Schwerkraftrichtungen                           36     6     2.55
+   drei Lagen, koplanar (um x gedreht: 0°, 90°, 180°)                      36     5        –  fehlt: Fx+1.00
+3. Lastpunkte nur auf der Hochachse (z = −100, −50, 50, 100 mm)
+   drei Lagen, unabhängige Schwerkraftrichtungen                           12     5        –  fehlt: Mz+1.00
+4. Eine Rahmenlage: Gewichtsstücke an zwölf Stellen und waagerechte Lasten über Umlenkrollen (je 5 N)
+   + je ein Zug in x und in y                                              14     5        –  fehlt: Fx+0.31 Fy-0.25 Mz+0.92
+   + zweiter Zug in x mit anderer Wirkungslinie                            15     6    13.74
+
+Eine einzelne Last am Schwerpunkt erzeugt nur Lastvektoren (F; r_cm × F) mit Wirkungslinie durch r_cm: Rang
+höchstens 3, gleich in wie vielen Lagen. Liegen alle Lastpunkte auf einer Geraden – auch Schwerpunkt und ein
+weiteres Stück –, fehlt das Moment um diese Gerade (Rang 5). Drei Rahmenlagen genügen nur mit linear unabhängigen
+Schwerkraftrichtungen und mindestens drei Lastpunkten, die nicht auf einer Geraden liegen; koplanare Richtungen
+lassen eine Kraftrichtung aus. Eine waagerechte Last je Richtung lässt M_z mit F_x, F_y gekoppelt. Entscheidend ist
+der Rang des tatsächlichen Lastsatzes, nicht die Zahl der Lagen.

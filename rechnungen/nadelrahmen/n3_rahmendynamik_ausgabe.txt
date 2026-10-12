@@ -1,0 +1,102 @@
+
+====================================================================================================
+1. Eigenfrequenzen des gehaltenen Körpers (V1-Kandidat, 0,65 kg) [Hz] und dominante Freiheitsgrade
+====================================================================================================
+B, k_a = 1e6:
+      124.4 Hz   θ_z 1.00
+      147.2 Hz   θ_y 0.77, θ_x 0.23
+      147.2 Hz   θ_x 0.77, θ_y 0.23
+      279.2 Hz   u_y 0.67, u_z 0.33
+      279.2 Hz   u_x 1.00
+      279.2 Hz   u_z 0.67, u_y 0.33
+B, k_a = 1e7:
+      393.3 Hz   θ_z 1.00
+      465.5 Hz   θ_y 0.78, θ_x 0.22
+      465.5 Hz   θ_x 0.78, θ_y 0.22
+      882.8 Hz   u_x 1.00
+      882.8 Hz   u_y 1.00
+      882.8 Hz   u_z 1.00
+C, k_a = 1e6, k_t = 2e4:
+       93.3 Hz   θ_z 1.00
+      110.4 Hz   θ_y 0.64, θ_x 0.36
+      110.4 Hz   θ_x 0.64, θ_y 0.36
+      284.7 Hz   u_y 1.00
+      284.7 Hz   u_z 1.00
+      284.7 Hz   u_x 1.00
+C, k_a = 1e6, k_t = 1e5:
+      208.6 Hz   θ_z 1.00
+      246.9 Hz   θ_y 0.62, θ_x 0.38
+      246.9 Hz   θ_x 0.62, θ_y 0.38
+      305.8 Hz   u_z 0.62, u_y 0.38
+      305.8 Hz   u_x 1.00
+      305.8 Hz   u_y 0.62, u_z 0.38
+Gleich hohe Frequenzen sind entartet; ihre Modenformen sind dann beliebige Mischungen derselben Freiheitsgrade.
+
+B, k_a = 1e6 N/m: Eigenfrequenzen über den Versatz A der Wirkungslinien (D = 0,15 m)
+   A = 0.02 m:    62.2    73.6    73.6   279.2   279.2   279.2
+   A = 0.04 m:   124.4   147.2   147.2   279.2   279.2   279.2
+   A = 0.08 m:   248.7   279.2   279.2   279.2   294.4   294.4
+   A = 0.12 m:   279.2   279.2   279.2   373.1   441.7   441.7
+Die drei Drehmoden werden nur über die Paare mit Hebel A gehalten (Drehsteifigkeit 2·k_a·A²): f_Dreh ∝ A.
+
+====================================================================================================
+2. Übertragung der Moduldyname auf die Nadeldyname: |T_ii(k·f)| und größtes Übersprechen (skaliert mit D)
+====================================================================================================
+B, k_a = 1e6:
+   k        Fx       Fy       Fz       Mx       My       Mz   max|T_ij|, i ≠ j
+   1    1.0013   1.0013   1.0013   1.0046   1.0046   1.0065   8.0e-19
+   2    1.0052   1.0052   1.0052   1.0188   1.0188   1.0265   3.3e-18
+   3    1.0117   1.0117   1.0117   1.0433   1.0433   1.0618   7.7e-18
+   4    1.0210   1.0210   1.0210   1.0797   1.0797   1.1153   1.4e-17
+   5    1.0331   1.0331   1.0331   1.1304   1.1304   1.1927   2.5e-17
+   6    1.0484   1.0484   1.0484   1.1991   1.1991   1.3031   3.9e-17
+B, k_a = 1e7:
+   k        Fx       Fy       Fz       Mx       My       Mz   max|T_ij|, i ≠ j
+   1    1.0001   1.0001   1.0001   1.0005   1.0005   1.0006   8.0e-20
+   2    1.0005   1.0005   1.0005   1.0018   1.0018   1.0026   3.2e-19
+   3    1.0012   1.0012   1.0012   1.0042   1.0042   1.0059   7.2e-19
+   4    1.0021   1.0021   1.0021   1.0074   1.0074   1.0105   1.3e-18
+   5    1.0032   1.0032   1.0032   1.0117   1.0117   1.0164   2.0e-18
+   6    1.0046   1.0046   1.0046   1.0169   1.0169   1.0238   2.9e-18
+C, k_a = 1e6, k_t = 2e4:
+   k        Fx       Fy       Fz       Mx       My       Mz   max|T_ij|, i ≠ j
+   1    1.0012   1.0012   1.0012   1.0083   1.0083   1.0116   1.3e-18
+   2    1.0050   1.0050   1.0050   1.0339   1.0339   1.0482   5.5e-18
+   3    1.0112   1.0112   1.0112   1.0797   1.0797   1.1153   1.3e-17
+   4    1.0201   1.0201   1.0201   1.1510   1.1510   1.2252   2.6e-17
+   5    1.0318   1.0318   1.0318   1.2578   1.2578   1.4028   4.8e-17
+   6    1.0464   1.0464   1.0464   1.4186   1.4186   1.7046   8.4e-17
+C, k_a = 1e6, k_t = 1e5:
+   k        Fx       Fy       Fz       Mx       My       Mz   max|T_ij|, i ≠ j
+   1    1.0011   1.0011   1.0011   1.0016   1.0016   1.0023   2.6e-19
+   2    1.0043   1.0043   1.0043   1.0066   1.0066   1.0093   1.0e-18
+   3    1.0097   1.0097   1.0097   1.0150   1.0150   1.0211   2.4e-18
+   4    1.0174   1.0174   1.0174   1.0270   1.0270   1.0382   4.3e-18
+   5    1.0275   1.0275   1.0275   1.0428   1.0428   1.0610   7.0e-18
+   6    1.0400   1.0400   1.0400   1.0628   1.0628   1.0902   1.0e-17
+
+====================================================================================================
+3. Übersprechen in F_x, F_y, M_z am Triphasik-Punkt: Trägerschwerpunkt in O gegen 30 mm über O
+====================================================================================================
+Schwerpunkthöhe des Körpers z_cm = 0 bzw. 16.2 mm
+B, k_a = 1e6, z_cm = 0: 2|w_k| k = 1 … 3:  F_x    0        0        0       F_y    0        0        0       M_z    0        0        0    
+B, k_a = 1e6, z_cm > 0: 2|w_k| k = 1 … 3:  F_x 3.04e-03 4.09e-03    0       F_y 3.04e-03 4.09e-03    0       M_z    0        0        0    
+B, k_a = 1e7, z_cm = 0: 2|w_k| k = 1 … 3:  F_x    0        0        0       F_y    0        0        0       M_z    0        0        0    
+B, k_a = 1e7, z_cm > 0: 2|w_k| k = 1 … 3:  F_x 3.03e-04 4.00e-04    0       F_y 3.03e-04 4.00e-04    0       M_z    0        0        0    
+Mit dem Schwerpunkt über O koppelt das Kippen an waagerechte Beschleunigungen; F_x und F_y sind dann keine
+Nullkomponenten mehr (Kopplung über die Halterung, nicht L3). Starrer Grenzfall: exakt null (n2, Abschnitt 2).
+
+====================================================================================================
+4. Nadelkräfte mit Rahmendynamik gegen den starren Grenzfall (Belegung B), max. Abweichung über die Periode [N]
+====================================================================================================
+B, k_a = 1e6, T: Nord=0.1996  Süd=0.1996  Ost=0.0000  West=0.0000  oben=0.2093  unten=0.1962
+B, k_a = 1e6, S: Nord=0.0000  Süd=0.0000  Ost=0.0000  West=0.0000  oben=0.1157  unten=0.1157
+B, k_a = 1e7, T: Nord=0.0668  Süd=0.0668  Ost=0.0000  West=0.0000  oben=0.0689  unten=0.0650
+B, k_a = 1e7, S: Nord=0.0000  Süd=0.0000  Ost=0.0000  West=0.0000  oben=0.0363  unten=0.0363
+
+Auslegungsregel (Einmassenschwinger, ohne Korrektur): |T − 1| ≈ (k·f/f₁)² ≤ ε  ⇒  f₁ ≥ k_max·f/√ε
+   ε = 0.01, k_max = 6, f = 10 Hz:  f₁ ≥ 600 Hz
+   ε = 0.001, k_max = 6, f = 10 Hz:  f₁ ≥ 1897 Hz
+Mit gemessener Übertragung (dynamische Kalibrierung H_cal(f) des Gesamtaufbaus) begrenzt deren Unsicherheit,
+nicht |T − 1|. Die Moden hängen von Körper und Nadeln ab (Rahmenstruktur hier starr) und gehören zur
+Versuchskonfiguration.
