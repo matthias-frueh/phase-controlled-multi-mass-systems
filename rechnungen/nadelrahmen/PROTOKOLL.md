@@ -172,10 +172,12 @@ ohne äußere Nebenpfade; ein Signal dort zeigt Querbewegung der Module, Führun
 für Momente mit der Basislinie r_cm × M g e_z, Nachtrag §4). Voraussetzungen: festgelegte Bilanzgrenze, alle Lasten
 außer dem Gewicht über die sechs Schnittstellen (keine Kabel oder Zuleitungen), Rahmen ortsfest, ganze Perioden im
 eingeschwungenen Zustand; für die Differenzform gleiche äußere Lasten in beiden Zuständen. Bei senkrechter
-Modulbewegung hängt die Basislinie nicht von der Phasenlage ab. In der statisch bestimmten Belegung B ohne Nebenpfade
-und mit unveränderter Geometrie G ist zusätzlich jede Nadel ein eigener Nulltest (Δ⟨q_j⟩ = 0 zwischen Zuständen); der
-Absolutwert G⁻¹·Basislinie verlangt bekanntes G, M und r_cm. Differenztests zeigen gleichbleibende Fehlbeträge nicht
-(NR-07). Ausgewertet werden ganze Perioden; sonst gehört der Randterm zur Basislinie.
+Modulbewegung hängt die Basislinie nicht von der Phasenlage ab. In der statisch bestimmten Belegung B ohne Nebenpfade,
+mit unveränderter Geometrie G und unverändertem Kontaktzustand ist zusätzlich jede Nadel ein eigener Nulltest
+(Δ⟨q_j⟩ = 0 zwischen Zuständen); der Absolutwert G⁻¹·Basislinie verlangt bekanntes G, M und r_cm. Im linearen Modell
+ist das Zeitmittel jeder Pfadkraft ihr statischer Anteil (in C einschließlich der vorgegebenen Vorspannung, NR-06);
+eine phasenabhängige mittlere Lastumverteilung sagt es nicht vorher. Differenztests zeigen gleichbleibende
+Fehlbeträge nicht (NR-07). Ausgewertet werden ganze Perioden; sonst gehört der Randterm zur Basislinie.
 
 ## NR-06 · Nadelkräfte, Vorspannbedarf, Zeltkurve und Modulzeiger
 

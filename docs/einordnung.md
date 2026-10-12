@@ -1,7 +1,7 @@
 # PCMMS — Was es ist, was es nicht ist, und warum es das braucht
 
 **Phasenkontrollierte Mehrmassensysteme · Phase-Controlled Multi-Mass Systems**
-Matthias Früh · ORCID 0009-0005-9984-4207 · Stand September 2026 · Nachträge 2. Oktober 2026
+Matthias Früh · ORCID 0009-0005-9984-4207 · Stand September 2026 · Nachträge 2. und 12. Oktober 2026
 
 *Geschrieben für jemanden, der Mechanik kann und noch nie von PCMMS gehört hat.*
 
@@ -26,7 +26,22 @@ Für beschränkte periodische Innenbewegung gilt über eine Periode
 
 auch bei intermittierendem Kontakt mit Liftoff. Das ist kein Ergebnis, sondern eine Randbedingung.
 Sie wird im Projekt als **Kontrollgröße** benutzt: Weicht ein gemessenes Zeitmittel dauerhaft ab, ist
-die Messkette defekt, nicht die Physik.
+die Messkette defekt oder die Bilanz unvollständig, nicht die Physik.
+
+Der Schwerpunktsatz bestimmt dabei unter den jeweiligen Randbedingungen die vertikale Kontaktresultierende
+F_c: die vorzeichengerecht nach ihrer tatsächlichen Richtung summierten vertikalen Komponenten aller
+Schnittstellenkräfte. Die Summe der Rohkanalwerte ist nicht automatisch diese Resultierende. Für ein
+Auswertefenster der Dauer T_w gilt, bei positiver Vertikalrichtung nach oben,
+
+```
+⟨F_c⟩ − M·g  =  M·[v_S,z(t₁) − v_S,z(t₀)] / T_w  −  ⟨F_ext,z⟩
+```
+
+mit der Schwerpunktgeschwindigkeit v_S und weiteren äußeren Kräften F_ext,z außerhalb der erfassten
+Schnittstellen und der Gewichtskraft (Formelverzeichnis v2.7, „Zeitmittel und endliches Fenster“). Die
+Referenz M·g gilt bei verschwindendem Randterm und ohne weitere äußere Vertikalkraft; ganze
+Anregungsperioden allein garantieren keinen verschwindenden Randterm. Für Momente sind zusätzlich
+Angriffspunkte, gegebenenfalls freie Kontaktmomente und die Drallbilanz maßgeblich.
 
 Die Kontakt-Nichtlinearität — der Kontakt kann drücken, aber nicht ziehen — verlagert die gesamte
 Information in die **Form** des Signals. Wo der Kontakt abhebt, ist die Kraft exakt null; die verlorene
@@ -50,12 +65,20 @@ und ordnet sie:
 
 ### Linie A — Wellenformstatistik (primär)
 
-Der Körper steht auf einer Unterlage und bewegt sich nicht. Gefragt ist ausschließlich, wie die
-Phasenkonfiguration (φ₂, φ₃) die Wellenform von F_N(t) formt. Das Zeitmittel ist fixiert und wird
-zur Kontrolle mitgemessen.
+Der Körper steht auf einer Unterlage oder ist in einem Messrahmen gehalten und bewegt sich nicht.
+Gefragt ist ausschließlich, wie die Phasenkonfiguration (φ₂, φ₃) die Kontaktlasten formt: ihre zeitliche
+Form – im Grundaufbau die Wellenform von F_N(t) – und, bei einem dafür ausgelegten und kalibrierten
+Messrahmen, ihre räumliche Verteilung. Dazu gehören die Kräfte an den einzelnen Schnittstellen sowie die
+rekonstruierte Kraft- und Momentenresultierende. Das Zeitmittel ist fixiert und wird zur Kontrolle
+mitgemessen. Phasenabhängige lokale Wellenformen und Momente können auch dann auftreten, wenn die
+Mittelwerte der Resultierenden und der Einzelkanäle unverändert bleiben. Die Gesamtbilanz allein legt die
+Einzelmittelwerte im Allgemeinen nicht fest; daraus folgt jedoch keine allgemeine Vorhersage einer
+phasenabhängigen mittleren Lastumverteilung (zu den Belegungen B und C siehe das Konzept des
+Sechs-Nadel-Messrahmens, Abschnitt 5.2).
 
 Hierzu gehören: das Exposé September 2026, der 19×19-Phasensweep, der 2°-Feinsweep, die
-Simulationsengine, die Präsentationen.
+Simulationsengine, die Präsentationen und, für die räumliche Untersuchung (AP-27), das Konzept des
+Sechs-Nadel-Messrahmens ([`konzepte/nadelrahmen_dreimassenkoerper_2026-10.md`](konzepte/nadelrahmen_dreimassenkoerper_2026-10.md)).
 
 ### Linie B — Medium-gekoppelte Fortbewegung (optional, separater Aufbau)
 
@@ -303,6 +326,22 @@ veröffentlichen.
 - keine neue Physik
 
 Alles bewegt sich innerhalb der klassischen Mechanik.
+
+Physikalischer Erkenntnisgewinn setzt keine Abweichung von bekannten Naturgesetzen voraus. Die quantitative
+Vorhersage und experimentelle Prüfung phasenabhängiger Kraft-, Momenten- und Feldverläufe kann
+Modellgültigkeit, Steuerbarkeit und Dynamik charakterisieren. Eine Rechnung liefert zunächst eine
+Modellvorhersage. Ein Nulltest ist eine ausdrücklich festgelegte Prüfung auf einen erwarteten Nullbefund,
+etwa eine verschwindende Zustandsdifferenz der Mittelwerte (Formelverzeichnis v2.7, „Hypothesen und
+Nulltest“); diese Bezeichnung folgt nicht allein daraus, dass ein Modell newtonsch ist.
+
+Eine separate Untersuchung des zeitabhängigen gravitativen Nahfeldes wäre eine eigenständige Fragestellung.
+Das newtonsche Feld folgt aus den tatsächlichen absoluten Bahnen und der vollständigen Massenverteilung;
+auch die gegenseitige gravitative Anziehung der Module gehört bereits zur newtonschen Mechanik. Eine
+Kopplung über die mechanische Rahmenverbindung hinaus ist deshalb für sich genommen kein Hinweis auf einen
+zusätzlichen physikalischen Mechanismus. Gravitationswellenabstrahlung und relativistische Korrekturen sind
+davon getrennt zu behandeln. Der Fokus von PCMMS auf Kontaktlasten ergibt sich aus der spezifizierten
+Messaufgabe, Kalibrierbarkeit und Störbeherrschung. Die Einordnung begründet keine allgemeine
+Unmessbarkeit gravitativer Nahfelder und erweitert die geplanten Messungen nicht um einen Feldnachweis.
 
 ---
 

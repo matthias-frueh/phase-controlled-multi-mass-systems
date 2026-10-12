@@ -1,7 +1,8 @@
 # Sechs-Nadel-Messrahmen · Dreimassenkörper in der Rundum-Messung (Vollmodell)
 
-> **Vermerk (11.10.2026).** Konzept- und Modellarbeit zum Arbeitspaket AP-27 (räumliche Last), ausgearbeitet am
-> 11.10.2026 nach der Festhaltung des Autors vom selben Tag (Abschnitt 1). Nicht umgesetzt, nicht an Hardware geprüft;
+> **Vermerk (11.10.2026, Nachtrag 12.10.2026).** Konzept- und Modellarbeit zu Linie A, Arbeitspaket AP-27
+> (räumliche Last), ausgearbeitet am 11.10.2026 nach der Festhaltung des Autors vom selben Tag (Abschnitt 1).
+> Nicht umgesetzt, nicht an Hardware geprüft;
 > es gibt keine Messdaten. Alle Zahlen sind Simulation oder Analytik mit angenommenen Maßen, Steifigkeiten und
 > Trägheiten (Rechenbeispiele, keine Bauvorgabe; Annahmen in Abschnitt 5). Rechnungen, Gegenprüfung und Grenzen
 > stehen in [`../../rechnungen/nadelrahmen/PROTOKOLL.md`](../../rechnungen/nadelrahmen/PROTOKOLL.md) (Befunde NR-01
@@ -81,7 +82,9 @@ Schwerkraft g = −g·e_z.
   Kontaktmoment des Pfads j. Gemessen wird nur die Summe über die gemessenen Komponenten, w_mess. Sie ist gleich w_O,
   wenn jeder Pfad nur überträgt, was seine Schnittstelle misst (Nadelregel, Abschnitt 3), und keine weiteren Pfade
   die Bilanzgrenze kreuzen (Kabel, Zuleitungen). Die ausgearbeiteten Ausführungen setzen τ^c_j = 0 voraus (ideale
-  Gelenke, Druckspitzen und Kugelgelenke); ungemessene Querkräfte sind in NR-07 bilanziert.
+  Gelenke, Druckspitzen und Kugelgelenke); ungemessene Querkräfte sind in NR-07 bilanziert. Jeder Kanal geht mit
+  seiner Richtung und seinem Vorzeichen ein; die Summe der Rohkanalwerte ist nicht automatisch eine Resultierende
+  (in B ergibt sie (M_x + M_y + M_z)/A, während F_z = q_unten − q_oben, Abschnitt 4).
 
 ## 3 Die Nadelregel
 
@@ -207,20 +210,27 @@ zugfest, C mit ausreichender Vorspannung oder gefangenem Kugelgelenk); F_z < 0 t
 
 Voraussetzungen: Bilanzgrenze und M sind festgelegt; außer dem Gewicht laufen alle Lasten auf die bilanzierte Masse
 über die sechs Schnittstellen (keine Kabel, Zuleitungen oder sonstigen äußeren Lasten); der Rahmen ist ortsfest;
-ausgewertet wird über ganze Perioden im eingeschwungenen Zustand. Dann ist ⟨F_Σ⟩ = M·g·e_z und
+ausgewertet wird über ganze Perioden der eingeschwungenen Systemantwort (ganze Anregungsperioden genügen nur bei
+passender Antwort; Formelverzeichnis v2.7). Dann ist ⟨F_Σ⟩ = M·g·e_z und
 ⟨τ_O⟩ = r_cm × M·g·e_z = M·g·(y_cm, −x_cm, 0). Bei senkrecht bewegten Modulen ändert sich die waagerechte
 Schwerpunktlage nicht, und beides hängt nicht von der Phasenlage ab. Zwischen zwei Zuständen mit gleichen äußeren
 Lasten gilt daher Δ⟨w_O⟩ = 0 in allen sechs Komponenten (NR-05). Das ist Spur 1 der Linie A, sechsfach.
 
-Einzelne Kanalmittelwerte brauchen zusätzlich Geometrie- und Lagerungsannahmen. In der statisch bestimmten Belegung B
-ohne Nebenpfade und mit unveränderter Geometrie G gilt Δ⟨q_j⟩ = 0 für jede Nadel; der Absolutwert
-⟨q⟩ = G⁻¹·(M·g·e_z; r_cm × M·g·e_z) verlangt bekanntes G, M und r_cm. In C hängen die Nadelmittel an der Vorspannung
-und ihrer Drift (Nullraum); dort sind nur die sechs Resultierenden Nulltests.
+Einzelne Kanalmittelwerte brauchen zusätzlich Geometrie- und Lagerungsannahmen. Die Gesamtbilanz allein legt sie im
+Allgemeinen nicht fest; eine allgemeine Vorhersage einer phasenabhängigen mittleren Lastumverteilung folgt daraus aber
+nicht. In der statisch bestimmten Belegung B legen Impuls- und Drallbilanz über G die Nadelmittel fest: Ohne
+Nebenpfade, mit unveränderter Geometrie G, gleichen äußeren Lasten und unverändertem Kontaktzustand gilt
+Δ⟨q_j⟩ = 0 für jede Nadel, im linearen Modell für T, Z und S numerisch bestätigt (NR-05); der Absolutwert
+⟨q⟩ = G⁻¹·(M·g·e_z; r_cm × M·g·e_z) verlangt bekanntes G, M und r_cm. In C hängen die Nadelmittel zusätzlich vom
+inneren Lastzustand im Nullraum ab (Vorspannung und ihre Drift); dort sind nur die sechs Resultierenden Nulltests. Im
+Modell ist die Vorspannung vorgegeben; eine Änderung durch Phasensteuerung ist bislang nicht nachgewiesen. Eine
+mögliche mittlere Lastumverteilung bleibt eine Modellfrage (Kontaktzustände, Geometrie, Nachgiebigkeit,
+Vorspannung), die gegenüber Messketteneffekten zu prüfen wäre.
 
 Differenztests zeigen gleichbleibende Fehlbeträge nicht, etwa den Nebenschluss aus Abschnitt 3; dafür braucht es eine
 unabhängige Referenz (M·g aus getrennter Wägung, bekannte Schwerpunktlage). Über Teilfenster weicht das Mittel genau
-um den Randterm (P(t₁) − P(t₀))/T_W bzw. (H_O(t₁) − H_O(t₀))/T_W ab, bei 3,37 Perioden synchroner Phasung um 0,27 N
-in F_z. Ausgewertet werden deshalb ganze Perioden.
+um den Randterm (P(t₁) − P(t₀))/T_W (b_w im Formelverzeichnis) bzw. (H_O(t₁) − H_O(t₀))/T_W ab, bei 3,37 Perioden
+synchroner Phasung um 0,27 N in F_z. Ausgewertet werden deshalb ganze Perioden.
 
 ### 5.3 Auswahlregeln am Triphasik-Punkt
 
@@ -234,7 +244,8 @@ Kraft und Moment ergänzen sich: Was in F_z ausgelöscht ist, steht vollständig
 [`../../rechnungen/kippmoment/PROTOKOLL.md`](../../rechnungen/kippmoment/PROTOKOLL.md)). Abseits des
 Triphasik-Punkts erscheinen in F_z die Ordnungen 1 und 2 und im Moment eine gegenläufige Komponente (bei φ₂ = 110°:
 F_z,1 = 0,27 N, R−₁ = 0,014 N·m). F_x, F_y und M_z sind bei senkrecht geführten Modulen im starren Grenzfall ohne
-äußere Nebenpfade in jeder Phasenlage null. Ein Signal dort zeigt Querbewegung der Module, Führungsfehler, Kopplung
+äußere Nebenpfade in jeder Phasenlage null; das ist eine Modellvorhersage unter diesen Annahmen, kein festgelegter
+Nulltest. Ein Signal dort zeigt Querbewegung der Module, Führungsfehler, Kopplung
 über die Halterung (Schwerpunkt über O, Abschnitt 6) oder äußere Lasten über die Systemgrenze (Kabel, Zuleitungen).
 Welche Sensorkanäle dabei ohne dynamische Last bleiben, hängt von der Belegung ab: im Beispiel in B die Kanäle Ost und
 West, in C die axialen Kanäle der vier Seitennadeln (bis auf eine Vorspannung).
