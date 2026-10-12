@@ -43,9 +43,10 @@ Referenz M·g gilt bei verschwindendem Randterm und ohne weitere äußere Vertik
 Anregungsperioden allein garantieren keinen verschwindenden Randterm. Für Momente sind zusätzlich
 Angriffspunkte, gegebenenfalls freie Kontaktmomente und die Drallbilanz maßgeblich.
 
-Die Kontakt-Nichtlinearität — der Kontakt kann drücken, aber nicht ziehen — verlagert die gesamte
-Information in die **Form** des Signals. Wo der Kontakt abhebt, ist die Kraft exakt null; die verlorene
-Fläche muss anderswo durch höhere Spitzen kompensiert werden. Genau diese Umverteilung ist steuerbar.
+Die Phasenlage formt die Kontaktlasten bereits im linearen Kontaktast. Bei einer einseitigen Auflage kann der
+Kontakt drücken, aber nicht ziehen. Kontaktverlust fügt eine Nichtlinearität hinzu: Während der Trennung ist die
+Kontaktkraft null, während ihr Periodenmittel unter den genannten Randbedingungen bei M·g bleibt. Zugfeste
+Verbindungen im Messrahmen können auch Zuglasten übertragen; ihr Verhalten hängt von der gewählten Befestigung ab.
 
 **Die vier Observablen:**
 
@@ -65,7 +66,8 @@ und ordnet sie:
 
 ### Linie A — Wellenformstatistik (primär)
 
-Der Körper steht auf einer Unterlage oder ist in einem Messrahmen gehalten und bewegt sich nicht.
+Der Körper steht auf einer Unterlage oder ist in einem Messrahmen gehalten. Untersucht wird stationärer
+Betrieb mit begrenzter Bewegung des Körpers, ohne gerichtete Nettodrift.
 Gefragt ist ausschließlich, wie die Phasenkonfiguration (φ₂, φ₃) die Kontaktlasten formt: ihre zeitliche
 Form – im Grundaufbau die Wellenform von F_N(t) – und, bei einem dafür ausgelegten und kalibrierten
 Messrahmen, ihre räumliche Verteilung. Dazu gehören die Kräfte an den einzelnen Schnittstellen sowie die
@@ -102,11 +104,11 @@ Antriebsbehauptung hinein, die dort nicht steht.
 
 | | Linie A | Linie B |
 |---|---|---|
-| Körper | stationär auf Unterlage | frei bzw. aufgehängt |
+| Körper | stationär auf Unterlage oder im Messrahmen gehalten | frei bzw. aufgehängt |
 | Hauptfrage | Form der Kontaktkraft | gerichtete Nettodrift |
-| primäre Observable | F_N(t) und ihre Statistik | Position, Driftgeschwindigkeit |
+| primäre Observable | F_N(t) und ihre Statistik; räumliche Ergänzung: Schnittstellenkräfte und Momente | Position, Driftgeschwindigkeit |
 | Rolle der Phase | experimentelle unabhängige Variable | Steuergröße für den Effekt |
-| Reaktionspartner | Unterlage (Messinterface) | umgebende Luft (Effektträger) |
+| Reaktionspartner | Unterlage bzw. Messrahmen (Messinterfaces) | umgebende Luft (Effektträger) |
 | Abstand zur Nachbarliteratur | größer | kleiner |
 | Rolle im Projekt | wissenschaftlicher Kern | Nebenlinie, separater Aufbau |
 
