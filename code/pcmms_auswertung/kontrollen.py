@@ -120,6 +120,11 @@ def moment(Nz1, xy):
 def e3_auswerten(K, E0, idxA, idxB0, T, xy, dd, u_dd, phi_mess, triphasik, profil, rng, u_quant_grad, kmax=2):
     """K: id → dict(Xz (n, 3, Kv) Zellharmonische, Z, nz); E0: Einzelmodul-Zellharmonische Phase 0 je Modul
     (n_j, 3, Kv); T: (k, Zelle, Modul); xy: Zelllagen (3, 2); dd, u_dd: Δδⱼ und u(Δδⱼ); phi_mess: id → φ̄ⱼ^P (3)."""
+    T = np.asarray(T)
+    kond = np.linalg.cond(T)
+    if not np.all(np.isfinite(kond)) or np.any(kond > 1e12):
+        return dict(status='nicht auswertbar: T(kω) singulär oder schlecht konditioniert (Zell- und Modullagen '
+                           'trennen die Module nicht)', bewertung=None, kondition=np.asarray(kond).tolist())
     Tinv = np.linalg.inv(T)                                             # (k, Modul, Zelle)
     Nbar0 = np.stack([e.mean(0) for e in E0])                           # (Modul, Zelle, Kv)
     B = idxA[next(iter(idxA))].shape[0]

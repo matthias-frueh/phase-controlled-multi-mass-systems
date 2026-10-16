@@ -30,6 +30,14 @@
     "wert": 10000,
     "wirkung": "verarbeitung"
    },
+   "bootstrap.varianz": {
+    "fundstelle": "§8.3, A9.5",
+    "gegenstand": "Varianz der Bootstrap-Replikate",
+    "herkunft": "",
+    "status": "technisch",
+    "wert": "Stichprobenvarianz mit ddof = 1",
+    "wirkung": "verarbeitung"
+   },
    "bootstrap.ziehung": {
     "fundstelle": "Plan AP-13 2.6 c",
     "gegenstand": "Indexmatrizen und Ziehreihenfolge",
@@ -443,6 +451,14 @@
     "wert": "kleinstes_phi",
     "wirkung": "ausgang"
    },
+   "h2.gleichstand_toleranz": {
+    "fundstelle": "A9.6 (nennt keine Toleranz)",
+    "gegenstand": "Toleranz der Gleichstandsregel im Zeltfit",
+    "herkunft": "Rundungsgleichheit, keine statistische Toleranz",
+    "status": "technisch",
+    "wert": "RSS ≤ RSS_min·(1 + 10⁻⁹) + 10⁻¹²·SST + 10⁻²⁸·n·max F²",
+    "wirkung": "verarbeitung"
+   },
    "h2.intervallkette": {
     "fundstelle": "§8.6, A9.6, §12 Intervall von H2",
     "gegenstand": "Intervalltyp und Rückfallkette",
@@ -483,6 +499,14 @@
     "wert": 0.95,
     "wirkung": "ausgang"
    },
+   "h2.quantil": {
+    "fundstelle": "§8.6, A9.6",
+    "gegenstand": "Quantildefinition der Bootstrap-Intervalle",
+    "herkunft": "",
+    "status": "technisch",
+    "wert": "numpy „linear“",
+    "wirkung": "verarbeitung"
+   },
    "h2.rasterursprung": {
     "fundstelle": "A9.6 „über [min W, max W]“",
     "gegenstand": "Ursprung des 0,001°-Rasters",
@@ -497,6 +521,14 @@
     "herkunft": "",
     "status": "festlegung",
     "wert": 10000,
+    "wirkung": "verarbeitung"
+   },
+   "h2.replikate_gemeinsam": {
+    "fundstelle": "A9.6, A9.13, Plan 2.6 c",
+    "gegenstand": "Replikate von H2 und E3",
+    "herkunft": "h2_replikate und e3_mc folgen bootstrap_B",
+    "status": "technisch",
+    "wert": "Zeilen der Bootstrap-Indexmatrizen (B_H2 = B_E3 = B)",
     "wirkung": "verarbeitung"
    },
    "h2.schaetzer": {
@@ -618,6 +650,46 @@
     "status": "regeltext",
     "wert": 23,
     "wirkung": "ausgang"
+   },
+   "harness.c_pool": {
+    "fundstelle": "§8.4",
+    "gegenstand": "gepooltes Quantil bei Prüfrate > 0,069",
+    "herkunft": "",
+    "status": "technisch",
+    "wert": "95-%-Quantil der vereinigten max|z⁰| beider Simulationen; Prüfsimulation danach neu ausgewertet",
+    "wirkung": "planung"
+   },
+   "harness.c_vollstaendig": {
+    "fundstelle": "§8.4 „über die 147 korrelierten Tests“",
+    "gegenstand": "Kampagnen für das Quantil von c",
+    "herkunft": "",
+    "status": "technisch",
+    "wert": "nur Kampagnen mit allen Tests; ausgeschlossene werden gezählt",
+    "wirkung": "planung"
+   },
+   "harness.planung_rauschen": {
+    "fundstelle": "§5.4, A9.2",
+    "gegenstand": "Rauschmodell der Planungssimulation",
+    "herkunft": "Generator aus gemessenen Pilotkovarianzen fehlt",
+    "status": "technisch",
+    "wert": "Rauschmodell des Szenarios mit κ = √(ν_p/χ²₀,₂(ν_p)) skaliert (obere 80-%-Grenze)",
+    "wirkung": "planung"
+   },
+   "harness.seeds": {
+    "fundstelle": "Plan 4.3",
+    "gegenstand": "Seeds der Kampagnen",
+    "herkunft": "unabhängig von Prozesszahl und Reihenfolge",
+    "status": "technisch",
+    "wert": "unterseed(Basis, Rolle, Szenario, Stufe, i)",
+    "wirkung": "planung"
+   },
+   "harness.ueberdeckung_beide": {
+    "fundstelle": "§8.6, A9.6",
+    "gegenstand": "Überdeckung gegen ŷ⁰ und ŷ¹",
+    "herkunft": "",
+    "status": "technisch",
+    "wert": "ein Intervalltyp gilt, wenn beide Überdeckungen die Schwelle erreichen",
+    "wirkung": "planung"
    },
    "kontaktast.reserve": {
     "fundstelle": "§5.3 (a), Tab. F",
@@ -961,12 +1033,20 @@
     "status": "entwicklungsprueffall",
     "wert": "a",
     "wirkung": "bericht"
+   },
+   "zuordnung.s_formel": {
+    "fundstelle": "§8.10, A9.13",
+    "gegenstand": "Kraftskala s der Zuordnung",
+    "herkunft": "",
+    "status": "technisch",
+    "wert": "s = Σⱼ|N̄′₁⁽ʲ⁾|/Σⱼ|N̄₁⁽ʲ⁾| aus den Einzelmodulläufen",
+    "wirkung": "bericht"
    }
   }
  },
  "kopf": {
   "code_version": {
-   "git": "0ec8d9263b1a93eecc062cec1a12acfe4c9e14d8+geändert",
+   "git": "e428abb83ffed7819920b222595881d97f84e4ed+geändert",
    "paket": "0.1.0"
   },
   "datenart": "synthetisch",

@@ -135,6 +135,8 @@ _GRUND = [
     _r('drift.zusatz', 'Definition des Drift-Zusatzes', '§9.3, §12 Driftbehandlung', OF, None, '', 'bericht'),
     _r('drift.logik', 'Wirkung nachgewiesener Drift auf den Ausgang', '§9.3, §12 Driftbehandlung', OF),
     _r('bootstrap.B', 'Bootstrap-Replikate je Anteil', '§8.3, A9.5, Tab. F', FL, 10000, '', 'verarbeitung'),
+    _r('bootstrap.varianz', 'Varianz der Bootstrap-Replikate', '§8.3, A9.5', TD, 'Stichprobenvarianz mit ddof = 1',
+       '', 'verarbeitung'),
     _r('bootstrap.ziehung', 'Indexmatrizen und Ziehreihenfolge', 'Plan AP-13 2.6 c', TD,
        'SeedSequence(seed).spawn: A_i in Listenreihenfolge, B¹_1…B¹_3, H3, H4, danach E3, Einstellung 2', '',
        'verarbeitung'),
@@ -161,6 +163,14 @@ _GRUND = [
        'bericht'),
     _r('h2.drift_zusatz', 'Drift-Zusatz bei H2', '§9.3, §12 Driftbehandlung', OF, None, '', 'bericht'),
     _r('h2.biaskorrektur', 'Rauschbias im Zeltfit', '§5.4, §8.6', TD, 'keine', 'Präreg nennt keine Korrektur für H2'),
+    _r('h2.gleichstand_toleranz', 'Toleranz der Gleichstandsregel im Zeltfit', 'A9.6 (nennt keine Toleranz)', TD,
+       'RSS ≤ RSS_min·(1 + 10⁻⁹) + 10⁻¹²·SST + 10⁻²⁸·n·max F²', 'Rundungsgleichheit, keine statistische Toleranz',
+       'verarbeitung'),
+    _r('h2.quantil', 'Quantildefinition der Bootstrap-Intervalle', '§8.6, A9.6', TD, 'numpy „linear“', '',
+       'verarbeitung'),
+    _r('h2.replikate_gemeinsam', 'Replikate von H2 und E3', 'A9.6, A9.13, Plan 2.6 c', TD,
+       'Zeilen der Bootstrap-Indexmatrizen (B_H2 = B_E3 = B)', 'h2_replikate und e3_mc folgen bootstrap_B',
+       'verarbeitung'),
     # H3
     _r('h3.logik', 'Entscheidungslogik von H3', '§3, §8.5, §9.3, §12 (I)', AF, 'aequivalenz'),
     _r('h3.delta', 'δ_H3', '§3, §8.5, §12 Grenzen von H2 und H3', OF),
@@ -181,6 +191,8 @@ _GRUND = [
     _r('zuordnung.regel', 'Regel der Zuordnung', '§8.10, A9.13, §12 Zuordnung', OF, None, '', 'bericht'),
     _r('zuordnung.ausloeser', 'Auslöser der Zuordnung', '§8.10, §12 Zuordnung', OF, None, '', 'bericht'),
     _r('zuordnung.kriterium', 'Kriterium der Zuordnung (A9.11)', 'A9.11, §12 Zuordnung', OF, None, '', 'bericht'),
+    _r('zuordnung.s_formel', 'Kraftskala s der Zuordnung', '§8.10, A9.13', TD,
+       's = Σⱼ|N̄′₁⁽ʲ⁾|/Σⱼ|N̄₁⁽ʲ⁾| aus den Einzelmodulläufen', '', 'bericht'),
     _r('zuordnung.m_fest', 'm = 6·N_I fest bei Ausfällen', 'A9.13, §12 Läufe bei Einstellung 2', OF, None, '',
        'bericht'),
     _r('punkte_I', 'Punkte I', '§5.5, §12 Punkte I', OF, None, '', 'bericht'),
@@ -227,6 +239,19 @@ _GRUND = [
        'M = Σ_c F_c,stat/g; Gewicht M·g, träge Masse M + m_L getrennt'),
     _r('rauschmodelle', 'Rauschmodelle (Liste in Teil A oder Teil B)', '§12 Rauschmodelle …, A9.5', OF, None, '',
        'planung'),
+    # Harness (Werkzeug 8): Umsetzungsdetails der Kalibrier- und Prüfsimulation
+    _r('harness.c_vollstaendig', 'Kampagnen für das Quantil von c', '§8.4 „über die 147 korrelierten Tests“', TD,
+       'nur Kampagnen mit allen Tests; ausgeschlossene werden gezählt', '', 'planung'),
+    _r('harness.c_pool', 'gepooltes Quantil bei Prüfrate > 0,069', '§8.4', TD,
+       '95-%-Quantil der vereinigten max|z⁰| beider Simulationen; Prüfsimulation danach neu ausgewertet', '',
+       'planung'),
+    _r('harness.ueberdeckung_beide', 'Überdeckung gegen ŷ⁰ und ŷ¹', '§8.6, A9.6', TD,
+       'ein Intervalltyp gilt, wenn beide Überdeckungen die Schwelle erreichen', '', 'planung'),
+    _r('harness.planung_rauschen', 'Rauschmodell der Planungssimulation', '§5.4, A9.2', TD,
+       'Rauschmodell des Szenarios mit κ = √(ν_p/χ²₀,₂(ν_p)) skaliert (obere 80-%-Grenze)',
+       'Generator aus gemessenen Pilotkovarianzen fehlt', 'planung'),
+    _r('harness.seeds', 'Seeds der Kampagnen', 'Plan 4.3', TD, 'unterseed(Basis, Rolle, Szenario, Stufe, i)',
+       'unabhängig von Prozesszahl und Reihenfolge', 'planung'),
     # nicht implementierte Optionen
     _r('ni.fassung_I', 'H3 Fassung I (Betriebsimpedanz)', '§8.7, §12 (II)', NI),
     _r('ni.gespiegelt', 'H1′/H2′ am gespiegelten Schnitt', '§3, §6', NI),
@@ -311,10 +336,17 @@ class Regelprofil:
         return int(self.reduktion.get(name, NORMATIVE_ZAHLEN[name]))
 
     def mit_reduktion(self, **zahlen):
-        """Abgeleitetes Profil mit verringerten Replikat- oder Kampagnenzahlen (Entwicklungsdiagnostik)."""
+        """Abgeleitetes Profil mit verringerten Replikat- oder Kampagnenzahlen (Entwicklungsdiagnostik).
+        H2 und E3 verwenden die Zeilen der Bootstrap-Indexmatrizen (A9.6, A9.13); h2_replikate und e3_mc folgen
+        deshalb bootstrap_B."""
         for k in zahlen:
             if k not in NORMATIVE_ZAHLEN:
                 raise KeyError(k)
+        if 'bootstrap_B' in zahlen:
+            for k in ('h2_replikate', 'e3_mc'):
+                if k in zahlen and int(zahlen[k]) != int(zahlen['bootstrap_B']):
+                    raise ValueError(f'{k} folgt bootstrap_B (gemeinsame Zeilen der Indexmatrizen)')
+                zahlen[k] = zahlen['bootstrap_B']
         red = {**self.reduktion, **{k: int(v) for k, v in zahlen.items() if int(v) != NORMATIVE_ZAHLEN[k]}}
         kenn = self.id.split('+')[0] + ('+red(' + ','.join(f'{k}={v}' for k, v in sorted(red.items())) + ')'
                                         if red else '')
@@ -391,7 +423,7 @@ UMSETZUNG = (                           # Präfix der Regel → umsetzendes Modu
     ('h2.', 'zeltfit, h2'), ('h3.', 'h3'), ('h4.', 'h4'), ('e3.', 'kontrollen'), ('zuordnung.', 'kontrollen'),
     ('punkte_I', 'kontrollen, generator'), ('einstellung2.', 'generator'), ('kontaktast.', 'teil_b, auswertung'),
     ('a6.', 'generator.ebene_z'), ('planung.', 'pilot, harness.planung'), ('p0.', 'anpassung'),
-    ('M.', 'anpassung'), ('rauschmodelle', 'generator.rauschen, pilot'), ('ni.', '–'))
+    ('M.', 'anpassung'), ('rauschmodelle', 'generator.rauschen, pilot'), ('harness.', 'harness'), ('ni.', '–'))
 
 
 def umsetzung(rid):

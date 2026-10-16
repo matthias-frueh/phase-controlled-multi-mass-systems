@@ -272,15 +272,18 @@ def _s01a_hub(abstand_sigma, rausch):
     return s0.mit(name=f'V1-G60h-hub{h:.4f}', hub=tuple(np.asarray(s0.hub) * h))
 
 
-def modell(sz, stufe='L2', plan=None, staerke=None, rausch=None):
+def modell(sz, stufe='L2', plan=None, staerke=None, rausch=None, k_max=None):
     """Generatormodell eines Szenarios (sz: Szenario oder ID). staerke: Effektstärke; ohne Angabe die Plangröße oder,
-    bei einem Zielverhältnis, das Ergebnis der Nullstellensuche auf der Wahrheit."""
+    bei einem Zielverhältnis, das Ergebnis der Nullstellensuche auf der Wahrheit. k_max: Auswerte-k_max statt des
+    Systemwerts (Planungssuche über k, A9.2)."""
     sz = KATALOG[sz] if isinstance(sz, str) else sz
     rausch = _rausch(sz, stufe) if rausch is None else rausch
     p = _plan(sz, plan)
     if staerke is None:
         staerke = staerke_suchen(sz, p)[0] if sz.ziel else sz.staerke
     s = _system(sz, staerke, rausch)
+    if k_max is not None:
+        s = s.mit(k_max=int(k_max))
     eff = _effekte(sz, staerke)
     if sz.hertz is not None:
         if p.einstellung2:

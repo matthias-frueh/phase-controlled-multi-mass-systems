@@ -305,7 +305,7 @@ def auswerten(zusammenfassungen, kalibrierung, teil_b, regeln, seed=None, bootst
                       teil_b_sha256=_hash_objekt(tb), profil=prof.kurz(), seed=seed, B=int(B),
                       bootstrap_indizes=idx_quelle, n_mc_h3=prof.zahl('h3_mc'), reduziert=prof.reduziert,
                       code_version=formate.code_version(), kennung=tab.meta.get('kennung'),
-                      laufzeit_s=round(time.perf_counter() - t_start, 3)),
+                      laufzeit_s=round(time.perf_counter() - t_start, 3), pilot_suche=n2.get('pilot_suche')),
         gueltigkeit=dict(n_laeufe=len(t1), n_ungueltig=int((~pr['gueltig']).sum()),
                          gruende={t1.koepfe[i]['lauf_id']: pr['gruende'][i] for i in np.flatnonzero(~pr['gueltig'])},
                          nicht_pruefbar={g: len(v) for g, v in pr['nicht_pruefbar'].items()},

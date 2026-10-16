@@ -113,6 +113,7 @@ Befunde mit möglicher Ergebniswirkung stehen mit Auswirkung und betroffenem Pfa
 | `drift.zusatz` | Definition des Drift-Zusatzes | §9.3, §12 Driftbehandlung | offen → entwicklungsprüffall | "a" | h1 |
 | `drift.logik` | Wirkung nachgewiesener Drift auf den Ausgang | §9.3, §12 Driftbehandlung | offen → entwicklungsprüffall | "a" | h1 |
 | `bootstrap.B` | Bootstrap-Replikate je Anteil | §8.3, A9.5, Tab. F | festlegung | 10000 | bootstrap |
+| `bootstrap.varianz` | Varianz der Bootstrap-Replikate | §8.3, A9.5 | technisch | "Stichprobenvarianz mit ddof = 1" | bootstrap |
 | `bootstrap.ziehung` | Indexmatrizen und Ziehreihenfolge | Plan AP-13 2.6 c | technisch | "SeedSequence(seed).spawn: A_i in Listenreihenfolge, B¹_1…B¹_3, H3, H4, danach E3, Einstellung 2" | bootstrap |
 | `h1z.grenzen` | Grenzen Δ_c,q, Δ_c,rel,q von H1Z | §8.5, §12 Grenzen von H1Z | offen → entwicklungsprüffall | "a" | h1 |
 | `h1z.c_quelle` | kritischer Wert von H1Z (441 Tests) | §8.4 | regeltext | "teil_b" | h1 |
@@ -133,6 +134,9 @@ Befunde mit möglicher Ergebniswirkung stehen mit Auswirkung und betroffenem Pfa
 | `h2.lesart_entscheidbar` | Lesart „H2 auch bei hoher Präzision entscheidbar“ | A9.11, §12 | offen | – | zeltfit, h2 |
 | `h2.drift_zusatz` | Drift-Zusatz bei H2 | §9.3, §12 Driftbehandlung | offen | – | zeltfit, h2 |
 | `h2.biaskorrektur` | Rauschbias im Zeltfit | §5.4, §8.6 | technisch | "keine" | zeltfit, h2 |
+| `h2.gleichstand_toleranz` | Toleranz der Gleichstandsregel im Zeltfit | A9.6 (nennt keine Toleranz) | technisch | "RSS ≤ RSS_min·(1 + 10⁻⁹) + 10⁻¹²·SST + 10⁻²⁸·n·max F²" | zeltfit, h2 |
+| `h2.quantil` | Quantildefinition der Bootstrap-Intervalle | §8.6, A9.6 | technisch | "numpy „linear“" | zeltfit, h2 |
+| `h2.replikate_gemeinsam` | Replikate von H2 und E3 | A9.6, A9.13, Plan 2.6 c | technisch | "Zeilen der Bootstrap-Indexmatrizen (B_H2 = B_E3 = B)" | zeltfit, h2 |
 | `h3.logik` | Entscheidungslogik von H3 | §3, §8.5, §9.3, §12 (I) | arbeitsfestlegung | "aequivalenz" | h3 |
 | `h3.delta` | δ_H3 | §3, §8.5, §12 Grenzen von H2 und H3 | offen → entwicklungsprüffall | 0.1 | h3 |
 | `h3.relevanz` | Relevanzgrenze von H3 | §3, §8.5, §12 | offen → entwicklungsprüffall | "gleich_delta" | h3 |
@@ -150,6 +154,7 @@ Befunde mit möglicher Ergebniswirkung stehen mit Auswirkung und betroffenem Pfa
 | `zuordnung.regel` | Regel der Zuordnung | §8.10, A9.13, §12 Zuordnung | offen → entwicklungsprüffall | "a" | kontrollen |
 | `zuordnung.ausloeser` | Auslöser der Zuordnung | §8.10, §12 Zuordnung | offen → entwicklungsprüffall | "a" | kontrollen |
 | `zuordnung.kriterium` | Kriterium der Zuordnung (A9.11) | A9.11, §12 Zuordnung | offen → entwicklungsprüffall | "a" | kontrollen |
+| `zuordnung.s_formel` | Kraftskala s der Zuordnung | §8.10, A9.13 | technisch | "s = Σⱼ∣N̄′₁⁽ʲ⁾∣/Σⱼ∣N̄₁⁽ʲ⁾∣ aus den Einzelmodulläufen" | kontrollen |
 | `zuordnung.m_fest` | m = 6·N_I fest bei Ausfällen | A9.13, §12 Läufe bei Einstellung 2 | offen → entwicklungsprüffall | "fest" | kontrollen |
 | `punkte_I` | Punkte I | §5.5, §12 Punkte I | offen → entwicklungsprüffall | [116.0, 120.0, 124.0] | kontrollen, generator |
 | `einstellung2.art` | Art von Einstellung 2 | §5.5, §12 (II) | offen → entwicklungsprüffall | "beide" | generator |
@@ -176,6 +181,11 @@ Befunde mit möglicher Ergebniswirkung stehen mit Auswirkung und betroffenem Pfa
 | `verarbeitung.kennlinie` | Umrechnung der Rohwerte in Stufe 1 | A9.4 (1) „statische Kalibrierung je Zelle“ | technisch | "linear" | stufe1 |
 | `M.konvention` | Bestimmung von M | §3, §4, P0.2, §12 (I) | arbeitsfestlegung | "b" | anpassung |
 | `rauschmodelle` | Rauschmodelle (Liste in Teil A oder Teil B) | §12 Rauschmodelle …, A9.5 | offen → entwicklungsprüffall | "entwicklungsfamilie" | generator.rauschen, pilot |
+| `harness.c_vollstaendig` | Kampagnen für das Quantil von c | §8.4 „über die 147 korrelierten Tests“ | technisch | "nur Kampagnen mit allen Tests; ausgeschlossene werden gezählt" | harness |
+| `harness.c_pool` | gepooltes Quantil bei Prüfrate > 0,069 | §8.4 | technisch | "95-%-Quantil der vereinigten max∣z⁰∣ beider Simulationen; Prüfsimulation danach neu ausgewertet" | harness |
+| `harness.ueberdeckung_beide` | Überdeckung gegen ŷ⁰ und ŷ¹ | §8.6, A9.6 | technisch | "ein Intervalltyp gilt, wenn beide Überdeckungen die Schwelle erreichen" | harness |
+| `harness.planung_rauschen` | Rauschmodell der Planungssimulation | §5.4, A9.2 | technisch | "Rauschmodell des Szenarios mit κ = √(ν_p/χ²₀,₂(ν_p)) skaliert (obere 80-%-Grenze)" | harness |
+| `harness.seeds` | Seeds der Kampagnen | Plan 4.3 | technisch | "unterseed(Basis, Rolle, Szenario, Stufe, i)" | harness |
 | `ni.fassung_I` | H3 Fassung I (Betriebsimpedanz) | §8.7, §12 (II) | nicht_implementiert | – | – |
 | `ni.gespiegelt` | H1′/H2′ am gespiegelten Schnitt | §3, §6 | nicht_implementiert | – | – |
 | `ni.paarlaeufe` | Paarläufe | §5.5, §12 Paarläufe | nicht_implementiert | – | – |

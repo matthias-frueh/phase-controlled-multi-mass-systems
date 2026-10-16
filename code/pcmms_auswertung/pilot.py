@@ -227,12 +227,10 @@ def pilot_auswerten(tab, kal, profil, f_soll, zeit=None, seed=0, planung=None, t
     tphi = tab.daten['t_phi'][pil]
     out['T_phi_s'] = float(np.nanmax(tphi)) if np.isfinite(tphi).any() else None
     k_start = min(k_b, K_voll)
-    if k_start < 3:
-        out['suche'] = dict(ergebnis='kein zulässiger Arbeitspunkt unter diesen Annahmen',
-                            grund=f'k_b = {k_b} < 3 (f₁ = {f1:g} Hz, f = {f_soll:g} Hz)')
-        return out
-    # Validität mit k = k_start (G4 mit F_min − ⟨N⟩ hängt von k ab; je k neu in der Suche)
-    sw, pr1, sr, eps, pr = _validitaet(tab, sw0, k_start, profil, seed, n_sim)
+    # Validität mit k = k_start (G4 mit F_min − ⟨N⟩ hängt von k ab; je k neu in der Suche). Ohne zulässiges k
+    # (k_b < 3) werden die Pilotgrößen mit k = 3 bestimmt und die Suche endet regulär ohne Arbeitspunkt.
+    k_val = max(k_start, 3)
+    sw, pr1, sr, eps, pr = _validitaet(tab, sw0, k_val, profil, seed, n_sim)
     out['sigma_ref'] = dict(sigma_ref=sr['sigma_ref'], sigma_ref_zellen=sr['sigma_ref_zellen'], n=sr['n'],
                             werte=sr['werte'], mindestzahl=profil.wert('h0.referenzlaeufe_min'),
                             ausreichend=bool(sr['n'] >= profil.wert('h0.referenzlaeufe_min')))
@@ -250,10 +248,15 @@ def pilot_auswerten(tab, kal, profil, f_soll, zeit=None, seed=0, planung=None, t
     out['p_hat'] = float((~gp[pil]).mean())
     out['p_hat_hinweis'] = ('untere Schranke: ' + ', '.join(sorted(pr['nicht_pruefbar'])) + ' nicht prüfbar'
                             if pr['nicht_pruefbar'] else 'alle Regeln geprüft')
-    out['kovarianzen'] = kovarianzen(tab, gp, k_start)
-    out['streuungen_volles_fenster'] = streuungen(tab, gp & pil, k_start)
-    out['suche'] = suche(tab, kal, profil, f_soll, k_start, out, zeit, planung, tabelle_fuer, N_z_raster, seed,
-                         sw0, n_sim)
+    out['kovarianzen'] = kovarianzen(tab, gp, k_val)
+    out['streuungen_volles_fenster'] = streuungen(tab, gp & pil, k_val)
+    out['k_pilotgroessen'] = k_val
+    if k_start < 3:
+        out['suche'] = dict(ergebnis='kein zulässiger Arbeitspunkt unter diesen Annahmen',
+                            grund=f'k_b = {k_b} < 3 (f₁ = {f1:g} Hz, f = {f_soll:g} Hz)')
+    else:
+        out['suche'] = suche(tab, kal, profil, f_soll, k_start, out, zeit, planung, tabelle_fuer, N_z_raster, seed,
+                             sw0, n_sim)
     out['kennung'] = kennung
     pruefe_ausgabe(out)
     return out

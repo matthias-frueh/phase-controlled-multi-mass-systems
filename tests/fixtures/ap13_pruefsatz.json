@@ -1,0 +1,127 @@
+{
+ "inhalt": {
+  "beschreibung": "Software-Prüfsatz AP-11 bis AP-13 (kein Einfrieren von Teil A)",
+  "katalog": "71ac168954a78ef5ceb0ba569cf24d3f46249eb3614833f7296f4ed7160ac9a0",
+  "normative_zahlen": {
+   "bootstrap_B": 10000,
+   "e3_mc": 10000,
+   "eps_ctrl_datensaetze": 10000,
+   "h2_replikate": 10000,
+   "h3_mc": 10000,
+   "kampagnen_kalibrierung": 1000,
+   "kampagnen_pruefung": 1000
+  },
+  "plan": {
+   "n0": 20,
+   "n_bloecke": 24,
+   "n_pilot": 20
+  },
+  "profile": {
+   "AF-2026-10": "31afc483bdc9f9ac914ee87ecba92b5c943b35c2e0245ece6d27aba170d55535",
+   "ENTW-2026-10": "4032bc56396deefcf2c49c810263092d91abef437d3bd49707c165c107697487"
+  },
+  "rundung_stellen": 12,
+  "seeds": [
+   {
+    "seed": 7,
+    "stufe": "L1",
+    "szenario": "N01-A4"
+   },
+   {
+    "seed": 7,
+    "stufe": "L1",
+    "szenario": "N03-ungleich"
+   },
+   {
+    "seed": 7,
+    "stufe": "L1",
+    "szenario": "A04-R4"
+   },
+   {
+    "seed": 7,
+    "stufe": "L1",
+    "szenario": "H01-zelt"
+   },
+   {
+    "seed": 7,
+    "stufe": "L1",
+    "szenario": "C03-GF5"
+   },
+   {
+    "seed": 7,
+    "stufe": "L1",
+    "szenario": "I01-amplitude"
+   },
+   {
+    "seed": 7,
+    "stufe": "L1",
+    "szenario": "S06-saettigung"
+   }
+  ],
+  "sha256_gesamt": "3442c1ae120519fe1725803ff136501c4a740ab4a9bf2252c103af534997eb1c",
+  "testdaten": {
+   "A04-R4/L1/7": {
+    "koepfe": "9cdd47d1b9c8b4cc7a90843135484b0f375182c390325b9678b3dc480cbf0d15",
+    "n_laeufe": 811,
+    "p0_messung": "16ac89d2995eab903f686d4bcb491b2ca39f224dad946c67019828a9c85d9bb2",
+    "zusammenfassungen": "66a212f96aab273e8260e1b73702e7229f1c2d251cf52fccf284a3ed69c08bfc"
+   },
+   "C03-GF5/L1/7": {
+    "koepfe": "9cdd47d1b9c8b4cc7a90843135484b0f375182c390325b9678b3dc480cbf0d15",
+    "n_laeufe": 811,
+    "p0_messung": "dbcf9c4f02a365039641372227d5cb9001fe4923dc16c29ac16443a5672f06c9",
+    "zusammenfassungen": "aa0bc3f7bcfd9c0c2648dc04272285a6ff8b47f09736bf23bffcafa86d3e77fa"
+   },
+   "H01-zelt/L1/7": {
+    "koepfe": "9cdd47d1b9c8b4cc7a90843135484b0f375182c390325b9678b3dc480cbf0d15",
+    "n_laeufe": 811,
+    "p0_messung": "16ac89d2995eab903f686d4bcb491b2ca39f224dad946c67019828a9c85d9bb2",
+    "zusammenfassungen": "98dcd64da62e175b00d61ccd960d3d099d6bff55f2f0c8fafe3a4473e6c3c636"
+   },
+   "I01-amplitude/L1/7": {
+    "koepfe": "955f33b8a1cbbb31201e4f4749352825b72abd22aa976e0ea7d0cbe76cf9be49",
+    "n_laeufe": 1003,
+    "p0_messung": "867bd57b5331ce2d1ee5b82adf3c6de2cf1593c4299c3949c283289c16dbb4ff",
+    "zusammenfassungen": "8d87edb5fd67a00e4e0f51e938f27878160b28be6ef6992bb047afc4634075bf"
+   },
+   "N01-A4/L1/7": {
+    "koepfe": "9cdd47d1b9c8b4cc7a90843135484b0f375182c390325b9678b3dc480cbf0d15",
+    "n_laeufe": 811,
+    "p0_messung": "16ac89d2995eab903f686d4bcb491b2ca39f224dad946c67019828a9c85d9bb2",
+    "zusammenfassungen": "98dcd64da62e175b00d61ccd960d3d099d6bff55f2f0c8fafe3a4473e6c3c636"
+   },
+   "N03-ungleich/L1/7": {
+    "koepfe": "9cdd47d1b9c8b4cc7a90843135484b0f375182c390325b9678b3dc480cbf0d15",
+    "n_laeufe": 811,
+    "p0_messung": "a78494492702b07c9919b7d82a8ec8d9901df811ebafde058a4c2cdd134f11e9",
+    "zusammenfassungen": "846315e3a4569bf02c7c070c7e553b5baf9d9ccb593edc95002ccb70d2cf2229"
+   },
+   "S06-saettigung/L1/7": {
+    "koepfe": "9cdd47d1b9c8b4cc7a90843135484b0f375182c390325b9678b3dc480cbf0d15",
+    "n_laeufe": 811,
+    "p0_messung": "16ac89d2995eab903f686d4bcb491b2ca39f224dad946c67019828a9c85d9bb2",
+    "zusammenfassungen": "df0c672d95093f4212066552c8947da003577223af7cb068c27cc3b8d4f96bb8"
+   }
+  },
+  "umgebung": {
+   "numpy": "2.5.3",
+   "python": "3.13.16",
+   "scipy": "1.18.1"
+  }
+ },
+ "kopf": {
+  "code_version": {
+   "git": "e428abb83ffed7819920b222595881d97f84e4ed+geändert",
+   "paket": "0.1.0"
+  },
+  "datenart": "synthetisch",
+  "erzeugt_von": {
+   "programm": "pcmms_auswertung",
+   "version": "0.1.0"
+  },
+  "kennung": "SYNTH-PRUEFSATZ",
+  "registrierung": "keine (synthetisch)",
+  "schema": "pcmms.pruefsatz",
+  "schema_version": "0.1"
+ }
+}

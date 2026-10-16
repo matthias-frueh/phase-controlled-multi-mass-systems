@@ -11,7 +11,7 @@ import time
 import numpy as np
 from scipy import stats
 
-from .. import anpassung, auswertung, formate, konventionen as kv, pilot, rohdaten, teil_b, zufall
+from .. import anpassung, auswertung, formate, pilot, teil_b, zufall
 from ..generator import ebene_h, ebene_z, kalibrierdaten, kampagne, szenarien, wahrheit
 
 BAND_HZ = (20.0, 600.0)                 # Anpassungsband der Entwicklungsläufe (ausdrücklich, Regel p0.4.band)
@@ -49,9 +49,9 @@ def kalibrierung_erzeugen(sz, m, seed):
     return mes, wahr, anpassung.kalibrieren(mes, band_hz=BAND_HZ)
 
 
-def kampagne_erzeugen(sid, stufe, plan, seed, staerke=None, rausch=None):
+def kampagne_erzeugen(sid, stufe, plan, seed, staerke=None, rausch=None, k_max=None):
     """Modell, Laufplan und Ebene-H-Tabelle einer Kampagne mit getrennten Zufallsströmen."""
-    m = szenarien.modell(sid, stufe, plan=plan, staerke=staerke, rausch=rausch)
+    m = szenarien.modell(sid, stufe, plan=plan, staerke=staerke, rausch=rausch, k_max=k_max)
     laeufe = kampagne.laufplan(m.plan, zufall.strom(seed, 'reihenfolge'))
     tab = ebene_h.erzeuge(m, laeufe, zufall.strom(seed, 'generator'))
     return m, laeufe, tab
@@ -68,14 +68,14 @@ def teil_b_erzeugen(tab, kal, m, profil, werkzeug8, seed, n_min=None, kennung='S
 
 
 def kette(sid, stufe, profil, plan=None, seed=1, werkzeug8=None, staerke=None, kalibrierung=None, n_min=None,
-          mit_wahrheit=True, rausch=None):
+          mit_wahrheit=True, rausch=None, k_max=None):
     """Eine Kampagne auf Ebene H vollständig: Ergebnis von AP-12, Teil B, Kalibrierung, Wahrheit (getrennt)."""
     sz = szenarien.KATALOG[sid]
     plan = kampagne.Plan() if plan is None else plan
     kennung = formate.synth_kennung('KETTE', sid, stufe, seed)
     zeit = {}
     t = time.perf_counter()
-    m, laeufe, tab = kampagne_erzeugen(sid, stufe, plan, seed, staerke, rausch)
+    m, laeufe, tab = kampagne_erzeugen(sid, stufe, plan, seed, staerke, rausch, k_max)
     tab.meta.setdefault('kennung', kennung)
     zeit['generator'] = time.perf_counter() - t
     t = time.perf_counter()

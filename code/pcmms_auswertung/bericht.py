@@ -19,6 +19,9 @@ def text(erg):
          f'Profil {hk["profil"]["profil_id"]} (SHA-256 {hk["profil"]["sha256"][:12]}…), Seed {hk["seed"]}, '
          f'B = {hk["B"]}, H3-MC = {hk["n_mc_h3"]}' + (' – REDUZIERT (Entwicklungsdiagnostik)' if hk['reduziert']
                                                     else ''),
+         *([f'Pilotskript: {hk["pilot_suche"]["ergebnis"]} ({hk["pilot_suche"].get("grund")}); Teil B mit den '
+            'Planwerten der synthetischen Kampagne (Stressprüfung, keine zulässige Planung)']
+           if (hk.get('pilot_suche') or {}).get('ergebnis', '').startswith('kein zulässiger') else []),
          f'Läufe Phase 1: {erg["gueltigkeit"]["n_laeufe"]}, ungültig {erg["gueltigkeit"]["n_ungueltig"]}; '
          f'auswertbare Konfigurationen {erg["n_auswertbar"]}; ŷ¹ gültig: {erg["yhat1_gueltig"]}',
          f'H1: {_ausgang(erg["H1"])}; max|z⁰| = {erg["H1"].get("max_abs_z0")}; c = {erg["H1"].get("c")} '
@@ -41,7 +44,7 @@ def text(erg):
         z.append(f'Zuordnung: {zu.get("ergebnis", zu.get("status", "–"))}')
     e3 = erg.get('E3')
     if e3:
-        z.append(f'E3: {e3.get("bewertung", e3.get("status", "–"))}')
+        z.append(f'E3: {e3.get("bewertung") or e3.get("status", "–")}')
     ab = erg['gueltigkeit']['abbruch']
     if ab['S2'] or ab['S4']:
         z.append(f'Abbruchregeln (offline): S2 {ab["S2"]}, S4 {ab["S4"]}; Phase 1 beendet: {ab["S2_phase_beendet"]}')

@@ -60,13 +60,15 @@ Gleiche Eingaben und Seeds ergeben bitgleiche Dateien.
 | `p0_messung` | synthetische Messdaten von P0.1 (Kennlinien, Laststellen, Querkraft, Brückensimulator), P0.2 (Zelllasten, Bauteilwägung), P0.4 (Übertragungsfunktionen mit Kohärenz, zwei Amplituden, exzentrisch, Betriebslast), P0.5 (Weg, Indeximpulse) | Generator | AP-11 |
 | `kalibrierung` | Ergebnis von Werkzeug 4 mit Unsicherheiten und Kovarianzen, Diagnosen, Eingangshashes | AP-11 | Stufe 1 (Umrechnung), Stufe 2 (H3, E3) |
 | `pilot` | Ergebnis von Werkzeug 5: Streuungen, s_q, T_φ, Rauschkovarianzen, p̂, Rampen- und Einschwinginformation, Planungsstand; keine Residuen, keine Entscheidungen | AP-11 | Teil B, Planung |
-| `teil_b` | synthetisches Teil B nach A9.3 (Abschnitt 5) | AP-12 (`teil_b.py`) mit Werten aus AP-13 | Stufe 2 |
+| `teil_b` | synthetisches Teil B nach A9.3 (Abschnitt 5) | `teil_b.py` (Befehl `ap11 teil-b`) aus Phase-0-Zusammenfassungen, Kalibrierung, Pilot und Werkzeug-8-Werten | Stufe 2 |
 | `laufzusammenfassung`, `zusammenfassungen` | ein Lauf bzw. Bündel vieler Läufe (Abschnitt 4) | Stufe 1, Ebene H | Stufe 2 |
 | `regelprofil` | Profil-ID, alle Regeln mit Fundstelle, Status, Wert und Herkunft, Reduktionen | `regeln.py` | Stufe 2, Harness |
 | `bootstrap_indizes` | Indexmatrizen je Quelle (Abschnitt 7) | Stufe 2, Harness | Stufe 2 |
 | `ergebnis` | Ausgänge, Zusätze, Gründe, Intervalle, Grenzen, Prüfgrößen und Herkunft (Abschnitt 8) | Stufe 2 | Harness, Bericht |
 | `wahrheit` | rauschfreie Erwartungswerte, wahre Residuen, Klasse der erwarteten Antwort | Generator | nur Harness |
-| `bewertung`, `katalog`, `pruefsatz` | Raten mit MC-Fehler, Szenarienkatalog, Hashes des Software-Prüfsatzes | Harness | – |
+| `werkzeug8` | Werte für Teil B nr4/nr10: c von H1 und H1Z, Rauschbias b̂⁰, b̂¹ mit u(b̂) (Summe und je Zelle), Intervalltyp von H2 mit Überdeckung, Prüfrate, jeweils mit Herkunft und Kennzeichnung „reduziert“ | Harness (`harness kalibrierung`) | `ap11 teil-b` |
+| `planangaben` | Laufplan der synthetischen Kampagne (f, k_max, n_min, n₀, n, d, Einstellung 2) und Seeds von Pilot, Teil B, Bootstrap und Reihenfolge; Platzhalter für Teil B nr2 | Generator | `ap11 teil-b` |
+| `bewertung`, `katalog`, `pruefsatz` | Vergleich mit der Wahrheit, Raten mit MC-Fehler, Prüfstand; Szenarienkatalog; Hashes des Software-Prüfsatzes | Harness | – |
 
 ## 4 Rohdatei und Laufzusammenfassung
 
@@ -83,7 +85,9 @@ phase, block, messtag, position, kontrollsatz, t_start, t_ende, f_soll, f_mittel
 stoerung, aufzeichnung_ok, park_ok, fehlende_kanaele, hash_rohdatei, version_stufe1, kalibrier_hash, ebene. Daten:
 `Nk_summe` (k), `Nk_zellen` (3, k), `N_mittel`, `N_mittel_zellen` (3), `zeiger` (3, k) = Σ_c e^{−ikφⱼ,c},
 `phi_mittel_grad`, `sigma_grad`, `index_fehler` (3), `fuenftel_N_mittel` (2), `fuenftel_Nk` (2, k), `min_roh_zellen`,
-`max_roh_zellen` (3; ganzer Lauf einschließlich Rampe), `uebersteuert_zellen` (3), `temperatur_min_zellen`,
+`max_roh_zellen` (3; ganzer Lauf einschließlich Rampe), `sigma_roh_zellen` (3) und `sigma_roh_summe` (Standardabweichung
+der Rohwerte im Auswertefenster, für σ_c, σ_Σ und F_LO aus den Referenzläufen), `uebersteuert_zellen` (3),
+`temperatur_min_zellen`,
 `temperatur_max_zellen` (3), `t_phi` (3). Abweichend vom Plan stehen Zeiger und Harmonische für alle Läufe bis k_voll
 (nicht nur bis k_max), damit Bedingung (a) ungebändert geprüft und k_max in der Pilotanalyse gewählt werden kann; die
 Fünftel stehen als Harmonische, F_min − ⟨N⟩ der Fünftel bildet Stufe 2 mit k_max.
@@ -98,7 +102,9 @@ Phase 0 je Lauf (Summe, Zellen, ungebändert) mit den Indexmatrizen B⁰ⱼ als 
 Fassung A als Sensitivität), b̂⁰, b̂¹ mit u(b̂), u_c,erw, H1Z-Größen je Zelle, `nr5` T(kω) für E3, `nr6` H2
 (Fenstermittelpunkt, w, W, φ̂₂*, SNR, Intervalltyp mit Niveau und simulierter Überdeckung), `nr7` H3-Vorhersage (nur
 zum Vergleich; Stufe 2 rechnet sie aus der Kalibrierung), `nr8` Prüfmenge V, `nr9` Laufreihenfolge (Seed),
-`nr10` Ergebnisse von Werkzeug 8 (c von H1 und H1Z mit Prüfrate und Herkunft, kritischer Wert für ε_ctrl, Raten).
+`nr10` Ergebnisse von Werkzeug 8 (c von H1 und H1Z mit Prüfrate und Herkunft, Intervalltyp von H2, kritischer Wert
+für ε_ctrl, Raten). Die Werkzeug-8-Werte kommen aus `harness kalibrierung` (Datei `werkzeug8`) oder ausdrücklich als
+`testvorgabe` (c = c_B, b̂ = 0, Perzentilintervall; jede Herkunftsangabe trägt dann „TESTVORGABE“).
 Fehlt ein benötigter Wert, meldet Stufe 2 den betroffenen Ausgang als nicht entscheidbar mit Grund.
 
 ## 6 Regelprofil
@@ -111,9 +117,10 @@ Kampagnenzahlen ändern die Profil-ID (`…+red(bootstrap_B=200)`).
 ## 7 Zufallsströme und Bootstrap-Indizes
 
 `zufall.py`: jeder Strom aus `SeedSequence(basis, spawn_key=(Schlüssel …))`; getrennte Schlüssel für Generator,
-Kalibriersimulation von c, Prüfsimulation, Bootstrap, H3-, E3-Monte-Carlo und Teil B; eine Kampagne erhält ihren
-Strom aus (Katalog-Hash, Szenario, Stufe, Kampagnennummer). Parallele Ausführung ändert keine Zahl; es gibt keine
-Seed-Suche. Bootstrap-Indizes nach Plan 2.6 c: `SeedSequence(seed).spawn` in fester Reihenfolge A_i für alle
+Kalibriersimulation von c, Prüfsimulation, Bootstrap, H3-, E3-Monte-Carlo und Teil B; Kampagne i eines Szenarios
+erhält den Seed `zufall.unterseed(Basis, Rolle, Szenario, Stufe, i)` (Rolle: `kalibrierung_c`, `pruefung_c`,
+`pruefung`, `planung` …; `zufall.katalog_seed` leitet eine Basis aus dem Katalog-Hash ab). Parallele Ausführung ändert
+keine Zahl (Test `test_kampagnen_unabhaengig_von_der_prozesszahl`); es gibt keine Seed-Suche. Bootstrap-Indizes nach Plan 2.6 c: `SeedSequence(seed).spawn` in fester Reihenfolge A_i für alle
 Konfigurationen in der Listenreihenfolge von Teil B, B¹₁ … B¹₃, H3, H4, danach in dieser Stufe angehängt E3 und die
 Quellen bei Einstellung 2; je Kind `Generator(PCG64(kind)).integers(0, n, size=(B, n))` über die gültigen Läufe der
 Quelle in aufsteigender Position. B⁰ⱼ stehen fest in Teil B. Übergebene `bootstrap_indizes` ersetzen die Ziehung
@@ -133,8 +140,10 @@ Replikatzahlen, Codestand). Dazu eine kurze Textfassung. Ergebnisdateien enthalt
 
 Generatorausgaben liegen in `eingang/` (alles, was AP-11 und AP-12 sehen) und `wahrheit/` (nur Harness). AP-11 und
 AP-12 importieren weder Generator- noch Harnessmodule, lesen keine `wahrheit`-Dateien (Schema `pcmms.wahrheit` wird von
-ihren Lesefunktionen abgewiesen) und übernehmen keine wahren Parameter oder erwarteten Entscheidungen. Ein Test ändert
-die Wahrheit und prüft, dass das Ergebnis von AP-12 bitgleich bleibt.
+ihren Lesefunktionen abgewiesen) und übernehmen keine wahren Parameter oder erwarteten Entscheidungen. Der Negativtest
+`test_wahrheit_aendern_oder_entfernen_aendert_ap12_nicht` ändert die Wahrheit, entfernt sie und prüft, dass das Ergebnis
+von AP-12 gleich bleibt (Prüfsumme ohne Laufzeit und Codestand) und eine Wahrheitsdatei als Eingang zurückgewiesen
+wird.
 
 ## 10 Beispieldatensatz
 
@@ -156,5 +165,24 @@ SHA-256 der Datendateien:
 | `wahrheit/wahrheit.npz` | `7435ea9ea5c5546741a4ca728fbfa58e9bf75823ce3de9182b49e89aec7ba626` |
 
 Die JSON-Köpfe tragen den Codestand und ändern sich deshalb mit jedem Commit; ihr übriger Inhalt ist fest
-(`tests/test_pcmms_formate.py`). Stufe 1 rechnet aus den beiden Rohdateien Laufzusammenfassungen, die die Wahrheit bis
-auf den Interpolationsfehler nach A6 und die ADC-Quantisierung treffen (`tests/test_ap12_stufe1.py`).
+(`tests/test_pcmms_formate.py`). Stufe 1 rechnet aus Rohdateien Laufzusammenfassungen, die Ebene H bis auf den
+Interpolationsfehler nach A6 und die Quantisierung der Zeitstempel treffen (`tests/test_ap12_auswertung.py`,
+`test_stufe1_rauschfrei_gleich_ebene_h`; `harness.ebenen.vergleich_rauschfrei`).
+
+## 11 Ausgabestruktur der Kette
+
+`python3 code/pcmms_auswertung kette …` bzw. die Einzelbefehle schreiben in ein frisches Zielverzeichnis:
+
+| Pfad | Inhalt | Schreibt |
+|---|---|---|
+| `eingang/p0_messung`, `eingang/planangaben` | P0-Messdaten, Laufplan und Seeds | `generator` |
+| `eingang/laeufe/` (Ebene Z) | Rohläufe und Manifest | `generator` |
+| `eingang/zusammenfassungen` | Laufzusammenfassungen (Ebene H direkt, Ebene Z aus Stufe 1) | `generator` bzw. `ap12 stufe1` |
+| `eingang/kalibrierung` | Werkzeug 4 aus den P0-Daten | `ap11 kalibrierung` |
+| `eingang/pilot`, `eingang/teil_b` | Werkzeug 5 und Teil B | `ap11 teil-b` |
+| `eingang/regelprofil`, `eingang/werkzeug8` | verwendetes Profil, gegebenenfalls Werkzeug-8-Werte | `kette` |
+| `ergebnis/ergebnis`, `ergebnis/bewertung` | Ergebnis von AP-12; Vergleich mit der Wahrheit | `ap12 auswerten`, `harness bewerten` |
+| `wahrheit/wahrheit`, `wahrheit/p0_wahrheit` | Generatorwahrheit (H1-Größen, Klasse, P0-Parameter) | `generator`; liest nur der Harness |
+
+Der Generator schreibt nur Generatorausgaben; Kalibrierung, Pilot und Teil B entstehen aus diesen Dateien in AP-11
+(auf Ebene Z aus den Stufe-1-Zusammenfassungen der Phase-0-Läufe). Ein nicht leeres `eingang/` wird zurückgewiesen.

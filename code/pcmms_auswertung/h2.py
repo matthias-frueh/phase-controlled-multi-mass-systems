@@ -188,13 +188,13 @@ def h2_auswerten(K, E0, E1, idxA, idxB0, idxB1, kmax, dd2, profil, intervall, W_
     if intervall is None:
         gruende.append(('Verfahren', 'Intervalltyp nicht kalibriert (Teil B nr10 fehlt)'))
         gewaehlt = None
+    elif intervall['typ'] == 'keiner':
+        gruende.append(('Verfahren', 'kein Intervall erreicht die Überdeckung 0,936'))
+        gewaehlt = None
     else:
         typ, nv = intervall['typ'], float(intervall.get('niveau', 0.95))
         schl = f'{typ}_{nv:.2f}'
-        if typ == 'keiner':
-            gruende.append(('Verfahren', 'kein Intervall erreicht die Überdeckung 0,936'))
-            gewaehlt = None
-        elif schl not in iv or iv[schl][0] is None or iv[schl][1] is None:
+        if schl not in iv or iv[schl][0] is None or iv[schl][1] is None:
             gruende.append(('Verfahren', f'Intervall {schl} nicht bestimmbar'))
             gewaehlt = None
         else:

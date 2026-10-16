@@ -47,6 +47,8 @@ SCHEMATA = {
     'ergebnis': '0.1',            # Ergebnis von Werkzeug 6 (AP-12)
     'wahrheit': '0.1',            # Generatorwahrheit (nur der Harness liest sie)
     'bewertung': '0.1',           # Harness: Vergleich mit der Wahrheit, Raten mit MC-Fehler
+    'werkzeug8': '0.1',           # Harness: Werte für Teil B nr4/nr10 (c, Rauschbias, Intervalltyp) mit Herkunft
+    'planangaben': '0.1',         # Laufplan der synthetischen Kampagne und Seeds (Platzhalter für Teil B nr2)
     'katalog': '0.1',             # Szenarienkatalog
     'pruefsatz': '0.1',           # Hashes von Katalog, Seeds, Profilen und Testdaten
 }

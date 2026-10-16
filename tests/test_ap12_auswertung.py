@@ -5,18 +5,15 @@ dem Vergleichssatz des Kandidatenverfahrens gegen das Vollraster.
 Langsame Prüfungen (@slow, PCMMS_SLOW=1): Vergleichssatz mit ≥ 4000 Zeltfits gegen das Vollraster."""
 import ast
 import os
-import time
 import warnings
 
 import numpy as np
 import pytest
 
-from pcmms_auswertung import (auswertung, bootstrap as bs, formate, h1, konventionen as kv, regeln, stufe1,
-                              vorhersage as vh, zeltfit as zfit)
+from pcmms_auswertung import auswertung, formate, regeln, stufe1, zeltfit as zfit
 from pcmms_auswertung.generator import ebene_h, ebene_z, kampagne, rauschen, systeme
 from pcmms_auswertung.generator.modell import Generatormodell
-from pcmms_auswertung.harness import kette
-from pcmms_auswertung.referenz import h1_referenz, zeltfit_referenz
+from pcmms_auswertung.harness import abgleich, kette
 
 CODE = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'code', 'pcmms_auswertung')
 LANGSAM = os.environ.get('PCMMS_SLOW') == '1'
@@ -235,101 +232,17 @@ def test_ap12_importiert_weder_generator_noch_harness(datei):
 
 
 # ── unabhängiger Abgleich mit referenz/ ──────────────────────────────────────────────────────────────
-def _referenz_eingabe(r, B, seed):
-    """Gültige Läufe aus dem Ergebnis, dieselben Indexmatrizen für Produktion und Referenz."""
-    e, tb, tab = r['ergebnis'], r['teil_b'], r['tabelle']
-    t1 = tab.auswahl(tab.spalte('phase', int) == 1).sortiert()
-    ungueltig = set(e['gueltigkeit']['gruende'])
-    schnitt = [c['id'] for c in tb['nr2']['konfigurationen'] if c['gruppe'] == 'schnitt']
-    sel = lambda pr: sorted([i for i, k in enumerate(t1.koepfe) if pr(k) and k['lauf_id'] not in ungueltig],
-                            key=lambda i: t1.koepfe[i]['position'])
-    lauf = {kid: sel(lambda k, kid=kid: k['laufart'] == 'K' and k['konfiguration']['id'] == kid) for kid in schnitt}
-    ctr = [sel(lambda k, j=j: k['laufart'] == 'L' and k['modul'] == j and k['einstellung'] == 1) for j in (1, 2, 3)]
-    rng = np.random.default_rng(seed)
-    idx = {f'A/{k}': rng.integers(0, len(v), size=(B, len(v))) for k, v in lauf.items()}
-    idx.update({f'B1/modul{j + 1}': rng.integers(0, len(ctr[j]), size=(B, len(ctr[j]))) for j in range(3)})
-    E0 = [np.asarray(x['Nk_zellen']).sum(1) for x in tb['nr3']['einzel0']]
-    d = t1.daten
-    ein = dict(kmax=tb['nr2']['k_max'], punkte=schnitt,
-               laeufe={k: dict(Nk=d['Nk_summe'][v], zeiger=d['zeiger'][v], nz=np.array(
-                   [t1.koepfe[i]['n_zyklen'] for i in v])) for k, v in lauf.items()},
-               einzel0=E0, einzel1=[d['Nk_summe'][c] for c in ctr], bias0=np.asarray(tb['nr4']['bias0']),
-               bias1=np.asarray(tb['nr4']['bias1']), u_bias0=np.asarray(tb['nr4']['u_bias0']),
-               u_bias1=np.asarray(tb['nr4']['u_bias1']), Delta=np.asarray(tb['nr4']['Delta']),
-               Delta_rel=np.asarray(tb['nr4']['Delta_rel']), c=tb['nr10']['c_H1'],
-               indizes={**idx, **{k: np.asarray(v)[:B] for k, v in tb['nr3']['indizes'].items() if k.startswith('B0/')}})
-    return ein, idx
-
-
 @pytest.mark.parametrize('sid,stufe', [('N01-A4', 'L2'), ('A04-R2', 'L1'), ('A04-R4', 'L1')])
 def test_h1_gleich_referenz_mit_denselben_indizes(sid, stufe):
     """Produktion (h1, bootstrap, vorhersage) gegen referenz/h1_referenz aus dem Regeltext: Toleranzen nach Plan
     2.6 e (Kräfte, Residuen 10⁻⁹ N + 10⁻⁹·|Wert|; u 10⁻¹² N + 10⁻⁹·u; z 10⁻⁷ + 10⁻⁹·|z|; ν relativ 10⁻⁹)."""
     r = _kette(sid, stufe)
-    B = 150
-    ein, idx = _referenz_eingabe(r, B, seed=99)
-    e = auswertung.auswerten(r['tabelle'], r['kalibrierung'], r['teil_b'], PROFIL, bootstrap_indizes=idx)
-    ref = h1_referenz.h1_referenz(ein)
-    for p, T in (('0', e['H1']['tests0']), ('1', e['H1']['tests1'])):
-        np.testing.assert_allclose(T['r'], ref['r' + p], rtol=1e-9, atol=1e-9)
-        np.testing.assert_allclose(T['u'], ref['u' + p], rtol=1e-9, atol=1e-12)
-        np.testing.assert_allclose(T['z'], ref['z' + p], rtol=1e-9, atol=1e-7)
-        np.testing.assert_allclose(T['nu'], ref['nu' + p], rtol=1e-9)
-    assert np.array_equal(e['H1']['tost0'], ref['tost0']) and np.array_equal(e['H1']['tost1'], ref['tost1'])
-    assert np.array_equal(e['H1']['relevant'], ref['relevant'])
-    assert e['H1']['ausgang'].replace('ä', 'ae') == ref['ausgang']        # Referenz schreibt „bestaetigt“
-    assert e['H1']['abweichung_nachgewiesen'] == ref['abweichung_nachgewiesen'] and e['H1']['drift'] == ref['drift']
+    a = abgleich.h1_abgleich(r, PROFIL, B=150, seed=99)
+    assert all(v['innerhalb'] for v in a['werte'].values()), a['werte']
+    assert all(a['gleich'].values()), a['gleich']
 
 
-def _testsatz(rng, n_fits):
-    """Vergleichssatz: asymmetrisches und symmetrisches Zelt, verrauschte Kurven, reines Rauschen, Gerade; Fenster 6°,
-    8° und 20° (7, 9, 21 Punkte), Abszissen mit Messrauschen."""
-    faelle = []
-    arten = ('asymmetrisch', 'symmetrisch', 'verrauscht', 'rauschen', 'gerade')
-    for i in range(n_fits):
-        art = arten[i % 5]
-        n = (7, 9, 21)[(i // 5) % 3]
-        phi = 120 - (n - 1) + 2 * np.arange(n) + 0.01 * rng.standard_normal(n)
-        spitze = 120 + rng.uniform(-1.5, 1.5)
-        if art == 'asymmetrisch':
-            F = np.where(phi <= spitze, 0.044 * (phi - spitze), -0.031 * (phi - spitze))
-        elif art == 'symmetrisch':
-            F = -0.04 * np.abs(phi - spitze)
-        elif art == 'verrauscht':
-            F = -0.04 * np.abs(phi - spitze) + 0.004 * rng.standard_normal(n)
-        elif art == 'rauschen':
-            F = 0.01 * rng.standard_normal(n)
-        else:
-            F = 0.3 + 0.01 * phi
-        faelle.append((art, phi, F))
-    return faelle
-
-
-def _vergleich(n_fits, seed=5):
-    rng = np.random.default_rng(seed)
-    faelle = _testsatz(rng, n_fits)
-    gleich = gleichstand = 0
-    abweichung = []
-    t_k = t_v = 0.0
-    for art, phi, F in faelle:
-        t = time.perf_counter()
-        k = zfit.zeltfit(phi[None], F[None])
-        t_k += time.perf_counter() - t
-        t = time.perf_counter()
-        v = zeltfit_referenz.zeltfit_vollraster(phi, F)
-        t_v += time.perf_counter() - t
-        if abs(k['phi_stern'][0] - v['phi_stern']) < 1e-9:
-            gleich += 1
-            continue
-        rk, rv = zfit.rss_exakt(phi, F, k['phi_stern'][0]), zfit.rss_exakt(phi, F, v['phi_stern'])
-        sst = float(((F - F.mean()) ** 2).sum())
-        tol = 1e-9 * max(rk, rv) + 1e-12 * sst + 1e-28 * F.size * float((F ** 2).max())
-        if abs(rk - rv) <= tol:
-            gleichstand += 1
-        else:
-            abweichung.append((art, phi.size, k['phi_stern'][0], v['phi_stern'], rk, rv))
-    return dict(n=n_fits, gleich=gleich, gleichstand=gleichstand, abweichung=abweichung, t_kandidat=t_k,
-                t_vollraster=t_v)
+_vergleich = abgleich.zeltfit_vergleich
 
 
 def test_zeltfit_kandidat_gleich_vollraster_klein():
@@ -344,6 +257,30 @@ def test_zeltfit_kandidat_gleich_vollraster_4000():
     print(f"\nZeltfit-Vergleichssatz: {r['n']} Fits, gleich {r['gleich']}, Gleichstand {r['gleichstand']}, "
           f"abweichend {len(r['abweichung'])}; Kandidat {r['t_kandidat']:.2f} s, Vollraster {r['t_vollraster']:.1f} s")
     assert not r['abweichung'] and r['n'] >= 4000
+
+
+def test_h2_intervalltyp_keiner_nicht_entscheidbar(exakt):
+    """Regression (Befund der Planungssimulation): Teil B nr10 mit Intervalltyp „keiner“ (keine Überdeckung erreicht)
+    führt zu H2 „nicht entscheidbar“ (Verfahren), nicht zu einem Abbruch."""
+    import copy
+    tb = copy.deepcopy(exakt['teil_b'])
+    tb['nr10']['h2_intervall'] = dict(typ='keiner', niveau=None, quelle='Test')
+    e = auswertung.auswerten(exakt['tabelle'], exakt['kalibrierung'], tb, PROFIL)
+    assert e['H2']['ausgang'] == 'nicht entscheidbar' and e['H2']['grund'] == 'Verfahren'
+    assert any('0,936' in g['text'] for g in e['H2']['gruende'])
+
+
+def test_stressszenario_ohne_zulaessigen_arbeitspunkt():
+    """Regression (Befund im Prüfstand): A07 verletzt die Auslegungsregel (b) bewusst (k_b = 2 < 3). Das Pilotskript
+    meldet „kein zulässiger Arbeitspunkt“, liefert aber die Pilotgrößen (mit k = 3); Teil B entsteht mit den
+    Planwerten, das Ergebnis nennt den Pilotbefund, und E3 ist bei singulärem T(kω) nicht auswertbar statt abzubrechen."""
+    r = _kette('A07-hertz50')
+    e = r['ergebnis']
+    assert r['pilot']['suche']['ergebnis'].startswith('kein zulässiger') and r['pilot']['k_pilotgroessen'] == 3
+    assert e['herkunft']['pilot_suche']['ergebnis'].startswith('kein zulässiger')
+    assert 'Pilotskript: kein zulässiger Arbeitspunkt' in e['text']
+    assert e['E3']['bewertung'] is None and e['E3']['status'].startswith('nicht auswertbar')
+    assert e['H1']['ausgang'] in ('bestätigt', 'falsifiziert', 'nicht entscheidbar')
 
 
 def test_zeltfit_grenzfaelle():

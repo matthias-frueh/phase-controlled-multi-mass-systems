@@ -173,7 +173,10 @@ def test_reduktion_sichtbar_und_profil_rundreise(tmp_path):
     assert p.zahl('bootstrap_B') == 10000 and not p.reduziert
     q = p.mit_reduktion(bootstrap_B=200, h2_replikate=200)
     assert q.reduziert and q.zahl('bootstrap_B') == 200 and q.id.startswith('ENTW-2026-10+red(')
-    assert q.kurz()['reduktion']['normativ'] == {'bootstrap_B': 10000, 'h2_replikate': 10000}
+    assert q.kurz()['reduktion']['normativ'] == {'bootstrap_B': 10000, 'h2_replikate': 10000, 'e3_mc': 10000}
+    assert q.zahl('e3_mc') == 200                                   # H2 und E3 nutzen die Bootstrap-Zeilen
+    with pytest.raises(ValueError, match='folgt bootstrap_B'):
+        p.mit_reduktion(bootstrap_B=200, h2_replikate=300)
     regeln.schreibe_profil(str(tmp_path / 'p'), q)
     assert regeln.lade_profil(str(tmp_path / 'p')).sha256() == q.sha256()
     obj = json.loads((tmp_path / 'p.json').read_text(encoding='utf-8'))

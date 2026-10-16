@@ -188,7 +188,8 @@ def erstellen(tab0, kal, pilot_erg, profil, plan, werkzeug8=None, kennung=None, 
                n_min=n_min, n0=int(plan['n0']), r=plan.get('r'), n=int(plan['n']), n_max=plan.get('n_max'),
                d=int(plan['d']), p_hat=pilot_erg['p_hat'], einstellung2=e2,
                F_c_stat=np.asarray(kal['p0_2']['F_c_stat_N'], float), N_s_zellen=N_s_z,
-               konfigurationen=konf, f_takt=plan.get('f_takt', 1e6))
+               konfigurationen=konf, f_takt=plan.get('f_takt', 1e6),
+               pilot_suche={x: pilot_erg.get('suche', {}).get(x) for x in ('ergebnis', 'grund')})
     nr10 = dict(c_H1=w8.get('c_H1'), c_H1_herkunft=w8.get('c_H1_herkunft', 'fehlt (Werkzeug 8)'),
                 c_H1Z=w8.get('c_H1Z'), c_H1Z_herkunft=w8.get('c_H1Z_herkunft', 'fehlt (Werkzeug 8)'),
                 pruefrate=w8.get('pruefrate'), h2_intervall=w8.get('h2_intervall'),
