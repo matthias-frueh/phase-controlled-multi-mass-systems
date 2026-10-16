@@ -35,6 +35,12 @@ def strom(basis, *schluessel):
     return np.random.Generator(np.random.PCG64(seedsequence(basis, *schluessel)))
 
 
+def unterseed(basis, *schluessel):
+    """Ganzzahliger Seed (63 Bit) eines Teilstroms, etwa für Teil B oder die Bootstrap-Indizes einer Kampagne."""
+    st = seedsequence(basis, *schluessel).generate_state(2, np.uint32)
+    return int(st[0]) | (int(st[1] & 0x7FFFFFFF) << 32)
+
+
 def katalog_seed(katalog_sha256):
     """Basis-Seed aus der Prüfsumme des Szenarienkatalogs (erste 16 Hexziffern, 64 Bit wie §6)."""
     return int(katalog_sha256[:16], 16)

@@ -108,7 +108,7 @@ def zeitreihe(modell, g, i, spec, rng, kalib, f_s, T_r=0.5, T_e=0.5, f_takt=1e6,
     T0, sT = rausch.temperatur_C
     inhalt = dict(
         lauf={x: spec[x] for x in ('lauf_id', 'laufart', 'modul', 'einstellung', 'konfiguration', 'phase', 'block',
-                                   'messtag', 'position', 'kontrollsatz', 't_start')},
+                                   'messtag', 'position', 'kontrollsatz', 't_start', 't_ende')},
         erfassung=dict(f_soll=f, f_s=f_s, t0=t0, adc=dict(bits=adc_bits, vollausschlag=voll), f_takt=f_takt,
                        kanaele=[dict(name='kraft_adc', art='kraft', einheit='ADC', zellen=[1, 2, 3])]
                        + [dict(name=f'index_modul{j}', art='index', einheit='s', modul=j) for j in (1, 2, 3)]

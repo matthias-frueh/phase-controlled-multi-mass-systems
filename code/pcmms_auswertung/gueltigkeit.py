@@ -2,7 +2,8 @@
 
 Geprüft wird an Laufzusammenfassungen, also nach der Aufnahme; das ist keine Echtzeit-Sicherheitsfunktion (AP-10).
 Je Lauf und Regel steht True (verletzt), False (eingehalten) oder None (nicht anwendbar oder nicht prüfbar, mit
-Grund). Ein Lauf ist gültig, wenn keine geprüfte Regel verletzt ist; nicht prüfbare Regeln werden getrennt gezählt
+Grund). Schwellen erhalten einen Rundungsboden (10⁻⁵° bzw. 10⁻¹²·⟨N⟩), damit rauschfreie Prüffälle mit Schwelle null
+nicht an Rundungsfehlern scheitern (technisch). Ein Lauf ist gültig, wenn keine geprüfte Regel verletzt ist; nicht prüfbare Regeln werden getrennt gezählt
 und berichtet, nie stillschweigend als eingehalten gewertet.
 
 G1   |Δ⟨N⟩| > ε_ctrl, Δ⟨N⟩ = ⟨N⟩ − N_s,int (lineare Interpolation zwischen den einschließenden gültigen
@@ -29,6 +30,8 @@ from scipy import stats
 from . import konventionen as kv
 
 REGELN_G = ('G1', 'G2', 'G3', 'G4', 'G5', 'G6', 'G7', 'G8', 'G9', 'G10')
+RUNDUNG_GRAD = 1e-5                     # Rundungsboden der Jittertoleranz: σ = √(−2 ln R) rauscht bei R ≈ 1 um √(2ε) ≈ 10⁻⁶°
+RUNDUNG_REL = 1e-12                     # Rundungsboden relativ zu ⟨N⟩ für G1, G4 und den Nullpunktalarm
 
 
 @dataclass
@@ -163,8 +166,8 @@ def pruefe(tab, sw, regeln=('G2', 'G3', 'G4', 'G5', 'G6', 'G7', 'G8', 'G9', 'G10
                         phiP = -np.degrees(np.angle(rho)) + np.asarray(sw.delta_delta_grad, float)
                         ab = np.abs(kv.wickel_grad(phiP[1:] - soll[1:]))
                         sig = d['sigma_grad'][i, 1:]
-                        v = bool((ab > sw.delta_phi_tol_grad).any() or
-                                 (sig > np.array([sw.sigma_tol_grad[2], sw.sigma_tol_grad[3]])).any())
+                        tol = np.maximum(np.array([sw.sigma_tol_grad[2], sw.sigma_tol_grad[3]]), RUNDUNG_GRAD)
+                        v = bool((ab > sw.delta_phi_tol_grad).any() or (sig > tol).any())
                 erg['G2'][i] = v
         # G3
         if 'G3' in regeln and art[i] != 'R':
@@ -183,9 +186,10 @@ def pruefe(tab, sw, regeln=('G2', 'G3', 'G4', 'G5', 'G6', 'G7', 'G8', 'G9', 'G10
                 nicht['G4'].append((i, f'σ_Δ der Laufart {g} fehlt'))
             else:
                 s = sw.sigma_delta[g]
-                v = bool(abs(DN[i]) > sw.g4_faktor * s['N'])
+                boden = RUNDUNG_REL * abs(d['N_mittel'][i])
+                v = bool(abs(DN[i]) > sw.g4_faktor * s['N'] + boden)
                 if art[i] != 'R' and s.get('F') is not None:
-                    v = v or bool(abs(DF[i]) > sw.g4_faktor * s['F'])
+                    v = v or bool(abs(DF[i]) > sw.g4_faktor * s['F'] + boden)
                 erg['G4'][i] = v
         # G5, G6, G8, G9, G10
         if 'G5' in regeln:
@@ -221,7 +225,7 @@ def pruefe(tab, sw, regeln=('G2', 'G3', 'G4', 'G5', 'G6', 'G7', 'G8', 'G9', 'G10
             elif not np.isfinite(dN[i]):
                 nicht['G1'].append((i, 'kein einschließendes Paar gültiger Referenzläufe'))
             else:
-                erg['G1'][i] = bool(abs(dN[i]) > sw.eps_ctrl)
+                erg['G1'][i] = bool(abs(dN[i]) > sw.eps_ctrl + RUNDUNG_REL * abs(d['N_mittel'][i]))
         alarm = nullpunktalarm(tab, sw, ~ungueltig_vor_g1)
         for i, a in alarm.items():
             erg['G1'][i] = a['alarm']
@@ -250,8 +254,10 @@ def nullpunktalarm(tab, sw, kandidat):
             dS = abs(tab.daten['N_mittel'][i] - tab.daten['N_mittel'][vor])
             dZ = np.abs(tab.daten['N_mittel_zellen'][i] - tab.daten['N_mittel_zellen'][vor])
             zs = (np.asarray(sw.sigma_ref_zellen) if sw.sigma_ref_zellen is not None else np.full(3, np.inf))
-            kanal = (['Summe'] if dS > sw.alarm_faktor * sw.sigma_ref else []) + \
-                [f'Zelle {c + 1}' for c in range(3) if dZ[c] > sw.alarm_faktor * zs[c]]
+            bS = RUNDUNG_REL * abs(tab.daten['N_mittel'][i])
+            bZ = RUNDUNG_REL * np.abs(tab.daten['N_mittel_zellen'][i])
+            kanal = (['Summe'] if dS > sw.alarm_faktor * sw.sigma_ref + bS else []) + \
+                [f'Zelle {c + 1}' for c in range(3) if dZ[c] > sw.alarm_faktor * zs[c] + bZ[c]]
             out[i] = dict(alarm=bool(kanal), kanaele=kanal)
             if kanal:
                 continue                                                # alarmierter Lauf ist nicht Bezug

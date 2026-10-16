@@ -129,6 +129,11 @@ def eps_ctrl_test(tab, gueltig, sig_ref, n_sim, seed, faktor=3.0):
     Nref, Noth = tab.daten['N_mittel'][ref], tab.daten['N_mittel'][use]
     d = (Noth - ((1 - be) * Nref[a_i] + be * Nref[b_i])) * norm
     s_d = float(d.std(ddof=1))
+    if sig_ref <= 0:                                                     # rauschfreie Daten: Grenzfall
+        return dict(pruefbar=False, F=None, kritisch=None, n_sim=0, s_d=s_d, n_laeufe=int(use.size),
+                    betrieb_streut_staerker=bool(s_d > 0), sigma_betr=s_d if s_d > 0 else None,
+                    eps_ctrl=float(faktor * s_d), quelle='3·σ̂_betr' if s_d > 0 else '3·σ̂_ref (= 0, rauschfrei)',
+                    diagnose='σ̂_ref = 0 (rauschfreie Daten): F-Test nicht definiert')
     F = s_d ** 2 / sig_ref ** 2
 
     # Simulation: ⟨N⟩ normalverteilt, gleiche Streuung in allen Laufarten

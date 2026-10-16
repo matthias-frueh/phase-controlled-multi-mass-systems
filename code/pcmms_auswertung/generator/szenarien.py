@@ -60,8 +60,9 @@ def _sys(name, **kw):
 
 
 def _weiss(stufe):
-    """Weiß dominiertes Rauschen (N04): σ je Abtastwert und Zelle 0,25 N, Lauf-Streuung klein (Stufe L0)."""
-    return rauschen.stufe('L0', sigma_zelle=0.25, jitter_grad=0.02, index_versatz_grad=0.0).mit(name=f'weiss({stufe})')
+    """Weiß dominiertes Rauschen (N04): σ je Abtastwert und Zelle 0,08 N, Lauf-Streuung klein (Stufe L0). σ bleibt so
+    klein, dass das Rohminimum der Zellen (Kurvenminimum − etwa 4,5σ) über F_LO,c = 5σ liegt (sonst G6)."""
+    return rauschen.stufe('L0', sigma_zelle=0.08, jitter_grad=0.02, index_versatz_grad=0.0).mit(name=f'weiss({stufe})')
 
 
 def _laufart(stufe):
