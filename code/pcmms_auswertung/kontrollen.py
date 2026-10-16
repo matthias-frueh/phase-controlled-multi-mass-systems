@@ -14,7 +14,9 @@ gleichsinnigem |z¹| > c.
 
 E3 (Regeln e3.*, offen; dreiwertig nur im Entwicklungsprofil): Modulzeiger Ĉₖ = T(kω)⁻¹·(N₁,ₖ, N₂,ₖ, N₃,ₖ)ᵀ mit
 T_cj = g_c·G_F,c(kω)·w_cj·H(kω) (Statik der Dreipunktlagerung aus P0.1, Kette, 1 FG; Kippmoden vernachlässigt,
-gültig für k·f weit unter der Kippmode). E3a: Δφⱼ^Z = (arg Ĉ₁,₁ − arg Ĉⱼ,₁) − φ̄ⱼ^P (j = 2, 3), daneben k = 2.
+gültig für k·f weit unter der Kippmode). E3a: Δφⱼ^Z = (arg Ĉ₁,₁ − arg Ĉⱼ,₁) − φ̄ⱼ^P (j = 2, 3), daneben k = 2:
+Δφⱼ^{Z,2} = wickel(arg Ĉ₁,₂ − arg Ĉⱼ,₂ − 2·φ̄ⱼ^P)/2 (erst auf Ebene der Harmonischen modulo 360°, dann halbiert; Werte
+in (−90°, 90°], lokaler Bezug zur Encoder-Profilphase, aus k = 2 allein nur bis auf 180° bestimmt).
 E3b: q_Z = |R₋₁ − R̂₋₁|/|R̂₊₁| am Triphasik-Punkt aus der ersten Harmonischen des Kippmoments
 (M_x = Σ y_c·N_c,1, M_y = −Σ x_c·N_c,1; R₊₁ = (M_x + iM_y)/2, R₋₁ = (M̄_x + iM̄_y)/2). Unsicherheit aus Bootstrap A/B,
 Ziehungen von Δδⱼ (je Modul eine) und der Quantisierung der Zeitstempel (Rechteck).
@@ -146,8 +148,8 @@ def e3_auswerten(K, E0, idxA, idxB0, T, xy, dd, u_dd, phi_mess, triphasik, profi
         for j in (1, 2):
             dz = kv.wickel_grad(np.degrees(np.angle(Ch[0, 0]) - np.angle(Ch[j, 0])) - phiP[j])
             dzb = kv.wickel_grad(np.degrees(np.angle(Chb[:, 0, 0]) - np.angle(Chb[:, j, 0])) - phiPb[:, j])
-            d2 = kv.wickel_grad((np.degrees(np.angle(Ch[0, 1]) - np.angle(Ch[j, 1])) - 2 * phiP[j]) / 2) \
-                if kmax >= 2 else None
+            d2 = kv.wickel_grad(np.degrees(np.angle(Ch[0, 1]) - np.angle(Ch[j, 1])) - 2 * phiP[j]) / 2 \
+                if kmax >= 2 else None                                  # erst modulo 360°, dann halbieren
             u = float(np.sqrt(np.var(dzb, ddof=1) + u_quant_grad ** 2))
             res[f'modul{j + 1}'] = dict(delta_phi_Z_grad=float(dz), u_grad=u,
                                         delta_phi_Z_k2_grad=None if d2 is None else float(d2))
@@ -174,7 +176,11 @@ def e3_auswerten(K, E0, idxA, idxB0, T, xy, dd, u_dd, phi_mess, triphasik, profi
         qb = np.abs(Rmb - Rmhb) / np.abs(Rphb)
         e3b = dict(id=triphasik, q_Z=q, u_q_Z=float(np.std(qb, ddof=1)), verhaeltnis_messung=float(abs(Rm) / abs(Rp)),
                    verhaeltnis_vorhersage=float(abs(Rmh) / abs(Rph)))
-    out = dict(e3a=erg, e3b=e3b, T_hinweis='T aus Statik (P0.1), Kette und 1 FG; Kippmoden vernachlässigt')
+    out = dict(e3a=erg, e3b=e3b, T_hinweis='T aus Statik (P0.1), Kette und 1 FG; Kippmoden vernachlässigt',
+               k2_hinweis='k = 2: Abweichung gegen 2·φ̄ⱼ^P auf Ebene der Harmonischen modulo 360°, dann halbiert; '
+                          'Werte in (−90°, 90°], lokaler Bezug zur Encoder-Profilphase; die Profilphase ist aus k = 2 '
+                          'nur bis auf 180° bestimmt (keine Auflösung einer globalen 180°-Mehrdeutigkeit); zusätzliche '
+                          'Diagnose, die Bewertung nutzt k = 1')
     try:
         sw = profil.wert('e3.schwellen')
         profil.wert('e3.pruefzahl')
