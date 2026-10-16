@@ -1,9 +1,13 @@
 """Korrekturen an den Kontrollen von AP-12 Stufe 2 (kontrollen.py): Phase der zweiten Harmonischen in E3a
-(Korrektur C).
+(Korrektur C), Nullkontrolle bei verschwindenden Varianzen (Korrektur D).
 
-Erwartungswerte stammen aus den vorgegebenen komplexen Zeigern, nicht aus der Implementierung."""
+Erwartungswerte stammen aus den vorgegebenen komplexen Zeigern bzw. aus einer unabhängigen Rechnung (SciPy), nicht
+aus der Implementierung."""
+import warnings
+
 import numpy as np
 import pytest
+from scipy import stats
 
 from pcmms_auswertung import kontrollen, regeln
 
@@ -61,3 +65,71 @@ def test_e3_k2_lokal_mit_180_grad_mehrdeutigkeit():
     assert _abw(out, 2, k2=True) == pytest.approx(-80.0, abs=1e-9)
     assert _abw(out, 3, k2=True) == pytest.approx(-0.2, abs=1e-9)
     assert '180°' in out['k2_hinweis']
+
+
+# ── Korrektur D: Nullkontrolle ───────────────────────────────────────────────────────────────────────
+def _nk(x, y, eps=0.01):
+    with warnings.catch_warnings():
+        warnings.simplefilter('error')                                  # keine 0/0- oder Überlaufwarnung
+        return kontrollen.nullkontrolle(x, y, eps, ENTW)
+
+
+def _ohne_testaussage(r):
+    regel = ENTW.wert('h0.sammeltest')
+    assert r['pruefbar'] is False and r['grund']
+    assert r.get('aussage') is None and r.get('lage') is None and r.get('intervall') is None
+    assert all(a not in str(r) for a in regel['aussagen']) and 'Gleichheit nachgewiesen' not in str(r)
+
+
+def test_nullkontrolle_beide_varianzen_null():
+    """Zehnmal 0,125 N gegen zehnmal 0 N, ε_ctrl = 0,01 N: Differenz bleibt sichtbar, kein gültiges „kein Unterschied“
+    (vor Korrektur D: NaN-Grenzen, prüfbar und „kein Unterschied nachgewiesen“)."""
+    r = _nk(np.full(10, 0.125), np.zeros(10))
+    _ohne_testaussage(r)
+    assert r['differenz'] == pytest.approx(0.125) and r['n_komb'] == 10 and r['n_ref'] == 10
+    assert 'varianzen' in r['grund'].lower()
+
+
+def test_nullkontrolle_gleiche_konstanten_ohne_gleichheitsaussage():
+    r = _nk(np.full(8, 0.3), np.full(12, 0.3))
+    _ohne_testaussage(r)
+    assert r['differenz'] == 0.0 and r['n_komb'] == 8 and r['n_ref'] == 12
+
+
+def _welch_referenz(x, y):
+    with warnings.catch_warnings():         # SciPy warnt bei identischen Werten über Rundung im eigenen Moment
+        warnings.simplefilter('ignore', RuntimeWarning)
+        res = stats.ttest_ind(x, y, equal_var=False)
+    ci = res.confidence_interval(0.95)
+    return float(res.df), float(ci.low), float(ci.high)
+
+
+def test_nullkontrolle_eine_konstante_stichprobe_regulaer():
+    """Einseitig verschwindende Varianz bei positiver Gesamtvarianz bleibt auswertbar (ν = n_ref − 1)."""
+    y = np.random.default_rng(3).normal(0.0, 0.004, 15)
+    x = np.full(10, 0.002)
+    r = _nk(x, y)
+    nu, lo, hi = _welch_referenz(x, y)
+    assert r['pruefbar'] is True and r['nu'] == pytest.approx(nu, rel=1e-12) and nu == pytest.approx(14.0, rel=1e-12)
+    assert r['intervall'] == pytest.approx([lo, hi], rel=1e-10, abs=1e-15)
+    assert r['aussage'] in ENTW.wert('h0.sammeltest')['aussagen']
+
+
+def test_nullkontrolle_gewoehnlicher_welch_gegen_scipy():
+    rng = np.random.default_rng(5)
+    x, y = rng.normal(0.003, 0.002, 30), rng.normal(0.0, 0.005, 12)
+    r = _nk(x, y)
+    nu, lo, hi = _welch_referenz(x, y)
+    assert r['pruefbar'] is True and r['nu'] == pytest.approx(nu, rel=1e-12)
+    assert r['intervall'] == pytest.approx([lo, hi], rel=1e-10)
+    assert r['differenz'] == pytest.approx(x.mean() - y.mean(), rel=1e-12)
+    erwartet = ENTW.wert('h0.sammeltest')['aussagen'][0 if (lo > 0 or hi < 0) else 1]
+    assert r['aussage'] == erwartet
+
+
+def test_nullkontrolle_zu_wenige_und_nicht_endliche_werte():
+    r = _nk([0.1], np.zeros(5))
+    assert r['pruefbar'] is False and 'zu wenige' in r['grund'] and r.get('aussage') is None
+    r = _nk(np.array([1e300, -1e300] * 5), np.random.default_rng(1).normal(0, 1e-3, 10))
+    _ohne_testaussage(r)
+    assert 'nicht endlich' in r['grund']

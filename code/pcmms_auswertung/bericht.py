@@ -42,6 +42,10 @@ def text(erg):
     if h0.get('pruefbar'):
         z.append(f'Nullkontrolle: Differenz {h0["differenz"]:.3g} N, 95 % [{h0["intervall"][0]:.3g}, '
                  f'{h0["intervall"][1]:.3g}] N, {h0["lage"]} ({h0["vermerk"]}); {h0["aussage"]}')
+    else:
+        z.append(f'Nullkontrolle: nicht prüfbar ({h0.get("grund")}); Differenz '
+                 + (f'{h0["differenz"]:.3g} N' if h0.get('differenz') is not None else '–')
+                 + f', n = {h0.get("n_komb")} / {h0.get("n_ref")}')
     zu = erg.get('zuordnung')
     if zu:
         z.append(f'Zuordnung: {zu.get("ergebnis", zu.get("status", "–"))}')

@@ -3,7 +3,9 @@ Keine dieser Auswertungen ändert einen Ausgang oder schließt einen Lauf aus.
 
 Nullkontrolle: Welch-Satterthwaite-t-Test von Δ⟨N⟩ aller Kombinationsläufe der Phase 1 (gültig bis auf G1) gegen
 Δ⟨N⟩ der Referenzläufe der Phase 1 (leave-one-out), zweiseitig, α = 0,05; Differenz, 95-%-Intervall, Lage zu ±ε_ctrl
-mit Vermerk und genau eine der beiden Aussagen (Regel h0.sammeltest); keine Gleichheitsaussage.
+mit Vermerk und genau eine der beiden Aussagen (Regel h0.sammeltest); keine Gleichheitsaussage. Ist der Test nicht
+definiert (beide Stichprobenvarianzen null: Welch-Satterthwaite 0/0) oder eine Rechengröße nicht endlich, lautet das
+Ergebnis „nicht prüfbar“ mit Grund, Differenz und Stichprobenzahlen, ohne Testaussage und ohne Ersatzstreuung.
 
 Zuordnung (Regeln zuordnung.*, offen; dreiwertig nur im Entwicklungsprofil): an den Punkten I für Re/Im N₁…N₃ die
 Residuen r (Haupteinstellung) und r′ (Einstellung 2) gegen (ŷ⁰, ŷ⁰′) und (ŷ¹, ŷ¹′);
@@ -32,15 +34,32 @@ from .regeln import RegelOffen
 def nullkontrolle(dN_komb, dN_ref_loo, eps_ctrl, profil):
     x, y = np.asarray(dN_komb, float), np.asarray(dN_ref_loo, float)
     x, y = x[np.isfinite(x)], y[np.isfinite(y)]
-    if x.size < 2 or y.size < 2:
-        return dict(pruefbar=False, grund='zu wenige Kombinations- oder Referenzläufe')
-    d = x.mean() - y.mean()
-    vx, vy = x.var(ddof=1) / x.size, y.var(ddof=1) / y.size
-    se = np.sqrt(vx + vy)
-    nu = (vx + vy) ** 2 / (vx ** 2 / (x.size - 1) + vy ** 2 / (y.size - 1))
-    regel = profil.wert('h0.sammeltest')
-    t = stats.t.ppf(1 - regel['alpha'] / 2, nu)
-    L, U = d - t * se, d + t * se
+    basis = dict(n_komb=int(x.size), n_ref=int(y.size), eps_ctrl=eps_ctrl)
+    def mittel(v):          # identische Werte: Mittel = Wert, Varianz null (nicht der Rundungsrest der Mittelbildung)
+        return float(v[0]) if np.all(v == v[0]) else float(v.mean())
+
+    with np.errstate(over='ignore', invalid='ignore', divide='ignore'):
+        if x.size and y.size:
+            basis['differenz'] = mittel(x) - mittel(y)
+        if x.size < 2 or y.size < 2:
+            return dict(pruefbar=False, grund='zu wenige Kombinations- oder Referenzläufe', **basis)
+        d = mittel(x) - mittel(y)
+        vx, vy = (0.0 if np.all(v == v[0]) else v.var(ddof=1) / v.size for v in (x, y))
+        if not (np.isfinite(d) and np.isfinite(vx) and np.isfinite(vy)):
+            return dict(pruefbar=False, grund='nicht endliche Rechengröße (Mittel oder Varianz): Welch-Test nicht '
+                                              'auswertbar, keine Testaussage', **basis)
+        if vx + vy == 0.0:
+            return dict(pruefbar=False, grund='Stichprobenvarianzen beider Gruppen null: Welch-Satterthwaite 0/0, '
+                                              'Test nicht definiert; keine Testaussage und keine Gleichheitsaussage',
+                        **basis)
+        se = np.sqrt(vx + vy)
+        nu = (vx + vy) ** 2 / (vx ** 2 / (x.size - 1) + vy ** 2 / (y.size - 1))
+        regel = profil.wert('h0.sammeltest')
+        t = stats.t.ppf(1 - regel['alpha'] / 2, nu) if np.isfinite(nu) and nu > 0 else np.nan
+        L, U = d - t * se, d + t * se
+    if not (np.isfinite(L) and np.isfinite(U)):
+        return dict(pruefbar=False, grund=f'nicht endliches Intervall (ν = {float(nu):g}): Welch-Test nicht '
+                                          'auswertbar, keine Testaussage', nu=float(nu), **basis)
     unterschied = bool(L > 0 or U < 0)
     return dict(pruefbar=True, differenz=float(d), intervall=[float(L), float(U)], nu=float(nu), n_komb=int(x.size),
                 n_ref=int(y.size), eps_ctrl=eps_ctrl,
