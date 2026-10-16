@@ -6,7 +6,8 @@ Gliederung (A9.3): nr1 Herkunft; nr2 Platzhalterwerte; nr3 Einzelmodul-Harmonisc
 ungebändert) mit den festen Indexmatrizen B⁰ⱼ; nr4 Vorhersage an den Sollphasen mit dem Jitter der Pilotläufe
 (ρⱼₖ = e^{−ikφⱼ,soll}·e^{−k²σⱼ²/2}, A2.4), D_q (Fassung B, dazu Fassung A), Δ_q = Faktor·D_q, Δ_rel,q, Sensitivität
 0,1·D_q, Rauschbias b̂⁰, b̂¹ mit u(b̂) (Werkzeug 8), u_c,erw, H1Z-Grenzen, ŷ⁰′ an den Punkten I; nr5 T(kω) für E3;
-nr6 H2-Fenster, φ̂₂*, SNR und erwartete Halbbreite; nr7 H3-Vorhersage (nur zum Vergleich); nr8 Prüfmenge V;
+nr6 H2-Fenster, φ̂₂*, SNR und erwartete Halbbreite; nr5 trägt dazu die Unsicherheitsbeschreibung von T
+(kontrollen.t_beschreibung, A9.3 Nr. 5); nr7 H3-Vorhersage (nur zum Vergleich); nr8 Prüfmenge V;
 nr9 Laufreihenfolge; nr10 Ergebnisse von Werkzeug 8 (c von H1 und H1Z mit Prüfrate und Herkunft, kritischer Wert für
 ε_ctrl, Intervalltyp von H2 mit Überdeckung). Fehlende Werte stehen als None mit Vermerk; Stufe 2 meldet die
 betroffenen Ausgänge dann als nicht entscheidbar mit Grund.
@@ -18,7 +19,7 @@ from . import bootstrap as bs, formate, h2, kontrollen, konventionen as kv, vorh
 from . import zusammenfassung as zf
 from .regeln import RegelOffen
 
-VERSION = 'teil_b-0.1'
+VERSION = 'teil_b-0.2'          # 0.2: nr5.unsicherheit (Korrektur E), nr1.phase0_verarbeitung (Korrektur B)
 
 
 def konfigurationen(zusatz=False, punkte_I=None):
@@ -177,7 +178,12 @@ def erstellen(tab0, kal, pilot_erg, profil, plan, werkzeug8=None, kennung=None, 
         nr6 = dict(W=None, grund=e.grund)
     # nr5: T(kω) für E3
     T = kontrollen.uebertragung(kal, plan['f'])
-    nr5 = dict(T=T, hinweis='T aus P0.1 (Statik, Lagen, Verstärkungen), Kette und 1 FG; Kippmoden vernachlässigt')
+    nr5 = dict(T=T, hinweis='T aus P0.1 (Statik, Lagen, Verstärkungen), Kette und 1 FG; Kippmoden vernachlässigt',
+               unsicherheit=kontrollen.t_beschreibung(kal, plan['f']))
+    if nr5['unsicherheit'] is not None:
+        nr5['unsicherheit']['herkunft'] = dict(quelle='Kalibrierung (AP-11): P0.1 Laststellen und Brücke, P0.4 '
+                                                     'Einfreiheitsgrad', kalibrierung_sha256=formate.sha256_json(kal),
+                                               teil_b_version=VERSION)
     nr2 = dict(f=float(plan['f']), k_max=kmax, k_voll=K, delta_delta_grad=dd,
                u_delta_delta_grad=np.asarray(p05['u_delta_delta_grad'], float),
                sigma_tol_grad=pilot_erg['sigma_tol_grad'], delta_f_tol=plan.get('delta_f_tol'),

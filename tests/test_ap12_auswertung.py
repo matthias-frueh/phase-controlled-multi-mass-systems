@@ -250,6 +250,21 @@ def test_verarbeitungsstand_alte_bedeutung_des_zeitmittels_gemeldet(exakt):
     assert 'alter Bedeutung' in erg['text']
 
 
+def test_e3_ohne_unsicherheit_von_T_nur_numerisch(exakt):
+    """Korrektur E: Teil B mit Unsicherheitsbeschreibung von T → E3 mit T-Ziehungen (eigener Strom E3/T); ein Teil B
+    ohne Beschreibung (älterer Stand) gilt nicht als „Unsicherheit null“: nur numerische Diagnostik."""
+    e = exakt['ergebnis']['E3']
+    nr5 = exakt['teil_b']['nr5']
+    assert nr5['unsicherheit']['format'] == 'e3_T_unsicherheit-0.1' and nr5['unsicherheit']['herkunft']['quelle']
+    assert e['t_unsicherheit']['gezogen'] and e['t_unsicherheit']['anteil_ungueltig'] == 0.0
+    assert e.get('bewertung') in ('auffällig', 'unauffällig', 'unbestimmt')
+    tb = dict(exakt['teil_b'], nr5={k: v for k, v in nr5.items() if k != 'unsicherheit'})
+    alt = auswertung.auswerten(exakt['tabelle'], exakt['kalibrierung'], tb, PROFIL)['E3']
+    assert alt['bewertung'] is None and alt['status'].startswith('nur numerisch') and not alt['t_unsicherheit']['gezogen']
+    assert [x['e3a']['modul2']['delta_phi_Z_grad'] for x in alt['e3a']] == \
+        [x['e3a']['modul2']['delta_phi_Z_grad'] for x in e['e3a']]
+
+
 def test_ergebnis_reproduzierbar_und_seedabhaengig(exakt):
     tab, kal, tb = exakt['tabelle'], exakt['kalibrierung'], exakt['teil_b']
     a = auswertung.auswerten(tab, kal, tb, PROFIL)

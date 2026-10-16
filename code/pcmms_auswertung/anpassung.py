@@ -31,7 +31,7 @@ from scipy import optimize, stats
 
 from . import formate, konventionen as kv
 
-VERSION = 'anpassung-0.1'
+VERSION = 'anpassung-0.2'        # 0.2: P0.4 kette_richtungen (Korrektur E)
 
 
 def _sha_eingang(obj):
@@ -185,19 +185,29 @@ def p01_bruecke(br):
     return out
 
 
-def kette_richtungen(bruecke, f):
-    """Unabhängige Störrichtungen von G_F (Zelle, f) aus den Kovarianzen der Brückenanpassung (Cholesky je Zelle):
-    Liste von (Zelle, δG(f)) mit δG = G(p + L·e_i) − G(p)."""
+def kette_cholesky(bruecke):
+    """Je Zelle (Zelle, Parameterindizes mit positiver Varianz, Cholesky-Faktor ihrer Kovarianz) der Brückenanpassung;
+    gemeinsame Grundlage der Störrichtungen (kette_richtungen, P0.4) und der T-Ziehungen von E3 (Reihenfolge Zelle,
+    dann Spalte)."""
     out = []
     for c, b in enumerate(bruecke):
         C = np.asarray(b['kovarianz'], float)
         idx = [i for i in range(3) if C[i, i] > 0]
+        L = np.linalg.cholesky(C[np.ix_(idx, idx)] + 1e-30 * np.eye(len(idx))) if idx else np.zeros((0, 0))
+        out.append((c, idx, L))
+    return out
+
+
+def kette_richtungen(bruecke, f):
+    """Unabhängige Störrichtungen von G_F (Zelle, f) aus den Kovarianzen der Brückenanpassung (Cholesky je Zelle):
+    Liste von (Zelle, δG(f)) mit δG = G(p + L·e_i) − G(p)."""
+    out = []
+    for c, idx, L in kette_cholesky(bruecke):
         if not idx:
             continue
-        L = np.linalg.cholesky(C[np.ix_(idx, idx)] + 1e-30 * np.eye(len(idx)))
-        G0 = gf_modell(b['p'], f)
+        G0 = gf_modell(bruecke[c]['p'], f)
         for col in range(len(idx)):
-            pp = np.array(b['p'], float)
+            pp = np.array(bruecke[c]['p'], float)
             pp[idx] += L[:, col]
             out.append((c, gf_modell(pp, f) - G0))
     return out
@@ -449,8 +459,13 @@ def p04_auswerten(m, p01, p02, band_hz, amplituden=None, kmax=None, f=None):
         if pw < 1e-3:
             diag.append(f'1-FG-Modell der Summe passt nicht (χ²/ν = {chi2_k / dof:.3g} mit Kettenunsicherheit, '
                         f'p = {pw:.2g})')
+        rid = [(c, col) for c, idx, _ in kette_cholesky(p01['bruecke']) for col in range(len(idx))]
         fits[amp] = dict(f_n_hz=float(x[0]), u_f_n_hz=float(u[0]), zeta=float(x[1]), u_zeta=float(u[1]),
                          kovarianz_fn_zeta=cov, kovarianz_statistisch=cov_stat, kovarianz_kette=cov_gf,
+                         # Verschiebung von (f_n, ζ) je Störrichtung der Kette (kovarianz_kette = Σ d·dᵀ); erlaubt
+                         # gemeinsame Ziehungen von Kette und 1 FG ohne Doppelzählung (E3, A9.13)
+                         kette_richtungen=[dict(zelle=c + 1, spalte=col, d_fn_zeta=[float(v[0]), float(v[1])])
+                                           for (c, col), v in zip(rid, dX)],
                          korrelation=float(cov[0, 1] / (u[0] * u[1])) if u.all() else None,
                          chi2=chi2, chi2_mit_kette=chi2_k, freiheitsgrade=dof, p_wert=pw, kondition=kond,
                          identifizierbar=not any('nicht identifizierbar' in s for s in diag), diagnose=diag)

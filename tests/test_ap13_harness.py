@@ -226,6 +226,15 @@ def test_dateikette_reproduzierbar_und_gleich_speicherkette(tmp_path):
     # AP-11-Kalibrierung und Teil B aus den Dateien werden tatsächlich verwendet
     _, kal = dateien.anpassung.lies_kalibrierung(a['pfade']['kalibrierung'])
     assert a['ergebnis']['herkunft']['kalibrierung_sha256'] == formate.sha256_json(kal)
+    # Rundreise der neuen Metadaten (Korrekturen B und E): Kettenrichtungen in P0.4, T-Unsicherheit in Teil B
+    from pcmms_auswertung import teil_b
+    _, tb = teil_b.lesen(a['pfade']['teil_b'])
+    u = tb['nr5']['unsicherheit']
+    assert u['format'] == 'e3_T_unsicherheit-0.1' and u['herkunft']['kalibrierung_sha256'] == formate.sha256_json(kal)
+    assert u['fn_zeta']['kette_richtungen'] == kal['p0_4']['einfreiheitsgrad']['kette_richtungen']
+    assert np.allclose(u['gxy']['kovarianz'], kal['p0_1']['laststellen']['kovarianz_g_x_y'])
+    assert tb['nr1']['phase0_verarbeitung']['alte_bedeutung'] == []
+    assert a['ergebnis']['E3']['t_unsicherheit']['gezogen'] is True
     with pytest.raises(FileExistsError):
         dateien.generator_schreiben(str(tmp_path / 'a'), 'N01-A4', 'L1', PLAN, 1, 'H')
 

@@ -18,7 +18,7 @@ from . import (bootstrap as bs, formate, gueltigkeit, h1, h2 as h2m, h3 as h3m, 
                konventionen as kv, regeln as rg, stufe1, vorhersage as vh, zusammenfassung as zf)
 from . import anpassung, bericht
 
-VERSION = 'auswertung-0.1'
+VERSION = 'auswertung-0.2'       # 0.2: Korrekturen B, D und E
 laufzusammenfassung = stufe1.laufzusammenfassung
 
 
@@ -273,7 +273,8 @@ def auswerten(zusammenfassungen, kalibrierung, teil_b, regeln, seed=None, bootst
                         Nbar0, Nbar1)
     # E3
     E3 = None
-    T = tb['nr5'].get('T')
+    nr5 = tb['nr5']
+    T = nr5.get('T')
     if T is not None and kal['p0_1']['laststellen'].get('bestimmbar'):
         ls = kal['p0_1']['laststellen']
         xy = np.c_[ls['x_m'], ls['y_m']]
@@ -285,9 +286,12 @@ def auswerten(zusammenfassungen, kalibrierung, teil_b, regeln, seed=None, bootst
               for k in schnitt if k in auswertbar}
         if KE:
             uq = 360.0 * f / float(n2.get('f_takt', 1e6)) * np.sqrt(2 / 12)
+            beschr = nr5.get('unsicherheit')
+            tz = (kontrollen.t_ziehungen(beschr, bs.mc_strom(seed, reihenfolge, 'E3/T'), int(B)) if beschr
+                  else None)
             E3 = kontrollen.e3_auswerten(KE, E0, {k: idx[f'A/{k}'] for k in KE}, idxB0, np.asarray(T), xy,
                                          n2['delta_delta_grad'], n2['u_delta_delta_grad'], None, 'S120', prof,
-                                         bs.mc_strom(seed, reihenfolge, 'E3'), uq)
+                                         bs.mc_strom(seed, reihenfolge, 'E3'), uq, T_zieh=tz)
     # beschreibend: A und F_max je Schnittpunkt mit Vorhersage
     beschr = {}
     for kid in schnitt:

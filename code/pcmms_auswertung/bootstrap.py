@@ -3,6 +3,7 @@
 Indexmatrizen: numpy.random.SeedSequence(seed).spawn in fester Reihenfolge – A_i für alle Konfigurationen in der
 Listenreihenfolge von Teil B, B¹₁ … B¹₃, H3, H4, E3, danach die Quellen bei Einstellung 2 (B¹′₁ … B¹′₃); je Kind
 Generator(PCG64(kind)).integers(0, n, size=(B, n)) über die gültigen Läufe der Quelle in aufsteigender Position.
+Zuletzt der Strom E3/T der Ziehungen von T (keine Indexmatrix); die übrigen Ströme ändern sich dadurch nicht.
 B⁰ⱼ stehen fest in Teil B (nicht neu gezogen). Übergebene Indizes ersetzen die Ziehung vollständig.
 
 Bootstrap A (Messung): Läufe der Konfiguration mit Zurücklegen, mit ihren Zeigern; ȳ, ρⱼₖ und ŷ je Replikat neu.
@@ -19,7 +20,7 @@ def quellen_reihenfolge(konfig_ids, einstellung2=False):
     q = [f'A/{k}' for k in konfig_ids] + [f'B1/modul{j}' for j in (1, 2, 3)] + ['H3', 'H4', 'E3']
     if einstellung2:
         q += [f"B1′/modul{j}" for j in (1, 2, 3)]
-    return q
+    return q + ['E3/T']                  # Ziehungen der Übertragungsmatrix (Korrektur E), zuletzt
 
 
 def indexmatrizen(seed, groessen, B, reihenfolge):
