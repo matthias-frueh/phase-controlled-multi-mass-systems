@@ -1,9 +1,15 @@
 \documentclass[11pt,a4paper]{article}
-\usepackage[utf8]{inputenc}
-\usepackage[T1]{fontenc}
+\usepackage{iftex}
+\ifTUTeX
+  \usepackage{fontspec}% XeLaTeX/LuaLaTeX: Latin Modern OpenType
+\else
+  \usepackage[utf8]{inputenc}
+  \usepackage[T1]{fontenc}
+  \usepackage{lmodern}
+\fi
 \usepackage{babel}
 \babelprovide[import,main]{ngerman}
-\usepackage{lmodern,needspace,etoolbox}
+\usepackage{needspace,etoolbox}
 \usepackage{amsmath,amssymb,mathtools}
 \usepackage{booktabs,array,longtable,geometry,enumitem,microtype}
 \usepackage[hidelinks]{hyperref}
@@ -29,7 +35,7 @@
 \date{Arbeitsstand: 28. September 2026}
 \maketitle
 \begin{abstract}
-Dieses Dokument definiert die Größen für die Untersuchung phasen- und profilgesteuerter Mehrmassendynamik im PCMMS-Forschungsrahmen. Schwerpunkt ist Linie A: die zeitliche Form der Kontaktkraft an einer Auflage und ihre experimentelle Rekonstruktion. Kontaktkraft, kalibriertes Kraftsignal, Referenzdifferenz und Modellresiduum werden getrennt. Der Schwerpunktsatz liefert unter angegebenen Randbedingungen die Mittelwertreferenz $\langle F_c\rangle=Mg$; sie dient der Bilanz- und Messkontrolle. Untersuchungsgrößen sind insbesondere Schiefe, Kontaktverlustanteil, Extremwerte und Peak-to-Mean. Die Fassung präzisiert Nullpunktbezug, endliche Messfenster, statistische Entscheidungsschwellen und nichtlineare Messketteneffekte. Sie ist ein prä-experimentelles Arbeitsdokument und enthält keine neuen Messnachweise. Medienkopplung und Energiebilanzen werden als Anschlüsse eingeordnet, nicht als vollständig spezifizierte Modelle behandelt.
+Dieses Dokument definiert die Größen für die Untersuchung phasen- und profilgesteuerter Mehrmassendynamik im PCMMS-Forschungsrahmen. Schwerpunkt ist Linie A: die zeitliche Form der Kontaktkraft an einer Auflage und ihre experimentelle Rekonstruktion. Kontaktkraft, kalibriertes Kraftsignal, Referenzdifferenz und Modellresiduum werden getrennt. Der Schwerpunktsatz liefert unter angegebenen Randbedingungen die Mit\-tel\-wert\-re\-fe\-renz $\langle F_c\rangle=Mg$; sie dient der Bilanz- und Messkontrolle. Untersuchungsgrößen sind insbesondere Schiefe, Kontaktverlustanteil, Extremwerte und Peak-to-Mean. Die Fassung präzisiert Nullpunktbezug, endliche Messfenster, statistische Entscheidungsschwellen und nichtlineare Messketteneffekte. Sie ist ein prä-experimentelles Arbeitsdokument und enthält keine neuen Messnachweise. Medienkopplung und Energiebilanzen werden als Anschlüsse eingeordnet, nicht als vollständig spezifizierte Modelle behandelt.
 \end{abstract}
 \clearpage
 \tableofcontents
@@ -502,7 +508,7 @@ F_{\mathrm{ideal}}=Mg+\mathbf m_*^\top(\mathbf A_2\mathbf x+\mathbf G_2\mathbf u
 Ein algebraischer Durchgriff ist möglich, aber nicht zwingend. Bei vollständiger Bilanz interner Aktoren können sich deren unmittelbare Beiträge in $\mathbf m_*^\top\mathbf G_2$ aufheben. Kontaktgesetz, Koordinaten und Systemgrenze entscheiden darüber. Das Messsignal folgt erst nach der Messkette.
 
 \subsection{Beobachtbarkeit und Identifizierbarkeit}
-Beobachtbarkeit betrifft die Rekonstruktion von Zuständen aus Ein- und Ausgängen; Parameteridentifizierbarkeit betrifft die eindeutige Bestimmung von Modellparametern. Beides ist zu unterscheiden. Für ein bestimmtes Residuum kann die Rekonstruierbarkeit der benötigten Kraftkombination genügen, auch wenn nicht jeder Zustand beobachtbar ist. Ein Steuerprofil allein ersetzt keine Messung der tatsächlichen Bewegung, solange Regelfehler und Rahmenbewegung unbekannt sind.
+Beobachtbarkeit betrifft die Rekonstruktion von Zuständen aus Ein- und Ausgängen; Pa\-ra\-me\-ter\-iden\-ti\-fi\-zier\-bar\-keit betrifft die eindeutige Bestimmung von Modellparametern. Beides ist zu unterscheiden. Für ein bestimmtes Residuum kann die Rekonstruierbarkeit der benötigten Kraftkombination genügen, auch wenn nicht jeder Zustand beobachtbar ist. Ein Steuerprofil allein ersetzt keine Messung der tatsächlichen Bewegung, solange Regelfehler und Rahmenbewegung unbekannt sind.
 Numerische Abweichungen von der Bilanz können neben Integrationsfehlern auch inkonsistente Kontaktmodelle, fehlende Freiheitsgrade, unaufgelöste Stöße oder Auswertefehler anzeigen. Die Abweichung wird nicht ohne Prüfung einem einzigen Mechanismus zugeordnet.
 
 \section{Residual- und Artefaktmodellierung}\label{sec:residual}
