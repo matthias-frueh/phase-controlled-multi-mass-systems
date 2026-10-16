@@ -2,7 +2,7 @@
 
 **Phase-Controlled Multi-Mass Systems**\
 Matthias Früh · Gravidon Systemics Research · ORCID [0009-0005-9984-4207](https://orcid.org/0009-0005-9984-4207)\
-Stand: 28. September 2026, Nachträge 2., 4. und 11. Oktober 2026 · Status: prä-experimentell (Simulation; keine Messdaten)
+Stand: 28. September 2026, Nachträge 2., 4., 11. und 16. Oktober 2026 · Status: prä-experimentell (Simulation; keine Messdaten)
 
 ---
 
@@ -66,9 +66,9 @@ Die Präregistrierung v2 für die Messkampagne liegt als [Entwurf](docs/praeregi
 Die Abnahme der Werkzeuge für Auslegung und ereignisgenaue Rechnung dokumentiert [`docs/abnahme_ap02_ap03.md`](docs/abnahme_ap02_ap03.md).
 
 Das Arbeitspapier v2.5 liegt mit Quellen und Nachrechnung in [`docs/arbeitspapier/`](docs/arbeitspapier/), das
-Symbol- und Formelverzeichnis v2.8 in [`docs/formelverzeichnis/`](docs/formelverzeichnis/). Die PDFs geben den Stand
-vom 26.09. bzw. 28.09.2026 wieder; die Nachträge vom 2. Oktober 2026 stehen bisher nur im Quelltext (`.tex`, siehe
-die README-Dateien beider Ordner).
+Symbol- und Formelverzeichnis v2.8 in [`docs/formelverzeichnis/`](docs/formelverzeichnis/). Die PDFs vom 16.10.2026
+enthalten die Nachträge vom Oktober 2026; PDF und Quelltext stimmen überein (Bauanleitung in den README-Dateien
+beider Ordner).
 
 ## Simulationsstand
 

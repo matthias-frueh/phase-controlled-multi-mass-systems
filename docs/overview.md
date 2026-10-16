@@ -1,6 +1,6 @@
 # Wegweiser durch die Dokumente
 
-Stand: 25. September 2026, Nachträge 2. und 4. Oktober 2026. Diese Datei ersetzt die Übersicht vom April 2026.
+Stand: 25. September 2026, Nachträge 2., 4., 11. und 16. Oktober 2026. Diese Datei ersetzt die Übersicht vom April 2026.
 
 Lizenz dieses Ordners: CC BY 4.0, siehe [`../LICENSE-CC-BY-4.0`](../LICENSE-CC-BY-4.0). Namensnennung: „Matthias Früh, PCMMS“, https://github.com/matthias-frueh/phase-controlled-multi-mass-systems
 
@@ -53,8 +53,8 @@ Schiefe (Arbeitspapier v2.4, Abschnitt 4.8).
   nicht registriert).
 - Das **Arbeitspapier** v2.5 liegt in [`arbeitspapier/`](arbeitspapier/) (die Skripte der Nachrechnung und der Gegenprobe dort
   unter MIT), das **Symbol- und Formelverzeichnis** in der Fassung v2.8 in
-  [`formelverzeichnis/`](formelverzeichnis/). Die PDFs geben den Stand vom 26.09. bzw. 28.09.2026 wieder; die
-  Nachträge vom 2. Oktober 2026 stehen bisher nur im Quelltext (`.tex`, siehe die README-Dateien beider Ordner).
+  [`formelverzeichnis/`](formelverzeichnis/). Die PDFs vom 16.10.2026 enthalten die Nachträge vom Oktober 2026; PDF
+  und Quelltext stimmen überein (Bauanleitung in den README-Dateien beider Ordner).
 - Der **Literaturabgleich** ist ein Arbeitsdokument für die nächste Fassung des Forschungsrahmens (v3.6);
   die dort genannte Fassung v3.5 ist noch nicht im Repository abgelegt, weil sie vor der Umstellung auf
   Linie A als primäre Linie entstand.
