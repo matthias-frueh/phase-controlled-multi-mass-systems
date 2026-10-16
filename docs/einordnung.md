@@ -38,7 +38,7 @@ Auswertefenster der Dauer T_w gilt, bei positiver Vertikalrichtung nach oben,
 ```
 
 mit der Schwerpunktgeschwindigkeit v_S und weiteren äußeren Kräften F_ext,z außerhalb der erfassten
-Schnittstellen und der Gewichtskraft (Formelverzeichnis v2.7, „Zeitmittel und endliches Fenster“). Die
+Schnittstellen und der Gewichtskraft (Formelverzeichnis v2.8, „Zeitmittel und endliches Fenster“). Die
 Referenz M·g gilt bei verschwindendem Randterm und ohne weitere äußere Vertikalkraft; ganze
 Anregungsperioden allein garantieren keinen verschwindenden Randterm. Für Momente sind zusätzlich
 Angriffspunkte, gegebenenfalls freie Kontaktmomente und die Drallbilanz maßgeblich.
@@ -170,7 +170,7 @@ stückweise-glatte Mehrmodulsysteme mit Trockenreibung und diskontinuitätsinduz
 (*Commun. Nonlinear Sci. Numer. Simul.* 114, 106704, 2022) und eine bi-objektive Optimierung der
 Lokomotionsleistung durch Diao, Zhang & Fang (*Arch. Appl. Mech.* 91, 2073–2088, 2021). Diese Angaben
 sind nicht gegen die Primärquellen geprüft; in anderen Projektunterlagen stehen dazu abweichende
-Arbeitsangaben, und das Arbeitspapier v2.4 (Anhang C) führt die Zuordnung zu einer Arbeitsgruppe als nicht
+Arbeitsangaben, und das Arbeitspapier v2.5 (Anhang C) führt die Zuordnung zu einer Arbeitsgruppe als nicht
 bestätigt.
 
 **Bestätigen sich die Angaben, wäre das ein sehr naher Nachbar** — gleicher mechanischer Unterbau, gleicher
@@ -333,7 +333,7 @@ Physikalischer Erkenntnisgewinn setzt keine Abweichung von bekannten Naturgesetz
 Vorhersage und experimentelle Prüfung phasenabhängiger Kraft-, Momenten- und Feldverläufe kann
 Modellgültigkeit, Steuerbarkeit und Dynamik charakterisieren. Eine Rechnung liefert zunächst eine
 Modellvorhersage. Ein Nulltest ist eine ausdrücklich festgelegte Prüfung auf einen erwarteten Nullbefund,
-etwa eine verschwindende Zustandsdifferenz der Mittelwerte (Formelverzeichnis v2.7, „Hypothesen und
+etwa eine verschwindende Zustandsdifferenz der Mittelwerte (Formelverzeichnis v2.8, „Hypothesen und
 Nulltest“); diese Bezeichnung folgt nicht allein daraus, dass ein Modell newtonsch ist.
 
 Eine separate Untersuchung des zeitabhängigen gravitativen Nahfeldes wäre eine eigenständige Fragestellung.

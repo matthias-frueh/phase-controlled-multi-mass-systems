@@ -51,8 +51,8 @@ Schiefe (Arbeitspapier v2.4, Abschnitt 4.8).
   sind also zwei verschiedene Größen.
   Eine v2 mit Änderungsvermerk liegt als [Entwurf](praeregistrierung_v2_entwurf.md) vor (nicht eingefroren,
   nicht registriert).
-- Das **Arbeitspapier** v2.4 liegt in [`arbeitspapier/`](arbeitspapier/) (die Skripte der Nachrechnung und der Gegenprobe dort
-  unter MIT), das **Symbol- und Formelverzeichnis** in der Fassung v2.7 in
+- Das **Arbeitspapier** v2.5 liegt in [`arbeitspapier/`](arbeitspapier/) (die Skripte der Nachrechnung und der Gegenprobe dort
+  unter MIT), das **Symbol- und Formelverzeichnis** in der Fassung v2.8 in
   [`formelverzeichnis/`](formelverzeichnis/). Die PDFs geben den Stand vom 26.09. bzw. 28.09.2026 wieder; die
   Nachträge vom 2. Oktober 2026 stehen bisher nur im Quelltext (`.tex`, siehe die README-Dateien beider Ordner).
 - Der **Literaturabgleich** ist ein Arbeitsdokument für die nächste Fassung des Forschungsrahmens (v3.6);

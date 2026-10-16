@@ -65,8 +65,8 @@ ist mit dem Arbeitspapier v2.4 (Abschnitt 4.8) zurückgezogen. Die alten Gleichu
 Die Präregistrierung v2 für die Messkampagne liegt als [Entwurf](docs/praeregistrierung_v2_entwurf.md) vor (nicht eingefroren, nicht registriert).
 Die Abnahme der Werkzeuge für Auslegung und ereignisgenaue Rechnung dokumentiert [`docs/abnahme_ap02_ap03.md`](docs/abnahme_ap02_ap03.md).
 
-Das Arbeitspapier v2.4 liegt mit Quellen und Nachrechnung in [`docs/arbeitspapier/`](docs/arbeitspapier/), das
-Symbol- und Formelverzeichnis v2.7 in [`docs/formelverzeichnis/`](docs/formelverzeichnis/). Die PDFs geben den Stand
+Das Arbeitspapier v2.5 liegt mit Quellen und Nachrechnung in [`docs/arbeitspapier/`](docs/arbeitspapier/), das
+Symbol- und Formelverzeichnis v2.8 in [`docs/formelverzeichnis/`](docs/formelverzeichnis/). Die PDFs geben den Stand
 vom 26.09. bzw. 28.09.2026 wieder; die Nachträge vom 2. Oktober 2026 stehen bisher nur im Quelltext (`.tex`, siehe
 die README-Dateien beider Ordner).
 

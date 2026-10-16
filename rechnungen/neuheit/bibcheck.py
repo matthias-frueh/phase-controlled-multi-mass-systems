@@ -14,9 +14,9 @@ import re
 from pathlib import Path
 
 REPO = Path(__file__).resolve().parents[2]
-AP = REPO / "docs/arbeitspapier/PCMMS_Arbeitspapier_v2_4.tex"
+AP = REPO / "docs/arbeitspapier/PCMMS_Arbeitspapier_v2_5.tex"
 BIB = REPO / "docs/arbeitspapier/references.bib"
-FV = REPO / "docs/formelverzeichnis/PCMMS_Formelverzeichnis_v2_7.tex"
+FV = REPO / "docs/formelverzeichnis/PCMMS_Formelverzeichnis_v2_8.tex"
 LA = REPO / "docs/literaturabgleich_2026-09-12.md"
 # Dissertation v2.1: Quelle außerhalb des Repositorys; Pfad zur .tex-Datei bei Bedarf über PCMMS_DISS_TEX angeben
 DISS = Path(os.environ["PCMMS_DISS_TEX"]) if os.environ.get("PCMMS_DISS_TEX") else None

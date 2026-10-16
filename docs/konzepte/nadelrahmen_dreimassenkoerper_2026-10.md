@@ -30,7 +30,7 @@ Die Idee eines Nadelrahmens ist älter. Eine Arbeitsfassung des Formelwerks vom 
 Repositorys) führt ein Nadel-Messmodell (jede Nadel misst eine Kraftkomponente längs ihrer Achse; Kraft und Moment
 als Summen) und einen vorläufigen Aufbau mit Nadeln auf ±x, ±y, ±z, dort zusammen mit Ballons als Medienkontakt
 (Linie B). Den Rahmen mit sechs Interfaces, den Lastvektor mit freien Kontaktmomenten und die Ebenen L0–L3 beschreibt
-das Formelverzeichnis v2.7, Abschnitt „Mehrpunkt-, Mehrinterface- und Mehrkanalmessung“
+das Formelverzeichnis v2.8, Abschnitt „Mehrpunkt-, Mehrinterface- und Mehrkanalmessung“
 ([`../formelverzeichnis/`](../formelverzeichnis/README.md)). Neu sind die Einbettung des Dreimassenkörpers, die Nadeln
 mit Fixierstelle und eigener Schnittstelle und die Vollmodellmessung.
 
@@ -72,9 +72,9 @@ Schwerkraft g = −g·e_z.
   Pfade über ihre Angriffspunkte r_j in das gemeinsame System O.
 - **Bilanzgrenze:** die Messebenen der sechs Schnittstellen. Zur bilanzierten Masse M gehören Träger (L1), Module
   (L2) und die Teile der Nadeln innerhalb dieser Ebenen. L0 ist der passive Messrahmen mit den Schnittstellen; die
-  Nadeln verbinden ihn mit dem Träger. L3 bleibt wie im Formelverzeichnis v2.7 die Kopplung zwischen Träger und
+  Nadeln verbinden ihn mit dem Träger. L3 bleibt wie im Formelverzeichnis v2.8 die Kopplung zwischen Träger und
   Modulen. Nadeln, Gelenke und Kontakte heißen hier **Halterung**.
-- **Lastbilanz** (Formelverzeichnis v2.7, mit Pfaden statt Interfaces):
+- **Lastbilanz** (Formelverzeichnis v2.8, mit Pfaden statt Interfaces):
 
       w_O = (F_Σ; τ_O) = Σ_j [ Σ_c G_jc·λ_jc + (0; τ^c_j) ],   G_jc = (e_jc; r_j × e_jc)
 
@@ -211,7 +211,7 @@ zugfest, C mit ausreichender Vorspannung oder gefangenem Kugelgelenk); F_z < 0 t
 Voraussetzungen: Bilanzgrenze und M sind festgelegt; außer dem Gewicht laufen alle Lasten auf die bilanzierte Masse
 über die sechs Schnittstellen (keine Kabel, Zuleitungen oder sonstigen äußeren Lasten); der Rahmen ist ortsfest;
 ausgewertet wird über ganze Perioden der eingeschwungenen Systemantwort (ganze Anregungsperioden genügen nur bei
-passender Antwort; Formelverzeichnis v2.7). Dann ist ⟨F_Σ⟩ = M·g·e_z und
+passender Antwort; Formelverzeichnis v2.8). Dann ist ⟨F_Σ⟩ = M·g·e_z und
 ⟨τ_O⟩ = r_cm × M·g·e_z = M·g·(y_cm, −x_cm, 0). Bei senkrecht bewegten Modulen ändert sich die waagerechte
 Schwerpunktlage nicht, und beides hängt nicht von der Phasenlage ab. Zwischen zwei Zuständen mit gleichen äußeren
 Lasten gilt daher Δ⟨w_O⟩ = 0 in allen sechs Komponenten (NR-05). Das ist Spur 1 der Linie A, sechsfach.
