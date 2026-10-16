@@ -306,8 +306,9 @@ def suche(tab, kal, profil, f, k_start, basis, zeit, planung, tabelle_fuer, N_z_
                 return dict(ergebnis='offen', grund='Planungssimulation (P(H1 und H2 bestätigt | exakt) ≥ 0,8) nicht '
                                                     'angebunden; nur vorbereitende Pilotgrößen', schritte=schritte,
                             reduktion=reduktion)
-            pl = planung(dict(k=k, N_z=Nz, T_a=T_a, s_q=st, kovarianzen=kovarianzen(t, pr['gueltig'], k),
-                              p_hat=p_hat, n_max=nmax, tabelle=t, gueltig=pr['gueltig'], kal=kal, f=f))
+            pl = planung(dict(k=k, N_z=Nz, T_a=T_a, T_e=T_e, T_lauf=T_lauf, zeit=dict(zeit), s_q=st,
+                              kovarianzen=kovarianzen(t, pr['gueltig'], k), p_hat=p_hat, n_max=nmax, tabelle=t,
+                              gueltig=pr['gueltig'], kal=kal, f=f))
             schritt['planung'] = {kk: v for kk, v in pl.items() if kk not in ('details',)}
             schritte.append(schritt)
             if pl.get('n_min') is None:

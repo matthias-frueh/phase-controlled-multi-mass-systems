@@ -139,6 +139,60 @@ def test_planungshaken_im_pilotskript():
     assert s['ergebnis'] in ('festgelegt', 'kein zulässiger Arbeitspunkt unter diesen Annahmen')
     if s['ergebnis'] == 'festgelegt':
         assert s['n_min'] == 18 and s['n0'] == 20 and 'Entwicklungsdiagnostik' in s['planung_quelle']
+    ps = prot[0]['kandidaten'][0]['plan_simuliert']
+    assert ps['n_zyklen'] == prot[0]['N_z'] and ps['tage'] == zeit['d']
+
+
+def test_planungshaken_simuliert_gewaehlte_fensterlaenge(monkeypatch, tmp_path):
+    """Korrektur A: N_z des Kandidaten, T_a = N_z/f, T_Lauf und d kommen im Plan der Kampagnensimulation an (nicht
+    nur im Seed). Instrumentierter Aufruf je Fensterlänge, dann echte Läufe mit genau diesem Plan: Ebene H (Köpfe,
+    Laufdauer, Messtage, Zeitbudget) und ein Rohlauf auf Ebene Z durch Stufe 1 (gezählte Zyklen, Fensterdauer)."""
+    from pcmms_auswertung import stufe1, zufall
+    from pcmms_auswertung.generator import ebene_z, kampagne as kp
+    sid, f = 'N01-A4', 10.0
+    gesehen = []
+
+    def kal_attrappe(sid_, stufe_, profil_, n_kal, n_pruef, seed, plan=None, n_min=None, **kw):
+        gesehen.append(plan)
+        return dict(gemeinsame_bestaetigung=dict(rate=1.0, mc_se=0.0, zaehler=1, nenner=1), c_H1=dict(wert=3.7),
+                    h2=dict(schluessel='perzentil_0.95'), pruefung=None)
+
+    monkeypatch.setattr(planung.kalibrierung, 'kalibrieren', kal_attrappe)
+    zeit = dict(T_park=2.0, T_ramp=2.0, T_ab=1.0, T_eP=4.0, T_aP=10.0, T_verfuegbar=4 * 86400.0, d=2, N_K=21, N_I=0)
+    T_e = 3.0
+    hk = planung.haken(sid, 'L1', PROFIL, 1, 1, 77, n_kandidaten=(18,), plan_basis=PLAN)
+    kal = dict(zellen=[dict(zelle=c + 1, nullpunkt_adc=0.0, umrechnung='linear', empfindlichkeit_N_je_adc=1e-6)
+                       for c in range(3)])
+    for Nz in (20, 80):
+        T_a = Nz / f
+        T_lauf = zeit['T_park'] + zeit['T_ramp'] + T_e + T_a + zeit['T_ab']
+        n_max = pilot.n_max(T_lauf, 0.0, zeit)
+        out = hk(dict(k=9, N_z=Nz, T_a=T_a, T_e=T_e, T_lauf=T_lauf, zeit=zeit, s_q=dict(nu_p=57), p_hat=0.0,
+                      n_max=n_max, f=f))
+        plan_ = gesehen[-1]
+        assert plan_.n_zyklen == Nz and plan_.T_lauf == pytest.approx(T_lauf) and plan_.tage == zeit['d']
+        ps = out['kandidaten'][0]['plan_simuliert']
+        assert ps['n_zyklen'] == Nz and ps['T_a_s'] == pytest.approx(T_a) and ps['T_lauf_s'] == pytest.approx(T_lauf)
+        assert out['fenster'] == dict(N_z=Nz, T_a_s=pytest.approx(T_a), T_e_s=T_e, T_lauf_s=pytest.approx(T_lauf),
+                                      f_hz=f)
+        # Ebene H mit diesem Plan: Fensterlänge, Laufdauer, Messtage und Zeitbudget wie in der Kandidatenrechnung
+        m, laeufe, tab = kette.kampagne_erzeugen(sid, 'L1', plan_, 5)
+        assert {k['n_zyklen'] for k in tab.koepfe} == {Nz}
+        assert np.allclose([k['t_ende'] - k['t_start'] for k in tab.koepfe], T_lauf, rtol=0, atol=1e-9)
+        assert {k['messtag'] for k in tab.koepfe if k['phase'] == 1} == {1, 2}
+        n1 = sum(v for (ph, _, _), v in kp.zaehlung(laeufe).items() if ph == 1)
+        assert plan_.n_bloecke <= n_max
+        assert n1 <= (zeit['N_K'] + zeit['N_I'] + 8) * plan_.n_bloecke + 18 * zeit['d']   # Budget von n_max (§5.3 c)
+        # Ebene Z: ein Kombinationslauf der Phase 1 mit diesem Plan durch Stufe 1
+        pos = next(l['position'] for l in laeufe if l['phase'] == 1 and l['laufart'] == 'K')
+        ziel = str(tmp_path / f'z{Nz}')
+        os.makedirs(ziel, exist_ok=True)
+        zeilen, _ = ebene_z.erzeuge(m, laeufe, zufall.strom(5, 'z'), ziel, formate.synth_kennung('PLAN', sid),
+                                    dict(nullpunkt_adc=[0.0] * 3, empfindlichkeit_N_je_adc=[1e-6] * 3), nur=[pos])
+        lz = stufe1.laufzusammenfassung(os.path.join(ziel, zeilen[0]['lauf_id']), kal, k_voll=tab.k_voll)
+        assert lz.kopf['n_zyklen'] == Nz
+        assert lz.kopf['n_zyklen'] / lz.kopf['f_mittel'] == pytest.approx(T_a, abs=2e-6)   # 1-µs-Zeitstempel
+    assert [p.n_zyklen for p in gesehen] == [20, 80]
 
 
 # ── Wahrheitstrennung, Reproduzierbarkeit, Durchgängigkeit ───────────────────────────────────────────
