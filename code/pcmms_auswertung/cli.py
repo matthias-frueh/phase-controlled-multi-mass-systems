@@ -288,12 +288,13 @@ def _harness(ap, argv):
         stufen = a.stufen.split(',')
         auftr = [dict(szenario=s, stufe=st, kampagnen=a.kampagnen, seed_basis=a.seed, rolle='pruefung')
                  for s in szenarien.KATALOG for st in stufen]
-        sek = 5.0 * a.kampagnen * len(auftr)
+        sek = 7.5 * a.kampagnen * len(auftr)
         formate.schreibe_objekt(a.ausgabe, formate.kopf('bewertung', formate.synth_kennung('MATRIX', a.seed)),
                                 dict(auftraege=auftr, gestartet=False, schaetzung_kernstunden=round(sek / 3600, 1),
                                      hinweis='Auftragsliste der großen Matrix; nicht gestartet (Auftrag Etappe 5). '
-                                             'Schätzung mit 5 s je Kampagne (B = 1000, Ebene H, A4), ohne '
-                                             'Kalibrier- und Prüfsimulationen von c je Stufe'))
+                                             'Schätzung mit 7,5 s je Kampagne und Kern (gemessen im Prüfstand: A4, '
+                                             'Ebene H, B = 1000; V1-Systeme etwa 10–11 s), ohne Kalibrier- und '
+                                             'Prüfsimulationen von c je Stufe'))
         print(f'{len(auftr)} Aufträge × {a.kampagnen} Kampagnen, geschätzt {sek / 3600:.0f} Kernstunden; '
               f'nicht gestartet → {a.ausgabe}.json')
     return 0

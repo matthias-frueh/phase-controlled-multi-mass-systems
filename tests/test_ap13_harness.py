@@ -4,6 +4,7 @@ Wahrheitstrennung (Negativtest), Reproduzierbarkeit, Ebenen Z/H, S₃, Software-
 Kommandozeile aus einer frischen Ausgabestruktur.
 
 Kampagnenzahlen sind hier klein (Softwareprüfung); jedes Ergebnis trägt die Kennzeichnung „reduziert“."""
+import copy
 import json
 import os
 
@@ -47,6 +48,14 @@ def test_kampagnen_unabhaengig_von_der_prozesszahl():
     assert r['wahrheit']['klasse'] == 'R4'
     x = r['raten']['H1: falsifiziert']
     assert x['nenner'] == 3 and x['zaehler'] == 3 and x['mc_se'] == 0.0 and x['reduziert']
+    # Regression (Prüfstand A07): Kontrollen ohne Bewertung zählen unter ihrem Status, nicht als „None“
+    d = copy.deepcopy(a)
+    d['befunde'][0]['E3'] = dict(bewertung=None, status='nicht auswertbar: T(kω) singulär')
+    d['befunde'][1]['zuordnung'] = dict(ergebnis=None, klasse=None, status='nur numerisch: Regel offen')
+    rd = kampagnen.raten(d)['raten']
+    assert rd['E3: nicht auswertbar']['zaehler'] == 1 and rd['E3: nicht auswertbar']['nenner'] == 3
+    assert rd['Zuordnung: nur numerisch']['zaehler'] == 1
+    assert not [k for k in rd if 'None' in k]
 
 
 # ── Kalibrier- und Prüfsimulation ────────────────────────────────────────────────────────────────────

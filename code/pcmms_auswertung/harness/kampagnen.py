@@ -153,6 +153,14 @@ def _plan_dict(plan):
 
 
 # ── Raten ────────────────────────────────────────────────────────────────────────────────────────────
+def _etikett(wert, status):
+    """Zählbezeichnung einer Kontrolle: Bewertung bzw. Ergebnis, sonst der Status ohne Begründung (z. B. „nicht
+    auswertbar“, „nur beschreibend“, „nur numerisch“)."""
+    if wert is not None:
+        return str(wert)
+    return (status or 'ohne Bewertung').split(':', 1)[0]
+
+
 def raten(lauf):
     """Raten der Ausgänge, Gründe und Zusätze je Hypothese, Gültigkeit und Kontrollen (Zähler, Nenner, MC-Fehler)."""
     m = lauf['meta']
@@ -183,15 +191,12 @@ def raten(lauf):
     R['mindestens ein |z⁰| > c (H1)'] = metriken.rate(
         sum(b['H1']['max_abs_z0'] is not None and b['H1']['c'] is not None and b['H1']['max_abs_z0'] > b['H1']['c']
             for b in bf), n, 'Anteil mit max|z⁰| > c (H1)', **kw)
-    zus = [b['zuordnung'] for b in bf if b['zuordnung']]
-    if zus:
-        for e in sorted({str(z['ergebnis']) for z in zus}):
-            R[f'Zuordnung: {e}'] = metriken.rate(sum(str(z['ergebnis']) == e for z in zus), len(zus),
-                                                 f'P(Zuordnung „{e}“)', **kw)
-    e3 = [b['E3'] for b in bf if b['E3']]
-    if e3:
-        for e in sorted({str(x['bewertung']) for x in e3}):
-            R[f'E3: {e}'] = metriken.rate(sum(str(x['bewertung']) == e for x in e3), len(e3), f'P(E3 „{e}“)', **kw)
+    zus = [_etikett(b['zuordnung']['ergebnis'], b['zuordnung'].get('status')) for b in bf if b['zuordnung']]
+    for e in sorted(set(zus)):
+        R[f'Zuordnung: {e}'] = metriken.rate(zus.count(e), len(zus), f'P(Zuordnung „{e}“)', **kw)
+    e3 = [_etikett(b['E3']['bewertung'], b['E3'].get('status')) for b in bf if b['E3']]
+    for e in sorted(set(e3)):
+        R[f'E3: {e}'] = metriken.rate(e3.count(e), len(e3), f'P(E3 „{e}“)', **kw)
     nl = sum(b['gueltigkeit']['n_laeufe'] for b in bf)
     regeln_alle = sorted({g for b in bf for g in b['gueltigkeit']['regeln']})
     out['gueltigkeit'] = {g: metriken.rate(sum(b['gueltigkeit']['regeln'].get(g, 0) for b in bf), nl,
