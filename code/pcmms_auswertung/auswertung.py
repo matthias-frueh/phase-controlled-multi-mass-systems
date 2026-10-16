@@ -298,9 +298,14 @@ def auswerten(zusammenfassungen, kalibrierung, teil_b, regeln, seed=None, bootst
             kp = kv.kenngroessen(vh.vorhersage(Nbar0[:, :, :kmax].sum(1), rho[:, :kmax]))
             beschr[kid] = dict(A_messung=float(km['A']), A_yhat0=float(kp['A']), F_max_messung=float(km['F_max_rel']),
                                F_max_yhat0=float(kp['F_max_rel']))
+    vb = zf.verarbeitungsstand(tab.koepfe)
+    vb0 = (tb.get('nr1') or {}).get('phase0_verarbeitung')
+    vb['teil_b_phase0'] = vb0 or 'nicht angegeben (Teil B vor Korrektur B erstellt)'
+    vb['alte_bedeutung'] = sorted(set(vb['alte_bedeutung']) | set((vb0 or {}).get('alte_bedeutung', [])) |
+                                  (set() if vb0 else {'Teil B ohne Verarbeitungsstand'}))
     erg = dict(
         version=VERSION,
-        herkunft=dict(zusammenfassungen_sha256=formate.sha256_bytes(formate.npz_bytes(tab.daten)),
+        herkunft=dict(zusammenfassungen_sha256=formate.sha256_bytes(formate.npz_bytes(tab.daten)), verarbeitung=vb,
                       koepfe_sha256=formate.sha256_json(tab.koepfe), kalibrierung_sha256=formate.sha256_json(kal),
                       teil_b_sha256=_hash_objekt(tb), profil=prof.kurz(), seed=seed, B=int(B),
                       bootstrap_indizes=idx_quelle, n_mc_h3=prof.zahl('h3_mc'), reduziert=prof.reduziert,

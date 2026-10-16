@@ -12,7 +12,8 @@ Felder je Lauf (Kopf: JSON-Werte; Daten: Felder fester Form, k = 1 … k_voll, k
           n_fuenftel, k_voll, n_theta, stoerung (G8), aufzeichnung_ok (G10), park_ok (G9; null ohne geparktes
           Modul), fehlende_kanaele, hash_rohdatei, version_stufe1, kalibrier_hash, ebene (Z oder H)
   Daten   Nk_summe (k) und Nk_zellen (3, k): Harmonische der Mittelkurve, θ = 0 am Index von Modul 1 bzw. j;
-          N_mittel, N_mittel_zellen (3): ⟨N⟩ über die ganzen Zyklen [N]; zeiger (3, k) = Σ_c e^{−ikφⱼ,c} der
+          N_mittel, N_mittel_zellen (3): ⟨N⟩ über die ganzen Zyklen [N] (Bedeutung je Verarbeitungsstand:
+          MITTEL_BEDEUTUNG; ab stufe1-0.2 Zeitmittel aus den Rohzeiten); zeiger (3, k) = Σ_c e^{−ikφⱼ,c} der
           Indexphasen (Modul 1: N_z; nicht laufende Module: nan); phi_mittel_grad, sigma_grad (3): zirkuläres
           Mittel und Jitter der Indexphasen; index_fehler (3): fehlende und überzählige Indeximpulse;
           fuenftel_N_mittel (2), fuenftel_Nk (2, k): erstes und letztes Fünftel (⌊N_z/5⌋ Zyklen) für G4;
@@ -26,6 +27,14 @@ import numpy as np
 
 from . import formate
 
+MITTEL_BEDEUTUNG = {        # version_stufe1 → Bedeutung von N_mittel, N_mittel_zellen, fuenftel_N_mittel
+    'stufe1-0.1': 'Phasenmittel: Gleichanteil der Mittelkurve, Zyklen gleich gewichtet (alte Bedeutung, vor '
+                  'Korrektur B; bei ungleichen Periodendauern nicht das Zeitmittel nach A1)',
+    'stufe1-0.2': 'Zeitmittel nach A1 über die akzeptierten Zyklusintervalle aus den Rohzeiten',
+    'ebene_h-0.1': 'Generator Ebene H: Gleichanteil des Modells (gleiche Periodendauern, Zeit- gleich Phasenmittel)',
+    'teil_b': 'Einzelmodulläufe aus Teil B (nur Harmonische)',
+}
+ALTE_BEDEUTUNG = ('stufe1-0.1',)
 LAUFARTEN = ('R', 'L', 'K', 'D1', 'D2')
 GRUPPEN = ('referenz', 'einzel', 'schnitt', 'zusatz', 'pilot', 'identifizierbarkeit', 'dummy', 'pruef')   # pruef: Prüffälle (S₃-Bilder), kein Teil des Präreg-Plans
 DATENFELDER = {                         # Name: (dtype, Form je Lauf; 'k' = k_voll)
@@ -90,6 +99,16 @@ def pruefe_kopf_lauf(k):
         raise formate.FormatFehler('ebene ∈ {Z, H} erwartet')
     if not (isinstance(k['n_zyklen'], int) and k['n_zyklen'] >= 0):
         raise formate.FormatFehler('n_zyklen: ganze Zahl ≥ 0 erwartet')
+
+
+def verarbeitungsstand(koepfe):
+    """Verarbeitungsstände der Laufzusammenfassungen mit Anzahl und Bedeutung von ⟨N⟩; alte_bedeutung: mindestens
+    eine Zusammenfassung trägt ⟨N⟩ in der Bedeutung vor Korrektur B (nicht stillschweigend als neu berechnet)."""
+    st = {}
+    for k in koepfe:
+        st[k['version_stufe1']] = st.get(k['version_stufe1'], 0) + 1
+    return dict(versionen=st, mittel_bedeutung={v: MITTEL_BEDEUTUNG.get(v, 'unbekannt') for v in st},
+                alte_bedeutung=sorted(v for v in st if v in ALTE_BEDEUTUNG or v not in MITTEL_BEDEUTUNG))
 
 
 def _form(spec, kv):

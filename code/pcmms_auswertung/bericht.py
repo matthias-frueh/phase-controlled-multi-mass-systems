@@ -22,6 +22,9 @@ def text(erg):
          *([f'Pilotskript: {hk["pilot_suche"]["ergebnis"]} ({hk["pilot_suche"].get("grund")}); Teil B mit den '
             'Planwerten der synthetischen Kampagne (Stressprüfung, keine zulässige Planung)']
            if (hk.get('pilot_suche') or {}).get('ergebnis', '').startswith('kein zulässiger') else []),
+         *([f'Laufzusammenfassungen mit ⟨N⟩ in alter Bedeutung (Phasenmittel, vor Korrektur B): '
+            f'{", ".join(hk["verarbeitung"]["alte_bedeutung"])} – nicht neu berechnet']
+           if (hk.get('verarbeitung') or {}).get('alte_bedeutung') else []),
          f'Läufe Phase 1: {erg["gueltigkeit"]["n_laeufe"]}, ungültig {erg["gueltigkeit"]["n_ungueltig"]}; '
          f'auswertbare Konfigurationen {erg["n_auswertbar"]}; ŷ¹ gültig: {erg["yhat1_gueltig"]}',
          f'H1: {_ausgang(erg["H1"])}; max|z⁰| = {erg["H1"].get("max_abs_z0")}; c = {erg["H1"].get("c")} '

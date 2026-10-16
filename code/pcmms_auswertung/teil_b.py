@@ -197,6 +197,7 @@ def erstellen(tab0, kal, pilot_erg, profil, plan, werkzeug8=None, kennung=None, 
     return dict(version=VERSION, kennung=kennung,
                 nr1=dict(kalibrierung_sha256=formate.sha256_json(kal),
                          phase0_sha256=formate.sha256_bytes(formate.npz_bytes(tab0.daten)),
+                         phase0_verarbeitung=zf.verarbeitungsstand(tab0.koepfe),
                          pilot_sha256=formate.sha256_json(pilot_erg), code_version=formate.code_version()),
                 nr2=nr2, nr3=nr3, nr4=nr4, nr5=nr5, nr6=nr6, nr7=dict(hinweis='H3-Vorhersage rechnet Stufe 2 aus der '
                                                                                'Kalibrierung (nur zum Vergleich)'),

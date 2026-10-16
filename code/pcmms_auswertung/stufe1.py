@@ -13,12 +13,37 @@ identisch.
     Rohwerten (einschließlich Rampe und Einschwingzeit, nicht aus der bandbegrenzten Kurve), Streuung der Rohwerte
     im Fenster, Übersteuerung, Temperaturen, Einregelzeit der Phasen (Regel verarbeitung.t_phi).
 Fehlende Pflichtkanäle werden gemeldet und nicht ergänzt; abhängige Felder bleiben nan.
+
+⟨N⟩ ist das Zeitmittel (A1) über die akzeptierten vollständigen Zyklusintervalle [aᵢ, bᵢ] aus den kalibrierten
+Rohwerten und ihren Zeiten: N_mittel,c = Σᵢ ∫ F_c dt / Σᵢ (bᵢ − aᵢ), integriert über den linear interpolierten
+Verlauf wie im Resampling (Grenzen zwischen Abtastwerten mit interpoliertem Wert); verworfene Zyklen und Lücken gehen
+weder in Zähler noch Nenner ein. Für die Fünftel gilt dasselbe über die ersten bzw. letzten ⌊N_z/5⌋ akzeptierten
+Zyklen. Die phasensynchrone Mittelkurve (Zyklen gleich gewichtet) und ihre Harmonischen bleiben davon getrennt.
+Bis stufe1-0.1 war ⟨N⟩ der Gleichanteil dieser Mittelkurve (Phasenmittel), bei ungleichen Periodendauern eine andere
+Größe; die Version steht in jeder Laufzusammenfassung (version_stufe1, zusammenfassung.MITTEL_BEDEUTUNG).
 """
 import numpy as np
 
 from . import formate, konventionen as kv, rohdaten, zusammenfassung as zf
 
-VERSION = 'stufe1-0.1'
+VERSION = 'stufe1-0.2'
+
+
+def zeitintegrale(t, F, grenzen):
+    """∫_a^b F_c(t) dt des linear interpolierten Verlaufs (wie np.interp im Resampling, außerhalb [t₀, t_ende]
+    konstant fortgesetzt) je Intervall [a, b) und Zelle. Rückgabe (Intervalle, Zellen) und die Dauern b − a."""
+    a = np.array([g[0] for g in grenzen], float)
+    b = np.array([g[1] for g in grenzen], float)
+    dt = np.diff(t)
+    C = np.concatenate([np.zeros((F.shape[0], 1)), np.cumsum(0.5 * (F[:, 1:] + F[:, :-1]) * dt, axis=1)], axis=1)
+
+    def stamm(x):
+        j = np.clip(np.searchsorted(t, x, side='right') - 1, 0, t.size - 2)
+        u = np.clip(x, t[0], t[-1]) - t[j]
+        Fx = F[:, j] + (F[:, j + 1] - F[:, j]) * (u / dt[j])
+        return (C[:, j] + 0.5 * (F[:, j] + Fx) * u + F[:, [0]] * np.minimum(x - t[0], 0.0)
+                + F[:, [-1]] * np.maximum(x - t[-1], 0.0))
+    return (stamm(b) - stamm(a)).T, b - a
 
 
 def _kal_zellen(kal):
@@ -146,14 +171,15 @@ def laufzusammenfassung(laufdatei, kalibrierung, teil_b=None, k_voll=None, profi
             Nkz = kv.harmonische(mittel, k_voll)
             out['Nk_zellen'] = Nkz
             out['Nk_summe'] = Nkz.sum(0)
-            out['N_mittel_zellen'] = mittel.mean(-1)
-            out['N_mittel'] = float(mittel.mean(-1).sum())
+            I, dauer = zeitintegrale(t, F, grenzen)                     # Zeitmittel ⟨N⟩ (A1), nicht Phasenmittel
+            out['N_mittel_zellen'] = I.sum(0) / dauer.sum()
+            out['N_mittel'] = float(out['N_mittel_zellen'].sum())
             nf = n_zyklen // 5
             if nf >= 1:
                 for q, sl in ((0, slice(0, nf)), (1, slice(n_zyklen - nf, n_zyklen))):
                     m = kurven[sl].mean(0)
                     out['fuenftel_Nk'][q] = kv.harmonische(m, k_voll).sum(0)
-                    out['fuenftel_N_mittel'][q] = float(m.mean(-1).sum())
+                    out['fuenftel_N_mittel'][q] = float(I[sl].sum() / dauer[sl].sum())
             w = (t >= grenzen[0][0]) & (t < grenzen[-1][1])
             out['sigma_roh_zellen'] = F[:, w].std(1, ddof=1)
             out['sigma_roh_summe'] = float(F[:, w].sum(0).std(ddof=1))

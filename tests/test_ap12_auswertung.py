@@ -92,6 +92,129 @@ def test_stufe1_regeln_aus_rohkanal(tmp_path):
     assert 'temperatur_zellen' in lz3.kopf['fehlende_kanaele'] and np.isnan(lz3.daten['temperatur_min_zellen']).all()
 
 
+# ── Stufe 1: Zeitmittel ⟨N⟩ aus den ursprünglichen Zeiten (Korrektur B) ───────────────────────────────
+KAL_EINS = dict(zellen=[dict(zelle=c + 1, nullpunkt_adc=0.0, umrechnung='linear', empfindlichkeit_N_je_adc=1e-6)
+                        for c in range(3)])
+
+
+def _rohlauf_perioden(verz, perioden, kraft, f_s, t0=0.0, ts=0.1, auslassen=(), name='V'):
+    """Einzelmodullauf L1 mit vorgegebenen Periodendauern ab dem Fensterbeginn ts (Indeximpulse von Modul 1 auf dem
+    1-µs-Raster) und Zellkräften kraft(t, c) → (3, n) [N]; c: Zyklusnummer je Abtastwert (−1 vor dem Fenster).
+    auslassen: Nummern fehlender Impulse. Rückgabe Pfad, Zeiten, Rohwerte in N (wie Stufe 1 sie sieht), Impulse."""
+    from pcmms_auswertung import rohdaten
+    impulse = rohdaten.index_quantisiert(ts + np.r_[0.0, np.cumsum(perioden)], 1e6)
+    t = t0 + np.arange(int(np.floor((impulse[-1] + 0.05 - t0) * f_s))) / f_s
+    F = np.asarray(kraft(t, np.searchsorted(impulse, t, side='right') - 1), float)
+    adc = np.rint(F / 1e-6).astype(np.int64)
+    inhalt = dict(lauf=dict(lauf_id=name, laufart='L', modul=1, einstellung=1,
+                            konfiguration=dict(id='L1', gruppe='einzel', phi_soll_grad=None), phase=1, block=1,
+                            messtag=1, position=0, kontrollsatz=None, t_start=0.0, t_ende=float(t[-1])),
+                  erfassung=dict(f_soll=10.0, f_s=f_s, t0=t0, adc=dict(bits=24, vollausschlag=2 ** 23 - 1),
+                                 f_takt=1e6, kanaele=[]),
+                  protokoll=dict(t_rampe_ende=ts / 2, t_e=ts / 2, n_zyklen_fenster=len(perioden), stoerung=False,
+                                 aufzeichnung_ok=True, park_ok=True, bediener='synthetisch', notizen=''),
+                  umgebung={}, einstellungen={}, generator=dict(programm='test', szenario=None, seed=None))
+    daten = dict(kraft_adc=adc, index_modul1=np.delete(impulse, list(auslassen)), index_modul2=np.zeros(0),
+                 index_modul3=np.zeros(0), temperatur_zellen=np.full((3, 2), 21.0),
+                 t_temperatur=np.array([0.0, float(t[-1])]), uebersteuerung=np.zeros(3, bool))
+    os.makedirs(verz, exist_ok=True)
+    rohdaten.schreibe_rohlauf(verz, inhalt, daten, formate.synth_kennung('ZEITMITTEL'))
+    return os.path.join(verz, name), t, adc * 1e-6, impulse
+
+
+def _integral_referenz(t, F, a, b):
+    """Unabhängige Referenz: Trapez über die Stützstellen in (a, b) und die interpolierten Randwerte (exakt für den
+    linear interpolierten Verlauf, der auch dem Resampling zugrunde liegt)."""
+    x = np.r_[a, t[(t > a) & (t < b)], b]
+    return np.array([np.trapezoid(np.interp(x, t, F[c]), x) for c in range(F.shape[0])])
+
+
+def _zeitmittel_referenz(t, F, intervalle):
+    I = sum(_integral_referenz(t, F, a, b) for a, b in intervalle)
+    return I / sum(b - a for a, b in intervalle)
+
+
+def _phasenmittelkurve(t, F, intervalle):
+    th = np.arange(2000) / 2000
+    return np.mean([[np.interp(a + th * (b - a), t, F[c]) for c in range(3)] for a, b in intervalle], axis=0)
+
+
+def test_stufe1_zeitmittel_bei_ungleichen_perioden(tmp_path):
+    """Zehn Perioden abwechselnd 99 und 101 ms, Zelle 1 im kürzeren Zyklus 1 N, im längeren 3 N, Zellen 2 und 3 je
+    1 N: analytisches Zeitmittel der Summe 4,010 N, Phasenmittel 4,000 N. Toleranz zum analytischen Wert: je
+    Kraftsprung höchstens |ΔF|·Δt/2 durch die lineare Interpolation (10 Sprünge · 2 N · 10 µs/2 über 1 s = 1·10⁻⁴ N);
+    gegen die unabhängige Integration des interpolierten Verlaufs 10⁻⁹ N. Mittelkurve und Harmonische unverändert."""
+    per = np.tile([0.099, 0.101], 5)
+    pfad, t, F, g = _rohlauf_perioden(str(tmp_path), per, lambda t, c: np.stack(
+        [np.where((c >= 0) & (c < 10) & (c % 2 == 1), 3.0, 1.0), np.ones_like(t), np.ones_like(t)]), f_s=1e5)
+    lz = stufe1.laufzusammenfassung(pfad, KAL_EINS, k_voll=12)
+    iv = list(zip(g[:-1], g[1:]))
+    assert lz.kopf['n_zyklen'] == 10
+    assert lz.daten['N_mittel'] == pytest.approx(4.010, abs=1.0e-4)
+    assert np.abs(lz.daten['N_mittel_zellen'] - _zeitmittel_referenz(t, F, iv)).max() < 1e-9
+    assert lz.daten['N_mittel'] == pytest.approx(lz.daten['N_mittel_zellen'].sum(), abs=1e-12)
+    kurve = _phasenmittelkurve(t, F, iv)
+    assert kurve.mean(-1).sum() == pytest.approx(4.000, abs=1.0e-4)          # Phasenmittel bleibt eine andere Größe
+    from pcmms_auswertung import konventionen as kv
+    assert np.abs(lz.daten['Nk_zellen'] - kv.harmonische(kurve, 12)).max() < 1e-12
+    assert np.abs(lz.daten['Nk_summe'] - lz.daten['Nk_zellen'].sum(0)).max() < 1e-12
+    assert lz.kopf['version_stufe1'] == stufe1.VERSION and stufe1.VERSION != 'stufe1-0.1'
+
+
+def test_stufe1_zeitmittel_grenzen_zwischen_abtastwerten_und_ausgelassener_zyklus(tmp_path):
+    """Zyklusgrenzen zwischen Abtastwerten (f_s inkommensurabel, versetztes t₀) und ein fehlender Indeximpuls: die
+    beiden betroffenen Zyklen gehen weder in Zähler noch Nenner ein (in ihnen läge Zelle 2 um 5 N höher)."""
+    rng = np.random.default_rng(11)
+    per = 0.1 + 0.003 * rng.uniform(-1, 1, 12)
+
+    def kraft(t, c):
+        luecke = np.where((c == 4) | (c == 5), 5.0, 0.0)
+        return np.stack([1.0 + 0.3 * z + 0.2 * np.sin(2 * np.pi * 10 * t + z) + 0.05 * t + (luecke if z == 1 else 0)
+                         for z in range(3)])
+    pfad, t, F, g = _rohlauf_perioden(str(tmp_path), per, kraft, f_s=33333.0, t0=7.3e-6, auslassen=(5,))
+    lz = stufe1.laufzusammenfassung(pfad, KAL_EINS, k_voll=12)
+    iv = [(g[c], g[c + 1]) for c in range(12) if c not in (4, 5)]
+    assert lz.kopf['n_zyklen'] == 10 and lz.daten['index_fehler'][0] == 1
+    lage = (g - 7.3e-6) * 33333.0
+    assert (np.abs(lage - np.round(lage)) > 1e-3).all()                       # Grenzen liegen zwischen Abtastwerten
+    assert np.abs(lz.daten['N_mittel_zellen'] - _zeitmittel_referenz(t, F, iv)).max() < 1e-9
+    assert lz.daten['N_mittel_zellen'][1] < 1.4                                # Lücke (≈ 6,3 N) nicht enthalten
+
+
+def test_stufe1_zeitmittel_der_fuenftel(tmp_path):
+    """Erstes und letztes Fünftel (⌊10/5⌋ = 2 Zyklen nach der bisherigen Auswahl) mit verschiedenen Perioden und
+    Kräften: Zeitmittel je Fünftel 4,010 N und 5,575 N (Phasenmittel 4,0 und 5,5 N)."""
+    per = np.array([0.099, 0.101, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.095, 0.105])
+    f1 = np.array([1.0, 3.0, 2, 2, 2, 2, 2, 2, 2.0, 5.0])
+    pfad, t, F, g = _rohlauf_perioden(str(tmp_path), per, lambda t, c: np.stack(
+        [np.where((c >= 0) & (c < 10), f1[np.clip(c, 0, 9)], 2.0), np.ones_like(t), np.ones_like(t)]), f_s=1e5)
+    lz = stufe1.laufzusammenfassung(pfad, KAL_EINS, k_voll=12)
+    iv = list(zip(g[:-1], g[1:]))
+    ref = [_zeitmittel_referenz(t, F, iv[:2]).sum(), _zeitmittel_referenz(t, F, iv[-2:]).sum()]
+    assert np.abs(lz.daten['fuenftel_N_mittel'] - ref).max() < 1e-9
+    assert lz.daten['fuenftel_N_mittel'] == pytest.approx([4.010, 5.575], abs=3e-4)  # 3 Sprünge · 3 N · 5 µs / 0,2 s
+
+
+def test_stufe1_zeitmittel_gleich_phasenmittel_bei_gleichen_perioden(tmp_path):
+    """Standardfall gleicher Perioden mit Grenzen auf Abtastwerten: Zeitmittel = bisheriges Phasenmittel innerhalb der
+    numerischen Genauigkeit; Harmonische und Zellensumme gesondert geprüft."""
+    per = np.full(10, 0.1)
+
+    def kraft(t, c):
+        return np.stack([1.0 + 0.3 * z + 0.4 * np.cos(2 * np.pi * 10 * (t - 0.1) + z) + 0.1 * np.sin(
+            4 * np.pi * 10 * (t - 0.1)) for z in range(3)])
+    pfad, t, F, g = _rohlauf_perioden(str(tmp_path), per, kraft, f_s=1e4)
+    lz = stufe1.laufzusammenfassung(pfad, KAL_EINS, k_voll=12)
+    iv = list(zip(g[:-1], g[1:]))
+    kurve = _phasenmittelkurve(t, F, iv)
+    assert np.abs(lz.daten['N_mittel_zellen'] - kurve.mean(-1)).max() < 1e-9
+    assert np.abs(lz.daten['N_mittel_zellen'] - _zeitmittel_referenz(t, F, iv)).max() < 1e-9
+    from pcmms_auswertung import konventionen as kv
+    assert np.abs(lz.daten['Nk_zellen'] - kv.harmonische(kurve, 12)).max() < 1e-12
+    assert np.abs(lz.daten['Nk_summe'] - lz.daten['Nk_zellen'].sum(0)).max() < 1e-12
+    assert lz.daten['N_mittel'] == pytest.approx(lz.daten['N_mittel_zellen'].sum(), abs=1e-12)
+
+
 # ── Stufe 2: Entscheidungen ──────────────────────────────────────────────────────────────────────────
 @pytest.fixture(scope='module')
 def exakt():
@@ -109,6 +232,22 @@ def test_exakt_bestaetigt_und_herkunft(exakt):
     # A4 ist starr: H3 nicht entscheidbar mit Grund (P0.4 nicht identifizierbar), kein Platzhalterausgang
     assert e['H3']['ausgang'] == 'nicht entscheidbar' and e['H3']['grund'] == 'Verfahren'
     assert e['H0']['vermerk'].startswith('Einzellauftoleranz') and 'Gleichheit nachgewiesen' not in e['H0']['aussage']
+
+
+def test_verarbeitungsstand_alte_bedeutung_des_zeitmittels_gemeldet(exakt):
+    """Korrektur B: Laufzusammenfassungen von stufe1-0.1 (⟨N⟩ als Phasenmittel) gelten in Stufe 2 nicht
+    stillschweigend als neu berechnet; Teil B und Ergebnis nennen den Verarbeitungsstand."""
+    from pcmms_auswertung import zusammenfassung as zf
+    vb = exakt['ergebnis']['herkunft']['verarbeitung']
+    assert vb['alte_bedeutung'] == [] and 'ebene_h-0.1' in vb['versionen']
+    assert exakt['teil_b']['nr1']['phase0_verarbeitung']['alte_bedeutung'] == []
+    tab = exakt['tabelle']
+    alt = zf.LaufTabelle([dict(k, version_stufe1='stufe1-0.1') if k['phase'] == 1 else k for k in tab.koepfe],
+                         tab.daten, meta=tab.meta)
+    erg = auswertung.auswerten(alt, exakt['kalibrierung'], exakt['teil_b'], PROFIL)
+    assert erg['herkunft']['verarbeitung']['alte_bedeutung'] == ['stufe1-0.1']
+    assert 'Phasenmittel' in erg['herkunft']['verarbeitung']['mittel_bedeutung']['stufe1-0.1']
+    assert 'alter Bedeutung' in erg['text']
 
 
 def test_ergebnis_reproduzierbar_und_seedabhaengig(exakt):
