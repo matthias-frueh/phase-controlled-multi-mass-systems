@@ -184,6 +184,8 @@ def erzeuge(modell, laeufe, rng, rausch=None):
         daten['min_roh_zellen'][idx] = np.maximum(x.min(-1), 0.0) - sz * _extremwert(rng, n_abt, (m, 3))
         daten['max_roh_zellen'][idx] = x.max(-1) + sz * _extremwert(rng, n_abt, (m, 3))
         daten['uebersteuert_zellen'][idx] = daten['max_roh_zellen'][idx] >= modell.vollausschlag_N
+        daten['sigma_roh_zellen'][idx] = np.sqrt(0.5 * (np.abs(Nh) ** 2).sum(-1) + sz ** 2)
+        daten['sigma_roh_summe'][idx] = np.sqrt(0.5 * (np.abs(Nh.sum(1)) ** 2).sum(-1) + 3 * sz ** 2)
         T0, sT = rausch.temperatur_C
         daten['temperatur_min_zellen'][idx] = T0 - np.abs(sT * rng.standard_normal((m, 3)))
         daten['temperatur_max_zellen'][idx] = T0 + np.abs(sT * rng.standard_normal((m, 3)))

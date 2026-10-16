@@ -190,7 +190,8 @@ for _e, _ekw, _txt in (('amplitude', dict(s=0.5), 'zweite Amplitude s = 0,5'), (
                                                               'Entwicklungsstufen eine Wirkung über dem Rauschen sieht')
     _neu(f'I02-{_e}', 'I02', f'quadratische Kettenkennlinie β = 2·10⁻³/N je Zelle (V1-G60h), {_txt}', 'mechanisch',
          'V1-G60h', ('Zuordnung', 'H1'), 'Klasse „∝ A²“ (p = 2); K18; H1-Wirkung ≥ 1 mN',
-         effekte=lambda x: ({'art': 'kennlinie', 'beta': x},), staerke=2e-3, plan=(('einstellung2', _e2(_e, **_ekw)),))
+         effekte=lambda x: ({'art': 'kennlinie', 'beta': x},), staerke=2e-3, plan=(('einstellung2', _e2(_e, **_ekw)),),
+         kalibrierung=(('p01', dict(beta=(2e-3,) * 3)),))            # Z4: dieselbe Kennlinie zeigt P0.1
 _neu('I04-drift', 'I04', 'Verstärkungsdrift Phase 0 → 1 um 0,1 % bei zweiter Amplitude', 'null', 'V1-G0',
      ('Zuordnung',), 'Klasse „konstant“ bzw. keine Zuordnung (gegen ŷ¹ kein Residuum)',
      effekte=lambda x: ({'art': 'verstaerkung_p1', 'faktor': x},), staerke=1e-3,
@@ -198,7 +199,7 @@ _neu('I04-drift', 'I04', 'Verstärkungsdrift Phase 0 → 1 um 0,1 % bei zweiter 
 _neu('I05-misch', 'I05', 'Kopplung 1 % und quadratische Kennlinie zusammen (V1-G60h), zweite Amplitude', 'mechanisch',
      'V1-G60h', ('Zuordnung',), 'Mischklasse; Grenzen der Zuordnung zeigen',
      effekte=({'art': 'kopplung', 'x': 0.01}, {'art': 'kennlinie', 'beta': 2e-3}),
-     plan=(('einstellung2', _e2('amplitude', s=0.5)),))
+     plan=(('einstellung2', _e2('amplitude', s=0.5)),), kalibrierung=(('p01', dict(beta=(2e-3,) * 3)),))
 
 # — Gruppe S ———————————————————————————————————————————————————————————————————————————————————————————————————————————
 _neu('S01a-liftoff', 'S01a', 'Beginn des Einzelzell-Liftoffs (V1-G60h, Hub skaliert: kleinstes lineares Zellminimum '

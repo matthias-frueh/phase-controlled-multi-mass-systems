@@ -11,8 +11,9 @@ P0.1  Zelle einzeln: Laststufen auf- und absteigend, Rohwert = Nullpunkt + (F + 
 P0.2  statische Zelllasten bei geparkten Modulen (Konvention b: M = Σ_c F_c,stat/g), Bauteilwägung m_j, örtliches g.
 P0.4  Übertragungsfunktion äußere Kraft → Zellen und Summe aus dem 3-FG-Modell (systeme.frf) mit Kraftkette, an der
       Mitte und über den Modulpositionen, zwei Amplituden (optional amplitudenabhängige Steifigkeit), Schätzfehler
-      nach der Kohärenz (Varianz des H1-Schätzers (1 − γ²)/(2·n_Mittel·γ²)·|T|²); Betriebslastprüfung mit
-      Oberwellen einer quadratischen Kennlinie gegen den Referenzaufnehmer.
+      nach der Kohärenz (Varianz des H1-Schätzers je Real- und Imaginärteil (1 − γ²)/(2·n_Mittel·γ²)·|T|², wie
+      die normierte Zufallsabweichung von Betrag und Phase); Betriebslastprüfung mit Oberwellen einer
+      quadratischen Kennlinie gegen den Referenzaufnehmer.
 P0.5  Weg der bewegten Masse je Modul mit Wegkanal G_x (Tiefpass, Laufzeit, Verstärkung) und Indeximpulsen des
       eigenen Encoders (Jitter, Zeitgeber); Datenblattwerte von G_x mit Unsicherheit.
 """
@@ -78,7 +79,7 @@ def p01_daten(s, rng, nullpunkt_adc=(120000.0, -80000.0, 45000.0), empf=(1e-6, 1
                antwort12=kette_e(s1 + s2), einheit='N (Brückensimulator, als Kraft skaliert)')
     messung = dict(einzeln=einzeln, laststellen=dict(orte_m=orte, last_N=last_N, delta_N=dN, u_N=sigma_lage_N,
                                                      umrechnung='mit der Einzelkalibrierung je Zelle'),
-                   zellen_nominal_m=zellen_nom, querkraft=quer,
+                   zellen_nominal_m=zellen_nom, module_nominal_m=np.asarray(a.module, float), querkraft=quer,
                    bruecke=dict(f_hz=f_br, G=Gm, u_rel=sigma_bruecke), superposition=sup)
     wahr = dict(nullpunkt_adc=np.asarray(nullpunkt_adc), empfindlichkeit_N_je_adc=np.asarray(empf),
                 beta=np.asarray(beta), hysterese_N=np.asarray(hysterese_N), zellen_m=zellen_wahr,
@@ -89,15 +90,37 @@ def p01_daten(s, rng, nullpunkt_adc=(120000.0, -80000.0, 45000.0), empf=(1e-6, 1
     return messung, wahr
 
 
-def p02_daten(s, rng, u_F=2e-5, wiederholungen=5, u_m=2e-5, g=G, u_g=1e-5):
+def p02_daten(s, rng, u_F=2e-5, wiederholungen=5, u_m=2e-5, g=G, u_g=1e-5, u_m_L=None, m_L_angeben=True):
+    """P0.2: statische Zelllasten (wiederholt), Bauteilwägung m_j, örtliches g; m_L = ρ_L·V_außen + m_hyd als
+    vorgegebene Rechengröße des synthetischen Körpers (keine Messung; ohne Angabe fehlt sie im Protokoll)."""
     a = s.aufbau()
     F = a.F0[None, :] + u_F * rng.standard_normal((wiederholungen, 3))
     m = np.asarray(s.m) + u_m * rng.standard_normal(3)
     messung = dict(F_c_stat_N=F, u_F_N=u_F, m_j_kg=m, u_m_j_kg=u_m, g=dict(wert=g, u=u_g, quelle='örtlich (synthetisch)'),
                    luft=dict(druck_hPa=1013.0, temperatur_C=21.0, feuchte_pct=45.0), gesamtwaegung=None,
                    gesamtwaegung_grund='keine geeignete Waage im synthetischen Datensatz')
+    if m_L_angeben:
+        messung['m_L'] = dict(wert_kg=float(a.m_luft), u_kg=float(0.1 * a.m_luft if u_m_L is None else u_m_L),
+                              quelle='synthetisch vorgegeben: ρ_L·V_außen + m_hyd (keine Messung)')
     wahr = dict(F0=a.F0, M=a.M, m=np.asarray(s.m), M_traege=a.M_traege, m_luft=a.m_luft)
     return messung, wahr
+
+
+def p0_messungen(s, rng, p01=None, p02=None, p04=None, p05=None, p05_strich=None):
+    """Alle Phase-0-Protokolle eines Systems (Abweichungen je Schritt als dict); Rückgabe (messung, wahrheit)."""
+    mes, wahr = {}, {}
+    for name, fn, kw in (('p01', p01_daten, p01), ('p02', p02_daten, p02), ('p04', p04_daten, p04),
+                         ('p05', p05_daten, p05)):
+        mes[name], wahr[name] = fn(s, rng, **(kw or {}))
+    if p05_strich is not None:
+        mes['p05_strich'], wahr['p05_strich'] = p05_daten(s, rng, **p05_strich)
+    return mes, wahr
+
+
+def schreibe_p0(pfad, messung, kennung):
+    """Eingang von AP-11 (Schema p0_messung); die Wahrheit wird getrennt davon geschrieben."""
+    from .. import formate
+    return formate.schreibe_objekt(pfad, formate.kopf('p0_messung', kennung), messung)
 
 
 def p04_daten(s, rng, f_band=(20.0, 600.0), df=2.0, n_mittel=50, rauschpegel=2e-4, anregung_N=0.5, orte=None,
@@ -118,8 +141,8 @@ def p04_daten(s, rng, f_band=(20.0, 600.0), df=2.0, n_mittel=50, rauschpegel=2e-
             X = anregung_N * amp
             snr = (np.abs(T) * X / rauschpegel) ** 2
             g2 = snr / (1 + snr)
-            var = (1 - g2) / (2 * n_mittel * g2) * np.abs(T) ** 2
-            Tm = T + np.sqrt(var / 2) * (rng.standard_normal(T.shape) + 1j * rng.standard_normal(T.shape))
+            var = np.full(T.shape, (rauschpegel / X) ** 2 / (2 * n_mittel))   # = (1 − γ²)/(2nγ²)·|T|², auch bei T = 0
+            Tm = T + np.sqrt(var) * (rng.standard_normal(T.shape) + 1j * rng.standard_normal(T.shape))
             daten[f'{name}@{amp:g}'] = dict(ort_m=o, amplitude=amp, T=Tm, kohaerenz=g2, n_mittel=n_mittel)
     betrieb = None
     if f_betrieb is not None:
@@ -144,8 +167,9 @@ def p04_daten(s, rng, f_band=(20.0, 600.0), df=2.0, n_mittel=50, rauschpegel=2e-
                    kanaele=['Zelle 1', 'Zelle 2', 'Zelle 3', 'Summe'],
                    hinweis='Übertragung äußere Kraft → Zellkraft, Module geparkt, mit Kraftkette')
     kz = a.kennzahlen()
-    wahr = dict(f_n=a.f_n, zeta=a.zeta, K=a.K, C=a.C, M_traege=a.M_traege, moden=a.moden()[0],
-                f_kipp=kz['f_kipp'], kappa_amplitude=kappa_amplitude, klirr_beta=klirr_beta)
+    wahr = dict(f_n=a.f_n, zeta=a.zeta, K=a.K, C=a.C, M_traege=a.M_traege,
+                moden=np.zeros(0) if a.starr else a.moden()[0], f_kipp=np.inf if a.starr else kz['f_kipp'],
+                kappa_amplitude=kappa_amplitude, klirr_beta=klirr_beta)
     return messung, wahr
 
 

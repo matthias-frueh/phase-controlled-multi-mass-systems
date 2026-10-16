@@ -168,6 +168,12 @@ Befunde mit möglicher Ergebniswirkung stehen mit Auswirkung und betroffenem Pfa
 | `p0.klirr_faktor` | Klirrkriterium und P0.12 (Faktor auf u_c,erw) | §5.2, §12 Schwelle des Klirrkriteriums | offen → entwicklungsprüffall | 0.3 | anpassung |
 | `p0.u_delta_delta_grad` | Anforderung u(Δδⱼ) ≤ 0,1° | P0.5, Tab. F | festlegung | 0.1 | anpassung |
 | `p0.4.gewichtung` | Kohärenzgewichtung der 1-FG-Anpassung | §5.2 P0.4, A9.2, §12 Werkzeug 4 | technisch | "Gewicht 2·n_Mittel·γ²/((1 − γ²)·∣T∣²) je Real- und Imaginärteil" | anpassung |
+| `p0.4.band` | Anpassungsband der 1-FG-Anpassung | §5.2 P0.4, A9.2 „festgelegtes Frequenzband“ | technisch | "Eingabe" | anpassung |
+| `p0.4.kohaerenz_min` | Mindestkohärenz einer Frequenzlinie | §5.2 P0.4, Werkzeug 4 | technisch | 0.5 | anpassung |
+| `p0.4.linearitaet` | Linearität zweier Amplituden | §5.2 P0.4, A9.2 „gleich innerhalb der Unsicherheit“ | technisch | "χ²-Test der Übertragungsdifferenz p ≥ 0,01 und ∣z∣ < 3 für f_n, ζ" | anpassung |
+| `p0.4.modellordnung` | Zahl der Moden aus den Zellkanälen | §5.2 P0.4, A1 (f₁, f_m, ζ_m) | technisch | "gemeinsame Pole, zusätzliche Mode bei F-Test p ≤ 0,01; Moden außerhalb des Bands nicht bestimmt" | anpassung |
+| `p0.gf_modell` | Modell der Kraftkette G_F aus dem Brückensimulator | §5.2 P0.1, A9.7, Werkzeug 4 | technisch | "g·e^{−i2πfτ}/(1 + if/f_tp); ohne nachweisbaren Tiefpass g·e^{−i2πfτ}" | anpassung |
+| `verarbeitung.kennlinie` | Umrechnung der Rohwerte in Stufe 1 | A9.4 (1) „statische Kalibrierung je Zelle“ | technisch | "linear" | stufe1 |
 | `M.konvention` | Bestimmung von M | §3, §4, P0.2, §12 (I) | arbeitsfestlegung | "b" | anpassung |
 | `rauschmodelle` | Rauschmodelle (Liste in Teil A oder Teil B) | §12 Rauschmodelle …, A9.5 | offen → entwicklungsprüffall | "entwicklungsfamilie" | generator.rauschen, pilot |
 | `ni.fassung_I` | H3 Fassung I (Betriebsimpedanz) | §8.7, §12 (II) | nicht_implementiert | – | – |

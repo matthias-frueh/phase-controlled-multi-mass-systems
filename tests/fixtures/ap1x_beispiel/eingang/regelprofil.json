@@ -707,12 +707,52 @@
     "wert": null,
     "wirkung": "ausgang"
    },
+   "p0.4.band": {
+    "fundstelle": "§5.2 P0.4, A9.2 „festgelegtes Frequenzband“",
+    "gegenstand": "Anpassungsband der 1-FG-Anpassung",
+    "herkunft": "Teil B bzw. ausdrücklicher Aufrufparameter; kein Vorgabewert",
+    "status": "technisch",
+    "wert": "Eingabe",
+    "wirkung": "verarbeitung"
+   },
    "p0.4.gewichtung": {
     "fundstelle": "§5.2 P0.4, A9.2, §12 Werkzeug 4",
     "gegenstand": "Kohärenzgewichtung der 1-FG-Anpassung",
     "herkunft": "Varianz des H1-Schätzers",
     "status": "technisch",
     "wert": "Gewicht 2·n_Mittel·γ²/((1 − γ²)·|T|²) je Real- und Imaginärteil",
+    "wirkung": "verarbeitung"
+   },
+   "p0.4.kohaerenz_min": {
+    "fundstelle": "§5.2 P0.4, Werkzeug 4",
+    "gegenstand": "Mindestkohärenz einer Frequenzlinie",
+    "herkunft": "Linien darunter tragen kein Signal (Kanal unbelastet)",
+    "status": "technisch",
+    "wert": 0.5,
+    "wirkung": "verarbeitung"
+   },
+   "p0.4.linearitaet": {
+    "fundstelle": "§5.2 P0.4, A9.2 „gleich innerhalb der Unsicherheit“",
+    "gegenstand": "Linearität zweier Amplituden",
+    "herkunft": "",
+    "status": "technisch",
+    "wert": "χ²-Test der Übertragungsdifferenz p ≥ 0,01 und |z| < 3 für f_n, ζ",
+    "wirkung": "bericht"
+   },
+   "p0.4.modellordnung": {
+    "fundstelle": "§5.2 P0.4, A1 (f₁, f_m, ζ_m)",
+    "gegenstand": "Zahl der Moden aus den Zellkanälen",
+    "herkunft": "",
+    "status": "technisch",
+    "wert": "gemeinsame Pole, zusätzliche Mode bei F-Test p ≤ 0,01; Moden außerhalb des Bands nicht bestimmt",
+    "wirkung": "verarbeitung"
+   },
+   "p0.gf_modell": {
+    "fundstelle": "§5.2 P0.1, A9.7, Werkzeug 4",
+    "gegenstand": "Modell der Kraftkette G_F aus dem Brückensimulator",
+    "herkunft": "Entwicklungsmodell",
+    "status": "technisch",
+    "wert": "g·e^{−i2πfτ}/(1 + if/f_tp); ohne nachweisbaren Tiefpass g·e^{−i2πfτ}",
     "wirkung": "verarbeitung"
    },
    "p0.klirr_faktor": {
@@ -858,6 +898,14 @@
     "wert": 60,
     "wirkung": "verarbeitung"
    },
+   "verarbeitung.kennlinie": {
+    "fundstelle": "A9.4 (1) „statische Kalibrierung je Zelle“",
+    "gegenstand": "Umrechnung der Rohwerte in Stufe 1",
+    "herkunft": "Nullpunkt und Empfindlichkeit aus P0.1; quadratischer Anteil nur berichtet (Befund: Text legt die Kennlinienform der Umrechnung nicht fest)",
+    "status": "technisch",
+    "wert": "linear",
+    "wirkung": "verarbeitung"
+   },
    "verarbeitung.n_theta": {
     "fundstelle": "§4, A1, A9.4 (4), Tab. F",
     "gegenstand": "Stützstellen je Zyklus",
@@ -918,7 +966,7 @@
  },
  "kopf": {
   "code_version": {
-   "git": "a1c995364196128a88bb7d61bfc39a98db9c3755",
+   "git": "0ec8d9263b1a93eecc062cec1a12acfe4c9e14d8+geändert",
    "paket": "0.1.0"
   },
   "datenart": "synthetisch",

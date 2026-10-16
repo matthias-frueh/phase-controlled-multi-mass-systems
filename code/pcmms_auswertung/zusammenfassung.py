@@ -17,8 +17,9 @@ Felder je Lauf (Kopf: JSON-Werte; Daten: Felder fester Form, k = 1 … k_voll, k
           Mittel und Jitter der Indexphasen; index_fehler (3): fehlende und überzählige Indeximpulse;
           fuenftel_N_mittel (2), fuenftel_Nk (2, k): erstes und letztes Fünftel (⌊N_z/5⌋ Zyklen) für G4;
           min_roh_zellen, max_roh_zellen (3): Extrema der kalibrierten Rohwerte des ganzen Laufs einschließlich
-          Rampe und Einschwingzeit (G6, S2); uebersteuert_zellen (3) (G5); temperatur_min/max_zellen (3) (G7);
-          t_phi (3): Einregelzeit der Phasen [s].
+          Rampe und Einschwingzeit (G6, S2); sigma_roh_zellen (3), sigma_roh_summe: Standardabweichung der
+          kalibrierten Rohwerte im Auswertefenster (in Referenzläufen σ_c, σ_Σ für F_LO, A1); uebersteuert_zellen (3)
+          (G5); temperatur_min/max_zellen (3) (G7); t_phi (3): Einregelzeit der Phasen [s].
 Fehlende Kanäle werden in fehlende_kanaele genannt; die abhängigen Felder sind nan, nie null-ergänzt.
 """
 import numpy as np
@@ -40,6 +41,8 @@ DATENFELDER = {                         # Name: (dtype, Form je Lauf; 'k' = k_vo
     'fuenftel_Nk': ('complex128', (2, 'k')),
     'min_roh_zellen': ('float64', (3,)),
     'max_roh_zellen': ('float64', (3,)),
+    'sigma_roh_zellen': ('float64', (3,)),
+    'sigma_roh_summe': ('float64', ()),
     'uebersteuert_zellen': ('bool', (3,)),
     'temperatur_min_zellen': ('float64', (3,)),
     'temperatur_max_zellen': ('float64', (3,)),

@@ -279,6 +279,54 @@ def lies(pfad, art=None, datenarten=('synthetisch',)):
     return k, obj.get('inhalt'), felder
 
 
+# ── verschachtelte Objekte (Messprotokolle, Kalibrierung) ──────────────────────────────────────────────
+def zerlege(obj, pfad=''):
+    """Verschachteltes Objekt → (JSON-Skelett, NPZ-Felder). Jedes NumPy-Array wandert unter seinem Pfad
+    (Schlüssel und Listenindizes mit „__“ verbunden) in die NPZ-Datei; das Skelett verweist mit {"npz": Pfad}."""
+    felder = {}
+
+    def geh(o, p):
+        if isinstance(o, np.ndarray):
+            if o.dtype == object:
+                raise FormatFehler(f'{p}: Objekt-Arrays sind nicht zulässig')
+            felder[p] = o
+            return {'npz': p}
+        if isinstance(o, dict):
+            if 'npz' in o and len(o) == 1:
+                raise FormatFehler(f'{p}: Schlüssel „npz“ ist reserviert')
+            return {str(k): geh(v, f'{p}__{k}' if p else str(k)) for k, v in o.items()}
+        if isinstance(o, (list, tuple)):
+            return [geh(v, f'{p}__{i}') for i, v in enumerate(o)]
+        return o
+    return geh(obj, pfad), felder
+
+
+def zusammensetzen(skelett, felder):
+    """Gegenstück zu zerlege()."""
+    def geh(o):
+        if isinstance(o, dict):
+            if set(o) == {'npz'}:
+                if o['npz'] not in felder:
+                    raise FormatFehler(f'Feld {o["npz"]} fehlt in der NPZ-Datei')
+                return felder[o['npz']]
+            return {k: geh(v) for k, v in o.items()}
+        if isinstance(o, list):
+            return [geh(v) for v in o]
+        return o
+    return geh(skelett)
+
+
+def schreibe_objekt(pfad, k, obj):
+    """Schreibt ein verschachteltes Objekt (JSON-Skelett und NPZ-Felder)."""
+    skelett, felder = zerlege(obj)
+    return schreibe(pfad, k, felder or None, inhalt=skelett)
+
+
+def lies_objekt(pfad, art, datenarten=('synthetisch',)):
+    k, skelett, felder = lies(pfad, art, datenarten)
+    return k, zusammensetzen(skelett, felder)
+
+
 def zeitstempel():
     """Nur für Protokollzwecke; Ergebnisdateien enthalten keine Zeitstempel, damit sie reproduzierbar bleiben."""
     return datetime.datetime.now(datetime.timezone.utc).isoformat(timespec='seconds')
