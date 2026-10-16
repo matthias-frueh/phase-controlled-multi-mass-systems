@@ -24,7 +24,9 @@ Lizenz: Skripte MIT ([`../LICENSE`](../LICENSE)); Protokolle, Ausgaben und Daten
 - **Dokumentstand der Rechnungen:** Präregistrierung v2 vom 25./28.09.2026, Arbeitspapier v2.4, Formelverzeichnis
   v2.7. Die Präregistrierung ist seither überarbeitet (PR #14: Entscheidungsregeln als Arbeitsfestlegungen, M nach
   Konvention (b)); die Vorschläge in `statistik/PROTOKOLL.md` sind dort teilweise eingegangen. Maßgeblich ist der
-  Text in `docs/`, nicht das Protokoll.
+  Text in `docs/`, nicht das Protokoll. Pfad- und Zeilenangaben in den Protokollen beziehen sich auf den jeweils
+  geprüften Repository-Stand (siehe Übernahmevermerk des Protokolls); Arbeitspapier und Formelverzeichnis sind
+  seither als v2.5 und v2.8 fortgeführt.
 - **Konzeptrechnung `nadelrahmen/` (11.10.2026):** neu entstanden, nicht Teil der Gesamtprojektanalyse; gerechnet mit
   dem Code-Stand `499d4e0` (aus `code/auslegung.py` nur Profil und V1-Kandidat). Das Protokoll hat keinen
   Übernahmevermerk.

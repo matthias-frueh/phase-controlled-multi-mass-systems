@@ -2,7 +2,7 @@
 
 **Phase-Controlled Multi-Mass Systems**\
 Matthias Früh · Gravidon Systemics Research · ORCID [0009-0005-9984-4207](https://orcid.org/0009-0005-9984-4207)\
-Stand: 28. September 2026, Nachträge 2., 4. und 11. Oktober 2026 · Status: prä-experimentell (Simulation; keine Messdaten)
+Stand: 28. September 2026, Nachträge 2., 4., 11. und 16. Oktober 2026 · Status: prä-experimentell (Simulation; keine Messdaten)
 
 ---
 
@@ -18,9 +18,14 @@ A = (F_max − M·g)/(M·g − F_min) und Minimalkraft F_min. Für die Messkampa
 
 Der Grundsatz des Projekts: **Primär ausgewertet werden nicht Absolutkräfte, sondern Abweichungen der
 Kontaktkraft gegen eine Referenz.** Die Referenz ist das Zeitmittel ⟨N⟩ = M·g, das aus dem Schwerpunktsatz
-folgt. Es ist kein Ergebnis und kein Forschungsziel, sondern Randbedingung und Kontrollgröße: Jede
-beobachtete Abweichung des Zeitmittels gilt als Apparaturfehler. Der Untersuchungsgegenstand ist die
-Wellenform, nicht das Mittel.
+folgt. Es ist kein Ergebnis und kein Forschungsziel, sondern Randbedingung und Kontrollgröße. Die Referenz M·g
+gilt für ein Auswertefenster aus ganzen Perioden der eingeschwungenen Systemantwort, wenn der Impulsrandterm
+verschwindet und keine weiteren mittleren äußeren Vertikalkräfte wirken (Formelverzeichnis, Abschnitt „Zeitmittel
+und endliches Fenster“). Weicht das so gebildete Zeitmittel von M·g ab, ist die Messkette fehlerhaft oder die
+Bilanz unvollständig, etwa durch nicht erfasste Lastpfade – nicht die Physik. Umgekehrt qualifiziert ein
+unauffälliges Zeitmittel die dynamische Messkette nicht: Verstärkung, Phasenlage, Bandbreite und Drift sind
+gesondert zu charakterisieren, und gleichbleibend fehlende Lastanteile bleiben im Differenzvergleich unsichtbar.
+Der Untersuchungsgegenstand ist die Wellenform, nicht das Mittel.
 
 Ausdrücklich **nicht** behauptet werden: reaktionsloser Antrieb, Gravitationsmodifikation,
 Gewichtsreduktion, Verschiebung des Zeitmittels. Frühere Aussagen zu einer Mittelwertverschiebung, zu
@@ -60,15 +65,15 @@ ist mit dem Arbeitspapier v2.4 (Abschnitt 4.8) zurückgezogen. Die alten Gleichu
 | [`code/firmware/`](code/firmware/) | Firmware-Muster (ESP32) der Demonstratoren und Tischtests mit zwei Aktoren; keine V1-Firmware ([`code/firmware/README.md`](code/firmware/README.md)) |
 | [`docs/figures/`](docs/figures/) | Abbildungen aus den Simulationsdaten, je in heller und dunkler Fassung |
 | [`data/`](data/) | Simulationsausgaben: 19×19-Phasensweep, 2°-Feinsweep und Attraktorkarten des V1-Kandidaten ([`data/README.md`](data/README.md)) |
-| [`rechnungen/`](rechnungen/) | Rechen- und Prüfskripte der Gesamtprojektanalyse 10/2026 mit gespeicherten Ergebnissen und Protokollen: Auslegung, Engine-Prüfung, Kippmoment, Statistik, Symmetrie und Randterm, Linie-B-Kontrollrechnungen, Bewertungen, dazu die Kurzmessungen zum Pipelinetest und die Kontrollrechnung zu den Entscheidungsregeln ([`rechnungen/README.md`](rechnungen/README.md); Simulation und Analytik, historischer Stand 02.10.2026); außerdem die Konzeptrechnung zum Sechs-Nadel-Messrahmen ([`rechnungen/nadelrahmen/`](rechnungen/nadelrahmen/PROTOKOLL.md), 11.10.2026) |
+| [`rechnungen/`](rechnungen/) | Rechen- und Prüfskripte der Gesamtprojektanalyse 10/2026 mit gespeicherten Ergebnissen und Protokollen: Auslegung, Engine-Prüfung, Kippmoment, Statistik, Symmetrie und Randterm, Linie-B-Kontrollrechnungen, Bewertungen, dazu die Kurzmessungen zum Pipelinetest und die Kontrollrechnung zu den Entscheidungsregeln ([`rechnungen/README.md`](rechnungen/README.md); Simulation und Analytik, historischer Stand 02.10.2026); außerdem die Konzeptrechnung zum Sechs-Nadel-Messrahmen ([`rechnungen/nadelrahmen/`](rechnungen/nadelrahmen/PROTOKOLL.md), 11.10.2026). Nachweisarchiv, für den Einstieg nicht nötig; Kennungen wie „L1a-019“ verweisen auf nicht veröffentlichte Arbeitsdokumente (siehe `rechnungen/README.md`). |
 
 Die Präregistrierung v2 für die Messkampagne liegt als [Entwurf](docs/praeregistrierung_v2_entwurf.md) vor (nicht eingefroren, nicht registriert).
 Die Abnahme der Werkzeuge für Auslegung und ereignisgenaue Rechnung dokumentiert [`docs/abnahme_ap02_ap03.md`](docs/abnahme_ap02_ap03.md).
 
-Das Arbeitspapier v2.4 liegt mit Quellen und Nachrechnung in [`docs/arbeitspapier/`](docs/arbeitspapier/), das
-Symbol- und Formelverzeichnis v2.7 in [`docs/formelverzeichnis/`](docs/formelverzeichnis/). Die PDFs geben den Stand
-vom 26.09. bzw. 28.09.2026 wieder; die Nachträge vom 2. Oktober 2026 stehen bisher nur im Quelltext (`.tex`, siehe
-die README-Dateien beider Ordner).
+Das Arbeitspapier v2.5 liegt mit Quellen und Nachrechnung in [`docs/arbeitspapier/`](docs/arbeitspapier/), das
+Symbol- und Formelverzeichnis v2.8 in [`docs/formelverzeichnis/`](docs/formelverzeichnis/). Die PDFs vom 16.10.2026
+enthalten die Nachträge vom Oktober 2026; PDF und Quelltext stimmen überein (Bauanleitung in den README-Dateien
+beider Ordner).
 
 ## Simulationsstand
 
@@ -208,6 +213,8 @@ dokumentieren den Weg, nicht den aktuellen Stand.
 - Code in [`code/`](code/): MIT, siehe [`LICENSE`](LICENSE).
 - Dokumente in [`docs/`](docs/) und Daten in [`data/`](data/): CC BY 4.0, siehe [`LICENSE-CC-BY-4.0`](LICENSE-CC-BY-4.0).
   Namensnennung: „Matthias Früh, PCMMS“, https://github.com/matthias-frueh/phase-controlled-multi-mass-systems
+- Skripte in `rechnungen/` und Tests in `tests/`: MIT (wie `code/`); Protokolle, Ausgaben und Daten in `rechnungen/`:
+  CC BY 4.0 (wie in `rechnungen/README.md`).
 - Ausnahme: Die Python-Skripte in
   [`docs/arbeitspapier/nachrechnung_2026-09-13/`](docs/arbeitspapier/nachrechnung_2026-09-13/) und
   [`docs/arbeitspapier/gegenprobe_2026-09-26/`](docs/arbeitspapier/gegenprobe_2026-09-26/) stehen als Code unter

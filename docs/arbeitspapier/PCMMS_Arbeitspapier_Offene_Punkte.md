@@ -154,7 +154,8 @@ Repository geschlossen), 12, 13, 18, 20, 28, 38 und „Stand des Dokuments“ (0
     Verlagsseiten prüfen; die 15-%-Angabe zu Perret-Liaudet/Rigaud in Teil 2 von 2003 prüfen; die
     13 Einträge des Literaturabgleichs vom 12.09.2026 und die Kandidaten zu Impact-Oszillatoren
     (Kap. 2.3) vor einer Aufnahme gegen die Primärquellen prüfen.
-43. Quelltext und PDF von Arbeitspapier v2.4 und Formelverzeichnis v2.7 weichen seit den Nachträgen
+43. ~~Quelltext und PDF von Arbeitspapier v2.4 und Formelverzeichnis v2.7 weichen seit den Nachträgen
     vom 2. Oktober 2026 voneinander ab. Neusatz und Versionsnummer sind offen (Entscheidung des Autors).
     Titelblatt (Arbeitspapier) und Datum (Formelverzeichnis) nennen weiter 26.09. bzw. 28.09.2026 und sind
-    beim Neusatz anzupassen.
+    beim Neusatz anzupassen.~~ **erledigt 16.10.** — Neusatz als Arbeitspapier v2.5 und Formelverzeichnis
+    v2.8 (16.10.2026); Titelblatt und Datum angepasst, Quelltext und PDF stimmen überein.
