@@ -24,7 +24,8 @@ Prüfstand erzeugt), Plan [AP-13](plan_ap13_pipelinetest.md) mit Vermerk vom 16.
 - **AP-13 teilweise umgesetzt.** Kalibrierung von c mit getrennter Prüfsimulation (bei A4 griff die Pool-Regel:
   Prüfrate 18/193 > 0,069, gepooltes c = 3,71 gegen c_B = 4,20), H2-Überdeckung und gemeinsame Bestätigungswahrscheinlichkeit
   als getrennte Größen (A4: 0,965; V1-G0: 0,82; V1-G60h: 0,75 bei n = 24, n_min = 18), Planungshaken, Ebenenabgleich,
-  Wahrheitstrennung, Reproduzierbarkeit und Prüfsatz geprüft; 36 Szenariopunkte mit 30–200 Kampagnen gerechnet.
+  Wahrheitstrennung, Reproduzierbarkeit und Prüfsatz geprüft; alle 36 Katalogszenarien durchlaufen (34 mit 30–200
+  Kampagnen je Simulation, die beiden S₃-Fälle deterministisch).
 - **Keine Kalibrierabnahme.** Alle Raten sind Entwicklungsdiagnostik (B = 1000, höchstens 200 Kampagnen je Simulation).
   Die Kriterienmatrix führt 1 Kriterium als geprüft (K16, deterministisch), 16 als nur probeweise gerechnet, 1 als
   fehlend, 5 als fachlich offen und 1 als in diesem Modell nicht prüfbar, ohne Gesamtampel. Die Matrix mit ≥ 1000
@@ -325,7 +326,7 @@ E3-Bedingung „unauffällig ≥ 0,8“ wird auf L1 verfehlt (14/200).
 | normative Replikatzahlen, Speicherkette | N01-V1G0, L1, n = 20 | 139 s (Stufe 2: 131 s) |
 | Ebene Z, Einzelschritte | A04-R4, L1, n = 24, 811 Rohläufe (522 MB, danach gelöscht) | Generator 237 s, AP-11 3 s, Stufe 1 34 s, Teil B 2 s, AP-12 3 s |
 | Zeltfit-Vergleichssatz | 4000 Fits | Kandidat 9,5–10,5 s, Vollraster 461–544 s (Faktor ≈ 50) |
-| Prüfstand | 14 Schritte, rund 2300 Kampagnen | 91 min (Kalibrierung A4 18 min, Szenarien A4 22 min, Kalibrierung V1 11 min, Szenarien V1 13 min, eigene Systeme 7 min, Präzisionsreihe 4 min, Ebenen 5 min, Zeltfit 8 min, Planung 2 min) |
+| Prüfstand | 14 Schritte, rund 2100 Kampagnen (einschließlich der Wiederholung der A4-Prüfsimulation mit gepooltem c) | 91 min (Kalibrierung A4 18 min, Szenarien A4 22 min, Kalibrierung V1 11 min, Szenarien V1 13 min, eigene Systeme 7 min, Präzisionsreihe 4 min, Ebenen 5 min, Zeltfit 8 min, Planung 2 min) |
 | große Matrix (nur Schätzung) | 36 Szenarien × 6 Stufen × 1000 Kampagnen, B = 1000 | ≈ 450 Kernstunden ohne die Simulationen von c je Stufe; mit B = 10 000 rund das Zehnfache |
 
 Die Kurzmessung des Plans (Abschnitt 4.1: 0,30 s je Kampagne bei n = 20, B = 1000, nur Bootstrap von H1) misst einen
