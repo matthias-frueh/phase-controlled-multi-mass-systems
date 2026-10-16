@@ -26,7 +26,7 @@ import numpy as np
 from . import formate
 
 LAUFARTEN = ('R', 'L', 'K', 'D1', 'D2')
-GRUPPEN = ('referenz', 'einzel', 'schnitt', 'zusatz', 'pilot', 'identifizierbarkeit', 'dummy')
+GRUPPEN = ('referenz', 'einzel', 'schnitt', 'zusatz', 'pilot', 'identifizierbarkeit', 'dummy', 'pruef')   # pruef: Prüffälle (S₃-Bilder), kein Teil des Präreg-Plans
 DATENFELDER = {                         # Name: (dtype, Form je Lauf; 'k' = k_voll)
     'Nk_summe': ('complex128', ('k',)),
     'Nk_zellen': ('complex128', (3, 'k')),

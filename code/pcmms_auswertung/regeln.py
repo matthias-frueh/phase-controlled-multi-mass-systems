@@ -19,7 +19,7 @@ Entwicklungsprüffälle). Verringerte Replikat- oder Kampagnenzahlen erzeugen ei
 """
 import copy
 import json
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 
 from . import formate
 
