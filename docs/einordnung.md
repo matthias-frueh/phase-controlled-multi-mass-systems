@@ -91,7 +91,7 @@ ist Teil der Hypothese, nicht ihr Widerspruch. Welches Kraftmodell bei der vorli
 Keulegan-Carpenter-Zahl gilt, ist offen; ein quasistationäres quadratisches Widerstandsgesetz ist dort
 nicht begründet.
 
-Hierzu gehören: der Forschungsrahmen v3.5 (korrekturbedürftig; Nachfolger v3.6 in Arbeit), der
+Hierzu gehören: der Forschungsrahmen v3.5 (korrekturbedürftig; Nachfolger v3.6 vorgesehen, AP-28), der
 Drift-Sweep, die Medienkopplungsmodelle, der Ballon-Demonstrator.
 
 **Warum die Trennung wichtig ist:** Linie A ist erhaltungssicher im starken Sinne — der Effekt ist
