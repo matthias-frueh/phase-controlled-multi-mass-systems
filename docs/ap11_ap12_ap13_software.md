@@ -41,6 +41,11 @@ Prüfstand erzeugt), Plan [AP-13](plan_ap13_pipelinetest.md) mit Vermerk vom 16.
   gemeinsame Bestätigungswahrscheinlichkeit; der Drift-Zusatz (a) erscheint auch ohne Drift; F_min ist unter S₃ nur bis
   auf die Rasterschranke invariant; C03 und A07 prüfen K11 und K21 mit dem Katalog nicht; die quadratische Kette I02
   kollidiert mit G1; E3 verfehlt „unauffällig ≥ 0,8“ auf L1, auch mit Unsicherheit von T (Neulauf vom 17.10.2026).
+- **Diagnose E3b und G4** (17.10.2026, [Diagnosebericht](e3b_g4_diagnose_2026-10-17/bericht.md), Entscheidungsvorlage,
+  keine Regel geändert): „unbestimmt“ von E3b folgt aus dem Betrag des komplexen Residuums (Rayleigh); G4 unterschätzt
+  die Fünftel-Streuung an steilen Flanken (Jitter × Steigung), eine vorab aus Phase 0 bestimmte Standardisierung
+  behebt das weitgehend; die Reserve „+2“ reicht mit den Wiederholungen nach A9.12, die der Generator nicht abbildet.
+  Die Begründung der Pilotsuche nennt jetzt den tatsächlichen Abbruchgrund (`pilot-0.2`).
 
 ## 1a Korrekturen vom 16.10.2026
 
@@ -158,6 +163,8 @@ python3 code/pcmms_auswertung harness pruefsatz --pruefen tests/fixtures/ap13_pr
 python3 code/pcmms_auswertung harness matrix --kampagnen 1000 --seed 1 --ausgabe /tmp/pcmms_matrix   # nur Auftragsliste
 python3 code/pcmms_auswertung harness neulauf             # Neuläufe K12/K19/E3 nach Auftragsliste, mit Checkpoints
 python3 code/pcmms_auswertung harness neulauf --bericht   # Alt-Neu-Vergleich (docs/ap13_neulaeufe_2026-10-17/)
+python3 code/pcmms_auswertung harness diagnose-e3b-g4 [--startsatz]   # G4-Ergänzungsläufe der Diagnose, mit Checkpoints
+python3 code/pcmms_auswertung harness diagnose-e3b-g4 --bericht       # Diagnose E3b/G4 (docs/e3b_g4_diagnose_2026-10-17/)
 PCMMS_SLOW=1 python3 -m pytest tests/test_ap12_auswertung.py -k vollraster_4000 -s   # 4000 Zeltfits gegen Vollraster
 ```
 
@@ -424,7 +431,11 @@ klären am Präreg-Text bzw. im Plan (AP-08, AP-13), nicht in der Software.
    Superposition in 7/200, 11/60 und 15/60 Kampagnen „Datenlage“, und P(H1 und H2 bestätigt | exakt) sinkt auf 0,965,
    0,82 und 0,75. Mit 30 Harmonischen (Planungssuche bei A4) wird der Anteil noch größer. Wirkung: K05 und die gemeinsame
    Bestätigungswahrscheinlichkeit sinken, für c zählen weniger Kampagnen; Pfad `gueltigkeit.py` (G4), `pilot.py`
-   (Reserve). Rückmeldung (σ_Δ je Konfiguration oder Lage der Piloten, Reserve je Punkt).
+   (Reserve). Rückmeldung (σ_Δ je Konfiguration oder Lage der Piloten, Reserve je Punkt). Diagnose vom 17.10.2026
+   ([Diagnosebericht](e3b_g4_diagnose_2026-10-17/bericht.md), Abschnitt 3, 120 Ergänzungskampagnen): Ursache ist der
+   Jitter der Indexphasen mal der Flankensteigung; nach A7 zulässige Piloten erreichen die steilen Punkte nicht; eine
+   konfigurationsabhängige Standardisierung aus Phase 0 senkt G4 auf 0,9–1,5 %; mit den Wiederholungen nach A9.12
+   sind alle 120 Kampagnen vollständig; bei A4 bildet die Pilotanalyse σ_Δ,F mit k = 30 statt k_max = 9.
 2. **S₃-Gleichheit von F_min nur bis auf die N_θ-Rasterschranke** (Plan K16 gegen A1). F_min ist nach A1 das Minimum
    auf den 2000 Stützstellen; unter Zeitverschiebungen, die kein Vielfaches von 0,18° sind, ist F_min − ⟨N⟩ nur bis
    auf Σ_k k²|N_k|·(2π/N_θ)²/8 invariant (F01: 1,2·10⁻⁵ N bei Schranke 1,5–1,8·10⁻⁵ N). |N_k|, γ₁ und die Phasenregel
@@ -468,7 +479,11 @@ klären am Präreg-Text bzw. im Plan (AP-08, AP-13), nicht in der Software.
     [Neulaufbericht](ap13_neulaeufe_2026-10-17/bericht.md); eine Schwellenentscheidung folgt daraus nicht). Mit den Entwicklungsschwellen (0,1°, q_tol = 5,8·10⁻⁴)
     ist E3 bei exakter Superposition in 14/200 Kampagnen „unauffällig“, sonst „unbestimmt“; nach A9.11 würde E3 dann
     nur beschreibend berichtet. Phasenversatz eines Moduls (A06, H03) und der lineare Messketteneinfluss E04 erscheinen
-    als „auffällig“ (30/30), die Basisdrift E07 in 36/40. Bei A07 ist E3 nicht auswertbar (T(kω) singulär).
+    als „auffällig“ (30/30), die Basisdrift E07 in 36/40. Bei A07 ist E3 nicht auswertbar (T(kω) singulär). Diagnose vom
+    17.10.2026 ([Diagnosebericht](e3b_g4_diagnose_2026-10-17/bericht.md), Abschnitt 2): 27/200 scheitern an der reinen
+    Unsicherheitsgrenze u(q_Z) > q_tol/1,645, 159/200 am positiven Punktschätzer; ein komplexes Nullresiduum sagt
+    P(unauffällig) = 0,07 voraus (beobachtet 14/200), für 0,8 müsste die Streuung 2,2-mal kleiner sein. Vorschlag:
+    feste Schwellen mit Rückfall je Prüfgröße und fester Prüfzahl; Entscheidung beim Autor.
 12. **Überdeckung der H2-Intervalle konservativ** (§8.6, A9.6). Bei exakter Superposition überdeckt das
     Perzentilintervall den Bezugswert in allen Kampagnen (194/194, symmetrisches Zelt 40/40), BCa in 0,94–0,98; die
     Rückfallkette wählt damit stets das Perzentilintervall. Der Bezugswert der Überdeckung ist offen (§12); gewählt ist
