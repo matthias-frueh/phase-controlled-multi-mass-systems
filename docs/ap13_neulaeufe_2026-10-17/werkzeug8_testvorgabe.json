@@ -1,0 +1,115 @@
+{
+ "inhalt": {
+  "bias0": {
+   "npz": "bias0"
+  },
+  "bias0_zellen": {
+   "npz": "bias0_zellen"
+  },
+  "bias1": {
+   "npz": "bias1"
+  },
+  "bias1_zellen": {
+   "npz": "bias1_zellen"
+  },
+  "bias_herkunft": "TESTVORGABE (keine Kalibriersimulation): b̂ = 0",
+  "c_H1": 4.355977150585433,
+  "c_H1Z": 4.841506689208008,
+  "c_H1Z_herkunft": "TESTVORGABE (keine Kalibriersimulation): c_B = t(1 − 0,05/882; 19)",
+  "c_H1_herkunft": "TESTVORGABE (keine Kalibriersimulation): c_B = t(1 − 0,05/294; 19)",
+  "h2_intervall": {
+   "niveau": 0.95,
+   "quelle": "TESTVORGABE (keine Kalibriersimulation)",
+   "typ": "perzentil"
+  },
+  "u_bias0": {
+   "npz": "u_bias0"
+  },
+  "u_bias0_zellen": {
+   "npz": "u_bias0_zellen"
+  },
+  "u_bias1": {
+   "npz": "u_bias1"
+  },
+  "u_bias1_zellen": {
+   "npz": "u_bias1_zellen"
+  }
+ },
+ "kopf": {
+  "code_version": {
+   "git": "0982df95ee57be25246ad2c2ae81d241b0e65af0",
+   "paket": "0.1.0"
+  },
+  "daten": {
+   "datei": "werkzeug8_testvorgabe.npz",
+   "felder": {
+    "bias0": {
+     "dtype": "float64",
+     "form": [
+      21
+     ]
+    },
+    "bias0_zellen": {
+     "dtype": "float64",
+     "form": [
+      21,
+      3
+     ]
+    },
+    "bias1": {
+     "dtype": "float64",
+     "form": [
+      21
+     ]
+    },
+    "bias1_zellen": {
+     "dtype": "float64",
+     "form": [
+      21,
+      3
+     ]
+    },
+    "u_bias0": {
+     "dtype": "float64",
+     "form": [
+      21
+     ]
+    },
+    "u_bias0_zellen": {
+     "dtype": "float64",
+     "form": [
+      21,
+      3
+     ]
+    },
+    "u_bias1": {
+     "dtype": "float64",
+     "form": [
+      21
+     ]
+    },
+    "u_bias1_zellen": {
+     "dtype": "float64",
+     "form": [
+      21,
+      3
+     ]
+    }
+   },
+   "sha256": "8782fbd6acbcd38f990d85c338160553fb234573a62342dd976327135a98c7d4"
+  },
+  "datenart": "synthetisch",
+  "erzeugt_von": {
+   "programm": "pcmms_auswertung",
+   "version": "0.1.0"
+  },
+  "herkunft": {
+   "art": "Testvorgabe des Harness (kette.testvorgabe_werkzeug8), keine Kalibriersimulation",
+   "aufruf": "werkzeug8=None wie im Altversuch; diese Datei dokumentiert die erzeugten Werte"
+  },
+  "kennung": "SYNTH-W8-TESTVORGABE",
+  "registrierung": "keine (synthetisch)",
+  "schema": "pcmms.werkzeug8",
+  "schema_version": "0.1"
+ }
+}
