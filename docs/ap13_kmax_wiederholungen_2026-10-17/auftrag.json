@@ -1,0 +1,647 @@
+{
+ "anweisung": "ANWEISUNG_Claude_Code_AP13_kmax_Wiederholungen_2026-10-17",
+ "auftraege": [
+  {
+   "art": "schlank",
+   "ebene": "H",
+   "id": "N01-A4-historisch-start",
+   "indizes": [
+    0,
+    1
+   ],
+   "seedregel": "vergleich",
+   "seeds": [
+    6421326674948950355,
+    941771759588347363
+   ],
+   "szenario": "N01-A4",
+   "variante": "historisch",
+   "werkzeug8": null
+  },
+  {
+   "art": "schlank",
+   "ebene": "H",
+   "id": "N01-A4-k_konsistent-start",
+   "indizes": [
+    0,
+    1
+   ],
+   "seedregel": "vergleich",
+   "seeds": [
+    6421326674948950355,
+    941771759588347363
+   ],
+   "szenario": "N01-A4",
+   "variante": "k_konsistent",
+   "werkzeug8": null
+  },
+  {
+   "art": "schlank",
+   "ebene": "H",
+   "id": "N01-A4-wiederholungen-start",
+   "indizes": [
+    0,
+    1
+   ],
+   "seedregel": "vergleich",
+   "seeds": [
+    6421326674948950355,
+    941771759588347363
+   ],
+   "szenario": "N01-A4",
+   "variante": "wiederholungen",
+   "werkzeug8": null
+  },
+  {
+   "art": "schlank",
+   "ebene": "H",
+   "id": "N01-V1G0-historisch-start",
+   "indizes": [
+    0,
+    1
+   ],
+   "seedregel": "vergleich",
+   "seeds": [
+    4202534701440629906,
+    522969386212988845
+   ],
+   "szenario": "N01-V1G0",
+   "variante": "historisch",
+   "werkzeug8": null
+  },
+  {
+   "art": "schlank",
+   "ebene": "H",
+   "id": "N01-V1G0-k_konsistent-start",
+   "indizes": [
+    0,
+    1
+   ],
+   "seedregel": "vergleich",
+   "seeds": [
+    4202534701440629906,
+    522969386212988845
+   ],
+   "szenario": "N01-V1G0",
+   "variante": "k_konsistent",
+   "werkzeug8": null
+  },
+  {
+   "art": "schlank",
+   "ebene": "H",
+   "id": "N01-V1G0-wiederholungen-start",
+   "indizes": [
+    0,
+    1
+   ],
+   "seedregel": "vergleich",
+   "seeds": [
+    4202534701440629906,
+    522969386212988845
+   ],
+   "szenario": "N01-V1G0",
+   "variante": "wiederholungen",
+   "werkzeug8": null
+  },
+  {
+   "art": "schlank",
+   "ebene": "H",
+   "id": "N01-V1G60h-historisch-start",
+   "indizes": [
+    0,
+    1
+   ],
+   "seedregel": "vergleich",
+   "seeds": [
+    795519448574340983,
+    6415602612872341321
+   ],
+   "szenario": "N01-V1G60h",
+   "variante": "historisch",
+   "werkzeug8": null
+  },
+  {
+   "art": "schlank",
+   "ebene": "H",
+   "id": "N01-V1G60h-k_konsistent-start",
+   "indizes": [
+    0,
+    1
+   ],
+   "seedregel": "vergleich",
+   "seeds": [
+    795519448574340983,
+    6415602612872341321
+   ],
+   "szenario": "N01-V1G60h",
+   "variante": "k_konsistent",
+   "werkzeug8": null
+  },
+  {
+   "art": "schlank",
+   "ebene": "H",
+   "id": "N01-V1G60h-wiederholungen-start",
+   "indizes": [
+    0,
+    1
+   ],
+   "seedregel": "vergleich",
+   "seeds": [
+    795519448574340983,
+    6415602612872341321
+   ],
+   "szenario": "N01-V1G60h",
+   "variante": "wiederholungen",
+   "werkzeug8": null
+  },
+  {
+   "art": "schlank",
+   "ebene": "H",
+   "id": "N01-A4-historisch-rest",
+   "indizes": [
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+   ],
+   "seedregel": "vergleich",
+   "seeds": [
+    1671252940681334300,
+    3742277982765182668,
+    655012045435102802,
+    3010703880746530213,
+    4088570445890746321,
+    8609028504085932528,
+    6952551792846395683,
+    5328013158255319426
+   ],
+   "szenario": "N01-A4",
+   "variante": "historisch",
+   "werkzeug8": null
+  },
+  {
+   "art": "schlank",
+   "ebene": "H",
+   "id": "N01-A4-k_konsistent-rest",
+   "indizes": [
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+   ],
+   "seedregel": "vergleich",
+   "seeds": [
+    1671252940681334300,
+    3742277982765182668,
+    655012045435102802,
+    3010703880746530213,
+    4088570445890746321,
+    8609028504085932528,
+    6952551792846395683,
+    5328013158255319426
+   ],
+   "szenario": "N01-A4",
+   "variante": "k_konsistent",
+   "werkzeug8": null
+  },
+  {
+   "art": "schlank",
+   "ebene": "H",
+   "id": "N01-A4-wiederholungen-rest",
+   "indizes": [
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+   ],
+   "seedregel": "vergleich",
+   "seeds": [
+    1671252940681334300,
+    3742277982765182668,
+    655012045435102802,
+    3010703880746530213,
+    4088570445890746321,
+    8609028504085932528,
+    6952551792846395683,
+    5328013158255319426
+   ],
+   "szenario": "N01-A4",
+   "variante": "wiederholungen",
+   "werkzeug8": null
+  },
+  {
+   "art": "schlank",
+   "ebene": "H",
+   "id": "N01-V1G0-historisch-rest",
+   "indizes": [
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+   ],
+   "seedregel": "vergleich",
+   "seeds": [
+    6151025590442919715,
+    2837871836508963753,
+    6541414184217749668,
+    1911642046984185806,
+    3825293146687617875,
+    3111866991806461631,
+    5605373187149328597,
+    8923286715072122757
+   ],
+   "szenario": "N01-V1G0",
+   "variante": "historisch",
+   "werkzeug8": null
+  },
+  {
+   "art": "schlank",
+   "ebene": "H",
+   "id": "N01-V1G0-k_konsistent-rest",
+   "indizes": [
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+   ],
+   "seedregel": "vergleich",
+   "seeds": [
+    6151025590442919715,
+    2837871836508963753,
+    6541414184217749668,
+    1911642046984185806,
+    3825293146687617875,
+    3111866991806461631,
+    5605373187149328597,
+    8923286715072122757
+   ],
+   "szenario": "N01-V1G0",
+   "variante": "k_konsistent",
+   "werkzeug8": null
+  },
+  {
+   "art": "schlank",
+   "ebene": "H",
+   "id": "N01-V1G0-wiederholungen-rest",
+   "indizes": [
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+   ],
+   "seedregel": "vergleich",
+   "seeds": [
+    6151025590442919715,
+    2837871836508963753,
+    6541414184217749668,
+    1911642046984185806,
+    3825293146687617875,
+    3111866991806461631,
+    5605373187149328597,
+    8923286715072122757
+   ],
+   "szenario": "N01-V1G0",
+   "variante": "wiederholungen",
+   "werkzeug8": null
+  },
+  {
+   "art": "schlank",
+   "ebene": "H",
+   "id": "N01-V1G60h-historisch-rest",
+   "indizes": [
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+   ],
+   "seedregel": "vergleich",
+   "seeds": [
+    8676972707023640149,
+    1085381528517609721,
+    4992586427391883278,
+    2876192135852870702,
+    7657828229482855577,
+    3187541850860021720,
+    8236900843280286866,
+    2511684875737638130
+   ],
+   "szenario": "N01-V1G60h",
+   "variante": "historisch",
+   "werkzeug8": null
+  },
+  {
+   "art": "schlank",
+   "ebene": "H",
+   "id": "N01-V1G60h-k_konsistent-rest",
+   "indizes": [
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+   ],
+   "seedregel": "vergleich",
+   "seeds": [
+    8676972707023640149,
+    1085381528517609721,
+    4992586427391883278,
+    2876192135852870702,
+    7657828229482855577,
+    3187541850860021720,
+    8236900843280286866,
+    2511684875737638130
+   ],
+   "szenario": "N01-V1G60h",
+   "variante": "k_konsistent",
+   "werkzeug8": null
+  },
+  {
+   "art": "schlank",
+   "ebene": "H",
+   "id": "N01-V1G60h-wiederholungen-rest",
+   "indizes": [
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+   ],
+   "seedregel": "vergleich",
+   "seeds": [
+    8676972707023640149,
+    1085381528517609721,
+    4992586427391883278,
+    2876192135852870702,
+    7657828229482855577,
+    3187541850860021720,
+    8236900843280286866,
+    2511684875737638130
+   ],
+   "szenario": "N01-V1G60h",
+   "variante": "wiederholungen",
+   "werkzeug8": null
+  },
+  {
+   "art": "voll",
+   "ebene": "H",
+   "id": "voll-N01-A4-k_konsistent",
+   "indizes": [
+    0
+   ],
+   "seedregel": "vergleich",
+   "seeds": [
+    6421326674948950355
+   ],
+   "szenario": "N01-A4",
+   "variante": "k_konsistent",
+   "werkzeug8": "A4"
+  },
+  {
+   "art": "voll",
+   "ebene": "H",
+   "id": "voll-A04-R4-k_konsistent",
+   "indizes": [
+    0
+   ],
+   "seedregel": "zusatz",
+   "seeds": [
+    7550300167789857562
+   ],
+   "szenario": "A04-R4",
+   "variante": "k_konsistent",
+   "werkzeug8": "A4"
+  },
+  {
+   "art": "voll",
+   "ebene": "H",
+   "id": "voll-N01-A4-wiederholungen",
+   "indizes": [
+    0
+   ],
+   "seedregel": "vergleich",
+   "seeds": [
+    6421326674948950355
+   ],
+   "szenario": "N01-A4",
+   "variante": "wiederholungen",
+   "werkzeug8": "A4"
+  },
+  {
+   "art": "voll",
+   "ebene": "H",
+   "id": "voll-A04-R4-wiederholungen",
+   "indizes": [
+    0
+   ],
+   "seedregel": "zusatz",
+   "seeds": [
+    7550300167789857562
+   ],
+   "szenario": "A04-R4",
+   "variante": "wiederholungen",
+   "werkzeug8": "A4"
+  },
+  {
+   "art": "voll",
+   "ebene": "Z",
+   "id": "voll-Z-N01-A4-wiederholungen",
+   "indizes": [
+    0
+   ],
+   "seedregel": "vergleich",
+   "seeds": [
+    6421326674948950355
+   ],
+   "szenario": "N01-A4",
+   "variante": "wiederholungen",
+   "werkzeug8": "A4"
+  },
+  {
+   "art": "voll",
+   "ebene": "Z",
+   "id": "voll-Z-A04-R4-wiederholungen",
+   "indizes": [
+    0
+   ],
+   "seedregel": "zusatz",
+   "seeds": [
+    7550300167789857562
+   ],
+   "szenario": "A04-R4",
+   "variante": "wiederholungen",
+   "werkzeug8": "A4"
+  },
+  {
+   "art": "schlank",
+   "ebene": "H",
+   "id": "regelpfad-S06-saettigung",
+   "indizes": [
+    0
+   ],
+   "seedregel": "zusatz",
+   "seeds": [
+    1910311766019208858
+   ],
+   "szenario": "S06-saettigung",
+   "variante": "wiederholungen",
+   "werkzeug8": null
+  },
+  {
+   "art": "schlank",
+   "ebene": "H",
+   "id": "regelpfad-H-fehlend",
+   "indizes": [
+    0
+   ],
+   "seedregel": "zusatz",
+   "seeds": [
+    2265562330325795912
+   ],
+   "szenario": "H-fehlend",
+   "variante": "wiederholungen",
+   "werkzeug8": null
+  },
+  {
+   "art": "schlank",
+   "ebene": "H",
+   "id": "regelpfad-S02-kontrolllauf",
+   "indizes": [
+    0
+   ],
+   "seedregel": "zusatz",
+   "seeds": [
+    8492860313944394542
+   ],
+   "szenario": "S02-kontrolllauf",
+   "variante": "wiederholungen",
+   "werkzeug8": null
+  },
+  {
+   "art": "fortsetzung",
+   "ebene": "H",
+   "id": "fortsetzung-N01-V1G60h",
+   "indizes": [
+    0
+   ],
+   "seedregel": "vergleich",
+   "seeds": [
+    795519448574340983
+   ],
+   "szenario": "N01-V1G60h",
+   "variante": "wiederholungen",
+   "werkzeug8": null
+  }
+ ],
+ "ausgangsstand": "2ab6d2818a80e67aaa927de00060f99167ed8c25",
+ "budget": {
+  "davon_voll": 6,
+  "grenze_kampagnen": 120,
+  "grenze_kernstunden": 4.0,
+  "grenze_prozesse": 4,
+  "grenze_voll": 12,
+  "kampagnenausfuehrungen": 101,
+  "zaehlung": "je (System, Seed, Variante) eine Ausführung; Fortsetzung zählt doppelt (unterbrochen und ununterbrochen)"
+ },
+ "gemeinsam": {
+  "ausgabe": "/tmp/pcmms-ablauf-vergleich-20261017",
+  "blas_threads_je_prozess": 1,
+  "fortsetzung_bis": 300,
+  "n_min": 18,
+  "plan": {
+   "n0": 20,
+   "n_bloecke": 24,
+   "n_pilot": 20
+  },
+  "profil": "ENTW-2026-10+red(bootstrap_B=1000,e3_mc=1000,eps_ctrl_datensaetze=1000,h2_replikate=1000,h3_mc=1000)",
+  "profil_reduktion": {
+   "bootstrap_B": 1000,
+   "eps_ctrl_datensaetze": 1000,
+   "h3_mc": 1000
+  },
+  "profil_sha256": "49dc74abca52b2c5e4ae8f6d2e1c53dc468205b01b9f65270b86c27e91114352",
+  "prozesse": 4,
+  "seed_ableitung": {
+   "vergleich": "zufall.unterseed(20261017, 'diagnose_g4', Szenario, 'L1', i) – die ersten zehn Seeds der G4-Diagnose von PR #22",
+   "zusatz": "zufall.unterseed(20261017, 'ablauf_voll', Szenario, 'L1', i)"
+  },
+  "seed_basis": 20261017,
+  "stufe": "L1",
+  "varianten": {
+   "historisch": {
+    "ablauf": "statisch",
+    "ablauf_version": null,
+    "bindung": "historisch",
+    "optionen": null,
+    "version": "verfahren-1"
+   },
+   "k_konsistent": {
+    "ablauf": "statisch",
+    "ablauf_version": null,
+    "bindung": "plan",
+    "optionen": null,
+    "version": "verfahren-1"
+   },
+   "wiederholungen": {
+    "ablauf": "zustand",
+    "ablauf_version": "ablauf-1",
+    "bindung": "plan",
+    "optionen": {
+     "aufwaermen": true,
+     "halt": true,
+     "wiederholungen": true
+    },
+    "version": "verfahren-1"
+   }
+  },
+  "zufallsstroeme": {
+   "bootstrap": "zufall.unterseed(seed, 'bootstrap') (Stufe 2) und zufall.unterseed(seed, 'teil_b') (B⁰-Replikate)",
+   "ebene_z": "zufall.strom(seed, 'generator_z_versuch', Kennung)",
+   "eps_ctrl": "Kampagnenseed (pilot.pilot_auswerten, in der Bindung von Teil B vermerkt)",
+   "generator": "zufall.strom(seed, 'generator') (geplante Läufe, Vorrat)",
+   "p0": "zufall.strom(seed, 'p0') (P0-Kalibrierdaten)",
+   "reihenfolge": "zufall.strom(seed, 'reihenfolge') (Laufplan, danach Wiederholungsplätze)",
+   "versuch": "zufall.strom(seed, 'generator_versuch', Versuchsnummer)"
+  }
+ },
+ "werkzeug8": {
+  "A4": {
+   "art": "Testwert: Kalibrierung von PR #21 mit dem alten Ablauf, keine Kalibrierung des neuen Ablaufs",
+   "datei": "docs/ap13_neulaeufe_2026-10-17/werkzeug8_A4",
+   "inhalt_sha256": "d4465b57a7e7b6ba6a6b075c187fa38041e6afefcb756c3852ca7f9517209b3c"
+  }
+ }
+}
