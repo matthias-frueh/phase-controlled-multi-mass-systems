@@ -1,0 +1,189 @@
+{
+ "inhalt": {
+  "bias0": {
+   "npz": "bias0"
+  },
+  "bias0_zellen": {
+   "npz": "bias0_zellen"
+  },
+  "bias1": {
+   "npz": "bias1"
+  },
+  "bias1_zellen": {
+   "npz": "bias1_zellen"
+  },
+  "bias_herkunft": "Kalibriersimulation (AP-13) mit 60 Kampagnen (reduziert: Entwicklungsdiagnostik), Profil ENTW-2026-10+red(bootstrap_B=1000,e3_mc=1000,eps_ctrl_datensaetze=1000,h2_replikate=1000,h3_mc=1000): Mittel der Rohresiduen von F_min − ⟨N⟩",
+  "c_H1": 3.658874367687632,
+  "c_H1Z": 3.6703703084165524,
+  "c_H1Z_herkunft": "Kalibriersimulation (AP-13) mit 60 Kampagnen (reduziert: Entwicklungsdiagnostik), Profil ENTW-2026-10+red(bootstrap_B=1000,e3_mc=1000,eps_ctrl_datensaetze=1000,h2_replikate=1000,h3_mc=1000): q95 von max|z⁰| über 441 Tests, n = 40",
+  "c_H1_herkunft": "Kalibriersimulation (AP-13) mit 60 Kampagnen (reduziert: Entwicklungsdiagnostik), Profil ENTW-2026-10+red(bootstrap_B=1000,e3_mc=1000,eps_ctrl_datensaetze=1000,h2_replikate=1000,h3_mc=1000): q95 von max|z⁰| über 147 Tests, n = 40; Prüfrate 0.0204 ± 0.0202 aus 49 vollständigen von 60 Kampagnen",
+  "h2_intervall": {
+   "niveau": 0.95,
+   "quelle": "Kalibriersimulation (AP-13) mit 60 Kampagnen (reduziert: Entwicklungsdiagnostik), Profil ENTW-2026-10+red(bootstrap_B=1000,e3_mc=1000,eps_ctrl_datensaetze=1000,h2_replikate=1000,h3_mc=1000)",
+   "typ": "perzentil",
+   "ueberdeckung": {
+    "bca_0.95": {
+     "yhat0": 0.9761904761904762,
+     "yhat1": 0.9761904761904762
+    },
+    "perzentil_0.95": {
+     "yhat0": 1.0,
+     "yhat1": 1.0
+    },
+    "perzentil_0.96": {
+     "yhat0": 1.0,
+     "yhat1": 1.0
+    },
+    "perzentil_0.97": {
+     "yhat0": 1.0,
+     "yhat1": 1.0
+    },
+    "perzentil_0.98": {
+     "yhat0": 1.0,
+     "yhat1": 1.0
+    },
+    "perzentil_0.99": {
+     "yhat0": 1.0,
+     "yhat1": 1.0
+    }
+   }
+  },
+  "pruefrate": {
+   "gepoolt": false,
+   "mc_se": 0.020198843236954835,
+   "n": 49,
+   "rate": 0.02040816326530612
+  },
+  "reduziert": true,
+  "u_bias0": {
+   "npz": "u_bias0"
+  },
+  "u_bias0_zellen": {
+   "npz": "u_bias0_zellen"
+  },
+  "u_bias1": {
+   "npz": "u_bias1"
+  },
+  "u_bias1_zellen": {
+   "npz": "u_bias1_zellen"
+  }
+ },
+ "kopf": {
+  "code_version": {
+   "git": "0982df95ee57be25246ad2c2ae81d241b0e65af0",
+   "paket": "0.1.0"
+  },
+  "daten": {
+   "datei": "werkzeug8_V1G0.npz",
+   "felder": {
+    "bias0": {
+     "dtype": "float64",
+     "form": [
+      21
+     ]
+    },
+    "bias0_zellen": {
+     "dtype": "float64",
+     "form": [
+      21,
+      3
+     ]
+    },
+    "bias1": {
+     "dtype": "float64",
+     "form": [
+      21
+     ]
+    },
+    "bias1_zellen": {
+     "dtype": "float64",
+     "form": [
+      21,
+      3
+     ]
+    },
+    "u_bias0": {
+     "dtype": "float64",
+     "form": [
+      21
+     ]
+    },
+    "u_bias0_zellen": {
+     "dtype": "float64",
+     "form": [
+      21,
+      3
+     ]
+    },
+    "u_bias1": {
+     "dtype": "float64",
+     "form": [
+      21
+     ]
+    },
+    "u_bias1_zellen": {
+     "dtype": "float64",
+     "form": [
+      21,
+      3
+     ]
+    }
+   },
+   "sha256": "a42d723821d8321543c9b3c7d3d202b717e6b319d0c9a45bcc7e3bb22e036677"
+  },
+  "datenart": "synthetisch",
+  "erzeugt_von": {
+   "programm": "pcmms_auswertung",
+   "version": "0.1.0"
+  },
+  "herkunft": {
+   "art": "wiederverwendet (nicht rekonstruiert)",
+   "kalibrierung": {
+    "code_version": {
+     "git": "7a259efe3f2f9545cd487af3d2ddb8a20a1e8b34",
+     "paket": "0.1.0"
+    },
+    "gepoolt": false,
+    "n_kalibrierung": 60,
+    "n_min": 18,
+    "n_pruefung": 60,
+    "plan": {
+     "n0": 20,
+     "n_bloecke": 24,
+     "n_pilot": 20
+    },
+    "profil": "ENTW-2026-10+red(bootstrap_B=1000,e3_mc=1000,eps_ctrl_datensaetze=1000,h2_replikate=1000,h3_mc=1000)",
+    "profil_sha256": "49dc74abca52b2c5e4ae8f6d2e1c53dc468205b01b9f65270b86c27e91114352",
+    "rollen": [
+     "kalibrierung_c",
+     "pruefung_c"
+    ],
+    "seed_basis": 20261016,
+    "stufe": "L1",
+    "szenario": "N01-V1G0"
+   },
+   "ort": "schritte.kalibrierung_v1.V1-G0.werkzeug8",
+   "quelle": {
+    "code_version": {
+     "git": "7a259efe3f2f9545cd487af3d2ddb8a20a1e8b34",
+     "paket": "0.1.0"
+    },
+    "datei": "pruefstand.json (+ pruefstand.npz), vollständige Ausgabe des Entwicklungsprüfstands vom 16.10.2026; nicht im Repository, im Arbeitsbereich der Sitzung erhalten",
+    "historisch": {
+     "datei": "docs/ap11_ap12_ap13_pruefstand.json",
+     "git_blob": "c0a6afb4e5ee8d7fc2c98984354da3b09b32efe8",
+     "gleich_kompakt_der_quelle": true
+    },
+    "kennung": "SYNTH-PRUEFSTAND-20261016",
+    "npz_sha256": "d1a5700809629f84f6fecfe062d65677c74f315e6c372f4494950b67aed25449",
+    "profil": "ENTW-2026-10+red(bootstrap_B=1000,e3_mc=1000,eps_ctrl_datensaetze=1000,h2_replikate=1000,h3_mc=1000)",
+    "profil_sha256": "49dc74abca52b2c5e4ae8f6d2e1c53dc468205b01b9f65270b86c27e91114352",
+    "sha256": "fdfe9229747408e9ad90b97784550d2bc57edc9151e1a959ac152726c169d468"
+   }
+  },
+  "kennung": "SYNTH-W8-N01-V1G0-L1-20261016",
+  "registrierung": "keine (synthetisch)",
+  "schema": "pcmms.werkzeug8",
+  "schema_version": "0.1"
+ }
+}

@@ -180,8 +180,10 @@ def ausfuehren(ziel, konfiguration=None, schritte=None, prozesse=4, protokoll=pr
                     N_I=0)
         pe = pilot.pilot_auswerten(tab.auswahl(tab.spalte('phase', int) == 0), kal, prof, m.system.f, zeit=zeit,
                                    seed=seed, planung=hk)
-        return dict(suche={k: v for k, v in pe['suche'].items() if k != 'schritte'}, aufrufe=prot, zeit=zeit,
-                    hinweis='Zeitangaben sind Entwicklungsannahmen, keine Teil-B-Werte')
+        paare = [{k: s[k] for k in ('k', 'N_z', 'T_a', 'T_e', 'T_lauf', 'p_hat', 'n_max', 'reserve_r', 'n', 'erfuellt')
+                  if k in s} for s in pe['suche'].get('schritte', [])]          # je Paar (k, T_a) mit n_max
+        return dict(suche={k: v for k, v in pe['suche'].items() if k != 'schritte'}, aufrufe=prot, paare=paare,
+                    zeit=zeit, hinweis='Zeitangaben sind Entwicklungsannahmen, keine Teil-B-Werte')
     schritt('planung', plan_)
     schritt('pruefsatz', lambda: pruefsatz.pruefen(os.path.join(os.path.dirname(__file__), '..', '..', '..', 'tests',
                                                                 'fixtures', 'ap13_pruefsatz')))

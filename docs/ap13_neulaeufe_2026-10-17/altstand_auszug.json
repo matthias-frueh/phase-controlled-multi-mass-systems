@@ -1,0 +1,4373 @@
+{
+ "e3": {
+  "A06-phase/L1": {
+   "abbruch": {
+    "S1_kandidaten": {
+     "mc_se": 0.06206328908341751,
+     "nenner": 30,
+     "rate": 0.8666666666666667,
+     "zaehler": 26
+    },
+    "S2": {
+     "mc_se": 0.0,
+     "nenner": 30,
+     "rate": 0.0,
+     "zaehler": 0
+    },
+    "S4": {
+     "mc_se": 0.0,
+     "nenner": 30,
+     "rate": 0.0,
+     "zaehler": 0
+    }
+   },
+   "gueltigkeit": {
+    "G1": {
+     "mc_se": 0.0005607576837195228,
+     "nenner": 18900,
+     "rate": 0.0059788359788359785,
+     "zaehler": 113
+    },
+    "G4": {
+     "mc_se": 0.0014451075009101325,
+     "nenner": 18900,
+     "rate": 0.04116402116402117,
+     "zaehler": 778
+    }
+   },
+   "meta": {
+    "code_version": {
+     "git": "7a259efe3f2f9545cd487af3d2ddb8a20a1e8b34",
+     "paket": "0.1.0"
+    },
+    "laufzeit_s": 92.38,
+    "n": 30,
+    "n_min": 18,
+    "plan": {
+     "T_lauf": 17.0,
+     "einstellung2": null,
+     "n0": 20,
+     "n_bloecke": 24,
+     "n_pilot": 20,
+     "n_zyklen": 100,
+     "phase_pause": 86400.0,
+     "pruef": [],
+     "pruef_bilder": true,
+     "ref_abstand": 12,
+     "ref_min_p0": 42,
+     "tag_pause": 43200.0,
+     "tage": 1,
+     "zusatz": false
+    },
+    "profil_sha256": "49dc74abca52b2c5e4ae8f6d2e1c53dc468205b01b9f65270b86c27e91114352",
+    "prozesse": 4,
+    "rolle": "pruefung",
+    "seed_basis": 20261016,
+    "seeds": [
+     438548262862245702,
+     4368021340452439976,
+     6956972288675681944,
+     7395782382825338433,
+     2570435796447086344,
+     742136572625269126,
+     5120714650732898694,
+     115990511888104833,
+     1952192890039913292,
+     7166948963913918892,
+     7976360938764277076,
+     7908723913386917236,
+     2029282491583134973,
+     3906842188133512630,
+     3541211397684663152,
+     1491577606557677437,
+     537512422377732183,
+     7313276344998781758,
+     2824705107665366256,
+     7868486636621598370,
+     8504899985275293821,
+     6265975445220553830,
+     5003487675792458715,
+     5907629376544968640,
+     3792023475079279938,
+     5784783682922648574,
+     6292214915955682341,
+     4799417684482345122,
+     2159770130144075679,
+     5735293586899446801
+    ],
+    "stufe": "L1",
+    "szenario": "A06-phase",
+    "werkzeug8": "übergeben",
+    "werkzeug8_herkunft": "Kalibriersimulation (AP-13) mit 60 Kampagnen (reduziert: Entwicklungsdiagnostik), Profil ENTW-2026-10+red(bootstrap_B=1000,e3_mc=1000,eps_ctrl_datensaetze=1000,h2_replikate=1000,h3_mc=1000): q95 von max|z⁰| über 147 Tests, n = 40; Prüfrate 0.0204 ± 0.0202 aus 49 vollständigen von 60 Kampagnen"
+   },
+   "ort": "schritte.szenarien_v1.A06-phase/L1",
+   "raten": {
+    "E3: auffällig": {
+     "mc_se": 0.0,
+     "nenner": 30,
+     "rate": 1.0,
+     "zaehler": 30
+    },
+    "H1 Sensitivität faktor_0_1: bestätigt": {
+     "mc_se": 0.07722022379508468,
+     "nenner": 30,
+     "rate": 0.7666666666666667,
+     "zaehler": 23
+    },
+    "H1 Sensitivität faktor_0_1: falsifiziert": {
+     "mc_se": 0.0,
+     "nenner": 30,
+     "rate": 0.0,
+     "zaehler": 0
+    },
+    "H1 Sensitivität faktor_0_1: nicht entscheidbar": {
+     "mc_se": 0.07722022379508468,
+     "nenner": 30,
+     "rate": 0.23333333333333334,
+     "zaehler": 7
+    },
+    "H1 Sensitivität fassung_A: bestätigt": {
+     "mc_se": 0.07722022379508468,
+     "nenner": 30,
+     "rate": 0.7666666666666667,
+     "zaehler": 23
+    },
+    "H1 Sensitivität fassung_A: falsifiziert": {
+     "mc_se": 0.0,
+     "nenner": 30,
+     "rate": 0.0,
+     "zaehler": 0
+    },
+    "H1 Sensitivität fassung_A: nicht entscheidbar": {
+     "mc_se": 0.07722022379508468,
+     "nenner": 30,
+     "rate": 0.23333333333333334,
+     "zaehler": 7
+    },
+    "H1 und H2 bestätigt": {
+     "mc_se": 0.07722022379508468,
+     "nenner": 30,
+     "rate": 0.7666666666666667,
+     "zaehler": 23
+    },
+    "H1: Zusatz Abweichung nachgewiesen, Relevanz offen": {
+     "mc_se": 0.07722022379508468,
+     "nenner": 30,
+     "rate": 0.23333333333333334,
+     "zaehler": 7
+    },
+    "H1: Zusatz Abweichung nachgewiesen, innerhalb der Äquivalenzgrenze": {
+     "mc_se": 0.07722022379508468,
+     "nenner": 30,
+     "rate": 0.7666666666666667,
+     "zaehler": 23
+    },
+    "H1: Zusatz Drift der Einzelmodulbasis": {
+     "mc_se": 0.0,
+     "nenner": 30,
+     "rate": 1.0,
+     "zaehler": 30
+    },
+    "H1: bestätigt": {
+     "mc_se": 0.07722022379508468,
+     "nenner": 30,
+     "rate": 0.7666666666666667,
+     "zaehler": 23
+    },
+    "H1: falsifiziert": {
+     "mc_se": 0.0,
+     "nenner": 30,
+     "rate": 0.0,
+     "zaehler": 0
+    },
+    "H1: nicht entscheidbar": {
+     "mc_se": 0.07722022379508468,
+     "nenner": 30,
+     "rate": 0.23333333333333334,
+     "zaehler": 7
+    },
+    "H1: nicht entscheidbar, Grund Datenlage": {
+     "mc_se": 0.07722022379508468,
+     "nenner": 30,
+     "rate": 0.23333333333333334,
+     "zaehler": 7
+    },
+    "H1Z: bestätigt": {
+     "mc_se": 0.07722022379508468,
+     "nenner": 30,
+     "rate": 0.7666666666666667,
+     "zaehler": 23
+    },
+    "H1Z: falsifiziert": {
+     "mc_se": 0.0,
+     "nenner": 30,
+     "rate": 0.0,
+     "zaehler": 0
+    },
+    "H1Z: nicht entscheidbar": {
+     "mc_se": 0.07722022379508468,
+     "nenner": 30,
+     "rate": 0.23333333333333334,
+     "zaehler": 7
+    },
+    "H1Z: nicht entscheidbar, Grund Datenlage": {
+     "mc_se": 0.07722022379508468,
+     "nenner": 30,
+     "rate": 0.23333333333333334,
+     "zaehler": 7
+    },
+    "H2: Zusatz Abweichung nachgewiesen, innerhalb der Äquivalenzgrenze": {
+     "mc_se": 0.07722022379508468,
+     "nenner": 30,
+     "rate": 0.7666666666666667,
+     "zaehler": 23
+    },
+    "H2: bestätigt": {
+     "mc_se": 0.07722022379508468,
+     "nenner": 30,
+     "rate": 0.7666666666666667,
+     "zaehler": 23
+    },
+    "H2: falsifiziert": {
+     "mc_se": 0.0,
+     "nenner": 30,
+     "rate": 0.0,
+     "zaehler": 0
+    },
+    "H2: nicht entscheidbar": {
+     "mc_se": 0.07722022379508468,
+     "nenner": 30,
+     "rate": 0.23333333333333334,
+     "zaehler": 7
+    },
+    "H2: nicht entscheidbar, Grund Datenlage": {
+     "mc_se": 0.07722022379508468,
+     "nenner": 30,
+     "rate": 0.23333333333333334,
+     "zaehler": 7
+    },
+    "H3: bestätigt": {
+     "mc_se": 0.045542003404264876,
+     "nenner": 30,
+     "rate": 0.9333333333333333,
+     "zaehler": 28
+    },
+    "H3: falsifiziert": {
+     "mc_se": 0.0,
+     "nenner": 30,
+     "rate": 0.0,
+     "zaehler": 0
+    },
+    "H3: nicht entscheidbar": {
+     "mc_se": 0.04554200340426488,
+     "nenner": 30,
+     "rate": 0.06666666666666667,
+     "zaehler": 2
+    },
+    "H3: nicht entscheidbar, Grund Datenlage": {
+     "mc_se": 0.04554200340426488,
+     "nenner": 30,
+     "rate": 0.06666666666666667,
+     "zaehler": 2
+    },
+    "H4: bestätigt": {
+     "mc_se": 0.0,
+     "nenner": 30,
+     "rate": 1.0,
+     "zaehler": 30
+    },
+    "H4: falsifiziert": {
+     "mc_se": 0.0,
+     "nenner": 30,
+     "rate": 0.0,
+     "zaehler": 0
+    },
+    "H4: nicht entscheidbar": {
+     "mc_se": 0.0,
+     "nenner": 30,
+     "rate": 0.0,
+     "zaehler": 0
+    },
+    "mindestens ein |z⁰| > c (H1)": {
+     "mc_se": 0.0,
+     "nenner": 30,
+     "rate": 1.0,
+     "zaehler": 30
+    }
+   },
+   "u_c_median": {
+    "F_min": 0.0011693016353415903,
+    "Im N1": 0.0017231766163254513,
+    "Im N2": 0.0005837638410245586,
+    "Im N3": 0.00021076935953687486,
+    "Re N1": 0.0017389411177846095,
+    "Re N2": 0.0006171664273414381,
+    "Re N3": 0.00033412044989265767
+   },
+   "wahrheit": {
+    "klasse": "R1",
+    "r_max_rel": 0.06114939240713722
+   }
+  },
+  "E04-kette/L1": {
+   "abbruch": {
+    "S1_kandidaten": {
+     "mc_se": 0.054772255750516606,
+     "nenner": 30,
+     "rate": 0.9,
+     "zaehler": 27
+    },
+    "S2": {
+     "mc_se": 0.0,
+     "nenner": 30,
+     "rate": 0.0,
+     "zaehler": 0
+    },
+    "S4": {
+     "mc_se": 0.0,
+     "nenner": 30,
+     "rate": 0.0,
+     "zaehler": 0
+    }
+   },
+   "gueltigkeit": {
+    "G1": {
+     "mc_se": 0.0005508019751984065,
+     "nenner": 18900,
+     "rate": 0.005767195767195767,
+     "zaehler": 109
+    },
+    "G4": {
+     "mc_se": 0.0014956066749177582,
+     "nenner": 18900,
+     "rate": 0.044232804232804235,
+     "zaehler": 836
+    }
+   },
+   "meta": {
+    "code_version": {
+     "git": "7a259efe3f2f9545cd487af3d2ddb8a20a1e8b34",
+     "paket": "0.1.0"
+    },
+    "laufzeit_s": 87.75,
+    "n": 30,
+    "n_min": 18,
+    "plan": {
+     "T_lauf": 17.0,
+     "einstellung2": null,
+     "n0": 20,
+     "n_bloecke": 24,
+     "n_pilot": 20,
+     "n_zyklen": 100,
+     "phase_pause": 86400.0,
+     "pruef": [],
+     "pruef_bilder": true,
+     "ref_abstand": 12,
+     "ref_min_p0": 42,
+     "tag_pause": 43200.0,
+     "tage": 1,
+     "zusatz": false
+    },
+    "profil_sha256": "49dc74abca52b2c5e4ae8f6d2e1c53dc468205b01b9f65270b86c27e91114352",
+    "prozesse": 4,
+    "rolle": "pruefung",
+    "seed_basis": 20261016,
+    "seeds": [
+     2966241411300600695,
+     6132848301596916345,
+     8133511841337641084,
+     4939074554869485263,
+     8654585088786291689,
+     6002896412124800404,
+     786784779323729091,
+     4120564260277444418,
+     3188934525904547884,
+     2371371877082012969,
+     7312471406184724033,
+     3803499203984573662,
+     2032471864326621881,
+     6906351157387775880,
+     409051734327073847,
+     864570704527182467,
+     2290873276075137371,
+     843348087411135462,
+     2215033493391988207,
+     5708729695574020203,
+     1604242332434691516,
+     2129656087322892632,
+     7947268151677078911,
+     7114261224098656027,
+     7268632601382988942,
+     4297346238079778710,
+     1014169044231332258,
+     3849274197242516710,
+     6481886385853575032,
+     4162031735975051387
+    ],
+    "stufe": "L1",
+    "szenario": "E04-kette",
+    "werkzeug8": "TESTVORGABE",
+    "werkzeug8_herkunft": null
+   },
+   "ort": "schritte.eigene.E04-kette/L1",
+   "raten": {
+    "E3: auffällig": {
+     "mc_se": 0.0,
+     "nenner": 30,
+     "rate": 1.0,
+     "zaehler": 30
+    },
+    "H1 Sensitivität faktor_0_1: bestätigt": {
+     "mc_se": 0.08073734277593311,
+     "nenner": 30,
+     "rate": 0.7333333333333333,
+     "zaehler": 22
+    },
+    "H1 Sensitivität faktor_0_1: falsifiziert": {
+     "mc_se": 0.0,
+     "nenner": 30,
+     "rate": 0.0,
+     "zaehler": 0
+    },
+    "H1 Sensitivität faktor_0_1: nicht entscheidbar": {
+     "mc_se": 0.08073734277593311,
+     "nenner": 30,
+     "rate": 0.26666666666666666,
+     "zaehler": 8
+    },
+    "H1 Sensitivität fassung_A: bestätigt": {
+     "mc_se": 0.08073734277593311,
+     "nenner": 30,
+     "rate": 0.7333333333333333,
+     "zaehler": 22
+    },
+    "H1 Sensitivität fassung_A: falsifiziert": {
+     "mc_se": 0.0,
+     "nenner": 30,
+     "rate": 0.0,
+     "zaehler": 0
+    },
+    "H1 Sensitivität fassung_A: nicht entscheidbar": {
+     "mc_se": 0.08073734277593311,
+     "nenner": 30,
+     "rate": 0.26666666666666666,
+     "zaehler": 8
+    },
+    "H1 und H2 bestätigt": {
+     "mc_se": 0.08073734277593311,
+     "nenner": 30,
+     "rate": 0.7333333333333333,
+     "zaehler": 22
+    },
+    "H1: bestätigt": {
+     "mc_se": 0.08073734277593311,
+     "nenner": 30,
+     "rate": 0.7333333333333333,
+     "zaehler": 22
+    },
+    "H1: falsifiziert": {
+     "mc_se": 0.0,
+     "nenner": 30,
+     "rate": 0.0,
+     "zaehler": 0
+    },
+    "H1: nicht entscheidbar": {
+     "mc_se": 0.08073734277593311,
+     "nenner": 30,
+     "rate": 0.26666666666666666,
+     "zaehler": 8
+    },
+    "H1: nicht entscheidbar, Grund Datenlage": {
+     "mc_se": 0.08073734277593311,
+     "nenner": 30,
+     "rate": 0.26666666666666666,
+     "zaehler": 8
+    },
+    "H1Z: bestätigt": {
+     "mc_se": 0.08073734277593311,
+     "nenner": 30,
+     "rate": 0.7333333333333333,
+     "zaehler": 22
+    },
+    "H1Z: falsifiziert": {
+     "mc_se": 0.0,
+     "nenner": 30,
+     "rate": 0.0,
+     "zaehler": 0
+    },
+    "H1Z: nicht entscheidbar": {
+     "mc_se": 0.08073734277593311,
+     "nenner": 30,
+     "rate": 0.26666666666666666,
+     "zaehler": 8
+    },
+    "H1Z: nicht entscheidbar, Grund Datenlage": {
+     "mc_se": 0.08073734277593311,
+     "nenner": 30,
+     "rate": 0.26666666666666666,
+     "zaehler": 8
+    },
+    "H2: bestätigt": {
+     "mc_se": 0.08073734277593311,
+     "nenner": 30,
+     "rate": 0.7333333333333333,
+     "zaehler": 22
+    },
+    "H2: falsifiziert": {
+     "mc_se": 0.0,
+     "nenner": 30,
+     "rate": 0.0,
+     "zaehler": 0
+    },
+    "H2: nicht entscheidbar": {
+     "mc_se": 0.08073734277593311,
+     "nenner": 30,
+     "rate": 0.26666666666666666,
+     "zaehler": 8
+    },
+    "H2: nicht entscheidbar, Grund Datenlage": {
+     "mc_se": 0.08073734277593311,
+     "nenner": 30,
+     "rate": 0.26666666666666666,
+     "zaehler": 8
+    },
+    "H3: Zusatz Abweichung nachgewiesen, Relevanz offen": {
+     "mc_se": 0.04554200340426488,
+     "nenner": 30,
+     "rate": 0.06666666666666667,
+     "zaehler": 2
+    },
+    "H3: Zusatz Abweichung nachgewiesen, innerhalb der Äquivalenzgrenze": {
+     "mc_se": 0.045542003404264876,
+     "nenner": 30,
+     "rate": 0.9333333333333333,
+     "zaehler": 28
+    },
+    "H3: bestätigt": {
+     "mc_se": 0.045542003404264876,
+     "nenner": 30,
+     "rate": 0.9333333333333333,
+     "zaehler": 28
+    },
+    "H3: falsifiziert": {
+     "mc_se": 0.0,
+     "nenner": 30,
+     "rate": 0.0,
+     "zaehler": 0
+    },
+    "H3: nicht entscheidbar": {
+     "mc_se": 0.04554200340426488,
+     "nenner": 30,
+     "rate": 0.06666666666666667,
+     "zaehler": 2
+    },
+    "H3: nicht entscheidbar, Grund Datenlage": {
+     "mc_se": 0.04554200340426488,
+     "nenner": 30,
+     "rate": 0.06666666666666667,
+     "zaehler": 2
+    },
+    "H4: bestätigt": {
+     "mc_se": 0.0,
+     "nenner": 30,
+     "rate": 1.0,
+     "zaehler": 30
+    },
+    "H4: falsifiziert": {
+     "mc_se": 0.0,
+     "nenner": 30,
+     "rate": 0.0,
+     "zaehler": 0
+    },
+    "H4: nicht entscheidbar": {
+     "mc_se": 0.0,
+     "nenner": 30,
+     "rate": 0.0,
+     "zaehler": 0
+    },
+    "mindestens ein |z⁰| > c (H1)": {
+     "mc_se": 0.0,
+     "nenner": 30,
+     "rate": 0.0,
+     "zaehler": 0
+    }
+   },
+   "u_c_median": {
+    "F_min": 0.0011736356486677553,
+    "Im N1": 0.0017082187046052746,
+    "Im N2": 0.0005775504257525376,
+    "Im N3": 0.0002076504525748604,
+    "Re N1": 0.0017629870925669293,
+    "Re N2": 0.0006213543186319363,
+    "Re N3": 0.0003367759634178613
+   },
+   "wahrheit": {
+    "klasse": "R0",
+    "r_max_rel": 6.105933650577187e-15
+   }
+  },
+  "E07-basisdrift/L1": {
+   "abbruch": {
+    "S1_kandidaten": {
+     "mc_se": 0.05229125165837972,
+     "nenner": 40,
+     "rate": 0.875,
+     "zaehler": 35
+    },
+    "S2": {
+     "mc_se": 0.0,
+     "nenner": 40,
+     "rate": 0.0,
+     "zaehler": 0
+    },
+    "S4": {
+     "mc_se": 0.0,
+     "nenner": 40,
+     "rate": 0.0,
+     "zaehler": 0
+    }
+   },
+   "gueltigkeit": {
+    "G1": {
+     "mc_se": 0.0005363114072756538,
+     "nenner": 25200,
+     "rate": 0.007301587301587302,
+     "zaehler": 184
+    },
+    "G4": {
+     "mc_se": 0.0008387810616663628,
+     "nenner": 25200,
+     "rate": 0.018055555555555554,
+     "zaehler": 455
+    }
+   },
+   "meta": {
+    "code_version": {
+     "git": "7a259efe3f2f9545cd487af3d2ddb8a20a1e8b34",
+     "paket": "0.1.0"
+    },
+    "laufzeit_s": 77.55,
+    "n": 40,
+    "n_min": 18,
+    "plan": {
+     "T_lauf": 17.0,
+     "einstellung2": null,
+     "n0": 20,
+     "n_bloecke": 24,
+     "n_pilot": 20,
+     "n_zyklen": 100,
+     "phase_pause": 86400.0,
+     "pruef": [],
+     "pruef_bilder": true,
+     "ref_abstand": 12,
+     "ref_min_p0": 42,
+     "tag_pause": 43200.0,
+     "tage": 1,
+     "zusatz": false
+    },
+    "profil_sha256": "49dc74abca52b2c5e4ae8f6d2e1c53dc468205b01b9f65270b86c27e91114352",
+    "prozesse": 4,
+    "rolle": "pruefung",
+    "seed_basis": 20261016,
+    "seeds": [
+     6502126151777966437,
+     2154831050879150535,
+     109885112416534051,
+     3921671813439746383,
+     2869063448257630352,
+     1125825244796991266,
+     6136245576305191436,
+     7107920484840885820,
+     8515922269798650933,
+     3255010134082142959,
+     7491184853874533662,
+     29138734495139706,
+     5821426285841008845,
+     130410792901572332,
+     1830570204083407129,
+     558793660073119831,
+     6138178731694682693,
+     5211155611800416600,
+     2834721614334040521,
+     489735208012123868,
+     5750024338372082351,
+     8748260664732427073,
+     390793766812352116,
+     1499240480192819870,
+     9116451132285611078,
+     5668958651231747000,
+     5169578471227522914,
+     3506040105441732879,
+     1116299967991770277,
+     3913670955996756484,
+     1348919438573311797,
+     1684466734767571002,
+     4640375582584019988,
+     1215172807757813918,
+     2321763249253012064,
+     7674996494697601778,
+     7582146197884822017,
+     4944510544167820546,
+     8124291426451425229,
+     4786941568841814748
+    ],
+    "stufe": "L1",
+    "szenario": "E07-basisdrift",
+    "werkzeug8": "übergeben",
+    "werkzeug8_herkunft": "Kalibriersimulation (AP-13) mit 200 Kampagnen (reduziert: Entwicklungsdiagnostik), Profil ENTW-2026-10+red(bootstrap_B=1000,e3_mc=1000,eps_ctrl_datensaetze=1000,h2_replikate=1000,h3_mc=1000): q95 von max|z⁰| über 147 Tests, n = 387; Prüfrate 0.0933 ± 0.0209 aus 193 vollständigen von 200 Kampagnen; gepooltes Quantil (Prüfrate > 0,069)"
+   },
+   "ort": "schritte.szenarien_a4.E07-basisdrift/L1",
+   "raten": {
+    "E3: auffällig": {
+     "mc_se": 0.04743416490252569,
+     "nenner": 40,
+     "rate": 0.9,
+     "zaehler": 36
+    },
+    "E3: unbestimmt": {
+     "mc_se": 0.047434164902525694,
+     "nenner": 40,
+     "rate": 0.1,
+     "zaehler": 4
+    },
+    "H1 Sensitivität faktor_0_1: bestätigt": {
+     "mc_se": 0.024685522072664386,
+     "nenner": 40,
+     "rate": 0.975,
+     "zaehler": 39
+    },
+    "H1 Sensitivität faktor_0_1: falsifiziert": {
+     "mc_se": 0.0,
+     "nenner": 40,
+     "rate": 0.0,
+     "zaehler": 0
+    },
+    "H1 Sensitivität faktor_0_1: nicht entscheidbar": {
+     "mc_se": 0.024685522072664372,
+     "nenner": 40,
+     "rate": 0.025,
+     "zaehler": 1
+    },
+    "H1 Sensitivität fassung_A: bestätigt": {
+     "mc_se": 0.024685522072664386,
+     "nenner": 40,
+     "rate": 0.975,
+     "zaehler": 39
+    },
+    "H1 Sensitivität fassung_A: falsifiziert": {
+     "mc_se": 0.0,
+     "nenner": 40,
+     "rate": 0.0,
+     "zaehler": 0
+    },
+    "H1 Sensitivität fassung_A: nicht entscheidbar": {
+     "mc_se": 0.024685522072664372,
+     "nenner": 40,
+     "rate": 0.025,
+     "zaehler": 1
+    },
+    "H1 und H2 bestätigt": {
+     "mc_se": 0.024685522072664386,
+     "nenner": 40,
+     "rate": 0.975,
+     "zaehler": 39
+    },
+    "H1: Zusatz Abweichung nachgewiesen, innerhalb der Äquivalenzgrenze": {
+     "mc_se": 0.034460121880225555,
+     "nenner": 40,
+     "rate": 0.05,
+     "zaehler": 2
+    },
+    "H1: Zusatz Drift der Einzelmodulbasis": {
+     "mc_se": 0.0,
+     "nenner": 40,
+     "rate": 1.0,
+     "zaehler": 40
+    },
+    "H1: bestätigt": {
+     "mc_se": 0.024685522072664386,
+     "nenner": 40,
+     "rate": 0.975,
+     "zaehler": 39
+    },
+    "H1: falsifiziert": {
+     "mc_se": 0.0,
+     "nenner": 40,
+     "rate": 0.0,
+     "zaehler": 0
+    },
+    "H1: nicht entscheidbar": {
+     "mc_se": 0.024685522072664372,
+     "nenner": 40,
+     "rate": 0.025,
+     "zaehler": 1
+    },
+    "H1: nicht entscheidbar, Grund Datenlage": {
+     "mc_se": 0.024685522072664372,
+     "nenner": 40,
+     "rate": 0.025,
+     "zaehler": 1
+    },
+    "H1Z: bestätigt": {
+     "mc_se": 0.024685522072664386,
+     "nenner": 40,
+     "rate": 0.975,
+     "zaehler": 39
+    },
+    "H1Z: falsifiziert": {
+     "mc_se": 0.0,
+     "nenner": 40,
+     "rate": 0.0,
+     "zaehler": 0
+    },
+    "H1Z: nicht entscheidbar": {
+     "mc_se": 0.024685522072664372,
+     "nenner": 40,
+     "rate": 0.025,
+     "zaehler": 1
+    },
+    "H1Z: nicht entscheidbar, Grund Datenlage": {
+     "mc_se": 0.024685522072664372,
+     "nenner": 40,
+     "rate": 0.025,
+     "zaehler": 1
+    },
+    "H2: bestätigt": {
+     "mc_se": 0.024685522072664386,
+     "nenner": 40,
+     "rate": 0.975,
+     "zaehler": 39
+    },
+    "H2: falsifiziert": {
+     "mc_se": 0.0,
+     "nenner": 40,
+     "rate": 0.0,
+     "zaehler": 0
+    },
+    "H2: nicht entscheidbar": {
+     "mc_se": 0.024685522072664372,
+     "nenner": 40,
+     "rate": 0.025,
+     "zaehler": 1
+    },
+    "H2: nicht entscheidbar, Grund Datenlage": {
+     "mc_se": 0.024685522072664372,
+     "nenner": 40,
+     "rate": 0.025,
+     "zaehler": 1
+    },
+    "H3: bestätigt": {
+     "mc_se": 0.0,
+     "nenner": 40,
+     "rate": 0.0,
+     "zaehler": 0
+    },
+    "H3: falsifiziert": {
+     "mc_se": 0.0,
+     "nenner": 40,
+     "rate": 0.0,
+     "zaehler": 0
+    },
+    "H3: nicht entscheidbar": {
+     "mc_se": 0.0,
+     "nenner": 40,
+     "rate": 1.0,
+     "zaehler": 40
+    },
+    "H3: nicht entscheidbar, Grund Verfahren": {
+     "mc_se": 0.0,
+     "nenner": 40,
+     "rate": 1.0,
+     "zaehler": 40
+    },
+    "H4: bestätigt": {
+     "mc_se": 0.0,
+     "nenner": 40,
+     "rate": 1.0,
+     "zaehler": 40
+    },
+    "H4: falsifiziert": {
+     "mc_se": 0.0,
+     "nenner": 40,
+     "rate": 0.0,
+     "zaehler": 0
+    },
+    "H4: nicht entscheidbar": {
+     "mc_se": 0.0,
+     "nenner": 40,
+     "rate": 0.0,
+     "zaehler": 0
+    },
+    "mindestens ein |z⁰| > c (H1)": {
+     "mc_se": 0.0,
+     "nenner": 40,
+     "rate": 1.0,
+     "zaehler": 40
+    }
+   },
+   "u_c_median": {
+    "F_min": 0.001504672798991534,
+    "Im N1": 0.002209418426236763,
+    "Im N2": 0.0007430809389592209,
+    "Im N3": 0.0002668372736620987,
+    "Re N1": 0.0022194809878293338,
+    "Re N2": 0.0007832311436466251,
+    "Re N3": 0.0004223974622856569
+   },
+   "wahrheit": {
+    "klasse": "R0",
+    "r_max_rel": 5.150583848930261e-15
+   }
+  },
+  "E07-verstaerkung/L1": {
+   "abbruch": {
+    "S1_kandidaten": {
+     "mc_se": 0.05645794895318108,
+     "nenner": 40,
+     "rate": 0.85,
+     "zaehler": 34
+    },
+    "S2": {
+     "mc_se": 0.0,
+     "nenner": 40,
+     "rate": 0.0,
+     "zaehler": 0
+    },
+    "S4": {
+     "mc_se": 0.0,
+     "nenner": 40,
+     "rate": 0.0,
+     "zaehler": 0
+    }
+   },
+   "gueltigkeit": {
+    "G1": {
+     "mc_se": 0.0005420661941841891,
+     "nenner": 25200,
+     "rate": 0.0074603174603174605,
+     "zaehler": 188
+    },
+    "G4": {
+     "mc_se": 0.0009940790811976184,
+     "nenner": 25200,
+     "rate": 0.025555555555555557,
+     "zaehler": 644
+    }
+   },
+   "meta": {
+    "code_version": {
+     "git": "7a259efe3f2f9545cd487af3d2ddb8a20a1e8b34",
+     "paket": "0.1.0"
+    },
+    "laufzeit_s": 75.51,
+    "n": 40,
+    "n_min": 18,
+    "plan": {
+     "T_lauf": 17.0,
+     "einstellung2": null,
+     "n0": 20,
+     "n_bloecke": 24,
+     "n_pilot": 20,
+     "n_zyklen": 100,
+     "phase_pause": 86400.0,
+     "pruef": [],
+     "pruef_bilder": true,
+     "ref_abstand": 12,
+     "ref_min_p0": 42,
+     "tag_pause": 43200.0,
+     "tage": 1,
+     "zusatz": false
+    },
+    "profil_sha256": "49dc74abca52b2c5e4ae8f6d2e1c53dc468205b01b9f65270b86c27e91114352",
+    "prozesse": 4,
+    "rolle": "pruefung",
+    "seed_basis": 20261016,
+    "seeds": [
+     5982546263336054208,
+     1979663731410206289,
+     3732939091730973413,
+     3761547526770269962,
+     4919460052454703124,
+     5077296358621950586,
+     5097202666289126780,
+     7691848393464545200,
+     5554765269821354180,
+     2718415409368270701,
+     1479012264967541108,
+     3399300825910964915,
+     2133091086618336592,
+     7601542766826935039,
+     5644188541140408226,
+     5937057978014160911,
+     2954612634479931556,
+     4656817939462697882,
+     1151901949430881498,
+     548222769493618197,
+     6177045314686703816,
+     3141145570125027280,
+     491413568264254996,
+     3149939802967208059,
+     4829711334219521775,
+     6556465852415732835,
+     7107320258564968699,
+     9181502291580256323,
+     7433389524121341375,
+     719650018972767713,
+     3951468979818766964,
+     8137409258864863544,
+     8532660098562215353,
+     8958380748094307573,
+     6444803649694159879,
+     6589358756810393507,
+     6317508911970085889,
+     7736847679199316901,
+     7527573917300521972,
+     395392098850102388
+    ],
+    "stufe": "L1",
+    "szenario": "E07-verstaerkung",
+    "werkzeug8": "übergeben",
+    "werkzeug8_herkunft": "Kalibriersimulation (AP-13) mit 200 Kampagnen (reduziert: Entwicklungsdiagnostik), Profil ENTW-2026-10+red(bootstrap_B=1000,e3_mc=1000,eps_ctrl_datensaetze=1000,h2_replikate=1000,h3_mc=1000): q95 von max|z⁰| über 147 Tests, n = 387; Prüfrate 0.0933 ± 0.0209 aus 193 vollständigen von 200 Kampagnen; gepooltes Quantil (Prüfrate > 0,069)"
+   },
+   "ort": "schritte.szenarien_a4.E07-verstaerkung/L1",
+   "raten": {
+    "E3: unauffällig": {
+     "mc_se": 0.05645794895318108,
+     "nenner": 40,
+     "rate": 0.15,
+     "zaehler": 6
+    },
+    "E3: unbestimmt": {
+     "mc_se": 0.05645794895318108,
+     "nenner": 40,
+     "rate": 0.85,
+     "zaehler": 34
+    },
+    "H1 Sensitivität faktor_0_1: bestätigt": {
+     "mc_se": 0.041645828122394195,
+     "nenner": 40,
+     "rate": 0.925,
+     "zaehler": 37
+    },
+    "H1 Sensitivität faktor_0_1: falsifiziert": {
+     "mc_se": 0.0,
+     "nenner": 40,
+     "rate": 0.0,
+     "zaehler": 0
+    },
+    "H1 Sensitivität faktor_0_1: nicht entscheidbar": {
+     "mc_se": 0.04164582812239421,
+     "nenner": 40,
+     "rate": 0.075,
+     "zaehler": 3
+    },
+    "H1 Sensitivität fassung_A: bestätigt": {
+     "mc_se": 0.041645828122394195,
+     "nenner": 40,
+     "rate": 0.925,
+     "zaehler": 37
+    },
+    "H1 Sensitivität fassung_A: falsifiziert": {
+     "mc_se": 0.0,
+     "nenner": 40,
+     "rate": 0.0,
+     "zaehler": 0
+    },
+    "H1 Sensitivität fassung_A: nicht entscheidbar": {
+     "mc_se": 0.04164582812239421,
+     "nenner": 40,
+     "rate": 0.075,
+     "zaehler": 3
+    },
+    "H1 und H2 bestätigt": {
+     "mc_se": 0.041645828122394195,
+     "nenner": 40,
+     "rate": 0.925,
+     "zaehler": 37
+    },
+    "H1: Zusatz Drift der Einzelmodulbasis": {
+     "mc_se": 0.0,
+     "nenner": 40,
+     "rate": 1.0,
+     "zaehler": 40
+    },
+    "H1: bestätigt": {
+     "mc_se": 0.041645828122394195,
+     "nenner": 40,
+     "rate": 0.925,
+     "zaehler": 37
+    },
+    "H1: falsifiziert": {
+     "mc_se": 0.0,
+     "nenner": 40,
+     "rate": 0.0,
+     "zaehler": 0
+    },
+    "H1: nicht entscheidbar": {
+     "mc_se": 0.04164582812239421,
+     "nenner": 40,
+     "rate": 0.075,
+     "zaehler": 3
+    },
+    "H1: nicht entscheidbar, Grund Datenlage": {
+     "mc_se": 0.04164582812239421,
+     "nenner": 40,
+     "rate": 0.075,
+     "zaehler": 3
+    },
+    "H1Z: bestätigt": {
+     "mc_se": 0.041645828122394195,
+     "nenner": 40,
+     "rate": 0.925,
+     "zaehler": 37
+    },
+    "H1Z: falsifiziert": {
+     "mc_se": 0.0,
+     "nenner": 40,
+     "rate": 0.0,
+     "zaehler": 0
+    },
+    "H1Z: nicht entscheidbar": {
+     "mc_se": 0.04164582812239421,
+     "nenner": 40,
+     "rate": 0.075,
+     "zaehler": 3
+    },
+    "H1Z: nicht entscheidbar, Grund Datenlage": {
+     "mc_se": 0.04164582812239421,
+     "nenner": 40,
+     "rate": 0.075,
+     "zaehler": 3
+    },
+    "H2: bestätigt": {
+     "mc_se": 0.03446012188022557,
+     "nenner": 40,
+     "rate": 0.95,
+     "zaehler": 38
+    },
+    "H2: falsifiziert": {
+     "mc_se": 0.0,
+     "nenner": 40,
+     "rate": 0.0,
+     "zaehler": 0
+    },
+    "H2: nicht entscheidbar": {
+     "mc_se": 0.034460121880225555,
+     "nenner": 40,
+     "rate": 0.05,
+     "zaehler": 2
+    },
+    "H2: nicht entscheidbar, Grund Datenlage": {
+     "mc_se": 0.034460121880225555,
+     "nenner": 40,
+     "rate": 0.05,
+     "zaehler": 2
+    },
+    "H3: bestätigt": {
+     "mc_se": 0.0,
+     "nenner": 40,
+     "rate": 0.0,
+     "zaehler": 0
+    },
+    "H3: falsifiziert": {
+     "mc_se": 0.0,
+     "nenner": 40,
+     "rate": 0.0,
+     "zaehler": 0
+    },
+    "H3: nicht entscheidbar": {
+     "mc_se": 0.0,
+     "nenner": 40,
+     "rate": 1.0,
+     "zaehler": 40
+    },
+    "H3: nicht entscheidbar, Grund Verfahren": {
+     "mc_se": 0.0,
+     "nenner": 40,
+     "rate": 1.0,
+     "zaehler": 40
+    },
+    "H4: bestätigt": {
+     "mc_se": 0.0,
+     "nenner": 40,
+     "rate": 1.0,
+     "zaehler": 40
+    },
+    "H4: falsifiziert": {
+     "mc_se": 0.0,
+     "nenner": 40,
+     "rate": 0.0,
+     "zaehler": 0
+    },
+    "H4: nicht entscheidbar": {
+     "mc_se": 0.0,
+     "nenner": 40,
+     "rate": 0.0,
+     "zaehler": 0
+    },
+    "mindestens ein |z⁰| > c (H1)": {
+     "mc_se": 0.0,
+     "nenner": 40,
+     "rate": 1.0,
+     "zaehler": 40
+    }
+   },
+   "u_c_median": {
+    "F_min": 0.0009883643895965322,
+    "Im N1": 0.00143981918795739,
+    "Im N2": 0.0004894701415659961,
+    "Im N3": 0.0001799317127313685,
+    "Re N1": 0.0014739222262971205,
+    "Re N2": 0.000517114448631856,
+    "Re N3": 0.0002782357938760971
+   },
+   "wahrheit": {
+    "klasse": "R0",
+    "r_max_rel": 5.150583848930261e-15
+   }
+  },
+  "H03-phase/L1": {
+   "abbruch": {
+    "S1_kandidaten": {
+     "mc_se": 0.08073734277593311,
+     "nenner": 30,
+     "rate": 0.7333333333333333,
+     "zaehler": 22
+    },
+    "S2": {
+     "mc_se": 0.0,
+     "nenner": 30,
+     "rate": 0.0,
+     "zaehler": 0
+    },
+    "S4": {
+     "mc_se": 0.0,
+     "nenner": 30,
+     "rate": 0.0,
+     "zaehler": 0
+    }
+   },
+   "gueltigkeit": {
+    "G1": {
+     "mc_se": 0.0005276989358328716,
+     "nenner": 18900,
+     "rate": 0.005291005291005291,
+     "zaehler": 100
+    },
+    "G4": {
+     "mc_se": 0.0013382608002838559,
+     "nenner": 18900,
+     "rate": 0.03507936507936508,
+     "zaehler": 663
+    }
+   },
+   "meta": {
+    "code_version": {
+     "git": "7a259efe3f2f9545cd487af3d2ddb8a20a1e8b34",
+     "paket": "0.1.0"
+    },
+    "laufzeit_s": 94.63,
+    "n": 30,
+    "n_min": 18,
+    "plan": {
+     "T_lauf": 17.0,
+     "einstellung2": null,
+     "n0": 20,
+     "n_bloecke": 24,
+     "n_pilot": 20,
+     "n_zyklen": 100,
+     "phase_pause": 86400.0,
+     "pruef": [],
+     "pruef_bilder": true,
+     "ref_abstand": 12,
+     "ref_min_p0": 42,
+     "tag_pause": 43200.0,
+     "tage": 1,
+     "zusatz": false
+    },
+    "profil_sha256": "49dc74abca52b2c5e4ae8f6d2e1c53dc468205b01b9f65270b86c27e91114352",
+    "prozesse": 4,
+    "rolle": "pruefung",
+    "seed_basis": 20261016,
+    "seeds": [
+     6198499576465346351,
+     5540034591781585150,
+     5745937216292325504,
+     4514374025897946029,
+     3494792610007625780,
+     8063534287999724473,
+     7471716153160760913,
+     4841592610869074187,
+     1082743358840026693,
+     5902297874640113389,
+     3484386436433330381,
+     8537109441192802383,
+     2995508717051569739,
+     8916300571111060823,
+     4100801063505274822,
+     6018141858014778511,
+     6089939675387401833,
+     4830021256308121292,
+     7759424013342977149,
+     4440432629674336760,
+     2666023187795368502,
+     355941065750454181,
+     396825705245573680,
+     3742183166718106513,
+     5848080381446074386,
+     7868099971947213053,
+     2979658648820594034,
+     5348588526552730226,
+     246375009528583498,
+     5241919756049359934
+    ],
+    "stufe": "L1",
+    "szenario": "H03-phase",
+    "werkzeug8": "übergeben",
+    "werkzeug8_herkunft": "Kalibriersimulation (AP-13) mit 60 Kampagnen (reduziert: Entwicklungsdiagnostik), Profil ENTW-2026-10+red(bootstrap_B=1000,e3_mc=1000,eps_ctrl_datensaetze=1000,h2_replikate=1000,h3_mc=1000): q95 von max|z⁰| über 147 Tests, n = 40; Prüfrate 0.0204 ± 0.0202 aus 49 vollständigen von 60 Kampagnen"
+   },
+   "ort": "schritte.szenarien_v1.H03-phase/L1",
+   "raten": {
+    "E3: auffällig": {
+     "mc_se": 0.0,
+     "nenner": 30,
+     "rate": 1.0,
+     "zaehler": 30
+    },
+    "H1 Sensitivität faktor_0_1: bestätigt": {
+     "mc_se": 0.07302967433402215,
+     "nenner": 30,
+     "rate": 0.8,
+     "zaehler": 24
+    },
+    "H1 Sensitivität faktor_0_1: falsifiziert": {
+     "mc_se": 0.0,
+     "nenner": 30,
+     "rate": 0.0,
+     "zaehler": 0
+    },
+    "H1 Sensitivität faktor_0_1: nicht entscheidbar": {
+     "mc_se": 0.07302967433402216,
+     "nenner": 30,
+     "rate": 0.2,
+     "zaehler": 6
+    },
+    "H1 Sensitivität fassung_A: bestätigt": {
+     "mc_se": 0.07302967433402215,
+     "nenner": 30,
+     "rate": 0.8,
+     "zaehler": 24
+    },
+    "H1 Sensitivität fassung_A: falsifiziert": {
+     "mc_se": 0.0,
+     "nenner": 30,
+     "rate": 0.0,
+     "zaehler": 0
+    },
+    "H1 Sensitivität fassung_A: nicht entscheidbar": {
+     "mc_se": 0.07302967433402216,
+     "nenner": 30,
+     "rate": 0.2,
+     "zaehler": 6
+    },
+    "H1 und H2 bestätigt": {
+     "mc_se": 0.07302967433402215,
+     "nenner": 30,
+     "rate": 0.8,
+     "zaehler": 24
+    },
+    "H1: Zusatz Abweichung nachgewiesen, Relevanz offen": {
+     "mc_se": 0.07302967433402216,
+     "nenner": 30,
+     "rate": 0.2,
+     "zaehler": 6
+    },
+    "H1: Zusatz Abweichung nachgewiesen, innerhalb der Äquivalenzgrenze": {
+     "mc_se": 0.07302967433402215,
+     "nenner": 30,
+     "rate": 0.8,
+     "zaehler": 24
+    },
+    "H1: Zusatz Drift der Einzelmodulbasis": {
+     "mc_se": 0.0,
+     "nenner": 30,
+     "rate": 1.0,
+     "zaehler": 30
+    },
+    "H1: bestätigt": {
+     "mc_se": 0.07302967433402215,
+     "nenner": 30,
+     "rate": 0.8,
+     "zaehler": 24
+    },
+    "H1: falsifiziert": {
+     "mc_se": 0.0,
+     "nenner": 30,
+     "rate": 0.0,
+     "zaehler": 0
+    },
+    "H1: nicht entscheidbar": {
+     "mc_se": 0.07302967433402216,
+     "nenner": 30,
+     "rate": 0.2,
+     "zaehler": 6
+    },
+    "H1: nicht entscheidbar, Grund Datenlage": {
+     "mc_se": 0.07302967433402216,
+     "nenner": 30,
+     "rate": 0.2,
+     "zaehler": 6
+    },
+    "H1Z: bestätigt": {
+     "mc_se": 0.07302967433402215,
+     "nenner": 30,
+     "rate": 0.8,
+     "zaehler": 24
+    },
+    "H1Z: falsifiziert": {
+     "mc_se": 0.0,
+     "nenner": 30,
+     "rate": 0.0,
+     "zaehler": 0
+    },
+    "H1Z: nicht entscheidbar": {
+     "mc_se": 0.07302967433402216,
+     "nenner": 30,
+     "rate": 0.2,
+     "zaehler": 6
+    },
+    "H1Z: nicht entscheidbar, Grund Datenlage": {
+     "mc_se": 0.07302967433402216,
+     "nenner": 30,
+     "rate": 0.2,
+     "zaehler": 6
+    },
+    "H2: Zusatz Abweichung nachgewiesen, innerhalb der Äquivalenzgrenze": {
+     "mc_se": 0.06804138174397716,
+     "nenner": 30,
+     "rate": 0.8333333333333334,
+     "zaehler": 25
+    },
+    "H2: bestätigt": {
+     "mc_se": 0.06804138174397716,
+     "nenner": 30,
+     "rate": 0.8333333333333334,
+     "zaehler": 25
+    },
+    "H2: falsifiziert": {
+     "mc_se": 0.0,
+     "nenner": 30,
+     "rate": 0.0,
+     "zaehler": 0
+    },
+    "H2: nicht entscheidbar": {
+     "mc_se": 0.06804138174397717,
+     "nenner": 30,
+     "rate": 0.16666666666666666,
+     "zaehler": 5
+    },
+    "H2: nicht entscheidbar, Grund Datenlage": {
+     "mc_se": 0.06804138174397717,
+     "nenner": 30,
+     "rate": 0.16666666666666666,
+     "zaehler": 5
+    },
+    "H3: Zusatz Abweichung nachgewiesen, innerhalb der Äquivalenzgrenze": {
+     "mc_se": 0.032773069341672505,
+     "nenner": 30,
+     "rate": 0.03333333333333333,
+     "zaehler": 1
+    },
+    "H3: bestätigt": {
+     "mc_se": 0.0,
+     "nenner": 30,
+     "rate": 1.0,
+     "zaehler": 30
+    },
+    "H3: falsifiziert": {
+     "mc_se": 0.0,
+     "nenner": 30,
+     "rate": 0.0,
+     "zaehler": 0
+    },
+    "H3: nicht entscheidbar": {
+     "mc_se": 0.0,
+     "nenner": 30,
+     "rate": 0.0,
+     "zaehler": 0
+    },
+    "H4: bestätigt": {
+     "mc_se": 0.0,
+     "nenner": 30,
+     "rate": 1.0,
+     "zaehler": 30
+    },
+    "H4: falsifiziert": {
+     "mc_se": 0.0,
+     "nenner": 30,
+     "rate": 0.0,
+     "zaehler": 0
+    },
+    "H4: nicht entscheidbar": {
+     "mc_se": 0.0,
+     "nenner": 30,
+     "rate": 0.0,
+     "zaehler": 0
+    },
+    "mindestens ein |z⁰| > c (H1)": {
+     "mc_se": 0.0,
+     "nenner": 30,
+     "rate": 1.0,
+     "zaehler": 30
+    }
+   },
+   "u_c_median": {
+    "F_min": 0.0011792457694099984,
+    "Im N1": 0.0017305412258068612,
+    "Im N2": 0.0005905877127167559,
+    "Im N3": 0.0002144645400796287,
+    "Re N1": 0.0017583767486908897,
+    "Re N2": 0.0006213975547613512,
+    "Re N3": 0.0003401574576574026
+   },
+   "wahrheit": {
+    "klasse": "R1",
+    "r_max_rel": 0.15203630223943243
+   }
+  },
+  "N01-A4/L0": {
+   "abbruch": {
+    "S1_kandidaten": {
+     "mc_se": 0.06007807420348958,
+     "nenner": 40,
+     "rate": 0.825,
+     "zaehler": 33
+    },
+    "S2": {
+     "mc_se": 0.0,
+     "nenner": 40,
+     "rate": 0.0,
+     "zaehler": 0
+    },
+    "S4": {
+     "mc_se": 0.0,
+     "nenner": 40,
+     "rate": 0.0,
+     "zaehler": 0
+    }
+   },
+   "gueltigkeit": {
+    "G1": {
+     "mc_se": 0.0005766948179412993,
+     "nenner": 25200,
+     "rate": 0.008452380952380953,
+     "zaehler": 213
+    },
+    "G4": {
+     "mc_se": 0.0009236922360931483,
+     "nenner": 25200,
+     "rate": 0.021984126984126984,
+     "zaehler": 554
+    }
+   },
+   "meta": {
+    "code_version": {
+     "git": "7a259efe3f2f9545cd487af3d2ddb8a20a1e8b34",
+     "paket": "0.1.0"
+    },
+    "laufzeit_s": 68.29,
+    "n": 40,
+    "n_min": 18,
+    "plan": {
+     "T_lauf": 17.0,
+     "einstellung2": null,
+     "n0": 20,
+     "n_bloecke": 24,
+     "n_pilot": 20,
+     "n_zyklen": 100,
+     "phase_pause": 86400.0,
+     "pruef": [],
+     "pruef_bilder": true,
+     "ref_abstand": 12,
+     "ref_min_p0": 42,
+     "tag_pause": 43200.0,
+     "tage": 1,
+     "zusatz": false
+    },
+    "profil_sha256": "49dc74abca52b2c5e4ae8f6d2e1c53dc468205b01b9f65270b86c27e91114352",
+    "prozesse": 4,
+    "rolle": "pruefung",
+    "seed_basis": 20261016,
+    "seeds": [
+     2374617110768802740,
+     6206175207903370663,
+     5403409528000646026,
+     5605863639679650945,
+     2204103291724798323,
+     8026771250325942991,
+     1834275368632441754,
+     1429191119696690228,
+     3854386577447058303,
+     3893379356861574335,
+     960022166661820910,
+     921293067283868662,
+     666850624343715472,
+     2376039323572206386,
+     4914136718495294194,
+     7446849170071703816,
+     252872551318348248,
+     260168811489447571,
+     5936204156835107307,
+     2745996240342542311,
+     354746587846646101,
+     2982548909608259574,
+     7327591352487542171,
+     4199166069492014320,
+     9078329587524505464,
+     764393780748297065,
+     2526515939850890236,
+     1466079355725926971,
+     265919766319329184,
+     9205580429385668594,
+     1667601662723895975,
+     6960460770599672118,
+     1331407880991241861,
+     2695926496692112039,
+     283622491450603827,
+     1160455134868170223,
+     209296277215192163,
+     4331634422658472955,
+     4197257328572579309,
+     2322022349844913766
+    ],
+    "stufe": "L0",
+    "szenario": "N01-A4",
+    "werkzeug8": "TESTVORGABE",
+    "werkzeug8_herkunft": null
+   },
+   "ort": "schritte.k06.N01-A4/L0",
+   "raten": {
+    "E3: unauffällig": {
+     "mc_se": 0.0,
+     "nenner": 40,
+     "rate": 1.0,
+     "zaehler": 40
+    },
+    "H1 Sensitivität faktor_0_1: bestätigt": {
+     "mc_se": 0.041645828122394195,
+     "nenner": 40,
+     "rate": 0.925,
+     "zaehler": 37
+    },
+    "H1 Sensitivität faktor_0_1: falsifiziert": {
+     "mc_se": 0.0,
+     "nenner": 40,
+     "rate": 0.0,
+     "zaehler": 0
+    },
+    "H1 Sensitivität faktor_0_1: nicht entscheidbar": {
+     "mc_se": 0.04164582812239421,
+     "nenner": 40,
+     "rate": 0.075,
+     "zaehler": 3
+    },
+    "H1 Sensitivität fassung_A: bestätigt": {
+     "mc_se": 0.041645828122394195,
+     "nenner": 40,
+     "rate": 0.925,
+     "zaehler": 37
+    },
+    "H1 Sensitivität fassung_A: falsifiziert": {
+     "mc_se": 0.0,
+     "nenner": 40,
+     "rate": 0.0,
+     "zaehler": 0
+    },
+    "H1 Sensitivität fassung_A: nicht entscheidbar": {
+     "mc_se": 0.04164582812239421,
+     "nenner": 40,
+     "rate": 0.075,
+     "zaehler": 3
+    },
+    "H1 und H2 bestätigt": {
+     "mc_se": 0.041645828122394195,
+     "nenner": 40,
+     "rate": 0.925,
+     "zaehler": 37
+    },
+    "H1: bestätigt": {
+     "mc_se": 0.041645828122394195,
+     "nenner": 40,
+     "rate": 0.925,
+     "zaehler": 37
+    },
+    "H1: falsifiziert": {
+     "mc_se": 0.0,
+     "nenner": 40,
+     "rate": 0.0,
+     "zaehler": 0
+    },
+    "H1: nicht entscheidbar": {
+     "mc_se": 0.04164582812239421,
+     "nenner": 40,
+     "rate": 0.075,
+     "zaehler": 3
+    },
+    "H1: nicht entscheidbar, Grund Datenlage": {
+     "mc_se": 0.04164582812239421,
+     "nenner": 40,
+     "rate": 0.075,
+     "zaehler": 3
+    },
+    "H1Z: bestätigt": {
+     "mc_se": 0.041645828122394195,
+     "nenner": 40,
+     "rate": 0.925,
+     "zaehler": 37
+    },
+    "H1Z: falsifiziert": {
+     "mc_se": 0.0,
+     "nenner": 40,
+     "rate": 0.0,
+     "zaehler": 0
+    },
+    "H1Z: nicht entscheidbar": {
+     "mc_se": 0.04164582812239421,
+     "nenner": 40,
+     "rate": 0.075,
+     "zaehler": 3
+    },
+    "H1Z: nicht entscheidbar, Grund Datenlage": {
+     "mc_se": 0.04164582812239421,
+     "nenner": 40,
+     "rate": 0.075,
+     "zaehler": 3
+    },
+    "H2: bestätigt": {
+     "mc_se": 0.041645828122394195,
+     "nenner": 40,
+     "rate": 0.925,
+     "zaehler": 37
+    },
+    "H2: falsifiziert": {
+     "mc_se": 0.0,
+     "nenner": 40,
+     "rate": 0.0,
+     "zaehler": 0
+    },
+    "H2: nicht entscheidbar": {
+     "mc_se": 0.04164582812239421,
+     "nenner": 40,
+     "rate": 0.075,
+     "zaehler": 3
+    },
+    "H2: nicht entscheidbar, Grund Datenlage": {
+     "mc_se": 0.04164582812239421,
+     "nenner": 40,
+     "rate": 0.075,
+     "zaehler": 3
+    },
+    "H3: bestätigt": {
+     "mc_se": 0.0,
+     "nenner": 40,
+     "rate": 0.0,
+     "zaehler": 0
+    },
+    "H3: falsifiziert": {
+     "mc_se": 0.0,
+     "nenner": 40,
+     "rate": 0.0,
+     "zaehler": 0
+    },
+    "H3: nicht entscheidbar": {
+     "mc_se": 0.0,
+     "nenner": 40,
+     "rate": 1.0,
+     "zaehler": 40
+    },
+    "H3: nicht entscheidbar, Grund Verfahren": {
+     "mc_se": 0.0,
+     "nenner": 40,
+     "rate": 1.0,
+     "zaehler": 40
+    },
+    "H4: bestätigt": {
+     "mc_se": 0.0,
+     "nenner": 40,
+     "rate": 1.0,
+     "zaehler": 40
+    },
+    "H4: falsifiziert": {
+     "mc_se": 0.0,
+     "nenner": 40,
+     "rate": 0.0,
+     "zaehler": 0
+    },
+    "H4: nicht entscheidbar": {
+     "mc_se": 0.0,
+     "nenner": 40,
+     "rate": 0.0,
+     "zaehler": 0
+    },
+    "mindestens ein |z⁰| > c (H1)": {
+     "mc_se": 0.0,
+     "nenner": 40,
+     "rate": 0.0,
+     "zaehler": 0
+    }
+   },
+   "u_c_median": {
+    "F_min": 0.0002640662607826714,
+    "Im N1": 0.00017406550076254235,
+    "Im N2": 0.00012315367253539785,
+    "Im N3": 0.00010598209685057326,
+    "Re N1": 0.00016907613293537776,
+    "Re N2": 0.00011461765338908075,
+    "Re N3": 5.849740280785946e-05
+   },
+   "wahrheit": {
+    "klasse": "R0",
+    "r_max_rel": 5.150583848930261e-15
+   }
+  },
+  "N01-A4/L1": {
+   "c_H1": {
+    "ausgeschlossen": 6,
+    "c_B": 4.202234109375977,
+    "gepoolt": true,
+    "n": 387,
+    "regel": null,
+    "se": 0.09568275016237231,
+    "wert": 3.709322110180076
+   },
+   "c_H1Z": {
+    "ausgeschlossen": 6,
+    "c_B": 4.642796862350881,
+    "n": 194,
+    "se": 0.07690808598517429,
+    "wert": 3.8064613614497946
+   },
+   "gemeinsame_bestaetigung": {
+    "mc_se": 0.012995191418367032,
+    "nenner": 200,
+    "rate": 0.965,
+    "zaehler": 193
+   },
+   "gepoolt": true,
+   "gueltigkeit": {
+    "G1": {
+     "mc_se": 0.00021799088452309604,
+     "nenner": 126000,
+     "rate": 0.006023809523809524,
+     "zaehler": 759
+    },
+    "G4": {
+     "mc_se": 0.00042514009233375697,
+     "nenner": 126000,
+     "rate": 0.023317460317460317,
+     "zaehler": 2938
+    }
+   },
+   "h2": {
+    "niveau": 0.95,
+    "schluessel": "perzentil_0.95",
+    "typ": "perzentil",
+    "ueberdeckung": {
+     "bca_0.95": {
+      "yhat0": {
+       "mc_se": 0.011376621500064398,
+       "nenner": 194,
+       "rate": 0.9742268041237113,
+       "zaehler": 189
+      },
+      "yhat1": {
+       "mc_se": 0.012429451238720293,
+       "nenner": 194,
+       "rate": 0.9690721649484536,
+       "zaehler": 188
+      }
+     },
+     "perzentil_0.95": {
+      "yhat0": {
+       "mc_se": 0.0,
+       "nenner": 194,
+       "rate": 1.0,
+       "zaehler": 194
+      },
+      "yhat1": {
+       "mc_se": 0.0,
+       "nenner": 194,
+       "rate": 1.0,
+       "zaehler": 194
+      }
+     },
+     "perzentil_0.96": {
+      "yhat0": {
+       "mc_se": 0.0,
+       "nenner": 194,
+       "rate": 1.0,
+       "zaehler": 194
+      },
+      "yhat1": {
+       "mc_se": 0.0,
+       "nenner": 194,
+       "rate": 1.0,
+       "zaehler": 194
+      }
+     },
+     "perzentil_0.97": {
+      "yhat0": {
+       "mc_se": 0.0,
+       "nenner": 194,
+       "rate": 1.0,
+       "zaehler": 194
+      },
+      "yhat1": {
+       "mc_se": 0.0,
+       "nenner": 194,
+       "rate": 1.0,
+       "zaehler": 194
+      }
+     },
+     "perzentil_0.98": {
+      "yhat0": {
+       "mc_se": 0.0,
+       "nenner": 194,
+       "rate": 1.0,
+       "zaehler": 194
+      },
+      "yhat1": {
+       "mc_se": 0.0,
+       "nenner": 194,
+       "rate": 1.0,
+       "zaehler": 194
+      }
+     },
+     "perzentil_0.99": {
+      "yhat0": {
+       "mc_se": 0.0,
+       "nenner": 194,
+       "rate": 1.0,
+       "zaehler": 194
+      },
+      "yhat1": {
+       "mc_se": 0.0,
+       "nenner": 194,
+       "rate": 1.0,
+       "zaehler": 194
+      }
+     }
+    }
+   },
+   "meta": {
+    "code_version": {
+     "git": "7a259efe3f2f9545cd487af3d2ddb8a20a1e8b34",
+     "paket": "0.1.0"
+    },
+    "lesart": "Entwicklungsdiagnostik: weniger Kampagnen oder Replikate als normativ; keine Kalibrierabnahme",
+    "n_kalibrierung": 200,
+    "n_pruefung": 200,
+    "profil": "ENTW-2026-10+red(bootstrap_B=1000,e3_mc=1000,eps_ctrl_datensaetze=1000,h2_replikate=1000,h3_mc=1000)",
+    "profil_sha256": "49dc74abca52b2c5e4ae8f6d2e1c53dc468205b01b9f65270b86c27e91114352",
+    "rauschvarianten": 1,
+    "reduziert": true,
+    "seed_basis": 20261016,
+    "stufe": "L1",
+    "szenario": "N01-A4"
+   },
+   "ort": "schritte.kalibrierung_a4.raten_pruefung",
+   "pruefung": {
+    "mc_se": 0.020932413893044687,
+    "nenner": 193,
+    "rate": 0.09326424870466321,
+    "zaehler": 18
+   },
+   "raten": {
+    "E3: unauffällig": {
+     "mc_se": 0.01804161855266872,
+     "nenner": 200,
+     "rate": 0.07,
+     "zaehler": 14
+    },
+    "E3: unbestimmt": {
+     "mc_se": 0.01804161855266871,
+     "nenner": 200,
+     "rate": 0.93,
+     "zaehler": 186
+    },
+    "H1 Sensitivität faktor_0_1: bestätigt": {
+     "mc_se": 0.012995191418367032,
+     "nenner": 200,
+     "rate": 0.965,
+     "zaehler": 193
+    },
+    "H1 Sensitivität faktor_0_1: falsifiziert": {
+     "mc_se": 0.0,
+     "nenner": 200,
+     "rate": 0.0,
+     "zaehler": 0
+    },
+    "H1 Sensitivität faktor_0_1: nicht entscheidbar": {
+     "mc_se": 0.012995191418367026,
+     "nenner": 200,
+     "rate": 0.035,
+     "zaehler": 7
+    },
+    "H1 Sensitivität fassung_A: bestätigt": {
+     "mc_se": 0.012995191418367032,
+     "nenner": 200,
+     "rate": 0.965,
+     "zaehler": 193
+    },
+    "H1 Sensitivität fassung_A: falsifiziert": {
+     "mc_se": 0.0,
+     "nenner": 200,
+     "rate": 0.0,
+     "zaehler": 0
+    },
+    "H1 Sensitivität fassung_A: nicht entscheidbar": {
+     "mc_se": 0.012995191418367026,
+     "nenner": 200,
+     "rate": 0.035,
+     "zaehler": 7
+    },
+    "H1 und H2 bestätigt": {
+     "mc_se": 0.012995191418367032,
+     "nenner": 200,
+     "rate": 0.965,
+     "zaehler": 193
+    },
+    "H1: Zusatz Drift der Einzelmodulbasis": {
+     "mc_se": 0.021676600286945368,
+     "nenner": 200,
+     "rate": 0.105,
+     "zaehler": 21
+    },
+    "H1: bestätigt": {
+     "mc_se": 0.012995191418367032,
+     "nenner": 200,
+     "rate": 0.965,
+     "zaehler": 193
+    },
+    "H1: falsifiziert": {
+     "mc_se": 0.0,
+     "nenner": 200,
+     "rate": 0.0,
+     "zaehler": 0
+    },
+    "H1: nicht entscheidbar": {
+     "mc_se": 0.012995191418367026,
+     "nenner": 200,
+     "rate": 0.035,
+     "zaehler": 7
+    },
+    "H1: nicht entscheidbar, Grund Datenlage": {
+     "mc_se": 0.012995191418367026,
+     "nenner": 200,
+     "rate": 0.035,
+     "zaehler": 7
+    },
+    "H1Z: bestätigt": {
+     "mc_se": 0.012995191418367032,
+     "nenner": 200,
+     "rate": 0.965,
+     "zaehler": 193
+    },
+    "H1Z: falsifiziert": {
+     "mc_se": 0.0,
+     "nenner": 200,
+     "rate": 0.0,
+     "zaehler": 0
+    },
+    "H1Z: nicht entscheidbar": {
+     "mc_se": 0.012995191418367026,
+     "nenner": 200,
+     "rate": 0.035,
+     "zaehler": 7
+    },
+    "H1Z: nicht entscheidbar, Grund Datenlage": {
+     "mc_se": 0.012995191418367026,
+     "nenner": 200,
+     "rate": 0.035,
+     "zaehler": 7
+    },
+    "H2: bestätigt": {
+     "mc_se": 0.012062338081814825,
+     "nenner": 200,
+     "rate": 0.97,
+     "zaehler": 194
+    },
+    "H2: falsifiziert": {
+     "mc_se": 0.0,
+     "nenner": 200,
+     "rate": 0.0,
+     "zaehler": 0
+    },
+    "H2: nicht entscheidbar": {
+     "mc_se": 0.012062338081814818,
+     "nenner": 200,
+     "rate": 0.03,
+     "zaehler": 6
+    },
+    "H2: nicht entscheidbar, Grund Datenlage": {
+     "mc_se": 0.012062338081814818,
+     "nenner": 200,
+     "rate": 0.03,
+     "zaehler": 6
+    },
+    "H3: bestätigt": {
+     "mc_se": 0.0,
+     "nenner": 200,
+     "rate": 0.0,
+     "zaehler": 0
+    },
+    "H3: falsifiziert": {
+     "mc_se": 0.0,
+     "nenner": 200,
+     "rate": 0.0,
+     "zaehler": 0
+    },
+    "H3: nicht entscheidbar": {
+     "mc_se": 0.0,
+     "nenner": 200,
+     "rate": 1.0,
+     "zaehler": 200
+    },
+    "H3: nicht entscheidbar, Grund Verfahren": {
+     "mc_se": 0.0,
+     "nenner": 200,
+     "rate": 1.0,
+     "zaehler": 200
+    },
+    "H4: bestätigt": {
+     "mc_se": 0.0,
+     "nenner": 200,
+     "rate": 1.0,
+     "zaehler": 200
+    },
+    "H4: falsifiziert": {
+     "mc_se": 0.0,
+     "nenner": 200,
+     "rate": 0.0,
+     "zaehler": 0
+    },
+    "H4: nicht entscheidbar": {
+     "mc_se": 0.0,
+     "nenner": 200,
+     "rate": 0.0,
+     "zaehler": 0
+    },
+    "mindestens ein |z⁰| > c (H1)": {
+     "mc_se": 0.018624580532189176,
+     "nenner": 200,
+     "rate": 0.075,
+     "zaehler": 15
+    }
+   },
+   "zmax_pruefung": [
+    2.2343980236709764,
+    2.621145709478668,
+    3.054252214699656,
+    2.90180500547673,
+    2.440495923552831,
+    3.5138359686972946,
+    2.6568448811115175,
+    1.9289124763818173,
+    2.2830342899931386,
+    3.9256783555839285,
+    1.9023648825603798,
+    2.864305937903122,
+    2.509085542436202,
+    2.86389298283809,
+    1.9394456812149028,
+    3.1298989982174197,
+    2.7398622483431883,
+    2.284850940920721,
+    2.3270140111404523,
+    2.3312713770701596,
+    2.469623742842079,
+    2.6383005362888814,
+    2.520767831216098,
+    3.8172335151942614,
+    2.6693497346870685,
+    2.3337569669752125,
+    2.8559060682018953,
+    2.6077705023793363,
+    2.1700310210810474,
+    2.3108088546279535,
+    4.487546833572103,
+    3.2434743174619376,
+    2.3855089863562977,
+    2.3214908214185788,
+    2.1067030007272276,
+    3.321743065236817,
+    1.818936157988895,
+    3.696257085524612,
+    2.2775562075974762,
+    4.86929522930924,
+    2.2376610591915065,
+    2.325965926686767,
+    2.5680427005157194,
+    2.939682591130456,
+    3.583945275591473,
+    2.779650024580844,
+    2.494227818600244,
+    2.947531966937394,
+    2.2950418311142418,
+    1.96220110908098,
+    2.5013520412123236,
+    3.1289359866483415,
+    3.143935714460805,
+    2.969403627434137,
+    2.8680097941873592,
+    2.7605080103945903,
+    2.74658723244153,
+    2.249627632151771,
+    3.6537284215650585,
+    2.8567470170871827,
+    1.6837067874267764,
+    2.8275716283216172,
+    2.1055769924800156,
+    2.400708315386349,
+    2.147623221464087,
+    3.8347255006510403,
+    2.8234882642510373,
+    2.149221365684015,
+    3.237452789937893,
+    2.0978949710345036,
+    3.8733836410571407,
+    2.734833987155321,
+    1.959146057766406,
+    2.7573278944298187,
+    2.1136734646123565,
+    2.4326433986039593,
+    3.3517243458341386,
+    3.386865500935053,
+    2.3847789331503515,
+    3.2480238805333044,
+    3.248189530172563,
+    2.516385759975361,
+    2.2661554306349876,
+    2.683015748258844,
+    3.7108130925960388,
+    2.3689308909110025,
+    2.9074031646954297,
+    1.9212253460632551,
+    2.445773461897702,
+    2.5065423665438815,
+    2.4832570018474955,
+    2.413015488169263,
+    3.8164924245190215,
+    2.259950385785524,
+    3.239008830338352,
+    3.558440959300266,
+    3.9442604023220387,
+    2.789294586762588,
+    2.476774780567854,
+    3.0228709601845836,
+    2.9526441181433554,
+    2.699501189267302,
+    2.562960866619515,
+    2.815264894183534,
+    2.6235370763061505,
+    2.10208880875256,
+    2.7649487115033784,
+    2.643122413270478,
+    3.446360492737208,
+    2.836254059254128,
+    2.384426018909531,
+    3.5634122251797997,
+    2.4905287542886936,
+    3.4637145020949403,
+    3.1832666893326484,
+    2.8996552434502787,
+    2.5936941616800744,
+    3.381836753585161,
+    2.916993694020188,
+    3.4248647733802104,
+    2.3409253085367734,
+    2.6428009096006972,
+    3.2133036061257325,
+    2.681784579620653,
+    2.7476773313254665,
+    4.24390634496157,
+    2.309330913633035,
+    2.7445114614643407,
+    3.32992198164244,
+    2.694747708127835,
+    3.007185323790069,
+    2.315124835265473,
+    2.790160467779937,
+    2.3375412116582894,
+    2.414433211424459,
+    2.4270729678135106,
+    3.165725735544581,
+    2.6389680147016388,
+    2.6845992066327047,
+    2.788354723511998,
+    1.874295591738158,
+    2.7114264163953363,
+    3.252001600755877,
+    3.277854766513389,
+    3.3079260690093513,
+    2.7571127461118863,
+    3.638647454507996,
+    2.053748545665682,
+    3.3627937957310885,
+    2.8915504609254,
+    2.0087152427847674,
+    2.3612055152245217,
+    2.2922872565547863,
+    1.9548377710658615,
+    3.016401112658078,
+    3.755186617497812,
+    1.9851882861275227,
+    2.741404532645497,
+    2.8125020038379662,
+    3.1527117388125423,
+    2.839721480286538,
+    2.945774002663315,
+    3.0673044266596405,
+    2.5331025240984077,
+    2.2528271345630997,
+    2.899244743655734,
+    1.954521124360336,
+    2.048958090314258,
+    2.3397218874217045,
+    4.898192395010501,
+    3.585611462871178,
+    3.6277344224934103,
+    2.440872777647912,
+    2.7433131887142506,
+    2.879637690693582,
+    1.906661526109803,
+    3.1790769283634477,
+    2.4512152014933193,
+    2.157538421600644,
+    2.4553954415918495,
+    2.2681108986201552,
+    3.2356279576419844,
+    3.254636263784538,
+    4.283591314546021,
+    3.061027176504436,
+    3.150454788721633,
+    2.2858133436874253,
+    2.3992231624066322,
+    2.5477845438328375,
+    2.5427446191818253,
+    2.8856030396277683,
+    4.165786614268681,
+    2.9995604962527658,
+    2.106680360540619,
+    2.61235891981927,
+    2.4172758949309157,
+    2.467400038834052,
+    2.6031911872322944,
+    2.5298097954424015,
+    3.790782612910009
+   ],
+   "zmax_pruefung_vollstaendig": [
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    false,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    false,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    false,
+    true,
+    true,
+    true,
+    true,
+    false,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    false,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    false,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    false,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true
+   ]
+  },
+  "N01-A4/L2": {
+   "abbruch": {
+    "S1_kandidaten": {
+     "mc_se": 0.06007807420348958,
+     "nenner": 40,
+     "rate": 0.825,
+     "zaehler": 33
+    },
+    "S2": {
+     "mc_se": 0.0,
+     "nenner": 40,
+     "rate": 0.0,
+     "zaehler": 0
+    },
+    "S4": {
+     "mc_se": 0.0,
+     "nenner": 40,
+     "rate": 0.0,
+     "zaehler": 0
+    }
+   },
+   "gueltigkeit": {
+    "G1": {
+     "mc_se": 0.0004972356265047447,
+     "nenner": 25200,
+     "rate": 0.00626984126984127,
+     "zaehler": 158
+    },
+    "G4": {
+     "mc_se": 0.0009064022193723616,
+     "nenner": 25200,
+     "rate": 0.02115079365079365,
+     "zaehler": 533
+    }
+   },
+   "meta": {
+    "code_version": {
+     "git": "7a259efe3f2f9545cd487af3d2ddb8a20a1e8b34",
+     "paket": "0.1.0"
+    },
+    "laufzeit_s": 69.29,
+    "n": 40,
+    "n_min": 18,
+    "plan": {
+     "T_lauf": 17.0,
+     "einstellung2": null,
+     "n0": 20,
+     "n_bloecke": 24,
+     "n_pilot": 20,
+     "n_zyklen": 100,
+     "phase_pause": 86400.0,
+     "pruef": [],
+     "pruef_bilder": true,
+     "ref_abstand": 12,
+     "ref_min_p0": 42,
+     "tag_pause": 43200.0,
+     "tage": 1,
+     "zusatz": false
+    },
+    "profil_sha256": "49dc74abca52b2c5e4ae8f6d2e1c53dc468205b01b9f65270b86c27e91114352",
+    "prozesse": 4,
+    "rolle": "pruefung",
+    "seed_basis": 20261016,
+    "seeds": [
+     6257914333128543417,
+     521074346530537771,
+     5526850675894599636,
+     4155967498769551354,
+     2076812832353048066,
+     7287655210855870877,
+     8385732135839302311,
+     3162369438791508550,
+     6298589553443890063,
+     5327837616179142005,
+     2897030331473996857,
+     7032245815250263608,
+     1180746876672277941,
+     5462827295756920111,
+     5308287036592812204,
+     6988430102277953902,
+     8245895324250078522,
+     7786718602955537555,
+     6351097765456487383,
+     9173837889294183955,
+     830057630418369418,
+     1329944083725436680,
+     8778003540571990446,
+     8949106958017268208,
+     4925627402797756704,
+     765104894500015261,
+     7494379655146639833,
+     6351155312876386395,
+     3459237937694425069,
+     8825996320017610851,
+     16055471083784034,
+     1141165968929412350,
+     523439297166249391,
+     8526953371552523204,
+     1512142729272151021,
+     905221940015890123,
+     4708904823545220473,
+     3010115877480823849,
+     8036581353221167313,
+     4538533207712218467
+    ],
+    "stufe": "L2",
+    "szenario": "N01-A4",
+    "werkzeug8": "TESTVORGABE",
+    "werkzeug8_herkunft": null
+   },
+   "ort": "schritte.k06.N01-A4/L2",
+   "raten": {
+    "E3: unbestimmt": {
+     "mc_se": 0.0,
+     "nenner": 40,
+     "rate": 1.0,
+     "zaehler": 40
+    },
+    "H1 Sensitivität faktor_0_1: bestätigt": {
+     "mc_se": 0.03446012188022557,
+     "nenner": 40,
+     "rate": 0.95,
+     "zaehler": 38
+    },
+    "H1 Sensitivität faktor_0_1: falsifiziert": {
+     "mc_se": 0.0,
+     "nenner": 40,
+     "rate": 0.0,
+     "zaehler": 0
+    },
+    "H1 Sensitivität faktor_0_1: nicht entscheidbar": {
+     "mc_se": 0.034460121880225555,
+     "nenner": 40,
+     "rate": 0.05,
+     "zaehler": 2
+    },
+    "H1 Sensitivität fassung_A: bestätigt": {
+     "mc_se": 0.03446012188022557,
+     "nenner": 40,
+     "rate": 0.95,
+     "zaehler": 38
+    },
+    "H1 Sensitivität fassung_A: falsifiziert": {
+     "mc_se": 0.0,
+     "nenner": 40,
+     "rate": 0.0,
+     "zaehler": 0
+    },
+    "H1 Sensitivität fassung_A: nicht entscheidbar": {
+     "mc_se": 0.034460121880225555,
+     "nenner": 40,
+     "rate": 0.05,
+     "zaehler": 2
+    },
+    "H1 und H2 bestätigt": {
+     "mc_se": 0.03446012188022557,
+     "nenner": 40,
+     "rate": 0.95,
+     "zaehler": 38
+    },
+    "H1: bestätigt": {
+     "mc_se": 0.03446012188022557,
+     "nenner": 40,
+     "rate": 0.95,
+     "zaehler": 38
+    },
+    "H1: falsifiziert": {
+     "mc_se": 0.0,
+     "nenner": 40,
+     "rate": 0.0,
+     "zaehler": 0
+    },
+    "H1: nicht entscheidbar": {
+     "mc_se": 0.034460121880225555,
+     "nenner": 40,
+     "rate": 0.05,
+     "zaehler": 2
+    },
+    "H1: nicht entscheidbar, Grund Datenlage": {
+     "mc_se": 0.034460121880225555,
+     "nenner": 40,
+     "rate": 0.05,
+     "zaehler": 2
+    },
+    "H1Z: bestätigt": {
+     "mc_se": 0.03446012188022557,
+     "nenner": 40,
+     "rate": 0.95,
+     "zaehler": 38
+    },
+    "H1Z: falsifiziert": {
+     "mc_se": 0.0,
+     "nenner": 40,
+     "rate": 0.0,
+     "zaehler": 0
+    },
+    "H1Z: nicht entscheidbar": {
+     "mc_se": 0.034460121880225555,
+     "nenner": 40,
+     "rate": 0.05,
+     "zaehler": 2
+    },
+    "H1Z: nicht entscheidbar, Grund Datenlage": {
+     "mc_se": 0.034460121880225555,
+     "nenner": 40,
+     "rate": 0.05,
+     "zaehler": 2
+    },
+    "H2: bestätigt": {
+     "mc_se": 0.03446012188022557,
+     "nenner": 40,
+     "rate": 0.95,
+     "zaehler": 38
+    },
+    "H2: falsifiziert": {
+     "mc_se": 0.0,
+     "nenner": 40,
+     "rate": 0.0,
+     "zaehler": 0
+    },
+    "H2: nicht entscheidbar": {
+     "mc_se": 0.034460121880225555,
+     "nenner": 40,
+     "rate": 0.05,
+     "zaehler": 2
+    },
+    "H2: nicht entscheidbar, Grund Datenlage": {
+     "mc_se": 0.034460121880225555,
+     "nenner": 40,
+     "rate": 0.05,
+     "zaehler": 2
+    },
+    "H3: bestätigt": {
+     "mc_se": 0.0,
+     "nenner": 40,
+     "rate": 0.0,
+     "zaehler": 0
+    },
+    "H3: falsifiziert": {
+     "mc_se": 0.0,
+     "nenner": 40,
+     "rate": 0.0,
+     "zaehler": 0
+    },
+    "H3: nicht entscheidbar": {
+     "mc_se": 0.0,
+     "nenner": 40,
+     "rate": 1.0,
+     "zaehler": 40
+    },
+    "H3: nicht entscheidbar, Grund Verfahren": {
+     "mc_se": 0.0,
+     "nenner": 40,
+     "rate": 1.0,
+     "zaehler": 40
+    },
+    "H4: bestätigt": {
+     "mc_se": 0.0,
+     "nenner": 40,
+     "rate": 1.0,
+     "zaehler": 40
+    },
+    "H4: falsifiziert": {
+     "mc_se": 0.0,
+     "nenner": 40,
+     "rate": 0.0,
+     "zaehler": 0
+    },
+    "H4: nicht entscheidbar": {
+     "mc_se": 0.0,
+     "nenner": 40,
+     "rate": 0.0,
+     "zaehler": 0
+    },
+    "mindestens ein |z⁰| > c (H1)": {
+     "mc_se": 0.0,
+     "nenner": 40,
+     "rate": 0.0,
+     "zaehler": 0
+    }
+   },
+   "u_c_median": {
+    "F_min": 0.003168522680997151,
+    "Im N1": 0.0046455206659103115,
+    "Im N2": 0.0015745575048805947,
+    "Im N3": 0.0005666115438326398,
+    "Re N1": 0.004829526480856508,
+    "Re N2": 0.001685539361708023,
+    "Re N3": 0.0009007247569666564
+   },
+   "wahrheit": {
+    "klasse": "R0",
+    "r_max_rel": 5.150583848930261e-15
+   }
+  },
+  "N01-A4/L4": {
+   "abbruch": {
+    "S1_kandidaten": {
+     "mc_se": 0.07060010623221469,
+     "nenner": 40,
+     "rate": 0.725,
+     "zaehler": 29
+    },
+    "S2": {
+     "mc_se": 0.0,
+     "nenner": 40,
+     "rate": 0.0,
+     "zaehler": 0
+    },
+    "S4": {
+     "mc_se": 0.0,
+     "nenner": 40,
+     "rate": 0.0,
+     "zaehler": 0
+    }
+   },
+   "gueltigkeit": {
+    "G1": {
+     "mc_se": 0.00045643211040523335,
+     "nenner": 25200,
+     "rate": 0.005277777777777778,
+     "zaehler": 133
+    },
+    "G4": {
+     "mc_se": 0.0007009754796530774,
+     "nenner": 25200,
+     "rate": 0.01253968253968254,
+     "zaehler": 316
+    }
+   },
+   "meta": {
+    "code_version": {
+     "git": "7a259efe3f2f9545cd487af3d2ddb8a20a1e8b34",
+     "paket": "0.1.0"
+    },
+    "laufzeit_s": 73.52,
+    "n": 40,
+    "n_min": 18,
+    "plan": {
+     "T_lauf": 17.0,
+     "einstellung2": null,
+     "n0": 20,
+     "n_bloecke": 24,
+     "n_pilot": 20,
+     "n_zyklen": 100,
+     "phase_pause": 86400.0,
+     "pruef": [],
+     "pruef_bilder": true,
+     "ref_abstand": 12,
+     "ref_min_p0": 42,
+     "tag_pause": 43200.0,
+     "tage": 1,
+     "zusatz": false
+    },
+    "profil_sha256": "49dc74abca52b2c5e4ae8f6d2e1c53dc468205b01b9f65270b86c27e91114352",
+    "prozesse": 4,
+    "rolle": "pruefung",
+    "seed_basis": 20261016,
+    "seeds": [
+     8484723159489696235,
+     6295037285973953407,
+     5946215636309497253,
+     4074289229925642354,
+     778604496731528053,
+     2153759358345137048,
+     443004998212506581,
+     5213719713452951374,
+     7220545086959320949,
+     6459155791794155677,
+     2657162290521658850,
+     8972361494067382303,
+     3464437767078433134,
+     980896566724421233,
+     2308253561941151248,
+     6914282316747099203,
+     355290078388822858,
+     6200918851105840631,
+     307340883782731239,
+     9051725537548256642,
+     5596644621679675683,
+     2790463810368839808,
+     8572889693660793306,
+     4938118073778324026,
+     8917038971080335650,
+     6084042676186800132,
+     2162623383787986620,
+     6994577111928387623,
+     3982936116631507398,
+     7297204303748218675,
+     8817086867006206706,
+     8117263723502624496,
+     5073784665417761492,
+     8771265719378803373,
+     6507673653763143319,
+     2162383206748942592,
+     6311843540158764893,
+     4499081881203278480,
+     8802928615636887889,
+     1899657871334514366
+    ],
+    "stufe": "L4",
+    "szenario": "N01-A4",
+    "werkzeug8": "TESTVORGABE",
+    "werkzeug8_herkunft": null
+   },
+   "ort": "schritte.k06.N01-A4/L4",
+   "raten": {
+    "E3: auffällig": {
+     "mc_se": 0.04164582812239421,
+     "nenner": 40,
+     "rate": 0.075,
+     "zaehler": 3
+    },
+    "E3: unbestimmt": {
+     "mc_se": 0.041645828122394195,
+     "nenner": 40,
+     "rate": 0.925,
+     "zaehler": 37
+    },
+    "H1 Sensitivität faktor_0_1: bestätigt": {
+     "mc_se": 0.0,
+     "nenner": 40,
+     "rate": 0.0,
+     "zaehler": 0
+    },
+    "H1 Sensitivität faktor_0_1: falsifiziert": {
+     "mc_se": 0.0,
+     "nenner": 40,
+     "rate": 0.0,
+     "zaehler": 0
+    },
+    "H1 Sensitivität faktor_0_1: nicht entscheidbar": {
+     "mc_se": 0.0,
+     "nenner": 40,
+     "rate": 1.0,
+     "zaehler": 40
+    },
+    "H1 Sensitivität fassung_A: bestätigt": {
+     "mc_se": 0.07905694150420949,
+     "nenner": 40,
+     "rate": 0.5,
+     "zaehler": 20
+    },
+    "H1 Sensitivität fassung_A: falsifiziert": {
+     "mc_se": 0.0,
+     "nenner": 40,
+     "rate": 0.0,
+     "zaehler": 0
+    },
+    "H1 Sensitivität fassung_A: nicht entscheidbar": {
+     "mc_se": 0.07905694150420949,
+     "nenner": 40,
+     "rate": 0.5,
+     "zaehler": 20
+    },
+    "H1 und H2 bestätigt": {
+     "mc_se": 0.0,
+     "nenner": 40,
+     "rate": 0.0,
+     "zaehler": 0
+    },
+    "H1: Zusatz Drift der Einzelmodulbasis": {
+     "mc_se": 0.024685522072664372,
+     "nenner": 40,
+     "rate": 0.025,
+     "zaehler": 1
+    },
+    "H1: bestätigt": {
+     "mc_se": 0.0,
+     "nenner": 40,
+     "rate": 1.0,
+     "zaehler": 40
+    },
+    "H1: falsifiziert": {
+     "mc_se": 0.0,
+     "nenner": 40,
+     "rate": 0.0,
+     "zaehler": 0
+    },
+    "H1: nicht entscheidbar": {
+     "mc_se": 0.0,
+     "nenner": 40,
+     "rate": 0.0,
+     "zaehler": 0
+    },
+    "H1Z: bestätigt": {
+     "mc_se": 0.0,
+     "nenner": 40,
+     "rate": 0.0,
+     "zaehler": 0
+    },
+    "H1Z: falsifiziert": {
+     "mc_se": 0.0,
+     "nenner": 40,
+     "rate": 0.0,
+     "zaehler": 0
+    },
+    "H1Z: nicht entscheidbar": {
+     "mc_se": 0.0,
+     "nenner": 40,
+     "rate": 1.0,
+     "zaehler": 40
+    },
+    "H1Z: nicht entscheidbar, Grund Graubereich": {
+     "mc_se": 0.0,
+     "nenner": 40,
+     "rate": 1.0,
+     "zaehler": 40
+    },
+    "H2: bestätigt": {
+     "mc_se": 0.0,
+     "nenner": 40,
+     "rate": 0.0,
+     "zaehler": 0
+    },
+    "H2: falsifiziert": {
+     "mc_se": 0.0,
+     "nenner": 40,
+     "rate": 0.0,
+     "zaehler": 0
+    },
+    "H2: nicht entscheidbar": {
+     "mc_se": 0.0,
+     "nenner": 40,
+     "rate": 1.0,
+     "zaehler": 40
+    },
+    "H2: nicht entscheidbar, Grund Graubereich": {
+     "mc_se": 0.07405656621799313,
+     "nenner": 40,
+     "rate": 0.325,
+     "zaehler": 13
+    },
+    "H2: nicht entscheidbar, Grund Präzision": {
+     "mc_se": 0.07405656621799311,
+     "nenner": 40,
+     "rate": 0.675,
+     "zaehler": 27
+    },
+    "H3: bestätigt": {
+     "mc_se": 0.0,
+     "nenner": 40,
+     "rate": 0.0,
+     "zaehler": 0
+    },
+    "H3: falsifiziert": {
+     "mc_se": 0.0,
+     "nenner": 40,
+     "rate": 0.0,
+     "zaehler": 0
+    },
+    "H3: nicht entscheidbar": {
+     "mc_se": 0.0,
+     "nenner": 40,
+     "rate": 1.0,
+     "zaehler": 40
+    },
+    "H3: nicht entscheidbar, Grund Verfahren": {
+     "mc_se": 0.0,
+     "nenner": 40,
+     "rate": 1.0,
+     "zaehler": 40
+    },
+    "H4: bestätigt": {
+     "mc_se": 0.0,
+     "nenner": 40,
+     "rate": 1.0,
+     "zaehler": 40
+    },
+    "H4: falsifiziert": {
+     "mc_se": 0.0,
+     "nenner": 40,
+     "rate": 0.0,
+     "zaehler": 0
+    },
+    "H4: nicht entscheidbar": {
+     "mc_se": 0.0,
+     "nenner": 40,
+     "rate": 0.0,
+     "zaehler": 0
+    },
+    "mindestens ein |z⁰| > c (H1)": {
+     "mc_se": 0.024685522072664372,
+     "nenner": 40,
+     "rate": 0.025,
+     "zaehler": 1
+    }
+   },
+   "u_c_median": {
+    "F_min": 0.01900033002008459,
+    "Im N1": 0.02832008403081311,
+    "Im N2": 0.009459910360082903,
+    "Im N3": 0.0033967241752167797,
+    "Re N1": 0.028588175696427583,
+    "Re N2": 0.010012118001340544,
+    "Re N3": 0.0054039524129723526
+   },
+   "wahrheit": {
+    "klasse": "R0",
+    "r_max_rel": 5.150583848930261e-15
+   }
+  },
+  "N03-N3bindet/L1": {
+   "abbruch": {
+    "S1_kandidaten": {
+     "mc_se": 0.06324555320336758,
+     "nenner": 40,
+     "rate": 0.8,
+     "zaehler": 32
+    },
+    "S2": {
+     "mc_se": 0.0,
+     "nenner": 40,
+     "rate": 0.0,
+     "zaehler": 0
+    },
+    "S4": {
+     "mc_se": 0.0,
+     "nenner": 40,
+     "rate": 0.0,
+     "zaehler": 0
+    }
+   },
+   "gueltigkeit": {
+    "G1": {
+     "mc_se": 0.00046152351538834055,
+     "nenner": 25200,
+     "rate": 0.005396825396825397,
+     "zaehler": 136
+    },
+    "G4": {
+     "mc_se": 0.0006292402662395505,
+     "nenner": 25200,
+     "rate": 0.010079365079365079,
+     "zaehler": 254
+    }
+   },
+   "meta": {
+    "code_version": {
+     "git": "7a259efe3f2f9545cd487af3d2ddb8a20a1e8b34",
+     "paket": "0.1.0"
+    },
+    "laufzeit_s": 105.95,
+    "n": 40,
+    "n_min": 18,
+    "plan": {
+     "T_lauf": 17.0,
+     "einstellung2": null,
+     "n0": 20,
+     "n_bloecke": 24,
+     "n_pilot": 20,
+     "n_zyklen": 100,
+     "phase_pause": 86400.0,
+     "pruef": [],
+     "pruef_bilder": true,
+     "ref_abstand": 12,
+     "ref_min_p0": 42,
+     "tag_pause": 43200.0,
+     "tage": 1,
+     "zusatz": false
+    },
+    "profil_sha256": "49dc74abca52b2c5e4ae8f6d2e1c53dc468205b01b9f65270b86c27e91114352",
+    "prozesse": 4,
+    "rolle": "pruefung",
+    "seed_basis": 20261016,
+    "seeds": [
+     8178970855863744100,
+     5635364792691881291,
+     7397730236837512873,
+     5408714013542811964,
+     1373814102269905731,
+     3622018141627653312,
+     655838197472167823,
+     5336456485061168313,
+     5934497319831450445,
+     2096568524739680127,
+     5266869924442638063,
+     4087989412479083078,
+     6404966005525376045,
+     4188167715671390168,
+     8251815958088283033,
+     3009643342196076108,
+     9157095739970899290,
+     3493445428090704868,
+     9136052516321618798,
+     4032864091184522655,
+     4127428680737041078,
+     123818794839380646,
+     5326451698849092102,
+     2321221883952811977,
+     660883426277813508,
+     8278492612358821902,
+     6746581622565618645,
+     811875301918455165,
+     676945588864153251,
+     8270061297386367990,
+     2247384227981427981,
+     1778679049606915109,
+     5776317989737559102,
+     4076772855702872391,
+     4946283176420282117,
+     2786458164584195746,
+     8008400499796767049,
+     8552323645391268555,
+     7646654973986263770,
+     6567764670219483408
+    ],
+    "stufe": "L1",
+    "szenario": "N03-N3bindet",
+    "werkzeug8": "übergeben",
+    "werkzeug8_herkunft": "Kalibriersimulation (AP-13) mit 200 Kampagnen (reduziert: Entwicklungsdiagnostik), Profil ENTW-2026-10+red(bootstrap_B=1000,e3_mc=1000,eps_ctrl_datensaetze=1000,h2_replikate=1000,h3_mc=1000): q95 von max|z⁰| über 147 Tests, n = 387; Prüfrate 0.0933 ± 0.0209 aus 193 vollständigen von 200 Kampagnen; gepooltes Quantil (Prüfrate > 0,069)"
+   },
+   "ort": "schritte.szenarien_a4.N03-N3bindet/L1",
+   "raten": {
+    "E3: unauffällig": {
+     "mc_se": 0.0,
+     "nenner": 40,
+     "rate": 1.0,
+     "zaehler": 40
+    },
+    "H1 Sensitivität faktor_0_1: bestätigt": {
+     "mc_se": 0.0,
+     "nenner": 40,
+     "rate": 1.0,
+     "zaehler": 40
+    },
+    "H1 Sensitivität faktor_0_1: falsifiziert": {
+     "mc_se": 0.0,
+     "nenner": 40,
+     "rate": 0.0,
+     "zaehler": 0
+    },
+    "H1 Sensitivität faktor_0_1: nicht entscheidbar": {
+     "mc_se": 0.0,
+     "nenner": 40,
+     "rate": 0.0,
+     "zaehler": 0
+    },
+    "H1 Sensitivität fassung_A: bestätigt": {
+     "mc_se": 0.0,
+     "nenner": 40,
+     "rate": 1.0,
+     "zaehler": 40
+    },
+    "H1 Sensitivität fassung_A: falsifiziert": {
+     "mc_se": 0.0,
+     "nenner": 40,
+     "rate": 0.0,
+     "zaehler": 0
+    },
+    "H1 Sensitivität fassung_A: nicht entscheidbar": {
+     "mc_se": 0.0,
+     "nenner": 40,
+     "rate": 0.0,
+     "zaehler": 0
+    },
+    "H1 und H2 bestätigt": {
+     "mc_se": 0.0,
+     "nenner": 40,
+     "rate": 1.0,
+     "zaehler": 40
+    },
+    "H1: Zusatz Drift der Einzelmodulbasis": {
+     "mc_se": 0.060078074203489575,
+     "nenner": 40,
+     "rate": 0.175,
+     "zaehler": 7
+    },
+    "H1: bestätigt": {
+     "mc_se": 0.0,
+     "nenner": 40,
+     "rate": 1.0,
+     "zaehler": 40
+    },
+    "H1: falsifiziert": {
+     "mc_se": 0.0,
+     "nenner": 40,
+     "rate": 0.0,
+     "zaehler": 0
+    },
+    "H1: nicht entscheidbar": {
+     "mc_se": 0.0,
+     "nenner": 40,
+     "rate": 0.0,
+     "zaehler": 0
+    },
+    "H1Z: bestätigt": {
+     "mc_se": 0.0,
+     "nenner": 40,
+     "rate": 1.0,
+     "zaehler": 40
+    },
+    "H1Z: falsifiziert": {
+     "mc_se": 0.0,
+     "nenner": 40,
+     "rate": 0.0,
+     "zaehler": 0
+    },
+    "H1Z: nicht entscheidbar": {
+     "mc_se": 0.0,
+     "nenner": 40,
+     "rate": 0.0,
+     "zaehler": 0
+    },
+    "H2: bestätigt": {
+     "mc_se": 0.0,
+     "nenner": 40,
+     "rate": 1.0,
+     "zaehler": 40
+    },
+    "H2: falsifiziert": {
+     "mc_se": 0.0,
+     "nenner": 40,
+     "rate": 0.0,
+     "zaehler": 0
+    },
+    "H2: nicht entscheidbar": {
+     "mc_se": 0.0,
+     "nenner": 40,
+     "rate": 0.0,
+     "zaehler": 0
+    },
+    "H3: bestätigt": {
+     "mc_se": 0.0,
+     "nenner": 40,
+     "rate": 0.0,
+     "zaehler": 0
+    },
+    "H3: falsifiziert": {
+     "mc_se": 0.0,
+     "nenner": 40,
+     "rate": 0.0,
+     "zaehler": 0
+    },
+    "H3: nicht entscheidbar": {
+     "mc_se": 0.0,
+     "nenner": 40,
+     "rate": 1.0,
+     "zaehler": 40
+    },
+    "H3: nicht entscheidbar, Grund Verfahren": {
+     "mc_se": 0.0,
+     "nenner": 40,
+     "rate": 1.0,
+     "zaehler": 40
+    },
+    "H4: bestätigt": {
+     "mc_se": 0.0,
+     "nenner": 40,
+     "rate": 1.0,
+     "zaehler": 40
+    },
+    "H4: falsifiziert": {
+     "mc_se": 0.0,
+     "nenner": 40,
+     "rate": 0.0,
+     "zaehler": 0
+    },
+    "H4: nicht entscheidbar": {
+     "mc_se": 0.0,
+     "nenner": 40,
+     "rate": 0.0,
+     "zaehler": 0
+    },
+    "mindestens ein |z⁰| > c (H1)": {
+     "mc_se": 0.05645794895318108,
+     "nenner": 40,
+     "rate": 0.15,
+     "zaehler": 6
+    }
+   },
+   "u_c_median": {
+    "F_min": 0.0010350136623650565,
+    "Im N1": 0.00037230996829738913,
+    "Im N2": 0.000348770999161482,
+    "Im N3": 0.0003409830374600846,
+    "Re N1": 0.0003744166116127393,
+    "Re N2": 0.00034706984051261045,
+    "Re N3": 0.0003273364857706372
+   },
+   "wahrheit": {
+    "klasse": "R0",
+    "r_max_rel": 6.256165668243665e-15
+   }
+  },
+  "N03-ungleich/L1": {
+   "abbruch": {
+    "S1_kandidaten": {
+     "mc_se": 0.05229125165837972,
+     "nenner": 40,
+     "rate": 0.875,
+     "zaehler": 35
+    },
+    "S2": {
+     "mc_se": 0.0,
+     "nenner": 40,
+     "rate": 0.0,
+     "zaehler": 0
+    },
+    "S4": {
+     "mc_se": 0.0,
+     "nenner": 40,
+     "rate": 0.0,
+     "zaehler": 0
+    }
+   },
+   "gueltigkeit": {
+    "G1": {
+     "mc_se": 0.0005095870194197377,
+     "nenner": 25200,
+     "rate": 0.006587301587301587,
+     "zaehler": 166
+    },
+    "G4": {
+     "mc_se": 0.0011900678521997586,
+     "nenner": 25200,
+     "rate": 0.03706349206349206,
+     "zaehler": 934
+    }
+   },
+   "meta": {
+    "code_version": {
+     "git": "7a259efe3f2f9545cd487af3d2ddb8a20a1e8b34",
+     "paket": "0.1.0"
+    },
+    "laufzeit_s": 124.11,
+    "n": 40,
+    "n_min": 18,
+    "plan": {
+     "T_lauf": 17.0,
+     "einstellung2": null,
+     "n0": 20,
+     "n_bloecke": 24,
+     "n_pilot": 20,
+     "n_zyklen": 100,
+     "phase_pause": 86400.0,
+     "pruef": [],
+     "pruef_bilder": true,
+     "ref_abstand": 12,
+     "ref_min_p0": 42,
+     "tag_pause": 43200.0,
+     "tage": 1,
+     "zusatz": false
+    },
+    "profil_sha256": "49dc74abca52b2c5e4ae8f6d2e1c53dc468205b01b9f65270b86c27e91114352",
+    "prozesse": 4,
+    "rolle": "pruefung",
+    "seed_basis": 20261016,
+    "seeds": [
+     7343655658691298791,
+     6944555262579724844,
+     4937949106133491198,
+     8163114980309329465,
+     44265841970996295,
+     725949186675854545,
+     5892351573370709793,
+     4818009774034919400,
+     5606755753920348639,
+     3709833019632153473,
+     493329847323001376,
+     4720471437307715554,
+     3166779635907454786,
+     2847850988609360381,
+     4521000345838261923,
+     2037431739321408161,
+     5718849986819300192,
+     7845099693717034111,
+     3788158427873529193,
+     8826146654001564483,
+     8560935751107193901,
+     731251322906184133,
+     4859425706878110951,
+     1830616700255760560,
+     6450302853489705309,
+     1574908125559734508,
+     3490077838195394844,
+     8542242369541894072,
+     2324374539349819307,
+     5581897920911835391,
+     2241668162147079340,
+     8872772871411330424,
+     2389098239227241118,
+     7258256965905552273,
+     9119827641444573960,
+     1079286089706528144,
+     3090166691693157281,
+     7230953239685748297,
+     6244242465770324463,
+     5283313736589455854
+    ],
+    "stufe": "L1",
+    "szenario": "N03-ungleich",
+    "werkzeug8": "übergeben",
+    "werkzeug8_herkunft": "Kalibriersimulation (AP-13) mit 200 Kampagnen (reduziert: Entwicklungsdiagnostik), Profil ENTW-2026-10+red(bootstrap_B=1000,e3_mc=1000,eps_ctrl_datensaetze=1000,h2_replikate=1000,h3_mc=1000): q95 von max|z⁰| über 147 Tests, n = 387; Prüfrate 0.0933 ± 0.0209 aus 193 vollständigen von 200 Kampagnen; gepooltes Quantil (Prüfrate > 0,069)"
+   },
+   "ort": "schritte.szenarien_a4.N03-ungleich/L1",
+   "raten": {
+    "E3: unauffällig": {
+     "mc_se": 0.04164582812239421,
+     "nenner": 40,
+     "rate": 0.075,
+     "zaehler": 3
+    },
+    "E3: unbestimmt": {
+     "mc_se": 0.041645828122394195,
+     "nenner": 40,
+     "rate": 0.925,
+     "zaehler": 37
+    },
+    "H1 Sensitivität faktor_0_1: bestätigt": {
+     "mc_se": 0.05645794895318108,
+     "nenner": 40,
+     "rate": 0.85,
+     "zaehler": 34
+    },
+    "H1 Sensitivität faktor_0_1: falsifiziert": {
+     "mc_se": 0.0,
+     "nenner": 40,
+     "rate": 0.0,
+     "zaehler": 0
+    },
+    "H1 Sensitivität faktor_0_1: nicht entscheidbar": {
+     "mc_se": 0.05645794895318108,
+     "nenner": 40,
+     "rate": 0.15,
+     "zaehler": 6
+    },
+    "H1 Sensitivität fassung_A: bestätigt": {
+     "mc_se": 0.05645794895318108,
+     "nenner": 40,
+     "rate": 0.85,
+     "zaehler": 34
+    },
+    "H1 Sensitivität fassung_A: falsifiziert": {
+     "mc_se": 0.0,
+     "nenner": 40,
+     "rate": 0.0,
+     "zaehler": 0
+    },
+    "H1 Sensitivität fassung_A: nicht entscheidbar": {
+     "mc_se": 0.05645794895318108,
+     "nenner": 40,
+     "rate": 0.15,
+     "zaehler": 6
+    },
+    "H1 und H2 bestätigt": {
+     "mc_se": 0.05645794895318108,
+     "nenner": 40,
+     "rate": 0.85,
+     "zaehler": 34
+    },
+    "H1: Zusatz Drift der Einzelmodulbasis": {
+     "mc_se": 0.05229125165837972,
+     "nenner": 40,
+     "rate": 0.125,
+     "zaehler": 5
+    },
+    "H1: bestätigt": {
+     "mc_se": 0.05645794895318108,
+     "nenner": 40,
+     "rate": 0.85,
+     "zaehler": 34
+    },
+    "H1: falsifiziert": {
+     "mc_se": 0.0,
+     "nenner": 40,
+     "rate": 0.0,
+     "zaehler": 0
+    },
+    "H1: nicht entscheidbar": {
+     "mc_se": 0.05645794895318108,
+     "nenner": 40,
+     "rate": 0.15,
+     "zaehler": 6
+    },
+    "H1: nicht entscheidbar, Grund Datenlage": {
+     "mc_se": 0.05645794895318108,
+     "nenner": 40,
+     "rate": 0.15,
+     "zaehler": 6
+    },
+    "H1Z: bestätigt": {
+     "mc_se": 0.05645794895318108,
+     "nenner": 40,
+     "rate": 0.85,
+     "zaehler": 34
+    },
+    "H1Z: falsifiziert": {
+     "mc_se": 0.0,
+     "nenner": 40,
+     "rate": 0.0,
+     "zaehler": 0
+    },
+    "H1Z: nicht entscheidbar": {
+     "mc_se": 0.05645794895318108,
+     "nenner": 40,
+     "rate": 0.15,
+     "zaehler": 6
+    },
+    "H1Z: nicht entscheidbar, Grund Datenlage": {
+     "mc_se": 0.05645794895318108,
+     "nenner": 40,
+     "rate": 0.15,
+     "zaehler": 6
+    },
+    "H2: bestätigt": {
+     "mc_se": 0.05645794895318108,
+     "nenner": 40,
+     "rate": 0.85,
+     "zaehler": 34
+    },
+    "H2: falsifiziert": {
+     "mc_se": 0.0,
+     "nenner": 40,
+     "rate": 0.0,
+     "zaehler": 0
+    },
+    "H2: nicht entscheidbar": {
+     "mc_se": 0.05645794895318108,
+     "nenner": 40,
+     "rate": 0.15,
+     "zaehler": 6
+    },
+    "H2: nicht entscheidbar, Grund Datenlage": {
+     "mc_se": 0.05645794895318108,
+     "nenner": 40,
+     "rate": 0.15,
+     "zaehler": 6
+    },
+    "H3: bestätigt": {
+     "mc_se": 0.0,
+     "nenner": 40,
+     "rate": 1.0,
+     "zaehler": 40
+    },
+    "H3: falsifiziert": {
+     "mc_se": 0.0,
+     "nenner": 40,
+     "rate": 0.0,
+     "zaehler": 0
+    },
+    "H3: nicht entscheidbar": {
+     "mc_se": 0.0,
+     "nenner": 40,
+     "rate": 0.0,
+     "zaehler": 0
+    },
+    "H4: bestätigt": {
+     "mc_se": 0.0,
+     "nenner": 40,
+     "rate": 1.0,
+     "zaehler": 40
+    },
+    "H4: falsifiziert": {
+     "mc_se": 0.0,
+     "nenner": 40,
+     "rate": 0.0,
+     "zaehler": 0
+    },
+    "H4: nicht entscheidbar": {
+     "mc_se": 0.0,
+     "nenner": 40,
+     "rate": 0.0,
+     "zaehler": 0
+    },
+    "mindestens ein |z⁰| > c (H1)": {
+     "mc_se": 0.04164582812239421,
+     "nenner": 40,
+     "rate": 0.075,
+     "zaehler": 3
+    }
+   },
+   "u_c_median": {
+    "F_min": 0.0011807030308336474,
+    "Im N1": 0.0017841376818402551,
+    "Im N2": 0.0006060078512076752,
+    "Im N3": 0.00021647521979651954,
+    "Re N1": 0.0017742682620506599,
+    "Re N2": 0.0006252121830240517,
+    "Re N3": 0.0003425635483495974
+   },
+   "wahrheit": {
+    "klasse": "R0",
+    "r_max_rel": 6.309449154700373e-15
+   }
+  }
+ },
+ "k12": {
+  "aufrufe": [
+   {
+    "N_z": 100,
+    "bedingung": 0.8,
+    "grund": "kein Kandidat erreicht P(H1 und H2 bestätigt | exakt) ≥ 0,8",
+    "k": 30,
+    "kandidaten": [
+     {
+      "P_gemeinsam": 0.25,
+      "c_H1": 3.782416066599014,
+      "erfuellt": false,
+      "intervalltyp_H2": "perzentil_0.95",
+      "mc_se": 0.21650635094610965,
+      "n0": 20,
+      "n_min": 18,
+      "nenner": 4,
+      "pruefrate_c": 0.0,
+      "reserve_r": 2,
+      "zaehler": 1
+     },
+     {
+      "P_gemeinsam": 0.0,
+      "c_H1": null,
+      "erfuellt": false,
+      "intervalltyp_H2": "perzentil_0.95",
+      "mc_se": 0.0,
+      "n0": 20,
+      "n_min": 24,
+      "nenner": 4,
+      "pruefrate_c": null,
+      "reserve_r": 2,
+      "zaehler": 0
+     }
+    ],
+    "kappa": 1.0911406901482563,
+    "n0": null,
+    "n_min": null,
+    "power_bedingung": "offen (Regel planung.power), nicht geprüft",
+    "reduziert": true
+   },
+   {
+    "N_z": 100,
+    "bedingung": 0.8,
+    "grund": "kein Kandidat erreicht P(H1 und H2 bestätigt | exakt) ≥ 0,8",
+    "k": 29,
+    "kandidaten": [
+     {
+      "P_gemeinsam": 0.0,
+      "c_H1": null,
+      "erfuellt": false,
+      "intervalltyp_H2": null,
+      "mc_se": 0.0,
+      "n0": 20,
+      "n_min": 18,
+      "nenner": 4,
+      "pruefrate_c": null,
+      "reserve_r": 2,
+      "zaehler": 0
+     },
+     {
+      "P_gemeinsam": 0.0,
+      "c_H1": null,
+      "erfuellt": false,
+      "intervalltyp_H2": null,
+      "mc_se": 0.0,
+      "n0": 20,
+      "n_min": 24,
+      "nenner": 4,
+      "pruefrate_c": null,
+      "reserve_r": 2,
+      "zaehler": 0
+     }
+    ],
+    "kappa": 1.0911406901482563,
+    "n0": null,
+    "n_min": null,
+    "power_bedingung": "offen (Regel planung.power), nicht geprüft",
+    "reduziert": true
+   },
+   {
+    "N_z": 100,
+    "grund": "nicht simuliert: Entwicklungsgrenze von 2 Planungsaufrufen erreicht",
+    "k": 28,
+    "kandidaten": [],
+    "n0": null,
+    "n_min": null,
+    "reduziert": true
+   },
+   {
+    "N_z": 100,
+    "grund": "nicht simuliert: Entwicklungsgrenze von 2 Planungsaufrufen erreicht",
+    "k": 27,
+    "kandidaten": [],
+    "n0": null,
+    "n_min": null,
+    "reduziert": true
+   },
+   {
+    "N_z": 100,
+    "grund": "nicht simuliert: Entwicklungsgrenze von 2 Planungsaufrufen erreicht",
+    "k": 26,
+    "kandidaten": [],
+    "n0": null,
+    "n_min": null,
+    "reduziert": true
+   },
+   {
+    "N_z": 100,
+    "grund": "nicht simuliert: Entwicklungsgrenze von 2 Planungsaufrufen erreicht",
+    "k": 25,
+    "kandidaten": [],
+    "n0": null,
+    "n_min": null,
+    "reduziert": true
+   },
+   {
+    "N_z": 100,
+    "grund": "nicht simuliert: Entwicklungsgrenze von 2 Planungsaufrufen erreicht",
+    "k": 24,
+    "kandidaten": [],
+    "n0": null,
+    "n_min": null,
+    "reduziert": true
+   },
+   {
+    "N_z": 100,
+    "grund": "nicht simuliert: Entwicklungsgrenze von 2 Planungsaufrufen erreicht",
+    "k": 23,
+    "kandidaten": [],
+    "n0": null,
+    "n_min": null,
+    "reduziert": true
+   },
+   {
+    "N_z": 100,
+    "grund": "nicht simuliert: Entwicklungsgrenze von 2 Planungsaufrufen erreicht",
+    "k": 22,
+    "kandidaten": [],
+    "n0": null,
+    "n_min": null,
+    "reduziert": true
+   },
+   {
+    "N_z": 100,
+    "grund": "nicht simuliert: Entwicklungsgrenze von 2 Planungsaufrufen erreicht",
+    "k": 21,
+    "kandidaten": [],
+    "n0": null,
+    "n_min": null,
+    "reduziert": true
+   },
+   {
+    "N_z": 100,
+    "grund": "nicht simuliert: Entwicklungsgrenze von 2 Planungsaufrufen erreicht",
+    "k": 20,
+    "kandidaten": [],
+    "n0": null,
+    "n_min": null,
+    "reduziert": true
+   },
+   {
+    "N_z": 100,
+    "grund": "nicht simuliert: Entwicklungsgrenze von 2 Planungsaufrufen erreicht",
+    "k": 19,
+    "kandidaten": [],
+    "n0": null,
+    "n_min": null,
+    "reduziert": true
+   },
+   {
+    "N_z": 100,
+    "grund": "nicht simuliert: Entwicklungsgrenze von 2 Planungsaufrufen erreicht",
+    "k": 18,
+    "kandidaten": [],
+    "n0": null,
+    "n_min": null,
+    "reduziert": true
+   },
+   {
+    "N_z": 100,
+    "grund": "nicht simuliert: Entwicklungsgrenze von 2 Planungsaufrufen erreicht",
+    "k": 17,
+    "kandidaten": [],
+    "n0": null,
+    "n_min": null,
+    "reduziert": true
+   },
+   {
+    "N_z": 100,
+    "grund": "nicht simuliert: Entwicklungsgrenze von 2 Planungsaufrufen erreicht",
+    "k": 16,
+    "kandidaten": [],
+    "n0": null,
+    "n_min": null,
+    "reduziert": true
+   },
+   {
+    "N_z": 100,
+    "grund": "nicht simuliert: Entwicklungsgrenze von 2 Planungsaufrufen erreicht",
+    "k": 15,
+    "kandidaten": [],
+    "n0": null,
+    "n_min": null,
+    "reduziert": true
+   },
+   {
+    "N_z": 100,
+    "grund": "nicht simuliert: Entwicklungsgrenze von 2 Planungsaufrufen erreicht",
+    "k": 14,
+    "kandidaten": [],
+    "n0": null,
+    "n_min": null,
+    "reduziert": true
+   },
+   {
+    "N_z": 100,
+    "grund": "nicht simuliert: Entwicklungsgrenze von 2 Planungsaufrufen erreicht",
+    "k": 13,
+    "kandidaten": [],
+    "n0": null,
+    "n_min": null,
+    "reduziert": true
+   },
+   {
+    "N_z": 100,
+    "grund": "nicht simuliert: Entwicklungsgrenze von 2 Planungsaufrufen erreicht",
+    "k": 12,
+    "kandidaten": [],
+    "n0": null,
+    "n_min": null,
+    "reduziert": true
+   },
+   {
+    "N_z": 100,
+    "grund": "nicht simuliert: Entwicklungsgrenze von 2 Planungsaufrufen erreicht",
+    "k": 11,
+    "kandidaten": [],
+    "n0": null,
+    "n_min": null,
+    "reduziert": true
+   },
+   {
+    "N_z": 100,
+    "grund": "nicht simuliert: Entwicklungsgrenze von 2 Planungsaufrufen erreicht",
+    "k": 10,
+    "kandidaten": [],
+    "n0": null,
+    "n_min": null,
+    "reduziert": true
+   },
+   {
+    "N_z": 100,
+    "grund": "nicht simuliert: Entwicklungsgrenze von 2 Planungsaufrufen erreicht",
+    "k": 9,
+    "kandidaten": [],
+    "n0": null,
+    "n_min": null,
+    "reduziert": true
+   },
+   {
+    "N_z": 100,
+    "grund": "nicht simuliert: Entwicklungsgrenze von 2 Planungsaufrufen erreicht",
+    "k": 8,
+    "kandidaten": [],
+    "n0": null,
+    "n_min": null,
+    "reduziert": true
+   },
+   {
+    "N_z": 100,
+    "grund": "nicht simuliert: Entwicklungsgrenze von 2 Planungsaufrufen erreicht",
+    "k": 7,
+    "kandidaten": [],
+    "n0": null,
+    "n_min": null,
+    "reduziert": true
+   },
+   {
+    "N_z": 100,
+    "grund": "nicht simuliert: Entwicklungsgrenze von 2 Planungsaufrufen erreicht",
+    "k": 6,
+    "kandidaten": [],
+    "n0": null,
+    "n_min": null,
+    "reduziert": true
+   },
+   {
+    "N_z": 100,
+    "grund": "nicht simuliert: Entwicklungsgrenze von 2 Planungsaufrufen erreicht",
+    "k": 5,
+    "kandidaten": [],
+    "n0": null,
+    "n_min": null,
+    "reduziert": true
+   },
+   {
+    "N_z": 100,
+    "grund": "nicht simuliert: Entwicklungsgrenze von 2 Planungsaufrufen erreicht",
+    "k": 4,
+    "kandidaten": [],
+    "n0": null,
+    "n_min": null,
+    "reduziert": true
+   },
+   {
+    "N_z": 100,
+    "grund": "nicht simuliert: Entwicklungsgrenze von 2 Planungsaufrufen erreicht",
+    "k": 3,
+    "kandidaten": [],
+    "n0": null,
+    "n_min": null,
+    "reduziert": true
+   }
+  ],
+  "ort": "schritte.planung",
+  "plan_simuliert": {
+   "T_lauf_s": 17.0,
+   "herkunft": "Code 7a259ef: plan_basis.mit(n_bloecke=n + r, n0=n0); N_z, T_Lauf und d aus den Vorgaben von kampagne.Plan",
+   "n_zyklen": 100,
+   "tage": 1
+  },
+  "suche": {
+   "ergebnis": "kein zulässiger Arbeitspunkt unter diesen Annahmen",
+   "grund": "kein Paar (k, T_a) erfüllt n = n_min + r ≤ n_max",
+   "reduktion": "keine gekürzten Zusammenfassungen: nur N_z = 100"
+  },
+  "zeit": {
+   "N_I": 0,
+   "N_K": 21,
+   "T_aP": 10.0,
+   "T_ab": 1.0,
+   "T_eP": 4.0,
+   "T_park": 2.0,
+   "T_ramp": 2.0,
+   "T_verfuegbar": 345600.0,
+   "d": 2
+  }
+ },
+ "k19": {
+  "n": 4,
+  "ort": "schritte.ebenen.verrauscht",
+  "raten": {
+   "H1: bestätigt": {
+    "H": {
+     "mc_se": 0.0,
+     "nenner": 4,
+     "rate": 1.0,
+     "zaehler": 4
+    },
+    "Z": {
+     "mc_se": 0.0,
+     "nenner": 4,
+     "rate": 1.0,
+     "zaehler": 4
+    },
+    "innerhalb_2se": true
+   },
+   "H1: falsifiziert": {
+    "H": {
+     "mc_se": 0.0,
+     "nenner": 4,
+     "rate": 0.0,
+     "zaehler": 0
+    },
+    "Z": {
+     "mc_se": 0.0,
+     "nenner": 4,
+     "rate": 0.0,
+     "zaehler": 0
+    },
+    "innerhalb_2se": true
+   },
+   "H1: nicht entscheidbar": {
+    "H": {
+     "mc_se": 0.0,
+     "nenner": 4,
+     "rate": 0.0,
+     "zaehler": 0
+    },
+    "Z": {
+     "mc_se": 0.0,
+     "nenner": 4,
+     "rate": 0.0,
+     "zaehler": 0
+    },
+    "innerhalb_2se": true
+   },
+   "H1Z: bestätigt": {
+    "H": {
+     "mc_se": 0.0,
+     "nenner": 4,
+     "rate": 1.0,
+     "zaehler": 4
+    },
+    "Z": {
+     "mc_se": 0.0,
+     "nenner": 4,
+     "rate": 1.0,
+     "zaehler": 4
+    },
+    "innerhalb_2se": true
+   },
+   "H1Z: falsifiziert": {
+    "H": {
+     "mc_se": 0.0,
+     "nenner": 4,
+     "rate": 0.0,
+     "zaehler": 0
+    },
+    "Z": {
+     "mc_se": 0.0,
+     "nenner": 4,
+     "rate": 0.0,
+     "zaehler": 0
+    },
+    "innerhalb_2se": true
+   },
+   "H1Z: nicht entscheidbar": {
+    "H": {
+     "mc_se": 0.0,
+     "nenner": 4,
+     "rate": 0.0,
+     "zaehler": 0
+    },
+    "Z": {
+     "mc_se": 0.0,
+     "nenner": 4,
+     "rate": 0.0,
+     "zaehler": 0
+    },
+    "innerhalb_2se": true
+   },
+   "H2: bestätigt": {
+    "H": {
+     "mc_se": 0.0,
+     "nenner": 4,
+     "rate": 1.0,
+     "zaehler": 4
+    },
+    "Z": {
+     "mc_se": 0.0,
+     "nenner": 4,
+     "rate": 1.0,
+     "zaehler": 4
+    },
+    "innerhalb_2se": true
+   },
+   "H2: falsifiziert": {
+    "H": {
+     "mc_se": 0.0,
+     "nenner": 4,
+     "rate": 0.0,
+     "zaehler": 0
+    },
+    "Z": {
+     "mc_se": 0.0,
+     "nenner": 4,
+     "rate": 0.0,
+     "zaehler": 0
+    },
+    "innerhalb_2se": true
+   },
+   "H2: nicht entscheidbar": {
+    "H": {
+     "mc_se": 0.0,
+     "nenner": 4,
+     "rate": 0.0,
+     "zaehler": 0
+    },
+    "Z": {
+     "mc_se": 0.0,
+     "nenner": 4,
+     "rate": 0.0,
+     "zaehler": 0
+    },
+    "innerhalb_2se": true
+   },
+   "H4: bestätigt": {
+    "H": {
+     "mc_se": 0.0,
+     "nenner": 4,
+     "rate": 1.0,
+     "zaehler": 4
+    },
+    "Z": {
+     "mc_se": 0.0,
+     "nenner": 4,
+     "rate": 1.0,
+     "zaehler": 4
+    },
+    "innerhalb_2se": true
+   },
+   "H4: falsifiziert": {
+    "H": {
+     "mc_se": 0.0,
+     "nenner": 4,
+     "rate": 0.0,
+     "zaehler": 0
+    },
+    "Z": {
+     "mc_se": 0.0,
+     "nenner": 4,
+     "rate": 0.0,
+     "zaehler": 0
+    },
+    "innerhalb_2se": true
+   },
+   "H4: nicht entscheidbar": {
+    "H": {
+     "mc_se": 0.0,
+     "nenner": 4,
+     "rate": 0.0,
+     "zaehler": 0
+    },
+    "Z": {
+     "mc_se": 0.0,
+     "nenner": 4,
+     "rate": 0.0,
+     "zaehler": 0
+    },
+    "innerhalb_2se": true
+   }
+  },
+  "rauschfrei": {
+   "abweichung": {
+    "N_mittel_zellen": 2.9999999950902634e-07,
+    "Nk_zellen": 1.4071015310889483e-05,
+    "min_roh_zellen": 3.839520821280473e-07,
+    "zeiger": 0.0025132741163405295
+   },
+   "art": "physikalisch-numerisch (rauschfrei)",
+   "gleich": true,
+   "k_max": 9,
+   "laufarten": [
+    "K",
+    "L",
+    "R"
+   ],
+   "n_laeufe": 13,
+   "n_zyklen": 10,
+   "schranken": {
+    "N_mittel_zellen": 2e-06,
+    "Nk_zellen": 3e-05,
+    "min_roh_zellen": 0.0002,
+    "zeiger": 0.01
+   },
+   "stufe": "L1",
+   "szenario": "N01-A4"
+  },
+  "u_c_innerhalb_5_prozent": true,
+  "u_c_median": {
+   "H": {
+    "F_min": 0.0009814092296727673,
+    "Im N1": 0.0014134466631745093,
+    "Im N2": 0.000499442514820255,
+    "Im N3": 0.00017577504442538295,
+    "Re N1": 0.001483433842521182,
+    "Re N2": 0.0005122517588239541,
+    "Re N3": 0.00027610347223665937
+   },
+   "Z": {
+    "F_min": 0.0009950822067647926,
+    "Im N1": 0.0014281111752906927,
+    "Im N2": 0.0004973768920905892,
+    "Im N3": 0.0001713125085381831,
+    "Re N1": 0.001461239964423189,
+    "Re N2": 0.0005125482501547041,
+    "Re N3": 0.0002761698609388306
+   }
+  },
+  "u_c_relativ": {
+   "F_min": 0.013931983395534493,
+   "Im N1": 0.010375002112388065,
+   "Im N2": -0.004135856817093717,
+   "Im N3": -0.02538776708484468,
+   "Re N1": -0.014961151257189467,
+   "Re N2": 0.0005788000248757581,
+   "Re N3": 0.00024044863193282696
+  }
+ },
+ "laufzeit_s": {
+  "ebenen": 286.9,
+  "eigene": 422.9,
+  "k06": 211.2,
+  "kalibrierung_a4": 1064.1,
+  "kalibrierung_v1": 686.0,
+  "planung": 140.3,
+  "pruefsatz": 9.7,
+  "referenz": 23.6,
+  "reproduzierbarkeit": 61.6,
+  "s3": 0.2,
+  "szenarien_a4": 1294.2,
+  "szenarien_v1": 767.1,
+  "wahrheit": 15.0,
+  "zeltfit": 471.0
+ },
+ "quelle": {
+  "code_version": {
+   "git": "7a259efe3f2f9545cd487af3d2ddb8a20a1e8b34",
+   "paket": "0.1.0"
+  },
+  "datei": "pruefstand.json (+ pruefstand.npz), vollständige Ausgabe des Entwicklungsprüfstands vom 16.10.2026; nicht im Repository, im Arbeitsbereich der Sitzung erhalten",
+  "historisch": {
+   "datei": "docs/ap11_ap12_ap13_pruefstand.json",
+   "git_blob": "c0a6afb4e5ee8d7fc2c98984354da3b09b32efe8",
+   "gleich_kompakt_der_quelle": true
+  },
+  "kennung": "SYNTH-PRUEFSTAND-20261016",
+  "npz_sha256": "d1a5700809629f84f6fecfe062d65677c74f315e6c372f4494950b67aed25449",
+  "profil": "ENTW-2026-10+red(bootstrap_B=1000,e3_mc=1000,eps_ctrl_datensaetze=1000,h2_replikate=1000,h3_mc=1000)",
+  "profil_sha256": "49dc74abca52b2c5e4ae8f6d2e1c53dc468205b01b9f65270b86c27e91114352",
+  "sha256": "fdfe9229747408e9ad90b97784550d2bc57edc9151e1a959ac152726c169d468"
+ }
+}
