@@ -9,6 +9,12 @@ Feldliste und Trennstelle nach [Plan AP-13](plan_ap13_pipelinetest.md), Abschnit
 `main`“ ihn nicht überholt. Regeln mit Status: [`ap11_ap12_ap13_regelmatrix.md`](ap11_ap12_ap13_regelmatrix.md).
 Umfang und Prüfergebnisse: [`ap11_ap12_ap13_software.md`](ap11_ap12_ap13_software.md).
 
+> **Vermerk vom 16.10.2026 (Korrekturen A–E).** Geänderte Felder und Bedeutungen: Zeitmittel ⟨N⟩ der
+> Laufzusammenfassung ab `stufe1-0.2` (Abschnitt 4), Kettenrichtungen in P0.4 und Unsicherheitsbeschreibung von T in
+> Teil B `nr5` (Abschnitt 5), Strom `E3/T` (Abschnitt 7), Nullkontrolle ohne definierten Test, E3 mit T-Ziehungen und
+> Verarbeitungsstand im Ergebnis (Abschnitt 8), Planungshaken mit dem Plan des Kandidaten (Abschnitt 5). Ältere
+> Dateien bleiben lesbar und werden nicht als neu berechnet behandelt.
+
 ## 1 Trennstelle
 
 ```python
@@ -92,6 +98,14 @@ der Rohwerte im Auswertefenster, für σ_c, σ_Σ und F_LO aus den Referenzläuf
 (nicht nur bis k_max), damit Bedingung (a) ungebändert geprüft und k_max in der Pilotanalyse gewählt werden kann; die
 Fünftel stehen als Harmonische, F_min − ⟨N⟩ der Fünftel bildet Stufe 2 mit k_max.
 
+`N_mittel`, `N_mittel_zellen` und `fuenftel_N_mittel` sind ab `stufe1-0.2` Zeitmittel nach A1: Integral des linear
+interpolierten Verlaufs der kalibrierten Rohwerte über die akzeptierten vollständigen Zyklusintervalle, geteilt durch
+deren Gesamtdauer (Grenzen zwischen Abtastwerten interpoliert; verworfene Zyklen und Lücken weder in Zähler noch
+Nenner; Fünftel nach der bisherigen Auswahl). Bis `stufe1-0.1` waren sie das Phasenmittel der resampelten Zyklen.
+Die Bedeutung je `version_stufe1` steht in `zusammenfassung.MITTEL_BEDEUTUNG`; Teil B (`nr1.phase0_verarbeitung`) und
+Ergebnis (`herkunft.verarbeitung`) nennen den Verarbeitungsstand, Zusammenfassungen der alten Bedeutung werden als
+solche gemeldet. Ebene H liefert den Gleichanteil des Modells (gleiche Periodendauern).
+
 ## 5 Synthetisches Teil B
 
 `teil_b.json` gliedert nach A9.3: `nr1` Herkunft (Kalibrier-, Phase-0- und Code-Hashes), `nr2` Platzhalterwerte (f,
@@ -106,6 +120,18 @@ zum Vergleich; Stufe 2 rechnet sie aus der Kalibrierung), `nr8` Prüfmenge V, `n
 für ε_ctrl, Raten). Die Werkzeug-8-Werte kommen aus `harness kalibrierung` (Datei `werkzeug8`) oder ausdrücklich als
 `testvorgabe` (c = c_B, b̂ = 0, Perzentilintervall; jede Herkunftsangabe trägt dann „TESTVORGABE“).
 Fehlt ein benötigter Wert, meldet Stufe 2 den betroffenen Ausgang als nicht entscheidbar mit Grund.
+
+`nr5.unsicherheit` (ab `teil_b-0.2`, Format `e3_T_unsicherheit-0.1`, Modell `e3_T-0.2`, Herkunft mit
+Kalibrierungs-Hash; A9.3 Nr. 5): Nennwerte und gemeinsame Kovarianz von (g₁…g₃, x₁…x₃, y₁…y₃) aus P0.1, Parameter
+und Kovarianz der Kette je Zelle, (f_n, ζ) mit statistischem Anteil, Kennzeichen „gezogen“ und den Verschiebungen je
+Störrichtung der Kette aus P0.4 (`kette_richtungen`, ab `anpassung-0.2`; Reihenfolge Zelle, Spalte wie
+`anpassung.kette_cholesky`), Modullagen, nicht gezogene Eingänge, unvollständige Teile und Näherungen. Teil B ohne
+diese Beschreibung (älterer Stand) ergibt in E3 nur numerische Diagnostik, keine Unsicherheit null.
+
+Planungshaken (`harness.planung.haken`, Aufruf durch das Pilotskript): Eingang k, N_z, T_a, T_e, T_Lauf, die
+Zeitangaben (d, N_K, N_I), Pilotstreuungen, p̂ und n_max; der simulierte Plan erhält n_zyklen = N_z, T_lauf und
+tage = d des Kandidaten (Widerspruch bei f, T_a, N_K oder N_I: Abbruch); jeder Kandidat nennt `plan_simuliert`, die
+Ausgabe das `fenster`.
 
 ## 6 Regelprofil
 
@@ -122,7 +148,8 @@ erhält den Seed `zufall.unterseed(Basis, Rolle, Szenario, Stufe, i)` (Rolle: `k
 `pruefung`, `planung` …; `zufall.katalog_seed` leitet eine Basis aus dem Katalog-Hash ab). Parallele Ausführung ändert
 keine Zahl (Test `test_kampagnen_unabhaengig_von_der_prozesszahl`); es gibt keine Seed-Suche. Bootstrap-Indizes nach Plan 2.6 c: `SeedSequence(seed).spawn` in fester Reihenfolge A_i für alle
 Konfigurationen in der Listenreihenfolge von Teil B, B¹₁ … B¹₃, H3, H4, danach in dieser Stufe angehängt E3 und die
-Quellen bei Einstellung 2; je Kind `Generator(PCG64(kind)).integers(0, n, size=(B, n))` über die gültigen Läufe der
+Quellen bei Einstellung 2, zuletzt der Strom `E3/T` der Ziehungen von T (keine Indexmatrix; die übrigen Ströme ändern
+sich dadurch nicht); je Kind `Generator(PCG64(kind)).integers(0, n, size=(B, n))` über die gültigen Läufe der
 Quelle in aufsteigender Position. B⁰ⱼ stehen fest in Teil B. Übergebene `bootstrap_indizes` ersetzen die Ziehung
 vollständig, mit denselben Schlüsseln (`A/<konfig>`, `B0/modul<j>`, `B1/modul<j>`, …; in NPZ mit `__` statt `/`).
 
@@ -134,7 +161,11 @@ Zusätzen nach §9.3/§9.4, die verwendeten Grenzen und kritischen Werte mit Her
 Kennzeichnung „prüft Masse, Profil, Kalibrierung“ (Fassung K), H4, Nullkontrolle mit Wortregel, Gültigkeit G1–G10 und
 Abbrüche S1–S4 (offline, keine Echtzeitfunktion) mit betroffenen Läufen, numerische Prüfgrößen von H1Z, E3 und
 Zuordnung mit Status, die offenen und nicht implementierten Regeln und die Herkunft (Eingangshashes, Profil, Seed,
-Replikatzahlen, Codestand). Dazu eine kurze Textfassung. Ergebnisdateien enthalten keine Zeitstempel.
+Replikatzahlen, Codestand, Verarbeitungsstand der Laufzusammenfassungen). Dazu eine kurze Textfassung.
+Ergebnisdateien enthalten keine Zeitstempel. Ist der Welch-Test der Nullkontrolle nicht definiert (beide Varianzen
+null) oder eine Rechengröße nicht endlich, steht dort `pruefbar = false` mit Grund, Differenz und Stichprobenzahlen,
+ohne Testaussage. E3 trägt `t_unsicherheit` (gezogen, Anteil unzulässiger Ziehungen mit Gründen, nicht gezogene
+Eingänge, Näherungen) und `k2_hinweis` (k = 2 lokal, nur bis auf 180° bestimmt).
 
 ## 9 Wahrheit getrennt
 

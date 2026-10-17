@@ -1,6 +1,6 @@
 # AP-11 bis AP-13: Anpassung, Auswertung und synthetischer Pipelinetest — erste Softwarestufe
 
-Stand 16.10.2026 · Basis `a1c9953` (`main` nach PR #19) · Paket [`code/pcmms_auswertung/`](../code/pcmms_auswertung/)
+Stand 16.10.2026, mit den Korrekturen A–E vom selben Tag (Abschnitt 1a) · Basis `a1c9953` (`main` nach PR #19) · Paket [`code/pcmms_auswertung/`](../code/pcmms_auswertung/)
 (Code MIT, dieses Dokument CC BY 4.0) · Umgebung der Prüfläufe: Python 3.13.16, NumPy 2.5.3, SciPy 1.18.1, 4 Kerne.
 *Nur Software und Simulation.* Es gibt keine Messdaten, keine Hardwarewahl, keine Festlegung offener Regeln und kein
 ausgefülltes Teil B; synthetische Kennungen beginnen mit `SYNTH-` und behaupten keine Registrierung. Die
@@ -30,10 +30,54 @@ Prüfstand erzeugt), Plan [AP-13](plan_ap13_pipelinetest.md) mit Vermerk vom 16.
   Die Kriterienmatrix führt 1 Kriterium als geprüft (K16, deterministisch), 16 als nur probeweise gerechnet, 1 als
   fehlend, 5 als fachlich offen und 1 als in diesem Modell nicht prüfbar, ohne Gesamtampel. Die Matrix mit ≥ 1000
   Kampagnen je Szenario und Stufe (geschätzt ≈ 450 Kernstunden) ist vorbereitet, nicht gestartet.
+- **Korrekturen A–E** (Abschnitt 1a): Planungshaken mit dem Plan des Kandidaten, Zeitmittel ⟨N⟩ aus den Rohzeiten,
+  Phase von k = 2 in E3a, Nullkontrolle ohne definierten Test, Unsicherheit von T in E3. Der Prüfstand (Abschnitt 4.4)
+  und die Kriterienmatrix stammen vom Stand `7a259ef` vor diesen Korrekturen und sind nicht neu gerechnet; betroffen
+  sind vor allem der Planungsschritt (K12) und die E3-Raten.
 - **Wichtigste Befunde** (Abschnitt 6): G4 mit σ_Δ aus den Piloten verliert konfigurationsabhängig Punkte und senkt die
   gemeinsame Bestätigungswahrscheinlichkeit; der Drift-Zusatz (a) erscheint auch ohne Drift; F_min ist unter S₃ nur bis
   auf die Rasterschranke invariant; C03 und A07 prüfen K11 und K21 mit dem Katalog nicht; die quadratische Kette I02
   kollidiert mit G1; E3 verfehlt „unauffällig ≥ 0,8“ auf L1.
+
+## 1a Korrekturen vom 16.10.2026
+
+Nach der ersten Prüfung wurden fünf Fehler behoben, je mit Regressionstest, der am alten Stand den Fehler zeigt (bei B,
+C und D in den betroffenen Fällen; die Erhaltungstests des Standardfalls und die regulären Fälle bestanden dort schon). Die historischen Zahlen in
+Abschnitt 4.4 und in der Kriterienmatrix bleiben der Lauf auf `7a259ef`; sie sind nicht mit neuen Einzelwerten
+vermischt. Präregistrierung, Schwellen, offene Regeln, G4, δ_H2, δ_H3, die E3-Schwellen, die Bonferroni-Regel und der
+Drift-Zusatz sind unverändert.
+
+| | Fehler | Korrektur | Regression, Gegenprobe | betroffene historische Ergebnisse | verbleibender Neulauf |
+|---|---|---|---|---|---|
+| A | Planungshaken: N_z änderte nur den Seed; simuliert wurden die Vorgaben des Grundplans (100 Zyklen, T_Lauf = 17 s, 1 Messtag) | `5d52e6c`: Plan der Kampagnensimulation mit n_zyklen = N_z, T_Lauf und d aus dem Pilotskript, Abbruch bei widersprechendem f, T_a, N_K oder N_I, `plan_simuliert` je Kandidat | `test_planungshaken_simuliert_gewaehlte_fensterlaenge`: N_z = 20 und 80 im instrumentierten Aufruf; echte Läufe mit diesem Plan auf Ebene H (Zyklen, Laufdauer, Messtage, Budget von n_max) und je ein Rohlauf auf Ebene Z durch Stufe 1 (gezählte Zyklen, Fensterdauer); am alten Stand 100 statt 20 Zyklen | Planungsschritt des Prüfstands (K12): N_z = 100 stimmte zufällig, simuliert wurden aber T_Lauf = 17 s statt 16 s und 1 statt 2 Messtagen. Die Kandidatenraten (P ≤ 0,25) und „kein zulässiger Arbeitspunkt“ sind potenziell betroffen (Zeitlage der Drift, Tagesstruktur) | Planungsschritt neu rechnen (2 Aufrufe, je 2 Kandidaten mit 4 + 4 Kampagnen, etwa 2 min); eine Planung für Teil B bleibt eine eigene Rechnung mit ≥ 1000 Kampagnen je Kandidat |
+| B | Stufe 1: ⟨N⟩ war das Mittel der auf N_θ resampelten Zyklen (Phasenmittel), bei ungleichen Perioden nicht das Zeitmittel nach A1 | `87c5888`: Zeitintegral über die akzeptierten Zyklusintervalle aus den Rohzeiten (`stufe1-0.2`); Bedeutung je Verarbeitungsstand, alte Zusammenfassungen werden gemeldet | vier Rohdatentests: 99/101 ms (4,010 N statt 4,000 N), Grenzen zwischen Abtastwerten mit ausgelassenem Zyklus, Fünftel (4,010 und 5,575 N), Standardfall gleicher Perioden; Meldung der alten Bedeutung; am alten Stand drei von vier fehlgeschlagen | nur Rohdatenketten (Ebene Z → Stufe 1): ⟨N⟩ in G1, G4 (D_N), σ̂_ref, ε_ctrl, Nullkontrolle, S-Regeln und N_s. Der Generator der Ebene Z hat gleiche Periodendauern; der rauschfreie Abgleich Z ↔ H bleibt bei 3·10⁻⁷ N. Potenziell betroffen: der verrauschte Ebenenabgleich (K19, je 4 Kampagnen) und die Ebene-Z-Läufe in Abschnitt 4.3. Ebene H (fast der ganze Prüfstand) und F_min − ⟨N⟩ (aus den Harmonischen) sind nicht betroffen | verrauschten Ebenenabgleich neu rechnen (etwa 5 min) |
+| C | E3a aus k = 2 wurde erst nach der Halbierung gewickelt: Scheinfehler 180° bei exakt passender zweiter Harmonischer | `0397d48`: zuerst modulo 360° auf Ebene der Harmonischen, dann halbiert; Bezug und 180°-Mehrdeutigkeit im Ergebnis (`k2_hinweis`) | `tests/test_ap12_kontrollen.py`: T = I mit 0°/120°/240° (vorher 180° für Module 2 und 3), Phasen über den Argument-Sprung mit kleinen Fehlern (k = 2 gleich k = 1), Mehrdeutigkeit (δ = 100° erscheint als −80°) | nur berichtete k = 2-Werte; die Bewertung nutzt k = 1, die Raten sind nicht betroffen | keiner |
+| D | Nullkontrolle mit beiden Stichprobenvarianzen null: Welch-Satterthwaite 0/0, NaN-Grenzen, trotzdem „prüfbar“ und „kein Unterschied nachgewiesen“ | `eddc156`: „nicht prüfbar“ mit Grund, Differenz und Stichprobenzahlen, ohne Testaussage und ohne Ersatzstreuung; nicht endliche Größen ebenso | 10 × 0,125 N gegen 10 × 0 N bei ε_ctrl = 0,01 N, gleiche Konstanten, eine konstante Stichprobe und zwei gewöhnliche gegen `scipy.stats.ttest_ind` (ν, Intervall), zu wenige und nicht endliche Werte, ohne Laufzeitwarnung | keine Raten des Prüfstands (alle Läufe verrauscht); betroffen wären rauschfreie Grenzfälle | keiner |
+| E | E3: alle Replikate mit fester Inverse des nominellen T; die Ziehungen aus der Unsicherheit von T (A9.13) fehlten | `6e28cd5`: Unsicherheitsbeschreibung in Teil B `nr5`, Ziehungen je Replikat aus (g, x, y), Kette und f_n, ζ (Kette und 1 FG gemeinsam, ohne Doppelzählung), eigener Strom `E3/T`; ohne Beschreibung nur numerische Diagnostik | unabhängige T-Formulierung (Flächenverhältnisse); u(Δφ) gegen eine unabhängige lineare Sensitivitätsrechnung bei bekannter Kovarianz (Kettenlaufzeit, korrelierte Zelllage, Verstärkung; Verhältnis 0,99–1,00 bei B = 4000); Nullkovarianzen gleich festem T; gemeinsamer Faktor H ohne Wirkung; Zelllagen in E3b heben sich auf; Reproduzierbarkeit, gemeinsame Ziehungen, unzulässige Ziehungen, fehlende und unvollständige Beschreibung, Datei-Rundreise | alle E3-Raten des Prüfstands (z. B. „unauffällig“ 14/200 bei N01-A4, „auffällig“ 30/30 bei A06, H03 und E04, 36/40 bei E07) und die E3-Zeile der Kriterienmatrix sind ohne T-Anteil gerechnet. Die synthetischen Kalibrierungen sind sehr genau (Zelllagen 1–2 µm, Kettenlaufzeit ±14 ns); ob sich die Raten merklich ändern, ist nicht nachgerechnet | E3-Raten neu rechnen: Prüfsimulation N01-A4 mit den Werkzeug-8-Werten des Laufs (200 Kampagnen, etwa 6 min auf 4 Kernen) und die E3-Szenarien (A06, H03, E04, E07, N03, Präzisionsreihe; rund 370 Kampagnen, etwa 15 min). Eine Schwellenentscheidung folgt daraus nicht |
+
+Grenzen der Korrekturen: Die Planung nutzt weiter das Szenariorauschmodell statt eines Generators aus gemessenen
+Pilotkovarianzen. In E3 bleiben Modullagen (Konstruktion) und Kippmoden ohne Unsicherheit bzw. ohne Modell; getrennte
+Kalibriermessungen ohne Kreuzkovarianz im Format werden als unabhängig gezogen; bei nicht identifizierbarem P0.4 (A4)
+bleibt H(kω) nominal, weil es sich als gemeinsamer Faktor in E3a exakt aufhebt (die berichteten Amplituden |Ĉⱼ,₁|
+tragen dann keine H-Unsicherheit). Jede E3-Auswertung nennt das unter `t_unsicherheit`. Ein Neulauf des ganzen
+Prüfstands (91 min) ist für diese Korrekturen nicht nötig; die genannten Teilläufe zusammen dauern auf 4 Kernen etwa
+eine halbe Stunde. Sie sind in diesem Auftrag nicht gestartet.
+
+Gezielte Läufe nach den Korrekturen (Endstand, reduzierte Replikatzahlen B = 200, Entwicklungsdiagnostik; sie prüfen
+Funktion und Korrekturen, keine Fehlerraten oder Power):
+
+- **Dateiketten mit Stufe 1** aus frischer Ausgabestruktur auf Ebene Z (`kette --ebene Z`, je 811 Rohläufe): N01-A4
+  (exakte Superposition) H1, H1Z, H2 und H4 bestätigt, H3 nicht entscheidbar (Verfahren), Nullkontrolle regulär, E3
+  „unbestimmt“, 268 s; A04-R4 (Kopplung, Klasse R4) H1 und H1Z falsifiziert mit „Abweichung nachgewiesen“, H2 und H4
+  bestätigt, 257 s. Alle Zusammenfassungen tragen `stufe1-0.2`.
+- **Ebenen Z ↔ H rauschfrei** für N01-A4 und N01-V1G60h innerhalb der Schranken: Harmonische 1,4·10⁻⁵ bzw.
+  0,9·10⁻⁵ N, ⟨N_c⟩ 3·10⁻⁷ N, Zeiger 2,5·10⁻³ bzw. 3,4·10⁻³.
+- **Wahrheitstrennung** am Ebene-Z-Ergebnis von N01-A4: gleiche Prüfsumme bei unveränderter, geänderter (der Harness
+  sieht Klasse R4) und entfernter Wahrheit.
+- **E3-Gegenprobe** mit bewusst gewählter Unsicherheit (G60h, B = 4000, feste Seeds und Bootstrap-Indizes): u(Δφ) aus
+  den T-Ziehungen zur unabhängigen linearen Referenz 0,996/0,996 (Kettenlaufzeit), 0,992/1,001 (korrelierte Zelllage),
+  0,994/0,994 (Verstärkung) für Modul 2/3; wiederholt mit denselben Seeds bitgleich.
+- **Endabnahme**: `python3 -m pytest tests -q` 328 bestanden, 8 übersprungen (382 s); `(cd data && python3 ../code/linear_solver.py --validate)` bestanden (2 s); `python3 rechnungen/neuheit/bibcheck.py` ohne Fehler; `harness pruefsatz --pruefen tests/fixtures/ap13_pruefsatz` gleich (25 s); zusammen 410 s auf 4 Kernen.
 
 ## 1 Erreichter Umfang
 
@@ -119,8 +163,8 @@ Planungssimulation und Seeds der Kampagnen.
 
 ### 4.1 Tests
 
-Basis `a1c9953`: 135 bestanden, 6 übersprungen (Stand PR #19). Endstand dieser Stufe:
-`python3 -m pytest tests -q` → 294 bestanden, 8 übersprungen (376 s). Übersprungen sind die langsamen Prüfungen (`PCMMS_SLOW=1`), darunter der
+Basis `a1c9953`: 135 bestanden, 6 übersprungen (Stand PR #19). Vor den Korrekturen A–E: 294 bestanden, 8 übersprungen
+(376 s). Endstand nach den Korrekturen: `python3 -m pytest tests -q` → 328 bestanden, 8 übersprungen (382 s). Übersprungen sind die langsamen Prüfungen (`PCMMS_SLOW=1`), darunter der
 Vergleichssatz mit 4000 Zeltfits; er wurde gesondert ausgeführt (Abschnitt 4.3). Die Tests des Stands `a1c9953` sind
 unverändert; die Testdateien unten sind neu. In `tests/test_pcmms_formate.py` (Etappe 1) wurde die Erwartung zur
 Reduktion in Etappe 5 verschärft (h2_replikate und e3_mc folgen bootstrap_B).
@@ -130,9 +174,10 @@ Reduktion in Etappe 5 verschärft (h2_replikate und e3_mc folgen bootstrap_B).
 | `tests/test_pcmms_formate.py` | 21 | Pflichtköpfe, Schemata, Datenarten, deterministische NPZ, Regelprofile und Reduktion, Regelmatrix gleich Code, Beispieldatensatz bitgleich, Wahrheit getrennt, Zufallsströme |
 | `tests/test_ap13_generator.py` | 29 Funktionen (mit Parametern mehr) | analytische Gegenproben (starre G0, Egg-Harmonische), Abgleich mit `linear_solver.py` und `auslegung.py`, Ebene H (Superposition, Streuungen je Laufart, Reproduzierbarkeit, Ereignisse), Abtastrate nach A6, Ebene Z ↔ H, P0-Daten, Szenarienklassen, Hertz über den ereignisgenauen Löser, Wahrheit getrennt |
 | `tests/test_ap11_anpassung.py` | 23 Funktionen | Überdeckung der Unsicherheiten über feste Seeds, Modellabweichungen, Fehlfälle, Pilotskript ohne Residuen und Entscheidungen, Suchreihenfolge, ε_ctrl, Gültigkeit aus dem Rohkanal, Importtrennung |
-| `tests/test_ap12_auswertung.py` | 20 Funktionen | Stufe 1 gegen Ebene H, Regeln aus dem Rohkanal, Entscheidungen und Grenzfälle, Reproduzierbarkeit, fehlende Teil-B-Werte, Profil AF, N₃ bindet, H3 bei falscher Kette, Zuordnung, Importtrennung, H1 gegen Referenz, Zeltfit gegen Vollraster, Regressionen (Intervalltyp „keiner“, Stressszenario) |
+| `tests/test_ap12_auswertung.py` | 26 Funktionen | Stufe 1 gegen Ebene H, Regeln aus dem Rohkanal, Zeitmittel ⟨N⟩ bei ungleichen Perioden, Grenzen zwischen Abtastwerten, ausgelassenem Zyklus und in den Fünfteln (Korrektur B), Meldung der alten Bedeutung, Entscheidungen und Grenzfälle, Reproduzierbarkeit, fehlende Teil-B-Werte, E3 ohne Unsicherheit von T (Korrektur E), Profil AF, N₃ bindet, H3 bei falscher Kette, Zuordnung, Importtrennung, H1 gegen Referenz, Zeltfit gegen Vollraster, Regressionen (Intervalltyp „keiner“, Stressszenario) |
+| `tests/test_ap12_kontrollen.py` | 16 Funktionen (27 Fälle) | E3a aus k = 2 (Korrektur C), Nullkontrolle bei verschwindenden Varianzen gegen SciPy (Korrektur D), Unsicherheit von T in E3 gegen unabhängige Formulierung und lineare Referenz (Korrektur E) |
 | `tests/test_referenz_selbst.py` | 15 Funktionen | Selbstprüfung der unabhängigen Referenz (H1-Formeln, Grenzfall, Vollraster) |
-| `tests/test_ap13_harness.py` | 15 | Raten, Seeds und Prozesse, c mit Pool-Regel, Überdeckung und gemeinsame Bestätigung, Rückfallkette, Planungshaken, Wahrheitstrennung, Dateikette, Ebenen, S₃, Prüfsatz, Kriterienmatrix, CLI |
+| `tests/test_ap13_harness.py` | 16 | Raten, Seeds und Prozesse, c mit Pool-Regel, Überdeckung und gemeinsame Bestätigung, Rückfallkette, Planungshaken mit dem simulierten Plan des Kandidaten (Korrektur A), Wahrheitstrennung, Dateikette mit Rundreise der neuen Metadaten, Ebenen, S₃, Prüfsatz, Kriterienmatrix, CLI |
 
 ### 4.2 AP-11
 
@@ -181,6 +226,10 @@ Arbeitspunkt“. In der Kette verwenden Teil B und AP-12 nachweislich die AP-11-
   B = 200, Regel vom 25.09., n = 20) sind unter anderen Regeln entstanden und wurden nicht als Sollwerte verwendet.
 
 ### 4.4 AP-13: gezielte Entwicklungsläufe (Prüfstand)
+
+> **Vermerk (Korrekturen A–E, Abschnitt 1a).** Dieser Abschnitt ist der Lauf auf `7a259ef` vor den Korrekturen und
+> nicht neu gerechnet. Potenziell betroffen sind der Planungshaken (Korrektur A: T_Lauf und Messtage), der verrauschte
+> Ebenenabgleich (B) und alle E3-Raten (E: ohne Unsicherheit von T; C betrifft nur berichtete k = 2-Werte).
 
 Ausgeführt mit `python3 code/pcmms_auswertung harness pruefstand --prozesse 4` auf Commit `7a259ef` (sauberer Worktree),
 Profil `ENTW-2026-10+red(bootstrap_B=1000, e3_mc=1000, eps_ctrl_datensaetze=1000, h2_replikate=1000, h3_mc=1000)`,
@@ -307,7 +356,8 @@ Lesart der Szenariopunkte (Punktschätzer mit MC-Fehler, keine Abnahme):
 
 ### 4.5 Kriterienmatrix
 
-Aus dem Prüfstand erzeugt: [`ap11_ap12_ap13_kriterien.md`](ap11_ap12_ap13_kriterien.md). Zählung: 1 geprüft
+Aus dem Prüfstand auf `7a259ef` erzeugt (nicht neu gerechnet; betroffen sind K12 durch Korrektur A, K19 durch
+Korrektur B und die E3-Zeile durch Korrektur E, Abschnitt 1a): [`ap11_ap12_ap13_kriterien.md`](ap11_ap12_ap13_kriterien.md). Zählung: 1 geprüft
 (K16, deterministisch), 16 nur probeweise gerechnet, 1 fehlt (K17), 5 fachlich offen (K08 entfallen, K09 Lesart
 offen, K20 Einfrieren nicht Gegenstand, E3 und Zuordnung mit offenen Schwellen bzw. Kriterium), 1 in diesem Modell
 nicht prüfbar (K21: kein Hertz-Punkt ≥ 2·Δ_rel im Katalog). Es gibt keine Gesamtampel. Die Punktschätzer liegen bei
@@ -319,11 +369,13 @@ E3-Bedingung „unauffällig ≥ 0,8“ wird auf L1 verfehlt (14/200).
 
 | Vorgang | Umfang | Laufzeit (4 Kerne) |
 |---|---|---|
-| Testsuite | 294 bestanden, 8 übersprungen | 376 s |
+| Testsuite (Endstand nach den Korrekturen) | 328 bestanden, 8 übersprungen | 382 s |
 | eine Kampagne Ebene H, Kette im Speicher | N01-A4, L1, n = 24; B = 200, ε_ctrl 300, H3-MC 1000 | 3,9 s (Generator 0,2; AP-11-Kalibrierung 1,7; Pilot und Teil B 0,7; Stufe 2 1,2) |
 | dieselbe im Prüfstand | B = 1000, ε_ctrl 1000, H3-MC 1000 | 7,1–7,6 s je Kampagne und Kern (A4), 10–11 s (V1) |
 | normative Replikatzahlen, `kette` | N01-A4, L1, n = 20; B = 10 000, H3-MC 10 000, ε_ctrl 10 000 | 78 s (Stufe 2: 72 s) |
 | normative Replikatzahlen, Speicherkette | N01-V1G0, L1, n = 20 | 139 s (Stufe 2: 131 s) |
+| normative Replikatzahlen mit T-Ziehungen (Korrektur E) | N01-V1G60h, L1, n = 20; B = 10 000 | 68 s (Stufe 2: 65 s) |
+| T-Ziehungen von E3 (Korrektur E) | V1-G60h, B = 1000 bzw. 10 000 | 0,12 s bzw. 1,3 s |
 | Ebene Z, Einzelschritte | A04-R4, L1, n = 24, 811 Rohläufe (522 MB, danach gelöscht) | Generator 237 s, AP-11 3 s, Stufe 1 34 s, Teil B 2 s, AP-12 3 s |
 | Zeltfit-Vergleichssatz | 4000 Fits | Kandidat 9,5–10,5 s, Vollraster 461–544 s (Faktor ≈ 50) |
 | Prüfstand | 14 Schritte, rund 2100 Kampagnen (einschließlich der Wiederholung der A4-Prüfsimulation mit gepooltem c) | 91 min (Kalibrierung A4 18 min, Szenarien A4 22 min, Kalibrierung V1 11 min, Szenarien V1 13 min, eigene Systeme 7 min, Präzisionsreihe 4 min, Ebenen 5 min, Zeltfit 8 min, Planung 2 min) |
@@ -386,7 +438,8 @@ klären am Präreg-Text bzw. im Plan (AP-08, AP-13), nicht in der Software.
 10. **Intervalltyp „keiner“** (Integration). Erreichte in der Planungssimulation kein Intervalltyp die Überdeckung,
     brach H2 beim Lesen des Niveaus ab; jetzt „nicht entscheidbar (Verfahren)“ mit Grund, Regressionstest
     `test_h2_intervalltyp_keiner_nicht_entscheidbar`.
-11. **E3 verfehlt „unauffällig ≥ 0,8“ auf L1** (A9.11, §8.10). Mit den Entwicklungsschwellen (0,1°, q_tol = 5,8·10⁻⁴)
+11. **E3 verfehlt „unauffällig ≥ 0,8“ auf L1** (A9.11, §8.10; Prüfstand vor Korrektur E, also ohne Unsicherheit von T
+    gerechnet und nicht neu gerechnet; eine Schwellenentscheidung folgt daraus nicht). Mit den Entwicklungsschwellen (0,1°, q_tol = 5,8·10⁻⁴)
     ist E3 bei exakter Superposition in 14/200 Kampagnen „unauffällig“, sonst „unbestimmt“; nach A9.11 würde E3 dann
     nur beschreibend berichtet. Phasenversatz eines Moduls (A06, H03) und der lineare Messketteneinfluss E04 erscheinen
     als „auffällig“ (30/30), die Basisdrift E07 in 36/40. Bei A07 ist E3 nicht auswertbar (T(kω) singulär).

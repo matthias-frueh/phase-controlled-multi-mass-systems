@@ -14,6 +14,14 @@ Kriterium oder Lesart offen (§12); **in diesem Modell nicht prüfbar** = der Ka
 dar. Zahlen: Rate ± Monte-Carlo-Fehler (Zähler/Nenner); ein Punktschätzer innerhalb des Solls ist bei dieser
 Kampagnenzahl kein Nachweis.
 
+> **Vermerk vom 16.10.2026 (nachträglich, nicht aus dem Prüfstand erzeugt).** Die Tabelle ist der Stand `7a259ef` vor
+> den Korrekturen A–E ([Softwaredokument, Abschnitt 1a](ap11_ap12_ap13_software.md#1a-korrekturen-vom-16102026)) und
+> nicht neu gerechnet. **K12**: Der Planungshaken simulierte T_Lauf = 17 s statt 16 s und einen statt zwei Messtagen
+> (Korrektur A; N_z stimmte); die Kandidatenraten sind potenziell betroffen. **K19**: Der verrauschte Ebenenabgleich lief
+> mit ⟨N⟩ als Phasenmittel in Stufe 1 (Korrektur B); der rauschfreie Abgleich ist nicht betroffen. **E3**: Alle Raten
+> sind ohne Unsicherheit von T gerechnet (Korrektur E; C betrifft nur berichtete k = 2-Werte); daraus folgt keine
+> Schwellenentscheidung. Die übrigen Zeilen beruhen auf Ebene H und sind von den Korrekturen nicht berührt.
+
 | Nr. | Kriterium | Status | Befund (Rate ± MC-Fehler (Zähler/Nenner)) | Einschränkung |
 |---|---|---|---|---|
 | K01 | P(H1 falsifiziert \| exakte Superposition) ≤ 0,05 je Stufe, beide Betriebsarten | nur probeweise gerechnet | N01-A4 (Prüfsimulation mit kalibriertem c): 0.000 ± 0.000 (0/200); N03-ungleich: 0.000 ± 0.000 (0/40); N03-N3bindet: 0.000 ± 0.000 (0/40); N04-laufart: 0.000 ± 0.000 (0/40) | nur Stufe L1 und Betriebsart „Raster“ mit Entwicklungsplan; V1-Systeme siehe Kalibrierung V1 |
