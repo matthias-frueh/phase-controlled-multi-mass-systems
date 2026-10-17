@@ -18,8 +18,9 @@ vier Kampagnen je System (vorab festgelegt, Startsatz) läuft die volle Kette; i
   Fünftel) und der Jitter der Piloten.
 
 Checkpoint je Auftrag wie harness.neulauf (Rechencode ohne Berichtsteil, Auftrag, gemeinsame Einstellungen, Profil,
-Werkzeug 8, Seeds, Bibliotheken); gerechnet wird nur aus einem sauberen Git-Stand. vorbereiten() erzeugt einmalig die
-Auftragsliste, Werkzeug 8 V1-G60h (wiederverwendet aus dem Altlauf) und den E3-Auszug.
+Werkzeug 8, Seeds, Lage des Zielpiloten, Bibliotheken); gerechnet wird nur aus einem sauberen Git-Stand.
+vorbereiten() erzeugt einmalig die Auftragsliste, Werkzeug 8 V1-G60h (wiederverwendet aus dem Altlauf) und den
+E3-Auszug.
 """
 import csv
 import json
@@ -335,9 +336,13 @@ def werkzeug8(a, name):
 
 
 def schluessel(a, job, prof, w8_sha):
+    """Herkunftsschlüssel eines Auftrags. Die Lage des Zielpiloten steht je System (nicht im Auftrag) und geht in die
+    Rechnung ein; ohne sie würde ein Checkpoint zu einer anderen Lage übernommen."""
     return dict(rechencode=neulauf.rechencode_sha256(NICHT_RECHENCODE), auftrag=formate.sha256_json(job),
                 gemeinsam=formate.sha256_json(a['gemeinsam']), profil_sha256=prof.sha256(), werkzeug8=w8_sha,
-                seeds=formate.sha256_json(job['seeds']), umgebung=neulauf.umgebung())
+                seeds=formate.sha256_json(job['seeds']),
+                zielpilot=[float(x) for x in a['systeme'][job['szenario']]['zielpilot']['phi']],
+                umgebung=neulauf.umgebung())
 
 
 def _rechne(job, a, prof, plan, w8, ziel, prozesse):

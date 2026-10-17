@@ -1,10 +1,12 @@
 """Diagnose E3b/G4 (harness.diagnose_e3b_g4): Auftragsliste und Seeds vor den Rechnungen, Zulässigkeit der Piloten,
 Flanken- und Jittergrößen an unabhängigen Grenzfällen, schlanke gegen volle Kette und der Wiederholungsvorrat."""
+import copy
 import csv
 import json
 import os
 
 import numpy as np
+import pytest
 
 from pcmms_auswertung import formate, gueltigkeit, konventionen as kv, regeln
 from pcmms_auswertung.generator import kampagne as kp
@@ -135,3 +137,30 @@ def test_e3_zeilen_klassen():
     assert np.isclose(z[0]['e3a_max_unter_grad'], 0.2 - 3 * 0.02) and z[0]['status'] is None
     assert z[1]['E3_grund'].startswith('keine E3-Auswertung') and 'bewertung' not in z[1]
     assert json.dumps(sorted(z[0]))                                  # Spalten serialisierbar
+
+
+def test_checkpoint_schluessel_enthaelt_zielpilot(tmp_path):
+    """Gegenprobe: Die Lage des Zielpiloten steht je System, nicht im Auftrag. (130°, 262°) und (132°, 262°) ergeben
+    verschiedene Schlüssel, und ein Checkpoint zur alten Lage wird weder von checkpoint() noch von lies_ergebnisse()
+    übernommen."""
+    a = dg.lies_auftrag()
+    prof, _ = dg.profil_und_plan(a['gemeinsam'])
+    job = a['auftraege'][0]
+    _, w8_sha = dg.werkzeug8(a, a['systeme'][job['szenario']]['werkzeug8'])
+    alt = dg.schluessel(a, job, prof, w8_sha)
+    b = copy.deepcopy(a)
+    b['systeme'][job['szenario']]['zielpilot']['phi'] = [132.0, 262.0]
+    neu = dg.schluessel(b, job, prof, w8_sha)
+    assert alt['zielpilot'] == [130.0, 262.0] and neu['zielpilot'] == [132.0, 262.0]
+    assert sorted(k for k in alt if not neulauf._gleich(alt[k], neu[k])) == ['zielpilot']
+    assert formate.sha256_json(job) == formate.sha256_json(b['auftraege'][0])       # Auftrag allein unterscheidet nicht
+    ziel = tmp_path / job['id']
+    ziel.mkdir()
+    (ziel / f'g4_{job["id"]}.json').write_text('{}', encoding='utf-8')
+    s = dict(auftrag=job['id'], schluessel=alt,
+             dateien={f'g4_{job["id"]}.json': formate.sha256_datei(str(ziel / f'g4_{job["id"]}.json'))})
+    (ziel / 'schluessel.json').write_text(formate.json_text(s), encoding='utf-8')
+    assert neulauf.checkpoint(str(ziel), alt)                                      # passende Lage: übernommen
+    assert neulauf.checkpoint(str(ziel), neu) is False                             # andere Lage: nicht übernommen
+    with pytest.raises(dg.Fehler, match='kein passender Checkpoint'):
+        dg.lies_ergebnisse(b, str(tmp_path))
