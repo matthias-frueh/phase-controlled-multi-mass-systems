@@ -356,6 +356,61 @@ def test_pilot_suchreihenfolge_und_kein_arbeitspunkt(phase0):
     assert s['ergebnis'] == 'festgelegt' and s['k_max'] == 12 and s['N_z'] == 20 and s['n'] == 12 + s['reserve_r']
 
 
+def _paar(planung, erfuellt=None):
+    s = dict(k=12, N_z=100, planung=planung)
+    if erfuellt is not None:
+        s.update(erfuellt=erfuellt)
+    return s
+
+
+BEDINGUNG = dict(n_min=None, n0=None, grund='kein Kandidat erreicht P(H1 und H2 bestätigt | exakt) ≥ 0,8',
+                 kandidaten=[dict(n_min=18, n0=20, reserve_r=2, P_gemeinsam=0.25, erfuellt=False)])
+GRENZE = dict(n_min=None, n0=None, kandidaten=[], reduziert=True,
+              grund='nicht simuliert: Entwicklungsgrenze von 2 Planungsaufrufen erreicht')
+UEBERSPRUNGEN = dict(n_min=None, n0=None, grund='kein Kandidat erreicht P(H1 und H2 bestätigt | exakt) ≥ 0,8',
+                     kandidaten=[dict(n_min=18, n0=20, reserve_r=2, uebersprungen='n = n_min + r > n_max')])
+
+
+def test_suchbegruendung_nennt_den_tatsaechlichen_abbruchgrund():
+    """Grundklassen der Begründung ohne Arbeitspunkt aus den Rückgaben je Paar (k, T_a): nur Zeitbudget (auch wenn der
+    Haken alle Kandidaten wegen n > n_max überspringt) → bisheriger Text; nicht erreichte Bedingung und Aufrufgrenze
+    mit Zahlen und ohne Unzulässigkeit außerhalb der reduzierten Suche; sonstiger Grund des Hakens; leeres Raster."""
+    budget = 'kein Paar (k, T_a) erfüllt n = n_min + r ≤ n_max'
+    gb = pilot.grund_ohne_arbeitspunkt
+    assert gb([_paar(dict(n_min=10 ** 6, n0=20), erfuellt=False)] * 3) == budget
+    assert gb([_paar(UEBERSPRUNGEN)] * 2) == budget
+    assert gb([_paar(UEBERSPRUNGEN)], 'nur N_z = 100') == budget + (' – reduzierte Suche ausgeschöpft, kein Nachweis '
+                                                                     'der Unzulässigkeit außerhalb dieser Suche')
+    g = gb([_paar(BEDINGUNG)] * 2 + [_paar(GRENZE)] * 26)
+    assert g.startswith('an 2 Paaren (k, T_a) erreicht kein simulierter Kandidat P(H1 und H2 bestätigt | exakt) ≥ 0,8')
+    assert '26 Paare wegen der Grenze der Planungsaufrufe nicht simuliert' in g and 'reduzierte Suche ausgeschöpft' in g
+    assert 'n_min + r ≤ n_max' not in g
+    g = gb([_paar(BEDINGUNG), _paar(UEBERSPRUNGEN), _paar(dict(n_min=None, grund='keine Pilotstreuungen (ν_p = 0)',
+                                                                kandidaten=[]))])
+    assert g == ('an 1 Paar (k, T_a) erreicht kein simulierter Kandidat P(H1 und H2 bestätigt | exakt) ≥ 0,8; an 1 Paar '
+                 'überschreitet n = n_min + r das Zeitbudget n_max; 1 Paar ohne Planung (keine Pilotstreuungen (ν_p = 0))')
+    assert gb([]).startswith('kein Paar (k, T_a) im Suchraster')
+
+
+def test_suchbegruendung_im_ablauf_mit_aufrufgrenze(phase0):
+    """Durch die Suche des Pilotskripts mit einem Haken im Rückgabeformat von harness.planung.haken: erster Aufruf
+    simuliert ohne Erfolg, alle weiteren wegen der Aufrufgrenze nicht; Ergebnis und Suchreihenfolge unverändert."""
+    m, kal, laeufe, tab = phase0
+    prof = regeln.profil('ENTW-2026-10').mit_reduktion(eps_ctrl_datensaetze=200)
+    aufrufe = []
+
+    def haken(e):
+        aufrufe.append((e['k'], e['N_z']))
+        return dict(BEDINGUNG) if len(aufrufe) == 1 else dict(GRENZE)
+    s = pilot.pilot_auswerten(tab, kal, prof, 10.0, zeit=ZEIT, seed=3, planung=haken)['suche']
+    assert s['ergebnis'] == 'kein zulässiger Arbeitspunkt unter diesen Annahmen' and len(s['schritte']) == len(aufrufe)
+    n = len(aufrufe)
+    assert n > 2 and s['grund'] == (f'an 1 Paar (k, T_a) erreicht kein simulierter Kandidat P(H1 und H2 bestätigt | '
+                                    f'exakt) ≥ 0,8; {n - 1} Paare wegen der Grenze der Planungsaufrufe nicht simuliert'
+                                    ' – reduzierte Suche ausgeschöpft, kein Nachweis der Unzulässigkeit außerhalb dieser '
+                                    'Suche')
+
+
 def test_pilot_eps_ctrl_betriebsstreuung_und_p_hat(phase0):
     m, kal, laeufe, tab = phase0
     prof = regeln.profil('ENTW-2026-10').mit_reduktion(eps_ctrl_datensaetze=2000)

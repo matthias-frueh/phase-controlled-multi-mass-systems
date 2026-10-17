@@ -74,14 +74,14 @@ def umgebung():
     return dict(python=platform.python_version(), numpy=np.__version__, scipy=scipy.__version__)
 
 
-def rechencode_sha256():
-    """Prüfsumme aller Module des Pakets außer Kommandozeile und Vergleichs-/Berichtsteil."""
+def rechencode_sha256(ausgenommen=NICHT_RECHENCODE):
+    """Prüfsumme aller Module des Pakets außer Kommandozeile und Vergleichs-/Berichtsteil (`ausgenommen`)."""
     teile = []
     for d, unter, dateien in os.walk(PAKET):
         unter[:] = sorted(x for x in unter if x != '__pycache__')
         for f in sorted(dateien):
             rel = os.path.relpath(os.path.join(d, f), PAKET).replace(os.sep, '/')
-            if f.endswith('.py') and rel not in NICHT_RECHENCODE:
+            if f.endswith('.py') and rel not in ausgenommen:
                 teile.append([rel, formate.sha256_datei(os.path.join(d, f))])
     return formate.sha256_json(sorted(teile))
 

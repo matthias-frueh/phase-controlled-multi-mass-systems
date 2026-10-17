@@ -116,13 +116,14 @@ def _eine(auftrag):
 THREAD_VARIABLEN = ('OMP_NUM_THREADS', 'OPENBLAS_NUM_THREADS', 'MKL_NUM_THREADS')
 
 
-def _parallel(auftraege, prozesse):
-    """Arbeitsprozesse mit je einem BLAS-Thread (spawn; die Umgebung gilt beim Import von NumPy im Kind)."""
+def _parallel(auftraege, prozesse, fn=None):
+    """Arbeitsprozesse mit je einem BLAS-Thread (spawn; die Umgebung gilt beim Import von NumPy im Kind). fn: Funktion
+    je Auftrag auf Modulebene (Vorgabe: eine Kampagne der Kette mit Kurzbefund)."""
     alt = {v: os.environ.get(v) for v in THREAD_VARIABLEN}
     os.environ.update({v: '1' for v in THREAD_VARIABLEN})
     try:
         with cf.ProcessPoolExecutor(prozesse, mp_context=mp.get_context('spawn')) as ex:
-            return list(ex.map(_eine, auftraege, chunksize=1))
+            return list(ex.map(fn or _eine, auftraege, chunksize=1))
     finally:
         for v, w in alt.items():
             if w is None:

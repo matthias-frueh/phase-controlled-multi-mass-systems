@@ -7,10 +7,10 @@
   generator                   AP-13-Generator: frische Ausgabestruktur eingang/ und getrennt wahrheit/
   ap11 kalibrierung|teil-b    AP-11: Kalibrierung aus P0-Daten; Pilotanalyse und Teil B
   ap12 stufe1|auswerten       AP-12: Rohdaten → Laufzusammenfassungen; Zusammenfassungen → Ergebnis
-  harness bewerten|kampagnen|kalibrierung|pruefstand|kriterien|pruefsatz|matrix|neulauf
+  harness bewerten|kampagnen|kalibrierung|pruefstand|kriterien|pruefsatz|matrix|neulauf|diagnose-e3b-g4
                               AP-13: Bewertung gegen die Wahrheit, Kampagnen, c-Kalibrierung, gezielte Läufe,
                               Kriterienmatrix, Software-Prüfsatz, Auftragsliste der großen Matrix (ohne Start),
-                              gezielte Neuläufe K12/K19/E3 mit Checkpoints und Alt-Neu-Vergleich
+                              gezielte Neuläufe K12/K19/E3 mit Checkpoints und Alt-Neu-Vergleich, Diagnose E3b/G4
   kette                       Generator → AP-11 → (Stufe 1) → Teil B → AP-12 → Bewertung aus einer frischen Struktur
 
 Profil: --profil ID (AF-2026-10 oder ENTW-2026-10) mit --red name=wert,… (verringerte Replikat- bzw.
@@ -185,7 +185,7 @@ def _ap12(ap, argv):
 
 # ── Harness ──────────────────────────────────────────────────────────────────────────────────────────
 @befehl('harness', 'AP-13-Harness: bewerten, kampagnen, kalibrierung, pruefstand, kriterien, pruefsatz, matrix, '
-                   'neulauf')
+                   'neulauf, diagnose-e3b-g4')
 def _harness(ap, argv):
     sp = ap.add_subparsers(dest='was', required=True)
     b = sp.add_parser('bewerten')
@@ -242,6 +242,21 @@ def _harness(ap, argv):
                    help='Auftragsliste, Werkzeug-8-Dateien und Altstandsauszug aus der vollständigen Ausgabe des '
                         'Altlaufs (Pfad ohne Endung) erzeugen')
     g.add_argument('--bericht', action='store_true', help='Alt-Neu-Vergleich aus den Checkpoints schreiben')
+    d = sp.add_parser('diagnose-e3b-g4', help='Diagnose E3b und G4 mit Pilotreserve (harness.diagnose_e3b_g4)')
+    d.add_argument('--auftrag', default=None, help='Auftragsliste (Vorgabe: docs/e3b_g4_diagnose_2026-10-17/'
+                                                    'auftrag.json)')
+    d.add_argument('--nur', default=None, help='nur diese Auftrags-IDs, kommagetrennt')
+    d.add_argument('--startsatz', action='store_true', help='nur der Startsatz (je System Kampagnen 0–3, volle Ketten)')
+    d.add_argument('--prozesse', type=int, default=None, help='Arbeitsprozesse je Auftrag (Vorgabe: Auftragsliste)')
+    d.add_argument('--ausgabe', default=None, help='Checkpoint-Verzeichnis (Vorgabe: Auftragsliste)')
+    d.add_argument('--e3-checkpoints', default=None, help='nur mit --vorbereiten: Checkpoints der Neuläufe von PR #21 '
+                                                          '(Vorgabe: deren Auftragsliste)')
+    gd = d.add_mutually_exclusive_group()
+    gd.add_argument('--vorbereiten', default=None, metavar='VOLLSTAENDIGE_AUSGABE',
+                    help='Auftragsliste, Werkzeug 8 V1-G60h (aus der vollständigen Ausgabe des Altlaufs, Pfad ohne '
+                         'Endung) und E3-Auszug erzeugen')
+    gd.add_argument('--bericht', action='store_true', help='Auswertung, kompakte Ergebnisse und Berichtstabellen '
+                                                           'aus den Checkpoints schreiben')
     a = ap.parse_args(argv)
     from .harness import dateien, kalibrierung, kampagnen, kriterien, pruefsatz, pruefstand
     if a.was == 'bewerten':
@@ -323,6 +338,23 @@ def _harness(ap, argv):
             print(f'Alt-Neu-Vergleich: {z["umfang"]}; Laufzeiten {z["laufzeit_s"]}')
         else:
             print(_json(neulauf.ausfuehren(pfad, a.nur.split(',') if a.nur else None, a.prozesse, a.ausgabe)))
+    elif a.was == 'diagnose-e3b-g4':
+        from .harness import diagnose_e3b_g4 as dg
+        pfad = a.auftrag or dg.AUFTRAG
+        if a.vorbereiten:
+            r = dg.vorbereiten(a.vorbereiten, a.e3_checkpoints)
+            print(f'Auftragsliste {pfad}: {len(r["auftraege"])} Aufträge, {r["umfang"]["neue_kampagnen"]} neue '
+                  f'Kampagnen, {r["e3"]["n"]} E3-Kampagnen im Auszug; Zielpiloten '
+                  + ', '.join(f'{s}: {v["zielpilot"]["phi"]}' for s, v in r['systeme'].items()))
+        elif a.bericht:
+            from .harness import diagnose_e3b_g4_bericht as db
+            z = db.schreiben(pfad, a.ausgabe)
+            print(f'Diagnose E3b/G4: {z["umfang"]}')
+        else:
+            nur = a.nur.split(',') if a.nur else None
+            if a.startsatz:
+                nur = [j['id'] for j in dg.lies_auftrag(pfad)['auftraege'] if j['voll']]
+            print(_json(dg.ausfuehren(pfad, nur, a.prozesse, a.ausgabe)))
     return 0
 
 
