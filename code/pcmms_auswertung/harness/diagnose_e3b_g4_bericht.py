@@ -1,8 +1,9 @@
 """Auswertung und Bericht der Diagnose E3b/G4 (harness.diagnose_e3b_g4).
 
 E3: Nachzählung der 570 Kampagnen der Neuläufe aus dem versionierten Auszug (e3_pruefgroessen.csv), Trennung nach
-E3a und E3b, Zerlegung der Bedingung „unauffällig“ für E3b, Simulation eines komplexen Nullresiduums und eine
-nachträgliche, nur beschreibende Sensitivität von q_tol auf denselben Kampagnen.
+E3a und E3b, Zerlegung der Bedingung „unauffällig“ für E3b, Simulation eines komplexen Nullresiduums, die
+Fehlerraten beider einseitigen Grenzen am Schwellenrand (wahrer Betrag = q_tol) im Rice-Modell mit Gegenprobe und
+eine nachträgliche, nur beschreibende Sensitivität von q_tol auf denselben Kampagnen.
 
 G4: je Kampagne und Konfiguration die Verletzungen durch D_N und D_F, G4 insgesamt, nur G4 und andere Regeln; gültige
 Läufe, kleinster Bestand und Vollständigkeit der 21 Schnittpunkte ohne und mit Wiederholungen (A9.12), bei n = 24 und
@@ -27,7 +28,7 @@ import math
 import os
 
 import numpy as np
-from scipy import stats
+from scipy import optimize, special, stats
 
 from .. import formate, gueltigkeit, konventionen as kv, pilot
 from . import diagnose_e3b_g4 as dg, neulauf, neulauf_vergleich
@@ -46,6 +47,8 @@ ZIEL_VOLL = 0.95                                         # gemeinsame Vollständ
 OBERE_GRENZE = 0.8                                       # einseitige obere Vertrauensgrenze von p̂ (wie A9.2 für s)
 NULL_N, NULL_B, NULL_SEED = 20000, 1000, 20261017        # Nullresiduum: Kampagnen, Bootstrap-Replikate, Seed
 QTOL_FAKTOREN = (1.0, 1.25, 1.5, 2.0, 2.5, 3.0)          # nachträgliche Sensitivität (nur beschreibend)
+RAND_GITTER = (0.0, 0.5, 1.0, 1.5, 2.0, 3.0, 5.0, 10.0, 20.0, 50.0)                # q_tol/s am Schwellenrand
+RAND_MC = dict(t=1.5, n=100000, B=1000, seed=NULL_SEED + 1)                         # Gegenprobe mit Bootstrap
 HISTORISCH = {'N01-A4': ('kalibrierung_a4', None, 0.023), 'N01-V1G0': ('kalibrierung_v1', 'V1-G0', 0.044),
               'N01-V1G60h': ('kalibrierung_v1', 'V1-G60h', 0.050)}   # G4-Anteil: Softwaredokument, Befund 1
 
@@ -213,6 +216,69 @@ def nullresiduum(zB, n=NULL_N, B=NULL_B, seed=NULL_SEED, block=1000):
                 analytisch=dict(q_mittel=math.sqrt(math.pi / 2), q_median=math.sqrt(2 * math.log(2)),
                                 q_streuung=math.sqrt(2 - math.pi / 2)),
                 _ober=ober, _q=q, _u=u)
+
+
+def rice_streuung(b):
+    """Streuung von Rice(b) bei Streuung 1 je Komponente: Mittel √(π/2)·L_{1/2}(−b²/2), über skalierte
+    Bessel-Funktionen auch für große b stabil, Varianz 2 + b² − Mittel²."""
+    x = b * b / 4
+    m = math.sqrt(math.pi / 2) * ((1 + 2 * x) * special.ive(0, x) + 2 * x * special.ive(1, x))
+    return math.sqrt(max(2.0 + b * b - m * m, 0.0))
+
+
+def rand_raten(t, zB, z_oben=1.645):
+    """Fehlerraten der einseitigen Grenzen eines Betrags am Schwellenrand im Rice-Modell: Streuung 1 je Komponente,
+    wahrer Betrag t = Schwelle/s, Bootstrap-Streuung u(x) = Streuung von Rice(x) (Grenzfall B → ∞), X ~ Rice(t).
+    Unten P(X − z_B·u(X) > t): fälschlich „Überschreitung nachgewiesen“, nominal α/m. Oben P(X + z·u(X) ≤ t):
+    fälschlich „Einhaltung nachgewiesen“, nominal 0,05. Beide Grenzen wachsen in x; die Raten folgen aus einer
+    Nullstelle und der Verteilungsfunktion von scipy.stats.rice."""
+    x_u = optimize.brentq(lambda x: x - zB * rice_streuung(x) - t, t, t + zB + 20.0)
+    f = lambda x: x + z_oben * rice_streuung(x) - t                                             # noqa: E731
+    p_o = 0.0 if f(0.0) >= 0 else float(stats.rice.cdf(optimize.brentq(f, 0.0, t), t))
+    return float(stats.rice.sf(x_u, t)), p_o
+
+
+def rand_mc(t, zB, n, B, seed, block=2000, z_oben=1.645):
+    """Gegenprobe am Schwellenrand mit Bootstrap-Replikaten wie nullresiduum: R = t + Z₁ + iZ₂."""
+    rng = np.random.default_rng(seed)
+    unten = oben = 0
+    for s0 in range(0, n, block):
+        m = min(block, n - s0)
+        R = t + rng.standard_normal(m) + 1j * rng.standard_normal(m)
+        Rb = R[:, None] + rng.standard_normal((m, B)) + 1j * rng.standard_normal((m, B))
+        q, u = np.abs(R), np.abs(Rb).std(1, ddof=1)
+        unten += int((q - zB * u > t).sum())
+        oben += int((q + z_oben * u <= t).sum())
+    p = unten / n
+    return dict(p_auffaellig=p, se=math.sqrt(p * (1 - p) / n), p_unauffaellig=oben / n)
+
+
+def _e3a_u_median():
+    """Median der E3a-Unsicherheit u (Median je Kampagne) bei N01-A4/L1 aus der Kampagnenübersicht der Neuläufe."""
+    with open(os.path.join(neulauf.WURZEL, 'docs/ap13_neulaeufe_2026-10-17/kampagnen_e3.csv'), encoding='utf-8') as f:
+        return float(np.median([float(r['u_E3a_median_grad']) for r in csv.DictReader(f) if r['punkt'] == 'N01-A4/L1']))
+
+
+def schwellenrand(zB, m, t_daten, schwelle_e3a=0.1):
+    """Grenzen am Schwellenrand statt bei wahrer Differenz null: Raten beider Grenzen von E3b über q_tol/s,
+    Gegenprobe, Wert bei der Präzision der Daten. E3a ist reellwertig; im Normalmodell ist seine untere Grenze am Rand
+    gültig bis auf den Faltungsanteil Φ(−z_B − 2·0,1°/u). Dazu die Bonferroni-Schranke der gemeinsamen Fehlalarmrate
+    am ungünstigsten Rand: m − 1 Prüfungen mit je α/m und E3b mit seiner Randrate."""
+    alpha = 0.05 / m
+    gitter = []
+    for t in RAND_GITTER:
+        pu, po = rand_raten(t, zB)
+        gitter.append(dict(t=t, p_auffaellig=pu, faktor=pu / alpha, p_unauffaellig=po))
+    pu, po = rand_raten(t_daten, zB)
+    u_a = _e3a_u_median()
+    return dict(z_B=zB, m=m, alpha_je_pruefung=alpha, gitter=gitter,
+                mc=dict(RAND_MC, halbanalytisch=rand_raten(RAND_MC['t'], zB)[0],
+                        **rand_mc(RAND_MC['t'], zB, RAND_MC['n'], RAND_MC['B'], RAND_MC['seed'])),
+                daten=dict(t=t_daten, p_auffaellig=pu, faktor=pu / alpha, p_unauffaellig=po,
+                           bonferroni=(m - 1) * alpha + pu),
+                e3a=dict(u_median_grad=u_a, faltung=float(stats.norm.sf(zB + 2 * schwelle_e3a / u_a))),
+                modell='Rice: komplexes Residuum mit Streuung s je Komponente, Bootstrap-Streuung des Betrags um den '
+                       'Schätzwert (B → ∞); vereinfachtes Modell, keine gemessene PCMMS-Rate')
 
 
 # ── G4 ────────────────────────────────────────────────────────────────────────────────────────────────────
@@ -473,6 +539,19 @@ def tabellen(z):
     for g in nr['gitter']:
         zl.append(f'| {_f(g["t"], 2)} | {_f(g["p_unauffaellig"], 3)} | {_f(g["p_auffaellig"], 4)} |')
     t['nullresiduum'] = '\n'.join(zl)
+    r = z['schwellenrand']
+    zl = ['| q_tol/s | P(„auffällig“ \\| wahrer Betrag = q_tol) | Faktor zu α/m = ' + _p(r['alpha_je_pruefung'], 3) +
+          ' | P(„unauffällig“ \\| wahrer Betrag = q_tol) |', '|---|---|---|---|']
+    for g in r['gitter']:
+        zl.append(f'| {_f(g["t"], 1)} | {_p(g["p_auffaellig"], 3)} | {_f(g["faktor"], 2)} | {_p(g["p_unauffaellig"], 2)} |')
+    d, mc = r['daten'], r['mc']
+    zl.append(f'| {_f(d["t"], 2)} (Präzision der Daten, N01-A4/L1) | {_p(d["p_auffaellig"], 3)} | {_f(d["faktor"], 2)} | '
+              f'{_p(d["p_unauffaellig"], 2)} |')
+    faelle = f'{mc["n"]:,}'.replace(',', ' ')
+    zl.append(f'| {_f(mc["t"], 1)} (Gegenprobe mit Bootstrap, {faelle} Fälle, B = {mc["B"]}) | '
+              f'{_p(mc["p_auffaellig"], 3)} ± {_p(mc["se"], 3)} | {_f(mc["p_auffaellig"] / r["alpha_je_pruefung"], 2)} | '
+              f'{_p(mc["p_unauffaellig"], 2)} |')
+    t['e3b_schwellenrand'] = '\n'.join(zl)
     zl = ['| q_tol (nachträglich, nur beschreibend) | „unauffällig“ an E3b | „auffällig“ an E3b |', '|---|---|---|']
     for s in a4['sensitivitaet']:
         zl.append(f'| {_f(s["faktor"], 2)} × 5,8·10⁻⁴ | {s["unauffaellig"]}/{a4["n"]} | {s["auffaellig"]}/{a4["n"]} |')
@@ -599,6 +678,7 @@ def schreiben(pfad=dg.AUFTRAG, ausgabe=None, doku=None):
                        q_median_vorhergesagt=float(s * nr['q_median']), q_median_beobachtet=e3['a4l1']['q'][3],
                        s_stern=e3['schwellen']['q_tol'] / nr['t_stern'],
                        faktor_s=float(s / (e3['schwellen']['q_tol'] / nr['t_stern'])))
+    rand = schwellenrand(nr['z_B'], 2 * PUNKTE + 1, t)
     g4, kz, kk, trend = g4_auswertung(a, B)
     hist = _historisch()
     lz = dict(auftraege={j: dict(kampagnen=len(next(x for x in a['auftraege'] if x['id'] == j)['seeds']),
@@ -615,7 +695,8 @@ def schreiben(pfad=dg.AUFTRAG, ausgabe=None, doku=None):
                            werkzeug8={k: v['inhalt_sha256'] for k, v in a['werkzeug8'].items()},
                            e3_auszug=dict(datei=a['e3']['datei'], sha256=a['e3']['sha256'], quelle=a['e3']['quelle']),
                            umgebung=neulauf.umgebung()),
-             laufzeiten=lz, e3=e3, nullresiduum=pr, g4=g4, historisch=hist, pilotsuche=k12_begruendung(),
+             laufzeiten=lz, e3=e3, nullresiduum=pr, schwellenrand=rand, g4=g4, historisch=hist,
+             pilotsuche=k12_begruendung(),
              umfang=dict(neue_kampagnen=lz['kampagnen'], volle_ketten=len(g4['volle_ketten']),
                          e3_kampagnen=e3['n'], kalibrierkampagnen=0, kernstunden=round(lz['kernsekunden'] / 3600, 3)))
     z['dateien'] = {n: _csv(os.path.join(doku, n), r, st) for n, r, st in (

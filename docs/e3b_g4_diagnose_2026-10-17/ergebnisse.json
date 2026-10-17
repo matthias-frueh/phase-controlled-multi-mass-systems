@@ -5,7 +5,7 @@
    "sha256": "54ef6fa3150dd14d62067e12e24a147395b236ec136caf3ef14f1a84cfb60530"
   },
   "dateien": {
-   "g4_kampagnen.csv": "455ea13b0573a76838e7b734422948bcc887ea7368e859e76435fff24c5537ce",
+   "g4_kampagnen.csv": "142d3c5e632cbd6ac4f5a21506c6696de86f56dfb30f458600463d24627b52d0",
    "g4_konfigurationen.csv": "f667dca993b08b7125adaac5ada30c033fa917ea86aeced54828a715e68aa83c",
    "g4_trendfall.csv": "2b8e4f11670c998d020477f9804e1fb04e50a40457a02eb2107f3278f4a49ba3"
   },
@@ -3138,45 +3138,45 @@
    "checkpoints": {
     "G4-N01-A4-rest": {
      "dateien": {
-      "g4_G4-N01-A4-rest.json": "b5ac12d8f052386a9044812b4a4d759a500a7c4a81caff101e15a17f67f43087",
+      "g4_G4-N01-A4-rest.json": "252c0b1c9949d7a06f2c20e47e816e2a8765fffbf8b858bb9111000919fd8c82",
       "g4_G4-N01-A4-rest.npz": "d4ef70a839cc63e90ecadcca0db0176b890f6ae35133718c07bb4e8005f5bf96"
      },
-     "git": "778e1b2c3f20d61652a75bfeb4c895f04dfbe639"
+     "git": "9c98602f8268381d8826b9467e6a9c5111c7ceb9"
     },
     "G4-N01-A4-start": {
      "dateien": {
-      "g4_G4-N01-A4-start.json": "37f8707742af4f962ddc3651a141ff6c02c373805383c3327984592fdd030971",
+      "g4_G4-N01-A4-start.json": "35ffd614d592ee5b10e162ccd1ef2af5f4dab8d48004db2eae71f4027ce4b553",
       "g4_G4-N01-A4-start.npz": "e2a0bf3649815dc15d418a93e26d9d0a9e238a814f3595f4892e1428bbdbd80f"
      },
-     "git": "778e1b2c3f20d61652a75bfeb4c895f04dfbe639"
+     "git": "9c98602f8268381d8826b9467e6a9c5111c7ceb9"
     },
     "G4-N01-V1G0-rest": {
      "dateien": {
-      "g4_G4-N01-V1G0-rest.json": "606154c534f42229d403f33a14cd6124e114c7fea7533bd3e5cf030df2ab9ba6",
+      "g4_G4-N01-V1G0-rest.json": "46376980e365df21ae4a69226885110cb0196ee551c7a30a73021f5462498c36",
       "g4_G4-N01-V1G0-rest.npz": "9bcb7c2ecc6c96ceaae4ce163d1dec384f31224d5a24f78c72fef8b81f4b5445"
      },
-     "git": "778e1b2c3f20d61652a75bfeb4c895f04dfbe639"
+     "git": "9c98602f8268381d8826b9467e6a9c5111c7ceb9"
     },
     "G4-N01-V1G0-start": {
      "dateien": {
-      "g4_G4-N01-V1G0-start.json": "7a4f153a7b88d500430277373faa087668d82dfb41ea3a72e6316a8c6ea71d37",
+      "g4_G4-N01-V1G0-start.json": "bce47218178ee20f99f4ee2ee479a84198425d47e1115cf682f51e1273d20d12",
       "g4_G4-N01-V1G0-start.npz": "11db976692477f6f987344482d00c71fd5c85ce1ec5a45678c245a7139474ca5"
      },
-     "git": "778e1b2c3f20d61652a75bfeb4c895f04dfbe639"
+     "git": "9c98602f8268381d8826b9467e6a9c5111c7ceb9"
     },
     "G4-N01-V1G60h-rest": {
      "dateien": {
-      "g4_G4-N01-V1G60h-rest.json": "f74f6a3b2f28d5399fa64353af281229edf9a6a03243e8162c2cb056ef36ef7b",
+      "g4_G4-N01-V1G60h-rest.json": "805e5e115397af4a667bc84cf247f6801102c369a1c518c2969badfa63d6a185",
       "g4_G4-N01-V1G60h-rest.npz": "36487cc55bbc3842c36c3ec7e1f6d857ede53aa6a2fe6b68334cbfca0f8435e0"
      },
-     "git": "778e1b2c3f20d61652a75bfeb4c895f04dfbe639"
+     "git": "9c98602f8268381d8826b9467e6a9c5111c7ceb9"
     },
     "G4-N01-V1G60h-start": {
      "dateien": {
-      "g4_G4-N01-V1G60h-start.json": "b8f13a824e6020217e57bcc6cc50bcb7148a0a255ba6a3158e41f65fa8d32ab7",
+      "g4_G4-N01-V1G60h-start.json": "5e02840887cba2baaa98dec9d3ab45c44f84d641e403b03d5acf50a419ab0900",
       "g4_G4-N01-V1G60h-start.npz": "a57ff83139f405d575671b890ed4d027bcf23b9efb3e8c9d66872bab7f007ad1"
      },
-     "git": "778e1b2c3f20d61652a75bfeb4c895f04dfbe639"
+     "git": "9c98602f8268381d8826b9467e6a9c5111c7ceb9"
     }
    },
    "e3_auszug": {
@@ -3241,63 +3241,63 @@
   "laufzeiten": {
    "auftraege": {
     "G4-N01-A4-rest": {
-     "ende": "2026-10-17T11:39:11+00:00",
-     "git": "778e1b2c3f20d61652a75bfeb4c895f04dfbe639",
+     "ende": "2026-10-17T13:22:21+00:00",
+     "git": "9c98602f8268381d8826b9467e6a9c5111c7ceb9",
      "kampagnen": 36,
-     "kernsekunden": 117.9,
-     "laufzeit_s": 31.7,
+     "kernsekunden": 123.2,
+     "laufzeit_s": 32.3,
      "prozesse": 4,
-     "start": "2026-10-17T11:38:39+00:00"
+     "start": "2026-10-17T13:21:49+00:00"
     },
     "G4-N01-A4-start": {
-     "ende": "2026-10-17T11:38:05+00:00",
-     "git": "778e1b2c3f20d61652a75bfeb4c895f04dfbe639",
+     "ende": "2026-10-17T13:21:49+00:00",
+     "git": "9c98602f8268381d8826b9467e6a9c5111c7ceb9",
      "kampagnen": 4,
-     "kernsekunden": 29.4,
+     "kernsekunden": 28.3,
      "laufzeit_s": 9.0,
      "prozesse": 4,
-     "start": "2026-10-17T11:37:56+00:00"
+     "start": "2026-10-17T13:21:40+00:00"
     },
     "G4-N01-V1G0-rest": {
-     "ende": "2026-10-17T11:39:40+00:00",
-     "git": "778e1b2c3f20d61652a75bfeb4c895f04dfbe639",
+     "ende": "2026-10-17T13:23:03+00:00",
+     "git": "9c98602f8268381d8826b9467e6a9c5111c7ceb9",
      "kampagnen": 36,
-     "kernsekunden": 108.4,
-     "laufzeit_s": 28.5,
+     "kernsekunden": 112.2,
+     "laufzeit_s": 29.4,
      "prozesse": 4,
-     "start": "2026-10-17T11:39:11+00:00"
+     "start": "2026-10-17T13:22:34+00:00"
     },
     "G4-N01-V1G0-start": {
-     "ende": "2026-10-17T11:38:18+00:00",
-     "git": "778e1b2c3f20d61652a75bfeb4c895f04dfbe639",
+     "ende": "2026-10-17T13:22:34+00:00",
+     "git": "9c98602f8268381d8826b9467e6a9c5111c7ceb9",
      "kampagnen": 4,
-     "kernsekunden": 48.1,
-     "laufzeit_s": 13.3,
+     "kernsekunden": 45.6,
+     "laufzeit_s": 13.0,
      "prozesse": 4,
-     "start": "2026-10-17T11:38:05+00:00"
+     "start": "2026-10-17T13:22:21+00:00"
     },
     "G4-N01-V1G60h-rest": {
-     "ende": "2026-10-17T11:40:07+00:00",
-     "git": "778e1b2c3f20d61652a75bfeb4c895f04dfbe639",
+     "ende": "2026-10-17T13:23:44+00:00",
+     "git": "9c98602f8268381d8826b9467e6a9c5111c7ceb9",
      "kampagnen": 36,
-     "kernsekunden": 103.1,
-     "laufzeit_s": 27.5,
+     "kernsekunden": 106.8,
+     "laufzeit_s": 28.1,
      "prozesse": 4,
-     "start": "2026-10-17T11:39:40+00:00"
+     "start": "2026-10-17T13:23:15+00:00"
     },
     "G4-N01-V1G60h-start": {
-     "ende": "2026-10-17T11:38:30+00:00",
-     "git": "778e1b2c3f20d61652a75bfeb4c895f04dfbe639",
+     "ende": "2026-10-17T13:23:15+00:00",
+     "git": "9c98602f8268381d8826b9467e6a9c5111c7ceb9",
      "kampagnen": 4,
-     "kernsekunden": 43.6,
-     "laufzeit_s": 12.4,
+     "kernsekunden": 42.6,
+     "laufzeit_s": 12.1,
      "prozesse": 4,
-     "start": "2026-10-17T11:38:18+00:00"
+     "start": "2026-10-17T13:23:03+00:00"
     }
    },
    "kampagnen": 120,
-   "kernsekunden": 450.5,
-   "laufzeit_s": 122.4
+   "kernsekunden": 458.7,
+   "laufzeit_s": 123.89999999999999
   },
   "nullresiduum": {
    "B": 1000,
@@ -3398,17 +3398,106 @@
    "quelle": "docs/ap13_neulaeufe_2026-10-17/altstand_auszug.json: k12.aufrufe",
    "reduktion": "keine gekürzten Zusammenfassungen: nur N_z = 100"
   },
+  "schwellenrand": {
+   "alpha_je_pruefung": 0.0011627906976744186,
+   "daten": {
+    "bonferroni": 0.05124996108884725,
+    "faktor": 2.074966536408638,
+    "p_auffaellig": 0.002412751786521672,
+    "p_unauffaellig": 0.02432625286012653,
+    "t": 1.503320149332662
+   },
+   "e3a": {
+    "faltung": 5.156070604016914e-134,
+    "u_median_grad": 0.009275115
+   },
+   "gitter": [
+    {
+     "faktor": 11.451710996886398,
+     "p_auffaellig": 0.013315943019635346,
+     "p_unauffaellig": 0.0,
+     "t": 0.0
+    },
+    {
+     "faktor": 3.815042577061891,
+     "p_auffaellig": 0.004436096019839408,
+     "p_unauffaellig": 0.0,
+     "t": 0.5
+    },
+    {
+     "faktor": 2.539565022341501,
+     "p_auffaellig": 0.0029529825841180246,
+     "p_unauffaellig": 0.0,
+     "t": 1.0
+    },
+    {
+     "faktor": 2.0770930639791607,
+     "p_auffaellig": 0.002415224492999024,
+     "p_unauffaellig": 0.024090511419547277,
+     "t": 1.5
+    },
+    {
+     "faktor": 1.8300727999293653,
+     "p_auffaellig": 0.0021279916278248434,
+     "p_unauffaellig": 0.047592058472174986,
+     "t": 2.0
+    },
+    {
+     "faktor": 1.5680692666031804,
+     "p_auffaellig": 0.001823336356515326,
+     "p_unauffaellig": 0.04820247685277665,
+     "t": 3.0
+    },
+    {
+     "faktor": 1.345874772839466,
+     "p_auffaellig": 0.0015649706660924023,
+     "p_unauffaellig": 0.04215083890847654,
+     "t": 5.0
+    },
+    {
+     "faktor": 1.1726249533137434,
+     "p_auffaellig": 0.0013635173875741202,
+     "p_unauffaellig": 0.04515743576944369,
+     "t": 10.0
+    },
+    {
+     "faktor": 1.0853461995807723,
+     "p_auffaellig": 0.001262030464628805,
+     "p_unauffaellig": 0.04747207461128812,
+     "t": 20.0
+    },
+    {
+     "faktor": 1.0336885812928598,
+     "p_auffaellig": 0.0012019634666196044,
+     "p_unauffaellig": 0.048962967144885794,
+     "t": 50.0
+    }
+   ],
+   "m": 43,
+   "mc": {
+    "B": 1000,
+    "halbanalytisch": 0.002415224492999024,
+    "n": 100000,
+    "p_auffaellig": 0.00232,
+    "p_unauffaellig": 0.02327,
+    "se": 0.00015213867358433226,
+    "seed": 20261018,
+    "t": 1.5
+   },
+   "modell": "Rice: komplexes Residuum mit Streuung s je Komponente, Bootstrap-Streuung des Betrags um den Schätzwert (B → ∞); vereinfachtes Modell, keine gemessene PCMMS-Rate",
+   "z_B": 3.0451579519337875
+  },
   "umfang": {
    "e3_kampagnen": 570,
    "kalibrierkampagnen": 0,
-   "kernstunden": 0.125,
+   "kernstunden": 0.127,
    "neue_kampagnen": 120,
    "volle_ketten": 12
   }
  },
  "kopf": {
   "code_version": {
-   "git": "da0d6285886928903671857dd09ff02e9acf020a",
+   "git": "9c98602f8268381d8826b9467e6a9c5111c7ceb9+geändert",
    "paket": "0.1.0"
   },
   "datenart": "synthetisch",

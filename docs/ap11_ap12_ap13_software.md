@@ -482,8 +482,10 @@ klären am Präreg-Text bzw. im Plan (AP-08, AP-13), nicht in der Software.
     als „auffällig“ (30/30), die Basisdrift E07 in 36/40. Bei A07 ist E3 nicht auswertbar (T(kω) singulär). Diagnose vom
     17.10.2026 ([Diagnosebericht](e3b_g4_diagnose_2026-10-17/bericht.md), Abschnitt 2): 27/200 scheitern an der reinen
     Unsicherheitsgrenze u(q_Z) > q_tol/1,645, 159/200 am positiven Punktschätzer; ein komplexes Nullresiduum sagt
-    P(unauffällig) = 0,07 voraus (beobachtet 14/200), für 0,8 müsste die Streuung 2,2-mal kleiner sein. Vorschlag:
-    feste Schwellen mit Rückfall je Prüfgröße und fester Prüfzahl; Entscheidung beim Autor.
+    P(unauffällig) = 0,07 voraus (beobachtet 14/200), für 0,8 müsste die Streuung 2,2-mal kleiner sein. Am
+    Schwellenrand ist die untere Grenze von E3b im selben Modell nicht gültig (0,24 % statt 0,116 % je Prüfung bei
+    L1-Präzision). Vorschlag: feste Schwellen mit Rückfall je Prüfgröße und fester Prüfzahl, vorausgesetzt am Rand
+    gültige einseitige Grenzen und gemeinsame Fehlerkontrolle über alle E3-Prüfungen; Entscheidung beim Autor.
 12. **Überdeckung der H2-Intervalle konservativ** (§8.6, A9.6). Bei exakter Superposition überdeckt das
     Perzentilintervall den Bezugswert in allen Kampagnen (194/194, symmetrisches Zelt 40/40), BCa in 0,94–0,98; die
     Rückfallkette wählt damit stets das Perzentilintervall. Der Bezugswert der Überdeckung ist offen (§12); gewählt ist

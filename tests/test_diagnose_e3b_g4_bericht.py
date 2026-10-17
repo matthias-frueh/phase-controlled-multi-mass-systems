@@ -6,6 +6,7 @@ import os
 
 import numpy as np
 import pytest
+from scipy import stats
 
 from pcmms_auswertung import formate, konventionen as kv, regeln
 from pcmms_auswertung.generator import kampagne as kp
@@ -146,3 +147,42 @@ def test_pilotsuche_begruendung_am_versionierten_k12_ablauf():
     assert '26 Paare wegen der Grenze der Planungsaufrufe nicht simuliert' in k['neu']
     assert k['neu'].endswith('kein Nachweis der Unzulässigkeit außerhalb dieser Suche')
     assert 'n_max' not in k['neu']                                   # das Zeitbudget band nicht
+
+
+def test_rice_streuung_stabil_und_gleich_scipy():
+    """Streuung von Rice(b) über skalierte Bessel-Funktionen: gleich scipy.stats.rice, Rayleigh bei b = 0, endlich und
+    gegen 1 bei großen b (wo scipy überläuft)."""
+    for b in (1e-3, 0.5, 1.5, 5.0, 19.0):
+        assert np.isclose(db.rice_streuung(b), stats.rice.std(b), rtol=1e-10)
+    assert np.isclose(db.rice_streuung(0.0), math.sqrt(2 - math.pi / 2))
+    assert 0.99995 < db.rice_streuung(100.0) < 1.0 and np.isfinite(db.rice_streuung(1e4))
+
+
+def test_grenzen_am_schwellenrand_rice_modell():
+    """Am Schwellenrand (wahrer Betrag = Schwelle): Normalgrenzfall für große q_tol/s (α/m bzw. 5 %), monoton fallende
+    Fehlalarmrate stets über α/m, Bestätigung nie über 5 %, Gegenprobe mit Bootstrap-Replikaten, Grenzfall t = 0 gleich
+    dem Nullresiduum; bei der Präzision von L1 etwa das Doppelte von α/m."""
+    zB = float(stats.norm.ppf(1 - 0.05 / 43))
+    pu, po = db.rand_raten(400.0, zB)
+    assert np.isclose(pu, 0.05 / 43, rtol=0.01) and np.isclose(po, 0.05, rtol=0.01)
+    unten = [db.rand_raten(t, zB)[0] for t in db.RAND_GITTER]
+    assert unten == sorted(unten, reverse=True) and min(unten) > 0.05 / 43
+    assert all(db.rand_raten(t, zB)[1] <= 0.05 for t in db.RAND_GITTER)
+    assert 0.0023 < db.rand_raten(1.5, zB)[0] < 0.0025
+    z = 1.645                                                    # viele Ereignisse für eine kleine Gegenprobe
+    mc = db.rand_mc(2.0, z, n=20000, B=400, seed=5)
+    pu, po = db.rand_raten(2.0, z, z_oben=z)
+    assert abs(mc['p_auffaellig'] - pu) < 4 * mc['se'] and abs(mc['p_unauffaellig'] - po) < 0.01
+    nr = db.nullresiduum(zB, n=4000, B=200)
+    assert abs(db.rand_raten(0.0, zB)[0] - nr['gitter'][0]['p_auffaellig']) < 0.006
+
+
+@pytest.mark.skipif(not os.path.exists(os.path.join(DOKU, 'ergebnisse.json')), reason='ergebnisse.json fehlt')
+def test_schwellenrand_in_den_ergebnissen():
+    """Gespeicherte Randraten: Bonferroni-Schranke über 43 Prüfungen mit der E3b-Randrate über 5 %, E3a-Faltung
+    vernachlässigbar, Gegenprobe innerhalb von vier Standardfehlern."""
+    r = _ergebnisse()['schwellenrand']
+    assert r['m'] == 43 and np.isclose(r['alpha_je_pruefung'], 0.05 / 43)
+    assert r['daten']['bonferroni'] > 0.05 and r['daten']['faktor'] > 2.0
+    assert r['e3a']['faltung'] < 1e-50
+    assert abs(r['mc']['p_auffaellig'] - r['mc']['halbanalytisch']) < 4 * r['mc']['se']

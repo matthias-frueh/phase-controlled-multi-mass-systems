@@ -17,8 +17,11 @@ Diagnoseskript.
   - Der Betrag eines verrauschten komplexen Nullresiduums ist im Mittel 1,25-mal so groß wie die Streuung je Komponente.
   - Für P(unauffällig) ≥ 0,8 muss diese Streuung unter q_tol/3,28 liegen. Auf L1 ist sie 2,2-mal so groß.
   - Das Modell sagt P(unauffällig) = 0,07 voraus, beobachtet sind 14/200.
-  - Empfohlen: feste Schwellen mit Rückfall je Prüfgröße, „auffällig“ bleibt dabei erhalten, und eine feste Prüfzahl
-    m = 43. Damit bliebe E3a dreiwertig, E3b würde auf L1 einseitig ausgewertet.
+  - Am Schwellenrand (wahrer Betrag = q_tol) ist die heutige untere Grenze von E3b nicht gültig: Im Rice-Modell
+    meldet sie bei L1-Präzision in 0,24 % statt 0,116 % je Prüfung fälschlich eine Überschreitung.
+  - Empfohlen: feste Schwellen mit Rückfall je Prüfgröße und fester Prüfzahl m = 43, unter zwei ausdrücklichen
+    Voraussetzungen: am Schwellenrand gültige einseitige Grenzen und gemeinsame Fehlerkontrolle über alle
+    E3-Prüfungen. E3a bliebe dreiwertig, E3b bis zum Nachweis einer gültigen Grenze nur beschreibend.
 - **G4, Schwelle.** σ_Δ,F aus den Piloten unterschätzt die Fünftel-Streuung an steilen Flanken um bis zu den
   Faktor 2. Ursache ist der Jitter der Indexphasen mal der Flankensteigung.
   - Nach A7 zulässige Piloten erreichen diese Steilheit nicht.
@@ -44,15 +47,19 @@ python3 code/pcmms_auswertung harness diagnose-e3b-g4 --bericht                 
 Rechnungen laufen nur aus einem sauberen Git-Stand und nur mit passenden Checkpoints.
 
 - Checkpoints liegen unter `/tmp/pcmms-diagnose-e3b-g4-20261017/`, nicht im Repository.
-- Der Schlüssel umfasst Rechencode ohne Berichtsteil, Auftrag, Profil, Werkzeug 8, Seeds und Bibliotheken.
+- Der Schlüssel umfasst Rechencode ohne Berichtsteil, Auftrag, Profil, Werkzeug 8, Seeds, Lage des Zielpiloten und
+  Bibliotheken.
 - Berichtskorrekturen (`harness/diagnose_e3b_g4_bericht.py`) wiederholen keine Rechnung.
 - Der E3-Teil braucht keine temporären Ausgaben: Er liest den versionierten Auszug `e3_pruefgroessen.csv`.
 
 ## 1 Ausgangsstand und Arbeitsweise
 
 - `main` = 0a8eb1b (PR #21 gemergt; Baum gleich dem PR-Kopf ea02eed). Gearbeitet im Worktree
-  `diagnose-e3b-g4-2026-10`. Gerechnet auf 778e1b2 aus sauberem Stand, nachdem Treiber, Auftragsliste und Seeds
-  committet waren (c320d62, 778e1b2).
+  `diagnose-e3b-g4-2026-10`. Erstmals gerechnet auf 778e1b2 aus sauberem Stand, nachdem Treiber, Auftragsliste und
+  Seeds committet waren (c320d62, 778e1b2).
+- Nach der Aufnahme der Zielpilotlage in den Checkpoint-Schlüssel (9c98602) sind dieselben 120 Kampagnen mit denselben
+  Seeds neu gerechnet. Alle 2880 Einzellauffelder und alle Skalare sind bitgleich; nur Laufzeiten und Herkunft ändern
+  sich.
 - **Gespeicherte Befunde:**
   - E3-Prüfgrößen der 570 Neulaufkampagnen in voller Genauigkeit aus den Checkpoints von PR #21. Herkunft je Punkt geprüft
     (Auftrags-Hash, Seeds, Rechenstand 020e131), abgeglichen mit `kampagnen_e3.csv` (Bewertung, Seed, q_Z, u auf 6
@@ -93,7 +100,8 @@ mit 0,1° und q_tol = 5,8·10⁻⁴. Die nachgezählte Gesamtbewertung gleicht i
   - Die größte obere Grenze |Δφ| + 1,645·u je Kampagne liegt bei 0,029°–0,054° (Median 0,038°), weit unter 0,1°.
   - E3a erkennt A06, H03 und E04 in 30/30 Kampagnen, an der Mehrzahl davon bei bestätigtem H1Z.
 - Auf L1 entsteht „unbestimmt“ allein an E3b.
-- E3b ist „auffällig“ an H03 (30/30) und E07-basisdrift (36/40), in 24 bzw. 35 Fällen bei bestätigtem H1Z.
+- E3b ist „auffällig“ an H03 (30/30) und E07-basisdrift (36/40), in 24 bzw. 35 Fällen bei bestätigtem H1Z. Ob diese
+  Aussage ihre Fehlerrate einhält, prüft 2.4.
   - E3b ist von H1Z nicht unabhängig (§8.10), trägt aber an diesen Artefakten Nachweisinformation über die
     Äquivalenzaussage von H1Z hinaus.
 - Die Prüfzahl m hängt von der Datenlage ab: Kampagnen mit nicht auswertbaren Punkten haben m = 35–41 statt 43.
@@ -159,12 +167,55 @@ zwei etwa normalverteilten, unabhängigen Komponenten der Streuung s; q_Z ist se
   3,12·10⁻⁴, beobachtet 2,96·10⁻⁴; q_Z/u im Median 1,47 gegen 1,48.
 - Die Streuung müsste also um den Faktor 2,2 sinken. Wie sich das auf Messung, Vorhersage und Kalibrierung verteilt
   und welche Laufzahl daraus folgt, lässt sich ohne getrenntes Modell nicht angeben; hier wird es nicht umgerechnet.
-- „Auffällig“ ist bei q_tol/s ≥ 1,5 praktisch ausgeschlossen. Bei sehr geringer Präzision (q_tol/s → 0) erreicht es
-  1,3 % je Kampagne statt 0,05/43 = 0,12 % für diese eine Prüfung. Daher gilt auch die untere Grenze eines Betrags nur
-  bei ausreichender Präzision als kalibriert (vgl. N01-A4/L4: E3b auffällig 2/40).
+- Bei wahrer Differenz null ist „auffällig“ für q_tol/s ≥ 1,5 praktisch ausgeschlossen. Bei sehr geringer Präzision
+  (q_tol/s → 0) erreicht es 1,3 % je Kampagne statt 0,05/43 = 0,12 % für diese eine Prüfung (vgl. N01-A4/L4: E3b
+  auffällig 2/40). Für die Aussage „Überschreitung nachgewiesen“ ist aber der Schwellenrand maßgeblich (2.4).
 - Das ist eine Verfahrensdiagnose. Sie ersetzt die Kampagnensimulation nicht und legt keine neue Intervallregel fest.
 
-### 2.4 Zelllagen und T in E3b
+### 2.4 Grenzen am Schwellenrand
+
+„Auffällig“ behauptet eine Überschreitung von q_tol. Ob diese Aussage ihre Fehlerrate einhält, entscheidet der
+ungünstigste Fall unter der Nullhypothese: der wahre Betrag genau an der Schwelle. Die 0/200 bei exakter
+Superposition zeigen nur den Fall wahrer Differenz null.
+
+Rechnung im selben vereinfachten Rice-Modell wie 2.3, mit wahrem Betrag q_tol und der Bootstrap-Streuung des Betrags
+um den Schätzwert (Grenzfall B → ∞). Halbanalytisch über die Verteilungsfunktion von `scipy.stats.rice`, dazu eine
+Gegenprobe mit Bootstrap-Replikaten:
+
+<!-- tabelle:e3b_schwellenrand -->
+| q_tol/s | P(„auffällig“ \| wahrer Betrag = q_tol) | Faktor zu α/m = 0,116 % | P(„unauffällig“ \| wahrer Betrag = q_tol) |
+|---|---|---|---|
+| 0,0 | 1,332 % | 11,45 | 0,00 % |
+| 0,5 | 0,444 % | 3,82 | 0,00 % |
+| 1,0 | 0,295 % | 2,54 | 0,00 % |
+| 1,5 | 0,242 % | 2,08 | 2,41 % |
+| 2,0 | 0,213 % | 1,83 | 4,76 % |
+| 3,0 | 0,182 % | 1,57 | 4,82 % |
+| 5,0 | 0,156 % | 1,35 | 4,22 % |
+| 10,0 | 0,136 % | 1,17 | 4,52 % |
+| 20,0 | 0,126 % | 1,09 | 4,75 % |
+| 50,0 | 0,120 % | 1,03 | 4,90 % |
+| 1,50 (Präzision der Daten, N01-A4/L1) | 0,241 % | 2,07 | 2,43 % |
+| 1,5 (Gegenprobe mit Bootstrap, 100 000 Fälle, B = 1000) | 0,232 % ± 0,015 % | 2,00 | 2,33 % |
+<!-- /tabelle -->
+
+- **Untere Grenze:** q_Z − z_B·u ist am Rand antikonservativ. Bei der Präzision der Daten (q_tol/s = 1,50) meldet sie
+  in 0,24 % statt α/m = 0,116 % je Prüfung fälschlich eine Überschreitung, Faktor 2,1.
+  - Erst bei q_tol/s ≈ 20 liegt sie innerhalb von 10 % des Nominalwerts, bei geringer Präzision bis zum Elffachen.
+  - Ursache: Auch Abweichungen quer zum wahren Residuum vergrößern den Betrag. Der Rand der Rice-Verteilung ist
+    schwerer als der einer Normalverteilung mit der Bootstrap-Streuung.
+- **Obere Grenze:** Für „unauffällig“ ist sie am Rand konservativ (stets unter 5 %, für große q_tol/s gegen 5 %).
+  Dort liegt das Problem bei der erreichbaren Präzision (2.2, 2.3), nicht bei der Gültigkeit.
+- **E3a** ist reellwertig. Im Normalmodell ist seine untere Grenze am Rand gültig: P = Φ(−z_B) + Φ(−z_B − 2·0,1°/u);
+  mit u ≈ 0,009° ist der zweite Term kleiner als 10⁻¹⁰⁰.
+- **Gemeinsame Fehlerkontrolle:** Die Bonferroni-Schranke für „E3 auffällig“ über alle 43 Prüfungen, alle wahren Werte
+  an ihren Schwellen, beträgt mit dieser E3b-Grenze 42·α/m + 0,24 % = 5,1 % statt höchstens 5 %.
+  - Ein Kriterium „je Prüfgröße höchstens 5 % Fehlalarm bei exakter Superposition“ sicherte die gemeinsame Kontrolle
+    ohnehin nicht: Zwei Teile mit je 5 % ergäben bis zu 10 %.
+- Das Rice-Modell ist eine Vereinfachung; die Zahlen sind keine gemessene PCMMS-Rate. Ob eine Grenze am Rand gültig
+  ist, muss die Kalibriersimulation über die Präzisionsstufen zeigen.
+
+### 2.5 Zelllagen und T in E3b
 
 - E3b enthält T nicht. Die Zelllagen werden je Replikat gemeinsam für Messung und Vorhersage gezogen (Korrektur E).
 - Laut Modell ändert das u(q_Z) um höchstens 3,5·10⁻⁶ relativ (N01-A4/L1); über alle elf Punkte sind es höchstens
@@ -175,7 +226,7 @@ zwei etwa normalverteilten, unabhängigen Komponenten der Streuung s; q_Z ist se
   hält. Für reale Kalibrierfehler ist es kein Nachweis der Vernachlässigbarkeit, etwa für lastabhängige
   Zellverstärkungen, Kippmoden oder Modullagen, die das T-Modell nicht enthält.
 
-### 2.5 Nachträgliche Sensitivität von q_tol (nur beschreibend)
+### 2.6 Nachträgliche Sensitivität von q_tol (nur beschreibend)
 
 Auf denselben 200 Kampagnen, ohne neue Rechnung. Die Tabelle legt keine Schwelle fest. Eine Anhebung von q_tol allein,
 damit die Rate 0,8 erreicht, widerspräche der Bedeutung von q_tol als Wirkung von 0,1° an einem Modul (A2.7).
@@ -191,32 +242,46 @@ damit die Rate 0,8 erreicht, widerspräche der Bedeutung von q_tol als Wirkung v
 | 3,00 × 5,8·10⁻⁴ | 197/200 | 0/200 |
 <!-- /tabelle -->
 
-### 2.6 Entscheidungsvorlage E3
+### 2.7 Entscheidungsvorlage E3
 
 | Option (§12) | Welche Präzision verlangt sie, was bleibt? | Einordnung |
 |---|---|---|
-| (a) feste Schwellen 0,1° und q_tol mit Rückfall | E3a erreicht beide Kriterien auf L1 (unauffällig 200/200, auffällig 0/200). E3b braucht s ≤ q_tol/3,28 (L1: Faktor 2,2 darüber). Ein Rückfall für E3 als Ganzes nähme auf L1 auch E3a und die Nachweise von E3b weg; ein Rückfall je Prüfgröße nicht. | bevorzugt, mit Rückfall je Prüfgröße |
+| (a) feste Schwellen 0,1° und q_tol mit Rückfall | E3a erreicht beide Kriterien auf L1 (unauffällig 200/200, auffällig 0/200) und ist am Rand gültig. E3b braucht s ≤ q_tol/3,28 (L1: Faktor 2,2 darüber), und seine untere Grenze ist am Rand nicht gültig (2.4). Ein Rückfall für E3 als Ganzes nähme auf L1 auch E3a weg, ein Rückfall je Prüfgröße nicht. | bevorzugt, mit Rückfall je Prüfgröße und den Voraussetzungen unten |
 | (b) Schwellen als Vielfaches der erwarteten Unsicherheit | Bei jeder Präzision entscheidbar. Die Schwelle wächst mit dem Rauschen. Auf L2 und L4 läge κ·u über der Wirkung von 0,1° bzw. q_tol, und „unauffällig“ hieße dann nur „nicht größer als das Rauschen“. Der Bezug zur Profilphase (P0.5, A2.7) ginge verloren. | nicht empfohlen |
-| (c) E3 nur beschreibend | Werte mit Unsicherheit bleiben. Die dreiwertige Aussage entfällt auch dort, wo sie funktioniert: E3a an A06/H03/E04 und E3b an H03/E07, meist bei bestätigtem H1Z. | nur als Rückfall |
+| (c) E3 nur beschreibend | Werte mit Unsicherheit bleiben. Die dreiwertige Aussage entfällt auch dort, wo sie funktioniert: E3a an A06/H03/E04, meist bei bestätigtem H1Z. | nur als Rückfall |
 
-- **Auffällig erkennen und unauffällig bestätigen** sind getrennte Fragen.
-  - „Auffällig“ hält auf L1 das Kriterium P ≤ 0,05 ein, für E3a wie für E3b (je 0/200).
-  - „Unauffällig“ verfehlt nur E3b.
-  - Verfehlt eine Prüfgröße nur die Bestätigung, kann sie einseitig ausgewertet werden: „auffällig“ oder „keine
-    Überschreitung nachgewiesen“. Das bewahrt die Nachweise von E3b.
+- **Auffällig erkennen und unauffällig bestätigen** sind getrennte Fragen mit verschiedenen ungünstigsten Fällen.
+  - „Auffällig“ (Überschreitung nachgewiesen) wird am Schwellenrand geprüft, nicht bei wahrer Differenz null. E3a hält
+    das ein, die untere Grenze von E3b im Rice-Modell nicht (2.4).
+  - „Unauffällig“ (Einhaltung nachgewiesen) ist am Rand für beide gültig, bei exakter Superposition für E3b auf L1
+    aber kaum erreichbar (14/200).
+- **Voraussetzungen der Vorlage,** ausdrücklich:
+  1. Jede E3-Prüfung hat einseitige Grenzen, die am Schwellenrand gültig sind: P(untere Grenze > Schwelle | wahrer
+     Wert = Schwelle) ≤ α/m und P(obere Grenze ≤ Schwelle | wahrer Wert = Schwelle) ≤ 0,05. Nachzuweisen in der
+     Kalibriersimulation über die Präzisionsstufen.
+  2. Gemeinsame Fehlerkontrolle: „E3 auffällig“ hält P ≤ 0,05 über alle Prüfungen beider Teile zusammen, mit fester
+     Prüfzahl m = 43 (Bonferroni, starke Kontrolle). Der Rückfall einer Prüfgröße ändert m nicht.
+  3. Rückfall je Prüfgröße: Erfüllt eine Prüfgröße 1, verfehlt aber nur P(unauffällig | exakt) ≥ 0,8, wird sie
+     einseitig ausgewertet („auffällig“ oder „keine Überschreitung nachgewiesen“). Erfüllt sie 1 nicht, wird sie nur
+     beschreibend berichtet.
   - Ein Rückfall auf beschreibend oder einseitig ist kein bestandener Test. E3 insgesamt ist dann nie „unauffällig“.
+- **Folge mit den heutigen Grenzen:** E3a erfüllt 1 und beide Kriterien und bliebe dreiwertig. E3b erfüllt 1 mit
+  q_Z − z_B·u nicht und bliebe nur beschreibend, bis eine am Rand gültige Grenze nachgewiesen ist, etwa über die
+  Rice-Verteilung des Betrags oder einen Bereich für das komplexe Residuum. Das wäre eine spätere Festlegung des
+  Verfahrens; hier ist sie nicht umgesetzt.
 - **H1Z.** E3b fasst die H1Z-Residuen von N_c,1 am Triphasik-Punkt zusammen. Die konfirmatorische Aussage zu diesen
-  Residuen bleibt bei H1Z. Der Verlust der Bestätigung von E3b kostet daher wenig, der Verlust seiner Nachweise mehr
-  (2.1).
+  Residuen bleibt bei H1Z. Der Verlust der Bestätigung von E3b kostet daher wenig. Seine Nachweise an H03 und E07
+  (2.1) blieben erst mit einer gültigen unteren Grenze erhalten.
 - **Prüfmenge und Bonferroni.** Die Prüfmenge sind die auswertbaren Schnittkonfigurationen und der Triphasik-Punkt,
   ohne Zusatz- und Identifizierbarkeitskonfigurationen. Eine feste Prüfzahl m = 2·N_K + 1 = 43 entkoppelt z_B von
-  der Datenlage (heute m = 35–43); sie ist bei fehlenden Punkten etwas konservativ.
+  der Datenlage (heute m = 35–43); sie ist bei fehlenden Punkten etwas konservativ und gehört zu Voraussetzung 2.
 - E3b bleibt eine Differenz gegen die Vorhersage. Eine absolute Fassung würde zulässige konstante Modulunterschiede und
   Zelllagefehler bewerten (§8.10). Eine relative E3a-Fassung ist für die Entscheidung nicht nötig, weil E3a absolut
   auf L1 beide Kriterien erreicht.
 
-**Bevorzugt:** Option (a) mit Rückfall je Prüfgröße und einseitiger Auswertung bei verfehlter Bestätigung, feste
-Prüfzahl. Wortlaut in Abschnitt 5.
+**Bevorzugt:** Option (a) mit Rückfall je Prüfgröße und fester Prüfzahl, unter den Voraussetzungen 1 und 2. Damit
+bliebe E3a dreiwertig und E3b bis zum Nachweis einer am Rand gültigen Grenze nur beschreibend. Wortlaut in Abschnitt
+5.
 
 ## 3 G4 und Pilotreserve
 
@@ -240,17 +305,19 @@ Prüfzahl. Wortlaut in Abschnitt 5.
     nicht nachgebildet).
 - **Laufzeit:** 120 Kampagnen in 2 min Wandzeit mit 4 Prozessen zu je einem BLAS-Thread. Der Startsatz ergab
   10 Kernsekunden je voller und 3 je schlanker Kampagne; der Umfang wurde deshalb nicht reduziert.
+  - Die Tabelle zeigt die Neuberechnung nach der Schlüsselkorrektur (dieselben Kampagnen).
+  - Mit der ersten Rechnung (122 s Wandzeit, 450 Kernsekunden) sind es zusammen etwa 0,25 Kernstunden.
 
 <!-- tabelle:laufzeiten -->
 | Auftrag | Kampagnen | Wandzeit [s] | Kernsekunden |
 |---|---|---|---|
-| G4-N01-A4-start | 4 | 9,0 | 29,4 |
-| G4-N01-A4-rest | 36 | 31,7 | 117,9 |
-| G4-N01-V1G0-start | 4 | 13,3 | 48,1 |
-| G4-N01-V1G0-rest | 36 | 28,5 | 108,4 |
-| G4-N01-V1G60h-start | 4 | 12,4 | 43,6 |
-| G4-N01-V1G60h-rest | 36 | 27,5 | 103,1 |
-| zusammen | 120 | 122,4 | 450,5 (0,125 Kernstunden) |
+| G4-N01-A4-start | 4 | 9,0 | 28,3 |
+| G4-N01-A4-rest | 36 | 32,3 | 123,2 |
+| G4-N01-V1G0-start | 4 | 13,0 | 45,6 |
+| G4-N01-V1G0-rest | 36 | 29,4 | 112,2 |
+| G4-N01-V1G60h-start | 4 | 12,1 | 42,6 |
+| G4-N01-V1G60h-rest | 36 | 28,1 | 106,8 |
+| zusammen | 120 | 123,9 | 458,7 (0,127 Kernstunden) |
 <!-- /tabelle -->
 
 ### 3.2 Befunde je Konfiguration (produktive Regel)
@@ -536,16 +603,17 @@ Tests:
 
 | Zu entscheidender Punkt | Empfehlung | Nachteil / Aufwand | Vorgeschlagener Wortlaut | Spätere Implementierung und Kalibrierung |
 |---|---|---|---|---|
-| E1 Fassung der E3-Schwellen (§12) | Option (a): feste Schwellen 0,1° und q_tol = 5,8·10⁻⁴ unverändert | E3b ist auf L1 nicht bestätigbar (14/200); die nötige Präzision ist s ≤ q_tol/3,28 | §12, Zeile „Schwellen von E3“: „Festgelegt: (a) mit Rückfall je Prüfgröße (A9.11); (b) und (c) entfallen.“ | keine Codeänderung an den Schwellen; Kriterien je Prüfgröße in Teil B berichten |
-| E2 Rückfall je Prüfgröße und Richtung (A9.11, §8.10) | Rückfall je Prüfgröße; bei verfehlter Bestätigung, aber eingehaltenem P(auffällig \| exakt) ≤ 0,05 einseitige Auswertung | weiterer Ausgang „keine Überschreitung nachgewiesen“; E3 insgesamt ist dann nie „unauffällig“ | A9.11: „Verfehlt eine E3-Prüfgröße (E3a, E3b) in Teil B ein Kriterium, gilt der Rückfall nur für sie. Ist P(auffällig \| exakt) ≤ 0,05 eingehalten und nur P(unauffällig \| exakt) ≥ 0,8 verfehlt, wird sie einseitig ausgewertet: ‚auffällig‘ (Überschreitung nachgewiesen) oder ‚keine Überschreitung nachgewiesen‘; sonst nur beschreibend. Beides ist kein bestandener Test; E3 ist dann nicht ‚unauffällig‘.“ | `kontrollen.e3_auswerten`: Status je Prüfgröße; Kalibriersimulation: beide Kriterien je Prüfgröße und Präzisionsstufe |
-| E3 Bonferroni-Prüfzahl und Prüfmenge (A9.13) | feste Prüfzahl m = 2·N_K + 1 (43) über die Schnittkonfigurationen und den Triphasik-Punkt, ohne Zusatz- und Identifizierbarkeitskonfigurationen | bei fehlenden Punkten etwas konservativ (z_B 3,05 statt 3,00) | A9.13: „z_B ist das einseitige Bonferroni-Quantil zu α = 0,05 mit m = 2·N_K + 1, unabhängig von der Zahl auswertbarer Konfigurationen; Prüfmenge sind die Schnittkonfigurationen und der Triphasik-Punkt.“ | `e3_auswerten` mit festem m aus Teil B; Raten neu zählen (gleiche Kampagnen) |
+| E1 Fassung der E3-Schwellen (§12) | Option (a): feste Schwellen 0,1° und q_tol = 5,8·10⁻⁴ unverändert, mit den Voraussetzungen von E2 | E3b ist auf L1 nicht bestätigbar (14/200; nötig wäre s ≤ q_tol/3,28) und bis zu einer gültigen unteren Grenze nur beschreibend | §12, Zeile „Schwellen von E3“: „Festgelegt: (a) mit Rückfall je Prüfgröße (A9.11); (b) und (c) entfallen.“ | keine Codeänderung an den Schwellen; Kriterien je Prüfgröße in Teil B berichten |
+| E2 Gültige Grenzen, gemeinsame Fehlerkontrolle und Rückfall je Prüfgröße (A9.11, A9.13, §8.10) | Rückfall je Prüfgröße unter zwei Voraussetzungen: am Schwellenrand gültige einseitige Grenzen jeder Prüfung und gemeinsame Fehlerkontrolle für „E3 auffällig“ über alle Prüfungen; einseitige Auswertung nur bei gültiger unterer Grenze | weiterer Ausgang „keine Überschreitung nachgewiesen“; E3 insgesamt ist dann nie „unauffällig“; E3b heute nur beschreibend, bis eine am Rand gültige untere Grenze nachgewiesen ist | A9.11/A9.13: „Jede E3-Prüfung braucht einseitige Grenzen, die am Schwellenrand gültig sind: Liegt der wahre Wert auf der Schwelle, überschreitet die untere Grenze sie mit Wahrscheinlichkeit höchstens α/m, und die obere Grenze liegt mit höchstens 0,05 darunter; nachgewiesen in der Kalibriersimulation über die Präzisionsstufen. ‚E3 auffällig‘ hält P ≤ 0,05 gemeinsam über alle Prüfungen beider Teile (Bonferroni mit m = 43). Verfehlt eine Prüfgröße in Teil B nur P(unauffällig \| exakt) ≥ 0,8, wird sie einseitig ausgewertet: ‚auffällig‘ (Überschreitung nachgewiesen) oder ‚keine Überschreitung nachgewiesen‘. Ist ihre untere Grenze am Rand nicht gültig, wird sie nur beschreibend berichtet. Beides ist kein bestandener Test; E3 ist dann nicht ‚unauffällig‘.“ | `kontrollen.e3_auswerten`: Status je Prüfgröße; für E3b eine am Rand gültige untere Grenze (etwa aus der Rice-Verteilung des Betrags) als spätere Festlegung; Kalibriersimulation: Fehlerraten beider Grenzen am Schwellenrand je Präzisionsstufe und die gemeinsame Fehlalarmrate |
+| E3 Bonferroni-Prüfzahl und Prüfmenge (A9.13) | feste Prüfzahl m = 2·N_K + 1 (43) über die Schnittkonfigurationen und den Triphasik-Punkt, ohne Zusatz- und Identifizierbarkeitskonfigurationen (Voraussetzung 2 von E2) | bei fehlenden Punkten etwas konservativ (z_B 3,05 statt 3,00) | A9.13: „z_B ist das einseitige Bonferroni-Quantil zu α = 0,05 mit m = 2·N_K + 1, unabhängig von der Zahl auswertbarer Konfigurationen; Prüfmenge sind die Schnittkonfigurationen und der Triphasik-Punkt.“ | `e3_auswerten` mit festem m aus Teil B; Raten neu zählen (gleiche Kampagnen) |
 | G1 k der Pilotgrößen für G4 (technisch) | σ_Δ,F mit dem festgelegten k_max bilden | A4: G4-Rate 2,8 % → 4,3 % (v0k); c von A4 neu | A9.2 (Reihenfolge der Schwellen), Klarstellung: „σ_Δ für F_min − ⟨N⟩ wird mit dem festgelegten k_max gebildet.“ | `pilot`/`teil_b`: σ_Δ beim festgelegten k_max übergeben; Kalibrierung A4 neu |
 | G2 Schwellenübertragung von G4 (§9.1) | konfigurationsabhängige Standardisierung v2, vor Phase 1 aus Phase 0 festgelegt | Methodik in Teil A und B; an den steilsten Punkten werden Amplitudentrends unter etwa 1 % nicht mehr erkannt, weil sie dort im Jitter liegen; flache Punkte unverändert | §9.1 G4, Zusatz: „Für X = F_min − ⟨N⟩ an der Kombinationskonfiguration i gilt σ²_Δ,F,i = σ²_Δ,F + max(0, s²_i − s̄²_P); s_i ist die aus Phase 0 vorhergesagte Jitterstreuung der Fünftel-Differenz (Vorhersage ŷ⁰, Jitter σⱼ der Piloten, ⌊N_z/5⌋ Zyklen je Fünftel, feste Ziehungen) und s̄²_P ihr Mittel über die Pilotkonfigurationen [Teil B]. Die Schwelle ist nie kleiner als 3·σ_Δ,F.“ | `gueltigkeit` (σ je Konfiguration), `teil_b` (s_i), Tests; Kalibrierung c_H1/c_H1Z/Rauschbias/H2 neu; G4-Ausschlussrate je Punkt und Trendempfindlichkeit als Kriterium |
 | G3 Reserve und Wiederholungen (A9.2 (v), A9.12) | „+2“ beibehalten; Planungs- und Kalibriersimulation mit Wiederholungen; gemeinsame Vollständigkeit direkt zählen | Generator und Planung brauchen Wiederholungsplätze und mehr simulierte Läufe; die Messzeit enthält die Wiederholungen | A9.2 (v), Zusatz: „Die Planungssimulation bildet die Wiederholungen nach A9.12 ab. r = ⌈n_min·p̂/(1 − p̂)⌉ + 2 gilt, wenn alle Punkte in mindestens 95 % der simulierten Kampagnen n_min gültige Läufe erreichen; sonst wird r erhöht, bis das erreicht ist.“ | Generator (`kampagne.laufplan`, Ebene H/Z), Planungshaken, Zeitformel; Kalibrierung mit Wiederholungen |
 
-Vom Autor zu entscheiden sind E1/E2 (zusammen) und G2. E3, G1 und G3 sind Folgerungen mit wenig Ermessen: E3 und G1
-betreffen Prüfzahl bzw. Konsistenz mit dem vorhandenen Wortlaut, G3 die Abbildung des registrierten Ablaufs. Offen
-bleibt bei G3 das Ziel 0,95.
+Vom Autor zu entscheiden sind E1/E2 (zusammen) und G2. Zu E2 gehört die Frage, ob E3b bis zum Nachweis einer am Rand
+gültigen Grenze nur beschreibend berichtet wird oder ob die Grenzkonstruktion vorab festgelegt und kalibriert wird.
+E3, G1 und G3 sind Folgerungen mit wenig Ermessen: E3 und G1 betreffen Prüfzahl bzw. Konsistenz mit dem vorhandenen
+Wortlaut, G3 die Abbildung des registrierten Ablaufs. Offen bleibt bei G3 das Ziel 0,95.
 
 ## 6 Grenzen
 
