@@ -646,14 +646,14 @@ Wortlaut, G3 die Abbildung des registrierten Ablaufs. Offen bleibt bei G3 das Zi
 Alle Zähler dieses Berichts lassen sich aus den CSV-Dateien nachzählen. Beispiel: Ein Punkt unter n_min bei n Blöcken
 heißt `b18_<Variante> > n`, mit Wiederholungen `b18w_<Variante> > n`.
 
-**Abnahme** am Codestand 4c1f1f5 (danach nur dieser Abschnitt ergänzt), vom Repository-Stamm:
+**Abnahme** am Codestand 75f75af (danach nur dieser Abschnitt ergänzt), vom Repository-Stamm:
 
 | Befehl | Ergebnis | Dauer |
 |---|---|---|
-| `python3 -m pytest tests -q` | 350 bestanden, 8 übersprungen (Ausgangswert 333/8; 17 neue Tests) | 375 s |
-| `(cd data && python3 ../code/linear_solver.py --validate)` | bestanden | 2,8 s |
-| `python3 rechnungen/neuheit/bibcheck.py` | ohne Fehler | 0,1 s |
-| `python3 code/pcmms_auswertung harness pruefsatz --pruefen tests/fixtures/ap13_pruefsatz` | gleich, keine Abweichungen | 24 s |
+| `python3 -m pytest tests -q` | 354 bestanden, 8 übersprungen (Ausgangswert 333/8; 21 neue Tests) | 357 s |
+| `(cd data && python3 ../code/linear_solver.py --validate)` | bestanden | 2,2 s |
+| `python3 rechnungen/neuheit/bibcheck.py` | ohne Fehler | 0,3 s |
+| `python3 code/pcmms_auswertung harness pruefsatz --pruefen tests/fixtures/ap13_pruefsatz` | gleich, keine Abweichungen | 21 s |
 
 Unverändert: Präregistrierung, Regelprofile, H1/H2/H3, Schwellen, Bonferroni-Regel, produktive
 Ausschlussentscheidungen, `data/`, `rechnungen/`, der historische Prüfstand, der Prüfsatz und die Ergebnisse von PR #21.
