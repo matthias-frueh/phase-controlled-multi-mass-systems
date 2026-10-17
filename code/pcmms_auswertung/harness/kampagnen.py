@@ -33,6 +33,29 @@ def _roh(T, bias, achse=None):
     return r, np.asarray(T['varA'], float) + np.asarray(T['varB'], float)
 
 
+def _e3_kurz(e3):
+    """Kompakter E3-Befund: Bewertung, Status, Prüfgrößen je Konfiguration und Modul (|Δφ_Z|, u, u ohne T-Anteil) und
+    für E3b (q_Z, u, u ohne T-Anteil), z_B, m sowie die Diagnose der T-Ziehungen (Teil B nr5.unsicherheit)."""
+    a = [[abs(v['delta_phi_Z_grad']), v['u_grad'], v.get('u_ohne_T_grad', np.nan)]
+         for e in e3.get('e3a') or [] for v in e['e3a'].values()]
+    b = e3.get('e3b')
+    return dict(bewertung=e3.get('bewertung'), status=e3.get('status'), z_B=e3.get('z_B'), m=e3.get('m'),
+                e3a=np.asarray(a, float).reshape(-1, 3),
+                e3b=None if not b else np.array([b['q_Z'], b['u_q_Z'], b.get('u_q_Z_ohne_T', np.nan)], float),
+                t=e3.get('t_unsicherheit'))
+
+
+def _e3_fehlt(tb):
+    """Grund, aus dem AP-12 keine E3-Auswertung liefert (statt eines stillen Fehlens im Befund)."""
+    n5 = tb.get('nr5') or {}
+    if n5.get('T') is None:
+        return 'keine E3-Auswertung: T(kω) fehlt in Teil B nr5 (Zellanteile aus P0.1 nicht bestimmbar)'
+    if n5.get('unsicherheit') is None:
+        return ('keine E3-Auswertung: Laststellen aus P0.1 nicht bestimmbar oder keine auswertbare '
+                'Schnittkonfiguration')
+    return 'keine E3-Auswertung: keine auswertbare Schnittkonfiguration'
+
+
 def kurzbefund(erg, tb, seed):
     """Kompakter, wahrheitsfreier Befund einer Kampagne (nur aus dem Ergebnis von AP-12 und Teil B)."""
     H1, H1Z, H2, H3, H4 = (erg[k] for k in HYPOTHESEN)
@@ -70,7 +93,7 @@ def kurzbefund(erg, tb, seed):
         H0=dict(aussage=erg['H0'].get('aussage'), lage=erg['H0'].get('lage'),
                 g1=len(erg['H0'].get('g1_verletzt', []))),
         zuordnung=dict(ergebnis=zu.get('ergebnis'), klasse=zu.get('klasse'), status=zu.get('status')) if zu else None,
-        E3=dict(bewertung=e3.get('bewertung'), status=e3.get('status')) if e3 else None,
+        E3=_e3_kurz(e3) if e3 else None, E3_grund=None if e3 else _e3_fehlt(tb),
         gueltigkeit=dict(n_laeufe=g['n_laeufe'], n_ungueltig=g['n_ungueltig'], regeln=regelzahl,
                          S2=len(g['abbruch']['S2']), S4=len(g['abbruch']['S4']),
                          S1_kandidaten=len(g['abbruch']['S1_kandidaten'])),

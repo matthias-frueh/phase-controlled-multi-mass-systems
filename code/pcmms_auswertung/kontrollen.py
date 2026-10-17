@@ -279,7 +279,8 @@ def e3_auswerten(K, E0, idxA, idxB0, T, xy, dd, u_dd, phi_mess, triphasik, profi
     (n_j, 3, Kv); T: Nennwert (k, Zelle, Modul); xy: Zelllagen (3, 2); dd, u_dd: Δδⱼ und u(Δδⱼ); phi_mess: id → φ̄ⱼ^P
     (3). T_zieh: Ergebnis von t_ziehungen mit so vielen Ziehungen wie Bootstrap-Replikaten (Replikat b verwendet T_b
     und die Zelllagen von b für alle Konfigurationen, Messung und Vorhersage); None: keine Unsicherheitsbeschreibung,
-    nur numerische Diagnostik mit festem T, keine dreiwertige Aussage."""
+    nur numerische Diagnostik mit festem T, keine dreiwertige Aussage. Je Prüfgröße steht zusätzlich u ohne T-Anteil
+    (dieselben Replikate, T und Zelllagen fest) als Diagnose; die Bewertung nutzt sie nicht."""
     T = np.asarray(T)
     kond = np.linalg.cond(T)
     if not np.all(np.isfinite(kond)) or np.any(kond > KOND_MAX):
@@ -310,6 +311,7 @@ def e3_auswerten(K, E0, idxA, idxB0, T, xy, dd, u_dd, phi_mess, triphasik, profi
         rho = vh.zeiger_mittel(d['Z'], d['nz'])
         Ch = np.einsum('kjc,ck->jk', Tinv[:kmax], y)                    # (Modul, k)
         Chb = np.einsum('bkjc,bck->bjk', Tinv_b[:, :kmax], yb)
+        Chb_fest = None if T_zieh is None else np.einsum('kjc,bck->bjk', Tinv[:kmax], yb)   # Diagnose: T fest
         phiP = -np.degrees(np.angle(rho[:, 0])) + np.asarray(dd)
         phiPb = -np.degrees(np.angle(rb[:, :, 0])) + zieh_dd
         res = {}
@@ -319,7 +321,13 @@ def e3_auswerten(K, E0, idxA, idxB0, T, xy, dd, u_dd, phi_mess, triphasik, profi
             d2 = kv.wickel_grad(np.degrees(np.angle(Ch[0, 1]) - np.angle(Ch[j, 1])) - 2 * phiP[j]) / 2 \
                 if kmax >= 2 else None                                  # erst modulo 360°, dann halbieren
             u = float(np.sqrt(np.nanvar(dzb, ddof=1) + u_quant_grad ** 2))
-            res[f'modul{j + 1}'] = dict(delta_phi_Z_grad=float(dz), u_grad=u,
+            if Chb_fest is None:
+                u_fest = u
+            else:
+                dzf = kv.wickel_grad(np.degrees(np.angle(Chb_fest[:, 0, 0]) - np.angle(Chb_fest[:, j, 0])) -
+                                     phiPb[:, j])
+                u_fest = float(np.sqrt(np.var(dzf, ddof=1) + u_quant_grad ** 2))
+            res[f'modul{j + 1}'] = dict(delta_phi_Z_grad=float(dz), u_grad=u, u_ohne_T_grad=u_fest,
                                         delta_phi_Z_k2_grad=None if d2 is None else float(d2))
         erg.append(dict(id=kid, e3a=res, amplitude=np.abs(Ch[:, 0]).tolist()))
     # E3b am Triphasik-Punkt: Zelllagen je Replikat gemeinsam für Messung und Vorhersage, T kommt nicht vor
@@ -342,9 +350,17 @@ def e3_auswerten(K, E0, idxA, idxB0, T, xy, dd, u_dd, phi_mess, triphasik, profi
         Rpb, Rmb = moment(yb[..., 0], xy_b)
         Rphb, Rmhb = moment(yhb[..., 0], xy_b)
         qb = np.abs(Rmb - Rmhb) / np.abs(Rphb)
-        e3b = dict(id=triphasik, q_Z=q, u_q_Z=float(np.nanstd(qb, ddof=1)),
+        if T_zieh is None:
+            u_q_fest = float(np.nanstd(qb, ddof=1))
+        else:
+            Rpf, Rmf = moment(yb[..., 0], xy)
+            Rphf, Rmhf = moment(yhb[..., 0], xy)
+            u_q_fest = float(np.std(np.abs(Rmf - Rmhf) / np.abs(Rphf), ddof=1))
+        e3b = dict(id=triphasik, q_Z=q, u_q_Z=float(np.nanstd(qb, ddof=1)), u_q_Z_ohne_T=u_q_fest,
                    verhaeltnis_messung=float(abs(Rm) / abs(Rp)), verhaeltnis_vorhersage=float(abs(Rmh) / abs(Rph)))
     out = dict(e3a=erg, e3b=e3b, T_hinweis='T aus Statik (P0.1), Kette und 1 FG; Kippmoden vernachlässigt',
+               u_ohne_T_hinweis='u_ohne_T_grad, u_q_Z_ohne_T: Diagnose aus denselben Replikaten mit festem T(kω) und '
+                                'festen Zelllagen (Lesart vor Korrektur E); nicht Teil der Bewertung',
                k2_hinweis='k = 2: Abweichung gegen 2·φ̄ⱼ^P auf Ebene der Harmonischen modulo 360°, dann halbiert; '
                           'Werte in (−90°, 90°], lokaler Bezug zur Encoder-Profilphase; die Profilphase ist aus k = 2 '
                           'nur bis auf 180° bestimmt (keine Auflösung einer globalen 180°-Mehrdeutigkeit); zusätzliche '

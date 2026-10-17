@@ -68,13 +68,14 @@ def _beide(auftrag):
     if not behalten:
         import shutil
         shutil.rmtree(ziel, ignore_errors=True)
-    return {e: (_u_median(erg), {h: erg[h]['ausgang'] for h in ('H1', 'H2', 'H1Z', 'H4')})
-            for e, erg in (('Z', rz['ergebnis']), ('H', rh['ergebnis']))}
+    return {e: (_u_median(erg), {h: erg[h]['ausgang'] for h in ('H1', 'H2', 'H1Z', 'H4')},
+                erg['herkunft'].get('verarbeitung')) for e, erg in (('Z', rz['ergebnis']), ('H', rh['ergebnis']))}
 
 
 def vergleich_verrauscht(sid, stufe, profil, n_kampagnen, seed_basis, verzeichnis, plan, n_min=None, werkzeug8=None,
                          prozesse=1, behalten=False):
-    """Getrennte Kampagnen auf Ebene Z (Dateikette mit Stufe 1) und Ebene H; Mediane von u_c und Raten.
+    """Getrennte Kampagnen auf Ebene Z (Dateikette mit Stufe 1) und Ebene H; Mediane von u_c und Raten, dazu Seeds,
+    Ausgänge und Verarbeitungsstand (herkunft.verarbeitung) je Kampagne und Ebene.
     Die Rohdaten der Ebene Z werden nach der Auswertung gelöscht, außer behalten=True."""
     auftraege = [(sid, stufe, profil, plan, zufall.unterseed(seed_basis, 'ebenen', sid, stufe, i), n_min, werkzeug8,
                   os.path.join(verzeichnis, f'z{i:03d}'), behalten) for i in range(n_kampagnen)]
@@ -94,6 +95,7 @@ def vergleich_verrauscht(sid, stufe, profil, n_kampagnen, seed_basis, verzeichni
         teile = [_beide(a) for a in auftraege]
     u = {e: [t[e][0] for t in teile] for e in ('Z', 'H')}
     aus = {e: [t[e][1] for t in teile] for e in ('Z', 'H')}
+    vb = {e: [t[e][2] for t in teile] for e in ('Z', 'H')}
     kw = dict(szenario=sid, stufe=stufe, profil=profil.id)
     med = {e: np.nanmedian(np.stack(u[e]), 0) for e in u}
     rel = (med['Z'] - med['H']) / med['H']
@@ -106,5 +108,6 @@ def vergleich_verrauscht(sid, stufe, profil, n_kampagnen, seed_basis, verzeichni
     return dict(szenario=sid, stufe=stufe, n=n_kampagnen, u_c_median=dict(Z=dict(zip(GROESSEN, med['Z'].tolist())),
                                                                          H=dict(zip(GROESSEN, med['H'].tolist()))),
                 u_c_relativ=dict(zip(GROESSEN, rel.tolist())), u_c_innerhalb_5_prozent=bool(np.all(np.abs(rel) <= 0.05)),
-                raten=raten, art='statistisch (verrauscht, getrennte Zufallsströme)',
+                raten=raten, seeds=[a[4] for a in auftraege], ausgaenge=aus, verarbeitung=vb,
+                art='statistisch (verrauscht, getrennte Zufallsströme)',
                 lesart='Entwicklungsdiagnostik' if n_kampagnen < 1000 else 'normative Kampagnenzahl')

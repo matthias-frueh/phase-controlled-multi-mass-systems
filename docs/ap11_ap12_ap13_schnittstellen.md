@@ -165,7 +165,11 @@ Replikatzahlen, Codestand, Verarbeitungsstand der Laufzusammenfassungen). Dazu e
 Ergebnisdateien enthalten keine Zeitstempel. Ist der Welch-Test der Nullkontrolle nicht definiert (beide Varianzen
 null) oder eine Rechengröße nicht endlich, steht dort `pruefbar = false` mit Grund, Differenz und Stichprobenzahlen,
 ohne Testaussage. E3 trägt `t_unsicherheit` (gezogen, Anteil unzulässiger Ziehungen mit Gründen, nicht gezogene
-Eingänge, Näherungen) und `k2_hinweis` (k = 2 lokal, nur bis auf 180° bestimmt).
+Eingänge, Näherungen) und `k2_hinweis` (k = 2 lokal, nur bis auf 180° bestimmt). Je Prüfgröße steht als Diagnose
+zusätzlich u ohne T-Anteil (`u_ohne_T_grad` in E3a, `u_q_Z_ohne_T` in E3b: dieselben Replikate, T und Zelllagen fest);
+die Bewertung nutzt sie nicht. Der Kurzbefund des Harness (`kampagnen.kurzbefund`) behält davon Bewertung, Status,
+z_B, m, die Prüfgrößen (|Δφ_Z|, u, u ohne T-Anteil bzw. q_Z, u, u ohne T-Anteil) und die T-Diagnose; fehlt E3 ganz,
+nennt `E3_grund` den Grund.
 
 ## 9 Wahrheit getrennt
 

@@ -7,9 +7,10 @@
   generator                   AP-13-Generator: frische Ausgabestruktur eingang/ und getrennt wahrheit/
   ap11 kalibrierung|teil-b    AP-11: Kalibrierung aus P0-Daten; Pilotanalyse und Teil B
   ap12 stufe1|auswerten       AP-12: Rohdaten → Laufzusammenfassungen; Zusammenfassungen → Ergebnis
-  harness bewerten|kampagnen|kalibrierung|pruefstand|kriterien|pruefsatz|matrix
+  harness bewerten|kampagnen|kalibrierung|pruefstand|kriterien|pruefsatz|matrix|neulauf
                               AP-13: Bewertung gegen die Wahrheit, Kampagnen, c-Kalibrierung, gezielte Läufe,
-                              Kriterienmatrix, Software-Prüfsatz, Auftragsliste der großen Matrix (ohne Start)
+                              Kriterienmatrix, Software-Prüfsatz, Auftragsliste der großen Matrix (ohne Start),
+                              gezielte Neuläufe K12/K19/E3 mit Checkpoints und Alt-Neu-Vergleich
   kette                       Generator → AP-11 → (Stufe 1) → Teil B → AP-12 → Bewertung aus einer frischen Struktur
 
 Profil: --profil ID (AF-2026-10 oder ENTW-2026-10) mit --red name=wert,… (verringerte Replikat- bzw.
@@ -183,7 +184,8 @@ def _ap12(ap, argv):
 
 
 # ── Harness ──────────────────────────────────────────────────────────────────────────────────────────
-@befehl('harness', 'AP-13-Harness: bewerten, kampagnen, kalibrierung, pruefstand, kriterien, pruefsatz, matrix')
+@befehl('harness', 'AP-13-Harness: bewerten, kampagnen, kalibrierung, pruefstand, kriterien, pruefsatz, matrix, '
+                   'neulauf')
 def _harness(ap, argv):
     sp = ap.add_subparsers(dest='was', required=True)
     b = sp.add_parser('bewerten')
@@ -229,6 +231,17 @@ def _harness(ap, argv):
     m.add_argument('--kampagnen', type=int, required=True)
     m.add_argument('--stufen', default='L0,L1,L2,L3,L4,L5')
     m.add_argument('--seed', type=int, required=True)
+    n = sp.add_parser('neulauf', help='gezielte Neuläufe nach Auftragsliste (harness.neulauf)')
+    n.add_argument('--auftrag', default=None, help='Auftragsliste (Vorgabe: docs/ap13_neulaeufe_2026-10-17/'
+                                                    'auftrag.json)')
+    n.add_argument('--nur', default=None, help='nur diese Auftrags-IDs, kommagetrennt')
+    n.add_argument('--prozesse', type=int, default=None, help='Arbeitsprozesse je Auftrag (Vorgabe: Auftragsliste)')
+    n.add_argument('--ausgabe', default=None, help='Checkpoint-Verzeichnis (Vorgabe: Auftragsliste)')
+    g = n.add_mutually_exclusive_group()
+    g.add_argument('--vorbereiten', default=None, metavar='VOLLSTAENDIGE_AUSGABE',
+                   help='Auftragsliste, Werkzeug-8-Dateien und Altstandsauszug aus der vollständigen Ausgabe des '
+                        'Altlaufs (Pfad ohne Endung) erzeugen')
+    g.add_argument('--bericht', action='store_true', help='Alt-Neu-Vergleich aus den Checkpoints schreiben')
     a = ap.parse_args(argv)
     from .harness import dateien, kalibrierung, kampagnen, kriterien, pruefsatz, pruefstand
     if a.was == 'bewerten':
@@ -297,6 +310,19 @@ def _harness(ap, argv):
                                              'Prüfsimulationen von c je Stufe'))
         print(f'{len(auftr)} Aufträge × {a.kampagnen} Kampagnen, geschätzt {sek / 3600:.0f} Kernstunden; '
               f'nicht gestartet → {a.ausgabe}.json')
+    elif a.was == 'neulauf':
+        from .harness import neulauf
+        pfad = a.auftrag or neulauf.AUFTRAG
+        if a.vorbereiten:
+            r = neulauf.vorbereiten(a.vorbereiten)
+            print(f'Auftragsliste {pfad}: {len(r["auftraege"])} Aufträge, {r["umfang"]["e3_pruefkampagnen"]} '
+                  'E3-Prüfkampagnen; Werkzeug 8 ' + ', '.join(r['werkzeug8']))
+        elif a.bericht:
+            from .harness import neulauf_vergleich
+            z, _ = neulauf_vergleich.schreiben(pfad, a.ausgabe)
+            print(f'Alt-Neu-Vergleich: {z["umfang"]}; Laufzeiten {z["laufzeit_s"]}')
+        else:
+            print(_json(neulauf.ausfuehren(pfad, a.nur.split(',') if a.nur else None, a.prozesse, a.ausgabe)))
     return 0
 
 

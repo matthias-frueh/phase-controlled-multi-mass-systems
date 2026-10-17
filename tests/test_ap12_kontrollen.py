@@ -276,6 +276,30 @@ def test_e3_unsicherheit_aus_t_gleich_linearer_referenz(fall):
     assert max(_u(_e3(K, T0, None, 4000)).values()) < 1e-9               # ohne T-Anteil nur Rundungsrest
 
 
+def test_e3_u_ohne_T_diagnose_gleich_festem_T_aus_denselben_replikaten():
+    """Diagnose „u ohne T-Anteil“ (AP-13-Neuläufe): aus denselben Replikaten mit festem T und festen Zelllagen gleich
+    u einer Auswertung ohne T-Ziehungen; mit unsicherem T ist u selbst größer. Der Kurzbefund trägt beide Spalten."""
+    from pcmms_auswertung.harness import kampagnen
+    T0 = _t_nenn()
+    K = {'S118': _konfig(T0, delta=(0, 0.05, -0.03), rauschen=2e-3, seed=1), 'S120': _konfig(T0, rauschen=2e-3,
+                                                                                            seed=2)}
+    Ck = [np.zeros((3, 3)) for _ in range(3)]
+    Ck[1][1, 1] = (5e-5) ** 2
+    Cg = np.zeros((9, 9))
+    Cg[3:, 3:] = np.eye(6) * (5e-4) ** 2
+    tz = kontrollen.t_ziehungen(_beschr(C_gxy=Cg, C_kette=Ck), np.random.default_rng(7), 800)
+    mit, fest = _e3(K, T0, tz, 800, triphasik='S120'), _e3(K, T0, None, 800, triphasik='S120')
+    for em, ef in zip(mit['e3a'], fest['e3a']):
+        for m in ('modul2', 'modul3'):
+            assert em['e3a'][m]['u_ohne_T_grad'] == pytest.approx(ef['e3a'][m]['u_grad'], abs=1e-12)
+            assert ef['e3a'][m]['u_ohne_T_grad'] == ef['e3a'][m]['u_grad']
+            assert em['e3a'][m]['u_grad'] > 1.5 * em['e3a'][m]['u_ohne_T_grad']
+    assert mit['e3b']['u_q_Z_ohne_T'] == pytest.approx(fest['e3b']['u_q_Z'], abs=1e-12)
+    kb = kampagnen._e3_kurz(mit)
+    assert kb['e3a'].shape == (4, 3) and kb['e3a'][0, 2] == mit['e3a'][0]['e3a']['modul2']['u_ohne_T_grad']
+    assert kb['e3b'][1] == mit['e3b']['u_q_Z'] and kb['t']['gezogen'] and kb['bewertung'] == mit['bewertung']
+
+
 def test_e3_gemeinsamer_faktor_hebt_sich_in_der_modulphase_auf():
     """Nur f_n, ζ unsicher: H(kω) ist ein gemeinsamer komplexer Faktor aller Zellen und Module und ändert u(Δφ) nicht;
     E3b (ohne T, exakte Superposition) bleibt ebenfalls unverändert."""
