@@ -171,5 +171,6 @@ def test_e3_nenner_und_gruende_ohne_umetikettierung():
                                                                                           / 4000)))
     assert p['t_ziehungen']['kampagnen_mit_unzulaessigen']['zaehler'] == 1
     assert p['gegenprobe_regel'] == dict(geprueft=2, gleich=2)
+    assert p['bestimmende_pruefgroessen'] == {'auffällig': {'E3a': 1}, 'unbestimmt': {'E3a': 1}}
     # alte Lesart (u ohne T-Anteil): die zweite Kampagne wird mit kleinerem u unauffällig
     assert p['alte_lesart_je_kampagne'][:2] == ['auffällig', 'unauffällig']

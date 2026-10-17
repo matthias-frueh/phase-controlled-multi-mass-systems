@@ -95,9 +95,25 @@ def _zaehle(werte):
     return dict(sorted(out.items()))
 
 
+def begrenzend(e3, schwellen):
+    """Welche Prüfgrößen (E3a-Phasen, E3b-Moment) die Bewertung bestimmen: bei „auffällig“ die über der Schwelle
+    (x − z_B·u > s), bei „unbestimmt“ die, die „unauffällig“ verfehlen (x + 1,645·u > s). Rückgabe 'E3a', 'E3b',
+    'beide' oder None."""
+    if not e3 or e3.get('bewertung') not in ('auffällig', 'unbestimmt'):
+        return None
+    p = _pruefgroessen(e3, 1)
+    zB = float(stats.norm.ppf(1 - 0.05 / len(p)))
+    if e3['bewertung'] == 'auffällig':
+        f = {s for x, u, s in p if x - zB * u > schwellen[s]}
+    else:
+        f = {s for x, u, s in p if x + 1.645 * u > schwellen[s]}
+    return {frozenset({'phase_grad'}): 'E3a', frozenset({'q_tol'}): 'E3b'}.get(frozenset(f), 'beide' if f else None)
+
+
 def e3_punkt(lauf, schwellen):
     """E3 eines Szenariopunkts: Raten über alle Kampagnen, Gründe ohne dreiwertige Bewertung, Diagnose der
-    Unsicherheiten und T-Ziehungen, alte Lesart (u ohne T-Anteil) und die Gegenprobe der Regel."""
+    Unsicherheiten, der bestimmenden Prüfgrößen und der T-Ziehungen, alte Lesart (u ohne T-Anteil) und die Gegenprobe
+    der Regel."""
     bf = lauf['befunde']
     n = len(bf)
     bew = [(b.get('E3') or {}).get('bewertung') for b in bf]
@@ -116,6 +132,8 @@ def e3_punkt(lauf, schwellen):
     geprueft = [(x, y) for x, y in zip(bew, nach) if x is not None]
     alte_lesart = {k: _rate(sum(x == k for x in alt_l), n) for k in KATEGORIEN}
     alte_lesart[OHNE] = _rate(sum(x is None for x in alt_l), n)
+    bestimmend = {k: _zaehle(begrenzend(b.get('E3'), schwellen) for b, x in zip(bf, bew) if x == k)
+                  for k in ('auffällig', 'unbestimmt')}
     e3s = [b['E3'] for b in bf if b.get('E3')]
     A = [np.asarray(e['e3a'], float).reshape(-1, 3) for e in e3s if e.get('e3a') is not None]
     A = np.concatenate(A) if A else np.zeros((0, 3))
@@ -149,6 +167,7 @@ def e3_punkt(lauf, schwellen):
         modell=_zaehle(x.get('modell') for x in gez), format=_zaehle(x.get('format') for x in gez))
     return dict(n=n, raten=raten, ohne_dreiwertige_bewertung=gruende, alte_lesart=alte_lesart,
                 gegenprobe_regel=dict(geprueft=len(geprueft), gleich=sum(x == y for x, y in geprueft)),
+                bestimmende_pruefgroessen=bestimmend,
                 unsicherheit=unsicherheit, t_ziehungen=ziehungen, bewertungen=bew, alte_lesart_je_kampagne=alt_l)
 
 
@@ -422,19 +441,26 @@ def tabellen(z):
         for kl, r in g.items():
             zl.append(f'| {pid} | {_zn(x["raten"][OHNE])} | {kl} | {r["zaehler"]} |')
     t['e3_gruende'] = '\n'.join(zl)
-    zl = ['| Punkt | T gezogen | unzulässige Ziehungen | Median u E3a mit / ohne T [°] | Median u/u ohne T (E3a) | '
-          'Median u(q_Z) mit / ohne T | alte Lesart (u ohne T) a/u/b | gleich alt |',
-          '|---|---|---|---|---|---|---|---|']
+    zl = ['| Punkt | Kampagnen mit T-Ziehungen | unzulässige Ziehungen | Median u E3a mit / ohne T-Anteil [°] | '
+          'u/u ohne T (E3a): Median, Max. | Median u(q_Z) mit / ohne T-Anteil |', '|---|---|---|---|---|---|']
     for pid, x in z['e3'].items():
         u, tz = x['unsicherheit'], x['t_ziehungen']
         ua, ub = u['e3a'], u['e3b']
-        al = x['alte_lesart']
+        v = ua['verhaeltnis_u_zu_u_ohne_T']
         zl.append(f'| {pid} | {_zn(tz["kampagnen_mit_ziehungen"])} | {_zn(tz["unzulaessige_ziehungen"])} | '
-                  f'{_m(ua["u_grad"])} / {_m(ua["u_ohne_T_grad"])} | {_m(ua["verhaeltnis_u_zu_u_ohne_T"], 2)} | '
-                  f'{_m(ub["u_q_Z"], 4)} / {_m(ub["u_q_Z_ohne_T"], 4)} | '
-                  f'{al["auffällig"]["zaehler"]}/{al["unauffällig"]["zaehler"]}/{al["unbestimmt"]["zaehler"]} | '
-                  f'{_ja(x["alte_lesart_gleich_alt"])} |')
+                  f'{_m(ua["u_grad"], 4)} / {_m(ua["u_ohne_T_grad"], 4)} | '
+                  f'{_m(v, 4)}, {_mx(v)} | '
+                  f'{_m(ub["u_q_Z"], 6)} / {_m(ub["u_q_Z_ohne_T"], 6)} |')
     t['e3_diagnose'] = '\n'.join(zl)
+    zl = ['| Punkt | historisch auff. / unauff. / unbest. | alte Lesart nachgerechnet (u ohne T-Anteil) | gleich | '
+          'bestimmend bei „auffällig“ | bestimmend bei „unbestimmt“ |', '|---|---|---|---|---|---|']
+    for pid, x in z['e3'].items():
+        al, v = x['alte_lesart'], x['vergleich']
+        b = x['bestimmende_pruefgroessen']
+        zl.append(f'| {pid} | ' + ' / '.join(str(v[c]['alt']['zaehler']) for c in KATEGORIEN) + ' | ' +
+                  ' / '.join(str(al[c]['zaehler']) for c in KATEGORIEN) + f' | {_ja(x["alte_lesart_gleich_alt"])} | '
+                  f'{_bestimmend(b["auffällig"])} | {_bestimmend(b["unbestimmt"])} |')
+    t['e3_lesart'] = '\n'.join(zl)
     zl = ['| Punkt | H1 bestätigt alt / neu | H2 bestätigt alt / neu | H1 ∧ H2 alt / neu | ungültig G1, G4 alt / neu | '
           'Kontrollen gleich | Seeds bzw. Kohorte |', '|---|---|---|---|---|---|---|']
     for pid, x in z['e3'].items():
@@ -455,12 +481,20 @@ def _d(x, d=3):
     return '–' if x is None else f'{x:+.{d}f}'
 
 
+def _bestimmend(d):
+    return '–' if not d else ', '.join(f'{k} {v}' for k, v in d.items())
+
+
 def _ja(x):
     return '–' if x is None else ('ja' if x else 'nein')
 
 
 def _m(v, d=3):
     return '–' if not v else f'{v["median"]:.{d}f}'
+
+
+def _mx(v, d=3):
+    return '–' if not v else f'{v["max"]:.{d}f}'
 
 
 def kampagnenuebersicht(pfad, erg, ck):
@@ -503,10 +537,8 @@ def bericht_einsetzen(pfad, tab):
     with open(pfad, encoding='utf-8') as f:
         text = f.read()
     for name, inhalt in tab.items():
-        muster = re.compile(rf'(<!-- tabelle:{name} -->\n).*?(\n<!-- /tabelle -->)', re.S)
-        if not muster.search(text):
-            continue
-        text = muster.sub(lambda m: m.group(1) + inhalt + m.group(2), text)
+        muster = re.compile(rf'(<!-- tabelle:{name} -->).*?(<!-- /tabelle -->)', re.S)   # Blöcke nicht geschachtelt
+        text = muster.sub(lambda m: f'{m.group(1)}\n{inhalt}\n{m.group(2)}', text)
     with open(pfad, 'w', encoding='utf-8') as f:
         f.write(text)
 
