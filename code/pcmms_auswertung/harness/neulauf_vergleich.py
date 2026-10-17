@@ -275,7 +275,8 @@ def k19(erg, alt):
     return dict(n=rv['n'], seeds=rv['seeds'], u_c_median=dict(alt=alt['u_c_median'], neu=rv['u_c_median']),
                 u_c_relativ=dict(alt=alt['u_c_relativ'], neu=rv['u_c_relativ']),
                 u_c_innerhalb_5_prozent=dict(alt=alt['u_c_innerhalb_5_prozent'], neu=rv['u_c_innerhalb_5_prozent']),
-                ebene_H_gleich_alt=all(rv['u_c_median']['H'][g] == alt['u_c_median']['H'][g] for g in GROESSEN),
+                gleich_alt={e: all(rv['u_c_median'][e][g] == alt['u_c_median'][e][g] for g in GROESSEN)
+                            for e in ('Z', 'H')},
                 raten=raten, alle_raten_innerhalb_2se_neu=all(x['innerhalb_2se_neu'] is not False
                                                                for x in raten.values()),
                 ausgaenge=rv['ausgaenge'], verarbeitung=vb, meta=erg['meta'], lesart=rv['lesart'])
@@ -418,8 +419,8 @@ def tabellen(z):
         zl.append(f'| {g} | {ua["Z"][g]:.6g} | {ua["H"][g]:.6g} | {100 * k["u_c_relativ"]["alt"][g]:+.2f} % | '
                   f'{un["Z"][g]:.6g} | {un["H"][g]:.6g} | {100 * k["u_c_relativ"]["neu"][g]:+.2f} % |')
     zl += ['', f'Alle |rel.| ≤ 5 %: alt {"ja" if k["u_c_innerhalb_5_prozent"]["alt"] else "nein"}, neu '
-               f'{"ja" if k["u_c_innerhalb_5_prozent"]["neu"] else "nein"}. Ebene H neu bitgleich alt: '
-               f'{"ja" if k["ebene_H_gleich_alt"] else "nein"}.', '',
+               f'{"ja" if k["u_c_innerhalb_5_prozent"]["neu"] else "nein"}. u_c-Mediane neu bitgleich alt: Ebene Z '
+               f'{_ja(k["gleich_alt"]["Z"])}, Ebene H {_ja(k["gleich_alt"]["H"])}.', '',
            '| Ausgang | Z alt | H alt | Z neu | H neu | innerhalb 2 SE alt / neu |', '|---|---|---|---|---|---|']
     for key, x in k['raten'].items():
         zl.append(f'| {key} | {_zn(x["Z_alt"])} | {_zn(x["H_alt"])} | {_rz(x["Z_neu"], 2)} | {_rz(x["H_neu"], 2)} | '
