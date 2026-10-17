@@ -1,0 +1,3077 @@
+{
+ "inhalt": {
+  "code_version": {
+   "git": "7a259efe3f2f9545cd487af3d2ddb8a20a1e8b34",
+   "paket": "0.1.0"
+  },
+  "konfiguration": {
+   "k06_stufen": [
+    "L0",
+    "L2",
+    "L4"
+   ],
+   "n_ebenen": 4,
+   "n_eigen": 30,
+   "n_k06": 40,
+   "n_kal": 200,
+   "n_kal_v1": 60,
+   "n_min": 18,
+   "n_planung": [
+    4,
+    4
+   ],
+   "n_pruef": 200,
+   "n_pruef_v1": 60,
+   "n_szenario": 40,
+   "n_szenario_v1": 30,
+   "plan": {
+    "n0": 20,
+    "n_bloecke": 24,
+    "n_pilot": 20
+   },
+   "planung_kandidaten": [
+    18,
+    24
+   ],
+   "planung_max_aufrufe": 2,
+   "profil_reduktion": {
+    "bootstrap_B": 1000,
+    "eps_ctrl_datensaetze": 1000,
+    "h3_mc": 1000
+   },
+   "referenz": [
+    [
+     "N01-A4",
+     "L2"
+    ],
+    [
+     "A04-R2",
+     "L1"
+    ],
+    [
+     "A04-R4",
+     "L1"
+    ]
+   ],
+   "seed": 20261016,
+   "stufe": "L1",
+   "zeltfit_fits": 4000
+  },
+  "laufzeit_s": {
+   "ebenen": 286.9,
+   "eigene": 422.9,
+   "k06": 211.2,
+   "kalibrierung_a4": 1064.1,
+   "kalibrierung_v1": 686.0,
+   "planung": 140.3,
+   "pruefsatz": 9.7,
+   "referenz": 23.6,
+   "reproduzierbarkeit": 61.6,
+   "s3": 0.2,
+   "szenarien_a4": 1294.2,
+   "szenarien_v1": 767.1,
+   "wahrheit": 15.0,
+   "zeltfit": 471.0
+  },
+  "profil": "ENTW-2026-10+red(bootstrap_B=1000,e3_mc=1000,eps_ctrl_datensaetze=1000,h2_replikate=1000,h3_mc=1000)",
+  "profil_sha256": "49dc74abca52b2c5e4ae8f6d2e1c53dc468205b01b9f65270b86c27e91114352",
+  "schritte": {
+   "ebenen": {
+    "rauschfrei": {
+     "abweichung": {
+      "N_mittel_zellen": 2.9999999950902634e-07,
+      "Nk_zellen": 1.4071015310889483e-05,
+      "min_roh_zellen": 3.839520821280473e-07,
+      "zeiger": 0.0025132741163405295
+     },
+     "art": "physikalisch-numerisch (rauschfrei)",
+     "gleich": true,
+     "k_max": 9,
+     "laufarten": [
+      "K",
+      "L",
+      "R"
+     ],
+     "n_laeufe": 13,
+     "n_zyklen": 10,
+     "schranken": {
+      "N_mittel_zellen": 2e-06,
+      "Nk_zellen": 3e-05,
+      "min_roh_zellen": 0.0002,
+      "zeiger": 0.01
+     },
+     "stufe": "L1",
+     "szenario": "N01-A4"
+    },
+    "verrauscht": {
+     "n": 4,
+     "raten": {
+      "H1: bestätigt": {
+       "H": "4/4",
+       "Z": "4/4",
+       "innerhalb_2se": true
+      },
+      "H1: falsifiziert": {
+       "H": "0/4",
+       "Z": "0/4",
+       "innerhalb_2se": true
+      },
+      "H1: nicht entscheidbar": {
+       "H": "0/4",
+       "Z": "0/4",
+       "innerhalb_2se": true
+      },
+      "H1Z: bestätigt": {
+       "H": "4/4",
+       "Z": "4/4",
+       "innerhalb_2se": true
+      },
+      "H1Z: falsifiziert": {
+       "H": "0/4",
+       "Z": "0/4",
+       "innerhalb_2se": true
+      },
+      "H1Z: nicht entscheidbar": {
+       "H": "0/4",
+       "Z": "0/4",
+       "innerhalb_2se": true
+      },
+      "H2: bestätigt": {
+       "H": "4/4",
+       "Z": "4/4",
+       "innerhalb_2se": true
+      },
+      "H2: falsifiziert": {
+       "H": "0/4",
+       "Z": "0/4",
+       "innerhalb_2se": true
+      },
+      "H2: nicht entscheidbar": {
+       "H": "0/4",
+       "Z": "0/4",
+       "innerhalb_2se": true
+      },
+      "H4: bestätigt": {
+       "H": "4/4",
+       "Z": "4/4",
+       "innerhalb_2se": true
+      },
+      "H4: falsifiziert": {
+       "H": "0/4",
+       "Z": "0/4",
+       "innerhalb_2se": true
+      },
+      "H4: nicht entscheidbar": {
+       "H": "0/4",
+       "Z": "0/4",
+       "innerhalb_2se": true
+      }
+     },
+     "u_c_innerhalb_5_prozent": true,
+     "u_c_relativ": {
+      "F_min": 0.013931983395534493,
+      "Im N1": 0.010375002112388065,
+      "Im N2": -0.004135856817093717,
+      "Im N3": -0.02538776708484468,
+      "Re N1": -0.014961151257189467,
+      "Re N2": 0.0005788000248757581,
+      "Re N3": 0.00024044863193282696
+     }
+    }
+   },
+   "eigene": {
+    "A07-hertz50/L1": {
+     "abbruch": {
+      "S1_kandidaten": "26/30",
+      "S2": "0/30",
+      "S4": "0/30"
+     },
+     "gueltigkeit": {
+      "G1": "128/18900",
+      "G4": "2056/18900"
+     },
+     "laufzeit_je_kampagne_s": 3.3314,
+     "raten": {
+      "E3: None": "30/30",
+      "H1 Sensitivität faktor_0_1: bestätigt": "0/30",
+      "H1 Sensitivität faktor_0_1: falsifiziert": "30/30",
+      "H1 Sensitivität faktor_0_1: nicht entscheidbar": "0/30",
+      "H1 Sensitivität fassung_A: bestätigt": "8/30",
+      "H1 Sensitivität fassung_A: falsifiziert": "0/30",
+      "H1 Sensitivität fassung_A: nicht entscheidbar": "22/30",
+      "H1 und H2 bestätigt": "8/30",
+      "H1: Zusatz Abweichung nachgewiesen, Relevanz offen": "22/30",
+      "H1: Zusatz Abweichung nachgewiesen, innerhalb der Äquivalenzgrenze": "8/30",
+      "H1: Zusatz Drift der Einzelmodulbasis": "30/30",
+      "H1: bestätigt": "8/30",
+      "H1: falsifiziert": "0/30",
+      "H1: nicht entscheidbar": "22/30",
+      "H1: nicht entscheidbar, Grund Datenlage": "22/30",
+      "H1Z: bestätigt": "8/30",
+      "H1Z: falsifiziert": "0/30",
+      "H1Z: nicht entscheidbar": "22/30",
+      "H1Z: nicht entscheidbar, Grund Datenlage": "22/30",
+      "H2: bestätigt": "9/30",
+      "H2: falsifiziert": "0/30",
+      "H2: nicht entscheidbar": "21/30",
+      "H2: nicht entscheidbar, Grund Datenlage": "21/30",
+      "H3: Zusatz Abweichung nachgewiesen, Relevanz offen": "6/30",
+      "H3: Zusatz Abweichung nachgewiesen, innerhalb der Äquivalenzgrenze": "24/30",
+      "H3: bestätigt": "24/30",
+      "H3: falsifiziert": "0/30",
+      "H3: nicht entscheidbar": "6/30",
+      "H3: nicht entscheidbar, Grund Datenlage": "6/30",
+      "H4: bestätigt": "0/30",
+      "H4: falsifiziert": "30/30",
+      "H4: nicht entscheidbar": "0/30",
+      "mindestens ein |z⁰| > c (H1)": "30/30"
+     },
+     "u_c_median": {
+      "F_min": 0.001139957118513602,
+      "Im N1": 0.0015421365044433033,
+      "Im N2": 0.0005795784287938137,
+      "Im N3": 0.0002684997870574371,
+      "Re N1": 0.001517769078244953,
+      "Re N2": 0.0006168889728675472,
+      "Re N3": 0.00042347539168134153
+     },
+     "wahrheit": {
+      "klasse": "R1",
+      "r_max_rel": 0.4995273708897554
+     }
+    },
+    "C03-GF1/L1": {
+     "abbruch": {
+      "S1_kandidaten": "22/30",
+      "S2": "0/30",
+      "S4": "0/30"
+     },
+     "gueltigkeit": {
+      "G1": "129/18900",
+      "G4": "692/18900"
+     },
+     "laufzeit_je_kampagne_s": 7.856533333333332,
+     "raten": {
+      "E3: unauffällig": "3/30",
+      "E3: unbestimmt": "27/30",
+      "H1 Sensitivität faktor_0_1: bestätigt": "24/30",
+      "H1 Sensitivität faktor_0_1: falsifiziert": "0/30",
+      "H1 Sensitivität faktor_0_1: nicht entscheidbar": "6/30",
+      "H1 Sensitivität fassung_A: bestätigt": "24/30",
+      "H1 Sensitivität fassung_A: falsifiziert": "0/30",
+      "H1 Sensitivität fassung_A: nicht entscheidbar": "6/30",
+      "H1 und H2 bestätigt": "24/30",
+      "H1: Zusatz Drift der Einzelmodulbasis": "1/30",
+      "H1: bestätigt": "24/30",
+      "H1: falsifiziert": "0/30",
+      "H1: nicht entscheidbar": "6/30",
+      "H1: nicht entscheidbar, Grund Datenlage": "6/30",
+      "H1Z: bestätigt": "24/30",
+      "H1Z: falsifiziert": "0/30",
+      "H1Z: nicht entscheidbar": "6/30",
+      "H1Z: nicht entscheidbar, Grund Datenlage": "6/30",
+      "H2: bestätigt": "24/30",
+      "H2: falsifiziert": "0/30",
+      "H2: nicht entscheidbar": "6/30",
+      "H2: nicht entscheidbar, Grund Datenlage": "6/30",
+      "H3: Zusatz Abweichung nachgewiesen, Relevanz offen": "1/30",
+      "H3: Zusatz Abweichung nachgewiesen, innerhalb der Äquivalenzgrenze": "29/30",
+      "H3: bestätigt": "29/30",
+      "H3: falsifiziert": "0/30",
+      "H3: nicht entscheidbar": "1/30",
+      "H3: nicht entscheidbar, Grund Datenlage": "1/30",
+      "H4: bestätigt": "30/30",
+      "H4: falsifiziert": "0/30",
+      "H4: nicht entscheidbar": "0/30",
+      "mindestens ein |z⁰| > c (H1)": "1/30"
+     },
+     "u_c_median": {
+      "F_min": 0.001148846250333594,
+      "Im N1": 0.0016960139741650766,
+      "Im N2": 0.0005796027284935979,
+      "Im N3": 0.00020569696049312886,
+      "Re N1": 0.0017271820138725416,
+      "Re N2": 0.0006045632906821077,
+      "Re N3": 0.0003314030619395156
+     },
+     "wahrheit": {
+      "klasse": "R0",
+      "r_max_rel": 4.442403032450186e-15
+     }
+    },
+    "C03-GF5/L1": {
+     "abbruch": {
+      "S1_kandidaten": "24/30",
+      "S2": "0/30",
+      "S4": "0/30"
+     },
+     "gueltigkeit": {
+      "G1": "119/18900",
+      "G4": "777/18900"
+     },
+     "laufzeit_je_kampagne_s": 7.8412,
+     "raten": {
+      "E3: unauffällig": "2/30",
+      "E3: unbestimmt": "28/30",
+      "H1 Sensitivität faktor_0_1: bestätigt": "26/30",
+      "H1 Sensitivität faktor_0_1: falsifiziert": "0/30",
+      "H1 Sensitivität faktor_0_1: nicht entscheidbar": "4/30",
+      "H1 Sensitivität fassung_A: bestätigt": "26/30",
+      "H1 Sensitivität fassung_A: falsifiziert": "0/30",
+      "H1 Sensitivität fassung_A: nicht entscheidbar": "4/30",
+      "H1 und H2 bestätigt": "26/30",
+      "H1: bestätigt": "26/30",
+      "H1: falsifiziert": "0/30",
+      "H1: nicht entscheidbar": "4/30",
+      "H1: nicht entscheidbar, Grund Datenlage": "4/30",
+      "H1Z: bestätigt": "26/30",
+      "H1Z: falsifiziert": "0/30",
+      "H1Z: nicht entscheidbar": "4/30",
+      "H1Z: nicht entscheidbar, Grund Datenlage": "4/30",
+      "H2: bestätigt": "26/30",
+      "H2: falsifiziert": "0/30",
+      "H2: nicht entscheidbar": "4/30",
+      "H2: nicht entscheidbar, Grund Datenlage": "4/30",
+      "H3: Zusatz Abweichung nachgewiesen, Relevanz offen": "3/30",
+      "H3: Zusatz Abweichung nachgewiesen, innerhalb der Äquivalenzgrenze": "27/30",
+      "H3: bestätigt": "27/30",
+      "H3: falsifiziert": "0/30",
+      "H3: nicht entscheidbar": "3/30",
+      "H3: nicht entscheidbar, Grund Datenlage": "3/30",
+      "H4: bestätigt": "30/30",
+      "H4: falsifiziert": "0/30",
+      "H4: nicht entscheidbar": "0/30",
+      "mindestens ein |z⁰| > c (H1)": "0/30"
+     },
+     "u_c_median": {
+      "F_min": 0.0011641141781442914,
+      "Im N1": 0.0017597114928219752,
+      "Im N2": 0.0005943079709150915,
+      "Im N3": 0.00020751909997146503,
+      "Re N1": 0.0017481618826601813,
+      "Re N2": 0.0006062842558818092,
+      "Re N3": 0.00033562500716216294
+     },
+     "wahrheit": {
+      "klasse": "R0",
+      "r_max_rel": 4.442403032450186e-15
+     }
+    },
+    "C04-steif/L1": {
+     "abbruch": {
+      "S1_kandidaten": "25/30",
+      "S2": "0/30",
+      "S4": "0/30"
+     },
+     "gueltigkeit": {
+      "G1": "142/18900",
+      "G4": "729/18900"
+     },
+     "laufzeit_je_kampagne_s": 7.943366666666666,
+     "raten": {
+      "E3: unauffällig": "2/30",
+      "E3: unbestimmt": "28/30",
+      "H1 Sensitivität faktor_0_1: bestätigt": "27/30",
+      "H1 Sensitivität faktor_0_1: falsifiziert": "0/30",
+      "H1 Sensitivität faktor_0_1: nicht entscheidbar": "3/30",
+      "H1 Sensitivität fassung_A: bestätigt": "27/30",
+      "H1 Sensitivität fassung_A: falsifiziert": "0/30",
+      "H1 Sensitivität fassung_A: nicht entscheidbar": "3/30",
+      "H1 und H2 bestätigt": "27/30",
+      "H1: bestätigt": "27/30",
+      "H1: falsifiziert": "0/30",
+      "H1: nicht entscheidbar": "3/30",
+      "H1: nicht entscheidbar, Grund Datenlage": "3/30",
+      "H1Z: bestätigt": "27/30",
+      "H1Z: falsifiziert": "0/30",
+      "H1Z: nicht entscheidbar": "3/30",
+      "H1Z: nicht entscheidbar, Grund Datenlage": "3/30",
+      "H2: bestätigt": "28/30",
+      "H2: falsifiziert": "0/30",
+      "H2: nicht entscheidbar": "2/30",
+      "H2: nicht entscheidbar, Grund Datenlage": "2/30",
+      "H3: bestätigt": "29/30",
+      "H3: falsifiziert": "0/30",
+      "H3: nicht entscheidbar": "1/30",
+      "H3: nicht entscheidbar, Grund Datenlage": "1/30",
+      "H4: bestätigt": "30/30",
+      "H4: falsifiziert": "0/30",
+      "H4: nicht entscheidbar": "0/30",
+      "mindestens ein |z⁰| > c (H1)": "0/30"
+     },
+     "u_c_median": {
+      "F_min": 0.0011855099939692834,
+      "Im N1": 0.0017217551729073423,
+      "Im N2": 0.0005807145685825415,
+      "Im N3": 0.00020722177751437108,
+      "Re N1": 0.0017762696607961663,
+      "Re N2": 0.0006159733102859816,
+      "Re N3": 0.00033521091519180175
+     },
+     "wahrheit": {
+      "klasse": "R0",
+      "r_max_rel": 4.442403032450186e-15
+     }
+    },
+    "E04-kette/L1": {
+     "abbruch": {
+      "S1_kandidaten": "27/30",
+      "S2": "0/30",
+      "S4": "0/30"
+     },
+     "gueltigkeit": {
+      "G1": "109/18900",
+      "G4": "836/18900"
+     },
+     "laufzeit_je_kampagne_s": 7.761533333333333,
+     "raten": {
+      "E3: auffällig": "30/30",
+      "H1 Sensitivität faktor_0_1: bestätigt": "22/30",
+      "H1 Sensitivität faktor_0_1: falsifiziert": "0/30",
+      "H1 Sensitivität faktor_0_1: nicht entscheidbar": "8/30",
+      "H1 Sensitivität fassung_A: bestätigt": "22/30",
+      "H1 Sensitivität fassung_A: falsifiziert": "0/30",
+      "H1 Sensitivität fassung_A: nicht entscheidbar": "8/30",
+      "H1 und H2 bestätigt": "22/30",
+      "H1: bestätigt": "22/30",
+      "H1: falsifiziert": "0/30",
+      "H1: nicht entscheidbar": "8/30",
+      "H1: nicht entscheidbar, Grund Datenlage": "8/30",
+      "H1Z: bestätigt": "22/30",
+      "H1Z: falsifiziert": "0/30",
+      "H1Z: nicht entscheidbar": "8/30",
+      "H1Z: nicht entscheidbar, Grund Datenlage": "8/30",
+      "H2: bestätigt": "22/30",
+      "H2: falsifiziert": "0/30",
+      "H2: nicht entscheidbar": "8/30",
+      "H2: nicht entscheidbar, Grund Datenlage": "8/30",
+      "H3: Zusatz Abweichung nachgewiesen, Relevanz offen": "2/30",
+      "H3: Zusatz Abweichung nachgewiesen, innerhalb der Äquivalenzgrenze": "28/30",
+      "H3: bestätigt": "28/30",
+      "H3: falsifiziert": "0/30",
+      "H3: nicht entscheidbar": "2/30",
+      "H3: nicht entscheidbar, Grund Datenlage": "2/30",
+      "H4: bestätigt": "30/30",
+      "H4: falsifiziert": "0/30",
+      "H4: nicht entscheidbar": "0/30",
+      "mindestens ein |z⁰| > c (H1)": "0/30"
+     },
+     "u_c_median": {
+      "F_min": 0.0011736356486677553,
+      "Im N1": 0.0017082187046052746,
+      "Im N2": 0.0005775504257525376,
+      "Im N3": 0.0002076504525748604,
+      "Re N1": 0.0017629870925669293,
+      "Re N2": 0.0006213543186319363,
+      "Re N3": 0.0003367759634178613
+     },
+     "wahrheit": {
+      "klasse": "R0",
+      "r_max_rel": 6.105933650577187e-15
+     }
+    }
+   },
+   "k06": {
+    "N01-A4/L0": {
+     "abbruch": {
+      "S1_kandidaten": "33/40",
+      "S2": "0/40",
+      "S4": "0/40"
+     },
+     "gueltigkeit": {
+      "G1": "213/25200",
+      "G4": "554/25200"
+     },
+     "laufzeit_je_kampagne_s": 3.9667499999999998,
+     "raten": {
+      "E3: unauffällig": "40/40",
+      "H1 Sensitivität faktor_0_1: bestätigt": "37/40",
+      "H1 Sensitivität faktor_0_1: falsifiziert": "0/40",
+      "H1 Sensitivität faktor_0_1: nicht entscheidbar": "3/40",
+      "H1 Sensitivität fassung_A: bestätigt": "37/40",
+      "H1 Sensitivität fassung_A: falsifiziert": "0/40",
+      "H1 Sensitivität fassung_A: nicht entscheidbar": "3/40",
+      "H1 und H2 bestätigt": "37/40",
+      "H1: bestätigt": "37/40",
+      "H1: falsifiziert": "0/40",
+      "H1: nicht entscheidbar": "3/40",
+      "H1: nicht entscheidbar, Grund Datenlage": "3/40",
+      "H1Z: bestätigt": "37/40",
+      "H1Z: falsifiziert": "0/40",
+      "H1Z: nicht entscheidbar": "3/40",
+      "H1Z: nicht entscheidbar, Grund Datenlage": "3/40",
+      "H2: bestätigt": "37/40",
+      "H2: falsifiziert": "0/40",
+      "H2: nicht entscheidbar": "3/40",
+      "H2: nicht entscheidbar, Grund Datenlage": "3/40",
+      "H3: bestätigt": "0/40",
+      "H3: falsifiziert": "0/40",
+      "H3: nicht entscheidbar": "40/40",
+      "H3: nicht entscheidbar, Grund Verfahren": "40/40",
+      "H4: bestätigt": "40/40",
+      "H4: falsifiziert": "0/40",
+      "H4: nicht entscheidbar": "0/40",
+      "mindestens ein |z⁰| > c (H1)": "0/40"
+     },
+     "u_c_median": {
+      "F_min": 0.0002640662607826714,
+      "Im N1": 0.00017406550076254235,
+      "Im N2": 0.00012315367253539785,
+      "Im N3": 0.00010598209685057326,
+      "Re N1": 0.00016907613293537776,
+      "Re N2": 0.00011461765338908075,
+      "Re N3": 5.849740280785946e-05
+     },
+     "wahrheit": {
+      "klasse": "R0",
+      "r_max_rel": 5.150583848930261e-15
+     }
+    },
+    "N01-A4/L2": {
+     "abbruch": {
+      "S1_kandidaten": "33/40",
+      "S2": "0/40",
+      "S4": "0/40"
+     },
+     "gueltigkeit": {
+      "G1": "158/25200",
+      "G4": "533/25200"
+     },
+     "laufzeit_je_kampagne_s": 3.998175,
+     "raten": {
+      "E3: unbestimmt": "40/40",
+      "H1 Sensitivität faktor_0_1: bestätigt": "38/40",
+      "H1 Sensitivität faktor_0_1: falsifiziert": "0/40",
+      "H1 Sensitivität faktor_0_1: nicht entscheidbar": "2/40",
+      "H1 Sensitivität fassung_A: bestätigt": "38/40",
+      "H1 Sensitivität fassung_A: falsifiziert": "0/40",
+      "H1 Sensitivität fassung_A: nicht entscheidbar": "2/40",
+      "H1 und H2 bestätigt": "38/40",
+      "H1: bestätigt": "38/40",
+      "H1: falsifiziert": "0/40",
+      "H1: nicht entscheidbar": "2/40",
+      "H1: nicht entscheidbar, Grund Datenlage": "2/40",
+      "H1Z: bestätigt": "38/40",
+      "H1Z: falsifiziert": "0/40",
+      "H1Z: nicht entscheidbar": "2/40",
+      "H1Z: nicht entscheidbar, Grund Datenlage": "2/40",
+      "H2: bestätigt": "38/40",
+      "H2: falsifiziert": "0/40",
+      "H2: nicht entscheidbar": "2/40",
+      "H2: nicht entscheidbar, Grund Datenlage": "2/40",
+      "H3: bestätigt": "0/40",
+      "H3: falsifiziert": "0/40",
+      "H3: nicht entscheidbar": "40/40",
+      "H3: nicht entscheidbar, Grund Verfahren": "40/40",
+      "H4: bestätigt": "40/40",
+      "H4: falsifiziert": "0/40",
+      "H4: nicht entscheidbar": "0/40",
+      "mindestens ein |z⁰| > c (H1)": "0/40"
+     },
+     "u_c_median": {
+      "F_min": 0.003168522680997151,
+      "Im N1": 0.0046455206659103115,
+      "Im N2": 0.0015745575048805947,
+      "Im N3": 0.0005666115438326398,
+      "Re N1": 0.004829526480856508,
+      "Re N2": 0.001685539361708023,
+      "Re N3": 0.0009007247569666564
+     },
+     "wahrheit": {
+      "klasse": "R0",
+      "r_max_rel": 5.150583848930261e-15
+     }
+    },
+    "N01-A4/L4": {
+     "abbruch": {
+      "S1_kandidaten": "29/40",
+      "S2": "0/40",
+      "S4": "0/40"
+     },
+     "gueltigkeit": {
+      "G1": "133/25200",
+      "G4": "316/25200"
+     },
+     "laufzeit_je_kampagne_s": 4.40245,
+     "raten": {
+      "E3: auffällig": "3/40",
+      "E3: unbestimmt": "37/40",
+      "H1 Sensitivität faktor_0_1: bestätigt": "0/40",
+      "H1 Sensitivität faktor_0_1: falsifiziert": "0/40",
+      "H1 Sensitivität faktor_0_1: nicht entscheidbar": "40/40",
+      "H1 Sensitivität fassung_A: bestätigt": "20/40",
+      "H1 Sensitivität fassung_A: falsifiziert": "0/40",
+      "H1 Sensitivität fassung_A: nicht entscheidbar": "20/40",
+      "H1 und H2 bestätigt": "0/40",
+      "H1: Zusatz Drift der Einzelmodulbasis": "1/40",
+      "H1: bestätigt": "40/40",
+      "H1: falsifiziert": "0/40",
+      "H1: nicht entscheidbar": "0/40",
+      "H1Z: bestätigt": "0/40",
+      "H1Z: falsifiziert": "0/40",
+      "H1Z: nicht entscheidbar": "40/40",
+      "H1Z: nicht entscheidbar, Grund Graubereich": "40/40",
+      "H2: bestätigt": "0/40",
+      "H2: falsifiziert": "0/40",
+      "H2: nicht entscheidbar": "40/40",
+      "H2: nicht entscheidbar, Grund Graubereich": "13/40",
+      "H2: nicht entscheidbar, Grund Präzision": "27/40",
+      "H3: bestätigt": "0/40",
+      "H3: falsifiziert": "0/40",
+      "H3: nicht entscheidbar": "40/40",
+      "H3: nicht entscheidbar, Grund Verfahren": "40/40",
+      "H4: bestätigt": "40/40",
+      "H4: falsifiziert": "0/40",
+      "H4: nicht entscheidbar": "0/40",
+      "mindestens ein |z⁰| > c (H1)": "1/40"
+     },
+     "u_c_median": {
+      "F_min": 0.01900033002008459,
+      "Im N1": 0.02832008403081311,
+      "Im N2": 0.009459910360082903,
+      "Im N3": 0.0033967241752167797,
+      "Re N1": 0.028588175696427583,
+      "Re N2": 0.010012118001340544,
+      "Re N3": 0.0054039524129723526
+     },
+     "wahrheit": {
+      "klasse": "R0",
+      "r_max_rel": 5.150583848930261e-15
+     }
+    }
+   },
+   "kalibrierung_a4": {
+    "c_H1": {
+     "ausgeschlossen": 6,
+     "c_B": 4.202234109375977,
+     "gepoolt": true,
+     "n": 387,
+     "regel": null,
+     "se": 0.09568275016237231,
+     "wert": 3.709322110180076
+    },
+    "c_H1Z": {
+     "ausgeschlossen": 6,
+     "c_B": 4.642796862350881,
+     "n": 194,
+     "se": 0.07690808598517429,
+     "wert": 3.8064613614497946
+    },
+    "gemeinsame_bestaetigung": "193/200",
+    "gepoolt": true,
+    "h2": {
+     "schluessel": "perzentil_0.95",
+     "ueberdeckung": {
+      "bca_0.95": {
+       "yhat0": "189/194",
+       "yhat1": "188/194"
+      },
+      "perzentil_0.95": {
+       "yhat0": "194/194",
+       "yhat1": "194/194"
+      },
+      "perzentil_0.96": {
+       "yhat0": "194/194",
+       "yhat1": "194/194"
+      },
+      "perzentil_0.97": {
+       "yhat0": "194/194",
+       "yhat1": "194/194"
+      },
+      "perzentil_0.98": {
+       "yhat0": "194/194",
+       "yhat1": "194/194"
+      },
+      "perzentil_0.99": {
+       "yhat0": "194/194",
+       "yhat1": "194/194"
+      }
+     }
+    },
+    "meta": {
+     "code_version": {
+      "git": "7a259efe3f2f9545cd487af3d2ddb8a20a1e8b34",
+      "paket": "0.1.0"
+     },
+     "lesart": "Entwicklungsdiagnostik: weniger Kampagnen oder Replikate als normativ; keine Kalibrierabnahme",
+     "n_kalibrierung": 200,
+     "n_pruefung": 200,
+     "profil": "ENTW-2026-10+red(bootstrap_B=1000,e3_mc=1000,eps_ctrl_datensaetze=1000,h2_replikate=1000,h3_mc=1000)",
+     "profil_sha256": "49dc74abca52b2c5e4ae8f6d2e1c53dc468205b01b9f65270b86c27e91114352",
+     "rauschvarianten": 1,
+     "reduziert": true,
+     "seed_basis": 20261016,
+     "stufe": "L1",
+     "szenario": "N01-A4"
+    },
+    "pruefung": "18/193",
+    "raten_pruefung": {
+     "E3: unauffällig": "14/200",
+     "E3: unbestimmt": "186/200",
+     "H1 Sensitivität faktor_0_1: bestätigt": "193/200",
+     "H1 Sensitivität faktor_0_1: falsifiziert": "0/200",
+     "H1 Sensitivität faktor_0_1: nicht entscheidbar": "7/200",
+     "H1 Sensitivität fassung_A: bestätigt": "193/200",
+     "H1 Sensitivität fassung_A: falsifiziert": "0/200",
+     "H1 Sensitivität fassung_A: nicht entscheidbar": "7/200",
+     "H1 und H2 bestätigt": "193/200",
+     "H1: Zusatz Drift der Einzelmodulbasis": "21/200",
+     "H1: bestätigt": "193/200",
+     "H1: falsifiziert": "0/200",
+     "H1: nicht entscheidbar": "7/200",
+     "H1: nicht entscheidbar, Grund Datenlage": "7/200",
+     "H1Z: bestätigt": "193/200",
+     "H1Z: falsifiziert": "0/200",
+     "H1Z: nicht entscheidbar": "7/200",
+     "H1Z: nicht entscheidbar, Grund Datenlage": "7/200",
+     "H2: bestätigt": "194/200",
+     "H2: falsifiziert": "0/200",
+     "H2: nicht entscheidbar": "6/200",
+     "H2: nicht entscheidbar, Grund Datenlage": "6/200",
+     "H3: bestätigt": "0/200",
+     "H3: falsifiziert": "0/200",
+     "H3: nicht entscheidbar": "200/200",
+     "H3: nicht entscheidbar, Grund Verfahren": "200/200",
+     "H4: bestätigt": "200/200",
+     "H4: falsifiziert": "0/200",
+     "H4: nicht entscheidbar": "0/200",
+     "mindestens ein |z⁰| > c (H1)": "15/200"
+    },
+    "restbias": {
+     "yhat0": {
+      "max_verhaeltnis": 0.26430971922595986,
+      "mc_se_verhaeltnis": 0.08536673730026685,
+      "n": 200,
+      "soll": 0.1
+     },
+     "yhat1": {
+      "max_verhaeltnis": 0.24612323654542406,
+      "mc_se_verhaeltnis": 0.07846870409827002,
+      "n": 200,
+      "soll": 0.1
+     }
+    }
+   },
+   "kalibrierung_v1": {
+    "V1-G0": {
+     "c_H1": {
+      "ausgeschlossen": 20,
+      "c_B": 4.202234109375977,
+      "gepoolt": false,
+      "n": 40,
+      "regel": null,
+      "se": 0.0912705830521956,
+      "wert": 3.658874367687632
+     },
+     "c_H1Z": {
+      "ausgeschlossen": 20,
+      "c_B": 4.642796862350881,
+      "n": 40,
+      "se": 0.16555043662646637,
+      "wert": 3.6703703084165524
+     },
+     "gemeinsame_bestaetigung": "49/60",
+     "gepoolt": false,
+     "h2": {
+      "schluessel": "perzentil_0.95",
+      "ueberdeckung": {
+       "bca_0.95": {
+        "yhat0": "41/42",
+        "yhat1": "41/42"
+       },
+       "perzentil_0.95": {
+        "yhat0": "42/42",
+        "yhat1": "42/42"
+       },
+       "perzentil_0.96": {
+        "yhat0": "42/42",
+        "yhat1": "42/42"
+       },
+       "perzentil_0.97": {
+        "yhat0": "42/42",
+        "yhat1": "42/42"
+       },
+       "perzentil_0.98": {
+        "yhat0": "42/42",
+        "yhat1": "42/42"
+       },
+       "perzentil_0.99": {
+        "yhat0": "42/42",
+        "yhat1": "42/42"
+       }
+      }
+     },
+     "meta": {
+      "code_version": {
+       "git": "7a259efe3f2f9545cd487af3d2ddb8a20a1e8b34",
+       "paket": "0.1.0"
+      },
+      "lesart": "Entwicklungsdiagnostik: weniger Kampagnen oder Replikate als normativ; keine Kalibrierabnahme",
+      "n_kalibrierung": 60,
+      "n_pruefung": 60,
+      "profil": "ENTW-2026-10+red(bootstrap_B=1000,e3_mc=1000,eps_ctrl_datensaetze=1000,h2_replikate=1000,h3_mc=1000)",
+      "profil_sha256": "49dc74abca52b2c5e4ae8f6d2e1c53dc468205b01b9f65270b86c27e91114352",
+      "rauschvarianten": 1,
+      "reduziert": true,
+      "seed_basis": 20261016,
+      "stufe": "L1",
+      "szenario": "N01-V1G0"
+     },
+     "pruefung": "1/49",
+     "raten_pruefung": {
+      "E3: unauffällig": "3/60",
+      "E3: unbestimmt": "57/60",
+      "H1 Sensitivität faktor_0_1: bestätigt": "49/60",
+      "H1 Sensitivität faktor_0_1: falsifiziert": "0/60",
+      "H1 Sensitivität faktor_0_1: nicht entscheidbar": "11/60",
+      "H1 Sensitivität fassung_A: bestätigt": "49/60",
+      "H1 Sensitivität fassung_A: falsifiziert": "0/60",
+      "H1 Sensitivität fassung_A: nicht entscheidbar": "11/60",
+      "H1 und H2 bestätigt": "49/60",
+      "H1: Zusatz Drift der Einzelmodulbasis": "3/60",
+      "H1: bestätigt": "49/60",
+      "H1: falsifiziert": "0/60",
+      "H1: nicht entscheidbar": "11/60",
+      "H1: nicht entscheidbar, Grund Datenlage": "11/60",
+      "H1Z: bestätigt": "49/60",
+      "H1Z: falsifiziert": "0/60",
+      "H1Z: nicht entscheidbar": "11/60",
+      "H1Z: nicht entscheidbar, Grund Datenlage": "11/60",
+      "H2: bestätigt": "49/60",
+      "H2: falsifiziert": "0/60",
+      "H2: nicht entscheidbar": "11/60",
+      "H2: nicht entscheidbar, Grund Datenlage": "11/60",
+      "H3: Zusatz Abweichung nachgewiesen, innerhalb der Äquivalenzgrenze": "1/60",
+      "H3: bestätigt": "59/60",
+      "H3: falsifiziert": "0/60",
+      "H3: nicht entscheidbar": "1/60",
+      "H3: nicht entscheidbar, Grund Datenlage": "1/60",
+      "H4: bestätigt": "60/60",
+      "H4: falsifiziert": "0/60",
+      "H4: nicht entscheidbar": "0/60",
+      "mindestens ein |z⁰| > c (H1)": "2/60"
+     },
+     "restbias": {
+      "yhat0": {
+       "max_verhaeltnis": 0.28238497633896525,
+       "mc_se_verhaeltnis": 0.1402354576320675,
+       "n": 60,
+       "soll": 0.1
+      },
+      "yhat1": {
+       "max_verhaeltnis": 0.2903755126568582,
+       "mc_se_verhaeltnis": 0.15780329455087252,
+       "n": 60,
+       "soll": 0.1
+      }
+     }
+    },
+    "V1-G60h": {
+     "c_H1": {
+      "ausgeschlossen": 15,
+      "c_B": 4.202234109375977,
+      "gepoolt": false,
+      "n": 45,
+      "regel": null,
+      "se": 0.28861329294553206,
+      "wert": 3.596477600643589
+     },
+     "c_H1Z": {
+      "ausgeschlossen": 15,
+      "c_B": 4.642796862350881,
+      "n": 45,
+      "se": 0.22689810866594506,
+      "wert": 4.278125795265793
+     },
+     "gemeinsame_bestaetigung": "45/60",
+     "gepoolt": false,
+     "h2": {
+      "schluessel": "perzentil_0.95",
+      "ueberdeckung": {
+       "bca_0.95": {
+        "yhat0": "43/46",
+        "yhat1": "45/46"
+       },
+       "perzentil_0.95": {
+        "yhat0": "46/46",
+        "yhat1": "46/46"
+       },
+       "perzentil_0.96": {
+        "yhat0": "46/46",
+        "yhat1": "46/46"
+       },
+       "perzentil_0.97": {
+        "yhat0": "46/46",
+        "yhat1": "46/46"
+       },
+       "perzentil_0.98": {
+        "yhat0": "46/46",
+        "yhat1": "46/46"
+       },
+       "perzentil_0.99": {
+        "yhat0": "46/46",
+        "yhat1": "46/46"
+       }
+      }
+     },
+     "meta": {
+      "code_version": {
+       "git": "7a259efe3f2f9545cd487af3d2ddb8a20a1e8b34",
+       "paket": "0.1.0"
+      },
+      "lesart": "Entwicklungsdiagnostik: weniger Kampagnen oder Replikate als normativ; keine Kalibrierabnahme",
+      "n_kalibrierung": 60,
+      "n_pruefung": 60,
+      "profil": "ENTW-2026-10+red(bootstrap_B=1000,e3_mc=1000,eps_ctrl_datensaetze=1000,h2_replikate=1000,h3_mc=1000)",
+      "profil_sha256": "49dc74abca52b2c5e4ae8f6d2e1c53dc468205b01b9f65270b86c27e91114352",
+      "rauschvarianten": 1,
+      "reduziert": true,
+      "seed_basis": 20261016,
+      "stufe": "L1",
+      "szenario": "N01-V1G60h"
+     },
+     "pruefung": "1/45",
+     "raten_pruefung": {
+      "E3: unauffällig": "5/60",
+      "E3: unbestimmt": "55/60",
+      "H1 Sensitivität faktor_0_1: bestätigt": "45/60",
+      "H1 Sensitivität faktor_0_1: falsifiziert": "0/60",
+      "H1 Sensitivität faktor_0_1: nicht entscheidbar": "15/60",
+      "H1 Sensitivität fassung_A: bestätigt": "45/60",
+      "H1 Sensitivität fassung_A: falsifiziert": "0/60",
+      "H1 Sensitivität fassung_A: nicht entscheidbar": "15/60",
+      "H1 und H2 bestätigt": "45/60",
+      "H1: Zusatz Drift der Einzelmodulbasis": "6/60",
+      "H1: bestätigt": "45/60",
+      "H1: falsifiziert": "0/60",
+      "H1: nicht entscheidbar": "15/60",
+      "H1: nicht entscheidbar, Grund Datenlage": "15/60",
+      "H1Z: bestätigt": "45/60",
+      "H1Z: falsifiziert": "0/60",
+      "H1Z: nicht entscheidbar": "15/60",
+      "H1Z: nicht entscheidbar, Grund Datenlage": "15/60",
+      "H2: bestätigt": "45/60",
+      "H2: falsifiziert": "0/60",
+      "H2: nicht entscheidbar": "15/60",
+      "H2: nicht entscheidbar, Grund Datenlage": "15/60",
+      "H3: Zusatz Abweichung nachgewiesen, innerhalb der Äquivalenzgrenze": "1/60",
+      "H3: bestätigt": "58/60",
+      "H3: falsifiziert": "0/60",
+      "H3: nicht entscheidbar": "2/60",
+      "H3: nicht entscheidbar, Grund Datenlage": "2/60",
+      "H4: bestätigt": "60/60",
+      "H4: falsifiziert": "0/60",
+      "H4: nicht entscheidbar": "0/60",
+      "mindestens ein |z⁰| > c (H1)": "1/60"
+     },
+     "restbias": {
+      "yhat0": {
+       "max_verhaeltnis": 0.29513382283998774,
+       "mc_se_verhaeltnis": 0.17831167273240844,
+       "n": 60,
+       "soll": 0.1
+      },
+      "yhat1": {
+       "max_verhaeltnis": 0.4300814955578245,
+       "mc_se_verhaeltnis": 0.1551423264055267,
+       "n": 60,
+       "soll": 0.1
+      }
+     }
+    }
+   },
+   "planung": {
+    "aufrufe": [
+     {
+      "N_z": 100,
+      "bedingung": 0.8,
+      "grund": "kein Kandidat erreicht P(H1 und H2 bestätigt | exakt) ≥ 0,8",
+      "k": 30,
+      "kandidaten": [
+       {
+        "P_gemeinsam": 0.25,
+        "c_H1": 3.782416066599014,
+        "erfuellt": false,
+        "intervalltyp_H2": "perzentil_0.95",
+        "mc_se": 0.21650635094610965,
+        "n0": 20,
+        "n_min": 18,
+        "nenner": 4,
+        "pruefrate_c": 0.0,
+        "reserve_r": 2,
+        "zaehler": 1
+       },
+       {
+        "P_gemeinsam": 0.0,
+        "c_H1": null,
+        "erfuellt": false,
+        "intervalltyp_H2": "perzentil_0.95",
+        "mc_se": 0.0,
+        "n0": 20,
+        "n_min": 24,
+        "nenner": 4,
+        "pruefrate_c": null,
+        "reserve_r": 2,
+        "zaehler": 0
+       }
+      ],
+      "kappa": 1.0911406901482563,
+      "n0": null,
+      "n_min": null,
+      "power_bedingung": "offen (Regel planung.power), nicht geprüft",
+      "reduziert": true
+     },
+     {
+      "N_z": 100,
+      "bedingung": 0.8,
+      "grund": "kein Kandidat erreicht P(H1 und H2 bestätigt | exakt) ≥ 0,8",
+      "k": 29,
+      "kandidaten": [
+       {
+        "P_gemeinsam": 0.0,
+        "c_H1": null,
+        "erfuellt": false,
+        "intervalltyp_H2": null,
+        "mc_se": 0.0,
+        "n0": 20,
+        "n_min": 18,
+        "nenner": 4,
+        "pruefrate_c": null,
+        "reserve_r": 2,
+        "zaehler": 0
+       },
+       {
+        "P_gemeinsam": 0.0,
+        "c_H1": null,
+        "erfuellt": false,
+        "intervalltyp_H2": null,
+        "mc_se": 0.0,
+        "n0": 20,
+        "n_min": 24,
+        "nenner": 4,
+        "pruefrate_c": null,
+        "reserve_r": 2,
+        "zaehler": 0
+       }
+      ],
+      "kappa": 1.0911406901482563,
+      "n0": null,
+      "n_min": null,
+      "power_bedingung": "offen (Regel planung.power), nicht geprüft",
+      "reduziert": true
+     },
+     {
+      "N_z": 100,
+      "grund": "nicht simuliert: Entwicklungsgrenze von 2 Planungsaufrufen erreicht",
+      "k": 28,
+      "kandidaten": [],
+      "n0": null,
+      "n_min": null,
+      "reduziert": true
+     },
+     {
+      "N_z": 100,
+      "grund": "nicht simuliert: Entwicklungsgrenze von 2 Planungsaufrufen erreicht",
+      "k": 27,
+      "kandidaten": [],
+      "n0": null,
+      "n_min": null,
+      "reduziert": true
+     },
+     {
+      "N_z": 100,
+      "grund": "nicht simuliert: Entwicklungsgrenze von 2 Planungsaufrufen erreicht",
+      "k": 26,
+      "kandidaten": [],
+      "n0": null,
+      "n_min": null,
+      "reduziert": true
+     },
+     {
+      "N_z": 100,
+      "grund": "nicht simuliert: Entwicklungsgrenze von 2 Planungsaufrufen erreicht",
+      "k": 25,
+      "kandidaten": [],
+      "n0": null,
+      "n_min": null,
+      "reduziert": true
+     },
+     {
+      "N_z": 100,
+      "grund": "nicht simuliert: Entwicklungsgrenze von 2 Planungsaufrufen erreicht",
+      "k": 24,
+      "kandidaten": [],
+      "n0": null,
+      "n_min": null,
+      "reduziert": true
+     },
+     {
+      "N_z": 100,
+      "grund": "nicht simuliert: Entwicklungsgrenze von 2 Planungsaufrufen erreicht",
+      "k": 23,
+      "kandidaten": [],
+      "n0": null,
+      "n_min": null,
+      "reduziert": true
+     },
+     {
+      "N_z": 100,
+      "grund": "nicht simuliert: Entwicklungsgrenze von 2 Planungsaufrufen erreicht",
+      "k": 22,
+      "kandidaten": [],
+      "n0": null,
+      "n_min": null,
+      "reduziert": true
+     },
+     {
+      "N_z": 100,
+      "grund": "nicht simuliert: Entwicklungsgrenze von 2 Planungsaufrufen erreicht",
+      "k": 21,
+      "kandidaten": [],
+      "n0": null,
+      "n_min": null,
+      "reduziert": true
+     },
+     {
+      "N_z": 100,
+      "grund": "nicht simuliert: Entwicklungsgrenze von 2 Planungsaufrufen erreicht",
+      "k": 20,
+      "kandidaten": [],
+      "n0": null,
+      "n_min": null,
+      "reduziert": true
+     },
+     {
+      "N_z": 100,
+      "grund": "nicht simuliert: Entwicklungsgrenze von 2 Planungsaufrufen erreicht",
+      "k": 19,
+      "kandidaten": [],
+      "n0": null,
+      "n_min": null,
+      "reduziert": true
+     },
+     {
+      "N_z": 100,
+      "grund": "nicht simuliert: Entwicklungsgrenze von 2 Planungsaufrufen erreicht",
+      "k": 18,
+      "kandidaten": [],
+      "n0": null,
+      "n_min": null,
+      "reduziert": true
+     },
+     {
+      "N_z": 100,
+      "grund": "nicht simuliert: Entwicklungsgrenze von 2 Planungsaufrufen erreicht",
+      "k": 17,
+      "kandidaten": [],
+      "n0": null,
+      "n_min": null,
+      "reduziert": true
+     },
+     {
+      "N_z": 100,
+      "grund": "nicht simuliert: Entwicklungsgrenze von 2 Planungsaufrufen erreicht",
+      "k": 16,
+      "kandidaten": [],
+      "n0": null,
+      "n_min": null,
+      "reduziert": true
+     },
+     {
+      "N_z": 100,
+      "grund": "nicht simuliert: Entwicklungsgrenze von 2 Planungsaufrufen erreicht",
+      "k": 15,
+      "kandidaten": [],
+      "n0": null,
+      "n_min": null,
+      "reduziert": true
+     },
+     {
+      "N_z": 100,
+      "grund": "nicht simuliert: Entwicklungsgrenze von 2 Planungsaufrufen erreicht",
+      "k": 14,
+      "kandidaten": [],
+      "n0": null,
+      "n_min": null,
+      "reduziert": true
+     },
+     {
+      "N_z": 100,
+      "grund": "nicht simuliert: Entwicklungsgrenze von 2 Planungsaufrufen erreicht",
+      "k": 13,
+      "kandidaten": [],
+      "n0": null,
+      "n_min": null,
+      "reduziert": true
+     },
+     {
+      "N_z": 100,
+      "grund": "nicht simuliert: Entwicklungsgrenze von 2 Planungsaufrufen erreicht",
+      "k": 12,
+      "kandidaten": [],
+      "n0": null,
+      "n_min": null,
+      "reduziert": true
+     },
+     {
+      "N_z": 100,
+      "grund": "nicht simuliert: Entwicklungsgrenze von 2 Planungsaufrufen erreicht",
+      "k": 11,
+      "kandidaten": [],
+      "n0": null,
+      "n_min": null,
+      "reduziert": true
+     },
+     {
+      "N_z": 100,
+      "grund": "nicht simuliert: Entwicklungsgrenze von 2 Planungsaufrufen erreicht",
+      "k": 10,
+      "kandidaten": [],
+      "n0": null,
+      "n_min": null,
+      "reduziert": true
+     },
+     {
+      "N_z": 100,
+      "grund": "nicht simuliert: Entwicklungsgrenze von 2 Planungsaufrufen erreicht",
+      "k": 9,
+      "kandidaten": [],
+      "n0": null,
+      "n_min": null,
+      "reduziert": true
+     },
+     {
+      "N_z": 100,
+      "grund": "nicht simuliert: Entwicklungsgrenze von 2 Planungsaufrufen erreicht",
+      "k": 8,
+      "kandidaten": [],
+      "n0": null,
+      "n_min": null,
+      "reduziert": true
+     },
+     {
+      "N_z": 100,
+      "grund": "nicht simuliert: Entwicklungsgrenze von 2 Planungsaufrufen erreicht",
+      "k": 7,
+      "kandidaten": [],
+      "n0": null,
+      "n_min": null,
+      "reduziert": true
+     },
+     {
+      "N_z": 100,
+      "grund": "nicht simuliert: Entwicklungsgrenze von 2 Planungsaufrufen erreicht",
+      "k": 6,
+      "kandidaten": [],
+      "n0": null,
+      "n_min": null,
+      "reduziert": true
+     },
+     {
+      "N_z": 100,
+      "grund": "nicht simuliert: Entwicklungsgrenze von 2 Planungsaufrufen erreicht",
+      "k": 5,
+      "kandidaten": [],
+      "n0": null,
+      "n_min": null,
+      "reduziert": true
+     },
+     {
+      "N_z": 100,
+      "grund": "nicht simuliert: Entwicklungsgrenze von 2 Planungsaufrufen erreicht",
+      "k": 4,
+      "kandidaten": [],
+      "n0": null,
+      "n_min": null,
+      "reduziert": true
+     },
+     {
+      "N_z": 100,
+      "grund": "nicht simuliert: Entwicklungsgrenze von 2 Planungsaufrufen erreicht",
+      "k": 3,
+      "kandidaten": [],
+      "n0": null,
+      "n_min": null,
+      "reduziert": true
+     }
+    ],
+    "suche": {
+     "ergebnis": "kein zulässiger Arbeitspunkt unter diesen Annahmen",
+     "grund": "kein Paar (k, T_a) erfüllt n = n_min + r ≤ n_max",
+     "reduktion": "keine gekürzten Zusammenfassungen: nur N_z = 100"
+    }
+   },
+   "pruefsatz": {
+    "abweichungen": [],
+    "gleich": true,
+    "umgebung_alt": {
+     "numpy": "2.5.3",
+     "python": "3.13.16",
+     "scipy": "1.18.1"
+    },
+    "umgebung_neu": {
+     "numpy": "2.5.3",
+     "python": "3.13.16",
+     "scipy": "1.18.1"
+    }
+   },
+   "referenz": {
+    "A04-R2/L1": {
+     "alle_innerhalb": true,
+     "ausgang": "nicht entscheidbar",
+     "gleich": {
+      "abweichung": true,
+      "ausgang": true,
+      "drift": true,
+      "relevant": true,
+      "tost0": true,
+      "tost1": true
+     },
+     "max_abs": {
+      "nu0": 2.6929569685307797e-12,
+      "nu1": 2.5934809855243657e-12,
+      "r0": 8.187894806610529e-16,
+      "r1": 1.6653345369377348e-15,
+      "u0": 6.19079440489223e-17,
+      "u1": 5.919743861770854e-17,
+      "z0": 1.3386625141720288e-11,
+      "z1": 9.492850949754938e-12
+     }
+    },
+    "A04-R4/L1": {
+     "alle_innerhalb": true,
+     "ausgang": "falsifiziert",
+     "gleich": {
+      "abweichung": true,
+      "ausgang": true,
+      "drift": true,
+      "relevant": true,
+      "tost0": true,
+      "tost1": true
+     },
+     "max_abs": {
+      "nu0": 3.154809746774845e-12,
+      "nu1": 3.439026841078885e-12,
+      "r0": 9.853229343548264e-16,
+      "r1": 7.771561172376096e-16,
+      "u0": 7.48099499014998e-17,
+      "u1": 6.179952383167375e-17,
+      "z0": 3.5640823625726625e-11,
+      "z1": 3.7971403799019754e-11
+     }
+    },
+    "N01-A4/L2": {
+     "alle_innerhalb": true,
+     "ausgang": "bestätigt",
+     "gleich": {
+      "abweichung": true,
+      "ausgang": true,
+      "drift": true,
+      "relevant": true,
+      "tost0": true,
+      "tost1": true
+     },
+     "max_abs": {
+      "nu0": 1.1723955140041653e-12,
+      "nu1": 8.810729923425242e-13,
+      "r0": 1.3322676295501878e-15,
+      "r1": 7.771561172376096e-16,
+      "u0": 8.153200337090993e-17,
+      "u1": 7.936359902593892e-17,
+      "z0": 4.1167069753100805e-13,
+      "z1": 3.115285807098189e-13
+     }
+    }
+   },
+   "reproduzierbarkeit": {
+    "andere_seeds_verschieden": true,
+    "kampagnen": 4,
+    "seriell_gleich_parallel": true,
+    "toleranz": "bitgleich auf derselben Maschine und Bibliotheksversion"
+   },
+   "s3": {
+    "F01-S3": {
+     "F_min_auf_1e9": false,
+     "F_min_in_rasterschranke": true,
+     "bilder_gleich": true,
+     "gleiche_module": true,
+     "k_max": 9,
+     "maximum": {
+      "F_min_rel_N": 1.1904607758017605e-05,
+      "betrag_N": 7.771561172376096e-16,
+      "gamma1": 7.771561172376096e-16,
+      "phase_grad": 2.6252379276362675e-13,
+      "vorhersage_N": 6.280369834735101e-16
+     },
+     "schranken": {
+      "N": 1e-09,
+      "grad": 1e-06
+     },
+     "szenario": "F01-S3",
+     "vorhersage_exakt": true
+    },
+    "F03-S3ungleich": {
+     "F_min_auf_1e9": false,
+     "F_min_in_rasterschranke": false,
+     "bilder_gleich": false,
+     "gleiche_module": false,
+     "k_max": 9,
+     "maximum": {
+      "F_min_rel_N": 0.009261028852191489,
+      "betrag_N": 0.02349604863173882,
+      "gamma1": 0.0348316312156276,
+      "phase_grad": 3.685588256895566,
+      "vorhersage_N": 7.108895957933346e-16
+     },
+     "schranken": {
+      "N": 1e-09,
+      "grad": 1e-06
+     },
+     "szenario": "F03-S3ungleich",
+     "vorhersage_exakt": true
+    }
+   },
+   "szenarien_a4": {
+    "A04-R1/L1": {
+     "abbruch": {
+      "S1_kandidaten": "36/40",
+      "S2": "0/40",
+      "S4": "0/40"
+     },
+     "gueltigkeit": {
+      "G1": "162/25200",
+      "G4": "519/25200"
+     },
+     "laufzeit_je_kampagne_s": 4.208975,
+     "raten": {
+      "E3: unauffällig": "3/40",
+      "E3: unbestimmt": "37/40",
+      "H1 Sensitivität faktor_0_1: bestätigt": "0/40",
+      "H1 Sensitivität faktor_0_1: falsifiziert": "40/40",
+      "H1 Sensitivität faktor_0_1: nicht entscheidbar": "0/40",
+      "H1 Sensitivität fassung_A: bestätigt": "39/40",
+      "H1 Sensitivität fassung_A: falsifiziert": "0/40",
+      "H1 Sensitivität fassung_A: nicht entscheidbar": "1/40",
+      "H1 und H2 bestätigt": "39/40",
+      "H1: Zusatz Abweichung nachgewiesen, Relevanz offen": "1/40",
+      "H1: Zusatz Abweichung nachgewiesen, innerhalb der Äquivalenzgrenze": "39/40",
+      "H1: Zusatz Drift der Einzelmodulbasis": "40/40",
+      "H1: bestätigt": "39/40",
+      "H1: falsifiziert": "0/40",
+      "H1: nicht entscheidbar": "1/40",
+      "H1: nicht entscheidbar, Grund Datenlage": "1/40",
+      "H1Z: bestätigt": "0/40",
+      "H1Z: falsifiziert": "40/40",
+      "H1Z: nicht entscheidbar": "0/40",
+      "H2: bestätigt": "39/40",
+      "H2: falsifiziert": "0/40",
+      "H2: nicht entscheidbar": "1/40",
+      "H2: nicht entscheidbar, Grund Datenlage": "1/40",
+      "H3: bestätigt": "0/40",
+      "H3: falsifiziert": "0/40",
+      "H3: nicht entscheidbar": "40/40",
+      "H3: nicht entscheidbar, Grund Verfahren": "40/40",
+      "H4: bestätigt": "40/40",
+      "H4: falsifiziert": "0/40",
+      "H4: nicht entscheidbar": "0/40",
+      "mindestens ein |z⁰| > c (H1)": "40/40"
+     },
+     "u_c_median": {
+      "F_min": 0.0009639407463056407,
+      "Im N1": 0.0014186759664342415,
+      "Im N2": 0.0004773634079064022,
+      "Im N3": 0.00017254310425285309,
+      "Re N1": 0.001428851871159853,
+      "Re N2": 0.0005033233973710656,
+      "Re N3": 0.00027452454842614917
+     },
+     "wahrheit": {
+      "klasse": "R1",
+      "r_max_rel": 0.4999999999999897
+     }
+    },
+    "A04-R2/L1": {
+     "abbruch": {
+      "S1_kandidaten": "34/40",
+      "S2": "0/40",
+      "S4": "0/40"
+     },
+     "gueltigkeit": {
+      "G1": "149/25200",
+      "G4": "403/25200"
+     },
+     "laufzeit_je_kampagne_s": 4.208825,
+     "raten": {
+      "E3: unauffällig": "5/40",
+      "E3: unbestimmt": "35/40",
+      "H1 Sensitivität faktor_0_1: bestätigt": "0/40",
+      "H1 Sensitivität faktor_0_1: falsifiziert": "40/40",
+      "H1 Sensitivität faktor_0_1: nicht entscheidbar": "0/40",
+      "H1 Sensitivität fassung_A: bestätigt": "0/40",
+      "H1 Sensitivität fassung_A: falsifiziert": "0/40",
+      "H1 Sensitivität fassung_A: nicht entscheidbar": "40/40",
+      "H1 und H2 bestätigt": "0/40",
+      "H1: Zusatz Abweichung nachgewiesen, Relevanz offen": "40/40",
+      "H1: Zusatz Drift der Einzelmodulbasis": "33/40",
+      "H1: bestätigt": "0/40",
+      "H1: falsifiziert": "0/40",
+      "H1: nicht entscheidbar": "40/40",
+      "H1: nicht entscheidbar, Grund Datenlage": "1/40",
+      "H1: nicht entscheidbar, Grund Graubereich": "39/40",
+      "H1Z: bestätigt": "0/40",
+      "H1Z: falsifiziert": "40/40",
+      "H1Z: nicht entscheidbar": "0/40",
+      "H2: bestätigt": "39/40",
+      "H2: falsifiziert": "0/40",
+      "H2: nicht entscheidbar": "1/40",
+      "H2: nicht entscheidbar, Grund Datenlage": "1/40",
+      "H3: bestätigt": "0/40",
+      "H3: falsifiziert": "0/40",
+      "H3: nicht entscheidbar": "40/40",
+      "H3: nicht entscheidbar, Grund Verfahren": "40/40",
+      "H4: bestätigt": "40/40",
+      "H4: falsifiziert": "0/40",
+      "H4: nicht entscheidbar": "0/40",
+      "mindestens ein |z⁰| > c (H1)": "40/40"
+     },
+     "u_c_median": {
+      "F_min": 0.0009273777392246534,
+      "Im N1": 0.0013632717550274088,
+      "Im N2": 0.00046456353522944527,
+      "Im N3": 0.00017382853163407712,
+      "Re N1": 0.0013823397083518813,
+      "Re N2": 0.0004904984174717509,
+      "Re N3": 0.00026333083432991217
+     },
+     "wahrheit": {
+      "klasse": "R2",
+      "r_max_rel": 0.9999999999999915
+     }
+    },
+    "A04-R3/L1": {
+     "abbruch": {
+      "S1_kandidaten": "34/40",
+      "S2": "0/40",
+      "S4": "0/40"
+     },
+     "gueltigkeit": {
+      "G1": "149/25200",
+      "G4": "440/25200"
+     },
+     "laufzeit_je_kampagne_s": 4.114974999999999,
+     "raten": {
+      "E3: unauffällig": "9/40",
+      "E3: unbestimmt": "31/40",
+      "H1 Sensitivität faktor_0_1: bestätigt": "0/40",
+      "H1 Sensitivität faktor_0_1: falsifiziert": "40/40",
+      "H1 Sensitivität faktor_0_1: nicht entscheidbar": "0/40",
+      "H1 Sensitivität fassung_A: bestätigt": "0/40",
+      "H1 Sensitivität fassung_A: falsifiziert": "40/40",
+      "H1 Sensitivität fassung_A: nicht entscheidbar": "0/40",
+      "H1 und H2 bestätigt": "0/40",
+      "H1: Zusatz Abweichung nachgewiesen": "40/40",
+      "H1: Zusatz Drift der Einzelmodulbasis": "34/40",
+      "H1: bestätigt": "0/40",
+      "H1: falsifiziert": "40/40",
+      "H1: nicht entscheidbar": "0/40",
+      "H1Z: bestätigt": "0/40",
+      "H1Z: falsifiziert": "40/40",
+      "H1Z: nicht entscheidbar": "0/40",
+      "H2: bestätigt": "40/40",
+      "H2: falsifiziert": "0/40",
+      "H2: nicht entscheidbar": "0/40",
+      "H3: bestätigt": "0/40",
+      "H3: falsifiziert": "0/40",
+      "H3: nicht entscheidbar": "40/40",
+      "H3: nicht entscheidbar, Grund Verfahren": "40/40",
+      "H4: bestätigt": "40/40",
+      "H4: falsifiziert": "0/40",
+      "H4: nicht entscheidbar": "0/40",
+      "mindestens ein |z⁰| > c (H1)": "40/40"
+     },
+     "u_c_median": {
+      "F_min": 0.0009037708583938351,
+      "Im N1": 0.0013353345412532211,
+      "Im N2": 0.00045147102274065056,
+      "Im N3": 0.00016562026777007494,
+      "Re N1": 0.00131162648446875,
+      "Re N2": 0.00046855570633820424,
+      "Re N3": 0.00025511819457911013
+     },
+     "wahrheit": {
+      "klasse": "R3",
+      "r_max_rel": 1.4999999999999913
+     }
+    },
+    "A04-R4/L1": {
+     "abbruch": {
+      "S1_kandidaten": "30/40",
+      "S2": "0/40",
+      "S4": "0/40"
+     },
+     "gueltigkeit": {
+      "G1": "159/25200",
+      "G4": "349/25200"
+     },
+     "laufzeit_je_kampagne_s": 4.19285,
+     "raten": {
+      "E3: unauffällig": "6/40",
+      "E3: unbestimmt": "34/40",
+      "H1 Sensitivität faktor_0_1: bestätigt": "0/40",
+      "H1 Sensitivität faktor_0_1: falsifiziert": "40/40",
+      "H1 Sensitivität faktor_0_1: nicht entscheidbar": "0/40",
+      "H1 Sensitivität fassung_A: bestätigt": "0/40",
+      "H1 Sensitivität fassung_A: falsifiziert": "40/40",
+      "H1 Sensitivität fassung_A: nicht entscheidbar": "0/40",
+      "H1 und H2 bestätigt": "0/40",
+      "H1: Zusatz Abweichung nachgewiesen": "40/40",
+      "H1: Zusatz Drift der Einzelmodulbasis": "11/40",
+      "H1: bestätigt": "0/40",
+      "H1: falsifiziert": "40/40",
+      "H1: nicht entscheidbar": "0/40",
+      "H1Z: bestätigt": "0/40",
+      "H1Z: falsifiziert": "40/40",
+      "H1Z: nicht entscheidbar": "0/40",
+      "H2: bestätigt": "40/40",
+      "H2: falsifiziert": "0/40",
+      "H2: nicht entscheidbar": "0/40",
+      "H3: bestätigt": "0/40",
+      "H3: falsifiziert": "0/40",
+      "H3: nicht entscheidbar": "40/40",
+      "H3: nicht entscheidbar, Grund Verfahren": "40/40",
+      "H4: bestätigt": "40/40",
+      "H4: falsifiziert": "0/40",
+      "H4: nicht entscheidbar": "0/40",
+      "mindestens ein |z⁰| > c (H1)": "40/40"
+     },
+     "u_c_median": {
+      "F_min": 0.0008801289196247134,
+      "Im N1": 0.0012807095429580933,
+      "Im N2": 0.0004387723720150551,
+      "Im N3": 0.00016466007657032003,
+      "Re N1": 0.0012854704843055864,
+      "Re N2": 0.0004545780387872563,
+      "Re N3": 0.0002488695304389115
+     },
+     "wahrheit": {
+      "klasse": "R4",
+      "r_max_rel": 2.4999999999999925
+     }
+    },
+    "E07-basisdrift/L1": {
+     "abbruch": {
+      "S1_kandidaten": "35/40",
+      "S2": "0/40",
+      "S4": "0/40"
+     },
+     "gueltigkeit": {
+      "G1": "184/25200",
+      "G4": "455/25200"
+     },
+     "laufzeit_je_kampagne_s": 4.499425,
+     "raten": {
+      "E3: auffällig": "36/40",
+      "E3: unbestimmt": "4/40",
+      "H1 Sensitivität faktor_0_1: bestätigt": "39/40",
+      "H1 Sensitivität faktor_0_1: falsifiziert": "0/40",
+      "H1 Sensitivität faktor_0_1: nicht entscheidbar": "1/40",
+      "H1 Sensitivität fassung_A: bestätigt": "39/40",
+      "H1 Sensitivität fassung_A: falsifiziert": "0/40",
+      "H1 Sensitivität fassung_A: nicht entscheidbar": "1/40",
+      "H1 und H2 bestätigt": "39/40",
+      "H1: Zusatz Abweichung nachgewiesen, innerhalb der Äquivalenzgrenze": "2/40",
+      "H1: Zusatz Drift der Einzelmodulbasis": "40/40",
+      "H1: bestätigt": "39/40",
+      "H1: falsifiziert": "0/40",
+      "H1: nicht entscheidbar": "1/40",
+      "H1: nicht entscheidbar, Grund Datenlage": "1/40",
+      "H1Z: bestätigt": "39/40",
+      "H1Z: falsifiziert": "0/40",
+      "H1Z: nicht entscheidbar": "1/40",
+      "H1Z: nicht entscheidbar, Grund Datenlage": "1/40",
+      "H2: bestätigt": "39/40",
+      "H2: falsifiziert": "0/40",
+      "H2: nicht entscheidbar": "1/40",
+      "H2: nicht entscheidbar, Grund Datenlage": "1/40",
+      "H3: bestätigt": "0/40",
+      "H3: falsifiziert": "0/40",
+      "H3: nicht entscheidbar": "40/40",
+      "H3: nicht entscheidbar, Grund Verfahren": "40/40",
+      "H4: bestätigt": "40/40",
+      "H4: falsifiziert": "0/40",
+      "H4: nicht entscheidbar": "0/40",
+      "mindestens ein |z⁰| > c (H1)": "40/40"
+     },
+     "u_c_median": {
+      "F_min": 0.001504672798991534,
+      "Im N1": 0.002209418426236763,
+      "Im N2": 0.0007430809389592209,
+      "Im N3": 0.0002668372736620987,
+      "Re N1": 0.0022194809878293338,
+      "Re N2": 0.0007832311436466251,
+      "Re N3": 0.0004223974622856569
+     },
+     "wahrheit": {
+      "klasse": "R0",
+      "r_max_rel": 5.150583848930261e-15
+     }
+    },
+    "E07-verstaerkung/L1": {
+     "abbruch": {
+      "S1_kandidaten": "34/40",
+      "S2": "0/40",
+      "S4": "0/40"
+     },
+     "gueltigkeit": {
+      "G1": "188/25200",
+      "G4": "644/25200"
+     },
+     "laufzeit_je_kampagne_s": 4.367325,
+     "raten": {
+      "E3: unauffällig": "6/40",
+      "E3: unbestimmt": "34/40",
+      "H1 Sensitivität faktor_0_1: bestätigt": "37/40",
+      "H1 Sensitivität faktor_0_1: falsifiziert": "0/40",
+      "H1 Sensitivität faktor_0_1: nicht entscheidbar": "3/40",
+      "H1 Sensitivität fassung_A: bestätigt": "37/40",
+      "H1 Sensitivität fassung_A: falsifiziert": "0/40",
+      "H1 Sensitivität fassung_A: nicht entscheidbar": "3/40",
+      "H1 und H2 bestätigt": "37/40",
+      "H1: Zusatz Drift der Einzelmodulbasis": "40/40",
+      "H1: bestätigt": "37/40",
+      "H1: falsifiziert": "0/40",
+      "H1: nicht entscheidbar": "3/40",
+      "H1: nicht entscheidbar, Grund Datenlage": "3/40",
+      "H1Z: bestätigt": "37/40",
+      "H1Z: falsifiziert": "0/40",
+      "H1Z: nicht entscheidbar": "3/40",
+      "H1Z: nicht entscheidbar, Grund Datenlage": "3/40",
+      "H2: bestätigt": "38/40",
+      "H2: falsifiziert": "0/40",
+      "H2: nicht entscheidbar": "2/40",
+      "H2: nicht entscheidbar, Grund Datenlage": "2/40",
+      "H3: bestätigt": "0/40",
+      "H3: falsifiziert": "0/40",
+      "H3: nicht entscheidbar": "40/40",
+      "H3: nicht entscheidbar, Grund Verfahren": "40/40",
+      "H4: bestätigt": "40/40",
+      "H4: falsifiziert": "0/40",
+      "H4: nicht entscheidbar": "0/40",
+      "mindestens ein |z⁰| > c (H1)": "40/40"
+     },
+     "u_c_median": {
+      "F_min": 0.0009883643895965322,
+      "Im N1": 0.00143981918795739,
+      "Im N2": 0.0004894701415659961,
+      "Im N3": 0.0001799317127313685,
+      "Re N1": 0.0014739222262971205,
+      "Re N2": 0.000517114448631856,
+      "Re N3": 0.0002782357938760971
+     },
+     "wahrheit": {
+      "klasse": "R0",
+      "r_max_rel": 5.150583848930261e-15
+     }
+    },
+    "H-fehlend/L1": {
+     "abbruch": {
+      "S1_kandidaten": "34/40",
+      "S2": "0/40",
+      "S4": "0/40"
+     },
+     "gueltigkeit": {
+      "G1": "115/25200",
+      "G4": "517/25200",
+      "G8": "1920/25200"
+     },
+     "laufzeit_je_kampagne_s": 3.5691250000000005,
+     "raten": {
+      "E3: unauffällig": "5/40",
+      "E3: unbestimmt": "35/40",
+      "H1 Sensitivität faktor_0_1: bestätigt": "0/40",
+      "H1 Sensitivität faktor_0_1: falsifiziert": "0/40",
+      "H1 Sensitivität faktor_0_1: nicht entscheidbar": "40/40",
+      "H1 Sensitivität fassung_A: bestätigt": "0/40",
+      "H1 Sensitivität fassung_A: falsifiziert": "0/40",
+      "H1 Sensitivität fassung_A: nicht entscheidbar": "40/40",
+      "H1 und H2 bestätigt": "0/40",
+      "H1: Zusatz Drift der Einzelmodulbasis": "5/40",
+      "H1: bestätigt": "0/40",
+      "H1: falsifiziert": "0/40",
+      "H1: nicht entscheidbar": "40/40",
+      "H1: nicht entscheidbar, Grund Datenlage": "40/40",
+      "H1Z: bestätigt": "0/40",
+      "H1Z: falsifiziert": "0/40",
+      "H1Z: nicht entscheidbar": "40/40",
+      "H1Z: nicht entscheidbar, Grund Datenlage": "40/40",
+      "H2: bestätigt": "0/40",
+      "H2: falsifiziert": "0/40",
+      "H2: nicht entscheidbar": "40/40",
+      "H2: nicht entscheidbar, Grund Datenlage": "40/40",
+      "H3: bestätigt": "0/40",
+      "H3: falsifiziert": "0/40",
+      "H3: nicht entscheidbar": "40/40",
+      "H3: nicht entscheidbar, Grund Verfahren": "40/40",
+      "H4: bestätigt": "40/40",
+      "H4: falsifiziert": "0/40",
+      "H4: nicht entscheidbar": "0/40",
+      "mindestens ein |z⁰| > c (H1)": "3/40"
+     },
+     "u_c_median": {
+      "F_min": 0.0009714756119213008,
+      "Im N1": 0.001437730350932276,
+      "Im N2": 0.0004923374757789488,
+      "Im N3": 0.00017609262524315568,
+      "Re N1": 0.0014765196907120539,
+      "Re N2": 0.000511349871282243,
+      "Re N3": 0.00028394864886820386
+     },
+     "wahrheit": {
+      "klasse": "R0",
+      "r_max_rel": 5.150583848930261e-15
+     }
+    },
+    "H01-zelt/L1": {
+     "abbruch": {
+      "S1_kandidaten": "37/40",
+      "S2": "0/40",
+      "S4": "0/40"
+     },
+     "gueltigkeit": {
+      "G1": "152/25200",
+      "G4": "516/25200"
+     },
+     "h2_ueberdeckung": {
+      "schluessel": "perzentil_0.95",
+      "ueberdeckung": {
+       "bca_0.95": {
+        "yhat0": "40/40",
+        "yhat1": "38/40"
+       },
+       "perzentil_0.95": {
+        "yhat0": "40/40",
+        "yhat1": "40/40"
+       },
+       "perzentil_0.96": {
+        "yhat0": "40/40",
+        "yhat1": "40/40"
+       },
+       "perzentil_0.97": {
+        "yhat0": "40/40",
+        "yhat1": "40/40"
+       },
+       "perzentil_0.98": {
+        "yhat0": "40/40",
+        "yhat1": "40/40"
+       },
+       "perzentil_0.99": {
+        "yhat0": "40/40",
+        "yhat1": "40/40"
+       }
+      }
+     },
+     "laufzeit_je_kampagne_s": 4.2421750000000005,
+     "raten": {
+      "E3: unauffällig": "4/40",
+      "E3: unbestimmt": "36/40",
+      "H1 Sensitivität faktor_0_1: bestätigt": "40/40",
+      "H1 Sensitivität faktor_0_1: falsifiziert": "0/40",
+      "H1 Sensitivität faktor_0_1: nicht entscheidbar": "0/40",
+      "H1 Sensitivität fassung_A: bestätigt": "40/40",
+      "H1 Sensitivität fassung_A: falsifiziert": "0/40",
+      "H1 Sensitivität fassung_A: nicht entscheidbar": "0/40",
+      "H1 und H2 bestätigt": "40/40",
+      "H1: Zusatz Drift der Einzelmodulbasis": "3/40",
+      "H1: bestätigt": "40/40",
+      "H1: falsifiziert": "0/40",
+      "H1: nicht entscheidbar": "0/40",
+      "H1Z: bestätigt": "40/40",
+      "H1Z: falsifiziert": "0/40",
+      "H1Z: nicht entscheidbar": "0/40",
+      "H2: bestätigt": "40/40",
+      "H2: falsifiziert": "0/40",
+      "H2: nicht entscheidbar": "0/40",
+      "H3: bestätigt": "0/40",
+      "H3: falsifiziert": "0/40",
+      "H3: nicht entscheidbar": "40/40",
+      "H3: nicht entscheidbar, Grund Verfahren": "40/40",
+      "H4: bestätigt": "40/40",
+      "H4: falsifiziert": "0/40",
+      "H4: nicht entscheidbar": "0/40",
+      "mindestens ein |z⁰| > c (H1)": "1/40"
+     },
+     "u_c_median": {
+      "F_min": 0.000993494195843908,
+      "Im N1": 0.0014444880858673478,
+      "Im N2": 0.0004897495098061442,
+      "Im N3": 0.00017800077546946782,
+      "Re N1": 0.0014759598769657927,
+      "Re N2": 0.0005191096406512382,
+      "Re N3": 0.0002822585228143843
+     },
+     "wahrheit": {
+      "klasse": "R0",
+      "r_max_rel": 5.150583848930261e-15
+     }
+    },
+    "N03-N3bindet/L1": {
+     "abbruch": {
+      "S1_kandidaten": "32/40",
+      "S2": "0/40",
+      "S4": "0/40"
+     },
+     "gueltigkeit": {
+      "G1": "136/25200",
+      "G4": "254/25200"
+     },
+     "laufzeit_je_kampagne_s": 7.3173,
+     "raten": {
+      "E3: unauffällig": "40/40",
+      "H1 Sensitivität faktor_0_1: bestätigt": "40/40",
+      "H1 Sensitivität faktor_0_1: falsifiziert": "0/40",
+      "H1 Sensitivität faktor_0_1: nicht entscheidbar": "0/40",
+      "H1 Sensitivität fassung_A: bestätigt": "40/40",
+      "H1 Sensitivität fassung_A: falsifiziert": "0/40",
+      "H1 Sensitivität fassung_A: nicht entscheidbar": "0/40",
+      "H1 und H2 bestätigt": "40/40",
+      "H1: Zusatz Drift der Einzelmodulbasis": "7/40",
+      "H1: bestätigt": "40/40",
+      "H1: falsifiziert": "0/40",
+      "H1: nicht entscheidbar": "0/40",
+      "H1Z: bestätigt": "40/40",
+      "H1Z: falsifiziert": "0/40",
+      "H1Z: nicht entscheidbar": "0/40",
+      "H2: bestätigt": "40/40",
+      "H2: falsifiziert": "0/40",
+      "H2: nicht entscheidbar": "0/40",
+      "H3: bestätigt": "0/40",
+      "H3: falsifiziert": "0/40",
+      "H3: nicht entscheidbar": "40/40",
+      "H3: nicht entscheidbar, Grund Verfahren": "40/40",
+      "H4: bestätigt": "40/40",
+      "H4: falsifiziert": "0/40",
+      "H4: nicht entscheidbar": "0/40",
+      "mindestens ein |z⁰| > c (H1)": "6/40"
+     },
+     "u_c_median": {
+      "F_min": 0.0010350136623650565,
+      "Im N1": 0.00037230996829738913,
+      "Im N2": 0.000348770999161482,
+      "Im N3": 0.0003409830374600846,
+      "Re N1": 0.0003744166116127393,
+      "Re N2": 0.00034706984051261045,
+      "Re N3": 0.0003273364857706372
+     },
+     "wahrheit": {
+      "klasse": "R0",
+      "r_max_rel": 6.256165668243665e-15
+     }
+    },
+    "N03-ungleich/L1": {
+     "abbruch": {
+      "S1_kandidaten": "35/40",
+      "S2": "0/40",
+      "S4": "0/40"
+     },
+     "gueltigkeit": {
+      "G1": "166/25200",
+      "G4": "934/25200"
+     },
+     "laufzeit_je_kampagne_s": 9.417750000000002,
+     "raten": {
+      "E3: unauffällig": "3/40",
+      "E3: unbestimmt": "37/40",
+      "H1 Sensitivität faktor_0_1: bestätigt": "34/40",
+      "H1 Sensitivität faktor_0_1: falsifiziert": "0/40",
+      "H1 Sensitivität faktor_0_1: nicht entscheidbar": "6/40",
+      "H1 Sensitivität fassung_A: bestätigt": "34/40",
+      "H1 Sensitivität fassung_A: falsifiziert": "0/40",
+      "H1 Sensitivität fassung_A: nicht entscheidbar": "6/40",
+      "H1 und H2 bestätigt": "34/40",
+      "H1: Zusatz Drift der Einzelmodulbasis": "5/40",
+      "H1: bestätigt": "34/40",
+      "H1: falsifiziert": "0/40",
+      "H1: nicht entscheidbar": "6/40",
+      "H1: nicht entscheidbar, Grund Datenlage": "6/40",
+      "H1Z: bestätigt": "34/40",
+      "H1Z: falsifiziert": "0/40",
+      "H1Z: nicht entscheidbar": "6/40",
+      "H1Z: nicht entscheidbar, Grund Datenlage": "6/40",
+      "H2: bestätigt": "34/40",
+      "H2: falsifiziert": "0/40",
+      "H2: nicht entscheidbar": "6/40",
+      "H2: nicht entscheidbar, Grund Datenlage": "6/40",
+      "H3: bestätigt": "40/40",
+      "H3: falsifiziert": "0/40",
+      "H3: nicht entscheidbar": "0/40",
+      "H4: bestätigt": "40/40",
+      "H4: falsifiziert": "0/40",
+      "H4: nicht entscheidbar": "0/40",
+      "mindestens ein |z⁰| > c (H1)": "3/40"
+     },
+     "u_c_median": {
+      "F_min": 0.0011807030308336474,
+      "Im N1": 0.0017841376818402551,
+      "Im N2": 0.0006060078512076752,
+      "Im N3": 0.00021647521979651954,
+      "Re N1": 0.0017742682620506599,
+      "Re N2": 0.0006252121830240517,
+      "Re N3": 0.0003425635483495974
+     },
+     "wahrheit": {
+      "klasse": "R0",
+      "r_max_rel": 6.309449154700373e-15
+     }
+    },
+    "N04-laufart/L1": {
+     "abbruch": {
+      "S1_kandidaten": "36/40",
+      "S2": "0/40",
+      "S4": "0/40"
+     },
+     "gueltigkeit": {
+      "G1": "202/25200",
+      "G4": "560/25200"
+     },
+     "laufzeit_je_kampagne_s": 4.190975,
+     "raten": {
+      "E3: unbestimmt": "40/40",
+      "H1 Sensitivität faktor_0_1: bestätigt": "39/40",
+      "H1 Sensitivität faktor_0_1: falsifiziert": "0/40",
+      "H1 Sensitivität faktor_0_1: nicht entscheidbar": "1/40",
+      "H1 Sensitivität fassung_A: bestätigt": "39/40",
+      "H1 Sensitivität fassung_A: falsifiziert": "0/40",
+      "H1 Sensitivität fassung_A: nicht entscheidbar": "1/40",
+      "H1 und H2 bestätigt": "39/40",
+      "H1: Zusatz Abweichung nachgewiesen, innerhalb der Äquivalenzgrenze": "2/40",
+      "H1: Zusatz Drift der Einzelmodulbasis": "8/40",
+      "H1: bestätigt": "39/40",
+      "H1: falsifiziert": "0/40",
+      "H1: nicht entscheidbar": "1/40",
+      "H1: nicht entscheidbar, Grund Datenlage": "1/40",
+      "H1Z: bestätigt": "39/40",
+      "H1Z: falsifiziert": "0/40",
+      "H1Z: nicht entscheidbar": "1/40",
+      "H1Z: nicht entscheidbar, Grund Datenlage": "1/40",
+      "H2: bestätigt": "40/40",
+      "H2: falsifiziert": "0/40",
+      "H2: nicht entscheidbar": "0/40",
+      "H3: bestätigt": "0/40",
+      "H3: falsifiziert": "0/40",
+      "H3: nicht entscheidbar": "40/40",
+      "H3: nicht entscheidbar, Grund Verfahren": "40/40",
+      "H4: bestätigt": "40/40",
+      "H4: falsifiziert": "0/40",
+      "H4: nicht entscheidbar": "0/40",
+      "mindestens ein |z⁰| > c (H1)": "5/40"
+     },
+     "u_c_median": {
+      "F_min": 0.0014726967164704308,
+      "Im N1": 0.002193114632145883,
+      "Im N2": 0.0007398056120350841,
+      "Im N3": 0.0002659628736414027,
+      "Re N1": 0.002190934766589322,
+      "Re N2": 0.0007747338584279423,
+      "Re N3": 0.00041798068204439555
+     },
+     "wahrheit": {
+      "klasse": "R0",
+      "r_max_rel": 5.150583848930261e-15
+     }
+    },
+    "N05-F/L1": {
+     "abbruch": {
+      "S1_kandidaten": "34/40",
+      "S2": "0/40",
+      "S4": "0/40"
+     },
+     "gueltigkeit": {
+      "G1": "183/25200",
+      "G4": "472/25200"
+     },
+     "laufzeit_je_kampagne_s": 4.1055,
+     "raten": {
+      "E3: unauffällig": "3/40",
+      "E3: unbestimmt": "37/40",
+      "H1 Sensitivität faktor_0_1: bestätigt": "0/40",
+      "H1 Sensitivität faktor_0_1: falsifiziert": "40/40",
+      "H1 Sensitivität faktor_0_1: nicht entscheidbar": "0/40",
+      "H1 Sensitivität fassung_A: bestätigt": "0/40",
+      "H1 Sensitivität fassung_A: falsifiziert": "0/40",
+      "H1 Sensitivität fassung_A: nicht entscheidbar": "40/40",
+      "H1 und H2 bestätigt": "0/40",
+      "H1: Zusatz Abweichung nachgewiesen, Relevanz offen": "40/40",
+      "H1: Zusatz Drift der Einzelmodulbasis": "33/40",
+      "H1: bestätigt": "0/40",
+      "H1: falsifiziert": "0/40",
+      "H1: nicht entscheidbar": "40/40",
+      "H1: nicht entscheidbar, Grund Datenlage": "3/40",
+      "H1: nicht entscheidbar, Grund Graubereich": "37/40",
+      "H1Z: bestätigt": "0/40",
+      "H1Z: falsifiziert": "40/40",
+      "H1Z: nicht entscheidbar": "0/40",
+      "H2: bestätigt": "37/40",
+      "H2: falsifiziert": "0/40",
+      "H2: nicht entscheidbar": "3/40",
+      "H2: nicht entscheidbar, Grund Datenlage": "3/40",
+      "H3: bestätigt": "0/40",
+      "H3: falsifiziert": "0/40",
+      "H3: nicht entscheidbar": "40/40",
+      "H3: nicht entscheidbar, Grund Verfahren": "40/40",
+      "H4: bestätigt": "40/40",
+      "H4: falsifiziert": "0/40",
+      "H4: nicht entscheidbar": "0/40",
+      "mindestens ein |z⁰| > c (H1)": "40/40"
+     },
+     "u_c_median": {
+      "F_min": 0.0009215054771241037,
+      "Im N1": 0.001348522388197796,
+      "Im N2": 0.00045427096012025413,
+      "Im N3": 0.0001687025193874186,
+      "Re N1": 0.0013657667106729994,
+      "Re N2": 0.0004790739725796895,
+      "Re N3": 0.000259994589200789
+     },
+     "wahrheit": {
+      "klasse": "R2",
+      "r_max_rel": 0.9999999999999915
+     }
+    },
+    "N05-N2/L1": {
+     "abbruch": {
+      "S1_kandidaten": "34/40",
+      "S2": "0/40",
+      "S4": "0/40"
+     },
+     "gueltigkeit": {
+      "G1": "157/25200",
+      "G4": "409/25200"
+     },
+     "laufzeit_je_kampagne_s": 4.053725,
+     "raten": {
+      "E3: unauffällig": "6/40",
+      "E3: unbestimmt": "34/40",
+      "H1 Sensitivität faktor_0_1: bestätigt": "0/40",
+      "H1 Sensitivität faktor_0_1: falsifiziert": "40/40",
+      "H1 Sensitivität faktor_0_1: nicht entscheidbar": "0/40",
+      "H1 Sensitivität fassung_A: bestätigt": "0/40",
+      "H1 Sensitivität fassung_A: falsifiziert": "40/40",
+      "H1 Sensitivität fassung_A: nicht entscheidbar": "0/40",
+      "H1 und H2 bestätigt": "0/40",
+      "H1: Zusatz Abweichung nachgewiesen, Relevanz offen": "40/40",
+      "H1: Zusatz Drift der Einzelmodulbasis": "3/40",
+      "H1: bestätigt": "0/40",
+      "H1: falsifiziert": "0/40",
+      "H1: nicht entscheidbar": "40/40",
+      "H1: nicht entscheidbar, Grund Datenlage": "2/40",
+      "H1: nicht entscheidbar, Grund Graubereich": "38/40",
+      "H1Z: bestätigt": "0/40",
+      "H1Z: falsifiziert": "40/40",
+      "H1Z: nicht entscheidbar": "0/40",
+      "H2: bestätigt": "38/40",
+      "H2: falsifiziert": "0/40",
+      "H2: nicht entscheidbar": "2/40",
+      "H2: nicht entscheidbar, Grund Datenlage": "2/40",
+      "H3: bestätigt": "0/40",
+      "H3: falsifiziert": "0/40",
+      "H3: nicht entscheidbar": "40/40",
+      "H3: nicht entscheidbar, Grund Verfahren": "40/40",
+      "H4: bestätigt": "40/40",
+      "H4: falsifiziert": "0/40",
+      "H4: nicht entscheidbar": "0/40",
+      "mindestens ein |z⁰| > c (H1)": "40/40"
+     },
+     "u_c_median": {
+      "F_min": 0.0010496641600063416,
+      "Im N1": 0.0014264569400617407,
+      "Im N2": 0.000405436838955666,
+      "Im N3": 0.0001757443237741723,
+      "Re N1": 0.0014457913257461016,
+      "Re N2": 0.00042496333873599915,
+      "Re N3": 0.0002789679868546564
+     },
+     "wahrheit": {
+      "klasse": "R2",
+      "r_max_rel": 0.9999999999999992
+     }
+    },
+    "N05-N3/L1": {
+     "abbruch": {
+      "S1_kandidaten": "33/40",
+      "S2": "0/40",
+      "S4": "0/40"
+     },
+     "gueltigkeit": {
+      "G1": "154/25200",
+      "G4": "546/25200"
+     },
+     "laufzeit_je_kampagne_s": 5.53795,
+     "raten": {
+      "E3: unauffällig": "7/40",
+      "E3: unbestimmt": "33/40",
+      "H1 Sensitivität faktor_0_1: bestätigt": "0/40",
+      "H1 Sensitivität faktor_0_1: falsifiziert": "40/40",
+      "H1 Sensitivität faktor_0_1: nicht entscheidbar": "0/40",
+      "H1 Sensitivität fassung_A: bestätigt": "39/40",
+      "H1 Sensitivität fassung_A: falsifiziert": "0/40",
+      "H1 Sensitivität fassung_A: nicht entscheidbar": "1/40",
+      "H1 und H2 bestätigt": "0/40",
+      "H1: Zusatz Abweichung nachgewiesen, Relevanz offen": "40/40",
+      "H1: Zusatz Drift der Einzelmodulbasis": "3/40",
+      "H1: bestätigt": "0/40",
+      "H1: falsifiziert": "0/40",
+      "H1: nicht entscheidbar": "40/40",
+      "H1: nicht entscheidbar, Grund Datenlage": "1/40",
+      "H1: nicht entscheidbar, Grund Graubereich": "39/40",
+      "H1Z: bestätigt": "0/40",
+      "H1Z: falsifiziert": "0/40",
+      "H1Z: nicht entscheidbar": "40/40",
+      "H1Z: nicht entscheidbar, Grund Datenlage": "1/40",
+      "H1Z: nicht entscheidbar, Grund Graubereich": "39/40",
+      "H2: bestätigt": "39/40",
+      "H2: falsifiziert": "0/40",
+      "H2: nicht entscheidbar": "1/40",
+      "H2: nicht entscheidbar, Grund Datenlage": "1/40",
+      "H3: bestätigt": "0/40",
+      "H3: falsifiziert": "0/40",
+      "H3: nicht entscheidbar": "40/40",
+      "H3: nicht entscheidbar, Grund Verfahren": "40/40",
+      "H4: bestätigt": "40/40",
+      "H4: falsifiziert": "0/40",
+      "H4: nicht entscheidbar": "0/40",
+      "mindestens ein |z⁰| > c (H1)": "40/40"
+     },
+     "u_c_median": {
+      "F_min": 0.0009619423118058443,
+      "Im N1": 0.0014444360793291705,
+      "Im N2": 0.00048523285196423456,
+      "Im N3": 0.00016900000830370098,
+      "Re N1": 0.001413625701226255,
+      "Re N2": 0.0005019691565360761,
+      "Re N3": 0.000257154974027345
+     },
+     "wahrheit": {
+      "klasse": "R2",
+      "r_max_rel": 0.9999999999999972
+     }
+    },
+    "S-indexfehler/L1": {
+     "abbruch": {
+      "S1_kandidaten": "36/40",
+      "S2": "0/40",
+      "S4": "0/40"
+     },
+     "gueltigkeit": {
+      "G1": "146/25200",
+      "G2": "40/25200",
+      "G4": "611/25200"
+     },
+     "laufzeit_je_kampagne_s": 4.244225,
+     "raten": {
+      "E3: unauffällig": "5/40",
+      "E3: unbestimmt": "35/40",
+      "H1 Sensitivität faktor_0_1: bestätigt": "39/40",
+      "H1 Sensitivität faktor_0_1: falsifiziert": "0/40",
+      "H1 Sensitivität faktor_0_1: nicht entscheidbar": "1/40",
+      "H1 Sensitivität fassung_A: bestätigt": "39/40",
+      "H1 Sensitivität fassung_A: falsifiziert": "0/40",
+      "H1 Sensitivität fassung_A: nicht entscheidbar": "1/40",
+      "H1 und H2 bestätigt": "39/40",
+      "H1: Zusatz Drift der Einzelmodulbasis": "4/40",
+      "H1: bestätigt": "39/40",
+      "H1: falsifiziert": "0/40",
+      "H1: nicht entscheidbar": "1/40",
+      "H1: nicht entscheidbar, Grund Datenlage": "1/40",
+      "H1Z: bestätigt": "39/40",
+      "H1Z: falsifiziert": "0/40",
+      "H1Z: nicht entscheidbar": "1/40",
+      "H1Z: nicht entscheidbar, Grund Datenlage": "1/40",
+      "H2: bestätigt": "39/40",
+      "H2: falsifiziert": "0/40",
+      "H2: nicht entscheidbar": "1/40",
+      "H2: nicht entscheidbar, Grund Datenlage": "1/40",
+      "H3: bestätigt": "0/40",
+      "H3: falsifiziert": "0/40",
+      "H3: nicht entscheidbar": "40/40",
+      "H3: nicht entscheidbar, Grund Verfahren": "40/40",
+      "H4: bestätigt": "40/40",
+      "H4: falsifiziert": "0/40",
+      "H4: nicht entscheidbar": "0/40",
+      "mindestens ein |z⁰| > c (H1)": "2/40"
+     },
+     "u_c_median": {
+      "F_min": 0.0009719624661723257,
+      "Im N1": 0.0014271902866485962,
+      "Im N2": 0.000487773591977188,
+      "Im N3": 0.0001786404901361368,
+      "Re N1": 0.0014430876482994276,
+      "Re N2": 0.000510212718481382,
+      "Re N3": 0.00027757681433531763
+     },
+     "wahrheit": {
+      "klasse": "R0",
+      "r_max_rel": 5.150583848930261e-15
+     }
+    },
+    "S02-kontrolllauf/L1": {
+     "abbruch": {
+      "S1_kandidaten": "35/40",
+      "S2": "40/40",
+      "S4": "0/40"
+     },
+     "gueltigkeit": {
+      "G1": "172/25200",
+      "G4": "419/25200",
+      "G6": "40/25200"
+     },
+     "laufzeit_je_kampagne_s": 0.5105500000000001,
+     "raten": {
+      "E3: unauffällig": "6/40",
+      "E3: unbestimmt": "34/40",
+      "H1 Sensitivität faktor_0_1: bestätigt": "0/40",
+      "H1 Sensitivität faktor_0_1: falsifiziert": "0/40",
+      "H1 Sensitivität faktor_0_1: nicht entscheidbar": "40/40",
+      "H1 Sensitivität fassung_A: bestätigt": "0/40",
+      "H1 Sensitivität fassung_A: falsifiziert": "0/40",
+      "H1 Sensitivität fassung_A: nicht entscheidbar": "40/40",
+      "H1 und H2 bestätigt": "0/40",
+      "H1: bestätigt": "0/40",
+      "H1: falsifiziert": "0/40",
+      "H1: nicht entscheidbar": "40/40",
+      "H1: nicht entscheidbar, Grund Datenlage": "40/40",
+      "H1Z: bestätigt": "0/40",
+      "H1Z: falsifiziert": "0/40",
+      "H1Z: nicht entscheidbar": "40/40",
+      "H1Z: nicht entscheidbar, Grund Datenlage": "40/40",
+      "H2: bestätigt": "0/40",
+      "H2: falsifiziert": "0/40",
+      "H2: nicht entscheidbar": "40/40",
+      "H2: nicht entscheidbar, Grund Datenlage": "40/40",
+      "H3: bestätigt": "0/40",
+      "H3: falsifiziert": "0/40",
+      "H3: nicht entscheidbar": "40/40",
+      "H3: nicht entscheidbar, Grund Verfahren": "40/40",
+      "H4: bestätigt": "40/40",
+      "H4: falsifiziert": "0/40",
+      "H4: nicht entscheidbar": "0/40",
+      "mindestens ein |z⁰| > c (H1)": "0/40"
+     },
+     "u_c_median": {
+      "F_min": null,
+      "Im N1": null,
+      "Im N2": null,
+      "Im N3": null,
+      "Re N1": null,
+      "Re N2": null,
+      "Re N3": null
+     },
+     "wahrheit": {
+      "klasse": "R0",
+      "r_max_rel": 5.150583848930261e-15
+     }
+    },
+    "S06-saettigung/L1": {
+     "abbruch": {
+      "S1_kandidaten": "33/40",
+      "S2": "0/40",
+      "S4": "0/40"
+     },
+     "gueltigkeit": {
+      "G1": "178/25200",
+      "G4": "447/25200",
+      "G5": "40/25200"
+     },
+     "laufzeit_je_kampagne_s": 4.209149999999999,
+     "raten": {
+      "E3: unauffällig": "2/40",
+      "E3: unbestimmt": "38/40",
+      "H1 Sensitivität faktor_0_1: bestätigt": "40/40",
+      "H1 Sensitivität faktor_0_1: falsifiziert": "0/40",
+      "H1 Sensitivität faktor_0_1: nicht entscheidbar": "0/40",
+      "H1 Sensitivität fassung_A: bestätigt": "40/40",
+      "H1 Sensitivität fassung_A: falsifiziert": "0/40",
+      "H1 Sensitivität fassung_A: nicht entscheidbar": "0/40",
+      "H1 und H2 bestätigt": "40/40",
+      "H1: Zusatz Drift der Einzelmodulbasis": "5/40",
+      "H1: bestätigt": "40/40",
+      "H1: falsifiziert": "0/40",
+      "H1: nicht entscheidbar": "0/40",
+      "H1Z: bestätigt": "40/40",
+      "H1Z: falsifiziert": "0/40",
+      "H1Z: nicht entscheidbar": "0/40",
+      "H2: bestätigt": "40/40",
+      "H2: falsifiziert": "0/40",
+      "H2: nicht entscheidbar": "0/40",
+      "H3: bestätigt": "0/40",
+      "H3: falsifiziert": "0/40",
+      "H3: nicht entscheidbar": "40/40",
+      "H3: nicht entscheidbar, Grund Verfahren": "40/40",
+      "H4: bestätigt": "40/40",
+      "H4: falsifiziert": "0/40",
+      "H4: nicht entscheidbar": "0/40",
+      "mindestens ein |z⁰| > c (H1)": "3/40"
+     },
+     "u_c_median": {
+      "F_min": 0.0009834354916644808,
+      "Im N1": 0.0014499934372925643,
+      "Im N2": 0.0004905791552532075,
+      "Im N3": 0.00017679077076098983,
+      "Re N1": 0.0014598026098776606,
+      "Re N2": 0.0005140107172957871,
+      "Re N3": 0.0002805297877868833
+     },
+     "wahrheit": {
+      "klasse": "R0",
+      "r_max_rel": 5.150583848930261e-15
+     }
+    }
+   },
+   "szenarien_v1": {
+    "A06-phase/L1": {
+     "abbruch": {
+      "S1_kandidaten": "26/30",
+      "S2": "0/30",
+      "S4": "0/30"
+     },
+     "gueltigkeit": {
+      "G1": "113/18900",
+      "G4": "778/18900"
+     },
+     "laufzeit_je_kampagne_s": 8.761366666666667,
+     "raten": {
+      "E3: auffällig": "30/30",
+      "H1 Sensitivität faktor_0_1: bestätigt": "23/30",
+      "H1 Sensitivität faktor_0_1: falsifiziert": "0/30",
+      "H1 Sensitivität faktor_0_1: nicht entscheidbar": "7/30",
+      "H1 Sensitivität fassung_A: bestätigt": "23/30",
+      "H1 Sensitivität fassung_A: falsifiziert": "0/30",
+      "H1 Sensitivität fassung_A: nicht entscheidbar": "7/30",
+      "H1 und H2 bestätigt": "23/30",
+      "H1: Zusatz Abweichung nachgewiesen, Relevanz offen": "7/30",
+      "H1: Zusatz Abweichung nachgewiesen, innerhalb der Äquivalenzgrenze": "23/30",
+      "H1: Zusatz Drift der Einzelmodulbasis": "30/30",
+      "H1: bestätigt": "23/30",
+      "H1: falsifiziert": "0/30",
+      "H1: nicht entscheidbar": "7/30",
+      "H1: nicht entscheidbar, Grund Datenlage": "7/30",
+      "H1Z: bestätigt": "23/30",
+      "H1Z: falsifiziert": "0/30",
+      "H1Z: nicht entscheidbar": "7/30",
+      "H1Z: nicht entscheidbar, Grund Datenlage": "7/30",
+      "H2: Zusatz Abweichung nachgewiesen, innerhalb der Äquivalenzgrenze": "23/30",
+      "H2: bestätigt": "23/30",
+      "H2: falsifiziert": "0/30",
+      "H2: nicht entscheidbar": "7/30",
+      "H2: nicht entscheidbar, Grund Datenlage": "7/30",
+      "H3: bestätigt": "28/30",
+      "H3: falsifiziert": "0/30",
+      "H3: nicht entscheidbar": "2/30",
+      "H3: nicht entscheidbar, Grund Datenlage": "2/30",
+      "H4: bestätigt": "30/30",
+      "H4: falsifiziert": "0/30",
+      "H4: nicht entscheidbar": "0/30",
+      "mindestens ein |z⁰| > c (H1)": "30/30"
+     },
+     "u_c_median": {
+      "F_min": 0.0011693016353415903,
+      "Im N1": 0.0017231766163254513,
+      "Im N2": 0.0005837638410245586,
+      "Im N3": 0.00021076935953687486,
+      "Re N1": 0.0017389411177846095,
+      "Re N2": 0.0006171664273414381,
+      "Re N3": 0.00033412044989265767
+     },
+     "wahrheit": {
+      "klasse": "R1",
+      "r_max_rel": 0.06114939240713722
+     }
+    },
+    "H03-phase/L1": {
+     "abbruch": {
+      "S1_kandidaten": "22/30",
+      "S2": "0/30",
+      "S4": "0/30"
+     },
+     "gueltigkeit": {
+      "G1": "100/18900",
+      "G4": "663/18900"
+     },
+     "laufzeit_je_kampagne_s": 9.024466666666665,
+     "raten": {
+      "E3: auffällig": "30/30",
+      "H1 Sensitivität faktor_0_1: bestätigt": "24/30",
+      "H1 Sensitivität faktor_0_1: falsifiziert": "0/30",
+      "H1 Sensitivität faktor_0_1: nicht entscheidbar": "6/30",
+      "H1 Sensitivität fassung_A: bestätigt": "24/30",
+      "H1 Sensitivität fassung_A: falsifiziert": "0/30",
+      "H1 Sensitivität fassung_A: nicht entscheidbar": "6/30",
+      "H1 und H2 bestätigt": "24/30",
+      "H1: Zusatz Abweichung nachgewiesen, Relevanz offen": "6/30",
+      "H1: Zusatz Abweichung nachgewiesen, innerhalb der Äquivalenzgrenze": "24/30",
+      "H1: Zusatz Drift der Einzelmodulbasis": "30/30",
+      "H1: bestätigt": "24/30",
+      "H1: falsifiziert": "0/30",
+      "H1: nicht entscheidbar": "6/30",
+      "H1: nicht entscheidbar, Grund Datenlage": "6/30",
+      "H1Z: bestätigt": "24/30",
+      "H1Z: falsifiziert": "0/30",
+      "H1Z: nicht entscheidbar": "6/30",
+      "H1Z: nicht entscheidbar, Grund Datenlage": "6/30",
+      "H2: Zusatz Abweichung nachgewiesen, innerhalb der Äquivalenzgrenze": "25/30",
+      "H2: bestätigt": "25/30",
+      "H2: falsifiziert": "0/30",
+      "H2: nicht entscheidbar": "5/30",
+      "H2: nicht entscheidbar, Grund Datenlage": "5/30",
+      "H3: Zusatz Abweichung nachgewiesen, innerhalb der Äquivalenzgrenze": "1/30",
+      "H3: bestätigt": "30/30",
+      "H3: falsifiziert": "0/30",
+      "H3: nicht entscheidbar": "0/30",
+      "H4: bestätigt": "30/30",
+      "H4: falsifiziert": "0/30",
+      "H4: nicht entscheidbar": "0/30",
+      "mindestens ein |z⁰| > c (H1)": "30/30"
+     },
+     "u_c_median": {
+      "F_min": 0.0011792457694099984,
+      "Im N1": 0.0017305412258068612,
+      "Im N2": 0.0005905877127167559,
+      "Im N3": 0.0002144645400796287,
+      "Re N1": 0.0017583767486908897,
+      "Re N2": 0.0006213975547613512,
+      "Re N3": 0.0003401574576574026
+     },
+     "wahrheit": {
+      "klasse": "R1",
+      "r_max_rel": 0.15203630223943243
+     }
+    },
+    "I01-amplitude/L1": {
+     "abbruch": {
+      "S1_kandidaten": "22/30",
+      "S2": "0/30",
+      "S4": "0/30"
+     },
+     "gueltigkeit": {
+      "G1": "155/23310",
+      "G4": "760/23310"
+     },
+     "laufzeit_je_kampagne_s": 9.765233333333333,
+     "raten": {
+      "E3: unauffällig": "2/30",
+      "E3: unbestimmt": "28/30",
+      "H1 Sensitivität faktor_0_1: bestätigt": "23/30",
+      "H1 Sensitivität faktor_0_1: falsifiziert": "0/30",
+      "H1 Sensitivität faktor_0_1: nicht entscheidbar": "7/30",
+      "H1 Sensitivität fassung_A: bestätigt": "23/30",
+      "H1 Sensitivität fassung_A: falsifiziert": "0/30",
+      "H1 Sensitivität fassung_A: nicht entscheidbar": "7/30",
+      "H1 und H2 bestätigt": "23/30",
+      "H1: Zusatz Abweichung nachgewiesen, Relevanz offen": "7/30",
+      "H1: Zusatz Abweichung nachgewiesen, innerhalb der Äquivalenzgrenze": "23/30",
+      "H1: Zusatz Drift der Einzelmodulbasis": "30/30",
+      "H1: bestätigt": "23/30",
+      "H1: falsifiziert": "0/30",
+      "H1: nicht entscheidbar": "7/30",
+      "H1: nicht entscheidbar, Grund Datenlage": "7/30",
+      "H1Z: bestätigt": "23/30",
+      "H1Z: falsifiziert": "0/30",
+      "H1Z: nicht entscheidbar": "7/30",
+      "H1Z: nicht entscheidbar, Grund Datenlage": "7/30",
+      "H2: bestätigt": "25/30",
+      "H2: falsifiziert": "0/30",
+      "H2: nicht entscheidbar": "5/30",
+      "H2: nicht entscheidbar, Grund Datenlage": "5/30",
+      "H3: Zusatz Abweichung nachgewiesen, innerhalb der Äquivalenzgrenze": "3/30",
+      "H3: bestätigt": "29/30",
+      "H3: falsifiziert": "0/30",
+      "H3: nicht entscheidbar": "1/30",
+      "H3: nicht entscheidbar, Grund Datenlage": "1/30",
+      "H4: bestätigt": "30/30",
+      "H4: falsifiziert": "0/30",
+      "H4: nicht entscheidbar": "0/30",
+      "Zuordnung: Klasse p = 1": "20/30",
+      "Zuordnung: nicht durchgeführt": "1/30",
+      "Zuordnung: nicht zuordenbar": "9/30",
+      "mindestens ein |z⁰| > c (H1)": "30/30"
+     },
+     "u_c_median": {
+      "F_min": 0.0011545860424046978,
+      "Im N1": 0.0017017725157360256,
+      "Im N2": 0.0005803369583979237,
+      "Im N3": 0.00021601374492385189,
+      "Re N1": 0.001731228298990771,
+      "Re N2": 0.0006074408791394881,
+      "Re N3": 0.0003339014300960383
+     },
+     "wahrheit": {
+      "klasse": "R1",
+      "r_max_rel": 0.10110262477158666
+     }
+    },
+    "I01-frequenz/L1": {
+     "abbruch": {
+      "S1_kandidaten": "28/30",
+      "S2": "0/30",
+      "S4": "0/30"
+     },
+     "gueltigkeit": {
+      "G1": "151/23310",
+      "G4": "800/23310"
+     },
+     "laufzeit_je_kampagne_s": 9.970633333333332,
+     "raten": {
+      "E3: unauffällig": "3/30",
+      "E3: unbestimmt": "27/30",
+      "H1 Sensitivität faktor_0_1: bestätigt": "24/30",
+      "H1 Sensitivität faktor_0_1: falsifiziert": "0/30",
+      "H1 Sensitivität faktor_0_1: nicht entscheidbar": "6/30",
+      "H1 Sensitivität fassung_A: bestätigt": "24/30",
+      "H1 Sensitivität fassung_A: falsifiziert": "0/30",
+      "H1 Sensitivität fassung_A: nicht entscheidbar": "6/30",
+      "H1 und H2 bestätigt": "24/30",
+      "H1: Zusatz Abweichung nachgewiesen, Relevanz offen": "6/30",
+      "H1: Zusatz Abweichung nachgewiesen, innerhalb der Äquivalenzgrenze": "24/30",
+      "H1: Zusatz Drift der Einzelmodulbasis": "30/30",
+      "H1: bestätigt": "24/30",
+      "H1: falsifiziert": "0/30",
+      "H1: nicht entscheidbar": "6/30",
+      "H1: nicht entscheidbar, Grund Datenlage": "6/30",
+      "H1Z: bestätigt": "24/30",
+      "H1Z: falsifiziert": "0/30",
+      "H1Z: nicht entscheidbar": "6/30",
+      "H1Z: nicht entscheidbar, Grund Datenlage": "6/30",
+      "H2: bestätigt": "24/30",
+      "H2: falsifiziert": "0/30",
+      "H2: nicht entscheidbar": "6/30",
+      "H2: nicht entscheidbar, Grund Datenlage": "6/30",
+      "H3: Zusatz Abweichung nachgewiesen, innerhalb der Äquivalenzgrenze": "3/30",
+      "H3: bestätigt": "29/30",
+      "H3: falsifiziert": "0/30",
+      "H3: nicht entscheidbar": "1/30",
+      "H3: nicht entscheidbar, Grund Datenlage": "1/30",
+      "H4: bestätigt": "30/30",
+      "H4: falsifiziert": "0/30",
+      "H4: nicht entscheidbar": "0/30",
+      "Zuordnung: Klasse p = 1": "22/30",
+      "Zuordnung: nicht durchgeführt": "3/30",
+      "Zuordnung: nicht zuordenbar": "5/30",
+      "mindestens ein |z⁰| > c (H1)": "30/30"
+     },
+     "u_c_median": {
+      "F_min": 0.00120372490962303,
+      "Im N1": 0.0017675825172001434,
+      "Im N2": 0.000589727145234368,
+      "Im N3": 0.00021284526254485256,
+      "Re N1": 0.0017427441717658724,
+      "Re N2": 0.0006220034163041343,
+      "Re N3": 0.000341241084069319
+     },
+     "wahrheit": {
+      "klasse": "R1",
+      "r_max_rel": 0.10110262477158666
+     }
+    },
+    "I02-amplitude/L1": {
+     "abbruch": {
+      "S1_kandidaten": "30/30",
+      "S2": "0/30",
+      "S4": "0/30"
+     },
+     "gueltigkeit": {
+      "G1": "3685/23310",
+      "G4": "845/23310"
+     },
+     "laufzeit_je_kampagne_s": 5.189000000000001,
+     "raten": {
+      "E3: unauffällig": "12/30",
+      "E3: unbestimmt": "18/30",
+      "H1 Sensitivität faktor_0_1: bestätigt": "1/30",
+      "H1 Sensitivität faktor_0_1: falsifiziert": "0/30",
+      "H1 Sensitivität faktor_0_1: nicht entscheidbar": "29/30",
+      "H1 Sensitivität fassung_A: bestätigt": "1/30",
+      "H1 Sensitivität fassung_A: falsifiziert": "0/30",
+      "H1 Sensitivität fassung_A: nicht entscheidbar": "29/30",
+      "H1 und H2 bestätigt": "1/30",
+      "H1: Zusatz Abweichung nachgewiesen, Relevanz offen": "24/30",
+      "H1: Zusatz Drift der Einzelmodulbasis": "28/30",
+      "H1: bestätigt": "1/30",
+      "H1: falsifiziert": "0/30",
+      "H1: nicht entscheidbar": "29/30",
+      "H1: nicht entscheidbar, Grund Datenlage": "29/30",
+      "H1Z: bestätigt": "1/30",
+      "H1Z: falsifiziert": "0/30",
+      "H1Z: nicht entscheidbar": "29/30",
+      "H1Z: nicht entscheidbar, Grund Datenlage": "29/30",
+      "H2: bestätigt": "2/30",
+      "H2: falsifiziert": "0/30",
+      "H2: nicht entscheidbar": "28/30",
+      "H2: nicht entscheidbar, Grund Datenlage": "28/30",
+      "H3: Zusatz Abweichung nachgewiesen, innerhalb der Äquivalenzgrenze": "30/30",
+      "H3: bestätigt": "30/30",
+      "H3: falsifiziert": "0/30",
+      "H3: nicht entscheidbar": "0/30",
+      "H4: bestätigt": "30/30",
+      "H4: falsifiziert": "0/30",
+      "H4: nicht entscheidbar": "0/30",
+      "Zuordnung: Klasse p = 2": "1/30",
+      "Zuordnung: keine Abweichung an den Punkten I nachgewiesen": "3/30",
+      "Zuordnung: nicht durchgeführt": "21/30",
+      "Zuordnung: nicht zuordenbar": "5/30",
+      "mindestens ein |z⁰| > c (H1)": "28/30"
+     },
+     "u_c_median": {
+      "F_min": 0.0012211881558779197,
+      "Im N1": 0.001805137173717967,
+      "Im N2": 0.0006110237358440889,
+      "Im N3": 0.00021910826333733447,
+      "Re N1": 0.0018051849565005184,
+      "Re N2": 0.0006416755106119253,
+      "Re N3": 0.0003501873600871806
+     },
+     "wahrheit": {
+      "klasse": "R1",
+      "r_max_rel": 0.015207795642874772
+     }
+    },
+    "I02-frequenz/L1": {
+     "abbruch": {
+      "S1_kandidaten": "30/30",
+      "S2": "0/30",
+      "S4": "0/30"
+     },
+     "gueltigkeit": {
+      "G1": "2616/23310",
+      "G4": "804/23310"
+     },
+     "laufzeit_je_kampagne_s": 7.4928333333333335,
+     "raten": {
+      "E3: unauffällig": "4/30",
+      "E3: unbestimmt": "26/30",
+      "H1 Sensitivität faktor_0_1: bestätigt": "2/30",
+      "H1 Sensitivität faktor_0_1: falsifiziert": "0/30",
+      "H1 Sensitivität faktor_0_1: nicht entscheidbar": "28/30",
+      "H1 Sensitivität fassung_A: bestätigt": "2/30",
+      "H1 Sensitivität fassung_A: falsifiziert": "0/30",
+      "H1 Sensitivität fassung_A: nicht entscheidbar": "28/30",
+      "H1 und H2 bestätigt": "2/30",
+      "H1: Zusatz Abweichung nachgewiesen, Relevanz offen": "25/30",
+      "H1: Zusatz Abweichung nachgewiesen, innerhalb der Äquivalenzgrenze": "2/30",
+      "H1: Zusatz Drift der Einzelmodulbasis": "29/30",
+      "H1: bestätigt": "2/30",
+      "H1: falsifiziert": "0/30",
+      "H1: nicht entscheidbar": "28/30",
+      "H1: nicht entscheidbar, Grund Datenlage": "28/30",
+      "H1Z: bestätigt": "2/30",
+      "H1Z: falsifiziert": "0/30",
+      "H1Z: nicht entscheidbar": "28/30",
+      "H1Z: nicht entscheidbar, Grund Datenlage": "28/30",
+      "H2: bestätigt": "10/30",
+      "H2: falsifiziert": "0/30",
+      "H2: nicht entscheidbar": "20/30",
+      "H2: nicht entscheidbar, Grund Datenlage": "20/30",
+      "H3: Zusatz Abweichung nachgewiesen, Relevanz offen": "1/30",
+      "H3: Zusatz Abweichung nachgewiesen, innerhalb der Äquivalenzgrenze": "29/30",
+      "H3: bestätigt": "29/30",
+      "H3: falsifiziert": "0/30",
+      "H3: nicht entscheidbar": "1/30",
+      "H3: nicht entscheidbar, Grund Datenlage": "1/30",
+      "H4: bestätigt": "30/30",
+      "H4: falsifiziert": "0/30",
+      "H4: nicht entscheidbar": "0/30",
+      "Zuordnung: Klasse p = 2": "1/30",
+      "Zuordnung: keine Abweichung an den Punkten I nachgewiesen": "10/30",
+      "Zuordnung: nicht durchgeführt": "10/30",
+      "Zuordnung: nicht zuordenbar": "9/30",
+      "mindestens ein |z⁰| > c (H1)": "28/30"
+     },
+     "u_c_median": {
+      "F_min": 0.0012029928387061026,
+      "Im N1": 0.0017960014391382902,
+      "Im N2": 0.0006076351331558557,
+      "Im N3": 0.000218345011941221,
+      "Re N1": 0.0017945895113537754,
+      "Re N2": 0.0006364867409030964,
+      "Re N3": 0.00034413108650312087
+     },
+     "wahrheit": {
+      "klasse": "R1",
+      "r_max_rel": 0.015207795642874772
+     }
+    },
+    "I04-drift/L1": {
+     "abbruch": {
+      "S1_kandidaten": "26/30",
+      "S2": "0/30",
+      "S4": "0/30"
+     },
+     "gueltigkeit": {
+      "G1": "147/23310",
+      "G4": "876/23310"
+     },
+     "laufzeit_je_kampagne_s": 9.768266666666666,
+     "raten": {
+      "E3: unauffällig": "2/30",
+      "E3: unbestimmt": "28/30",
+      "H1 Sensitivität faktor_0_1: bestätigt": "20/30",
+      "H1 Sensitivität faktor_0_1: falsifiziert": "0/30",
+      "H1 Sensitivität faktor_0_1: nicht entscheidbar": "10/30",
+      "H1 Sensitivität fassung_A: bestätigt": "20/30",
+      "H1 Sensitivität fassung_A: falsifiziert": "0/30",
+      "H1 Sensitivität fassung_A: nicht entscheidbar": "10/30",
+      "H1 und H2 bestätigt": "20/30",
+      "H1: Zusatz Drift der Einzelmodulbasis": "15/30",
+      "H1: bestätigt": "20/30",
+      "H1: falsifiziert": "0/30",
+      "H1: nicht entscheidbar": "10/30",
+      "H1: nicht entscheidbar, Grund Datenlage": "10/30",
+      "H1Z: bestätigt": "20/30",
+      "H1Z: falsifiziert": "0/30",
+      "H1Z: nicht entscheidbar": "10/30",
+      "H1Z: nicht entscheidbar, Grund Datenlage": "10/30",
+      "H2: bestätigt": "20/30",
+      "H2: falsifiziert": "0/30",
+      "H2: nicht entscheidbar": "10/30",
+      "H2: nicht entscheidbar, Grund Datenlage": "10/30",
+      "H3: Zusatz Abweichung nachgewiesen, innerhalb der Äquivalenzgrenze": "8/30",
+      "H3: bestätigt": "29/30",
+      "H3: falsifiziert": "0/30",
+      "H3: nicht entscheidbar": "1/30",
+      "H3: nicht entscheidbar, Grund Datenlage": "1/30",
+      "H4: bestätigt": "30/30",
+      "H4: falsifiziert": "0/30",
+      "H4: nicht entscheidbar": "0/30",
+      "Zuordnung: keine Abweichung an den Punkten I nachgewiesen": "24/30",
+      "Zuordnung: nicht durchgeführt": "6/30",
+      "mindestens ein |z⁰| > c (H1)": "15/30"
+     },
+     "u_c_median": {
+      "F_min": 0.0011902575035960842,
+      "Im N1": 0.0017474440543003783,
+      "Im N2": 0.0005966704620922914,
+      "Im N3": 0.00021485660587164138,
+      "Re N1": 0.0017669823125555737,
+      "Re N2": 0.0006266760629457851,
+      "Re N3": 0.000346655902102858
+     },
+     "wahrheit": {
+      "klasse": "R0",
+      "r_max_rel": 3.9924999328704646e-15
+     }
+    },
+    "I05-misch/L1": {
+     "abbruch": {
+      "S1_kandidaten": "30/30",
+      "S2": "0/30",
+      "S4": "0/30"
+     },
+     "gueltigkeit": {
+      "G1": "3504/23310",
+      "G4": "930/23310"
+     },
+     "laufzeit_je_kampagne_s": 5.661466666666667,
+     "raten": {
+      "E3: unauffällig": "6/30",
+      "E3: unbestimmt": "24/30",
+      "H1 Sensitivität faktor_0_1: bestätigt": "0/30",
+      "H1 Sensitivität faktor_0_1: falsifiziert": "0/30",
+      "H1 Sensitivität faktor_0_1: nicht entscheidbar": "30/30",
+      "H1 Sensitivität fassung_A: bestätigt": "0/30",
+      "H1 Sensitivität fassung_A: falsifiziert": "0/30",
+      "H1 Sensitivität fassung_A: nicht entscheidbar": "30/30",
+      "H1 und H2 bestätigt": "0/30",
+      "H1: Zusatz Abweichung nachgewiesen, Relevanz offen": "30/30",
+      "H1: Zusatz Drift der Einzelmodulbasis": "22/30",
+      "H1: bestätigt": "0/30",
+      "H1: falsifiziert": "0/30",
+      "H1: nicht entscheidbar": "30/30",
+      "H1: nicht entscheidbar, Grund Datenlage": "30/30",
+      "H1Z: bestätigt": "0/30",
+      "H1Z: falsifiziert": "0/30",
+      "H1Z: nicht entscheidbar": "30/30",
+      "H1Z: nicht entscheidbar, Grund Datenlage": "30/30",
+      "H2: bestätigt": "6/30",
+      "H2: falsifiziert": "0/30",
+      "H2: nicht entscheidbar": "24/30",
+      "H2: nicht entscheidbar, Grund Datenlage": "24/30",
+      "H3: Zusatz Abweichung nachgewiesen, Relevanz offen": "1/30",
+      "H3: Zusatz Abweichung nachgewiesen, innerhalb der Äquivalenzgrenze": "29/30",
+      "H3: bestätigt": "29/30",
+      "H3: falsifiziert": "0/30",
+      "H3: nicht entscheidbar": "1/30",
+      "H3: nicht entscheidbar, Grund Datenlage": "1/30",
+      "H4: bestätigt": "30/30",
+      "H4: falsifiziert": "0/30",
+      "H4: nicht entscheidbar": "0/30",
+      "Zuordnung: Klasse p = 1": "6/30",
+      "Zuordnung: nicht durchgeführt": "19/30",
+      "Zuordnung: nicht zuordenbar": "5/30",
+      "mindestens ein |z⁰| > c (H1)": "30/30"
+     },
+     "u_c_median": {
+      "F_min": 0.0012342705566318812,
+      "Im N1": 0.0017866815102133462,
+      "Im N2": 0.0006029163451436617,
+      "Im N3": 0.0002143517673808376,
+      "Re N1": 0.001797827138029668,
+      "Re N2": 0.0006427593336820918,
+      "Re N3": 0.0003588033029405773
+     },
+     "wahrheit": {
+      "klasse": "R1",
+      "r_max_rel": 0.1163482875316548
+     }
+    },
+    "S01a-liftoff/L1": {
+     "abbruch": {
+      "S1_kandidaten": "22/30",
+      "S2": "30/30",
+      "S4": "0/30"
+     },
+     "gueltigkeit": {
+      "G1": "130/18900",
+      "G4": "1119/18900",
+      "G6": "4099/18900"
+     },
+     "laufzeit_je_kampagne_s": 0.4234,
+     "raten": {
+      "H1 Sensitivität faktor_0_1: bestätigt": "0/30",
+      "H1 Sensitivität faktor_0_1: falsifiziert": "0/30",
+      "H1 Sensitivität faktor_0_1: nicht entscheidbar": "30/30",
+      "H1 Sensitivität fassung_A: bestätigt": "0/30",
+      "H1 Sensitivität fassung_A: falsifiziert": "0/30",
+      "H1 Sensitivität fassung_A: nicht entscheidbar": "30/30",
+      "H1 und H2 bestätigt": "0/30",
+      "H1: bestätigt": "0/30",
+      "H1: falsifiziert": "0/30",
+      "H1: nicht entscheidbar": "30/30",
+      "H1: nicht entscheidbar, Grund Datenlage": "30/30",
+      "H1Z: bestätigt": "0/30",
+      "H1Z: falsifiziert": "0/30",
+      "H1Z: nicht entscheidbar": "30/30",
+      "H1Z: nicht entscheidbar, Grund Datenlage": "30/30",
+      "H2: bestätigt": "0/30",
+      "H2: falsifiziert": "0/30",
+      "H2: nicht entscheidbar": "30/30",
+      "H2: nicht entscheidbar, Grund Datenlage": "30/30",
+      "H3: bestätigt": "0/30",
+      "H3: falsifiziert": "0/30",
+      "H3: nicht entscheidbar": "30/30",
+      "H3: nicht entscheidbar, Grund Datenlage": "30/30",
+      "H4: bestätigt": "0/30",
+      "H4: falsifiziert": "0/30",
+      "H4: nicht entscheidbar": "30/30",
+      "H4: nicht entscheidbar, Grund Datenlage": "30/30",
+      "mindestens ein |z⁰| > c (H1)": "0/30"
+     },
+     "u_c_median": {
+      "F_min": null,
+      "Im N1": null,
+      "Im N2": null,
+      "Im N3": null,
+      "Re N1": null,
+      "Re N2": null,
+      "Re N3": null
+     },
+     "wahrheit": {
+      "klasse": "R0",
+      "r_max_rel": 5.5856617864660205e-15
+     }
+    }
+   },
+   "wahrheit": {
+    "bewertung": {
+     "H1_falsifiziert_bei_R0_R1": false,
+     "ausgaenge": {
+      "H1": {
+       "ausgang": "falsifiziert",
+       "grund": null,
+       "zusaetze": [
+        "Abweichung nachgewiesen"
+       ]
+      },
+      "H1Z": {
+       "ausgang": "falsifiziert",
+       "grund": null,
+       "zusaetze": [
+        "Abweichung nachgewiesen"
+       ]
+      },
+      "H2": {
+       "ausgang": "bestätigt",
+       "grund": null,
+       "zusaetze": []
+      },
+      "H3": {
+       "ausgang": "nicht entscheidbar",
+       "grund": "Verfahren",
+       "zusaetze": []
+      },
+      "H4": {
+       "ausgang": "bestätigt",
+       "grund": null,
+       "zusaetze": []
+      }
+     },
+     "erwartung": "H1 falsifiziert mit Power ≥ 0,8 (K07/K21)",
+     "kennung": "SYNTH-DATEI-A04-R4-L1-20261016",
+     "klasse": "R4",
+     "r_max_rel": 2.4999999999999925,
+     "szenario": "A04-R4"
+    },
+    "entfernt_gleich": true,
+    "geaendert_gleich": true
+   },
+   "zeltfit": {
+    "abweichung": [],
+    "gleich": 3997,
+    "gleichstand": 3,
+    "je_art": {
+     "asymmetrisch": {
+      "abweichend": 0,
+      "gleich": 800,
+      "gleichstand": 0
+     },
+     "gerade": {
+      "abweichend": 0,
+      "gleich": 800,
+      "gleichstand": 0
+     },
+     "rauschen": {
+      "abweichend": 0,
+      "gleich": 797,
+      "gleichstand": 3
+     },
+     "symmetrisch": {
+      "abweichend": 0,
+      "gleich": 800,
+      "gleichstand": 0
+     },
+     "verrauscht": {
+      "abweichend": 0,
+      "gleich": 800,
+      "gleichstand": 0
+     }
+    },
+    "n": 4000,
+    "seed": 5,
+    "t_kandidat": 9.493972590008525,
+    "t_vollraster": 461.43254099397836
+   }
+  }
+ },
+ "kopf": {
+  "code_version": {
+   "git": "7a259efe3f2f9545cd487af3d2ddb8a20a1e8b34+geändert",
+   "paket": "0.1.0"
+  },
+  "datenart": "synthetisch",
+  "erzeugt_von": {
+   "programm": "pcmms_auswertung",
+   "version": "0.1.0"
+  },
+  "kennung": "SYNTH-PRUEFSTAND-KOMPAKT",
+  "registrierung": "keine (synthetisch)",
+  "schema": "pcmms.bewertung",
+  "schema_version": "0.1"
+ }
+}

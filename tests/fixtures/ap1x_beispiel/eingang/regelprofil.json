@@ -1,0 +1,1062 @@
+{
+ "inhalt": {
+  "beschreibung": "Entwicklungsprofil: wie AF-2026-10, dazu ausdrücklich gewählte Entwicklungsprüffälle (Testvarianten und Vorschläge des Entwurfs); keine Festlegung",
+  "profil_id": "ENTW-2026-10",
+  "reduktion": {
+   "normativ": {}
+  },
+  "regeln": {
+   "M.konvention": {
+    "fundstelle": "§3, §4, P0.2, §12 (I)",
+    "gegenstand": "Bestimmung von M",
+    "herkunft": "M = Σ_c F_c,stat/g; Gewicht M·g, träge Masse M + m_L getrennt",
+    "status": "arbeitsfestlegung",
+    "wert": "b",
+    "wirkung": "ausgang"
+   },
+   "a6.interpolation": {
+    "fundstelle": "§5.1, A6, Tab. F",
+    "gegenstand": "Abtastrate (π·k_max·f/f_s)²/2 ≤ 10⁻³",
+    "herkunft": "",
+    "status": "festlegung",
+    "wert": 0.001,
+    "wirkung": "generator"
+   },
+   "bootstrap.B": {
+    "fundstelle": "§8.3, A9.5, Tab. F",
+    "gegenstand": "Bootstrap-Replikate je Anteil",
+    "herkunft": "",
+    "status": "festlegung",
+    "wert": 10000,
+    "wirkung": "verarbeitung"
+   },
+   "bootstrap.varianz": {
+    "fundstelle": "§8.3, A9.5",
+    "gegenstand": "Varianz der Bootstrap-Replikate",
+    "herkunft": "",
+    "status": "technisch",
+    "wert": "Stichprobenvarianz mit ddof = 1",
+    "wirkung": "verarbeitung"
+   },
+   "bootstrap.ziehung": {
+    "fundstelle": "Plan AP-13 2.6 c",
+    "gegenstand": "Indexmatrizen und Ziehreihenfolge",
+    "herkunft": "",
+    "status": "technisch",
+    "wert": "SeedSequence(seed).spawn: A_i in Listenreihenfolge, B¹_1…B¹_3, H3, H4, danach E3, Einstellung 2",
+    "wirkung": "verarbeitung"
+   },
+   "drift.logik": {
+    "fundstelle": "§9.3, §12 Driftbehandlung",
+    "gegenstand": "Wirkung nachgewiesener Drift auf den Ausgang",
+    "herkunft": "Fassung (a): Ausgang trotz Drift möglich, Drift als Zusatz",
+    "status": "entwicklungsprueffall",
+    "wert": "a",
+    "wirkung": "ausgang"
+   },
+   "drift.zusatz": {
+    "fundstelle": "§9.3, §12 Driftbehandlung",
+    "gegenstand": "Definition des Drift-Zusatzes",
+    "herkunft": "Fassung (a): |z⁰| > c ohne gleichsinniges |z¹| > c oder umgekehrt (heutiger Text)",
+    "status": "entwicklungsprueffall",
+    "wert": "a",
+    "wirkung": "bericht"
+   },
+   "e3.e3b_form": {
+    "fundstelle": "§8.10, §12",
+    "gegenstand": "E3b als Differenz oder absolut",
+    "herkunft": "Differenz gegen die Vorhersage (heutiger Text)",
+    "status": "entwicklungsprueffall",
+    "wert": "differenz",
+    "wirkung": "bericht"
+   },
+   "e3.pruefmenge": {
+    "fundstelle": "§12 Schwellen von E3",
+    "gegenstand": "Prüfmenge von E3",
+    "herkunft": "ohne Identifizierbarkeits- und Zusatzkonfigurationen",
+    "status": "entwicklungsprueffall",
+    "wert": "auswertbare_schnittpunkte",
+    "wirkung": "bericht"
+   },
+   "e3.pruefzahl": {
+    "fundstelle": "A9.13, §12",
+    "gegenstand": "Zahl der E3-Prüfungen (Bonferroni)",
+    "herkunft": "heutige Fassung von A9.13",
+    "status": "entwicklungsprueffall",
+    "wert": "zwei_je_konfiguration_plus_eins",
+    "wirkung": "bericht"
+   },
+   "e3.rueckfall": {
+    "fundstelle": "§8.10, A9.11, §12",
+    "gegenstand": "Rückfall von E3",
+    "herkunft": "Rückfall für E3 als Ganzes",
+    "status": "entwicklungsprueffall",
+    "wert": "ganz",
+    "wirkung": "bericht"
+   },
+   "e3.schwellen": {
+    "fundstelle": "§8.10, §12 Schwellen von E3",
+    "gegenstand": "Schwellen von E3 (0,1°, q_tol)",
+    "herkunft": "Vorschlag (a): 0,1° und 5,8·10⁻⁴",
+    "status": "entwicklungsprueffall",
+    "wert": {
+     "phase_grad": 0.1,
+     "q_tol": 0.00058
+    },
+    "wirkung": "bericht"
+   },
+   "einstellung2.art": {
+    "fundstelle": "§5.5, §12 (II)",
+    "gegenstand": "Art von Einstellung 2",
+    "herkunft": "Generator rechnet zweite Amplitude und zweite Frequenz als Prüffälle",
+    "status": "entwicklungsprueffall",
+    "wert": "beide",
+    "wirkung": "generator"
+   },
+   "einstellung2.s": {
+    "fundstelle": "§5.5, §12 Einstellung 2",
+    "gegenstand": "Kraftskala s",
+    "herkunft": "Vorschlag s ≈ 0,5; zweite Frequenz: ganzzahlig nächst f·√0,5",
+    "status": "entwicklungsprueffall",
+    "wert": 0.5,
+    "wirkung": "generator"
+   },
+   "g.einstellung2": {
+    "fundstelle": "§9.1, §12 Läufe bei Einstellung 2",
+    "gegenstand": "G2–G4 für Läufe bei Einstellung 2",
+    "herkunft": "",
+    "status": "offen",
+    "wert": null,
+    "wirkung": "ausgang"
+   },
+   "g2.delta_phi_tol_grad": {
+    "fundstelle": "§9.1 G2, Tab. F",
+    "gegenstand": "Phasentoleranz δφ_tol",
+    "herkunft": "",
+    "status": "festlegung",
+    "wert": 0.5,
+    "wirkung": "ausgang"
+   },
+   "g2.sigma_tol": {
+    "fundstelle": "§9.1 G2, Tab. F",
+    "gegenstand": "Jittertoleranz σ_tol",
+    "herkunft": "dreifacher Median von σⱼ der Pilotläufe",
+    "status": "festlegung",
+    "wert": 3.0,
+    "wirkung": "ausgang"
+   },
+   "g4.faktor": {
+    "fundstelle": "§9.1 G4, Tab. F",
+    "gegenstand": "Fünftelkriterium",
+    "herkunft": "3·σ_Δ,X, σ_Δ = 1,4826·MAD je Laufart",
+    "status": "festlegung",
+    "wert": 3.0,
+    "wirkung": "ausgang"
+   },
+   "g6.faktor": {
+    "fundstelle": "§4, A1, Tab. F",
+    "gegenstand": "Liftoff-Schwelle F_LO,c",
+    "herkunft": "Nullpunkt + 5·σ_c",
+    "status": "festlegung",
+    "wert": 5.0,
+    "wirkung": "ausgang"
+   },
+   "g7.form": {
+    "fundstelle": "§9.1 G7, §12 Driftbehandlung",
+    "gegenstand": "Form des Temperaturfensters G7",
+    "herkunft": "Fassung (a) wie bisher: T_P0 ± ΔT",
+    "status": "entwicklungsprueffall",
+    "wert": "a",
+    "wirkung": "ausgang"
+   },
+   "h0.alarm_faktor": {
+    "fundstelle": "§8.8, Tab. F",
+    "gegenstand": "Nullpunktalarm 3·√(4/3)·σ̂_ref",
+    "herkunft": "",
+    "status": "festlegung",
+    "wert": 3.4641016151377544,
+    "wirkung": "ausgang"
+   },
+   "h0.eps_faktor": {
+    "fundstelle": "§8.8, A9.8, Tab. F",
+    "gegenstand": "ε_ctrl = 3·σ̂_ref bzw. 3·σ̂_betr",
+    "herkunft": "",
+    "status": "festlegung",
+    "wert": 3.0,
+    "wirkung": "ausgang"
+   },
+   "h0.referenzlaeufe_min": {
+    "fundstelle": "P0.7, Tab. F",
+    "gegenstand": "Referenzläufe der Phase 0",
+    "herkunft": "",
+    "status": "festlegung",
+    "wert": 42,
+    "wirkung": "ausgang"
+   },
+   "h0.sammeltest": {
+    "fundstelle": "§8.8, A9.8, §12 Wortlaut",
+    "gegenstand": "Nullkontroll-Sammeltest und Wortregel",
+    "herkunft": "",
+    "status": "arbeitsfestlegung",
+    "wert": {
+     "alpha": 0.05,
+     "aussagen": [
+      "Unterschied nachgewiesen",
+      "kein Unterschied nachgewiesen, Gleichheit nicht nachgewiesen"
+     ],
+     "vermerk": "Einzellauftoleranz, keine Äquivalenzgrenze für das Mittel"
+    },
+    "wirkung": "bericht"
+   },
+   "h1.alpha": {
+    "fundstelle": "§3, §8.4, Tab. F",
+    "gegenstand": "α je Familie",
+    "herkunft": "",
+    "status": "festlegung",
+    "wert": 0.05,
+    "wirkung": "ausgang"
+   },
+   "h1.bias": {
+    "fundstelle": "§5.4, §8.3, A9.5",
+    "gegenstand": "Rauschbias b̂⁰, b̂¹ getrennt mit u(b̂); dieselbe Korrektur in c",
+    "herkunft": "",
+    "status": "regeltext",
+    "wert": "getrennt",
+    "wirkung": "ausgang"
+   },
+   "h1.bias_u": {
+    "fundstelle": "A9.5, Tab. F",
+    "gegenstand": "u(b̂): MC-Fehler und halbe Spannweite über die Rauschmodelle (Rechteck)",
+    "herkunft": "",
+    "status": "festlegung",
+    "wert": "rechteck",
+    "wirkung": "ausgang"
+   },
+   "h1.c_pruefschwelle": {
+    "fundstelle": "§8.4, A8, Tab. F",
+    "gegenstand": "Prüfrate über 0,069 → gepooltes Quantil",
+    "herkunft": "",
+    "status": "festlegung",
+    "wert": 0.069,
+    "wirkung": "ausgang"
+   },
+   "h1.c_quantil": {
+    "fundstelle": "§8.4",
+    "gegenstand": "Quantil von max|z⁰|",
+    "herkunft": "",
+    "status": "regeltext",
+    "wert": 0.95,
+    "wirkung": "ausgang"
+   },
+   "h1.c_quelle": {
+    "fundstelle": "§8.4, A9.3 Nr. 10",
+    "gegenstand": "kritischer Wert c von H1",
+    "herkunft": "95-%-Quantil von max|z⁰| aus der Kalibriersimulation; c_B nur Planung und Sensitivität",
+    "status": "regeltext",
+    "wert": "teil_b",
+    "wirkung": "ausgang"
+   },
+   "h1.c_rauschmodelle": {
+    "fundstelle": "§8.4, §12 Rauschmodelle",
+    "gegenstand": "Rauschmodelle und Wahl des Quantils für c",
+    "herkunft": "Fassung (a): Quantil mit dem Rauschmodell des Szenarios bzw. von Teil B",
+    "status": "entwicklungsprueffall",
+    "wert": "a",
+    "wirkung": "ausgang"
+   },
+   "h1.d_fassung": {
+    "fundstelle": "§8.5, A8, §12 (I)",
+    "gegenstand": "D für Re/Im N_k",
+    "herkunft": "Fassung B: Durchmesser der Zeigermenge",
+    "status": "arbeitsfestlegung",
+    "wert": "B",
+    "wirkung": "ausgang"
+   },
+   "h1.delta_rel": {
+    "fundstelle": "§8.5, A8, §12 (I)",
+    "gegenstand": "Relevanzgrenze Δ_rel,q",
+    "herkunft": "",
+    "status": "arbeitsfestlegung",
+    "wert": "gleich_delta_q",
+    "wirkung": "ausgang"
+   },
+   "h1.faktor": {
+    "fundstelle": "§8.5, §12 (I), Tab. F",
+    "gegenstand": "Äquivalenzgrenze Δ_q = Faktor·D_q",
+    "herkunft": "",
+    "status": "arbeitsfestlegung",
+    "wert": 0.25,
+    "wirkung": "ausgang"
+   },
+   "h1.grenzen_quelle": {
+    "fundstelle": "§8.5, A9.11, §12 (I)",
+    "gegenstand": "D_q, Δ_q, Δ_rel als Punktwert aus ŷ⁰",
+    "herkunft": "in AP-13 je Kampagne aus ihrem verrauschten ŷ⁰",
+    "status": "arbeitsfestlegung",
+    "wert": "yhat0_teil_b",
+    "wirkung": "ausgang"
+   },
+   "h1.grenzfall": {
+    "fundstelle": "—",
+    "gegenstand": "u_c = 0 (rauschfrei)",
+    "herkunft": "",
+    "status": "technisch",
+    "wert": "u_c ≤ 1e-14·Skala gilt als null: Intervall entartet, z = 0 bei |r| ≤ 1e-14·Skala, sonst ±∞",
+    "wirkung": "verarbeitung"
+   },
+   "h1.groessen": {
+    "fundstelle": "§3 H1, §4",
+    "gegenstand": "H1-Größen",
+    "herkunft": "21 Punkte × 7 Größen = 147 Tests; Summen- und Zellgrößen getrennt (H1Z)",
+    "status": "regeltext",
+    "wert": [
+     "F_min − ⟨N⟩",
+     "Re/Im N₁",
+     "Re/Im N₂",
+     "Re/Im N₃"
+    ],
+    "wirkung": "ausgang"
+   },
+   "h1.groesste_abweichung": {
+    "fundstelle": "§9.3",
+    "gegenstand": "Auswahl der „größten Abweichung“ für die Vertrauensgrenzen",
+    "herkunft": "",
+    "status": "technisch",
+    "wert": "größtes min(|r⁰| − c·u⁰, |r¹| − c·u¹)/Δ_q unter den Tests mit nachgewiesener Abweichung",
+    "wirkung": "bericht"
+   },
+   "h1.gruende": {
+    "fundstelle": "§9.3, §9.4, §12 Wortlaut",
+    "gegenstand": "Gründe für „nicht entscheidbar“",
+    "herkunft": "",
+    "status": "arbeitsfestlegung",
+    "wert": [
+     "Präzision",
+     "Graubereich",
+     "Drift",
+     "Datenlage",
+     "Verfahren"
+    ],
+    "wirkung": "bericht"
+   },
+   "h1.grund_zuordnung": {
+    "fundstelle": "§9.4",
+    "gegenstand": "Zuordnung des Grundes je Test und Rangfolge",
+    "herkunft": "Präreg nennt nur die Klassen",
+    "status": "technisch",
+    "wert": "Datenlage > Verfahren > Drift > Graubereich > Präzision; Präzision: t_eq·u ≥ Δ_q, Graubereich sonst",
+    "wirkung": "bericht"
+   },
+   "h1.mindesteffekt": {
+    "fundstelle": "§8.5, §9.3",
+    "gegenstand": "|r⁰| − c·u⁰ > Δ_rel und |r¹| − c·u¹ > Δ_rel, gleiches Vorzeichen",
+    "herkunft": "",
+    "status": "regeltext",
+    "wert": "beide_gleiches_vorzeichen",
+    "wirkung": "ausgang"
+   },
+   "h1.rueckfall": {
+    "fundstelle": "§12 Rückfall für H1",
+    "gegenstand": "Rückfall für H1 bei verfehlten Raten",
+    "herkunft": "",
+    "status": "offen",
+    "wert": null,
+    "wirkung": "ausgang"
+   },
+   "h1.sensitivitaet": {
+    "fundstelle": "§8.5, §8.9, A9.9",
+    "gegenstand": "Sensitivitätsvarianten (ohne Ausgangswirkung)",
+    "herkunft": "getrennt berichtet",
+    "status": "arbeitsfestlegung",
+    "wert": {
+     "c_B": true,
+     "faktor": 0.1,
+     "fassung_A": true
+    },
+    "wirkung": "bericht"
+   },
+   "h1.tost": {
+    "fundstelle": "§8.5, A8, Tab. F",
+    "gegenstand": "PB1: TOST mit t(0,95; ν_eff), IUT gegen ŷ⁰ und ŷ¹, ohne „kein |z| > c“",
+    "herkunft": "",
+    "status": "arbeitsfestlegung",
+    "wert": 0.95,
+    "wirkung": "ausgang"
+   },
+   "h1.vollstaendigkeit": {
+    "fundstelle": "§9.3",
+    "gegenstand": "Bestätigung nur bei 21 auswertbaren Punkten",
+    "herkunft": "",
+    "status": "regeltext",
+    "wert": 21,
+    "wirkung": "ausgang"
+   },
+   "h1.zusaetze": {
+    "fundstelle": "§9.3, §9.4, §12 Wortlaut",
+    "gegenstand": "Wortlaut der Zusätze",
+    "herkunft": "",
+    "status": "arbeitsfestlegung",
+    "wert": {
+     "bestaetigt": "Abweichung nachgewiesen, innerhalb der Äquivalenzgrenze",
+     "drift": "Drift der Einzelmodulbasis",
+     "nicht_entscheidbar": "Abweichung nachgewiesen, Relevanz offen"
+    },
+    "wirkung": "bericht"
+   },
+   "h1z.c_quelle": {
+    "fundstelle": "§8.4",
+    "gegenstand": "kritischer Wert von H1Z (441 Tests)",
+    "herkunft": "bis Teil B c_B = t(1 − α/882)",
+    "status": "regeltext",
+    "wert": "teil_b",
+    "wirkung": "ausgang"
+   },
+   "h1z.grenzen": {
+    "fundstelle": "§8.5, §12 Grenzen von H1Z",
+    "gegenstand": "Grenzen Δ_c,q, Δ_c,rel,q von H1Z",
+    "herkunft": "Vorschlag (a): Δ_c,q = Δ_q/3, Δ_c,rel,q = Δ_rel,q/3",
+    "status": "entwicklungsprueffall",
+    "wert": "a",
+    "wirkung": "ausgang"
+   },
+   "h2.biaskorrektur": {
+    "fundstelle": "§5.4, §8.6",
+    "gegenstand": "Rauschbias im Zeltfit",
+    "herkunft": "Präreg nennt keine Korrektur für H2",
+    "status": "technisch",
+    "wert": "keine",
+    "wirkung": "ausgang"
+   },
+   "h2.delta_grad": {
+    "fundstelle": "§3, §8.6, §12 Grenzen von H2 und H3",
+    "gegenstand": "δ_H2 (Äquivalenz- und Relevanzgrenze)",
+    "herkunft": "Testvariante ±1°",
+    "status": "entwicklungsprueffall",
+    "wert": 1.0,
+    "wirkung": "ausgang"
+   },
+   "h2.drift_zusatz": {
+    "fundstelle": "§9.3, §12 Driftbehandlung",
+    "gegenstand": "Drift-Zusatz bei H2",
+    "herkunft": "",
+    "status": "offen",
+    "wert": null,
+    "wirkung": "bericht"
+   },
+   "h2.gleichstand": {
+    "fundstelle": "A9.6",
+    "gegenstand": "Gleichstand im Zeltfit",
+    "herkunft": "",
+    "status": "regeltext",
+    "wert": "kleinstes_phi",
+    "wirkung": "ausgang"
+   },
+   "h2.gleichstand_toleranz": {
+    "fundstelle": "A9.6 (nennt keine Toleranz)",
+    "gegenstand": "Toleranz der Gleichstandsregel im Zeltfit",
+    "herkunft": "Rundungsgleichheit, keine statistische Toleranz",
+    "status": "technisch",
+    "wert": "RSS ≤ RSS_min·(1 + 10⁻⁹) + 10⁻¹²·SST + 10⁻²⁸·n·max F²",
+    "wirkung": "verarbeitung"
+   },
+   "h2.intervallkette": {
+    "fundstelle": "§8.6, A9.6, §12 Intervall von H2",
+    "gegenstand": "Intervalltyp und Rückfallkette",
+    "herkunft": "Fassung (a): Perzentil, BCa, Perzentil mit Niveau 0,96–0,99, sonst nicht entscheidbar; Typ aus der Kalibriersimulation (Teil B)",
+    "status": "entwicklungsprueffall",
+    "wert": "a",
+    "wirkung": "ausgang"
+   },
+   "h2.lesart_entscheidbar": {
+    "fundstelle": "A9.11, §12",
+    "gegenstand": "Lesart „H2 auch bei hoher Präzision entscheidbar“",
+    "herkunft": "",
+    "status": "offen",
+    "wert": null,
+    "wirkung": "bericht"
+   },
+   "h2.logik": {
+    "fundstelle": "§3, §8.6, §9.3, §12 (I)",
+    "gegenstand": "Entscheidungslogik von H2",
+    "herkunft": "",
+    "status": "arbeitsfestlegung",
+    "wert": "aequivalenz",
+    "wirkung": "ausgang"
+   },
+   "h2.mittelpunkt": {
+    "fundstelle": "A9.6, §12 H2-Fitfenster",
+    "gegenstand": "Mittelpunkt des Fitfensters",
+    "herkunft": "Fassung (i): Schnittpunkt mit größtem vorhergesagtem F̂_min − N_s, bei Gleichstand der kleinere",
+    "status": "entwicklungsprueffall",
+    "wert": "i",
+    "wirkung": "ausgang"
+   },
+   "h2.niveau": {
+    "fundstelle": "§8.6, §12 (I), Tab. F",
+    "gegenstand": "Niveau der H2-Intervalle",
+    "herkunft": "",
+    "status": "arbeitsfestlegung",
+    "wert": 0.95,
+    "wirkung": "ausgang"
+   },
+   "h2.quantil": {
+    "fundstelle": "§8.6, A9.6",
+    "gegenstand": "Quantildefinition der Bootstrap-Intervalle",
+    "herkunft": "",
+    "status": "technisch",
+    "wert": "numpy „linear“",
+    "wirkung": "verarbeitung"
+   },
+   "h2.rasterursprung": {
+    "fundstelle": "A9.6 „über [min W, max W]“",
+    "gegenstand": "Ursprung des 0,001°-Rasters",
+    "herkunft": "",
+    "status": "technisch",
+    "wert": "kleinste_abszisse",
+    "wirkung": "ausgang"
+   },
+   "h2.replikate": {
+    "fundstelle": "§8.6, A9.6",
+    "gegenstand": "Bootstrap-Replikate H2",
+    "herkunft": "",
+    "status": "festlegung",
+    "wert": 10000,
+    "wirkung": "verarbeitung"
+   },
+   "h2.replikate_gemeinsam": {
+    "fundstelle": "A9.6, A9.13, Plan 2.6 c",
+    "gegenstand": "Replikate von H2 und E3",
+    "herkunft": "h2_replikate und e3_mc folgen bootstrap_B",
+    "status": "technisch",
+    "wert": "Zeilen der Bootstrap-Indexmatrizen (B_H2 = B_E3 = B)",
+    "wirkung": "verarbeitung"
+   },
+   "h2.schaetzer": {
+    "fundstelle": "§8.6, §12 Schätzer",
+    "gegenstand": "Schätzer der Spitzenlage",
+    "herkunft": "Fassung (a): stetiges Zelt",
+    "status": "entwicklungsprueffall",
+    "wert": "zelt",
+    "wirkung": "ausgang"
+   },
+   "h2.suchschritt_grad": {
+    "fundstelle": "A9.6, Tab. F",
+    "gegenstand": "Suchschritt des Zeltfits",
+    "herkunft": "",
+    "status": "festlegung",
+    "wert": 0.001,
+    "wirkung": "ausgang"
+   },
+   "h2.ueberdeckung": {
+    "fundstelle": "§8.6, A9.6, Tab. F",
+    "gegenstand": "Überdeckungsschwelle",
+    "herkunft": "",
+    "status": "festlegung",
+    "wert": 0.936,
+    "wirkung": "ausgang"
+   },
+   "h2.ueberdeckung_bezug": {
+    "fundstelle": "§8.6, §12 Intervall von H2",
+    "gegenstand": "Bezugswert der simulierten Überdeckung",
+    "herkunft": "Wert des Schätzers an den rauschfreien Kurven; die Lage des Maximums wird zusätzlich berichtet",
+    "status": "entwicklungsprueffall",
+    "wert": "schaetzer_rauschfrei",
+    "wirkung": "bericht"
+   },
+   "h2.vollstaendigkeit": {
+    "fundstelle": "§9.3, §12 Vollständigkeit",
+    "gegenstand": "Vollständigkeit bei H2",
+    "herkunft": "Fassung (a): alle Punkte von W auswertbar",
+    "status": "entwicklungsprueffall",
+    "wert": "a",
+    "wirkung": "ausgang"
+   },
+   "h2.w_grad": {
+    "fundstelle": "§8.6, A9.6, §12 H2-Fitfenster",
+    "gegenstand": "Halbbreite w des Fitfensters",
+    "herkunft": "Vorschlag w = 6° fest",
+    "status": "entwicklungsprueffall",
+    "wert": 6.0,
+    "wirkung": "ausgang"
+   },
+   "h3.delta": {
+    "fundstelle": "§3, §8.5, §12 Grenzen von H2 und H3",
+    "gegenstand": "δ_H3",
+    "herkunft": "Testvariante ±10 %",
+    "status": "entwicklungsprueffall",
+    "wert": 0.1,
+    "wirkung": "ausgang"
+   },
+   "h3.eingaenge": {
+    "fundstelle": "§3 H3, §5.2, A9.7",
+    "gegenstand": "Eingänge nur aus P0.1–P0.5",
+    "herkunft": "",
+    "status": "regeltext",
+    "wert": "kalibrierung",
+    "wirkung": "ausgang"
+   },
+   "h3.fassung": {
+    "fundstelle": "§8.7, §12 (II)",
+    "gegenstand": "Fassung K oder I",
+    "herkunft": "Fassung K (Kennzeichnung) als Entwicklungsprüffall",
+    "status": "entwicklungsprueffall",
+    "wert": "K",
+    "wirkung": "ausgang"
+   },
+   "h3.logik": {
+    "fundstelle": "§3, §8.5, §9.3, §12 (I)",
+    "gegenstand": "Entscheidungslogik von H3",
+    "herkunft": "",
+    "status": "arbeitsfestlegung",
+    "wert": "aequivalenz",
+    "wirkung": "ausgang"
+   },
+   "h3.m": {
+    "fundstelle": "§8.4, A8",
+    "gegenstand": "Testzahl der Familie",
+    "herkunft": "",
+    "status": "regeltext",
+    "wert": 18,
+    "wirkung": "ausgang"
+   },
+   "h3.mc": {
+    "fundstelle": "A9.7, Tab. F",
+    "gegenstand": "Monte-Carlo-Ziehungen",
+    "herkunft": "",
+    "status": "festlegung",
+    "wert": 10000,
+    "wirkung": "verarbeitung"
+   },
+   "h3.relevanz": {
+    "fundstelle": "§3, §8.5, §12",
+    "gegenstand": "Relevanzgrenze von H3",
+    "herkunft": "Relevanzgrenze gleich δ_H3·|N̂_k⁽ʲ⁾| (Mindestwert)",
+    "status": "entwicklungsprueffall",
+    "wert": "gleich_delta",
+    "wirkung": "ausgang"
+   },
+   "h4.aufnahme": {
+    "fundstelle": "§3 H4, §8.5",
+    "gegenstand": "Aufnahme in V: |γ̂₁| ≥ (c₄ + 1,645)·u_c,erw(γ₁)",
+    "herkunft": "",
+    "status": "regeltext",
+    "wert": 1.645,
+    "wirkung": "ausgang"
+   },
+   "h4.m": {
+    "fundstelle": "§8.4, A8",
+    "gegenstand": "Testzahl (einseitig)",
+    "herkunft": "",
+    "status": "regeltext",
+    "wert": 23,
+    "wirkung": "ausgang"
+   },
+   "harness.c_pool": {
+    "fundstelle": "§8.4",
+    "gegenstand": "gepooltes Quantil bei Prüfrate > 0,069",
+    "herkunft": "",
+    "status": "technisch",
+    "wert": "95-%-Quantil der vereinigten max|z⁰| beider Simulationen; Prüfsimulation danach neu ausgewertet",
+    "wirkung": "planung"
+   },
+   "harness.c_vollstaendig": {
+    "fundstelle": "§8.4 „über die 147 korrelierten Tests“",
+    "gegenstand": "Kampagnen für das Quantil von c",
+    "herkunft": "",
+    "status": "technisch",
+    "wert": "nur Kampagnen mit allen Tests; ausgeschlossene werden gezählt",
+    "wirkung": "planung"
+   },
+   "harness.planung_rauschen": {
+    "fundstelle": "§5.4, A9.2",
+    "gegenstand": "Rauschmodell der Planungssimulation",
+    "herkunft": "Generator aus gemessenen Pilotkovarianzen fehlt",
+    "status": "technisch",
+    "wert": "Rauschmodell des Szenarios mit κ = √(ν_p/χ²₀,₂(ν_p)) skaliert (obere 80-%-Grenze)",
+    "wirkung": "planung"
+   },
+   "harness.seeds": {
+    "fundstelle": "Plan 4.3",
+    "gegenstand": "Seeds der Kampagnen",
+    "herkunft": "unabhängig von Prozesszahl und Reihenfolge",
+    "status": "technisch",
+    "wert": "unterseed(Basis, Rolle, Szenario, Stufe, i)",
+    "wirkung": "planung"
+   },
+   "harness.ueberdeckung_beide": {
+    "fundstelle": "§8.6, A9.6",
+    "gegenstand": "Überdeckung gegen ŷ⁰ und ŷ¹",
+    "herkunft": "",
+    "status": "technisch",
+    "wert": "ein Intervalltyp gilt, wenn beide Überdeckungen die Schwelle erreichen",
+    "wirkung": "planung"
+   },
+   "kontaktast.reserve": {
+    "fundstelle": "§5.3 (a), Tab. F",
+    "gegenstand": "Mindestabstand 25 % der statischen Zelllast",
+    "herkunft": "",
+    "status": "festlegung",
+    "wert": 0.25,
+    "wirkung": "ausgang"
+   },
+   "kontaktast.resonanz": {
+    "fundstelle": "§5.3 (b), A6, Tab. F",
+    "gegenstand": "Resonanzabstand k·f ≤ f₁/2",
+    "herkunft": "",
+    "status": "festlegung",
+    "wert": 0.5,
+    "wirkung": "ausgang"
+   },
+   "ni.d2k": {
+    "fundstelle": "§5.2 P0.3",
+    "gegenstand": "Auswertung von D2_K und Kabelschlaufe (P0.3)",
+    "herkunft": "",
+    "status": "nicht_implementiert",
+    "wert": null,
+    "wirkung": "ausgang"
+   },
+   "ni.einzelzell_dynamik": {
+    "fundstelle": "Plan 2.2 (c)",
+    "gegenstand": "Einzelzell-Liftoff mit Stoßdynamik (nichtlineares 3-FG-Modell)",
+    "herkunft": "",
+    "status": "nicht_implementiert",
+    "wert": null,
+    "wirkung": "generator"
+   },
+   "ni.fassung_I": {
+    "fundstelle": "§8.7, §12 (II)",
+    "gegenstand": "H3 Fassung I (Betriebsimpedanz)",
+    "herkunft": "",
+    "status": "nicht_implementiert",
+    "wert": null,
+    "wirkung": "ausgang"
+   },
+   "ni.gespiegelt": {
+    "fundstelle": "§3, §6",
+    "gegenstand": "H1′/H2′ am gespiegelten Schnitt",
+    "herkunft": "",
+    "status": "nicht_implementiert",
+    "wert": null,
+    "wirkung": "ausgang"
+   },
+   "ni.neuberechnung": {
+    "fundstelle": "§12 Rauschmodelle …",
+    "gegenstand": "Neuberechnung von b̂ und c nach dem Datenschluss",
+    "herkunft": "",
+    "status": "nicht_implementiert",
+    "wert": null,
+    "wirkung": "ausgang"
+   },
+   "ni.paarlaeufe": {
+    "fundstelle": "§5.5, §12 Paarläufe",
+    "gegenstand": "Paarläufe",
+    "herkunft": "",
+    "status": "nicht_implementiert",
+    "wert": null,
+    "wirkung": "ausgang"
+   },
+   "ni.sensitivitaet_rest": {
+    "fundstelle": "A9.9",
+    "gegenstand": "übrige Sensitivitätsanalysen von A9.9",
+    "herkunft": "Phase 0 + 1 gemeinsam, blockweise, ohne Jitterzeiger, k_max ± 2, je Block, w ± 2°, mit G1-ungültigen Läufen, ohne Biaskorrektur, Triphasik-Zusatzwerte, Zuordnung einseitig, E3 nominal",
+    "status": "nicht_implementiert",
+    "wert": null,
+    "wirkung": "ausgang"
+   },
+   "ni.signifikanzlogik": {
+    "fundstelle": "A0, §12 (I)",
+    "gegenstand": "frühere Signifikanzlogik von H2/H3 und Regel vom 25.09.",
+    "herkunft": "nicht als Hauptverfahren",
+    "status": "nicht_implementiert",
+    "wert": null,
+    "wirkung": "ausgang"
+   },
+   "ni.wiederaufnahme": {
+    "fundstelle": "§9.2, §12",
+    "gegenstand": "Wiederaufnahme nach mechanischem Eingriff",
+    "herkunft": "",
+    "status": "nicht_implementiert",
+    "wert": null,
+    "wirkung": "ausgang"
+   },
+   "p0.4.band": {
+    "fundstelle": "§5.2 P0.4, A9.2 „festgelegtes Frequenzband“",
+    "gegenstand": "Anpassungsband der 1-FG-Anpassung",
+    "herkunft": "Teil B bzw. ausdrücklicher Aufrufparameter; kein Vorgabewert",
+    "status": "technisch",
+    "wert": "Eingabe",
+    "wirkung": "verarbeitung"
+   },
+   "p0.4.gewichtung": {
+    "fundstelle": "§5.2 P0.4, A9.2, §12 Werkzeug 4",
+    "gegenstand": "Kohärenzgewichtung der 1-FG-Anpassung",
+    "herkunft": "Varianz des H1-Schätzers",
+    "status": "technisch",
+    "wert": "Gewicht 2·n_Mittel·γ²/((1 − γ²)·|T|²) je Real- und Imaginärteil",
+    "wirkung": "verarbeitung"
+   },
+   "p0.4.kohaerenz_min": {
+    "fundstelle": "§5.2 P0.4, Werkzeug 4",
+    "gegenstand": "Mindestkohärenz einer Frequenzlinie",
+    "herkunft": "Linien darunter tragen kein Signal (Kanal unbelastet)",
+    "status": "technisch",
+    "wert": 0.5,
+    "wirkung": "verarbeitung"
+   },
+   "p0.4.linearitaet": {
+    "fundstelle": "§5.2 P0.4, A9.2 „gleich innerhalb der Unsicherheit“",
+    "gegenstand": "Linearität zweier Amplituden",
+    "herkunft": "",
+    "status": "technisch",
+    "wert": "χ²-Test der Übertragungsdifferenz p ≥ 0,01 und |z| < 3 für f_n, ζ",
+    "wirkung": "bericht"
+   },
+   "p0.4.modellordnung": {
+    "fundstelle": "§5.2 P0.4, A1 (f₁, f_m, ζ_m)",
+    "gegenstand": "Zahl der Moden aus den Zellkanälen",
+    "herkunft": "",
+    "status": "technisch",
+    "wert": "gemeinsame Pole, zusätzliche Mode bei F-Test p ≤ 0,01; Moden außerhalb des Bands nicht bestimmt",
+    "wirkung": "verarbeitung"
+   },
+   "p0.gf_modell": {
+    "fundstelle": "§5.2 P0.1, A9.7, Werkzeug 4",
+    "gegenstand": "Modell der Kraftkette G_F aus dem Brückensimulator",
+    "herkunft": "Entwicklungsmodell",
+    "status": "technisch",
+    "wert": "g·e^{−i2πfτ}/(1 + if/f_tp); ohne nachweisbaren Tiefpass g·e^{−i2πfτ}",
+    "wirkung": "verarbeitung"
+   },
+   "p0.klirr_faktor": {
+    "fundstelle": "§5.2, §12 Schwelle des Klirrkriteriums",
+    "gegenstand": "Klirrkriterium und P0.12 (Faktor auf u_c,erw)",
+    "herkunft": "Vorschlag (a): 0,3·u_c,erw",
+    "status": "entwicklungsprueffall",
+    "wert": 0.3,
+    "wirkung": "bericht"
+   },
+   "p0.nachweisform": {
+    "fundstelle": "§5.2, A9.2, §12 Nachweis und Folge",
+    "gegenstand": "Nachweisform der Phase-0-Schwellen",
+    "herkunft": "Schätzwert und obere 95-%-Grenze werden beide berichtet, ohne Folge",
+    "status": "entwicklungsprueffall",
+    "wert": "beide",
+    "wirkung": "bericht"
+   },
+   "p0.u_delta_delta_grad": {
+    "fundstelle": "P0.5, Tab. F",
+    "gegenstand": "Anforderung u(Δδⱼ) ≤ 0,1°",
+    "herkunft": "prüfbare Anforderung",
+    "status": "festlegung",
+    "wert": 0.1,
+    "wirkung": "bericht"
+   },
+   "planung.auslegungsgrenze": {
+    "fundstelle": "§8.5, A8",
+    "gegenstand": "Startwert Δ_q/5,01 (ν → ∞) bzw. Δ_q/5,21 (ν = 19)",
+    "herkunft": "",
+    "status": "regeltext",
+    "wert": [
+     5.012,
+     5.208
+    ],
+    "wirkung": "planung"
+   },
+   "planung.bedingung": {
+    "fundstelle": "§5.4, A9.2, §12 (I)",
+    "gegenstand": "P(H1 und H2 bestätigt | exakt) ≥ 0,8, Streuungen an der oberen 80-%-Grenze",
+    "herkunft": "",
+    "status": "arbeitsfestlegung",
+    "wert": 0.8,
+    "wirkung": "planung"
+   },
+   "planung.faustregel": {
+    "fundstelle": "§5.4, A9.2",
+    "gegenstand": "n_min ≥ (3·1°/(SNR·δ_H2))², notwendig, nicht hinreichend",
+    "herkunft": "",
+    "status": "regeltext",
+    "wert": 3.0,
+    "wirkung": "planung"
+   },
+   "planung.n0_min": {
+    "fundstelle": "P0.8, §5.4, Tab. F",
+    "gegenstand": "mindestens 20 Einzelmodulläufe je Modul",
+    "herkunft": "",
+    "status": "festlegung",
+    "wert": 20,
+    "wirkung": "planung"
+   },
+   "planung.power": {
+    "fundstelle": "§5.4, §12 Rauschmodelle …",
+    "gegenstand": "zusätzliche Power-Bedingung (Laufzahl von H1)",
+    "herkunft": "",
+    "status": "offen",
+    "wert": null,
+    "wirkung": "planung"
+   },
+   "planung.reserve": {
+    "fundstelle": "§5.4, Tab. F",
+    "gegenstand": "Reserve r = ⌈n_min·p̂/(1 − p̂)⌉ + 2",
+    "herkunft": "",
+    "status": "festlegung",
+    "wert": 2,
+    "wirkung": "planung"
+   },
+   "planung.zielfunktion": {
+    "fundstelle": "§5.4, §12 Messzeit",
+    "gegenstand": "Zielfunktion der Laufzahlplanung",
+    "herkunft": "Fassung (a): N_K·n_min + 3·n₀",
+    "status": "entwicklungsprueffall",
+    "wert": "a",
+    "wirkung": "planung"
+   },
+   "punkte_I": {
+    "fundstelle": "§5.5, §12 Punkte I",
+    "gegenstand": "Punkte I",
+    "herkunft": "Vorschlag (a)",
+    "status": "entwicklungsprueffall",
+    "wert": [
+     116.0,
+     120.0,
+     124.0
+    ],
+    "wirkung": "bericht"
+   },
+   "rauschmodelle": {
+    "fundstelle": "§12 Rauschmodelle …, A9.5",
+    "gegenstand": "Rauschmodelle (Liste in Teil A oder Teil B)",
+    "herkunft": "weißes Rauschen je Zelle, Amplituden- und Phasenstreuung je Modul, Jitter, getrennt nach Laufart (Plan 2.2, Stufen L0–L5)",
+    "status": "entwicklungsprueffall",
+    "wert": "entwicklungsfamilie",
+    "wirkung": "planung"
+   },
+   "s.l_strich": {
+    "fundstelle": "§9.2, §12 Läufe bei Einstellung 2",
+    "gegenstand": "S1, S2, S4 für L₁′–L₃′",
+    "herkunft": "",
+    "status": "offen",
+    "wert": null,
+    "wirkung": "ausgang"
+   },
+   "s3.c_S": {
+    "fundstelle": "§9.2 S3, A8",
+    "gegenstand": "S3-Schwelle c_S = t(1 − 0,05/42; n₀ⱼ − 1)",
+    "herkunft": "",
+    "status": "regeltext",
+    "wert": 42,
+    "wirkung": "ausgang"
+   },
+   "verarbeitung.filter": {
+    "fundstelle": "§5.1, §8.1, A9.1, A9.4 (2)",
+    "gegenstand": "Softwarefilter",
+    "herkunft": "",
+    "status": "regeltext",
+    "wert": "keine",
+    "wirkung": "verarbeitung"
+   },
+   "verarbeitung.interpolation": {
+    "fundstelle": "A9.4 (4)",
+    "gegenstand": "Resampling je Zyklus",
+    "herkunft": "",
+    "status": "regeltext",
+    "wert": "linear",
+    "wirkung": "verarbeitung"
+   },
+   "verarbeitung.k_voll": {
+    "fundstelle": "§5.3 (a), Plan 2.6 b",
+    "gegenstand": "Zahl gespeicherter Harmonischer je Lauf (≥ k_max; ungebändert für (a))",
+    "herkunft": "Entwicklung: höchstens Nyquist der Abtastung",
+    "status": "technisch",
+    "wert": 60,
+    "wirkung": "verarbeitung"
+   },
+   "verarbeitung.kennlinie": {
+    "fundstelle": "A9.4 (1) „statische Kalibrierung je Zelle“",
+    "gegenstand": "Umrechnung der Rohwerte in Stufe 1",
+    "herkunft": "Nullpunkt und Empfindlichkeit aus P0.1; quadratischer Anteil nur berichtet (Befund: Text legt die Kennlinienform der Umrechnung nicht fest)",
+    "status": "technisch",
+    "wert": "linear",
+    "wirkung": "verarbeitung"
+   },
+   "verarbeitung.n_theta": {
+    "fundstelle": "§4, A1, A9.4 (4), Tab. F",
+    "gegenstand": "Stützstellen je Zyklus",
+    "herkunft": "Tab. F: wie die Engine",
+    "status": "festlegung",
+    "wert": 2000,
+    "wirkung": "verarbeitung"
+   },
+   "verarbeitung.t_phi": {
+    "fundstelle": "§5.4, §6 (T_φ)",
+    "gegenstand": "Einregelzeit der Phasen je Lauf",
+    "herkunft": "Präreg definiert T_φ nicht im Einzelnen",
+    "status": "technisch",
+    "wert": "erster Zyklus nach Rampenende, ab dem alle Indexphasen bis Fensterende innerhalb max(4σⱼ, 0,1°) um das Fenstermittel liegen",
+    "wirkung": "planung"
+   },
+   "verarbeitung.zyklen": {
+    "fundstelle": "A9.4 (3)",
+    "gegenstand": "nur vollständige Zyklen im Auswertefenster",
+    "herkunft": "",
+    "status": "regeltext",
+    "wert": "vollstaendig",
+    "wirkung": "verarbeitung"
+   },
+   "zuordnung.ausloeser": {
+    "fundstelle": "§8.10, §12 Zuordnung",
+    "gegenstand": "Auslöser der Zuordnung",
+    "herkunft": "Fassung (a): |z⁰| > c mit gleichsinnigem |z¹| > c an einem Punkt von I",
+    "status": "entwicklungsprueffall",
+    "wert": "a",
+    "wirkung": "bericht"
+   },
+   "zuordnung.kriterium": {
+    "fundstelle": "A9.11, §12 Zuordnung",
+    "gegenstand": "Kriterium der Zuordnung (A9.11)",
+    "herkunft": "Fassung (a): Trefferquote für Anker 0,1 % Kopplung und 1 mN Kettenresiduum",
+    "status": "entwicklungsprueffall",
+    "wert": "a",
+    "wirkung": "bericht"
+   },
+   "zuordnung.m_fest": {
+    "fundstelle": "A9.13, §12 Läufe bei Einstellung 2",
+    "gegenstand": "m = 6·N_I fest bei Ausfällen",
+    "herkunft": "m = 6·N_I fest",
+    "status": "entwicklungsprueffall",
+    "wert": "fest",
+    "wirkung": "bericht"
+   },
+   "zuordnung.regel": {
+    "fundstelle": "§8.10, A9.13, §12 Zuordnung",
+    "gegenstand": "Regel der Zuordnung",
+    "herkunft": "Fassung (a): Anpassungstest je Klasse gegen beide Vorhersagepaare",
+    "status": "entwicklungsprueffall",
+    "wert": "a",
+    "wirkung": "bericht"
+   },
+   "zuordnung.s_formel": {
+    "fundstelle": "§8.10, A9.13",
+    "gegenstand": "Kraftskala s der Zuordnung",
+    "herkunft": "",
+    "status": "technisch",
+    "wert": "s = Σⱼ|N̄′₁⁽ʲ⁾|/Σⱼ|N̄₁⁽ʲ⁾| aus den Einzelmodulläufen",
+    "wirkung": "bericht"
+   }
+  }
+ },
+ "kopf": {
+  "code_version": {
+   "git": "e428abb83ffed7819920b222595881d97f84e4ed+geändert",
+   "paket": "0.1.0"
+  },
+  "datenart": "synthetisch",
+  "erzeugt_von": {
+   "programm": "pcmms_auswertung",
+   "version": "0.1.0"
+  },
+  "kennung": "SYNTH-REGELPROFIL-ENTW-2026-10",
+  "registrierung": "keine (synthetisch)",
+  "schema": "pcmms.regelprofil",
+  "schema_version": "0.1"
+ }
+}

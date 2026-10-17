@@ -2,6 +2,16 @@
 
 Stand 03.10.2026 (Nachbesserung nach Prüfung; Änderungen in Abschnitt 8) · Planungsdokument, nicht umgesetzt · ins Repository übernommen am 04.10.2026 mit dem Vermerk zur Regelgrundlage, angepassten Verweisen und dem Anhang „Abgleich mit `main`“; Inhalt sonst unverändert
 
+> **Vermerk vom 16.10.2026 (Umsetzung).** Eine erste Softwarestufe von Werkzeug 8 liegt zusammen mit AP-11 und AP-12
+> in [`../code/pcmms_auswertung/`](../code/pcmms_auswertung/) vor: Generator auf Ebene Z und H mit getrennter Wahrheit,
+> Harness mit Kalibrier- und Prüfsimulation von c (Pool-Regel 0,069), Rauschbias, H2-Überdeckung mit Rückfallkette,
+> gemeinsamer Bestätigungswahrscheinlichkeit, Planungshaken für das Pilotskript, Software-Prüfsatz und Kriterienmatrix
+> K01–K21 einschließlich Zuordnung, H1Z und E3 mit Status je Kriterium. Umfang, Befunde, Laufzeiten und Grenzen stehen in
+> [`ap11_ap12_ap13_software.md`](ap11_ap12_ap13_software.md). Gerechnet sind nur gezielte Entwicklungsläufe mit reduzierten
+> Kampagnen- und Replikatzahlen; die vollständige Kalibrierung mit mindestens 1000 Kampagnen je Szenariopunkt und
+> Präzisionsstufe ist offen, kein Kriterium gilt als abgenommen. Dieser Plan und sein Anhang bleiben im Übrigen
+> unverändert; Abweichungen der Umsetzung vom Plan sind im Softwaredokument begründet.
+>
 > **Vermerk vom 04.10.2026 (Regelgrundlage).** Die Regeln, die dieser Plan als „AP-08-Entwurf“ zitiert
 > (Entwurfsfassung der Entscheidungsregeln vom 2./3. Oktober 2026), sind mit PR #14 in `main` (`1b840de`) übernommen
 > und dort als vorläufige Arbeitsfestlegungen gekennzeichnet (Präreg §0, §12, A0). Gegenüber den Annahmen des Plans ist festgelegt: Entscheidungslogik von H2 und H3

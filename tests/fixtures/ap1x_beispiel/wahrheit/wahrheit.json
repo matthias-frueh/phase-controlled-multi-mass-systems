@@ -1,0 +1,59 @@
+{
+ "inhalt": {
+  "hinweis": "rauschfrei; Stufe 1 trifft diese Werte bis auf den Interpolationsfehler von A6 ((π·k·f/f_s)²/2 ≤ 10⁻³ relativ) und die Quantisierung (10⁻⁶ N)"
+ },
+ "kopf": {
+  "code_version": {
+   "git": "a1c995364196128a88bb7d61bfc39a98db9c3755",
+   "paket": "0.1.0"
+  },
+  "daten": {
+   "datei": "wahrheit.npz",
+   "felder": {
+    "L1__N_mittel": {
+     "dtype": "float64",
+     "form": []
+    },
+    "L1__N_mittel_zellen": {
+     "dtype": "float64",
+     "form": [
+      3
+     ]
+    },
+    "L1__Nk_summe": {
+     "dtype": "complex128",
+     "form": [
+      3
+     ]
+    },
+    "L1__Nk_zellen": {
+     "dtype": "complex128",
+     "form": [
+      3,
+      3
+     ]
+    },
+    "R__N_mittel": {
+     "dtype": "float64",
+     "form": []
+    },
+    "R__N_mittel_zellen": {
+     "dtype": "float64",
+     "form": [
+      3
+     ]
+    }
+   },
+   "sha256": "7435ea9ea5c5546741a4ca728fbfa58e9bf75823ce3de9182b49e89aec7ba626"
+  },
+  "datenart": "synthetisch",
+  "erzeugt_von": {
+   "programm": "pcmms_auswertung",
+   "version": "0.1.0"
+  },
+  "kennung": "SYNTH-BEISPIEL-2026-10",
+  "registrierung": "keine (synthetisch)",
+  "schema": "pcmms.wahrheit",
+  "schema_version": "0.1"
+ }
+}

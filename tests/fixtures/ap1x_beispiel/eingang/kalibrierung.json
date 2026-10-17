@@ -1,0 +1,76 @@
+{
+ "inhalt": {
+  "g": {
+   "quelle": "Beispielwert (synthetisch)",
+   "u": 1e-05,
+   "wert": 9.81
+  },
+  "hinweis": "Nur das Format; vollständige Kalibrierung liefert AP-11 (anpassung.py)",
+  "m_L": {
+   "quelle": "Vorgabe (synthetisch), keine Messung",
+   "u_kg": 0.0,
+   "wert_kg": 0.0
+  },
+  "p0_2": {
+   "F_c_stat": [
+    2.1255,
+    2.1255,
+    2.1255
+   ],
+   "M_kg": 0.65,
+   "konvention": "b",
+   "m_j_kg": [
+    0.1,
+    0.1,
+    0.1
+   ],
+   "u_M_kg": 1e-05,
+   "u_m_j_kg": [
+    1e-05,
+    1e-05,
+    1e-05
+   ]
+  },
+  "zellen": [
+   {
+    "empfindlichkeit_N_je_adc": 1e-06,
+    "kennlinie_quadratisch": 0.0,
+    "nullpunkt_adc": 120000.0,
+    "u_empfindlichkeit_rel": 0.0001,
+    "umrechnung": "linear",
+    "zelle": 1
+   },
+   {
+    "empfindlichkeit_N_je_adc": 1e-06,
+    "kennlinie_quadratisch": 0.0,
+    "nullpunkt_adc": -80000.0,
+    "u_empfindlichkeit_rel": 0.0001,
+    "umrechnung": "linear",
+    "zelle": 2
+   },
+   {
+    "empfindlichkeit_N_je_adc": 1e-06,
+    "kennlinie_quadratisch": 0.0,
+    "nullpunkt_adc": 45000.0,
+    "u_empfindlichkeit_rel": 0.0001,
+    "umrechnung": "linear",
+    "zelle": 3
+   }
+  ]
+ },
+ "kopf": {
+  "code_version": {
+   "git": "a1c995364196128a88bb7d61bfc39a98db9c3755",
+   "paket": "0.1.0"
+  },
+  "datenart": "synthetisch",
+  "erzeugt_von": {
+   "programm": "pcmms_auswertung",
+   "version": "0.1.0"
+  },
+  "kennung": "SYNTH-BEISPIEL-2026-10",
+  "registrierung": "keine (synthetisch)",
+  "schema": "pcmms.kalibrierung",
+  "schema_version": "0.1"
+ }
+}

@@ -1,0 +1,40 @@
+{
+ "kopf": {
+  "B": 4,
+  "code_version": {
+   "git": "a1c995364196128a88bb7d61bfc39a98db9c3755",
+   "paket": "0.1.0"
+  },
+  "daten": {
+   "datei": "bootstrap_indizes.npz",
+   "felder": {
+    "A__L1": {
+     "dtype": "int64",
+     "form": [
+      4,
+      1
+     ]
+    },
+    "B0__modul1": {
+     "dtype": "int64",
+     "form": [
+      4,
+      1
+     ]
+    }
+   },
+   "sha256": "c794b13d0b0817bfe3a1b3b230c102001a0f439292b1cb2c18ef9ba149607f68"
+  },
+  "datenart": "synthetisch",
+  "erzeugt_von": {
+   "programm": "pcmms_auswertung",
+   "version": "0.1.0"
+  },
+  "kennung": "SYNTH-BEISPIEL-2026-10",
+  "ordnung": "gültige Läufe der Quelle in aufsteigender Position der Laufreihenfolge",
+  "registrierung": "keine (synthetisch)",
+  "schema": "pcmms.bootstrap_indizes",
+  "schema_version": "0.1",
+  "seed": 20261016
+ }
+}

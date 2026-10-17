@@ -1,0 +1,160 @@
+{
+ "inhalt": {
+  "einstellungen": {
+   "filter": "analog, gleich in allen Kraftkanälen",
+   "firmware": "synthetisch",
+   "kalibrier_ids": [
+    "SYNTH-BEISPIEL-KAL"
+   ],
+   "verstaerkung": "fest"
+  },
+  "erfassung": {
+   "adc": {
+    "bits": 24,
+    "vollausschlag": 8388607
+   },
+   "f_s": 2110.0,
+   "f_soll": 10.0,
+   "f_takt": 1000000.0,
+   "kanaele": [
+    {
+     "art": "kraft",
+     "einheit": "ADC",
+     "name": "kraft_adc",
+     "zellen": [
+      1,
+      2,
+      3
+     ]
+    },
+    {
+     "art": "index",
+     "einheit": "s",
+     "modul": 1,
+     "name": "index_modul1"
+    },
+    {
+     "art": "index",
+     "einheit": "s",
+     "modul": 2,
+     "name": "index_modul2"
+    },
+    {
+     "art": "index",
+     "einheit": "s",
+     "modul": 3,
+     "name": "index_modul3"
+    },
+    {
+     "art": "temperatur",
+     "einheit": "°C",
+     "name": "temperatur_zellen"
+    }
+   ],
+   "t0": 0.00011848341232227489
+  },
+  "generator": {
+   "programm": "pcmms_auswertung.beispiel",
+   "seed": null,
+   "szenario": "Beispiel"
+  },
+  "lauf": {
+   "block": null,
+   "einstellung": 1,
+   "konfiguration": {
+    "gruppe": "referenz",
+    "id": "R",
+    "phi_soll_grad": null
+   },
+   "kontrollsatz": null,
+   "lauf_id": "B-R-001",
+   "laufart": "R",
+   "messtag": 1,
+   "modul": null,
+   "phase": 0,
+   "position": 0,
+   "t_start": 0.0
+  },
+  "protokoll": {
+   "aufzeichnung_ok": true,
+   "bediener": "synthetisch",
+   "n_zyklen_fenster": 6,
+   "notizen": "Beispieldatensatz der Schnittstelle",
+   "park_ok": null,
+   "stoerung": false,
+   "t_e": 0.1,
+   "t_rampe_ende": 0.2
+  },
+  "umgebung": {
+   "feuchte_pct": 45.0,
+   "luftdruck_hPa": 1013.0,
+   "lufttemperatur_C": 21.0,
+   "versorgung_V": 24.0
+  }
+ },
+ "kopf": {
+  "code_version": {
+   "git": "a1c995364196128a88bb7d61bfc39a98db9c3755",
+   "paket": "0.1.0"
+  },
+  "daten": {
+   "datei": "B-R-001.npz",
+   "felder": {
+    "index_modul1": {
+     "dtype": "float64",
+     "form": [
+      0
+     ]
+    },
+    "index_modul2": {
+     "dtype": "float64",
+     "form": [
+      0
+     ]
+    },
+    "index_modul3": {
+     "dtype": "float64",
+     "form": [
+      0
+     ]
+    },
+    "kraft_adc": {
+     "dtype": "int64",
+     "form": [
+      3,
+      2004
+     ]
+    },
+    "t_temperatur": {
+     "dtype": "float64",
+     "form": [
+      2
+     ]
+    },
+    "temperatur_zellen": {
+     "dtype": "float64",
+     "form": [
+      3,
+      2
+     ]
+    },
+    "uebersteuerung": {
+     "dtype": "bool",
+     "form": [
+      3
+     ]
+    }
+   },
+   "sha256": "326d60ddf792b2dfd8fa0ac1ed2de795615465b2ff629f8a3d4fc09079125c84"
+  },
+  "datenart": "synthetisch",
+  "erzeugt_von": {
+   "programm": "pcmms_auswertung",
+   "version": "0.1.0"
+  },
+  "kennung": "SYNTH-BEISPIEL-2026-10",
+  "registrierung": "keine (synthetisch)",
+  "schema": "pcmms.rohlauf",
+  "schema_version": "0.1"
+ }
+}

@@ -1,0 +1,51 @@
+{
+ "inhalt": {
+  "laeufe": [
+   {
+    "block": null,
+    "daten": "B-R-001.npz",
+    "einstellung": 1,
+    "konfiguration": "R",
+    "kopf": "B-R-001.json",
+    "lauf_id": "B-R-001",
+    "laufart": "R",
+    "modul": null,
+    "online_gueltigkeit": "nicht geprüft (kein Monitor, AP-10)",
+    "phase": 0,
+    "position": 0,
+    "sha256_daten": "326d60ddf792b2dfd8fa0ac1ed2de795615465b2ff629f8a3d4fc09079125c84",
+    "sha256_kopf": "b09baae10efcb0b028250b1ff990101360c122dedae513227b1096a0dfc62cd5"
+   },
+   {
+    "block": null,
+    "daten": "B-L1-001.npz",
+    "einstellung": 1,
+    "konfiguration": "L1",
+    "kopf": "B-L1-001.json",
+    "lauf_id": "B-L1-001",
+    "laufart": "L",
+    "modul": 1,
+    "online_gueltigkeit": "nicht geprüft (kein Monitor, AP-10)",
+    "phase": 0,
+    "position": 1,
+    "sha256_daten": "dc06ead11196e29fa453c02c39663f6a8326fb97cebbc47996f818f344313720",
+    "sha256_kopf": "5f8e609496e9f612e28d33ca7a1f779977eac496c49466752161abf7fcc72184"
+   }
+  ]
+ },
+ "kopf": {
+  "code_version": {
+   "git": "a1c995364196128a88bb7d61bfc39a98db9c3755",
+   "paket": "0.1.0"
+  },
+  "datenart": "synthetisch",
+  "erzeugt_von": {
+   "programm": "pcmms_auswertung",
+   "version": "0.1.0"
+  },
+  "kennung": "SYNTH-BEISPIEL-2026-10",
+  "registrierung": "keine (synthetisch)",
+  "schema": "pcmms.manifest",
+  "schema_version": "0.1"
+ }
+}
