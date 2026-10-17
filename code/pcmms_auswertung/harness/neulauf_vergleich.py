@@ -501,7 +501,7 @@ def kampagnenuebersicht(pfad, erg, ck):
     """Eine Zeile je E3-Kampagne mit den Größen, aus denen sich Zähler, Nenner und Gründe nachzählen lassen."""
     with open(pfad, 'w', newline='', encoding='utf-8') as fh:
         w = csv.writer(fh)
-        w.writerow(['punkt', 'kampagne', 'seed', 'E3_bewertung', 'E3_ohne_bewertung_grund', 'E3_status',
+        w.writerow(['punkt', 'kampagne', 'seed', 'E3_bewertung', 'E3_ohne_bewertung_klasse', 'E3_ohne_bewertung_grund',
                     'E3_alte_lesart_u_ohne_T', 'pruefgroessen', 'u_E3a_median_grad', 'u_E3a_ohne_T_median_grad',
                     'abs_dphi_max_grad', 'q_Z', 'u_q_Z', 'u_q_Z_ohne_T', 'T_gezogen', 'T_B', 'T_anteil_unzulaessig',
                     'H1', 'H2', 'H1Z', 'H4', 'max_abs_z0', 'laeufe', 'laeufe_ungueltig'])
@@ -518,7 +518,7 @@ def kampagnenuebersicht(pfad, erg, ck):
                 q = None if e.get('e3b') is None else np.asarray(e['e3b'], float)
                 t = e.get('t') or {}
                 w.writerow([pid, i, b['seed'], e.get('bewertung') or '',
-                            _ohne_grund(b)[0] if p['bewertungen'][i] is None else '', e.get('status') or '',
+                            *((_ohne_grund(b)[0], _ohne_grund(b)[1]) if p['bewertungen'][i] is None else ('', '')),
                             p['alte_lesart_je_kampagne'][i] or '', A.shape[0] + (q is not None),
                             _g(np.median(A[:, 1]) if A.size else None), _g(np.median(A[:, 2]) if A.size else None),
                             _g(A[:, 0].max() if A.size else None), _g(None if q is None else q[0]),
