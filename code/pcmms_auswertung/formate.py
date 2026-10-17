@@ -51,6 +51,7 @@ SCHEMATA = {
     'planangaben': '0.1',         # Laufplan der synthetischen Kampagne und Seeds (Platzhalter für Teil B nr2)
     'katalog': '0.1',             # Szenarienkatalog
     'pruefsatz': '0.1',           # Hashes von Katalog, Seeds, Profilen und Testdaten
+    'ablaufstand': '0.1',         # fortsetzbarer Stand des zustandsbehafteten Phase-1-Ablaufs (ablauf.py)
 }
 _ZIPZEIT = (1980, 1, 1, 0, 0, 0)
 

@@ -66,22 +66,21 @@ def _quellen(t1, pr, konf):
     return lauf, kontroll
 
 
-def auswerten(zusammenfassungen, kalibrierung, teil_b, regeln, seed=None, bootstrap_indizes=None):
-    """Stufe 2: Ergebnis (dict) aus Laufzusammenfassungen (LaufTabelle oder Pfad), Kalibrierung, Teil B und Regeln."""
-    t_start = time.perf_counter()
-    tab = zusammenfassungen if isinstance(zusammenfassungen, zf.LaufTabelle) else zf.LaufTabelle.lesen(
-        zusammenfassungen)
-    kal = kalibrierung if isinstance(kalibrierung, dict) else anpassung.lies_kalibrierung(kalibrierung)[1]
-    tb = teil_b if isinstance(teil_b, dict) else formate.lies_objekt(teil_b, 'teil_b')[1]
-    prof = _profil(regeln)
-    if tab.meta.get('datenart') not in (None, 'synthetisch'):
-        raise formate.FormatFehler('AP-12 verarbeitet in dieser Stufe nur synthetische Daten')
-    n2, n4 = tb['nr2'], tb['nr4']
-    kmax, K, f = int(n2['k_max']), int(tab.k_voll), float(n2['f'])
+def _online_gueltig(v):
+    """Gültigkeit eines Versuchs nach den Entscheidungen des Ablaufs (G2–G10, Nullpunktalarm, feststehendes G1)."""
+    return bool(v.get('gueltig')) and v.get('g1') is not True
+
+
+def datenlage(tab, tb, prof):
+    """Gültigkeit (offline), Abbruchregeln, gültige Läufe je Konfiguration und Kontrollmodul, ŷ¹-Gültigkeit, Kontaktast
+    und Auswertbarkeit der Phase 1 – ohne Bootstrap (auch für Zähl- und Ablaufdiagnosen des Harness).
+
+    Läufe des zustandsbehafteten Ablaufs (Köpfe mit „versuch“): Die offline geprüfte Gültigkeit muss den Entscheidungen
+    des Ablaufs gleichen, je Konfiguration und Block ist höchstens ein Versuch gültig (kein Doppelbeitrag), und ein
+    angehaltener oder abgebrochener Ablauf sperrt alle Ausgänge (Datenlage)."""
+    n2 = tb['nr2']
     n_min = int(n2['n_min'])
     konf = n2['konfigurationen']
-    schnitt = [c['id'] for c in konf if c['gruppe'] == 'schnitt']
-    seed = tb.get('seed_bootstrap') if seed is None else seed
     t1 = tab.auswahl(tab.spalte('phase', int) == 1).sortiert()
     # Gültigkeit und Abbruch (offline)
     sw = _schwellen(tb, prof)
@@ -123,14 +122,57 @@ def auswerten(zusammenfassungen, kalibrierung, teil_b, regeln, seed=None, bootst
             e['kontaktast'] = bool(idx) and not lift
         e['auswertbar'] = bool(e['kontaktast'] and len(idx) >= n_min)
         info[c['id']] = e
-    if 1 in ab.get('S2', []):
-        pass
     for i in ab['S2']:
         kid = t1.koepfe[i]['konfiguration']['id']
         if kid in info:
             info[kid]['auswertbar'] = False
             info[kid]['s2'] = True
     auswertbar = {k for k, v in info.items() if v['auswertbar']}
+    zustand = any('versuch' in k for k in t1.koepfe)
+    abl = tab.meta.get('ablauf')
+    if zustand:
+        if abl is None:
+            raise formate.FormatFehler('Läufe des zustandsbehafteten Ablaufs ohne Ablaufstand (meta „ablauf“)')
+        abw = [k['lauf_id'] for i, k in enumerate(t1.koepfe) if _online_gueltig(k['versuch']) != bool(pr['gueltig'][i])]
+        if abw:
+            raise formate.FormatFehler(f'Gültigkeit offline ≠ Entscheidung des Ablaufs für {abw[:5]}'
+                                       + (f' und {len(abw) - 5} weitere' if len(abw) > 5 else ''))
+        zahl = {}
+        for i, k in enumerate(t1.koepfe):
+            if k['laufart'] == 'K' and pr['gueltig'][i]:
+                zahl[(k['konfiguration']['id'], k['block'])] = zahl.get((k['konfiguration']['id'], k['block']), 0) + 1
+        doppelt = sorted(x for x, c in zahl.items() if c > 1)
+        if doppelt:
+            raise formate.FormatFehler(f'mehr als ein gültiger Versuch je Konfiguration und Block: {doppelt[:5]}')
+        if abl.get('status') != 'abgeschlossen':
+            sperren_alle.append(('Datenlage', f'Phase 1 {abl.get("status")}: {(abl.get("ende") or {}).get("grund")} '
+                                              '(keine abgeschlossene Kampagne)'))
+    return dict(t1=t1, sw=sw, pr=pr, ab=ab, lauf=lauf, kontroll=kontroll, d=d, E0=E0, E1=E1, Nbar0=Nbar0, Nbar1=Nbar1,
+                reg=reg, yhat1_gueltig=yhat1_gueltig, sperren_alle=sperren_alle, sperren_y1=sperren_y1, info=info,
+                auswertbar=auswertbar, lift_kontroll=lift_kontroll, ablauf=abl if zustand else None)
+
+
+def auswerten(zusammenfassungen, kalibrierung, teil_b, regeln, seed=None, bootstrap_indizes=None):
+    """Stufe 2: Ergebnis (dict) aus Laufzusammenfassungen (LaufTabelle oder Pfad), Kalibrierung, Teil B und Regeln."""
+    t_start = time.perf_counter()
+    tab = zusammenfassungen if isinstance(zusammenfassungen, zf.LaufTabelle) else zf.LaufTabelle.lesen(
+        zusammenfassungen)
+    kal = kalibrierung if isinstance(kalibrierung, dict) else anpassung.lies_kalibrierung(kalibrierung)[1]
+    tb = teil_b if isinstance(teil_b, dict) else formate.lies_objekt(teil_b, 'teil_b')[1]
+    prof = _profil(regeln)
+    if tab.meta.get('datenart') not in (None, 'synthetisch'):
+        raise formate.FormatFehler('AP-12 verarbeitet in dieser Stufe nur synthetische Daten')
+    n2, n4 = tb['nr2'], tb['nr4']
+    kmax, K, f = int(n2['k_max']), int(tab.k_voll), float(n2['f'])
+    n_min = int(n2['n_min'])
+    konf = n2['konfigurationen']
+    schnitt = [c['id'] for c in konf if c['gruppe'] == 'schnitt']
+    seed = tb.get('seed_bootstrap') if seed is None else seed
+    dl = datenlage(tab, tb, prof)
+    t1, sw, pr, ab, lauf, kontroll, d = (dl[x] for x in ('t1', 'sw', 'pr', 'ab', 'lauf', 'kontroll', 'd'))
+    E0, E1, Nbar0, Nbar1, reg = (dl[x] for x in ('E0', 'E1', 'Nbar0', 'Nbar1', 'reg'))
+    yhat1_gueltig, sperren_alle, sperren_y1 = dl['yhat1_gueltig'], dl['sperren_alle'], dl['sperren_y1']
+    info, auswertbar = dl['info'], dl['auswertbar']
     # Indexmatrizen
     e2 = n2.get('einstellung2')
     reihenfolge = bs.quellen_reihenfolge([c['id'] for c in konf], einstellung2=bool(e2))
@@ -315,7 +357,7 @@ def auswerten(zusammenfassungen, kalibrierung, teil_b, regeln, seed=None, bootst
                       bootstrap_indizes=idx_quelle, n_mc_h3=prof.zahl('h3_mc'), reduziert=prof.reduziert,
                       code_version=formate.code_version(), kennung=tab.meta.get('kennung'),
                       laufzeit_s=round(time.perf_counter() - t_start, 3), pilot_suche=n2.get('pilot_suche'),
-                      teil_b=teil_b_mod.einordnen(tb)),
+                      teil_b=teil_b_mod.einordnen(tb), ablauf=dl['ablauf']),
         gueltigkeit=dict(n_laeufe=len(t1), n_ungueltig=int((~pr['gueltig']).sum()),
                          gruende={t1.koepfe[i]['lauf_id']: pr['gruende'][i] for i in np.flatnonzero(~pr['gueltig'])},
                          nicht_pruefbar={g: len(v) for g, v in pr['nicht_pruefbar'].items()},

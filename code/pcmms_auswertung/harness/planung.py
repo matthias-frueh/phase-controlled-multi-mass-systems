@@ -111,6 +111,9 @@ def haken(sid, stufe, profil, n_kal, n_pruef, seed_basis, n_kandidaten, n0_kandi
                                          plan=plan, n_min=n, prozesse=prozesse, rauschvarianten=[rausch],
                                          k_max=e['k'], verfahren=verfahren)
             g = k['gemeinsame_bestaetigung']
+            gr = [x['konfiguration']['gruppe'] for x in kp.schnitt_konfigurationen(plan)]
+            N_KI = sum(x in ('schnitt', 'zusatz') for x in gr) + sum(x == 'identifizierbarkeit' for x in gr)
+            zeit_formel = ((N_KI + 8) * plan.n_bloecke + 18 * tage) * plan.T_lauf / (1 - p) if p < 1 else None
             schritte.append(dict(n_min=n, n0=n0, reserve_r=r,
                                  plan_simuliert=dict(n_bloecke=plan.n_bloecke, n0=plan.n0, n_pilot=plan.n_pilot,
                                                      tage=plan.tage, n_zyklen=plan.n_zyklen,
@@ -119,7 +122,10 @@ def haken(sid, stufe, profil, n_kal, n_pruef, seed_basis, n_kandidaten, n0_kandi
                                  zaehler=g['zaehler'], nenner=g['nenner'], c_H1=k['c_H1']['wert'],
                                  intervalltyp_H2=k['h2'].get('schluessel'), pruefrate_c=None if k['pruefung'] is None
                                  else k['pruefung']['rate'], erfuellt=bool(g['rate'] is not None and
-                                                                           g['rate'] >= bedingung)))
+                                                                           g['rate'] >= bedingung),
+                                 messzeit=dict(formel_s=zeit_formel, ablauf=(k.get('raten_pruefung') or {}).get('ablauf'),
+                                               hinweis='Formel §5.3 (c) unverändert (offen, §12); „ablauf“ nur beim '
+                                                       'Verfahren „zustand“: realisierte Laufzahl × T_Lauf')))
             if schritte[-1]['erfuellt']:
                 break
         red = n_kal < rg.NORMATIVE_ZAHLEN['kampagnen_kalibrierung'] or n_pruef < rg.NORMATIVE_ZAHLEN[

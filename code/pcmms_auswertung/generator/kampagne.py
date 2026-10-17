@@ -1,8 +1,10 @@
 """Kampagnenplan nach Präreg §5.2, §6, A9.2 und A9.12: Phase 0 (P0.7 Referenzläufe, P0.8 Einzelmodulläufe,
 Pilotläufe, bei Einstellung 2 Lⱼ′) und Phase 1 (Blöcke mit Kontrollsätzen, Referenzlauf nach der zwölften
 Konfiguration, Messtage mit Aufwärm- und Schlussreferenzlauf). Die Reihenfolge der Phase 1 zieht ein gesäter
-Generator nach der Regel von §6, bis Werkzeug 7 (AP-10) vorliegt. Wiederholungen ungültiger Läufe sind nicht
-abgebildet (Gültigkeit entscheidet die Auswertung offline).
+Generator nach der Regel von §6, bis Werkzeug 7 (AP-10) vorliegt. Dieser Laufplan ist die geplante Reihenfolge; im
+statischen Ablauf wird er unverändert gemessen (Gültigkeit entscheidet die Auswertung offline). Wiederholungen,
+eingefügte Referenzläufe, Halt und verschobene Zeiten führt der zustandsbehaftete Ablauf (ablauf.py) aus, mit demselben
+Generator für die Wiederholungsplätze.
 
 Phase 0: P0.7 verlangt mindestens 42 Referenzläufe, „je einer nach zwölf anderen Läufen“. Bei wenigen anderen Läufen
 reicht der Abstand 12 dafür nicht; der Generator setzt dann einen Referenzlauf nach je ⌊n_andere/41⌋ (höchstens
