@@ -18,6 +18,14 @@ und n₀ fest; gibt es keines, lautet das Ergebnis regulär „kein zulässiger 
 Begründung nennt dann die tatsächlichen Gründe je Paar (Grenze der Planungsaufrufe, gemeinsame Bedingung nicht erreicht,
 Zeitbudget, sonstiger Grund) und behauptet bei reduzierter Suche keine Unzulässigkeit außerhalb von ihr.
 Ohne angebundene Planung liefert das Skript die vorbereitenden Größen und kennzeichnet die Planung als offen.
+
+Bindung (ab pilot-0.3): Gültigkeitsmasken, σ_Δ, σ̂_ref, ε_ctrl mit kritischem Wert, p̂, Streuungen und Kovarianzen hängen
+über G4 (F_min − ⟨N⟩ mit k ≤ k) von k und über die Fünftel von der Zyklenzahl N_z des Fensters ab. Sie werden als
+zusammengehöriger Satz mit seiner Bindung ausgegeben (k, N_z, Prüfsumme der Phase-0-Läufe, Seed und Datensatzzahl der
+ε_ctrl-Simulation). Die Größen auf oberster Ebene sind der vorläufige Satz bei k = max(min(k_b, K), 3) vor der Suche
+(bis pilot-0.2 ohne Bindungsangabe); nach erfolgreicher Suche steht der Satz des festgelegten Paars (k_max, N_z) unter
+suche.satz. Teil B verwendet nur einen Satz, der zu k_max und N_z des tatsächlich verwendeten Plans passt
+(teil_b.phase0_satz), und berechnet ihn sonst mit satz_fuer_plan neu.
 """
 import math
 
@@ -26,7 +34,8 @@ from scipy import stats
 
 from . import formate, gueltigkeit, konventionen as kv, zufall
 
-VERSION = 'pilot-0.2'                   # 0.2: Begründung der Suche nach dem tatsächlichen Abbruchgrund
+VERSION = 'pilot-0.3'                   # 0.2: Begründung der Suche nach dem tatsächlichen Abbruchgrund; 0.3: Satz mit
+                                        # Bindung (k, N_z, Daten, Seed), Satz der Suche beim festgelegten Paar
 VERBOTEN_TEIL = ('residu', 'yhat', 'vorhersage', 'superposition', 'bestaetigt', 'falsifiziert', 'entscheid', 'ausgang')
 VERBOTEN_NAME = ('r', 'z', 'r0', 'r1', 'z0', 'z1', 'h1', 'h2', 'h3', 'h4', 'h1z')
 
@@ -189,6 +198,113 @@ def _validitaet(tab, sw0, kmax, profil, seed, n_sim):
     return sw, pr1, sr, eps, pr
 
 
+# ── Satz zusammengehöriger Phase-0-Größen ────────────────────────────────────────────────────────────────
+SATZ_FELDER = ('sigma_delta', 'sigma_ref', 'eps_ctrl', 'gueltigkeit', 'p_hat', 'p_hat_hinweis', 'kovarianzen',
+               'streuungen', 'rampe')
+
+
+def fenster(tab):
+    """Zyklenzahl N_z der übergebenen Läufe (einheitlich verlangt) und ⌊N_z/5⌋ Zyklen je Fünftel."""
+    nz = sorted({int(k['n_zyklen']) for k in tab.koepfe})
+    if len(nz) != 1:
+        raise ValueError(f'Phase-0-Läufe mit verschiedenen Zyklenzahlen {nz}: kein einheitliches Fenster')
+    return nz[0], nz[0] // 5
+
+
+def daten_sha256(tab):
+    """Prüfsumme der Phase-0-Läufe (Kennungen in Laufreihenfolge, Datenfelder), an die ein Satz gebunden ist."""
+    t = tab.auswahl(tab.spalte('phase', int) == 0).sortiert()
+    return formate.sha256_json(dict(laeufe=[k['lauf_id'] for k in t.koepfe],
+                                    daten=formate.sha256_bytes(formate.npz_bytes(t.daten))))
+
+
+def _schwellen0(tab, kal, profil, f_soll):
+    """Phase-0-Schwellen, die nicht von k abhängen: σ_tol aus allen Pilotläufen, F_LO aus den Referenzläufen, Δδⱼ."""
+    art = tab.spalte('laufart', object)
+    grp = np.array([k['konfiguration']['gruppe'] for k in tab.koepfe])
+    pil = (art == 'K') & (grp == 'pilot')
+    if not pil.any():
+        raise ValueError('keine Pilotläufe in der Tabelle')
+    ref = art == 'R'
+    sig_c = np.sqrt(np.mean(tab.daten['sigma_roh_zellen'][ref] ** 2, 0))
+    sig_S = _rms(tab.daten['sigma_roh_summe'][ref])
+    fak_lo = profil.wert('g6.faktor')
+    F_LO = fak_lo * sig_c
+    sig_tol = {j: float(profil.wert('g2.sigma_tol') * np.median(tab.daten['sigma_grad'][pil, j - 1])) for j in (2, 3)}
+    dd = np.asarray(kal['p0_5']['delta_delta_grad'], float)
+    sw0 = gueltigkeit.Schwellen(f_soll=f_soll, kmax=3, delta_phi_tol_grad=profil.wert('g2.delta_phi_tol_grad'),
+                                sigma_tol_grad=sig_tol, F_LO_zellen=F_LO, delta_delta_grad=dd,
+                                g4_faktor=profil.wert('g4.faktor'), alarm_faktor=profil.wert('h0.alarm_faktor'))
+    return sw0, dict(sigma_c=sig_c, sigma_summe=sig_S, F_LO=F_LO, fak_lo=fak_lo, sigma_tol=sig_tol, pil=pil)
+
+
+def _satz(tab, sw0, k, profil, seed, n_sim, f_soll, quelle):
+    """Schritte (1)–(3) der Reihenfolge der Schwellen bei k und alle davon abhängigen Pilotgrößen als Satz; dazu das
+    Prüfergebnis (Gültigkeitsmaske je Lauf) für den Planungshaken."""
+    art = tab.spalte('laufart', object)
+    grp = np.array([kk['konfiguration']['gruppe'] for kk in tab.koepfe])
+    pil = (art == 'K') & (grp == 'pilot')
+    sw, pr1, sr, eps, pr = _validitaet(tab, sw0, k, profil, seed, n_sim)
+    gp = pr['gueltig']
+    N_z, n_f = fenster(tab)
+    g6p = [int(i) for i in np.flatnonzero(pil) if pr['regeln']['G6'][i] is True]
+    s = dict(
+        bindung=dict(k=int(k), N_z=int(N_z), n_fuenftel=int(n_f), T_a_s=float(N_z / f_soll), quelle=quelle,
+                     phase0_sha256=daten_sha256(tab), n_laeufe=len(tab), n_pilot=int(pil.sum()),
+                     seed_eps_ctrl=int(seed), n_sim_eps_ctrl=int(n_sim), version=VERSION),
+        sigma_ref=dict(sigma_ref=sr['sigma_ref'], sigma_ref_zellen=sr['sigma_ref_zellen'], n=sr['n'],
+                       werte=sr['werte'], mindestzahl=profil.wert('h0.referenzlaeufe_min'),
+                       ausreichend=bool(sr['n'] >= profil.wert('h0.referenzlaeufe_min'))),
+        eps_ctrl={kk: v for kk, v in eps.items()}, sigma_delta=sw.sigma_delta,
+        rampe=dict(liftoff_pilotlaeufe=[tab.koepfe[i]['lauf_id'] for i in g6p], T_ramp_verdoppeln=bool(g6p),
+                   hinweis='Liftoff im ganzen Lauf einschließlich Rampe (min_roh); Lage in Rampe oder Fenster '
+                           'ist aus der Laufzusammenfassung nicht trennbar'),
+        gueltigkeit=dict(n_laeufe=len(tab), n_ungueltig=int((~gp).sum()),
+                         gruende={tab.koepfe[i]['lauf_id']: pr['gruende'][i] for i in np.flatnonzero(~gp)},
+                         nicht_pruefbar={g: len(v) for g, v in pr['nicht_pruefbar'].items()},
+                         regeln_angewandt='G2–G10, dann ε_ctrl, dann G1 (A9.2)'),
+        p_hat=float((~gp[pil]).mean()),
+        p_hat_hinweis=('untere Schranke: ' + ', '.join(sorted(pr['nicht_pruefbar'])) + ' nicht prüfbar'
+                       if pr['nicht_pruefbar'] else 'alle Regeln geprüft'),
+        kovarianzen=kovarianzen(tab, gp, k), streuungen=streuungen(tab, gp & pil, k))
+    return s, pr
+
+
+def satz_fuer_plan(tab, kal, profil, f_soll, k, seed, quelle=None):
+    """Satz der Phase-0-Größen beim k des Plans und dem Fenster der übergebenen (gegebenenfalls auf die ersten N_z
+    Zyklen gekürzten) Phase-0-Läufe, mit demselben Code und Seed wie das Pilotskript."""
+    t = tab.auswahl(tab.spalte('phase', int) == 0).sortiert()
+    sw0, _ = _schwellen0(t, kal, profil, f_soll)
+    return _satz(t, sw0, int(k), profil, seed, profil.zahl('eps_ctrl_datensaetze'), f_soll,
+                 quelle or f'neu berechnet beim k des Plans (k = {int(k)})')[0]
+
+
+def satz_oberste_ebene(pe):
+    """Der Satz auf oberster Ebene einer Pilotausgabe (Bindung None bei Fassungen bis pilot-0.2)."""
+    s = {x: pe.get(x) for x in SATZ_FELDER if x != 'streuungen'}
+    s['streuungen'] = pe.get('streuungen_volles_fenster')
+    s['bindung'] = pe.get('bindung')
+    return s
+
+
+def einordnen(pe):
+    """Bedeutung einer Pilotausgabe, auch älterer Fassungen: an welches k und Fenster die Größen gebunden sind und ob
+    ein Satz beim festgelegten Paar der Suche vorliegt."""
+    b = pe.get('bindung')
+    s = (pe.get('suche') or {}).get('satz')
+    if b is None:
+        return dict(version=pe.get('version') or 'unbekannt', gebunden=False, k=pe.get('k_pilotgroessen'), N_z=None,
+                    seed=pe.get('seed'), satz_suche=None,
+                    bedeutung=(f'Größen bei k = {pe.get("k_pilotgroessen")} vor der Suche (k der Pilotgrößen), Fenster '
+                               'der übergebenen Läufe; keine Bindung an k_max oder N_z des Plans (Fassung bis '
+                               'pilot-0.2). Für Teil B nur nach Neuberechnung beim k des Plans verwendbar.'))
+    return dict(version=pe.get('version'), gebunden=True, k=b['k'], N_z=b['N_z'], seed=pe.get('seed'),
+                satz_suche=None if s is None else dict(k=s['bindung']['k'], N_z=s['bindung']['N_z']),
+                bedeutung=(f'oberste Ebene: vorläufiger Satz bei k = {b["k"]}, N_z = {b["N_z"]}' +
+                           ('' if s is None else f'; Suche: Satz beim festgelegten Paar k_max = '
+                                                 f'{s["bindung"]["k"]}, N_z = {s["bindung"]["N_z"]}')))
+
+
 def pilot_auswerten(tab, kal, profil, f_soll, zeit=None, seed=0, planung=None, tabelle_fuer=None, N_z_raster=None,
                     kennung=None):
     """Pilotanalyse der Phase-0-Läufe bei f (LaufTabelle tab). kal: Kalibrierung (Δδ, Moden); zeit: dict mit T_park,
@@ -202,9 +318,7 @@ def pilot_auswerten(tab, kal, profil, f_soll, zeit=None, seed=0, planung=None, t
     pil = (art == 'K') & (grp == 'pilot')
     if not pil.any():
         raise ValueError('keine Pilotläufe in der Tabelle')
-    p05, p04 = kal['p0_5'], kal['p0_4']
-    dd = np.asarray(p05['delta_delta_grad'], float)
-    moden = p04['moden']
+    p04 = kal['p0_4']
     f1 = p04['f_1_hz']
     f1_schranke = f1 is None
     if f1 is None:
@@ -213,46 +327,23 @@ def pilot_auswerten(tab, kal, profil, f_soll, zeit=None, seed=0, planung=None, t
     K_voll = int(tab.koepfe[0]['k_voll'])
     n_sim = profil.zahl('eps_ctrl_datensaetze')
     # σ_c, σ_Σ, F_LO aus den Referenzläufen; σ_tol aus allen Pilotläufen
-    ref = art == 'R'
-    sig_c = np.sqrt(np.mean(tab.daten['sigma_roh_zellen'][ref] ** 2, 0))
-    sig_S = _rms(tab.daten['sigma_roh_summe'][ref])
-    fak_lo = profil.wert('g6.faktor')
-    F_LO = fak_lo * sig_c
-    sig_tol = {j: float(profil.wert('g2.sigma_tol') * np.median(tab.daten['sigma_grad'][pil, j - 1])) for j in (2, 3)}
-    sw0 = gueltigkeit.Schwellen(f_soll=f_soll, kmax=3, delta_phi_tol_grad=profil.wert('g2.delta_phi_tol_grad'),
-                                sigma_tol_grad=sig_tol, F_LO_zellen=F_LO, delta_delta_grad=dd,
-                                g4_faktor=profil.wert('g4.faktor'), alarm_faktor=profil.wert('h0.alarm_faktor'))
+    sw0, s0 = _schwellen0(tab, kal, profil, f_soll)
     out = dict(version=VERSION, f_soll=f_soll, k_voll=K_voll, f_1_hz=f1, f_1_untere_schranke=f1_schranke, k_b=k_b,
-               sigma_c=sig_c.tolist(), sigma_summe=sig_S, F_LO_zellen=F_LO.tolist(), F_LO_summe=fak_lo * sig_S,
-               sigma_tol_grad=sig_tol, profil=profil.kurz())
+               sigma_c=s0['sigma_c'].tolist(), sigma_summe=s0['sigma_summe'], F_LO_zellen=s0['F_LO'].tolist(),
+               F_LO_summe=s0['fak_lo'] * s0['sigma_summe'], sigma_tol_grad=s0['sigma_tol'], profil=profil.kurz())
     # T_φ und Rampe
     tphi = tab.daten['t_phi'][pil]
     out['T_phi_s'] = float(np.nanmax(tphi)) if np.isfinite(tphi).any() else None
     k_start = min(k_b, K_voll)
-    # Validität mit k = k_start (G4 mit F_min − ⟨N⟩ hängt von k ab; je k neu in der Suche). Ohne zulässiges k
+    # Vorläufiger Satz mit k = k_start (G4 mit F_min − ⟨N⟩ hängt von k ab; je k neu in der Suche). Ohne zulässiges k
     # (k_b < 3) werden die Pilotgrößen mit k = 3 bestimmt und die Suche endet regulär ohne Arbeitspunkt.
     k_val = max(k_start, 3)
-    sw, pr1, sr, eps, pr = _validitaet(tab, sw0, k_val, profil, seed, n_sim)
-    out['sigma_ref'] = dict(sigma_ref=sr['sigma_ref'], sigma_ref_zellen=sr['sigma_ref_zellen'], n=sr['n'],
-                            werte=sr['werte'], mindestzahl=profil.wert('h0.referenzlaeufe_min'),
-                            ausreichend=bool(sr['n'] >= profil.wert('h0.referenzlaeufe_min')))
-    out['eps_ctrl'] = {k: v for k, v in eps.items()}
-    out['sigma_delta'] = sw.sigma_delta
-    g6p = [int(i) for i in np.flatnonzero(pil) if pr['regeln']['G6'][i] is True]
-    out['rampe'] = dict(liftoff_pilotlaeufe=[tab.koepfe[i]['lauf_id'] for i in g6p], T_ramp_verdoppeln=bool(g6p),
-                        hinweis='Liftoff im ganzen Lauf einschließlich Rampe (min_roh); Lage in Rampe oder Fenster '
-                                'ist aus der Laufzusammenfassung nicht trennbar')
-    gp = pr['gueltig']
-    out['gueltigkeit'] = dict(n_laeufe=len(tab), n_ungueltig=int((~gp).sum()),
-                              gruende={tab.koepfe[i]['lauf_id']: pr['gruende'][i] for i in np.flatnonzero(~gp)},
-                              nicht_pruefbar={g: len(v) for g, v in pr['nicht_pruefbar'].items()},
-                              regeln_angewandt='G2–G10, dann ε_ctrl, dann G1 (A9.2)')
-    out['p_hat'] = float((~gp[pil]).mean())
-    out['p_hat_hinweis'] = ('untere Schranke: ' + ', '.join(sorted(pr['nicht_pruefbar'])) + ' nicht prüfbar'
-                            if pr['nicht_pruefbar'] else 'alle Regeln geprüft')
-    out['kovarianzen'] = kovarianzen(tab, gp, k_val)
-    out['streuungen_volles_fenster'] = streuungen(tab, gp & pil, k_val)
+    s, _ = _satz(tab, sw0, k_val, profil, seed, n_sim, f_soll, 'vorläufig: k = max(min(k_b, K), 3) vor der Suche')
+    for x in SATZ_FELDER:
+        out['streuungen_volles_fenster' if x == 'streuungen' else x] = s[x]
     out['k_pilotgroessen'] = k_val
+    out['bindung'] = s['bindung']
+    out['seed'] = int(seed)
     if k_start < 3:
         out['suche'] = dict(ergebnis='kein zulässiger Arbeitspunkt unter diesen Annahmen',
                             grund=f'k_b = {k_b} < 3 (f₁ = {f1:g} Hz, f = {f_soll:g} Hz)')
@@ -291,12 +382,9 @@ def suche(tab, kal, profil, f, k_start, basis, zeit, planung, tabelle_fuer, N_z_
             else:
                 t = tabelle_fuer(Nz)
                 t = t.auswahl(t.spalte('phase', int) == 0).sortiert()
-            sw, _, _, eps, pr = _validitaet(t, sw0, k, profil, seed, n_sim)
-            art = t.spalte('laufart', object)
-            grp = np.array([kk['konfiguration']['gruppe'] for kk in t.koepfe])
-            pil = (art == 'K') & (grp == 'pilot')
-            p_hat = float((~pr['gueltig'][pil]).mean())
-            st = streuungen(t, pr['gueltig'] & pil, k)
+            satz_k, pr = _satz(t, sw0, k, profil, seed, n_sim, f, f'Suche: Paar (k = {k}, N_z = {Nz})')
+            p_hat = satz_k['p_hat']
+            st = satz_k['streuungen']
             T_a = Nz / f
             T_lauf = zeit['T_park'] + zeit['T_ramp'] + T_e + T_a + zeit['T_ab']
             nmax = n_max(T_lauf, p_hat, zeit)
@@ -309,7 +397,7 @@ def suche(tab, kal, profil, f, k_start, basis, zeit, planung, tabelle_fuer, N_z_
                                                     'angebunden; nur vorbereitende Pilotgrößen', schritte=schritte,
                             reduktion=reduktion)
             pl = planung(dict(k=k, N_z=Nz, T_a=T_a, T_e=T_e, T_lauf=T_lauf, zeit=dict(zeit), s_q=st,
-                              kovarianzen=kovarianzen(t, pr['gueltig'], k), p_hat=p_hat, n_max=nmax, tabelle=t,
+                              kovarianzen=satz_k['kovarianzen'], p_hat=p_hat, n_max=nmax, tabelle=t,
                               gueltig=pr['gueltig'], kal=kal, f=f))
             schritt['planung'] = {kk: v for kk, v in pl.items() if kk not in ('details',)}
             schritte.append(schritt)
@@ -321,7 +409,7 @@ def suche(tab, kal, profil, f, k_start, basis, zeit, planung, tabelle_fuer, N_z_
             if n <= nmax:
                 return dict(ergebnis='festgelegt', k_max=k, N_z=Nz, T_a=T_a, T_e=T_e, T_lauf=T_lauf,
                             n_min=pl['n_min'], n0=pl['n0'], reserve_r=r, n=n, n_max=nmax, p_hat=p_hat, schritte=schritte,
-                            reduktion=reduktion, planung_quelle=pl.get('quelle'))
+                            reduktion=reduktion, planung_quelle=pl.get('quelle'), zeit=dict(zeit), satz=satz_k)
     return dict(ergebnis='kein zulässiger Arbeitspunkt unter diesen Annahmen',
                 grund=grund_ohne_arbeitspunkt(schritte, reduktion), schritte=schritte, reduktion=reduktion)
 

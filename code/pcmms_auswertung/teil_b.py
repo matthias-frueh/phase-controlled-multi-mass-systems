@@ -11,15 +11,28 @@ nr6 H2-Fenster, φ̂₂*, SNR und erwartete Halbbreite; nr5 trägt dazu die Unsi
 nr9 Laufreihenfolge; nr10 Ergebnisse von Werkzeug 8 (c von H1 und H1Z mit Prüfrate und Herkunft, kritischer Wert für
 ε_ctrl, Intervalltyp von H2 mit Überdeckung). Fehlende Werte stehen als None mit Vermerk; Stufe 2 meldet die
 betroffenen Ausgänge dann als nicht entscheidbar mit Grund.
+
+Phase-0-Größen (ab teil_b-0.3): σ_Δ, σ̂_ref, ε_ctrl mit kritischem Wert, p̂, die Streuungen (u_c,erw, V, SNR) und die
+Auswahl der gültigen Phase-0-Läufe (ŷ⁰, N_s) stammen aus einem Satz, der an k_max und N_z des tatsächlich verwendeten
+Plans gebunden ist (phase0_satz, nr2.phase0_bindung). Ein passender Satz der Pilotausgabe wird übernommen, sonst mit
+dem Code des Pilotskripts neu berechnet; Pilotausgaben anderer Daten oder ohne Seed werden zurückgewiesen. Bis
+teil_b-0.2 stammten diese Größen aus dem vorläufigen Satz bei k der Pilotgrößen (bei A4 k = 30 gegen k_max = 9); diese
+Bindung ist als „historisch“ nur ausdrücklich und gekennzeichnet wählbar. nr2.arbeitspunkt prüft den Plan mit dem
+gebundenen p̂ erneut (Reserve, n_max, Herkunft aus der Suche) und gibt einen nicht mehr abgesicherten Plan als solchen aus;
+nachoptimiert wird nicht.
 """
+import math
+
 import numpy as np
 from scipy import stats
 
-from . import bootstrap as bs, formate, h2, kontrollen, konventionen as kv, vorhersage as vh, zeltfit as zfit
+from . import bootstrap as bs, formate, h2, kontrollen, konventionen as kv, pilot, vorhersage as vh, zeltfit as zfit
 from . import zusammenfassung as zf
 from .regeln import RegelOffen
 
-VERSION = 'teil_b-0.2'          # 0.2: nr5.unsicherheit (Korrektur E), nr1.phase0_verarbeitung (Korrektur B)
+VERSION = 'teil_b-0.3'          # 0.2: nr5.unsicherheit (Korrektur E), nr1.phase0_verarbeitung (Korrektur B);
+                                # 0.3: Phase-0-Satz an k_max und N_z des Plans gebunden, nr2.arbeitspunkt
+BINDUNGEN = ('plan', 'historisch')
 
 
 def konfigurationen(zusatz=False, punkte_I=None):
@@ -64,18 +77,130 @@ def d_grenzen(Y, kmax):
     return np.array(DB), np.array(DA)
 
 
-def erstellen(tab0, kal, pilot_erg, profil, plan, werkzeug8=None, kennung=None, seed_b0=None, B=None):
+def phase0_satz(tab0, kal, pilot_erg, profil, plan, bindung='plan', seed_pilot=None):
+    """Der für Phase 1 maßgebliche Satz der Phase-0-Größen und seine Einordnung (nr2.phase0_bindung).
+
+    bindung='plan': Satz bei k_max des Plans und dem Fenster der übergebenen Phase-0-Läufe; ihre Zyklenzahl muss N_z des
+    Plans gleichen (sonst: Läufe zuerst auf die ersten N_z Zyklen kürzen). Ein Satz der Pilotausgabe (oberste Ebene oder
+    Suche) mit gleichem k, N_z und gleichen Phase-0-Daten wird übernommen; gleiches k und N_z bei anderen Daten ist
+    unvereinbar. Sonst wird der Satz mit dem Code und Seed des Pilotskripts neu berechnet (seed_pilot, falls die
+    Pilotausgabe keinen Seed nennt). bindung='historisch': der vorläufige Satz auf oberster Ebene wie bis teil_b-0.2,
+    gekennzeichnet und nicht qualifizierend."""
+    if bindung not in BINDUNGEN:
+        raise ValueError(f'Bindung {bindung!r} unbekannt ({", ".join(BINDUNGEN)})')
+    t = tab0.auswahl(tab0.spalte('phase', int) == 0).sortiert()
+    k = int(plan['k_max'])
+    N_z, _ = pilot.fenster(t)
+    if plan.get('N_z') is not None and int(plan['N_z']) != N_z:
+        raise ValueError(f'Teil B: Phase-0-Läufe mit N_z = {N_z} Zyklen passen nicht zum Plan (N_z = {plan["N_z"]}); '
+                         'die Läufe zuerst auf die ersten N_z Zyklen kürzen')
+    einordnung = pilot.einordnen(pilot_erg)
+    info = dict(modus=bindung, k_plan=k, N_z_plan=plan.get('N_z'), N_z=N_z, pilot_version=pilot_erg.get('version'),
+                pilot_einordnung=einordnung['bedeutung'], k_pilotgroessen=pilot_erg.get('k_pilotgroessen'))
+    if bindung == 'historisch':
+        s = pilot.satz_oberste_ebene(pilot_erg)
+        info.update(quelle='historisch: vorläufiger Satz bei k der Pilotgrößen (bis teil_b-0.2)', k=info['k_pilotgroessen'],
+                    qualifiziert=False, neu_berechnet=False, bindung=s.get('bindung'),
+                    grund='nicht an k_max des Plans gebunden' if info['k_pilotgroessen'] != k else
+                    'Bindung an k_max zufällig gleich, aber nicht geprüft')
+        return s, info
+    h = pilot.daten_sha256(t)
+    kandidaten = [('Pilotskript, oberste Ebene', pilot.satz_oberste_ebene(pilot_erg))]
+    if (pilot_erg.get('suche') or {}).get('satz'):
+        kandidaten.append(('Pilotskript, Suche', pilot_erg['suche']['satz']))
+    for name, s in kandidaten:
+        b = s.get('bindung')
+        if not b or b['k'] != k or b['N_z'] != N_z:
+            continue
+        if b['phase0_sha256'] != h:
+            raise ValueError(f'Teil B: Satz „{name}“ (k = {k}, N_z = {N_z}) stammt aus anderen Phase-0-Daten als den '
+                             'übergebenen Läufen')
+        info.update(quelle=name, k=k, qualifiziert=True, neu_berechnet=False, bindung=b)
+        return s, info
+    seed = pilot_erg.get('seed', seed_pilot)
+    if seed is None:
+        raise ValueError(f'Teil B: Pilotgrößen nicht an k_max = {k}, N_z = {N_z} gebunden ({einordnung["bedeutung"]}) '
+                         'und ohne Seed der ε_ctrl-Simulation nicht neu berechenbar')
+    s = pilot.satz_fuer_plan(t, kal, profil, plan['f'], k, int(seed),
+                             quelle=f'in Teil B neu berechnet: k_max des Plans = {k}, k der Pilotgrößen = '
+                                    f'{pilot_erg.get("k_pilotgroessen")}')
+    info.update(quelle='neu berechnet (Code des Pilotskripts)', k=k, qualifiziert=True, neu_berechnet=True,
+                bindung=s['bindung'])
+    return s, info
+
+
+def arbeitspunkt(plan, satz, info, pilot_erg, profil):
+    """Erneute Prüfung des verwendeten Plans mit dem gebundenen Satz (keine Nachoptimierung): Reserve
+    r(p̂) = ⌈n_min·p̂/(1 − p̂)⌉ + Reserve, n ≤ n_max(p̂) bei Zeitangaben, p̂ des Plans, Herkunft aus der Suche.
+    Status „abgesichert“ nur für einen Plan aus der Suche mit demselben Satz und bestandenen Prüfungen; „nicht
+    abgesichert“, wenn eine Prüfung scheitert; sonst „nicht geprüft“ (externer Plan: gemeinsame Bedingung hier nicht
+    geprüft)."""
+    p = float(satz['p_hat'])
+    n_min, n = int(plan['n_min']), int(plan['n'])
+    res = profil.wert('planung.reserve')
+    pr, fehl = [], []
+    r_soll = math.ceil(n_min * p / (1 - p)) + res if p < 1 else None
+    if r_soll is None:
+        fehl.append('p̂ = 1: Reserve nicht bestimmbar')
+    elif n < n_min + r_soll:
+        fehl.append(f'n = {n} < n_min + r(p̂) = {n_min} + {r_soll} (p̂ = {p:.4f})')
+    else:
+        pr.append(f'n = {n} ≥ n_min + r(p̂) = {n_min + r_soll} (p̂ = {p:.4f})')
+    zeit, T_lauf = plan.get('zeit'), plan.get('T_lauf')
+    n_max_neu = None
+    if zeit and T_lauf is not None and p < 1:
+        n_max_neu = pilot.n_max(float(T_lauf), p, zeit)
+        (pr if n <= n_max_neu else fehl).append(f'n = {n} {"≤" if n <= n_max_neu else ">"} n_max(p̂) = {n_max_neu}')
+    else:
+        pr.append('n ≤ n_max nicht prüfbar (Zeitangaben des Plans fehlen)')
+    if plan.get('p_hat') is not None and abs(float(plan['p_hat']) - p) > 1e-12:
+        fehl.append(f'p̂ des Plans {float(plan["p_hat"]):.4f} ≠ p̂ des gebundenen Satzes {p:.4f}')
+    s = pilot_erg.get('suche') or {}
+    aus_suche = s.get('ergebnis') == 'festgelegt'
+    if aus_suche:
+        ab = [x for x in ('k_max', 'N_z', 'n_min', 'n0', 'n') if plan.get(x) is not None and plan.get(x) != s.get(x)]
+        if ab:
+            fehl.append(f'Plan weicht vom Ergebnis der Suche ab: {ab}')
+        if info.get('quelle') != 'Pilotskript, Suche':
+            fehl.append(f'Satz nicht der des festgelegten Paars der Suche ({info.get("quelle")})')
+    if info['modus'] == 'historisch':
+        fehl.append('historische Bindung: Phase-0-Größen bei k der Pilotgrößen, nicht beim k_max des Plans')
+    status = 'nicht abgesichert' if fehl else ('abgesichert' if aus_suche else 'nicht geprüft')
+    return dict(status=status, aus_suche=aus_suche, p_hat=p, r_soll=r_soll, r_plan=plan.get('r'), n=n, n_min=n_min,
+                n_max_neu=n_max_neu, bestanden=pr, verfehlt=fehl,
+                hinweis=None if aus_suche else 'externer Plan: P(H1 und H2 bestätigt | exakt) ≥ 0,8 hier nicht geprüft')
+
+
+def einordnen(tb):
+    """Bedeutung eines Teil B, auch älterer Fassungen (ohne nr2.phase0_bindung)."""
+    n2 = tb['nr2']
+    b = n2.get('phase0_bindung')
+    if b is None:
+        return dict(version=tb.get('version') or 'unbekannt', modus='historisch', qualifiziert=False,
+                    bedeutung=('Phase-0-Größen (σ_Δ, σ̂_ref, ε_ctrl, p̂, Streuungen, Auswahl gültiger Phase-0-Läufe) aus '
+                               'dem vorläufigen Satz bei k der Pilotgrößen, nicht an k_max = '
+                               f'{n2.get("k_max")} gebunden (Fassung bis teil_b-0.2)'))
+    ap = n2.get('arbeitspunkt') or {}
+    return dict(version=tb.get('version'), modus=b['modus'], qualifiziert=bool(b.get('qualifiziert')),
+                arbeitspunkt=ap.get('status'),
+                bedeutung=f'Phase-0-Größen bei k = {b.get("k")}, N_z = {b.get("N_z")} ({b.get("quelle")})')
+
+
+def erstellen(tab0, kal, pilot_erg, profil, plan, werkzeug8=None, kennung=None, seed_b0=None, B=None, bindung='plan',
+              seed_pilot=None):
     """Teil B (Inhalt als verschachteltes dict). tab0: Phase-0-Läufe (LaufTabelle); kal: Kalibrierung; pilot_erg:
-    Ergebnis von pilot.pilot_auswerten; plan: dict(f, k_max, n_min, n0, r, n, d, n_max, zusatz, einstellung2 (art, s,
-    punkte_I) oder None, seed_reihenfolge, laufreihenfolge, seed_bootstrap); werkzeug8: dict (c_H1, c_H1Z,
-    bias0, bias1, u_bias0, u_bias1 (je (21,) Summe; *_zellen (21, 3)), h2_intervall, eps_kritisch, …) oder None."""
+    Ergebnis von pilot.pilot_auswerten; plan: dict(f, k_max, N_z (optional), n_min, n0, r, n, d, n_max, zusatz,
+    einstellung2 (art, s, punkte_I) oder None, seed_reihenfolge, laufreihenfolge, seed_bootstrap, gegebenenfalls zeit,
+    T_lauf, p_hat); werkzeug8: dict (c_H1, c_H1Z, bias0, bias1, u_bias0, u_bias1 (je (21,) Summe; *_zellen (21, 3)),
+    h2_intervall, eps_kritisch, …) oder None; bindung: Phase-0-Satz an den Plan ('plan') oder historisch (phase0_satz)."""
     w8 = dict(werkzeug8 or {})
     kmax = int(plan['k_max'])
     K = int(tab0.k_voll)
     B = profil.zahl('bootstrap_B') if B is None else int(B)
     p05 = kal['p0_5']
     dd = np.asarray(p05['delta_delta_grad'], float)
-    ungueltig = set(pilot_erg['gueltigkeit']['gruende'])
+    satz, bindung_info = phase0_satz(tab0, kal, pilot_erg, profil, plan, bindung, seed_pilot)
+    ungueltig = set(satz['gueltigkeit']['gruende'])
     e2 = plan.get('einstellung2')
     # nr3: Einzelmodulläufe der Phase 0 und feste Indexmatrizen B⁰ⱼ
     nr3 = dict(einzel0=[_einzel(tab0, j, 1, ungueltig) for j in (1, 2, 3)],
@@ -131,8 +256,8 @@ def erstellen(tab0, kal, pilot_erg, profil, plan, werkzeug8=None, kennung=None, 
                  'u_bias1_zellen'):
         nr4[name] = None if w8.get(name) is None else np.asarray(w8[name], float)
     nr4['bias_herkunft'] = w8.get('bias_herkunft', 'fehlt (Werkzeug 8)')
-    # u_c,erw aus s_q (Pilot) und u(ŷ) (Bootstrap der Vorhersage an den Sollphasen)
-    st = pilot_erg['streuungen_volles_fenster']
+    # u_c,erw aus s_q (Pilot, gebundener Satz) und u(ŷ) (Bootstrap der Vorhersage an den Sollphasen)
+    st = satz['streuungen']
     s_q = np.array([st['s_q'][g] for g in kv.GROESSEN_H1]) if st.get('s_q') else None
     u_yhat = np.zeros((len(schnitt), 7))
     u_gam = np.zeros(len(schnitt))
@@ -187,19 +312,21 @@ def erstellen(tab0, kal, pilot_erg, profil, plan, werkzeug8=None, kennung=None, 
     nr2 = dict(f=float(plan['f']), k_max=kmax, k_voll=K, delta_delta_grad=dd,
                u_delta_delta_grad=np.asarray(p05['u_delta_delta_grad'], float),
                sigma_tol_grad=pilot_erg['sigma_tol_grad'], delta_f_tol=plan.get('delta_f_tol'),
-               sigma_ref=pilot_erg['sigma_ref']['sigma_ref'], sigma_ref_zellen=pilot_erg['sigma_ref']['sigma_ref_zellen'],
-               eps_ctrl=pilot_erg['eps_ctrl'].get('eps_ctrl'), eps_ctrl_test=pilot_erg['eps_ctrl'],
+               sigma_ref=satz['sigma_ref']['sigma_ref'], sigma_ref_zellen=satz['sigma_ref']['sigma_ref_zellen'],
+               eps_ctrl=satz['eps_ctrl'].get('eps_ctrl'), eps_ctrl_test=satz['eps_ctrl'],
                sigma_c=pilot_erg['sigma_c'], F_LO_zellen=pilot_erg['F_LO_zellen'],
-               sigma_delta=pilot_erg['sigma_delta'], T_P0=plan.get('T_P0'), Delta_T=plan.get('Delta_T'),
+               sigma_delta=satz['sigma_delta'], T_P0=plan.get('T_P0'), Delta_T=plan.get('Delta_T'),
                n_min=n_min, n0=int(plan['n0']), r=plan.get('r'), n=int(plan['n']), n_max=plan.get('n_max'),
-               d=int(plan['d']), p_hat=pilot_erg['p_hat'], einstellung2=e2,
+               d=int(plan['d']), p_hat=satz['p_hat'], einstellung2=e2,
                F_c_stat=np.asarray(kal['p0_2']['F_c_stat_N'], float), N_s_zellen=N_s_z,
                konfigurationen=konf, f_takt=plan.get('f_takt', 1e6),
-               pilot_suche={x: pilot_erg.get('suche', {}).get(x) for x in ('ergebnis', 'grund')})
+               pilot_suche={x: pilot_erg.get('suche', {}).get(x) for x in ('ergebnis', 'grund')},
+               phase0_bindung=bindung_info, arbeitspunkt=arbeitspunkt(plan, satz, bindung_info, pilot_erg, profil),
+               N_z=bindung_info['N_z'])
     nr10 = dict(c_H1=w8.get('c_H1'), c_H1_herkunft=w8.get('c_H1_herkunft', 'fehlt (Werkzeug 8)'),
                 c_H1Z=w8.get('c_H1Z'), c_H1Z_herkunft=w8.get('c_H1Z_herkunft', 'fehlt (Werkzeug 8)'),
                 pruefrate=w8.get('pruefrate'), h2_intervall=w8.get('h2_intervall'),
-                eps_kritisch=pilot_erg['eps_ctrl'].get('kritisch'), raten=w8.get('raten'))
+                eps_kritisch=satz['eps_ctrl'].get('kritisch'), raten=w8.get('raten'))
     return dict(version=VERSION, kennung=kennung,
                 nr1=dict(kalibrierung_sha256=formate.sha256_json(kal),
                          phase0_sha256=formate.sha256_bytes(formate.npz_bytes(tab0.daten)),

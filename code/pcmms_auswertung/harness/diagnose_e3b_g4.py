@@ -31,7 +31,8 @@ import time
 
 import numpy as np
 
-from .. import auswertung, formate, gueltigkeit, konventionen as kv, regeln, teil_b, vorhersage as vh, zufall
+from .. import auswertung, formate, gueltigkeit, konventionen as kv, regeln, teil_b, verfahren as vf, vorhersage as vh
+from .. import zufall
 from .. import zusammenfassung as zf
 from ..generator import ebene_h, kampagne as kp, szenarien, wahrheit
 from . import kampagnen, kette, neulauf, pruefstand
@@ -58,6 +59,7 @@ SEED_JITTER_MC = 20261017
 JITTER_NENN_GRAD = 0.2          # Nennjitter je Zyklus für die Wahl des Zielpiloten vor Phase 0 (Rauschmodell L1)
 SUCHRASTER = (np.arange(90.0, 150.0 + 1e-9, 2.0), np.arange(200.0, 280.0 + 1e-9, 2.0))    # Umgebung des Schnitts
 REGELN = gueltigkeit.REGELN_G
+VERFAHREN = vf.HISTORISCH       # Diagnose des produktiven Stands vom 17.10.2026 (σ_Δ bei k der Pilotgrößen)
 
 # Werkzeug 8: A4 und V1-G0 aus PR #21 (unverändert), V1-G60h aus dem Altlauf (vorbereiten)
 W8_DATEIEN = {'A4': 'docs/ap13_neulaeufe_2026-10-17/werkzeug8_A4',
@@ -218,7 +220,8 @@ def kampagne(auftrag):
     t0 = time.perf_counter()
     kurz = info = None
     if voll:
-        r = kette.kette(sid, STUFE, prof, plan=plan, seed=seed, werkzeug8=w8, n_min=n_min, mit_wahrheit=False)
+        r = kette.kette(sid, STUFE, prof, plan=plan, seed=seed, werkzeug8=w8, n_min=n_min, mit_wahrheit=False,
+                        verfahren=VERFAHREN)
         m, laeufe, tab, tb, pe, erg = r['modell'], r['laeufe'], r['tabelle'], r['teil_b'], r['pilot'], r['ergebnis']
         kurz = kampagnen.kurzbefund(erg, tb, seed)
         kurz = {k: v for k, v in kurz.items() if k not in ('felder', 'teil_b')}
@@ -227,7 +230,7 @@ def kampagne(auftrag):
         m, laeufe, tab = kette.kampagne_erzeugen(sid, STUFE, plan, seed)
         _, _, kal = kette.kalibrierung_erzeugen(szenarien.KATALOG[sid], m, seed)
         tb, pe = kette.teil_b_erzeugen(tab, kal, m, prof, w8, seed, n_min,
-                                       kennung=formate.synth_kennung('KETTE', sid, STUFE, seed))
+                                       kennung=formate.synth_kennung('KETTE', sid, STUFE, seed), verfahren=VERFAHREN)
     t_kette = time.perf_counter() - t0
     kmax, kval = int(tb['nr2']['k_max']), int(pe['k_pilotgroessen'])
     sw = auswertung._schwellen(tb, prof)

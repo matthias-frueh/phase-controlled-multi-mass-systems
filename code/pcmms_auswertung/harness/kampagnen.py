@@ -14,7 +14,7 @@ import warnings
 
 import numpy as np
 
-from .. import formate, regeln, zufall
+from .. import formate, regeln, verfahren as vf, zufall
 from ..generator import kampagne as kp, szenarien, wahrheit
 from . import kette, metriken
 
@@ -99,7 +99,10 @@ def kurzbefund(erg, tb, seed):
                          S1_kandidaten=len(g['abbruch']['S1_kandidaten'])),
         n_auswertbar=erg['n_auswertbar'], yhat1_gueltig=erg['yhat1_gueltig'],
         teil_b=dict(Delta=np.asarray(n4['Delta'], float), Delta_rel=np.asarray(n4['Delta_rel'], float),
-                    D=np.asarray(n4['D'], float) if n4.get('D') is not None else None),
+                    D=np.asarray(n4['D'], float) if n4.get('D') is not None else None,
+                    bindung=(tb['nr2'].get('phase0_bindung') or {}).get('modus', 'historisch'),
+                    k_bindung=(tb['nr2'].get('phase0_bindung') or {}).get('k'),
+                    arbeitspunkt=(tb['nr2'].get('arbeitspunkt') or {}).get('status')),
         felder=dict(r0=r0, v0=v0, r1=r1, v1=v1, rz0=rz0, vz0=vz0, rz1=rz1, vz1=vz1,
                     u0=np.asarray(H1['tests0']['u'], float), nu0=np.asarray(H1['tests0']['nu'], float),
                     z0=np.asarray(H1['tests0']['z'], float), z1=np.asarray(H1['tests1']['z'], float),
@@ -107,9 +110,9 @@ def kurzbefund(erg, tb, seed):
 
 
 def _eine(auftrag):
-    sid, stufe, prof, plan, seed, w8, n_min, rausch, staerke, k_max = auftrag
+    sid, stufe, prof, plan, seed, w8, n_min, rausch, staerke, k_max, verfahren = auftrag
     r = kette.kette(sid, stufe, prof, plan=plan, seed=seed, werkzeug8=w8, n_min=n_min, mit_wahrheit=False,
-                    rausch=rausch, staerke=staerke, k_max=k_max)
+                    rausch=rausch, staerke=staerke, k_max=k_max, verfahren=verfahren)
     return kurzbefund(r['ergebnis'], r['teil_b'], seed)
 
 
@@ -145,11 +148,13 @@ def wahrheit_kurz(sid, stufe, plan, staerke=None, k_max=None):
 
 
 def ausfuehren(sid, stufe, profil, n, seed_basis, rolle='pruefung', plan=None, n_min=None, werkzeug8=None, rausch=None,
-               staerke=None, prozesse=1, fortschritt=None, k_max=None):
-    """n Kampagnen des Szenariopunkts; Rückgabe dict(meta, befunde, wahrheit)."""
+               staerke=None, prozesse=1, fortschritt=None, k_max=None, verfahren=None):
+    """n Kampagnen des Szenariopunkts; Rückgabe dict(meta, befunde, wahrheit). verfahren: Bindung der Phase-0-Größen
+    und Ablauf der Phase 1 (Vorgabe verfahren.STANDARD), in der Herkunft vermerkt."""
     plan = kp.Plan() if plan is None else plan
+    verfahren = vf.oder_standard(verfahren)
     seeds = [kampagnen_seed(seed_basis, rolle, sid, stufe, i) for i in range(n)]
-    auftraege = [(sid, stufe, profil, plan, s, werkzeug8, n_min, rausch, staerke, k_max) for s in seeds]
+    auftraege = [(sid, stufe, profil, plan, s, werkzeug8, n_min, rausch, staerke, k_max, verfahren) for s in seeds]
     t = time.perf_counter()
     if prozesse > 1:
         befunde = _parallel(auftraege, prozesse)
@@ -167,7 +172,8 @@ def ausfuehren(sid, stufe, profil, n, seed_basis, rolle='pruefung', plan=None, n
                 normative_kampagnenzahl=regeln.NORMATIVE_ZAHLEN['kampagnen_pruefung'],
                 reduziert=bool(n < regeln.NORMATIVE_ZAHLEN['kampagnen_pruefung']) or profil.reduziert,
                 laufzeit_s=round(dauer, 2), prozesse=prozesse, code_version=formate.code_version())
-    meta.update(k_max=k_max, rauschmodell=None if rausch is None else rausch.name, staerke=staerke)
+    meta.update(k_max=k_max, rauschmodell=None if rausch is None else rausch.name, staerke=staerke,
+                verfahren=verfahren.kennung())
     return dict(meta=meta, befunde=befunde, wahrheit=wahrheit_kurz(sid, stufe, plan, staerke, k_max))
 
 

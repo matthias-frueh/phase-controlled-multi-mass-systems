@@ -169,8 +169,9 @@ def werkzeug8(bias0, bias1, biasz0, biasz1, c1, cz, h2, n_kal, n_pruef, profil_i
 
 
 def kalibrieren(sid, stufe, profil, n_kal, n_pruef, seed_basis, plan=None, n_min=None, prozesse=1,
-                rauschvarianten=None, fortschritt=None, k_max=None):
-    """Kalibrier- und Prüfsimulation an einem Szenariopunkt mit exakter Superposition (vgl. N01/N02)."""
+                rauschvarianten=None, fortschritt=None, k_max=None, verfahren=None):
+    """Kalibrier- und Prüfsimulation an einem Szenariopunkt mit exakter Superposition (vgl. N01/N02); verfahren wie
+    harness.kampagnen.ausfuehren (alle Kampagnen der Kalibrierung und Prüfung mit demselben Verfahren)."""
     try:
         profil.wert('h1.c_rauschmodelle')
         c_regel = None
@@ -178,7 +179,7 @@ def kalibrieren(sid, stufe, profil, n_kal, n_pruef, seed_basis, plan=None, n_min
         c_regel = e.grund
     var = rauschvarianten or [None]
     kal = [kpn.ausfuehren(sid, stufe, profil, n_kal, seed_basis, 'kalibrierung_c', plan, n_min, None, rv,
-                          prozesse=prozesse, fortschritt=fortschritt, k_max=k_max) for rv in var]
+                          prozesse=prozesse, fortschritt=fortschritt, k_max=k_max, verfahren=verfahren) for rv in var]
     b0, b1 = rauschbias(kal, 'r0'), rauschbias(kal, 'r1')
     bz0, bz1 = rauschbias(kal, 'rz0'), rauschbias(kal, 'rz1')
     alle = [b for lauf in kal for b in lauf['befunde']]
@@ -193,7 +194,7 @@ def kalibrieren(sid, stufe, profil, n_kal, n_pruef, seed_basis, plan=None, n_min
         w8.update(c_H1=None, c_H1Z=None, c_H1_herkunft=f'offen: {c_regel}', c_H1Z_herkunft=f'offen: {c_regel}')
     # Prüfsimulation
     pr = kpn.ausfuehren(sid, stufe, profil, n_pruef, seed_basis, 'pruefung_c', plan, n_min, w8, var[0],
-                        prozesse=prozesse, fortschritt=fortschritt, k_max=k_max)
+                        prozesse=prozesse, fortschritt=fortschritt, k_max=k_max, verfahren=verfahren)
     kw = dict(szenario=sid, stufe=stufe, profil=profil.id, normativ=rg.NORMATIVE_ZAHLEN['kampagnen_pruefung'])
     zp = np.array([np.abs(b['felder']['z0'][np.isfinite(b['felder']['z0'])]).max() if np.isfinite(
         b['felder']['z0']).any() else np.nan for b in pr['befunde']])
@@ -211,13 +212,14 @@ def kalibrieren(sid, stufe, profil, n_kal, n_pruef, seed_basis, plan=None, n_min
         w8 = werkzeug8(b0, b1, bz0, bz1, c1, cz, h2, len(alle), n_pruef, profil.id, pruefung, gepoolt)
         if gepoolt:
             pr = kpn.ausfuehren(sid, stufe, profil, n_pruef, seed_basis, 'pruefung_c', plan, n_min, w8, var[0],
-                                prozesse=prozesse, fortschritt=fortschritt, k_max=k_max)
+                                prozesse=prozesse, fortschritt=fortschritt, k_max=k_max, verfahren=verfahren)
     rp = kpn.raten(pr)
     gemeinsam = rp['raten']['H1 und H2 bestätigt']
     restbias = None if w8['bias0'] is None else _restbias(pr['befunde'], w8)
     return dict(
         meta=dict(szenario=sid, stufe=stufe, profil=profil.id, profil_sha256=profil.sha256(), seed_basis=seed_basis,
                   n_kalibrierung=len(alle), n_pruefung=n_pruef, rauschvarianten=len(var),
+                  verfahren=pr['meta']['verfahren'],
                   reduziert=bool(len(alle) < rg.NORMATIVE_ZAHLEN['kampagnen_kalibrierung'] or
                                  n_pruef < rg.NORMATIVE_ZAHLEN['kampagnen_pruefung']) or profil.reduziert,
                   lesart=('Entwicklungsdiagnostik: weniger Kampagnen oder Replikate als normativ; keine '

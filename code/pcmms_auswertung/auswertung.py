@@ -16,7 +16,7 @@ import numpy as np
 
 from . import (bootstrap as bs, formate, gueltigkeit, h1, h2 as h2m, h3 as h3m, h4 as h4m, kontrollen,
                konventionen as kv, regeln as rg, stufe1, vorhersage as vh, zusammenfassung as zf)
-from . import anpassung, bericht
+from . import anpassung, bericht, teil_b as teil_b_mod
 
 VERSION = 'auswertung-0.2'       # 0.2: Korrekturen B, D und E
 laufzusammenfassung = stufe1.laufzusammenfassung
@@ -314,7 +314,8 @@ def auswerten(zusammenfassungen, kalibrierung, teil_b, regeln, seed=None, bootst
                       teil_b_sha256=_hash_objekt(tb), profil=prof.kurz(), seed=seed, B=int(B),
                       bootstrap_indizes=idx_quelle, n_mc_h3=prof.zahl('h3_mc'), reduziert=prof.reduziert,
                       code_version=formate.code_version(), kennung=tab.meta.get('kennung'),
-                      laufzeit_s=round(time.perf_counter() - t_start, 3), pilot_suche=n2.get('pilot_suche')),
+                      laufzeit_s=round(time.perf_counter() - t_start, 3), pilot_suche=n2.get('pilot_suche'),
+                      teil_b=teil_b_mod.einordnen(tb)),
         gueltigkeit=dict(n_laeufe=len(t1), n_ungueltig=int((~pr['gueltig']).sum()),
                          gruende={t1.koepfe[i]['lauf_id']: pr['gruende'][i] for i in np.flatnonzero(~pr['gueltig'])},
                          nicht_pruefbar={g: len(v) for g, v in pr['nicht_pruefbar'].items()},
