@@ -14,7 +14,9 @@ Suche (A9.2): Für k = k_b, k_b − 1, …, 3 und je k für T_a = N_z/f mit N_z 
 (i) s_q(T_a) aus den auf die ersten N_z Zyklen gekürzten Pilotläufen, (ii) T_e = max(T_φ, 10·max τ_m) für die
 Moden bis k·f, aufgerundet auf ganze Sekunden, und T_Lauf, (iii) Planungssimulation (AP-13; Haken `planung`),
 (iv) Rauschbias (in der Planung), (v) n = n_min + r ≤ n_max. Das erste Paar, das (v) erfüllt, legt k_max, T_a, n_min
-und n₀ fest; gibt es keines, lautet das Ergebnis regulär „kein zulässiger Arbeitspunkt unter diesen Annahmen“.
+und n₀ fest; gibt es keines, lautet das Ergebnis regulär „kein zulässiger Arbeitspunkt unter diesen Annahmen“. Die
+Begründung nennt dann die tatsächlichen Gründe je Paar (Grenze der Planungsaufrufe, gemeinsame Bedingung nicht erreicht,
+Zeitbudget, sonstiger Grund) und behauptet bei reduzierter Suche keine Unzulässigkeit außerhalb von ihr.
 Ohne angebundene Planung liefert das Skript die vorbereitenden Größen und kennzeichnet die Planung als offen.
 """
 import math
@@ -24,7 +26,7 @@ from scipy import stats
 
 from . import formate, gueltigkeit, konventionen as kv, zufall
 
-VERSION = 'pilot-0.1'
+VERSION = 'pilot-0.2'                   # 0.2: Begründung der Suche nach dem tatsächlichen Abbruchgrund
 VERBOTEN_TEIL = ('residu', 'yhat', 'vorhersage', 'superposition', 'bestaetigt', 'falsifiziert', 'entscheid', 'ausgang')
 VERBOTEN_NAME = ('r', 'z', 'r0', 'r1', 'z0', 'z1', 'h1', 'h2', 'h3', 'h4', 'h1z')
 
@@ -321,7 +323,61 @@ def suche(tab, kal, profil, f, k_start, basis, zeit, planung, tabelle_fuer, N_z_
                             n_min=pl['n_min'], n0=pl['n0'], reserve_r=r, n=n, n_max=nmax, p_hat=p_hat, schritte=schritte,
                             reduktion=reduktion, planung_quelle=pl.get('quelle'))
     return dict(ergebnis='kein zulässiger Arbeitspunkt unter diesen Annahmen',
-                grund='kein Paar (k, T_a) erfüllt n = n_min + r ≤ n_max', schritte=schritte, reduktion=reduktion)
+                grund=grund_ohne_arbeitspunkt(schritte, reduktion), schritte=schritte, reduktion=reduktion)
+
+
+def _klasse_paar(schritt):
+    """Abbruchgrund eines Paars (k, T_a) aus der Rückgabe des Planungshakens und der Budgetprüfung."""
+    p = schritt.get('planung')
+    if not isinstance(p, dict):
+        return 'sonstig', str(p)
+    if p.get('n_min') is not None:
+        return ('zeitbudget', None) if schritt.get('erfuellt') is False else ('erfuellt', None)
+    grund = str(p.get('grund') or '')
+    if grund.startswith('nicht simuliert'):
+        return 'aufrufgrenze', None
+    kand = p.get('kandidaten') or []
+    if any('uebersprungen' not in c for c in kand):
+        return 'bedingung', None                      # simuliert, kein Kandidat erfüllt die gemeinsame Bedingung
+    if kand:
+        return 'zeitbudget', None                     # alle Kandidaten mit n = n_min + r > n_max, nicht simuliert
+    return 'sonstig', grund or 'kein Grund angegeben'
+
+
+def _paare(n, fall='dativ'):
+    if n == 1:
+        return '1 Paar'
+    return f'{n} Paaren' if fall == 'dativ' else f'{n} Paare'
+
+
+def grund_ohne_arbeitspunkt(schritte, reduktion=None):
+    """Begründung, wenn die Suche ohne Arbeitspunkt endet, aus den tatsächlichen Rückgaben je Paar (k, T_a): Grenze der
+    Planungsaufrufe, gemeinsame Bedingung von keinem simulierten Kandidaten erreicht, Zeitbudget n = n_min + r > n_max
+    oder ein sonstiger Grund des Hakens; bei mehreren Gründen alle mit der Zahl der Paare. Ist die Suche reduziert
+    (Aufrufgrenze, verringertes N_z-Raster), wird keine Unzulässigkeit außerhalb dieser Suche behauptet."""
+    if not schritte:
+        return ('kein Paar (k, T_a) im Suchraster: T_e + T_a > T_e,P + T_a,P für alle k'
+                + (f' ({reduktion})' if reduktion else ''))
+    zahl, sonst = {}, []
+    for s in schritte:
+        kl, text = _klasse_paar(s)
+        zahl[kl] = zahl.get(kl, 0) + 1
+        if text:
+            sonst.append(text)
+    teile = [] if set(zahl) != {'zeitbudget'} else ['kein Paar (k, T_a) erfüllt n = n_min + r ≤ n_max']
+    if 'bedingung' in zahl:
+        teile.append(f'an {_paare(zahl["bedingung"])} (k, T_a) erreicht kein simulierter Kandidat '
+                     'P(H1 und H2 bestätigt | exakt) ≥ 0,8')
+    if 'zeitbudget' in zahl and len(zahl) > 1:
+        teile.append(f'an {_paare(zahl["zeitbudget"])} überschreitet n = n_min + r das Zeitbudget n_max')
+    if 'aufrufgrenze' in zahl:
+        teile.append(f'{_paare(zahl["aufrufgrenze"], "nominativ")} wegen der Grenze der Planungsaufrufe nicht simuliert')
+    if 'sonstig' in zahl:
+        teile.append(f'{_paare(zahl["sonstig"], "nominativ")} ohne Planung ({"; ".join(sorted(set(sonst)))})')
+    text = '; '.join(teile)
+    if 'aufrufgrenze' in zahl or reduktion:
+        text += ' – reduzierte Suche ausgeschöpft, kein Nachweis der Unzulässigkeit außerhalb dieser Suche'
+    return text
 
 
 def pruefe_ausgabe(obj, pfad=''):

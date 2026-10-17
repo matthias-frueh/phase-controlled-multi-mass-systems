@@ -1,0 +1,957 @@
+{
+ "anweisung": "ANWEISUNG_Claude_Code_E3b_G4_Diagnose_2026-10-17",
+ "auftraege": [
+  {
+   "id": "G4-N01-A4-start",
+   "indizes": [
+    0,
+    1,
+    2,
+    3
+   ],
+   "rolle": "diagnose_g4",
+   "seeds": [
+    6421326674948950355,
+    941771759588347363,
+    1671252940681334300,
+    3742277982765182668
+   ],
+   "stufe": "L1",
+   "szenario": "N01-A4",
+   "voll": true
+  },
+  {
+   "id": "G4-N01-A4-rest",
+   "indizes": [
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22,
+    23,
+    24,
+    25,
+    26,
+    27,
+    28,
+    29,
+    30,
+    31,
+    32,
+    33,
+    34,
+    35,
+    36,
+    37,
+    38,
+    39
+   ],
+   "rolle": "diagnose_g4",
+   "seeds": [
+    655012045435102802,
+    3010703880746530213,
+    4088570445890746321,
+    8609028504085932528,
+    6952551792846395683,
+    5328013158255319426,
+    6292101990322801419,
+    4159718662785311894,
+    7213437447700591732,
+    8628566759560173917,
+    4072102204193605753,
+    2292771255050449918,
+    5093533479475587918,
+    7559372148564373279,
+    135312551088193254,
+    1865798079308945040,
+    8573627696125999661,
+    5227866822054956569,
+    7892352427417767900,
+    6841423307376710097,
+    4073942341745229320,
+    224655741353188788,
+    4336160494232586539,
+    3331074542628711832,
+    4248395052237660323,
+    2216795100731121804,
+    343657078251391048,
+    6824529138277545083,
+    4594139896666548203,
+    5816323316742594214,
+    87795153891896703,
+    8723365246059107280,
+    3223759980457280171,
+    1081975901850168570,
+    3055624953122362983,
+    1450371767284884170
+   ],
+   "stufe": "L1",
+   "szenario": "N01-A4",
+   "voll": false
+  },
+  {
+   "id": "G4-N01-V1G0-start",
+   "indizes": [
+    0,
+    1,
+    2,
+    3
+   ],
+   "rolle": "diagnose_g4",
+   "seeds": [
+    4202534701440629906,
+    522969386212988845,
+    6151025590442919715,
+    2837871836508963753
+   ],
+   "stufe": "L1",
+   "szenario": "N01-V1G0",
+   "voll": true
+  },
+  {
+   "id": "G4-N01-V1G0-rest",
+   "indizes": [
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22,
+    23,
+    24,
+    25,
+    26,
+    27,
+    28,
+    29,
+    30,
+    31,
+    32,
+    33,
+    34,
+    35,
+    36,
+    37,
+    38,
+    39
+   ],
+   "rolle": "diagnose_g4",
+   "seeds": [
+    6541414184217749668,
+    1911642046984185806,
+    3825293146687617875,
+    3111866991806461631,
+    5605373187149328597,
+    8923286715072122757,
+    5373599778527818155,
+    823764536409855132,
+    348759382774174942,
+    4490813240618779525,
+    1543504000985978711,
+    2274890747014650457,
+    6037043178206288464,
+    1259649282305010599,
+    8328174628562451972,
+    6662956677651346716,
+    9215129776846043176,
+    7954122438541772995,
+    7699669399939057898,
+    9053573733167013868,
+    2908406564398418063,
+    1325594217994364661,
+    7605151823605764392,
+    3564144126556403231,
+    4790359320614561367,
+    6579036823547490799,
+    8588134548330475013,
+    6203454077814618013,
+    7535501239532288904,
+    5929471827288406831,
+    3128037181875623912,
+    1168845761485539445,
+    9061741918200083919,
+    7605725617045947166,
+    3916989809364790052,
+    5024691928224468524
+   ],
+   "stufe": "L1",
+   "szenario": "N01-V1G0",
+   "voll": false
+  },
+  {
+   "id": "G4-N01-V1G60h-start",
+   "indizes": [
+    0,
+    1,
+    2,
+    3
+   ],
+   "rolle": "diagnose_g4",
+   "seeds": [
+    795519448574340983,
+    6415602612872341321,
+    8676972707023640149,
+    1085381528517609721
+   ],
+   "stufe": "L1",
+   "szenario": "N01-V1G60h",
+   "voll": true
+  },
+  {
+   "id": "G4-N01-V1G60h-rest",
+   "indizes": [
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22,
+    23,
+    24,
+    25,
+    26,
+    27,
+    28,
+    29,
+    30,
+    31,
+    32,
+    33,
+    34,
+    35,
+    36,
+    37,
+    38,
+    39
+   ],
+   "rolle": "diagnose_g4",
+   "seeds": [
+    4992586427391883278,
+    2876192135852870702,
+    7657828229482855577,
+    3187541850860021720,
+    8236900843280286866,
+    2511684875737638130,
+    4527629132677416372,
+    4706104434811300472,
+    4379076054053067403,
+    2827198853973417891,
+    4504421762246416397,
+    2310005271096483507,
+    2922794165675177129,
+    2622105866522638679,
+    7557879346463153725,
+    2597612145560276713,
+    4145998733112916075,
+    6359572776969163096,
+    4498269983228576575,
+    1386258523517617631,
+    20705810585142305,
+    4151600263537796454,
+    4126802603791357672,
+    6150928683091791494,
+    2865208129315894913,
+    2837097660762832649,
+    4971274909701191382,
+    3004014721134939970,
+    5575134065593308889,
+    8874146201287856943,
+    1357953832655404812,
+    7225273589906102944,
+    7378048876525256275,
+    7655264372708011948,
+    4965749803145139006,
+    2459362797236809952
+   ],
+   "stufe": "L1",
+   "szenario": "N01-V1G60h",
+   "voll": false
+  }
+ ],
+ "ausgangsstand": "0a8eb1b3812733b799e5134ddd9c4acf1a5398d2",
+ "diagnose": {
+  "flanke_schritt_grad": 0.05,
+  "volle_ketten": "Startsatz: Kampagnen 0–3 je System",
+  "wiederholung": "2 Läufe je Konfigurationsplatz am Platz des ursprünglichen Laufs (A9.12), nur Diagnose",
+  "zielpilot": "steilste nach A7 zulässige Konfiguration (Abstände ≥ 10° von 120°), 20 Läufe, nur Diagnose"
+ },
+ "e3": {
+  "datei": "docs/e3b_g4_diagnose_2026-10-17/e3_pruefgroessen.csv",
+  "n": 570,
+  "punkte": {
+   "A06-phase/L1": {
+    "auftrag": "E3-A06-phase-L1",
+    "dateien": {
+     "kampagnen_A06-phase_L1_pruefung.csv": "591d8d8f6366e31a501c0189f9e95976b3a973e1e0c50e540ef975e419cc57bf",
+     "kampagnen_A06-phase_L1_pruefung.json": "1725827f728ae3d304a1304a709c323e2cd1436ffcbf43c9848c6b51f0d6c5b7",
+     "kampagnen_A06-phase_L1_pruefung.npz": "092efebc65da74c691b9c79bee0bd89357b2feba6d2f408c29dd4a4c25b26615"
+    },
+    "git": "020e1313b1d8e39bd7f77ba0e5295cbf4f132865",
+    "n": 30,
+    "rolle": "pruefung",
+    "schluessel": {
+     "auftrag": "682a010b140a665f571700f8851a2c01ee3210ef65284f56c86ba24fe724cbe8",
+     "gemeinsam": "4767023e5e6b343d50c4982af1bba0069f1affc8a7138d58acc135518c445302",
+     "profil_sha256": "49dc74abca52b2c5e4ae8f6d2e1c53dc468205b01b9f65270b86c27e91114352",
+     "rechencode": "26dd5867de2186b3683016e71edd009b4ca033252bab2a52c0cbe6e293391e89",
+     "seeds": "9cc1f9bdc502d05ebf5fd79499aa3802a883b01b0efadc102700c907b0385934",
+     "umgebung": {
+      "numpy": "2.5.3",
+      "python": "3.13.16",
+      "scipy": "1.18.1"
+     },
+     "werkzeug8": "8f0286d58a6c6982850b0c26cc78c65715927a353438de744737e1a1eedf2076"
+    },
+    "verzeichnis": "E3-A06-phase-L1",
+    "werkzeug8": "V1-G0"
+   },
+   "E04-kette/L1": {
+    "auftrag": "E3-E04-kette-L1",
+    "dateien": {
+     "kampagnen_E04-kette_L1_pruefung.csv": "1889bae6c4d3421f94b0073f47893862e1b440316d566014a985b95a588d73a5",
+     "kampagnen_E04-kette_L1_pruefung.json": "742b75c78052fce8f731569fb7e9860fa47c0fc2ecb51fb8417dd43b7fc0dad5",
+     "kampagnen_E04-kette_L1_pruefung.npz": "7e83fbcc1fe3ca042df345717646053a2759615cdf54992be2b7f710b3c834fd"
+    },
+    "git": "020e1313b1d8e39bd7f77ba0e5295cbf4f132865",
+    "n": 30,
+    "rolle": "pruefung",
+    "schluessel": {
+     "auftrag": "6a9f0d85428ef27da9df0768347474648b41292ca810c3e3920546897abeb6fc",
+     "gemeinsam": "4767023e5e6b343d50c4982af1bba0069f1affc8a7138d58acc135518c445302",
+     "profil_sha256": "49dc74abca52b2c5e4ae8f6d2e1c53dc468205b01b9f65270b86c27e91114352",
+     "rechencode": "26dd5867de2186b3683016e71edd009b4ca033252bab2a52c0cbe6e293391e89",
+     "seeds": "e38ed340ebf02f593cacd54f031829d52e83fcf2390f11c7a2607581e63472fb",
+     "umgebung": {
+      "numpy": "2.5.3",
+      "python": "3.13.16",
+      "scipy": "1.18.1"
+     },
+     "werkzeug8": "1bfde4eda0bcc992972fd4928f529cdeb5eeffc4e7bc1300fda5d97279464667"
+    },
+    "verzeichnis": "E3-E04-kette-L1",
+    "werkzeug8": "testvorgabe"
+   },
+   "E07-basisdrift/L1": {
+    "auftrag": "E3-E07-basisdrift-L1",
+    "dateien": {
+     "kampagnen_E07-basisdrift_L1_pruefung.csv": "7ecac469fb99afb486834fb1abebf15ac0e492f19e550d31d5a688b8dcaebbcb",
+     "kampagnen_E07-basisdrift_L1_pruefung.json": "d39e2b7982dd0e3c6a6caeda575d0eeeadc91c31c4b657928625d730b0f9a0f4",
+     "kampagnen_E07-basisdrift_L1_pruefung.npz": "ace13e148c9e5f012e92b4b2e58a80533b28d677658e0074895246732b3e4a0b"
+    },
+    "git": "020e1313b1d8e39bd7f77ba0e5295cbf4f132865",
+    "n": 40,
+    "rolle": "pruefung",
+    "schluessel": {
+     "auftrag": "295c18e2ff12fbc2e5135abfeb38fdf0619d04692f9e5efdd97d2c6756f0d0a2",
+     "gemeinsam": "4767023e5e6b343d50c4982af1bba0069f1affc8a7138d58acc135518c445302",
+     "profil_sha256": "49dc74abca52b2c5e4ae8f6d2e1c53dc468205b01b9f65270b86c27e91114352",
+     "rechencode": "26dd5867de2186b3683016e71edd009b4ca033252bab2a52c0cbe6e293391e89",
+     "seeds": "1262073ef43c32a5ed70d88b8c81185dad7df051fce494d8e6081a1cd63a2e40",
+     "umgebung": {
+      "numpy": "2.5.3",
+      "python": "3.13.16",
+      "scipy": "1.18.1"
+     },
+     "werkzeug8": "d4465b57a7e7b6ba6a6b075c187fa38041e6afefcb756c3852ca7f9517209b3c"
+    },
+    "verzeichnis": "E3-E07-basisdrift-L1",
+    "werkzeug8": "A4"
+   },
+   "E07-verstaerkung/L1": {
+    "auftrag": "E3-E07-verstaerkung-L1",
+    "dateien": {
+     "kampagnen_E07-verstaerkung_L1_pruefung.csv": "7f61107c3218016ff3f29c3cd5a9a5e0d2278c6885df028e5003b76aac6a9c78",
+     "kampagnen_E07-verstaerkung_L1_pruefung.json": "e5b2f1a25cd53848ed0fc0ed3dc48a63ccbcf535bd488e4e2784482b103ae3b2",
+     "kampagnen_E07-verstaerkung_L1_pruefung.npz": "c86de2fb2d0f0cf8e620923820717b7378a489e739b6b97072f06b707d275793"
+    },
+    "git": "020e1313b1d8e39bd7f77ba0e5295cbf4f132865",
+    "n": 40,
+    "rolle": "pruefung",
+    "schluessel": {
+     "auftrag": "b33ebb0c95160f978302521614378e4d5c845288aadb717ab30d8631f90686e4",
+     "gemeinsam": "4767023e5e6b343d50c4982af1bba0069f1affc8a7138d58acc135518c445302",
+     "profil_sha256": "49dc74abca52b2c5e4ae8f6d2e1c53dc468205b01b9f65270b86c27e91114352",
+     "rechencode": "26dd5867de2186b3683016e71edd009b4ca033252bab2a52c0cbe6e293391e89",
+     "seeds": "c1a622096303ce8f4752bdbad9cffa9240b0fd36b61e319c31a11cb073a1f369",
+     "umgebung": {
+      "numpy": "2.5.3",
+      "python": "3.13.16",
+      "scipy": "1.18.1"
+     },
+     "werkzeug8": "d4465b57a7e7b6ba6a6b075c187fa38041e6afefcb756c3852ca7f9517209b3c"
+    },
+    "verzeichnis": "E3-E07-verstaerkung-L1",
+    "werkzeug8": "A4"
+   },
+   "H03-phase/L1": {
+    "auftrag": "E3-H03-phase-L1",
+    "dateien": {
+     "kampagnen_H03-phase_L1_pruefung.csv": "cbae9ed7950c8679643dfe5d57d5f183a7d435419be7a99167a4a87cc230aa84",
+     "kampagnen_H03-phase_L1_pruefung.json": "518441991c86dbd2b76acc644aeb364dc7b7b52a133c647aef522448b0a8ec81",
+     "kampagnen_H03-phase_L1_pruefung.npz": "3decb8a9b1dac2dc0865eb446147f14e9ccf8ca659ac000906c85ba74ea55cde"
+    },
+    "git": "020e1313b1d8e39bd7f77ba0e5295cbf4f132865",
+    "n": 30,
+    "rolle": "pruefung",
+    "schluessel": {
+     "auftrag": "d857eab1391f95eae7a7269fe1e6063a791f947879795fa70376cb479beaf650",
+     "gemeinsam": "4767023e5e6b343d50c4982af1bba0069f1affc8a7138d58acc135518c445302",
+     "profil_sha256": "49dc74abca52b2c5e4ae8f6d2e1c53dc468205b01b9f65270b86c27e91114352",
+     "rechencode": "26dd5867de2186b3683016e71edd009b4ca033252bab2a52c0cbe6e293391e89",
+     "seeds": "0ddfe1b3857b98e28cdd221aeef2d807b7e198bb4cf9c9ae3be8d181030e2b98",
+     "umgebung": {
+      "numpy": "2.5.3",
+      "python": "3.13.16",
+      "scipy": "1.18.1"
+     },
+     "werkzeug8": "8f0286d58a6c6982850b0c26cc78c65715927a353438de744737e1a1eedf2076"
+    },
+    "verzeichnis": "E3-H03-phase-L1",
+    "werkzeug8": "V1-G0"
+   },
+   "N01-A4/L0": {
+    "auftrag": "E3-N01-A4-L0",
+    "dateien": {
+     "kampagnen_N01-A4_L0_pruefung.csv": "3227d40a3f409840e28bb8d88ec354145f8adfc22f9b23f26e15df7c1aa3c83a",
+     "kampagnen_N01-A4_L0_pruefung.json": "b3dc7426118919fc1ae104e24904cc07f0921594379dda87e46fa025c1ce69e4",
+     "kampagnen_N01-A4_L0_pruefung.npz": "aaf36427dcaeb20f29b2ca6167d92a277b7c5126c951ac568f292d35336e9708"
+    },
+    "git": "020e1313b1d8e39bd7f77ba0e5295cbf4f132865",
+    "n": 40,
+    "rolle": "pruefung",
+    "schluessel": {
+     "auftrag": "a5b03359dd274e558e87ea5a97d3aaaa6b90173ad1a1a5f5cb021b7c4d4bec36",
+     "gemeinsam": "4767023e5e6b343d50c4982af1bba0069f1affc8a7138d58acc135518c445302",
+     "profil_sha256": "49dc74abca52b2c5e4ae8f6d2e1c53dc468205b01b9f65270b86c27e91114352",
+     "rechencode": "26dd5867de2186b3683016e71edd009b4ca033252bab2a52c0cbe6e293391e89",
+     "seeds": "c66aea47d59cf237e9f1894facfd25c425b3b09f52d450177a4b951301723637",
+     "umgebung": {
+      "numpy": "2.5.3",
+      "python": "3.13.16",
+      "scipy": "1.18.1"
+     },
+     "werkzeug8": "1bfde4eda0bcc992972fd4928f529cdeb5eeffc4e7bc1300fda5d97279464667"
+    },
+    "verzeichnis": "E3-N01-A4-L0",
+    "werkzeug8": "testvorgabe"
+   },
+   "N01-A4/L1": {
+    "auftrag": "E3-N01-A4-L1",
+    "dateien": {
+     "kampagnen_N01-A4_L1_pruefung_c.csv": "cf56f3425cc70dbe255dbf37110f2ca84b05def53fb116c7ef5b1d72e684f147",
+     "kampagnen_N01-A4_L1_pruefung_c.json": "c75878c7a3353e4e92843533bbab43f00854daa62e0ccc1c84a677cf77ab039c",
+     "kampagnen_N01-A4_L1_pruefung_c.npz": "9f286ca0fdd293d5f5f3b7ad260c4be628cd5dbac553e27742cd66f5b615185b"
+    },
+    "git": "020e1313b1d8e39bd7f77ba0e5295cbf4f132865",
+    "n": 200,
+    "rolle": "pruefung_c",
+    "schluessel": {
+     "auftrag": "3d62831710033fb5fad2b6dcb1d35acb4de714ee3d0688739d125c2d3610b5d3",
+     "gemeinsam": "4767023e5e6b343d50c4982af1bba0069f1affc8a7138d58acc135518c445302",
+     "profil_sha256": "49dc74abca52b2c5e4ae8f6d2e1c53dc468205b01b9f65270b86c27e91114352",
+     "rechencode": "26dd5867de2186b3683016e71edd009b4ca033252bab2a52c0cbe6e293391e89",
+     "seeds": "d91f5c22ea6ab0b6705200c4e3516b8ac7d308628b6b12a38498176f38634588",
+     "umgebung": {
+      "numpy": "2.5.3",
+      "python": "3.13.16",
+      "scipy": "1.18.1"
+     },
+     "werkzeug8": "d4465b57a7e7b6ba6a6b075c187fa38041e6afefcb756c3852ca7f9517209b3c"
+    },
+    "verzeichnis": "E3-N01-A4-L1",
+    "werkzeug8": "A4"
+   },
+   "N01-A4/L2": {
+    "auftrag": "E3-N01-A4-L2",
+    "dateien": {
+     "kampagnen_N01-A4_L2_pruefung.csv": "b2c9e06a6bb7a3b6b7146d8b1d00f9cc44d43a418ed5591d640e22131dcd1a42",
+     "kampagnen_N01-A4_L2_pruefung.json": "6f26ca0c7b54d00eb06160ad828e95890b5d63a8541adf84e7e444942968bdd0",
+     "kampagnen_N01-A4_L2_pruefung.npz": "ec10be714549ca76fdc3e63b3afd3da6ff337e2dc3317e1b6f65df6d01edb2bd"
+    },
+    "git": "020e1313b1d8e39bd7f77ba0e5295cbf4f132865",
+    "n": 40,
+    "rolle": "pruefung",
+    "schluessel": {
+     "auftrag": "2970f5a1cc2190f370643c0e27d41f5c998c925524b2a06cc0a3d8e30be47866",
+     "gemeinsam": "4767023e5e6b343d50c4982af1bba0069f1affc8a7138d58acc135518c445302",
+     "profil_sha256": "49dc74abca52b2c5e4ae8f6d2e1c53dc468205b01b9f65270b86c27e91114352",
+     "rechencode": "26dd5867de2186b3683016e71edd009b4ca033252bab2a52c0cbe6e293391e89",
+     "seeds": "fcb7424debd441247630741725c3e44cd0dddb8b3fa674efc4d90eadcd6bdf1c",
+     "umgebung": {
+      "numpy": "2.5.3",
+      "python": "3.13.16",
+      "scipy": "1.18.1"
+     },
+     "werkzeug8": "1bfde4eda0bcc992972fd4928f529cdeb5eeffc4e7bc1300fda5d97279464667"
+    },
+    "verzeichnis": "E3-N01-A4-L2",
+    "werkzeug8": "testvorgabe"
+   },
+   "N01-A4/L4": {
+    "auftrag": "E3-N01-A4-L4",
+    "dateien": {
+     "kampagnen_N01-A4_L4_pruefung.csv": "d2ea23da7c5be7a6704e76300d8f6832e8812a3c1b5ebdf00b6cf7275677e55f",
+     "kampagnen_N01-A4_L4_pruefung.json": "706456d814fc6bc74871ef8165d5a013eeb8694b8f884a799a58ce8f1c6e4c32",
+     "kampagnen_N01-A4_L4_pruefung.npz": "311b8bf593befd307aecdb985781cb7cdf7d85f77873df70fb0d7dbad9e18aef"
+    },
+    "git": "020e1313b1d8e39bd7f77ba0e5295cbf4f132865",
+    "n": 40,
+    "rolle": "pruefung",
+    "schluessel": {
+     "auftrag": "5fdbc1d7998e18ac5aa7ef8c9c4c8b66ba5e0bd1b0504d165171a3e93281b5c7",
+     "gemeinsam": "4767023e5e6b343d50c4982af1bba0069f1affc8a7138d58acc135518c445302",
+     "profil_sha256": "49dc74abca52b2c5e4ae8f6d2e1c53dc468205b01b9f65270b86c27e91114352",
+     "rechencode": "26dd5867de2186b3683016e71edd009b4ca033252bab2a52c0cbe6e293391e89",
+     "seeds": "8a5954a1e75931a12c415343dd9cd95373b7a0c4e45ffbc87b92822078bff4e0",
+     "umgebung": {
+      "numpy": "2.5.3",
+      "python": "3.13.16",
+      "scipy": "1.18.1"
+     },
+     "werkzeug8": "1bfde4eda0bcc992972fd4928f529cdeb5eeffc4e7bc1300fda5d97279464667"
+    },
+    "verzeichnis": "E3-N01-A4-L4",
+    "werkzeug8": "testvorgabe"
+   },
+   "N03-N3bindet/L1": {
+    "auftrag": "E3-N03-N3bindet-L1",
+    "dateien": {
+     "kampagnen_N03-N3bindet_L1_pruefung.csv": "0fa831ee57ea9db7343faa78e858c35e2fbe6ecbc9736a9a565716783af39018",
+     "kampagnen_N03-N3bindet_L1_pruefung.json": "fab91dca7d366045d2c84d17e84a544bbac13614067ab3f46131be95b188c77c",
+     "kampagnen_N03-N3bindet_L1_pruefung.npz": "25606f14b6171236377d6b283eec4d9af680a70869143a3e48ba0b79e58f5e2a"
+    },
+    "git": "020e1313b1d8e39bd7f77ba0e5295cbf4f132865",
+    "n": 40,
+    "rolle": "pruefung",
+    "schluessel": {
+     "auftrag": "f272824a2f9c704ed713257d3be1164b8b7aa85f2f62c928dd796a3a57e736b4",
+     "gemeinsam": "4767023e5e6b343d50c4982af1bba0069f1affc8a7138d58acc135518c445302",
+     "profil_sha256": "49dc74abca52b2c5e4ae8f6d2e1c53dc468205b01b9f65270b86c27e91114352",
+     "rechencode": "26dd5867de2186b3683016e71edd009b4ca033252bab2a52c0cbe6e293391e89",
+     "seeds": "c2717db187e1aead0bcc099f768234fe671dcce01c5cff530d621631c6d3697b",
+     "umgebung": {
+      "numpy": "2.5.3",
+      "python": "3.13.16",
+      "scipy": "1.18.1"
+     },
+     "werkzeug8": "d4465b57a7e7b6ba6a6b075c187fa38041e6afefcb756c3852ca7f9517209b3c"
+    },
+    "verzeichnis": "E3-N03-N3bindet-L1",
+    "werkzeug8": "A4"
+   },
+   "N03-ungleich/L1": {
+    "auftrag": "E3-N03-ungleich-L1",
+    "dateien": {
+     "kampagnen_N03-ungleich_L1_pruefung.csv": "63dc47bff490b24fc9f14eb3576704d6edfe46a292199956e6f078120d1ac796",
+     "kampagnen_N03-ungleich_L1_pruefung.json": "2cc67c269d2d96bae698293244ef89fed18cd7c323b7e9878448dcec28c6c829",
+     "kampagnen_N03-ungleich_L1_pruefung.npz": "9761c3baa72b2a568352a39c0f3b79652a48d4271ce66280ef5afb08802c652b"
+    },
+    "git": "020e1313b1d8e39bd7f77ba0e5295cbf4f132865",
+    "n": 40,
+    "rolle": "pruefung",
+    "schluessel": {
+     "auftrag": "a0fa76514988f7003e3350c1d0e78c51524f63d23f0eb423b4e571dc2231d403",
+     "gemeinsam": "4767023e5e6b343d50c4982af1bba0069f1affc8a7138d58acc135518c445302",
+     "profil_sha256": "49dc74abca52b2c5e4ae8f6d2e1c53dc468205b01b9f65270b86c27e91114352",
+     "rechencode": "26dd5867de2186b3683016e71edd009b4ca033252bab2a52c0cbe6e293391e89",
+     "seeds": "cc218990a1945e73c9ed82dc8c1785ad9a41252af96b37f1c081a8ccba279948",
+     "umgebung": {
+      "numpy": "2.5.3",
+      "python": "3.13.16",
+      "scipy": "1.18.1"
+     },
+     "werkzeug8": "d4465b57a7e7b6ba6a6b075c187fa38041e6afefcb756c3852ca7f9517209b3c"
+    },
+    "verzeichnis": "E3-N03-ungleich-L1",
+    "werkzeug8": "A4"
+   }
+  },
+  "quelle": {
+   "abgleich": "Bewertung, Seed und q_Z, u(q_Z), u ohne T gleich kampagnen_e3.csv (6 signifikante Stellen)",
+   "auftragsliste": "docs/ap13_neulaeufe_2026-10-17/auftrag.json",
+   "auftragsliste_git_blob": "b34d7e24d1c8fe1d47ad8c76bd45e4d154640538",
+   "git": "020e1313b1d8e39bd7f77ba0e5295cbf4f132865",
+   "verzeichnis": "/tmp/pcmms-ap13-neulaeufe-20261017"
+  },
+  "schwellen": {
+   "phase_grad": 0.1,
+   "q_tol": 0.00058
+  },
+  "sha256": "09646e1fe34b347df5369c0f7c02178384a1ecccaa59d460d1273bb7e32a1083",
+  "status_mit_bewertung": [
+   "Entwicklungsprofil (dreiwertig nur als Entwicklungsprüffall)"
+  ]
+ },
+ "gemeinsam": {
+  "ausgabe": "/tmp/pcmms-diagnose-e3b-g4-20261017",
+  "blas_threads_je_prozess": 1,
+  "g4_faktor": 3.0,
+  "harmonische": "k_max des Systems (A4: 9, V1: 12); σ_Δ der Piloten bei k = k_b (A4: 30), wie die produktive Pilotanalyse ohne Suche",
+  "n_min": 18,
+  "plan": {
+   "n0": 20,
+   "n_bloecke": 24,
+   "n_pilot": 20
+  },
+  "profil": "ENTW-2026-10",
+  "profil_reduktion": {
+   "bootstrap_B": 1000,
+   "eps_ctrl_datensaetze": 1000,
+   "h3_mc": 1000
+  },
+  "profil_sha256": "49dc74abca52b2c5e4ae8f6d2e1c53dc468205b01b9f65270b86c27e91114352",
+  "prozesse": 4,
+  "rolle": "diagnose_g4",
+  "seed_ableitung": "zufall.unterseed(20261017, 'diagnose_g4', Szenario, 'L1', i)",
+  "seed_basis": 20261017,
+  "stufe": "L1",
+  "zufallsstroeme": {
+   "generator": "zufall.strom(seed, 'generator')",
+   "wiederholung": "zufall.strom(seed, 'diagnose_wiederholung')",
+   "zielpilot": "zufall.strom(seed, 'diagnose_zielpilot')"
+  }
+ },
+ "kennung": "DIAGNOSE-E3B-G4-20261017",
+ "systeme": {
+  "N01-A4": {
+   "werkzeug8": "A4",
+   "zielpilot": {
+    "jitter_nenn_grad": 0.2,
+    "jitter_streuung_N": 0.0022753893518387145,
+    "jitter_streuung_piloten_N": [
+     0.0016772893130463425,
+     0.001231017099541942,
+     0.0015536731171121572
+    ],
+    "jitter_streuung_schnitt_N": [
+     0.0016778322870027956,
+     0.001810872979541168,
+     0.001953132165017567,
+     0.002103368242186479,
+     0.002260164565201171,
+     0.002421695497293406,
+     0.002586202306897319,
+     0.0027517181039250866,
+     0.002916955986011978,
+     0.003080037716373409,
+     0.0016546014746280588,
+     0.002145836821862404,
+     0.0020281929012515923,
+     0.0019043067568752974,
+     0.0017766902226879658,
+     0.0016502327309011735,
+     0.0015271610657554354,
+     0.0014091770211383098,
+     0.0012979422286640114,
+     0.0011933964293471863,
+     0.0010963023515035628
+    ],
+    "k_max": 9,
+    "kandidaten": 523,
+    "n_fuenftel": 20,
+    "phi": [
+     130.0,
+     262.0
+    ],
+    "raster": [
+     [
+      90.0,
+      150.0,
+      2.0
+     ],
+     [
+      200.0,
+      280.0,
+      2.0
+     ]
+    ],
+    "steigung_piloten": [
+     0.025803528747603572,
+     0.025069061658325485,
+     0.023892053892002007
+    ],
+    "steigung_schnitt": [
+     0.02590651577747072,
+     0.02794739951941714,
+     0.030127305962772775,
+     0.03242752942630002,
+     0.03482652927709088,
+     0.037300252177766,
+     0.0398249202486866,
+     0.04237005598199769,
+     0.044902597181385895,
+     0.047398099418732104,
+     0.04960338760325271,
+     0.03333448202013337,
+     0.031564535120527835,
+     0.029643747813964207,
+     0.02767407174313771,
+     0.025729344329240622,
+     0.023835041507972554,
+     0.02201510129282991,
+     0.02029141925114539,
+     0.018683382961447108,
+     0.01720745538386149
+    ],
+    "steigung_ziel": 0.03489902760544767
+   }
+  },
+  "N01-V1G0": {
+   "werkzeug8": "V1-G0",
+   "zielpilot": {
+    "jitter_nenn_grad": 0.2,
+    "jitter_streuung_N": 0.002465442618494588,
+    "jitter_streuung_piloten_N": [
+     0.0015664605381889702,
+     0.0013945340085843715,
+     0.0014113457775875526
+    ],
+    "jitter_streuung_schnitt_N": [
+     0.0015692605275515754,
+     0.0017512014195447108,
+     0.0019605632602145728,
+     0.002194425124984466,
+     0.0024485736818097756,
+     0.00271935950323693,
+     0.0030026911968184166,
+     0.0032920567952633936,
+     0.0035810441512363444,
+     0.0038668864033329594,
+     0.0021149664847936378,
+     0.0027048259253367605,
+     0.002484618381353692,
+     0.0022621795003277584,
+     0.002062667929558228,
+     0.0018573910339498658,
+     0.0016524697381013296,
+     0.0014628768547672358,
+     0.0012929112541190937,
+     0.0011434727276976226,
+     0.0010175154735108669
+    ],
+    "k_max": 12,
+    "kandidaten": 523,
+    "n_fuenftel": 20,
+    "phi": [
+     130.0,
+     262.0
+    ],
+    "raster": [
+     [
+      90.0,
+      150.0,
+      2.0
+     ],
+     [
+      200.0,
+      280.0,
+      2.0
+     ]
+    ],
+    "steigung_piloten": [
+     0.02409617658800057,
+     0.026146843492418623,
+     0.02169998630977686
+    ],
+    "steigung_schnitt": [
+     0.024227424158764423,
+     0.02702869402404668,
+     0.030239730271478804,
+     0.03383504653871261,
+     0.037751314874880926,
+     0.04190719001183806,
+     0.04623795165196974,
+     0.05067328143506714,
+     0.0551292934449425,
+     0.059505667778480535,
+     0.06352282186314265,
+     0.04204290425472868,
+     0.038636234039196866,
+     0.03517928475652643,
+     0.032154331836271796,
+     0.028973721384046008,
+     0.02580599439141745,
+     0.02287578150060477,
+     0.020239512684434253,
+     0.017941492276696513,
+     0.016012309651436272
+    ],
+    "steigung_ziel": 0.037818906277342676
+   }
+  },
+  "N01-V1G60h": {
+   "werkzeug8": "V1-G60h",
+   "zielpilot": {
+    "jitter_nenn_grad": 0.2,
+    "jitter_streuung_N": 0.002465442618494595,
+    "jitter_streuung_piloten_N": [
+     0.001566460538188959,
+     0.001394534008584369,
+     0.001411345777587547
+    ],
+    "jitter_streuung_schnitt_N": [
+     0.0015692605275515693,
+     0.001751201419544696,
+     0.0019605632602145776,
+     0.0021944251249844506,
+     0.0024485736818097574,
+     0.0027193595032369436,
+     0.0030026911968183932,
+     0.0032920567952634044,
+     0.003581044151236332,
+     0.0038668864033329646,
+     0.0021149664847936833,
+     0.0027048259253367947,
+     0.00248461838135371,
+     0.0022621795003277614,
+     0.0020626679295582396,
+     0.0018573910339498788,
+     0.0016524697381013552,
+     0.0014628768547672354,
+     0.0012929112541191067,
+     0.001143472727697627,
+     0.0010175154735108814
+    ],
+    "k_max": 12,
+    "kandidaten": 523,
+    "n_fuenftel": 20,
+    "phi": [
+     130.0,
+     262.0
+    ],
+    "raster": [
+     [
+      90.0,
+      150.0,
+      2.0
+     ],
+     [
+      200.0,
+      280.0,
+      2.0
+     ]
+    ],
+    "steigung_piloten": [
+     0.02409617658800215,
+     0.026146843492426908,
+     0.021699986309778437
+    ],
+    "steigung_schnitt": [
+     0.024227424158764645,
+     0.027028694024043582,
+     0.030239730271474013,
+     0.033835046538715746,
+     0.037751314874880926,
+     0.041907190011844314,
+     0.04623795165197126,
+     0.05067328143506714,
+     0.055129293444944064,
+     0.05950566777847975,
+     0.06352282186314892,
+     0.04204290425472649,
+     0.0386362340391969,
+     0.03517928475652421,
+     0.03215433183626966,
+     0.028973721384048474,
+     0.02580599439141978,
+     0.022875781500598383,
+     0.02023951268443453,
+     0.01794149227669872,
+     0.016012309651434797
+    ],
+    "steigung_ziel": 0.03781890627734581
+   }
+  }
+ },
+ "umfang": {
+  "e3_kampagnen_ausgewertet": 570,
+  "e3_kampagnen_neu_gerechnet": 0,
+  "kalibrierkampagnen": 0,
+  "neue_kampagnen": 120,
+  "volle_ketten": 12
+ },
+ "werkzeug8": {
+  "A4": {
+   "art": "wiederverwendet",
+   "c_H1": 3.709322110180076,
+   "c_H1Z": 3.8064613614497946,
+   "datei": "docs/ap13_neulaeufe_2026-10-17/werkzeug8_A4",
+   "gepoolt": true,
+   "h2_intervall": {
+    "niveau": 0.95,
+    "typ": "perzentil"
+   },
+   "herkunft": "PR #21 (unverändert)",
+   "inhalt_sha256": "d4465b57a7e7b6ba6a6b075c187fa38041e6afefcb756c3852ca7f9517209b3c",
+   "ort_im_altlauf": "schritte.kalibrierung_a4.werkzeug8"
+  },
+  "V1-G0": {
+   "art": "wiederverwendet",
+   "c_H1": 3.658874367687632,
+   "c_H1Z": 3.6703703084165524,
+   "datei": "docs/ap13_neulaeufe_2026-10-17/werkzeug8_V1G0",
+   "gepoolt": false,
+   "h2_intervall": {
+    "niveau": 0.95,
+    "typ": "perzentil"
+   },
+   "herkunft": "PR #21 (unverändert)",
+   "inhalt_sha256": "8f0286d58a6c6982850b0c26cc78c65715927a353438de744737e1a1eedf2076",
+   "ort_im_altlauf": "schritte.kalibrierung_v1.V1-G0.werkzeug8"
+  },
+  "V1-G60h": {
+   "art": "wiederverwendet",
+   "c_H1": 3.596477600643589,
+   "c_H1Z": 4.278125795265793,
+   "datei": "docs/e3b_g4_diagnose_2026-10-17/werkzeug8_V1G60h",
+   "gepoolt": false,
+   "h2_intervall": {
+    "niveau": 0.95,
+    "typ": "perzentil"
+   },
+   "inhalt_sha256": "a013fe6b84502efa91946d0adf8697eb381846c7540c905063e991cd44129710",
+   "ort_im_altlauf": "schritte.kalibrierung_v1.V1-G60h.werkzeug8",
+   "quelle_sha256": "fdfe9229747408e9ad90b97784550d2bc57edc9151e1a959ac152726c169d468"
+  }
+ }
+}
