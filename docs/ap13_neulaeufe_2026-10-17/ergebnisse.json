@@ -1,0 +1,6137 @@
+{
+ "inhalt": {
+  "e3": {
+   "A06-phase/L1": {
+    "alte_lesart": {
+     "auffällig": {
+      "mc_se": 0.0,
+      "nenner": 30,
+      "rate": 1.0,
+      "zaehler": 30
+     },
+     "ohne dreiwertige Bewertung": {
+      "mc_se": 0.0,
+      "nenner": 30,
+      "rate": 0.0,
+      "zaehler": 0
+     },
+     "unauffällig": {
+      "mc_se": 0.0,
+      "nenner": 30,
+      "rate": 0.0,
+      "zaehler": 0
+     },
+     "unbestimmt": {
+      "mc_se": 0.0,
+      "nenner": 30,
+      "rate": 0.0,
+      "zaehler": 0
+     }
+    },
+    "alte_lesart_gleich_alt": true,
+    "auftrag": "E3-A06-phase-L1",
+    "bestimmende_pruefgroessen": {
+     "auffällig": {
+      "E3a": 27,
+      "beide": 3
+     },
+     "unbestimmt": {}
+    },
+    "gegenprobe_regel": {
+     "geprueft": 30,
+     "gleich": 30
+    },
+    "kontrollen": {
+     "alle_gleich": true,
+     "raten": {
+      "Abbruch S1_kandidaten": {
+       "alt": {
+        "mc_se": 0.06206328908341751,
+        "nenner": 30,
+        "rate": 0.8666666666666667,
+        "zaehler": 26
+       },
+       "gleich": true,
+       "neu": {
+        "mc_se": 0.06206328908341751,
+        "nenner": 30,
+        "rate": 0.8666666666666667,
+        "zaehler": 26
+       }
+      },
+      "Abbruch S2": {
+       "alt": {
+        "mc_se": 0.0,
+        "nenner": 30,
+        "rate": 0.0,
+        "zaehler": 0
+       },
+       "gleich": true,
+       "neu": {
+        "mc_se": 0.0,
+        "nenner": 30,
+        "rate": 0.0,
+        "zaehler": 0
+       }
+      },
+      "Abbruch S4": {
+       "alt": {
+        "mc_se": 0.0,
+        "nenner": 30,
+        "rate": 0.0,
+        "zaehler": 0
+       },
+       "gleich": true,
+       "neu": {
+        "mc_se": 0.0,
+        "nenner": 30,
+        "rate": 0.0,
+        "zaehler": 0
+       }
+      },
+      "H1 und H2 bestätigt": {
+       "alt": {
+        "mc_se": 0.07722022379508468,
+        "nenner": 30,
+        "rate": 0.7666666666666667,
+        "zaehler": 23
+       },
+       "gleich": true,
+       "neu": {
+        "mc_se": 0.07722022379508468,
+        "nenner": 30,
+        "rate": 0.7666666666666667,
+        "zaehler": 23
+       }
+      },
+      "H1: bestätigt": {
+       "alt": {
+        "mc_se": 0.07722022379508468,
+        "nenner": 30,
+        "rate": 0.7666666666666667,
+        "zaehler": 23
+       },
+       "gleich": true,
+       "neu": {
+        "mc_se": 0.07722022379508468,
+        "nenner": 30,
+        "rate": 0.7666666666666667,
+        "zaehler": 23
+       }
+      },
+      "H1: falsifiziert": {
+       "alt": {
+        "mc_se": 0.0,
+        "nenner": 30,
+        "rate": 0.0,
+        "zaehler": 0
+       },
+       "gleich": true,
+       "neu": {
+        "mc_se": 0.0,
+        "nenner": 30,
+        "rate": 0.0,
+        "zaehler": 0
+       }
+      },
+      "H1: nicht entscheidbar": {
+       "alt": {
+        "mc_se": 0.07722022379508468,
+        "nenner": 30,
+        "rate": 0.23333333333333334,
+        "zaehler": 7
+       },
+       "gleich": true,
+       "neu": {
+        "mc_se": 0.07722022379508468,
+        "nenner": 30,
+        "rate": 0.23333333333333334,
+        "zaehler": 7
+       }
+      },
+      "H2: bestätigt": {
+       "alt": {
+        "mc_se": 0.07722022379508468,
+        "nenner": 30,
+        "rate": 0.7666666666666667,
+        "zaehler": 23
+       },
+       "gleich": true,
+       "neu": {
+        "mc_se": 0.07722022379508468,
+        "nenner": 30,
+        "rate": 0.7666666666666667,
+        "zaehler": 23
+       }
+      },
+      "H2: falsifiziert": {
+       "alt": {
+        "mc_se": 0.0,
+        "nenner": 30,
+        "rate": 0.0,
+        "zaehler": 0
+       },
+       "gleich": true,
+       "neu": {
+        "mc_se": 0.0,
+        "nenner": 30,
+        "rate": 0.0,
+        "zaehler": 0
+       }
+      },
+      "H2: nicht entscheidbar": {
+       "alt": {
+        "mc_se": 0.07722022379508468,
+        "nenner": 30,
+        "rate": 0.23333333333333334,
+        "zaehler": 7
+       },
+       "gleich": true,
+       "neu": {
+        "mc_se": 0.07722022379508468,
+        "nenner": 30,
+        "rate": 0.23333333333333334,
+        "zaehler": 7
+       }
+      },
+      "ungültig G1": {
+       "alt": {
+        "mc_se": 0.0005607576837195228,
+        "nenner": 18900,
+        "rate": 0.0059788359788359785,
+        "zaehler": 113
+       },
+       "gleich": true,
+       "neu": {
+        "mc_se": 0.0005607576837195228,
+        "nenner": 18900,
+        "rate": 0.0059788359788359785,
+        "zaehler": 113
+       }
+      },
+      "ungültig G4": {
+       "alt": {
+        "mc_se": 0.0014451075009101325,
+        "nenner": 18900,
+        "rate": 0.04116402116402117,
+        "zaehler": 778
+       },
+       "gleich": true,
+       "neu": {
+        "mc_se": 0.0014451075009101325,
+        "nenner": 18900,
+        "rate": 0.04116402116402117,
+        "zaehler": 778
+       }
+      }
+     },
+     "seeds_gleich_alt": true,
+     "wahrheit": {
+      "alt": "R1",
+      "neu": "R1"
+     }
+    },
+    "laufzeit_s": 79.9,
+    "n": 30,
+    "ohne_dreiwertige_bewertung": {},
+    "raten": {
+     "auffällig": {
+      "mc_se": 0.0,
+      "nenner": 30,
+      "rate": 1.0,
+      "zaehler": 30
+     },
+     "ohne dreiwertige Bewertung": {
+      "mc_se": 0.0,
+      "nenner": 30,
+      "rate": 0.0,
+      "zaehler": 0
+     },
+     "unauffällig": {
+      "mc_se": 0.0,
+      "nenner": 30,
+      "rate": 0.0,
+      "zaehler": 0
+     },
+     "unbestimmt": {
+      "mc_se": 0.0,
+      "nenner": 30,
+      "rate": 0.0,
+      "zaehler": 0
+     }
+    },
+    "rolle": "pruefung",
+    "seed_basis": 20261016,
+    "seeds_sha256": "9cc1f9bdc502d05ebf5fd79499aa3802a883b01b0efadc102700c907b0385934",
+    "t_ziehungen": {
+     "B": [
+      1000
+     ],
+     "anteil_w_gespiegelt": {
+      "max": 0.0,
+      "median": 0.0,
+      "n": 30,
+      "q25": 0.0,
+      "q75": 0.0
+     },
+     "format": {
+      "e3_T_unsicherheit-0.1": 30
+     },
+     "gruende_unzulaessig": {},
+     "kampagnen_mit_unzulaessigen": {
+      "mc_se": 0.0,
+      "nenner": 30,
+      "rate": 0.0,
+      "zaehler": 0
+     },
+     "kampagnen_mit_ziehungen": {
+      "mc_se": 0.0,
+      "nenner": 30,
+      "rate": 1.0,
+      "zaehler": 30
+     },
+     "modell": {
+      "e3_T-0.2": 30
+     },
+     "naeherungen": {
+      "Kette → (f_n, ζ) linear über die Verschiebungen je Störrichtung der Kette aus P0.4 (Neuanpassung bei 1σ, kovarianz_kette = Σ d·dᵀ): gemeinsame Ziehung ohne Doppelzählung, gültig für kleine Kettenunsicherheiten": 30,
+      "Parameterziehungen normalverteilt mit den Kovarianzen der Anpassungen; je Replikat ein Parametersatz für alle Konfigurationen und beide Harmonischen": 30,
+      "Tiefpassparameter w der Kette wie in der H3-Fortpflanzung betragsgespiegelt (|w|); Anteil berichtet": 30,
+      "getrennte Kalibriermessungen ohne Kreuzkovarianz im Format (P0.1-Laststellen, Brückenanpassung je Kanal, statistischer Anteil von P0.4) werden als unabhängig gezogen; ein gemeinsamer Fehler aller Kanäle (gleicher Faktor aller Zellen) hebt sich in den relativen Modulphasen auf, kanalweise verschiedene gemeinsame Ursachen deckt das nicht ab": 30
+     },
+     "nicht_gezogen": {
+      "Kippmoden: im T-Modell nicht enthalten (Modellgrenze, A2.7)": 30,
+      "Modullagen (Konstruktion, module_nominal_m) als bekannt angenommen wie in A2.7; keine Unsicherheit im Kalibrierformat": 30
+     },
+     "ohne_ziehungen": {},
+     "unvollstaendig": {},
+     "unzulaessige_ziehungen": {
+      "mc_se": 0.0,
+      "nenner": 30000,
+      "rate": 0.0,
+      "zaehler": 0
+     }
+    },
+    "unsicherheit": {
+     "e3a": {
+      "abs_delta_phi_grad": {
+       "max": 0.2304073849944075,
+       "median": 0.10341192038518443,
+       "n": 1242,
+       "q25": 0.006732889115141916,
+       "q75": 0.2003169623490777
+      },
+      "n_pruefgroessen": 1242,
+      "u_grad": {
+       "max": 0.014575588778813205,
+       "median": 0.009371746420117478,
+       "n": 1242,
+       "q25": 0.008591126228671725,
+       "q75": 0.010156265881169768
+      },
+      "u_ohne_T_grad": {
+       "max": 0.014552088886544474,
+       "median": 0.009315892573771049,
+       "n": 1242,
+       "q25": 0.008532870681047893,
+       "q75": 0.010116668910276098
+      },
+      "verhaeltnis_u_zu_u_ohne_T": {
+       "max": 1.018792491407041,
+       "median": 1.0059363533740222,
+       "n": 1242,
+       "q25": 1.0034969388417483,
+       "q75": 1.0083017257862141
+      }
+     },
+     "e3b": {
+      "n": 30,
+      "q_Z": {
+       "max": 0.0018448920317957077,
+       "median": 0.001237701692030036,
+       "n": 30,
+       "q25": 0.0009389016428420835,
+       "q75": 0.0014692019467106496
+      },
+      "u_q_Z": {
+       "max": 0.0004193941021125358,
+       "median": 0.0003614464915772152,
+       "n": 30,
+       "q25": 0.000338928342341936,
+       "q75": 0.00037745061655239284
+      },
+      "u_q_Z_ohne_T": {
+       "max": 0.0004193940008427368,
+       "median": 0.0003614467439261926,
+       "n": 30,
+       "q25": 0.0003389284676454271,
+       "q75": 0.0003774510746718052
+      },
+      "verhaeltnis_u_zu_u_ohne_T": {
+       "max": 1.0000034312981416,
+       "median": 0.9999997730819322,
+       "n": 30,
+       "q25": 0.999998541733748,
+       "q75": 1.0000005027141579
+      }
+     },
+     "schwellen": {
+      "phase_grad": 0.1,
+      "q_tol": 0.00058
+     }
+    },
+    "vergleich": {
+     "auffällig": {
+      "aenderung": 0.0,
+      "alt": {
+       "mc_se": 0.0,
+       "nenner": 30,
+       "rate": 1.0,
+       "zaehler": 30
+      },
+      "neu": {
+       "mc_se": 0.0,
+       "nenner": 30,
+       "rate": 1.0,
+       "zaehler": 30
+      }
+     },
+     "ohne dreiwertige Bewertung": {
+      "aenderung": 0.0,
+      "alt": {
+       "mc_se": 0.0,
+       "nenner": 30,
+       "rate": 0.0,
+       "zaehler": 0
+      },
+      "neu": {
+       "mc_se": 0.0,
+       "nenner": 30,
+       "rate": 0.0,
+       "zaehler": 0
+      }
+     },
+     "unauffällig": {
+      "aenderung": 0.0,
+      "alt": {
+       "mc_se": 0.0,
+       "nenner": 30,
+       "rate": 0.0,
+       "zaehler": 0
+      },
+      "neu": {
+       "mc_se": 0.0,
+       "nenner": 30,
+       "rate": 0.0,
+       "zaehler": 0
+      }
+     },
+     "unbestimmt": {
+      "aenderung": 0.0,
+      "alt": {
+       "mc_se": 0.0,
+       "nenner": 30,
+       "rate": 0.0,
+       "zaehler": 0
+      },
+      "neu": {
+       "mc_se": 0.0,
+       "nenner": 30,
+       "rate": 0.0,
+       "zaehler": 0
+      }
+     }
+    },
+    "werkzeug8": "V1-G0",
+    "werkzeug8_meta": "übergeben",
+    "werkzeug8_sha256": "8f0286d58a6c6982850b0c26cc78c65715927a353438de744737e1a1eedf2076"
+   },
+   "E04-kette/L1": {
+    "alte_lesart": {
+     "auffällig": {
+      "mc_se": 0.0,
+      "nenner": 30,
+      "rate": 1.0,
+      "zaehler": 30
+     },
+     "ohne dreiwertige Bewertung": {
+      "mc_se": 0.0,
+      "nenner": 30,
+      "rate": 0.0,
+      "zaehler": 0
+     },
+     "unauffällig": {
+      "mc_se": 0.0,
+      "nenner": 30,
+      "rate": 0.0,
+      "zaehler": 0
+     },
+     "unbestimmt": {
+      "mc_se": 0.0,
+      "nenner": 30,
+      "rate": 0.0,
+      "zaehler": 0
+     }
+    },
+    "alte_lesart_gleich_alt": true,
+    "auftrag": "E3-E04-kette-L1",
+    "bestimmende_pruefgroessen": {
+     "auffällig": {
+      "E3a": 30
+     },
+     "unbestimmt": {}
+    },
+    "gegenprobe_regel": {
+     "geprueft": 30,
+     "gleich": 30
+    },
+    "kontrollen": {
+     "alle_gleich": true,
+     "raten": {
+      "Abbruch S1_kandidaten": {
+       "alt": {
+        "mc_se": 0.054772255750516606,
+        "nenner": 30,
+        "rate": 0.9,
+        "zaehler": 27
+       },
+       "gleich": true,
+       "neu": {
+        "mc_se": 0.054772255750516606,
+        "nenner": 30,
+        "rate": 0.9,
+        "zaehler": 27
+       }
+      },
+      "Abbruch S2": {
+       "alt": {
+        "mc_se": 0.0,
+        "nenner": 30,
+        "rate": 0.0,
+        "zaehler": 0
+       },
+       "gleich": true,
+       "neu": {
+        "mc_se": 0.0,
+        "nenner": 30,
+        "rate": 0.0,
+        "zaehler": 0
+       }
+      },
+      "Abbruch S4": {
+       "alt": {
+        "mc_se": 0.0,
+        "nenner": 30,
+        "rate": 0.0,
+        "zaehler": 0
+       },
+       "gleich": true,
+       "neu": {
+        "mc_se": 0.0,
+        "nenner": 30,
+        "rate": 0.0,
+        "zaehler": 0
+       }
+      },
+      "H1 und H2 bestätigt": {
+       "alt": {
+        "mc_se": 0.08073734277593311,
+        "nenner": 30,
+        "rate": 0.7333333333333333,
+        "zaehler": 22
+       },
+       "gleich": true,
+       "neu": {
+        "mc_se": 0.08073734277593311,
+        "nenner": 30,
+        "rate": 0.7333333333333333,
+        "zaehler": 22
+       }
+      },
+      "H1: bestätigt": {
+       "alt": {
+        "mc_se": 0.08073734277593311,
+        "nenner": 30,
+        "rate": 0.7333333333333333,
+        "zaehler": 22
+       },
+       "gleich": true,
+       "neu": {
+        "mc_se": 0.08073734277593311,
+        "nenner": 30,
+        "rate": 0.7333333333333333,
+        "zaehler": 22
+       }
+      },
+      "H1: falsifiziert": {
+       "alt": {
+        "mc_se": 0.0,
+        "nenner": 30,
+        "rate": 0.0,
+        "zaehler": 0
+       },
+       "gleich": true,
+       "neu": {
+        "mc_se": 0.0,
+        "nenner": 30,
+        "rate": 0.0,
+        "zaehler": 0
+       }
+      },
+      "H1: nicht entscheidbar": {
+       "alt": {
+        "mc_se": 0.08073734277593311,
+        "nenner": 30,
+        "rate": 0.26666666666666666,
+        "zaehler": 8
+       },
+       "gleich": true,
+       "neu": {
+        "mc_se": 0.08073734277593311,
+        "nenner": 30,
+        "rate": 0.26666666666666666,
+        "zaehler": 8
+       }
+      },
+      "H2: bestätigt": {
+       "alt": {
+        "mc_se": 0.08073734277593311,
+        "nenner": 30,
+        "rate": 0.7333333333333333,
+        "zaehler": 22
+       },
+       "gleich": true,
+       "neu": {
+        "mc_se": 0.08073734277593311,
+        "nenner": 30,
+        "rate": 0.7333333333333333,
+        "zaehler": 22
+       }
+      },
+      "H2: falsifiziert": {
+       "alt": {
+        "mc_se": 0.0,
+        "nenner": 30,
+        "rate": 0.0,
+        "zaehler": 0
+       },
+       "gleich": true,
+       "neu": {
+        "mc_se": 0.0,
+        "nenner": 30,
+        "rate": 0.0,
+        "zaehler": 0
+       }
+      },
+      "H2: nicht entscheidbar": {
+       "alt": {
+        "mc_se": 0.08073734277593311,
+        "nenner": 30,
+        "rate": 0.26666666666666666,
+        "zaehler": 8
+       },
+       "gleich": true,
+       "neu": {
+        "mc_se": 0.08073734277593311,
+        "nenner": 30,
+        "rate": 0.26666666666666666,
+        "zaehler": 8
+       }
+      },
+      "ungültig G1": {
+       "alt": {
+        "mc_se": 0.0005508019751984065,
+        "nenner": 18900,
+        "rate": 0.005767195767195767,
+        "zaehler": 109
+       },
+       "gleich": true,
+       "neu": {
+        "mc_se": 0.0005508019751984065,
+        "nenner": 18900,
+        "rate": 0.005767195767195767,
+        "zaehler": 109
+       }
+      },
+      "ungültig G4": {
+       "alt": {
+        "mc_se": 0.0014956066749177582,
+        "nenner": 18900,
+        "rate": 0.044232804232804235,
+        "zaehler": 836
+       },
+       "gleich": true,
+       "neu": {
+        "mc_se": 0.0014956066749177582,
+        "nenner": 18900,
+        "rate": 0.044232804232804235,
+        "zaehler": 836
+       }
+      }
+     },
+     "seeds_gleich_alt": true,
+     "wahrheit": {
+      "alt": "R0",
+      "neu": "R0"
+     }
+    },
+    "laufzeit_s": 69.9,
+    "n": 30,
+    "ohne_dreiwertige_bewertung": {},
+    "raten": {
+     "auffällig": {
+      "mc_se": 0.0,
+      "nenner": 30,
+      "rate": 1.0,
+      "zaehler": 30
+     },
+     "ohne dreiwertige Bewertung": {
+      "mc_se": 0.0,
+      "nenner": 30,
+      "rate": 0.0,
+      "zaehler": 0
+     },
+     "unauffällig": {
+      "mc_se": 0.0,
+      "nenner": 30,
+      "rate": 0.0,
+      "zaehler": 0
+     },
+     "unbestimmt": {
+      "mc_se": 0.0,
+      "nenner": 30,
+      "rate": 0.0,
+      "zaehler": 0
+     }
+    },
+    "rolle": "pruefung",
+    "seed_basis": 20261016,
+    "seeds_sha256": "e38ed340ebf02f593cacd54f031829d52e83fcf2390f11c7a2607581e63472fb",
+    "t_ziehungen": {
+     "B": [
+      1000
+     ],
+     "anteil_w_gespiegelt": {
+      "max": 0.0,
+      "median": 0.0,
+      "n": 30,
+      "q25": 0.0,
+      "q75": 0.0
+     },
+     "format": {
+      "e3_T_unsicherheit-0.1": 30
+     },
+     "gruende_unzulaessig": {},
+     "kampagnen_mit_unzulaessigen": {
+      "mc_se": 0.0,
+      "nenner": 30,
+      "rate": 0.0,
+      "zaehler": 0
+     },
+     "kampagnen_mit_ziehungen": {
+      "mc_se": 0.0,
+      "nenner": 30,
+      "rate": 1.0,
+      "zaehler": 30
+     },
+     "modell": {
+      "e3_T-0.2": 30
+     },
+     "naeherungen": {
+      "Kette → (f_n, ζ) linear über die Verschiebungen je Störrichtung der Kette aus P0.4 (Neuanpassung bei 1σ, kovarianz_kette = Σ d·dᵀ): gemeinsame Ziehung ohne Doppelzählung, gültig für kleine Kettenunsicherheiten": 30,
+      "Parameterziehungen normalverteilt mit den Kovarianzen der Anpassungen; je Replikat ein Parametersatz für alle Konfigurationen und beide Harmonischen": 30,
+      "Tiefpassparameter w der Kette wie in der H3-Fortpflanzung betragsgespiegelt (|w|); Anteil berichtet": 30,
+      "getrennte Kalibriermessungen ohne Kreuzkovarianz im Format (P0.1-Laststellen, Brückenanpassung je Kanal, statistischer Anteil von P0.4) werden als unabhängig gezogen; ein gemeinsamer Fehler aller Kanäle (gleicher Faktor aller Zellen) hebt sich in den relativen Modulphasen auf, kanalweise verschiedene gemeinsame Ursachen deckt das nicht ab": 30
+     },
+     "nicht_gezogen": {
+      "Kippmoden: im T-Modell nicht enthalten (Modellgrenze, A2.7)": 30,
+      "Modullagen (Konstruktion, module_nominal_m) als bekannt angenommen wie in A2.7; keine Unsicherheit im Kalibrierformat": 30
+     },
+     "ohne_ziehungen": {},
+     "unvollstaendig": {},
+     "unzulaessige_ziehungen": {
+      "mc_se": 0.0,
+      "nenner": 30000,
+      "rate": 0.0,
+      "zaehler": 0
+     }
+    },
+    "unsicherheit": {
+     "e3a": {
+      "abs_delta_phi_grad": {
+       "max": 2.183894756632128,
+       "median": 1.0798690341978556,
+       "n": 1242,
+       "q25": 0.006854633210330974,
+       "q75": 2.150010909222317
+      },
+      "n_pruefgroessen": 1242,
+      "u_grad": {
+       "max": 0.014784962483120848,
+       "median": 0.009402343389384218,
+       "n": 1242,
+       "q25": 0.008564419197337159,
+       "q75": 0.010253855890559011
+      },
+      "u_ohne_T_grad": {
+       "max": 0.014728729550471954,
+       "median": 0.00933862655403878,
+       "n": 1242,
+       "q25": 0.008483608433738644,
+       "q75": 0.010175840243568818
+      },
+      "verhaeltnis_u_zu_u_ohne_T": {
+       "max": 1.034522063728366,
+       "median": 1.0073777940878208,
+       "n": 1242,
+       "q25": 1.0047300576104683,
+       "q75": 1.0110602257550592
+      }
+     },
+     "e3b": {
+      "n": 30,
+      "q_Z": {
+       "max": 0.0009914758295599178,
+       "median": 0.00044399392644114467,
+       "n": 30,
+       "q25": 0.0002851521582169286,
+       "q75": 0.0007452181194429381
+      },
+      "u_q_Z": {
+       "max": 0.0003893898318406919,
+       "median": 0.0003026485450073219,
+       "n": 30,
+       "q25": 0.00027761218109972294,
+       "q75": 0.0003311584867438177
+      },
+      "u_q_Z_ohne_T": {
+       "max": 0.0003893887212228751,
+       "median": 0.0003026488903670877,
+       "n": 30,
+       "q25": 0.0002776122487595854,
+       "q75": 0.00033115853010332106
+      },
+      "verhaeltnis_u_zu_u_ohne_T": {
+       "max": 1.0000028522084905,
+       "median": 1.0000002986458405,
+       "n": 30,
+       "q25": 0.999999196393957,
+       "q75": 1.0000011330740224
+      }
+     },
+     "schwellen": {
+      "phase_grad": 0.1,
+      "q_tol": 0.00058
+     }
+    },
+    "vergleich": {
+     "auffällig": {
+      "aenderung": 0.0,
+      "alt": {
+       "mc_se": 0.0,
+       "nenner": 30,
+       "rate": 1.0,
+       "zaehler": 30
+      },
+      "neu": {
+       "mc_se": 0.0,
+       "nenner": 30,
+       "rate": 1.0,
+       "zaehler": 30
+      }
+     },
+     "ohne dreiwertige Bewertung": {
+      "aenderung": 0.0,
+      "alt": {
+       "mc_se": 0.0,
+       "nenner": 30,
+       "rate": 0.0,
+       "zaehler": 0
+      },
+      "neu": {
+       "mc_se": 0.0,
+       "nenner": 30,
+       "rate": 0.0,
+       "zaehler": 0
+      }
+     },
+     "unauffällig": {
+      "aenderung": 0.0,
+      "alt": {
+       "mc_se": 0.0,
+       "nenner": 30,
+       "rate": 0.0,
+       "zaehler": 0
+      },
+      "neu": {
+       "mc_se": 0.0,
+       "nenner": 30,
+       "rate": 0.0,
+       "zaehler": 0
+      }
+     },
+     "unbestimmt": {
+      "aenderung": 0.0,
+      "alt": {
+       "mc_se": 0.0,
+       "nenner": 30,
+       "rate": 0.0,
+       "zaehler": 0
+      },
+      "neu": {
+       "mc_se": 0.0,
+       "nenner": 30,
+       "rate": 0.0,
+       "zaehler": 0
+      }
+     }
+    },
+    "werkzeug8": "testvorgabe",
+    "werkzeug8_meta": "TESTVORGABE",
+    "werkzeug8_sha256": "1bfde4eda0bcc992972fd4928f529cdeb5eeffc4e7bc1300fda5d97279464667"
+   },
+   "E07-basisdrift/L1": {
+    "alte_lesart": {
+     "auffällig": {
+      "mc_se": 0.04743416490252569,
+      "nenner": 40,
+      "rate": 0.9,
+      "zaehler": 36
+     },
+     "ohne dreiwertige Bewertung": {
+      "mc_se": 0.0,
+      "nenner": 40,
+      "rate": 0.0,
+      "zaehler": 0
+     },
+     "unauffällig": {
+      "mc_se": 0.0,
+      "nenner": 40,
+      "rate": 0.0,
+      "zaehler": 0
+     },
+     "unbestimmt": {
+      "mc_se": 0.047434164902525694,
+      "nenner": 40,
+      "rate": 0.1,
+      "zaehler": 4
+     }
+    },
+    "alte_lesart_gleich_alt": true,
+    "auftrag": "E3-E07-basisdrift-L1",
+    "bestimmende_pruefgroessen": {
+     "auffällig": {
+      "E3b": 36
+     },
+     "unbestimmt": {
+      "E3b": 4
+     }
+    },
+    "gegenprobe_regel": {
+     "geprueft": 40,
+     "gleich": 40
+    },
+    "kontrollen": {
+     "alle_gleich": true,
+     "raten": {
+      "Abbruch S1_kandidaten": {
+       "alt": {
+        "mc_se": 0.05229125165837972,
+        "nenner": 40,
+        "rate": 0.875,
+        "zaehler": 35
+       },
+       "gleich": true,
+       "neu": {
+        "mc_se": 0.05229125165837972,
+        "nenner": 40,
+        "rate": 0.875,
+        "zaehler": 35
+       }
+      },
+      "Abbruch S2": {
+       "alt": {
+        "mc_se": 0.0,
+        "nenner": 40,
+        "rate": 0.0,
+        "zaehler": 0
+       },
+       "gleich": true,
+       "neu": {
+        "mc_se": 0.0,
+        "nenner": 40,
+        "rate": 0.0,
+        "zaehler": 0
+       }
+      },
+      "Abbruch S4": {
+       "alt": {
+        "mc_se": 0.0,
+        "nenner": 40,
+        "rate": 0.0,
+        "zaehler": 0
+       },
+       "gleich": true,
+       "neu": {
+        "mc_se": 0.0,
+        "nenner": 40,
+        "rate": 0.0,
+        "zaehler": 0
+       }
+      },
+      "H1 und H2 bestätigt": {
+       "alt": {
+        "mc_se": 0.024685522072664386,
+        "nenner": 40,
+        "rate": 0.975,
+        "zaehler": 39
+       },
+       "gleich": true,
+       "neu": {
+        "mc_se": 0.024685522072664386,
+        "nenner": 40,
+        "rate": 0.975,
+        "zaehler": 39
+       }
+      },
+      "H1: bestätigt": {
+       "alt": {
+        "mc_se": 0.024685522072664386,
+        "nenner": 40,
+        "rate": 0.975,
+        "zaehler": 39
+       },
+       "gleich": true,
+       "neu": {
+        "mc_se": 0.024685522072664386,
+        "nenner": 40,
+        "rate": 0.975,
+        "zaehler": 39
+       }
+      },
+      "H1: falsifiziert": {
+       "alt": {
+        "mc_se": 0.0,
+        "nenner": 40,
+        "rate": 0.0,
+        "zaehler": 0
+       },
+       "gleich": true,
+       "neu": {
+        "mc_se": 0.0,
+        "nenner": 40,
+        "rate": 0.0,
+        "zaehler": 0
+       }
+      },
+      "H1: nicht entscheidbar": {
+       "alt": {
+        "mc_se": 0.024685522072664372,
+        "nenner": 40,
+        "rate": 0.025,
+        "zaehler": 1
+       },
+       "gleich": true,
+       "neu": {
+        "mc_se": 0.024685522072664372,
+        "nenner": 40,
+        "rate": 0.025,
+        "zaehler": 1
+       }
+      },
+      "H2: bestätigt": {
+       "alt": {
+        "mc_se": 0.024685522072664386,
+        "nenner": 40,
+        "rate": 0.975,
+        "zaehler": 39
+       },
+       "gleich": true,
+       "neu": {
+        "mc_se": 0.024685522072664386,
+        "nenner": 40,
+        "rate": 0.975,
+        "zaehler": 39
+       }
+      },
+      "H2: falsifiziert": {
+       "alt": {
+        "mc_se": 0.0,
+        "nenner": 40,
+        "rate": 0.0,
+        "zaehler": 0
+       },
+       "gleich": true,
+       "neu": {
+        "mc_se": 0.0,
+        "nenner": 40,
+        "rate": 0.0,
+        "zaehler": 0
+       }
+      },
+      "H2: nicht entscheidbar": {
+       "alt": {
+        "mc_se": 0.024685522072664372,
+        "nenner": 40,
+        "rate": 0.025,
+        "zaehler": 1
+       },
+       "gleich": true,
+       "neu": {
+        "mc_se": 0.024685522072664372,
+        "nenner": 40,
+        "rate": 0.025,
+        "zaehler": 1
+       }
+      },
+      "ungültig G1": {
+       "alt": {
+        "mc_se": 0.0005363114072756538,
+        "nenner": 25200,
+        "rate": 0.007301587301587302,
+        "zaehler": 184
+       },
+       "gleich": true,
+       "neu": {
+        "mc_se": 0.0005363114072756538,
+        "nenner": 25200,
+        "rate": 0.007301587301587302,
+        "zaehler": 184
+       }
+      },
+      "ungültig G4": {
+       "alt": {
+        "mc_se": 0.0008387810616663628,
+        "nenner": 25200,
+        "rate": 0.018055555555555554,
+        "zaehler": 455
+       },
+       "gleich": true,
+       "neu": {
+        "mc_se": 0.0008387810616663628,
+        "nenner": 25200,
+        "rate": 0.018055555555555554,
+        "zaehler": 455
+       }
+      }
+     },
+     "seeds_gleich_alt": true,
+     "wahrheit": {
+      "alt": "R0",
+      "neu": "R0"
+     }
+    },
+    "laufzeit_s": 56.0,
+    "n": 40,
+    "ohne_dreiwertige_bewertung": {},
+    "raten": {
+     "auffällig": {
+      "mc_se": 0.04743416490252569,
+      "nenner": 40,
+      "rate": 0.9,
+      "zaehler": 36
+     },
+     "ohne dreiwertige Bewertung": {
+      "mc_se": 0.0,
+      "nenner": 40,
+      "rate": 0.0,
+      "zaehler": 0
+     },
+     "unauffällig": {
+      "mc_se": 0.0,
+      "nenner": 40,
+      "rate": 0.0,
+      "zaehler": 0
+     },
+     "unbestimmt": {
+      "mc_se": 0.047434164902525694,
+      "nenner": 40,
+      "rate": 0.1,
+      "zaehler": 4
+     }
+    },
+    "rolle": "pruefung",
+    "seed_basis": 20261016,
+    "seeds_sha256": "1262073ef43c32a5ed70d88b8c81185dad7df051fce494d8e6081a1cd63a2e40",
+    "t_ziehungen": {
+     "B": [
+      1000
+     ],
+     "anteil_w_gespiegelt": {
+      "max": 0.0,
+      "median": 0.0,
+      "n": 40,
+      "q25": 0.0,
+      "q75": 0.0
+     },
+     "format": {
+      "e3_T_unsicherheit-0.1": 40
+     },
+     "gruende_unzulaessig": {},
+     "kampagnen_mit_unzulaessigen": {
+      "mc_se": 0.0,
+      "nenner": 40,
+      "rate": 0.0,
+      "zaehler": 0
+     },
+     "kampagnen_mit_ziehungen": {
+      "mc_se": 0.0,
+      "nenner": 40,
+      "rate": 1.0,
+      "zaehler": 40
+     },
+     "modell": {
+      "e3_T-0.2": 40
+     },
+     "naeherungen": {
+      "Kette → (f_n, ζ) linear über die Verschiebungen je Störrichtung der Kette aus P0.4 (Neuanpassung bei 1σ, kovarianz_kette = Σ d·dᵀ): gemeinsame Ziehung ohne Doppelzählung, gültig für kleine Kettenunsicherheiten": 40,
+      "Parameterziehungen normalverteilt mit den Kovarianzen der Anpassungen; je Replikat ein Parametersatz für alle Konfigurationen und beide Harmonischen": 40,
+      "Tiefpassparameter w der Kette wie in der H3-Fortpflanzung betragsgespiegelt (|w|); Anteil berichtet": 40,
+      "getrennte Kalibriermessungen ohne Kreuzkovarianz im Format (P0.1-Laststellen, Brückenanpassung je Kanal, statistischer Anteil von P0.4) werden als unabhängig gezogen; ein gemeinsamer Fehler aller Kanäle (gleicher Faktor aller Zellen) hebt sich in den relativen Modulphasen auf, kanalweise verschiedene gemeinsame Ursachen deckt das nicht ab": 40
+     },
+     "nicht_gezogen": {
+      "Kippmoden: im T-Modell nicht enthalten (Modellgrenze, A2.7)": 40,
+      "Modullagen (Konstruktion, module_nominal_m) als bekannt angenommen wie in A2.7; keine Unsicherheit im Kalibrierformat": 40,
+      "f_n, ζ (P0.4 nicht identifizierbar): H(kω) nominal. H ist bei kω ein gemeinsamer komplexer Faktor aller Zellen und Module und hebt sich in E3a (relative Modulphasen) exakt auf; E3b enthält T nicht; die berichteten Amplituden |Ĉⱼ,₁| tragen keine H-Unsicherheit": 40
+     },
+     "ohne_ziehungen": {},
+     "unvollstaendig": {},
+     "unzulaessige_ziehungen": {
+      "mc_se": 0.0,
+      "nenner": 40000,
+      "rate": 0.0,
+      "zaehler": 0
+     }
+    },
+    "unsicherheit": {
+     "e3a": {
+      "abs_delta_phi_grad": {
+       "max": 0.0695831471603583,
+       "median": 0.012257281413027954,
+       "n": 1678,
+       "q25": 0.005951984174039637,
+       "q75": 0.02060445007213474
+      },
+      "n_pruefgroessen": 1678,
+      "u_grad": {
+       "max": 0.02699861150582458,
+       "median": 0.017289647000113123,
+       "n": 1678,
+       "q25": 0.015675756172466533,
+       "q75": 0.019101108487668602
+      },
+      "u_ohne_T_grad": {
+       "max": 0.02692196524672108,
+       "median": 0.017254131861357172,
+       "n": 1678,
+       "q25": 0.015646348625784155,
+       "q75": 0.01907646131493434
+      },
+      "verhaeltnis_u_zu_u_ohne_T": {
+       "max": 1.009738969013905,
+       "median": 1.0017157151384795,
+       "n": 1678,
+       "q25": 1.000535732420798,
+       "q75": 1.0030257998615328
+      }
+     },
+     "e3b": {
+      "n": 40,
+      "q_Z": {
+       "max": 0.00435595191863693,
+       "median": 0.0033398155733452613,
+       "n": 40,
+       "q25": 0.002887035528306707,
+       "q75": 0.003742850095913842
+      },
+      "u_q_Z": {
+       "max": 0.0007156469107449338,
+       "median": 0.0005892153108380694,
+       "n": 40,
+       "q25": 0.0005448470904097786,
+       "q75": 0.0006252166591195474
+      },
+      "u_q_Z_ohne_T": {
+       "max": 0.0007156486793416701,
+       "median": 0.0005892136368345353,
+       "n": 40,
+       "q25": 0.0005448480861882364,
+       "q75": 0.0006252152334191847
+      },
+      "verhaeltnis_u_zu_u_ohne_T": {
+       "max": 1.000004961323669,
+       "median": 1.0000004039829333,
+       "n": 40,
+       "q25": 0.9999976246689702,
+       "q75": 1.0000014613018642
+      }
+     },
+     "schwellen": {
+      "phase_grad": 0.1,
+      "q_tol": 0.00058
+     }
+    },
+    "vergleich": {
+     "auffällig": {
+      "aenderung": 0.0,
+      "alt": {
+       "mc_se": 0.04743416490252569,
+       "nenner": 40,
+       "rate": 0.9,
+       "zaehler": 36
+      },
+      "neu": {
+       "mc_se": 0.04743416490252569,
+       "nenner": 40,
+       "rate": 0.9,
+       "zaehler": 36
+      }
+     },
+     "ohne dreiwertige Bewertung": {
+      "aenderung": 0.0,
+      "alt": {
+       "mc_se": 0.0,
+       "nenner": 40,
+       "rate": 0.0,
+       "zaehler": 0
+      },
+      "neu": {
+       "mc_se": 0.0,
+       "nenner": 40,
+       "rate": 0.0,
+       "zaehler": 0
+      }
+     },
+     "unauffällig": {
+      "aenderung": 0.0,
+      "alt": {
+       "mc_se": 0.0,
+       "nenner": 40,
+       "rate": 0.0,
+       "zaehler": 0
+      },
+      "neu": {
+       "mc_se": 0.0,
+       "nenner": 40,
+       "rate": 0.0,
+       "zaehler": 0
+      }
+     },
+     "unbestimmt": {
+      "aenderung": 0.0,
+      "alt": {
+       "mc_se": 0.047434164902525694,
+       "nenner": 40,
+       "rate": 0.1,
+       "zaehler": 4
+      },
+      "neu": {
+       "mc_se": 0.047434164902525694,
+       "nenner": 40,
+       "rate": 0.1,
+       "zaehler": 4
+      }
+     }
+    },
+    "werkzeug8": "A4",
+    "werkzeug8_meta": "übergeben",
+    "werkzeug8_sha256": "d4465b57a7e7b6ba6a6b075c187fa38041e6afefcb756c3852ca7f9517209b3c"
+   },
+   "E07-verstaerkung/L1": {
+    "alte_lesart": {
+     "auffällig": {
+      "mc_se": 0.0,
+      "nenner": 40,
+      "rate": 0.0,
+      "zaehler": 0
+     },
+     "ohne dreiwertige Bewertung": {
+      "mc_se": 0.0,
+      "nenner": 40,
+      "rate": 0.0,
+      "zaehler": 0
+     },
+     "unauffällig": {
+      "mc_se": 0.05645794895318108,
+      "nenner": 40,
+      "rate": 0.15,
+      "zaehler": 6
+     },
+     "unbestimmt": {
+      "mc_se": 0.05645794895318108,
+      "nenner": 40,
+      "rate": 0.85,
+      "zaehler": 34
+     }
+    },
+    "alte_lesart_gleich_alt": true,
+    "auftrag": "E3-E07-verstaerkung-L1",
+    "bestimmende_pruefgroessen": {
+     "auffällig": {},
+     "unbestimmt": {
+      "E3b": 34
+     }
+    },
+    "gegenprobe_regel": {
+     "geprueft": 40,
+     "gleich": 40
+    },
+    "kontrollen": {
+     "alle_gleich": true,
+     "raten": {
+      "Abbruch S1_kandidaten": {
+       "alt": {
+        "mc_se": 0.05645794895318108,
+        "nenner": 40,
+        "rate": 0.85,
+        "zaehler": 34
+       },
+       "gleich": true,
+       "neu": {
+        "mc_se": 0.05645794895318108,
+        "nenner": 40,
+        "rate": 0.85,
+        "zaehler": 34
+       }
+      },
+      "Abbruch S2": {
+       "alt": {
+        "mc_se": 0.0,
+        "nenner": 40,
+        "rate": 0.0,
+        "zaehler": 0
+       },
+       "gleich": true,
+       "neu": {
+        "mc_se": 0.0,
+        "nenner": 40,
+        "rate": 0.0,
+        "zaehler": 0
+       }
+      },
+      "Abbruch S4": {
+       "alt": {
+        "mc_se": 0.0,
+        "nenner": 40,
+        "rate": 0.0,
+        "zaehler": 0
+       },
+       "gleich": true,
+       "neu": {
+        "mc_se": 0.0,
+        "nenner": 40,
+        "rate": 0.0,
+        "zaehler": 0
+       }
+      },
+      "H1 und H2 bestätigt": {
+       "alt": {
+        "mc_se": 0.041645828122394195,
+        "nenner": 40,
+        "rate": 0.925,
+        "zaehler": 37
+       },
+       "gleich": true,
+       "neu": {
+        "mc_se": 0.041645828122394195,
+        "nenner": 40,
+        "rate": 0.925,
+        "zaehler": 37
+       }
+      },
+      "H1: bestätigt": {
+       "alt": {
+        "mc_se": 0.041645828122394195,
+        "nenner": 40,
+        "rate": 0.925,
+        "zaehler": 37
+       },
+       "gleich": true,
+       "neu": {
+        "mc_se": 0.041645828122394195,
+        "nenner": 40,
+        "rate": 0.925,
+        "zaehler": 37
+       }
+      },
+      "H1: falsifiziert": {
+       "alt": {
+        "mc_se": 0.0,
+        "nenner": 40,
+        "rate": 0.0,
+        "zaehler": 0
+       },
+       "gleich": true,
+       "neu": {
+        "mc_se": 0.0,
+        "nenner": 40,
+        "rate": 0.0,
+        "zaehler": 0
+       }
+      },
+      "H1: nicht entscheidbar": {
+       "alt": {
+        "mc_se": 0.04164582812239421,
+        "nenner": 40,
+        "rate": 0.075,
+        "zaehler": 3
+       },
+       "gleich": true,
+       "neu": {
+        "mc_se": 0.04164582812239421,
+        "nenner": 40,
+        "rate": 0.075,
+        "zaehler": 3
+       }
+      },
+      "H2: bestätigt": {
+       "alt": {
+        "mc_se": 0.03446012188022557,
+        "nenner": 40,
+        "rate": 0.95,
+        "zaehler": 38
+       },
+       "gleich": true,
+       "neu": {
+        "mc_se": 0.03446012188022557,
+        "nenner": 40,
+        "rate": 0.95,
+        "zaehler": 38
+       }
+      },
+      "H2: falsifiziert": {
+       "alt": {
+        "mc_se": 0.0,
+        "nenner": 40,
+        "rate": 0.0,
+        "zaehler": 0
+       },
+       "gleich": true,
+       "neu": {
+        "mc_se": 0.0,
+        "nenner": 40,
+        "rate": 0.0,
+        "zaehler": 0
+       }
+      },
+      "H2: nicht entscheidbar": {
+       "alt": {
+        "mc_se": 0.034460121880225555,
+        "nenner": 40,
+        "rate": 0.05,
+        "zaehler": 2
+       },
+       "gleich": true,
+       "neu": {
+        "mc_se": 0.034460121880225555,
+        "nenner": 40,
+        "rate": 0.05,
+        "zaehler": 2
+       }
+      },
+      "ungültig G1": {
+       "alt": {
+        "mc_se": 0.0005420661941841891,
+        "nenner": 25200,
+        "rate": 0.0074603174603174605,
+        "zaehler": 188
+       },
+       "gleich": true,
+       "neu": {
+        "mc_se": 0.0005420661941841891,
+        "nenner": 25200,
+        "rate": 0.0074603174603174605,
+        "zaehler": 188
+       }
+      },
+      "ungültig G4": {
+       "alt": {
+        "mc_se": 0.0009940790811976184,
+        "nenner": 25200,
+        "rate": 0.025555555555555557,
+        "zaehler": 644
+       },
+       "gleich": true,
+       "neu": {
+        "mc_se": 0.0009940790811976184,
+        "nenner": 25200,
+        "rate": 0.025555555555555557,
+        "zaehler": 644
+       }
+      }
+     },
+     "seeds_gleich_alt": true,
+     "wahrheit": {
+      "alt": "R0",
+      "neu": "R0"
+     }
+    },
+    "laufzeit_s": 55.9,
+    "n": 40,
+    "ohne_dreiwertige_bewertung": {},
+    "raten": {
+     "auffällig": {
+      "mc_se": 0.0,
+      "nenner": 40,
+      "rate": 0.0,
+      "zaehler": 0
+     },
+     "ohne dreiwertige Bewertung": {
+      "mc_se": 0.0,
+      "nenner": 40,
+      "rate": 0.0,
+      "zaehler": 0
+     },
+     "unauffällig": {
+      "mc_se": 0.05645794895318108,
+      "nenner": 40,
+      "rate": 0.15,
+      "zaehler": 6
+     },
+     "unbestimmt": {
+      "mc_se": 0.05645794895318108,
+      "nenner": 40,
+      "rate": 0.85,
+      "zaehler": 34
+     }
+    },
+    "rolle": "pruefung",
+    "seed_basis": 20261016,
+    "seeds_sha256": "c1a622096303ce8f4752bdbad9cffa9240b0fd36b61e319c31a11cb073a1f369",
+    "t_ziehungen": {
+     "B": [
+      1000
+     ],
+     "anteil_w_gespiegelt": {
+      "max": 0.0,
+      "median": 0.0,
+      "n": 40,
+      "q25": 0.0,
+      "q75": 0.0
+     },
+     "format": {
+      "e3_T_unsicherheit-0.1": 40
+     },
+     "gruende_unzulaessig": {},
+     "kampagnen_mit_unzulaessigen": {
+      "mc_se": 0.0,
+      "nenner": 40,
+      "rate": 0.0,
+      "zaehler": 0
+     },
+     "kampagnen_mit_ziehungen": {
+      "mc_se": 0.0,
+      "nenner": 40,
+      "rate": 1.0,
+      "zaehler": 40
+     },
+     "modell": {
+      "e3_T-0.2": 40
+     },
+     "naeherungen": {
+      "Kette → (f_n, ζ) linear über die Verschiebungen je Störrichtung der Kette aus P0.4 (Neuanpassung bei 1σ, kovarianz_kette = Σ d·dᵀ): gemeinsame Ziehung ohne Doppelzählung, gültig für kleine Kettenunsicherheiten": 40,
+      "Parameterziehungen normalverteilt mit den Kovarianzen der Anpassungen; je Replikat ein Parametersatz für alle Konfigurationen und beide Harmonischen": 40,
+      "Tiefpassparameter w der Kette wie in der H3-Fortpflanzung betragsgespiegelt (|w|); Anteil berichtet": 40,
+      "getrennte Kalibriermessungen ohne Kreuzkovarianz im Format (P0.1-Laststellen, Brückenanpassung je Kanal, statistischer Anteil von P0.4) werden als unabhängig gezogen; ein gemeinsamer Fehler aller Kanäle (gleicher Faktor aller Zellen) hebt sich in den relativen Modulphasen auf, kanalweise verschiedene gemeinsame Ursachen deckt das nicht ab": 40
+     },
+     "nicht_gezogen": {
+      "Kippmoden: im T-Modell nicht enthalten (Modellgrenze, A2.7)": 40,
+      "Modullagen (Konstruktion, module_nominal_m) als bekannt angenommen wie in A2.7; keine Unsicherheit im Kalibrierformat": 40,
+      "f_n, ζ (P0.4 nicht identifizierbar): H(kω) nominal. H ist bei kω ein gemeinsamer komplexer Faktor aller Zellen und Module und hebt sich in E3a (relative Modulphasen) exakt auf; E3b enthält T nicht; die berichteten Amplituden |Ĉⱼ,₁| tragen keine H-Unsicherheit": 40
+     },
+     "ohne_ziehungen": {},
+     "unvollstaendig": {},
+     "unzulaessige_ziehungen": {
+      "mc_se": 0.0,
+      "nenner": 40000,
+      "rate": 0.0,
+      "zaehler": 0
+     }
+    },
+    "unsicherheit": {
+     "e3a": {
+      "abs_delta_phi_grad": {
+       "max": 0.03526977538842857,
+       "median": 0.006600395266232795,
+       "n": 1674,
+       "q25": 0.003194548934068564,
+       "q75": 0.01130490780649751
+      },
+      "n_pruefgroessen": 1674,
+      "u_grad": {
+       "max": 0.013639377899707107,
+       "median": 0.00931228252424748,
+       "n": 1674,
+       "q25": 0.008520027705626182,
+       "q75": 0.010185094372164296
+      },
+      "u_ohne_T_grad": {
+       "max": 0.013579147900632098,
+       "median": 0.00926509158530809,
+       "n": 1674,
+       "q25": 0.008464200155309357,
+       "q75": 0.010141532354176534
+      },
+      "verhaeltnis_u_zu_u_ohne_T": {
+       "max": 1.022297750008518,
+       "median": 1.0054763172174337,
+       "n": 1674,
+       "q25": 1.00313341055839,
+       "q75": 1.0080339414209747
+      }
+     },
+     "e3b": {
+      "n": 40,
+      "q_Z": {
+       "max": 0.0012456049030363063,
+       "median": 0.000392691404331112,
+       "n": 40,
+       "q25": 0.0002338962624669389,
+       "q75": 0.0007378734471116387
+      },
+      "u_q_Z": {
+       "max": 0.0004175840658630316,
+       "median": 0.00030018954807242693,
+       "n": 40,
+       "q25": 0.00027787424337572686,
+       "q75": 0.0003423444204286751
+      },
+      "u_q_Z_ohne_T": {
+       "max": 0.0004175861994167143,
+       "median": 0.0003001862755421253,
+       "n": 40,
+       "q25": 0.00027787732525151273,
+       "q75": 0.0003423372218043639
+      },
+      "verhaeltnis_u_zu_u_ohne_T": {
+       "max": 1.0000559655875703,
+       "median": 1.000010536928338,
+       "n": 40,
+       "q25": 0.9999891223937506,
+       "q75": 1.0000265284439267
+      }
+     },
+     "schwellen": {
+      "phase_grad": 0.1,
+      "q_tol": 0.00058
+     }
+    },
+    "vergleich": {
+     "auffällig": {
+      "aenderung": 0.0,
+      "alt": {
+       "mc_se": 0.0,
+       "nenner": 40,
+       "rate": 0.0,
+       "zaehler": 0
+      },
+      "neu": {
+       "mc_se": 0.0,
+       "nenner": 40,
+       "rate": 0.0,
+       "zaehler": 0
+      }
+     },
+     "ohne dreiwertige Bewertung": {
+      "aenderung": 0.0,
+      "alt": {
+       "mc_se": 0.0,
+       "nenner": 40,
+       "rate": 0.0,
+       "zaehler": 0
+      },
+      "neu": {
+       "mc_se": 0.0,
+       "nenner": 40,
+       "rate": 0.0,
+       "zaehler": 0
+      }
+     },
+     "unauffällig": {
+      "aenderung": 0.0,
+      "alt": {
+       "mc_se": 0.05645794895318108,
+       "nenner": 40,
+       "rate": 0.15,
+       "zaehler": 6
+      },
+      "neu": {
+       "mc_se": 0.05645794895318108,
+       "nenner": 40,
+       "rate": 0.15,
+       "zaehler": 6
+      }
+     },
+     "unbestimmt": {
+      "aenderung": 0.0,
+      "alt": {
+       "mc_se": 0.05645794895318108,
+       "nenner": 40,
+       "rate": 0.85,
+       "zaehler": 34
+      },
+      "neu": {
+       "mc_se": 0.05645794895318108,
+       "nenner": 40,
+       "rate": 0.85,
+       "zaehler": 34
+      }
+     }
+    },
+    "werkzeug8": "A4",
+    "werkzeug8_meta": "übergeben",
+    "werkzeug8_sha256": "d4465b57a7e7b6ba6a6b075c187fa38041e6afefcb756c3852ca7f9517209b3c"
+   },
+   "H03-phase/L1": {
+    "alte_lesart": {
+     "auffällig": {
+      "mc_se": 0.0,
+      "nenner": 30,
+      "rate": 1.0,
+      "zaehler": 30
+     },
+     "ohne dreiwertige Bewertung": {
+      "mc_se": 0.0,
+      "nenner": 30,
+      "rate": 0.0,
+      "zaehler": 0
+     },
+     "unauffällig": {
+      "mc_se": 0.0,
+      "nenner": 30,
+      "rate": 0.0,
+      "zaehler": 0
+     },
+     "unbestimmt": {
+      "mc_se": 0.0,
+      "nenner": 30,
+      "rate": 0.0,
+      "zaehler": 0
+     }
+    },
+    "alte_lesart_gleich_alt": true,
+    "auftrag": "E3-H03-phase-L1",
+    "bestimmende_pruefgroessen": {
+     "auffällig": {
+      "beide": 30
+     },
+     "unbestimmt": {}
+    },
+    "gegenprobe_regel": {
+     "geprueft": 30,
+     "gleich": 30
+    },
+    "kontrollen": {
+     "alle_gleich": true,
+     "raten": {
+      "Abbruch S1_kandidaten": {
+       "alt": {
+        "mc_se": 0.08073734277593311,
+        "nenner": 30,
+        "rate": 0.7333333333333333,
+        "zaehler": 22
+       },
+       "gleich": true,
+       "neu": {
+        "mc_se": 0.08073734277593311,
+        "nenner": 30,
+        "rate": 0.7333333333333333,
+        "zaehler": 22
+       }
+      },
+      "Abbruch S2": {
+       "alt": {
+        "mc_se": 0.0,
+        "nenner": 30,
+        "rate": 0.0,
+        "zaehler": 0
+       },
+       "gleich": true,
+       "neu": {
+        "mc_se": 0.0,
+        "nenner": 30,
+        "rate": 0.0,
+        "zaehler": 0
+       }
+      },
+      "Abbruch S4": {
+       "alt": {
+        "mc_se": 0.0,
+        "nenner": 30,
+        "rate": 0.0,
+        "zaehler": 0
+       },
+       "gleich": true,
+       "neu": {
+        "mc_se": 0.0,
+        "nenner": 30,
+        "rate": 0.0,
+        "zaehler": 0
+       }
+      },
+      "H1 und H2 bestätigt": {
+       "alt": {
+        "mc_se": 0.07302967433402215,
+        "nenner": 30,
+        "rate": 0.8,
+        "zaehler": 24
+       },
+       "gleich": true,
+       "neu": {
+        "mc_se": 0.07302967433402215,
+        "nenner": 30,
+        "rate": 0.8,
+        "zaehler": 24
+       }
+      },
+      "H1: bestätigt": {
+       "alt": {
+        "mc_se": 0.07302967433402215,
+        "nenner": 30,
+        "rate": 0.8,
+        "zaehler": 24
+       },
+       "gleich": true,
+       "neu": {
+        "mc_se": 0.07302967433402215,
+        "nenner": 30,
+        "rate": 0.8,
+        "zaehler": 24
+       }
+      },
+      "H1: falsifiziert": {
+       "alt": {
+        "mc_se": 0.0,
+        "nenner": 30,
+        "rate": 0.0,
+        "zaehler": 0
+       },
+       "gleich": true,
+       "neu": {
+        "mc_se": 0.0,
+        "nenner": 30,
+        "rate": 0.0,
+        "zaehler": 0
+       }
+      },
+      "H1: nicht entscheidbar": {
+       "alt": {
+        "mc_se": 0.07302967433402216,
+        "nenner": 30,
+        "rate": 0.2,
+        "zaehler": 6
+       },
+       "gleich": true,
+       "neu": {
+        "mc_se": 0.07302967433402216,
+        "nenner": 30,
+        "rate": 0.2,
+        "zaehler": 6
+       }
+      },
+      "H2: bestätigt": {
+       "alt": {
+        "mc_se": 0.06804138174397716,
+        "nenner": 30,
+        "rate": 0.8333333333333334,
+        "zaehler": 25
+       },
+       "gleich": true,
+       "neu": {
+        "mc_se": 0.06804138174397716,
+        "nenner": 30,
+        "rate": 0.8333333333333334,
+        "zaehler": 25
+       }
+      },
+      "H2: falsifiziert": {
+       "alt": {
+        "mc_se": 0.0,
+        "nenner": 30,
+        "rate": 0.0,
+        "zaehler": 0
+       },
+       "gleich": true,
+       "neu": {
+        "mc_se": 0.0,
+        "nenner": 30,
+        "rate": 0.0,
+        "zaehler": 0
+       }
+      },
+      "H2: nicht entscheidbar": {
+       "alt": {
+        "mc_se": 0.06804138174397717,
+        "nenner": 30,
+        "rate": 0.16666666666666666,
+        "zaehler": 5
+       },
+       "gleich": true,
+       "neu": {
+        "mc_se": 0.06804138174397717,
+        "nenner": 30,
+        "rate": 0.16666666666666666,
+        "zaehler": 5
+       }
+      },
+      "ungültig G1": {
+       "alt": {
+        "mc_se": 0.0005276989358328716,
+        "nenner": 18900,
+        "rate": 0.005291005291005291,
+        "zaehler": 100
+       },
+       "gleich": true,
+       "neu": {
+        "mc_se": 0.0005276989358328716,
+        "nenner": 18900,
+        "rate": 0.005291005291005291,
+        "zaehler": 100
+       }
+      },
+      "ungültig G4": {
+       "alt": {
+        "mc_se": 0.0013382608002838559,
+        "nenner": 18900,
+        "rate": 0.03507936507936508,
+        "zaehler": 663
+       },
+       "gleich": true,
+       "neu": {
+        "mc_se": 0.0013382608002838559,
+        "nenner": 18900,
+        "rate": 0.03507936507936508,
+        "zaehler": 663
+       }
+      }
+     },
+     "seeds_gleich_alt": true,
+     "wahrheit": {
+      "alt": "R1",
+      "neu": "R1"
+     }
+    },
+    "laufzeit_s": 77.5,
+    "n": 30,
+    "ohne_dreiwertige_bewertung": {},
+    "raten": {
+     "auffällig": {
+      "mc_se": 0.0,
+      "nenner": 30,
+      "rate": 1.0,
+      "zaehler": 30
+     },
+     "ohne dreiwertige Bewertung": {
+      "mc_se": 0.0,
+      "nenner": 30,
+      "rate": 0.0,
+      "zaehler": 0
+     },
+     "unauffällig": {
+      "mc_se": 0.0,
+      "nenner": 30,
+      "rate": 0.0,
+      "zaehler": 0
+     },
+     "unbestimmt": {
+      "mc_se": 0.0,
+      "nenner": 30,
+      "rate": 0.0,
+      "zaehler": 0
+     }
+    },
+    "rolle": "pruefung",
+    "seed_basis": 20261016,
+    "seeds_sha256": "0ddfe1b3857b98e28cdd221aeef2d807b7e198bb4cf9c9ae3be8d181030e2b98",
+    "t_ziehungen": {
+     "B": [
+      1000
+     ],
+     "anteil_w_gespiegelt": {
+      "max": 0.0,
+      "median": 0.0,
+      "n": 30,
+      "q25": 0.0,
+      "q75": 0.0
+     },
+     "format": {
+      "e3_T_unsicherheit-0.1": 30
+     },
+     "gruende_unzulaessig": {},
+     "kampagnen_mit_unzulaessigen": {
+      "mc_se": 0.0,
+      "nenner": 30,
+      "rate": 0.0,
+      "zaehler": 0
+     },
+     "kampagnen_mit_ziehungen": {
+      "mc_se": 0.0,
+      "nenner": 30,
+      "rate": 1.0,
+      "zaehler": 30
+     },
+     "modell": {
+      "e3_T-0.2": 30
+     },
+     "naeherungen": {
+      "Kette → (f_n, ζ) linear über die Verschiebungen je Störrichtung der Kette aus P0.4 (Neuanpassung bei 1σ, kovarianz_kette = Σ d·dᵀ): gemeinsame Ziehung ohne Doppelzählung, gültig für kleine Kettenunsicherheiten": 30,
+      "Parameterziehungen normalverteilt mit den Kovarianzen der Anpassungen; je Replikat ein Parametersatz für alle Konfigurationen und beide Harmonischen": 30,
+      "Tiefpassparameter w der Kette wie in der H3-Fortpflanzung betragsgespiegelt (|w|); Anteil berichtet": 30,
+      "getrennte Kalibriermessungen ohne Kreuzkovarianz im Format (P0.1-Laststellen, Brückenanpassung je Kanal, statistischer Anteil von P0.4) werden als unabhängig gezogen; ein gemeinsamer Fehler aller Kanäle (gleicher Faktor aller Zellen) hebt sich in den relativen Modulphasen auf, kanalweise verschiedene gemeinsame Ursachen deckt das nicht ab": 30
+     },
+     "nicht_gezogen": {
+      "Kippmoden: im T-Modell nicht enthalten (Modellgrenze, A2.7)": 30,
+      "Modullagen (Konstruktion, module_nominal_m) als bekannt angenommen wie in A2.7; keine Unsicherheit im Kalibrierformat": 30
+     },
+     "ohne_ziehungen": {},
+     "unvollstaendig": {},
+     "unzulaessige_ziehungen": {
+      "mc_se": 0.0,
+      "nenner": 30000,
+      "rate": 0.0,
+      "zaehler": 0
+     }
+    },
+    "unsicherheit": {
+     "e3a": {
+      "abs_delta_phi_grad": {
+       "max": 0.5313322853289151,
+       "median": 0.25384282525438095,
+       "n": 1246,
+       "q25": 0.006698449532692052,
+       "q75": 0.5007392034053879
+      },
+      "n_pruefgroessen": 1246,
+      "u_grad": {
+       "max": 0.013359656563313586,
+       "median": 0.009259666406327444,
+       "n": 1246,
+       "q25": 0.008493402437874498,
+       "q75": 0.010115025379364293
+      },
+      "u_ohne_T_grad": {
+       "max": 0.0132767828146348,
+       "median": 0.009206172368269117,
+       "n": 1246,
+       "q25": 0.008432878520792367,
+       "q75": 0.010066937293010192
+      },
+      "verhaeltnis_u_zu_u_ohne_T": {
+       "max": 1.0201989153398068,
+       "median": 1.0057288837855185,
+       "n": 1246,
+       "q25": 1.003364989579245,
+       "q75": 1.0085215976005555
+      }
+     },
+     "e3b": {
+      "n": 30,
+      "q_Z": {
+       "max": 0.00394262948191617,
+       "median": 0.0030304292323966413,
+       "n": 30,
+       "q25": 0.0028745532238009302,
+       "q75": 0.0032979740549909974
+      },
+      "u_q_Z": {
+       "max": 0.00043910649904350106,
+       "median": 0.000382240272650772,
+       "n": 30,
+       "q25": 0.0003479109807280695,
+       "q75": 0.0003942656904526003
+      },
+      "u_q_Z_ohne_T": {
+       "max": 0.00043910745803596646,
+       "median": 0.00038224173567038915,
+       "n": 30,
+       "q25": 0.0003479097980884805,
+       "q75": 0.0003942665619202044
+      },
+      "verhaeltnis_u_zu_u_ohne_T": {
+       "max": 1.0000100047029783,
+       "median": 0.9999989220706162,
+       "n": 30,
+       "q25": 0.9999975384757137,
+       "q75": 1.0000025474610625
+      }
+     },
+     "schwellen": {
+      "phase_grad": 0.1,
+      "q_tol": 0.00058
+     }
+    },
+    "vergleich": {
+     "auffällig": {
+      "aenderung": 0.0,
+      "alt": {
+       "mc_se": 0.0,
+       "nenner": 30,
+       "rate": 1.0,
+       "zaehler": 30
+      },
+      "neu": {
+       "mc_se": 0.0,
+       "nenner": 30,
+       "rate": 1.0,
+       "zaehler": 30
+      }
+     },
+     "ohne dreiwertige Bewertung": {
+      "aenderung": 0.0,
+      "alt": {
+       "mc_se": 0.0,
+       "nenner": 30,
+       "rate": 0.0,
+       "zaehler": 0
+      },
+      "neu": {
+       "mc_se": 0.0,
+       "nenner": 30,
+       "rate": 0.0,
+       "zaehler": 0
+      }
+     },
+     "unauffällig": {
+      "aenderung": 0.0,
+      "alt": {
+       "mc_se": 0.0,
+       "nenner": 30,
+       "rate": 0.0,
+       "zaehler": 0
+      },
+      "neu": {
+       "mc_se": 0.0,
+       "nenner": 30,
+       "rate": 0.0,
+       "zaehler": 0
+      }
+     },
+     "unbestimmt": {
+      "aenderung": 0.0,
+      "alt": {
+       "mc_se": 0.0,
+       "nenner": 30,
+       "rate": 0.0,
+       "zaehler": 0
+      },
+      "neu": {
+       "mc_se": 0.0,
+       "nenner": 30,
+       "rate": 0.0,
+       "zaehler": 0
+      }
+     }
+    },
+    "werkzeug8": "V1-G0",
+    "werkzeug8_meta": "übergeben",
+    "werkzeug8_sha256": "8f0286d58a6c6982850b0c26cc78c65715927a353438de744737e1a1eedf2076"
+   },
+   "N01-A4/L0": {
+    "alte_lesart": {
+     "auffällig": {
+      "mc_se": 0.0,
+      "nenner": 40,
+      "rate": 0.0,
+      "zaehler": 0
+     },
+     "ohne dreiwertige Bewertung": {
+      "mc_se": 0.0,
+      "nenner": 40,
+      "rate": 0.0,
+      "zaehler": 0
+     },
+     "unauffällig": {
+      "mc_se": 0.0,
+      "nenner": 40,
+      "rate": 1.0,
+      "zaehler": 40
+     },
+     "unbestimmt": {
+      "mc_se": 0.0,
+      "nenner": 40,
+      "rate": 0.0,
+      "zaehler": 0
+     }
+    },
+    "alte_lesart_gleich_alt": true,
+    "auftrag": "E3-N01-A4-L0",
+    "bestimmende_pruefgroessen": {
+     "auffällig": {},
+     "unbestimmt": {}
+    },
+    "gegenprobe_regel": {
+     "geprueft": 40,
+     "gleich": 40
+    },
+    "kontrollen": {
+     "alle_gleich": true,
+     "raten": {
+      "Abbruch S1_kandidaten": {
+       "alt": {
+        "mc_se": 0.06007807420348958,
+        "nenner": 40,
+        "rate": 0.825,
+        "zaehler": 33
+       },
+       "gleich": true,
+       "neu": {
+        "mc_se": 0.06007807420348958,
+        "nenner": 40,
+        "rate": 0.825,
+        "zaehler": 33
+       }
+      },
+      "Abbruch S2": {
+       "alt": {
+        "mc_se": 0.0,
+        "nenner": 40,
+        "rate": 0.0,
+        "zaehler": 0
+       },
+       "gleich": true,
+       "neu": {
+        "mc_se": 0.0,
+        "nenner": 40,
+        "rate": 0.0,
+        "zaehler": 0
+       }
+      },
+      "Abbruch S4": {
+       "alt": {
+        "mc_se": 0.0,
+        "nenner": 40,
+        "rate": 0.0,
+        "zaehler": 0
+       },
+       "gleich": true,
+       "neu": {
+        "mc_se": 0.0,
+        "nenner": 40,
+        "rate": 0.0,
+        "zaehler": 0
+       }
+      },
+      "H1 und H2 bestätigt": {
+       "alt": {
+        "mc_se": 0.041645828122394195,
+        "nenner": 40,
+        "rate": 0.925,
+        "zaehler": 37
+       },
+       "gleich": true,
+       "neu": {
+        "mc_se": 0.041645828122394195,
+        "nenner": 40,
+        "rate": 0.925,
+        "zaehler": 37
+       }
+      },
+      "H1: bestätigt": {
+       "alt": {
+        "mc_se": 0.041645828122394195,
+        "nenner": 40,
+        "rate": 0.925,
+        "zaehler": 37
+       },
+       "gleich": true,
+       "neu": {
+        "mc_se": 0.041645828122394195,
+        "nenner": 40,
+        "rate": 0.925,
+        "zaehler": 37
+       }
+      },
+      "H1: falsifiziert": {
+       "alt": {
+        "mc_se": 0.0,
+        "nenner": 40,
+        "rate": 0.0,
+        "zaehler": 0
+       },
+       "gleich": true,
+       "neu": {
+        "mc_se": 0.0,
+        "nenner": 40,
+        "rate": 0.0,
+        "zaehler": 0
+       }
+      },
+      "H1: nicht entscheidbar": {
+       "alt": {
+        "mc_se": 0.04164582812239421,
+        "nenner": 40,
+        "rate": 0.075,
+        "zaehler": 3
+       },
+       "gleich": true,
+       "neu": {
+        "mc_se": 0.04164582812239421,
+        "nenner": 40,
+        "rate": 0.075,
+        "zaehler": 3
+       }
+      },
+      "H2: bestätigt": {
+       "alt": {
+        "mc_se": 0.041645828122394195,
+        "nenner": 40,
+        "rate": 0.925,
+        "zaehler": 37
+       },
+       "gleich": true,
+       "neu": {
+        "mc_se": 0.041645828122394195,
+        "nenner": 40,
+        "rate": 0.925,
+        "zaehler": 37
+       }
+      },
+      "H2: falsifiziert": {
+       "alt": {
+        "mc_se": 0.0,
+        "nenner": 40,
+        "rate": 0.0,
+        "zaehler": 0
+       },
+       "gleich": true,
+       "neu": {
+        "mc_se": 0.0,
+        "nenner": 40,
+        "rate": 0.0,
+        "zaehler": 0
+       }
+      },
+      "H2: nicht entscheidbar": {
+       "alt": {
+        "mc_se": 0.04164582812239421,
+        "nenner": 40,
+        "rate": 0.075,
+        "zaehler": 3
+       },
+       "gleich": true,
+       "neu": {
+        "mc_se": 0.04164582812239421,
+        "nenner": 40,
+        "rate": 0.075,
+        "zaehler": 3
+       }
+      },
+      "ungültig G1": {
+       "alt": {
+        "mc_se": 0.0005766948179412993,
+        "nenner": 25200,
+        "rate": 0.008452380952380953,
+        "zaehler": 213
+       },
+       "gleich": true,
+       "neu": {
+        "mc_se": 0.0005766948179412993,
+        "nenner": 25200,
+        "rate": 0.008452380952380953,
+        "zaehler": 213
+       }
+      },
+      "ungültig G4": {
+       "alt": {
+        "mc_se": 0.0009236922360931483,
+        "nenner": 25200,
+        "rate": 0.021984126984126984,
+        "zaehler": 554
+       },
+       "gleich": true,
+       "neu": {
+        "mc_se": 0.0009236922360931483,
+        "nenner": 25200,
+        "rate": 0.021984126984126984,
+        "zaehler": 554
+       }
+      }
+     },
+     "seeds_gleich_alt": true,
+     "wahrheit": {
+      "alt": "R0",
+      "neu": "R0"
+     }
+    },
+    "laufzeit_s": 56.0,
+    "n": 40,
+    "ohne_dreiwertige_bewertung": {},
+    "raten": {
+     "auffällig": {
+      "mc_se": 0.0,
+      "nenner": 40,
+      "rate": 0.0,
+      "zaehler": 0
+     },
+     "ohne dreiwertige Bewertung": {
+      "mc_se": 0.0,
+      "nenner": 40,
+      "rate": 0.0,
+      "zaehler": 0
+     },
+     "unauffällig": {
+      "mc_se": 0.0,
+      "nenner": 40,
+      "rate": 1.0,
+      "zaehler": 40
+     },
+     "unbestimmt": {
+      "mc_se": 0.0,
+      "nenner": 40,
+      "rate": 0.0,
+      "zaehler": 0
+     }
+    },
+    "rolle": "pruefung",
+    "seed_basis": 20261016,
+    "seeds_sha256": "c66aea47d59cf237e9f1894facfd25c425b3b09f52d450177a4b951301723637",
+    "t_ziehungen": {
+     "B": [
+      1000
+     ],
+     "anteil_w_gespiegelt": {
+      "max": 0.0,
+      "median": 0.0,
+      "n": 40,
+      "q25": 0.0,
+      "q75": 0.0
+     },
+     "format": {
+      "e3_T_unsicherheit-0.1": 40
+     },
+     "gruende_unzulaessig": {},
+     "kampagnen_mit_unzulaessigen": {
+      "mc_se": 0.0,
+      "nenner": 40,
+      "rate": 0.0,
+      "zaehler": 0
+     },
+     "kampagnen_mit_ziehungen": {
+      "mc_se": 0.0,
+      "nenner": 40,
+      "rate": 1.0,
+      "zaehler": 40
+     },
+     "modell": {
+      "e3_T-0.2": 40
+     },
+     "naeherungen": {
+      "Kette → (f_n, ζ) linear über die Verschiebungen je Störrichtung der Kette aus P0.4 (Neuanpassung bei 1σ, kovarianz_kette = Σ d·dᵀ): gemeinsame Ziehung ohne Doppelzählung, gültig für kleine Kettenunsicherheiten": 40,
+      "Parameterziehungen normalverteilt mit den Kovarianzen der Anpassungen; je Replikat ein Parametersatz für alle Konfigurationen und beide Harmonischen": 40,
+      "Tiefpassparameter w der Kette wie in der H3-Fortpflanzung betragsgespiegelt (|w|); Anteil berichtet": 40,
+      "getrennte Kalibriermessungen ohne Kreuzkovarianz im Format (P0.1-Laststellen, Brückenanpassung je Kanal, statistischer Anteil von P0.4) werden als unabhängig gezogen; ein gemeinsamer Fehler aller Kanäle (gleicher Faktor aller Zellen) hebt sich in den relativen Modulphasen auf, kanalweise verschiedene gemeinsame Ursachen deckt das nicht ab": 40
+     },
+     "nicht_gezogen": {
+      "Kippmoden: im T-Modell nicht enthalten (Modellgrenze, A2.7)": 40,
+      "Modullagen (Konstruktion, module_nominal_m) als bekannt angenommen wie in A2.7; keine Unsicherheit im Kalibrierformat": 40,
+      "f_n, ζ (P0.4 nicht identifizierbar): H(kω) nominal. H ist bei kω ein gemeinsamer komplexer Faktor aller Zellen und Module und hebt sich in E3a (relative Modulphasen) exakt auf; E3b enthält T nicht; die berichteten Amplituden |Ĉⱼ,₁| tragen keine H-Unsicherheit": 40
+     },
+     "ohne_ziehungen": {},
+     "unvollstaendig": {},
+     "unzulaessige_ziehungen": {
+      "mc_se": 0.0,
+      "nenner": 40000,
+      "rate": 0.0,
+      "zaehler": 0
+     }
+    },
+    "unsicherheit": {
+     "e3a": {
+      "abs_delta_phi_grad": {
+       "max": 0.03128298252613604,
+       "median": 0.004720264376857131,
+       "n": 1674,
+       "q25": 0.0021021226217499134,
+       "q75": 0.008398255129861809
+      },
+      "n_pruefgroessen": 1674,
+      "u_grad": {
+       "max": 0.01015128854255199,
+       "median": 0.0068010494456890854,
+       "n": 1674,
+       "q25": 0.006286748825352318,
+       "q75": 0.007316729295367046
+      },
+      "u_ohne_T_grad": {
+       "max": 0.010084524006022232,
+       "median": 0.006722715882119096,
+       "n": 1674,
+       "q25": 0.006203100492221702,
+       "q75": 0.007241605443142157
+      },
+      "verhaeltnis_u_zu_u_ohne_T": {
+       "max": 1.0312078852521236,
+       "median": 1.0110031399437784,
+       "n": 1674,
+       "q25": 1.0079455359316398,
+       "q75": 1.0145172386565477
+      }
+     },
+     "e3b": {
+      "n": 40,
+      "q_Z": {
+       "max": 0.00014273989555869414,
+       "median": 5.7143321311431256e-05,
+       "n": 40,
+       "q25": 4.0690319093999594e-05,
+       "q75": 7.489167033597501e-05
+      },
+      "u_q_Z": {
+       "max": 4.874370668190193e-05,
+       "median": 3.626647665668625e-05,
+       "n": 40,
+       "q25": 3.3314889666971976e-05,
+       "q75": 3.878427197350542e-05
+      },
+      "u_q_Z_ohne_T": {
+       "max": 4.874381490377136e-05,
+       "median": 3.626646609149535e-05,
+       "n": 40,
+       "q25": 3.3314903434164454e-05,
+       "q75": 3.878434979824632e-05
+      },
+      "verhaeltnis_u_zu_u_ohne_T": {
+       "max": 1.0000036253160847,
+       "median": 1.0000002022680636,
+       "n": 40,
+       "q25": 0.9999994181777578,
+       "q75": 1.0000011615631066
+      }
+     },
+     "schwellen": {
+      "phase_grad": 0.1,
+      "q_tol": 0.00058
+     }
+    },
+    "vergleich": {
+     "auffällig": {
+      "aenderung": 0.0,
+      "alt": {
+       "mc_se": 0.0,
+       "nenner": 40,
+       "rate": 0.0,
+       "zaehler": 0
+      },
+      "neu": {
+       "mc_se": 0.0,
+       "nenner": 40,
+       "rate": 0.0,
+       "zaehler": 0
+      }
+     },
+     "ohne dreiwertige Bewertung": {
+      "aenderung": 0.0,
+      "alt": {
+       "mc_se": 0.0,
+       "nenner": 40,
+       "rate": 0.0,
+       "zaehler": 0
+      },
+      "neu": {
+       "mc_se": 0.0,
+       "nenner": 40,
+       "rate": 0.0,
+       "zaehler": 0
+      }
+     },
+     "unauffällig": {
+      "aenderung": 0.0,
+      "alt": {
+       "mc_se": 0.0,
+       "nenner": 40,
+       "rate": 1.0,
+       "zaehler": 40
+      },
+      "neu": {
+       "mc_se": 0.0,
+       "nenner": 40,
+       "rate": 1.0,
+       "zaehler": 40
+      }
+     },
+     "unbestimmt": {
+      "aenderung": 0.0,
+      "alt": {
+       "mc_se": 0.0,
+       "nenner": 40,
+       "rate": 0.0,
+       "zaehler": 0
+      },
+      "neu": {
+       "mc_se": 0.0,
+       "nenner": 40,
+       "rate": 0.0,
+       "zaehler": 0
+      }
+     }
+    },
+    "werkzeug8": "testvorgabe",
+    "werkzeug8_meta": "TESTVORGABE",
+    "werkzeug8_sha256": "1bfde4eda0bcc992972fd4928f529cdeb5eeffc4e7bc1300fda5d97279464667"
+   },
+   "N01-A4/L1": {
+    "alte_lesart": {
+     "auffällig": {
+      "mc_se": 0.0,
+      "nenner": 200,
+      "rate": 0.0,
+      "zaehler": 0
+     },
+     "ohne dreiwertige Bewertung": {
+      "mc_se": 0.0,
+      "nenner": 200,
+      "rate": 0.0,
+      "zaehler": 0
+     },
+     "unauffällig": {
+      "mc_se": 0.01804161855266872,
+      "nenner": 200,
+      "rate": 0.07,
+      "zaehler": 14
+     },
+     "unbestimmt": {
+      "mc_se": 0.01804161855266871,
+      "nenner": 200,
+      "rate": 0.93,
+      "zaehler": 186
+     }
+    },
+    "alte_lesart_gleich_alt": true,
+    "auftrag": "E3-N01-A4-L1",
+    "bestimmende_pruefgroessen": {
+     "auffällig": {},
+     "unbestimmt": {
+      "E3b": 186
+     }
+    },
+    "gegenprobe_regel": {
+     "geprueft": 200,
+     "gleich": 200
+    },
+    "kontrollen": {
+     "alle_gleich": true,
+     "kohorte": {
+      "art": "max|z⁰| je Prüfkampagne (Rolle pruefung_c) gegen zmax.pruefung des Altlaufs",
+      "bitgleich": 200,
+      "max_abs_differenz": 0.0,
+      "n": 200,
+      "n_alt": 200,
+      "vollstaendig_gleich": true
+     },
+     "raten": {
+      "Abbruch S1_kandidaten": {
+       "alt": null,
+       "gleich": null,
+       "neu": {
+        "mc_se": 0.024535688292770596,
+        "nenner": 200,
+        "rate": 0.86,
+        "zaehler": 172
+       }
+      },
+      "Abbruch S2": {
+       "alt": null,
+       "gleich": null,
+       "neu": {
+        "mc_se": 0.0,
+        "nenner": 200,
+        "rate": 0.0,
+        "zaehler": 0
+       }
+      },
+      "Abbruch S4": {
+       "alt": null,
+       "gleich": null,
+       "neu": {
+        "mc_se": 0.0,
+        "nenner": 200,
+        "rate": 0.0,
+        "zaehler": 0
+       }
+      },
+      "H1 und H2 bestätigt": {
+       "alt": {
+        "mc_se": 0.012995191418367032,
+        "nenner": 200,
+        "rate": 0.965,
+        "zaehler": 193
+       },
+       "gleich": true,
+       "neu": {
+        "mc_se": 0.012995191418367032,
+        "nenner": 200,
+        "rate": 0.965,
+        "zaehler": 193
+       }
+      },
+      "H1: bestätigt": {
+       "alt": {
+        "mc_se": 0.012995191418367032,
+        "nenner": 200,
+        "rate": 0.965,
+        "zaehler": 193
+       },
+       "gleich": true,
+       "neu": {
+        "mc_se": 0.012995191418367032,
+        "nenner": 200,
+        "rate": 0.965,
+        "zaehler": 193
+       }
+      },
+      "H1: falsifiziert": {
+       "alt": {
+        "mc_se": 0.0,
+        "nenner": 200,
+        "rate": 0.0,
+        "zaehler": 0
+       },
+       "gleich": true,
+       "neu": {
+        "mc_se": 0.0,
+        "nenner": 200,
+        "rate": 0.0,
+        "zaehler": 0
+       }
+      },
+      "H1: nicht entscheidbar": {
+       "alt": {
+        "mc_se": 0.012995191418367026,
+        "nenner": 200,
+        "rate": 0.035,
+        "zaehler": 7
+       },
+       "gleich": true,
+       "neu": {
+        "mc_se": 0.012995191418367026,
+        "nenner": 200,
+        "rate": 0.035,
+        "zaehler": 7
+       }
+      },
+      "H2: bestätigt": {
+       "alt": {
+        "mc_se": 0.012062338081814825,
+        "nenner": 200,
+        "rate": 0.97,
+        "zaehler": 194
+       },
+       "gleich": true,
+       "neu": {
+        "mc_se": 0.012062338081814825,
+        "nenner": 200,
+        "rate": 0.97,
+        "zaehler": 194
+       }
+      },
+      "H2: falsifiziert": {
+       "alt": {
+        "mc_se": 0.0,
+        "nenner": 200,
+        "rate": 0.0,
+        "zaehler": 0
+       },
+       "gleich": true,
+       "neu": {
+        "mc_se": 0.0,
+        "nenner": 200,
+        "rate": 0.0,
+        "zaehler": 0
+       }
+      },
+      "H2: nicht entscheidbar": {
+       "alt": {
+        "mc_se": 0.012062338081814818,
+        "nenner": 200,
+        "rate": 0.03,
+        "zaehler": 6
+       },
+       "gleich": true,
+       "neu": {
+        "mc_se": 0.012062338081814818,
+        "nenner": 200,
+        "rate": 0.03,
+        "zaehler": 6
+       }
+      },
+      "ungültig G1": {
+       "alt": {
+        "mc_se": 0.00021799088452309604,
+        "nenner": 126000,
+        "rate": 0.006023809523809524,
+        "zaehler": 759
+       },
+       "gleich": true,
+       "neu": {
+        "mc_se": 0.00021799088452309604,
+        "nenner": 126000,
+        "rate": 0.006023809523809524,
+        "zaehler": 759
+       }
+      },
+      "ungültig G4": {
+       "alt": {
+        "mc_se": 0.00042514009233375697,
+        "nenner": 126000,
+        "rate": 0.023317460317460317,
+        "zaehler": 2938
+       },
+       "gleich": true,
+       "neu": {
+        "mc_se": 0.00042514009233375697,
+        "nenner": 126000,
+        "rate": 0.023317460317460317,
+        "zaehler": 2938
+       }
+      }
+     },
+     "wahrheit": {
+      "alt": null,
+      "neu": "R0"
+     }
+    },
+    "laufzeit_s": 277.3,
+    "n": 200,
+    "ohne_dreiwertige_bewertung": {},
+    "raten": {
+     "auffällig": {
+      "mc_se": 0.0,
+      "nenner": 200,
+      "rate": 0.0,
+      "zaehler": 0
+     },
+     "ohne dreiwertige Bewertung": {
+      "mc_se": 0.0,
+      "nenner": 200,
+      "rate": 0.0,
+      "zaehler": 0
+     },
+     "unauffällig": {
+      "mc_se": 0.01804161855266872,
+      "nenner": 200,
+      "rate": 0.07,
+      "zaehler": 14
+     },
+     "unbestimmt": {
+      "mc_se": 0.01804161855266871,
+      "nenner": 200,
+      "rate": 0.93,
+      "zaehler": 186
+     }
+    },
+    "rolle": "pruefung_c",
+    "seed_basis": 20261016,
+    "seeds_sha256": "d91f5c22ea6ab0b6705200c4e3516b8ac7d308628b6b12a38498176f38634588",
+    "t_ziehungen": {
+     "B": [
+      1000
+     ],
+     "anteil_w_gespiegelt": {
+      "max": 0.0,
+      "median": 0.0,
+      "n": 200,
+      "q25": 0.0,
+      "q75": 0.0
+     },
+     "format": {
+      "e3_T_unsicherheit-0.1": 200
+     },
+     "gruende_unzulaessig": {},
+     "kampagnen_mit_unzulaessigen": {
+      "mc_se": 0.0,
+      "nenner": 200,
+      "rate": 0.0,
+      "zaehler": 0
+     },
+     "kampagnen_mit_ziehungen": {
+      "mc_se": 0.0,
+      "nenner": 200,
+      "rate": 1.0,
+      "zaehler": 200
+     },
+     "modell": {
+      "e3_T-0.2": 200
+     },
+     "naeherungen": {
+      "Kette → (f_n, ζ) linear über die Verschiebungen je Störrichtung der Kette aus P0.4 (Neuanpassung bei 1σ, kovarianz_kette = Σ d·dᵀ): gemeinsame Ziehung ohne Doppelzählung, gültig für kleine Kettenunsicherheiten": 200,
+      "Parameterziehungen normalverteilt mit den Kovarianzen der Anpassungen; je Replikat ein Parametersatz für alle Konfigurationen und beide Harmonischen": 200,
+      "Tiefpassparameter w der Kette wie in der H3-Fortpflanzung betragsgespiegelt (|w|); Anteil berichtet": 200,
+      "getrennte Kalibriermessungen ohne Kreuzkovarianz im Format (P0.1-Laststellen, Brückenanpassung je Kanal, statistischer Anteil von P0.4) werden als unabhängig gezogen; ein gemeinsamer Fehler aller Kanäle (gleicher Faktor aller Zellen) hebt sich in den relativen Modulphasen auf, kanalweise verschiedene gemeinsame Ursachen deckt das nicht ab": 200
+     },
+     "nicht_gezogen": {
+      "Kippmoden: im T-Modell nicht enthalten (Modellgrenze, A2.7)": 200,
+      "Modullagen (Konstruktion, module_nominal_m) als bekannt angenommen wie in A2.7; keine Unsicherheit im Kalibrierformat": 200,
+      "f_n, ζ (P0.4 nicht identifizierbar): H(kω) nominal. H ist bei kω ein gemeinsamer komplexer Faktor aller Zellen und Module und hebt sich in E3a (relative Modulphasen) exakt auf; E3b enthält T nicht; die berichteten Amplituden |Ĉⱼ,₁| tragen keine H-Unsicherheit": 200
+     },
+     "ohne_ziehungen": {},
+     "unvollstaendig": {},
+     "unzulaessige_ziehungen": {
+      "mc_se": 0.0,
+      "nenner": 200000,
+      "rate": 0.0,
+      "zaehler": 0
+     }
+    },
+    "unsicherheit": {
+     "e3a": {
+      "abs_delta_phi_grad": {
+       "max": 0.03612346641932618,
+       "median": 0.006536090671346528,
+       "n": 8378,
+       "q25": 0.003162011798266917,
+       "q75": 0.010985759675776308
+      },
+      "n_pruefgroessen": 8378,
+      "u_grad": {
+       "max": 0.014724684645118979,
+       "median": 0.009281202039055506,
+       "n": 8378,
+       "q25": 0.008508689467920858,
+       "q75": 0.010130041027851417
+      },
+      "u_ohne_T_grad": {
+       "max": 0.014703524015873553,
+       "median": 0.00923112911248379,
+       "n": 8378,
+       "q25": 0.008447952917548511,
+       "q75": 0.01008367492399595
+      },
+      "verhaeltnis_u_zu_u_ohne_T": {
+       "max": 1.0242985480410578,
+       "median": 1.005743504292653,
+       "n": 8378,
+       "q25": 1.0033821848707152,
+       "q75": 1.0082775871016012
+      }
+     },
+     "e3b": {
+      "n": 200,
+      "q_Z": {
+       "max": 0.0012119078868883155,
+       "median": 0.0004473923357437721,
+       "n": 200,
+       "q25": 0.0003057893887218324,
+       "q75": 0.0006357320458675838
+      },
+      "u_q_Z": {
+       "max": 0.0004213639373842469,
+       "median": 0.0002955044266963274,
+       "n": 200,
+       "q25": 0.0002746079368481617,
+       "q75": 0.0003302317705215834
+      },
+      "u_q_Z_ohne_T": {
+       "max": 0.00042136393813988236,
+       "median": 0.00029550443820262515,
+       "n": 200,
+       "q25": 0.0002746081777164314,
+       "q75": 0.00033023159992309607
+      },
+      "verhaeltnis_u_zu_u_ohne_T": {
+       "max": 1.000003544934955,
+       "median": 1.000000017822428,
+       "n": 200,
+       "q25": 0.9999993570385435,
+       "q75": 1.000000806466218
+      }
+     },
+     "schwellen": {
+      "phase_grad": 0.1,
+      "q_tol": 0.00058
+     }
+    },
+    "vergleich": {
+     "auffällig": {
+      "aenderung": 0.0,
+      "alt": {
+       "mc_se": 0.0,
+       "nenner": 200,
+       "rate": 0.0,
+       "zaehler": 0
+      },
+      "neu": {
+       "mc_se": 0.0,
+       "nenner": 200,
+       "rate": 0.0,
+       "zaehler": 0
+      }
+     },
+     "ohne dreiwertige Bewertung": {
+      "aenderung": 0.0,
+      "alt": {
+       "mc_se": 0.0,
+       "nenner": 200,
+       "rate": 0.0,
+       "zaehler": 0
+      },
+      "neu": {
+       "mc_se": 0.0,
+       "nenner": 200,
+       "rate": 0.0,
+       "zaehler": 0
+      }
+     },
+     "unauffällig": {
+      "aenderung": 0.0,
+      "alt": {
+       "mc_se": 0.01804161855266872,
+       "nenner": 200,
+       "rate": 0.07,
+       "zaehler": 14
+      },
+      "neu": {
+       "mc_se": 0.01804161855266872,
+       "nenner": 200,
+       "rate": 0.07,
+       "zaehler": 14
+      }
+     },
+     "unbestimmt": {
+      "aenderung": 0.0,
+      "alt": {
+       "mc_se": 0.01804161855266871,
+       "nenner": 200,
+       "rate": 0.93,
+       "zaehler": 186
+      },
+      "neu": {
+       "mc_se": 0.01804161855266871,
+       "nenner": 200,
+       "rate": 0.93,
+       "zaehler": 186
+      }
+     }
+    },
+    "werkzeug8": "A4",
+    "werkzeug8_meta": "übergeben",
+    "werkzeug8_sha256": "d4465b57a7e7b6ba6a6b075c187fa38041e6afefcb756c3852ca7f9517209b3c"
+   },
+   "N01-A4/L2": {
+    "alte_lesart": {
+     "auffällig": {
+      "mc_se": 0.0,
+      "nenner": 40,
+      "rate": 0.0,
+      "zaehler": 0
+     },
+     "ohne dreiwertige Bewertung": {
+      "mc_se": 0.0,
+      "nenner": 40,
+      "rate": 0.0,
+      "zaehler": 0
+     },
+     "unauffällig": {
+      "mc_se": 0.0,
+      "nenner": 40,
+      "rate": 0.0,
+      "zaehler": 0
+     },
+     "unbestimmt": {
+      "mc_se": 0.0,
+      "nenner": 40,
+      "rate": 1.0,
+      "zaehler": 40
+     }
+    },
+    "alte_lesart_gleich_alt": true,
+    "auftrag": "E3-N01-A4-L2",
+    "bestimmende_pruefgroessen": {
+     "auffällig": {},
+     "unbestimmt": {
+      "E3b": 2,
+      "beide": 38
+     }
+    },
+    "gegenprobe_regel": {
+     "geprueft": 40,
+     "gleich": 40
+    },
+    "kontrollen": {
+     "alle_gleich": true,
+     "raten": {
+      "Abbruch S1_kandidaten": {
+       "alt": {
+        "mc_se": 0.06007807420348958,
+        "nenner": 40,
+        "rate": 0.825,
+        "zaehler": 33
+       },
+       "gleich": true,
+       "neu": {
+        "mc_se": 0.06007807420348958,
+        "nenner": 40,
+        "rate": 0.825,
+        "zaehler": 33
+       }
+      },
+      "Abbruch S2": {
+       "alt": {
+        "mc_se": 0.0,
+        "nenner": 40,
+        "rate": 0.0,
+        "zaehler": 0
+       },
+       "gleich": true,
+       "neu": {
+        "mc_se": 0.0,
+        "nenner": 40,
+        "rate": 0.0,
+        "zaehler": 0
+       }
+      },
+      "Abbruch S4": {
+       "alt": {
+        "mc_se": 0.0,
+        "nenner": 40,
+        "rate": 0.0,
+        "zaehler": 0
+       },
+       "gleich": true,
+       "neu": {
+        "mc_se": 0.0,
+        "nenner": 40,
+        "rate": 0.0,
+        "zaehler": 0
+       }
+      },
+      "H1 und H2 bestätigt": {
+       "alt": {
+        "mc_se": 0.03446012188022557,
+        "nenner": 40,
+        "rate": 0.95,
+        "zaehler": 38
+       },
+       "gleich": true,
+       "neu": {
+        "mc_se": 0.03446012188022557,
+        "nenner": 40,
+        "rate": 0.95,
+        "zaehler": 38
+       }
+      },
+      "H1: bestätigt": {
+       "alt": {
+        "mc_se": 0.03446012188022557,
+        "nenner": 40,
+        "rate": 0.95,
+        "zaehler": 38
+       },
+       "gleich": true,
+       "neu": {
+        "mc_se": 0.03446012188022557,
+        "nenner": 40,
+        "rate": 0.95,
+        "zaehler": 38
+       }
+      },
+      "H1: falsifiziert": {
+       "alt": {
+        "mc_se": 0.0,
+        "nenner": 40,
+        "rate": 0.0,
+        "zaehler": 0
+       },
+       "gleich": true,
+       "neu": {
+        "mc_se": 0.0,
+        "nenner": 40,
+        "rate": 0.0,
+        "zaehler": 0
+       }
+      },
+      "H1: nicht entscheidbar": {
+       "alt": {
+        "mc_se": 0.034460121880225555,
+        "nenner": 40,
+        "rate": 0.05,
+        "zaehler": 2
+       },
+       "gleich": true,
+       "neu": {
+        "mc_se": 0.034460121880225555,
+        "nenner": 40,
+        "rate": 0.05,
+        "zaehler": 2
+       }
+      },
+      "H2: bestätigt": {
+       "alt": {
+        "mc_se": 0.03446012188022557,
+        "nenner": 40,
+        "rate": 0.95,
+        "zaehler": 38
+       },
+       "gleich": true,
+       "neu": {
+        "mc_se": 0.03446012188022557,
+        "nenner": 40,
+        "rate": 0.95,
+        "zaehler": 38
+       }
+      },
+      "H2: falsifiziert": {
+       "alt": {
+        "mc_se": 0.0,
+        "nenner": 40,
+        "rate": 0.0,
+        "zaehler": 0
+       },
+       "gleich": true,
+       "neu": {
+        "mc_se": 0.0,
+        "nenner": 40,
+        "rate": 0.0,
+        "zaehler": 0
+       }
+      },
+      "H2: nicht entscheidbar": {
+       "alt": {
+        "mc_se": 0.034460121880225555,
+        "nenner": 40,
+        "rate": 0.05,
+        "zaehler": 2
+       },
+       "gleich": true,
+       "neu": {
+        "mc_se": 0.034460121880225555,
+        "nenner": 40,
+        "rate": 0.05,
+        "zaehler": 2
+       }
+      },
+      "ungültig G1": {
+       "alt": {
+        "mc_se": 0.0004972356265047447,
+        "nenner": 25200,
+        "rate": 0.00626984126984127,
+        "zaehler": 158
+       },
+       "gleich": true,
+       "neu": {
+        "mc_se": 0.0004972356265047447,
+        "nenner": 25200,
+        "rate": 0.00626984126984127,
+        "zaehler": 158
+       }
+      },
+      "ungültig G4": {
+       "alt": {
+        "mc_se": 0.0009064022193723616,
+        "nenner": 25200,
+        "rate": 0.02115079365079365,
+        "zaehler": 533
+       },
+       "gleich": true,
+       "neu": {
+        "mc_se": 0.0009064022193723616,
+        "nenner": 25200,
+        "rate": 0.02115079365079365,
+        "zaehler": 533
+       }
+      }
+     },
+     "seeds_gleich_alt": true,
+     "wahrheit": {
+      "alt": "R0",
+      "neu": "R0"
+     }
+    },
+    "laufzeit_s": 55.4,
+    "n": 40,
+    "ohne_dreiwertige_bewertung": {},
+    "raten": {
+     "auffällig": {
+      "mc_se": 0.0,
+      "nenner": 40,
+      "rate": 0.0,
+      "zaehler": 0
+     },
+     "ohne dreiwertige Bewertung": {
+      "mc_se": 0.0,
+      "nenner": 40,
+      "rate": 0.0,
+      "zaehler": 0
+     },
+     "unauffällig": {
+      "mc_se": 0.0,
+      "nenner": 40,
+      "rate": 0.0,
+      "zaehler": 0
+     },
+     "unbestimmt": {
+      "mc_se": 0.0,
+      "nenner": 40,
+      "rate": 1.0,
+      "zaehler": 40
+     }
+    },
+    "rolle": "pruefung",
+    "seed_basis": 20261016,
+    "seeds_sha256": "fcb7424debd441247630741725c3e44cd0dddb8b3fa674efc4d90eadcd6bdf1c",
+    "t_ziehungen": {
+     "B": [
+      1000
+     ],
+     "anteil_w_gespiegelt": {
+      "max": 0.0,
+      "median": 0.0,
+      "n": 40,
+      "q25": 0.0,
+      "q75": 0.0
+     },
+     "format": {
+      "e3_T_unsicherheit-0.1": 40
+     },
+     "gruende_unzulaessig": {},
+     "kampagnen_mit_unzulaessigen": {
+      "mc_se": 0.0,
+      "nenner": 40,
+      "rate": 0.0,
+      "zaehler": 0
+     },
+     "kampagnen_mit_ziehungen": {
+      "mc_se": 0.0,
+      "nenner": 40,
+      "rate": 1.0,
+      "zaehler": 40
+     },
+     "modell": {
+      "e3_T-0.2": 40
+     },
+     "naeherungen": {
+      "Kette → (f_n, ζ) linear über die Verschiebungen je Störrichtung der Kette aus P0.4 (Neuanpassung bei 1σ, kovarianz_kette = Σ d·dᵀ): gemeinsame Ziehung ohne Doppelzählung, gültig für kleine Kettenunsicherheiten": 40,
+      "Parameterziehungen normalverteilt mit den Kovarianzen der Anpassungen; je Replikat ein Parametersatz für alle Konfigurationen und beide Harmonischen": 40,
+      "Tiefpassparameter w der Kette wie in der H3-Fortpflanzung betragsgespiegelt (|w|); Anteil berichtet": 40,
+      "getrennte Kalibriermessungen ohne Kreuzkovarianz im Format (P0.1-Laststellen, Brückenanpassung je Kanal, statistischer Anteil von P0.4) werden als unabhängig gezogen; ein gemeinsamer Fehler aller Kanäle (gleicher Faktor aller Zellen) hebt sich in den relativen Modulphasen auf, kanalweise verschiedene gemeinsame Ursachen deckt das nicht ab": 40
+     },
+     "nicht_gezogen": {
+      "Kippmoden: im T-Modell nicht enthalten (Modellgrenze, A2.7)": 40,
+      "Modullagen (Konstruktion, module_nominal_m) als bekannt angenommen wie in A2.7; keine Unsicherheit im Kalibrierformat": 40,
+      "f_n, ζ (P0.4 nicht identifizierbar): H(kω) nominal. H ist bei kω ein gemeinsamer komplexer Faktor aller Zellen und Module und hebt sich in E3a (relative Modulphasen) exakt auf; E3b enthält T nicht; die berichteten Amplituden |Ĉⱼ,₁| tragen keine H-Unsicherheit": 40
+     },
+     "ohne_ziehungen": {},
+     "unvollstaendig": {},
+     "unzulaessige_ziehungen": {
+      "mc_se": 0.0,
+      "nenner": 40000,
+      "rate": 0.0,
+      "zaehler": 0
+     }
+    },
+    "unsicherheit": {
+     "e3a": {
+      "abs_delta_phi_grad": {
+       "max": 0.11150131267712027,
+       "median": 0.019461401827172153,
+       "n": 1676,
+       "q25": 0.009326458840128282,
+       "q75": 0.03314375850149531
+      },
+      "n_pruefgroessen": 1676,
+      "u_grad": {
+       "max": 0.04346740523559188,
+       "median": 0.028481095955275045,
+       "n": 1676,
+       "q25": 0.025635758079912446,
+       "q75": 0.03129068810475919
+      },
+      "u_ohne_T_grad": {
+       "max": 0.043465896899054786,
+       "median": 0.028457004981390272,
+       "n": 1676,
+       "q25": 0.025629606541159908,
+       "q75": 0.03126944667409682
+      },
+      "verhaeltnis_u_zu_u_ohne_T": {
+       "max": 1.0083103925743944,
+       "median": 1.000630280763637,
+       "n": 1676,
+       "q25": 0.9999188198607216,
+       "q75": 1.0013829258084601
+      }
+     },
+     "e3b": {
+      "n": 40,
+      "q_Z": {
+       "max": 0.0028640571758256806,
+       "median": 0.001484551393765464,
+       "n": 40,
+       "q25": 0.0009315582654255744,
+       "q75": 0.0022053519441789446
+      },
+      "u_q_Z": {
+       "max": 0.0012885367182936154,
+       "median": 0.0010030591537176967,
+       "n": 40,
+       "q25": 0.0009194087941618381,
+       "q75": 0.0010874527113007514
+      },
+      "u_q_Z_ohne_T": {
+       "max": 0.0012885366629641743,
+       "median": 0.0010030579678397913,
+       "n": 40,
+       "q25": 0.0009194093953404388,
+       "q75": 0.0010874521284013647
+      },
+      "verhaeltnis_u_zu_u_ohne_T": {
+       "max": 1.000002634958472,
+       "median": 1.0000000032009706,
+       "n": 40,
+       "q25": 0.9999992458509868,
+       "q75": 1.0000007470053984
+      }
+     },
+     "schwellen": {
+      "phase_grad": 0.1,
+      "q_tol": 0.00058
+     }
+    },
+    "vergleich": {
+     "auffällig": {
+      "aenderung": 0.0,
+      "alt": {
+       "mc_se": 0.0,
+       "nenner": 40,
+       "rate": 0.0,
+       "zaehler": 0
+      },
+      "neu": {
+       "mc_se": 0.0,
+       "nenner": 40,
+       "rate": 0.0,
+       "zaehler": 0
+      }
+     },
+     "ohne dreiwertige Bewertung": {
+      "aenderung": 0.0,
+      "alt": {
+       "mc_se": 0.0,
+       "nenner": 40,
+       "rate": 0.0,
+       "zaehler": 0
+      },
+      "neu": {
+       "mc_se": 0.0,
+       "nenner": 40,
+       "rate": 0.0,
+       "zaehler": 0
+      }
+     },
+     "unauffällig": {
+      "aenderung": 0.0,
+      "alt": {
+       "mc_se": 0.0,
+       "nenner": 40,
+       "rate": 0.0,
+       "zaehler": 0
+      },
+      "neu": {
+       "mc_se": 0.0,
+       "nenner": 40,
+       "rate": 0.0,
+       "zaehler": 0
+      }
+     },
+     "unbestimmt": {
+      "aenderung": 0.0,
+      "alt": {
+       "mc_se": 0.0,
+       "nenner": 40,
+       "rate": 1.0,
+       "zaehler": 40
+      },
+      "neu": {
+       "mc_se": 0.0,
+       "nenner": 40,
+       "rate": 1.0,
+       "zaehler": 40
+      }
+     }
+    },
+    "werkzeug8": "testvorgabe",
+    "werkzeug8_meta": "TESTVORGABE",
+    "werkzeug8_sha256": "1bfde4eda0bcc992972fd4928f529cdeb5eeffc4e7bc1300fda5d97279464667"
+   },
+   "N01-A4/L4": {
+    "alte_lesart": {
+     "auffällig": {
+      "mc_se": 0.04164582812239421,
+      "nenner": 40,
+      "rate": 0.075,
+      "zaehler": 3
+     },
+     "ohne dreiwertige Bewertung": {
+      "mc_se": 0.0,
+      "nenner": 40,
+      "rate": 0.0,
+      "zaehler": 0
+     },
+     "unauffällig": {
+      "mc_se": 0.0,
+      "nenner": 40,
+      "rate": 0.0,
+      "zaehler": 0
+     },
+     "unbestimmt": {
+      "mc_se": 0.041645828122394195,
+      "nenner": 40,
+      "rate": 0.925,
+      "zaehler": 37
+     }
+    },
+    "alte_lesart_gleich_alt": true,
+    "auftrag": "E3-N01-A4-L4",
+    "bestimmende_pruefgroessen": {
+     "auffällig": {
+      "E3a": 1,
+      "E3b": 2
+     },
+     "unbestimmt": {
+      "beide": 37
+     }
+    },
+    "gegenprobe_regel": {
+     "geprueft": 40,
+     "gleich": 40
+    },
+    "kontrollen": {
+     "alle_gleich": true,
+     "raten": {
+      "Abbruch S1_kandidaten": {
+       "alt": {
+        "mc_se": 0.07060010623221469,
+        "nenner": 40,
+        "rate": 0.725,
+        "zaehler": 29
+       },
+       "gleich": true,
+       "neu": {
+        "mc_se": 0.07060010623221469,
+        "nenner": 40,
+        "rate": 0.725,
+        "zaehler": 29
+       }
+      },
+      "Abbruch S2": {
+       "alt": {
+        "mc_se": 0.0,
+        "nenner": 40,
+        "rate": 0.0,
+        "zaehler": 0
+       },
+       "gleich": true,
+       "neu": {
+        "mc_se": 0.0,
+        "nenner": 40,
+        "rate": 0.0,
+        "zaehler": 0
+       }
+      },
+      "Abbruch S4": {
+       "alt": {
+        "mc_se": 0.0,
+        "nenner": 40,
+        "rate": 0.0,
+        "zaehler": 0
+       },
+       "gleich": true,
+       "neu": {
+        "mc_se": 0.0,
+        "nenner": 40,
+        "rate": 0.0,
+        "zaehler": 0
+       }
+      },
+      "H1 und H2 bestätigt": {
+       "alt": {
+        "mc_se": 0.0,
+        "nenner": 40,
+        "rate": 0.0,
+        "zaehler": 0
+       },
+       "gleich": true,
+       "neu": {
+        "mc_se": 0.0,
+        "nenner": 40,
+        "rate": 0.0,
+        "zaehler": 0
+       }
+      },
+      "H1: bestätigt": {
+       "alt": {
+        "mc_se": 0.0,
+        "nenner": 40,
+        "rate": 1.0,
+        "zaehler": 40
+       },
+       "gleich": true,
+       "neu": {
+        "mc_se": 0.0,
+        "nenner": 40,
+        "rate": 1.0,
+        "zaehler": 40
+       }
+      },
+      "H1: falsifiziert": {
+       "alt": {
+        "mc_se": 0.0,
+        "nenner": 40,
+        "rate": 0.0,
+        "zaehler": 0
+       },
+       "gleich": true,
+       "neu": {
+        "mc_se": 0.0,
+        "nenner": 40,
+        "rate": 0.0,
+        "zaehler": 0
+       }
+      },
+      "H1: nicht entscheidbar": {
+       "alt": {
+        "mc_se": 0.0,
+        "nenner": 40,
+        "rate": 0.0,
+        "zaehler": 0
+       },
+       "gleich": true,
+       "neu": {
+        "mc_se": 0.0,
+        "nenner": 40,
+        "rate": 0.0,
+        "zaehler": 0
+       }
+      },
+      "H2: bestätigt": {
+       "alt": {
+        "mc_se": 0.0,
+        "nenner": 40,
+        "rate": 0.0,
+        "zaehler": 0
+       },
+       "gleich": true,
+       "neu": {
+        "mc_se": 0.0,
+        "nenner": 40,
+        "rate": 0.0,
+        "zaehler": 0
+       }
+      },
+      "H2: falsifiziert": {
+       "alt": {
+        "mc_se": 0.0,
+        "nenner": 40,
+        "rate": 0.0,
+        "zaehler": 0
+       },
+       "gleich": true,
+       "neu": {
+        "mc_se": 0.0,
+        "nenner": 40,
+        "rate": 0.0,
+        "zaehler": 0
+       }
+      },
+      "H2: nicht entscheidbar": {
+       "alt": {
+        "mc_se": 0.0,
+        "nenner": 40,
+        "rate": 1.0,
+        "zaehler": 40
+       },
+       "gleich": true,
+       "neu": {
+        "mc_se": 0.0,
+        "nenner": 40,
+        "rate": 1.0,
+        "zaehler": 40
+       }
+      },
+      "ungültig G1": {
+       "alt": {
+        "mc_se": 0.00045643211040523335,
+        "nenner": 25200,
+        "rate": 0.005277777777777778,
+        "zaehler": 133
+       },
+       "gleich": true,
+       "neu": {
+        "mc_se": 0.00045643211040523335,
+        "nenner": 25200,
+        "rate": 0.005277777777777778,
+        "zaehler": 133
+       }
+      },
+      "ungültig G4": {
+       "alt": {
+        "mc_se": 0.0007009754796530774,
+        "nenner": 25200,
+        "rate": 0.01253968253968254,
+        "zaehler": 316
+       },
+       "gleich": true,
+       "neu": {
+        "mc_se": 0.0007009754796530774,
+        "nenner": 25200,
+        "rate": 0.01253968253968254,
+        "zaehler": 316
+       }
+      }
+     },
+     "seeds_gleich_alt": true,
+     "wahrheit": {
+      "alt": "R0",
+      "neu": "R0"
+     }
+    },
+    "laufzeit_s": 59.6,
+    "n": 40,
+    "ohne_dreiwertige_bewertung": {},
+    "raten": {
+     "auffällig": {
+      "mc_se": 0.04164582812239421,
+      "nenner": 40,
+      "rate": 0.075,
+      "zaehler": 3
+     },
+     "ohne dreiwertige Bewertung": {
+      "mc_se": 0.0,
+      "nenner": 40,
+      "rate": 0.0,
+      "zaehler": 0
+     },
+     "unauffällig": {
+      "mc_se": 0.0,
+      "nenner": 40,
+      "rate": 0.0,
+      "zaehler": 0
+     },
+     "unbestimmt": {
+      "mc_se": 0.041645828122394195,
+      "nenner": 40,
+      "rate": 0.925,
+      "zaehler": 37
+     }
+    },
+    "rolle": "pruefung",
+    "seed_basis": 20261016,
+    "seeds_sha256": "8a5954a1e75931a12c415343dd9cd95373b7a0c4e45ffbc87b92822078bff4e0",
+    "t_ziehungen": {
+     "B": [
+      1000
+     ],
+     "anteil_w_gespiegelt": {
+      "max": 0.0,
+      "median": 0.0,
+      "n": 40,
+      "q25": 0.0,
+      "q75": 0.0
+     },
+     "format": {
+      "e3_T_unsicherheit-0.1": 40
+     },
+     "gruende_unzulaessig": {},
+     "kampagnen_mit_unzulaessigen": {
+      "mc_se": 0.0,
+      "nenner": 40,
+      "rate": 0.0,
+      "zaehler": 0
+     },
+     "kampagnen_mit_ziehungen": {
+      "mc_se": 0.0,
+      "nenner": 40,
+      "rate": 1.0,
+      "zaehler": 40
+     },
+     "modell": {
+      "e3_T-0.2": 40
+     },
+     "naeherungen": {
+      "Kette → (f_n, ζ) linear über die Verschiebungen je Störrichtung der Kette aus P0.4 (Neuanpassung bei 1σ, kovarianz_kette = Σ d·dᵀ): gemeinsame Ziehung ohne Doppelzählung, gültig für kleine Kettenunsicherheiten": 40,
+      "Parameterziehungen normalverteilt mit den Kovarianzen der Anpassungen; je Replikat ein Parametersatz für alle Konfigurationen und beide Harmonischen": 40,
+      "Tiefpassparameter w der Kette wie in der H3-Fortpflanzung betragsgespiegelt (|w|); Anteil berichtet": 40,
+      "getrennte Kalibriermessungen ohne Kreuzkovarianz im Format (P0.1-Laststellen, Brückenanpassung je Kanal, statistischer Anteil von P0.4) werden als unabhängig gezogen; ein gemeinsamer Fehler aller Kanäle (gleicher Faktor aller Zellen) hebt sich in den relativen Modulphasen auf, kanalweise verschiedene gemeinsame Ursachen deckt das nicht ab": 40
+     },
+     "nicht_gezogen": {
+      "Kippmoden: im T-Modell nicht enthalten (Modellgrenze, A2.7)": 40,
+      "Modullagen (Konstruktion, module_nominal_m) als bekannt angenommen wie in A2.7; keine Unsicherheit im Kalibrierformat": 40,
+      "f_n, ζ (P0.4 nicht identifizierbar): H(kω) nominal. H ist bei kω ein gemeinsamer komplexer Faktor aller Zellen und Module und hebt sich in E3a (relative Modulphasen) exakt auf; E3b enthält T nicht; die berichteten Amplituden |Ĉⱼ,₁| tragen keine H-Unsicherheit": 40
+     },
+     "ohne_ziehungen": {},
+     "unvollstaendig": {},
+     "unzulaessige_ziehungen": {
+      "mc_se": 0.0,
+      "nenner": 40000,
+      "rate": 0.0,
+      "zaehler": 0
+     }
+    },
+    "unsicherheit": {
+     "e3a": {
+      "abs_delta_phi_grad": {
+       "max": 0.6492367398576562,
+       "median": 0.12462079959787786,
+       "n": 1680,
+       "q25": 0.05713334884580945,
+       "q75": 0.20211588054903018
+      },
+      "n_pruefgroessen": 1680,
+      "u_grad": {
+       "max": 0.2835512034952375,
+       "median": 0.16911197174401418,
+       "n": 1680,
+       "q25": 0.1511225458347768,
+       "q75": 0.18620470067908806
+      },
+      "u_ohne_T_grad": {
+       "max": 0.28356530697778615,
+       "median": 0.1691078911007218,
+       "n": 1680,
+       "q25": 0.1510925297379419,
+       "q75": 0.18621587622920216
+      },
+      "verhaeltnis_u_zu_u_ohne_T": {
+       "max": 1.0007464107442356,
+       "median": 1.000019280463928,
+       "n": 1680,
+       "q25": 0.9998825504100011,
+       "q75": 1.0001477891151371
+      }
+     },
+     "e3b": {
+      "n": 40,
+      "q_Z": {
+       "max": 0.024267873157272992,
+       "median": 0.00938185078225375,
+       "n": 40,
+       "q25": 0.006060450835436473,
+       "q75": 0.012168684295074023
+      },
+      "u_q_Z": {
+       "max": 0.0077235165524608615,
+       "median": 0.006136497205361462,
+       "n": 40,
+       "q25": 0.005552786589563858,
+       "q75": 0.006510384003062443
+      },
+      "u_q_Z_ohne_T": {
+       "max": 0.007723519184460547,
+       "median": 0.00613649569104943,
+       "n": 40,
+       "q25": 0.005552785418052663,
+       "q75": 0.006510382909287494
+      },
+      "verhaeltnis_u_zu_u_ohne_T": {
+       "max": 1.0000031053619716,
+       "median": 0.999999889668346,
+       "n": 40,
+       "q25": 0.9999991804359845,
+       "q75": 1.000000496213412
+      }
+     },
+     "schwellen": {
+      "phase_grad": 0.1,
+      "q_tol": 0.00058
+     }
+    },
+    "vergleich": {
+     "auffällig": {
+      "aenderung": 0.0,
+      "alt": {
+       "mc_se": 0.04164582812239421,
+       "nenner": 40,
+       "rate": 0.075,
+       "zaehler": 3
+      },
+      "neu": {
+       "mc_se": 0.04164582812239421,
+       "nenner": 40,
+       "rate": 0.075,
+       "zaehler": 3
+      }
+     },
+     "ohne dreiwertige Bewertung": {
+      "aenderung": 0.0,
+      "alt": {
+       "mc_se": 0.0,
+       "nenner": 40,
+       "rate": 0.0,
+       "zaehler": 0
+      },
+      "neu": {
+       "mc_se": 0.0,
+       "nenner": 40,
+       "rate": 0.0,
+       "zaehler": 0
+      }
+     },
+     "unauffällig": {
+      "aenderung": 0.0,
+      "alt": {
+       "mc_se": 0.0,
+       "nenner": 40,
+       "rate": 0.0,
+       "zaehler": 0
+      },
+      "neu": {
+       "mc_se": 0.0,
+       "nenner": 40,
+       "rate": 0.0,
+       "zaehler": 0
+      }
+     },
+     "unbestimmt": {
+      "aenderung": 0.0,
+      "alt": {
+       "mc_se": 0.041645828122394195,
+       "nenner": 40,
+       "rate": 0.925,
+       "zaehler": 37
+      },
+      "neu": {
+       "mc_se": 0.041645828122394195,
+       "nenner": 40,
+       "rate": 0.925,
+       "zaehler": 37
+      }
+     }
+    },
+    "werkzeug8": "testvorgabe",
+    "werkzeug8_meta": "TESTVORGABE",
+    "werkzeug8_sha256": "1bfde4eda0bcc992972fd4928f529cdeb5eeffc4e7bc1300fda5d97279464667"
+   },
+   "N03-N3bindet/L1": {
+    "alte_lesart": {
+     "auffällig": {
+      "mc_se": 0.0,
+      "nenner": 40,
+      "rate": 0.0,
+      "zaehler": 0
+     },
+     "ohne dreiwertige Bewertung": {
+      "mc_se": 0.0,
+      "nenner": 40,
+      "rate": 0.0,
+      "zaehler": 0
+     },
+     "unauffällig": {
+      "mc_se": 0.0,
+      "nenner": 40,
+      "rate": 1.0,
+      "zaehler": 40
+     },
+     "unbestimmt": {
+      "mc_se": 0.0,
+      "nenner": 40,
+      "rate": 0.0,
+      "zaehler": 0
+     }
+    },
+    "alte_lesart_gleich_alt": true,
+    "auftrag": "E3-N03-N3bindet-L1",
+    "bestimmende_pruefgroessen": {
+     "auffällig": {},
+     "unbestimmt": {}
+    },
+    "gegenprobe_regel": {
+     "geprueft": 40,
+     "gleich": 40
+    },
+    "kontrollen": {
+     "alle_gleich": true,
+     "raten": {
+      "Abbruch S1_kandidaten": {
+       "alt": {
+        "mc_se": 0.06324555320336758,
+        "nenner": 40,
+        "rate": 0.8,
+        "zaehler": 32
+       },
+       "gleich": true,
+       "neu": {
+        "mc_se": 0.06324555320336758,
+        "nenner": 40,
+        "rate": 0.8,
+        "zaehler": 32
+       }
+      },
+      "Abbruch S2": {
+       "alt": {
+        "mc_se": 0.0,
+        "nenner": 40,
+        "rate": 0.0,
+        "zaehler": 0
+       },
+       "gleich": true,
+       "neu": {
+        "mc_se": 0.0,
+        "nenner": 40,
+        "rate": 0.0,
+        "zaehler": 0
+       }
+      },
+      "Abbruch S4": {
+       "alt": {
+        "mc_se": 0.0,
+        "nenner": 40,
+        "rate": 0.0,
+        "zaehler": 0
+       },
+       "gleich": true,
+       "neu": {
+        "mc_se": 0.0,
+        "nenner": 40,
+        "rate": 0.0,
+        "zaehler": 0
+       }
+      },
+      "H1 und H2 bestätigt": {
+       "alt": {
+        "mc_se": 0.0,
+        "nenner": 40,
+        "rate": 1.0,
+        "zaehler": 40
+       },
+       "gleich": true,
+       "neu": {
+        "mc_se": 0.0,
+        "nenner": 40,
+        "rate": 1.0,
+        "zaehler": 40
+       }
+      },
+      "H1: bestätigt": {
+       "alt": {
+        "mc_se": 0.0,
+        "nenner": 40,
+        "rate": 1.0,
+        "zaehler": 40
+       },
+       "gleich": true,
+       "neu": {
+        "mc_se": 0.0,
+        "nenner": 40,
+        "rate": 1.0,
+        "zaehler": 40
+       }
+      },
+      "H1: falsifiziert": {
+       "alt": {
+        "mc_se": 0.0,
+        "nenner": 40,
+        "rate": 0.0,
+        "zaehler": 0
+       },
+       "gleich": true,
+       "neu": {
+        "mc_se": 0.0,
+        "nenner": 40,
+        "rate": 0.0,
+        "zaehler": 0
+       }
+      },
+      "H1: nicht entscheidbar": {
+       "alt": {
+        "mc_se": 0.0,
+        "nenner": 40,
+        "rate": 0.0,
+        "zaehler": 0
+       },
+       "gleich": true,
+       "neu": {
+        "mc_se": 0.0,
+        "nenner": 40,
+        "rate": 0.0,
+        "zaehler": 0
+       }
+      },
+      "H2: bestätigt": {
+       "alt": {
+        "mc_se": 0.0,
+        "nenner": 40,
+        "rate": 1.0,
+        "zaehler": 40
+       },
+       "gleich": true,
+       "neu": {
+        "mc_se": 0.0,
+        "nenner": 40,
+        "rate": 1.0,
+        "zaehler": 40
+       }
+      },
+      "H2: falsifiziert": {
+       "alt": {
+        "mc_se": 0.0,
+        "nenner": 40,
+        "rate": 0.0,
+        "zaehler": 0
+       },
+       "gleich": true,
+       "neu": {
+        "mc_se": 0.0,
+        "nenner": 40,
+        "rate": 0.0,
+        "zaehler": 0
+       }
+      },
+      "H2: nicht entscheidbar": {
+       "alt": {
+        "mc_se": 0.0,
+        "nenner": 40,
+        "rate": 0.0,
+        "zaehler": 0
+       },
+       "gleich": true,
+       "neu": {
+        "mc_se": 0.0,
+        "nenner": 40,
+        "rate": 0.0,
+        "zaehler": 0
+       }
+      },
+      "ungültig G1": {
+       "alt": {
+        "mc_se": 0.00046152351538834055,
+        "nenner": 25200,
+        "rate": 0.005396825396825397,
+        "zaehler": 136
+       },
+       "gleich": true,
+       "neu": {
+        "mc_se": 0.00046152351538834055,
+        "nenner": 25200,
+        "rate": 0.005396825396825397,
+        "zaehler": 136
+       }
+      },
+      "ungültig G4": {
+       "alt": {
+        "mc_se": 0.0006292402662395505,
+        "nenner": 25200,
+        "rate": 0.010079365079365079,
+        "zaehler": 254
+       },
+       "gleich": true,
+       "neu": {
+        "mc_se": 0.0006292402662395505,
+        "nenner": 25200,
+        "rate": 0.010079365079365079,
+        "zaehler": 254
+       }
+      }
+     },
+     "seeds_gleich_alt": true,
+     "wahrheit": {
+      "alt": "R0",
+      "neu": "R0"
+     }
+    },
+    "laufzeit_s": 84.0,
+    "n": 40,
+    "ohne_dreiwertige_bewertung": {},
+    "raten": {
+     "auffällig": {
+      "mc_se": 0.0,
+      "nenner": 40,
+      "rate": 0.0,
+      "zaehler": 0
+     },
+     "ohne dreiwertige Bewertung": {
+      "mc_se": 0.0,
+      "nenner": 40,
+      "rate": 0.0,
+      "zaehler": 0
+     },
+     "unauffällig": {
+      "mc_se": 0.0,
+      "nenner": 40,
+      "rate": 1.0,
+      "zaehler": 40
+     },
+     "unbestimmt": {
+      "mc_se": 0.0,
+      "nenner": 40,
+      "rate": 0.0,
+      "zaehler": 0
+     }
+    },
+    "rolle": "pruefung",
+    "seed_basis": 20261016,
+    "seeds_sha256": "c2717db187e1aead0bcc099f768234fe671dcce01c5cff530d621631c6d3697b",
+    "t_ziehungen": {
+     "B": [
+      1000
+     ],
+     "anteil_w_gespiegelt": {
+      "max": 0.0,
+      "median": 0.0,
+      "n": 40,
+      "q25": 0.0,
+      "q75": 0.0
+     },
+     "format": {
+      "e3_T_unsicherheit-0.1": 40
+     },
+     "gruende_unzulaessig": {},
+     "kampagnen_mit_unzulaessigen": {
+      "mc_se": 0.0,
+      "nenner": 40,
+      "rate": 0.0,
+      "zaehler": 0
+     },
+     "kampagnen_mit_ziehungen": {
+      "mc_se": 0.0,
+      "nenner": 40,
+      "rate": 1.0,
+      "zaehler": 40
+     },
+     "modell": {
+      "e3_T-0.2": 40
+     },
+     "naeherungen": {
+      "Kette → (f_n, ζ) linear über die Verschiebungen je Störrichtung der Kette aus P0.4 (Neuanpassung bei 1σ, kovarianz_kette = Σ d·dᵀ): gemeinsame Ziehung ohne Doppelzählung, gültig für kleine Kettenunsicherheiten": 40,
+      "Parameterziehungen normalverteilt mit den Kovarianzen der Anpassungen; je Replikat ein Parametersatz für alle Konfigurationen und beide Harmonischen": 40,
+      "Tiefpassparameter w der Kette wie in der H3-Fortpflanzung betragsgespiegelt (|w|); Anteil berichtet": 40,
+      "getrennte Kalibriermessungen ohne Kreuzkovarianz im Format (P0.1-Laststellen, Brückenanpassung je Kanal, statistischer Anteil von P0.4) werden als unabhängig gezogen; ein gemeinsamer Fehler aller Kanäle (gleicher Faktor aller Zellen) hebt sich in den relativen Modulphasen auf, kanalweise verschiedene gemeinsame Ursachen deckt das nicht ab": 40
+     },
+     "nicht_gezogen": {
+      "Kippmoden: im T-Modell nicht enthalten (Modellgrenze, A2.7)": 40,
+      "Modullagen (Konstruktion, module_nominal_m) als bekannt angenommen wie in A2.7; keine Unsicherheit im Kalibrierformat": 40,
+      "f_n, ζ (P0.4 nicht identifizierbar): H(kω) nominal. H ist bei kω ein gemeinsamer komplexer Faktor aller Zellen und Module und hebt sich in E3a (relative Modulphasen) exakt auf; E3b enthält T nicht; die berichteten Amplituden |Ĉⱼ,₁| tragen keine H-Unsicherheit": 40
+     },
+     "ohne_ziehungen": {},
+     "unvollstaendig": {},
+     "unzulaessige_ziehungen": {
+      "mc_se": 0.0,
+      "nenner": 40000,
+      "rate": 0.0,
+      "zaehler": 0
+     }
+    },
+    "unsicherheit": {
+     "e3a": {
+      "abs_delta_phi_grad": {
+       "max": 0.030640483040315303,
+       "median": 0.006302253855920981,
+       "n": 1680,
+       "q25": 0.0029647357635553817,
+       "q75": 0.010391648596637992
+      },
+      "n_pruefgroessen": 1680,
+      "u_grad": {
+       "max": 0.01287889498644472,
+       "median": 0.008782628376150403,
+       "n": 1680,
+       "q25": 0.008015026562351523,
+       "q75": 0.009500260187382436
+      },
+      "u_ohne_T_grad": {
+       "max": 0.012917305959467912,
+       "median": 0.008730928488375294,
+       "n": 1680,
+       "q25": 0.007969503869500103,
+       "q75": 0.009444084129881071
+      },
+      "verhaeltnis_u_zu_u_ohne_T": {
+       "max": 1.0242536362417736,
+       "median": 1.0062067494171527,
+       "n": 1680,
+       "q25": 1.003561636523838,
+       "q75": 1.0088639841148563
+      }
+     },
+     "e3b": {
+      "n": 40,
+      "q_Z": {
+       "max": 0.000284075093347681,
+       "median": 0.00011418521020464174,
+       "n": 40,
+       "q25": 7.527578016837213e-05,
+       "q75": 0.0001729447832051752
+      },
+      "u_q_Z": {
+       "max": 9.85727822297525e-05,
+       "median": 7.868777390683013e-05,
+       "n": 40,
+       "q25": 7.200329442855945e-05,
+       "q75": 8.579171346299451e-05
+      },
+      "u_q_Z_ohne_T": {
+       "max": 9.857286099117486e-05,
+       "median": 7.868777072275961e-05,
+       "n": 40,
+       "q25": 7.200336937411258e-05,
+       "q75": 8.57918185197115e-05
+      },
+      "verhaeltnis_u_zu_u_ohne_T": {
+       "max": 1.0000024055360042,
+       "median": 0.9999997651621391,
+       "n": 40,
+       "q25": 0.9999993436430445,
+       "q75": 1.0000007851738464
+      }
+     },
+     "schwellen": {
+      "phase_grad": 0.1,
+      "q_tol": 0.00058
+     }
+    },
+    "vergleich": {
+     "auffällig": {
+      "aenderung": 0.0,
+      "alt": {
+       "mc_se": 0.0,
+       "nenner": 40,
+       "rate": 0.0,
+       "zaehler": 0
+      },
+      "neu": {
+       "mc_se": 0.0,
+       "nenner": 40,
+       "rate": 0.0,
+       "zaehler": 0
+      }
+     },
+     "ohne dreiwertige Bewertung": {
+      "aenderung": 0.0,
+      "alt": {
+       "mc_se": 0.0,
+       "nenner": 40,
+       "rate": 0.0,
+       "zaehler": 0
+      },
+      "neu": {
+       "mc_se": 0.0,
+       "nenner": 40,
+       "rate": 0.0,
+       "zaehler": 0
+      }
+     },
+     "unauffällig": {
+      "aenderung": 0.0,
+      "alt": {
+       "mc_se": 0.0,
+       "nenner": 40,
+       "rate": 1.0,
+       "zaehler": 40
+      },
+      "neu": {
+       "mc_se": 0.0,
+       "nenner": 40,
+       "rate": 1.0,
+       "zaehler": 40
+      }
+     },
+     "unbestimmt": {
+      "aenderung": 0.0,
+      "alt": {
+       "mc_se": 0.0,
+       "nenner": 40,
+       "rate": 0.0,
+       "zaehler": 0
+      },
+      "neu": {
+       "mc_se": 0.0,
+       "nenner": 40,
+       "rate": 0.0,
+       "zaehler": 0
+      }
+     }
+    },
+    "werkzeug8": "A4",
+    "werkzeug8_meta": "übergeben",
+    "werkzeug8_sha256": "d4465b57a7e7b6ba6a6b075c187fa38041e6afefcb756c3852ca7f9517209b3c"
+   },
+   "N03-ungleich/L1": {
+    "alte_lesart": {
+     "auffällig": {
+      "mc_se": 0.0,
+      "nenner": 40,
+      "rate": 0.0,
+      "zaehler": 0
+     },
+     "ohne dreiwertige Bewertung": {
+      "mc_se": 0.0,
+      "nenner": 40,
+      "rate": 0.0,
+      "zaehler": 0
+     },
+     "unauffällig": {
+      "mc_se": 0.04164582812239421,
+      "nenner": 40,
+      "rate": 0.075,
+      "zaehler": 3
+     },
+     "unbestimmt": {
+      "mc_se": 0.041645828122394195,
+      "nenner": 40,
+      "rate": 0.925,
+      "zaehler": 37
+     }
+    },
+    "alte_lesart_gleich_alt": true,
+    "auftrag": "E3-N03-ungleich-L1",
+    "bestimmende_pruefgroessen": {
+     "auffällig": {},
+     "unbestimmt": {
+      "E3b": 37
+     }
+    },
+    "gegenprobe_regel": {
+     "geprueft": 40,
+     "gleich": 40
+    },
+    "kontrollen": {
+     "alle_gleich": true,
+     "raten": {
+      "Abbruch S1_kandidaten": {
+       "alt": {
+        "mc_se": 0.05229125165837972,
+        "nenner": 40,
+        "rate": 0.875,
+        "zaehler": 35
+       },
+       "gleich": true,
+       "neu": {
+        "mc_se": 0.05229125165837972,
+        "nenner": 40,
+        "rate": 0.875,
+        "zaehler": 35
+       }
+      },
+      "Abbruch S2": {
+       "alt": {
+        "mc_se": 0.0,
+        "nenner": 40,
+        "rate": 0.0,
+        "zaehler": 0
+       },
+       "gleich": true,
+       "neu": {
+        "mc_se": 0.0,
+        "nenner": 40,
+        "rate": 0.0,
+        "zaehler": 0
+       }
+      },
+      "Abbruch S4": {
+       "alt": {
+        "mc_se": 0.0,
+        "nenner": 40,
+        "rate": 0.0,
+        "zaehler": 0
+       },
+       "gleich": true,
+       "neu": {
+        "mc_se": 0.0,
+        "nenner": 40,
+        "rate": 0.0,
+        "zaehler": 0
+       }
+      },
+      "H1 und H2 bestätigt": {
+       "alt": {
+        "mc_se": 0.05645794895318108,
+        "nenner": 40,
+        "rate": 0.85,
+        "zaehler": 34
+       },
+       "gleich": true,
+       "neu": {
+        "mc_se": 0.05645794895318108,
+        "nenner": 40,
+        "rate": 0.85,
+        "zaehler": 34
+       }
+      },
+      "H1: bestätigt": {
+       "alt": {
+        "mc_se": 0.05645794895318108,
+        "nenner": 40,
+        "rate": 0.85,
+        "zaehler": 34
+       },
+       "gleich": true,
+       "neu": {
+        "mc_se": 0.05645794895318108,
+        "nenner": 40,
+        "rate": 0.85,
+        "zaehler": 34
+       }
+      },
+      "H1: falsifiziert": {
+       "alt": {
+        "mc_se": 0.0,
+        "nenner": 40,
+        "rate": 0.0,
+        "zaehler": 0
+       },
+       "gleich": true,
+       "neu": {
+        "mc_se": 0.0,
+        "nenner": 40,
+        "rate": 0.0,
+        "zaehler": 0
+       }
+      },
+      "H1: nicht entscheidbar": {
+       "alt": {
+        "mc_se": 0.05645794895318108,
+        "nenner": 40,
+        "rate": 0.15,
+        "zaehler": 6
+       },
+       "gleich": true,
+       "neu": {
+        "mc_se": 0.05645794895318108,
+        "nenner": 40,
+        "rate": 0.15,
+        "zaehler": 6
+       }
+      },
+      "H2: bestätigt": {
+       "alt": {
+        "mc_se": 0.05645794895318108,
+        "nenner": 40,
+        "rate": 0.85,
+        "zaehler": 34
+       },
+       "gleich": true,
+       "neu": {
+        "mc_se": 0.05645794895318108,
+        "nenner": 40,
+        "rate": 0.85,
+        "zaehler": 34
+       }
+      },
+      "H2: falsifiziert": {
+       "alt": {
+        "mc_se": 0.0,
+        "nenner": 40,
+        "rate": 0.0,
+        "zaehler": 0
+       },
+       "gleich": true,
+       "neu": {
+        "mc_se": 0.0,
+        "nenner": 40,
+        "rate": 0.0,
+        "zaehler": 0
+       }
+      },
+      "H2: nicht entscheidbar": {
+       "alt": {
+        "mc_se": 0.05645794895318108,
+        "nenner": 40,
+        "rate": 0.15,
+        "zaehler": 6
+       },
+       "gleich": true,
+       "neu": {
+        "mc_se": 0.05645794895318108,
+        "nenner": 40,
+        "rate": 0.15,
+        "zaehler": 6
+       }
+      },
+      "ungültig G1": {
+       "alt": {
+        "mc_se": 0.0005095870194197377,
+        "nenner": 25200,
+        "rate": 0.006587301587301587,
+        "zaehler": 166
+       },
+       "gleich": true,
+       "neu": {
+        "mc_se": 0.0005095870194197377,
+        "nenner": 25200,
+        "rate": 0.006587301587301587,
+        "zaehler": 166
+       }
+      },
+      "ungültig G4": {
+       "alt": {
+        "mc_se": 0.0011900678521997586,
+        "nenner": 25200,
+        "rate": 0.03706349206349206,
+        "zaehler": 934
+       },
+       "gleich": true,
+       "neu": {
+        "mc_se": 0.0011900678521997586,
+        "nenner": 25200,
+        "rate": 0.03706349206349206,
+        "zaehler": 934
+       }
+      }
+     },
+     "seeds_gleich_alt": true,
+     "wahrheit": {
+      "alt": "R0",
+      "neu": "R0"
+     }
+    },
+    "laufzeit_s": 99.7,
+    "n": 40,
+    "ohne_dreiwertige_bewertung": {},
+    "raten": {
+     "auffällig": {
+      "mc_se": 0.0,
+      "nenner": 40,
+      "rate": 0.0,
+      "zaehler": 0
+     },
+     "ohne dreiwertige Bewertung": {
+      "mc_se": 0.0,
+      "nenner": 40,
+      "rate": 0.0,
+      "zaehler": 0
+     },
+     "unauffällig": {
+      "mc_se": 0.04164582812239421,
+      "nenner": 40,
+      "rate": 0.075,
+      "zaehler": 3
+     },
+     "unbestimmt": {
+      "mc_se": 0.041645828122394195,
+      "nenner": 40,
+      "rate": 0.925,
+      "zaehler": 37
+     }
+    },
+    "rolle": "pruefung",
+    "seed_basis": 20261016,
+    "seeds_sha256": "cc218990a1945e73c9ed82dc8c1785ad9a41252af96b37f1c081a8ccba279948",
+    "t_ziehungen": {
+     "B": [
+      1000
+     ],
+     "anteil_w_gespiegelt": {
+      "max": 0.0,
+      "median": 0.0,
+      "n": 40,
+      "q25": 0.0,
+      "q75": 0.0
+     },
+     "format": {
+      "e3_T_unsicherheit-0.1": 40
+     },
+     "gruende_unzulaessig": {},
+     "kampagnen_mit_unzulaessigen": {
+      "mc_se": 0.0,
+      "nenner": 40,
+      "rate": 0.0,
+      "zaehler": 0
+     },
+     "kampagnen_mit_ziehungen": {
+      "mc_se": 0.0,
+      "nenner": 40,
+      "rate": 1.0,
+      "zaehler": 40
+     },
+     "modell": {
+      "e3_T-0.2": 40
+     },
+     "naeherungen": {
+      "Kette → (f_n, ζ) linear über die Verschiebungen je Störrichtung der Kette aus P0.4 (Neuanpassung bei 1σ, kovarianz_kette = Σ d·dᵀ): gemeinsame Ziehung ohne Doppelzählung, gültig für kleine Kettenunsicherheiten": 40,
+      "Parameterziehungen normalverteilt mit den Kovarianzen der Anpassungen; je Replikat ein Parametersatz für alle Konfigurationen und beide Harmonischen": 40,
+      "Tiefpassparameter w der Kette wie in der H3-Fortpflanzung betragsgespiegelt (|w|); Anteil berichtet": 40,
+      "getrennte Kalibriermessungen ohne Kreuzkovarianz im Format (P0.1-Laststellen, Brückenanpassung je Kanal, statistischer Anteil von P0.4) werden als unabhängig gezogen; ein gemeinsamer Fehler aller Kanäle (gleicher Faktor aller Zellen) hebt sich in den relativen Modulphasen auf, kanalweise verschiedene gemeinsame Ursachen deckt das nicht ab": 40
+     },
+     "nicht_gezogen": {
+      "Kippmoden: im T-Modell nicht enthalten (Modellgrenze, A2.7)": 40,
+      "Modullagen (Konstruktion, module_nominal_m) als bekannt angenommen wie in A2.7; keine Unsicherheit im Kalibrierformat": 40
+     },
+     "ohne_ziehungen": {},
+     "unvollstaendig": {},
+     "unzulaessige_ziehungen": {
+      "mc_se": 0.0,
+      "nenner": 40000,
+      "rate": 0.0,
+      "zaehler": 0
+     }
+    },
+    "unsicherheit": {
+     "e3a": {
+      "abs_delta_phi_grad": {
+       "max": 0.03428970003807308,
+       "median": 0.006959750561136957,
+       "n": 1662,
+       "q25": 0.003234860073462187,
+       "q75": 0.011681570609027858
+      },
+      "n_pruefgroessen": 1662,
+      "u_grad": {
+       "max": 0.014862220586953127,
+       "median": 0.009396960291218576,
+       "n": 1662,
+       "q25": 0.008541687818167608,
+       "q75": 0.010235523990224524
+      },
+      "u_ohne_T_grad": {
+       "max": 0.01483393733552558,
+       "median": 0.009344671388754833,
+       "n": 1662,
+       "q25": 0.00848799834680374,
+       "q75": 0.010190879264567129
+      },
+      "verhaeltnis_u_zu_u_ohne_T": {
+       "max": 1.0262498785348189,
+       "median": 1.0056821096883193,
+       "n": 1662,
+       "q25": 1.0033434513125212,
+       "q75": 1.0082004035476322
+      }
+     },
+     "e3b": {
+      "n": 40,
+      "q_Z": {
+       "max": 0.0013889245755078444,
+       "median": 0.0005065999368203012,
+       "n": 40,
+       "q25": 0.00032740557707678606,
+       "q75": 0.0006576639680067936
+      },
+      "u_q_Z": {
+       "max": 0.00039787066475114517,
+       "median": 0.00031546071436664553,
+       "n": 40,
+       "q25": 0.00029752573687836565,
+       "q75": 0.00033020643182787586
+      },
+      "u_q_Z_ohne_T": {
+       "max": 0.000397870511147934,
+       "median": 0.0003154599191634588,
+       "n": 40,
+       "q25": 0.0002975256839164524,
+       "q75": 0.0003302065255165016
+      },
+      "verhaeltnis_u_zu_u_ohne_T": {
+       "max": 1.0000042105875344,
+       "median": 0.9999998105942678,
+       "n": 40,
+       "q25": 0.9999994621113992,
+       "q75": 1.0000003238862054
+      }
+     },
+     "schwellen": {
+      "phase_grad": 0.1,
+      "q_tol": 0.00058
+     }
+    },
+    "vergleich": {
+     "auffällig": {
+      "aenderung": 0.0,
+      "alt": {
+       "mc_se": 0.0,
+       "nenner": 40,
+       "rate": 0.0,
+       "zaehler": 0
+      },
+      "neu": {
+       "mc_se": 0.0,
+       "nenner": 40,
+       "rate": 0.0,
+       "zaehler": 0
+      }
+     },
+     "ohne dreiwertige Bewertung": {
+      "aenderung": 0.0,
+      "alt": {
+       "mc_se": 0.0,
+       "nenner": 40,
+       "rate": 0.0,
+       "zaehler": 0
+      },
+      "neu": {
+       "mc_se": 0.0,
+       "nenner": 40,
+       "rate": 0.0,
+       "zaehler": 0
+      }
+     },
+     "unauffällig": {
+      "aenderung": 0.0,
+      "alt": {
+       "mc_se": 0.04164582812239421,
+       "nenner": 40,
+       "rate": 0.075,
+       "zaehler": 3
+      },
+      "neu": {
+       "mc_se": 0.04164582812239421,
+       "nenner": 40,
+       "rate": 0.075,
+       "zaehler": 3
+      }
+     },
+     "unbestimmt": {
+      "aenderung": 0.0,
+      "alt": {
+       "mc_se": 0.041645828122394195,
+       "nenner": 40,
+       "rate": 0.925,
+       "zaehler": 37
+      },
+      "neu": {
+       "mc_se": 0.041645828122394195,
+       "nenner": 40,
+       "rate": 0.925,
+       "zaehler": 37
+      }
+     }
+    },
+    "werkzeug8": "A4",
+    "werkzeug8_meta": "übergeben",
+    "werkzeug8_sha256": "d4465b57a7e7b6ba6a6b075c187fa38041e6afefcb756c3852ca7f9517209b3c"
+   }
+  },
+  "herkunft": {
+   "altlauf": {
+    "code_version": {
+     "git": "7a259efe3f2f9545cd487af3d2ddb8a20a1e8b34",
+     "paket": "0.1.0"
+    },
+    "datei": "pruefstand.json (+ pruefstand.npz), vollständige Ausgabe des Entwicklungsprüfstands vom 16.10.2026; nicht im Repository, im Arbeitsbereich der Sitzung erhalten",
+    "historisch": {
+     "datei": "docs/ap11_ap12_ap13_pruefstand.json",
+     "git_blob": "c0a6afb4e5ee8d7fc2c98984354da3b09b32efe8",
+     "gleich_kompakt_der_quelle": true
+    },
+    "kennung": "SYNTH-PRUEFSTAND-20261016",
+    "npz_sha256": "d1a5700809629f84f6fecfe062d65677c74f315e6c372f4494950b67aed25449",
+    "profil": "ENTW-2026-10+red(bootstrap_B=1000,e3_mc=1000,eps_ctrl_datensaetze=1000,h2_replikate=1000,h3_mc=1000)",
+    "profil_sha256": "49dc74abca52b2c5e4ae8f6d2e1c53dc468205b01b9f65270b86c27e91114352",
+    "sha256": "fdfe9229747408e9ad90b97784550d2bc57edc9151e1a959ac152726c169d468"
+   },
+   "auftrag_sha256": "9bb4216681275d67b4c85584849556fec668a59412472b2d28a179316b2b3f52",
+   "bericht_code": {
+    "git": "fb23ba49188206b97d152530011974c4714e774a",
+    "paket": "0.1.0"
+   },
+   "gemeinsam": {
+    "ausgabe": "/tmp/pcmms-ap13-neulaeufe-20261017",
+    "blas_threads_je_prozess": 1,
+    "hauptstufe": "L1",
+    "n_min": 18,
+    "plan": {
+     "n0": 20,
+     "n_bloecke": 24,
+     "n_pilot": 20
+    },
+    "profil": "ENTW-2026-10",
+    "profil_reduktion": {
+     "bootstrap_B": 1000,
+     "eps_ctrl_datensaetze": 1000,
+     "h3_mc": 1000
+    },
+    "profil_sha256": "49dc74abca52b2c5e4ae8f6d2e1c53dc468205b01b9f65270b86c27e91114352",
+    "prozesse": 4,
+    "seed_basis": 20261016
+   },
+   "profil": "ENTW-2026-10+red(bootstrap_B=1000,e3_mc=1000,eps_ctrl_datensaetze=1000,h2_replikate=1000,h3_mc=1000)",
+   "profil_sha256": "49dc74abca52b2c5e4ae8f6d2e1c53dc468205b01b9f65270b86c27e91114352",
+   "rechen_commit": [
+    "020e1313b1d8e39bd7f77ba0e5295cbf4f132865"
+   ],
+   "rechencode_sha256": [
+    "26dd5867de2186b3683016e71edd009b4ca033252bab2a52c0cbe6e293391e89"
+   ],
+   "umgebung": {
+    "numpy": "2.5.3",
+    "python": "3.13.16",
+    "scipy": "1.18.1"
+   },
+   "werkzeug8": {
+    "A4": {
+     "art": "wiederverwendet",
+     "c_H1": 3.709322110180076,
+     "c_H1Z": 3.8064613614497946,
+     "datei": "docs/ap13_neulaeufe_2026-10-17/werkzeug8_A4",
+     "gepoolt": true,
+     "h2_intervall": {
+      "niveau": 0.95,
+      "typ": "perzentil"
+     },
+     "inhalt_sha256": "d4465b57a7e7b6ba6a6b075c187fa38041e6afefcb756c3852ca7f9517209b3c",
+     "ort_im_altlauf": "schritte.kalibrierung_a4.werkzeug8"
+    },
+    "V1-G0": {
+     "art": "wiederverwendet",
+     "c_H1": 3.658874367687632,
+     "c_H1Z": 3.6703703084165524,
+     "datei": "docs/ap13_neulaeufe_2026-10-17/werkzeug8_V1G0",
+     "gepoolt": false,
+     "h2_intervall": {
+      "niveau": 0.95,
+      "typ": "perzentil"
+     },
+     "inhalt_sha256": "8f0286d58a6c6982850b0c26cc78c65715927a353438de744737e1a1eedf2076",
+     "ort_im_altlauf": "schritte.kalibrierung_v1.V1-G0.werkzeug8"
+    },
+    "testvorgabe": {
+     "art": "Testvorgabe",
+     "aufruf": "werkzeug8=None im Harness (wie im Altversuch)",
+     "datei": "docs/ap13_neulaeufe_2026-10-17/werkzeug8_testvorgabe",
+     "inhalt_sha256": "1bfde4eda0bcc992972fd4928f529cdeb5eeffc4e7bc1300fda5d97279464667"
+    }
+   }
+  },
+  "k12": {
+   "alt": {
+    "kandidaten": [
+     {
+      "N_z": 100,
+      "T_a": null,
+      "T_e": null,
+      "T_lauf_pilot": null,
+      "c_H1": 3.782416066599014,
+      "erfuellt": false,
+      "gemeinsam": {
+       "mc_se": 0.21650635094610965,
+       "nenner": 4,
+       "rate": 0.25,
+       "zaehler": 1
+      },
+      "intervalltyp_H2": "perzentil_0.95",
+      "k": 30,
+      "kappa": 1.0911406901482563,
+      "n0": 20,
+      "n_max": null,
+      "n_min": 18,
+      "p_hat": null,
+      "plan_simuliert": null,
+      "pruefrate_c": 0.0,
+      "reserve_r": 2,
+      "uebersprungen": null
+     },
+     {
+      "N_z": 100,
+      "T_a": null,
+      "T_e": null,
+      "T_lauf_pilot": null,
+      "c_H1": null,
+      "erfuellt": false,
+      "gemeinsam": {
+       "mc_se": 0.0,
+       "nenner": 4,
+       "rate": 0.0,
+       "zaehler": 0
+      },
+      "intervalltyp_H2": "perzentil_0.95",
+      "k": 30,
+      "kappa": 1.0911406901482563,
+      "n0": 20,
+      "n_max": null,
+      "n_min": 24,
+      "p_hat": null,
+      "plan_simuliert": null,
+      "pruefrate_c": null,
+      "reserve_r": 2,
+      "uebersprungen": null
+     },
+     {
+      "N_z": 100,
+      "T_a": null,
+      "T_e": null,
+      "T_lauf_pilot": null,
+      "c_H1": null,
+      "erfuellt": false,
+      "gemeinsam": {
+       "mc_se": 0.0,
+       "nenner": 4,
+       "rate": 0.0,
+       "zaehler": 0
+      },
+      "intervalltyp_H2": null,
+      "k": 29,
+      "kappa": 1.0911406901482563,
+      "n0": 20,
+      "n_max": null,
+      "n_min": 18,
+      "p_hat": null,
+      "plan_simuliert": null,
+      "pruefrate_c": null,
+      "reserve_r": 2,
+      "uebersprungen": null
+     },
+     {
+      "N_z": 100,
+      "T_a": null,
+      "T_e": null,
+      "T_lauf_pilot": null,
+      "c_H1": null,
+      "erfuellt": false,
+      "gemeinsam": {
+       "mc_se": 0.0,
+       "nenner": 4,
+       "rate": 0.0,
+       "zaehler": 0
+      },
+      "intervalltyp_H2": null,
+      "k": 29,
+      "kappa": 1.0911406901482563,
+      "n0": 20,
+      "n_max": null,
+      "n_min": 24,
+      "p_hat": null,
+      "plan_simuliert": null,
+      "pruefrate_c": null,
+      "reserve_r": 2,
+      "uebersprungen": null
+     }
+    ],
+    "plan_simuliert": {
+     "T_lauf_s": 17.0,
+     "herkunft": "Code 7a259ef: plan_basis.mit(n_bloecke=n + r, n0=n0); N_z, T_Lauf und d aus den Vorgaben von kampagne.Plan",
+     "n_zyklen": 100,
+     "tage": 1
+    },
+    "suche": {
+     "ergebnis": "kein zulässiger Arbeitspunkt unter diesen Annahmen",
+     "grund": "kein Paar (k, T_a) erfüllt n = n_min + r ≤ n_max",
+     "reduktion": "keine gekürzten Zusammenfassungen: nur N_z = 100"
+    },
+    "zaehlung": {
+     "aufrufe": 28,
+     "aufrufe_nicht_gerechnet_aufrufgrenze": 26,
+     "aufrufe_ohne_kandidaten_sonst": 0,
+     "aufrufe_simuliert": 2,
+     "kandidaten_nicht_gerechnet_aufrufgrenze": 52,
+     "kandidaten_simuliert": 4,
+     "kandidaten_uebersprungen": 0
+    },
+    "zeit": {
+     "N_I": 0,
+     "N_K": 21,
+     "T_aP": 10.0,
+     "T_ab": 1.0,
+     "T_eP": 4.0,
+     "T_park": 2.0,
+     "T_ramp": 2.0,
+     "T_verfuegbar": 345600.0,
+     "d": 2
+    }
+   },
+   "hinweis": "Je Kandidat 4 Kalibrier- und 4 Prüfkampagnen: Entwicklungsdiagnostik, keine Power-Aussage",
+   "neu": {
+    "fenster": [
+     {
+      "N_z": 100,
+      "T_a_s": 10.0,
+      "T_e_s": 1.0,
+      "T_lauf_s": 16.0,
+      "f_hz": 10.0
+     },
+     {
+      "N_z": 100,
+      "T_a_s": 10.0,
+      "T_e_s": 1.0,
+      "T_lauf_s": 16.0,
+      "f_hz": 10.0
+     }
+    ],
+    "kandidaten": [
+     {
+      "N_z": 100,
+      "T_a": 10.0,
+      "T_e": 1.0,
+      "T_lauf_pilot": 16.0,
+      "c_H1": 2.24145260588557,
+      "erfuellt": false,
+      "gemeinsam": {
+       "mc_se": 0.0,
+       "nenner": 4,
+       "rate": 0.0,
+       "zaehler": 0
+      },
+      "intervalltyp_H2": "perzentil_0.95",
+      "k": 30,
+      "kappa": 1.0911406901482563,
+      "n0": 20,
+      "n_max": 743,
+      "n_min": 18,
+      "p_hat": 0.0,
+      "plan_simuliert": {
+       "T_a_s": 10.0,
+       "T_lauf_s": 16.0,
+       "n0": 20,
+       "n_bloecke": 20,
+       "n_pilot": 20,
+       "n_zyklen": 100,
+       "tage": 2
+      },
+      "pruefrate_c": null,
+      "reserve_r": 2,
+      "uebersprungen": null
+     },
+     {
+      "N_z": 100,
+      "T_a": 10.0,
+      "T_e": 1.0,
+      "T_lauf_pilot": 16.0,
+      "c_H1": 2.8030857820397874,
+      "erfuellt": false,
+      "gemeinsam": {
+       "mc_se": 0.21650635094610965,
+       "nenner": 4,
+       "rate": 0.25,
+       "zaehler": 1
+      },
+      "intervalltyp_H2": "perzentil_0.95",
+      "k": 30,
+      "kappa": 1.0911406901482563,
+      "n0": 20,
+      "n_max": 743,
+      "n_min": 24,
+      "p_hat": 0.0,
+      "plan_simuliert": {
+       "T_a_s": 10.0,
+       "T_lauf_s": 16.0,
+       "n0": 20,
+       "n_bloecke": 26,
+       "n_pilot": 20,
+       "n_zyklen": 100,
+       "tage": 2
+      },
+      "pruefrate_c": 1.0,
+      "reserve_r": 2,
+      "uebersprungen": null
+     },
+     {
+      "N_z": 100,
+      "T_a": 10.0,
+      "T_e": 1.0,
+      "T_lauf_pilot": 16.0,
+      "c_H1": null,
+      "erfuellt": false,
+      "gemeinsam": {
+       "mc_se": 0.0,
+       "nenner": 4,
+       "rate": 0.0,
+       "zaehler": 0
+      },
+      "intervalltyp_H2": "perzentil_0.95",
+      "k": 29,
+      "kappa": 1.0911406901482563,
+      "n0": 20,
+      "n_max": 743,
+      "n_min": 18,
+      "p_hat": 0.0,
+      "plan_simuliert": {
+       "T_a_s": 10.0,
+       "T_lauf_s": 16.0,
+       "n0": 20,
+       "n_bloecke": 20,
+       "n_pilot": 20,
+       "n_zyklen": 100,
+       "tage": 2
+      },
+      "pruefrate_c": null,
+      "reserve_r": 2,
+      "uebersprungen": null
+     },
+     {
+      "N_z": 100,
+      "T_a": 10.0,
+      "T_e": 1.0,
+      "T_lauf_pilot": 16.0,
+      "c_H1": null,
+      "erfuellt": false,
+      "gemeinsam": {
+       "mc_se": 0.0,
+       "nenner": 4,
+       "rate": 0.0,
+       "zaehler": 0
+      },
+      "intervalltyp_H2": "perzentil_0.95",
+      "k": 29,
+      "kappa": 1.0911406901482563,
+      "n0": 20,
+      "n_max": 743,
+      "n_min": 24,
+      "p_hat": 0.0,
+      "plan_simuliert": {
+       "T_a_s": 10.0,
+       "T_lauf_s": 16.0,
+       "n0": 20,
+       "n_bloecke": 26,
+       "n_pilot": 20,
+       "n_zyklen": 100,
+       "tage": 2
+      },
+      "pruefrate_c": null,
+      "reserve_r": 2,
+      "uebersprungen": null
+     }
+    ],
+    "paare": [
+     {
+      "N_z": 100,
+      "T_a": 10.0,
+      "T_e": 1.0,
+      "T_lauf": 16.0,
+      "k": 30,
+      "n_max": 743,
+      "p_hat": 0.0
+     },
+     {
+      "N_z": 100,
+      "T_a": 10.0,
+      "T_e": 1.0,
+      "T_lauf": 16.0,
+      "k": 29,
+      "n_max": 743,
+      "p_hat": 0.0
+     },
+     {
+      "N_z": 100,
+      "T_a": 10.0,
+      "T_e": 1.0,
+      "T_lauf": 16.0,
+      "k": 28,
+      "n_max": 743,
+      "p_hat": 0.0
+     },
+     {
+      "N_z": 100,
+      "T_a": 10.0,
+      "T_e": 1.0,
+      "T_lauf": 16.0,
+      "k": 27,
+      "n_max": 743,
+      "p_hat": 0.0
+     },
+     {
+      "N_z": 100,
+      "T_a": 10.0,
+      "T_e": 1.0,
+      "T_lauf": 16.0,
+      "k": 26,
+      "n_max": 743,
+      "p_hat": 0.0
+     },
+     {
+      "N_z": 100,
+      "T_a": 10.0,
+      "T_e": 1.0,
+      "T_lauf": 16.0,
+      "k": 25,
+      "n_max": 731,
+      "p_hat": 0.016666666666666666
+     },
+     {
+      "N_z": 100,
+      "T_a": 10.0,
+      "T_e": 1.0,
+      "T_lauf": 16.0,
+      "k": 24,
+      "n_max": 731,
+      "p_hat": 0.016666666666666666
+     },
+     {
+      "N_z": 100,
+      "T_a": 10.0,
+      "T_e": 1.0,
+      "T_lauf": 16.0,
+      "k": 23,
+      "n_max": 743,
+      "p_hat": 0.0
+     },
+     {
+      "N_z": 100,
+      "T_a": 10.0,
+      "T_e": 1.0,
+      "T_lauf": 16.0,
+      "k": 22,
+      "n_max": 743,
+      "p_hat": 0.0
+     },
+     {
+      "N_z": 100,
+      "T_a": 10.0,
+      "T_e": 1.0,
+      "T_lauf": 16.0,
+      "k": 21,
+      "n_max": 743,
+      "p_hat": 0.0
+     },
+     {
+      "N_z": 100,
+      "T_a": 10.0,
+      "T_e": 1.0,
+      "T_lauf": 16.0,
+      "k": 20,
+      "n_max": 743,
+      "p_hat": 0.0
+     },
+     {
+      "N_z": 100,
+      "T_a": 10.0,
+      "T_e": 1.0,
+      "T_lauf": 16.0,
+      "k": 19,
+      "n_max": 731,
+      "p_hat": 0.016666666666666666
+     },
+     {
+      "N_z": 100,
+      "T_a": 10.0,
+      "T_e": 1.0,
+      "T_lauf": 16.0,
+      "k": 18,
+      "n_max": 731,
+      "p_hat": 0.016666666666666666
+     },
+     {
+      "N_z": 100,
+      "T_a": 10.0,
+      "T_e": 1.0,
+      "T_lauf": 16.0,
+      "k": 17,
+      "n_max": 731,
+      "p_hat": 0.016666666666666666
+     },
+     {
+      "N_z": 100,
+      "T_a": 10.0,
+      "T_e": 1.0,
+      "T_lauf": 16.0,
+      "k": 16,
+      "n_max": 743,
+      "p_hat": 0.0
+     },
+     {
+      "N_z": 100,
+      "T_a": 10.0,
+      "T_e": 1.0,
+      "T_lauf": 16.0,
+      "k": 15,
+      "n_max": 731,
+      "p_hat": 0.016666666666666666
+     },
+     {
+      "N_z": 100,
+      "T_a": 10.0,
+      "T_e": 1.0,
+      "T_lauf": 16.0,
+      "k": 14,
+      "n_max": 731,
+      "p_hat": 0.016666666666666666
+     },
+     {
+      "N_z": 100,
+      "T_a": 10.0,
+      "T_e": 1.0,
+      "T_lauf": 16.0,
+      "k": 13,
+      "n_max": 731,
+      "p_hat": 0.016666666666666666
+     },
+     {
+      "N_z": 100,
+      "T_a": 10.0,
+      "T_e": 1.0,
+      "T_lauf": 16.0,
+      "k": 12,
+      "n_max": 731,
+      "p_hat": 0.016666666666666666
+     },
+     {
+      "N_z": 100,
+      "T_a": 10.0,
+      "T_e": 1.0,
+      "T_lauf": 16.0,
+      "k": 11,
+      "n_max": 731,
+      "p_hat": 0.016666666666666666
+     },
+     {
+      "N_z": 100,
+      "T_a": 10.0,
+      "T_e": 1.0,
+      "T_lauf": 16.0,
+      "k": 10,
+      "n_max": 731,
+      "p_hat": 0.016666666666666666
+     },
+     {
+      "N_z": 100,
+      "T_a": 10.0,
+      "T_e": 1.0,
+      "T_lauf": 16.0,
+      "k": 9,
+      "n_max": 731,
+      "p_hat": 0.016666666666666666
+     },
+     {
+      "N_z": 100,
+      "T_a": 10.0,
+      "T_e": 1.0,
+      "T_lauf": 16.0,
+      "k": 8,
+      "n_max": 731,
+      "p_hat": 0.016666666666666666
+     },
+     {
+      "N_z": 100,
+      "T_a": 10.0,
+      "T_e": 1.0,
+      "T_lauf": 16.0,
+      "k": 7,
+      "n_max": 743,
+      "p_hat": 0.0
+     },
+     {
+      "N_z": 100,
+      "T_a": 10.0,
+      "T_e": 1.0,
+      "T_lauf": 16.0,
+      "k": 6,
+      "n_max": 731,
+      "p_hat": 0.016666666666666666
+     },
+     {
+      "N_z": 100,
+      "T_a": 10.0,
+      "T_e": 1.0,
+      "T_lauf": 16.0,
+      "k": 5,
+      "n_max": 718,
+      "p_hat": 0.03333333333333333
+     },
+     {
+      "N_z": 100,
+      "T_a": 10.0,
+      "T_e": 1.0,
+      "T_lauf": 16.0,
+      "k": 4,
+      "n_max": 731,
+      "p_hat": 0.016666666666666666
+     },
+     {
+      "N_z": 100,
+      "T_a": 10.0,
+      "T_e": 1.0,
+      "T_lauf": 16.0,
+      "k": 3,
+      "n_max": 731,
+      "p_hat": 0.016666666666666666
+     }
+    ],
+    "suche": {
+     "ergebnis": "kein zulässiger Arbeitspunkt unter diesen Annahmen",
+     "grund": "kein Paar (k, T_a) erfüllt n = n_min + r ≤ n_max",
+     "reduktion": "keine gekürzten Zusammenfassungen: nur N_z = 100"
+    },
+    "zaehlung": {
+     "aufrufe": 28,
+     "aufrufe_nicht_gerechnet_aufrufgrenze": 26,
+     "aufrufe_ohne_kandidaten_sonst": 0,
+     "aufrufe_simuliert": 2,
+     "kandidaten_nicht_gerechnet_aufrufgrenze": 52,
+     "kandidaten_simuliert": 4,
+     "kandidaten_uebersprungen": 0
+    },
+    "zeit": {
+     "N_I": 0,
+     "N_K": 21,
+     "T_aP": 10.0,
+     "T_ab": 1.0,
+     "T_eP": 4.0,
+     "T_park": 2.0,
+     "T_ramp": 2.0,
+     "T_verfuegbar": 345600.0,
+     "d": 2
+    }
+   }
+  },
+  "k19": {
+   "alle_raten_innerhalb_2se_neu": true,
+   "ausgaenge": {
+    "H": [
+     {
+      "H1": "bestätigt",
+      "H1Z": "bestätigt",
+      "H2": "bestätigt",
+      "H4": "bestätigt"
+     },
+     {
+      "H1": "bestätigt",
+      "H1Z": "bestätigt",
+      "H2": "bestätigt",
+      "H4": "bestätigt"
+     },
+     {
+      "H1": "bestätigt",
+      "H1Z": "bestätigt",
+      "H2": "bestätigt",
+      "H4": "bestätigt"
+     },
+     {
+      "H1": "bestätigt",
+      "H1Z": "bestätigt",
+      "H2": "bestätigt",
+      "H4": "bestätigt"
+     }
+    ],
+    "Z": [
+     {
+      "H1": "bestätigt",
+      "H1Z": "bestätigt",
+      "H2": "bestätigt",
+      "H4": "bestätigt"
+     },
+     {
+      "H1": "bestätigt",
+      "H1Z": "bestätigt",
+      "H2": "bestätigt",
+      "H4": "bestätigt"
+     },
+     {
+      "H1": "bestätigt",
+      "H1Z": "bestätigt",
+      "H2": "bestätigt",
+      "H4": "bestätigt"
+     },
+     {
+      "H1": "bestätigt",
+      "H1Z": "bestätigt",
+      "H2": "bestätigt",
+      "H4": "bestätigt"
+     }
+    ]
+   },
+   "gleich_alt": {
+    "H": true,
+    "Z": true
+   },
+   "lesart": "Entwicklungsdiagnostik",
+   "meta": {
+    "code_version": {
+     "git": "020e1313b1d8e39bd7f77ba0e5295cbf4f132865",
+     "paket": "0.1.0"
+    },
+    "n": 4,
+    "n_min": 18,
+    "plan": {
+     "T_lauf": 17.0,
+     "einstellung2": null,
+     "n0": 20,
+     "n_bloecke": 24,
+     "n_pilot": 20,
+     "n_zyklen": 100,
+     "phase_pause": 86400.0,
+     "pruef": [],
+     "pruef_bilder": true,
+     "ref_abstand": 12,
+     "ref_min_p0": 42,
+     "tag_pause": 43200.0,
+     "tage": 1,
+     "zusatz": false
+    },
+    "profil": "ENTW-2026-10+red(bootstrap_B=1000,e3_mc=1000,eps_ctrl_datensaetze=1000,h2_replikate=1000,h3_mc=1000)",
+    "profil_sha256": "49dc74abca52b2c5e4ae8f6d2e1c53dc468205b01b9f65270b86c27e91114352",
+    "seed_ableitung": "zufall.unterseed(Basis, 'ebenen', Szenario, Stufe, i)",
+    "seed_basis": 20261016,
+    "stufe": "L1",
+    "szenario": "N01-A4",
+    "werkzeug8": "A4",
+    "werkzeug8_herkunft": "Kalibriersimulation (AP-13) mit 200 Kampagnen (reduziert: Entwicklungsdiagnostik), Profil ENTW-2026-10+red(bootstrap_B=1000,e3_mc=1000,eps_ctrl_datensaetze=1000,h2_replikate=1000,h3_mc=1000): q95 von max|z⁰| über 147 Tests, n = 387; Prüfrate 0.0933 ± 0.0209 aus 193 vollständigen von 200 Kampagnen; gepooltes Quantil (Prüfrate > 0,069)",
+    "werkzeug8_sha256": "d4465b57a7e7b6ba6a6b075c187fa38041e6afefcb756c3852ca7f9517209b3c"
+   },
+   "n": 4,
+   "raten": {
+    "H1: bestätigt": {
+     "H_alt": {
+      "mc_se": 0.0,
+      "nenner": 4,
+      "rate": 1.0,
+      "zaehler": 4
+     },
+     "H_neu": {
+      "mc_se": 0.0,
+      "nenner": 4,
+      "rate": 1.0,
+      "zaehler": 4
+     },
+     "Z_alt": {
+      "mc_se": 0.0,
+      "nenner": 4,
+      "rate": 1.0,
+      "zaehler": 4
+     },
+     "Z_neu": {
+      "mc_se": 0.0,
+      "nenner": 4,
+      "rate": 1.0,
+      "zaehler": 4
+     },
+     "innerhalb_2se_alt": true,
+     "innerhalb_2se_neu": true
+    },
+    "H1: falsifiziert": {
+     "H_alt": {
+      "mc_se": 0.0,
+      "nenner": 4,
+      "rate": 0.0,
+      "zaehler": 0
+     },
+     "H_neu": {
+      "mc_se": 0.0,
+      "nenner": 4,
+      "rate": 0.0,
+      "zaehler": 0
+     },
+     "Z_alt": {
+      "mc_se": 0.0,
+      "nenner": 4,
+      "rate": 0.0,
+      "zaehler": 0
+     },
+     "Z_neu": {
+      "mc_se": 0.0,
+      "nenner": 4,
+      "rate": 0.0,
+      "zaehler": 0
+     },
+     "innerhalb_2se_alt": true,
+     "innerhalb_2se_neu": true
+    },
+    "H1: nicht entscheidbar": {
+     "H_alt": {
+      "mc_se": 0.0,
+      "nenner": 4,
+      "rate": 0.0,
+      "zaehler": 0
+     },
+     "H_neu": {
+      "mc_se": 0.0,
+      "nenner": 4,
+      "rate": 0.0,
+      "zaehler": 0
+     },
+     "Z_alt": {
+      "mc_se": 0.0,
+      "nenner": 4,
+      "rate": 0.0,
+      "zaehler": 0
+     },
+     "Z_neu": {
+      "mc_se": 0.0,
+      "nenner": 4,
+      "rate": 0.0,
+      "zaehler": 0
+     },
+     "innerhalb_2se_alt": true,
+     "innerhalb_2se_neu": true
+    },
+    "H1Z: bestätigt": {
+     "H_alt": {
+      "mc_se": 0.0,
+      "nenner": 4,
+      "rate": 1.0,
+      "zaehler": 4
+     },
+     "H_neu": {
+      "mc_se": 0.0,
+      "nenner": 4,
+      "rate": 1.0,
+      "zaehler": 4
+     },
+     "Z_alt": {
+      "mc_se": 0.0,
+      "nenner": 4,
+      "rate": 1.0,
+      "zaehler": 4
+     },
+     "Z_neu": {
+      "mc_se": 0.0,
+      "nenner": 4,
+      "rate": 1.0,
+      "zaehler": 4
+     },
+     "innerhalb_2se_alt": true,
+     "innerhalb_2se_neu": true
+    },
+    "H1Z: falsifiziert": {
+     "H_alt": {
+      "mc_se": 0.0,
+      "nenner": 4,
+      "rate": 0.0,
+      "zaehler": 0
+     },
+     "H_neu": {
+      "mc_se": 0.0,
+      "nenner": 4,
+      "rate": 0.0,
+      "zaehler": 0
+     },
+     "Z_alt": {
+      "mc_se": 0.0,
+      "nenner": 4,
+      "rate": 0.0,
+      "zaehler": 0
+     },
+     "Z_neu": {
+      "mc_se": 0.0,
+      "nenner": 4,
+      "rate": 0.0,
+      "zaehler": 0
+     },
+     "innerhalb_2se_alt": true,
+     "innerhalb_2se_neu": true
+    },
+    "H1Z: nicht entscheidbar": {
+     "H_alt": {
+      "mc_se": 0.0,
+      "nenner": 4,
+      "rate": 0.0,
+      "zaehler": 0
+     },
+     "H_neu": {
+      "mc_se": 0.0,
+      "nenner": 4,
+      "rate": 0.0,
+      "zaehler": 0
+     },
+     "Z_alt": {
+      "mc_se": 0.0,
+      "nenner": 4,
+      "rate": 0.0,
+      "zaehler": 0
+     },
+     "Z_neu": {
+      "mc_se": 0.0,
+      "nenner": 4,
+      "rate": 0.0,
+      "zaehler": 0
+     },
+     "innerhalb_2se_alt": true,
+     "innerhalb_2se_neu": true
+    },
+    "H2: bestätigt": {
+     "H_alt": {
+      "mc_se": 0.0,
+      "nenner": 4,
+      "rate": 1.0,
+      "zaehler": 4
+     },
+     "H_neu": {
+      "mc_se": 0.0,
+      "nenner": 4,
+      "rate": 1.0,
+      "zaehler": 4
+     },
+     "Z_alt": {
+      "mc_se": 0.0,
+      "nenner": 4,
+      "rate": 1.0,
+      "zaehler": 4
+     },
+     "Z_neu": {
+      "mc_se": 0.0,
+      "nenner": 4,
+      "rate": 1.0,
+      "zaehler": 4
+     },
+     "innerhalb_2se_alt": true,
+     "innerhalb_2se_neu": true
+    },
+    "H2: falsifiziert": {
+     "H_alt": {
+      "mc_se": 0.0,
+      "nenner": 4,
+      "rate": 0.0,
+      "zaehler": 0
+     },
+     "H_neu": {
+      "mc_se": 0.0,
+      "nenner": 4,
+      "rate": 0.0,
+      "zaehler": 0
+     },
+     "Z_alt": {
+      "mc_se": 0.0,
+      "nenner": 4,
+      "rate": 0.0,
+      "zaehler": 0
+     },
+     "Z_neu": {
+      "mc_se": 0.0,
+      "nenner": 4,
+      "rate": 0.0,
+      "zaehler": 0
+     },
+     "innerhalb_2se_alt": true,
+     "innerhalb_2se_neu": true
+    },
+    "H2: nicht entscheidbar": {
+     "H_alt": {
+      "mc_se": 0.0,
+      "nenner": 4,
+      "rate": 0.0,
+      "zaehler": 0
+     },
+     "H_neu": {
+      "mc_se": 0.0,
+      "nenner": 4,
+      "rate": 0.0,
+      "zaehler": 0
+     },
+     "Z_alt": {
+      "mc_se": 0.0,
+      "nenner": 4,
+      "rate": 0.0,
+      "zaehler": 0
+     },
+     "Z_neu": {
+      "mc_se": 0.0,
+      "nenner": 4,
+      "rate": 0.0,
+      "zaehler": 0
+     },
+     "innerhalb_2se_alt": true,
+     "innerhalb_2se_neu": true
+    },
+    "H4: bestätigt": {
+     "H_alt": {
+      "mc_se": 0.0,
+      "nenner": 4,
+      "rate": 1.0,
+      "zaehler": 4
+     },
+     "H_neu": {
+      "mc_se": 0.0,
+      "nenner": 4,
+      "rate": 1.0,
+      "zaehler": 4
+     },
+     "Z_alt": {
+      "mc_se": 0.0,
+      "nenner": 4,
+      "rate": 1.0,
+      "zaehler": 4
+     },
+     "Z_neu": {
+      "mc_se": 0.0,
+      "nenner": 4,
+      "rate": 1.0,
+      "zaehler": 4
+     },
+     "innerhalb_2se_alt": true,
+     "innerhalb_2se_neu": true
+    },
+    "H4: falsifiziert": {
+     "H_alt": {
+      "mc_se": 0.0,
+      "nenner": 4,
+      "rate": 0.0,
+      "zaehler": 0
+     },
+     "H_neu": {
+      "mc_se": 0.0,
+      "nenner": 4,
+      "rate": 0.0,
+      "zaehler": 0
+     },
+     "Z_alt": {
+      "mc_se": 0.0,
+      "nenner": 4,
+      "rate": 0.0,
+      "zaehler": 0
+     },
+     "Z_neu": {
+      "mc_se": 0.0,
+      "nenner": 4,
+      "rate": 0.0,
+      "zaehler": 0
+     },
+     "innerhalb_2se_alt": true,
+     "innerhalb_2se_neu": true
+    },
+    "H4: nicht entscheidbar": {
+     "H_alt": {
+      "mc_se": 0.0,
+      "nenner": 4,
+      "rate": 0.0,
+      "zaehler": 0
+     },
+     "H_neu": {
+      "mc_se": 0.0,
+      "nenner": 4,
+      "rate": 0.0,
+      "zaehler": 0
+     },
+     "Z_alt": {
+      "mc_se": 0.0,
+      "nenner": 4,
+      "rate": 0.0,
+      "zaehler": 0
+     },
+     "Z_neu": {
+      "mc_se": 0.0,
+      "nenner": 4,
+      "rate": 0.0,
+      "zaehler": 0
+     },
+     "innerhalb_2se_alt": true,
+     "innerhalb_2se_neu": true
+    }
+   },
+   "seeds": [
+    2928307386086025953,
+    5591414722214825035,
+    6002945704900382586,
+    5227392622243359404
+   ],
+   "u_c_innerhalb_5_prozent": {
+    "alt": true,
+    "neu": true
+   },
+   "u_c_median": {
+    "alt": {
+     "H": {
+      "F_min": 0.0009814092296727673,
+      "Im N1": 0.0014134466631745093,
+      "Im N2": 0.000499442514820255,
+      "Im N3": 0.00017577504442538295,
+      "Re N1": 0.001483433842521182,
+      "Re N2": 0.0005122517588239541,
+      "Re N3": 0.00027610347223665937
+     },
+     "Z": {
+      "F_min": 0.0009950822067647926,
+      "Im N1": 0.0014281111752906927,
+      "Im N2": 0.0004973768920905892,
+      "Im N3": 0.0001713125085381831,
+      "Re N1": 0.001461239964423189,
+      "Re N2": 0.0005125482501547041,
+      "Re N3": 0.0002761698609388306
+     }
+    },
+    "neu": {
+     "H": {
+      "F_min": 0.0009814092296727673,
+      "Im N1": 0.0014134466631745093,
+      "Im N2": 0.000499442514820255,
+      "Im N3": 0.00017577504442538295,
+      "Re N1": 0.001483433842521182,
+      "Re N2": 0.0005122517588239541,
+      "Re N3": 0.00027610347223665937
+     },
+     "Z": {
+      "F_min": 0.0009950822067647926,
+      "Im N1": 0.0014281111752906927,
+      "Im N2": 0.0004973768920905892,
+      "Im N3": 0.0001713125085381831,
+      "Re N1": 0.001461239964423189,
+      "Re N2": 0.0005125482501547041,
+      "Re N3": 0.0002761698609388306
+     }
+    }
+   },
+   "u_c_relativ": {
+    "alt": {
+     "F_min": 0.013931983395534493,
+     "Im N1": 0.010375002112388065,
+     "Im N2": -0.004135856817093717,
+     "Im N3": -0.02538776708484468,
+     "Re N1": -0.014961151257189467,
+     "Re N2": 0.0005788000248757581,
+     "Re N3": 0.00024044863193282696
+    },
+    "neu": {
+     "F_min": 0.013931983395534493,
+     "Im N1": 0.010375002112388065,
+     "Im N2": -0.004135856817093717,
+     "Im N3": -0.02538776708484468,
+     "Re N1": -0.014961151257189467,
+     "Re N2": 0.0005788000248757581,
+     "Re N3": 0.00024044863193282696
+    }
+   },
+   "verarbeitung": {
+    "H": {
+     "alte_bedeutung": [],
+     "kampagnen_mit_angabe": 4,
+     "mittel_bedeutung": [
+      "Generator Ebene H: Gleichanteil des Modells (gleiche Periodendauern, Zeit- gleich Phasenmittel)"
+     ],
+     "versionen": {
+      "ebene_h-0.1": 3244
+     }
+    },
+    "Z": {
+     "alte_bedeutung": [],
+     "kampagnen_mit_angabe": 4,
+     "mittel_bedeutung": [
+      "Zeitmittel nach A1 über die akzeptierten Zyklusintervalle aus den Rohzeiten"
+     ],
+     "versionen": {
+      "stufe1-0.2": 3244
+     }
+    }
+   }
+  },
+  "kennung": "AP13-NEULAUF-20261017",
+  "laufzeit_alt_s": {
+   "ebenen": 286.9,
+   "eigene": 422.9,
+   "k06": 211.2,
+   "kalibrierung_a4": 1064.1,
+   "kalibrierung_v1": 686.0,
+   "planung": 140.3,
+   "pruefsatz": 9.7,
+   "referenz": 23.6,
+   "reproduzierbarkeit": 61.6,
+   "s3": 0.2,
+   "szenarien_a4": 1294.2,
+   "szenarien_v1": 767.1,
+   "wahrheit": 15.0,
+   "zeltfit": 471.0
+  },
+  "laufzeit_s": {
+   "E3-A06-phase-L1": 79.9,
+   "E3-E04-kette-L1": 69.9,
+   "E3-E07-basisdrift-L1": 56.0,
+   "E3-E07-verstaerkung-L1": 55.9,
+   "E3-H03-phase-L1": 77.5,
+   "E3-N01-A4-L0": 56.0,
+   "E3-N01-A4-L1": 277.3,
+   "E3-N01-A4-L2": 55.4,
+   "E3-N01-A4-L4": 59.6,
+   "E3-N03-N3bindet-L1": 84.0,
+   "E3-N03-ungleich-L1": 99.7,
+   "K12-planung": 146.9,
+   "K19-ebenen": 265.5
+  },
+  "umfang": {
+   "e3_pruefkampagnen": 570,
+   "e3_punkte": 11,
+   "k19_kampagnen_je_ebene": 4,
+   "kalibrierkampagnen": 0
+  },
+  "zeitraum": {
+   "ende": "2026-10-17T07:14:32+00:00",
+   "start": "2026-10-17T06:51:28+00:00"
+  }
+ },
+ "kopf": {
+  "code_version": {
+   "git": "fb23ba49188206b97d152530011974c4714e774a",
+   "paket": "0.1.0"
+  },
+  "datenart": "synthetisch",
+  "erzeugt_von": {
+   "programm": "pcmms_auswertung",
+   "version": "0.1.0"
+  },
+  "kennung": "SYNTH-AP13-NEULAUF-20261017-ERGEBNISSE",
+  "registrierung": "keine (synthetisch)",
+  "schema": "pcmms.bewertung",
+  "schema_version": "0.1"
+ }
+}
