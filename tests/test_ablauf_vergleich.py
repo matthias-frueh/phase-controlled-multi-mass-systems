@@ -1,9 +1,12 @@
 """Treiber der begrenzten Entwicklungsrechnung (harness.ablauf_vergleich): Auftragsliste im Budget, gemeinsame Seeds
 mit PR #22, Checkpoint-Schlüssel mit Verfahren, schlanker Befund je Variante; Berichtsteil (Tabellen einsetzen)."""
+import json
+import os
+
 import pytest
 
 from pcmms_auswertung import regeln, verfahren as vf
-from pcmms_auswertung.harness import ablauf_vergleich as av, ablauf_vergleich_bericht as avb, kampagnen
+from pcmms_auswertung.harness import ablauf_vergleich as av, ablauf_vergleich_bericht as avb, kampagnen, neulauf
 
 KLEIN = dict(plan=dict(n0=20, n_pilot=20, n_bloecke=3), n_min=2, profil='ENTW-2026-10',
              profil_reduktion=dict(bootstrap_B=100, h3_mc=100, eps_ctrl_datensaetze=200))
@@ -107,3 +110,19 @@ def test_vorher_nachher_ursachen_ohne_kampagnen():
                             [0.0004, 0.0004])
     assert (s['n'], s['g1_geprueft'], s['andere_ungueltig'], s['vorpruefung_ablauf_1']) == (2, 1, 1, 1)
     assert s['max_verhaeltnis_eps'] == pytest.approx(0.75)
+
+
+def test_ergebnisse_der_korrekturrunde_gelten_fuer_ablauf_3():
+    """Nachtrag (ablauf-3): ablauf-3 entscheidet nur dann anders als ablauf-2, wenn ein nach G2–G10 gültiges X′ eine
+    S3-Wiederholung auslöst; sie folgt jetzt nach R₃, unter ablauf-2 stand sie zwischen X′ und dem Referenzlauf, der es
+    schließt. In den 37 neu gerechneten Ablaufkampagnen der Korrekturrunde (ergebnisse.json, Befunde aus den Checkpoints)
+    folgt auf jedes X′ mit G1-Prüfung unmittelbar sein R₃; nur eines ist ein Kontrolllauf. Die Ergebnisse gelten deshalb
+    unverändert für ablauf-3."""
+    with open(os.path.join(neulauf.WURZEL, av.DOKU_REL, 'ergebnisse.json'), encoding='utf-8') as f:
+        vn = json.load(f)['vorher_nachher']
+    xs = [x for k in vn for x in k['x_strich']]
+    geprueft = [x for x in xs if x['g1'] is not None]
+    assert (len(vn), len(xs), len(geprueft)) == (37, 35, 33)
+    assert all(x['nach_rolle'] == 'R3' and int(x['nach'][1:]) == int(x['versuch'][1:]) + 1 for x in geprueft)
+    assert all(x['halt'] in (None, 'S1') for x in xs)
+    assert [x['konfiguration'] for x in geprueft if x['konfiguration'] in ('L1', 'L2', 'L3')] == ['L1']

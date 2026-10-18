@@ -74,13 +74,19 @@ def _online_gueltig(v):
 def _x_strich_gegenprobe(t1, pr):
     """X′ des zustandsbehafteten Ablaufs offline nachgeprüft: Die einschließenden gültigen Referenzläufe gleichen dem
     Bezug des Ablaufs, „vorgesehen“ (R₂/R₃ desselben G1-Falls) folgt allein aus den Köpfen, und ein S1 an X′ setzt die
-    vorgesehene Klammer voraus."""
+    vorgesehene Klammer voraus. Auf ein nach G2–G10 gültiges X′ folgt unmittelbar das R₃ seines Falls (sonst hätte ein
+    anderer Versuch die Klammer unterbrochen); ausgenommen ist ein Halt an X′ selbst vor R₃ (andere Regel als S1)."""
     ka, kb = pr['g1_klammer'] if pr.get('g1_klammer') is not None else (None, None)
     abw = []
     for i, k in enumerate(t1.koepfe):
         v = k['versuch']
         if v.get('rolle') != 'X_strich':
             continue
+        if i + 1 < len(t1.koepfe) and set(pr['gruende'][i]) <= {'G1'} and v.get('halt') in (None, 'S1'):
+            w = t1.koepfe[i + 1]['versuch']
+            if w.get('rolle') != 'R3' or w.get('bezug_versuch') != v.get('bezug_versuch'):
+                abw.append(f'{v["id"]}: auf X′ folgt {w.get("id")} ({w.get("rolle")}), nicht R₃ des Falls '
+                           f'{v.get("bezug_versuch")}')
         a, b = (-1, -1) if ka is None else (int(ka[i]), int(kb[i]))
         vorgesehen = gueltigkeit.x_strich_klammer(t1.koepfe, i, a, b)
         if v.get('g1_bezug') is not None:

@@ -19,9 +19,11 @@ Regeln (maßgeblich ist die Präregistrierung; Lesarten unten):
 - G1/S1: Vorprüfung |⟨N⟩_X − ⟨N⟩_R₀| > ε_ctrl → sofort R₁. Mit dem nächsten gültigen Referenzlauf steht G1 aller
   offenen Läufe fest (Interpolation zwischen den einschließenden gültigen Referenzläufen, gueltigkeit.interpolation).
   Steht ein Verstoß vor Beginn des Schlusskontrollsatzes fest: sofort R₂, X′, R₃, auch über die Wiederholungsgrenze
-  hinaus; X′ zählt als Wiederholung. X′ hat keine Vorprüfung mit R₁; sein G1 steht mit R₃ fest. S1, wenn X′ G1
-  gegen die Klammer R₂/R₃ desselben Falls verletzt (eine nicht reproduzierte Alarmwiederholung ersetzt R₂ bzw. R₃,
-  §8.8). Ist die Klammer unvollständig (R₂ oder R₃ ungültig), gilt G1 von X′ wie für jeden Lauf zwischen den
+  hinaus; X′ zählt als Wiederholung. X′ hat keine Vorprüfung mit R₁; sein G1 steht mit R₃ fest. R₃ folgt unmittelbar
+  auf X′: Was X′ auslöst (die sofortige S3-Wiederholung eines Kontrolllaufs), folgt erst nach R₃, damit kein
+  Referenzlauf einer anderen Prüfung (etwa das R₁ der Vorprüfung dieser Wiederholung) die Klammer schließt. S1, wenn X′
+  G1 gegen die Klammer R₂/R₃ desselben Falls verletzt (eine nicht reproduzierte Alarmwiederholung ersetzt R₂ bzw. R₃,
+  §8.8). Ist die Klammer unvollständig (R₂ oder R₃ ungültig, Halt an X′), gilt G1 von X′ wie für jeden Lauf zwischen den
   einschließenden gültigen Referenzläufen, S1 ist dann „nicht prüfbar“ und wird nicht ausgelöst; ein dabei G1-ungültiges
   X′ wird nicht weiter wiederholt. Ein aus anderem Grund ungültiges X′ folgt der Regel für Konfigurationsläufe. Später
   festgestellte Verstöße werden weder wiederholt noch nach S1 geprüft.
@@ -52,6 +54,8 @@ Lesarten, wo die Präregistrierung nicht ausdrücklich ist (im Bericht als offen
   ist kein Bezug. Ein Alarm der Wiederholung nur in anderen Kanälen führt zu einer weiteren Wiederholung (technische
   Grenze GRENZE_ALARMKETTE, danach Halt ohne Regelausgang).
 - S3 wird an Lⱼ ohne Verstoß gegen G2–G10 geprüft; eine gültige S3-Wiederholung ist ein gültiger Kontrolllauf (§8.2).
+  Die S3-Wiederholung eines X′ folgt nach dessen R₃ (§9.2: R₂, X′, R₃; A8: X′ mittig zwischen R₂ und R₃); ein Halt an
+  X′ selbst (S3 im Kontrollsatz einer Wiederaufnahme) unterbricht die Folge, S1 ist dann nicht prüfbar.
 - Der Kontrollsatz der Wiederaufnahme wird in einer vom Reihenfolgegenerator gezogenen Reihenfolge gemessen.
 - Liegt nach einem Halt ein Messtag dazwischen, ändert das nichts an der Zuordnung zum unterbrochenen Block.
 
@@ -68,7 +72,8 @@ from scipy import stats
 
 from . import formate, gueltigkeit, konventionen as kv, zusammenfassung as zf
 
-VERSION = 'ablauf-2'            # ablauf-2: X′ ohne Vorprüfung mit R₂/R₃ geprüft; S2-Bilanz aus den Ereignissen
+VERSION = 'ablauf-3'            # ablauf-2: X′ ohne Vorprüfung mit R₂/R₃ geprüft; S2-Bilanz aus den Ereignissen;
+                                # ablauf-3: R₃ folgt unmittelbar auf X′ (S3-Wiederholung eines X′ erst nach R₃)
 GRENZE_KONFIGURATION = 2        # §6, A9.12: höchstens zwei Wiederholungen je Konfiguration und Block
 GRENZE_KONTROLLE = 2            # A9.12: Kontrolllauf höchstens zweimal sofort wiederholt
 GRENZE_AUFWAERMEN = 10          # §6: höchstens zehn Aufwärm-Referenzläufe
@@ -305,8 +310,8 @@ class Ablauf:
         self._v(n)['entscheidung'].append(text)
         self.z['entscheidungen'].append(dict(versuch=self._v(n)['id'], text=text))
 
-    def _vorn(self, *elemente):
-        self.z['queue'][0:0] = list(elemente)
+    def _vorn(self, *elemente, nach=0):
+        self.z['queue'][nach:nach] = list(elemente)
 
     def _einschub(self, n, rolle, anlass, art=None, **extra):
         """Element eines zusätzlichen Versuchs mit dem Lauf von Versuch n als Vorlage (art='R': Referenzlauf)."""
@@ -520,6 +525,14 @@ class Ablauf:
             ([] if ok_b else [f'Bezug nach X′ ist {rb["id"]} ({rb["rolle"]}), nicht R₃ des Falls {x}']))
         return dict(vor=self._v(a)['id'], nach=self._v(b)['id'], vorgesehen=bool(ok_a and ok_b), grund=grund)
 
+    def _klammer_offen(self, n):
+        """1, wenn Versuch n ein X′ ist, dessen R₃ als Nächstes ansteht: Sofortige Einschübe aus n folgen erst nach R₃,
+        sonst schlösse ein Referenzlauf einer anderen Prüfung die Klammer R₂/X′/R₃ (Platz in der Warteschlange)."""
+        v = self._v(n)
+        q = self.z['queue']
+        return int(v['rolle'] == 'X_strich' and bool(q) and q[0]['rolle'] == 'R3'
+                   and q[0].get('bezug_versuch') == v.get('bezug_versuch'))
+
     def _lauf(self, n):
         """Lauf mit bewegten Modulen (Konfiguration oder Kontrolllauf Lⱼ, Lⱼ′)."""
         z = self.z
@@ -655,8 +668,10 @@ class Ablauf:
             self._halt(n, 'Wiederaufnahme', f'S3-Überschreitung ({", ".join(ueber)}) im Kontrollsatz der Wiederaufnahme')
             return
         if ueber and self.opt.wiederholungen:
-            self._notiz(n, f'S3-Überschreitung ({", ".join(ueber)}): sofortige Wiederholung')
-            self._vorn(self._einschub(n, 's3_wiederholung', f'S3 {", ".join(ueber)}', s3_groessen=ueber))
+            nach = self._klammer_offen(n)
+            self._notiz(n, f'S3-Überschreitung ({", ".join(ueber)}): sofortige Wiederholung'
+                        + (' nach R₃ (Klammer R₂/X′/R₃)' if nach else ''))
+            self._vorn(self._einschub(n, 's3_wiederholung', f'S3 {", ".join(ueber)}', s3_groessen=ueber), nach=nach)
 
     def _s2(self, n, halten=True):
         """S2 an Versuch n: Ausschluss der Konfiguration (bleibt auch nach einem festgestellten Apparaturfehler), Halt;

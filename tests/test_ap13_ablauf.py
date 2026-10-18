@@ -469,6 +469,143 @@ def test_x_strich_fortsetzung_aus_dem_ablaufstand(tmp_path):
     assert [{f: v.get(f) for f in feld} for v in versuche(b)] == [{f: v.get(f) for f in feld} for v in versuche(ganz)]
 
 
+# Nachtrag vom 18.10.2026, verschachtelte Wiederholungen: X′ wartet auf sein R₃; die von X′ ausgelöste S3-Wiederholung
+# mit eigener Vorprüfung darf die Klammer nicht mit ihrem R₁ schließen
+def _regel_verschachtelt(dx, s3_wiederholung=None, r3=0.0):
+    """L₁ des ersten Kontrollsatzes +0,05 N (Vorprüfung, G1 → R₂, X′, R₃); X′ +dx N mit S3-Überschreitung (Re N₁ +1,0
+    bei Schwelle 0,5); R₃ +r3 N; die S3-Wiederholung +0,011 N (über ε_ctrl gegen R₂: eigene Vorprüfung, deren R₁
+    +0,003 N liegt), mit s3_wiederholung als erneutem S3-Ausschlag."""
+    rollen = {}
+
+    def regel(spec, v):
+        rollen[v['id']] = r = v['rolle']
+        if r == 'kontrolle' and spec['laufart'] == 'L' and spec['kontrollsatz'] == 1:
+            return dict(dN=0.05)
+        if r == 'X_strich':
+            return dict(dN=dx, S3=1.0)
+        if r == 'R3':
+            return dict(dN=r3)
+        if r == 's3_wiederholung':
+            return dict(dN=0.011, S3=s3_wiederholung)
+        if r == 'R1' and rollen.get(v['bezug_versuch']) == 's3_wiederholung':
+            return dict(dN=0.003)
+    return regel
+
+
+def test_s3_wiederholung_von_x_strich_schliesst_die_klammer_nicht():
+    """Am Stand 836f2c4 folgte die S3-Wiederholung eines X′ (Kontrolllauf L₁) vor R₃; das R₁ ihrer Vorprüfung schloss X′
+    gegen R₂/R₁, S1 war „nicht prüfbar“, und der Ablauf lief ohne Halt durch. Jetzt folgt R₃ unmittelbar auf X′: X′
+    weicht 0,015 N von der Klammer R₂/R₃ ab, S1 hält nach R₃ an; die S3-Wiederholung bleibt vorgemerkt und folgt nach
+    dem Kontrollsatz der Wiederaufnahme."""
+    a = lauf(_regel_verschachtelt(0.015))
+    vs = versuche(a)
+    rollen = [v['rolle'] for v in vs]
+    i = rollen.index('X_strich')
+    x = vs[i]
+    assert x['konfiguration'] == 'L1' and rollen[i - 1:] == ['R2', 'X_strich', 'R3']
+    assert x['s3_ueber'] and any('nach R₃' in t for t in x['entscheidung'])
+    assert _abweichung(a, i, i - 1, i + 1) == pytest.approx(0.015, abs=1e-12)
+    assert a.status == 'angehalten' and a.z['halt']['regel'] == 'S1' and x['halt'] == 'S1'
+    assert x['g1_bezug'] == [vs[i - 1]['id'], vs[i + 1]['id']] and x['g1_klammer']['vorgesehen']
+    w = a.z['queue'][0]
+    assert w['rolle'] == 's3_wiederholung' and w['bezug_versuch'] == x['id'] and w['s3_groessen'] == x['s3_ueber']
+    _offline_gleich(a)
+    _wiederaufnahme(a, EREIGNIS)
+    vs = versuche(a)
+    rollen = [v['rolle'] for v in vs]
+    j = rollen.index('s3_wiederholung')
+    assert a.status == 'abgeschlossen' and rollen[i + 2:j] == ['wiederaufnahme_kontrolle'] * 2
+    assert any('S3 nicht reproduziert' in t for t in vs[j]['entscheidung'])
+    assert rollen[j + 1] == 'R1' and vs[j + 1]['bezug_versuch'] == vs[j]['id'] and vs[j]['g1'] is False
+    _offline_gleich(a)
+
+
+def test_x_strich_besteht_und_seine_s3_wiederholung_reproduziert_nach_r3():
+    """X′ (+0,0105 N gegen R₂, R₃ +0,002 N) besteht gegen die Klammer R₂/R₃ mit 0,0095 N < ε_ctrl; seine
+    S3-Wiederholung folgt nach R₃ und reproduziert die Überschreitung: Halt S3. Am Stand 836f2c4 hielt S3 vor R₃ an."""
+    a = lauf(_regel_verschachtelt(0.0105, s3_wiederholung=1.0, r3=0.002))
+    vs = versuche(a)
+    rollen = [v['rolle'] for v in vs]
+    i = rollen.index('X_strich')
+    assert rollen[i - 1:] == ['R2', 'X_strich', 'R3', 's3_wiederholung']
+    assert _abweichung(a, i, i - 1, i + 1) == pytest.approx(0.0095, abs=1e-12)
+    assert vs[i]['gueltig'] and vs[i]['g1'] is False and vs[i]['g1_klammer']['vorgesehen']
+    assert a.status == 'angehalten' and a.z['halt']['regel'] == 'S3' and vs[-1]['halt'] == 'S3'
+    _offline_gleich(a)
+
+
+def test_offline_gegenprobe_erkennt_die_unterbrochene_klammer(monkeypatch):
+    """Mit der Platzierung von ablauf-2 (S3-Wiederholung vor R₃) schließt das R₁ ihrer Vorprüfung X′ (kein S1); Stufe 2
+    weist die Tabelle an der Folge der Versuche zurück, obwohl die Klammer R₂/R₁ („nicht prüfbar“) in sich stimmt."""
+    monkeypatch.setattr(ablauf.Ablauf, '_klammer_offen', lambda self, n: 0)
+    a = lauf(_regel_verschachtelt(0.015))
+    vs = versuche(a)
+    rollen = [v['rolle'] for v in vs]
+    i = rollen.index('X_strich')
+    assert rollen[i:i + 4] == ['X_strich', 's3_wiederholung', 'R1', 'R3'] and vs[i]['s1'] == 'nicht prüfbar'
+    assert a.status == 'abgeschlossen' and not a.z['halt']
+    t = a.tabelle()
+    pr = gueltigkeit.pruefe(t, SW)
+    with pytest.raises(formate.FormatFehler, match='auf X′ folgt .*s3_wiederholung.*, nicht R₃ des Falls'):
+        auswertung._x_strich_gegenprobe(t, pr)
+
+
+def test_verschachtelt_fortsetzung_aus_dem_ablaufstand(tmp_path):
+    """Nach X′ unterbrochen (R₃, dahinter die S3-Wiederholung vorgemerkt), gespeichert und fortgesetzt: derselbe Halt S1
+    und dieselbe Warteschlange wie ohne Unterbrechung; ein Ablaufstand von ablauf-2 wird nicht fortgesetzt."""
+    ganz = lauf(_regel_verschachtelt(0.015))
+    i = [v['rolle'] for v in versuche(ganz)].index('X_strich')
+    plan = plan_klein()
+    regel = _regel_verschachtelt(0.015)
+    a = ablauf.Ablauf(plan, Skript(regel), SW, S3, np.random.default_rng(1), ablauf.Ablaufoptionen(aufwaermen=False),
+                      10.0, 500.0, kennung=dict(test=True))
+    assert a.ausfuehren(bis=i + 1) == 'unterbrochen'
+    assert [el['rolle'] for el in a.z['queue'][:2]] == ['R3', 's3_wiederholung']
+    ablauf.speichern(str(tmp_path / 'stand'), a)
+    zustand = ablauf.laden(str(tmp_path / 'stand'))
+    b = ablauf.Ablauf.aus_zustand(zustand, plan, Skript(regel), SW, S3, np.random.default_rng(99), 10.0, 500.0,
+                                  dict(test=True))
+    assert b.ausfuehren() == 'angehalten' and b.z['halt'] == ganz.z['halt']
+    feld = ('id', 'rolle', 'gueltig', 'g1', 'g1_bezug', 'g1_klammer', 's3_ueber', 'halt', 't_start')
+    assert [{f: v.get(f) for f in feld} for v in versuche(b)] == [{f: v.get(f) for f in feld} for v in versuche(ganz)]
+    assert b.z['queue'] == ganz.z['queue']
+    with pytest.raises(ablauf.AblaufFehler, match='Version ablauf-2'):
+        ablauf.Ablauf.aus_zustand(dict(zustand, version='ablauf-2'), plan, Skript(regel), SW, S3,
+                                  np.random.default_rng(1), 10.0, 500.0, dict(test=True))
+
+
+def test_halt_an_x_strich_unterbricht_die_klammer():
+    """Hält der Ablauf an X′ selbst an (S3 im Kontrollsatz einer Wiederaufnahme), folgt R₃ erst nach dem Kontrollsatz
+    der nächsten Wiederaufnahme; dessen Referenzlauf schließt X′ mit unvollständiger Klammer, S1 ist „nicht prüfbar“
+    (wie bei ungültigem R₂ oder R₃). Stufe 2 nimmt diese Folge nur mit dem Halt an X′ an."""
+    def regel(spec, v):
+        if spec['konfiguration']['id'] == 'S100' and v['nummer'] == 0:
+            return dict(G6=True)                                         # S2: Halt, Wiederaufnahme W1
+        if v['rolle'] == 'wiederaufnahme_kontrolle' and spec['laufart'] == 'L' and spec['kontrollsatz'] == 'W1':
+            return dict(dN=0.05)                                         # G1 im Kontrollsatz W1 → R₂, X′, R₃
+        if v['rolle'] == 'X_strich':
+            return dict(dN=0.015, S3=1.0)
+    a = lauf(regel, rng=FesteZiehung(0))
+    assert a.status == 'angehalten' and a.z['halt']['regel'] == 'S2'
+    _wiederaufnahme(a, EREIGNIS)
+    vs = versuche(a)
+    i = [v['rolle'] for v in vs].index('X_strich')
+    x = vs[i]
+    assert a.z['halt']['regel'] == 'Wiederaufnahme' and x['halt'] == 'Wiederaufnahme' and x['kontrollsatz'] == 'W1'
+    assert a.z['queue'][0]['rolle'] == 'R3' and x['g1'] is None
+    _wiederaufnahme(a, EREIGNIS)
+    rollen = [v['rolle'] for v in versuche(a)]
+    assert a.status == 'abgeschlossen'
+    assert rollen[i + 1:i + 4] == ['wiederaufnahme_kontrolle', 'wiederaufnahme_kontrolle', 'R3']
+    assert x['g1'] is True and x['s1'] == 'nicht prüfbar' and not x['g1_klammer']['vorgesehen']
+    assert '(wiederaufnahme_kontrolle), nicht R₃' in x['g1_klammer']['grund']
+    t, pr = _offline_gleich(a)
+    t2 = copy.deepcopy(t)
+    t2.koepfe[i]['versuch'] = dict(t2.koepfe[i]['versuch'], halt=None)
+    with pytest.raises(formate.FormatFehler, match='auf X′ folgt'):
+        auswertung._x_strich_gegenprobe(t2, pr)
+
+
 def test_reproduzierter_und_nicht_reproduzierter_nullpunktalarm():
     def regel_rep(s, v):
         if s['laufart'] == 'R' and s['block'] == 1 and s['kontrollsatz'] == 2:
