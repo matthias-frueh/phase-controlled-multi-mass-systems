@@ -1,9 +1,9 @@
 """Treiber der begrenzten Entwicklungsrechnung (harness.ablauf_vergleich): Auftragsliste im Budget, gemeinsame Seeds
-mit PR #22, Checkpoint-Schlüssel mit Verfahren, schlanker Befund je Variante."""
+mit PR #22, Checkpoint-Schlüssel mit Verfahren, schlanker Befund je Variante; Berichtsteil (Tabellen einsetzen)."""
 import pytest
 
 from pcmms_auswertung import regeln, verfahren as vf
-from pcmms_auswertung.harness import ablauf_vergleich as av, kampagnen
+from pcmms_auswertung.harness import ablauf_vergleich as av, ablauf_vergleich_bericht as avb, kampagnen
 
 KLEIN = dict(plan=dict(n0=20, n_pilot=20, n_bloecke=3), n_min=2, profil='ENTW-2026-10',
              profil_reduktion=dict(bootstrap_B=100, h3_mc=100, eps_ctrl_datensaetze=200))
@@ -31,6 +31,17 @@ def test_checkpointschluessel_enthaelt_das_verfahren():
     j2 = dict(j1, variante='wiederholungen')
     k1, k2 = av.schluessel(a, j1, prof, None), av.schluessel(a, j2, prof, None)
     assert k1['verfahren'] == vf.STATISCH.kennung() and k2['verfahren'] == vf.ZUSTAND.kennung() and k1 != k2
+
+
+def test_berichtstabellen_lassen_den_text_zwischen_leeren_markierungen_stehen():
+    text = ('A\n<!-- tabelle:a -->\n<!-- /tabelle -->\nText zwischen den Tabellen\n<!-- tabelle:b -->\n| alt |\n'
+            '<!-- /tabelle -->\nEnde\n')
+    neu = avb.einsetzen(text, dict(a='| x |', b='| y |'))
+    assert neu == ('A\n<!-- tabelle:a -->\n| x |\n<!-- /tabelle -->\nText zwischen den Tabellen\n<!-- tabelle:b -->\n'
+                   '| y |\n<!-- /tabelle -->\nEnde\n')
+    assert avb.einsetzen(neu, dict(a='| x |', b='| y |')) == neu                  # wiederholbar
+    lo, hi = avb.wilson(4, 30)
+    assert abs(lo - 0.0531) < 1e-3 and abs(hi - 0.2968) < 1e-3
 
 
 @pytest.mark.parametrize('variante, k', [('historisch', 30), ('k_konsistent', 9), ('wiederholungen', 9)])

@@ -63,14 +63,19 @@ def vergleich(befunde):
                      k=sorted({b['teil_b']['k'] for b in bs}), k_max=sorted({b['teil_b']['k_max'] for b in bs}))
             ab = [b['ablauf'] for b in bs if b.get('ablauf')]
             if ab:
-                e['ablauf'] = dict(
+                fertig = [a for a in ab if a['status'] == 'abgeschlossen']    # Laufzahl und Messzeit nur vollständig
+                e['ablauf'] = dict(                                            # gelaufener Kampagnen vergleichbar
                     nicht_abgeschlossen=_anteil(sum(a['status'] != 'abgeschlossen' for a in ab), len(ab)),
                     halt_regeln={r: sum(a['halt'] == r for a in ab) for r in sorted({a['halt'] for a in ab
                                                                                       if a['halt']})},
                     zusaetzlich=_mittel_se([a['laufzahl']['zusaetzlich'] for a in ab]),
-                    zeit_verhaeltnis=_mittel_se([a['messzeit_s']['realisiert_laeufe'] / a['messzeit_s']['geplant_laeufe']
-                                                 for a in ab]),
+                    zusaetzlich_abgeschlossen=_mittel_se([a['laufzahl']['zusaetzlich'] for a in fertig]) if fertig
+                    else None,
+                    zeit_verhaeltnis_abgeschlossen=_mittel_se([a['messzeit_s']['realisiert_laeufe'] /
+                                                               a['messzeit_s']['geplant_laeufe'] for a in fertig])
+                    if fertig else None,
                     anlaesse=_summe([a['anlaesse'] for a in ab]), auswahl=_summe([a['auswahl'] for a in ab]),
+                    auswahl_abgeschlossen=_summe([a['auswahl'] for a in fertig]),
                     grenzen=int(sum(a['grenzen'] for a in ab)), luecken=sorted({x for a in ab for x in a['luecken']}))
             out[f'{sid}/{v}'] = e
     return out
@@ -143,26 +148,43 @@ def laufzeiten(cp, befunde):
                 kampagnen=len(befunde), voll=sum(b['art'] == 'voll' for b in befunde))
 
 
+NORMATIV_GEMESSEN_S = dict(A4=78.0, V1G0=139.0, V1G60h=68.0)   # Softwaredokument, Abschnitt 5: eine Kampagne mit
+#                                                               B = 10 000, H3-MC 10 000, ε_ctrl 10 000 (statisch, n = 20)
+ZUSCHLAG_ABLAUF = 1.05                                         # zusätzliche Versuche des Ablaufs (gemessen 5,4 % Laufzeit)
+
+
 def neulauf_abschaetzung(lz):
-    """Grobe Rechenabschätzung künftiger Neuläufe aus den gemessenen Laufzeiten (nicht gestartet)."""
+    """Grobe Rechenabschätzung künftiger Neuläufe aus den gemessenen Laufzeiten (nicht gestartet): untere Spanne aus
+    dieser Rechnung (B = 1000) mit linear in B skaliertem Bootstrap-Anteil, obere aus den im Softwaredokument
+    gemessenen Kampagnen mit normativen Replikatzahlen und einem Zuschlag für die zusätzlichen Versuche."""
     def t(key):
         e = lz['je_art'].get(key)
         return None if e is None else e['mittel']
-    schlank, voll = t('schlank/H/wiederholungen'), t('voll/H/wiederholungen')
+    schlank, voll, z = t('schlank/H/wiederholungen'), t('voll/H/wiederholungen'), t('voll/Z/wiederholungen')
     if schlank is None or voll is None:
         return None
     boot = max(voll - schlank, 0.0)                    # Stufe 2 mit B = 1000 (reduziertes Profil)
-    voll_norm = schlank + 10 * boot                    # B = 10 000 normativ: Bootstrap-Anteil etwa linear in B
-    kal = 2000 * voll_norm                             # 1000 Kalibrier- und 1000 Prüfkampagnen je System
+    lo = schlank + 10 * boot                           # B = 10 000 normativ: Bootstrap-Anteil etwa linear in B
+    hi = max(NORMATIV_GEMESSEN_S.values()) * ZUSCHLAG_ABLAUF
+    n_kal = 2000                                       # 1000 Kalibrier- und 1000 Prüfkampagnen je System (normativ)
+
+    def kh(s):
+        return round(s / 3600, 1)
     return dict(
-        sekunden_je_kampagne=dict(schlank=round(schlank, 2), voll_B1000=round(voll, 2), voll_B10000=round(voll_norm, 1)),
-        kalibrierung_je_system_kernstunden=round(kal / 3600, 1),
-        drei_referenzsysteme_kernstunden=round(3 * kal / 3600, 1),
-        planungssimulation_je_kandidat_kernstunden=round(kal / 3600, 1),
-        annahmen=('Laufzeiten dieser Rechnung (Ebene H, 24 Blöcke, Profil ENTW-2026-10 mit B = 1000); normativ '
-                  'B = 10 000 mit linear skaliertem Bootstrap-Anteil; je System 1000 Kalibrier- und 1000 '
-                  'Prüfkampagnen (normative Zahl), ohne Wiederholung bei Poolen; Planungssimulation je Kandidat '
-                  '(n_min, n₀) und Paar (k, T_a) gleich teuer wie eine Kalibrierung; nicht gestartet'))
+        sekunden_je_kampagne=dict(schlank=round(schlank, 2), voll_B1000=round(voll, 2), voll_B10000_linear=round(lo, 1),
+                                  voll_normativ_gemessen=NORMATIV_GEMESSEN_S, zuschlag_ablauf=ZUSCHLAG_ABLAUF,
+                                  ebene_Z_voll=None if z is None else round(z, 1)),
+        kalibrierung_je_system_kernstunden=[kh(n_kal * lo), kh(n_kal * hi)],
+        drei_referenzsysteme_kernstunden=[kh(3 * n_kal * lo), kh(3 * n_kal * hi)],
+        planungssimulation_je_kandidat_kernstunden=[kh(n_kal * lo), kh(n_kal * hi)],
+        zaehldiagnose_je_1000_kampagnen_kernstunden=kh(1000 * schlank),
+        ebene_Z_je_10_kampagnen_kernstunden=None if z is None else kh(10 * z),
+        annahmen=('untere Spanne: Laufzeiten dieser Rechnung (Ebene H, 24 Blöcke, B = 1000) mit linear auf B = 10 000 '
+                  'skaliertem Bootstrap-Anteil; obere Spanne: die im Softwaredokument (Abschnitt 5) gemessenen '
+                  'Kampagnen mit normativen Replikatzahlen (68–139 s, statisch) mit 5 % Zuschlag für die zusätzlichen '
+                  'Versuche; je System 1000 Kalibrier- und 1000 Prüfkampagnen (normative Zahl), ohne Wiederholung bei '
+                  'Poolen; Planungssimulation je Kandidat (n_min, n₀) und Paar (k, T_a) gleich teuer wie eine '
+                  'Kalibrierung; nicht gestartet'))
 
 
 # ── Tabellen ──────────────────────────────────────────────────────────────────────────────────────────────
@@ -202,18 +224,29 @@ def tabellen(erg):
                       f'{e["gewonnen"]} / {e["verloren"]} | {_zahl(d["mittel"], 1)} ± {_zahl(d["se"], 1)} | '
                       f'{_zahl(e["delta_auswertbar"]["mittel"], 1)} | {_zahl(e["delta_min_gueltig"]["mittel"], 1)} |')
     t_gepaart = '\n'.join(zeilen)
-    zeilen = ['| System | nicht abgeschlossen (Halt/Abbruch) | Haltregeln | zusätzliche Läufe (Mittel, max) | '
-              'Messzeit realisiert/geplant (Mittel, max) | Ersatz und Fehlen je Platz (Summe über 10 Kampagnen) |',
-              '|---|---|---|---|---|---|']
+    zeilen = ['| System | nicht abgeschlossen (Halt/Abbruch) | Haltregeln | abgeschlossene Kampagnen: zusätzliche Läufe '
+              '(Mittel, max) | abgeschlossene: Laufzeit realisiert/geplant (Mittel, max) | abgeschlossene: Plätze '
+              'gültig / ersetzt / fehlend (Grenze, spät) | angehaltene: Plätze bis zum Halt gültig / ersetzt / fehlend, '
+              'nicht gemessen |',
+              '|---|---|---|---|---|---|---|']
+
+    def plaetze(au, halt=False):
+        ok, er = au.get('gueltig', 0), au.get('ersetzt', 0)
+        gr, sp, fh = au.get('fehlt: Grenze ausgeschöpft', 0), au.get('fehlt: spät erkannt', 0), au.get('fehlt: Halt', 0)
+        if halt:
+            return f'{ok} / {er} / {gr + sp + fh}, {au.get("nicht gemessen", 0)}'
+        return f'{ok} / {er} / {gr + sp} ({gr}, {sp})'
     for key, e in v.items():
         if 'ablauf' not in e:
             continue
         a = e['ablauf']
         hr = ', '.join(f'{k}: {x}' for k, x in a['halt_regeln'].items()) or '–'
-        au = ', '.join(f'{k}: {x}' for k, x in a['auswahl'].items())
+        za, zv = a['zusaetzlich_abgeschlossen'], a['zeit_verhaeltnis_abgeschlossen']
+        rest = {k: x - a['auswahl_abgeschlossen'].get(k, 0) for k, x in a['auswahl'].items()}
         zeilen.append(f'| {key.split("/")[0]} | {_w(a["nicht_abgeschlossen"])} | {hr} | '
-                      f'{_zahl(a["zusaetzlich"]["mittel"], 1)}, {_zahl(a["zusaetzlich"]["max"], 0)} | '
-                      f'{_zahl(a["zeit_verhaeltnis"]["mittel"], 3)}, {_zahl(a["zeit_verhaeltnis"]["max"], 3)} | {au} |')
+                      f'{_zahl(za["mittel"], 1)}, {_zahl(za["max"], 0)} | '
+                      f'{_zahl(zv["mittel"], 3)}, {_zahl(zv["max"], 3)} | {plaetze(a["auswahl_abgeschlossen"])} | '
+                      f'{plaetze(rest, True) if any(rest.values()) else "–"} |')
     t_ablauf = '\n'.join(zeilen)
     zeilen = ['| Anlass (Rolle: Grund) | ' + ' | '.join(s for s in av.SYSTEME) + ' |',
               '|---|' + '---|' * len(av.SYSTEME)]
@@ -251,8 +284,22 @@ def tabellen(erg):
     zeilen.append(f'| zusammen | {lz["kampagnen"]} | {_zahl(lz["kernsekunden"], 0)} Kernsekunden '
                   f'({_zahl(lz["kernstunden"], 3)} Kernstunden), Wandzeit {_zahl(lz["wandzeit_s"], 0)} s |')
     t_laufzeit = '\n'.join(zeilen)
+    ab = erg['abschaetzung'] or {}
+
+    def sp(x):
+        return '–' if x is None else (f'{_zahl(x[0], 1)}–{_zahl(x[1], 1)}' if isinstance(x, list) else _zahl(x, 1))
+    zeilen = ['| künftiger Lauf (nicht gestartet) | Kernstunden (grob) |', '|---|---|',
+              f'| Kalibrier- und Prüfsimulation von c je System (1000 + 1000 Kampagnen, B = 10 000) | '
+              f'{sp(ab.get("kalibrierung_je_system_kernstunden"))} |',
+              f'| dasselbe für A4, V1-G0 und V1-G60h | {sp(ab.get("drei_referenzsysteme_kernstunden"))} |',
+              f'| Planungssimulation je Kandidat (n_min, n₀) und Paar (k, T_a) | '
+              f'{sp(ab.get("planungssimulation_je_kandidat_kernstunden"))} |',
+              f'| Zähl- und Ablaufdiagnose ohne Stufe 2 je 1000 Kampagnen | '
+              f'{sp(ab.get("zaehldiagnose_je_1000_kampagnen_kernstunden"))} |',
+              f'| Ebene Z/Stufe 1 mit Stufe 2 (B = 1000) je 10 Kampagnen | {sp(ab.get("ebene_Z_je_10_kampagnen_kernstunden"))} |']
+    t_abschaetzung = '\n'.join(zeilen)
     return dict(vergleich=t_vergleich, gepaart=t_gepaart, ablauf=t_ablauf, anlaesse=t_anlaesse, voll=t_voll,
-                regelpfad=t_regelpfad, laufzeit=t_laufzeit)
+                regelpfad=t_regelpfad, laufzeit=t_laufzeit, abschaetzung=t_abschaetzung)
 
 
 def auswerten(pfad=None, ausgabe=None):
@@ -300,10 +347,16 @@ def schreiben(pfad=None, ausgabe=None, doku=None):
     if os.path.exists(bpfad):
         with open(bpfad, encoding='utf-8') as f:
             text = f.read()
-        for name, tab in t.items():
-            text = re.sub(rf'(<!-- tabelle:{name} -->\n).*?(\n<!-- /tabelle -->)', lambda m: m.group(1) + tab + m.group(2),
-                          text, flags=re.S)
         with open(bpfad, 'w', encoding='utf-8') as f:
-            f.write(text)
+            f.write(einsetzen(text, t))
     return dict(ergebnisse=f'{av.DOKU_REL}/ergebnisse.json', kampagnen=len(erg['alle']), pr22=erg['pr22']['gleich'],
                 laufzeiten=erg['laufzeiten']['kernstunden'])
+
+
+def einsetzen(text, tabellen):
+    """Tabellen zwischen <!-- tabelle:NAME --> und der nächsten <!-- /tabelle --> einsetzen; der Text außerhalb der
+    Markierungen bleibt unverändert, auch bei leeren Markierungspaaren."""
+    for name, tab in tabellen.items():
+        text = re.sub(rf'(<!-- tabelle:{name} -->\n).*?(<!-- /tabelle -->)',
+                      lambda m, tab=tab: m.group(1) + tab + '\n' + m.group(2), text, flags=re.S)
+    return text
