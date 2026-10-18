@@ -1,4 +1,4 @@
-# k-Konsistenz und Wiederholungsablauf für AP-13 (17.10.2026)
+# k-Konsistenz und Wiederholungsablauf für AP-13 (17.10.2026, Korrekturrunde 18.10.2026)
 
 Synthetische Entwicklungsdiagnostik zu AP-11 und AP-13 (Auftrag „k-Konsistenz und Wiederholungsablauf für AP-13“ vom
 17.10.2026). Ausgangsstand ist `main` 2ab6d28 (PR #22 gemergt; `main` hat sich bis zum PR nicht weiterbewegt). Der
@@ -9,12 +9,16 @@ Auftrag umfasst zwei technische Änderungen:
 - Phase 1 läuft in der Simulation auf Wunsch als zustandsbehafteter Ablauf mit den Wiederholungen nach §6, §8.8, §9.1,
   §9.2 und A9.12, auf Ebene H und über Ebene Z/Stufe 1 (Abschnitt 2).
 
+Am 18.10.2026 wurden drei bestätigte Fehler korrigiert und die betroffenen Ergebnisse gezielt neu gerechnet (Abschnitt
+„Korrekturrunde vom 18.10.2026“). Die Zahlen dieses Berichts sind der Stand danach; der Stand davor bleibt über den
+Commit 9a1cd2f nachvollziehbar.
+
 Präregistrierung, Regelprofile, G4-Formel mit Faktor 3, Poolregel und normative Schwellen sind unverändert. Alle Zahlen
 sind Entwicklungswerte: reduzierte Replikatzahlen (Profil ENTW-2026-10 mit B = 1000, H3-MC 1000, 1000
 ε_ctrl-Datensätze), zehn Kampagnen je System und Variante. Sie qualifizieren keine Wahrscheinlichkeit. Es gibt keine
 Power-Aussage und keine 0,95-Aussage.
 
-**Ergebnis in Kürze.**
+**Ergebnis in Kürze** (nach der Korrekturrunde, Ablauf `ablauf-2`).
 
 - **Frage 1 – Phase-0-Größen.** Bis `teil_b-0.2` stammten σ_Δ, die Gültigkeitsmaske der Phase 0 (damit die n₀ⱼ
   Einzelmodulläufe für ŷ⁰ und der S3-Bezug), σ̂_ref, ε_ctrl, p̂, Rauschkovarianzen und gepoolte Streuungen aus einem
@@ -30,7 +34,10 @@ Power-Aussage und keine 0,95-Aussage.
   - In den 25 abgeschlossenen Kampagnen (12 600 Plätze) sind 580 Plätze ersetzt. Es fehlen 11: 7 nach ausgeschöpfter
     Grenze, 4 nach spät erkannter Ungültigkeit.
   - 5 von 30 Kampagnen halten an und zählen nicht als abgeschlossen: S1 nach reproduziertem Nullpunktalarm (2), S1
-    nach G1-Verstoß von X′ (2), S3 (1).
+    nach G1-Verstoß von X′ gegen seine Klammer R₂/R₃ (2), S3 (1).
+  - Korrekturrunde: Die Prüfung von X′ gegen R₂/R₃ und die S2-Bilanz ändern in den 39 neu gerechneten Kampagnen keine
+    Entscheidung. Kein X′ hätte unter `ablauf-1` ein R₁ erhalten; die beiden S1-Halte nach X′ sind jetzt gegen die
+    vorgesehene Klammer belegt. Drei Plätze angehaltener Kampagnen heißen „fehlt: Halt“ statt „spät erkannt“.
 - **Frage 3 – Vollständigkeit.** Gemeinsam vollständig sind 25/30 (historisch), 24/30 (k-konsistent ohne
   Wiederholungen) und 25/30 (mit Wiederholungen).
   - Der k-Effekt betrifft nur A4: 10/10 → 9/10, weil ein Punkt (S116) mit 17 gültigen Läufen unter n_min = 18 fällt.
@@ -44,16 +51,21 @@ Power-Aussage und keine 0,95-Aussage.
   Laufplan und bei A4 mit Phase-0-Größen bei k = 30 gerechnet. Die Neuläufe sind abgeschätzt, nicht gestartet
   (Abschnitt 5).
 
-**Rechenumfang.** Insgesamt 104 Kampagnenausführungen (Grenze 120):
+**Rechenumfang.** Zwei getrennte Budgets:
 
-- 90 Vergleichskampagnen;
-- 6 volle Ketten mit Stufe 2, davon 2 über Ebene Z/Stufe 1 (Grenze 12);
-- 3 Regelpfadfälle;
-- die Fortsetzung, gezählt doppelt (unterbrochen und fortgesetzt sowie ununterbrochen);
-- außerhalb der Auftragsliste eine Diagnosekampagne (S06) und zwei Gegenproben am Endstand (Abschnitt 7).
+- **Bis 9a1cd2f: 105 Kampagnenausführungen** (Grenze 120), davon 7 volle Bootstrap-Auswertungen (Grenze 12):
+  - 101 aus der Auftragsliste: 90 Vergleichskampagnen, 6 volle Ketten mit Stufe 2 (davon 2 über Ebene Z/Stufe 1),
+    3 Regelpfadfälle und die Fortsetzung, doppelt gezählt (unterbrochen und fortgesetzt sowie ununterbrochen);
+  - außerhalb der Auftragsliste eine Diagnosekampagne (S06), zwei Gegenproben am Endstand und ein
+    End-to-End-Abnahmelauf (B = 200). Die erste Fassung dieses Berichts nannte 104, ohne den Abnahmelauf.
+  - 0,20 Kernstunden. Wandzeit 33 s für den Startsatz und 9 min 19 s für die übrigen Aufträge.
+- **Korrekturrunde vom 18.10.2026: 39 zusätzliche Kampagnenausführungen** (eigenes Zusatzbudget 40), davon 4 volle
+  Bootstrap-Auswertungen (Zusatzgrenze 4); 0,20 Kernstunden, Wandzeit 10 min 51 s.
+- **Zusammen 144 Ausführungen, davon 11 volle.** Sie liegen nicht mehr innerhalb der ursprünglichen 120; die
+  Korrekturrunde ist ein ausdrücklich zusätzliches Budget.
 
-Gerechnet mit 4 Prozessen und je einem BLAS-Thread: 0,20 Kernstunden (Grenze 4). Die Wandzeit betrug 33 s für den
-Startsatz und 9 min 19 s für die übrigen Aufträge. Kein Matrixlauf, keine Kalibrierung, keine Schwellenoptimierung.
+Gerechnet jeweils mit 4 Prozessen und je einem BLAS-Thread. Kein Matrixlauf, keine Kalibrierung, keine
+Schwellenoptimierung.
 
 **Aufruf** (vom Repository-Stamm):
 
@@ -61,15 +73,171 @@ Startsatz und 9 min 19 s für die übrigen Aufträge. Kein Matrixlauf, keine Kal
 python3 code/pcmms_auswertung harness ablauf-vergleich --vorbereiten   # einmalig, erledigt (auftrag.json, committet vor den Rechnungen)
 python3 code/pcmms_auswertung harness ablauf-vergleich --startsatz     # Startsatz: Laufzeitmessung und Hochrechnung
 python3 code/pcmms_auswertung harness ablauf-vergleich                 # alle Aufträge; passende Checkpoints werden übernommen
-python3 code/pcmms_auswertung harness ablauf-vergleich --bericht       # ergebnisse.json, kampagnen.csv, Tabellen dieses Berichts
+python3 code/pcmms_auswertung harness ablauf-vergleich --bericht       # (Stand 9a1cd2f) ergebnisse.json, kampagnen.csv, Tabellen
+python3 code/pcmms_auswertung harness ablauf-vergleich --korrektur --vorbereiten   # Korrekturrunde: einmalig, erledigt (auftrag_korrektur_2026-10-18.json)
+python3 code/pcmms_auswertung harness ablauf-vergleich --korrektur                 # Korrekturrunde: 39 Ausführungen
+python3 code/pcmms_auswertung harness ablauf-vergleich --korrektur --bericht       # ergebnisse.json, kampagnen.csv, Tabellen dieses Berichts
 python3 code/pcmms_auswertung harness ablauf-pruefsatz --pruefen tests/fixtures/ap13_ablauf_pruefsatz
 ```
 
-Rechnungen laufen nur aus einem sauberen Git-Stand; die Checkpoints liegen unter `/tmp/pcmms-ablauf-vergleich-20261017/`,
-nicht im Repository. Ihr Schlüssel umfasst den Rechencode ohne Kommandozeile und Berichtsteil, den Auftrag, die
-gemeinsamen Einstellungen, das Profil, Werkzeug 8, die Seeds, das Verfahren der Variante (Bindung, Ablauf, Ablaufversion,
-Optionen) und die Bibliotheken. Berichtskorrekturen (`harness/ablauf_vergleich_bericht.py`) wiederholen keine Rechnung.
-Die Checkpoints passen zum Rechencode von 13f2a20; `--bericht` und Übernahmen laufen auf diesem Stand (Abschnitt 7).
+Rechnungen laufen nur aus einem sauberen Git-Stand; die Checkpoints liegen außerhalb des Repositorys. Ihr Schlüssel
+umfasst den Rechencode ohne Kommandozeile und Berichtsteil, den Auftrag, die gemeinsamen Einstellungen, das Profil,
+Werkzeug 8, die Seeds, das Verfahren der Variante (Bindung, Ablauf, Ablaufversion, Optionen) und die Bibliotheken.
+Berichtskorrekturen (`harness/ablauf_vergleich_bericht.py`) wiederholen keine Rechnung.
+
+- Die Checkpoints vom 17.10.2026 (`/tmp/pcmms-ablauf-vergleich-20261017/`) passen zum Rechencode von 13f2a20
+  (`ablauf-1`). Am heutigen Code passt ihr Schlüssel nicht mehr; als Ergebnis werden sie nicht übernommen.
+- Die Checkpoints der Korrekturrunde (`/tmp/pcmms-ablauf-vergleich-20261018/`) passen zum Rechencode von c8c0a36
+  (`ablauf-2`). `--korrektur --bericht` liest sie und die alten Befunde, Letztere nur als Vorher-Stand und geprüft gegen
+  die Prüfsummen in `ergebnisse.json` am Stand 9a1cd2f (Abschnitt 7).
+
+## Korrekturrunde vom 18.10.2026
+
+Anweisung „PR #23: drei bestätigte Fehler korrigieren“ vom 18.10.2026. Drei Gegenproben am Stand 9a1cd2f zeigten Fehler
+im Ablauf, in Teil B und in der Übergabe an Stufe 2. Jede Korrektur hat Regressionen, die am Stand 9a1cd2f den Fehler
+zeigen und jetzt bestehen; sie arbeiten mit unabhängig gerechneten Abweichungen, erwarteten Referenzrollen und
+S2-Kennungen, prüfen die Fortsetzung aus einem gespeicherten Ablaufstand und die Übergabe an Stufe 2 auf Ebene H und
+über Ebene Z/Stufe 1. Präregistrierung, Regelprofile, normative Schwellen, die G1-Grenze und die Wiederholungsgrenze sind
+unverändert.
+
+| | Fehler am Stand 9a1cd2f | Korrektur | Regressionen (Befund am Stand 9a1cd2f) | Wirkung in der Neurechnung |
+|---|---|---|---|---|
+| 1 | Die Vorprüfung gegen R₀ lief auch für X′ und schob in die Folge R₂, X′, R₃ ein R₁ ein. X′ wurde gegen R₂/R₁ geprüft, S1 konnte vor R₃ anhalten. Gegenprobe (S100 Block 1: +0,020 N, X′ +0,0105 N, R₃ +0,002 N): R₂, X′, R₁ und S1 bei 0,0105 N | `ablauf-2` (0008dd8): keine Vorprüfung für X′; seine Klammer ist an R₂/R₃ desselben G1-Falls gebunden (auch bei mehreren offenen Fällen; eine nicht reproduzierte Alarmwiederholung ersetzt R₂ bzw. R₃) und wird protokolliert. S1 nur mit dieser gültigen Klammer, sonst „S1 nicht prüfbar“ ohne weitere Wiederholung. Stufe 2 prüft die Klammer offline. Platzstatus aus strukturierten Angaben | Gegenprobe besteht (0,0095 N gegen R₂/R₃); ein verletzendes X′ (0,014 N) hält erst nach R₃; spät erkannter G1-Verstoß und X′ jenseits der Grenze; unvollständige Klammer; Fortsetzung aus dem Ablaufstand; Übergabe an Stufe 2 (A4). Am alten Stand je R₁ nach X′ bzw. Halt S1 | keine andere Entscheidung: Kein X′ der 37 Ablaufkampagnen hätte unter `ablauf-1` ein R₁ erhalten (größtes \|Δ⟨N⟩\|/ε_ctrl gegen R₂: 0,96). Die zwei S1-Halte nach X′ sind gegen R₂/R₃ belegt; drei Plätze angehaltener Kampagnen heißen „fehlt: Halt“ statt „spät erkannt“ |
+| 2 | `phase0_satz` übernahm bei gleichem k und N_z zuerst den vorläufigen Satz auf oberster Ebene. Ein Suchtreffer beim ursprünglichen k (k = 12 → 12, N_z = 100) war allein wegen dessen Quelle „nicht abgesichert“ | 4266bc3: Bei festgelegtem Paar geht der Satz der Suche vor. Die Herkunft prüft `arbeitspunkt` über Quelle und Bindung (`gleich_gebunden`: Daten, k, Fenster, Code, Seed). Datenprüfsumme, k, Fenster, Reserve, n_max und Abweichungen vom Suchplan bleiben geprüft; Format `teil_b-0.3` unverändert | Suchtreffer ohne k-Wechsel mit dem Testhaken beim ersten Paar (reiner Softwareprüffall, keine Qualifikation eines Arbeitspunkts): am alten Stand „nicht abgesichert“, jetzt „abgesichert“. Fremde Daten, abweichender Plan, zu kleine Reserve und andere Bindung bleiben zurückgewiesen bzw. nicht abgesichert | keine: Die Kampagnen rechnen ohne Planungshaken (Suche „offen“, Arbeitspunkt „nicht geprüft“); Teil B ist in allen 37 verglichenen Kampagnen und in der Stichprobe gleich |
+| 3 | Online zählte ein S2 mit bestätigtem Apparaturfehler nicht, offline galt `len(s2) >= 2`. Gegenprobe (S102 in beiden Blöcken G6; erste Wiederaufnahme mit, zweite ohne Apparaturfehler): online abgeschlossen, offline Phase 1 beendet und in `datenlage` die globale Sperre | 305c7b7: `gueltigkeit.s2_bilanz` online und offline aus den S2-Versuchen und den protokollierten Wiederaufnahmen; der Ablaufstand trägt beides bis Stufe 2, `datenlage` gleicht die Bilanz ab. Die Ausschlüsse (Konfiguration, ŷ¹) bleiben. Fehlende oder widersprüchliche Angaben geben nichts frei. Ein S2 während eines anderen Halts wird gezählt (vorher online verworfen). Keine Wiederaufnahme nach mechanischem Eingriff, keine angenommene Ursachenanalyse | Gegenprobe mit unabhängig erwarteten S2-Kennungen; zwei S2 ohne Apparaturfehler, auch nach einer Freigabe; fehlende und widersprüchliche Angaben (alt: „ja“ als Apparaturfehler angenommen); S2 im dritten Versuch eines Kontrolllaufs (alt: angehalten statt abgebrochen); Übergabe auf Ebene H mit Schreiben/Lesen und Fortsetzung aus dem gespeicherten Halt (alt: globale Sperre) und über Ebene Z/Stufe 1 | keine: In den Katalogkampagnen wird nicht wiederaufgenommen, und kein S2 trat während eines anderen Halts auf. S02 hält wie bisher beim ersten S2 an; nur der Halttext nennt jetzt „ŷ¹ ungültig“ |
+
+Am Stand 9a1cd2f schlagen 15 der neuen bzw. erweiterten Regressionen fehl: 13 am jeweiligen Fehler, 2 an einer neuen
+Prüfung (Abschnitt 7).
+
+**Neurechnung.** Auftragsliste `auftrag_korrektur_2026-10-18.json`, committet vor den Rechnungen (d47ca34; Befundfelder
+zur Ursachenangabe in c8c0a36). Gerechnet auf c8c0a36 aus sauberem Arbeitsbaum, mit 4 Prozessen und je einem BLAS-Thread:
+
+- die 30 Vergleichskampagnen der Variante mit Wiederholungen: A4, V1-G0 und V1-G60h mit denselben zehn Seeds, Plänen,
+  Rauschmodellen und Profilen, keine Suche nach anderen Seeds;
+- die vier vollen Ketten des Ablaufs (N01-A4 und A04-R4, Ebene H und Ebene Z/Stufe 1, B = 1000);
+- die drei Regelpfadfälle;
+- je eine Stichprobe der statischen Varianten (A4, Seed 0, historisch und k-konsistent).
+
+Die Ablaufversion ist auf `ablauf-2` angehoben, weil sich Entscheidungen (X′, S2 während eines anderen Halts) und das
+Protokoll ändern. Neue Checkpoints liegen unter `/tmp/pcmms-ablauf-vergleich-20261018/`; ihr Schlüssel enthält den
+Rechencode und `ablauf-2`. Die alten Checkpoints (`ablauf-1`) gelten nicht als Ergebnisse des korrigierten Ablaufs. Sie
+dienen nur als Vorher-Stand; ihre Dateien sind gegen die Prüfsummen in `ergebnisse.json` am Stand 9a1cd2f geprüft, die
+Hashprüfung der Checkpoints ist nicht abgeschaltet. Herkunft je Ergebnisgruppe:
+
+<!-- tabelle:herkunft -->
+| Ergebnisgruppe | Herkunft |
+|---|---|
+| Vergleich historisch (30 Kampagnen) | übernommen vom Rechenstand 13f2a20 (unberührt, geprüft) |
+| Vergleich k-konsistent ohne Wiederholungen (30) | übernommen vom Rechenstand 13f2a20 (unberührt, geprüft) |
+| Vergleich k-konsistent mit Wiederholungen (30) | neu gerechnet (Korrekturrunde, ablauf-2) |
+| Gegenprobe der Variante historisch gegen PR #22 | übernommen vom Rechenstand 13f2a20 (unberührt, geprüft) |
+| volle Ketten ohne Ablauf (2) | übernommen vom Rechenstand 13f2a20 (unberührt, geprüft) |
+| volle Ketten mit Ablauf, Ebene H und Z/Stufe 1 (4) | neu gerechnet (Korrekturrunde, ablauf-2) |
+| Regelpfadfälle (3) | neu gerechnet (Korrekturrunde, ablauf-2) |
+| Fortsetzung aus einem Ablaufstand (Katalogkampagne) | Stand ablauf-1 (Rechenstand 13f2a20), nicht neu gerechnet |
+| Abschätzung künftiger Neuläufe | übernommen (Laufzeiten der Rechnung vom 17.10.2026, Rechenstand 13f2a20); mit den Laufzeiten der Korrekturrunde: abschaetzung_korrektur |
+<!-- /tabelle -->
+
+- **Unberührte statische Ergebnisse.** Die Varianten historisch und k-konsistent ohne Wiederholungen, die Gegenprobe
+  gegen PR #22 und die zwei vollen Ketten ohne Ablauf sind übernommen, nicht neu gerechnet. Ihre Unbetroffenheit ist
+  geprüft:
+  - Codepfad: Die Korrekturen 1 und 3 wirken nur im Ablauf `zustand`, Korrektur 2 nur bei einem in der Suche
+    festgelegten Paar, das diese Kampagnen nicht haben. Die Klammerberechnung von G1 ist umgestellt, rechnet aber
+    bitgleich.
+  - Stichprobe: A4, Seed 0, in beiden statischen Varianten neu gerechnet; der Befund ist ohne Laufzeit gleich.
+  - Der Software-Prüfsatz (statischer Laufplan) ist am Endstand gleich.
+- **Fortsetzung.** Die Fortsetzung aus einem Ablaufstand (N01-V1G60h) ist nicht als Katalogkampagne wiederholt; ihr Wert
+  in `ergebnisse.json` ist als Stand `ablauf-1` gekennzeichnet. Die Fortsetzung des korrigierten Ablaufs prüfen
+  Regressionstests: X′ unterbrochen und aus der Datei fortgesetzt (Skriptmessung), ein Halt nach S2 gespeichert, frisch
+  aufgebaut und mit Ereignis fortgesetzt (Ebene H), A4 nach 60 Versuchen unterbrochen und fortgesetzt (Ebene H).
+- **Laufzeiten** der Korrekturrunde stehen in Abschnitt 5 neben denen vom 17.10.2026. Die Korrekturrunde lief rund 35 %
+  langsamer; die Abschätzung künftiger Neuläufe bleibt deshalb die vom 17.10.2026.
+
+**Vorher/Nachher** (vorher `ablauf-1`, Rechenstand 13f2a20; nachher `ablauf-2`). Von den 37 neu gerechneten
+Ablaufkampagnen (30 Vergleichskampagnen, 4 volle Ketten, 3 Regelpfade) sind 34 in allen verglichenen Größen gleich:
+Status, Halt mit Versuch, gemeinsame Vollständigkeit, Auswertbarkeit, Laufzahl, Rollen, Platzstatus, Messzeit, Sperren,
+Teil B und bei den vollen Ketten alle Entscheidungen (H0–H4, H1Z, E3; bitgleich). Je System:
+
+<!-- tabelle:vorher_nachher -->
+| System | Größe | vorher (ablauf-1, Rechenstand 13f2a20) | nachher (ablauf-2) |
+|---|---|---|---|
+| N01-A4 | gemeinsam vollständig | 9/10 | 9/10 |
+| N01-A4 | Halte | S1 Nullpunktalarm: 1 | S1 Nullpunktalarm: 1 |
+| N01-A4 | abgeschlossene: ersetzt / fehlend (Grenze, spät, S1 nicht prüfbar) | 212 / 3 (1, 2, 0) | 212 / 3 (1, 2, 0) |
+| N01-A4 | zusätzliche Versuche (Summe) | 308 | 308 |
+| N01-A4 | R₁ / R₂ / X′ / R₃ | 35 / 2 / 2 / 2 | 35 / 2 / 2 / 2 |
+| N01-A4 | abgeschlossene: Laufzeit realisiert/geplant (Mittel) | 1,052 | 1,052 |
+| N01-A4 | X′: mit G1-Prüfung (davon Klammer R₂/R₃) / gültig / S1 / S1 nicht prüfbar / aus anderem Grund ungültig | – | 2 (2) / 2 / 0 / 0 / 0 |
+| N01-A4 | X′ mit R₁ der Vorprüfung unter ablauf-1 (größtes \|Δ⟨N⟩\|/ε_ctrl gegen R₂) | – | 0 (0,56) |
+| N01-V1G0 | gemeinsam vollständig | 7/10 | 7/10 |
+| N01-V1G0 | Halte | S1 Nullpunktalarm: 1, S1 X′: 2 | S1 Nullpunktalarm: 1, S1 X′: 2 |
+| N01-V1G0 | abgeschlossene: ersetzt / fehlend (Grenze, spät, S1 nicht prüfbar) | 184 / 3 (1, 2, 0) | 184 / 3 (1, 2, 0) |
+| N01-V1G0 | zusätzliche Versuche (Summe) | 392 | 392 |
+| N01-V1G0 | R₁ / R₂ / X′ / R₃ | 38 / 22 / 22 / 22 | 38 / 22 / 22 / 22 |
+| N01-V1G0 | abgeschlossene: Laufzeit realisiert/geplant (Mittel) | 1,062 | 1,062 |
+| N01-V1G0 | X′: mit G1-Prüfung (davon Klammer R₂/R₃) / gültig / S1 / S1 nicht prüfbar / aus anderem Grund ungültig | – | 20 (20) / 18 / 2 / 0 / 2 |
+| N01-V1G0 | X′ mit R₁ der Vorprüfung unter ablauf-1 (größtes \|Δ⟨N⟩\|/ε_ctrl gegen R₂) | – | 0 (0,96) |
+| N01-V1G60h | gemeinsam vollständig | 9/10 | 9/10 |
+| N01-V1G60h | Halte | S3: 1 | S3: 1 |
+| N01-V1G60h | abgeschlossene: ersetzt / fehlend (Grenze, spät, S1 nicht prüfbar) | 184 / 5 (5, 0, 0) | 184 / 5 (5, 0, 0) |
+| N01-V1G60h | zusätzliche Versuche (Summe) | 295 | 295 |
+| N01-V1G60h | R₁ / R₂ / X′ / R₃ | 20 / 7 / 7 / 7 | 20 / 7 / 7 / 7 |
+| N01-V1G60h | abgeschlossene: Laufzeit realisiert/geplant (Mittel) | 1,050 | 1,050 |
+| N01-V1G60h | X′: mit G1-Prüfung (davon Klammer R₂/R₃) / gültig / S1 / S1 nicht prüfbar / aus anderem Grund ungültig | – | 7 (7) / 7 / 0 / 0 / 0 |
+| N01-V1G60h | X′ mit R₁ der Vorprüfung unter ablauf-1 (größtes \|Δ⟨N⟩\|/ε_ctrl gegen R₂) | – | 0 (0,61) |
+<!-- /tabelle -->
+
+Die drei Kampagnen mit Unterschieden, alle nur in Text und Benennung:
+
+<!-- tabelle:vorher_nachher_kampagnen -->
+| Kampagne | vorher → nachher | Ursache |
+|---|---|---|
+| N01-V1G0 schlank Ebene H Nr. 2 | S104 Block 23: fehlt: spät erkannt → fehlt: Halt; S128 Block 23: fehlt: spät erkannt → fehlt: Halt; Haltgrund (Text) | Haltgrund nennt jetzt die Klammer R₂/R₃ von X′ (Korrektur 1); Halt und Zeitpunkt gleich; Platzstatus aus strukturierten Angaben (Korrektur 1, kein anderer Ablauf): fehlt: spät erkannt → fehlt: Halt |
+| N01-V1G0 schlank Ebene H Nr. 7 | S124 Block 13: fehlt: spät erkannt → fehlt: Halt; Haltgrund (Text) | Haltgrund nennt jetzt die Klammer R₂/R₃ von X′ (Korrektur 1); Halt und Zeitpunkt gleich; Platzstatus aus strukturierten Angaben (Korrektur 1, kein anderer Ablauf): fehlt: spät erkannt → fehlt: Halt |
+| S02-kontrolllauf schlank Ebene H Nr. 0 | Haltgrund (Text) | Halttext für S2 im Kontrolllauf: ŷ¹ ungültig statt Ausschluss der Konfiguration (Korrektur 3); Halt und Zeitpunkt gleich |
+<!-- /tabelle -->
+
+- **Die vier S1-Halte bleiben.**
+  - Zwei folgen aus einem reproduzierten Nullpunktalarm (A4 Kampagne 4, V1-G0 Kampagne 1).
+  - Zwei folgen aus einem G1-Verstoß von X′ gegen seine Klammer R₂/R₃: V1-G0 Kampagne 2 (X′ V00666 zu S128 in Block 23,
+    R₂ V00665, R₃ V00667) und Kampagne 7 (X′ V00364 zu S124 in Block 13, R₂ V00363, R₃ V00365).
+  - Unter `ablauf-1` wurden diese X′ gegen dieselben Referenzläufe geprüft: Ihre Abweichung von R₂ lag mit 0,12 mN und
+    0,25 mN unter ε_ctrl (0,22 bzw. 0,26 mN), es gab kein R₁.
+  - Die Halte sind Fehlalarme bei exakter Superposition im Sinn von §9.2.
+- **Referenzbezüge.** Alle 33 X′ mit G1-Prüfung (29 in den Vergleichskampagnen, 4 in den vollen Ketten über Ebene Z)
+  haben ihre Klammer R₂/R₃, vor wie nach der Korrektur. Zwei X′ (V1-G0) waren aus anderem Grund ungültig und folgten §6.
+  Am nächsten an der Schwelle der alten Vorprüfung lag das haltende X′ von V1-G0 Kampagne 7 (0,96 ε_ctrl).
+- **Plätze.** In abgeschlossenen Kampagnen unverändert: 580 ersetzt, 11 fehlend (7 nach ausgeschöpfter Grenze, 4 spät
+  erkannt). In den angehaltenen Kampagnen V1-G0 2 und 7 hießen drei Plätze „fehlt: spät erkannt“: Der frühere
+  Textvergleich traf auch „G1-Verstoß vor Beginn des Schlusskontrollsatzes“. Sie fehlen wegen des Halts.
+- **Messzeit, Laufzahl und Rollen** sind unverändert (Tabelle oben; 93 R₁ nach der Vorprüfung, je 31 R₂, X′ und R₃).
+- **S2.** S02-kontrolllauf hält wie bisher nach dem ersten S2 an. Die S2-Bilanz im Ablaufstand (ein maßgebliches S2,
+  Phase 1 nicht beendet) gleicht der Offline-Auswertung.
+
+**Ablauf-Prüfsatz.** Vor dem Neuschreiben gegengeprüft (`pruefsatz_gegenpruefung.py`, Ergebnis
+`pruefsatz_gegenpruefung.json`):
+
+- In allen fünf Prüfkampagnen sind die Inhaltsgrößen und die Prüfsummen von Daten, Ziehungen und Schwellen gleich dem
+  Stand 9a1cd2f.
+- Die Prüfsummen von Köpfen und Entscheidungen gleichen ihm, sobald die neuen Protokollfelder (`g1_klammer`,
+  `spaet_erkannt`, `s1`) entfernt und der alte Halttext eingesetzt sind.
+- Neu geschrieben (51ca307) sind daher nur Ablaufversion, Verfahrenskennung und die Prüfsummen der Köpfe (fünf Fälle)
+  und der Entscheidungen (S02-kontrolllauf). Der Software-Prüfsatz ist unverändert.
+
+**Rechenumfang** (die Korrekturrunde ist ein ausdrücklich zusätzliches Budget):
+
+<!-- tabelle:rechenumfang -->
+| Rechnung | Kampagnenausführungen | volle Bootstrap-Auswertungen | Grenze |
+|---|---|---|---|
+| bisher (PR #23 bis 9a1cd2f) | 105 (101 Auftragsliste, 1 Diagnose, 2 Gegenproben, 1 Abnahmelauf) | 7 | 120 / 12 |
+| Korrekturrunde 18.10.2026 (zusätzlich) | 39 | 4 | 40 / 4 |
+| zusammen | 144 | 11 | – (zwei getrennte Budgets) |
+<!-- /tabelle -->
+
+Nicht gezählt sind wie bisher die Regressionstests und die Prüfsätze: die Abnahme und die Gegenprüfung des
+Ablauf-Prüfsatzes mit dessen fünf kleinen Prüfkampagnen. Entwicklungsläufe mit Testgrößen (Pläne mit 1–6 Blöcken, wie
+in den Regressionen) zählen ebenso wenig. Einen End-to-End-Abnahmelauf mit Stufe 2 gibt es in der Korrekturrunde nicht;
+er wäre die fünfte volle Auswertung.
 
 ## 1 Phase-0-Größen: bisher an k der Pilotgrößen, jetzt an den Plan gebunden (Frage 1)
 
@@ -138,7 +306,8 @@ Datensatzzahl der ε_ctrl-Simulation, Version.
 
 ## 2 Ablauf der Phase 1: zusätzliche Versuche, Messzeit, Ersatz, Fehlen und Halt (Frage 2)
 
-**Umsetzung** (`ablauf.py`, Version `ablauf-1`; Verfahren `zustand` in `verfahren.py`):
+**Umsetzung** (`ablauf.py`, Version `ablauf-2` seit der Korrekturrunde, vorher `ablauf-1`; Verfahren `zustand` in
+`verfahren.py`):
 
 - Die geplante Reihenfolge (Laufplan mit dem Reihenfolgegenerator von §6) und die ausgeführte Reihenfolge sind
   getrennt. Jeder Versuch hat eine Kennung, den Bezug zum geplanten Lauf, einen Versuchszähler, Rolle, Anlass,
@@ -158,18 +327,25 @@ Datensatzzahl der ε_ctrl-Simulation, Version.
   Optionen gehören zur Checkpoint-Kennung; ein Ablaufstand mit anderer Kennung wird nicht fortgesetzt.
 - Regeln: Konfigurationswiederholung am gezogenen Platz, höchstens zwei je Konfiguration und Block, nur vor Beginn des
   Schlusskontrollsatzes; G1 mit R₀/R₁, beidseitiger Klammerung, R₂/X′/R₃ auch über die Grenze (X′ zählt als
-  Wiederholung), S1 bei G1-Verstoß von X′ oder reproduziertem Nullpunktalarm; Kontrolllauf sofort wiederholt,
-  höchstens zweimal, dann Halt, bei L′ Fehlen ohne Halt; S2 mit Ausschluss und weiterer Messung, zweites S2 beendet
-  Phase 1; S3 mit sofortiger Wiederholung; S4; Aufwärm-Referenzläufe nach §6.
+  Wiederholung); S1 bei reproduziertem Nullpunktalarm oder bei G1-Verstoß von X′ gegen seine Klammer R₂/R₃; Kontrolllauf
+  sofort wiederholt, höchstens zweimal, dann Halt, bei L′ Fehlen ohne Halt; S2 mit Ausschluss und weiterer Messung,
+  ein zweites S2 ohne festgestellten Apparaturfehler beendet Phase 1; S3 mit sofortiger Wiederholung; S4;
+  Aufwärm-Referenzläufe nach §6.
+- Seit `ablauf-2` (Korrekturrunde): X′ hat keine Vorprüfung mit R₁; sein G1 steht mit R₃ fest. Ist die Klammer
+  unvollständig (R₂ oder R₃ ungültig), gilt G1 zwischen den einschließenden gültigen Referenzläufen, S1 ist „nicht
+  prüfbar“, und X′ wird nicht weiter wiederholt. Die S2-Bilanz rechnen Ablauf und Stufe 2 gleich aus den S2-Versuchen
+  und den protokollierten Wiederaufnahmen (`gueltigkeit.s2_bilanz`).
 - Ein Halt gibt einen fortsetzbaren Ablaufstand mit Grund zurück. Fortgesetzt wird nur mit einem ausdrücklich
   übergebenen externen Ereignis (Quelle, Zeitpunkt, Befund, Angaben zu mechanischem Eingriff und Apparaturfehler),
   danach mit einem vollständigen Kontrollsatz ohne Alarm. Ein angehaltener Ablauf ist keine abgeschlossene Kampagne:
   Stufe 2 sperrt dann alle Ausgänge („Datenlage“).
 - Übergabe an Stufe 2: Die Tabelle enthält alle Versuche mit Ablaufstand. Stufe 2 prüft offline, dass ihre Gültigkeit
   den Entscheidungen des Ablaufs gleicht, und zählt je Konfiguration und Block höchstens einen gültigen Versuch; ein
-  Ersatzversuch erzeugt keinen zusätzlichen Block. Ein mit dem Folgeblock geteilter Kontrollsatz zählt einmal.
+  Ersatzversuch erzeugt keinen zusätzlichen Block. Ein mit dem Folgeblock geteilter Kontrollsatz zählt einmal. Seit
+  `ablauf-2` prüft Stufe 2 auch die Klammer jedes X′ und die S2-Bilanz gegen den Ablaufstand.
 
-**Ergebnis** (zehn Kampagnen je System; Plan mit 630 geplanten Läufen der Phase 1, T_Lauf = 17 s):
+**Ergebnis** (zehn Kampagnen je System; Plan mit 630 geplanten Läufen der Phase 1, T_Lauf = 17 s; mit `ablauf-2` neu
+gerechnet, Zahlen gleich denen von `ablauf-1`):
 
 - **Zusätzliche Versuche:** 995 in 30 Kampagnen (11–78 je Kampagne).
   - 658 Konfigurationswiederholungen, alle nach G4; andere Ungültigkeitsgründe traten in diesen Nullfällen nicht auf.
@@ -189,8 +365,8 @@ Datensatzzahl der ε_ctrl-Simulation, Version.
   - S1 nach reproduziertem Nullpunktalarm: A4 Kampagne 4 (Zelle 3), V1-G0 Kampagne 1 (Zelle 2). Von den 16 sofortigen
     Wiederholungen nach einem Nullpunktalarm (11 außerhalb, 5 innerhalb von Kontrollsätzen) überschritten 2 die
     Schwelle im selben Kanal erneut.
-  - S1 nach G1-Verstoß von X′: V1-G0 Kampagnen 2 und 7. Vor dem Schlusskontrollsatz standen bei V1-G0 22 G1-Verstöße
-    fest, bei A4 2 und bei V1-G60h 7.
+  - S1 nach G1-Verstoß von X′ gegen seine Klammer R₂/R₃: V1-G0 Kampagnen 2 und 7. Vor dem Schlusskontrollsatz standen
+    bei V1-G0 22 G1-Verstöße fest, bei A4 2 und bei V1-G60h 7.
   - S3: V1-G60h Kampagne 7 (Im N₃ in einem Kontrolllauf und in seiner sofortigen Wiederholung über der Schwelle).
   - Die Halte sind Regelausgänge bei exakter Superposition, also Fehlalarme im Sinn von §9.2. S1 hielt 4 von
     30 Kampagnen an (Wilson [5 %; 30 %]). Die Präregistrierung nennt dafür Bonferroni-Schranken von etwa 25–28 % je
@@ -263,8 +439,10 @@ Regelpfade (Ebene H, je eine Kampagne mit eigenem Seed):
   - Damit prüft der Fall unter dem Ablauf nicht mehr „fehlende Punkte“. Katalogereignisse betreffen nur geplante Läufe
     (Abschnitt 6); dauerhaft fehlende Punkte prüfen die Tests.
 - **S02-kontrolllauf:** Ein Liftoff in L₂ der Phase 1 ist das erste S2. Phase 1 hält nach 32 Versuchen an; der Stand
-  ist fortsetzbar, ŷ¹ wäre ungültig (§8.2). Fortgesetzt wird nicht.
-- **Fortsetzung aus einem Ablaufstand** (N01-V1G60h, Seed der Vergleichskampagne 0):
+  ist fortsetzbar, ŷ¹ wäre ungültig (§8.2). Fortgesetzt wird nicht. Die S2-Bilanz im Ablaufstand (ein maßgebliches S2)
+  gleicht der Offline-Auswertung.
+- **Fortsetzung aus einem Ablaufstand** (N01-V1G60h, Seed der Vergleichskampagne 0; Stand `ablauf-1`, in der
+  Korrekturrunde nicht wiederholt, siehe dort):
   - Der Ablauf ist nach 300 Versuchen technisch unterbrochen und als Datei gespeichert (JSON und NPZ, SHA-256
     `7177b4f9…`).
   - Aus der Datei fortgesetzt, gleicht er dem ununterbrochenen Ablauf in Daten und Köpfen. Eine Fortsetzung mit anderen
@@ -276,7 +454,9 @@ Regelpfade (Ebene H, je eine Kampagne mit eigenem Seed):
 
 „Vollständig“ heißt: alle 21 Schnittpunkte auswertbar (Kontaktast und mindestens n_min = 18 gültige Läufe), ŷ¹ gültig
 und keine Sperre aller Ausgänge (beim Ablauf auch kein Halt). Ein Randanteil gültiger Einzelläufe ersetzt diese
-gemeinsame Zählung nicht. Kampagnenanteile mit 95-%-Wilson-Intervall.
+gemeinsame Zählung nicht. Kampagnenanteile mit 95-%-Wilson-Intervall. Die Zeilen „historisch“ und „k-konsistent ohne
+Wiederholungen“ sind vom Rechenstand 13f2a20 übernommen (unberührt, geprüft; Abschnitt Korrekturrunde), die Zeilen
+„mit Wiederholungen“ sind mit `ablauf-2` neu gerechnet.
 
 <!-- tabelle:vergleich -->
 | System | Variante | vollständig (95-%-Wilson) | auswertbar (Mittel, min) | min. gültige Läufe (Mittel) | G4 je Konfigurationslauf | p̂ (Mittel) | σ_Δ,F [mN] |
@@ -319,7 +499,8 @@ Gepaart über dieselben Seeds (k: historisch → k-konsistent; Ablauf: k-konsist
   weit. Ob der Ablauf die gemeinsame Vollständigkeit erhöht, entscheidet die Haltrate. Diese hängt an S1/S3 und an der
   nicht simulierbaren Wiederaufnahme. Mit zehn Seeds ist das nicht bestimmbar.
 
-Volle Ketten mit Stufe 2 (Werkzeug 8 A4 aus PR #21 nur als Testwert, B = 1000):
+Volle Ketten mit Stufe 2 (Werkzeug 8 A4 aus PR #21 nur als Testwert, B = 1000; ohne Ablauf übernommen, mit Ablauf
+neu gerechnet):
 
 <!-- tabelle:voll -->
 | Auftrag | Status | zusätzliche Läufe | Auswahl | H1 | H2 | H3 | H4 | E3 | Datenlage = schlank |
@@ -332,7 +513,8 @@ Volle Ketten mit Stufe 2 (Werkzeug 8 A4 aus PR #21 nur als Testwert, B = 1000):
 | A04-R4 k-konsistent mit Wiederholungen Ebene Z | abgeschlossen | 34 | ersetzt: 19, fehlt: spät erkannt: 1, gueltig: 484 | falsifiziert | bestätigt | nicht entscheidbar | bestätigt | unbestimmt | ja |
 <!-- /tabelle -->
 
-- Die Entscheidungen bleiben in allen sechs Ketten gleich:
+- Die Entscheidungen bleiben in allen sechs Ketten gleich (die vier Ketten mit Ablauf unter `ablauf-2` bitgleich zu
+  `ablauf-1`):
   - N01-A4: H1, H1Z, H2 und H4 bestätigt.
   - A04-R4: H1 und H1Z falsifiziert, H2 und H4 bestätigt.
   - H3 ist bei A4 nicht entscheidbar (starre Auflage, P0.4 nicht identifizierbar); E3 ist „unbestimmt“.
@@ -363,7 +545,7 @@ der Anteil verwertbarer Kampagnen ändern sich.
 
 ## 5 Künftige Neuläufe (grobe Abschätzung, nicht gestartet)
 
-Gemessene Laufzeiten dieser Rechnung (je Kampagne und Kern):
+Gemessene Laufzeiten der Rechnung vom 17.10.2026 (je Kampagne und Kern; Grundlage der Abschätzung):
 
 <!-- tabelle:laufzeit -->
 | Art | Kampagnen | Sekunden je Kampagne (Mittel, max) |
@@ -377,6 +559,24 @@ Gemessene Laufzeiten dieser Rechnung (je Kampagne und Kern):
 | voll/Z/wiederholungen | 2 | 234,2, 234,8 |
 | zusammen | 100 | 704 Kernsekunden (0,196 Kernstunden), Wandzeit 589 s |
 <!-- /tabelle -->
+
+Laufzeiten der Korrekturrunde vom 18.10.2026 (dieselben Kampagnen, `ablauf-2`):
+
+<!-- tabelle:laufzeit_korrektur -->
+| Art | Kampagnen | Sekunden je Kampagne (Mittel, max) |
+|---|---|---|
+| schlank/H/historisch | 1 | 3,1, 3,1 |
+| schlank/H/k_konsistent | 1 | 2,9, 2,9 |
+| schlank/H/wiederholungen | 33 | 3,5, 4,4 |
+| voll/H/wiederholungen | 2 | 7,9, 8,0 |
+| voll/Z/wiederholungen | 2 | 290,8, 291,9 |
+| zusammen | 39 | 720 Kernsekunden (0,200 Kernstunden), Wandzeit 649 s |
+<!-- /tabelle -->
+
+Die Korrekturrunde lief auf diesem Rechner langsamer: 3,5 statt 2,6 s je schlanker Kampagne mit Ablauf, 7,9 statt 5,6 s
+mit Stufe 2, 291 statt 234 s über Ebene Z. Gerechnet wurden dieselben Kampagnen mit demselben Ergebnis. Die Abschätzung
+unten bleibt deshalb die vom 17.10.2026. Mit den Laufzeiten der Korrekturrunde läge ihre untere Spanne für die
+Kalibrierung je System bei 26,0 statt 18,4 Kernstunden (`abschaetzung_korrektur` in `ergebnisse.json`).
 
 <!-- tabelle:abschaetzung -->
 | künftiger Lauf (nicht gestartet) | Kernstunden (grob) |
@@ -421,6 +621,17 @@ neue Fachregel):
 - S3 wird an Lⱼ ohne Verstoß gegen G2–G10 geprüft; eine gültige S3-Wiederholung ist ein gültiger Kontrolllauf.
 - Das erste S2 hält an (Abbruchregel S2, §9.2); die Konfiguration bleibt in den Blöcken und ist von Tests
   ausgeschlossen, ein zweites S2 ohne festgestellten Apparaturfehler beendet Phase 1.
+  - Maßgeblich ist die S2-Bilanz (`gueltigkeit.s2_bilanz`, im Ablauf und in Stufe 2 gleich). Ein S2 zählt nicht, wenn
+    die Wiederaufnahme seines Halts einen Apparaturfehler ausdrücklich feststellt: vollständige Angaben, kein
+    mechanischer Eingriff, Befund, Zeitpunkt nicht vor dem Halt. Die Ausschlüsse bleiben auch dann.
+  - Ein zweites maßgebliches S2 beendet Phase 1 sofort, ohne eigene Ursachenanalyse.
+  - Ein S2 während eines anderen Halts (Kontrolllauf an der Grenze) wird gezählt; die Ursachenanalyse dieses Halts
+    gilt auch für das S2.
+- X′ wird gegen seine Klammer R₂/R₃ geprüft (§9.2, A9.12), ohne Vorprüfung mit R₁. Eine nicht reproduzierte
+  Alarmwiederholung von R₂ oder R₃ ersetzt den alarmierten Lauf auch in der Klammer. Ist die Klammer unvollständig
+  (R₂ oder R₃ ungültig, kein Referenzlauf danach), gilt G1 von X′ zwischen den einschließenden gültigen Referenzläufen.
+  S1 ist dann „nicht prüfbar“ und wird nicht ausgelöst, ein G1-ungültiges X′ wird nicht weiter wiederholt, und der Platz
+  fehlt („fehlt: S1 nicht prüfbar“).
 - Der Kontrollsatz einer Wiederaufnahme wird in einer vom Reihenfolgegenerator gezogenen Reihenfolge gemessen und muss
   ohne Alarm bleiben; eine Wiederaufnahme nach mechanischem Eingriff ist nicht umgesetzt (Vergleich mit Phase 0, §9.2,
   Testlogik offen) und wird zurückgewiesen.
@@ -439,6 +650,9 @@ nach zwei ungültigen Wiederholungen ohne Halt). Primärer Funktionsnachweis ist
 - Angehaltene Kampagnen werden nicht automatisch fortgesetzt: Eine Wiederaufnahme braucht eine Ursachenanalyse, die
   sich nicht simulieren lässt. Ob eine angehaltene Kampagne nach der Analyse vollständig würde, bleibt offen; als
   abgeschlossen zählt sie hier nicht.
+- In den 39 Kampagnen der Korrekturrunde trat kein Fall auf, in dem die korrigierte Prüfung von X′ oder die S2-Bilanz
+  anders entscheidet. Die Korrekturen belegen die Regressionen, nicht diese Rechnung. Der Planungshaken ist in den
+  Kampagnen nicht angebunden; die Korrektur von Teil B prüft nur der Testhaken.
 - Zehn Kampagnen je System und Variante lösen Raten nicht auf. Die Wilson-Intervalle sind breit; eine
   Vollständigkeits- oder Haltrate ist damit nicht bestimmt.
 - Reduzierte Replikatzahlen (B = 1000). Werkzeug 8 A4 stammt aus PR #21 (alter Ablauf, historische Bindung) und dient
@@ -459,7 +673,19 @@ teilweise bearbeitet.
   - Auftragsliste vor den Rechnungen (13f2a20);
   - nach den Rechnungen: Berichtsteil (597fc7c, nur `harness/ablauf_vergleich_bericht.py` und dessen Test, außerhalb
     des Rechencodes), Ergebnisse mit diesem Bericht (f33f205), Zurückweisung des Ablaufs in der Dateikette (28bc9dc),
-    Dokumentation.
+    Dokumentation (9a1cd2f, Stand vor der Korrekturrunde).
+  - Korrekturrunde: Teil B (4266bc3), X′ (0008dd8), S2-Bilanz (305c7b7), Ablauf-Prüfsatz nach Gegenprüfung (51ca307),
+    Auftragsliste vor den Rechnungen (d47ca34), Befundfelder zur Ursachenangabe und Rechenstand (c8c0a36); danach
+    Berichtsteil, Ergebnisse und Dokumentation.
+- Altstandsprüfung der Regressionen: die neuen Testdateien in einem Worktree von 9a1cd2f, Auswahl der Tests zu X′, S2,
+  Suchtreffer und Übergabe (17). Es schlagen 15 fehl:
+  - 13 am jeweiligen Fehler: R₁ nach X′ (5), Halt S1 statt Abschluss bei der Fortsetzung, S2_phase_beendet True (Skript
+    und Ebene H), globale Sperre in `datenlage` (Ebene Z), „ja“ als Apparaturfehler angenommen, S2 im dritten Versuch
+    eines Kontrolllaufs verworfen (angehalten statt abgebrochen), „nicht abgesichert“ beim Suchtreffer, Herkunft ohne
+    Prüfung der Bindung;
+  - 2 an neuer Prüfung: Klammer von X′ im Befund der Stufe 2 und S2-Gegenprobe (Erhaltungsfall „zwei S2 ohne
+    Apparaturfehler“, der bis dorthin auch am alten Stand galt).
+  - Die zwei bestandenen sind bestehende Tests.
 - Alle Kampagnen der Auftragsliste sind auf 13f2a20 aus sauberem Arbeitsbaum gerechnet (Git-Stand je Checkpoint vor
   und nach der Rechnung in `ergebnisse.json`, `checkpoints`), mit vier Arbeitsprozessen und je einem BLAS-Thread.
 - 28bc9dc ändert nur die Dateikette, die die Rechnung nicht benutzt. Weil der Rechencode Teil des Checkpoint-Schlüssels
@@ -467,13 +693,21 @@ teilweise bearbeitet.
 - Gegenprobe am Endstand 28bc9dc: zwei Kampagnen neu gerechnet, ihre Befunde sind ohne Laufzeit gleich
   (`laufprotokoll.txt`). Es sind N01-A4 mit Wiederholungen, Kampagne 0, und N01-V1G0, Kampagne 1 (mit S1-Halt).
 - `auftrag.json`: Aufträge, Seeds und ihre Ableitung, Zufallsströme, Varianten mit Verfahrenskennung, Profil mit
-  Prüfsumme, Werkzeug 8 mit Inhaltsprüfsumme, Budget.
-- `ergebnisse.json`: Vergleich, gepaarte Unterschiede, Gegenprobe gegen PR #22, volle Ketten, Regelpfade, Fortsetzung,
-  Laufzeiten, Abschätzung; je Auftrag die Checkpoint-Angaben (Git-Stand, Zeiten, Prüfsummen der Dateien).
-- `kampagnen.csv`: eine Zeile je Kampagne (Teil-B-Größen, Gültigkeit, Auswertbarkeit, Ablauf, Laufzeit).
-- `laufprotokoll.txt`: Ausgabe der Rechnung (Startsatz und übrige Aufträge, Übernahme der Checkpoints).
+  Prüfsumme, Werkzeug 8 mit Inhaltsprüfsumme, Budget. `auftrag_korrektur_2026-10-18.json`: dasselbe für die
+  Korrekturrunde (gemeinsame Einstellungen, Werkzeug 8 und Seeds aus `auftrag.json`, eigenes Checkpoint-Verzeichnis,
+  Zusatzbudget mit dem bisherigen Umfang).
+- `ergebnisse.json` (Stand nach der Korrekturrunde): Vergleich, gepaarte Unterschiede, Gegenprobe gegen PR #22, volle
+  Ketten, Regelpfade, Fortsetzung, Laufzeiten und Abschätzung vom 17.10.2026; dazu Herkunft je Ergebnisgruppe, Vorher-Stand,
+  Stichprobe der statischen Varianten, Vorher/Nachher je Kampagne und je System, Laufzeiten und Abschätzung der
+  Korrekturrunde, Rechenumfang; je Auftrag der Korrekturrunde die Checkpoint-Angaben (Git-Stand, Zeiten, Prüfsummen).
+  Den Stand davor (Checkpoint-Angaben der Rechnung vom 17.10.2026) enthält `ergebnisse.json` am Stand 9a1cd2f.
+- `kampagnen.csv`: eine Zeile je Kampagne (Teil-B-Größen, Gültigkeit, Auswertbarkeit, Ablauf, Laufzeit) mit der
+  Herkunft der Zeile (neu gerechnet, übernommen, Stand `ablauf-1`, Stichprobe).
+- `laufprotokoll.txt`: Ausgabe der Rechnungen (Startsatz und übrige Aufträge vom 17.10.2026, Korrekturrunde vom
+  18.10.2026).
+- `pruefsatz_gegenpruefung.py` und `.json`: Gegenprüfung des Ablauf-Prüfsatzes vor dem Neuschreiben seiner Sollwerte.
 - Rohdaten der Ebene Z (je Kampagne rund 0,5 GB) lagen in temporären Verzeichnissen und sind gelöscht; die
   Checkpoints liegen außerhalb des Repositorys.
 - Ablauf-Prüfsatz: `tests/fixtures/ap13_ablauf_pruefsatz.json` (fünf Prüfkampagnen, Prüfsummen und lesbare
-  Inhaltsgrößen, inhaltliche Gegenprobe ohne gespeicherte Sollwerte). Der Software-Prüfsatz
-  `tests/fixtures/ap13_pruefsatz.json` ist unverändert und weiter gleich.
+  Inhaltsgrößen, inhaltliche Gegenprobe ohne gespeicherte Sollwerte; für `ablauf-2` nach der Gegenprüfung neu
+  geschrieben). Der Software-Prüfsatz `tests/fixtures/ap13_pruefsatz.json` ist unverändert und weiter gleich.

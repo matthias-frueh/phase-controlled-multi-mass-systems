@@ -28,327 +28,191 @@
   },
   "zaehldiagnose_je_1000_kampagnen_kernstunden": 0.7
  },
+ "abschaetzung_korrektur": {
+  "annahmen": "untere Spanne: Laufzeiten dieser Rechnung (Ebene H, 24 Blöcke, B = 1000) mit linear auf B = 10 000 skaliertem Bootstrap-Anteil; obere Spanne: die im Softwaredokument (Abschnitt 5) gemessenen Kampagnen mit normativen Replikatzahlen (68–139 s, statisch) mit 5 % Zuschlag für die zusätzlichen Versuche; je System 1000 Kalibrier- und 1000 Prüfkampagnen (normative Zahl), ohne Wiederholung bei Poolen; Planungssimulation je Kandidat (n_min, n₀) und Paar (k, T_a) gleich teuer wie eine Kalibrierung; nicht gestartet",
+  "drei_referenzsysteme_kernstunden": [
+   77.9,
+   243.3
+  ],
+  "ebene_Z_je_10_kampagnen_kernstunden": 0.8,
+  "kalibrierung_je_system_kernstunden": [
+   26.0,
+   81.1
+  ],
+  "planungssimulation_je_kandidat_kernstunden": [
+   26.0,
+   81.1
+  ],
+  "sekunden_je_kampagne": {
+   "ebene_Z_voll": 290.8,
+   "schlank": 3.54,
+   "voll_B1000": 7.86,
+   "voll_B10000_linear": 46.8,
+   "voll_normativ_gemessen": {
+    "A4": 78.0,
+    "V1G0": 139.0,
+    "V1G60h": 68.0
+   },
+   "zuschlag_ablauf": 1.05
+  },
+  "zaehldiagnose_je_1000_kampagnen_kernstunden": 1.0
+ },
  "auftrag": {
   "budget": {
-   "davon_voll": 6,
-   "grenze_kampagnen": 120,
-   "grenze_kernstunden": 4.0,
+   "bisher": {
+    "ausfuehrungen": 105,
+    "davon": {
+     "abnahmelauf": 1,
+     "auftragsliste": 101,
+     "diagnose": 1,
+     "gegenproben": 2
+    },
+    "rechenstand": "13f2a20",
+    "voll": 7
+   },
+   "davon_voll": 4,
+   "grenze_kampagnen": 40,
    "grenze_prozesse": 4,
-   "grenze_voll": 12,
-   "kampagnenausfuehrungen": 101,
-   "zaehlung": "je (System, Seed, Variante) eine Ausführung; Fortsetzung zählt doppelt (unterbrochen und ununterbrochen)"
+   "grenze_voll": 4,
+   "kampagnenausfuehrungen": 39,
+   "zaehlung": "zusätzliche Korrekturrunde; je (System, Seed, Variante) eine Ausführung"
   },
-  "datei": "docs/ap13_kmax_wiederholungen_2026-10-17/auftrag.json",
-  "git_blob": "a1f13f75ed5a9ad9e4d6cacf28acf27342816a1c"
+  "datei": "docs/ap13_kmax_wiederholungen_2026-10-17/auftrag_korrektur_2026-10-18.json",
+  "git_blob": "2f2bbce5ecf82ac7cd2b2bd0b693807203e662a0",
+  "urspruenglich": "docs/ap13_kmax_wiederholungen_2026-10-17/auftrag.json"
  },
  "checkpoints": {
-  "N01-A4-historisch-rest": {
+  "korr-N01-A4-wiederholungen": {
    "dateien": {
-    "ablauf_N01-A4-historisch-rest.json": "a4ecd1aa50591c6b5af4c068ba099b6a12a45fe79ed35f85978bb45fc549143d"
+    "ablauf_korr-N01-A4-wiederholungen.json": "daca921e6ac715424b90fc392fedcdd4a47e78c319cd867ff183702a66f5e124"
    },
-   "ende": "2026-10-17T18:30:52+00:00",
-   "git": "13f2a206f942696b68a3ad615333967a0cd9e76a",
-   "kernsekunden": 17.8,
-   "laufzeit_s": 5.9,
+   "ende": "2026-10-18T07:19:29+00:00",
+   "git": "c8c0a3657098c52f46469417aa64db0c994ee3ff",
+   "kernsekunden": 37.9,
+   "laufzeit_s": 12.4,
    "prozesse": 4,
-   "start": "2026-10-17T18:30:46+00:00"
+   "start": "2026-10-18T07:19:16+00:00"
   },
-  "N01-A4-historisch-start": {
+  "korr-N01-V1G0-wiederholungen": {
    "dateien": {
-    "ablauf_N01-A4-historisch-start.json": "2d89dc7eca03830df5ff77d2b63c7614769d415a008421275f60f7b04c16e350"
+    "ablauf_korr-N01-V1G0-wiederholungen.json": "b4d3da73fe4d54307dc345cebcf10684874660c1c3df082bcbd16a27de8fbdbf"
    },
-   "ende": "2026-10-17T18:29:03+00:00",
-   "git": "13f2a206f942696b68a3ad615333967a0cd9e76a",
-   "kernsekunden": 4.5,
-   "laufzeit_s": 3.3,
+   "ende": "2026-10-18T07:19:41+00:00",
+   "git": "c8c0a3657098c52f46469417aa64db0c994ee3ff",
+   "kernsekunden": 35.4,
+   "laufzeit_s": 11.9,
    "prozesse": 4,
-   "start": "2026-10-17T18:28:59+00:00"
+   "start": "2026-10-18T07:19:29+00:00"
   },
-  "N01-A4-k_konsistent-rest": {
+  "korr-N01-V1G60h-wiederholungen": {
    "dateien": {
-    "ablauf_N01-A4-k_konsistent-rest.json": "ef53c497a482955cac19218123ac4efe5c8b0b025c5e80717019b832dd83365a"
+    "ablauf_korr-N01-V1G60h-wiederholungen.json": "f9cd4300b987ba0bd969a1b6dfce1eb1aaceda5e0c9537ba6fe7a286ed4c61ba"
    },
-   "ende": "2026-10-17T18:30:57+00:00",
-   "git": "13f2a206f942696b68a3ad615333967a0cd9e76a",
-   "kernsekunden": 16.7,
-   "laufzeit_s": 5.5,
+   "ende": "2026-10-18T07:19:52+00:00",
+   "git": "c8c0a3657098c52f46469417aa64db0c994ee3ff",
+   "kernsekunden": 33.4,
+   "laufzeit_s": 11.2,
    "prozesse": 4,
-   "start": "2026-10-17T18:30:52+00:00"
+   "start": "2026-10-18T07:19:41+00:00"
   },
-  "N01-A4-k_konsistent-start": {
+  "korr-regelpfad-H-fehlend": {
    "dateien": {
-    "ablauf_N01-A4-k_konsistent-start.json": "e23017fba77dadf632097ca71ad74197747bb327b2b7f0f6f6afac709524c332"
+    "ablauf_korr-regelpfad-H-fehlend.json": "9a928495da4005ed906907426aa3ba84a46d28560cd452585b155618bde71153"
    },
-   "ende": "2026-10-17T18:29:06+00:00",
-   "git": "13f2a206f942696b68a3ad615333967a0cd9e76a",
-   "kernsekunden": 4.8,
-   "laufzeit_s": 3.6,
-   "prozesse": 4,
-   "start": "2026-10-17T18:29:03+00:00"
-  },
-  "N01-A4-wiederholungen-rest": {
-   "dateien": {
-    "ablauf_N01-A4-wiederholungen-rest.json": "97b7f935e07cf2783eb02ea1c4b360e97e2c3bcd8f4cfd8aaee6afa7a3964b7a"
-   },
-   "ende": "2026-10-17T18:31:04+00:00",
-   "git": "13f2a206f942696b68a3ad615333967a0cd9e76a",
-   "kernsekunden": 21.2,
-   "laufzeit_s": 6.6,
-   "prozesse": 4,
-   "start": "2026-10-17T18:30:57+00:00"
-  },
-  "N01-A4-wiederholungen-start": {
-   "dateien": {
-    "ablauf_N01-A4-wiederholungen-start.json": "64430bf0808ab235c78af45e393df7d7d5caeade277cebe8dc4929101a8ed975"
-   },
-   "ende": "2026-10-17T18:29:11+00:00",
-   "git": "13f2a206f942696b68a3ad615333967a0cd9e76a",
-   "kernsekunden": 5.8,
-   "laufzeit_s": 4.2,
-   "prozesse": 4,
-   "start": "2026-10-17T18:29:06+00:00"
-  },
-  "N01-V1G0-historisch-rest": {
-   "dateien": {
-    "ablauf_N01-V1G0-historisch-rest.json": "8f43a7ad833bf97e4429e87b00f3d20b994e7ed1c76548bd2df9716f48b222eb"
-   },
-   "ende": "2026-10-17T18:31:09+00:00",
-   "git": "13f2a206f942696b68a3ad615333967a0cd9e76a",
-   "kernsekunden": 15.3,
-   "laufzeit_s": 5.3,
-   "prozesse": 4,
-   "start": "2026-10-17T18:31:04+00:00"
-  },
-  "N01-V1G0-historisch-start": {
-   "dateien": {
-    "ablauf_N01-V1G0-historisch-start.json": "cf4bf4d68f3ed45f75254a444da1ac7f0d8236e48795be4bb116312db26d8e7b"
-   },
-   "ende": "2026-10-17T18:29:14+00:00",
-   "git": "13f2a206f942696b68a3ad615333967a0cd9e76a",
-   "kernsekunden": 4.1,
-   "laufzeit_s": 3.2,
-   "prozesse": 4,
-   "start": "2026-10-17T18:29:11+00:00"
-  },
-  "N01-V1G0-k_konsistent-rest": {
-   "dateien": {
-    "ablauf_N01-V1G0-k_konsistent-rest.json": "3b0822306369eea4a0077a27a6b8dd2ab508d848ab35947b651802f9fac9af3d"
-   },
-   "ende": "2026-10-17T18:31:15+00:00",
-   "git": "13f2a206f942696b68a3ad615333967a0cd9e76a",
-   "kernsekunden": 15.7,
-   "laufzeit_s": 5.2,
-   "prozesse": 4,
-   "start": "2026-10-17T18:31:09+00:00"
-  },
-  "N01-V1G0-k_konsistent-start": {
-   "dateien": {
-    "ablauf_N01-V1G0-k_konsistent-start.json": "99c8fc89a8857ef6eb701748442d0632edde066f56d889eb002fc3250333e826"
-   },
-   "ende": "2026-10-17T18:29:17+00:00",
-   "git": "13f2a206f942696b68a3ad615333967a0cd9e76a",
+   "ende": "2026-10-18T07:29:56+00:00",
+   "git": "c8c0a3657098c52f46469417aa64db0c994ee3ff",
    "kernsekunden": 4.0,
-   "laufzeit_s": 3.0,
+   "laufzeit_s": 4.0,
    "prozesse": 4,
-   "start": "2026-10-17T18:29:14+00:00"
+   "start": "2026-10-18T07:29:52+00:00"
   },
-  "N01-V1G0-wiederholungen-rest": {
+  "korr-regelpfad-S02-kontrolllauf": {
    "dateien": {
-    "ablauf_N01-V1G0-wiederholungen-rest.json": "c1bcf20361b990b6371f76f82a14de9a82a735ea3e9f72b5f7fb1dcf7b861509"
+    "ablauf_korr-regelpfad-S02-kontrolllauf.json": "697f72dd2780943e9b614e32ac44779a47f26b8acf1f21494f7abed2cec8ec3c"
    },
-   "ende": "2026-10-17T18:31:22+00:00",
-   "git": "13f2a206f942696b68a3ad615333967a0cd9e76a",
-   "kernsekunden": 21.8,
-   "laufzeit_s": 7.0,
+   "ende": "2026-10-18T07:29:59+00:00",
+   "git": "c8c0a3657098c52f46469417aa64db0c994ee3ff",
+   "kernsekunden": 3.1,
+   "laufzeit_s": 3.1,
    "prozesse": 4,
-   "start": "2026-10-17T18:31:15+00:00"
+   "start": "2026-10-18T07:29:56+00:00"
   },
-  "N01-V1G0-wiederholungen-start": {
+  "korr-regelpfad-S06-saettigung": {
    "dateien": {
-    "ablauf_N01-V1G0-wiederholungen-start.json": "6c254334c0025a2c7a9feb69489919cf6d26631fc363de6d41971d7103a17b2c"
+    "ablauf_korr-regelpfad-S06-saettigung.json": "cd386b178ddc3f7d3dd205d35c560803eca9c01240a851e94f4b896d2ef98517"
    },
-   "ende": "2026-10-17T18:29:21+00:00",
-   "git": "13f2a206f942696b68a3ad615333967a0cd9e76a",
-   "kernsekunden": 6.1,
-   "laufzeit_s": 4.7,
+   "ende": "2026-10-18T07:29:52+00:00",
+   "git": "c8c0a3657098c52f46469417aa64db0c994ee3ff",
+   "kernsekunden": 3.1,
+   "laufzeit_s": 3.1,
    "prozesse": 4,
-   "start": "2026-10-17T18:29:17+00:00"
+   "start": "2026-10-18T07:29:49+00:00"
   },
-  "N01-V1G60h-historisch-rest": {
+  "korr-statisch-N01-A4-historisch": {
    "dateien": {
-    "ablauf_N01-V1G60h-historisch-rest.json": "8ff0690ba1a2c900eb762630066981ff6765eb8b53371d958a09527866c4ee05"
+    "ablauf_korr-statisch-N01-A4-historisch.json": "809072f2576f672b42a814db4931afdf84152b2a81f76a6f54b7bc9009bd51f8"
    },
-   "ende": "2026-10-17T18:31:27+00:00",
-   "git": "13f2a206f942696b68a3ad615333967a0cd9e76a",
-   "kernsekunden": 15.1,
-   "laufzeit_s": 5.1,
+   "ende": "2026-10-18T07:30:03+00:00",
+   "git": "c8c0a3657098c52f46469417aa64db0c994ee3ff",
+   "kernsekunden": 3.1,
+   "laufzeit_s": 3.1,
    "prozesse": 4,
-   "start": "2026-10-17T18:31:22+00:00"
+   "start": "2026-10-18T07:29:59+00:00"
   },
-  "N01-V1G60h-historisch-start": {
+  "korr-statisch-N01-A4-k_konsistent": {
    "dateien": {
-    "ablauf_N01-V1G60h-historisch-start.json": "bdd924bc928e495a2c75f655913b94936559ec96763fb9f7e80a7d27776d8adc"
+    "ablauf_korr-statisch-N01-A4-k_konsistent.json": "d48bbcd27edc8fe7b84683fa1f0e44e1825dedac64b8022ef0ec87e70782fb33"
    },
-   "ende": "2026-10-17T18:29:24+00:00",
-   "git": "13f2a206f942696b68a3ad615333967a0cd9e76a",
-   "kernsekunden": 3.7,
-   "laufzeit_s": 3.0,
-   "prozesse": 4,
-   "start": "2026-10-17T18:29:21+00:00"
-  },
-  "N01-V1G60h-k_konsistent-rest": {
-   "dateien": {
-    "ablauf_N01-V1G60h-k_konsistent-rest.json": "f154cbc5b2caa94fb379fa040dc9e174e8c90ce2e554856d1ac5d42a2443a4e9"
-   },
-   "ende": "2026-10-17T18:31:32+00:00",
-   "git": "13f2a206f942696b68a3ad615333967a0cd9e76a",
-   "kernsekunden": 14.9,
-   "laufzeit_s": 4.9,
-   "prozesse": 4,
-   "start": "2026-10-17T18:31:27+00:00"
-  },
-  "N01-V1G60h-k_konsistent-start": {
-   "dateien": {
-    "ablauf_N01-V1G60h-k_konsistent-start.json": "b908e793bd501d902330224fc1aa94a6b5e75c03ace2120e456b9c3342390965"
-   },
-   "ende": "2026-10-17T18:29:27+00:00",
-   "git": "13f2a206f942696b68a3ad615333967a0cd9e76a",
-   "kernsekunden": 3.5,
+   "ende": "2026-10-18T07:30:05+00:00",
+   "git": "c8c0a3657098c52f46469417aa64db0c994ee3ff",
+   "kernsekunden": 2.9,
    "laufzeit_s": 2.9,
    "prozesse": 4,
-   "start": "2026-10-17T18:29:24+00:00"
+   "start": "2026-10-18T07:30:03+00:00"
   },
-  "N01-V1G60h-wiederholungen-rest": {
+  "korr-voll-A04-R4-wiederholungen": {
    "dateien": {
-    "ablauf_N01-V1G60h-wiederholungen-rest.json": "f0388af548515238bb712930b9082e6831b5e0260169a4b9fb0e2f19c030910d"
+    "ablauf_korr-voll-A04-R4-wiederholungen.json": "18a04c6fc44ac6004b3f7ba0eef4e7a99b82171ae3e3aeb5e1a48574f22aeb02"
    },
-   "ende": "2026-10-17T18:31:37+00:00",
-   "git": "13f2a206f942696b68a3ad615333967a0cd9e76a",
-   "kernsekunden": 18.4,
-   "laufzeit_s": 5.8,
+   "ende": "2026-10-18T07:20:08+00:00",
+   "git": "c8c0a3657098c52f46469417aa64db0c994ee3ff",
+   "kernsekunden": 7.7,
+   "laufzeit_s": 7.7,
    "prozesse": 4,
-   "start": "2026-10-17T18:31:32+00:00"
+   "start": "2026-10-18T07:20:00+00:00"
   },
-  "N01-V1G60h-wiederholungen-start": {
+  "korr-voll-N01-A4-wiederholungen": {
    "dateien": {
-    "ablauf_N01-V1G60h-wiederholungen-start.json": "cd6d1607a65143d3079ca0c4d0adf507c9e21fb3224840edac948f8b7a085006"
+    "ablauf_korr-voll-N01-A4-wiederholungen.json": "6d4484b9cbae0bf1b850d9f25cd6b117ae17f052fead4fe04caa3bf18ddb1ae5"
    },
-   "ende": "2026-10-17T18:29:31+00:00",
-   "git": "13f2a206f942696b68a3ad615333967a0cd9e76a",
-   "kernsekunden": 5.2,
-   "laufzeit_s": 3.8,
+   "ende": "2026-10-18T07:20:00+00:00",
+   "git": "c8c0a3657098c52f46469417aa64db0c994ee3ff",
+   "kernsekunden": 8.0,
+   "laufzeit_s": 8.0,
    "prozesse": 4,
-   "start": "2026-10-17T18:29:27+00:00"
+   "start": "2026-10-18T07:19:52+00:00"
   },
-  "fortsetzung-N01-V1G60h": {
+  "korr-voll-Z-A04-R4-wiederholungen": {
    "dateien": {
-    "ablauf_fortsetzung-N01-V1G60h.json": "03fd0cd7a9e6e13f9686661640386ed1310c92c1f1eaaed2f642a91088feb995"
+    "ablauf_korr-voll-Z-A04-R4-wiederholungen.json": "845da724790414328499a8fa6fb91f61bc4fb3e2d817c8221414b1a99e591b0a"
    },
-   "ende": "2026-10-17T18:40:04+00:00",
-   "git": "13f2a206f942696b68a3ad615333967a0cd9e76a",
-   "kernsekunden": 9.0,
-   "laufzeit_s": 9.0,
+   "ende": "2026-10-18T07:29:49+00:00",
+   "git": "c8c0a3657098c52f46469417aa64db0c994ee3ff",
+   "kernsekunden": 291.9,
+   "laufzeit_s": 292.0,
    "prozesse": 4,
-   "start": "2026-10-17T18:39:55+00:00"
+   "start": "2026-10-18T07:24:57+00:00"
   },
-  "regelpfad-H-fehlend": {
+  "korr-voll-Z-N01-A4-wiederholungen": {
    "dateien": {
-    "ablauf_regelpfad-H-fehlend.json": "81f3cdd046a48a6f115ade16dbd9a3904127595b8955d513a6826006e315fca6"
+    "ablauf_korr-voll-Z-N01-A4-wiederholungen.json": "4a493599b573a8e8356ef351d459660b88c6644fc8871674cfc2f9c204798ce9"
    },
-   "ende": "2026-10-17T18:39:53+00:00",
-   "git": "13f2a206f942696b68a3ad615333967a0cd9e76a",
-   "kernsekunden": 2.6,
-   "laufzeit_s": 2.6,
+   "ende": "2026-10-18T07:24:57+00:00",
+   "git": "c8c0a3657098c52f46469417aa64db0c994ee3ff",
+   "kernsekunden": 289.7,
+   "laufzeit_s": 289.7,
    "prozesse": 4,
-   "start": "2026-10-17T18:39:50+00:00"
-  },
-  "regelpfad-S02-kontrolllauf": {
-   "dateien": {
-    "ablauf_regelpfad-S02-kontrolllauf.json": "e9cfea221edcc86ac3ddc43a763488bac58aafc6d3f489689ffa9c1fe51cf00e"
-   },
-   "ende": "2026-10-17T18:39:55+00:00",
-   "git": "13f2a206f942696b68a3ad615333967a0cd9e76a",
-   "kernsekunden": 2.0,
-   "laufzeit_s": 2.0,
-   "prozesse": 4,
-   "start": "2026-10-17T18:39:53+00:00"
-  },
-  "regelpfad-S06-saettigung": {
-   "dateien": {
-    "ablauf_regelpfad-S06-saettigung.json": "9cbe17cd3449ada0c21e38d3abb1e3c689655fd15df5ea217d510602f89e62a9"
-   },
-   "ende": "2026-10-17T18:39:50+00:00",
-   "git": "13f2a206f942696b68a3ad615333967a0cd9e76a",
-   "kernsekunden": 2.5,
-   "laufzeit_s": 2.5,
-   "prozesse": 4,
-   "start": "2026-10-17T18:39:47+00:00"
-  },
-  "voll-A04-R4-k_konsistent": {
-   "dateien": {
-    "ablauf_voll-A04-R4-k_konsistent.json": "c4828bf0a9011d32518b3d9c461db07782457d00dc059ca3165ba480a0d431a2"
-   },
-   "ende": "2026-10-17T18:31:48+00:00",
-   "git": "13f2a206f942696b68a3ad615333967a0cd9e76a",
-   "kernsekunden": 4.9,
-   "laufzeit_s": 4.9,
-   "prozesse": 4,
-   "start": "2026-10-17T18:31:43+00:00"
-  },
-  "voll-A04-R4-wiederholungen": {
-   "dateien": {
-    "ablauf_voll-A04-R4-wiederholungen.json": "3a48170b908186a79d1e5e305b28cb0e9ba0a8c57c0045f1ba0428a72318bb8d"
-   },
-   "ende": "2026-10-17T18:31:59+00:00",
-   "git": "13f2a206f942696b68a3ad615333967a0cd9e76a",
-   "kernsekunden": 5.6,
-   "laufzeit_s": 5.6,
-   "prozesse": 4,
-   "start": "2026-10-17T18:31:53+00:00"
-  },
-  "voll-N01-A4-k_konsistent": {
-   "dateien": {
-    "ablauf_voll-N01-A4-k_konsistent.json": "123b06ddd7e2704aa44df34f9a5b283b8a66dd500f81b2748e696aee9c180642"
-   },
-   "ende": "2026-10-17T18:31:43+00:00",
-   "git": "13f2a206f942696b68a3ad615333967a0cd9e76a",
-   "kernsekunden": 5.2,
-   "laufzeit_s": 5.2,
-   "prozesse": 4,
-   "start": "2026-10-17T18:31:37+00:00"
-  },
-  "voll-N01-A4-wiederholungen": {
-   "dateien": {
-    "ablauf_voll-N01-A4-wiederholungen.json": "312b065440388f02b1c30552586db28cc8bbeab5979de9cf6252e2453dc98177"
-   },
-   "ende": "2026-10-17T18:31:53+00:00",
-   "git": "13f2a206f942696b68a3ad615333967a0cd9e76a",
-   "kernsekunden": 5.7,
-   "laufzeit_s": 5.7,
-   "prozesse": 4,
-   "start": "2026-10-17T18:31:48+00:00"
-  },
-  "voll-Z-A04-R4-wiederholungen": {
-   "dateien": {
-    "ablauf_voll-Z-A04-R4-wiederholungen.json": "48f54c38c1a7af520ffa4a4b4032521a6775b8d3363dca8a7ec754ee3ee4594d"
-   },
-   "ende": "2026-10-17T18:39:47+00:00",
-   "git": "13f2a206f942696b68a3ad615333967a0cd9e76a",
-   "kernsekunden": 233.6,
-   "laufzeit_s": 233.6,
-   "prozesse": 4,
-   "start": "2026-10-17T18:35:54+00:00"
-  },
-  "voll-Z-N01-A4-wiederholungen": {
-   "dateien": {
-    "ablauf_voll-Z-N01-A4-wiederholungen.json": "2d6eea01c86c7a02b9f724282bc19105814f7925441768f47a4b4bf0881bdbc3"
-   },
-   "ende": "2026-10-17T18:35:54+00:00",
-   "git": "13f2a206f942696b68a3ad615333967a0cd9e76a",
-   "kernsekunden": 234.8,
-   "laufzeit_s": 234.8,
-   "prozesse": 4,
-   "start": "2026-10-17T18:31:59+00:00"
+   "start": "2026-10-18T07:20:08+00:00"
   }
  },
  "fortsetzung": [
@@ -442,6 +306,7 @@
    },
    "ebene": "H",
    "gleich_ununterbrochen": true,
+   "herkunft": "Stand ablauf-1 (Rechenstand 13f2a20), nicht neu gerechnet",
    "index": 0,
    "kontrollen": {
     "gueltig_je_modul": [
@@ -711,6 +576,17 @@
    "von": "historisch"
   }
  },
+ "herkunft": {
+  "abschaetzung": "übernommen (Laufzeiten der Rechnung vom 17.10.2026, Rechenstand 13f2a20); mit den Laufzeiten der Korrekturrunde: abschaetzung_korrektur",
+  "fortsetzung": "Stand ablauf-1 (Rechenstand 13f2a20), nicht neu gerechnet",
+  "pr22": "übernommen vom Rechenstand 13f2a20 (unberührt, geprüft)",
+  "regelpfad": "neu gerechnet (Korrekturrunde, ablauf-2)",
+  "vergleich_historisch": "übernommen vom Rechenstand 13f2a20 (unberührt, geprüft)",
+  "vergleich_k_konsistent": "übernommen vom Rechenstand 13f2a20 (unberührt, geprüft)",
+  "vergleich_wiederholungen": "neu gerechnet (Korrekturrunde, ablauf-2)",
+  "voll_ablauf": "neu gerechnet (Korrekturrunde, ablauf-2)",
+  "voll_statisch": "übernommen vom Rechenstand 13f2a20 (unberührt, geprüft)"
+ },
  "laufzeiten": {
   "je_art": {
    "fortsetzung/H/wiederholungen": {
@@ -761,6 +637,45 @@
   "kernstunden": 0.196,
   "voll": 6,
   "wandzeit_s": 588.9
+ },
+ "laufzeiten_korrektur": {
+  "je_art": {
+   "schlank/H/historisch": {
+    "max": 3.129,
+    "min": 3.129,
+    "mittel": 3.129,
+    "se": null
+   },
+   "schlank/H/k_konsistent": {
+    "max": 2.852,
+    "min": 2.852,
+    "mittel": 2.852,
+    "se": null
+   },
+   "schlank/H/wiederholungen": {
+    "max": 4.391,
+    "min": 2.624,
+    "mittel": 3.5374848484848487,
+    "se": 0.08076694541699998
+   },
+   "voll/H/wiederholungen": {
+    "max": 7.99,
+    "min": 7.73,
+    "mittel": 7.86,
+    "se": 0.1299999999999999
+   },
+   "voll/Z/wiederholungen": {
+    "max": 291.94,
+    "min": 289.676,
+    "mittel": 290.808,
+    "se": 1.1320000000000048
+   }
+  },
+  "kampagnen": 39,
+  "kernsekunden": 720.2,
+  "kernstunden": 0.2,
+  "voll": 4,
+  "wandzeit_s": 649.1
  },
  "pr22": {
   "gleich": 30,
@@ -1429,6 +1344,31 @@
    }
   ]
  },
+ "rechenumfang": {
+  "bisher": {
+   "ausfuehrungen": 105,
+   "davon": {
+    "abnahmelauf": 1,
+    "auftragsliste": 101,
+    "diagnose": 1,
+    "gegenproben": 2
+   },
+   "rechenstand": "13f2a20",
+   "voll": 7
+  },
+  "korrektur": {
+   "ausfuehrungen": 39,
+   "grenzen": {
+    "kampagnen": 40,
+    "voll": 4
+   },
+   "voll": 4
+  },
+  "zusammen": {
+   "ausfuehrungen": 144,
+   "voll": 11
+  }
+ },
  "regelpfad": [
   {
    "ablauf": {
@@ -1868,7 +1808,16 @@
      "wiederholung": 5
     },
     "s2": 0,
+    "s2_bilanz": {
+     "apparaturfehler": [],
+     "beendet": false,
+     "massgeblich": [],
+     "s2": [],
+     "widerspruch": []
+    },
+    "s2_waehrend_halt": 0,
     "status": "angehalten",
+    "x_strich": [],
     "ziehungen": 5
    },
    "art": "schlank",
@@ -1933,7 +1882,7 @@
     ],
     "yhat1_gueltig": true
    },
-   "laufzeit_s": 2.515,
+   "laufzeit_s": 3.117,
    "phase1": {
     "S2": 0,
     "S4": 0,
@@ -1983,7 +1932,7 @@
    "variante": "wiederholungen",
    "verfahren": {
     "ablauf": "zustand",
-    "ablauf_version": "ablauf-1",
+    "ablauf_version": "ablauf-2",
     "bindung": "plan",
     "optionen": {
      "aufwaermen": true,
@@ -2094,7 +2043,16 @@
      "wiederholung": 54
     },
     "s2": 0,
+    "s2_bilanz": {
+     "apparaturfehler": [],
+     "beendet": false,
+     "massgeblich": [],
+     "s2": [],
+     "widerspruch": []
+    },
+    "s2_waehrend_halt": 0,
     "status": "abgeschlossen",
+    "x_strich": [],
     "ziehungen": 54
    },
    "art": "schlank",
@@ -2137,7 +2095,7 @@
     ],
     "yhat1_gueltig": true
    },
-   "laufzeit_s": 2.64,
+   "laufzeit_s": 3.95,
    "phase1": {
     "S2": 0,
     "S4": 0,
@@ -2185,7 +2143,7 @@
    "variante": "wiederholungen",
    "verfahren": {
     "ablauf": "zustand",
-    "ablauf_version": "ablauf-1",
+    "ablauf_version": "ablauf-2",
     "bindung": "plan",
     "optionen": {
      "aufwaermen": true,
@@ -2691,7 +2649,7 @@
      "S140|9": "nicht gemessen"
     },
     "grenzen": 0,
-    "grund": "S2: Einzelzell-Liftoff in L2; die Konfiguration bleibt in den Blöcken und ist von Tests ausgeschlossen",
+    "grund": "S2: Einzelzell-Liftoff im Kontrolllauf L2; ŷ¹ ungültig (§8.2)",
     "halt": "S2",
     "halte": [
      {
@@ -2719,7 +2677,20 @@
      "referenz_block": 1
     },
     "s2": 1,
+    "s2_bilanz": {
+     "apparaturfehler": [],
+     "beendet": false,
+     "massgeblich": [
+      "V00031"
+     ],
+     "s2": [
+      "V00031"
+     ],
+     "widerspruch": []
+    },
+    "s2_waehrend_halt": 0,
     "status": "angehalten",
+    "x_strich": [],
     "ziehungen": 0
    },
    "art": "schlank",
@@ -2784,7 +2755,7 @@
     ],
     "yhat1_gueltig": false
    },
-   "laufzeit_s": 1.975,
+   "laufzeit_s": 3.069,
    "phase1": {
     "S2": 1,
     "S4": 0,
@@ -2800,7 +2771,7 @@
    },
    "seed": 8492860313944394542,
    "sperren": [
-    "Phase 1 angehalten: S2: Einzelzell-Liftoff in L2; die Konfiguration bleibt in den Blöcken und ist von Tests ausgeschlossen (keine abgeschlossene Kampagne)"
+    "Phase 1 angehalten: S2: Einzelzell-Liftoff im Kontrolllauf L2; ŷ¹ ungültig (§8.2) (keine abgeschlossene Kampagne)"
    ],
    "szenario": "S02-kontrolllauf",
    "teil_b": {
@@ -2828,7 +2799,7 @@
    "variante": "wiederholungen",
    "verfahren": {
     "ablauf": "zustand",
-    "ablauf_version": "ablauf-1",
+    "ablauf_version": "ablauf-2",
     "bindung": "plan",
     "optionen": {
      "aufwaermen": true,
@@ -2838,6 +2809,28 @@
     "version": "verfahren-1"
    },
    "vollstaendig": false
+  }
+ ],
+ "stichprobe_statisch": [
+  {
+   "abweichungen": [],
+   "art": "schlank",
+   "ebene": "H",
+   "gleich": true,
+   "index": 0,
+   "seed": 6421326674948950355,
+   "szenario": "N01-A4",
+   "variante": "historisch"
+  },
+  {
+   "abweichungen": [],
+   "art": "schlank",
+   "ebene": "H",
+   "gleich": true,
+   "index": 0,
+   "seed": 6421326674948950355,
+   "szenario": "N01-A4",
+   "variante": "k_konsistent"
   }
  ],
  "vergleich": {
@@ -3215,8 +3208,8 @@
     "auswahl": {
      "ersetzt": 225,
      "fehlt: Grenze ausgeschöpft": 1,
-     "fehlt: Halt": 2,
-     "fehlt: spät erkannt": 5,
+     "fehlt: Halt": 5,
+     "fehlt: spät erkannt": 2,
      "gueltig": 4145,
      "nicht gemessen": 662
     },
@@ -3585,6 +3578,7 @@
     "von": 21
    },
    "ebene": "H",
+   "herkunft": "übernommen vom Rechenstand 13f2a20 (unberührt, geprüft)",
    "index": 0,
    "kontrollen": {
     "gueltig_je_modul": [
@@ -3825,6 +3819,7 @@
     "von": 21
    },
    "ebene": "H",
+   "herkunft": "übernommen vom Rechenstand 13f2a20 (unberührt, geprüft)",
    "index": 0,
    "kontrollen": {
     "gueltig_je_modul": [
@@ -4112,7 +4107,16 @@
      "wiederholung": 36
     },
     "s2": 0,
+    "s2_bilanz": {
+     "apparaturfehler": [],
+     "beendet": false,
+     "massgeblich": [],
+     "s2": [],
+     "widerspruch": []
+    },
+    "s2_waehrend_halt": 0,
     "status": "abgeschlossen",
+    "x_strich": [],
     "ziehungen": 36
    },
    "art": "voll",
@@ -4146,6 +4150,7 @@
     "von": 21
    },
    "ebene": "H",
+   "herkunft": "neu gerechnet (Korrekturrunde, ablauf-2)",
    "index": 0,
    "kontrollen": {
     "gueltig_je_modul": [
@@ -4155,7 +4160,7 @@
     ],
     "yhat1_gueltig": true
    },
-   "laufzeit_s": 5.687,
+   "laufzeit_s": 7.99,
    "phase1": {
     "S2": 0,
     "S4": 0,
@@ -4200,7 +4205,7 @@
    "variante": "wiederholungen",
    "verfahren": {
     "ablauf": "zustand",
-    "ablauf_version": "ablauf-1",
+    "ablauf_version": "ablauf-2",
     "bindung": "plan",
     "optionen": {
      "aufwaermen": true,
@@ -4357,6 +4362,7 @@
       "grund": "alle Blöcke gemessen",
       "status": "abgeschlossen"
      },
+     "ereignisse": [],
      "halt": null,
      "kennung": {
       "ebene": "H",
@@ -4384,7 +4390,7 @@
       "szenario": "N01-A4",
       "verfahren": {
        "ablauf": "zustand",
-       "ablauf_version": "ablauf-1",
+       "ablauf_version": "ablauf-2",
        "bindung": "plan",
        "optionen": {
         "aufwaermen": true,
@@ -4400,8 +4406,16 @@
       "halt": true,
       "wiederholungen": true
      },
+     "s2": [],
+     "s2_bilanz": {
+      "apparaturfehler": [],
+      "beendet": false,
+      "massgeblich": [],
+      "s2": [],
+      "widerspruch": []
+     },
      "status": "abgeschlossen",
-     "version": "ablauf-1"
+     "version": "ablauf-2"
     },
     "n_auswertbar": 21,
     "yhat1_gueltig": true
@@ -4463,7 +4477,16 @@
      "wiederholung": 18
     },
     "s2": 0,
+    "s2_bilanz": {
+     "apparaturfehler": [],
+     "beendet": false,
+     "massgeblich": [],
+     "s2": [],
+     "widerspruch": []
+    },
+    "s2_waehrend_halt": 0,
     "status": "abgeschlossen",
+    "x_strich": [],
     "ziehungen": 18
    },
    "art": "voll",
@@ -4497,6 +4520,7 @@
     "von": 21
    },
    "ebene": "H",
+   "herkunft": "neu gerechnet (Korrekturrunde, ablauf-2)",
    "index": 0,
    "kontrollen": {
     "gueltig_je_modul": [
@@ -4506,7 +4530,7 @@
     ],
     "yhat1_gueltig": true
    },
-   "laufzeit_s": 5.592,
+   "laufzeit_s": 7.73,
    "phase1": {
     "S2": 0,
     "S4": 0,
@@ -4550,7 +4574,7 @@
    "variante": "wiederholungen",
    "verfahren": {
     "ablauf": "zustand",
-    "ablauf_version": "ablauf-1",
+    "ablauf_version": "ablauf-2",
     "bindung": "plan",
     "optionen": {
      "aufwaermen": true,
@@ -4709,6 +4733,7 @@
       "grund": "alle Blöcke gemessen",
       "status": "abgeschlossen"
      },
+     "ereignisse": [],
      "halt": null,
      "kennung": {
       "ebene": "H",
@@ -4736,7 +4761,7 @@
       "szenario": "A04-R4",
       "verfahren": {
        "ablauf": "zustand",
-       "ablauf_version": "ablauf-1",
+       "ablauf_version": "ablauf-2",
        "bindung": "plan",
        "optionen": {
         "aufwaermen": true,
@@ -4752,8 +4777,16 @@
       "halt": true,
       "wiederholungen": true
      },
+     "s2": [],
+     "s2_bilanz": {
+      "apparaturfehler": [],
+      "beendet": false,
+      "massgeblich": [],
+      "s2": [],
+      "widerspruch": []
+     },
      "status": "abgeschlossen",
-     "version": "ablauf-1"
+     "version": "ablauf-2"
     },
     "n_auswertbar": 21,
     "yhat1_gueltig": true
@@ -4834,7 +4867,34 @@
      "wiederholung": 24
     },
     "s2": 0,
+    "s2_bilanz": {
+     "apparaturfehler": [],
+     "beendet": false,
+     "massgeblich": [],
+     "s2": [],
+     "widerspruch": []
+    },
+    "s2_waehrend_halt": 0,
     "status": "abgeschlossen",
+    "x_strich": [
+     {
+      "abweichung_r0_N": 5.5226208544922883e-05,
+      "block": 21,
+      "fall": "V00556",
+      "g1": false,
+      "gueltig": true,
+      "halt": null,
+      "konfiguration": "S134",
+      "nach": "V00560",
+      "nach_rolle": "R3",
+      "s1": null,
+      "versuch": "V00559",
+      "vor": "V00558",
+      "vor_rolle": "R2",
+      "vorgesehen": true,
+      "vorpruefung_ablauf_1": false
+     }
+    ],
     "ziehungen": 24
    },
    "art": "voll",
@@ -4868,6 +4928,7 @@
     "von": 21
    },
    "ebene": "Z",
+   "herkunft": "neu gerechnet (Korrekturrunde, ablauf-2)",
    "index": 0,
    "kontrollen": {
     "gueltig_je_modul": [
@@ -4877,7 +4938,7 @@
     ],
     "yhat1_gueltig": true
    },
-   "laufzeit_s": 234.82,
+   "laufzeit_s": 289.676,
    "phase1": {
     "S2": 0,
     "S4": 0,
@@ -4923,7 +4984,7 @@
    "variante": "wiederholungen",
    "verfahren": {
     "ablauf": "zustand",
-    "ablauf_version": "ablauf-1",
+    "ablauf_version": "ablauf-2",
     "bindung": "plan",
     "optionen": {
      "aufwaermen": true,
@@ -5080,6 +5141,7 @@
       "grund": "alle Blöcke gemessen",
       "status": "abgeschlossen"
      },
+     "ereignisse": [],
      "halt": null,
      "kennung": {
       "ebene": "Z",
@@ -5107,7 +5169,7 @@
       "szenario": "N01-A4",
       "verfahren": {
        "ablauf": "zustand",
-       "ablauf_version": "ablauf-1",
+       "ablauf_version": "ablauf-2",
        "bindung": "plan",
        "optionen": {
         "aufwaermen": true,
@@ -5123,8 +5185,16 @@
       "halt": true,
       "wiederholungen": true
      },
+     "s2": [],
+     "s2_bilanz": {
+      "apparaturfehler": [],
+      "beendet": false,
+      "massgeblich": [],
+      "s2": [],
+      "widerspruch": []
+     },
      "status": "abgeschlossen",
-     "version": "ablauf-1"
+     "version": "ablauf-2"
     },
     "n_auswertbar": 21,
     "yhat1_gueltig": true
@@ -5198,7 +5268,68 @@
      "wiederholung": 16
     },
     "s2": 0,
+    "s2_bilanz": {
+     "apparaturfehler": [],
+     "beendet": false,
+     "massgeblich": [],
+     "s2": [],
+     "widerspruch": []
+    },
+    "s2_waehrend_halt": 0,
     "status": "abgeschlossen",
+    "x_strich": [
+     {
+      "abweichung_r0_N": 7.793976894809873e-05,
+      "block": 8,
+      "fall": "V00213",
+      "g1": false,
+      "gueltig": true,
+      "halt": null,
+      "konfiguration": "S130",
+      "nach": "V00217",
+      "nach_rolle": "R3",
+      "s1": null,
+      "versuch": "V00216",
+      "vor": "V00215",
+      "vor_rolle": "R2",
+      "vorgesehen": true,
+      "vorpruefung_ablauf_1": false
+     },
+     {
+      "abweichung_r0_N": 8.394465528738237e-05,
+      "block": 13,
+      "fall": "V00348",
+      "g1": false,
+      "gueltig": true,
+      "halt": null,
+      "konfiguration": "S116",
+      "nach": "V00352",
+      "nach_rolle": "R3",
+      "s1": null,
+      "versuch": "V00351",
+      "vor": "V00350",
+      "vor_rolle": "R2",
+      "vorgesehen": true,
+      "vorpruefung_ablauf_1": false
+     },
+     {
+      "abweichung_r0_N": 0.00018326941632906824,
+      "block": 18,
+      "fall": "V00473",
+      "g1": false,
+      "gueltig": true,
+      "halt": null,
+      "konfiguration": "S102",
+      "nach": "V00477",
+      "nach_rolle": "R3",
+      "s1": null,
+      "versuch": "V00476",
+      "vor": "V00475",
+      "vor_rolle": "R2",
+      "vorgesehen": true,
+      "vorpruefung_ablauf_1": false
+     }
+    ],
     "ziehungen": 16
    },
    "art": "voll",
@@ -5232,6 +5363,7 @@
     "von": 21
    },
    "ebene": "Z",
+   "herkunft": "neu gerechnet (Korrekturrunde, ablauf-2)",
    "index": 0,
    "kontrollen": {
     "gueltig_je_modul": [
@@ -5241,7 +5373,7 @@
     ],
     "yhat1_gueltig": true
    },
-   "laufzeit_s": 233.571,
+   "laufzeit_s": 291.94,
    "phase1": {
     "S2": 0,
     "S4": 0,
@@ -5287,7 +5419,7 @@
    "variante": "wiederholungen",
    "verfahren": {
     "ablauf": "zustand",
-    "ablauf_version": "ablauf-1",
+    "ablauf_version": "ablauf-2",
     "bindung": "plan",
     "optionen": {
      "aufwaermen": true,
@@ -5446,6 +5578,7 @@
       "grund": "alle Blöcke gemessen",
       "status": "abgeschlossen"
      },
+     "ereignisse": [],
      "halt": null,
      "kennung": {
       "ebene": "Z",
@@ -5473,7 +5606,7 @@
       "szenario": "A04-R4",
       "verfahren": {
        "ablauf": "zustand",
-       "ablauf_version": "ablauf-1",
+       "ablauf_version": "ablauf-2",
        "bindung": "plan",
        "optionen": {
         "aufwaermen": true,
@@ -5489,13 +5622,1760 @@
       "halt": true,
       "wiederholungen": true
      },
+     "s2": [],
+     "s2_bilanz": {
+      "apparaturfehler": [],
+      "beendet": false,
+      "massgeblich": [],
+      "s2": [],
+      "widerspruch": []
+     },
      "status": "abgeschlossen",
-     "version": "ablauf-1"
+     "version": "ablauf-2"
     },
     "n_auswertbar": 21,
     "yhat1_gueltig": true
    },
    "vollstaendig": true
   }
- ]
+ ],
+ "vorher": {
+  "ablauf_version": "ablauf-1",
+  "checkpoints": "/tmp/pcmms-ablauf-vergleich-20261017 (Prüfsummen wie in ergebnisse.json am Stand 9a1cd2f)",
+  "rechenstand": "13f2a20",
+  "stand": "9a1cd2f294f34897de807a53bb106a0d767007dd"
+ },
+ "vorher_nachher": [
+  {
+   "art": "schlank",
+   "auswahl": {},
+   "ebene": "H",
+   "gleich": true,
+   "index": 0,
+   "plaetze": {},
+   "rollen": {},
+   "s2_bilanz": {
+    "apparaturfehler": [],
+    "beendet": false,
+    "massgeblich": [],
+    "s2": [],
+    "widerspruch": []
+   },
+   "seed": 6421326674948950355,
+   "szenario": "N01-A4",
+   "teil_b_gleich": true,
+   "unterschiede": {},
+   "ursache": [],
+   "variante": "wiederholungen",
+   "x_strich": []
+  },
+  {
+   "art": "schlank",
+   "auswahl": {},
+   "ebene": "H",
+   "gleich": true,
+   "index": 1,
+   "plaetze": {},
+   "rollen": {},
+   "s2_bilanz": {
+    "apparaturfehler": [],
+    "beendet": false,
+    "massgeblich": [],
+    "s2": [],
+    "widerspruch": []
+   },
+   "seed": 941771759588347363,
+   "szenario": "N01-A4",
+   "teil_b_gleich": true,
+   "unterschiede": {},
+   "ursache": [],
+   "variante": "wiederholungen",
+   "x_strich": []
+  },
+  {
+   "art": "schlank",
+   "auswahl": {},
+   "ebene": "H",
+   "gleich": true,
+   "index": 2,
+   "plaetze": {},
+   "rollen": {},
+   "s2_bilanz": {
+    "apparaturfehler": [],
+    "beendet": false,
+    "massgeblich": [],
+    "s2": [],
+    "widerspruch": []
+   },
+   "seed": 1671252940681334300,
+   "szenario": "N01-A4",
+   "teil_b_gleich": true,
+   "unterschiede": {},
+   "ursache": [],
+   "variante": "wiederholungen",
+   "x_strich": [
+    {
+     "abweichung_r0_N": 1.962568914581908e-05,
+     "block": 17,
+     "fall": "V00460",
+     "g1": false,
+     "gueltig": true,
+     "halt": null,
+     "konfiguration": "S122",
+     "nach": "V00464",
+     "nach_rolle": "R3",
+     "s1": null,
+     "versuch": "V00463",
+     "vor": "V00462",
+     "vor_rolle": "R2",
+     "vorgesehen": true,
+     "vorpruefung_ablauf_1": false
+    }
+   ]
+  },
+  {
+   "art": "schlank",
+   "auswahl": {},
+   "ebene": "H",
+   "gleich": true,
+   "index": 3,
+   "plaetze": {},
+   "rollen": {},
+   "s2_bilanz": {
+    "apparaturfehler": [],
+    "beendet": false,
+    "massgeblich": [],
+    "s2": [],
+    "widerspruch": []
+   },
+   "seed": 3742277982765182668,
+   "szenario": "N01-A4",
+   "teil_b_gleich": true,
+   "unterschiede": {},
+   "ursache": [],
+   "variante": "wiederholungen",
+   "x_strich": []
+  },
+  {
+   "art": "schlank",
+   "auswahl": {},
+   "ebene": "H",
+   "gleich": true,
+   "index": 4,
+   "plaetze": {},
+   "rollen": {},
+   "s2_bilanz": {
+    "apparaturfehler": [],
+    "beendet": false,
+    "massgeblich": [],
+    "s2": [],
+    "widerspruch": []
+   },
+   "seed": 655012045435102802,
+   "szenario": "N01-A4",
+   "teil_b_gleich": true,
+   "unterschiede": {},
+   "ursache": [],
+   "variante": "wiederholungen",
+   "x_strich": []
+  },
+  {
+   "art": "schlank",
+   "auswahl": {},
+   "ebene": "H",
+   "gleich": true,
+   "index": 5,
+   "plaetze": {},
+   "rollen": {},
+   "s2_bilanz": {
+    "apparaturfehler": [],
+    "beendet": false,
+    "massgeblich": [],
+    "s2": [],
+    "widerspruch": []
+   },
+   "seed": 3010703880746530213,
+   "szenario": "N01-A4",
+   "teil_b_gleich": true,
+   "unterschiede": {},
+   "ursache": [],
+   "variante": "wiederholungen",
+   "x_strich": [
+    {
+     "abweichung_r0_N": 0.00015097933900776184,
+     "block": 2,
+     "fall": "V00041",
+     "g1": false,
+     "gueltig": true,
+     "halt": null,
+     "konfiguration": "S134",
+     "nach": "V00048",
+     "nach_rolle": "R3",
+     "s1": null,
+     "versuch": "V00047",
+     "vor": "V00046",
+     "vor_rolle": "R2",
+     "vorgesehen": true,
+     "vorpruefung_ablauf_1": false
+    }
+   ]
+  },
+  {
+   "art": "schlank",
+   "auswahl": {},
+   "ebene": "H",
+   "gleich": true,
+   "index": 6,
+   "plaetze": {},
+   "rollen": {},
+   "s2_bilanz": {
+    "apparaturfehler": [],
+    "beendet": false,
+    "massgeblich": [],
+    "s2": [],
+    "widerspruch": []
+   },
+   "seed": 4088570445890746321,
+   "szenario": "N01-A4",
+   "teil_b_gleich": true,
+   "unterschiede": {},
+   "ursache": [],
+   "variante": "wiederholungen",
+   "x_strich": []
+  },
+  {
+   "art": "schlank",
+   "auswahl": {},
+   "ebene": "H",
+   "gleich": true,
+   "index": 7,
+   "plaetze": {},
+   "rollen": {},
+   "s2_bilanz": {
+    "apparaturfehler": [],
+    "beendet": false,
+    "massgeblich": [],
+    "s2": [],
+    "widerspruch": []
+   },
+   "seed": 8609028504085932528,
+   "szenario": "N01-A4",
+   "teil_b_gleich": true,
+   "unterschiede": {},
+   "ursache": [],
+   "variante": "wiederholungen",
+   "x_strich": []
+  },
+  {
+   "art": "schlank",
+   "auswahl": {},
+   "ebene": "H",
+   "gleich": true,
+   "index": 8,
+   "plaetze": {},
+   "rollen": {},
+   "s2_bilanz": {
+    "apparaturfehler": [],
+    "beendet": false,
+    "massgeblich": [],
+    "s2": [],
+    "widerspruch": []
+   },
+   "seed": 6952551792846395683,
+   "szenario": "N01-A4",
+   "teil_b_gleich": true,
+   "unterschiede": {},
+   "ursache": [],
+   "variante": "wiederholungen",
+   "x_strich": []
+  },
+  {
+   "art": "schlank",
+   "auswahl": {},
+   "ebene": "H",
+   "gleich": true,
+   "index": 9,
+   "plaetze": {},
+   "rollen": {},
+   "s2_bilanz": {
+    "apparaturfehler": [],
+    "beendet": false,
+    "massgeblich": [],
+    "s2": [],
+    "widerspruch": []
+   },
+   "seed": 5328013158255319426,
+   "szenario": "N01-A4",
+   "teil_b_gleich": true,
+   "unterschiede": {},
+   "ursache": [],
+   "variante": "wiederholungen",
+   "x_strich": []
+  },
+  {
+   "art": "schlank",
+   "auswahl": {},
+   "ebene": "H",
+   "gleich": true,
+   "index": 0,
+   "plaetze": {},
+   "rollen": {},
+   "s2_bilanz": {
+    "apparaturfehler": [],
+    "beendet": false,
+    "massgeblich": [],
+    "s2": [],
+    "widerspruch": []
+   },
+   "seed": 4202534701440629906,
+   "szenario": "N01-V1G0",
+   "teil_b_gleich": true,
+   "unterschiede": {},
+   "ursache": [],
+   "variante": "wiederholungen",
+   "x_strich": [
+    {
+     "abweichung_r0_N": 5.2701280276679086e-05,
+     "block": 14,
+     "fall": "V00370",
+     "g1": false,
+     "gueltig": true,
+     "halt": null,
+     "konfiguration": "S138",
+     "nach": "V00376",
+     "nach_rolle": "R3",
+     "s1": null,
+     "versuch": "V00375",
+     "vor": "V00374",
+     "vor_rolle": "R2",
+     "vorgesehen": true,
+     "vorpruefung_ablauf_1": false
+    }
+   ]
+  },
+  {
+   "art": "schlank",
+   "auswahl": {},
+   "ebene": "H",
+   "gleich": true,
+   "index": 1,
+   "plaetze": {},
+   "rollen": {},
+   "s2_bilanz": {
+    "apparaturfehler": [],
+    "beendet": false,
+    "massgeblich": [],
+    "s2": [],
+    "widerspruch": []
+   },
+   "seed": 522969386212988845,
+   "szenario": "N01-V1G0",
+   "teil_b_gleich": true,
+   "unterschiede": {},
+   "ursache": [],
+   "variante": "wiederholungen",
+   "x_strich": [
+    {
+     "abweichung_r0_N": 0.0002064188284878199,
+     "block": 1,
+     "fall": "V00022",
+     "g1": false,
+     "gueltig": true,
+     "halt": null,
+     "konfiguration": "S104",
+     "nach": "V00026",
+     "nach_rolle": "R3",
+     "s1": null,
+     "versuch": "V00025",
+     "vor": "V00024",
+     "vor_rolle": "R2",
+     "vorgesehen": true,
+     "vorpruefung_ablauf_1": false
+    }
+   ]
+  },
+  {
+   "art": "schlank",
+   "auswahl": {
+    "fehlt: Halt": [
+     1,
+     3
+    ],
+    "fehlt: spät erkannt": [
+     2,
+     0
+    ]
+   },
+   "ebene": "H",
+   "gleich": false,
+   "index": 2,
+   "plaetze": {
+    "S104|23": [
+     "fehlt: spät erkannt",
+     "fehlt: Halt"
+    ],
+    "S128|23": [
+     "fehlt: spät erkannt",
+     "fehlt: Halt"
+    ]
+   },
+   "rollen": {},
+   "s2_bilanz": {
+    "apparaturfehler": [],
+    "beendet": false,
+    "massgeblich": [],
+    "s2": [],
+    "widerspruch": []
+   },
+   "seed": 6151025590442919715,
+   "szenario": "N01-V1G0",
+   "teil_b_gleich": true,
+   "unterschiede": {
+    "grund": [
+     "S1: G1-Verstoß der Wiederholung X′",
+     "S1: G1-Verstoß der Wiederholung X′ gegen R₂/R₃ (V00665/V00667)"
+    ],
+    "sperren": [
+     [
+      "Phase 1 angehalten: S1: G1-Verstoß der Wiederholung X′ (keine abgeschlossene Kampagne)"
+     ],
+     [
+      "Phase 1 angehalten: S1: G1-Verstoß der Wiederholung X′ gegen R₂/R₃ (V00665/V00667) (keine abgeschlossene Kampagne)"
+     ]
+    ]
+   },
+   "ursache": [
+    "Haltgrund nennt jetzt die Klammer R₂/R₃ von X′ (Korrektur 1); Halt und Zeitpunkt gleich",
+    "Platzstatus aus strukturierten Angaben (Korrektur 1, kein anderer Ablauf): fehlt: spät erkannt → fehlt: Halt"
+   ],
+   "variante": "wiederholungen",
+   "x_strich": [
+    {
+     "abweichung_r0_N": 0.00011256412991134113,
+     "block": 1,
+     "fall": "V00007",
+     "g1": false,
+     "gueltig": true,
+     "halt": null,
+     "konfiguration": "L1",
+     "nach": "V00011",
+     "nach_rolle": "R3",
+     "s1": null,
+     "versuch": "V00010",
+     "vor": "V00009",
+     "vor_rolle": "R2",
+     "vorgesehen": true,
+     "vorpruefung_ablauf_1": false
+    },
+    {
+     "abweichung_r0_N": 0.00016219105984305315,
+     "block": 3,
+     "fall": "V00086",
+     "g1": false,
+     "gueltig": true,
+     "halt": null,
+     "konfiguration": "S106",
+     "nach": "V00090",
+     "nach_rolle": "R3",
+     "s1": null,
+     "versuch": "V00089",
+     "vor": "V00088",
+     "vor_rolle": "R2",
+     "vorgesehen": true,
+     "vorpruefung_ablauf_1": false
+    },
+    {
+     "abweichung_r0_N": 1.2580904806824833e-05,
+     "block": 4,
+     "fall": "V00112",
+     "g1": false,
+     "gueltig": true,
+     "halt": null,
+     "konfiguration": "S100",
+     "nach": "V00117",
+     "nach_rolle": "R3",
+     "s1": null,
+     "versuch": "V00116",
+     "vor": "V00115",
+     "vor_rolle": "R2",
+     "vorgesehen": true,
+     "vorpruefung_ablauf_1": false
+    },
+    {
+     "abweichung_r0_N": 0.00011771963872231339,
+     "block": 4,
+     "fall": "V00121",
+     "g1": false,
+     "gueltig": true,
+     "halt": null,
+     "konfiguration": "S138",
+     "nach": "V00125",
+     "nach_rolle": "R3",
+     "s1": null,
+     "versuch": "V00124",
+     "vor": "V00123",
+     "vor_rolle": "R2",
+     "vorgesehen": true,
+     "vorpruefung_ablauf_1": false
+    },
+    {
+     "abweichung_r0_N": 0.0001514762409353665,
+     "block": 6,
+     "fall": "V00171",
+     "g1": false,
+     "gueltig": true,
+     "halt": null,
+     "konfiguration": "S134",
+     "nach": "V00180",
+     "nach_rolle": "R3",
+     "s1": null,
+     "versuch": "V00179",
+     "vor": "V00178",
+     "vor_rolle": "R2",
+     "vorgesehen": true,
+     "vorpruefung_ablauf_1": false
+    },
+    {
+     "abweichung_r0_N": 8.174969376728569e-05,
+     "block": 11,
+     "fall": "V00317",
+     "g1": false,
+     "gueltig": true,
+     "halt": null,
+     "konfiguration": "S116",
+     "nach": "V00321",
+     "nach_rolle": "R3",
+     "s1": null,
+     "versuch": "V00320",
+     "vor": "V00319",
+     "vor_rolle": "R2",
+     "vorgesehen": true,
+     "vorpruefung_ablauf_1": false
+    },
+    {
+     "abweichung_r0_N": 8.54903985914035e-05,
+     "block": 12,
+     "fall": "V00338",
+     "g1": false,
+     "gueltig": true,
+     "halt": null,
+     "konfiguration": "S134",
+     "nach": "V00342",
+     "nach_rolle": "R3",
+     "s1": null,
+     "versuch": "V00341",
+     "vor": "V00340",
+     "vor_rolle": "R2",
+     "vorgesehen": true,
+     "vorpruefung_ablauf_1": false
+    },
+    {
+     "abweichung_r0_N": 0.00020517508662187822,
+     "block": 13,
+     "fall": "V00376",
+     "g1": false,
+     "gueltig": true,
+     "halt": null,
+     "konfiguration": "S130",
+     "nach": "V00380",
+     "nach_rolle": "R3",
+     "s1": null,
+     "versuch": "V00379",
+     "vor": "V00378",
+     "vor_rolle": "R2",
+     "vorgesehen": true,
+     "vorpruefung_ablauf_1": false
+    },
+    {
+     "abweichung_r0_N": null,
+     "block": 13,
+     "fall": "V00381",
+     "g1": null,
+     "gueltig": false,
+     "halt": null,
+     "konfiguration": "S126",
+     "nach": null,
+     "nach_rolle": null,
+     "s1": null,
+     "versuch": "V00385",
+     "vor": null,
+     "vor_rolle": null,
+     "vorgesehen": null,
+     "vorpruefung_ablauf_1": null
+    },
+    {
+     "abweichung_r0_N": 5.563757493032284e-05,
+     "block": 21,
+     "fall": "V00604",
+     "g1": false,
+     "gueltig": true,
+     "halt": null,
+     "konfiguration": "S140",
+     "nach": "V00608",
+     "nach_rolle": "R3",
+     "s1": null,
+     "versuch": "V00607",
+     "vor": "V00606",
+     "vor_rolle": "R2",
+     "vorgesehen": true,
+     "vorpruefung_ablauf_1": false
+    },
+    {
+     "abweichung_r0_N": 9.696159212957411e-05,
+     "block": 22,
+     "fall": "V00623",
+     "g1": false,
+     "gueltig": true,
+     "halt": null,
+     "konfiguration": "S138",
+     "nach": "V00633",
+     "nach_rolle": "R3",
+     "s1": null,
+     "versuch": "V00632",
+     "vor": "V00631",
+     "vor_rolle": "R2",
+     "vorgesehen": true,
+     "vorpruefung_ablauf_1": false
+    },
+    {
+     "abweichung_r0_N": 3.7183985170941014e-05,
+     "block": 23,
+     "fall": "V00652",
+     "g1": false,
+     "gueltig": true,
+     "halt": null,
+     "konfiguration": "S132",
+     "nach": "V00656",
+     "nach_rolle": "R3",
+     "s1": null,
+     "versuch": "V00655",
+     "vor": "V00654",
+     "vor_rolle": "R2",
+     "vorgesehen": true,
+     "vorpruefung_ablauf_1": false
+    },
+    {
+     "abweichung_r0_N": 0.0001173111090491119,
+     "block": 23,
+     "fall": "V00661",
+     "g1": true,
+     "gueltig": false,
+     "halt": "S1",
+     "konfiguration": "S128",
+     "nach": "V00667",
+     "nach_rolle": "R3",
+     "s1": null,
+     "versuch": "V00666",
+     "vor": "V00665",
+     "vor_rolle": "R2",
+     "vorgesehen": true,
+     "vorpruefung_ablauf_1": false
+    }
+   ]
+  },
+  {
+   "art": "schlank",
+   "auswahl": {},
+   "ebene": "H",
+   "gleich": true,
+   "index": 3,
+   "plaetze": {},
+   "rollen": {},
+   "s2_bilanz": {
+    "apparaturfehler": [],
+    "beendet": false,
+    "massgeblich": [],
+    "s2": [],
+    "widerspruch": []
+   },
+   "seed": 2837871836508963753,
+   "szenario": "N01-V1G0",
+   "teil_b_gleich": true,
+   "unterschiede": {},
+   "ursache": [],
+   "variante": "wiederholungen",
+   "x_strich": [
+    {
+     "abweichung_r0_N": 8.819694652562049e-05,
+     "block": 16,
+     "fall": "V00419",
+     "g1": false,
+     "gueltig": true,
+     "halt": null,
+     "konfiguration": "S114",
+     "nach": "V00429",
+     "nach_rolle": "R3",
+     "s1": null,
+     "versuch": "V00428",
+     "vor": "V00427",
+     "vor_rolle": "R2",
+     "vorgesehen": true,
+     "vorpruefung_ablauf_1": false
+    }
+   ]
+  },
+  {
+   "art": "schlank",
+   "auswahl": {},
+   "ebene": "H",
+   "gleich": true,
+   "index": 4,
+   "plaetze": {},
+   "rollen": {},
+   "s2_bilanz": {
+    "apparaturfehler": [],
+    "beendet": false,
+    "massgeblich": [],
+    "s2": [],
+    "widerspruch": []
+   },
+   "seed": 6541414184217749668,
+   "szenario": "N01-V1G0",
+   "teil_b_gleich": true,
+   "unterschiede": {},
+   "ursache": [],
+   "variante": "wiederholungen",
+   "x_strich": []
+  },
+  {
+   "art": "schlank",
+   "auswahl": {},
+   "ebene": "H",
+   "gleich": true,
+   "index": 5,
+   "plaetze": {},
+   "rollen": {},
+   "s2_bilanz": {
+    "apparaturfehler": [],
+    "beendet": false,
+    "massgeblich": [],
+    "s2": [],
+    "widerspruch": []
+   },
+   "seed": 1911642046984185806,
+   "szenario": "N01-V1G0",
+   "teil_b_gleich": true,
+   "unterschiede": {},
+   "ursache": [],
+   "variante": "wiederholungen",
+   "x_strich": []
+  },
+  {
+   "art": "schlank",
+   "auswahl": {},
+   "ebene": "H",
+   "gleich": true,
+   "index": 6,
+   "plaetze": {},
+   "rollen": {},
+   "s2_bilanz": {
+    "apparaturfehler": [],
+    "beendet": false,
+    "massgeblich": [],
+    "s2": [],
+    "widerspruch": []
+   },
+   "seed": 3825293146687617875,
+   "szenario": "N01-V1G0",
+   "teil_b_gleich": true,
+   "unterschiede": {},
+   "ursache": [],
+   "variante": "wiederholungen",
+   "x_strich": []
+  },
+  {
+   "art": "schlank",
+   "auswahl": {
+    "fehlt: Halt": [
+     0,
+     1
+    ],
+    "fehlt: spät erkannt": [
+     1,
+     0
+    ]
+   },
+   "ebene": "H",
+   "gleich": false,
+   "index": 7,
+   "plaetze": {
+    "S124|13": [
+     "fehlt: spät erkannt",
+     "fehlt: Halt"
+    ]
+   },
+   "rollen": {},
+   "s2_bilanz": {
+    "apparaturfehler": [],
+    "beendet": false,
+    "massgeblich": [],
+    "s2": [],
+    "widerspruch": []
+   },
+   "seed": 3111866991806461631,
+   "szenario": "N01-V1G0",
+   "teil_b_gleich": true,
+   "unterschiede": {
+    "grund": [
+     "S1: G1-Verstoß der Wiederholung X′",
+     "S1: G1-Verstoß der Wiederholung X′ gegen R₂/R₃ (V00363/V00365)"
+    ],
+    "sperren": [
+     [
+      "Phase 1 angehalten: S1: G1-Verstoß der Wiederholung X′ (keine abgeschlossene Kampagne)"
+     ],
+     [
+      "Phase 1 angehalten: S1: G1-Verstoß der Wiederholung X′ gegen R₂/R₃ (V00363/V00365) (keine abgeschlossene Kampagne)"
+     ]
+    ]
+   },
+   "ursache": [
+    "Haltgrund nennt jetzt die Klammer R₂/R₃ von X′ (Korrektur 1); Halt und Zeitpunkt gleich",
+    "Platzstatus aus strukturierten Angaben (Korrektur 1, kein anderer Ablauf): fehlt: spät erkannt → fehlt: Halt"
+   ],
+   "variante": "wiederholungen",
+   "x_strich": [
+    {
+     "abweichung_r0_N": 7.13949488098109e-05,
+     "block": 11,
+     "fall": "V00290",
+     "g1": false,
+     "gueltig": true,
+     "halt": null,
+     "konfiguration": "S134",
+     "nach": "V00294",
+     "nach_rolle": "R3",
+     "s1": null,
+     "versuch": "V00293",
+     "vor": "V00292",
+     "vor_rolle": "R2",
+     "vorgesehen": true,
+     "vorpruefung_ablauf_1": false
+    },
+    {
+     "abweichung_r0_N": 0.00025295375792211416,
+     "block": 13,
+     "fall": "V00361",
+     "g1": true,
+     "gueltig": false,
+     "halt": "S1",
+     "konfiguration": "S124",
+     "nach": "V00365",
+     "nach_rolle": "R3",
+     "s1": null,
+     "versuch": "V00364",
+     "vor": "V00363",
+     "vor_rolle": "R2",
+     "vorgesehen": true,
+     "vorpruefung_ablauf_1": false
+    }
+   ]
+  },
+  {
+   "art": "schlank",
+   "auswahl": {},
+   "ebene": "H",
+   "gleich": true,
+   "index": 8,
+   "plaetze": {},
+   "rollen": {},
+   "s2_bilanz": {
+    "apparaturfehler": [],
+    "beendet": false,
+    "massgeblich": [],
+    "s2": [],
+    "widerspruch": []
+   },
+   "seed": 5605373187149328597,
+   "szenario": "N01-V1G0",
+   "teil_b_gleich": true,
+   "unterschiede": {},
+   "ursache": [],
+   "variante": "wiederholungen",
+   "x_strich": [
+    {
+     "abweichung_r0_N": 9.129033950117105e-06,
+     "block": 9,
+     "fall": "V00238",
+     "g1": false,
+     "gueltig": true,
+     "halt": null,
+     "konfiguration": "S126",
+     "nach": "V00243",
+     "nach_rolle": "R3",
+     "s1": null,
+     "versuch": "V00242",
+     "vor": "V00241",
+     "vor_rolle": "R2",
+     "vorgesehen": true,
+     "vorpruefung_ablauf_1": false
+    },
+    {
+     "abweichung_r0_N": null,
+     "block": 19,
+     "fall": "V00527",
+     "g1": null,
+     "gueltig": false,
+     "halt": null,
+     "konfiguration": "S108",
+     "nach": null,
+     "nach_rolle": null,
+     "s1": null,
+     "versuch": "V00532",
+     "vor": null,
+     "vor_rolle": null,
+     "vorgesehen": null,
+     "vorpruefung_ablauf_1": null
+    },
+    {
+     "abweichung_r0_N": 2.210820741055386e-05,
+     "block": 20,
+     "fall": "V00568",
+     "g1": false,
+     "gueltig": true,
+     "halt": null,
+     "konfiguration": "S136",
+     "nach": "V00572",
+     "nach_rolle": "R3",
+     "s1": null,
+     "versuch": "V00571",
+     "vor": "V00570",
+     "vor_rolle": "R2",
+     "vorgesehen": true,
+     "vorpruefung_ablauf_1": false
+    }
+   ]
+  },
+  {
+   "art": "schlank",
+   "auswahl": {},
+   "ebene": "H",
+   "gleich": true,
+   "index": 9,
+   "plaetze": {},
+   "rollen": {},
+   "s2_bilanz": {
+    "apparaturfehler": [],
+    "beendet": false,
+    "massgeblich": [],
+    "s2": [],
+    "widerspruch": []
+   },
+   "seed": 8923286715072122757,
+   "szenario": "N01-V1G0",
+   "teil_b_gleich": true,
+   "unterschiede": {},
+   "ursache": [],
+   "variante": "wiederholungen",
+   "x_strich": [
+    {
+     "abweichung_r0_N": 6.166398408780083e-05,
+     "block": 1,
+     "fall": "V00018",
+     "g1": false,
+     "gueltig": true,
+     "halt": null,
+     "konfiguration": "S114",
+     "nach": "V00022",
+     "nach_rolle": "R3",
+     "s1": null,
+     "versuch": "V00021",
+     "vor": "V00020",
+     "vor_rolle": "R2",
+     "vorgesehen": true,
+     "vorpruefung_ablauf_1": false
+    }
+   ]
+  },
+  {
+   "art": "schlank",
+   "auswahl": {},
+   "ebene": "H",
+   "gleich": true,
+   "index": 0,
+   "plaetze": {},
+   "rollen": {},
+   "s2_bilanz": {
+    "apparaturfehler": [],
+    "beendet": false,
+    "massgeblich": [],
+    "s2": [],
+    "widerspruch": []
+   },
+   "seed": 795519448574340983,
+   "szenario": "N01-V1G60h",
+   "teil_b_gleich": true,
+   "unterschiede": {},
+   "ursache": [],
+   "variante": "wiederholungen",
+   "x_strich": []
+  },
+  {
+   "art": "schlank",
+   "auswahl": {},
+   "ebene": "H",
+   "gleich": true,
+   "index": 1,
+   "plaetze": {},
+   "rollen": {},
+   "s2_bilanz": {
+    "apparaturfehler": [],
+    "beendet": false,
+    "massgeblich": [],
+    "s2": [],
+    "widerspruch": []
+   },
+   "seed": 6415602612872341321,
+   "szenario": "N01-V1G60h",
+   "teil_b_gleich": true,
+   "unterschiede": {},
+   "ursache": [],
+   "variante": "wiederholungen",
+   "x_strich": []
+  },
+  {
+   "art": "schlank",
+   "auswahl": {},
+   "ebene": "H",
+   "gleich": true,
+   "index": 2,
+   "plaetze": {},
+   "rollen": {},
+   "s2_bilanz": {
+    "apparaturfehler": [],
+    "beendet": false,
+    "massgeblich": [],
+    "s2": [],
+    "widerspruch": []
+   },
+   "seed": 8676972707023640149,
+   "szenario": "N01-V1G60h",
+   "teil_b_gleich": true,
+   "unterschiede": {},
+   "ursache": [],
+   "variante": "wiederholungen",
+   "x_strich": []
+  },
+  {
+   "art": "schlank",
+   "auswahl": {},
+   "ebene": "H",
+   "gleich": true,
+   "index": 3,
+   "plaetze": {},
+   "rollen": {},
+   "s2_bilanz": {
+    "apparaturfehler": [],
+    "beendet": false,
+    "massgeblich": [],
+    "s2": [],
+    "widerspruch": []
+   },
+   "seed": 1085381528517609721,
+   "szenario": "N01-V1G60h",
+   "teil_b_gleich": true,
+   "unterschiede": {},
+   "ursache": [],
+   "variante": "wiederholungen",
+   "x_strich": [
+    {
+     "abweichung_r0_N": 9.843243986118466e-05,
+     "block": 2,
+     "fall": "V00039",
+     "g1": false,
+     "gueltig": true,
+     "halt": null,
+     "konfiguration": "S108",
+     "nach": "V00048",
+     "nach_rolle": "R3",
+     "s1": null,
+     "versuch": "V00047",
+     "vor": "V00046",
+     "vor_rolle": "R2",
+     "vorgesehen": true,
+     "vorpruefung_ablauf_1": false
+    },
+    {
+     "abweichung_r0_N": 0.000128434823007062,
+     "block": 7,
+     "fall": "V00181",
+     "g1": false,
+     "gueltig": true,
+     "halt": null,
+     "konfiguration": "S132",
+     "nach": "V00186",
+     "nach_rolle": "R3",
+     "s1": null,
+     "versuch": "V00185",
+     "vor": "V00184",
+     "vor_rolle": "R2",
+     "vorgesehen": true,
+     "vorpruefung_ablauf_1": false
+    },
+    {
+     "abweichung_r0_N": 0.0001642938148638251,
+     "block": 20,
+     "fall": "V00532",
+     "g1": false,
+     "gueltig": true,
+     "halt": null,
+     "konfiguration": "S100",
+     "nach": "V00537",
+     "nach_rolle": "R3",
+     "s1": null,
+     "versuch": "V00536",
+     "vor": "V00535",
+     "vor_rolle": "R2",
+     "vorgesehen": true,
+     "vorpruefung_ablauf_1": false
+    }
+   ]
+  },
+  {
+   "art": "schlank",
+   "auswahl": {},
+   "ebene": "H",
+   "gleich": true,
+   "index": 4,
+   "plaetze": {},
+   "rollen": {},
+   "s2_bilanz": {
+    "apparaturfehler": [],
+    "beendet": false,
+    "massgeblich": [],
+    "s2": [],
+    "widerspruch": []
+   },
+   "seed": 4992586427391883278,
+   "szenario": "N01-V1G60h",
+   "teil_b_gleich": true,
+   "unterschiede": {},
+   "ursache": [],
+   "variante": "wiederholungen",
+   "x_strich": []
+  },
+  {
+   "art": "schlank",
+   "auswahl": {},
+   "ebene": "H",
+   "gleich": true,
+   "index": 5,
+   "plaetze": {},
+   "rollen": {},
+   "s2_bilanz": {
+    "apparaturfehler": [],
+    "beendet": false,
+    "massgeblich": [],
+    "s2": [],
+    "widerspruch": []
+   },
+   "seed": 2876192135852870702,
+   "szenario": "N01-V1G60h",
+   "teil_b_gleich": true,
+   "unterschiede": {},
+   "ursache": [],
+   "variante": "wiederholungen",
+   "x_strich": []
+  },
+  {
+   "art": "schlank",
+   "auswahl": {},
+   "ebene": "H",
+   "gleich": true,
+   "index": 6,
+   "plaetze": {},
+   "rollen": {},
+   "s2_bilanz": {
+    "apparaturfehler": [],
+    "beendet": false,
+    "massgeblich": [],
+    "s2": [],
+    "widerspruch": []
+   },
+   "seed": 7657828229482855577,
+   "szenario": "N01-V1G60h",
+   "teil_b_gleich": true,
+   "unterschiede": {},
+   "ursache": [],
+   "variante": "wiederholungen",
+   "x_strich": []
+  },
+  {
+   "art": "schlank",
+   "auswahl": {},
+   "ebene": "H",
+   "gleich": true,
+   "index": 7,
+   "plaetze": {},
+   "rollen": {},
+   "s2_bilanz": {
+    "apparaturfehler": [],
+    "beendet": false,
+    "massgeblich": [],
+    "s2": [],
+    "widerspruch": []
+   },
+   "seed": 3187541850860021720,
+   "szenario": "N01-V1G60h",
+   "teil_b_gleich": true,
+   "unterschiede": {},
+   "ursache": [],
+   "variante": "wiederholungen",
+   "x_strich": [
+    {
+     "abweichung_r0_N": 9.166641667945896e-06,
+     "block": 6,
+     "fall": "V00153",
+     "g1": false,
+     "gueltig": true,
+     "halt": null,
+     "konfiguration": "S116",
+     "nach": "V00157",
+     "nach_rolle": "R3",
+     "s1": null,
+     "versuch": "V00156",
+     "vor": "V00155",
+     "vor_rolle": "R2",
+     "vorgesehen": true,
+     "vorpruefung_ablauf_1": false
+    }
+   ]
+  },
+  {
+   "art": "schlank",
+   "auswahl": {},
+   "ebene": "H",
+   "gleich": true,
+   "index": 8,
+   "plaetze": {},
+   "rollen": {},
+   "s2_bilanz": {
+    "apparaturfehler": [],
+    "beendet": false,
+    "massgeblich": [],
+    "s2": [],
+    "widerspruch": []
+   },
+   "seed": 8236900843280286866,
+   "szenario": "N01-V1G60h",
+   "teil_b_gleich": true,
+   "unterschiede": {},
+   "ursache": [],
+   "variante": "wiederholungen",
+   "x_strich": []
+  },
+  {
+   "art": "schlank",
+   "auswahl": {},
+   "ebene": "H",
+   "gleich": true,
+   "index": 9,
+   "plaetze": {},
+   "rollen": {},
+   "s2_bilanz": {
+    "apparaturfehler": [],
+    "beendet": false,
+    "massgeblich": [],
+    "s2": [],
+    "widerspruch": []
+   },
+   "seed": 2511684875737638130,
+   "szenario": "N01-V1G60h",
+   "teil_b_gleich": true,
+   "unterschiede": {},
+   "ursache": [],
+   "variante": "wiederholungen",
+   "x_strich": [
+    {
+     "abweichung_r0_N": 3.9442902963315873e-05,
+     "block": 16,
+     "fall": "V00425",
+     "g1": false,
+     "gueltig": true,
+     "halt": null,
+     "konfiguration": "S134",
+     "nach": "V00430",
+     "nach_rolle": "R3",
+     "s1": null,
+     "versuch": "V00429",
+     "vor": "V00428",
+     "vor_rolle": "R2",
+     "vorgesehen": true,
+     "vorpruefung_ablauf_1": false
+    },
+    {
+     "abweichung_r0_N": 1.444204738199062e-05,
+     "block": 16,
+     "fall": "V00426",
+     "g1": false,
+     "gueltig": true,
+     "halt": null,
+     "konfiguration": "S126",
+     "nach": "V00433",
+     "nach_rolle": "R3",
+     "s1": null,
+     "versuch": "V00432",
+     "vor": "V00431",
+     "vor_rolle": "R2",
+     "vorgesehen": true,
+     "vorpruefung_ablauf_1": false
+    },
+    {
+     "abweichung_r0_N": 0.00015242613089938573,
+     "block": 19,
+     "fall": "V00521",
+     "g1": false,
+     "gueltig": true,
+     "halt": null,
+     "konfiguration": "S108",
+     "nach": "V00528",
+     "nach_rolle": "R3",
+     "s1": null,
+     "versuch": "V00527",
+     "vor": "V00526",
+     "vor_rolle": "R2",
+     "vorgesehen": true,
+     "vorpruefung_ablauf_1": false
+    }
+   ]
+  },
+  {
+   "art": "voll",
+   "auswahl": {},
+   "ebene": "H",
+   "gleich": true,
+   "index": 0,
+   "plaetze": {},
+   "rollen": {},
+   "s2_bilanz": {
+    "apparaturfehler": [],
+    "beendet": false,
+    "massgeblich": [],
+    "s2": [],
+    "widerspruch": []
+   },
+   "seed": 6421326674948950355,
+   "szenario": "N01-A4",
+   "teil_b_gleich": true,
+   "unterschiede": {},
+   "ursache": [],
+   "variante": "wiederholungen",
+   "x_strich": []
+  },
+  {
+   "art": "voll",
+   "auswahl": {},
+   "ebene": "H",
+   "gleich": true,
+   "index": 0,
+   "plaetze": {},
+   "rollen": {},
+   "s2_bilanz": {
+    "apparaturfehler": [],
+    "beendet": false,
+    "massgeblich": [],
+    "s2": [],
+    "widerspruch": []
+   },
+   "seed": 7550300167789857562,
+   "szenario": "A04-R4",
+   "teil_b_gleich": true,
+   "unterschiede": {},
+   "ursache": [],
+   "variante": "wiederholungen",
+   "x_strich": []
+  },
+  {
+   "art": "voll",
+   "auswahl": {},
+   "ebene": "Z",
+   "gleich": true,
+   "index": 0,
+   "plaetze": {},
+   "rollen": {},
+   "s2_bilanz": {
+    "apparaturfehler": [],
+    "beendet": false,
+    "massgeblich": [],
+    "s2": [],
+    "widerspruch": []
+   },
+   "seed": 6421326674948950355,
+   "szenario": "N01-A4",
+   "teil_b_gleich": true,
+   "unterschiede": {},
+   "ursache": [],
+   "variante": "wiederholungen",
+   "x_strich": [
+    {
+     "abweichung_r0_N": 5.5226208544922883e-05,
+     "block": 21,
+     "fall": "V00556",
+     "g1": false,
+     "gueltig": true,
+     "halt": null,
+     "konfiguration": "S134",
+     "nach": "V00560",
+     "nach_rolle": "R3",
+     "s1": null,
+     "versuch": "V00559",
+     "vor": "V00558",
+     "vor_rolle": "R2",
+     "vorgesehen": true,
+     "vorpruefung_ablauf_1": false
+    }
+   ]
+  },
+  {
+   "art": "voll",
+   "auswahl": {},
+   "ebene": "Z",
+   "gleich": true,
+   "index": 0,
+   "plaetze": {},
+   "rollen": {},
+   "s2_bilanz": {
+    "apparaturfehler": [],
+    "beendet": false,
+    "massgeblich": [],
+    "s2": [],
+    "widerspruch": []
+   },
+   "seed": 7550300167789857562,
+   "szenario": "A04-R4",
+   "teil_b_gleich": true,
+   "unterschiede": {},
+   "ursache": [],
+   "variante": "wiederholungen",
+   "x_strich": [
+    {
+     "abweichung_r0_N": 7.793976894809873e-05,
+     "block": 8,
+     "fall": "V00213",
+     "g1": false,
+     "gueltig": true,
+     "halt": null,
+     "konfiguration": "S130",
+     "nach": "V00217",
+     "nach_rolle": "R3",
+     "s1": null,
+     "versuch": "V00216",
+     "vor": "V00215",
+     "vor_rolle": "R2",
+     "vorgesehen": true,
+     "vorpruefung_ablauf_1": false
+    },
+    {
+     "abweichung_r0_N": 8.394465528738237e-05,
+     "block": 13,
+     "fall": "V00348",
+     "g1": false,
+     "gueltig": true,
+     "halt": null,
+     "konfiguration": "S116",
+     "nach": "V00352",
+     "nach_rolle": "R3",
+     "s1": null,
+     "versuch": "V00351",
+     "vor": "V00350",
+     "vor_rolle": "R2",
+     "vorgesehen": true,
+     "vorpruefung_ablauf_1": false
+    },
+    {
+     "abweichung_r0_N": 0.00018326941632906824,
+     "block": 18,
+     "fall": "V00473",
+     "g1": false,
+     "gueltig": true,
+     "halt": null,
+     "konfiguration": "S102",
+     "nach": "V00477",
+     "nach_rolle": "R3",
+     "s1": null,
+     "versuch": "V00476",
+     "vor": "V00475",
+     "vor_rolle": "R2",
+     "vorgesehen": true,
+     "vorpruefung_ablauf_1": false
+    }
+   ]
+  },
+  {
+   "art": "schlank",
+   "auswahl": {},
+   "ebene": "H",
+   "gleich": true,
+   "index": 0,
+   "plaetze": {},
+   "rollen": {},
+   "s2_bilanz": {
+    "apparaturfehler": [],
+    "beendet": false,
+    "massgeblich": [],
+    "s2": [],
+    "widerspruch": []
+   },
+   "seed": 1910311766019208858,
+   "szenario": "S06-saettigung",
+   "teil_b_gleich": true,
+   "unterschiede": {},
+   "ursache": [],
+   "variante": "wiederholungen",
+   "x_strich": []
+  },
+  {
+   "art": "schlank",
+   "auswahl": {},
+   "ebene": "H",
+   "gleich": true,
+   "index": 0,
+   "plaetze": {},
+   "rollen": {},
+   "s2_bilanz": {
+    "apparaturfehler": [],
+    "beendet": false,
+    "massgeblich": [],
+    "s2": [],
+    "widerspruch": []
+   },
+   "seed": 2265562330325795912,
+   "szenario": "H-fehlend",
+   "teil_b_gleich": true,
+   "unterschiede": {},
+   "ursache": [],
+   "variante": "wiederholungen",
+   "x_strich": []
+  },
+  {
+   "art": "schlank",
+   "auswahl": {},
+   "ebene": "H",
+   "gleich": false,
+   "index": 0,
+   "plaetze": {},
+   "rollen": {},
+   "s2_bilanz": {
+    "apparaturfehler": [],
+    "beendet": false,
+    "massgeblich": [
+     "V00031"
+    ],
+    "s2": [
+     "V00031"
+    ],
+    "widerspruch": []
+   },
+   "seed": 8492860313944394542,
+   "szenario": "S02-kontrolllauf",
+   "teil_b_gleich": true,
+   "unterschiede": {
+    "grund": [
+     "S2: Einzelzell-Liftoff in L2; die Konfiguration bleibt in den Blöcken und ist von Tests ausgeschlossen",
+     "S2: Einzelzell-Liftoff im Kontrolllauf L2; ŷ¹ ungültig (§8.2)"
+    ],
+    "sperren": [
+     [
+      "Phase 1 angehalten: S2: Einzelzell-Liftoff in L2; die Konfiguration bleibt in den Blöcken und ist von Tests ausgeschlossen (keine abgeschlossene Kampagne)"
+     ],
+     [
+      "Phase 1 angehalten: S2: Einzelzell-Liftoff im Kontrolllauf L2; ŷ¹ ungültig (§8.2) (keine abgeschlossene Kampagne)"
+     ]
+    ]
+   },
+   "ursache": [
+    "Halttext für S2 im Kontrolllauf: ŷ¹ ungültig statt Ausschluss der Konfiguration (Korrektur 3); Halt und Zeitpunkt gleich"
+   ],
+   "variante": "wiederholungen",
+   "x_strich": []
+  }
+ ],
+ "vorher_nachher_summen": {
+  "nachher": {
+   "N01-A4": {
+    "abgeschlossen": 9,
+    "halte": {
+     "S1 Nullpunktalarm": 1
+    },
+    "n": 10,
+    "plaetze_abgeschlossen": {
+     "ersetzt": 212,
+     "grenze": 1,
+     "gueltig": 4321,
+     "s1_nicht_pruefbar": 0,
+     "sonst": 0,
+     "spaet": 2
+    },
+    "rollen": {
+     "R1": 35,
+     "R2": 2,
+     "R3": 2,
+     "X_strich": 2
+    },
+    "vollstaendig": 9,
+    "x_strich": {
+     "andere_ungueltig": 0,
+     "g1_geprueft": 2,
+     "gueltig": 2,
+     "klammer_r2_r3": 2,
+     "max_verhaeltnis_eps": 0.5571016399862401,
+     "n": 2,
+     "s1": 0,
+     "s1_nicht_pruefbar": 0,
+     "vorpruefung_ablauf_1": 0
+    },
+    "zeit_verhaeltnis_abgeschlossen": 1.052204585537919,
+    "zusaetzlich": 308
+   },
+   "N01-V1G0": {
+    "abgeschlossen": 7,
+    "halte": {
+     "S1 Nullpunktalarm": 1,
+     "S1 X′": 2
+    },
+    "n": 10,
+    "plaetze_abgeschlossen": {
+     "ersetzt": 184,
+     "grenze": 1,
+     "gueltig": 3341,
+     "s1_nicht_pruefbar": 0,
+     "sonst": 0,
+     "spaet": 2
+    },
+    "rollen": {
+     "R1": 38,
+     "R2": 22,
+     "R3": 22,
+     "X_strich": 22
+    },
+    "vollstaendig": 7,
+    "x_strich": {
+     "andere_ungueltig": 2,
+     "g1_geprueft": 20,
+     "gueltig": 18,
+     "klammer_r2_r3": 20,
+     "max_verhaeltnis_eps": 0.9558111535096456,
+     "n": 22,
+     "s1": 2,
+     "s1_nicht_pruefbar": 0,
+     "vorpruefung_ablauf_1": 0
+    },
+    "zeit_verhaeltnis_abgeschlossen": 1.061904761904762,
+    "zusaetzlich": 392
+   },
+   "N01-V1G60h": {
+    "abgeschlossen": 9,
+    "halte": {
+     "S3": 1
+    },
+    "n": 10,
+    "plaetze_abgeschlossen": {
+     "ersetzt": 184,
+     "grenze": 5,
+     "gueltig": 4347,
+     "s1_nicht_pruefbar": 0,
+     "sonst": 0,
+     "spaet": 0
+    },
+    "rollen": {
+     "R1": 20,
+     "R2": 7,
+     "R3": 7,
+     "X_strich": 7
+    },
+    "vollstaendig": 9,
+    "x_strich": {
+     "andere_ungueltig": 0,
+     "g1_geprueft": 7,
+     "gueltig": 7,
+     "klammer_r2_r3": 7,
+     "max_verhaeltnis_eps": 0.6103819351748369,
+     "n": 7,
+     "s1": 0,
+     "s1_nicht_pruefbar": 0,
+     "vorpruefung_ablauf_1": 0
+    },
+    "zeit_verhaeltnis_abgeschlossen": 1.0500881834215166,
+    "zusaetzlich": 295
+   }
+  },
+  "vorher": {
+   "N01-A4": {
+    "abgeschlossen": 9,
+    "halte": {
+     "S1 Nullpunktalarm": 1
+    },
+    "n": 10,
+    "plaetze_abgeschlossen": {
+     "ersetzt": 212,
+     "grenze": 1,
+     "gueltig": 4321,
+     "s1_nicht_pruefbar": 0,
+     "sonst": 0,
+     "spaet": 2
+    },
+    "rollen": {
+     "R1": 35,
+     "R2": 2,
+     "R3": 2,
+     "X_strich": 2
+    },
+    "vollstaendig": 9,
+    "x_strich": null,
+    "zeit_verhaeltnis_abgeschlossen": 1.052204585537919,
+    "zusaetzlich": 308
+   },
+   "N01-V1G0": {
+    "abgeschlossen": 7,
+    "halte": {
+     "S1 Nullpunktalarm": 1,
+     "S1 X′": 2
+    },
+    "n": 10,
+    "plaetze_abgeschlossen": {
+     "ersetzt": 184,
+     "grenze": 1,
+     "gueltig": 3341,
+     "s1_nicht_pruefbar": 0,
+     "sonst": 0,
+     "spaet": 2
+    },
+    "rollen": {
+     "R1": 38,
+     "R2": 22,
+     "R3": 22,
+     "X_strich": 22
+    },
+    "vollstaendig": 7,
+    "x_strich": null,
+    "zeit_verhaeltnis_abgeschlossen": 1.061904761904762,
+    "zusaetzlich": 392
+   },
+   "N01-V1G60h": {
+    "abgeschlossen": 9,
+    "halte": {
+     "S3": 1
+    },
+    "n": 10,
+    "plaetze_abgeschlossen": {
+     "ersetzt": 184,
+     "grenze": 5,
+     "gueltig": 4347,
+     "s1_nicht_pruefbar": 0,
+     "sonst": 0,
+     "spaet": 0
+    },
+    "rollen": {
+     "R1": 20,
+     "R2": 7,
+     "R3": 7,
+     "X_strich": 7
+    },
+    "vollstaendig": 9,
+    "x_strich": null,
+    "zeit_verhaeltnis_abgeschlossen": 1.0500881834215166,
+    "zusaetzlich": 295
+   }
+  }
+ }
 }

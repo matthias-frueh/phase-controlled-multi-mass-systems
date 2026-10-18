@@ -53,8 +53,10 @@ Prüfstand erzeugt), Plan [AP-13](plan_ap13_pipelinetest.md) mit Vermerk vom 16.
     verwendeten Plans; bis PR #22 galten sie bei A4 für k = 30 statt 9.
   - Phase 1 kann als zustandsbehafteter Ablauf mit den Wiederholungen nach A9.12 laufen, auf Ebene H und über
     Ebene Z/Stufe 1.
-  - In der begrenzten Rechnung (104 Kampagnenausführungen) sind abgeschlossene Kampagnen mit Wiederholungen
+  - In der begrenzten Rechnung (105 Kampagnenausführungen) sind abgeschlossene Kampagnen mit Wiederholungen
     vollständig. 5 von 30 halten nach S1 oder S3 an.
+  - Korrekturrunde vom 18.10.2026 (Abschnitt 1c): X′ gegen R₂/R₃, Suchtreffer ohne k-Wechsel, S2-Bilanz online wie
+    offline; 39 weitere Kampagnenausführungen mit `ablauf-2` bestätigen die Befunde.
   - Werkzeug 8, die Prüfstandsraten, K12 und die E3-Zähler sind für den neuen Ablauf nicht übertragbar.
 
 ## 1a Korrekturen vom 16.10.2026
@@ -131,7 +133,8 @@ unverändert.
   - Ältere Pilot- und Teil-B-Dateien bleiben lesbar und gelten als historisch, nicht qualifiziert (`einordnen`).
   - A4 mit zehn Seeds: σ_Δ,F im Mittel 1,84 → 1,66 mN, ungültige Piloten 12/600 → 8/600, G4 in Phase 1
     166 → 221 von 5040 Läufen. V1-G0 und V1-G60h (k = k_max = 12) sind bitgleich.
-- **Zustandsbehafteter Ablauf der Phase 1** (`ablauf.py`, `ablauf-1`; nur Simulation, keine DAQ):
+- **Zustandsbehafteter Ablauf der Phase 1** (`ablauf.py`, `ablauf-1`, seit 18.10.2026 `ablauf-2`; nur Simulation,
+  keine DAQ):
   - Geplante und ausgeführte Reihenfolge sind getrennt. Jeder Versuch hat Kennung, Bezug, Zähler, Rolle, Anlass, Zeit
     und Gründe; verworfene Versuche bleiben erhalten.
   - Zusätzliche Versuche verbrauchen T_Lauf und verschieben spätere Läufe und die Drift.
@@ -153,12 +156,13 @@ unverändert.
     Laufplans) ist unverändert und weiter gleich. Der Ablauf hat einen eigenen Prüfsatz
     (`tests/fixtures/ap13_ablauf_pruefsatz`, fünf Prüfkampagnen mit inhaltlicher Gegenprobe).
   - Der Planungshaken trennt geplante und realisierte Messzeit; die normative Zeitformel ist unverändert.
-- **Begrenzte Rechnung** (104 Kampagnenausführungen, 6 volle Ketten, 0,20 Kernstunden; A4, V1-G0, V1-G60h mit je
-  zehn Seeds von PR #22 in drei Varianten):
+- **Begrenzte Rechnung** (105 Kampagnenausführungen einschließlich Diagnose, Gegenproben und Abnahmelauf, 6 volle Ketten
+  in der Rechnung, 0,20 Kernstunden; A4, V1-G0, V1-G60h mit je zehn Seeds von PR #22 in drei Varianten; Variante mit
+  Wiederholungen in der Korrekturrunde mit `ablauf-2` neu gerechnet, Zahlen gleich):
   - Mit Wiederholungen kommen je Kampagne 11–78 Versuche hinzu, die Laufzeit abgeschlossener Kampagnen steigt um
     5–6 %.
   - Jede abgeschlossene Kampagne ist vollständig (mindestens 23 von 24 gültigen Läufen je Punkt).
-  - 5 von 30 halten an: S1 nach reproduziertem Nullpunktalarm (2) oder G1-Verstoß von X′ (2), S3 (1).
+  - 5 von 30 halten an: S1 nach reproduziertem Nullpunktalarm (2) oder G1-Verstoß von X′ gegen R₂/R₃ (2), S3 (1).
   - Gemeinsam vollständig: 25/30 historisch, 24/30 k-konsistent ohne und 25/30 mit Wiederholungen. Die Ursache
     wechselt von Punkten unter n_min zu Halten.
   - Volle Ketten (Nullfall N01-A4, Artefaktfall A04-R4, Ebene H und Z): Entscheidungen unverändert.
@@ -166,6 +170,25 @@ unverändert.
   Rauschbias, H2-Intervalltyp), die gemeinsame Bestätigungswahrscheinlichkeit und alle Raten des Prüfstands, K12, die
   E3-Zähler und die Reserveaussage von PR #22. Die Neuläufe sind im Bericht abgeschätzt (Kalibrierung je System grob
   18–81 Kernstunden), nicht gestartet.
+
+## 1c Korrekturen vom 18.10.2026 (PR #23)
+
+Drei bestätigte Fehler aus der unabhängigen Prüfung von PR #23, je mit Regressionen, die am Stand 9a1cd2f den Fehler
+zeigen und jetzt bestehen ([Bericht](ap13_kmax_wiederholungen_2026-10-17/bericht.md), Abschnitt „Korrekturrunde vom
+18.10.2026“). Präregistrierung, Regelprofile, normative Schwellen, G1-Grenze und Wiederholungsgrenze sind unverändert.
+
+| | Fehler | Korrektur | Regression, Gegenprobe | betroffene Ergebnisse | Neurechnung |
+|---|---|---|---|---|---|
+| 1 | Die Vorprüfung gegen R₀ lief auch für X′; in R₂, X′, R₃ kam ein R₁, X′ wurde gegen R₂/R₁ geprüft, S1 konnte vor R₃ anhalten | `ablauf-2` (0008dd8): X′ ohne Vorprüfung, Klammer an R₂/R₃ desselben G1-Falls gebunden und protokolliert; S1 nur mit dieser gültigen Klammer, sonst „S1 nicht prüfbar“; Stufe 2 prüft die Klammer offline; Platzstatus aus strukturierten Angaben | Gegenprobe der Anweisung (0,0095 N gegen R₂/R₃, am alten Stand R₁ und S1 bei 0,0105 N), verletzendes X′ nach R₃, spät erkannter Verstoß, X′ jenseits der Grenze, unvollständige Klammer, Fortsetzung, Übergabe an Stufe 2 | Ablauf-Prüfsatz (Prüfsummen, Inhalt gleich); in 39 Kampagnen keine Entscheidung, nur Texte und drei Platzbenennungen | 30 Vergleichskampagnen, 4 volle Ketten, 3 Regelpfade: Befunde gleich, kein X′ mit R₁ unter `ablauf-1` |
+| 2 | Suchtreffer beim ursprünglichen k (k = 12 → 12, N_z = 100): `phase0_satz` übernahm den vorläufigen Satz, `arbeitspunkt` lehnte allein wegen dessen Quelle ab | 4266bc3: Satz der Suche geht bei festgelegtem Paar vor; Herkunft über Quelle und Bindung (`gleich_gebunden`) | Testhaken beim ersten Paar (reiner Softwareprüffall): am alten Stand „nicht abgesichert“, jetzt „abgesichert“; fremde Daten, abweichender Plan, zu kleine Reserve, andere Bindung weiter zurückgewiesen bzw. nicht abgesichert | keine gerechnete Kampagne (ohne Planungshaken ist die Suche „offen“) | – |
+| 3 | Online zählte ein S2 mit bestätigtem Apparaturfehler nicht, offline galt `len(s2) >= 2`: ein abgeschlossener Ablauf konnte in `datenlage` global gesperrt werden | 305c7b7: `gueltigkeit.s2_bilanz` online und offline, Übergabe im Ablaufstand, Abgleich in `datenlage`; Ausschlüsse bleiben; fehlende oder widersprüchliche Angaben geben nichts frei; S2 während eines anderen Halts gezählt | Gegenprobe der Anweisung, zwei S2 ohne Apparaturfehler, widersprüchliche Angaben, S2 im dritten Versuch eines Kontrolllaufs, Übergabe auf Ebene H (mit Fortsetzung aus dem gespeicherten Halt) und über Ebene Z/Stufe 1 | keine gerechnete Kampagne (keine Wiederaufnahme in den Katalogkampagnen) | Regelpfad S02 neu gerechnet: Halt wie bisher |
+
+- Neurechnung: 39 zusätzliche Kampagnenausführungen (Zusatzbudget 40), davon 4 volle Bootstrap-Auswertungen
+  (Zusatzgrenze 4), 0,20 Kernstunden; bisher 105 Ausführungen, zusammen 144, davon 11 volle. Statische Varianten sind
+  nach Codeanalyse, Stichprobe und Software-Prüfsatz unberührt und mit Herkunft 13f2a20 übernommen.
+- Die vier S1-Halte der Rechnung bleiben; die zwei nach X′ sind gegen die vorgesehene Klammer R₂/R₃ belegt.
+- Der Ablauf-Prüfsatz ist nach einer Gegenprüfung neu geschrieben (Inhalt gleich, Prüfsummen von Köpfen und
+  Entscheidungen neu). Der Software-Prüfsatz und die Ergebnisse von PR #21/#22 sind unverändert.
 
 ## 1 Erreichter Umfang
 
@@ -493,7 +516,8 @@ E3-Bedingung „unauffällig ≥ 0,8“ wird auf L1 verfehlt (14/200).
 | Kampagne Ebene H ohne Stufe 2 (17.10.2026, Abschnitt 1b) | A4/V1, L1, n = 24, ε_ctrl 1000; statisch bzw. mit Ablauf | 2,0 s bzw. 2,6 s je Kampagne und Kern |
 | dieselbe mit Stufe 2 | B = 1000, H3-MC 1000 | 5,1 s (statisch), 5,6 s (Ablauf) |
 | Ebene Z/Stufe 1 mit Ablauf und Stufe 2 | N01-A4, A04-R4, L1, n = 24; rund 850 Rohläufe je Kampagne (danach gelöscht) | 234 s je Kampagne und Kern |
-| begrenzte Rechnung k-Konsistenz/Ablauf | 104 Kampagnenausführungen, davon 6 mit Stufe 2 | 0,20 Kernstunden, Wandzeit rund 10 min |
+| begrenzte Rechnung k-Konsistenz/Ablauf | 105 Kampagnenausführungen, davon 7 mit Stufe 2 (6 in der Rechnung, 1 im Abnahmelauf) | 0,20 Kernstunden, Wandzeit rund 10 min |
+| Korrekturrunde vom 18.10.2026 (Abschnitt 1c) | 39 Kampagnenausführungen, davon 4 mit Stufe 2 | 0,20 Kernstunden, Wandzeit 10 min 51 s (Rechner rund 35 % langsamer als am 17.10.) |
 
 Die Kurzmessung des Plans (Abschnitt 4.1: 0,30 s je Kampagne bei n = 20, B = 1000, nur Bootstrap von H1) misst einen
 kleineren Rechenweg und ist keine Abnahmeschwelle; sie wurde nicht als Vergleich verwendet.
@@ -583,7 +607,8 @@ klären am Präreg-Text bzw. im Plan (AP-08, AP-13), nicht in der Software.
 14. **S1 und S3 halten Kampagnen bei exakter Superposition an** (§8.8, §9.2; Ablauf vom 17.10.2026). In 30 Kampagnen
     mit Wiederholungsablauf (A4, V1-G0, V1-G60h, je zehn) halten 5 an, ohne dass ein Effekt vorliegt:
     - S1 nach reproduziertem Nullpunktalarm: 2 Kampagnen;
-    - S1 nach G1-Verstoß von X′: 2 Kampagnen, beide V1-G0 mit 22 feststehenden G1-Verstößen in zehn Kampagnen;
+    - S1 nach G1-Verstoß von X′: 2 Kampagnen, beide V1-G0 mit 22 feststehenden G1-Verstößen in zehn Kampagnen; mit
+      `ablauf-2` (X′ gegen R₂/R₃, Korrektur vom 18.10.2026) bestätigt;
     - S3: 1 Kampagne, dazu der Regelpfad S06.
     Das liegt innerhalb der Schranken der Präregistrierung (S1 bis etwa 25–28 % je Kampagne). Für die gemeinsame
     Vollständigkeit wiegen die Halte aber mehr als die punktweisen Ausfälle, die der Ablauf beseitigt; ob eine

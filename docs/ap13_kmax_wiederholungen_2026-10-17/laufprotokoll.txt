@@ -116,3 +116,107 @@ Status angehalten, Halt S3 bei V00178 (Block 6): Re_N2 von L1 in Kontrollsatz 7 
 == 4. Gegenprobe am Endstand 28bc9dc (außerhalb der Auftragsliste): ablauf_vergleich.kampagne direkt, Befund ohne Laufzeit gegen den Checkpoint
 N01-A4-wiederholungen-start 0 Seed 6421326674948950355 Befund am Endstand gleich: True 3.8 s abgeschlossen None
 N01-V1G0-wiederholungen-start 1 Seed 522969386212988845 Befund am Endstand gleich: True 2.8 s angehalten S1
+
+== 5. Korrekturrunde vom 18.10.2026 (Anweisung „PR #23: drei bestätigte Fehler korrigieren“)
+
+-- 5a. Altstandsprüfung der Regressionen: neue Testdateien (Endstand) in einem Worktree von 9a1cd2f
+python3 -m pytest tests/test_ap13_ablauf.py tests/test_ap13_kmax.py -q -p no:cacheprovider --tb=line -rA \
+    -k "x_strich or s2 or suchtreffer or arbeitspunkt_logik or uebergabe_an_stufe2"
+PASSED tests/test_ap13_ablauf.py::test_g1_sofort_mit_r1_und_ersatz_durch_x_strich
+PASSED tests/test_ap13_ablauf.py::test_s2_halt_ausschluss_weitere_messung_und_zweites_s2
+FAILED tests/test_ap13_ablauf.py::test_x_strich_ueber_der_grenze_und_s1
+FAILED tests/test_ap13_ablauf.py::test_x_strich_mit_r2_und_r3_ohne_vorpruefung
+FAILED tests/test_ap13_ablauf.py::test_x_strich_verletzend_s1_erst_nach_r3
+FAILED tests/test_ap13_ablauf.py::test_x_strich_nach_spaet_erkanntem_g1_und_ueber_der_grenze
+FAILED tests/test_ap13_ablauf.py::test_x_strich_unvollstaendige_klammer_ohne_s1
+FAILED tests/test_ap13_ablauf.py::test_x_strich_fortsetzung_aus_dem_ablaufstand
+FAILED tests/test_ap13_ablauf.py::test_s2_nach_bestaetigtem_apparaturfehler_beendet_phase_1_offline_nicht
+FAILED tests/test_ap13_ablauf.py::test_zwei_s2_ohne_apparaturfehler_beenden_phase_1_auch_nach_einer_freigabe
+FAILED tests/test_ap13_ablauf.py::test_s2_ohne_freigabe_bei_fehlenden_oder_widerspruechlichen_angaben
+FAILED tests/test_ap13_ablauf.py::test_s2_im_dritten_versuch_eines_kontrolllaufs_waehrend_des_halts_kontrolllauf
+FAILED tests/test_ap13_ablauf.py::test_uebergabe_an_stufe2_eindeutige_zaehlung_und_halt_sperrt
+FAILED tests/test_ap13_ablauf.py::test_s2_bilanz_uebergabe_an_datenlage_und_fortsetzung_aus_dem_ablaufstand
+FAILED tests/test_ap13_ablauf.py::test_s2_bilanz_ebene_z_ueber_stufe_1
+FAILED tests/test_ap13_kmax.py::test_suchtreffer_ohne_k_wechsel_dem_satz_der_suche_zugeordnet
+FAILED tests/test_ap13_kmax.py::test_arbeitspunkt_logik
+Fehlerzeilen:
+test_ap13_ablauf.py:303: AssertionError: assert (['R2', 'X_strich', 'R1'] == ['R2', 'X_strich', 'R3']
+test_ap13_ablauf.py:349: AssertionError: assert (['R2', 'X_strich', 'R1'] == ['R2', 'X_strich', 'R3']
+test_ap13_ablauf.py:377: AssertionError: assert ['R2', 'X_strich', 'R1'] == ['R2', 'X_strich', 'R3']
+test_ap13_ablauf.py:401: AssertionError: assert (True is True and 'V00006' == 'V00006'
+test_ap13_ablauf.py:441: AssertionError: assert (['R2', 'X_strich', 'R1'] == ['R2', 'X_strich', 'R3']
+test_ap13_ablauf.py:467: AssertionError: assert 'angehalten' == 'abgeschlossen'
+test_ap13_ablauf.py:583: assert True is False
+test_ap13_ablauf.py:603: AttributeError: module 'pcmms_auswertung.auswertung' has no attribute '_s2_gegenprobe'
+test_ap13_ablauf.py:623: Failed: DID NOT RAISE AblaufFehler
+test_ap13_ablauf.py:681: AssertionError: assert ('angehalten' == 'abgebrochen'
+test_ap13_ablauf.py:850: KeyError: 'g1_klammer'
+test_ap13_ablauf.py:974: assert (True is False)
+test_ap13_ablauf.py:1019: AssertionError: assert ([('Datenlage'...ndet (§9.2)')] == []
+test_ap13_kmax.py:229: AssertionError: assert ('nicht abgesichert' == 'abgesichert'
+test_ap13_kmax.py:283: AssertionError: assert ('abgesichert' == 'nicht abgesichert'
+15 failed, 2 passed, 30 deselected in 41.46s  (pytest exit=1; danach Worktree auf 9a1cd2f zurückgesetzt)
+
+-- 5b. Ablauf-Prüfsatz vor und nach dem Neuschreiben
+harness ablauf-pruefsatz --pruefen (Code 305c7b7, alte Datei): gleich=false, Abweichungen nur ablauf_version,
+verfahren, Prüfsumme koepfe (alle fünf Fälle) und entscheidungen (S02-kontrolllauf); keine Inhaltsgröße abweichend.
+pruefsatz_gegenpruefung.py gegen die Datei am Stand 9a1cd2f: Gegenprüfung bestanden (exit=0), Ergebnis in
+pruefsatz_gegenpruefung.json.
+harness ablauf-pruefsatz --schreiben: SHA-256 44b727a213c701c5…, exit=0; danach --pruefen: gleich=true, exit=0.
+
+-- 5c. Vollständige Testsuite am Rechenstand d47ca34 (vor den Rechnungen)
+python3 -m pytest tests -q -p no:cacheprovider: 408 passed, 8 skipped in 628.94s, exit=0.
+
+-- 5d. Rechnung: python3 code/pcmms_auswertung harness ablauf-vergleich --korrektur (4 Prozesse, je 1 BLAS-Thread)
+Checkpoints: /tmp/pcmms-ablauf-vergleich-20261018/ (nicht im Repository).
+Start 2026-10-18T07:19:15 monoton 4206.644638822 git c8c0a3657098c52f46469417aa64db0c994ee3ff
+[07:19:16] korr-N01-A4-wiederholungen: 10 Kampagnen …
+[07:19:29] korr-N01-A4-wiederholungen fertig (12.4 s, 37.9 Kernsekunden)
+[07:19:29] korr-N01-V1G0-wiederholungen: 10 Kampagnen …
+[07:19:41] korr-N01-V1G0-wiederholungen fertig (11.9 s, 35.4 Kernsekunden)
+[07:19:41] korr-N01-V1G60h-wiederholungen: 10 Kampagnen …
+[07:19:52] korr-N01-V1G60h-wiederholungen fertig (11.2 s, 33.4 Kernsekunden)
+[07:19:52] korr-voll-N01-A4-wiederholungen: 1 Kampagnen …
+[07:20:00] korr-voll-N01-A4-wiederholungen fertig (8.0 s, 8.0 Kernsekunden)
+[07:20:00] korr-voll-A04-R4-wiederholungen: 1 Kampagnen …
+[07:20:08] korr-voll-A04-R4-wiederholungen fertig (7.7 s, 7.7 Kernsekunden)
+[07:20:08] korr-voll-Z-N01-A4-wiederholungen: 1 Kampagnen …
+[07:24:57] korr-voll-Z-N01-A4-wiederholungen fertig (289.7 s, 289.7 Kernsekunden)
+[07:24:57] korr-voll-Z-A04-R4-wiederholungen: 1 Kampagnen …
+[07:29:49] korr-voll-Z-A04-R4-wiederholungen fertig (292.0 s, 291.9 Kernsekunden)
+[07:29:49] korr-regelpfad-S06-saettigung: 1 Kampagnen …
+[07:29:52] korr-regelpfad-S06-saettigung fertig (3.1 s, 3.1 Kernsekunden)
+[07:29:52] korr-regelpfad-H-fehlend: 1 Kampagnen …
+[07:29:56] korr-regelpfad-H-fehlend fertig (4.0 s, 4.0 Kernsekunden)
+[07:29:56] korr-regelpfad-S02-kontrolllauf: 1 Kampagnen …
+[07:29:59] korr-regelpfad-S02-kontrolllauf fertig (3.1 s, 3.1 Kernsekunden)
+[07:29:59] korr-statisch-N01-A4-historisch: 1 Kampagnen …
+[07:30:03] korr-statisch-N01-A4-historisch fertig (3.1 s, 3.1 Kernsekunden)
+[07:30:03] korr-statisch-N01-A4-k_konsistent: 1 Kampagnen …
+[07:30:05] korr-statisch-N01-A4-k_konsistent fertig (2.9 s, 2.9 Kernsekunden)
+{
+ "korr-N01-A4-wiederholungen": "gerechnet",
+ "korr-N01-V1G0-wiederholungen": "gerechnet",
+ "korr-N01-V1G60h-wiederholungen": "gerechnet",
+ "korr-regelpfad-H-fehlend": "gerechnet",
+ "korr-regelpfad-S02-kontrolllauf": "gerechnet",
+ "korr-regelpfad-S06-saettigung": "gerechnet",
+ "korr-statisch-N01-A4-historisch": "gerechnet",
+ "korr-statisch-N01-A4-k_konsistent": "gerechnet",
+ "korr-voll-A04-R4-wiederholungen": "gerechnet",
+ "korr-voll-N01-A4-wiederholungen": "gerechnet",
+ "korr-voll-Z-A04-R4-wiederholungen": "gerechnet",
+ "korr-voll-Z-N01-A4-wiederholungen": "gerechnet"
+}
+
+exit=0
+Ende 2026-10-18T07:30:06 monoton 4857.046746739
+
+-- 5e. Auswertung: python3 code/pcmms_auswertung harness ablauf-vergleich --korrektur --bericht
+Alte Befunde aus /tmp/pcmms-ablauf-vergleich-20261017/, Dateien gegen die Prüfsummen in ergebnisse.json am Stand 9a1cd2f
+geprüft (alle 28 Aufträge gleich), Befunde gegen kampagnen.csv am Stand 9a1cd2f geprüft.
+Stichprobe der statischen Varianten (A4, Seed 6421326674948950355): historisch und k_konsistent ohne Laufzeit gleich.
+Vorher/Nachher: 34 von 37 neu gerechneten Ablaufkampagnen in allen verglichenen Größen gleich; 3 nur in Text und
+Benennung verschieden (V1-G0 Kampagnen 2 und 7: Haltgrund, drei Plätze „fehlt: spät erkannt“ → „fehlt: Halt“;
+S02-kontrolllauf: Halttext). Kein X′ mit R₁ unter ablauf-1 (größtes |Δ⟨N⟩|/ε_ctrl gegen R₂: 0,956, V1-G0 Kampagne 7,
+V00364). Volle Ketten: alle Entscheidungen bitgleich.
