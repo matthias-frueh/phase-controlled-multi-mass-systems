@@ -272,7 +272,10 @@ def _kette_ablauf(sid, stufe, profil, plan, seed, werkzeug8, staerke, kalibrieru
 def eingang_schreiben(verzeichnis, sid, stufe, plan, seed, profil, ebene='Z', nur=None, werkzeug8=None,
                       kennung=None, verfahren=None):
     """Frische Ausgabestruktur: eingang/ (P0-Daten, Kalibrierung, Teil B, Regelprofil, Rohläufe bzw.
-    Zusammenfassungen, Manifest) und wahrheit/ (nur Harness). Rückgabe der Pfade."""
+    Zusammenfassungen, Manifest) und wahrheit/ (nur Harness). Rückgabe der Pfade. Nur der statische Laufplan; ein
+    Verfahren mit Ablauf „zustand“ wird zurückgewiesen."""
+    if vf.oder_standard(verfahren).ablauf != 'statisch':
+        raise ValueError('eingang_schreiben: nur der statische Laufplan; den Ablauf der Phase 1 rechnet kampagne_ablauf')
     kennung = kennung or formate.synth_kennung('KETTE', sid, stufe, seed)
     sz = szenarien.KATALOG[sid]
     m, laeufe, tab = kampagne_erzeugen(sid, stufe, plan, seed)

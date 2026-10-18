@@ -36,8 +36,12 @@ def pfade(ziel):
 def generator_schreiben(ziel, sid, stufe, plan, seed, ebene='Z', n_min=None, staerke=None, kennung=None,
                         verfahren=None):
     """Generatorausgaben einer Kampagne in eine frische Struktur; Rückgabe der Pfade. Die Planangaben nennen das
-    Verfahren (Bindung der Phase-0-Größen in Teil B)."""
+    Verfahren (Bindung der Phase-0-Größen in Teil B). Die Dateikette schreibt den statischen Laufplan; ein Verfahren
+    mit Ablauf „zustand“ wird zurückgewiesen statt still statisch gerechnet (Ablauf: kette.kampagne_ablauf)."""
     v = vf.oder_standard(verfahren)
+    if v.ablauf != 'statisch':
+        raise ValueError(f'Dateikette: Ablauf „{v.ablauf}“ nicht umgesetzt, nur der statische Laufplan; den Ablauf '
+                         'der Phase 1 rechnet kette.kampagne_ablauf (Ebene H oder Z)')
     p = pfade(ziel)
     if os.path.exists(p['eingang']) and os.listdir(p['eingang']):
         raise FileExistsError(f'{p["eingang"]} ist nicht leer (frische Ausgabestruktur verlangt)')

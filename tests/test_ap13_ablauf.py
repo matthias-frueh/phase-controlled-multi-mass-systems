@@ -634,3 +634,20 @@ def test_ablauf_pruefsatz_nachrechenbar():
     assert r['gleich'], r['abweichungen']
     assert r['inhalt']['N01-A4/L1/13/aus']['laufzahl']['zusaetzlich'] == 0
     assert r['inhalt']['S02-kontrolllauf/L1/7/zustand']['halt'] == 'S2'
+
+
+def test_kein_stiller_rueckfall_auf_den_statischen_laufplan(tmp_path):
+    """Ein angeforderter Ablauf fällt nicht still auf den statischen Laufplan zurück: Die Dateikette (nur statischer
+    Laufplan) weist „zustand“ zurück, bevor sie etwas schreibt; kampagne_ablauf verlangt „zustand“."""
+    from pcmms_auswertung.harness import dateien
+    prof = regeln.profil('ENTW-2026-10').mit_reduktion(bootstrap_B=50, h3_mc=50, eps_ctrl_datensaetze=100)
+    plan = kp.Plan(n0=6, n_pilot=6, n_bloecke=1)
+    with pytest.raises(ValueError, match='Dateikette: Ablauf'):
+        dateien.kette_dateien(str(tmp_path / 'k'), 'N01-A4', 'L1', prof, plan=plan, seed=1, ebene='H',
+                              verfahren=vf.ZUSTAND)
+    assert not (tmp_path / 'k').exists()
+    with pytest.raises(ValueError, match='nur der statische Laufplan'):
+        kette.eingang_schreiben(str(tmp_path / 'e'), 'N01-A4', 'L1', plan, 1, prof, ebene='H', verfahren=vf.ZUSTAND)
+    assert not (tmp_path / 'e').exists()
+    with pytest.raises(ValueError, match='verlangt ein Verfahren'):
+        kette.kampagne_ablauf('N01-A4', 'L1', plan, 1, prof, verfahren=vf.STATISCH)
