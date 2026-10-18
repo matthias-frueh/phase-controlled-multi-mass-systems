@@ -11,7 +11,8 @@ Auftrag umfasst zwei technische Änderungen:
 
 Am 18.10.2026 wurden drei bestätigte Fehler korrigiert und die betroffenen Ergebnisse gezielt neu gerechnet (Abschnitt
 „Korrekturrunde vom 18.10.2026“). Die Zahlen dieses Berichts sind der Stand danach; der Stand davor bleibt über den
-Commit 9a1cd2f nachvollziehbar.
+Commit 9a1cd2f nachvollziehbar. Ein Nachtrag vom selben Tag schließt einen Restfehler bei verschachtelten Wiederholungen
+(`ablauf-3`, Abschnitt „Nachtrag vom 18.10.2026“); er ändert keine gerechnete Kampagne.
 
 Präregistrierung, Regelprofile, G4-Formel mit Faktor 3, Poolregel und normative Schwellen sind unverändert. Alle Zahlen
 sind Entwicklungswerte: reduzierte Replikatzahlen (Profil ENTW-2026-10 mit B = 1000, H3-MC 1000, 1000
@@ -38,6 +39,8 @@ Power-Aussage und keine 0,95-Aussage.
   - Korrekturrunde: Die Prüfung von X′ gegen R₂/R₃ und die S2-Bilanz ändern in den 39 neu gerechneten Kampagnen keine
     Entscheidung. Kein X′ hätte unter `ablauf-1` ein R₁ erhalten; die beiden S1-Halte nach X′ sind jetzt gegen die
     vorgesehene Klammer belegt. Drei Plätze angehaltener Kampagnen heißen „fehlt: Halt“ statt „spät erkannt“.
+  - Nachtrag (`ablauf-3`): R₃ folgt jetzt unmittelbar auf X′, auch wenn X′ eine S3-Wiederholung auslöst. In allen 37
+    neu gerechneten Ablaufkampagnen folgte es schon so; die Zahlen gelten unverändert.
 - **Frage 3 – Vollständigkeit.** Gemeinsam vollständig sind 25/30 (historisch), 24/30 (k-konsistent ohne
   Wiederholungen) und 25/30 (mit Wiederholungen).
   - Der k-Effekt betrifft nur A4: 10/10 → 9/10, weil ein Punkt (S116) mit 17 gültigen Läufen unter n_min = 18 fällt.
@@ -90,6 +93,9 @@ Berichtskorrekturen (`harness/ablauf_vergleich_bericht.py`) wiederholen keine Re
 - Die Checkpoints der Korrekturrunde (`/tmp/pcmms-ablauf-vergleich-20261018/`) passen zum Rechencode von c8c0a36
   (`ablauf-2`). `--korrektur --bericht` liest sie und die alten Befunde, Letztere nur als Vorher-Stand und geprüft gegen
   die Prüfsummen in `ergebnisse.json` am Stand 9a1cd2f (Abschnitt 7).
+- Seit dem Nachtrag (`ablauf-3`, 377fc26) passt auch ihr Schlüssel nicht mehr; `--korrektur --bericht` läuft mit ihnen
+  nur auf Ständen mit dem Rechencode von c8c0a36 (bis 836f2c4). Die Ergebnisse gelten unverändert für `ablauf-3`
+  (Abschnitt „Nachtrag“), neu gerechnet ist nichts.
 
 ## Korrekturrunde vom 18.10.2026
 
@@ -238,6 +244,61 @@ Nicht gezählt sind wie bisher die Regressionstests und die Prüfsätze: die Abn
 Ablauf-Prüfsatzes mit dessen fünf kleinen Prüfkampagnen. Entwicklungsläufe mit Testgrößen (Pläne mit 1–6 Blöcken, wie
 in den Regressionen) zählen ebenso wenig. Einen End-to-End-Abnahmelauf mit Stufe 2 gibt es in der Korrekturrunde nicht;
 er wäre die fünfte volle Auswertung.
+
+## Nachtrag vom 18.10.2026: verschachtelte Wiederholungen (`ablauf-3`)
+
+Eine weitere Gegenprobe am Stand 836f2c4 zeigte einen Restfehler bei verschachtelten Wiederholungen: X′ wartet auf sein
+R₃, eine von X′ ausgelöste zweite Prüfung beginnt, und deren Referenzlauf schließt die erste.
+
+- **Ablauf am Stand 836f2c4.** Ist X′ ein Kontrolllauf (Lⱼ) mit S3-Überschreitung, kam die sofortige S3-Wiederholung
+  vor R₃. Lag sie um mehr als ε_ctrl neben R₂, folgte ihre Vorprüfung mit R₁. Dieses R₁ schloss die offene G1-Prüfung
+  von X′: X′ wurde gegen R₂/R₁ geprüft, die Klammer galt als unvollständig, S1 als „nicht prüfbar“. Ein erforderlicher
+  Halt blieb aus.
+- **Gegenprobe** (Skriptmessung, Kontrollsatz aus R und L₁): L₁ des ersten Kontrollsatzes +0,05 N (Vorprüfung, G1 →
+  R₂, X′, R₃), X′ +0,015 N mit S3-Überschreitung, S3-Wiederholung +0,011 N, R₁ ihrer Vorprüfung +0,003 N.
+  - Am Stand 836f2c4: Folge R₂, X′, S3-Wiederholung, R₁, R₃; X′ „S1 nicht prüfbar“, der Ablauf schließt ohne Halt ab.
+  - Jetzt: Folge R₂, X′, R₃. X′ weicht 0,015 N von der Klammer R₂/R₃ ab (ε_ctrl = 0,010 N), S1 hält nach R₃ an. Die
+    S3-Wiederholung bleibt vorgemerkt und folgt nach dem Kontrollsatz der Wiederaufnahme.
+- **Korrektur** (377fc26, `ablauf-3`): Was X′ auslöst, folgt erst nach seinem R₃. Damit bleibt die Folge R₂, X′, R₃
+  geschlossen, wie §9.2 sie nennt und A8 sie voraussetzt (X′ mittig zwischen den frischen Referenzläufen R₂ und R₃).
+  - Ein X′, das kein Kontrolllauf ist, löst vor R₃ nichts aus; für ihn ändert sich nichts. Die sofortige
+    Kontrollwiederholung eines aus anderem Grund ungültigen X′ folgt weiter unmittelbar; ein solches X′ hat keine
+    offene G1-Prüfung.
+  - Bei einem nach G2–G10 gültigen X′ unterbricht nur ein Halt an X′ selbst die Folge (S3 im Kontrollsatz einer
+    Wiederaufnahme). R₃ folgt dann erst nach dem Kontrollsatz der nächsten Wiederaufnahme; die Klammer ist
+    unvollständig und S1 „nicht prüfbar“, wie bei ungültigem R₂ oder R₃. Lesart, keine ausdrückliche Regel: Nach einem Halt wird erst nach der Ursachenanalyse und
+    einem vollständigen Kontrollsatz weitergemessen; ein R₃ danach ist kein frischer Referenzlauf der Klammer mehr.
+  - Stufe 2 prüft die Folge offline: Auf ein nach G2–G10 gültiges X′ folgt unmittelbar das R₃ seines Falls,
+    ausgenommen ein Halt an X′ vor R₃ (andere Regel als S1). Eine Tabelle mit der alten Folge wird zurückgewiesen,
+    obwohl ihre Klammer R₂/R₁ in sich stimmt.
+  - Ablaufstände von `ablauf-2` werden nicht fortgesetzt.
+- **Regressionen** (`tests/test_ap13_ablauf.py`); alle fünf schlagen am Stand 836f2c4 fehl und bestehen jetzt:
+  - S1 nach R₃ trotz S3-Wiederholung mit eigener Vorprüfung, mit unabhängig gerechneter Abweichung gegen R₂/R₃, danach
+    Wiederaufnahme und S3-Wiederholung („S3 nicht reproduziert“);
+  - ein bestehendes X′ (0,0095 N gegen R₂/R₃) mit reproduziertem S3 nach R₃: Halt S3 (am alten Stand vor R₃);
+  - Zurückweisung der alten Folge durch Stufe 2;
+  - Unterbrechung zwischen X′ und R₃, Fortsetzung aus dem gespeicherten Ablaufstand (gleicher Halt, gleiche
+    Warteschlange), Zurückweisung eines Stands von `ablauf-2`;
+  - Halt an X′ im Kontrollsatz einer Wiederaufnahme (Lesart oben; am alten Stand fehlte nur die Offline-Prüfung der
+    Folge).
+  - Dazu prüft `tests/test_ablauf_vergleich.py` die Unbetroffenheit der gerechneten Kampagnen aus `ergebnisse.json`.
+- **Gerechnete Ergebnisse unverändert, nichts neu gerechnet.** `ablauf-3` entscheidet nur dann anders als `ablauf-2`,
+  wenn ein nach G2–G10 gültiges X′ eine S3-Wiederholung auslöst; unter `ablauf-2` stand sie zwischen X′ und dem
+  Referenzlauf, der es schließt.
+  - In den 37 neu gerechneten Ablaufkampagnen der Korrekturrunde (30 Vergleichskampagnen, 4 volle Ketten, 3 Regelpfade)
+    gibt es 35 X′. Auf jedes der 33 mit G1-Prüfung folgt unmittelbar sein R₃. Nur eines davon ist ein Kontrolllauf
+    (V1-G0 Kampagne 2, L₁, V00010 → R₃ V00011), ohne S3-Wiederholung. Die zwei übrigen X′ waren aus anderem Grund
+    ungültig.
+  - Grundlage sind die Befunde in `ergebnisse.json`. Sie gleichen den Checkpoints, deren Dateien die dort vermerkten
+    Prüfsummen haben.
+  - Alle Zahlen dieses Berichts gelten deshalb unverändert für `ablauf-3`. Die Checkpoints passen nicht mehr zum
+    heutigen Rechencode; eine Neurechnung bräuchte ein neues Budget und ist nicht nötig.
+  - Die Rechnung vom 17.10.2026 (`ablauf-1`) ist Vorher-Stand und davon nicht berührt.
+- **Ablauf-Prüfsatz.** Am Code 377fc26 wich er nur in Ablaufversion und Verfahrenskennung ab. Inhaltsgrößen und alle
+  Prüfsummen (Daten, Köpfe, Entscheidungen, Ziehungen, Schwellen) der fünf Prüfkampagnen sind gleich; neu geschrieben
+  in 73fdbf0.
+- **Rechenumfang.** Keine Kampagnenausführung; es bleibt bei 105 + 39 = 144 Ausführungen, davon 11 volle. Nicht
+  gezählt sind wie bisher Regressionstests und Prüfsätze.
 
 ## 1 Phase-0-Größen: bisher an k der Pilotgrößen, jetzt an den Plan gebunden (Frage 1)
 
@@ -618,7 +679,8 @@ neue Fachregel):
 - Ein Referenzlauf außerhalb eines Kontrollsatzes, der gegen G2–G10 verstößt, wird nicht wiederholt und ist kein Bezug.
   Ein Alarm der Wiederholung nur in anderen Kanälen führt zu einer weiteren Wiederholung; nach mehr als zehn
   solchen Wiederholungen hält der Ablauf an (technische Grenze ohne Regelausgang; in dieser Rechnung nicht erreicht).
-- S3 wird an Lⱼ ohne Verstoß gegen G2–G10 geprüft; eine gültige S3-Wiederholung ist ein gültiger Kontrolllauf.
+- S3 wird an Lⱼ ohne Verstoß gegen G2–G10 geprüft; eine gültige S3-Wiederholung ist ein gültiger Kontrolllauf. Die
+  S3-Wiederholung eines X′ folgt nach dessen R₃ (Nachtrag, `ablauf-3`).
 - Das erste S2 hält an (Abbruchregel S2, §9.2); die Konfiguration bleibt in den Blöcken und ist von Tests
   ausgeschlossen, ein zweites S2 ohne festgestellten Apparaturfehler beendet Phase 1.
   - Maßgeblich ist die S2-Bilanz (`gueltigkeit.s2_bilanz`, im Ablauf und in Stufe 2 gleich). Ein S2 zählt nicht, wenn
@@ -627,9 +689,10 @@ neue Fachregel):
   - Ein zweites maßgebliches S2 beendet Phase 1 sofort, ohne eigene Ursachenanalyse.
   - Ein S2 während eines anderen Halts (Kontrolllauf an der Grenze) wird gezählt; die Ursachenanalyse dieses Halts
     gilt auch für das S2.
-- X′ wird gegen seine Klammer R₂/R₃ geprüft (§9.2, A9.12), ohne Vorprüfung mit R₁. Eine nicht reproduzierte
-  Alarmwiederholung von R₂ oder R₃ ersetzt den alarmierten Lauf auch in der Klammer. Ist die Klammer unvollständig
-  (R₂ oder R₃ ungültig, kein Referenzlauf danach), gilt G1 von X′ zwischen den einschließenden gültigen Referenzläufen.
+- X′ wird gegen seine Klammer R₂/R₃ geprüft (§9.2, A9.12), ohne Vorprüfung mit R₁; R₃ folgt unmittelbar auf X′
+  (`ablauf-3`). Eine nicht reproduzierte Alarmwiederholung von R₂ oder R₃ ersetzt den alarmierten Lauf auch in der
+  Klammer. Ist die Klammer unvollständig (R₂ oder R₃ ungültig, Halt an X′, kein Referenzlauf danach), gilt G1 von X′
+  zwischen den einschließenden gültigen Referenzläufen.
   S1 ist dann „nicht prüfbar“ und wird nicht ausgelöst, ein G1-ungültiges X′ wird nicht weiter wiederholt, und der Platz
   fehlt („fehlt: S1 nicht prüfbar“).
 - Der Kontrollsatz einer Wiederaufnahme wird in einer vom Reihenfolgegenerator gezogenen Reihenfolge gemessen und muss
@@ -650,8 +713,9 @@ nach zwei ungültigen Wiederholungen ohne Halt). Primärer Funktionsnachweis ist
 - Angehaltene Kampagnen werden nicht automatisch fortgesetzt: Eine Wiederaufnahme braucht eine Ursachenanalyse, die
   sich nicht simulieren lässt. Ob eine angehaltene Kampagne nach der Analyse vollständig würde, bleibt offen; als
   abgeschlossen zählt sie hier nicht.
-- In den 39 Kampagnen der Korrekturrunde trat kein Fall auf, in dem die korrigierte Prüfung von X′ oder die S2-Bilanz
-  anders entscheidet. Die Korrekturen belegen die Regressionen, nicht diese Rechnung. Der Planungshaken ist in den
+- In den 39 Kampagnen der Korrekturrunde trat kein Fall auf, in dem die korrigierte Prüfung von X′, die S2-Bilanz
+  oder die Folge R₂, X′, R₃ des Nachtrags anders entscheidet. Die Korrekturen belegen die Regressionen, nicht diese
+  Rechnung. Der Planungshaken ist in den
   Kampagnen nicht angebunden; die Korrektur von Teil B prüft nur der Testhaken.
 - Zehn Kampagnen je System und Variante lösen Raten nicht auf. Die Wilson-Intervalle sind breit; eine
   Vollständigkeits- oder Haltrate ist damit nicht bestimmt.
@@ -677,6 +741,8 @@ teilweise bearbeitet.
   - Korrekturrunde: Teil B (4266bc3), X′ (0008dd8), S2-Bilanz (305c7b7), Ablauf-Prüfsatz nach Gegenprüfung (51ca307),
     Auftragsliste vor den Rechnungen (d47ca34), Befundfelder zur Ursachenangabe und Rechenstand (c8c0a36); danach
     Berichtsteil, Ergebnisse und Dokumentation.
+  - Nachtrag: Folge R₂, X′, R₃ mit Regressionen und Nachweis der Unbetroffenheit (377fc26), Ablauf-Prüfsatz für
+    `ablauf-3` (73fdbf0), Altstandsfassung der Offline-Gegenprobe (231e27c, nur Test), Dokumentation.
 - Altstandsprüfung der Regressionen: die neuen Testdateien in einem Worktree von 9a1cd2f, Auswahl der Tests zu X′, S2,
   Suchtreffer und Übergabe (17). Es schlagen 15 fehl:
   - 13 am jeweiligen Fehler: R₁ nach X′ (5), Halt S1 statt Abschluss bei der Fortsetzung, S2_phase_beendet True (Skript
@@ -686,6 +752,10 @@ teilweise bearbeitet.
   - 2 an neuer Prüfung: Klammer von X′ im Befund der Stufe 2 und S2-Gegenprobe (Erhaltungsfall „zwei S2 ohne
     Apparaturfehler“, der bis dorthin auch am alten Stand galt).
   - Die zwei bestandenen sind bestehende Tests.
+- Altstandsprüfung des Nachtrags: die neue Testdatei in einem Worktree von 836f2c4, Auswahl der fünf neuen Tests. Alle
+  fünf schlagen fehl, drei an der alten Folge (S3-Wiederholung vor R₃ ohne S1, Halt S3 vor R₃, Warteschlange bei der
+  Fortsetzung), zwei an der fehlenden Offline-Prüfung der Folge: Die alte Folge mit „S1 nicht prüfbar“ und ohne Halt
+  entsteht dort von selbst und wird nicht zurückgewiesen; ebenso fehlt die Prüfung beim Halt an X′.
 - Alle Kampagnen der Auftragsliste sind auf 13f2a20 aus sauberem Arbeitsbaum gerechnet (Git-Stand je Checkpoint vor
   und nach der Rechnung in `ergebnisse.json`, `checkpoints`), mit vier Arbeitsprozessen und je einem BLAS-Thread.
 - 28bc9dc ändert nur die Dateikette, die die Rechnung nicht benutzt. Weil der Rechencode Teil des Checkpoint-Schlüssels
@@ -710,4 +780,5 @@ teilweise bearbeitet.
   Checkpoints liegen außerhalb des Repositorys.
 - Ablauf-Prüfsatz: `tests/fixtures/ap13_ablauf_pruefsatz.json` (fünf Prüfkampagnen, Prüfsummen und lesbare
   Inhaltsgrößen, inhaltliche Gegenprobe ohne gespeicherte Sollwerte; für `ablauf-2` nach der Gegenprüfung neu
-  geschrieben). Der Software-Prüfsatz `tests/fixtures/ap13_pruefsatz.json` ist unverändert und weiter gleich.
+  geschrieben, für `ablauf-3` nur in Version und Verfahrenskennung). Der Software-Prüfsatz
+  `tests/fixtures/ap13_pruefsatz.json` ist unverändert und weiter gleich.

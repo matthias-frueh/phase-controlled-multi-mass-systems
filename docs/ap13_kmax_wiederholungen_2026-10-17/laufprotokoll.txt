@@ -245,3 +245,52 @@ python3 code/pcmms_auswertung harness ablauf-pruefsatz --pruefen tests/fixtures/
 Geschützte Dateien gegen main 2ab6d28 unverändert: data/, rechnungen/, docs/ap11_ap12_ap13_pruefstand.json,
 tests/fixtures/ap13_pruefsatz.json, docs/ap13_neulaeufe_2026-10-17/, docs/e3b_g4_diagnose_2026-10-17/,
 Präregistrierung, regeln.py (Regelprofile), Regel- und Kriterienmatrix, PDFs.
+
+== 6. Nachtrag vom 18.10.2026: verschachtelte Wiederholungen (ablauf-3)
+Keine Kampagnenausführung; Gegenproben mit der Skriptmessung der Tests, Prüfsatz und Nachweis aus gespeicherten Befunden.
+
+-- 6a. Gegenprobe am Stand 836f2c4 und am Code 377fc26 (Skriptmessung, Kontrollsatz R und L1; L1 des ersten
+Kontrollsatzes +0,05 N, X′ +0,015 N mit S3-Überschreitung, S3-Wiederholung +0,011 N, R1 ihrer Vorprüfung +0,003 N)
+836f2c4 (ablauf-2):
+V00004 R2 R gültig
+V00005 X_strich L1 ungültig ['G1'] G1-Bezug ['V00004', 'V00007'] Klammer unvollständig, S1 nicht prüfbar
+V00006 s3_wiederholung L1 gültig, G1-Bezug ['V00004', 'V00007']
+V00007 R1 R gültig (Vorprüfung von V00006)
+V00008 R3 R gültig
+Status abgeschlossen, kein Halt
+377fc26 (ablauf-3):
+V00004 R2 R gültig
+V00005 X_strich L1 ungültig ['G1'] G1-Bezug ['V00004', 'V00006'] Klammer vorgesehen, Halt S1
+V00006 R3 R gültig
+Status angehalten, Halt S1 (die S3-Wiederholung steht vorn in der Warteschlange)
+
+-- 6b. Altstandsprüfung der Regressionen: neue tests/test_ap13_ablauf.py (Stand 231e27c) in einem Worktree von 836f2c4
+python3 -m pytest tests/test_ap13_ablauf.py -q -p no:cacheprovider --tb=line -rA \
+    -k "verschachtelt or schliesst_die_klammer or reproduziert_nach_r3 or unterbrochene_klammer or unterbricht_die_klammer"
+FAILED tests/test_ap13_ablauf.py::test_s3_wiederholung_von_x_strich_schliesst_die_klammer_nicht
+FAILED tests/test_ap13_ablauf.py::test_x_strich_besteht_und_seine_s3_wiederholung_reproduziert_nach_r3
+FAILED tests/test_ap13_ablauf.py::test_offline_gegenprobe_erkennt_die_unterbrochene_klammer
+FAILED tests/test_ap13_ablauf.py::test_verschachtelt_fortsetzung_aus_dem_ablaufstand
+FAILED tests/test_ap13_ablauf.py::test_halt_an_x_strich_unterbricht_die_klammer
+Fehlerzeilen:
+test_ap13_ablauf.py:505: AssertionError: assert ('L1' == 'L1'   (Folge R2, X′, S3-Wiederholung statt R2, X′, R3)
+test_ap13_ablauf.py:530: AssertionError: assert ['R2', 'X_str...wiederholung'] == ['R2', 'X_str...wiederholung']
+test_ap13_ablauf.py:550: Failed: DID NOT RAISE FormatFehler
+test_ap13_ablauf.py:564: AssertionError: assert ['s3_wiederholung', 'R3'] == ['R3', 's3_wiederholung']
+test_ap13_ablauf.py:606: Failed: DID NOT RAISE FormatFehler
+5 failed, 37 deselected in 1.50s  (pytest exit=1)
+Am Code 231e27c: 5 passed, 37 deselected.
+
+-- 6c. Ablauf-Prüfsatz vor und nach dem Neuschreiben
+harness ablauf-pruefsatz --pruefen (Code 377fc26, alte Datei): gleich=false, Abweichungen nur ablauf_version und
+verfahren; Inhaltsgrößen und alle Prüfsummen der fünf Fälle gleich; exit=1, 14,1 s.
+harness ablauf-pruefsatz --schreiben (Code 377fc26): SHA-256 181ac5a76c4cc2be…, exit=0, 13,6 s; danach --pruefen:
+gleich=true, exit=0, 13,7 s. Commit 73fdbf0 (Datei: Ablaufversion, Verfahrenskennung, Gesamtprüfsumme, Code-Stand).
+
+-- 6d. Unbetroffenheit der Korrekturrunde (keine Rechnung)
+Checkpoint-Dateien in /tmp/pcmms-ablauf-vergleich-20261018/ gegen die Prüfsummen in ergebnisse.json: alle 12 gleich.
+x_strich der 37 Ablaufkampagnen in ergebnisse.json (vorher_nachher) gleich den Befunden der Checkpoints.
+35 X′, davon 33 mit G1-Prüfung; auf jedes der 33 folgt unmittelbar sein R3 (nach = versuch + 1, Rolle R3); Halte an
+X′ nur S1 (2); X′ eines Kontrolllaufs: 1 (N01-V1G0 schlank Nr. 2, V00010 L1 → V00011 R3), ohne S3-Wiederholung.
+ablauf-3 entscheidet in diesen Kampagnen wie ablauf-2; geprüft von
+tests/test_ablauf_vergleich.py::test_ergebnisse_der_korrekturrunde_gelten_fuer_ablauf_3.
