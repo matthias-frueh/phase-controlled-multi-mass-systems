@@ -160,13 +160,16 @@ def ablauf_kennung(m, sid, stufe, seed, verfahren, sw, s3, profil, ebene):
 
 
 def kampagne_ablauf(sid, stufe, plan, seed, profil, werkzeug8=None, n_min=None, verfahren=None, staerke=None,
-                    rausch=None, k_max=None, modell=None, ebene='H', verzeichnis=None, zustand=None, bis=None):
+                    rausch=None, k_max=None, modell=None, ebene='H', verzeichnis=None, zustand=None, bis=None,
+                    ereignis=None):
     """Kampagne mit zustandsbehaftetem Ablauf der Phase 1: Laufplan (Strom „reihenfolge“), Phase 0 zu den geplanten
     Zeitpunkten, Kalibrierung, Pilotanalyse, Teil B (Bindung an den Plan), dann Phase 1 als Ablauf; der
     Reihenfolgegenerator zieht danach die Wiederholungsplätze. modell: vorgegebenes Generatormodell (Prüffälle mit
     Ereignissen; Kalibrierabweichungen weiter aus dem Szenario sid). ebene 'Z': Rohdaten und Stufe 1 in verzeichnis.
     zustand: gespeicherter Ablaufstand (Fortsetzung; die Kennung muss passen); bis: technische Unterbrechung nach so
-    vielen Phase-1-Versuchen. Rückgabe dict(modell, laeufe, tab0, kalibrierung, teil_b, pilot, ablauf, kennung, …)."""
+    vielen Phase-1-Versuchen; ereignis: protokollierte Wiederaufnahme eines angehaltenen gespeicherten Ablaufstands
+    (Ablauf.fortsetzen statt ausfuehren). Rückgabe dict(modell, laeufe, tab0, kalibrierung, teil_b, pilot, ablauf,
+    kennung, …)."""
     v = verfahren if verfahren is not None else vf.ZUSTAND
     if v.ablauf != 'zustand':
         raise ValueError('kampagne_ablauf verlangt ein Verfahren mit Ablauf „zustand“')
@@ -198,7 +201,10 @@ def kampagne_ablauf(sid, stufe, plan, seed, profil, werkzeug8=None, n_min=None, 
         a = ablauf.Ablauf(geplant, messung, sw, s3, rng_r, v.optionen, m.plan.T_lauf, m.plan.tag_pause, kennung=ak)
     else:
         a = ablauf.Ablauf.aus_zustand(zustand, geplant, messung, sw, s3, rng_r, m.plan.T_lauf, m.plan.tag_pause, ak)
-    a.ausfuehren(bis)
+    if ereignis is not None:
+        a.fortsetzen(ereignis)
+    else:
+        a.ausfuehren(bis)
     out = dict(modell=m, laeufe=laeufe, tab0=tab0, kalibrierung=kal, teil_b=tb, pilot=pe, ablauf=a, kennung=ak,
                messung=messung, p0_messung=mes, p0_wahrheit=kwahr)
     return out

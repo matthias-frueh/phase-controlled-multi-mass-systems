@@ -360,9 +360,66 @@ def abbruchregeln(tab, pr, phase=1):
     if zustand:
         halt = {g: [tab.koepfe[i]['lauf_id'] for i in ordn if (tab.koepfe[i].get('versuch') or {}).get('halt') == g]
                 for g in ('S1', 'S3')}
+        # maßgebliche S2-Bilanz aus den S2-Versuchen und den protokollierten Ursachenanalysen (wie der Ablauf)
+        bil = s2_bilanz([tab.koepfe[i]['versuch']['id'] for i in s2],
+                        (tab.meta.get('ablauf') or {}).get('ereignisse'))
         out.update(S1=halt['S1'], S3=halt['S3'], L_strich_offen=[int(i) for i in ordn if strich[i]],
+                   S2_phase_beendet=bil['beendet'], S2_bilanz=bil,
                    hinweis='Ablaufprotokoll (zustandsbehafteter Ablauf); S2 und S4 für L′ offen (§12)')
     return out
+
+
+WIEDERAUFNAHME_PFLICHT = ('art', 'quelle', 'zeitpunkt', 'befund', 'mechanischer_eingriff', 'apparaturfehler')
+
+
+def s2_bilanz(s2_versuche, ereignisse):
+    """Maßgebliche S2-Bilanz (§9.2: „ein zweites S2 ohne festgestellten Apparaturfehler beendet Phase 1“), online im
+    Ablauf und offline gleich gerechnet. s2_versuche: Kennungen der S2-Versuche in Ablaufreihenfolge; ereignisse:
+    protokollierte externe Wiederaufnahmen mit dem Halt, den sie beenden. Ein S2 zählt nicht, wenn sein Halt (Regel S2
+    oder ein anderer Halt am selben Versuch) mit einem vollständigen Ereignis fortgesetzt wurde, das einen
+    Apparaturfehler ausdrücklich feststellt (apparaturfehler True, mechanischer_eingriff False, Befund angegeben,
+    Zeitpunkt nicht vor dem Halt). Fehlende, unvollständige oder widersprüchliche Angaben geben kein S2 frei und werden
+    genannt. Die Ausschlüsse nach S2 (Konfiguration, ŷ¹) bleiben davon unberührt."""
+    s2 = list(s2_versuche)
+    frei, widerspruch = [], []
+    for e in ereignisse or []:
+        if not isinstance(e, dict):
+            widerspruch.append('Ereignis ohne Angaben')
+            continue
+        h = e.get('halt') if isinstance(e.get('halt'), dict) else {}
+        if h.get('regel') != 'S2' and h.get('versuch') not in s2:
+            continue                                                    # Halt ohne Bezug zu einem S2
+        fehlt = [x for x in WIEDERAUFNAHME_PFLICHT if x not in e]
+        if fehlt or e.get('art') != 'wiederaufnahme':
+            widerspruch.append(f'Wiederaufnahme nach S2 {h.get("versuch")}: Angaben fehlen ({", ".join(fehlt) or "art"})')
+            continue
+        if not all(isinstance(e[x], bool) for x in ('mechanischer_eingriff', 'apparaturfehler')):
+            widerspruch.append(f'Wiederaufnahme nach S2 {h.get("versuch")}: mechanischer_eingriff/apparaturfehler nicht '
+                               'ausdrücklich wahr oder falsch')
+            continue
+        if e['apparaturfehler'] is not True:
+            continue                                                    # ohne festgestellten Apparaturfehler
+        grund = []
+        if h.get('versuch') not in s2:
+            grund.append('Halt gehört zu keinem S2-Versuch')
+        if e['mechanischer_eingriff'] is not False:
+            grund.append('mechanischer Eingriff')
+        if not str(e['befund']).strip():
+            grund.append('Befund fehlt')
+        try:
+            if float(e['zeitpunkt']) < float(h.get('t', np.inf)):
+                grund.append('Zeitpunkt vor dem Halt')
+        except (TypeError, ValueError):
+            grund.append('Zeitpunkt unlesbar')
+        if h.get('versuch') in frei:
+            grund.append('doppelt')
+        if grund:
+            widerspruch.append(f'Apparaturfehler zu S2 {h.get("versuch")} nicht anerkannt: {", ".join(grund)}')
+            continue
+        frei.append(h['versuch'])
+    massgeblich = [v for v in s2 if v not in frei]
+    return dict(s2=s2, apparaturfehler=frei, massgeblich=massgeblich, beendet=len(massgeblich) >= 2,
+                widerspruch=widerspruch)
 
 
 def s3_pruefung(tab, gueltig, kmax, n_tests=42):

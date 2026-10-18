@@ -95,6 +95,28 @@ def _x_strich_gegenprobe(t1, pr):
         raise formate.FormatFehler('X′ offline ≠ Ablauf: ' + '; '.join(abw[:5]))
 
 
+def _s2_gegenprobe(ab, abl):
+    """S2-Bilanz offline (gueltigkeit.abbruchregeln aus den S2-Versuchen und den im Ablaufstand protokollierten
+    Wiederaufnahmen) gegen den Ablauf: dieselben S2-Versuche, dieselben maßgeblichen S2 und „Phase 1 beendet“ genau
+    dann, wenn der Ablauf nach S2 abgebrochen hat (bei Ablauf mit Halten). Der Status allein ersetzt die Prüfung nicht."""
+    bil = ab.get('S2_bilanz') or {}
+    online = abl.get('s2_bilanz')
+    abw = []
+    if bil.get('s2') and online is None:
+        abw.append('Ablaufstand ohne S2-Bilanz')
+    elif online is not None:
+        if list(online.get('s2') or []) != list(bil.get('s2') or []):
+            abw.append(f'S2-Versuche offline {bil.get("s2")} ≠ Ablauf {online.get("s2")}')
+        if list(online.get('massgeblich') or []) != list(bil.get('massgeblich') or []):
+            abw.append(f'maßgebliche S2 offline {bil.get("massgeblich")} ≠ Ablauf {online.get("massgeblich")}')
+    if (abl.get('optionen') or {}).get('halt', True):
+        beendet = abl.get('status') == 'abgebrochen' and (abl.get('halt') or {}).get('regel') == 'S2'
+        if bool(bil.get('beendet')) != beendet:
+            abw.append(f'Phase 1 nach S2 beendet: offline {bool(bil.get("beendet"))}, Ablauf {abl.get("status")}')
+    if abw:
+        raise formate.FormatFehler('S2-Bilanz offline ≠ Ablauf: ' + '; '.join(abw))
+
+
 def datenlage(tab, tb, prof):
     """Gültigkeit (offline), Abbruchregeln, gültige Läufe je Konfiguration und Kontrollmodul, ŷ¹-Gültigkeit, Kontaktast
     und Auswertbarkeit der Phase 1 – ohne Bootstrap (auch für Zähl- und Ablaufdiagnosen des Harness).
@@ -169,6 +191,7 @@ def datenlage(tab, tb, prof):
         if doppelt:
             raise formate.FormatFehler(f'mehr als ein gültiger Versuch je Konfiguration und Block: {doppelt[:5]}')
         _x_strich_gegenprobe(t1, pr)
+        _s2_gegenprobe(ab, abl)
         if abl.get('status') != 'abgeschlossen':
             sperren_alle.append(('Datenlage', f'Phase 1 {abl.get("status")}: {(abl.get("ende") or {}).get("grund")} '
                                               '(keine abgeschlossene Kampagne)'))

@@ -31,9 +31,12 @@ Regeln (maßgeblich ist die Präregistrierung; Lesarten unten):
 - Kontrolllauf: aus anderem Grund als G1 ungültig (bei R auch ein nicht reproduzierter Alarm) → sofort wiederholt,
   höchstens zweimal, danach Halt; bei L₁′–L₃′ fehlt der Lauf danach, ohne Halt.
 - S2 (Einzelzell-Liftoff, ohne G5/G8/G10-ungültige Läufe): Halt; die Konfiguration bleibt in den Blöcken, wird weiter
-  gemessen und ist von Tests ausgeschlossen (Stufe 2); ein zweites S2 ohne festgestellten Apparaturfehler beendet
-  Phase 1 (abgebrochen). S3 in Lⱼ (Einstellung 1): Überschreitung → sofortige Wiederholung; dieselbe Größe erneut →
-  Halt. S4: G2 in zwei aufeinanderfolgenden Läufen → Halt.
+  gemessen und ist von Tests ausgeschlossen (Stufe 2), bei Lⱼ ist ŷ¹ ungültig (§8.2); ein zweites S2 ohne
+  festgestellten Apparaturfehler beendet Phase 1 (abgebrochen). Maßgeblich ist die S2-Bilanz (gueltigkeit.s2_bilanz,
+  offline gleich): Ein S2 zählt nicht, wenn die Wiederaufnahme seines Halts einen Apparaturfehler ausdrücklich
+  feststellt; die Ausschlüsse bleiben. Ein S2 während eines anderen Halts (Kontrolllauf an der Grenze) wird gezählt.
+  S3 in Lⱼ (Einstellung 1): Überschreitung → sofortige Wiederholung; dieselbe Größe erneut → Halt. S4: G2 in zwei
+  aufeinanderfolgenden Läufen → Halt.
 - Halt: Ablaufstand mit Grund, fortsetzbar nur mit einem ausdrücklich übergebenen externen Ereignis (fortsetzen);
   danach zuerst ein vollständiger Kontrollsatz (gemessen, ohne Alarm), dann der unterbrochene Block in der gezogenen
   Reihenfolge. Ein angehaltener oder abgebrochener Ablauf ist keine abgeschlossene Kampagne.
@@ -65,7 +68,7 @@ from scipy import stats
 
 from . import formate, gueltigkeit, konventionen as kv, zusammenfassung as zf
 
-VERSION = 'ablauf-2'            # ablauf-2: X′ ohne Vorprüfung mit R₂/R₃ geprüft
+VERSION = 'ablauf-2'            # ablauf-2: X′ ohne Vorprüfung mit R₂/R₃ geprüft; S2-Bilanz aus den Ereignissen
 GRENZE_KONFIGURATION = 2        # §6, A9.12: höchstens zwei Wiederholungen je Konfiguration und Block
 GRENZE_KONTROLLE = 2            # A9.12: Kontrolllauf höchstens zweimal sofort wiederholt
 GRENZE_AUFWAERMEN = 10          # §6: höchstens zehn Aufwärm-Referenzläufe
@@ -553,8 +556,8 @@ class Ablauf:
                     self._vorn(self._einschub(n, 'R1', f'Vorprüfung {v["id"]}', art='R'))
             if k['laufart'] == 'L' and k['einstellung'] == 1:
                 self._s3(n)
-        if s2 and z['status'] == 'laufend':
-            self._s2(n)
+        if s2:                                     # S2 wird immer gezählt, auch wenn schon ein anderer Halt vorliegt
+            self._s2(n, halten=z['status'] == 'laufend')
         if s4 and z['status'] == 'laufend':
             self._halt(n, 'S4', 'G2 in zwei aufeinanderfolgenden Läufen')
 
@@ -655,19 +658,31 @@ class Ablauf:
             self._notiz(n, f'S3-Überschreitung ({", ".join(ueber)}): sofortige Wiederholung')
             self._vorn(self._einschub(n, 's3_wiederholung', f'S3 {", ".join(ueber)}', s3_groessen=ueber))
 
-    def _s2(self, n):
+    def _s2(self, n, halten=True):
+        """S2 an Versuch n: Ausschluss der Konfiguration (bleibt auch nach einem festgestellten Apparaturfehler), Halt;
+        maßgeblich für das Ende von Phase 1 ist die S2-Bilanz aus den S2-Versuchen und den Ursachenanalysen
+        (gueltigkeit.s2_bilanz, offline gleich)."""
         z = self.z
         v = self._v(n)
         z['s2'].append(v['id'])
-        z['s2_zaehler'] += 1
         k = z['versuche'][n]['kopf']
         if k['laufart'] == 'K' and v['konfiguration'] not in z['ausgeschlossen']:
             z['ausgeschlossen'].append(v['konfiguration'])
-        if z['s2_zaehler'] >= 2:
+        bil = gueltigkeit.s2_bilanz(z['s2'], z['ereignisse'])
+        z['s2_zaehler'] = len(bil['massgeblich'])
+        if bil['beendet']:
+            if not halten:
+                self._notiz(n, f'zweites S2 ohne festgestellten Apparaturfehler während des Halts '
+                               f'{(z["halt"] or {}).get("regel")}: Phase 1 endet')
             self._halt(n, 'S2', 'zweites S2 ohne festgestellten Apparaturfehler', endgueltig=True)
-        else:
+        elif not halten:
+            self._notiz(n, 'S2 während eines anderen Halts: gezählt, kein eigener Halt; die Ursachenanalyse dieses Halts '
+                           'gilt auch für das S2')
+        elif k['laufart'] == 'K':
             self._halt(n, 'S2', f'Einzelzell-Liftoff in {v["konfiguration"]}; die Konfiguration bleibt in den Blöcken '
                                 'und ist von Tests ausgeschlossen')
+        else:
+            self._halt(n, 'S2', f'Einzelzell-Liftoff im Kontrolllauf {v["konfiguration"]}; ŷ¹ ungültig (§8.2)')
 
     # ── Wiederaufnahme ─────────────────────────────────────────────────────────────────────────────────
     def fortsetzen(self, ereignis):
@@ -678,18 +693,20 @@ class Ablauf:
         z = self.z
         if z['status'] != 'angehalten':
             raise AblaufFehler(f'Wiederaufnahme nur nach einem Halt (Status {z["status"]})')
-        pflicht = ('art', 'quelle', 'zeitpunkt', 'befund', 'mechanischer_eingriff', 'apparaturfehler')
+        pflicht = gueltigkeit.WIEDERAUFNAHME_PFLICHT
         if not isinstance(ereignis, dict) or any(x not in ereignis for x in pflicht) or \
                 ereignis['art'] != 'wiederaufnahme':
             raise AblaufFehler(f'Wiederaufnahme verlangt ein externes Ereignis mit {", ".join(pflicht)}')
+        if not all(isinstance(ereignis[x], bool) for x in ('mechanischer_eingriff', 'apparaturfehler')):
+            raise AblaufFehler('Wiederaufnahme: mechanischer_eingriff und apparaturfehler ausdrücklich als wahr oder '
+                               'falsch angeben')
         if float(ereignis['zeitpunkt']) < z['t']:
             raise AblaufFehler('Wiederaufnahme vor dem Halt')
         if ereignis['mechanischer_eingriff']:
             raise AblaufFehler('Wiederaufnahme nach mechanischem Eingriff: Vergleich von n₀ Einzelmodulläufen je Modul '
                                'mit Phase 0 (§9.2, Testlogik offen, §12) nicht umgesetzt')
         z['ereignisse'].append(dict(ereignis, halt=z['halt']))
-        if ereignis['apparaturfehler'] and z['halt']['regel'] == 'S2':
-            z['s2_zaehler'] -= 1
+        z['s2_zaehler'] = len(gueltigkeit.s2_bilanz(z['s2'], z['ereignisse'])['massgeblich'])
         z['t'] = float(ereignis['zeitpunkt'])
         z['wiederaufnahmen'] += 1
         b = z['halt']['block']
@@ -727,9 +744,12 @@ class Ablauf:
         return zf.LaufTabelle([v['kopf'] for v in vs], daten, meta=dict(ablauf=self.kurz()))
 
     def kurz(self):
+        """Ablaufstand für die Tabelle (meta „ablauf“): Status, Halt, Kennung, Optionen, Lücken und die Angaben, aus
+        denen Stufe 2 die S2-Bilanz selbst nachrechnet (S2-Versuche, protokollierte Wiederaufnahmen mit ihrem Halt)."""
         z = self.z
         return dict(version=VERSION, status=z['status'], ende=z['ende'], halt=z['halt'], kennung=self.kennung,
-                    optionen=asdict(self.opt), luecken=list(z['luecken']))
+                    optionen=asdict(self.opt), luecken=list(z['luecken']), s2=list(z['s2']),
+                    ereignisse=copy.deepcopy(z['ereignisse']), s2_bilanz=gueltigkeit.s2_bilanz(z['s2'], z['ereignisse']))
 
     def zustand(self):
         """Vollständiger Ablaufstand (für Checkpoints): alle Versuche mit Daten, Warteschlange, Zähler, Generator."""

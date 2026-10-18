@@ -534,6 +534,162 @@ def test_s2_halt_ausschluss_weitere_messung_und_zweites_s2():
         c.fortsetzen(EREIGNIS)
 
 
+# Gegenproben vom 18.10.2026 zur S2-Bilanz: maßgebliche S2 nach der Ursachenanalyse, online wie offline
+FEHLER = dict(EREIGNIS, befund='Apparaturfehler festgestellt und behoben: Steckverbindung des Zellkanals gelöst '
+              '(Testereignis)', apparaturfehler=True)
+
+
+def _regel_s2(kid='S102'):
+    return lambda s, v: dict(G6=True) if s['konfiguration']['id'] == kid and v['nummer'] == 0 else None
+
+
+def _wiederaufnahme(a, ereignis):
+    """Wiederaufnahme zehn Minuten nach dem Halt."""
+    return a.fortsetzen(dict(ereignis, zeitpunkt=a.z['halt']['t'] + 600.0))
+
+
+def _offline_s2(t):
+    """Abbruchregeln offline wie Stufe 2 (gueltigkeit.pruefe, abbruchregeln) aus Köpfen, Daten und Ablaufstand."""
+    return gueltigkeit.abbruchregeln(t, gueltigkeit.pruefe(t, SW))
+
+
+def test_s2_nach_bestaetigtem_apparaturfehler_beendet_phase_1_offline_nicht():
+    """Gegenprobe der Anweisung: S2 in S102 (Block 1), Wiederaufnahme mit bestätigtem, behobenem Apparaturfehler,
+    erneut S2 in Block 2 (Halt mit maßgeblichem Zähler eins, nicht endgültig), Wiederaufnahme ohne Apparaturfehler,
+    bestandener Kontrollsatz: Der Ablauf schließt ab, und offline beendet das eine maßgebliche S2 Phase 1 nicht. Am Stand
+    vor der Korrektur zählte die Offline-Auswertung die zwei rohen S2 (S2_phase_beendet True). S102 bleibt in beiden
+    Blöcken ausgeschlossen."""
+    a = lauf(_regel_s2(), plan=plan_klein(tage=((3, 3),)))
+    erstes = nach_id(a, 'S102', 1)[0]
+    assert a.status == 'angehalten' and a.z['halt']['regel'] == 'S2' and a.z['halt']['versuch'] == erstes['id']
+    _wiederaufnahme(a, FEHLER)
+    zweites = nach_id(a, 'S102', 2)[0]
+    assert a.status == 'angehalten' and a.z['halt']['regel'] == 'S2' and a.z['halt']['versuch'] == zweites['id']
+    assert a.z['halt']['fortsetzbar'] and a.z['s2_zaehler'] == 1
+    _wiederaufnahme(a, EREIGNIS)
+    assert a.status == 'abgeschlossen'
+    w = [v for v in versuche(a) if v['rolle'] == 'wiederaufnahme_kontrolle']
+    assert len(w) == 4 and all(v['gueltig'] for v in w)
+    t = a.tabelle()
+    ab = _offline_s2(t)
+    assert ab['S2_phase_beendet'] is False                                # Fehler am Stand vor der Korrektur
+    # unabhängig erwartet: S2 sind die beiden ursprünglichen Versuche von S102, freigegeben ist nur das erste
+    assert [t.koepfe[i]['versuch']['id'] for i in ab['S2']] == [erstes['id'], zweites['id']]
+    assert ab['S2_bilanz']['massgeblich'] == [zweites['id']] and ab['S2_bilanz']['apparaturfehler'] == [erstes['id']]
+    assert not ab['S2_bilanz']['widerspruch']
+    auswertung._s2_gegenprobe(ab, t.meta['ablauf'])
+    # der Apparaturfehler hebt den Ausschluss der Konfiguration nicht auf
+    assert a.z['ausgeschlossen'] == ['S102']
+    b = a.bericht()['auswahl']
+    assert b['S102|1']['status'] == b['S102|2']['status'] == 'ersetzt, S2-ausgeschlossen'
+
+
+def test_zwei_s2_ohne_apparaturfehler_beenden_phase_1_auch_nach_einer_freigabe():
+    """Zwei S2 ohne festgestellten Apparaturfehler beenden Phase 1 endgültig, online wie offline: ohne Apparaturfehler
+    beim zweiten S2, nach einem freigegebenen ersten S2 beim dritten."""
+    c = lauf(_regel_s2(), plan=plan_klein(tage=((3, 3),)))
+    _wiederaufnahme(c, EREIGNIS)
+    assert c.status == 'abgebrochen' and c.z['halt']['regel'] == 'S2' and not c.z['halt']['fortsetzbar']
+    ab = _offline_s2(c.tabelle())
+    assert ab['S2_phase_beendet'] is True and len(ab['S2']) == 2
+    auswertung._s2_gegenprobe(ab, c.tabelle().meta['ablauf'])
+    d = lauf(_regel_s2(), plan=plan_klein(tage=((3, 3, 3),)))
+    _wiederaufnahme(d, FEHLER)
+    _wiederaufnahme(d, EREIGNIS)
+    s2 = [nach_id(d, 'S102', b)[0]['id'] for b in (1, 2, 3)]
+    assert d.status == 'abgebrochen' and d.z['halt']['versuch'] == s2[2] and not d.z['halt']['fortsetzbar']
+    ab = _offline_s2(d.tabelle())
+    assert ab['S2_phase_beendet'] is True and ab['S2_bilanz']['massgeblich'] == s2[1:]
+    auswertung._s2_gegenprobe(ab, d.tabelle().meta['ablauf'])
+
+
+def test_s2_ohne_freigabe_bei_fehlenden_oder_widerspruechlichen_angaben():
+    """Fehlende oder widersprüchliche Angaben zur Ursachenanalyse geben kein S2 frei: Online weist die Wiederaufnahme
+    sie zurück (ohne den Stand zu ändern); offline zählt das S2 dann maßgeblich, und die Gegenprobe gegen den
+    abgeschlossenen Ablauf schlägt an. Ebenso fällt ein nachträglich freigebendes Ereignis auf."""
+    a = lauf(_regel_s2(), plan=plan_klein(tage=((3, 3),)))
+    t_halt = a.z['halt']['t']
+    for falsch, text in ((dict(apparaturfehler='ja'), 'wahr oder falsch'), (dict(apparaturfehler=None), 'wahr oder'),
+                         (dict(mechanischer_eingriff=True), 'mechanischem Eingriff'),
+                         (dict(zeitpunkt=t_halt - 1.0), 'vor dem Halt')):
+        with pytest.raises(ablauf.AblaufFehler, match=text):
+            a.fortsetzen({**FEHLER, 'zeitpunkt': t_halt + 600.0, **falsch})
+    with pytest.raises(ablauf.AblaufFehler, match='externes Ereignis'):
+        a.fortsetzen({k: v for k, v in FEHLER.items() if k != 'befund'})
+    assert a.status == 'angehalten' and a.z['ereignisse'] == []
+    _wiederaufnahme(a, FEHLER)
+    _wiederaufnahme(a, EREIGNIS)
+    t = a.tabelle()
+    pr = gueltigkeit.pruefe(t, SW)
+    erstes, zweites = (nach_id(a, 'S102', b)[0]['id'] for b in (1, 2))
+    fremd = nach_id(a, 'S100', 1)[0]['id']
+
+    def manipuliert(f):
+        m = copy.deepcopy(t.meta['ablauf'])
+        f(m)
+        return zf.LaufTabelle(t.koepfe, t.daten, meta=dict(t.meta, ablauf=m)), m
+    faelle = dict(ohne_ereignisse=lambda m: m.pop('ereignisse'),
+                  angabe_fehlt=lambda m: m['ereignisse'][0].pop('quelle'),
+                  unbestimmt=lambda m: m['ereignisse'][0].update(apparaturfehler='ja'),
+                  mechanisch=lambda m: m['ereignisse'][0].update(mechanischer_eingriff=True),
+                  ohne_befund=lambda m: m['ereignisse'][0].update(befund=' '),
+                  vor_dem_halt=lambda m: m['ereignisse'][0].update(zeitpunkt=t_halt - 1.0),
+                  fremder_halt=lambda m: m['ereignisse'][0]['halt'].update(versuch=fremd))
+    for name, f in faelle.items():
+        t2, m = manipuliert(f)
+        ab = gueltigkeit.abbruchregeln(t2, pr)
+        assert ab['S2_bilanz']['apparaturfehler'] == [] and ab['S2_phase_beendet'] is True, name
+        assert ab['S2_bilanz']['massgeblich'] == [erstes, zweites], name
+        assert bool(ab['S2_bilanz']['widerspruch']) == (name != 'ohne_ereignisse'), name
+        with pytest.raises(formate.FormatFehler, match='S2-Bilanz offline'):
+            auswertung._s2_gegenprobe(ab, m)
+    t3, m3 = manipuliert(lambda m: m['ereignisse'][1].update(apparaturfehler=True))
+    ab3 = gueltigkeit.abbruchregeln(t3, pr)
+    assert ab3['S2_bilanz']['massgeblich'] == [] and ab3['S2_phase_beendet'] is False
+    with pytest.raises(formate.FormatFehler, match='maßgebliche S2'):
+        auswertung._s2_gegenprobe(ab3, m3)
+    t4, m4 = manipuliert(lambda m: m.pop('s2_bilanz'))
+    with pytest.raises(formate.FormatFehler, match='ohne S2-Bilanz'):
+        auswertung._s2_gegenprobe(gueltigkeit.abbruchregeln(t4, pr), m4)
+
+
+def test_s2_im_dritten_versuch_eines_kontrolllaufs_waehrend_des_halts_kontrolllauf():
+    """L₁ des Kontrollsatzes 2 ist zweimal gestört (G8, kein S2) und zeigt im dritten Versuch Liftoff: Dort hält
+    „Kontrolllauf“ an (Grenze), das S2 wird dennoch gezählt (am Stand vor der Korrektur online verworfen, offline
+    gezählt). Ist es das zweite maßgebliche S2, endet Phase 1; sonst gilt die Ursachenanalyse des Halts „Kontrolllauf“
+    auch für dieses S2."""
+    def regel(block_s102):
+        def r(s, v):
+            if s['konfiguration']['id'] == 'S102' and s['block'] == block_s102 and v['nummer'] == 0:
+                return dict(G6=True)
+            if s['konfiguration']['id'] == 'L1' and s['kontrollsatz'] == 2 and v['rolle'] != 'wiederaufnahme_kontrolle':
+                return dict(stoerung=True) if v['nummer'] < 2 else dict(G6=True)
+        return r
+    a = lauf(regel(1), plan=plan_klein(tage=((3, 3),)))
+    _wiederaufnahme(a, EREIGNIS)                                         # S2 in S102 (Block 1) ohne Apparaturfehler
+    l1 = [v for v in versuche(a) if v['konfiguration'] == 'L1' and v['kontrollsatz'] == 2]
+    assert [v['rolle'] for v in l1] == ['kontrolle', 'kontrollwiederholung', 'kontrollwiederholung']
+    assert l1[2]['grenze'] and any(t.startswith('Halt Kontrolllauf') for t in l1[2]['entscheidung'])
+    assert a.status == 'abgebrochen' and a.z['halt']['regel'] == 'S2' and not a.z['halt']['fortsetzbar']
+    s2 = [nach_id(a, 'S102', 1)[0]['id'], l1[2]['id']]
+    assert a.z['s2'] == s2
+    t = a.tabelle()
+    ab = _offline_s2(t)
+    assert ab['S2_phase_beendet'] and ab['S2_bilanz']['massgeblich'] == s2
+    auswertung._s2_gegenprobe(ab, t.meta['ablauf'])
+    # Apparaturfehler beim Halt „Kontrolllauf“: das S2 dieses Versuchs zählt nicht; das S2 in S102 (Block 2) hält an
+    b = lauf(regel(2), plan=plan_klein(tage=((3, 3),)))
+    assert b.status == 'angehalten' and b.z['halt']['regel'] == 'Kontrolllauf' and b.z['s2_zaehler'] == 1
+    _wiederaufnahme(b, FEHLER)
+    assert b.status == 'angehalten' and b.z['halt']['regel'] == 'S2' and b.z['halt']['fortsetzbar']
+    _wiederaufnahme(b, EREIGNIS)
+    assert b.status == 'abgeschlossen'
+    ab = _offline_s2(b.tabelle())
+    assert len(ab['S2']) == 2 and ab['S2_bilanz']['massgeblich'] == [nach_id(b, 'S102', 2)[0]['id']]
+    assert not ab['S2_phase_beendet']
+    auswertung._s2_gegenprobe(ab, b.tabelle().meta['ablauf'])
+
+
 def test_s4_bleibt_trotz_einschueben_und_kontrollwiederholung():
     """G2 in zwei aufeinanderfolgenden Läufen mit bewegten Modulen: auch über eingefügte Referenzläufe hinweg und
     wenn die zweite Messung die sofortige Wiederholung eines Kontrolllaufs ist."""
@@ -779,6 +935,81 @@ def test_ebene_z_mit_derselben_ablaufsteuerung(tmp_path):
     assert all(k['ebene'] == 'Z' and k['version_stufe1'].startswith('stufe1') for k in t1.koepfe)
     assert len(r['messung'].manifest) == len(r['tab0']) + len(t1)
     auswertung.datenlage(kette.ablauf_tabelle(r), r['teil_b'], PROFIL)
+
+
+def _liftoff(**auswahl):
+    """Einzelzell-Liftoff (Zelle 2) in den Versuchen der Auswahl (ablauf.versuch_passt)."""
+    return dict(art='ereignis', ereignis='liftoff_zelle', zelle=2, versuch=auswahl)
+
+
+def test_s2_bilanz_uebergabe_an_datenlage_und_fortsetzung_aus_dem_ablaufstand(tmp_path):
+    """Ebene H mit Stufe 2: S2 in S110 (Block 1) mit bestätigtem Apparaturfehler, dann S2 im Kontrolllauf L₂ am Ende
+    von Block 2 ohne Apparaturfehler. datenlage setzt keine globale Abbruchsperre (am Stand vor der Korrektur: „Phase 1
+    nach zweitem S2“), S110 bleibt nicht auswertbar und ŷ¹ ungültig, auch nach Schreiben und Lesen der Tabelle. Aus dem
+    nach dem ersten Halt gespeicherten Ablaufstand frisch aufgebaut und fortgesetzt gleicht der Ablauf dem
+    durchgehenden; ohne Apparaturfehler beendet dort das zweite S2 Phase 1 (globale Sperre)."""
+    m = szenarien.modell(szenarien.KATALOG['N01-A4'], 'L1', plan=PLAN)
+    m.effekte = (_liftoff(konfiguration='S110', block=1, nummer=0),
+                 _liftoff(konfiguration='L2', block=2, nummer=0, rolle='kontrolle'))
+    r = kette.kampagne_ablauf('N01-A4', 'L1', PLAN, 13, PROFIL, n_min=2, modell=m)
+    a = r['ablauf']
+    ablauf.speichern(str(tmp_path / 'halt'), a)
+    erstes = next(v for v in versuche(a) if v['konfiguration'] == 'S110' and v['block'] == 1)
+    assert a.status == 'angehalten' and a.z['halt']['versuch'] == erstes['id']
+    _wiederaufnahme(a, FEHLER)
+    zweites = next(v for v in versuche(a) if v['konfiguration'] == 'L2' and v['block'] == 2 and v['rolle'] == 'kontrolle')
+    assert a.status == 'angehalten' and a.z['halt']['versuch'] == zweites['id'] and a.z['halt']['fortsetzbar']
+    _wiederaufnahme(a, EREIGNIS)
+    assert a.status == 'abgeschlossen'
+    tab = kette.ablauf_tabelle(r)
+    dl = auswertung.datenlage(tab, r['teil_b'], PROFIL)
+    assert dl['ab']['S2_phase_beendet'] is False and dl['sperren_alle'] == []         # keine globale Sperre
+    t1 = dl['t1']
+    assert [t1.koepfe[i]['versuch']['id'] for i in dl['ab']['S2']] == [erstes['id'], zweites['id']]
+    assert dl['info']['S110']['s2'] and not dl['info']['S110']['auswertbar']          # Ausschluss bleibt
+    l2 = next(h['lauf_id'] for h in t1.koepfe if h['versuch']['id'] == zweites['id'])
+    assert not dl['yhat1_gueltig'] and l2 in dl['sperren_y1'][0][1]                     # ŷ¹ bleibt ungültig
+    tab.schreiben(str(tmp_path / 'zf'), 'SYNTH-TEST')
+    dl_f = auswertung.datenlage(zf.LaufTabelle.lesen(str(tmp_path / 'zf')), r['teil_b'], PROFIL)
+    assert dl_f['sperren_alle'] == [] and dl_f['ab']['S2_bilanz'] == dl['ab']['S2_bilanz']
+    assert dl_f['auswertbar'] == dl['auswertbar'] and not dl_f['yhat1_gueltig']
+    # Fortsetzung aus dem gespeicherten Ablaufstand nach dem ersten Halt
+    t_w = ablauf.laden(str(tmp_path / 'halt'))['halt']['t'] + 600.0
+    r2 = kette.kampagne_ablauf('N01-A4', 'L1', PLAN, 13, PROFIL, n_min=2, modell=m,
+                               zustand=ablauf.laden(str(tmp_path / 'halt')), ereignis=dict(FEHLER, zeitpunkt=t_w))
+    assert r2['ablauf'].status == 'angehalten' and r2['ablauf'].z['s2_zaehler'] == 1
+    _wiederaufnahme(r2['ablauf'], EREIGNIS)
+    tab2 = kette.ablauf_tabelle(r2)
+    assert formate.sha256_json(tab2.koepfe) == formate.sha256_json(tab.koepfe)
+    assert all(np.array_equal(tab.daten[f], tab2.daten[f], equal_nan=True) for f in tab.daten)
+    assert formate.sha256_json(tab2.meta['ablauf']) == formate.sha256_json(tab.meta['ablauf'])
+    r3 = kette.kampagne_ablauf('N01-A4', 'L1', PLAN, 13, PROFIL, n_min=2, modell=m,
+                               zustand=ablauf.laden(str(tmp_path / 'halt')), ereignis=dict(EREIGNIS, zeitpunkt=t_w))
+    assert r3['ablauf'].status == 'abgebrochen' and r3['ablauf'].z['halt']['versuch'] == zweites['id']
+    dl3 = auswertung.datenlage(kette.ablauf_tabelle(r3), r3['teil_b'], PROFIL)
+    assert dl3['ab']['S2_phase_beendet'] is True and any('zweitem S2' in x for _, x in dl3['sperren_alle'])
+
+
+def test_s2_bilanz_ebene_z_ueber_stufe_1(tmp_path):
+    """Ebene Z: Liftoff in der Rohzeitreihe (Stufe 1, G6) von S110 und S112; nach Freigabe des ersten S2 durch einen
+    bestätigten Apparaturfehler und einer Wiederaufnahme ohne Befund schließt der Ablauf ab. Stufe 2 übernimmt die
+    S2-Bilanz ohne globale Sperre, beide Konfigurationen bleiben ausgeschlossen."""
+    plan = kp.Plan(n0=6, n_pilot=6, n_bloecke=1, ref_min_p0=8)
+    m = szenarien.modell(szenarien.KATALOG['N01-A4'], 'L1', plan=plan)
+    m.effekte = (_liftoff(konfiguration='S110', nummer=0), _liftoff(konfiguration='S112', nummer=0))
+    r = kette.kampagne_ablauf('N01-A4', 'L1', plan, 13, PROFIL, n_min=1, modell=m, ebene='Z',
+                              verzeichnis=str(tmp_path / 'z'))
+    a = r['ablauf']
+    assert a.status == 'angehalten' and a.z['halt']['regel'] == 'S2'
+    _wiederaufnahme(a, FEHLER)
+    assert a.status == 'angehalten' and a.z['halt']['regel'] == 'S2' and a.z['halt']['fortsetzbar']
+    _wiederaufnahme(a, EREIGNIS)
+    assert a.status == 'abgeschlossen' and all(k['ebene'] == 'Z' for k in a.tabelle().koepfe)
+    s2 = [nach_id(a, c)[0]['id'] for c in ('S110', 'S112')]
+    assert sorted(a.z['s2']) == sorted(s2)
+    dl = auswertung.datenlage(kette.ablauf_tabelle(r), r['teil_b'], PROFIL)
+    assert dl['sperren_alle'] == [] and dl['ab']['S2_bilanz']['massgeblich'] == [a.z['s2'][1]]
+    assert not dl['info']['S110']['auswertbar'] and not dl['info']['S112']['auswertbar']
 
 
 def test_planungshaken_berichtet_geplante_und_realisierte_messzeit():
