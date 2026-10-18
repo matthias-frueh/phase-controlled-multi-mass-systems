@@ -536,8 +536,9 @@ def test_x_strich_besteht_und_seine_s3_wiederholung_reproduziert_nach_r3():
 
 def test_offline_gegenprobe_erkennt_die_unterbrochene_klammer(monkeypatch):
     """Mit der Platzierung von ablauf-2 (S3-Wiederholung vor R₃) schließt das R₁ ihrer Vorprüfung X′ (kein S1); Stufe 2
-    weist die Tabelle an der Folge der Versuche zurück, obwohl die Klammer R₂/R₁ („nicht prüfbar“) in sich stimmt."""
-    monkeypatch.setattr(ablauf.Ablauf, '_klammer_offen', lambda self, n: 0)
+    weist die Tabelle an der Folge der Versuche zurück, obwohl die Klammer R₂/R₁ („nicht prüfbar“) in sich stimmt. Der
+    Haken stellt die alte Platzierung nach; am Stand 836f2c4 fehlt er und die alte Folge entsteht von selbst."""
+    monkeypatch.setattr(ablauf.Ablauf, '_klammer_offen', lambda self, n: 0, raising=False)
     a = lauf(_regel_verschachtelt(0.015))
     vs = versuche(a)
     rollen = [v['rolle'] for v in vs]
