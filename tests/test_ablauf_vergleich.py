@@ -77,3 +77,33 @@ def test_schlanker_befund_je_variante(variante, k):
         assert all(x['vor_rolle'] and x['vorgesehen'] in (True, False) for x in b['ablauf']['x_strich'])
         assert all(isinstance(x['vorpruefung_ablauf_1'], bool) for x in b['ablauf']['x_strich'] if x['vor'])
         assert b['ablauf']['s2_bilanz']['beendet'] is False and b['ablauf']['s2_waehrend_halt'] == 0
+
+
+def _befund(**ablauf):
+    a = dict(status='abgeschlossen', halt=None, grund='alle Blöcke gemessen', laufzahl=dict(ausgefuehrt=700, zusaetzlich=70),
+             messzeit_s=dict(realisiert_laeufe=11900.0, realisiert_spanne=11900.0), halte=[], rollen=dict(R1=3),
+             auswahl=dict(gueltig=500, ersetzt=4), auswahl_status={'S100|1': 'ersetzt'}, x_strich=[], s2_waehrend_halt=0)
+    a.update(ablauf)
+    return dict(vollstaendig=True, auswertbar=dict(n=21, min_gueltig=23), phase1=dict(konfig_g4=20, S2=0), sperren=[],
+                teil_b=dict(p_hat=0.01), ablauf=a)
+
+
+def test_vorher_nachher_ursachen_ohne_kampagnen():
+    """Vorher/Nachher je Kampagne (Korrekturrunde): gleiche Befunde, nur ein anderer Platzstatus, eine Abzweigung an einem
+    X′ (unter ablauf-1 mit R₁) und ein unerklärter Unterschied werden unterschieden."""
+    alt = _befund()
+    assert avb.vorher_nachher_kampagne(alt, _befund())['gleich']
+    d = avb.vorher_nachher_kampagne(alt, _befund(auswahl_status={'S100|1': 'ersetzt', 'S102|3': 'fehlt: Halt'}))
+    assert not d['gleich'] and d['plaetze'] == {'S102|3': ['gueltig', 'fehlt: Halt']}
+    assert d['ursache'] and d['ursache'][0].startswith('Platzstatus')
+    x = dict(versuch='V00042', konfiguration='S104', block=2, abweichung_r0_N=0.0003, vorpruefung_ablauf_1=True,
+             g1=False, vorgesehen=True, gueltig=True)
+    d = avb.vorher_nachher_kampagne(alt, _befund(x_strich=[x], rollen=dict(R1=2), laufzahl=dict(ausgefuehrt=699,
+                                                                                                zusaetzlich=69)))
+    assert d['rollen'] == {'R1': [3, 2]} and 'V00042' in d['ursache'][0] and 'ablauf-1' in d['ursache'][0]
+    d = avb.vorher_nachher_kampagne(alt, _befund(status='angehalten', halt='S3', grund='S3: Drift'))
+    assert d['ursache'] == ['ungeklärt: grund, halt, status']
+    s = avb._x_strich_summe([x, dict(x, g1=None, gueltig=False, abweichung_r0_N=None, vorpruefung_ablauf_1=None)],
+                            [0.0004, 0.0004])
+    assert (s['n'], s['g1_geprueft'], s['andere_ungueltig'], s['vorpruefung_ablauf_1']) == (2, 1, 1, 1)
+    assert s['max_verhaeltnis_eps'] == pytest.approx(0.75)
