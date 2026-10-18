@@ -118,17 +118,15 @@ def rolle(kopf):
     return v.get('rolle') if isinstance(v, dict) else None
 
 
-def referenz_interpolation(tab, gueltig_ref=None):
-    """Δ⟨N⟩ (Summe und Zellen) und β jedes Laufs gegen die einschließenden gültigen Referenzläufe (nach Position).
-    Rückgabe (dN (n), dN_zellen (n, 3), beta (n)); nan, wenn ein Nachbar fehlt."""
+def klammer_indizes(tab, gueltig_ref=None):
+    """Je Lauf mit bewegten Modulen die Indizes (a, b) der einschließenden gültigen Referenzläufe derselben Phase
+    (nach Position); −1, wenn ein Nachbar fehlt, und für Referenzläufe."""
     n = len(tab)
     pos = tab.spalte('position', int)
-    t = 0.5 * (tab.spalte('t_start', float) + tab.spalte('t_ende', float))
     art = tab.spalte('laufart', object)
     ref = np.flatnonzero((art == 'R') & (np.ones(n, bool) if gueltig_ref is None else gueltig_ref))
     ref = ref[np.argsort(pos[ref])]
-    Nm, Nz = tab.daten['N_mittel'], tab.daten['N_mittel_zellen']
-    dN, dZ, beta = np.full(n, np.nan), np.full((n, 3), np.nan), np.full(n, np.nan)
+    ka, kb = np.full(n, -1), np.full(n, -1)
     for i in range(n):
         if art[i] == 'R':
             continue
@@ -139,9 +137,45 @@ def referenz_interpolation(tab, gueltig_ref=None):
         a, b = vor[-1], nach[0]
         if tab.koepfe[a]['phase'] != tab.koepfe[i]['phase'] or tab.koepfe[b]['phase'] != tab.koepfe[i]['phase']:
             continue
+        ka[i], kb[i] = a, b
+    return ka, kb
+
+
+def _interpolieren(tab, ka, kb):
+    n = len(tab)
+    t = 0.5 * (tab.spalte('t_start', float) + tab.spalte('t_ende', float))
+    Nm, Nz = tab.daten['N_mittel'], tab.daten['N_mittel_zellen']
+    dN, dZ, beta = np.full(n, np.nan), np.full((n, 3), np.nan), np.full(n, np.nan)
+    for i in np.flatnonzero(ka >= 0):
+        a, b = ka[i], kb[i]
         dN[i], beta[i] = interpolation(Nm[i], t[i], Nm[a], t[a], Nm[b], t[b])
         dZ[i] = interpolation(Nz[i], t[i], Nz[a], t[a], Nz[b], t[b])[0]
     return dN, dZ, beta
+
+
+def referenz_interpolation(tab, gueltig_ref=None):
+    """Δ⟨N⟩ (Summe und Zellen) und β jedes Laufs gegen die einschließenden gültigen Referenzläufe (nach Position).
+    Rückgabe (dN (n), dN_zellen (n, 3), beta (n)); nan, wenn ein Nachbar fehlt."""
+    return _interpolieren(tab, *klammer_indizes(tab, gueltig_ref))
+
+
+def x_strich_klammer(koepfe, i, a, b):
+    """Offline-Gegenprobe zur Klammer von X′ (Index i) im zustandsbehafteten Ablauf, nur aus den Köpfen: Sind die
+    einschließenden gültigen Referenzläufe a, b das R₂ und R₃ desselben G1-Falls? Eine nicht reproduzierte
+    Alarmwiederholung wird auf den alarmierten Lauf zurückgeführt, den sie ersetzt (§8.8)."""
+    if a < 0 or b < 0:
+        return False
+    ids = {k['versuch']['id']: j for j, k in enumerate(koepfe) if isinstance(k.get('versuch'), dict)}
+
+    def wurzel(j):
+        v = koepfe[j].get('versuch') or {}
+        while v.get('rolle') == 'alarmwiederholung' and v.get('bezug_versuch') in ids:
+            v = koepfe[ids[v['bezug_versuch']]]['versuch']
+        return v
+    x = (koepfe[i].get('versuch') or {}).get('bezug_versuch')
+    ra, rb = wurzel(a), wurzel(b)
+    return bool(x) and ra.get('rolle') == 'R2' and ra.get('bezug_versuch') == x and rb.get('rolle') == 'R3' \
+        and rb.get('bezug_versuch') == x
 
 
 def sigma_ref(tab, phase=0):
@@ -250,7 +284,8 @@ def pruefe(tab, sw, regeln=('G2', 'G3', 'G4', 'G5', 'G6', 'G7', 'G8', 'G9', 'G10
         gref = (art == 'R') & ~ungueltig_vor_g1 if gueltig_ref is None else gueltig_ref
         if gueltig_ref is None and any('versuch' in k for k in K):
             gref = gref & ~np.isin(np.arange(n), [i for i, a in alarm.items() if a['alarm']])
-        dN, dZ, beta = referenz_interpolation(tab, gref)
+        klammer = klammer_indizes(tab, gref)
+        dN, dZ, beta = _interpolieren(tab, *klammer)
         for i in range(n):
             if art[i] == 'R':
                 continue
@@ -263,11 +298,11 @@ def pruefe(tab, sw, regeln=('G2', 'G3', 'G4', 'G5', 'G6', 'G7', 'G8', 'G9', 'G10
         for i, a in alarm.items():
             erg['G1'][i] = a['alarm']
     else:
-        dN = dZ = beta = None
+        dN = dZ = beta = klammer = None
     gueltig = np.array([not any(erg[g][i] is True for g in REGELN_G) for i in range(n)])
     gruende = [[g for g in REGELN_G if erg[g][i] is True] for i in range(n)]
     return dict(regeln=erg, gueltig=gueltig, gruende=gruende, nicht_pruefbar={g: v for g, v in nicht.items() if v},
-                delta_N=dN, delta_N_zellen=dZ, beta=beta)
+                delta_N=dN, delta_N_zellen=dZ, beta=beta, g1_klammer=klammer)
 
 
 def nullpunktalarm(tab, sw, kandidat):

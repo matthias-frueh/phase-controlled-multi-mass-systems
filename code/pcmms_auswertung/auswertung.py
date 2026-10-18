@@ -71,6 +71,30 @@ def _online_gueltig(v):
     return bool(v.get('gueltig')) and v.get('g1') is not True
 
 
+def _x_strich_gegenprobe(t1, pr):
+    """X′ des zustandsbehafteten Ablaufs offline nachgeprüft: Die einschließenden gültigen Referenzläufe gleichen dem
+    Bezug des Ablaufs, „vorgesehen“ (R₂/R₃ desselben G1-Falls) folgt allein aus den Köpfen, und ein S1 an X′ setzt die
+    vorgesehene Klammer voraus."""
+    ka, kb = pr['g1_klammer'] if pr.get('g1_klammer') is not None else (None, None)
+    abw = []
+    for i, k in enumerate(t1.koepfe):
+        v = k['versuch']
+        if v.get('rolle') != 'X_strich':
+            continue
+        a, b = (-1, -1) if ka is None else (int(ka[i]), int(kb[i]))
+        vorgesehen = gueltigkeit.x_strich_klammer(t1.koepfe, i, a, b)
+        if v.get('g1_bezug') is not None:
+            off = [t1.koepfe[a]['versuch']['id'] if a >= 0 else None, t1.koepfe[b]['versuch']['id'] if b >= 0 else None]
+            if off != list(v['g1_bezug']):
+                abw.append(f'{v["id"]}: Bezug offline {off} ≠ Ablauf {v["g1_bezug"]}')
+            if bool((v.get('g1_klammer') or {}).get('vorgesehen')) != vorgesehen:
+                abw.append(f'{v["id"]}: Klammer R₂/R₃ offline {"vorgesehen" if vorgesehen else "unvollständig"}')
+        if v.get('halt') == 'S1' and not vorgesehen:
+            abw.append(f'{v["id"]}: S1 ohne vorgesehene Klammer R₂/R₃')
+    if abw:
+        raise formate.FormatFehler('X′ offline ≠ Ablauf: ' + '; '.join(abw[:5]))
+
+
 def datenlage(tab, tb, prof):
     """Gültigkeit (offline), Abbruchregeln, gültige Läufe je Konfiguration und Kontrollmodul, ŷ¹-Gültigkeit, Kontaktast
     und Auswertbarkeit der Phase 1 – ohne Bootstrap (auch für Zähl- und Ablaufdiagnosen des Harness).
@@ -144,6 +168,7 @@ def datenlage(tab, tb, prof):
         doppelt = sorted(x for x, c in zahl.items() if c > 1)
         if doppelt:
             raise formate.FormatFehler(f'mehr als ein gültiger Versuch je Konfiguration und Block: {doppelt[:5]}')
+        _x_strich_gegenprobe(t1, pr)
         if abl.get('status') != 'abgeschlossen':
             sperren_alle.append(('Datenlage', f'Phase 1 {abl.get("status")}: {(abl.get("ende") or {}).get("grund")} '
                                               '(keine abgeschlossene Kampagne)'))

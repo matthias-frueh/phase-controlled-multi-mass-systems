@@ -298,6 +298,167 @@ def test_x_strich_ueber_der_grenze_und_s1():
     assert [v['nummer'] for v in x] == [0, 1, 2, 3] and x[3]['rolle'] == 'X_strich'
     assert a.z['wdh']['S100|1'] == 3 and a.status == 'angehalten' and a.z['halt']['regel'] == 'S1'
     assert x[3]['halt'] == 'S1' and 'X′' in a.z['halt']['grund']
+    vs = versuche(a)
+    i = vs.index(x[3])
+    assert [v['rolle'] for v in vs[i - 1:]] == ['R2', 'X_strich', 'R3'] and x[3]['g1_klammer']['vorgesehen']
+    _offline_gleich(a)
+
+
+# Gegenproben vom 18.10.2026 zu X′: unabhängig gerechnete Abweichungen gegen die Klammer R₂/R₃
+def _abweichung(a, i, ia, ib):
+    """⟨N⟩ von Versuch i minus der linearen Interpolation zwischen den Versuchen ia und ib zur Laufmitte, ohne
+    gueltigkeit gerechnet."""
+    vs = a.z['versuche']
+
+    def t(j):
+        return 0.5 * (vs[j]['kopf']['t_start'] + vs[j]['kopf']['t_ende'])
+
+    def N(j):
+        return float(vs[j]['daten']['N_mittel'][0])
+    w = (t(i) - t(ia)) / (t(ib) - t(ia))
+    return N(i) - ((1 - w) * N(ia) + w * N(ib))
+
+
+def _offline_gleich(a):
+    """Entscheidungen des Ablaufs gegen die unabhängige Offline-Prüfung: Gültigkeit je Versuch und Klammer von X′."""
+    t = a.tabelle()
+    pr = gueltigkeit.pruefe(t, SW)
+    assert [auswertung._online_gueltig(k['versuch']) for k in t.koepfe] == [bool(x) for x in pr['gueltig']]
+    auswertung._x_strich_gegenprobe(t, pr)
+    return t, pr
+
+
+def _regel_x_strich(dx):
+    """Ursprünglicher Lauf von S100 in Block 1 +0,020 N (G1), X′ +dx N, R₃ +0,002 N."""
+    def regel(spec, v):
+        if spec['konfiguration']['id'] == 'S100' and spec['block'] == 1:
+            return dict(dN=0.020 if v['nummer'] == 0 else dx)
+        if v['rolle'] == 'R3':
+            return dict(dN=0.002)
+    return regel
+
+
+def test_x_strich_mit_r2_und_r3_ohne_vorpruefung():
+    """X′ wird mit seiner Klammer R₂/R₃ geprüft, nicht mit einem R₁ der allgemeinen Vorprüfung: X′ weicht 0,0105 N von
+    R₂ ab (Vorprüfung hätte R₁ eingefügt), gegen die gleich beabstandete Klammer R₂ (0) / R₃ (+0,002 N) aber nur
+    0,0095 N < ε_ctrl = 0,010 N. Am Stand vor der Korrektur folgte R₁ auf X′ und S1 hielt vor R₃ an."""
+    a = lauf(_regel_x_strich(0.0105))
+    vs = versuche(a)
+    rollen = [v['rolle'] for v in vs]
+    i = rollen.index('X_strich')
+    assert rollen[i - 1:i + 2] == ['R2', 'X_strich', 'R3'] and rollen.count('R1') == 1    # R₁ nur des Originals
+    assert _abweichung(a, i, i - 1, i + 1) == pytest.approx(0.0095, abs=1e-12)
+    N = [float(v['daten']['N_mittel'][0]) for v in a.z['versuche']]
+    assert N[i] - N[i - 1] == pytest.approx(0.0105, abs=1e-12)                # gegen R₂ allein (Vorprüfung)
+    x = vs[i]
+    assert x['g1_bezug'] == [vs[i - 1]['id'], vs[i + 1]['id']] and x['g1_klammer']['vorgesehen']
+    assert x['gueltig'] and x['g1'] is False and a.status == 'abgeschlossen' and not a.z['halt']
+    assert a.bericht()['auswahl']['S100|1']['status'] == 'ersetzt'
+    t, pr = _offline_gleich(a)
+    j = next(k for k, h in enumerate(t.koepfe) if h['versuch']['id'] == x['id'])
+    ka, kb = pr['g1_klammer']
+    assert [t.koepfe[ka[j]]['versuch']['rolle'], t.koepfe[kb[j]]['versuch']['rolle']] == ['R2', 'R3']
+
+
+def test_x_strich_verletzend_s1_erst_nach_r3():
+    """Ein wirklich verletzendes X′ (0,014 N gegen R₂/R₃) löst S1 aus, nachdem sein R₃ gemessen ist."""
+    a = lauf(_regel_x_strich(0.015))
+    vs = versuche(a)
+    rollen = [v['rolle'] for v in vs]
+    i = rollen.index('X_strich')
+    assert rollen[i - 1:] == ['R2', 'X_strich', 'R3']                     # Halt nach R₃, kein R₁ dazwischen
+    assert _abweichung(a, i, i - 1, i + 1) == pytest.approx(0.014, abs=1e-12)
+    assert a.status == 'angehalten' and a.z['halt']['regel'] == 'S1' and vs[i]['halt'] == 'S1'
+    assert a.z['halt']['t'] == vs[i + 1]['t_ende'] and vs[i]['g1_klammer']['vorgesehen']
+    assert a.bericht()['auswahl']['S100|1']['status'] == 'fehlt: Halt'           # nicht „spät erkannt“
+    _offline_gleich(a)
+
+
+def test_x_strich_nach_spaet_erkanntem_g1_und_ueber_der_grenze():
+    """Steht der G1-Verstoß erst mit der Referenz der Blockmitte fest (Vorprüfung 0,0095 N < ε_ctrl, Interpolation
+    0,0107 N), folgen R₂, X′, R₃ nach ihr; X′ (+0,0105 N gegen R₂, R₃ +0,002 N) besteht gegen R₂/R₃ mit 0,0095 N. Ebenso
+    jenseits der Wiederholungsgrenze. Am Stand vor der Korrektur folgte in beiden Fällen R₁ auf X′."""
+    def regel(spec, v):
+        if spec['laufart'] == 'R' and v['rolle'] == 'referenz_block':
+            return dict(dN=-0.003)                                       # unter der Alarmschwelle 0,0035 N
+        if v['rolle'] == 'R3':
+            return dict(dN=0.002)
+        if spec['konfiguration']['id'] == 'S100' and spec['block'] == 1:
+            return dict(dN=0.0095 if v['nummer'] == 0 else 0.0105)
+    a = lauf(regel, plan=plan_klein(tage=((6,),), mitte=3))
+    vs = versuche(a)
+    rollen = [v['rolle'] for v in vs]
+    o = nach_id(a, 'S100', 1)[0]
+    m = rollen.index('referenz_block')
+    assert o['g1'] is True and o['g1_bezug'][1] == vs[m]['id'] and 'R1' not in rollen     # spät, ohne R₁
+    assert _abweichung(a, vs.index(o), vs.index(o) - 2, m) == pytest.approx(0.0107, abs=1e-12)
+    assert rollen[m + 1:m + 4] == ['R2', 'X_strich', 'R3'] and vs[m + 2]['g1_klammer']['vorgesehen']
+    assert _abweichung(a, m + 2, m + 1, m + 3) == pytest.approx(0.0095, abs=1e-12)
+    assert vs[m + 2]['gueltig'] and a.status == 'abgeschlossen'
+    assert a.bericht()['auswahl']['S100|1']['status'] == 'ersetzt'
+    _offline_gleich(a)
+    # jenseits der Grenze: zwei Wiederholungen ungültig (G8), die dritte Messung mit G1-Verstoß, X′ besteht
+    def regel2(s, v):
+        if v['rolle'] == 'R3':
+            return dict(dN=0.002)
+        if s['konfiguration']['id'] != 'S100' or s['block'] != 1:
+            return None
+        return dict(stoerung=True) if v['nummer'] < 2 else dict(dN=0.05 if v['nummer'] == 2 else 0.0105)
+    b = lauf(regel2)
+    x = nach_id(b, 'S100', 1)
+    vs = versuche(b)
+    i = vs.index(x[3])
+    assert x[3]['rolle'] == 'X_strich' and b.z['wdh']['S100|1'] == 3 and x[3]['gueltig']
+    assert [v['rolle'] for v in vs[i - 1:i + 2]] == ['R2', 'X_strich', 'R3'] and x[3]['g1_klammer']['vorgesehen']
+    assert _abweichung(b, i, i - 1, i + 1) == pytest.approx(0.0095, abs=1e-12)
+    assert [v['rolle'] for v in vs].count('R1') == 1                                    # R₁ nur des Originals
+    assert b.bericht()['auswahl']['S100|1']['status'] == 'ersetzt' and b.status == 'abgeschlossen'
+    _offline_gleich(b)
+
+
+def test_x_strich_unvollstaendige_klammer_ohne_s1():
+    """Ist R₂ ungültig (G8; außerhalb von Kontrollsätzen nicht wiederholt), fehlt die vorgesehene Klammer: G1 von X′
+    gilt gegen die einschließenden gültigen Referenzläufe (R₁/R₃), S1 ist „nicht prüfbar“ und hält nicht an; X′ wird
+    nicht weiter wiederholt, der Platz fehlt."""
+    def regel(spec, v):
+        if spec['konfiguration']['id'] == 'S100' and spec['block'] == 1:
+            return dict(dN=0.05)
+        if v['rolle'] == 'R2':
+            return dict(stoerung=True)
+    a = lauf(regel)
+    vs = versuche(a)
+    rollen = [v['rolle'] for v in vs]
+    i = rollen.index('X_strich')
+    x = vs[i]
+    assert rollen[i - 1:i + 2] == ['R2', 'X_strich', 'R3'] and not vs[i - 1]['gueltig']
+    assert x['g1'] is True and not x['gueltig'] and x['s1'] == 'nicht prüfbar' and not x['g1_klammer']['vorgesehen']
+    assert x['g1_bezug'] == [vs[rollen.index('R1')]['id'], vs[i + 1]['id']] and not x.get('halt')
+    assert any('S1 nicht prüfbar' in t for t in x['entscheidung']) and a.status == 'abgeschlossen'
+    assert a.bericht()['auswahl']['S100|1']['status'] == 'fehlt: S1 nicht prüfbar'
+    t, pr = _offline_gleich(a)
+    # ein S1 an X′ ohne vorgesehene Klammer wird offline zurückgewiesen
+    t2 = copy.deepcopy(t)
+    j = next(k for k, h in enumerate(t2.koepfe) if h['versuch']['id'] == x['id'])
+    t2.koepfe[j]['versuch'] = dict(t2.koepfe[j]['versuch'], halt='S1')
+    with pytest.raises(formate.FormatFehler, match='S1 ohne vorgesehene Klammer'):
+        auswertung._x_strich_gegenprobe(t2, pr)
+
+
+def test_x_strich_fortsetzung_aus_dem_ablaufstand(tmp_path):
+    """Ein nach X′ (vor R₃) unterbrochener und aus der Datei fortgesetzter Ablauf gleicht dem ununterbrochenen."""
+    regel = _regel_x_strich(0.0105)
+    ganz = lauf(regel)
+    i = [v['rolle'] for v in versuche(ganz)].index('X_strich')
+    plan = plan_klein()
+    opt = ablauf.Ablaufoptionen(aufwaermen=False)
+    a = ablauf.Ablauf(plan, Skript(regel), SW, S3, np.random.default_rng(1), opt, 10.0, 500.0, kennung=dict(test=True))
+    assert a.ausfuehren(bis=i + 1) == 'unterbrochen'
+    ablauf.speichern(str(tmp_path / 'stand'), a)
+    b = ablauf.Ablauf.aus_zustand(ablauf.laden(str(tmp_path / 'stand')), plan, Skript(regel), SW, S3,
+                                  np.random.default_rng(99), 10.0, 500.0, dict(test=True))
+    assert b.ausfuehren() == 'abgeschlossen'
+    feld = ('id', 'rolle', 'gueltig', 'g1', 'g1_bezug', 'g1_klammer', 't_start')
+    assert [{f: v.get(f) for f in feld} for v in versuche(b)] == [{f: v.get(f) for f in feld} for v in versuche(ganz)]
 
 
 def test_reproduzierter_und_nicht_reproduzierter_nullpunktalarm():
@@ -520,6 +681,20 @@ def test_uebergabe_an_stufe2_eindeutige_zaehlung_und_halt_sperrt(a4_ablauf):
         if c.startswith('S'):
             n = sum(1 for x in b['auswahl'].values() if x['konfiguration'] == c and x['ausgewaehlt'])
             assert e['n_gueltig'] == n <= 6
+    # X′ über die Übergabe: die offline einschließenden gültigen Referenzläufe sind R₂ und R₃ seines G1-Falls
+    t1 = dl['t1']
+    ka, kb = dl['pr']['g1_klammer']
+    xs = [i for i, h in enumerate(t1.koepfe) if h['versuch']['rolle'] == 'X_strich']
+    assert xs
+    for i in xs:
+        x, vor, nach = (t1.koepfe[j]['versuch'] for j in (i, ka[i], kb[i]))
+        assert (vor['rolle'], nach['rolle']) == ('R2', 'R3') and x['g1_bezug'] == [vor['id'], nach['id']]
+        assert vor['bezug_versuch'] == nach['bezug_versuch'] == x['bezug_versuch']
+    t5 = copy.deepcopy(tab)                                              # abweichender Bezug im Protokoll
+    j = next(k for k, h in enumerate(t5.koepfe) if h.get('versuch', {}).get('rolle') == 'X_strich')
+    t5.koepfe[j]['versuch'] = dict(t5.koepfe[j]['versuch'], g1_bezug=['V00000', t5.koepfe[j]['versuch']['g1_bezug'][1]])
+    with pytest.raises(formate.FormatFehler, match='X′ offline'):
+        auswertung.datenlage(t5, r['teil_b'], PROFIL)
     # Doppelbeitrag (manipulierte Tabelle) wird zurückgewiesen
     t2 = copy.deepcopy(tab)
     i = next(k for k, h in enumerate(t2.koepfe) if h.get('versuch', {}).get('rolle') == 'wiederholung')

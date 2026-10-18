@@ -19,8 +19,12 @@ Regeln (maßgeblich ist die Präregistrierung; Lesarten unten):
 - G1/S1: Vorprüfung |⟨N⟩_X − ⟨N⟩_R₀| > ε_ctrl → sofort R₁. Mit dem nächsten gültigen Referenzlauf steht G1 aller
   offenen Läufe fest (Interpolation zwischen den einschließenden gültigen Referenzläufen, gueltigkeit.interpolation).
   Steht ein Verstoß vor Beginn des Schlusskontrollsatzes fest: sofort R₂, X′, R₃, auch über die Wiederholungsgrenze
-  hinaus; X′ zählt als Wiederholung. S1, wenn X′ G1 verletzt; ein aus anderem Grund ungültiges X′ folgt der Regel für
-  Konfigurationsläufe. Später festgestellte Verstöße werden weder wiederholt noch nach S1 geprüft.
+  hinaus; X′ zählt als Wiederholung. X′ hat keine Vorprüfung mit R₁; sein G1 steht mit R₃ fest. S1, wenn X′ G1
+  gegen die Klammer R₂/R₃ desselben Falls verletzt (eine nicht reproduzierte Alarmwiederholung ersetzt R₂ bzw. R₃,
+  §8.8). Ist die Klammer unvollständig (R₂ oder R₃ ungültig), gilt G1 von X′ wie für jeden Lauf zwischen den
+  einschließenden gültigen Referenzläufen, S1 ist dann „nicht prüfbar“ und wird nicht ausgelöst; ein dabei G1-ungültiges
+  X′ wird nicht weiter wiederholt. Ein aus anderem Grund ungültiges X′ folgt der Regel für Konfigurationsläufe. Später
+  festgestellte Verstöße werden weder wiederholt noch nach S1 geprüft.
 - Nullpunktalarm: sofortige Wiederholung; Überschreitung im selben Kanal → S1, sonst ersetzt die Wiederholung den
   alarmierten Lauf. Aufwärm-Referenzläufe lösen keinen Alarm aus; bis zwei aufeinanderfolgende um weniger als σ̂_ref
   differieren, höchstens zehn, sonst Halt (§6).
@@ -61,7 +65,7 @@ from scipy import stats
 
 from . import formate, gueltigkeit, konventionen as kv, zusammenfassung as zf
 
-VERSION = 'ablauf-1'
+VERSION = 'ablauf-2'            # ablauf-2: X′ ohne Vorprüfung mit R₂/R₃ geprüft
 GRENZE_KONFIGURATION = 2        # §6, A9.12: höchstens zwei Wiederholungen je Konfiguration und Block
 GRENZE_KONTROLLE = 2            # A9.12: Kontrolllauf höchstens zweimal sofort wiederholt
 GRENZE_AUFWAERMEN = 10          # §6: höchstens zehn Aufwärm-Referenzläufe
@@ -239,6 +243,10 @@ class Ablauf:
             v = self.z['versuche'][i]['kopf']['versuch']
             v['g1'] = 'nicht feststellbar'
             v['entscheidung'].append('G1 nicht feststellbar: kein gültiger Referenzlauf danach')
+            if v['rolle'] == 'X_strich':
+                v['s1'] = 'nicht prüfbar'
+                v['g1_klammer'] = dict(vor=self._v(v['r0'])['id'], nach=None, vorgesehen=False,
+                                       grund='kein gültiger Referenzlauf nach X′')
         self.z['offen_g1'] = []
 
     def _messen(self, el):
@@ -429,6 +437,11 @@ class Ablauf:
             verl = gueltigkeit.g1_verletzt(dN, self._wert(i, 'N_mittel'), self.sw.eps_ctrl)
             vi['g1'] = bool(verl)
             vi['g1_bezug'] = [self._v(vi['r0'])['id'], self._v(n)['id']]
+            if vi['rolle'] == 'X_strich':
+                vi['g1_klammer'] = self._klammer_x(i, vi['r0'], n)
+                if not verl and not vi['g1_klammer']['vorgesehen']:
+                    self._notiz(i, f'G1 von X′ gegen {vi["g1_bezug"][0]}/{vi["g1_bezug"][1]} eingehalten; Klammer R₂/R₃ '
+                                   f'unvollständig ({vi["g1_klammer"]["grund"]}): S1 nicht prüfbar')
             if not verl:
                 continue
             vi['gueltig'] = False
@@ -454,9 +467,16 @@ class Ablauf:
             self._notiz(i, 'G1-Verstoß eines L′: S1 für L′ offen (§12), keine Wiederholung')
             return []
         if v['rolle'] == 'X_strich':
-            self._halt(i, 'S1', 'G1-Verstoß der Wiederholung X′')
+            kl = v.get('g1_klammer') or {}
+            if kl.get('vorgesehen'):
+                self._halt(i, 'S1', f'G1-Verstoß der Wiederholung X′ gegen R₂/R₃ ({kl["vor"]}/{kl["nach"]})')
+            else:
+                v['s1'] = 'nicht prüfbar'
+                self._notiz(i, f'G1-Verstoß von X′ gegen {kl.get("vor")}/{kl.get("nach")}; Klammer R₂/R₃ unvollständig '
+                               f'({kl.get("grund")}): S1 nicht prüfbar, keine weitere Wiederholung')
             return []
         if not self._vor_schluss(i):
+            v['spaet_erkannt'] = True
             self._notiz(i, 'G1-Verstoß erst nach Beginn des Schlusskontrollsatzes festgestellt: keine Wiederholung, '
                            'keine S1-Prüfung')
             return []
@@ -476,6 +496,26 @@ class Ablauf:
         if v['kontrollsatz'] is not None:
             return _schluessel(v['kontrollsatz'], v['konfiguration'])
         return _schluessel(v['konfiguration'], v['block'])
+
+    def _wurzel(self, n):
+        """Ursprünglicher Referenzversuch einer Kette von Alarmwiederholungen: Eine nicht reproduzierte Wiederholung
+        ersetzt den alarmierten Lauf (§8.8)."""
+        v = self._v(n)
+        while v['rolle'] == 'alarmwiederholung' and v.get('bezug_versuch'):
+            v = self._v(int(v['bezug_versuch'][1:]))
+        return v
+
+    def _klammer_x(self, i, a, b):
+        """Klammer von X′ (Versuch i) aus den Referenzläufen a (vorher) und b (nachher): vorgesehen nur, wenn a das R₂
+        und b das R₃ desselben G1-Falls sind, gegebenenfalls ersetzt durch nicht reproduzierte Alarmwiederholungen."""
+        x = self._v(i).get('bezug_versuch')
+        ra, rb = self._wurzel(a), self._wurzel(b)
+        ok_a = ra['rolle'] == 'R2' and ra.get('bezug_versuch') == x
+        ok_b = rb['rolle'] == 'R3' and rb.get('bezug_versuch') == x
+        grund = None if ok_a and ok_b else '; '.join(
+            ([] if ok_a else [f'Bezug vor X′ ist {ra["id"]} ({ra["rolle"]}), nicht R₂ des Falls {x}']) +
+            ([] if ok_b else [f'Bezug nach X′ ist {rb["id"]} ({rb["rolle"]}), nicht R₃ des Falls {x}']))
+        return dict(vor=self._v(a)['id'], nach=self._v(b)['id'], vorgesehen=bool(ok_a and ok_b), grund=grund)
 
     def _lauf(self, n):
         """Lauf mit bewegten Modulen (Konfiguration oder Kontrolllauf Lⱼ, Lⱼ′)."""
@@ -506,7 +546,9 @@ class Ablauf:
             if z['r0'] is not None:
                 z['offen_g1'].append(n)
                 d = abs(self._wert(n, 'N_mittel') - self._wert(z['r0'], 'N_mittel'))
-                if self.opt.wiederholungen and gueltigkeit.g1_verletzt(d, self._wert(n, 'N_mittel'), self.sw.eps_ctrl):
+                # X′ hat seine Klammer R₂/R₃ (§9.2, A9.12); eine Vorprüfung mit R₁ würde sie ersetzen
+                if v['rolle'] != 'X_strich' and self.opt.wiederholungen and \
+                        gueltigkeit.g1_verletzt(d, self._wert(n, 'N_mittel'), self.sw.eps_ctrl):
                     self._notiz(n, 'Vorprüfung gegen R₀: |Δ⟨N⟩| > ε_ctrl → sofort R₁')
                     self._vorn(self._einschub(n, 'R1', f'Vorprüfung {v["id"]}', art='R'))
             if k['laufart'] == 'L' and k['einstellung'] == 1:
@@ -523,6 +565,7 @@ class Ablauf:
             self._notiz(n, 'ungültig – keine Wiederholung (Ablaufoption)')
             return
         if not self._vor_schluss(n):
+            v['spaet_erkannt'] = True
             self._notiz(n, 'ungültig nach Beginn des Schlusskontrollsatzes erkannt: keine Wiederholung')
             return
         key = self._wdh_schluessel(n)
@@ -759,11 +802,15 @@ def bericht(a):
             status = 'gueltig' if p['gueltig'][0] == (vv[0]['id'] if vv else None) else 'ersetzt'
         elif not vv:
             status = 'nicht gemessen'
+        elif any(x.get('halt') for x in vv):                          # ein Versuch dieses Platzes hielt an
+            status = 'fehlt: Halt'
         elif any(x.get('grenze') for x in vv):
             status = 'fehlt: Grenze ausgeschöpft'
-        elif any('Schlusskontrollsatzes' in t for x in vv for t in x['entscheidung']):
+        elif any(x.get('spaet_erkannt') for x in vv):                  # Ungültigkeit nach Beginn des Schlusssatzes
             status = 'fehlt: spät erkannt'
-        elif any(x.get('halt') for x in vv) or z['status'] != 'abgeschlossen':
+        elif any(x.get('s1') == 'nicht prüfbar' for x in vv):         # X′ ohne vollständige Klammer R₂/R₃
+            status = 'fehlt: S1 nicht prüfbar'
+        elif z['status'] != 'abgeschlossen':
             status = 'fehlt: Halt'
         else:
             status = 'fehlt'
