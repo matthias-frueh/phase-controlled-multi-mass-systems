@@ -266,8 +266,9 @@ R₃, eine von X′ ausgelöste zweite Prüfung beginnt, und deren Referenzlauf 
     offene G1-Prüfung.
   - Bei einem nach G2–G10 gültigen X′ unterbricht nur ein Halt an X′ selbst die Folge (S3 im Kontrollsatz einer
     Wiederaufnahme). R₃ folgt dann erst nach dem Kontrollsatz der nächsten Wiederaufnahme; die Klammer ist
-    unvollständig und S1 „nicht prüfbar“, wie bei ungültigem R₂ oder R₃. Lesart, keine ausdrückliche Regel: Nach einem Halt wird erst nach der Ursachenanalyse und
-    einem vollständigen Kontrollsatz weitergemessen; ein R₃ danach ist kein frischer Referenzlauf der Klammer mehr.
+    unvollständig und S1 „nicht prüfbar“, wie bei ungültigem R₂ oder R₃.
+  - Das ist eine Lesart, keine ausdrückliche Regel: Nach einem Halt wird erst nach der Ursachenanalyse und einem
+    vollständigen Kontrollsatz weitergemessen; ein R₃ danach ist kein frischer Referenzlauf der Klammer mehr.
   - Stufe 2 prüft die Folge offline: Auf ein nach G2–G10 gültiges X′ folgt unmittelbar das R₃ seines Falls,
     ausgenommen ein Halt an X′ vor R₃ (andere Regel als S1). Eine Tabelle mit der alten Folge wird zurückgewiesen,
     obwohl ihre Klammer R₂/R₁ in sich stimmt.
@@ -681,6 +682,11 @@ neue Fachregel):
   solchen Wiederholungen hält der Ablauf an (technische Grenze ohne Regelausgang; in dieser Rechnung nicht erreicht).
 - S3 wird an Lⱼ ohne Verstoß gegen G2–G10 geprüft; eine gültige S3-Wiederholung ist ein gültiger Kontrolllauf. Die
   S3-Wiederholung eines X′ folgt nach dessen R₃ (Nachtrag, `ablauf-3`).
+- Treffen an einem Kontrolllauf die Vorprüfung und eine S3-Überschreitung zusammen (beide verlangen „sofort“), wird
+  zuerst die S3-Wiederholung gemessen, dann R₁. G1 des Kontrolllaufs steht mit dem nächsten gültigen Referenzlauf
+  fest; löst die S3-Wiederholung selbst eine Vorprüfung aus, ist das deren R₁. Die G1-Prüfung und eine S1-Prüfung über
+  X′ gehen dabei nicht verloren, der Bezug ist aber ein anderer frischer Referenzlauf. Ob R₁ hier wie R₃ bei X′ Vorrang
+  hat, ist offen (unten).
 - Das erste S2 hält an (Abbruchregel S2, §9.2); die Konfiguration bleibt in den Blöcken und ist von Tests
   ausgeschlossen, ein zweites S2 ohne festgestellten Apparaturfehler beendet Phase 1.
   - Maßgeblich ist die S2-Bilanz (`gueltigkeit.s2_bilanz`, im Ablauf und in Stufe 2 gleich). Ein S2 zählt nicht, wenn
@@ -727,8 +733,10 @@ nach zwei ungültigen Wiederholungen ohne Halt). Primärer Funktionsnachweis ist
 
 **Offen** (Entscheidungen des Autors, durch diesen Auftrag nicht berührt): G4-Standardisierung je Konfiguration aus
 Phase 0 (PR #22), E3-Grenzen und Rückfall, feste E3-Prüfzahl, Ziel der gemeinsamen Vollständigkeit (Mindestwert und
-Umgang mit Halten in der Planung), S-Regeln und G2–G4 für L′, Wiederaufnahme nach mechanischem Eingriff. AP-13 bleibt
-teilweise bearbeitet.
+Umgang mit Halten in der Planung), S-Regeln und G2–G4 für L′, Wiederaufnahme nach mechanischem Eingriff. Dazu die
+Reihenfolge von R₁ und S3-Wiederholung, wenn beide an einem Kontrolllauf anfallen: Eine Änderung könnte Kampagnen mit
+diesem Zusammentreffen ändern; aus den gespeicherten Befunden lässt es sich nicht ausschließen, nachzuprüfen wäre es
+nur mit einer Neurechnung. AP-13 bleibt teilweise bearbeitet.
 
 ## 7 Herkunft und Dateien
 

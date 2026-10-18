@@ -247,7 +247,8 @@ tests/fixtures/ap13_pruefsatz.json, docs/ap13_neulaeufe_2026-10-17/, docs/e3b_g4
 Präregistrierung, regeln.py (Regelprofile), Regel- und Kriterienmatrix, PDFs.
 
 == 6. Nachtrag vom 18.10.2026: verschachtelte Wiederholungen (ablauf-3)
-Keine Kampagnenausführung; Gegenproben mit der Skriptmessung der Tests, Prüfsatz und Nachweis aus gespeicherten Befunden.
+Keine Kampagnenausführung; Gegenproben mit der Skriptmessung der Tests, Prüfsatz und Nachweis aus gespeicherten
+Befunden.
 
 -- 6a. Gegenprobe am Stand 836f2c4 und am Code 377fc26 (Skriptmessung, Kontrollsatz R und L1; L1 des ersten
 Kontrollsatzes +0,05 N, X′ +0,015 N mit S3-Überschreitung, S3-Wiederholung +0,011 N, R1 ihrer Vorprüfung +0,003 N)
@@ -294,3 +295,17 @@ x_strich der 37 Ablaufkampagnen in ergebnisse.json (vorher_nachher) gleich den B
 X′ nur S1 (2); X′ eines Kontrolllaufs: 1 (N01-V1G0 schlank Nr. 2, V00010 L1 → V00011 R3), ohne S3-Wiederholung.
 ablauf-3 entscheidet in diesen Kampagnen wie ablauf-2; geprüft von
 tests/test_ablauf_vergleich.py::test_ergebnisse_der_korrekturrunde_gelten_fuer_ablauf_3.
+
+-- 6e. Endabnahme am Stand a149f1d (Code seit 231e27c unverändert; danach nur Text in Bericht und Protokoll), sauberer
+Worktree, Prüfungen nacheinander, Exit-Codes geprüft, Zeiten monoton
+Start 2026-10-18T16:07:55+00:00, git a149f1d7c36251cbd24a7e2e1fe7ea013a8ea28b, 0 geänderte Dateien
+python3 -m pytest tests -q -p no:cacheprovider: 415 passed, 8 skipped in 476.64s, exit=0, 477,3 s
+(cd data && python3 ../code/linear_solver.py --validate): Ergebnis: bestanden, exit=0, 2,0 s
+python3 rechnungen/neuheit/bibcheck.py: ohne Fehler, exit=0, 0,1 s
+python3 code/pcmms_auswertung harness pruefsatz --pruefen tests/fixtures/ap13_pruefsatz: gleich, exit=0, 19,7 s
+python3 code/pcmms_auswertung harness ablauf-pruefsatz --pruefen tests/fixtures/ap13_ablauf_pruefsatz: gleich, exit=0, 13,1 s
+Ende 2026-10-18T16:16:27+00:00, git a149f1d7c36251cbd24a7e2e1fe7ea013a8ea28b, 0 geänderte Dateien
+Gegenüber 836f2c4 (409 passed, 8 skipped) sechs Tests mehr: fünf Regressionen des Nachtrags und der Nachweistest.
+Geschützte Dateien gegen main 2ab6d28 unverändert: data/, rechnungen/, docs/ap11_ap12_ap13_pruefstand.json,
+tests/fixtures/ap13_pruefsatz.json, docs/ap13_neulaeufe_2026-10-17/, docs/e3b_g4_diagnose_2026-10-17/,
+Präregistrierung, regeln.py (Regelprofile), Regel- und Kriterienmatrix, PDFs.
