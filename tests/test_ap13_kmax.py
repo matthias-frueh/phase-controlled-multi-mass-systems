@@ -207,6 +207,43 @@ def test_suchpfad_satz_beim_festgelegten_paar(v1_suche):
     assert tb3['nr2']['arbeitspunkt']['status'] == 'nicht abgesichert' and any('k_max' in x for x in v)
 
 
+def test_suchtreffer_ohne_k_wechsel_dem_satz_der_suche_zugeordnet(v1_suche):
+    """Gegenprobe vom 18.10.2026 (Testhaken: reiner Softwareprüffall, keine Qualifikation eines Arbeitspunkts): Legt die
+    Suche schon beim ersten Paar fest, ist k = 12 → 12 und N_z = 100 wie beim vorläufigen Satz auf oberster Ebene.
+    Teil B ordnet den Satz der Suche zu (Quelle und Bindung), der Arbeitspunkt ist abgesichert; am Stand vor der
+    Korrektur wurde der gleich gebundene vorläufige Satz übernommen und allein wegen seiner Quelle abgelehnt. Fremde
+    Daten, ein abweichender Plan, eine zu kleine Reserve und eine andere Bindung bleiben zurückgewiesen bzw. nicht
+    abgesichert."""
+    m, tab, kal, _, prof = v1_suche
+    zeit = dict(T_park=2.0, T_ramp=2.0, T_ab=2.0, T_eP=3.0, T_aP=12.0, T_verfuegbar=8 * 3600, d=1, N_K=21, N_I=0)
+    pe = pilot.pilot_auswerten(tab, kal, prof, 10.0, zeit=zeit, seed=3,
+                               planung=lambda e: dict(n_min=12, n0=20, quelle='Testhaken'))
+    s = pe['suche']
+    assert s['ergebnis'] == 'festgelegt' and len(s['schritte']) == 1                     # erstes Paar
+    assert s['k_max'] == pe['k_pilotgroessen'] == 12 and s['N_z'] == pe['bindung']['N_z'] == 100
+    t0 = _phase0(tab)
+    plan = dict(f=10.0, k_max=s['k_max'], N_z=s['N_z'], n_min=s['n_min'], n0=s['n0'], r=s['reserve_r'], n=s['n'],
+                d=1, n_max=s['n_max'], zeit=s['zeit'], T_lauf=s['T_lauf'], p_hat=s['p_hat'])
+    tb = teil_b.erstellen(t0, kal, pe, prof, plan, W8, seed_b0=1, B=50)
+    b, ap = tb['nr2']['phase0_bindung'], tb['nr2']['arbeitspunkt']
+    assert ap['status'] == 'abgesichert' and ap['aus_suche'] and not ap['verfehlt']     # Fehler vor der Korrektur
+    assert b['quelle'] == 'Pilotskript, Suche' and b['bindung']['quelle'] == 'Suche: Paar (k = 12, N_z = 100)'
+    assert b['k'] == 12 and not b['neu_berechnet'] and b['bindung']['phase0_sha256'] == pilot.daten_sha256(t0)
+    sig12, _ = direkt(t0, 12)                                                           # unabhängig nachgerechnet
+    assert tb['nr2']['sigma_delta']['K']['F'] == pytest.approx(sig12['K']['F'], rel=1e-12)
+    assert tb['nr2']['p_hat'] == s['p_hat'] and tb['nr2']['n'] == s['n']
+    fremd = dict(pe, suche=dict(s, satz=dict(s['satz'], bindung=dict(s['satz']['bindung'], phase0_sha256='0' * 64))))
+    with pytest.raises(ValueError, match='aus anderen Phase-0-Daten'):
+        teil_b.erstellen(t0, kal, fremd, prof, plan, W8, seed_b0=1, B=50)
+    for anders, text in ((dict(n0=19), 'Plan weicht vom Ergebnis der Suche ab'),
+                         (dict(n=plan['n_min'] + 1, r=1), 'n_min + r(p̂)')):
+        ax = teil_b.erstellen(t0, kal, pe, prof, dict(plan, **anders), W8, seed_b0=1, B=50)['nr2']['arbeitspunkt']
+        assert ax['status'] == 'nicht abgesichert' and any(text in x for x in ax['verfehlt'])
+    anders = dict(b, bindung=dict(b['bindung'], seed_eps_ctrl=b['bindung']['seed_eps_ctrl'] + 1))
+    ax = teil_b.arbeitspunkt(plan, s['satz'], anders, pe, prof)
+    assert ax['status'] == 'nicht abgesichert' and any('Bindung des Satzes' in x for x in ax['verfehlt'])
+
+
 def test_arbeitspunkt_nach_neuberechnung_nicht_mehr_abgesichert(a4):
     """Ein Plan, dessen Reserve mit p̂ bei k = 30 gebildet wurde (A4, Seed 24: 1/60 → r = 3), ist mit dem gebundenen
     p̂ = 5/60 bei k = 9 (r = 4) nicht mehr abgesichert; nachoptimiert wird nicht."""
@@ -221,11 +258,14 @@ def test_arbeitspunkt_nach_neuberechnung_nicht_mehr_abgesichert(a4):
 
 
 def test_arbeitspunkt_logik():
-    """Statusregeln ohne Daten: Reserve, n_max aus den Zeitangaben, Herkunft aus der Suche."""
-    satz = dict(p_hat=0.05)
-    info = dict(modus='plan', quelle='Pilotskript, Suche')
+    """Statusregeln ohne Daten: Reserve, n_max aus den Zeitangaben, Herkunft aus der Suche (Quelle und Bindung)."""
+    bindung = dict(k=9, N_z=100, n_fuenftel=20, T_a_s=10.0, quelle='Suche: Paar (k = 9, N_z = 100)',
+                   phase0_sha256='a' * 64, n_laeufe=140, n_pilot=60, seed_eps_ctrl=1, n_sim_eps_ctrl=300,
+                   version='pilot-0.3')
+    satz = dict(p_hat=0.05, bindung=bindung)
+    info = dict(modus='plan', quelle='Pilotskript, Suche', bindung=bindung)
     zeit = dict(T_verfuegbar=10 * 3600, d=1, N_K=21, N_I=0)
-    pe = dict(suche=dict(ergebnis='festgelegt', k_max=9, N_z=100, n_min=18, n0=20, n=22))
+    pe = dict(suche=dict(ergebnis='festgelegt', k_max=9, N_z=100, n_min=18, n0=20, n=22, satz=satz))
     plan = dict(k_max=9, N_z=100, n_min=18, n0=20, n=22, zeit=zeit, T_lauf=17.0)
     nmax = pilot.n_max(17.0, 0.05, zeit)
     a = teil_b.arbeitspunkt(plan, satz, info, pe, PROFIL)
@@ -237,6 +277,11 @@ def test_arbeitspunkt_logik():
     assert c['status'] == 'nicht abgesichert'
     d = teil_b.arbeitspunkt(plan, satz, info, dict(suche=dict(ergebnis='offen')), PROFIL)
     assert d['status'] == 'nicht geprüft' and 'externer Plan' in d['hinweis']
+    # Quelle „Suche“, aber eine andere oder fehlende Bindung als die des Satzes der Suche
+    for b2 in (dict(bindung, phase0_sha256='b' * 64), dict(bindung, n_sim_eps_ctrl=200), None):
+        e = teil_b.arbeitspunkt(plan, satz, dict(info, bindung=b2), pe, PROFIL)
+        assert e['status'] == 'nicht abgesichert' and any('Bindung des Satzes' in x for x in e['verfehlt'])
+    assert teil_b.gleich_gebunden(bindung, dict(bindung, quelle='andere Quellangabe'))
 
 
 def test_einordnung_alter_teil_b(a4):

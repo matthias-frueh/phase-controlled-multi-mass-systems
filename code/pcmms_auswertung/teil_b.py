@@ -33,6 +33,14 @@ from .regeln import RegelOffen
 VERSION = 'teil_b-0.3'          # 0.2: nr5.unsicherheit (Korrektur E), nr1.phase0_verarbeitung (Korrektur B);
                                 # 0.3: Phase-0-Satz an k_max und N_z des Plans gebunden, nr2.arbeitspunkt
 BINDUNGEN = ('plan', 'historisch')
+# Felder einer Bindung, die den Satz bestimmen (Phase-0-Daten, k, Fenster, Code und Seed); die Quellangabe zählt nicht
+BINDUNG_IDENTITAET = ('k', 'N_z', 'n_fuenftel', 'T_a_s', 'phase0_sha256', 'n_laeufe', 'n_pilot', 'seed_eps_ctrl',
+                      'n_sim_eps_ctrl', 'version')
+
+
+def gleich_gebunden(a, b):
+    """Bezeichnen zwei Bindungen denselben Satz (BINDUNG_IDENTITAET)? Fehlt eine Bindung, nein."""
+    return isinstance(a, dict) and isinstance(b, dict) and all(a.get(x) == b.get(x) for x in BINDUNG_IDENTITAET)
 
 
 def konfigurationen(zusatz=False, punkte_I=None):
@@ -81,11 +89,12 @@ def phase0_satz(tab0, kal, pilot_erg, profil, plan, bindung='plan', seed_pilot=N
     """Der für Phase 1 maßgebliche Satz der Phase-0-Größen und seine Einordnung (nr2.phase0_bindung).
 
     bindung='plan': Satz bei k_max des Plans und dem Fenster der übergebenen Phase-0-Läufe; ihre Zyklenzahl muss N_z des
-    Plans gleichen (sonst: Läufe zuerst auf die ersten N_z Zyklen kürzen). Ein Satz der Pilotausgabe (oberste Ebene oder
-    Suche) mit gleichem k, N_z und gleichen Phase-0-Daten wird übernommen; gleiches k und N_z bei anderen Daten ist
-    unvereinbar. Sonst wird der Satz mit dem Code und Seed des Pilotskripts neu berechnet (seed_pilot, falls die
-    Pilotausgabe keinen Seed nennt). bindung='historisch': der vorläufige Satz auf oberster Ebene wie bis teil_b-0.2,
-    gekennzeichnet und nicht qualifizierend."""
+    Plans gleichen (sonst: Läufe zuerst auf die ersten N_z Zyklen kürzen). Ein Satz der Pilotausgabe mit gleichem k, N_z
+    und gleichen Phase-0-Daten wird übernommen, bei einem festgelegten Paar der Suche deren Satz vor dem vorläufigen
+    Satz auf oberster Ebene (beide haben gleiches k und N_z, wenn die Suche beim k der Pilotgrößen festlegt); gleiches k
+    und N_z bei anderen Daten ist unvereinbar. Sonst wird der Satz mit dem Code und Seed des Pilotskripts neu berechnet
+    (seed_pilot, falls die Pilotausgabe keinen Seed nennt). bindung='historisch': der vorläufige Satz auf oberster Ebene
+    wie bis teil_b-0.2, gekennzeichnet und nicht qualifizierend."""
     if bindung not in BINDUNGEN:
         raise ValueError(f'Bindung {bindung!r} unbekannt ({", ".join(BINDUNGEN)})')
     t = tab0.auswahl(tab0.spalte('phase', int) == 0).sortiert()
@@ -105,17 +114,19 @@ def phase0_satz(tab0, kal, pilot_erg, profil, plan, bindung='plan', seed_pilot=N
                     'Bindung an k_max zufällig gleich, aber nicht geprüft')
         return s, info
     h = pilot.daten_sha256(t)
+    such = pilot_erg.get('suche') or {}
     kandidaten = [('Pilotskript, oberste Ebene', pilot.satz_oberste_ebene(pilot_erg))]
-    if (pilot_erg.get('suche') or {}).get('satz'):
-        kandidaten.append(('Pilotskript, Suche', pilot_erg['suche']['satz']))
-    for name, s in kandidaten:
-        b = s.get('bindung')
-        if not b or b['k'] != k or b['N_z'] != N_z:
-            continue
-        if b['phase0_sha256'] != h:
+    if such.get('satz'):
+        kandidaten.insert(0 if such.get('ergebnis') == 'festgelegt' else 1, ('Pilotskript, Suche', such['satz']))
+    passend = [(name, s) for name, s in kandidaten
+               if s.get('bindung') and s['bindung']['k'] == k and s['bindung']['N_z'] == N_z]
+    for name, s in passend:
+        if s['bindung']['phase0_sha256'] != h:
             raise ValueError(f'Teil B: Satz „{name}“ (k = {k}, N_z = {N_z}) stammt aus anderen Phase-0-Daten als den '
                              'übergebenen Läufen')
-        info.update(quelle=name, k=k, qualifiziert=True, neu_berechnet=False, bindung=b)
+    if passend:
+        name, s = passend[0]
+        info.update(quelle=name, k=k, qualifiziert=True, neu_berechnet=False, bindung=s['bindung'])
         return s, info
     seed = pilot_erg.get('seed', seed_pilot)
     if seed is None:
@@ -131,7 +142,8 @@ def phase0_satz(tab0, kal, pilot_erg, profil, plan, bindung='plan', seed_pilot=N
 
 def arbeitspunkt(plan, satz, info, pilot_erg, profil):
     """Erneute Prüfung des verwendeten Plans mit dem gebundenen Satz (keine Nachoptimierung): Reserve
-    r(p̂) = ⌈n_min·p̂/(1 − p̂)⌉ + Reserve, n ≤ n_max(p̂) bei Zeitangaben, p̂ des Plans, Herkunft aus der Suche.
+    r(p̂) = ⌈n_min·p̂/(1 − p̂)⌉ + Reserve, n ≤ n_max(p̂) bei Zeitangaben, p̂ des Plans, Herkunft aus der Suche (Quelle und
+    Bindung gleich der des Satzes beim festgelegten Paar, gleich_gebunden).
     Status „abgesichert“ nur für einen Plan aus der Suche mit demselben Satz und bestandenen Prüfungen; „nicht
     abgesichert“, wenn eine Prüfung scheitert; sonst „nicht geprüft“ (externer Plan: gemeinsame Bedingung hier nicht
     geprüft)."""
@@ -163,6 +175,9 @@ def arbeitspunkt(plan, satz, info, pilot_erg, profil):
             fehl.append(f'Plan weicht vom Ergebnis der Suche ab: {ab}')
         if info.get('quelle') != 'Pilotskript, Suche':
             fehl.append(f'Satz nicht der des festgelegten Paars der Suche ({info.get("quelle")})')
+        elif not gleich_gebunden(info.get('bindung'), (s.get('satz') or {}).get('bindung')):
+            fehl.append('Bindung des Satzes ≠ Bindung des Satzes beim festgelegten Paar der Suche (Daten, k, Fenster, '
+                        'Code oder Seed)')
     if info['modus'] == 'historisch':
         fehl.append('historische Bindung: Phase-0-Größen bei k der Pilotgrößen, nicht beim k_max des Plans')
     status = 'nicht abgesichert' if fehl else ('abgesichert' if aus_suche else 'nicht geprüft')
