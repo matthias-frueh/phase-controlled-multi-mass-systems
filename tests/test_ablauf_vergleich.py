@@ -24,6 +24,28 @@ def test_auftragsliste_im_budget_mit_gemeinsamen_seeds():
             assert s == pr22                                              # dieselben Seeds in allen drei Varianten
 
 
+def test_auftragsliste_der_korrekturrunde_im_zusatzbudget(tmp_path):
+    """Korrekturrunde vom 18.10.2026: höchstens 40 Ausführungen, davon höchstens vier volle; die 30 Vergleichskampagnen
+    der Variante „wiederholungen“ und alle übrigen Aufträge mit den Seeds der ursprünglichen Auftragsliste; gemeinsame
+    Einstellungen bis auf das Checkpoint-Verzeichnis gleich; die committete Liste gleicht der erzeugten."""
+    jobs = av.auftragsliste_korrektur()
+    n = sum(len(j['seeds']) * (2 if j['art'] == 'fortsetzung' else 1) for j in jobs)
+    voll = sum(len(j['seeds']) for j in jobs if j['art'] == 'voll')
+    assert n <= av.KORREKTUR_GRENZEN['kampagnen'] and voll <= av.KORREKTUR_GRENZEN['voll']
+    vergleich = [j for j in jobs if j['seedregel'] == 'vergleich' and j['art'] == 'schlank'
+                 and j['variante'] == 'wiederholungen']
+    assert sum(len(j['seeds']) for j in vergleich) == 30
+    alt = {(j['szenario'], j['variante'], j['art'], j['ebene'], j['seedregel'], i): s
+           for j in av.auftragsliste() for i, s in zip(j['indizes'], j['seeds'])}
+    for j in jobs:
+        for i, s in zip(j['indizes'], j['seeds']):
+            assert alt[(j['szenario'], j['variante'], j['art'], j['ebene'], j['seedregel'], i)] == s
+    a = av.vorbereiten_korrektur(str(tmp_path))
+    orig = av.lies_auftrag()
+    assert a['gemeinsam'] == dict(orig['gemeinsam'], ausgabe=av.KORREKTUR_AUSGABE) and a['werkzeug8'] == orig['werkzeug8']
+    assert av.lies_auftrag(av.KORREKTUR_AUFTRAG) == a
+
+
 def test_checkpointschluessel_enthaelt_das_verfahren():
     a = dict(gemeinsam=KLEIN)
     prof = regeln.profil('ENTW-2026-10').mit_reduktion(**KLEIN['profil_reduktion'])
@@ -51,3 +73,6 @@ def test_schlanker_befund_je_variante(variante, k):
     assert b['teil_b']['k'] == k and b['teil_b']['k_max'] == 9
     assert b['verfahren'] == av.VARIANTEN[variante].kennung()
     assert b['auswertbar']['von'] == 21 and ('ablauf' in b) == (variante == 'wiederholungen')
+    if variante == 'wiederholungen':                                    # Referenzbezüge der X′, S2-Bilanz
+        assert all(x['vor_rolle'] and x['vorgesehen'] in (True, False) for x in b['ablauf']['x_strich'])
+        assert b['ablauf']['s2_bilanz']['beendet'] is False

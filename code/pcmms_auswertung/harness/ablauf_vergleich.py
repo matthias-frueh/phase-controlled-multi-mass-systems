@@ -15,6 +15,11 @@ Stufe 2 (Nullfall, Artefaktfall, Ebene Z/Stufe 1), Regelpfadfälle und eine echt
 Checkpoint je Auftrag wie harness.neulauf: Rechencode (ohne Kommandozeile und Berichtsteil), Auftrag, gemeinsame
 Einstellungen, Profil, Werkzeug 8, Seeds, Verfahren der Variante, Bibliotheken; gerechnet wird nur aus einem sauberen
 Git-Stand.
+
+Korrekturrunde vom 18.10.2026 (auftragsliste_korrektur, eigene Auftragsliste und Checkpoints, ablauf-2): die 30
+Vergleichskampagnen der Variante „wiederholungen“ mit denselben Seeds, Plänen, Rauschmodellen und Profilen, die vier
+vollen Ketten des Ablaufs, die drei Regelpfadfälle und je eine Stichprobe der statischen Varianten (Prüfung ihrer
+Unbetroffenheit). Der Befund nennt dazu je X′ die Referenzklammer und die S2-Bilanz des Ablaufstands.
 """
 import json
 import os
@@ -42,6 +47,13 @@ VARIANTEN = dict(historisch=vf.HISTORISCH, k_konsistent=vf.STATISCH, wiederholun
 N_SEEDS = 10
 N_START = 2                 # Startsatz je System und Variante (vorab festgelegt): Laufzeit, Hochrechnung
 FORTSETZUNG_BIS = 300       # technische Unterbrechung nach so vielen Phase-1-Versuchen (echte Fortsetzung)
+# Korrekturrunde vom 18.10.2026 (Anweisung „PR #23: drei bestätigte Fehler korrigieren“)
+KORREKTUR_AUFTRAG = os.path.join(neulauf.WURZEL, DOKU_REL, 'auftrag_korrektur_2026-10-18.json')
+KORREKTUR_AUSGABE = '/tmp/pcmms-ablauf-vergleich-20261018'
+KORREKTUR_VORHER = '9a1cd2f294f34897de807a53bb106a0d767007dd'    # Kopf von PR #23 vor der Korrekturrunde
+KORREKTUR_GRENZEN = dict(kampagnen=40, voll=4, prozesse=4)
+BISHER = dict(ausfuehrungen=105, davon=dict(auftragsliste=101, diagnose=1, gegenproben=2, abnahmelauf=1),
+              voll=7, rechenstand='13f2a20')
 
 Fehler = neulauf.AuftragFehler
 
@@ -71,8 +83,25 @@ def _regelzahl(pr, idx):
     return out
 
 
-def befund(tab, tb, dl, bericht=None):
-    """Schlanker Befund einer Kampagne aus Tabelle, Teil B und Datenlage (keine Wahrheit, kein Bootstrap)."""
+def x_strich_bezuege(a):
+    """Je X′ eines Ablaufs: Fall (Versuch mit dem G1-Verstoß), Referenzklammer mit den Rollen der Bezüge, ob sie die
+    vorgesehene Klammer R₂/R₃ ist, Gültigkeit, G1, S1-Prüfbarkeit und Halt."""
+    vs = {x['kopf']['versuch']['id']: x['kopf']['versuch'] for x in a.z['versuche']}
+    out = []
+    for v in vs.values():
+        if v['rolle'] != 'X_strich':
+            continue
+        kl = v.get('g1_klammer') or {}
+        out.append(dict(versuch=v['id'], fall=v.get('bezug_versuch'), konfiguration=v['konfiguration'], block=v['block'],
+                        vor=kl.get('vor'), vor_rolle=(vs.get(kl.get('vor')) or {}).get('rolle'), nach=kl.get('nach'),
+                        nach_rolle=(vs.get(kl.get('nach')) or {}).get('rolle'), vorgesehen=kl.get('vorgesehen'),
+                        gueltig=bool(v['gueltig']), g1=v.get('g1'), s1=v.get('s1'), halt=v.get('halt')))
+    return out
+
+
+def befund(tab, tb, dl, bericht=None, a=None):
+    """Schlanker Befund einer Kampagne aus Tabelle, Teil B und Datenlage (keine Wahrheit, kein Bootstrap); mit dem
+    Ablauf a dazu die Referenzbezüge der X′ und die S2-Bilanz des Ablaufstands."""
     n2 = tb['nr2']
     t1, pr = dl['t1'], dl['pr']
     art = t1.spalte('laufart', object)
@@ -104,6 +133,8 @@ def befund(tab, tb, dl, bericht=None):
                              auswahl_status={k: v['status'] for k, v in bericht['auswahl'].items()
                                              if v['status'] != 'gueltig'},
                              halte=bericht['halte'])
+        if a is not None:
+            out['ablauf'].update(x_strich=x_strich_bezuege(a), s2_bilanz=(tab.meta.get('ablauf') or {}).get('s2_bilanz'))
     return out
 
 
@@ -146,7 +177,7 @@ def kampagne(auftrag):
                 r = kette.kampagne_ablauf(sid, STUFE, plan, seed, prof, w8, n_min, v, ebene=ebene,
                                           verzeichnis=None if tmp is None else os.path.join(tmp, 'z'))
             tab, tb, kal = kette.ablauf_tabelle(r), r['teil_b'], r['kalibrierung']
-            ber = r['ablauf'].bericht()
+            ber, abl = r['ablauf'].bericht(), r['ablauf']
         else:
             if ebene != 'H':
                 raise Fehler('statischer Ablauf nur auf Ebene H')
@@ -154,10 +185,10 @@ def kampagne(auftrag):
             _, _, kal = kette.kalibrierung_erzeugen(szenarien.KATALOG[sid], m, seed)
             tb, _ = kette.teil_b_erzeugen(tab, kal, m, prof, w8 or kette.testvorgabe_werkzeug8(), seed, n_min,
                                           kennung=formate.synth_kennung('KETTE', sid, STUFE, seed), verfahren=v)
-            ber = None
+            ber = abl = None
         dl = auswertung.datenlage(tab, tb, prof)
         out = dict(szenario=sid, variante=variante, index=int(idx), seed=int(seed), art=art, ebene=ebene,
-                   verfahren=v.kennung(), **befund(tab, tb, dl, ber))
+                   verfahren=v.kennung(), **befund(tab, tb, dl, ber, abl))
         out.update(zus)
         if art == 'voll':
             erg = auswertung.auswerten(tab, kal, tb, prof)
@@ -305,6 +336,56 @@ def auftragsliste():
         jobs.append(_job(f'regelpfad-{sid}', sid, 'wiederholungen', [0], seedregel='zusatz'))
     jobs.append(_job('fortsetzung-N01-V1G60h', 'N01-V1G60h', 'wiederholungen', [0], 'fortsetzung'))
     return jobs
+
+
+def auftragsliste_korrektur():
+    """Korrekturrunde vom 18.10.2026: die 30 Vergleichskampagnen der Variante „wiederholungen“ (dieselben Seeds), die
+    vier vollen Ketten des Ablaufs (Ebene H und Z/Stufe 1), die drei Regelpfadfälle und je eine Stichprobe der
+    statischen Varianten (A4, Seed 0) zur Prüfung ihrer Unbetroffenheit. Die Fortsetzung wird nicht als Katalogkampagne
+    wiederholt; die Fortsetzung des korrigierten Ablaufs prüfen die Regressionstests."""
+    jobs = [_job(f'korr-{sid}-wiederholungen', sid, 'wiederholungen', range(N_SEEDS)) for sid in SYSTEME]
+    jobs.append(_job('korr-voll-N01-A4-wiederholungen', 'N01-A4', 'wiederholungen', [0], 'voll', werkzeug8='A4'))
+    jobs.append(_job('korr-voll-A04-R4-wiederholungen', 'A04-R4', 'wiederholungen', [0], 'voll', seedregel='zusatz',
+                     werkzeug8='A4'))
+    jobs.append(_job('korr-voll-Z-N01-A4-wiederholungen', 'N01-A4', 'wiederholungen', [0], 'voll', 'Z',
+                     werkzeug8='A4'))
+    jobs.append(_job('korr-voll-Z-A04-R4-wiederholungen', 'A04-R4', 'wiederholungen', [0], 'voll', 'Z', 'zusatz',
+                     werkzeug8='A4'))
+    for sid in ('S06-saettigung', 'H-fehlend', 'S02-kontrolllauf'):
+        jobs.append(_job(f'korr-regelpfad-{sid}', sid, 'wiederholungen', [0], seedregel='zusatz'))
+    for v in ('historisch', 'k_konsistent'):
+        jobs.append(_job(f'korr-statisch-N01-A4-{v}', 'N01-A4', v, [0]))
+    return jobs
+
+
+def vorbereiten_korrektur(doku=None):
+    """Schreibt die Auftragsliste der Korrekturrunde (einmalig, vor den Rechnungen zu committen): gemeinsame
+    Einstellungen und Werkzeug 8 aus der ursprünglichen Auftragsliste, nur mit eigenem Checkpoint-Verzeichnis."""
+    doku = doku or os.path.join(neulauf.WURZEL, DOKU_REL)
+    alt = lies_auftrag(AUFTRAG)
+    jobs = auftragsliste_korrektur()
+    alt_ids = {j['id']: j for j in alt['auftraege']}
+    for j in jobs:                                         # dieselben Seeds wie die ursprünglichen Aufträge
+        basis = [x for x in alt_ids.values() if x['szenario'] == j['szenario'] and x['variante'] == j['variante']
+                 and x['art'] == j['art'] and x['ebene'] == j['ebene'] and x['seedregel'] == j['seedregel']]
+        alt_seeds = {i: s for x in basis for i, s in zip(x['indizes'], x['seeds'])}
+        if any(alt_seeds.get(i) != s for i, s in zip(j['indizes'], j['seeds'])):
+            raise Fehler(f'{j["id"]}: Seeds weichen von der ursprünglichen Auftragsliste ab')
+    n_kampagnen = sum(len(j['seeds']) * (2 if j['art'] == 'fortsetzung' else 1) for j in jobs)
+    n_voll = sum(len(j['seeds']) for j in jobs if j['art'] == 'voll')
+    a = dict(anweisung='ANWEISUNG_Claude_Code_PR23_Korrekturen_2026-10-18', vorher=KORREKTUR_VORHER,
+             ausgangsstand=alt['ausgangsstand'], gemeinsam=dict(alt['gemeinsam'], ausgabe=KORREKTUR_AUSGABE),
+             werkzeug8=alt['werkzeug8'],
+             budget=dict(kampagnenausfuehrungen=n_kampagnen, davon_voll=n_voll,
+                         grenze_kampagnen=KORREKTUR_GRENZEN['kampagnen'], grenze_voll=KORREKTUR_GRENZEN['voll'],
+                         grenze_prozesse=KORREKTUR_GRENZEN['prozesse'], bisher=BISHER,
+                         zaehlung='zusätzliche Korrekturrunde; je (System, Seed, Variante) eine Ausführung'),
+             auftraege=jobs)
+    if n_kampagnen > KORREKTUR_GRENZEN['kampagnen'] or n_voll > KORREKTUR_GRENZEN['voll']:
+        raise Fehler(f'Budget der Korrekturrunde überschritten: {n_kampagnen} Kampagnen, {n_voll} volle')
+    with open(os.path.join(doku, os.path.basename(KORREKTUR_AUFTRAG)), 'w', encoding='utf-8') as f:
+        f.write(formate.json_text(a))
+    return a
 
 
 def vorbereiten(doku=None):

@@ -287,6 +287,8 @@ def _harness(ap, argv):
     v.add_argument('--startsatz', action='store_true', help='nur der Startsatz (Seeds 0 und 1 je System und Variante)')
     v.add_argument('--prozesse', type=int, default=None, help='Arbeitsprozesse je Auftrag (Vorgabe: Auftragsliste)')
     v.add_argument('--ausgabe', default=None, help='Checkpoint-Verzeichnis (Vorgabe: Auftragsliste)')
+    v.add_argument('--korrektur', action='store_true', help='Korrekturrunde vom 18.10.2026 (eigene Auftragsliste '
+                                                            'auftrag_korrektur_2026-10-18.json und Checkpoints)')
     gv = v.add_mutually_exclusive_group()
     gv.add_argument('--vorbereiten', action='store_true', help='Auftragsliste schreiben (vor den Rechnungen committen)')
     gv.add_argument('--bericht', action='store_true', help='Ergebnisse und Berichtstabellen aus den Checkpoints')
@@ -346,13 +348,13 @@ def _harness(ap, argv):
             return 0 if r['gleich'] else 1
     elif a.was == 'ablauf-vergleich':
         from .harness import ablauf_vergleich as av
-        pfad = a.auftrag or av.AUFTRAG
+        pfad = a.auftrag or (av.KORREKTUR_AUFTRAG if a.korrektur else av.AUFTRAG)
         if a.vorbereiten:
-            x = av.vorbereiten()
-            print(f'Auftragsliste {av.AUFTRAG}: {len(x["auftraege"])} Aufträge, {x["budget"]}')
+            x = av.vorbereiten_korrektur() if a.korrektur else av.vorbereiten()
+            print(f'Auftragsliste {pfad}: {len(x["auftraege"])} Aufträge, {x["budget"]}')
         elif a.bericht:
             from .harness import ablauf_vergleich_bericht as avb
-            print(_json(avb.schreiben(pfad, a.ausgabe)))
+            print(_json(avb.schreiben_korrektur(pfad, a.ausgabe) if a.korrektur else avb.schreiben(pfad, a.ausgabe)))
         else:
             nur = a.nur.split(',') if a.nur else None
             if a.startsatz:
