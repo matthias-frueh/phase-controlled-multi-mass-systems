@@ -358,6 +358,14 @@ def test_x_strich_mit_r2_und_r3_ohne_vorpruefung():
     j = next(k for k, h in enumerate(t.koepfe) if h['versuch']['id'] == x['id'])
     ka, kb = pr['g1_klammer']
     assert [t.koepfe[ka[j]]['versuch']['rolle'], t.koepfe[kb[j]]['versuch']['rolle']] == ['R2', 'R3']
+    # Befund des Vergleichstreibers: Bezüge und die Stelle, an der ablauf-1 ein R₁ eingeschoben hätte
+    from pcmms_auswertung.harness import ablauf_vergleich
+    xb, = ablauf_vergleich.x_strich_bezuege(a)
+    assert (xb['vor_rolle'], xb['nach_rolle'], xb['vorgesehen'], xb['fall']) == ('R2', 'R3', True, x['bezug_versuch'])
+    assert xb['abweichung_r0_N'] == pytest.approx(0.0105, abs=1e-12) and xb['vorpruefung_ablauf_1'] is True
+    xg, = ablauf_vergleich.x_strich_bezuege(lauf(lambda s, v: dict(dN=0.05) if s['konfiguration']['id'] == 'S102'
+                                                 and v['nummer'] == 0 and s['block'] == 1 else None))
+    assert xg['abweichung_r0_N'] == pytest.approx(0.0, abs=1e-12) and xg['vorpruefung_ablauf_1'] is False
 
 
 def test_x_strich_verletzend_s1_erst_nach_r3():

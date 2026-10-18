@@ -75,4 +75,5 @@ def test_schlanker_befund_je_variante(variante, k):
     assert b['auswertbar']['von'] == 21 and ('ablauf' in b) == (variante == 'wiederholungen')
     if variante == 'wiederholungen':                                    # Referenzbezüge der X′, S2-Bilanz
         assert all(x['vor_rolle'] and x['vorgesehen'] in (True, False) for x in b['ablauf']['x_strich'])
-        assert b['ablauf']['s2_bilanz']['beendet'] is False
+        assert all(isinstance(x['vorpruefung_ablauf_1'], bool) for x in b['ablauf']['x_strich'] if x['vor'])
+        assert b['ablauf']['s2_bilanz']['beendet'] is False and b['ablauf']['s2_waehrend_halt'] == 0

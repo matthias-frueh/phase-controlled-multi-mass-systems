@@ -85,18 +85,30 @@ def _regelzahl(pr, idx):
 
 def x_strich_bezuege(a):
     """Je X′ eines Ablaufs: Fall (Versuch mit dem G1-Verstoß), Referenzklammer mit den Rollen der Bezüge, ob sie die
-    vorgesehene Klammer R₂/R₃ ist, Gültigkeit, G1, S1-Prüfbarkeit und Halt."""
+    vorgesehene Klammer R₂/R₃ ist, Gültigkeit, G1, S1-Prüfbarkeit und Halt. Dazu |⟨N⟩_X′ − ⟨N⟩_R₀| und ob die
+    Vorprüfung von ablauf-1 hier ein R₁ eingeschoben hätte (> ε_ctrl): Bis zum ersten solchen X′ verläuft ablauf-1 mit
+    denselben Daten gleich, danach anders (Vorher/Nachher)."""
     vs = {x['kopf']['versuch']['id']: x['kopf']['versuch'] for x in a.z['versuche']}
     out = []
     for v in vs.values():
         if v['rolle'] != 'X_strich':
             continue
         kl = v.get('g1_klammer') or {}
+        i, r0 = int(v['id'][1:]), v.get('r0')
+        d = None if r0 is None else float(abs(a._wert(i, 'N_mittel') - a._wert(r0, 'N_mittel')))
         out.append(dict(versuch=v['id'], fall=v.get('bezug_versuch'), konfiguration=v['konfiguration'], block=v['block'],
                         vor=kl.get('vor'), vor_rolle=(vs.get(kl.get('vor')) or {}).get('rolle'), nach=kl.get('nach'),
                         nach_rolle=(vs.get(kl.get('nach')) or {}).get('rolle'), vorgesehen=kl.get('vorgesehen'),
-                        gueltig=bool(v['gueltig']), g1=v.get('g1'), s1=v.get('s1'), halt=v.get('halt')))
+                        gueltig=bool(v['gueltig']), g1=v.get('g1'), s1=v.get('s1'), halt=v.get('halt'),
+                        abweichung_r0_N=d, vorpruefung_ablauf_1=None if d is None else bool(
+                            gueltigkeit.g1_verletzt(d, a._wert(i, 'N_mittel'), a.sw.eps_ctrl))))
     return out
+
+
+def s2_waehrend_halt(a):
+    """Zahl der S2, die während eines anderen Halts auftraten (unter ablauf-1 online nicht gezählt)."""
+    return sum(1 for x in a.z['versuche'] if any('während eines anderen Halts' in t or 'während des Halts' in t
+                                                  for t in x['kopf']['versuch']['entscheidung']))
 
 
 def befund(tab, tb, dl, bericht=None, a=None):
@@ -134,7 +146,8 @@ def befund(tab, tb, dl, bericht=None, a=None):
                                              if v['status'] != 'gueltig'},
                              halte=bericht['halte'])
         if a is not None:
-            out['ablauf'].update(x_strich=x_strich_bezuege(a), s2_bilanz=(tab.meta.get('ablauf') or {}).get('s2_bilanz'))
+            out['ablauf'].update(x_strich=x_strich_bezuege(a), s2_bilanz=(tab.meta.get('ablauf') or {}).get('s2_bilanz'),
+                                 s2_waehrend_halt=s2_waehrend_halt(a))
     return out
 
 
