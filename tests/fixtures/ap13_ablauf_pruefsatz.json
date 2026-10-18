@@ -1,6 +1,6 @@
 {
  "inhalt": {
-  "ablauf_version": "ablauf-2",
+  "ablauf_version": "ablauf-3",
   "beschreibung": "Prüfsatz des zustandsbehafteten Phase-1-Ablaufs (getrennt vom Software-Prüfsatz)",
   "faelle": {
    "I01-amplitude/L1/7/zustand": {
@@ -224,7 +224,7 @@
    "sha256": "5b2c92e04b52513b95ddc66d4772b93836d4b8175ad6dee1346b5e07e8d154f6"
   },
   "rundung_stellen": 12,
-  "sha256_gesamt": "44b727a213c701c53ae24e4c7d7a735a9ccfd0d5e427bd46aabf4340390c7991",
+  "sha256_gesamt": "181ac5a76c4cc2be89fc87862e2c489e481248485b262baeb9d797def87d3859",
   "umgebung": {
    "numpy": "2.5.3",
    "python": "3.13.16",
@@ -232,7 +232,7 @@
   },
   "verfahren": {
    "ablauf": "zustand",
-   "ablauf_version": "ablauf-2",
+   "ablauf_version": "ablauf-3",
    "bindung": "plan",
    "optionen": {
     "aufwaermen": true,
@@ -244,7 +244,7 @@
  },
  "kopf": {
   "code_version": {
-   "git": "305c7b7649d618cf1a4d9c737e54e93bb7958cdf",
+   "git": "377fc26955955107df25642315a670636c7afbd0",
    "paket": "0.1.0"
   },
   "datenart": "synthetisch",
