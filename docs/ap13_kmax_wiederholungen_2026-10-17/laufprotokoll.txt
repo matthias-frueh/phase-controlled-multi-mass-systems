@@ -220,3 +220,28 @@ Vorher/Nachher: 34 von 37 neu gerechneten Ablaufkampagnen in allen verglichenen 
 Benennung verschieden (V1-G0 Kampagnen 2 und 7: Haltgrund, drei Plätze „fehlt: spät erkannt“ → „fehlt: Halt“;
 S02-kontrolllauf: Halttext). Kein X′ mit R₁ unter ablauf-1 (größtes |Δ⟨N⟩|/ε_ctrl gegen R₂: 0,956, V1-G0 Kampagne 7,
 V00364). Volle Ketten: alle Entscheidungen bitgleich.
+
+-- 5f. Zweiter Aufruf nach dem Commit von Bericht und Ergebnissen (Stand f27e709): Übernahme, keine neue Ausführung
+[10:37:33] korr-N01-A4-wiederholungen: Checkpoint passt (Code c8c0a3657098c52f46469417aa64db0c994ee3ff, 12.4 s) – übernommen
+[10:37:33] korr-N01-V1G0-wiederholungen: Checkpoint passt (Code c8c0a3657098c52f46469417aa64db0c994ee3ff, 11.9 s) – übernommen
+[10:37:33] korr-N01-V1G60h-wiederholungen: Checkpoint passt (Code c8c0a3657098c52f46469417aa64db0c994ee3ff, 11.2 s) – übernommen
+[10:37:33] korr-voll-N01-A4-wiederholungen: Checkpoint passt (Code c8c0a3657098c52f46469417aa64db0c994ee3ff, 8.0 s) – übernommen
+[10:37:33] korr-voll-A04-R4-wiederholungen: Checkpoint passt (Code c8c0a3657098c52f46469417aa64db0c994ee3ff, 7.7 s) – übernommen
+[10:37:33] korr-voll-Z-N01-A4-wiederholungen: Checkpoint passt (Code c8c0a3657098c52f46469417aa64db0c994ee3ff, 289.7 s) – übernommen
+[10:37:33] korr-voll-Z-A04-R4-wiederholungen: Checkpoint passt (Code c8c0a3657098c52f46469417aa64db0c994ee3ff, 292.0 s) – übernommen
+[10:37:33] korr-regelpfad-S06-saettigung: Checkpoint passt (Code c8c0a3657098c52f46469417aa64db0c994ee3ff, 3.1 s) – übernommen
+[10:37:33] korr-regelpfad-H-fehlend: Checkpoint passt (Code c8c0a3657098c52f46469417aa64db0c994ee3ff, 4.0 s) – übernommen
+[10:37:33] korr-regelpfad-S02-kontrolllauf: Checkpoint passt (Code c8c0a3657098c52f46469417aa64db0c994ee3ff, 3.1 s) – übernommen
+[10:37:33] korr-statisch-N01-A4-historisch: Checkpoint passt (Code c8c0a3657098c52f46469417aa64db0c994ee3ff, 3.1 s) – übernommen
+[10:37:33] korr-statisch-N01-A4-k_konsistent: Checkpoint passt (Code c8c0a3657098c52f46469417aa64db0c994ee3ff, 2.9 s) – übernommen
+Status: alle 12 Aufträge „übernommen“, exit=0.
+
+-- 5g. Endabnahme am finalen Codestand f27e709 (danach nur Text in diesem Protokoll), Exit-Codes geprüft, Zeiten monoton
+python3 -m pytest tests -q -p no:cacheprovider: 409 passed, 8 skipped in 478.33s, exit=0
+(cd data && python3 ../code/linear_solver.py --validate): Ergebnis: bestanden, exit=0, 3,1 s
+python3 rechnungen/neuheit/bibcheck.py: ohne Fehler, exit=0, 0,4 s
+python3 code/pcmms_auswertung harness pruefsatz --pruefen tests/fixtures/ap13_pruefsatz: gleich, exit=0, 20,6 s
+python3 code/pcmms_auswertung harness ablauf-pruefsatz --pruefen tests/fixtures/ap13_ablauf_pruefsatz: gleich, exit=0, 14,1 s
+Geschützte Dateien gegen main 2ab6d28 unverändert: data/, rechnungen/, docs/ap11_ap12_ap13_pruefstand.json,
+tests/fixtures/ap13_pruefsatz.json, docs/ap13_neulaeufe_2026-10-17/, docs/e3b_g4_diagnose_2026-10-17/,
+Präregistrierung, regeln.py (Regelprofile), Regel- und Kriterienmatrix, PDFs.
