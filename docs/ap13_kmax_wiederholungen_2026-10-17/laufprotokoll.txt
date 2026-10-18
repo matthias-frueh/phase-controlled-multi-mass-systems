@@ -1,0 +1,114 @@
+Laufprotokoll der begrenzten Entwicklungsrechnung (Auftrag vom 17.10.2026), Rechenstand 13f2a20, 4 Prozesse, je 1 BLAS-Thread.
+Checkpoints: /tmp/pcmms-ablauf-vergleich-20261017/ (nicht im Repository).
+
+== 1. Startsatz (ablauf_vergleich.ausfuehren mit den Aufträgen *-start, wie 'harness ablauf-vergleich --startsatz')
+Start 2026-10-17T18:28:58
+[18:28:59] N01-A4-historisch-start: 2 Kampagnen …
+[18:29:03] N01-A4-historisch-start fertig (3.3 s, 4.5 Kernsekunden)
+[18:29:03] N01-A4-k_konsistent-start: 2 Kampagnen …
+[18:29:06] N01-A4-k_konsistent-start fertig (3.6 s, 4.8 Kernsekunden)
+[18:29:06] N01-A4-wiederholungen-start: 2 Kampagnen …
+[18:29:10] N01-A4-wiederholungen-start fertig (4.2 s, 5.8 Kernsekunden)
+[18:29:10] N01-V1G0-historisch-start: 2 Kampagnen …
+[18:29:14] N01-V1G0-historisch-start fertig (3.2 s, 4.1 Kernsekunden)
+[18:29:14] N01-V1G0-k_konsistent-start: 2 Kampagnen …
+[18:29:17] N01-V1G0-k_konsistent-start fertig (3.0 s, 4.0 Kernsekunden)
+[18:29:17] N01-V1G0-wiederholungen-start: 2 Kampagnen …
+[18:29:21] N01-V1G0-wiederholungen-start fertig (4.7 s, 6.1 Kernsekunden)
+[18:29:21] N01-V1G60h-historisch-start: 2 Kampagnen …
+[18:29:24] N01-V1G60h-historisch-start fertig (3.0 s, 3.7 Kernsekunden)
+[18:29:24] N01-V1G60h-k_konsistent-start: 2 Kampagnen …
+[18:29:27] N01-V1G60h-k_konsistent-start fertig (2.9 s, 3.5 Kernsekunden)
+[18:29:27] N01-V1G60h-wiederholungen-start: 2 Kampagnen …
+[18:29:31] N01-V1G60h-wiederholungen-start fertig (3.8 s, 5.2 Kernsekunden)
+{'N01-A4-historisch-start': 'gerechnet', 'N01-A4-k_konsistent-start': 'gerechnet', 'N01-A4-wiederholungen-start': 'gerechnet', 'N01-V1G0-historisch-start': 'gerechnet', 'N01-V1G0-k_konsistent-start': 'gerechnet', 'N01-V1G0-wiederholungen-start': 'gerechnet', 'N01-V1G60h-historisch-start': 'gerechnet', 'N01-V1G60h-k_konsistent-start': 'gerechnet', 'N01-V1G60h-wiederholungen-start': 'gerechnet'}
+Wandzeit (monoton) 32.7 s
+exit=0
+
+== 2. Alle Aufträge: python3 code/pcmms_auswertung harness ablauf-vergleich
+Start 2026-10-17T18:30:45 monoton 5157.577574731
+[18:30:46] N01-A4-historisch-start: Checkpoint passt (Code 13f2a206f942696b68a3ad615333967a0cd9e76a, 3.3 s) – übernommen
+[18:30:46] N01-A4-k_konsistent-start: Checkpoint passt (Code 13f2a206f942696b68a3ad615333967a0cd9e76a, 3.6 s) – übernommen
+[18:30:46] N01-A4-wiederholungen-start: Checkpoint passt (Code 13f2a206f942696b68a3ad615333967a0cd9e76a, 4.2 s) – übernommen
+[18:30:46] N01-V1G0-historisch-start: Checkpoint passt (Code 13f2a206f942696b68a3ad615333967a0cd9e76a, 3.2 s) – übernommen
+[18:30:46] N01-V1G0-k_konsistent-start: Checkpoint passt (Code 13f2a206f942696b68a3ad615333967a0cd9e76a, 3.0 s) – übernommen
+[18:30:46] N01-V1G0-wiederholungen-start: Checkpoint passt (Code 13f2a206f942696b68a3ad615333967a0cd9e76a, 4.7 s) – übernommen
+[18:30:46] N01-V1G60h-historisch-start: Checkpoint passt (Code 13f2a206f942696b68a3ad615333967a0cd9e76a, 3.0 s) – übernommen
+[18:30:46] N01-V1G60h-k_konsistent-start: Checkpoint passt (Code 13f2a206f942696b68a3ad615333967a0cd9e76a, 2.9 s) – übernommen
+[18:30:46] N01-V1G60h-wiederholungen-start: Checkpoint passt (Code 13f2a206f942696b68a3ad615333967a0cd9e76a, 3.8 s) – übernommen
+[18:30:46] N01-A4-historisch-rest: 8 Kampagnen …
+[18:30:52] N01-A4-historisch-rest fertig (5.9 s, 17.8 Kernsekunden)
+[18:30:52] N01-A4-k_konsistent-rest: 8 Kampagnen …
+[18:30:57] N01-A4-k_konsistent-rest fertig (5.5 s, 16.7 Kernsekunden)
+[18:30:57] N01-A4-wiederholungen-rest: 8 Kampagnen …
+[18:31:04] N01-A4-wiederholungen-rest fertig (6.6 s, 21.2 Kernsekunden)
+[18:31:04] N01-V1G0-historisch-rest: 8 Kampagnen …
+[18:31:09] N01-V1G0-historisch-rest fertig (5.3 s, 15.3 Kernsekunden)
+[18:31:09] N01-V1G0-k_konsistent-rest: 8 Kampagnen …
+[18:31:15] N01-V1G0-k_konsistent-rest fertig (5.2 s, 15.7 Kernsekunden)
+[18:31:15] N01-V1G0-wiederholungen-rest: 8 Kampagnen …
+[18:31:22] N01-V1G0-wiederholungen-rest fertig (7.0 s, 21.8 Kernsekunden)
+[18:31:22] N01-V1G60h-historisch-rest: 8 Kampagnen …
+[18:31:27] N01-V1G60h-historisch-rest fertig (5.1 s, 15.1 Kernsekunden)
+[18:31:27] N01-V1G60h-k_konsistent-rest: 8 Kampagnen …
+[18:31:32] N01-V1G60h-k_konsistent-rest fertig (4.9 s, 14.9 Kernsekunden)
+[18:31:32] N01-V1G60h-wiederholungen-rest: 8 Kampagnen …
+[18:31:37] N01-V1G60h-wiederholungen-rest fertig (5.8 s, 18.4 Kernsekunden)
+[18:31:37] voll-N01-A4-k_konsistent: 1 Kampagnen …
+[18:31:43] voll-N01-A4-k_konsistent fertig (5.2 s, 5.2 Kernsekunden)
+[18:31:43] voll-A04-R4-k_konsistent: 1 Kampagnen …
+[18:31:48] voll-A04-R4-k_konsistent fertig (4.9 s, 4.9 Kernsekunden)
+[18:31:48] voll-N01-A4-wiederholungen: 1 Kampagnen …
+[18:31:53] voll-N01-A4-wiederholungen fertig (5.7 s, 5.7 Kernsekunden)
+[18:31:53] voll-A04-R4-wiederholungen: 1 Kampagnen …
+[18:31:59] voll-A04-R4-wiederholungen fertig (5.6 s, 5.6 Kernsekunden)
+[18:31:59] voll-Z-N01-A4-wiederholungen: 1 Kampagnen …
+[18:35:54] voll-Z-N01-A4-wiederholungen fertig (234.8 s, 234.8 Kernsekunden)
+[18:35:54] voll-Z-A04-R4-wiederholungen: 1 Kampagnen …
+[18:39:47] voll-Z-A04-R4-wiederholungen fertig (233.6 s, 233.6 Kernsekunden)
+[18:39:47] regelpfad-S06-saettigung: 1 Kampagnen …
+[18:39:50] regelpfad-S06-saettigung fertig (2.5 s, 2.5 Kernsekunden)
+[18:39:50] regelpfad-H-fehlend: 1 Kampagnen …
+[18:39:53] regelpfad-H-fehlend fertig (2.6 s, 2.6 Kernsekunden)
+[18:39:53] regelpfad-S02-kontrolllauf: 1 Kampagnen …
+[18:39:55] regelpfad-S02-kontrolllauf fertig (2.0 s, 2.0 Kernsekunden)
+[18:39:55] fortsetzung-N01-V1G60h: 1 Kampagnen …
+[18:40:04] fortsetzung-N01-V1G60h fertig (9.0 s, 9.0 Kernsekunden)
+{
+ "N01-A4-historisch-rest": "gerechnet",
+ "N01-A4-historisch-start": "übernommen",
+ "N01-A4-k_konsistent-rest": "gerechnet",
+ "N01-A4-k_konsistent-start": "übernommen",
+ "N01-A4-wiederholungen-rest": "gerechnet",
+ "N01-A4-wiederholungen-start": "übernommen",
+ "N01-V1G0-historisch-rest": "gerechnet",
+ "N01-V1G0-historisch-start": "übernommen",
+ "N01-V1G0-k_konsistent-rest": "gerechnet",
+ "N01-V1G0-k_konsistent-start": "übernommen",
+ "N01-V1G0-wiederholungen-rest": "gerechnet",
+ "N01-V1G0-wiederholungen-start": "übernommen",
+ "N01-V1G60h-historisch-rest": "gerechnet",
+ "N01-V1G60h-historisch-start": "übernommen",
+ "N01-V1G60h-k_konsistent-rest": "gerechnet",
+ "N01-V1G60h-k_konsistent-start": "übernommen",
+ "N01-V1G60h-wiederholungen-rest": "gerechnet",
+ "N01-V1G60h-wiederholungen-start": "übernommen",
+ "fortsetzung-N01-V1G60h": "gerechnet",
+ "regelpfad-H-fehlend": "gerechnet",
+ "regelpfad-S02-kontrolllauf": "gerechnet",
+ "regelpfad-S06-saettigung": "gerechnet",
+ "voll-A04-R4-k_konsistent": "gerechnet",
+ "voll-A04-R4-wiederholungen": "gerechnet",
+ "voll-N01-A4-k_konsistent": "gerechnet",
+ "voll-N01-A4-wiederholungen": "gerechnet",
+ "voll-Z-A04-R4-wiederholungen": "gerechnet",
+ "voll-Z-N01-A4-wiederholungen": "gerechnet"
+}
+
+exit=0
+Ende 2026-10-17T18:40:04 monoton 5716.138666809
+
+== 3. Diagnosekampagne außerhalb der Auftragsliste (Ursache des S3-Halts im Regelpfad S06)
+kette.kampagne_ablauf('S06-saettigung', 'L1', Plan der Auftragsliste, Seed 1910311766019208858, Profil der Auftragsliste, Werkzeug 8 Testvorgabe, n_min 18, Verfahren zustand), ohne Stufe 2, 2,2 s:
+Status angehalten, Halt S3 bei V00178 (Block 6): Re_N2 von L1 in Kontrollsatz 7 (V00177) und in der sofortigen Wiederholung (V00178) über der Schwelle; beide gültig, ohne Ereignis.
+Übersteuerung (G5) nur in S120 Block 1 (V00009, am gezogenen Platz ersetzt) und im Einzelmodullauf L1 Nr. 2 der Phase 0 (S3-Bezug Modul 1: n0 = 18).
