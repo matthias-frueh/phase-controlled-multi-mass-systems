@@ -1,13 +1,13 @@
 {
  "inhalt": {
-  "ablauf_version": "ablauf-1",
+  "ablauf_version": "ablauf-2",
   "beschreibung": "Prüfsatz des zustandsbehafteten Phase-1-Ablaufs (getrennt vom Software-Prüfsatz)",
   "faelle": {
    "I01-amplitude/L1/7/zustand": {
     "hashes": {
      "daten": "e66de0abf168034fdbea90dad17cf650bbd0a6fca4a47a845b21f00eff2287c2",
      "entscheidungen": "3c37d746bb6acbfc9bee87ce6eff5e2851a58a82c4ee49f7dd7521d58df1eb95",
-     "koepfe": "40202f4c70d658bfb1d2059091b492e575cad313d76e0237890cadd668bed538",
+     "koepfe": "3dd3e187dead1789e14dd5fd1bdb253c9f070279d28cd92c0de7bc8c85161186",
      "schwellen": "8fae60eef666faf8b8a9e4217caa363a67268de03f06018b48ee7a1f762aed83",
      "ziehungen": "7294c4270a43d89bb4e0148e6cfb9a4cbb88c135f8166881442a5381ccef237c"
     },
@@ -50,7 +50,7 @@
     "hashes": {
      "daten": "21ad9f2ee900294c28b553ef97a38c2d57ef79d072dbdcf9d28789d900609646",
      "entscheidungen": "e2707b07a59bdf9416db20b177ca5a8d13a6252b797a5629b3dc747f5954c034",
-     "koepfe": "582353fabbb2d1bc962d4005b4cf16aeab0d84d6a6124dbb3c98833fbaedd0f7",
+     "koepfe": "c47c46377652ca1b841be74b744632e21de3796be90d6fbdf15990c6c0983d53",
      "schwellen": "8c70fcdc110de5ea1f9110ecd77b24b9baba4e5950fb593d08784338f0310948",
      "ziehungen": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
     },
@@ -85,7 +85,7 @@
     "hashes": {
      "daten": "bf361da17d0030931101ddbabb5f729975be334b0b0af8fb6d19805a6f824a74",
      "entscheidungen": "3191e3ff74abc4046a0c439acfb8befebb24cfd3e906d5e590b0c8488ad817af",
-     "koepfe": "37531ad6bb63e04af90fb8aeb3881bcb0f24fb0b6640e5cb35033f04e46b6dce",
+     "koepfe": "06c164f79b56a43b7b7591d4cca0782e5fdff442f128822df29327ef2df3b28b",
      "schwellen": "8c70fcdc110de5ea1f9110ecd77b24b9baba4e5950fb593d08784338f0310948",
      "ziehungen": "900c8fabcdee3a44bc5aaa19233a9c0502c67dae91d517c5b5dbe96842d315dd"
     },
@@ -126,8 +126,8 @@
    "S02-kontrolllauf/L1/7/zustand": {
     "hashes": {
      "daten": "544fed4e8727579257c24a486dd8e3cb5205e3dd417277c80a8bbbb7dfce905a",
-     "entscheidungen": "bbde5a0f436bfa93b62b8453ff4e9649cce9ba4e82a9498d8925712ac4004aea",
-     "koepfe": "caa4dfd468bb27dab4059e8c3ee5ef5254c224a037603fe91ab1b253ca718b38",
+     "entscheidungen": "14676fececb7e75043effe5c97ce0b6a328220481f27da8d4d96fffc1173b212",
+     "koepfe": "c2da176b52955a9e048efd162aa9786f13f62c77e007956fbc30256c16e04da2",
      "schwellen": "f73805b3765c825edbacc66e6be7d33d866e136756efdb66170a62fe12dc45de",
      "ziehungen": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
     },
@@ -164,7 +164,7 @@
     "hashes": {
      "daten": "79fec4c182032ca3f4e7fd5649ee5ad9082d91d4cceef813f93de89946028f90",
      "entscheidungen": "b3915d59f9d928cfb991b079c2fb8d3530918c312791eb90b21d3295bd04eb08",
-     "koepfe": "ebb5816e631800c95bc41e22eeae7dda77285e22ed01cc136b25eda26132f512",
+     "koepfe": "02683043f2e3cd8a41e55b212d995bb2dd3380168521c69f354a23425924c298",
      "schwellen": "cb4410a6d4880a6c4bcf9365221d7d9e147d8d0bf492d2b97d2ff3673ef3bf45",
      "ziehungen": "0d837a308d85e9b12ef377bb3194cb27ef68671540fa7ca2ea8ec1f736f9c4fe"
     },
@@ -224,7 +224,7 @@
    "sha256": "5b2c92e04b52513b95ddc66d4772b93836d4b8175ad6dee1346b5e07e8d154f6"
   },
   "rundung_stellen": 12,
-  "sha256_gesamt": "f33859d3605523d61f179946ea0aa35dfac6cca0237a0d5843c0a8b16acc95e2",
+  "sha256_gesamt": "44b727a213c701c53ae24e4c7d7a735a9ccfd0d5e427bd46aabf4340390c7991",
   "umgebung": {
    "numpy": "2.5.3",
    "python": "3.13.16",
@@ -232,7 +232,7 @@
   },
   "verfahren": {
    "ablauf": "zustand",
-   "ablauf_version": "ablauf-1",
+   "ablauf_version": "ablauf-2",
    "bindung": "plan",
    "optionen": {
     "aufwaermen": true,
@@ -244,7 +244,7 @@
  },
  "kopf": {
   "code_version": {
-   "git": "9e3bde82e19014b46efb7509266d155129df3d01+geändert",
+   "git": "305c7b7649d618cf1a4d9c737e54e93bb7958cdf",
    "paket": "0.1.0"
   },
   "datenart": "synthetisch",

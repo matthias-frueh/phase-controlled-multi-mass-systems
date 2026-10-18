@@ -1,0 +1,178 @@
+{
+ "alt": {
+  "ablauf_version": "ablauf-1",
+  "sha256_gesamt": "f33859d3605523d61f179946ea0aa35dfac6cca0237a0d5843c0a8b16acc95e2",
+  "verfahren": {
+   "ablauf": "zustand",
+   "ablauf_version": "ablauf-1",
+   "bindung": "plan",
+   "optionen": {
+    "aufwaermen": true,
+    "halt": true,
+    "wiederholungen": true
+   },
+   "version": "verfahren-1"
+  }
+ },
+ "alter_text": {
+  "Einzelzell-Liftoff im Kontrolllauf L2; ŷ¹ ungültig (§8.2)": "Einzelzell-Liftoff in L2; die Konfiguration bleibt in den Blöcken und ist von Tests ausgeschlossen"
+ },
+ "ergebnis": true,
+ "faelle": {
+  "I01-amplitude/L1/7/zustand": {
+   "daten_gleich": true,
+   "entscheidungen_gleich": true,
+   "entscheidungen_gleich_mit_altem_text": true,
+   "inhalt_gleich": true,
+   "inhaltliche_gegenprobe": [],
+   "koepfe_gleich": false,
+   "koepfe_gleich_ohne_neue_felder_mit_altem_text": true,
+   "neue_felder": {
+    "g1_klammer": 1,
+    "spaet_erkannt": 1
+   },
+   "s2_bilanz": {
+    "apparaturfehler": [],
+    "beendet": false,
+    "massgeblich": [],
+    "s2": [],
+    "widerspruch": []
+   },
+   "schwellen_gleich": true,
+   "x_strich": [
+    {
+     "gueltig": true,
+     "klammer": {
+      "grund": null,
+      "nach": "V00062",
+      "vor": "V00060",
+      "vorgesehen": true
+     },
+     "versuch": "V00061"
+    }
+   ],
+   "ziehungen_gleich": true
+  },
+  "N01-A4/L1/13/aus": {
+   "daten_gleich": true,
+   "entscheidungen_gleich": true,
+   "entscheidungen_gleich_mit_altem_text": true,
+   "inhalt_gleich": true,
+   "inhaltliche_gegenprobe": [],
+   "koepfe_gleich": false,
+   "koepfe_gleich_ohne_neue_felder_mit_altem_text": true,
+   "neue_felder": {
+    "spaet_erkannt": 6
+   },
+   "s2_bilanz": {
+    "apparaturfehler": [],
+    "beendet": false,
+    "massgeblich": [],
+    "s2": [],
+    "widerspruch": []
+   },
+   "schwellen_gleich": true,
+   "x_strich": [],
+   "ziehungen_gleich": true
+  },
+  "N01-A4/L1/13/zustand": {
+   "daten_gleich": true,
+   "entscheidungen_gleich": true,
+   "entscheidungen_gleich_mit_altem_text": true,
+   "inhalt_gleich": true,
+   "inhaltliche_gegenprobe": [],
+   "koepfe_gleich": false,
+   "koepfe_gleich_ohne_neue_felder_mit_altem_text": true,
+   "neue_felder": {
+    "g1_klammer": 1,
+    "spaet_erkannt": 2
+   },
+   "s2_bilanz": {
+    "apparaturfehler": [],
+    "beendet": false,
+    "massgeblich": [],
+    "s2": [],
+    "widerspruch": []
+   },
+   "schwellen_gleich": true,
+   "x_strich": [
+    {
+     "gueltig": true,
+     "klammer": {
+      "grund": null,
+      "nach": "V00108",
+      "vor": "V00106",
+      "vorgesehen": true
+     },
+     "versuch": "V00107"
+    }
+   ],
+   "ziehungen_gleich": true
+  },
+  "S02-kontrolllauf/L1/7/zustand": {
+   "daten_gleich": true,
+   "entscheidungen_gleich": false,
+   "entscheidungen_gleich_mit_altem_text": true,
+   "inhalt_gleich": true,
+   "inhaltliche_gegenprobe": [],
+   "koepfe_gleich": false,
+   "koepfe_gleich_ohne_neue_felder_mit_altem_text": true,
+   "neue_felder": {},
+   "s2_bilanz": {
+    "apparaturfehler": [],
+    "beendet": false,
+    "massgeblich": [
+     "V00032"
+    ],
+    "s2": [
+     "V00032"
+    ],
+    "widerspruch": []
+   },
+   "schwellen_gleich": true,
+   "x_strich": [],
+   "ziehungen_gleich": true
+  },
+  "S06-saettigung/L1/7/zustand": {
+   "daten_gleich": true,
+   "entscheidungen_gleich": true,
+   "entscheidungen_gleich_mit_altem_text": true,
+   "inhalt_gleich": true,
+   "inhaltliche_gegenprobe": [],
+   "koepfe_gleich": false,
+   "koepfe_gleich_ohne_neue_felder_mit_altem_text": true,
+   "neue_felder": {
+    "g1_klammer": 1
+   },
+   "s2_bilanz": {
+    "apparaturfehler": [],
+    "beendet": false,
+    "massgeblich": [],
+    "s2": [],
+    "widerspruch": []
+   },
+   "schwellen_gleich": true,
+   "x_strich": [
+    {
+     "gueltig": true,
+     "klammer": {
+      "grund": null,
+      "nach": "V00065",
+      "vor": "V00063",
+      "vorgesehen": true
+     },
+     "versuch": "V00064"
+    }
+   ],
+   "ziehungen_gleich": true
+  }
+ },
+ "neu": {
+  "ablauf_version": "ablauf-2"
+ },
+ "neue_felder": [
+  "g1_klammer",
+  "spaet_erkannt",
+  "s1"
+ ]
+}
