@@ -215,6 +215,8 @@ class LaufTabelle:
         return self.auswahl(np.argsort(self.spalte('position', int), kind='stable'))
 
     def schreiben(self, pfad, kennung, datenart='synthetisch', **weitere):
+        if 'ablauf' in self.meta and 'ablauf' not in weitere:            # Ablaufstand des zustandsbehafteten Ablaufs
+            weitere['ablauf'] = self.meta['ablauf']
         k = formate.kopf('zusammenfassungen', kennung, datenart, laeufe=self.koepfe, **weitere)
         return formate.schreibe(pfad, k, self.daten)
 
@@ -222,4 +224,6 @@ class LaufTabelle:
     def lesen(cls, pfad):
         k, _, felder = formate.lies(pfad, 'zusammenfassungen')
         meta = {x: k[x] for x in ('schema', 'schema_version', 'datenart', 'kennung')}
+        if 'ablauf' in k:
+            meta['ablauf'] = k['ablauf']
         return cls(k['laeufe'], felder, meta)

@@ -1,0 +1,7381 @@
+{
+ "abschaetzung": {
+  "annahmen": "untere Spanne: Laufzeiten dieser Rechnung (Ebene H, 24 Blöcke, B = 1000) mit linear auf B = 10 000 skaliertem Bootstrap-Anteil; obere Spanne: die im Softwaredokument (Abschnitt 5) gemessenen Kampagnen mit normativen Replikatzahlen (68–139 s, statisch) mit 5 % Zuschlag für die zusätzlichen Versuche; je System 1000 Kalibrier- und 1000 Prüfkampagnen (normative Zahl), ohne Wiederholung bei Poolen; Planungssimulation je Kandidat (n_min, n₀) und Paar (k, T_a) gleich teuer wie eine Kalibrierung; nicht gestartet",
+  "drei_referenzsysteme_kernstunden": [
+   55.1,
+   243.3
+  ],
+  "ebene_Z_je_10_kampagnen_kernstunden": 0.7,
+  "kalibrierung_je_system_kernstunden": [
+   18.4,
+   81.1
+  ],
+  "planungssimulation_je_kandidat_kernstunden": [
+   18.4,
+   81.1
+  ],
+  "sekunden_je_kampagne": {
+   "ebene_Z_voll": 234.2,
+   "schlank": 2.59,
+   "voll_B1000": 5.64,
+   "voll_B10000_linear": 33.1,
+   "voll_normativ_gemessen": {
+    "A4": 78.0,
+    "V1G0": 139.0,
+    "V1G60h": 68.0
+   },
+   "zuschlag_ablauf": 1.05
+  },
+  "zaehldiagnose_je_1000_kampagnen_kernstunden": 0.7
+ },
+ "abschaetzung_korrektur": {
+  "annahmen": "untere Spanne: Laufzeiten dieser Rechnung (Ebene H, 24 Blöcke, B = 1000) mit linear auf B = 10 000 skaliertem Bootstrap-Anteil; obere Spanne: die im Softwaredokument (Abschnitt 5) gemessenen Kampagnen mit normativen Replikatzahlen (68–139 s, statisch) mit 5 % Zuschlag für die zusätzlichen Versuche; je System 1000 Kalibrier- und 1000 Prüfkampagnen (normative Zahl), ohne Wiederholung bei Poolen; Planungssimulation je Kandidat (n_min, n₀) und Paar (k, T_a) gleich teuer wie eine Kalibrierung; nicht gestartet",
+  "drei_referenzsysteme_kernstunden": [
+   77.9,
+   243.3
+  ],
+  "ebene_Z_je_10_kampagnen_kernstunden": 0.8,
+  "kalibrierung_je_system_kernstunden": [
+   26.0,
+   81.1
+  ],
+  "planungssimulation_je_kandidat_kernstunden": [
+   26.0,
+   81.1
+  ],
+  "sekunden_je_kampagne": {
+   "ebene_Z_voll": 290.8,
+   "schlank": 3.54,
+   "voll_B1000": 7.86,
+   "voll_B10000_linear": 46.8,
+   "voll_normativ_gemessen": {
+    "A4": 78.0,
+    "V1G0": 139.0,
+    "V1G60h": 68.0
+   },
+   "zuschlag_ablauf": 1.05
+  },
+  "zaehldiagnose_je_1000_kampagnen_kernstunden": 1.0
+ },
+ "auftrag": {
+  "budget": {
+   "bisher": {
+    "ausfuehrungen": 105,
+    "davon": {
+     "abnahmelauf": 1,
+     "auftragsliste": 101,
+     "diagnose": 1,
+     "gegenproben": 2
+    },
+    "rechenstand": "13f2a20",
+    "voll": 7
+   },
+   "davon_voll": 4,
+   "grenze_kampagnen": 40,
+   "grenze_prozesse": 4,
+   "grenze_voll": 4,
+   "kampagnenausfuehrungen": 39,
+   "zaehlung": "zusätzliche Korrekturrunde; je (System, Seed, Variante) eine Ausführung"
+  },
+  "datei": "docs/ap13_kmax_wiederholungen_2026-10-17/auftrag_korrektur_2026-10-18.json",
+  "git_blob": "2f2bbce5ecf82ac7cd2b2bd0b693807203e662a0",
+  "urspruenglich": "docs/ap13_kmax_wiederholungen_2026-10-17/auftrag.json"
+ },
+ "checkpoints": {
+  "korr-N01-A4-wiederholungen": {
+   "dateien": {
+    "ablauf_korr-N01-A4-wiederholungen.json": "daca921e6ac715424b90fc392fedcdd4a47e78c319cd867ff183702a66f5e124"
+   },
+   "ende": "2026-10-18T07:19:29+00:00",
+   "git": "c8c0a3657098c52f46469417aa64db0c994ee3ff",
+   "kernsekunden": 37.9,
+   "laufzeit_s": 12.4,
+   "prozesse": 4,
+   "start": "2026-10-18T07:19:16+00:00"
+  },
+  "korr-N01-V1G0-wiederholungen": {
+   "dateien": {
+    "ablauf_korr-N01-V1G0-wiederholungen.json": "b4d3da73fe4d54307dc345cebcf10684874660c1c3df082bcbd16a27de8fbdbf"
+   },
+   "ende": "2026-10-18T07:19:41+00:00",
+   "git": "c8c0a3657098c52f46469417aa64db0c994ee3ff",
+   "kernsekunden": 35.4,
+   "laufzeit_s": 11.9,
+   "prozesse": 4,
+   "start": "2026-10-18T07:19:29+00:00"
+  },
+  "korr-N01-V1G60h-wiederholungen": {
+   "dateien": {
+    "ablauf_korr-N01-V1G60h-wiederholungen.json": "f9cd4300b987ba0bd969a1b6dfce1eb1aaceda5e0c9537ba6fe7a286ed4c61ba"
+   },
+   "ende": "2026-10-18T07:19:52+00:00",
+   "git": "c8c0a3657098c52f46469417aa64db0c994ee3ff",
+   "kernsekunden": 33.4,
+   "laufzeit_s": 11.2,
+   "prozesse": 4,
+   "start": "2026-10-18T07:19:41+00:00"
+  },
+  "korr-regelpfad-H-fehlend": {
+   "dateien": {
+    "ablauf_korr-regelpfad-H-fehlend.json": "9a928495da4005ed906907426aa3ba84a46d28560cd452585b155618bde71153"
+   },
+   "ende": "2026-10-18T07:29:56+00:00",
+   "git": "c8c0a3657098c52f46469417aa64db0c994ee3ff",
+   "kernsekunden": 4.0,
+   "laufzeit_s": 4.0,
+   "prozesse": 4,
+   "start": "2026-10-18T07:29:52+00:00"
+  },
+  "korr-regelpfad-S02-kontrolllauf": {
+   "dateien": {
+    "ablauf_korr-regelpfad-S02-kontrolllauf.json": "697f72dd2780943e9b614e32ac44779a47f26b8acf1f21494f7abed2cec8ec3c"
+   },
+   "ende": "2026-10-18T07:29:59+00:00",
+   "git": "c8c0a3657098c52f46469417aa64db0c994ee3ff",
+   "kernsekunden": 3.1,
+   "laufzeit_s": 3.1,
+   "prozesse": 4,
+   "start": "2026-10-18T07:29:56+00:00"
+  },
+  "korr-regelpfad-S06-saettigung": {
+   "dateien": {
+    "ablauf_korr-regelpfad-S06-saettigung.json": "cd386b178ddc3f7d3dd205d35c560803eca9c01240a851e94f4b896d2ef98517"
+   },
+   "ende": "2026-10-18T07:29:52+00:00",
+   "git": "c8c0a3657098c52f46469417aa64db0c994ee3ff",
+   "kernsekunden": 3.1,
+   "laufzeit_s": 3.1,
+   "prozesse": 4,
+   "start": "2026-10-18T07:29:49+00:00"
+  },
+  "korr-statisch-N01-A4-historisch": {
+   "dateien": {
+    "ablauf_korr-statisch-N01-A4-historisch.json": "809072f2576f672b42a814db4931afdf84152b2a81f76a6f54b7bc9009bd51f8"
+   },
+   "ende": "2026-10-18T07:30:03+00:00",
+   "git": "c8c0a3657098c52f46469417aa64db0c994ee3ff",
+   "kernsekunden": 3.1,
+   "laufzeit_s": 3.1,
+   "prozesse": 4,
+   "start": "2026-10-18T07:29:59+00:00"
+  },
+  "korr-statisch-N01-A4-k_konsistent": {
+   "dateien": {
+    "ablauf_korr-statisch-N01-A4-k_konsistent.json": "d48bbcd27edc8fe7b84683fa1f0e44e1825dedac64b8022ef0ec87e70782fb33"
+   },
+   "ende": "2026-10-18T07:30:05+00:00",
+   "git": "c8c0a3657098c52f46469417aa64db0c994ee3ff",
+   "kernsekunden": 2.9,
+   "laufzeit_s": 2.9,
+   "prozesse": 4,
+   "start": "2026-10-18T07:30:03+00:00"
+  },
+  "korr-voll-A04-R4-wiederholungen": {
+   "dateien": {
+    "ablauf_korr-voll-A04-R4-wiederholungen.json": "18a04c6fc44ac6004b3f7ba0eef4e7a99b82171ae3e3aeb5e1a48574f22aeb02"
+   },
+   "ende": "2026-10-18T07:20:08+00:00",
+   "git": "c8c0a3657098c52f46469417aa64db0c994ee3ff",
+   "kernsekunden": 7.7,
+   "laufzeit_s": 7.7,
+   "prozesse": 4,
+   "start": "2026-10-18T07:20:00+00:00"
+  },
+  "korr-voll-N01-A4-wiederholungen": {
+   "dateien": {
+    "ablauf_korr-voll-N01-A4-wiederholungen.json": "6d4484b9cbae0bf1b850d9f25cd6b117ae17f052fead4fe04caa3bf18ddb1ae5"
+   },
+   "ende": "2026-10-18T07:20:00+00:00",
+   "git": "c8c0a3657098c52f46469417aa64db0c994ee3ff",
+   "kernsekunden": 8.0,
+   "laufzeit_s": 8.0,
+   "prozesse": 4,
+   "start": "2026-10-18T07:19:52+00:00"
+  },
+  "korr-voll-Z-A04-R4-wiederholungen": {
+   "dateien": {
+    "ablauf_korr-voll-Z-A04-R4-wiederholungen.json": "845da724790414328499a8fa6fb91f61bc4fb3e2d817c8221414b1a99e591b0a"
+   },
+   "ende": "2026-10-18T07:29:49+00:00",
+   "git": "c8c0a3657098c52f46469417aa64db0c994ee3ff",
+   "kernsekunden": 291.9,
+   "laufzeit_s": 292.0,
+   "prozesse": 4,
+   "start": "2026-10-18T07:24:57+00:00"
+  },
+  "korr-voll-Z-N01-A4-wiederholungen": {
+   "dateien": {
+    "ablauf_korr-voll-Z-N01-A4-wiederholungen.json": "4a493599b573a8e8356ef351d459660b88c6644fc8871674cfc2f9c204798ce9"
+   },
+   "ende": "2026-10-18T07:24:57+00:00",
+   "git": "c8c0a3657098c52f46469417aa64db0c994ee3ff",
+   "kernsekunden": 289.7,
+   "laufzeit_s": 289.7,
+   "prozesse": 4,
+   "start": "2026-10-18T07:20:08+00:00"
+  }
+ },
+ "fortsetzung": [
+  {
+   "ablauf": {
+    "anlaesse": {
+     "R1: Vorprüfung": 3,
+     "aufwaermen: Aufwärmen (§6)": 3,
+     "s3_wiederholung: S3 F_min_rel, Im_N1, Re_N2, Re_N3": 1,
+     "s3_wiederholung: S3 F_min_rel, Re_N1, Im_N1, Im_N2, Re_N3": 1,
+     "s3_wiederholung: S3 Re_N1, Re_N3": 1,
+     "s3_wiederholung: S3 Re_N3": 1,
+     "wiederholung: ungültig (G4)": 9
+    },
+    "auswahl": {
+     "ersetzt": 7,
+     "fehlt: Grenze ausgeschöpft": 1,
+     "gueltig": 496
+    },
+    "auswahl_status": {
+     "S108|15": "ersetzt",
+     "S110|19": "ersetzt",
+     "S114|1": "ersetzt",
+     "S116|20": "ersetzt",
+     "S116|22": "fehlt: Grenze ausgeschöpft",
+     "S118|23": "ersetzt",
+     "S118|24": "ersetzt",
+     "S120|1": "ersetzt"
+    },
+    "grenzen": 1,
+    "grund": "alle Blöcke gemessen",
+    "halt": null,
+    "halte": [],
+    "laufzahl": {
+     "ausgefuehrt": 649,
+     "geplant": 630,
+     "geplant_ausgefuehrt": 630,
+     "zusaetzlich": 19
+    },
+    "luecken": [],
+    "messzeit_s": {
+     "geplant_laeufe": 10710.0,
+     "geplant_spanne": 10710.0,
+     "realisiert_laeufe": 11033.0,
+     "realisiert_spanne": 11033.0
+    },
+    "rollen": {
+     "R1": 3,
+     "aufwaermen": 4,
+     "konfiguration": 504,
+     "kontrolle": 100,
+     "referenz_block": 24,
+     "s3_wiederholung": 4,
+     "schlussreferenz": 1,
+     "wiederholung": 9
+    },
+    "s2": 0,
+    "status": "abgeschlossen",
+    "ziehungen": 9
+   },
+   "andere_optionen_zurueckgewiesen": true,
+   "art": "fortsetzung",
+   "auswertbar": {
+    "min_gueltig": 23,
+    "n": 21,
+    "n_gueltig": {
+     "S100": 24,
+     "S102": 24,
+     "S104": 24,
+     "S106": 24,
+     "S108": 24,
+     "S110": 24,
+     "S112": 24,
+     "S114": 24,
+     "S116": 23,
+     "S118": 24,
+     "S120": 24,
+     "S122": 24,
+     "S124": 24,
+     "S126": 24,
+     "S128": 24,
+     "S130": 24,
+     "S132": 24,
+     "S134": 24,
+     "S136": 24,
+     "S138": 24,
+     "S140": 24
+    },
+    "nicht": [],
+    "von": 21
+   },
+   "ebene": "H",
+   "gleich_ununterbrochen": true,
+   "herkunft": "Stand ablauf-1 (Rechenstand 13f2a20), nicht neu gerechnet",
+   "index": 0,
+   "kontrollen": {
+    "gueltig_je_modul": [
+     27,
+     25,
+     27
+    ],
+    "yhat1_gueltig": true
+   },
+   "laufzeit_s": 8.951,
+   "phase1": {
+    "S2": 0,
+    "S4": 0,
+    "konfig_g4": 10,
+    "konfig_laeufe": 513,
+    "konfig_regeln": {
+     "G4": 10
+    },
+    "konfig_ungueltig": 10,
+    "n_laeufe": 649,
+    "n_ungueltig": 10,
+    "regeln": {
+     "G4": 10
+    }
+   },
+   "seed": 795519448574340983,
+   "sperren": [],
+   "stand": {
+    "sha256": "7177b4f955184342abae024e2f6c840787351267c56f5b428045504149d98637",
+    "versuche": 300
+   },
+   "szenario": "N01-V1G60h",
+   "teil_b": {
+    "arbeitspunkt": "nicht geprüft",
+    "bindung": "plan",
+    "eps_ctrl": 0.00033512213913869816,
+    "k": 12,
+    "k_max": 12,
+    "k_pilotgroessen": 12,
+    "n": 24,
+    "n0_gueltig": [
+     19,
+     16,
+     19
+    ],
+    "n_min": 18,
+    "p_hat": 0.0,
+    "r_soll": 2,
+    "sigma_delta_K": {
+     "F": 0.00241199591515725,
+     "N": 0.0002548160825639165,
+     "n": 60
+    }
+   },
+   "variante": "wiederholungen",
+   "verfahren": {
+    "ablauf": "zustand",
+    "ablauf_version": "ablauf-1",
+    "bindung": "plan",
+    "optionen": {
+     "aufwaermen": true,
+     "halt": true,
+     "wiederholungen": true
+    },
+    "version": "verfahren-1"
+   },
+   "vollstaendig": true
+  }
+ ],
+ "gepaart": {
+  "N01-A4/ablauf": {
+   "delta_auswertbar": {
+    "max": 1.0,
+    "min": -21.0,
+    "mittel": -2.0,
+    "se": 2.1134489978863145
+   },
+   "delta_konfig_g4": {
+    "max": 4.0,
+    "min": -5.0,
+    "mittel": 0.5,
+    "se": 0.7637626158259733
+   },
+   "delta_min_gueltig": {
+    "max": 7.0,
+    "min": -13.0,
+    "mittel": 2.2,
+    "se": 1.7813852287849847
+   },
+   "delta_p_hat": {
+    "max": 0.0,
+    "min": 0.0,
+    "mittel": 0.0,
+    "se": 0.0
+   },
+   "gewonnen": 1,
+   "n": 10,
+   "nach": "wiederholungen",
+   "verloren": 1,
+   "vollstaendig_nachher": 9,
+   "vollstaendig_vorher": 9,
+   "von": "k_konsistent"
+  },
+  "N01-A4/k": {
+   "delta_auswertbar": {
+    "max": 0.0,
+    "min": -1.0,
+    "mittel": -0.1,
+    "se": 0.09999999999999999
+   },
+   "delta_konfig_g4": {
+    "max": 19.0,
+    "min": -27.0,
+    "mittel": 5.5,
+    "se": 5.057996968497839
+   },
+   "delta_min_gueltig": {
+    "max": 2.0,
+    "min": -4.0,
+    "mittel": -1.0,
+    "se": 0.5962847939999438
+   },
+   "delta_p_hat": {
+    "max": 0.03333333333333333,
+    "min": -0.06666666666666667,
+    "mittel": -0.006666666666666668,
+    "se": 0.009686442096757052
+   },
+   "gewonnen": 0,
+   "n": 10,
+   "nach": "k_konsistent",
+   "verloren": 1,
+   "vollstaendig_nachher": 9,
+   "vollstaendig_vorher": 10,
+   "von": "historisch"
+  },
+  "N01-V1G0/ablauf": {
+   "delta_auswertbar": {
+    "max": 1.0,
+    "min": -21.0,
+    "mittel": -3.9,
+    "se": 2.853652630109932
+   },
+   "delta_konfig_g4": {
+    "max": 7.0,
+    "min": -22.0,
+    "mittel": -1.2,
+    "se": 2.615339366124404
+   },
+   "delta_min_gueltig": {
+    "max": 8.0,
+    "min": -14.0,
+    "mittel": 2.0,
+    "se": 2.2410315085295482
+   },
+   "delta_p_hat": {
+    "max": 0.0,
+    "min": 0.0,
+    "mittel": 0.0,
+    "se": 0.0
+   },
+   "gewonnen": 3,
+   "n": 10,
+   "nach": "wiederholungen",
+   "verloren": 3,
+   "vollstaendig_nachher": 7,
+   "vollstaendig_vorher": 7,
+   "von": "k_konsistent"
+  },
+  "N01-V1G0/k": {
+   "delta_auswertbar": {
+    "max": 0.0,
+    "min": 0.0,
+    "mittel": 0.0,
+    "se": 0.0
+   },
+   "delta_konfig_g4": {
+    "max": 0.0,
+    "min": 0.0,
+    "mittel": 0.0,
+    "se": 0.0
+   },
+   "delta_min_gueltig": {
+    "max": 0.0,
+    "min": 0.0,
+    "mittel": 0.0,
+    "se": 0.0
+   },
+   "delta_p_hat": {
+    "max": 0.0,
+    "min": 0.0,
+    "mittel": 0.0,
+    "se": 0.0
+   },
+   "gewonnen": 0,
+   "n": 10,
+   "nach": "k_konsistent",
+   "verloren": 0,
+   "vollstaendig_nachher": 7,
+   "vollstaendig_vorher": 7,
+   "von": "historisch"
+  },
+  "N01-V1G60h/ablauf": {
+   "delta_auswertbar": {
+    "max": 1.0,
+    "min": -21.0,
+    "mittel": -1.9,
+    "se": 2.126290457842275
+   },
+   "delta_konfig_g4": {
+    "max": 8.0,
+    "min": -18.0,
+    "mittel": 0.7,
+    "se": 2.2063040991163883
+   },
+   "delta_min_gueltig": {
+    "max": 7.0,
+    "min": -11.0,
+    "mittel": 2.5,
+    "se": 1.600347184554374
+   },
+   "delta_p_hat": {
+    "max": 0.0,
+    "min": 0.0,
+    "mittel": 0.0,
+    "se": 0.0
+   },
+   "gewonnen": 2,
+   "n": 10,
+   "nach": "wiederholungen",
+   "verloren": 1,
+   "vollstaendig_nachher": 9,
+   "vollstaendig_vorher": 8,
+   "von": "k_konsistent"
+  },
+  "N01-V1G60h/k": {
+   "delta_auswertbar": {
+    "max": 0.0,
+    "min": 0.0,
+    "mittel": 0.0,
+    "se": 0.0
+   },
+   "delta_konfig_g4": {
+    "max": 0.0,
+    "min": 0.0,
+    "mittel": 0.0,
+    "se": 0.0
+   },
+   "delta_min_gueltig": {
+    "max": 0.0,
+    "min": 0.0,
+    "mittel": 0.0,
+    "se": 0.0
+   },
+   "delta_p_hat": {
+    "max": 0.0,
+    "min": 0.0,
+    "mittel": 0.0,
+    "se": 0.0
+   },
+   "gewonnen": 0,
+   "n": 10,
+   "nach": "k_konsistent",
+   "verloren": 0,
+   "vollstaendig_nachher": 8,
+   "vollstaendig_vorher": 8,
+   "von": "historisch"
+  }
+ },
+ "herkunft": {
+  "abschaetzung": "übernommen (Laufzeiten der Rechnung vom 17.10.2026, Rechenstand 13f2a20); mit den Laufzeiten der Korrekturrunde: abschaetzung_korrektur",
+  "fortsetzung": "Stand ablauf-1 (Rechenstand 13f2a20), nicht neu gerechnet",
+  "pr22": "übernommen vom Rechenstand 13f2a20 (unberührt, geprüft)",
+  "regelpfad": "neu gerechnet (Korrekturrunde, ablauf-2)",
+  "vergleich_historisch": "übernommen vom Rechenstand 13f2a20 (unberührt, geprüft)",
+  "vergleich_k_konsistent": "übernommen vom Rechenstand 13f2a20 (unberührt, geprüft)",
+  "vergleich_wiederholungen": "neu gerechnet (Korrekturrunde, ablauf-2)",
+  "voll_ablauf": "neu gerechnet (Korrekturrunde, ablauf-2)",
+  "voll_statisch": "übernommen vom Rechenstand 13f2a20 (unberührt, geprüft)"
+ },
+ "laufzeiten": {
+  "je_art": {
+   "fortsetzung/H/wiederholungen": {
+    "max": 8.951,
+    "min": 8.951,
+    "mittel": 8.951,
+    "se": null
+   },
+   "schlank/H/historisch": {
+    "max": 2.672,
+    "min": 1.554,
+    "mittel": 2.016966666666667,
+    "se": 0.04917460056773384
+   },
+   "schlank/H/k_konsistent": {
+    "max": 2.565,
+    "min": 1.625,
+    "mittel": 1.988333333333333,
+    "se": 0.036911336243693735
+   },
+   "schlank/H/wiederholungen": {
+    "max": 3.595,
+    "min": 1.823,
+    "mittel": 2.591666666666667,
+    "se": 0.06407573742269868
+   },
+   "voll/H/k_konsistent": {
+    "max": 5.231,
+    "min": 4.944,
+    "mittel": 5.0875,
+    "se": 0.14349999999999996
+   },
+   "voll/H/wiederholungen": {
+    "max": 5.687,
+    "min": 5.592,
+    "mittel": 5.6395,
+    "se": 0.04750000000000032
+   },
+   "voll/Z/wiederholungen": {
+    "max": 234.82,
+    "min": 233.571,
+    "mittel": 234.19549999999998,
+    "se": 0.6244999999999976
+   }
+  },
+  "kampagnen": 100,
+  "kernsekunden": 704.5,
+  "kernstunden": 0.196,
+  "voll": 6,
+  "wandzeit_s": 588.9
+ },
+ "laufzeiten_korrektur": {
+  "je_art": {
+   "schlank/H/historisch": {
+    "max": 3.129,
+    "min": 3.129,
+    "mittel": 3.129,
+    "se": null
+   },
+   "schlank/H/k_konsistent": {
+    "max": 2.852,
+    "min": 2.852,
+    "mittel": 2.852,
+    "se": null
+   },
+   "schlank/H/wiederholungen": {
+    "max": 4.391,
+    "min": 2.624,
+    "mittel": 3.5374848484848487,
+    "se": 0.08076694541699998
+   },
+   "voll/H/wiederholungen": {
+    "max": 7.99,
+    "min": 7.73,
+    "mittel": 7.86,
+    "se": 0.1299999999999999
+   },
+   "voll/Z/wiederholungen": {
+    "max": 291.94,
+    "min": 289.676,
+    "mittel": 290.808,
+    "se": 1.1320000000000048
+   }
+  },
+  "kampagnen": 39,
+  "kernsekunden": 720.2,
+  "kernstunden": 0.2,
+  "voll": 4,
+  "wandzeit_s": 649.1
+ },
+ "pr22": {
+  "gleich": 30,
+  "hinweis": "PR #22 speichert p̂ und σ_Δ,F gerundet (CSV); verglichen mit relativer Toleranz 10⁻⁵",
+  "n": 30,
+  "zeilen": [
+   {
+    "gleich": true,
+    "k_pilot": [
+     30,
+     30
+    ],
+    "kampagne": 0,
+    "p_hat": [
+     0.0666667,
+     0.06666666666666667
+    ],
+    "phase1_ungueltig": [
+     44,
+     44
+    ],
+    "seed_gleich": true,
+    "sigma_F_mN": [
+     1.34536,
+     1.3453634472190759
+    ],
+    "system": "N01-A4"
+   },
+   {
+    "gleich": true,
+    "k_pilot": [
+     30,
+     30
+    ],
+    "kampagne": 1,
+    "p_hat": [
+     0.0833333,
+     0.08333333333333333
+    ],
+    "phase1_ungueltig": [
+     39,
+     39
+    ],
+    "seed_gleich": true,
+    "sigma_F_mN": [
+     1.40354,
+     1.4035424691258633
+    ],
+    "system": "N01-A4"
+   },
+   {
+    "gleich": true,
+    "k_pilot": [
+     12,
+     12
+    ],
+    "kampagne": 0,
+    "p_hat": [
+     0.0,
+     0.0
+    ],
+    "phase1_ungueltig": [
+     28,
+     28
+    ],
+    "seed_gleich": true,
+    "sigma_F_mN": [
+     1.95697,
+     1.9569690222962592
+    ],
+    "system": "N01-V1G0"
+   },
+   {
+    "gleich": true,
+    "k_pilot": [
+     12,
+     12
+    ],
+    "kampagne": 1,
+    "p_hat": [
+     0.0166667,
+     0.016666666666666666
+    ],
+    "phase1_ungueltig": [
+     41,
+     41
+    ],
+    "seed_gleich": true,
+    "sigma_F_mN": [
+     1.7264,
+     1.7263987880797333
+    ],
+    "system": "N01-V1G0"
+   },
+   {
+    "gleich": true,
+    "k_pilot": [
+     12,
+     12
+    ],
+    "kampagne": 0,
+    "p_hat": [
+     0.0,
+     0.0
+    ],
+    "phase1_ungueltig": [
+     9,
+     9
+    ],
+    "seed_gleich": true,
+    "sigma_F_mN": [
+     2.412,
+     2.41199591515725
+    ],
+    "system": "N01-V1G60h"
+   },
+   {
+    "gleich": true,
+    "k_pilot": [
+     12,
+     12
+    ],
+    "kampagne": 1,
+    "p_hat": [
+     0.0166667,
+     0.016666666666666666
+    ],
+    "phase1_ungueltig": [
+     32,
+     32
+    ],
+    "seed_gleich": true,
+    "sigma_F_mN": [
+     1.64494,
+     1.6449382927894483
+    ],
+    "system": "N01-V1G60h"
+   },
+   {
+    "gleich": true,
+    "k_pilot": [
+     30,
+     30
+    ],
+    "kampagne": 2,
+    "p_hat": [
+     0.0166667,
+     0.016666666666666666
+    ],
+    "phase1_ungueltig": [
+     24,
+     24
+    ],
+    "seed_gleich": true,
+    "sigma_F_mN": [
+     1.63017,
+     1.6301665678441715
+    ],
+    "system": "N01-A4"
+   },
+   {
+    "gleich": true,
+    "k_pilot": [
+     30,
+     30
+    ],
+    "kampagne": 3,
+    "p_hat": [
+     0.0,
+     0.0
+    ],
+    "phase1_ungueltig": [
+     5,
+     5
+    ],
+    "seed_gleich": true,
+    "sigma_F_mN": [
+     2.12538,
+     2.1253815205415356
+    ],
+    "system": "N01-A4"
+   },
+   {
+    "gleich": true,
+    "k_pilot": [
+     30,
+     30
+    ],
+    "kampagne": 4,
+    "p_hat": [
+     0.0166667,
+     0.016666666666666666
+    ],
+    "phase1_ungueltig": [
+     28,
+     28
+    ],
+    "seed_gleich": true,
+    "sigma_F_mN": [
+     1.5272,
+     1.5271960605887505
+    ],
+    "system": "N01-A4"
+   },
+   {
+    "gleich": true,
+    "k_pilot": [
+     30,
+     30
+    ],
+    "kampagne": 5,
+    "p_hat": [
+     0.0166667,
+     0.016666666666666666
+    ],
+    "phase1_ungueltig": [
+     18,
+     18
+    ],
+    "seed_gleich": true,
+    "sigma_F_mN": [
+     2.16992,
+     2.169916132190045
+    ],
+    "system": "N01-A4"
+   },
+   {
+    "gleich": true,
+    "k_pilot": [
+     30,
+     30
+    ],
+    "kampagne": 6,
+    "p_hat": [
+     0.0,
+     0.0
+    ],
+    "phase1_ungueltig": [
+     13,
+     13
+    ],
+    "seed_gleich": true,
+    "sigma_F_mN": [
+     1.81969,
+     1.8196880878018173
+    ],
+    "system": "N01-A4"
+   },
+   {
+    "gleich": true,
+    "k_pilot": [
+     30,
+     30
+    ],
+    "kampagne": 7,
+    "p_hat": [
+     0.0,
+     0.0
+    ],
+    "phase1_ungueltig": [
+     11,
+     11
+    ],
+    "seed_gleich": true,
+    "sigma_F_mN": [
+     2.27031,
+     2.2703133637353456
+    ],
+    "system": "N01-A4"
+   },
+   {
+    "gleich": true,
+    "k_pilot": [
+     30,
+     30
+    ],
+    "kampagne": 8,
+    "p_hat": [
+     0.0,
+     0.0
+    ],
+    "phase1_ungueltig": [
+     7,
+     7
+    ],
+    "seed_gleich": true,
+    "sigma_F_mN": [
+     1.99959,
+     1.999593104557702
+    ],
+    "system": "N01-A4"
+   },
+   {
+    "gleich": true,
+    "k_pilot": [
+     30,
+     30
+    ],
+    "kampagne": 9,
+    "p_hat": [
+     0.0,
+     0.0
+    ],
+    "phase1_ungueltig": [
+     9,
+     9
+    ],
+    "seed_gleich": true,
+    "sigma_F_mN": [
+     2.10768,
+     2.1076841284932466
+    ],
+    "system": "N01-A4"
+   },
+   {
+    "gleich": true,
+    "k_pilot": [
+     12,
+     12
+    ],
+    "kampagne": 2,
+    "p_hat": [
+     0.0,
+     0.0
+    ],
+    "phase1_ungueltig": [
+     50,
+     50
+    ],
+    "seed_gleich": true,
+    "sigma_F_mN": [
+     2.08406,
+     2.0840591438373006
+    ],
+    "system": "N01-V1G0"
+   },
+   {
+    "gleich": true,
+    "k_pilot": [
+     12,
+     12
+    ],
+    "kampagne": 3,
+    "p_hat": [
+     0.0,
+     0.0
+    ],
+    "phase1_ungueltig": [
+     19,
+     19
+    ],
+    "seed_gleich": true,
+    "sigma_F_mN": [
+     1.83691,
+     1.8369109021428216
+    ],
+    "system": "N01-V1G0"
+   },
+   {
+    "gleich": true,
+    "k_pilot": [
+     12,
+     12
+    ],
+    "kampagne": 4,
+    "p_hat": [
+     0.0333333,
+     0.03333333333333333
+    ],
+    "phase1_ungueltig": [
+     43,
+     43
+    ],
+    "seed_gleich": true,
+    "sigma_F_mN": [
+     1.53805,
+     1.538052742731295
+    ],
+    "system": "N01-V1G0"
+   },
+   {
+    "gleich": true,
+    "k_pilot": [
+     12,
+     12
+    ],
+    "kampagne": 5,
+    "p_hat": [
+     0.0,
+     0.0
+    ],
+    "phase1_ungueltig": [
+     19,
+     19
+    ],
+    "seed_gleich": true,
+    "sigma_F_mN": [
+     2.31065,
+     2.3106544904546578
+    ],
+    "system": "N01-V1G0"
+   },
+   {
+    "gleich": true,
+    "k_pilot": [
+     12,
+     12
+    ],
+    "kampagne": 6,
+    "p_hat": [
+     0.0166667,
+     0.016666666666666666
+    ],
+    "phase1_ungueltig": [
+     26,
+     26
+    ],
+    "seed_gleich": true,
+    "sigma_F_mN": [
+     2.02537,
+     2.025370072887069
+    ],
+    "system": "N01-V1G0"
+   },
+   {
+    "gleich": true,
+    "k_pilot": [
+     12,
+     12
+    ],
+    "kampagne": 7,
+    "p_hat": [
+     0.0333333,
+     0.03333333333333333
+    ],
+    "phase1_ungueltig": [
+     32,
+     32
+    ],
+    "seed_gleich": true,
+    "sigma_F_mN": [
+     2.1823,
+     2.1822989659439824
+    ],
+    "system": "N01-V1G0"
+   },
+   {
+    "gleich": true,
+    "k_pilot": [
+     12,
+     12
+    ],
+    "kampagne": 8,
+    "p_hat": [
+     0.0666667,
+     0.06666666666666667
+    ],
+    "phase1_ungueltig": [
+     47,
+     47
+    ],
+    "seed_gleich": true,
+    "sigma_F_mN": [
+     1.62163,
+     1.6216301311480057
+    ],
+    "system": "N01-V1G0"
+   },
+   {
+    "gleich": true,
+    "k_pilot": [
+     12,
+     12
+    ],
+    "kampagne": 9,
+    "p_hat": [
+     0.0,
+     0.0
+    ],
+    "phase1_ungueltig": [
+     31,
+     31
+    ],
+    "seed_gleich": true,
+    "sigma_F_mN": [
+     1.84297,
+     1.8429737185982222
+    ],
+    "system": "N01-V1G0"
+   },
+   {
+    "gleich": true,
+    "k_pilot": [
+     12,
+     12
+    ],
+    "kampagne": 2,
+    "p_hat": [
+     0.05,
+     0.05
+    ],
+    "phase1_ungueltig": [
+     34,
+     34
+    ],
+    "seed_gleich": true,
+    "sigma_F_mN": [
+     1.74119,
+     1.7411851842010873
+    ],
+    "system": "N01-V1G60h"
+   },
+   {
+    "gleich": true,
+    "k_pilot": [
+     12,
+     12
+    ],
+    "kampagne": 3,
+    "p_hat": [
+     0.0,
+     0.0
+    ],
+    "phase1_ungueltig": [
+     20,
+     20
+    ],
+    "seed_gleich": true,
+    "sigma_F_mN": [
+     2.10619,
+     2.106188709459511
+    ],
+    "system": "N01-V1G60h"
+   },
+   {
+    "gleich": true,
+    "k_pilot": [
+     12,
+     12
+    ],
+    "kampagne": 4,
+    "p_hat": [
+     0.0,
+     0.0
+    ],
+    "phase1_ungueltig": [
+     16,
+     16
+    ],
+    "seed_gleich": true,
+    "sigma_F_mN": [
+     2.05788,
+     2.0578760232099844
+    ],
+    "system": "N01-V1G60h"
+   },
+   {
+    "gleich": true,
+    "k_pilot": [
+     12,
+     12
+    ],
+    "kampagne": 5,
+    "p_hat": [
+     0.0166667,
+     0.016666666666666666
+    ],
+    "phase1_ungueltig": [
+     8,
+     8
+    ],
+    "seed_gleich": true,
+    "sigma_F_mN": [
+     2.27348,
+     2.2734776720573917
+    ],
+    "system": "N01-V1G60h"
+   },
+   {
+    "gleich": true,
+    "k_pilot": [
+     12,
+     12
+    ],
+    "kampagne": 6,
+    "p_hat": [
+     0.0,
+     0.0
+    ],
+    "phase1_ungueltig": [
+     19,
+     19
+    ],
+    "seed_gleich": true,
+    "sigma_F_mN": [
+     2.03214,
+     2.0321406728074
+    ],
+    "system": "N01-V1G60h"
+   },
+   {
+    "gleich": true,
+    "k_pilot": [
+     12,
+     12
+    ],
+    "kampagne": 7,
+    "p_hat": [
+     0.0,
+     0.0
+    ],
+    "phase1_ungueltig": [
+     29,
+     29
+    ],
+    "seed_gleich": true,
+    "sigma_F_mN": [
+     1.86607,
+     1.8660726660682427
+    ],
+    "system": "N01-V1G60h"
+   },
+   {
+    "gleich": true,
+    "k_pilot": [
+     12,
+     12
+    ],
+    "kampagne": 8,
+    "p_hat": [
+     0.0333333,
+     0.03333333333333333
+    ],
+    "phase1_ungueltig": [
+     34,
+     34
+    ],
+    "seed_gleich": true,
+    "sigma_F_mN": [
+     1.65168,
+     1.6516762396803757
+    ],
+    "system": "N01-V1G60h"
+   },
+   {
+    "gleich": true,
+    "k_pilot": [
+     12,
+     12
+    ],
+    "kampagne": 9,
+    "p_hat": [
+     0.0,
+     0.0
+    ],
+    "phase1_ungueltig": [
+     38,
+     38
+    ],
+    "seed_gleich": true,
+    "sigma_F_mN": [
+     1.78384,
+     1.7838384102998082
+    ],
+    "system": "N01-V1G60h"
+   }
+  ]
+ },
+ "rechenumfang": {
+  "bisher": {
+   "ausfuehrungen": 105,
+   "davon": {
+    "abnahmelauf": 1,
+    "auftragsliste": 101,
+    "diagnose": 1,
+    "gegenproben": 2
+   },
+   "rechenstand": "13f2a20",
+   "voll": 7
+  },
+  "korrektur": {
+   "ausfuehrungen": 39,
+   "grenzen": {
+    "kampagnen": 40,
+    "voll": 4
+   },
+   "voll": 4
+  },
+  "zusammen": {
+   "ausfuehrungen": 144,
+   "voll": 11
+  }
+ },
+ "regelpfad": [
+  {
+   "ablauf": {
+    "anlaesse": {
+     "R1: Vorprüfung": 2,
+     "alarmwiederholung: Nullpunktalarm Summe": 2,
+     "aufwaermen: Aufwärmen (§6)": 3,
+     "kontrollwiederholung: ungültig (G4)": 4,
+     "s3_wiederholung: S3 F_min_rel, Im_N1, Re_N2": 1,
+     "s3_wiederholung: S3 Re_N2": 1,
+     "wiederholung: ungültig (G4)": 4,
+     "wiederholung: ungültig (G5)": 1
+    },
+    "auswahl": {
+     "ersetzt": 5,
+     "fehlt: spät erkannt": 1,
+     "gueltig": 120,
+     "nicht gemessen": 378
+    },
+    "auswahl_status": {
+     "S100|10": "nicht gemessen",
+     "S100|11": "nicht gemessen",
+     "S100|12": "nicht gemessen",
+     "S100|13": "nicht gemessen",
+     "S100|14": "nicht gemessen",
+     "S100|15": "nicht gemessen",
+     "S100|16": "nicht gemessen",
+     "S100|17": "nicht gemessen",
+     "S100|18": "nicht gemessen",
+     "S100|19": "nicht gemessen",
+     "S100|20": "nicht gemessen",
+     "S100|21": "nicht gemessen",
+     "S100|22": "nicht gemessen",
+     "S100|23": "nicht gemessen",
+     "S100|24": "nicht gemessen",
+     "S100|7": "nicht gemessen",
+     "S100|8": "nicht gemessen",
+     "S100|9": "nicht gemessen",
+     "S102|10": "nicht gemessen",
+     "S102|11": "nicht gemessen",
+     "S102|12": "nicht gemessen",
+     "S102|13": "nicht gemessen",
+     "S102|14": "nicht gemessen",
+     "S102|15": "nicht gemessen",
+     "S102|16": "nicht gemessen",
+     "S102|17": "nicht gemessen",
+     "S102|18": "nicht gemessen",
+     "S102|19": "nicht gemessen",
+     "S102|20": "nicht gemessen",
+     "S102|21": "nicht gemessen",
+     "S102|22": "nicht gemessen",
+     "S102|23": "nicht gemessen",
+     "S102|24": "nicht gemessen",
+     "S102|7": "nicht gemessen",
+     "S102|8": "nicht gemessen",
+     "S102|9": "nicht gemessen",
+     "S104|10": "nicht gemessen",
+     "S104|11": "nicht gemessen",
+     "S104|12": "nicht gemessen",
+     "S104|13": "nicht gemessen",
+     "S104|14": "nicht gemessen",
+     "S104|15": "nicht gemessen",
+     "S104|16": "nicht gemessen",
+     "S104|17": "nicht gemessen",
+     "S104|18": "nicht gemessen",
+     "S104|19": "nicht gemessen",
+     "S104|20": "nicht gemessen",
+     "S104|21": "nicht gemessen",
+     "S104|22": "nicht gemessen",
+     "S104|23": "nicht gemessen",
+     "S104|24": "nicht gemessen",
+     "S104|7": "nicht gemessen",
+     "S104|8": "nicht gemessen",
+     "S104|9": "nicht gemessen",
+     "S106|10": "nicht gemessen",
+     "S106|11": "nicht gemessen",
+     "S106|12": "nicht gemessen",
+     "S106|13": "nicht gemessen",
+     "S106|14": "nicht gemessen",
+     "S106|15": "nicht gemessen",
+     "S106|16": "nicht gemessen",
+     "S106|17": "nicht gemessen",
+     "S106|18": "nicht gemessen",
+     "S106|19": "nicht gemessen",
+     "S106|20": "nicht gemessen",
+     "S106|21": "nicht gemessen",
+     "S106|22": "nicht gemessen",
+     "S106|23": "nicht gemessen",
+     "S106|24": "nicht gemessen",
+     "S106|7": "nicht gemessen",
+     "S106|8": "nicht gemessen",
+     "S106|9": "nicht gemessen",
+     "S108|10": "nicht gemessen",
+     "S108|11": "nicht gemessen",
+     "S108|12": "nicht gemessen",
+     "S108|13": "nicht gemessen",
+     "S108|14": "nicht gemessen",
+     "S108|15": "nicht gemessen",
+     "S108|16": "nicht gemessen",
+     "S108|17": "nicht gemessen",
+     "S108|18": "nicht gemessen",
+     "S108|19": "nicht gemessen",
+     "S108|20": "nicht gemessen",
+     "S108|21": "nicht gemessen",
+     "S108|22": "nicht gemessen",
+     "S108|23": "nicht gemessen",
+     "S108|24": "nicht gemessen",
+     "S108|7": "nicht gemessen",
+     "S108|8": "nicht gemessen",
+     "S108|9": "nicht gemessen",
+     "S110|10": "nicht gemessen",
+     "S110|11": "nicht gemessen",
+     "S110|12": "nicht gemessen",
+     "S110|13": "nicht gemessen",
+     "S110|14": "nicht gemessen",
+     "S110|15": "nicht gemessen",
+     "S110|16": "nicht gemessen",
+     "S110|17": "nicht gemessen",
+     "S110|18": "nicht gemessen",
+     "S110|19": "nicht gemessen",
+     "S110|20": "nicht gemessen",
+     "S110|21": "nicht gemessen",
+     "S110|22": "nicht gemessen",
+     "S110|23": "nicht gemessen",
+     "S110|24": "nicht gemessen",
+     "S110|4": "ersetzt",
+     "S110|7": "nicht gemessen",
+     "S110|8": "nicht gemessen",
+     "S110|9": "nicht gemessen",
+     "S112|1": "ersetzt",
+     "S112|10": "nicht gemessen",
+     "S112|11": "nicht gemessen",
+     "S112|12": "nicht gemessen",
+     "S112|13": "nicht gemessen",
+     "S112|14": "nicht gemessen",
+     "S112|15": "nicht gemessen",
+     "S112|16": "nicht gemessen",
+     "S112|17": "nicht gemessen",
+     "S112|18": "nicht gemessen",
+     "S112|19": "nicht gemessen",
+     "S112|20": "nicht gemessen",
+     "S112|21": "nicht gemessen",
+     "S112|22": "nicht gemessen",
+     "S112|23": "nicht gemessen",
+     "S112|24": "nicht gemessen",
+     "S112|6": "fehlt: spät erkannt",
+     "S112|7": "nicht gemessen",
+     "S112|8": "nicht gemessen",
+     "S112|9": "nicht gemessen",
+     "S114|10": "nicht gemessen",
+     "S114|11": "nicht gemessen",
+     "S114|12": "nicht gemessen",
+     "S114|13": "nicht gemessen",
+     "S114|14": "nicht gemessen",
+     "S114|15": "nicht gemessen",
+     "S114|16": "nicht gemessen",
+     "S114|17": "nicht gemessen",
+     "S114|18": "nicht gemessen",
+     "S114|19": "nicht gemessen",
+     "S114|20": "nicht gemessen",
+     "S114|21": "nicht gemessen",
+     "S114|22": "nicht gemessen",
+     "S114|23": "nicht gemessen",
+     "S114|24": "nicht gemessen",
+     "S114|7": "nicht gemessen",
+     "S114|8": "nicht gemessen",
+     "S114|9": "nicht gemessen",
+     "S116|1": "ersetzt",
+     "S116|10": "nicht gemessen",
+     "S116|11": "nicht gemessen",
+     "S116|12": "nicht gemessen",
+     "S116|13": "nicht gemessen",
+     "S116|14": "nicht gemessen",
+     "S116|15": "nicht gemessen",
+     "S116|16": "nicht gemessen",
+     "S116|17": "nicht gemessen",
+     "S116|18": "nicht gemessen",
+     "S116|19": "nicht gemessen",
+     "S116|20": "nicht gemessen",
+     "S116|21": "nicht gemessen",
+     "S116|22": "nicht gemessen",
+     "S116|23": "nicht gemessen",
+     "S116|24": "nicht gemessen",
+     "S116|7": "nicht gemessen",
+     "S116|8": "nicht gemessen",
+     "S116|9": "nicht gemessen",
+     "S118|10": "nicht gemessen",
+     "S118|11": "nicht gemessen",
+     "S118|12": "nicht gemessen",
+     "S118|13": "nicht gemessen",
+     "S118|14": "nicht gemessen",
+     "S118|15": "nicht gemessen",
+     "S118|16": "nicht gemessen",
+     "S118|17": "nicht gemessen",
+     "S118|18": "nicht gemessen",
+     "S118|19": "nicht gemessen",
+     "S118|20": "nicht gemessen",
+     "S118|21": "nicht gemessen",
+     "S118|22": "nicht gemessen",
+     "S118|23": "nicht gemessen",
+     "S118|24": "nicht gemessen",
+     "S118|7": "nicht gemessen",
+     "S118|8": "nicht gemessen",
+     "S118|9": "nicht gemessen",
+     "S120|1": "ersetzt",
+     "S120|10": "nicht gemessen",
+     "S120|11": "nicht gemessen",
+     "S120|12": "nicht gemessen",
+     "S120|13": "nicht gemessen",
+     "S120|14": "nicht gemessen",
+     "S120|15": "nicht gemessen",
+     "S120|16": "nicht gemessen",
+     "S120|17": "nicht gemessen",
+     "S120|18": "nicht gemessen",
+     "S120|19": "nicht gemessen",
+     "S120|20": "nicht gemessen",
+     "S120|21": "nicht gemessen",
+     "S120|22": "nicht gemessen",
+     "S120|23": "nicht gemessen",
+     "S120|24": "nicht gemessen",
+     "S120|7": "nicht gemessen",
+     "S120|8": "nicht gemessen",
+     "S120|9": "nicht gemessen",
+     "S122|10": "nicht gemessen",
+     "S122|11": "nicht gemessen",
+     "S122|12": "nicht gemessen",
+     "S122|13": "nicht gemessen",
+     "S122|14": "nicht gemessen",
+     "S122|15": "nicht gemessen",
+     "S122|16": "nicht gemessen",
+     "S122|17": "nicht gemessen",
+     "S122|18": "nicht gemessen",
+     "S122|19": "nicht gemessen",
+     "S122|20": "nicht gemessen",
+     "S122|21": "nicht gemessen",
+     "S122|22": "nicht gemessen",
+     "S122|23": "nicht gemessen",
+     "S122|24": "nicht gemessen",
+     "S122|7": "nicht gemessen",
+     "S122|8": "nicht gemessen",
+     "S122|9": "nicht gemessen",
+     "S124|10": "nicht gemessen",
+     "S124|11": "nicht gemessen",
+     "S124|12": "nicht gemessen",
+     "S124|13": "nicht gemessen",
+     "S124|14": "nicht gemessen",
+     "S124|15": "nicht gemessen",
+     "S124|16": "nicht gemessen",
+     "S124|17": "nicht gemessen",
+     "S124|18": "nicht gemessen",
+     "S124|19": "nicht gemessen",
+     "S124|20": "nicht gemessen",
+     "S124|21": "nicht gemessen",
+     "S124|22": "nicht gemessen",
+     "S124|23": "nicht gemessen",
+     "S124|24": "nicht gemessen",
+     "S124|7": "nicht gemessen",
+     "S124|8": "nicht gemessen",
+     "S124|9": "nicht gemessen",
+     "S126|10": "nicht gemessen",
+     "S126|11": "nicht gemessen",
+     "S126|12": "nicht gemessen",
+     "S126|13": "nicht gemessen",
+     "S126|14": "nicht gemessen",
+     "S126|15": "nicht gemessen",
+     "S126|16": "nicht gemessen",
+     "S126|17": "nicht gemessen",
+     "S126|18": "nicht gemessen",
+     "S126|19": "nicht gemessen",
+     "S126|20": "nicht gemessen",
+     "S126|21": "nicht gemessen",
+     "S126|22": "nicht gemessen",
+     "S126|23": "nicht gemessen",
+     "S126|24": "nicht gemessen",
+     "S126|7": "nicht gemessen",
+     "S126|8": "nicht gemessen",
+     "S126|9": "nicht gemessen",
+     "S128|10": "nicht gemessen",
+     "S128|11": "nicht gemessen",
+     "S128|12": "nicht gemessen",
+     "S128|13": "nicht gemessen",
+     "S128|14": "nicht gemessen",
+     "S128|15": "nicht gemessen",
+     "S128|16": "nicht gemessen",
+     "S128|17": "nicht gemessen",
+     "S128|18": "nicht gemessen",
+     "S128|19": "nicht gemessen",
+     "S128|20": "nicht gemessen",
+     "S128|21": "nicht gemessen",
+     "S128|22": "nicht gemessen",
+     "S128|23": "nicht gemessen",
+     "S128|24": "nicht gemessen",
+     "S128|7": "nicht gemessen",
+     "S128|8": "nicht gemessen",
+     "S128|9": "nicht gemessen",
+     "S130|10": "nicht gemessen",
+     "S130|11": "nicht gemessen",
+     "S130|12": "nicht gemessen",
+     "S130|13": "nicht gemessen",
+     "S130|14": "nicht gemessen",
+     "S130|15": "nicht gemessen",
+     "S130|16": "nicht gemessen",
+     "S130|17": "nicht gemessen",
+     "S130|18": "nicht gemessen",
+     "S130|19": "nicht gemessen",
+     "S130|20": "nicht gemessen",
+     "S130|21": "nicht gemessen",
+     "S130|22": "nicht gemessen",
+     "S130|23": "nicht gemessen",
+     "S130|24": "nicht gemessen",
+     "S130|7": "nicht gemessen",
+     "S130|8": "nicht gemessen",
+     "S130|9": "nicht gemessen",
+     "S132|10": "nicht gemessen",
+     "S132|11": "nicht gemessen",
+     "S132|12": "nicht gemessen",
+     "S132|13": "nicht gemessen",
+     "S132|14": "nicht gemessen",
+     "S132|15": "nicht gemessen",
+     "S132|16": "nicht gemessen",
+     "S132|17": "nicht gemessen",
+     "S132|18": "nicht gemessen",
+     "S132|19": "nicht gemessen",
+     "S132|20": "nicht gemessen",
+     "S132|21": "nicht gemessen",
+     "S132|22": "nicht gemessen",
+     "S132|23": "nicht gemessen",
+     "S132|24": "nicht gemessen",
+     "S132|7": "nicht gemessen",
+     "S132|8": "nicht gemessen",
+     "S132|9": "nicht gemessen",
+     "S134|10": "nicht gemessen",
+     "S134|11": "nicht gemessen",
+     "S134|12": "nicht gemessen",
+     "S134|13": "nicht gemessen",
+     "S134|14": "nicht gemessen",
+     "S134|15": "nicht gemessen",
+     "S134|16": "nicht gemessen",
+     "S134|17": "nicht gemessen",
+     "S134|18": "nicht gemessen",
+     "S134|19": "nicht gemessen",
+     "S134|20": "nicht gemessen",
+     "S134|21": "nicht gemessen",
+     "S134|22": "nicht gemessen",
+     "S134|23": "nicht gemessen",
+     "S134|24": "nicht gemessen",
+     "S134|7": "nicht gemessen",
+     "S134|8": "nicht gemessen",
+     "S134|9": "nicht gemessen",
+     "S136|10": "nicht gemessen",
+     "S136|11": "nicht gemessen",
+     "S136|12": "nicht gemessen",
+     "S136|13": "nicht gemessen",
+     "S136|14": "nicht gemessen",
+     "S136|15": "nicht gemessen",
+     "S136|16": "nicht gemessen",
+     "S136|17": "nicht gemessen",
+     "S136|18": "nicht gemessen",
+     "S136|19": "nicht gemessen",
+     "S136|20": "nicht gemessen",
+     "S136|21": "nicht gemessen",
+     "S136|22": "nicht gemessen",
+     "S136|23": "nicht gemessen",
+     "S136|24": "nicht gemessen",
+     "S136|7": "nicht gemessen",
+     "S136|8": "nicht gemessen",
+     "S136|9": "nicht gemessen",
+     "S138|1": "ersetzt",
+     "S138|10": "nicht gemessen",
+     "S138|11": "nicht gemessen",
+     "S138|12": "nicht gemessen",
+     "S138|13": "nicht gemessen",
+     "S138|14": "nicht gemessen",
+     "S138|15": "nicht gemessen",
+     "S138|16": "nicht gemessen",
+     "S138|17": "nicht gemessen",
+     "S138|18": "nicht gemessen",
+     "S138|19": "nicht gemessen",
+     "S138|20": "nicht gemessen",
+     "S138|21": "nicht gemessen",
+     "S138|22": "nicht gemessen",
+     "S138|23": "nicht gemessen",
+     "S138|24": "nicht gemessen",
+     "S138|7": "nicht gemessen",
+     "S138|8": "nicht gemessen",
+     "S138|9": "nicht gemessen",
+     "S140|10": "nicht gemessen",
+     "S140|11": "nicht gemessen",
+     "S140|12": "nicht gemessen",
+     "S140|13": "nicht gemessen",
+     "S140|14": "nicht gemessen",
+     "S140|15": "nicht gemessen",
+     "S140|16": "nicht gemessen",
+     "S140|17": "nicht gemessen",
+     "S140|18": "nicht gemessen",
+     "S140|19": "nicht gemessen",
+     "S140|20": "nicht gemessen",
+     "S140|21": "nicht gemessen",
+     "S140|22": "nicht gemessen",
+     "S140|23": "nicht gemessen",
+     "S140|24": "nicht gemessen",
+     "S140|7": "nicht gemessen",
+     "S140|8": "nicht gemessen",
+     "S140|9": "nicht gemessen"
+    },
+    "grenzen": 0,
+    "grund": "S3: Drift der Einzelmodulreferenz reproduziert (Re_N2)",
+    "halt": "S3",
+    "halte": [
+     {
+      "regel": "S3",
+      "versuch": "V00178"
+     }
+    ],
+    "laufzahl": {
+     "ausgefuehrt": 179,
+     "geplant": 630,
+     "geplant_ausgefuehrt": 161,
+     "zusaetzlich": 18
+    },
+    "luecken": [],
+    "messzeit_s": {
+     "geplant_laeufe": 10710.0,
+     "geplant_spanne": 10710.0,
+     "realisiert_laeufe": 3043.0,
+     "realisiert_spanne": 3043.0
+    },
+    "rollen": {
+     "R1": 2,
+     "alarmwiederholung": 2,
+     "aufwaermen": 4,
+     "konfiguration": 126,
+     "kontrolle": 28,
+     "kontrollwiederholung": 4,
+     "referenz_block": 6,
+     "s3_wiederholung": 2,
+     "wiederholung": 5
+    },
+    "s2": 0,
+    "s2_bilanz": {
+     "apparaturfehler": [],
+     "beendet": false,
+     "massgeblich": [],
+     "s2": [],
+     "widerspruch": []
+    },
+    "s2_waehrend_halt": 0,
+    "status": "angehalten",
+    "x_strich": [],
+    "ziehungen": 5
+   },
+   "art": "schlank",
+   "auswertbar": {
+    "min_gueltig": 5,
+    "n": 0,
+    "n_gueltig": {
+     "S100": 6,
+     "S102": 6,
+     "S104": 6,
+     "S106": 6,
+     "S108": 6,
+     "S110": 6,
+     "S112": 5,
+     "S114": 6,
+     "S116": 6,
+     "S118": 6,
+     "S120": 6,
+     "S122": 6,
+     "S124": 6,
+     "S126": 6,
+     "S128": 6,
+     "S130": 6,
+     "S132": 6,
+     "S134": 6,
+     "S136": 6,
+     "S138": 6,
+     "S140": 6
+    },
+    "nicht": [
+     "S100",
+     "S102",
+     "S104",
+     "S106",
+     "S108",
+     "S110",
+     "S112",
+     "S114",
+     "S116",
+     "S118",
+     "S120",
+     "S122",
+     "S124",
+     "S126",
+     "S128",
+     "S130",
+     "S132",
+     "S134",
+     "S136",
+     "S138",
+     "S140"
+    ],
+    "von": 21
+   },
+   "ebene": "H",
+   "index": 0,
+   "kontrollen": {
+    "gueltig_je_modul": [
+     9,
+     7,
+     7
+    ],
+    "yhat1_gueltig": true
+   },
+   "laufzeit_s": 3.117,
+   "phase1": {
+    "S2": 0,
+    "S4": 0,
+    "konfig_g4": 4,
+    "konfig_laeufe": 131,
+    "konfig_regeln": {
+     "G1": 1,
+     "G4": 4,
+     "G5": 1
+    },
+    "konfig_ungueltig": 6,
+    "n_laeufe": 179,
+    "n_ungueltig": 12,
+    "regeln": {
+     "G1": 3,
+     "G4": 8,
+     "G5": 1
+    }
+   },
+   "seed": 1910311766019208858,
+   "sperren": [
+    "Phase 1 angehalten: S3: Drift der Einzelmodulreferenz reproduziert (Re_N2) (keine abgeschlossene Kampagne)"
+   ],
+   "szenario": "S06-saettigung",
+   "teil_b": {
+    "arbeitspunkt": "nicht geprüft",
+    "bindung": "plan",
+    "eps_ctrl": 0.00028893314074201256,
+    "k": 9,
+    "k_max": 9,
+    "k_pilotgroessen": 30,
+    "n": 24,
+    "n0_gueltig": [
+     18,
+     19,
+     18
+    ],
+    "n_min": 18,
+    "p_hat": 0.016666666666666666,
+    "r_soll": 3,
+    "sigma_delta_K": {
+     "F": 0.002136824997469506,
+     "N": 0.00019626656010222126,
+     "n": 60
+    }
+   },
+   "variante": "wiederholungen",
+   "verfahren": {
+    "ablauf": "zustand",
+    "ablauf_version": "ablauf-2",
+    "bindung": "plan",
+    "optionen": {
+     "aufwaermen": true,
+     "halt": true,
+     "wiederholungen": true
+    },
+    "version": "verfahren-1"
+   },
+   "vollstaendig": false
+  },
+  {
+   "ablauf": {
+    "anlaesse": {
+     "R1: Vorprüfung": 6,
+     "alarmwiederholung: Nullpunktalarm Zelle 3": 1,
+     "aufwaermen: Aufwärmen (§6)": 1,
+     "kontrollwiederholung: Nullpunktalarm (Zelle 1)": 1,
+     "kontrollwiederholung: ungültig (G4)": 6,
+     "wiederholung: ungültig (G4)": 6,
+     "wiederholung: ungültig (G8)": 48
+    },
+    "auswahl": {
+     "ersetzt": 52,
+     "fehlt: spät erkannt": 1,
+     "gueltig": 451
+    },
+    "auswahl_status": {
+     "S112|4": "ersetzt",
+     "S114|19": "ersetzt",
+     "S114|3": "ersetzt",
+     "S116|22": "ersetzt",
+     "S118|1": "ersetzt",
+     "S118|10": "ersetzt",
+     "S118|11": "ersetzt",
+     "S118|12": "ersetzt",
+     "S118|13": "ersetzt",
+     "S118|14": "ersetzt",
+     "S118|15": "ersetzt",
+     "S118|16": "ersetzt",
+     "S118|17": "ersetzt",
+     "S118|18": "ersetzt",
+     "S118|19": "ersetzt",
+     "S118|2": "ersetzt",
+     "S118|20": "ersetzt",
+     "S118|21": "ersetzt",
+     "S118|22": "ersetzt",
+     "S118|23": "ersetzt",
+     "S118|24": "ersetzt",
+     "S118|3": "ersetzt",
+     "S118|4": "ersetzt",
+     "S118|5": "ersetzt",
+     "S118|6": "ersetzt",
+     "S118|7": "ersetzt",
+     "S118|8": "ersetzt",
+     "S118|9": "ersetzt",
+     "S126|13": "fehlt: spät erkannt",
+     "S140|1": "ersetzt",
+     "S140|10": "ersetzt",
+     "S140|11": "ersetzt",
+     "S140|12": "ersetzt",
+     "S140|13": "ersetzt",
+     "S140|14": "ersetzt",
+     "S140|15": "ersetzt",
+     "S140|16": "ersetzt",
+     "S140|17": "ersetzt",
+     "S140|18": "ersetzt",
+     "S140|19": "ersetzt",
+     "S140|2": "ersetzt",
+     "S140|20": "ersetzt",
+     "S140|21": "ersetzt",
+     "S140|22": "ersetzt",
+     "S140|23": "ersetzt",
+     "S140|24": "ersetzt",
+     "S140|3": "ersetzt",
+     "S140|4": "ersetzt",
+     "S140|5": "ersetzt",
+     "S140|6": "ersetzt",
+     "S140|7": "ersetzt",
+     "S140|8": "ersetzt",
+     "S140|9": "ersetzt"
+    },
+    "grenzen": 0,
+    "grund": "alle Blöcke gemessen",
+    "halt": null,
+    "halte": [],
+    "laufzahl": {
+     "ausgefuehrt": 699,
+     "geplant": 630,
+     "geplant_ausgefuehrt": 630,
+     "zusaetzlich": 69
+    },
+    "luecken": [],
+    "messzeit_s": {
+     "geplant_laeufe": 10710.0,
+     "geplant_spanne": 10710.0,
+     "realisiert_laeufe": 11883.0,
+     "realisiert_spanne": 11883.0
+    },
+    "rollen": {
+     "R1": 6,
+     "alarmwiederholung": 1,
+     "aufwaermen": 2,
+     "konfiguration": 504,
+     "kontrolle": 100,
+     "kontrollwiederholung": 7,
+     "referenz_block": 24,
+     "schlussreferenz": 1,
+     "wiederholung": 54
+    },
+    "s2": 0,
+    "s2_bilanz": {
+     "apparaturfehler": [],
+     "beendet": false,
+     "massgeblich": [],
+     "s2": [],
+     "widerspruch": []
+    },
+    "s2_waehrend_halt": 0,
+    "status": "abgeschlossen",
+    "x_strich": [],
+    "ziehungen": 54
+   },
+   "art": "schlank",
+   "auswertbar": {
+    "min_gueltig": 23,
+    "n": 21,
+    "n_gueltig": {
+     "S100": 24,
+     "S102": 24,
+     "S104": 24,
+     "S106": 24,
+     "S108": 24,
+     "S110": 24,
+     "S112": 24,
+     "S114": 24,
+     "S116": 24,
+     "S118": 24,
+     "S120": 24,
+     "S122": 24,
+     "S124": 24,
+     "S126": 23,
+     "S128": 24,
+     "S130": 24,
+     "S132": 24,
+     "S134": 24,
+     "S136": 24,
+     "S138": 24,
+     "S140": 24
+    },
+    "nicht": [],
+    "von": 21
+   },
+   "ebene": "H",
+   "index": 0,
+   "kontrollen": {
+    "gueltig_je_modul": [
+     24,
+     25,
+     25
+    ],
+    "yhat1_gueltig": true
+   },
+   "laufzeit_s": 3.95,
+   "phase1": {
+    "S2": 0,
+    "S4": 0,
+    "konfig_g4": 6,
+    "konfig_laeufe": 558,
+    "konfig_regeln": {
+     "G1": 1,
+     "G4": 6,
+     "G8": 48
+    },
+    "konfig_ungueltig": 55,
+    "n_laeufe": 699,
+    "n_ungueltig": 64,
+    "regeln": {
+     "G1": 4,
+     "G4": 12,
+     "G8": 48
+    }
+   },
+   "seed": 2265562330325795912,
+   "sperren": [],
+   "szenario": "H-fehlend",
+   "teil_b": {
+    "arbeitspunkt": "nicht geprüft",
+    "bindung": "plan",
+    "eps_ctrl": 0.00025588757692476957,
+    "k": 9,
+    "k_max": 9,
+    "k_pilotgroessen": 30,
+    "n": 24,
+    "n0_gueltig": [
+     18,
+     19,
+     20
+    ],
+    "n_min": 18,
+    "p_hat": 0.03333333333333333,
+    "r_soll": 3,
+    "sigma_delta_K": {
+     "F": 0.0020497951264441413,
+     "N": 0.00031587782760834394,
+     "n": 60
+    }
+   },
+   "variante": "wiederholungen",
+   "verfahren": {
+    "ablauf": "zustand",
+    "ablauf_version": "ablauf-2",
+    "bindung": "plan",
+    "optionen": {
+     "aufwaermen": true,
+     "halt": true,
+     "wiederholungen": true
+    },
+    "version": "verfahren-1"
+   },
+   "vollstaendig": true
+  },
+  {
+   "ablauf": {
+    "anlaesse": {
+     "aufwaermen: Aufwärmen (§6)": 3
+    },
+    "auswahl": {
+     "gueltig": 21,
+     "nicht gemessen": 483
+    },
+    "auswahl_status": {
+     "S100|10": "nicht gemessen",
+     "S100|11": "nicht gemessen",
+     "S100|12": "nicht gemessen",
+     "S100|13": "nicht gemessen",
+     "S100|14": "nicht gemessen",
+     "S100|15": "nicht gemessen",
+     "S100|16": "nicht gemessen",
+     "S100|17": "nicht gemessen",
+     "S100|18": "nicht gemessen",
+     "S100|19": "nicht gemessen",
+     "S100|2": "nicht gemessen",
+     "S100|20": "nicht gemessen",
+     "S100|21": "nicht gemessen",
+     "S100|22": "nicht gemessen",
+     "S100|23": "nicht gemessen",
+     "S100|24": "nicht gemessen",
+     "S100|3": "nicht gemessen",
+     "S100|4": "nicht gemessen",
+     "S100|5": "nicht gemessen",
+     "S100|6": "nicht gemessen",
+     "S100|7": "nicht gemessen",
+     "S100|8": "nicht gemessen",
+     "S100|9": "nicht gemessen",
+     "S102|10": "nicht gemessen",
+     "S102|11": "nicht gemessen",
+     "S102|12": "nicht gemessen",
+     "S102|13": "nicht gemessen",
+     "S102|14": "nicht gemessen",
+     "S102|15": "nicht gemessen",
+     "S102|16": "nicht gemessen",
+     "S102|17": "nicht gemessen",
+     "S102|18": "nicht gemessen",
+     "S102|19": "nicht gemessen",
+     "S102|2": "nicht gemessen",
+     "S102|20": "nicht gemessen",
+     "S102|21": "nicht gemessen",
+     "S102|22": "nicht gemessen",
+     "S102|23": "nicht gemessen",
+     "S102|24": "nicht gemessen",
+     "S102|3": "nicht gemessen",
+     "S102|4": "nicht gemessen",
+     "S102|5": "nicht gemessen",
+     "S102|6": "nicht gemessen",
+     "S102|7": "nicht gemessen",
+     "S102|8": "nicht gemessen",
+     "S102|9": "nicht gemessen",
+     "S104|10": "nicht gemessen",
+     "S104|11": "nicht gemessen",
+     "S104|12": "nicht gemessen",
+     "S104|13": "nicht gemessen",
+     "S104|14": "nicht gemessen",
+     "S104|15": "nicht gemessen",
+     "S104|16": "nicht gemessen",
+     "S104|17": "nicht gemessen",
+     "S104|18": "nicht gemessen",
+     "S104|19": "nicht gemessen",
+     "S104|2": "nicht gemessen",
+     "S104|20": "nicht gemessen",
+     "S104|21": "nicht gemessen",
+     "S104|22": "nicht gemessen",
+     "S104|23": "nicht gemessen",
+     "S104|24": "nicht gemessen",
+     "S104|3": "nicht gemessen",
+     "S104|4": "nicht gemessen",
+     "S104|5": "nicht gemessen",
+     "S104|6": "nicht gemessen",
+     "S104|7": "nicht gemessen",
+     "S104|8": "nicht gemessen",
+     "S104|9": "nicht gemessen",
+     "S106|10": "nicht gemessen",
+     "S106|11": "nicht gemessen",
+     "S106|12": "nicht gemessen",
+     "S106|13": "nicht gemessen",
+     "S106|14": "nicht gemessen",
+     "S106|15": "nicht gemessen",
+     "S106|16": "nicht gemessen",
+     "S106|17": "nicht gemessen",
+     "S106|18": "nicht gemessen",
+     "S106|19": "nicht gemessen",
+     "S106|2": "nicht gemessen",
+     "S106|20": "nicht gemessen",
+     "S106|21": "nicht gemessen",
+     "S106|22": "nicht gemessen",
+     "S106|23": "nicht gemessen",
+     "S106|24": "nicht gemessen",
+     "S106|3": "nicht gemessen",
+     "S106|4": "nicht gemessen",
+     "S106|5": "nicht gemessen",
+     "S106|6": "nicht gemessen",
+     "S106|7": "nicht gemessen",
+     "S106|8": "nicht gemessen",
+     "S106|9": "nicht gemessen",
+     "S108|10": "nicht gemessen",
+     "S108|11": "nicht gemessen",
+     "S108|12": "nicht gemessen",
+     "S108|13": "nicht gemessen",
+     "S108|14": "nicht gemessen",
+     "S108|15": "nicht gemessen",
+     "S108|16": "nicht gemessen",
+     "S108|17": "nicht gemessen",
+     "S108|18": "nicht gemessen",
+     "S108|19": "nicht gemessen",
+     "S108|2": "nicht gemessen",
+     "S108|20": "nicht gemessen",
+     "S108|21": "nicht gemessen",
+     "S108|22": "nicht gemessen",
+     "S108|23": "nicht gemessen",
+     "S108|24": "nicht gemessen",
+     "S108|3": "nicht gemessen",
+     "S108|4": "nicht gemessen",
+     "S108|5": "nicht gemessen",
+     "S108|6": "nicht gemessen",
+     "S108|7": "nicht gemessen",
+     "S108|8": "nicht gemessen",
+     "S108|9": "nicht gemessen",
+     "S110|10": "nicht gemessen",
+     "S110|11": "nicht gemessen",
+     "S110|12": "nicht gemessen",
+     "S110|13": "nicht gemessen",
+     "S110|14": "nicht gemessen",
+     "S110|15": "nicht gemessen",
+     "S110|16": "nicht gemessen",
+     "S110|17": "nicht gemessen",
+     "S110|18": "nicht gemessen",
+     "S110|19": "nicht gemessen",
+     "S110|2": "nicht gemessen",
+     "S110|20": "nicht gemessen",
+     "S110|21": "nicht gemessen",
+     "S110|22": "nicht gemessen",
+     "S110|23": "nicht gemessen",
+     "S110|24": "nicht gemessen",
+     "S110|3": "nicht gemessen",
+     "S110|4": "nicht gemessen",
+     "S110|5": "nicht gemessen",
+     "S110|6": "nicht gemessen",
+     "S110|7": "nicht gemessen",
+     "S110|8": "nicht gemessen",
+     "S110|9": "nicht gemessen",
+     "S112|10": "nicht gemessen",
+     "S112|11": "nicht gemessen",
+     "S112|12": "nicht gemessen",
+     "S112|13": "nicht gemessen",
+     "S112|14": "nicht gemessen",
+     "S112|15": "nicht gemessen",
+     "S112|16": "nicht gemessen",
+     "S112|17": "nicht gemessen",
+     "S112|18": "nicht gemessen",
+     "S112|19": "nicht gemessen",
+     "S112|2": "nicht gemessen",
+     "S112|20": "nicht gemessen",
+     "S112|21": "nicht gemessen",
+     "S112|22": "nicht gemessen",
+     "S112|23": "nicht gemessen",
+     "S112|24": "nicht gemessen",
+     "S112|3": "nicht gemessen",
+     "S112|4": "nicht gemessen",
+     "S112|5": "nicht gemessen",
+     "S112|6": "nicht gemessen",
+     "S112|7": "nicht gemessen",
+     "S112|8": "nicht gemessen",
+     "S112|9": "nicht gemessen",
+     "S114|10": "nicht gemessen",
+     "S114|11": "nicht gemessen",
+     "S114|12": "nicht gemessen",
+     "S114|13": "nicht gemessen",
+     "S114|14": "nicht gemessen",
+     "S114|15": "nicht gemessen",
+     "S114|16": "nicht gemessen",
+     "S114|17": "nicht gemessen",
+     "S114|18": "nicht gemessen",
+     "S114|19": "nicht gemessen",
+     "S114|2": "nicht gemessen",
+     "S114|20": "nicht gemessen",
+     "S114|21": "nicht gemessen",
+     "S114|22": "nicht gemessen",
+     "S114|23": "nicht gemessen",
+     "S114|24": "nicht gemessen",
+     "S114|3": "nicht gemessen",
+     "S114|4": "nicht gemessen",
+     "S114|5": "nicht gemessen",
+     "S114|6": "nicht gemessen",
+     "S114|7": "nicht gemessen",
+     "S114|8": "nicht gemessen",
+     "S114|9": "nicht gemessen",
+     "S116|10": "nicht gemessen",
+     "S116|11": "nicht gemessen",
+     "S116|12": "nicht gemessen",
+     "S116|13": "nicht gemessen",
+     "S116|14": "nicht gemessen",
+     "S116|15": "nicht gemessen",
+     "S116|16": "nicht gemessen",
+     "S116|17": "nicht gemessen",
+     "S116|18": "nicht gemessen",
+     "S116|19": "nicht gemessen",
+     "S116|2": "nicht gemessen",
+     "S116|20": "nicht gemessen",
+     "S116|21": "nicht gemessen",
+     "S116|22": "nicht gemessen",
+     "S116|23": "nicht gemessen",
+     "S116|24": "nicht gemessen",
+     "S116|3": "nicht gemessen",
+     "S116|4": "nicht gemessen",
+     "S116|5": "nicht gemessen",
+     "S116|6": "nicht gemessen",
+     "S116|7": "nicht gemessen",
+     "S116|8": "nicht gemessen",
+     "S116|9": "nicht gemessen",
+     "S118|10": "nicht gemessen",
+     "S118|11": "nicht gemessen",
+     "S118|12": "nicht gemessen",
+     "S118|13": "nicht gemessen",
+     "S118|14": "nicht gemessen",
+     "S118|15": "nicht gemessen",
+     "S118|16": "nicht gemessen",
+     "S118|17": "nicht gemessen",
+     "S118|18": "nicht gemessen",
+     "S118|19": "nicht gemessen",
+     "S118|2": "nicht gemessen",
+     "S118|20": "nicht gemessen",
+     "S118|21": "nicht gemessen",
+     "S118|22": "nicht gemessen",
+     "S118|23": "nicht gemessen",
+     "S118|24": "nicht gemessen",
+     "S118|3": "nicht gemessen",
+     "S118|4": "nicht gemessen",
+     "S118|5": "nicht gemessen",
+     "S118|6": "nicht gemessen",
+     "S118|7": "nicht gemessen",
+     "S118|8": "nicht gemessen",
+     "S118|9": "nicht gemessen",
+     "S120|10": "nicht gemessen",
+     "S120|11": "nicht gemessen",
+     "S120|12": "nicht gemessen",
+     "S120|13": "nicht gemessen",
+     "S120|14": "nicht gemessen",
+     "S120|15": "nicht gemessen",
+     "S120|16": "nicht gemessen",
+     "S120|17": "nicht gemessen",
+     "S120|18": "nicht gemessen",
+     "S120|19": "nicht gemessen",
+     "S120|2": "nicht gemessen",
+     "S120|20": "nicht gemessen",
+     "S120|21": "nicht gemessen",
+     "S120|22": "nicht gemessen",
+     "S120|23": "nicht gemessen",
+     "S120|24": "nicht gemessen",
+     "S120|3": "nicht gemessen",
+     "S120|4": "nicht gemessen",
+     "S120|5": "nicht gemessen",
+     "S120|6": "nicht gemessen",
+     "S120|7": "nicht gemessen",
+     "S120|8": "nicht gemessen",
+     "S120|9": "nicht gemessen",
+     "S122|10": "nicht gemessen",
+     "S122|11": "nicht gemessen",
+     "S122|12": "nicht gemessen",
+     "S122|13": "nicht gemessen",
+     "S122|14": "nicht gemessen",
+     "S122|15": "nicht gemessen",
+     "S122|16": "nicht gemessen",
+     "S122|17": "nicht gemessen",
+     "S122|18": "nicht gemessen",
+     "S122|19": "nicht gemessen",
+     "S122|2": "nicht gemessen",
+     "S122|20": "nicht gemessen",
+     "S122|21": "nicht gemessen",
+     "S122|22": "nicht gemessen",
+     "S122|23": "nicht gemessen",
+     "S122|24": "nicht gemessen",
+     "S122|3": "nicht gemessen",
+     "S122|4": "nicht gemessen",
+     "S122|5": "nicht gemessen",
+     "S122|6": "nicht gemessen",
+     "S122|7": "nicht gemessen",
+     "S122|8": "nicht gemessen",
+     "S122|9": "nicht gemessen",
+     "S124|10": "nicht gemessen",
+     "S124|11": "nicht gemessen",
+     "S124|12": "nicht gemessen",
+     "S124|13": "nicht gemessen",
+     "S124|14": "nicht gemessen",
+     "S124|15": "nicht gemessen",
+     "S124|16": "nicht gemessen",
+     "S124|17": "nicht gemessen",
+     "S124|18": "nicht gemessen",
+     "S124|19": "nicht gemessen",
+     "S124|2": "nicht gemessen",
+     "S124|20": "nicht gemessen",
+     "S124|21": "nicht gemessen",
+     "S124|22": "nicht gemessen",
+     "S124|23": "nicht gemessen",
+     "S124|24": "nicht gemessen",
+     "S124|3": "nicht gemessen",
+     "S124|4": "nicht gemessen",
+     "S124|5": "nicht gemessen",
+     "S124|6": "nicht gemessen",
+     "S124|7": "nicht gemessen",
+     "S124|8": "nicht gemessen",
+     "S124|9": "nicht gemessen",
+     "S126|10": "nicht gemessen",
+     "S126|11": "nicht gemessen",
+     "S126|12": "nicht gemessen",
+     "S126|13": "nicht gemessen",
+     "S126|14": "nicht gemessen",
+     "S126|15": "nicht gemessen",
+     "S126|16": "nicht gemessen",
+     "S126|17": "nicht gemessen",
+     "S126|18": "nicht gemessen",
+     "S126|19": "nicht gemessen",
+     "S126|2": "nicht gemessen",
+     "S126|20": "nicht gemessen",
+     "S126|21": "nicht gemessen",
+     "S126|22": "nicht gemessen",
+     "S126|23": "nicht gemessen",
+     "S126|24": "nicht gemessen",
+     "S126|3": "nicht gemessen",
+     "S126|4": "nicht gemessen",
+     "S126|5": "nicht gemessen",
+     "S126|6": "nicht gemessen",
+     "S126|7": "nicht gemessen",
+     "S126|8": "nicht gemessen",
+     "S126|9": "nicht gemessen",
+     "S128|10": "nicht gemessen",
+     "S128|11": "nicht gemessen",
+     "S128|12": "nicht gemessen",
+     "S128|13": "nicht gemessen",
+     "S128|14": "nicht gemessen",
+     "S128|15": "nicht gemessen",
+     "S128|16": "nicht gemessen",
+     "S128|17": "nicht gemessen",
+     "S128|18": "nicht gemessen",
+     "S128|19": "nicht gemessen",
+     "S128|2": "nicht gemessen",
+     "S128|20": "nicht gemessen",
+     "S128|21": "nicht gemessen",
+     "S128|22": "nicht gemessen",
+     "S128|23": "nicht gemessen",
+     "S128|24": "nicht gemessen",
+     "S128|3": "nicht gemessen",
+     "S128|4": "nicht gemessen",
+     "S128|5": "nicht gemessen",
+     "S128|6": "nicht gemessen",
+     "S128|7": "nicht gemessen",
+     "S128|8": "nicht gemessen",
+     "S128|9": "nicht gemessen",
+     "S130|10": "nicht gemessen",
+     "S130|11": "nicht gemessen",
+     "S130|12": "nicht gemessen",
+     "S130|13": "nicht gemessen",
+     "S130|14": "nicht gemessen",
+     "S130|15": "nicht gemessen",
+     "S130|16": "nicht gemessen",
+     "S130|17": "nicht gemessen",
+     "S130|18": "nicht gemessen",
+     "S130|19": "nicht gemessen",
+     "S130|2": "nicht gemessen",
+     "S130|20": "nicht gemessen",
+     "S130|21": "nicht gemessen",
+     "S130|22": "nicht gemessen",
+     "S130|23": "nicht gemessen",
+     "S130|24": "nicht gemessen",
+     "S130|3": "nicht gemessen",
+     "S130|4": "nicht gemessen",
+     "S130|5": "nicht gemessen",
+     "S130|6": "nicht gemessen",
+     "S130|7": "nicht gemessen",
+     "S130|8": "nicht gemessen",
+     "S130|9": "nicht gemessen",
+     "S132|10": "nicht gemessen",
+     "S132|11": "nicht gemessen",
+     "S132|12": "nicht gemessen",
+     "S132|13": "nicht gemessen",
+     "S132|14": "nicht gemessen",
+     "S132|15": "nicht gemessen",
+     "S132|16": "nicht gemessen",
+     "S132|17": "nicht gemessen",
+     "S132|18": "nicht gemessen",
+     "S132|19": "nicht gemessen",
+     "S132|2": "nicht gemessen",
+     "S132|20": "nicht gemessen",
+     "S132|21": "nicht gemessen",
+     "S132|22": "nicht gemessen",
+     "S132|23": "nicht gemessen",
+     "S132|24": "nicht gemessen",
+     "S132|3": "nicht gemessen",
+     "S132|4": "nicht gemessen",
+     "S132|5": "nicht gemessen",
+     "S132|6": "nicht gemessen",
+     "S132|7": "nicht gemessen",
+     "S132|8": "nicht gemessen",
+     "S132|9": "nicht gemessen",
+     "S134|10": "nicht gemessen",
+     "S134|11": "nicht gemessen",
+     "S134|12": "nicht gemessen",
+     "S134|13": "nicht gemessen",
+     "S134|14": "nicht gemessen",
+     "S134|15": "nicht gemessen",
+     "S134|16": "nicht gemessen",
+     "S134|17": "nicht gemessen",
+     "S134|18": "nicht gemessen",
+     "S134|19": "nicht gemessen",
+     "S134|2": "nicht gemessen",
+     "S134|20": "nicht gemessen",
+     "S134|21": "nicht gemessen",
+     "S134|22": "nicht gemessen",
+     "S134|23": "nicht gemessen",
+     "S134|24": "nicht gemessen",
+     "S134|3": "nicht gemessen",
+     "S134|4": "nicht gemessen",
+     "S134|5": "nicht gemessen",
+     "S134|6": "nicht gemessen",
+     "S134|7": "nicht gemessen",
+     "S134|8": "nicht gemessen",
+     "S134|9": "nicht gemessen",
+     "S136|10": "nicht gemessen",
+     "S136|11": "nicht gemessen",
+     "S136|12": "nicht gemessen",
+     "S136|13": "nicht gemessen",
+     "S136|14": "nicht gemessen",
+     "S136|15": "nicht gemessen",
+     "S136|16": "nicht gemessen",
+     "S136|17": "nicht gemessen",
+     "S136|18": "nicht gemessen",
+     "S136|19": "nicht gemessen",
+     "S136|2": "nicht gemessen",
+     "S136|20": "nicht gemessen",
+     "S136|21": "nicht gemessen",
+     "S136|22": "nicht gemessen",
+     "S136|23": "nicht gemessen",
+     "S136|24": "nicht gemessen",
+     "S136|3": "nicht gemessen",
+     "S136|4": "nicht gemessen",
+     "S136|5": "nicht gemessen",
+     "S136|6": "nicht gemessen",
+     "S136|7": "nicht gemessen",
+     "S136|8": "nicht gemessen",
+     "S136|9": "nicht gemessen",
+     "S138|10": "nicht gemessen",
+     "S138|11": "nicht gemessen",
+     "S138|12": "nicht gemessen",
+     "S138|13": "nicht gemessen",
+     "S138|14": "nicht gemessen",
+     "S138|15": "nicht gemessen",
+     "S138|16": "nicht gemessen",
+     "S138|17": "nicht gemessen",
+     "S138|18": "nicht gemessen",
+     "S138|19": "nicht gemessen",
+     "S138|2": "nicht gemessen",
+     "S138|20": "nicht gemessen",
+     "S138|21": "nicht gemessen",
+     "S138|22": "nicht gemessen",
+     "S138|23": "nicht gemessen",
+     "S138|24": "nicht gemessen",
+     "S138|3": "nicht gemessen",
+     "S138|4": "nicht gemessen",
+     "S138|5": "nicht gemessen",
+     "S138|6": "nicht gemessen",
+     "S138|7": "nicht gemessen",
+     "S138|8": "nicht gemessen",
+     "S138|9": "nicht gemessen",
+     "S140|10": "nicht gemessen",
+     "S140|11": "nicht gemessen",
+     "S140|12": "nicht gemessen",
+     "S140|13": "nicht gemessen",
+     "S140|14": "nicht gemessen",
+     "S140|15": "nicht gemessen",
+     "S140|16": "nicht gemessen",
+     "S140|17": "nicht gemessen",
+     "S140|18": "nicht gemessen",
+     "S140|19": "nicht gemessen",
+     "S140|2": "nicht gemessen",
+     "S140|20": "nicht gemessen",
+     "S140|21": "nicht gemessen",
+     "S140|22": "nicht gemessen",
+     "S140|23": "nicht gemessen",
+     "S140|24": "nicht gemessen",
+     "S140|3": "nicht gemessen",
+     "S140|4": "nicht gemessen",
+     "S140|5": "nicht gemessen",
+     "S140|6": "nicht gemessen",
+     "S140|7": "nicht gemessen",
+     "S140|8": "nicht gemessen",
+     "S140|9": "nicht gemessen"
+    },
+    "grenzen": 0,
+    "grund": "S2: Einzelzell-Liftoff im Kontrolllauf L2; ŷ¹ ungültig (§8.2)",
+    "halt": "S2",
+    "halte": [
+     {
+      "regel": "S2",
+      "versuch": "V00031"
+     }
+    ],
+    "laufzahl": {
+     "ausgefuehrt": 32,
+     "geplant": 630,
+     "geplant_ausgefuehrt": 29,
+     "zusaetzlich": 3
+    },
+    "luecken": [],
+    "messzeit_s": {
+     "geplant_laeufe": 10710.0,
+     "geplant_spanne": 10710.0,
+     "realisiert_laeufe": 544.0,
+     "realisiert_spanne": 544.0
+    },
+    "rollen": {
+     "aufwaermen": 4,
+     "konfiguration": 21,
+     "kontrolle": 6,
+     "referenz_block": 1
+    },
+    "s2": 1,
+    "s2_bilanz": {
+     "apparaturfehler": [],
+     "beendet": false,
+     "massgeblich": [
+      "V00031"
+     ],
+     "s2": [
+      "V00031"
+     ],
+     "widerspruch": []
+    },
+    "s2_waehrend_halt": 0,
+    "status": "angehalten",
+    "x_strich": [],
+    "ziehungen": 0
+   },
+   "art": "schlank",
+   "auswertbar": {
+    "min_gueltig": 1,
+    "n": 0,
+    "n_gueltig": {
+     "S100": 1,
+     "S102": 1,
+     "S104": 1,
+     "S106": 1,
+     "S108": 1,
+     "S110": 1,
+     "S112": 1,
+     "S114": 1,
+     "S116": 1,
+     "S118": 1,
+     "S120": 1,
+     "S122": 1,
+     "S124": 1,
+     "S126": 1,
+     "S128": 1,
+     "S130": 1,
+     "S132": 1,
+     "S134": 1,
+     "S136": 1,
+     "S138": 1,
+     "S140": 1
+    },
+    "nicht": [
+     "S100",
+     "S102",
+     "S104",
+     "S106",
+     "S108",
+     "S110",
+     "S112",
+     "S114",
+     "S116",
+     "S118",
+     "S120",
+     "S122",
+     "S124",
+     "S126",
+     "S128",
+     "S130",
+     "S132",
+     "S134",
+     "S136",
+     "S138",
+     "S140"
+    ],
+    "von": 21
+   },
+   "ebene": "H",
+   "index": 0,
+   "kontrollen": {
+    "gueltig_je_modul": [
+     1,
+     1,
+     1
+    ],
+    "yhat1_gueltig": false
+   },
+   "laufzeit_s": 3.069,
+   "phase1": {
+    "S2": 1,
+    "S4": 0,
+    "konfig_g4": 0,
+    "konfig_laeufe": 21,
+    "konfig_regeln": {},
+    "konfig_ungueltig": 0,
+    "n_laeufe": 32,
+    "n_ungueltig": 1,
+    "regeln": {
+     "G6": 1
+    }
+   },
+   "seed": 8492860313944394542,
+   "sperren": [
+    "Phase 1 angehalten: S2: Einzelzell-Liftoff im Kontrolllauf L2; ŷ¹ ungültig (§8.2) (keine abgeschlossene Kampagne)"
+   ],
+   "szenario": "S02-kontrolllauf",
+   "teil_b": {
+    "arbeitspunkt": "nicht geprüft",
+    "bindung": "plan",
+    "eps_ctrl": 0.00026935271563764804,
+    "k": 9,
+    "k_max": 9,
+    "k_pilotgroessen": 30,
+    "n": 24,
+    "n0_gueltig": [
+     20,
+     20,
+     19
+    ],
+    "n_min": 18,
+    "p_hat": 0.016666666666666666,
+    "r_soll": 3,
+    "sigma_delta_K": {
+     "F": 0.001759956848743997,
+     "N": 0.00030427203339772617,
+     "n": 60
+    }
+   },
+   "variante": "wiederholungen",
+   "verfahren": {
+    "ablauf": "zustand",
+    "ablauf_version": "ablauf-2",
+    "bindung": "plan",
+    "optionen": {
+     "aufwaermen": true,
+     "halt": true,
+     "wiederholungen": true
+    },
+    "version": "verfahren-1"
+   },
+   "vollstaendig": false
+  }
+ ],
+ "stichprobe_statisch": [
+  {
+   "abweichungen": [],
+   "art": "schlank",
+   "ebene": "H",
+   "gleich": true,
+   "index": 0,
+   "seed": 6421326674948950355,
+   "szenario": "N01-A4",
+   "variante": "historisch"
+  },
+  {
+   "abweichungen": [],
+   "art": "schlank",
+   "ebene": "H",
+   "gleich": true,
+   "index": 0,
+   "seed": 6421326674948950355,
+   "szenario": "N01-A4",
+   "variante": "k_konsistent"
+  }
+ ],
+ "vergleich": {
+  "N01-A4/historisch": {
+   "arbeitspunkt": {
+    "nicht abgesichert": 10
+   },
+   "auswertbar": {
+    "max": 21.0,
+    "min": 21.0,
+    "mittel": 21.0,
+    "se": 0.0
+   },
+   "k": [
+    30
+   ],
+   "k_max": [
+    9
+   ],
+   "konfig_g4_je_lauf": {
+    "max": 0.08333333333333333,
+    "min": 0.003968253968253968,
+    "mittel": 0.03293650793650794,
+    "se": 0.008542761847866414
+   },
+   "konfig_ungueltig_je_lauf": {
+    "max": 0.08333333333333333,
+    "min": 0.003968253968253968,
+    "mittel": 0.03571428571428571,
+    "se": 0.008402334636591133
+   },
+   "min_gueltig": {
+    "max": 23.0,
+    "min": 18.0,
+    "mittel": 20.9,
+    "se": 0.5044248650140518
+   },
+   "n": 10,
+   "p_hat": {
+    "max": 0.08333333333333333,
+    "min": 0.0,
+    "mittel": 0.019999999999999997,
+    "se": 0.009558139185602917
+   },
+   "sigma_delta_F_mN": {
+    "max": 2.2703133637353456,
+    "min": 1.3453634472190759,
+    "mittel": 1.8398844882097556,
+    "se": 0.10801393526028973
+   },
+   "vollstaendig": {
+    "nenner": 10,
+    "rate": 1.0,
+    "wilson95": [
+     0.7224672001371107,
+     0.9999999999999999
+    ],
+    "zaehler": 10
+   }
+  },
+  "N01-A4/k_konsistent": {
+   "arbeitspunkt": {
+    "nicht geprüft": 10
+   },
+   "auswertbar": {
+    "max": 21.0,
+    "min": 20.0,
+    "mittel": 20.9,
+    "se": 0.09999999999999998
+   },
+   "k": [
+    9
+   ],
+   "k_max": [
+    9
+   ],
+   "konfig_g4_je_lauf": {
+    "max": 0.07142857142857142,
+    "min": 0.01984126984126984,
+    "mittel": 0.043849206349206346,
+    "se": 0.005599864248875512
+   },
+   "konfig_ungueltig_je_lauf": {
+    "max": 0.08134920634920635,
+    "min": 0.021825396825396824,
+    "mittel": 0.04662698412698413,
+    "se": 0.006012701415776167
+   },
+   "min_gueltig": {
+    "max": 22.0,
+    "min": 17.0,
+    "mittel": 19.9,
+    "se": 0.5259911279353167
+   },
+   "n": 10,
+   "p_hat": {
+    "max": 0.03333333333333333,
+    "min": 0.0,
+    "mittel": 0.013333333333333332,
+    "se": 0.0041573970964154895
+   },
+   "sigma_delta_F_mN": {
+    "max": 1.9485021952464818,
+    "min": 1.352548143545325,
+    "mittel": 1.6607674326854251,
+    "se": 0.057864134301838045
+   },
+   "vollstaendig": {
+    "nenner": 10,
+    "rate": 0.9,
+    "wilson95": [
+     0.5958499732047615,
+     0.9821237869049271
+    ],
+    "zaehler": 9
+   }
+  },
+  "N01-A4/wiederholungen": {
+   "ablauf": {
+    "anlaesse": {
+     "R1: Vorprüfung": 35,
+     "R2: G1": 2,
+     "R3: G1": 2,
+     "X_strich: G1": 2,
+     "alarmwiederholung: Nullpunktalarm Summe": 1,
+     "alarmwiederholung: Nullpunktalarm Summe, Zelle 3": 1,
+     "alarmwiederholung: Nullpunktalarm Zelle 1, Zelle 3": 1,
+     "alarmwiederholung: Nullpunktalarm Zelle 3": 1,
+     "aufwaermen: Aufwärmen (§6)": 16,
+     "kontrollwiederholung: Nullpunktalarm (Zelle 1)": 1,
+     "kontrollwiederholung: Nullpunktalarm (Zelle 2)": 1,
+     "kontrollwiederholung: Nullpunktalarm (Zelle 3)": 1,
+     "kontrollwiederholung: ungültig (G4)": 14,
+     "s3_wiederholung: S3 F_min_rel, Im_N2, Re_N3": 1,
+     "s3_wiederholung: S3 Im_N3": 4,
+     "wiederholung: ungültig (G4)": 225
+    },
+    "auswahl": {
+     "ersetzt": 217,
+     "fehlt: Grenze ausgeschöpft": 1,
+     "fehlt: spät erkannt": 2,
+     "gueltig": 4497,
+     "nicht gemessen": 323
+    },
+    "auswahl_abgeschlossen": {
+     "ersetzt": 212,
+     "fehlt: Grenze ausgeschöpft": 1,
+     "fehlt: spät erkannt": 2,
+     "gueltig": 4321
+    },
+    "grenzen": 1,
+    "halt_regeln": {
+     "S1": 1
+    },
+    "luecken": [],
+    "nicht_abgeschlossen": {
+     "nenner": 10,
+     "rate": 0.1,
+     "wilson95": [
+      0.017876213095072896,
+      0.4041500267952385
+     ],
+     "zaehler": 1
+    },
+    "zeit_verhaeltnis_abgeschlossen": {
+     "max": 1.0873015873015872,
+     "min": 1.0222222222222221,
+     "mittel": 1.052204585537919,
+     "se": 0.0061671679664570865
+    },
+    "zusaetzlich": {
+     "max": 55.0,
+     "min": 12.0,
+     "mittel": 30.8,
+     "se": 4.054626986542658
+    },
+    "zusaetzlich_abgeschlossen": {
+     "max": 55.0,
+     "min": 14.0,
+     "mittel": 32.888888888888886,
+     "se": 3.8853158188679693
+    }
+   },
+   "arbeitspunkt": {
+    "nicht geprüft": 10
+   },
+   "auswertbar": {
+    "max": 21.0,
+    "min": 0.0,
+    "mittel": 18.9,
+    "se": 2.1
+   },
+   "k": [
+    9
+   ],
+   "k_max": [
+    9
+   ],
+   "konfig_g4_je_lauf": {
+    "max": 0.07169117647058823,
+    "min": 0.019455252918287938,
+    "mittel": 0.04424621540903127,
+    "se": 0.005450979046363219
+   },
+   "konfig_ungueltig_je_lauf": {
+    "max": 0.07352941176470588,
+    "min": 0.021400778210116732,
+    "mittel": 0.04500231471312106,
+    "se": 0.0054865885660763895
+   },
+   "min_gueltig": {
+    "max": 24.0,
+    "min": 8.0,
+    "mittel": 22.1,
+    "se": 1.5737428845483832
+   },
+   "n": 10,
+   "p_hat": {
+    "max": 0.03333333333333333,
+    "min": 0.0,
+    "mittel": 0.013333333333333332,
+    "se": 0.0041573970964154895
+   },
+   "sigma_delta_F_mN": {
+    "max": 1.9485021952464818,
+    "min": 1.352548143545325,
+    "mittel": 1.6607674326854251,
+    "se": 0.057864134301838045
+   },
+   "vollstaendig": {
+    "nenner": 10,
+    "rate": 0.9,
+    "wilson95": [
+     0.5958499732047615,
+     0.9821237869049271
+    ],
+    "zaehler": 9
+   }
+  },
+  "N01-V1G0/historisch": {
+   "arbeitspunkt": {
+    "nicht abgesichert": 10
+   },
+   "auswertbar": {
+    "max": 21.0,
+    "min": 20.0,
+    "mittel": 20.7,
+    "se": 0.15275252316519464
+   },
+   "k": [
+    12
+   ],
+   "k_max": [
+    12
+   ],
+   "konfig_g4_je_lauf": {
+    "max": 0.08333333333333333,
+    "min": 0.01984126984126984,
+    "mittel": 0.04801587301587301,
+    "se": 0.006376704123383042
+   },
+   "konfig_ungueltig_je_lauf": {
+    "max": 0.08928571428571429,
+    "min": 0.021825396825396824,
+    "mittel": 0.05634920634920635,
+    "se": 0.006956716292224711
+   },
+   "min_gueltig": {
+    "max": 21.0,
+    "min": 16.0,
+    "mittel": 18.3,
+    "se": 0.5174724898753341
+   },
+   "n": 10,
+   "p_hat": {
+    "max": 0.06666666666666667,
+    "min": 0.0,
+    "mittel": 0.01666666666666667,
+    "se": 0.007027283689263065
+   },
+   "sigma_delta_F_mN": {
+    "max": 2.3106544904546578,
+    "min": 1.538052742731295,
+    "mittel": 1.9125317978119347,
+    "se": 0.07785067351417728
+   },
+   "vollstaendig": {
+    "nenner": 10,
+    "rate": 0.7,
+    "wilson95": [
+     0.39677814746114537,
+     0.8922087325936989
+    ],
+    "zaehler": 7
+   }
+  },
+  "N01-V1G0/k_konsistent": {
+   "arbeitspunkt": {
+    "nicht geprüft": 10
+   },
+   "auswertbar": {
+    "max": 21.0,
+    "min": 20.0,
+    "mittel": 20.7,
+    "se": 0.15275252316519464
+   },
+   "k": [
+    12
+   ],
+   "k_max": [
+    12
+   ],
+   "konfig_g4_je_lauf": {
+    "max": 0.08333333333333333,
+    "min": 0.01984126984126984,
+    "mittel": 0.04801587301587301,
+    "se": 0.006376704123383042
+   },
+   "konfig_ungueltig_je_lauf": {
+    "max": 0.08928571428571429,
+    "min": 0.021825396825396824,
+    "mittel": 0.05634920634920635,
+    "se": 0.006956716292224711
+   },
+   "min_gueltig": {
+    "max": 21.0,
+    "min": 16.0,
+    "mittel": 18.3,
+    "se": 0.5174724898753341
+   },
+   "n": 10,
+   "p_hat": {
+    "max": 0.06666666666666667,
+    "min": 0.0,
+    "mittel": 0.01666666666666667,
+    "se": 0.007027283689263065
+   },
+   "sigma_delta_F_mN": {
+    "max": 2.3106544904546578,
+    "min": 1.538052742731295,
+    "mittel": 1.9125317978119347,
+    "se": 0.07785067351417728
+   },
+   "vollstaendig": {
+    "nenner": 10,
+    "rate": 0.7,
+    "wilson95": [
+     0.39677814746114537,
+     0.8922087325936989
+    ],
+    "zaehler": 7
+   }
+  },
+  "N01-V1G0/wiederholungen": {
+   "ablauf": {
+    "anlaesse": {
+     "R1: Vorprüfung": 38,
+     "R2: G1": 22,
+     "R3: G1": 22,
+     "X_strich: G1": 22,
+     "alarmwiederholung: Nullpunktalarm Summe": 2,
+     "alarmwiederholung: Nullpunktalarm Zelle 2": 2,
+     "alarmwiederholung: Nullpunktalarm Zelle 3": 1,
+     "aufwaermen: Aufwärmen (§6)": 20,
+     "kontrollwiederholung: Nullpunktalarm (Zelle 3)": 2,
+     "kontrollwiederholung: ungültig (G4)": 27,
+     "s3_wiederholung: S3 F_min_rel, Im_N1": 1,
+     "s3_wiederholung: S3 F_min_rel, Re_N1, Im_N1, Im_N2, Re_N3": 1,
+     "s3_wiederholung: S3 F_min_rel, Re_N1, Im_N2, Re_N3": 1,
+     "s3_wiederholung: S3 Im_N1, Re_N2": 1,
+     "s3_wiederholung: S3 Im_N3": 2,
+     "s3_wiederholung: S3 Re_N1": 1,
+     "wiederholung: ungültig (G4)": 227
+    },
+    "auswahl": {
+     "ersetzt": 225,
+     "fehlt: Grenze ausgeschöpft": 1,
+     "fehlt: Halt": 5,
+     "fehlt: spät erkannt": 2,
+     "gueltig": 4145,
+     "nicht gemessen": 662
+    },
+    "auswahl_abgeschlossen": {
+     "ersetzt": 184,
+     "fehlt: Grenze ausgeschöpft": 1,
+     "fehlt: spät erkannt": 2,
+     "gueltig": 3341
+    },
+    "grenzen": 1,
+    "halt_regeln": {
+     "S1": 3
+    },
+    "luecken": [],
+    "nicht_abgeschlossen": {
+     "nenner": 10,
+     "rate": 0.3,
+     "wilson95": [
+      0.10779126740630099,
+      0.6032218525388546
+     ],
+     "zaehler": 3
+    },
+    "zeit_verhaeltnis_abgeschlossen": {
+     "max": 1.0952380952380953,
+     "min": 1.034920634920635,
+     "mittel": 1.061904761904762,
+     "se": 0.007814634931870179
+    },
+    "zusaetzlich": {
+     "max": 78.0,
+     "min": 14.0,
+     "mittel": 39.2,
+     "se": 6.062269468698262
+    },
+    "zusaetzlich_abgeschlossen": {
+     "max": 60.0,
+     "min": 22.0,
+     "mittel": 39.0,
+     "se": 4.923220007078217
+    }
+   },
+   "arbeitspunkt": {
+    "nicht geprüft": 10
+   },
+   "auswertbar": {
+    "max": 21.0,
+    "min": 0.0,
+    "mittel": 16.8,
+    "se": 2.8
+   },
+   "k": [
+    12
+   ],
+   "k_max": [
+    12
+   ],
+   "konfig_g4_je_lauf": {
+    "max": 0.08333333333333333,
+    "min": 0.019455252918287938,
+    "mittel": 0.04830389145910506,
+    "se": 0.006610640364079395
+   },
+   "konfig_ungueltig_je_lauf": {
+    "max": 0.08876811594202899,
+    "min": 0.021400778210116732,
+    "mittel": 0.05456447403568826,
+    "se": 0.006403867333798005
+   },
+   "min_gueltig": {
+    "max": 24.0,
+    "min": 4.0,
+    "mittel": 20.3,
+    "se": 2.145020072426156
+   },
+   "n": 10,
+   "p_hat": {
+    "max": 0.06666666666666667,
+    "min": 0.0,
+    "mittel": 0.01666666666666667,
+    "se": 0.007027283689263065
+   },
+   "sigma_delta_F_mN": {
+    "max": 2.3106544904546578,
+    "min": 1.538052742731295,
+    "mittel": 1.9125317978119347,
+    "se": 0.07785067351417728
+   },
+   "vollstaendig": {
+    "nenner": 10,
+    "rate": 0.7,
+    "wilson95": [
+     0.39677814746114537,
+     0.8922087325936989
+    ],
+    "zaehler": 7
+   }
+  },
+  "N01-V1G60h/historisch": {
+   "arbeitspunkt": {
+    "nicht abgesichert": 10
+   },
+   "auswertbar": {
+    "max": 21.0,
+    "min": 20.0,
+    "mittel": 20.8,
+    "se": 0.13333333333333333
+   },
+   "k": [
+    12
+   ],
+   "k_max": [
+    12
+   ],
+   "konfig_g4_je_lauf": {
+    "max": 0.06547619047619048,
+    "min": 0.015873015873015872,
+    "mittel": 0.04047619047619048,
+    "se": 0.006156125014931267
+   },
+   "konfig_ungueltig_je_lauf": {
+    "max": 0.06547619047619048,
+    "min": 0.015873015873015872,
+    "mittel": 0.04265873015873015,
+    "se": 0.006241157906528349
+   },
+   "min_gueltig": {
+    "max": 22.0,
+    "min": 17.0,
+    "mittel": 19.4,
+    "se": 0.5416025603090641
+   },
+   "n": 10,
+   "p_hat": {
+    "max": 0.05,
+    "min": 0.0,
+    "mittel": 0.011666666666666667,
+    "se": 0.00558326423395605
+   },
+   "sigma_delta_F_mN": {
+    "max": 2.41199591515725,
+    "min": 1.6449382927894483,
+    "mittel": 1.95693897857305,
+    "se": 0.08304567584755468
+   },
+   "vollstaendig": {
+    "nenner": 10,
+    "rate": 0.8,
+    "wilson95": [
+     0.49016247153664183,
+     0.9433178485456247
+    ],
+    "zaehler": 8
+   }
+  },
+  "N01-V1G60h/k_konsistent": {
+   "arbeitspunkt": {
+    "nicht geprüft": 10
+   },
+   "auswertbar": {
+    "max": 21.0,
+    "min": 20.0,
+    "mittel": 20.8,
+    "se": 0.13333333333333333
+   },
+   "k": [
+    12
+   ],
+   "k_max": [
+    12
+   ],
+   "konfig_g4_je_lauf": {
+    "max": 0.06547619047619048,
+    "min": 0.015873015873015872,
+    "mittel": 0.04047619047619048,
+    "se": 0.006156125014931267
+   },
+   "konfig_ungueltig_je_lauf": {
+    "max": 0.06547619047619048,
+    "min": 0.015873015873015872,
+    "mittel": 0.04265873015873015,
+    "se": 0.006241157906528349
+   },
+   "min_gueltig": {
+    "max": 22.0,
+    "min": 17.0,
+    "mittel": 19.4,
+    "se": 0.5416025603090641
+   },
+   "n": 10,
+   "p_hat": {
+    "max": 0.05,
+    "min": 0.0,
+    "mittel": 0.011666666666666667,
+    "se": 0.00558326423395605
+   },
+   "sigma_delta_F_mN": {
+    "max": 2.41199591515725,
+    "min": 1.6449382927894483,
+    "mittel": 1.95693897857305,
+    "se": 0.08304567584755468
+   },
+   "vollstaendig": {
+    "nenner": 10,
+    "rate": 0.8,
+    "wilson95": [
+     0.49016247153664183,
+     0.9433178485456247
+    ],
+    "zaehler": 8
+   }
+  },
+  "N01-V1G60h/wiederholungen": {
+   "ablauf": {
+    "anlaesse": {
+     "R1: Vorprüfung": 20,
+     "R2: G1": 7,
+     "R3: G1": 7,
+     "X_strich: G1": 7,
+     "alarmwiederholung: Nullpunktalarm Summe": 1,
+     "alarmwiederholung: Nullpunktalarm Zelle 3": 1,
+     "aufwaermen: Aufwärmen (§6)": 19,
+     "kontrollwiederholung: ungültig (G4)": 14,
+     "s3_wiederholung: S3 F_min_rel, Im_N1, Re_N2, Re_N3": 2,
+     "s3_wiederholung: S3 F_min_rel, Re_N1, Im_N1, Im_N2, Re_N3": 2,
+     "s3_wiederholung: S3 Im_N3": 2,
+     "s3_wiederholung: S3 Re_N1": 1,
+     "s3_wiederholung: S3 Re_N1, Im_N2": 1,
+     "s3_wiederholung: S3 Re_N1, Re_N3": 1,
+     "s3_wiederholung: S3 Re_N2": 2,
+     "s3_wiederholung: S3 Re_N2, Im_N3": 1,
+     "s3_wiederholung: S3 Re_N3": 1,
+     "wiederholung: ungültig (G4)": 206
+    },
+    "auswahl": {
+     "ersetzt": 188,
+     "fehlt: Grenze ausgeschöpft": 5,
+     "gueltig": 4490,
+     "nicht gemessen": 357
+    },
+    "auswahl_abgeschlossen": {
+     "ersetzt": 184,
+     "fehlt: Grenze ausgeschöpft": 5,
+     "gueltig": 4347
+    },
+    "grenzen": 5,
+    "halt_regeln": {
+     "S3": 1
+    },
+    "luecken": [],
+    "nicht_abgeschlossen": {
+     "nenner": 10,
+     "rate": 0.1,
+     "wilson95": [
+      0.017876213095072896,
+      0.4041500267952385
+     ],
+     "zaehler": 1
+    },
+    "zeit_verhaeltnis_abgeschlossen": {
+     "max": 1.0825396825396825,
+     "min": 1.0253968253968253,
+     "mittel": 1.0500881834215166,
+     "se": 0.006883957340837295
+    },
+    "zusaetzlich": {
+     "max": 52.0,
+     "min": 11.0,
+     "mittel": 29.5,
+     "se": 4.390013920504378
+    },
+    "zusaetzlich_abgeschlossen": {
+     "max": 52.0,
+     "min": 16.0,
+     "mittel": 31.555555555555557,
+     "se": 4.336893124727498
+    }
+   },
+   "arbeitspunkt": {
+    "nicht geprüft": 10
+   },
+   "auswertbar": {
+    "max": 21.0,
+    "min": 0.0,
+    "mittel": 18.9,
+    "se": 2.1
+   },
+   "k": [
+    12
+   ],
+   "k_max": [
+    12
+   ],
+   "konfig_g4_je_lauf": {
+    "max": 0.07037037037037037,
+    "min": 0.015625,
+    "mittel": 0.041023389559037116,
+    "se": 0.007078610241738896
+   },
+   "konfig_ungueltig_je_lauf": {
+    "max": 0.07037037037037037,
+    "min": 0.015625,
+    "mittel": 0.0428201851094332,
+    "se": 0.006916616495344944
+   },
+   "min_gueltig": {
+    "max": 24.0,
+    "min": 7.0,
+    "mittel": 21.9,
+    "se": 1.662995957768856
+   },
+   "n": 10,
+   "p_hat": {
+    "max": 0.05,
+    "min": 0.0,
+    "mittel": 0.011666666666666667,
+    "se": 0.00558326423395605
+   },
+   "sigma_delta_F_mN": {
+    "max": 2.41199591515725,
+    "min": 1.6449382927894483,
+    "mittel": 1.95693897857305,
+    "se": 0.08304567584755468
+   },
+   "vollstaendig": {
+    "nenner": 10,
+    "rate": 0.9,
+    "wilson95": [
+     0.5958499732047615,
+     0.9821237869049271
+    ],
+    "zaehler": 9
+   }
+  }
+ },
+ "voll": [
+  {
+   "art": "voll",
+   "auswertbar": {
+    "min_gueltig": 18,
+    "n": 21,
+    "n_gueltig": {
+     "S100": 24,
+     "S102": 23,
+     "S104": 23,
+     "S106": 23,
+     "S108": 20,
+     "S110": 18,
+     "S112": 20,
+     "S114": 20,
+     "S116": 24,
+     "S118": 23,
+     "S120": 21,
+     "S122": 22,
+     "S124": 23,
+     "S126": 24,
+     "S128": 22,
+     "S130": 24,
+     "S132": 23,
+     "S134": 22,
+     "S136": 24,
+     "S138": 24,
+     "S140": 24
+    },
+    "nicht": [],
+    "von": 21
+   },
+   "ebene": "H",
+   "herkunft": "übernommen vom Rechenstand 13f2a20 (unberührt, geprüft)",
+   "index": 0,
+   "kontrollen": {
+    "gueltig_je_modul": [
+     25,
+     25,
+     24
+    ],
+    "yhat1_gueltig": true
+   },
+   "laufzeit_s": 5.231,
+   "phase1": {
+    "S2": 0,
+    "S4": 0,
+    "konfig_g4": 33,
+    "konfig_laeufe": 504,
+    "konfig_regeln": {
+     "G4": 33
+    },
+    "konfig_ungueltig": 33,
+    "n_laeufe": 630,
+    "n_ungueltig": 35,
+    "regeln": {
+     "G1": 1,
+     "G4": 34
+    }
+   },
+   "seed": 6421326674948950355,
+   "sperren": [],
+   "szenario": "N01-A4",
+   "teil_b": {
+    "arbeitspunkt": "nicht geprüft",
+    "bindung": "plan",
+    "eps_ctrl": 0.0003541573311283454,
+    "k": 9,
+    "k_max": 9,
+    "k_pilotgroessen": 30,
+    "n": 24,
+    "n0_gueltig": [
+     20,
+     20,
+     20
+    ],
+    "n_min": 18,
+    "p_hat": 0.016666666666666666,
+    "r_soll": 3,
+    "sigma_delta_K": {
+     "F": 0.0014912720903637957,
+     "N": 0.00021931724019987539,
+     "n": 60
+    }
+   },
+   "variante": "k_konsistent",
+   "verfahren": {
+    "ablauf": "statisch",
+    "ablauf_version": null,
+    "bindung": "plan",
+    "optionen": null,
+    "version": "verfahren-1"
+   },
+   "voll": {
+    "E3": {
+     "bewertung": "unbestimmt",
+     "status": "Entwicklungsprofil (dreiwertig nur als Entwicklungsprüffall)"
+    },
+    "E3_grund": null,
+    "H0": {
+     "aussage": "kein Unterschied nachgewiesen, Gleichheit nicht nachgewiesen",
+     "g1": 1,
+     "lage": "innerhalb ±ε_ctrl"
+    },
+    "H1": {
+     "abweichung": false,
+     "ausgang": "bestätigt",
+     "c": 3.709322110180076,
+     "drift": false,
+     "grund": null,
+     "max_abs_z0": 2.5921366582380547,
+     "max_abs_z1": 2.971977603003711,
+     "vollstaendig": true,
+     "zusaetze": []
+    },
+    "H1Z": {
+     "ausgang": "bestätigt",
+     "c": 3.8064613614497946,
+     "grund": null,
+     "max_abs_z0": 2.79617762211289
+    },
+    "H2": {
+     "W_ids": [
+      "S114",
+      "S116",
+      "S118",
+      "S120",
+      "S122",
+      "S124",
+      "S126"
+     ],
+     "ausgang": "bestätigt",
+     "delta_phi0": 0.0,
+     "delta_phi1": 0.0,
+     "gewaehlt": "perzentil_0.95",
+     "grund": null,
+     "intervalle": {
+      "bca_0.95": [
+       [
+        -0.012821163422454356,
+        0.0010000000000047748
+       ],
+       [
+        -0.0010000000000047748,
+        0.0010000000000047748
+       ]
+      ],
+      "perzentil_0.95": [
+       [
+        -0.003024999999999855,
+        0.0010000000000047748
+       ],
+       [
+        0.0,
+        0.0010000000000047748
+       ]
+      ],
+      "perzentil_0.96": [
+       [
+        -0.006000000000000227,
+        0.0010000000000047748
+       ],
+       [
+        0.0,
+        0.0010000000000047748
+       ]
+      ],
+      "perzentil_0.97": [
+       [
+        -0.009000000000000341,
+        0.0010000000000047748
+       ],
+       [
+        -0.000999999999990564,
+        0.0020149999999953968
+       ]
+      ],
+      "perzentil_0.98": [
+       [
+        -0.01100999999999572,
+        0.002010000000009446
+       ],
+       [
+        -0.0010000000000047748,
+        0.0040000000000048885
+       ]
+      ],
+      "perzentil_0.99": [
+       [
+        -0.01300000000000523,
+        0.007010000000005041
+       ],
+       [
+        -0.0010000000000047748,
+        0.007999999999995637
+       ]
+      ]
+     },
+     "punktmasse0": 0.796,
+     "punktmasse1": 0.744,
+     "zusaetze": []
+    },
+    "H3": {
+     "ausgang": "nicht entscheidbar",
+     "grund": "Verfahren",
+     "kennzeichnung": null,
+     "zusaetze": []
+    },
+    "H4": {
+     "V": [
+      "S100",
+      "S102",
+      "S104",
+      "S106",
+      "S108",
+      "S110",
+      "S112",
+      "S114",
+      "S116",
+      "S118",
+      "S120",
+      "S122",
+      "S124",
+      "S126",
+      "S128",
+      "S130",
+      "S132",
+      "S134",
+      "S136",
+      "S138",
+      "S140"
+     ],
+     "ausgang": "bestätigt",
+     "grund": null
+    },
+    "datenlage_gleich": true,
+    "herkunft_ablauf": null,
+    "n_auswertbar": 21,
+    "yhat1_gueltig": true
+   },
+   "vollstaendig": true
+  },
+  {
+   "art": "voll",
+   "auswertbar": {
+    "min_gueltig": 19,
+    "n": 21,
+    "n_gueltig": {
+     "S100": 23,
+     "S102": 22,
+     "S104": 24,
+     "S106": 23,
+     "S108": 24,
+     "S110": 24,
+     "S112": 22,
+     "S114": 24,
+     "S116": 19,
+     "S118": 22,
+     "S120": 23,
+     "S122": 24,
+     "S124": 23,
+     "S126": 24,
+     "S128": 24,
+     "S130": 24,
+     "S132": 24,
+     "S134": 24,
+     "S136": 23,
+     "S138": 24,
+     "S140": 23
+    },
+    "nicht": [],
+    "von": 21
+   },
+   "ebene": "H",
+   "herkunft": "übernommen vom Rechenstand 13f2a20 (unberührt, geprüft)",
+   "index": 0,
+   "kontrollen": {
+    "gueltig_je_modul": [
+     25,
+     25,
+     25
+    ],
+    "yhat1_gueltig": true
+   },
+   "laufzeit_s": 4.944,
+   "phase1": {
+    "S2": 0,
+    "S4": 0,
+    "konfig_g4": 17,
+    "konfig_laeufe": 504,
+    "konfig_regeln": {
+     "G4": 17
+    },
+    "konfig_ungueltig": 17,
+    "n_laeufe": 630,
+    "n_ungueltig": 17,
+    "regeln": {
+     "G4": 17
+    }
+   },
+   "seed": 7550300167789857562,
+   "sperren": [],
+   "szenario": "A04-R4",
+   "teil_b": {
+    "arbeitspunkt": "nicht geprüft",
+    "bindung": "plan",
+    "eps_ctrl": 0.00038763067954615093,
+    "k": 9,
+    "k_max": 9,
+    "k_pilotgroessen": 30,
+    "n": 24,
+    "n0_gueltig": [
+     20,
+     20,
+     20
+    ],
+    "n_min": 18,
+    "p_hat": 0.016666666666666666,
+    "r_soll": 3,
+    "sigma_delta_K": {
+     "F": 0.0017304553940034593,
+     "N": 0.00020305308166233978,
+     "n": 60
+    }
+   },
+   "variante": "k_konsistent",
+   "verfahren": {
+    "ablauf": "statisch",
+    "ablauf_version": null,
+    "bindung": "plan",
+    "optionen": null,
+    "version": "verfahren-1"
+   },
+   "voll": {
+    "E3": {
+     "bewertung": "unbestimmt",
+     "status": "Entwicklungsprofil (dreiwertig nur als Entwicklungsprüffall)"
+    },
+    "E3_grund": null,
+    "H0": {
+     "aussage": "kein Unterschied nachgewiesen, Gleichheit nicht nachgewiesen",
+     "g1": 0,
+     "lage": "innerhalb ±ε_ctrl"
+    },
+    "H1": {
+     "abweichung": true,
+     "ausgang": "falsifiziert",
+     "c": 3.709322110180076,
+     "drift": false,
+     "grund": null,
+     "max_abs_z0": 597.1147251267143,
+     "max_abs_z1": 649.3409755928406,
+     "vollstaendig": true,
+     "zusaetze": [
+      "Abweichung nachgewiesen"
+     ]
+    },
+    "H1Z": {
+     "ausgang": "falsifiziert",
+     "c": 3.8064613614497946,
+     "grund": null,
+     "max_abs_z0": 387.46590366523816
+    },
+    "H2": {
+     "W_ids": [
+      "S114",
+      "S116",
+      "S118",
+      "S120",
+      "S122",
+      "S124",
+      "S126"
+     ],
+     "ausgang": "bestätigt",
+     "delta_phi0": 0.0,
+     "delta_phi1": 0.0,
+     "gewaehlt": "perzentil_0.95",
+     "grund": null,
+     "intervalle": {
+      "bca_0.95": [
+       [
+        -0.0010000000000047748,
+        0.0010000000000047748
+       ],
+       [
+        -0.0010000000000047748,
+        0.02831858761567016
+       ]
+      ],
+      "perzentil_0.95": [
+       [
+        -0.005025000000009405,
+        0.0
+       ],
+       [
+        -0.0020000000000095497,
+        0.009025000000000082
+       ]
+      ],
+      "perzentil_0.96": [
+       [
+        -0.007999999999995566,
+        0.0
+       ],
+       [
+        -0.004999999999995737,
+        0.01099999999999568
+       ]
+      ],
+      "perzentil_0.97": [
+       [
+        -0.010999999999995893,
+        0.0
+       ],
+       [
+        -0.00701499999999085,
+        0.012999999999991232
+       ]
+      ],
+      "perzentil_0.98": [
+       [
+        -0.013999999999995936,
+        0.000999999999990564
+       ],
+       [
+        -0.011010000000009788,
+        0.015010000000000608
+       ]
+      ],
+      "perzentil_0.99": [
+       [
+        -0.02000999999999599,
+        0.0010000000000047748
+       ],
+       [
+        -0.0180050000000007,
+        0.02200500000000552
+       ]
+      ]
+     },
+     "punktmasse0": 0.781,
+     "punktmasse1": 0.789,
+     "zusaetze": []
+    },
+    "H3": {
+     "ausgang": "nicht entscheidbar",
+     "grund": "Verfahren",
+     "kennzeichnung": null,
+     "zusaetze": []
+    },
+    "H4": {
+     "V": [
+      "S100",
+      "S102",
+      "S104",
+      "S106",
+      "S108",
+      "S110",
+      "S112",
+      "S114",
+      "S116",
+      "S118",
+      "S120",
+      "S122",
+      "S124",
+      "S126",
+      "S128",
+      "S130",
+      "S132",
+      "S134",
+      "S136",
+      "S138",
+      "S140"
+     ],
+     "ausgang": "bestätigt",
+     "grund": null
+    },
+    "datenlage_gleich": true,
+    "herkunft_ablauf": null,
+    "n_auswertbar": 21,
+    "yhat1_gueltig": true
+   },
+   "vollstaendig": true
+  },
+  {
+   "ablauf": {
+    "anlaesse": {
+     "R1: Vorprüfung": 1,
+     "alarmwiederholung: Nullpunktalarm Zelle 3": 1,
+     "aufwaermen: Aufwärmen (§6)": 1,
+     "kontrollwiederholung: ungültig (G4)": 1,
+     "wiederholung: ungültig (G4)": 36
+    },
+    "auswahl": {
+     "ersetzt": 32,
+     "fehlt: Grenze ausgeschöpft": 1,
+     "gueltig": 471
+    },
+    "auswahl_status": {
+     "S102|16": "ersetzt",
+     "S104|1": "ersetzt",
+     "S106|15": "ersetzt",
+     "S108|10": "ersetzt",
+     "S108|13": "ersetzt",
+     "S108|2": "ersetzt",
+     "S108|3": "ersetzt",
+     "S110|12": "ersetzt",
+     "S110|13": "ersetzt",
+     "S110|22": "ersetzt",
+     "S110|23": "ersetzt",
+     "S110|6": "ersetzt",
+     "S110|9": "ersetzt",
+     "S112|1": "ersetzt",
+     "S112|14": "fehlt: Grenze ausgeschöpft",
+     "S112|22": "ersetzt",
+     "S112|4": "ersetzt",
+     "S114|10": "ersetzt",
+     "S114|12": "ersetzt",
+     "S114|8": "ersetzt",
+     "S114|9": "ersetzt",
+     "S118|20": "ersetzt",
+     "S120|16": "ersetzt",
+     "S120|18": "ersetzt",
+     "S120|21": "ersetzt",
+     "S122|12": "ersetzt",
+     "S122|16": "ersetzt",
+     "S124|18": "ersetzt",
+     "S128|1": "ersetzt",
+     "S128|10": "ersetzt",
+     "S132|15": "ersetzt",
+     "S134|20": "ersetzt",
+     "S134|7": "ersetzt"
+    },
+    "grenzen": 1,
+    "grund": "alle Blöcke gemessen",
+    "halt": null,
+    "halte": [],
+    "laufzahl": {
+     "ausgefuehrt": 670,
+     "geplant": 630,
+     "geplant_ausgefuehrt": 630,
+     "zusaetzlich": 40
+    },
+    "luecken": [],
+    "messzeit_s": {
+     "geplant_laeufe": 10710.0,
+     "geplant_spanne": 10710.0,
+     "realisiert_laeufe": 11390.0,
+     "realisiert_spanne": 11390.0
+    },
+    "rollen": {
+     "R1": 1,
+     "alarmwiederholung": 1,
+     "aufwaermen": 2,
+     "konfiguration": 504,
+     "kontrolle": 100,
+     "kontrollwiederholung": 1,
+     "referenz_block": 24,
+     "schlussreferenz": 1,
+     "wiederholung": 36
+    },
+    "s2": 0,
+    "s2_bilanz": {
+     "apparaturfehler": [],
+     "beendet": false,
+     "massgeblich": [],
+     "s2": [],
+     "widerspruch": []
+    },
+    "s2_waehrend_halt": 0,
+    "status": "abgeschlossen",
+    "x_strich": [],
+    "ziehungen": 36
+   },
+   "art": "voll",
+   "auswertbar": {
+    "min_gueltig": 23,
+    "n": 21,
+    "n_gueltig": {
+     "S100": 24,
+     "S102": 24,
+     "S104": 24,
+     "S106": 24,
+     "S108": 24,
+     "S110": 24,
+     "S112": 23,
+     "S114": 24,
+     "S116": 24,
+     "S118": 24,
+     "S120": 24,
+     "S122": 24,
+     "S124": 24,
+     "S126": 24,
+     "S128": 24,
+     "S130": 24,
+     "S132": 24,
+     "S134": 24,
+     "S136": 24,
+     "S138": 24,
+     "S140": 24
+    },
+    "nicht": [],
+    "von": 21
+   },
+   "ebene": "H",
+   "herkunft": "neu gerechnet (Korrekturrunde, ablauf-2)",
+   "index": 0,
+   "kontrollen": {
+    "gueltig_je_modul": [
+     25,
+     25,
+     25
+    ],
+    "yhat1_gueltig": true
+   },
+   "laufzeit_s": 7.99,
+   "phase1": {
+    "S2": 0,
+    "S4": 0,
+    "konfig_g4": 37,
+    "konfig_laeufe": 540,
+    "konfig_regeln": {
+     "G4": 37
+    },
+    "konfig_ungueltig": 37,
+    "n_laeufe": 670,
+    "n_ungueltig": 39,
+    "regeln": {
+     "G1": 1,
+     "G4": 38
+    }
+   },
+   "seed": 6421326674948950355,
+   "sperren": [],
+   "szenario": "N01-A4",
+   "teil_b": {
+    "arbeitspunkt": "nicht geprüft",
+    "bindung": "plan",
+    "eps_ctrl": 0.0003541573311283454,
+    "k": 9,
+    "k_max": 9,
+    "k_pilotgroessen": 30,
+    "n": 24,
+    "n0_gueltig": [
+     20,
+     20,
+     20
+    ],
+    "n_min": 18,
+    "p_hat": 0.016666666666666666,
+    "r_soll": 3,
+    "sigma_delta_K": {
+     "F": 0.0014912720903637957,
+     "N": 0.00021931724019987539,
+     "n": 60
+    }
+   },
+   "variante": "wiederholungen",
+   "verfahren": {
+    "ablauf": "zustand",
+    "ablauf_version": "ablauf-2",
+    "bindung": "plan",
+    "optionen": {
+     "aufwaermen": true,
+     "halt": true,
+     "wiederholungen": true
+    },
+    "version": "verfahren-1"
+   },
+   "voll": {
+    "E3": {
+     "bewertung": "unbestimmt",
+     "status": "Entwicklungsprofil (dreiwertig nur als Entwicklungsprüffall)"
+    },
+    "E3_grund": null,
+    "H0": {
+     "aussage": "kein Unterschied nachgewiesen, Gleichheit nicht nachgewiesen",
+     "g1": 1,
+     "lage": "innerhalb ±ε_ctrl"
+    },
+    "H1": {
+     "abweichung": false,
+     "ausgang": "bestätigt",
+     "c": 3.709322110180076,
+     "drift": false,
+     "grund": null,
+     "max_abs_z0": 2.138144492152991,
+     "max_abs_z1": 2.3105746463708905,
+     "vollstaendig": true,
+     "zusaetze": []
+    },
+    "H1Z": {
+     "ausgang": "bestätigt",
+     "c": 3.8064613614497946,
+     "grund": null,
+     "max_abs_z0": 2.6463111125754577
+    },
+    "H2": {
+     "W_ids": [
+      "S114",
+      "S116",
+      "S118",
+      "S120",
+      "S122",
+      "S124",
+      "S126"
+     ],
+     "ausgang": "bestätigt",
+     "delta_phi0": 0.0,
+     "delta_phi1": 0.0,
+     "gewaehlt": "perzentil_0.95",
+     "grund": null,
+     "intervalle": {
+      "bca_0.95": [
+       [
+        -0.020617186892051092,
+        0.000999999999990564
+       ],
+       [
+        -0.0010000000000047748,
+        0.0010000000000047748
+       ]
+      ],
+      "perzentil_0.95": [
+       [
+        -0.0010000000000047748,
+        0.0010000000000047748
+       ],
+       [
+        0.0,
+        0.0010000000000047748
+       ]
+      ],
+      "perzentil_0.96": [
+       [
+        -0.002020000000009343,
+        0.0010000000000047748
+       ],
+       [
+        0.0,
+        0.0010000000000047748
+       ]
+      ],
+      "perzentil_0.97": [
+       [
+        -0.0040000000000048885,
+        0.0010000000000047748
+       ],
+       [
+        -0.000999999999990564,
+        0.001999999999995339
+       ]
+      ],
+      "perzentil_0.98": [
+       [
+        -0.00700999999999083,
+        0.0010100000000046714
+       ],
+       [
+        -0.0010000000000047748,
+        0.007030000000004834
+       ]
+      ],
+      "perzentil_0.99": [
+       [
+        -0.010010000000005084,
+        0.007015000000004918
+       ],
+       [
+        -0.0010000000000047748,
+        0.013005000000005177
+       ]
+      ]
+     },
+     "punktmasse0": 0.81,
+     "punktmasse1": 0.784,
+     "zusaetze": []
+    },
+    "H3": {
+     "ausgang": "nicht entscheidbar",
+     "grund": "Verfahren",
+     "kennzeichnung": null,
+     "zusaetze": []
+    },
+    "H4": {
+     "V": [
+      "S100",
+      "S102",
+      "S104",
+      "S106",
+      "S108",
+      "S110",
+      "S112",
+      "S114",
+      "S116",
+      "S118",
+      "S120",
+      "S122",
+      "S124",
+      "S126",
+      "S128",
+      "S130",
+      "S132",
+      "S134",
+      "S136",
+      "S138",
+      "S140"
+     ],
+     "ausgang": "bestätigt",
+     "grund": null
+    },
+    "datenlage_gleich": true,
+    "herkunft_ablauf": {
+     "ende": {
+      "grund": "alle Blöcke gemessen",
+      "status": "abgeschlossen"
+     },
+     "ereignisse": [],
+     "halt": null,
+     "kennung": {
+      "ebene": "H",
+      "modell_sha256": "06140f690a453867849c4fc6d38e548c4d2690c3ca0e860427bc23241b8a5cc2",
+      "plan": {
+       "T_lauf": 17.0,
+       "einstellung2": null,
+       "n0": 20,
+       "n_bloecke": 24,
+       "n_pilot": 20,
+       "n_zyklen": 100,
+       "phase_pause": 86400.0,
+       "pruef": [],
+       "pruef_bilder": true,
+       "ref_abstand": 12,
+       "ref_min_p0": 42,
+       "tag_pause": 43200.0,
+       "tage": 1,
+       "zusatz": false
+      },
+      "profil_sha256": "49dc74abca52b2c5e4ae8f6d2e1c53dc468205b01b9f65270b86c27e91114352",
+      "schwellen_sha256": "5bb6d58a7954ac9baaf701a6b6c5e216a757fbfc55bf71af97044258b834a939",
+      "seed": 6421326674948950355,
+      "stufe": "L1",
+      "szenario": "N01-A4",
+      "verfahren": {
+       "ablauf": "zustand",
+       "ablauf_version": "ablauf-2",
+       "bindung": "plan",
+       "optionen": {
+        "aufwaermen": true,
+        "halt": true,
+        "wiederholungen": true
+       },
+       "version": "verfahren-1"
+      }
+     },
+     "luecken": [],
+     "optionen": {
+      "aufwaermen": true,
+      "halt": true,
+      "wiederholungen": true
+     },
+     "s2": [],
+     "s2_bilanz": {
+      "apparaturfehler": [],
+      "beendet": false,
+      "massgeblich": [],
+      "s2": [],
+      "widerspruch": []
+     },
+     "status": "abgeschlossen",
+     "version": "ablauf-2"
+    },
+    "n_auswertbar": 21,
+    "yhat1_gueltig": true
+   },
+   "vollstaendig": true
+  },
+  {
+   "ablauf": {
+    "anlaesse": {
+     "aufwaermen: Aufwärmen (§6)": 2,
+     "wiederholung: ungültig (G4)": 18
+    },
+    "auswahl": {
+     "ersetzt": 17,
+     "gueltig": 487
+    },
+    "auswahl_status": {
+     "S100|12": "ersetzt",
+     "S102|12": "ersetzt",
+     "S102|21": "ersetzt",
+     "S106|5": "ersetzt",
+     "S112|15": "ersetzt",
+     "S112|21": "ersetzt",
+     "S116|13": "ersetzt",
+     "S116|16": "ersetzt",
+     "S116|24": "ersetzt",
+     "S116|3": "ersetzt",
+     "S116|4": "ersetzt",
+     "S118|22": "ersetzt",
+     "S118|4": "ersetzt",
+     "S120|18": "ersetzt",
+     "S124|22": "ersetzt",
+     "S136|22": "ersetzt",
+     "S140|3": "ersetzt"
+    },
+    "grenzen": 0,
+    "grund": "alle Blöcke gemessen",
+    "halt": null,
+    "halte": [],
+    "laufzahl": {
+     "ausgefuehrt": 650,
+     "geplant": 630,
+     "geplant_ausgefuehrt": 630,
+     "zusaetzlich": 20
+    },
+    "luecken": [],
+    "messzeit_s": {
+     "geplant_laeufe": 10710.0,
+     "geplant_spanne": 10710.0,
+     "realisiert_laeufe": 11050.0,
+     "realisiert_spanne": 11050.0
+    },
+    "rollen": {
+     "aufwaermen": 3,
+     "konfiguration": 504,
+     "kontrolle": 100,
+     "referenz_block": 24,
+     "schlussreferenz": 1,
+     "wiederholung": 18
+    },
+    "s2": 0,
+    "s2_bilanz": {
+     "apparaturfehler": [],
+     "beendet": false,
+     "massgeblich": [],
+     "s2": [],
+     "widerspruch": []
+    },
+    "s2_waehrend_halt": 0,
+    "status": "abgeschlossen",
+    "x_strich": [],
+    "ziehungen": 18
+   },
+   "art": "voll",
+   "auswertbar": {
+    "min_gueltig": 24,
+    "n": 21,
+    "n_gueltig": {
+     "S100": 24,
+     "S102": 24,
+     "S104": 24,
+     "S106": 24,
+     "S108": 24,
+     "S110": 24,
+     "S112": 24,
+     "S114": 24,
+     "S116": 24,
+     "S118": 24,
+     "S120": 24,
+     "S122": 24,
+     "S124": 24,
+     "S126": 24,
+     "S128": 24,
+     "S130": 24,
+     "S132": 24,
+     "S134": 24,
+     "S136": 24,
+     "S138": 24,
+     "S140": 24
+    },
+    "nicht": [],
+    "von": 21
+   },
+   "ebene": "H",
+   "herkunft": "neu gerechnet (Korrekturrunde, ablauf-2)",
+   "index": 0,
+   "kontrollen": {
+    "gueltig_je_modul": [
+     25,
+     25,
+     25
+    ],
+    "yhat1_gueltig": true
+   },
+   "laufzeit_s": 7.73,
+   "phase1": {
+    "S2": 0,
+    "S4": 0,
+    "konfig_g4": 18,
+    "konfig_laeufe": 522,
+    "konfig_regeln": {
+     "G4": 18
+    },
+    "konfig_ungueltig": 18,
+    "n_laeufe": 650,
+    "n_ungueltig": 18,
+    "regeln": {
+     "G4": 18
+    }
+   },
+   "seed": 7550300167789857562,
+   "sperren": [],
+   "szenario": "A04-R4",
+   "teil_b": {
+    "arbeitspunkt": "nicht geprüft",
+    "bindung": "plan",
+    "eps_ctrl": 0.00038763067954615093,
+    "k": 9,
+    "k_max": 9,
+    "k_pilotgroessen": 30,
+    "n": 24,
+    "n0_gueltig": [
+     20,
+     20,
+     20
+    ],
+    "n_min": 18,
+    "p_hat": 0.016666666666666666,
+    "r_soll": 3,
+    "sigma_delta_K": {
+     "F": 0.0017304553940034593,
+     "N": 0.00020305308166233978,
+     "n": 60
+    }
+   },
+   "variante": "wiederholungen",
+   "verfahren": {
+    "ablauf": "zustand",
+    "ablauf_version": "ablauf-2",
+    "bindung": "plan",
+    "optionen": {
+     "aufwaermen": true,
+     "halt": true,
+     "wiederholungen": true
+    },
+    "version": "verfahren-1"
+   },
+   "voll": {
+    "E3": {
+     "bewertung": "unbestimmt",
+     "status": "Entwicklungsprofil (dreiwertig nur als Entwicklungsprüffall)"
+    },
+    "E3_grund": null,
+    "H0": {
+     "aussage": "kein Unterschied nachgewiesen, Gleichheit nicht nachgewiesen",
+     "g1": 0,
+     "lage": "innerhalb ±ε_ctrl"
+    },
+    "H1": {
+     "abweichung": true,
+     "ausgang": "falsifiziert",
+     "c": 3.709322110180076,
+     "drift": false,
+     "grund": null,
+     "max_abs_z0": 597.1147251267143,
+     "max_abs_z1": 655.9884126092718,
+     "vollstaendig": true,
+     "zusaetze": [
+      "Abweichung nachgewiesen"
+     ]
+    },
+    "H1Z": {
+     "ausgang": "falsifiziert",
+     "c": 3.8064613614497946,
+     "grund": null,
+     "max_abs_z0": 388.1714800469521
+    },
+    "H2": {
+     "W_ids": [
+      "S114",
+      "S116",
+      "S118",
+      "S120",
+      "S122",
+      "S124",
+      "S126"
+     ],
+     "ausgang": "bestätigt",
+     "delta_phi0": 0.0,
+     "delta_phi1": 0.0,
+     "gewaehlt": "perzentil_0.95",
+     "grund": null,
+     "intervalle": {
+      "bca_0.95": [
+       [
+        -0.0010000000000047748,
+        0.0010000000000047748
+       ],
+       [
+        -0.0010000000000047748,
+        0.025772683684276442
+       ]
+      ],
+      "perzentil_0.95": [
+       [
+        -0.01099999999999568,
+        0.0
+       ],
+       [
+        -0.008025000000009518,
+        0.0010250000000045162
+       ]
+      ],
+      "perzentil_0.96": [
+       [
+        -0.012000000000000455,
+        0.0
+       ],
+       [
+        -0.010999999999995964,
+        0.004999999999995737
+       ]
+      ],
+      "perzentil_0.97": [
+       [
+        -0.015000000000000568,
+        0.0
+       ],
+       [
+        -0.0120150000000003,
+        0.007015000000004847
+       ]
+      ],
+      "perzentil_0.98": [
+       [
+        -0.020010000000010127,
+        9.999999999896544e-06
+       ],
+       [
+        -0.019010000000005495,
+        0.01401999999999587
+       ]
+      ],
+      "perzentil_0.99": [
+       [
+        -0.027005000000001042,
+        0.0010000000000047748
+       ],
+       [
+        -0.024010000000000878,
+        0.01999999999999602
+       ]
+      ]
+     },
+     "punktmasse0": 0.755,
+     "punktmasse1": 0.802,
+     "zusaetze": []
+    },
+    "H3": {
+     "ausgang": "nicht entscheidbar",
+     "grund": "Verfahren",
+     "kennzeichnung": null,
+     "zusaetze": []
+    },
+    "H4": {
+     "V": [
+      "S100",
+      "S102",
+      "S104",
+      "S106",
+      "S108",
+      "S110",
+      "S112",
+      "S114",
+      "S116",
+      "S118",
+      "S120",
+      "S122",
+      "S124",
+      "S126",
+      "S128",
+      "S130",
+      "S132",
+      "S134",
+      "S136",
+      "S138",
+      "S140"
+     ],
+     "ausgang": "bestätigt",
+     "grund": null
+    },
+    "datenlage_gleich": true,
+    "herkunft_ablauf": {
+     "ende": {
+      "grund": "alle Blöcke gemessen",
+      "status": "abgeschlossen"
+     },
+     "ereignisse": [],
+     "halt": null,
+     "kennung": {
+      "ebene": "H",
+      "modell_sha256": "db84166bc8264e865e95c3d1109a2c99c629e33d0781e8f511dc61d05622fb18",
+      "plan": {
+       "T_lauf": 17.0,
+       "einstellung2": null,
+       "n0": 20,
+       "n_bloecke": 24,
+       "n_pilot": 20,
+       "n_zyklen": 100,
+       "phase_pause": 86400.0,
+       "pruef": [],
+       "pruef_bilder": true,
+       "ref_abstand": 12,
+       "ref_min_p0": 42,
+       "tag_pause": 43200.0,
+       "tage": 1,
+       "zusatz": false
+      },
+      "profil_sha256": "49dc74abca52b2c5e4ae8f6d2e1c53dc468205b01b9f65270b86c27e91114352",
+      "schwellen_sha256": "9915f12b16bea98c79341717fc24469a2b2f7b3162ab79f52dce1d6eaa9d9ccd",
+      "seed": 7550300167789857562,
+      "stufe": "L1",
+      "szenario": "A04-R4",
+      "verfahren": {
+       "ablauf": "zustand",
+       "ablauf_version": "ablauf-2",
+       "bindung": "plan",
+       "optionen": {
+        "aufwaermen": true,
+        "halt": true,
+        "wiederholungen": true
+       },
+       "version": "verfahren-1"
+      }
+     },
+     "luecken": [],
+     "optionen": {
+      "aufwaermen": true,
+      "halt": true,
+      "wiederholungen": true
+     },
+     "s2": [],
+     "s2_bilanz": {
+      "apparaturfehler": [],
+      "beendet": false,
+      "massgeblich": [],
+      "s2": [],
+      "widerspruch": []
+     },
+     "status": "abgeschlossen",
+     "version": "ablauf-2"
+    },
+    "n_auswertbar": 21,
+    "yhat1_gueltig": true
+   },
+   "vollstaendig": true
+  },
+  {
+   "ablauf": {
+    "anlaesse": {
+     "R1: Vorprüfung": 7,
+     "R2: G1": 1,
+     "R3: G1": 1,
+     "X_strich: G1": 1,
+     "aufwaermen: Aufwärmen (§6)": 1,
+     "kontrollwiederholung: ungültig (G4)": 3,
+     "s3_wiederholung: S3 Im_N3": 1,
+     "wiederholung: ungültig (G4)": 24
+    },
+    "auswahl": {
+     "ersetzt": 24,
+     "gueltig": 480
+    },
+    "auswahl_status": {
+     "S100|21": "ersetzt",
+     "S104|22": "ersetzt",
+     "S106|15": "ersetzt",
+     "S108|10": "ersetzt",
+     "S108|13": "ersetzt",
+     "S108|14": "ersetzt",
+     "S108|24": "ersetzt",
+     "S110|12": "ersetzt",
+     "S110|23": "ersetzt",
+     "S112|1": "ersetzt",
+     "S112|24": "ersetzt",
+     "S112|4": "ersetzt",
+     "S112|8": "ersetzt",
+     "S114|12": "ersetzt",
+     "S114|14": "ersetzt",
+     "S114|18": "ersetzt",
+     "S116|11": "ersetzt",
+     "S116|14": "ersetzt",
+     "S118|20": "ersetzt",
+     "S122|12": "ersetzt",
+     "S122|16": "ersetzt",
+     "S124|18": "ersetzt",
+     "S128|1": "ersetzt",
+     "S134|21": "ersetzt"
+    },
+    "grenzen": 0,
+    "grund": "alle Blöcke gemessen",
+    "halt": null,
+    "halte": [],
+    "laufzahl": {
+     "ausgefuehrt": 669,
+     "geplant": 630,
+     "geplant_ausgefuehrt": 630,
+     "zusaetzlich": 39
+    },
+    "luecken": [],
+    "messzeit_s": {
+     "geplant_laeufe": 10710.0,
+     "geplant_spanne": 10710.0,
+     "realisiert_laeufe": 11373.0,
+     "realisiert_spanne": 11373.0
+    },
+    "rollen": {
+     "R1": 7,
+     "R2": 1,
+     "R3": 1,
+     "X_strich": 1,
+     "aufwaermen": 2,
+     "konfiguration": 504,
+     "kontrolle": 100,
+     "kontrollwiederholung": 3,
+     "referenz_block": 24,
+     "s3_wiederholung": 1,
+     "schlussreferenz": 1,
+     "wiederholung": 24
+    },
+    "s2": 0,
+    "s2_bilanz": {
+     "apparaturfehler": [],
+     "beendet": false,
+     "massgeblich": [],
+     "s2": [],
+     "widerspruch": []
+    },
+    "s2_waehrend_halt": 0,
+    "status": "abgeschlossen",
+    "x_strich": [
+     {
+      "abweichung_r0_N": 5.5226208544922883e-05,
+      "block": 21,
+      "fall": "V00556",
+      "g1": false,
+      "gueltig": true,
+      "halt": null,
+      "konfiguration": "S134",
+      "nach": "V00560",
+      "nach_rolle": "R3",
+      "s1": null,
+      "versuch": "V00559",
+      "vor": "V00558",
+      "vor_rolle": "R2",
+      "vorgesehen": true,
+      "vorpruefung_ablauf_1": false
+     }
+    ],
+    "ziehungen": 24
+   },
+   "art": "voll",
+   "auswertbar": {
+    "min_gueltig": 24,
+    "n": 21,
+    "n_gueltig": {
+     "S100": 24,
+     "S102": 24,
+     "S104": 24,
+     "S106": 24,
+     "S108": 24,
+     "S110": 24,
+     "S112": 24,
+     "S114": 24,
+     "S116": 24,
+     "S118": 24,
+     "S120": 24,
+     "S122": 24,
+     "S124": 24,
+     "S126": 24,
+     "S128": 24,
+     "S130": 24,
+     "S132": 24,
+     "S134": 24,
+     "S136": 24,
+     "S138": 24,
+     "S140": 24
+    },
+    "nicht": [],
+    "von": 21
+   },
+   "ebene": "Z",
+   "herkunft": "neu gerechnet (Korrekturrunde, ablauf-2)",
+   "index": 0,
+   "kontrollen": {
+    "gueltig_je_modul": [
+     25,
+     25,
+     26
+    ],
+    "yhat1_gueltig": true
+   },
+   "laufzeit_s": 289.676,
+   "phase1": {
+    "S2": 0,
+    "S4": 0,
+    "konfig_g4": 24,
+    "konfig_laeufe": 529,
+    "konfig_regeln": {
+     "G1": 2,
+     "G4": 24
+    },
+    "konfig_ungueltig": 25,
+    "n_laeufe": 669,
+    "n_ungueltig": 28,
+    "regeln": {
+     "G1": 2,
+     "G4": 27
+    }
+   },
+   "seed": 6421326674948950355,
+   "sperren": [],
+   "szenario": "N01-A4",
+   "teil_b": {
+    "arbeitspunkt": "nicht geprüft",
+    "bindung": "plan",
+    "eps_ctrl": 0.00025802931352970264,
+    "k": 9,
+    "k_max": 9,
+    "k_pilotgroessen": 30,
+    "n": 24,
+    "n0_gueltig": [
+     20,
+     19,
+     20
+    ],
+    "n_min": 18,
+    "p_hat": 0.05,
+    "r_soll": 3,
+    "sigma_delta_K": {
+     "F": 0.0015763088879958312,
+     "N": 0.0002559680884106775,
+     "n": 60
+    }
+   },
+   "variante": "wiederholungen",
+   "verfahren": {
+    "ablauf": "zustand",
+    "ablauf_version": "ablauf-2",
+    "bindung": "plan",
+    "optionen": {
+     "aufwaermen": true,
+     "halt": true,
+     "wiederholungen": true
+    },
+    "version": "verfahren-1"
+   },
+   "voll": {
+    "E3": {
+     "bewertung": "unbestimmt",
+     "status": "Entwicklungsprofil (dreiwertig nur als Entwicklungsprüffall)"
+    },
+    "E3_grund": null,
+    "H0": {
+     "aussage": "kein Unterschied nachgewiesen, Gleichheit nicht nachgewiesen",
+     "g1": 2,
+     "lage": "innerhalb ±ε_ctrl"
+    },
+    "H1": {
+     "abweichung": false,
+     "ausgang": "bestätigt",
+     "c": 3.709322110180076,
+     "drift": false,
+     "grund": null,
+     "max_abs_z0": 2.673600221996445,
+     "max_abs_z1": 2.5865823209514924,
+     "vollstaendig": true,
+     "zusaetze": []
+    },
+    "H1Z": {
+     "ausgang": "bestätigt",
+     "c": 3.8064613614497946,
+     "grund": null,
+     "max_abs_z0": 2.8585935868382983
+    },
+    "H2": {
+     "W_ids": [
+      "S114",
+      "S116",
+      "S118",
+      "S120",
+      "S122",
+      "S124",
+      "S126"
+     ],
+     "ausgang": "bestätigt",
+     "delta_phi0": 0.0,
+     "delta_phi1": 0.0,
+     "gewaehlt": "perzentil_0.95",
+     "grund": null,
+     "intervalle": {
+      "bca_0.95": [
+       [
+        -0.024511467406197477,
+        0.000999999999990564
+       ],
+       [
+        -0.0010000000000047748,
+        0.0010000000000047748
+       ]
+      ],
+      "perzentil_0.95": [
+       [
+        -0.008024999999995662,
+        0.0010000000000047748
+       ],
+       [
+        0.0,
+        0.0010000000000047748
+       ]
+      ],
+      "perzentil_0.96": [
+       [
+        -0.010020000000004909,
+        0.0010000000000047748
+       ],
+       [
+        0.0,
+        0.0010000000000047748
+       ]
+      ],
+      "perzentil_0.97": [
+       [
+        -0.012000000000000455,
+        0.0010000000000047748
+       ],
+       [
+        -0.000999999999990564,
+        0.0010000000000047748
+       ]
+      ],
+      "perzentil_0.98": [
+       [
+        -0.015000000000000568,
+        0.0010000000000047748
+       ],
+       [
+        -0.0010000000000047748,
+        0.002020000000009343
+       ]
+      ],
+      "perzentil_0.99": [
+       [
+        -0.019005000000005406,
+        0.004010000000004856
+       ],
+       [
+        -0.0010000000000047748,
+        0.0069999999999908625
+       ]
+      ]
+     },
+     "punktmasse0": 0.802,
+     "punktmasse1": 0.801,
+     "zusaetze": []
+    },
+    "H3": {
+     "ausgang": "nicht entscheidbar",
+     "grund": "Verfahren",
+     "kennzeichnung": null,
+     "zusaetze": []
+    },
+    "H4": {
+     "V": [
+      "S100",
+      "S102",
+      "S104",
+      "S106",
+      "S108",
+      "S110",
+      "S112",
+      "S114",
+      "S116",
+      "S118",
+      "S120",
+      "S122",
+      "S124",
+      "S126",
+      "S128",
+      "S130",
+      "S132",
+      "S134",
+      "S136",
+      "S138",
+      "S140"
+     ],
+     "ausgang": "bestätigt",
+     "grund": null
+    },
+    "datenlage_gleich": true,
+    "herkunft_ablauf": {
+     "ende": {
+      "grund": "alle Blöcke gemessen",
+      "status": "abgeschlossen"
+     },
+     "ereignisse": [],
+     "halt": null,
+     "kennung": {
+      "ebene": "Z",
+      "modell_sha256": "06140f690a453867849c4fc6d38e548c4d2690c3ca0e860427bc23241b8a5cc2",
+      "plan": {
+       "T_lauf": 17.0,
+       "einstellung2": null,
+       "n0": 20,
+       "n_bloecke": 24,
+       "n_pilot": 20,
+       "n_zyklen": 100,
+       "phase_pause": 86400.0,
+       "pruef": [],
+       "pruef_bilder": true,
+       "ref_abstand": 12,
+       "ref_min_p0": 42,
+       "tag_pause": 43200.0,
+       "tage": 1,
+       "zusatz": false
+      },
+      "profil_sha256": "49dc74abca52b2c5e4ae8f6d2e1c53dc468205b01b9f65270b86c27e91114352",
+      "schwellen_sha256": "e221c75a4600ba0b50b53d089397a82ebc9a30954b8664cf32cc5bcdc7d52d78",
+      "seed": 6421326674948950355,
+      "stufe": "L1",
+      "szenario": "N01-A4",
+      "verfahren": {
+       "ablauf": "zustand",
+       "ablauf_version": "ablauf-2",
+       "bindung": "plan",
+       "optionen": {
+        "aufwaermen": true,
+        "halt": true,
+        "wiederholungen": true
+       },
+       "version": "verfahren-1"
+      }
+     },
+     "luecken": [],
+     "optionen": {
+      "aufwaermen": true,
+      "halt": true,
+      "wiederholungen": true
+     },
+     "s2": [],
+     "s2_bilanz": {
+      "apparaturfehler": [],
+      "beendet": false,
+      "massgeblich": [],
+      "s2": [],
+      "widerspruch": []
+     },
+     "status": "abgeschlossen",
+     "version": "ablauf-2"
+    },
+    "n_auswertbar": 21,
+    "yhat1_gueltig": true
+   },
+   "vollstaendig": true
+  },
+  {
+   "ablauf": {
+    "anlaesse": {
+     "R1: Vorprüfung": 8,
+     "R2: G1": 3,
+     "R3: G1": 3,
+     "X_strich: G1": 3,
+     "aufwaermen: Aufwärmen (§6)": 1,
+     "wiederholung: ungültig (G4)": 16
+    },
+    "auswahl": {
+     "ersetzt": 19,
+     "fehlt: spät erkannt": 1,
+     "gueltig": 484
+    },
+    "auswahl_status": {
+     "S100|20": "ersetzt",
+     "S100|22": "ersetzt",
+     "S102|18": "ersetzt",
+     "S102|19": "ersetzt",
+     "S102|3": "ersetzt",
+     "S108|1": "ersetzt",
+     "S114|17": "ersetzt",
+     "S114|2": "ersetzt",
+     "S114|4": "ersetzt",
+     "S116|13": "ersetzt",
+     "S116|22": "ersetzt",
+     "S118|1": "ersetzt",
+     "S118|22": "ersetzt",
+     "S118|3": "ersetzt",
+     "S118|4": "ersetzt",
+     "S122|17": "fehlt: spät erkannt",
+     "S122|5": "ersetzt",
+     "S130|19": "ersetzt",
+     "S130|8": "ersetzt",
+     "S134|14": "ersetzt"
+    },
+    "grenzen": 0,
+    "grund": "alle Blöcke gemessen",
+    "halt": null,
+    "halte": [],
+    "laufzahl": {
+     "ausgefuehrt": 664,
+     "geplant": 630,
+     "geplant_ausgefuehrt": 630,
+     "zusaetzlich": 34
+    },
+    "luecken": [],
+    "messzeit_s": {
+     "geplant_laeufe": 10710.0,
+     "geplant_spanne": 10710.0,
+     "realisiert_laeufe": 11288.0,
+     "realisiert_spanne": 11288.0
+    },
+    "rollen": {
+     "R1": 8,
+     "R2": 3,
+     "R3": 3,
+     "X_strich": 3,
+     "aufwaermen": 2,
+     "konfiguration": 504,
+     "kontrolle": 100,
+     "referenz_block": 24,
+     "schlussreferenz": 1,
+     "wiederholung": 16
+    },
+    "s2": 0,
+    "s2_bilanz": {
+     "apparaturfehler": [],
+     "beendet": false,
+     "massgeblich": [],
+     "s2": [],
+     "widerspruch": []
+    },
+    "s2_waehrend_halt": 0,
+    "status": "abgeschlossen",
+    "x_strich": [
+     {
+      "abweichung_r0_N": 7.793976894809873e-05,
+      "block": 8,
+      "fall": "V00213",
+      "g1": false,
+      "gueltig": true,
+      "halt": null,
+      "konfiguration": "S130",
+      "nach": "V00217",
+      "nach_rolle": "R3",
+      "s1": null,
+      "versuch": "V00216",
+      "vor": "V00215",
+      "vor_rolle": "R2",
+      "vorgesehen": true,
+      "vorpruefung_ablauf_1": false
+     },
+     {
+      "abweichung_r0_N": 8.394465528738237e-05,
+      "block": 13,
+      "fall": "V00348",
+      "g1": false,
+      "gueltig": true,
+      "halt": null,
+      "konfiguration": "S116",
+      "nach": "V00352",
+      "nach_rolle": "R3",
+      "s1": null,
+      "versuch": "V00351",
+      "vor": "V00350",
+      "vor_rolle": "R2",
+      "vorgesehen": true,
+      "vorpruefung_ablauf_1": false
+     },
+     {
+      "abweichung_r0_N": 0.00018326941632906824,
+      "block": 18,
+      "fall": "V00473",
+      "g1": false,
+      "gueltig": true,
+      "halt": null,
+      "konfiguration": "S102",
+      "nach": "V00477",
+      "nach_rolle": "R3",
+      "s1": null,
+      "versuch": "V00476",
+      "vor": "V00475",
+      "vor_rolle": "R2",
+      "vorgesehen": true,
+      "vorpruefung_ablauf_1": false
+     }
+    ],
+    "ziehungen": 16
+   },
+   "art": "voll",
+   "auswertbar": {
+    "min_gueltig": 23,
+    "n": 21,
+    "n_gueltig": {
+     "S100": 24,
+     "S102": 24,
+     "S104": 24,
+     "S106": 24,
+     "S108": 24,
+     "S110": 24,
+     "S112": 24,
+     "S114": 24,
+     "S116": 24,
+     "S118": 24,
+     "S120": 24,
+     "S122": 23,
+     "S124": 24,
+     "S126": 24,
+     "S128": 24,
+     "S130": 24,
+     "S132": 24,
+     "S134": 24,
+     "S136": 24,
+     "S138": 24,
+     "S140": 24
+    },
+    "nicht": [],
+    "von": 21
+   },
+   "ebene": "Z",
+   "herkunft": "neu gerechnet (Korrekturrunde, ablauf-2)",
+   "index": 0,
+   "kontrollen": {
+    "gueltig_je_modul": [
+     25,
+     25,
+     25
+    ],
+    "yhat1_gueltig": true
+   },
+   "laufzeit_s": 291.94,
+   "phase1": {
+    "S2": 0,
+    "S4": 0,
+    "konfig_g4": 16,
+    "konfig_laeufe": 523,
+    "konfig_regeln": {
+     "G1": 4,
+     "G4": 16
+    },
+    "konfig_ungueltig": 20,
+    "n_laeufe": 664,
+    "n_ungueltig": 20,
+    "regeln": {
+     "G1": 4,
+     "G4": 16
+    }
+   },
+   "seed": 7550300167789857562,
+   "sperren": [],
+   "szenario": "A04-R4",
+   "teil_b": {
+    "arbeitspunkt": "nicht geprüft",
+    "bindung": "plan",
+    "eps_ctrl": 0.000255701396052373,
+    "k": 9,
+    "k_max": 9,
+    "k_pilotgroessen": 30,
+    "n": 24,
+    "n0_gueltig": [
+     20,
+     20,
+     20
+    ],
+    "n_min": 18,
+    "p_hat": 0.03333333333333333,
+    "r_soll": 3,
+    "sigma_delta_K": {
+     "F": 0.0017425363636671253,
+     "N": 0.00019212404273004076,
+     "n": 60
+    }
+   },
+   "variante": "wiederholungen",
+   "verfahren": {
+    "ablauf": "zustand",
+    "ablauf_version": "ablauf-2",
+    "bindung": "plan",
+    "optionen": {
+     "aufwaermen": true,
+     "halt": true,
+     "wiederholungen": true
+    },
+    "version": "verfahren-1"
+   },
+   "voll": {
+    "E3": {
+     "bewertung": "unbestimmt",
+     "status": "Entwicklungsprofil (dreiwertig nur als Entwicklungsprüffall)"
+    },
+    "E3_grund": null,
+    "H0": {
+     "aussage": "kein Unterschied nachgewiesen, Gleichheit nicht nachgewiesen",
+     "g1": 4,
+     "lage": "innerhalb ±ε_ctrl"
+    },
+    "H1": {
+     "abweichung": true,
+     "ausgang": "falsifiziert",
+     "c": 3.709322110180076,
+     "drift": false,
+     "grund": null,
+     "max_abs_z0": 604.4743309086551,
+     "max_abs_z1": 656.4208102928443,
+     "vollstaendig": true,
+     "zusaetze": [
+      "Abweichung nachgewiesen"
+     ]
+    },
+    "H1Z": {
+     "ausgang": "falsifiziert",
+     "c": 3.8064613614497946,
+     "grund": null,
+     "max_abs_z0": 387.4669187512865
+    },
+    "H2": {
+     "W_ids": [
+      "S114",
+      "S116",
+      "S118",
+      "S120",
+      "S122",
+      "S124",
+      "S126"
+     ],
+     "ausgang": "bestätigt",
+     "delta_phi0": 0.0,
+     "delta_phi1": 0.0,
+     "gewaehlt": "perzentil_0.95",
+     "grund": null,
+     "intervalle": {
+      "bca_0.95": [
+       [
+        -0.0010000000000047748,
+        0.0010000000000047748
+       ],
+       [
+        -0.0010000000000047748,
+        0.0012765404783236871
+       ]
+      ],
+      "perzentil_0.95": [
+       [
+        -0.001999999999995339,
+        0.0
+       ],
+       [
+        -0.0010000000000047748,
+        0.0010000000000047748
+       ]
+      ],
+      "perzentil_0.96": [
+       [
+        -0.0030000000000001137,
+        0.0
+       ],
+       [
+        -0.002019999999995416,
+        0.0030000000000001137
+       ]
+      ],
+      "perzentil_0.97": [
+       [
+        -0.006000000000000227,
+        0.0
+       ],
+       [
+        -0.0030150000000001716,
+        0.005015000000009508
+       ]
+      ],
+      "perzentil_0.98": [
+       [
+        -0.008010000000009674,
+        0.000999999999990564
+       ],
+       [
+        -0.006020000000000305,
+        0.01100999999999572
+       ]
+      ],
+      "perzentil_0.99": [
+       [
+        -0.012000000000000455,
+        0.0010000000000047748
+       ],
+       [
+        -0.010010000000005084,
+        0.019004999999991265
+       ]
+      ]
+     },
+     "punktmasse0": 0.806,
+     "punktmasse1": 0.84,
+     "zusaetze": []
+    },
+    "H3": {
+     "ausgang": "nicht entscheidbar",
+     "grund": "Verfahren",
+     "kennzeichnung": null,
+     "zusaetze": []
+    },
+    "H4": {
+     "V": [
+      "S100",
+      "S102",
+      "S104",
+      "S106",
+      "S108",
+      "S110",
+      "S112",
+      "S114",
+      "S116",
+      "S118",
+      "S120",
+      "S122",
+      "S124",
+      "S126",
+      "S128",
+      "S130",
+      "S132",
+      "S134",
+      "S136",
+      "S138",
+      "S140"
+     ],
+     "ausgang": "bestätigt",
+     "grund": null
+    },
+    "datenlage_gleich": true,
+    "herkunft_ablauf": {
+     "ende": {
+      "grund": "alle Blöcke gemessen",
+      "status": "abgeschlossen"
+     },
+     "ereignisse": [],
+     "halt": null,
+     "kennung": {
+      "ebene": "Z",
+      "modell_sha256": "db84166bc8264e865e95c3d1109a2c99c629e33d0781e8f511dc61d05622fb18",
+      "plan": {
+       "T_lauf": 17.0,
+       "einstellung2": null,
+       "n0": 20,
+       "n_bloecke": 24,
+       "n_pilot": 20,
+       "n_zyklen": 100,
+       "phase_pause": 86400.0,
+       "pruef": [],
+       "pruef_bilder": true,
+       "ref_abstand": 12,
+       "ref_min_p0": 42,
+       "tag_pause": 43200.0,
+       "tage": 1,
+       "zusatz": false
+      },
+      "profil_sha256": "49dc74abca52b2c5e4ae8f6d2e1c53dc468205b01b9f65270b86c27e91114352",
+      "schwellen_sha256": "8c18c00a82d7678f3cbf15a1071f52bcfdced26973d0adb5c46492c73808d8ef",
+      "seed": 7550300167789857562,
+      "stufe": "L1",
+      "szenario": "A04-R4",
+      "verfahren": {
+       "ablauf": "zustand",
+       "ablauf_version": "ablauf-2",
+       "bindung": "plan",
+       "optionen": {
+        "aufwaermen": true,
+        "halt": true,
+        "wiederholungen": true
+       },
+       "version": "verfahren-1"
+      }
+     },
+     "luecken": [],
+     "optionen": {
+      "aufwaermen": true,
+      "halt": true,
+      "wiederholungen": true
+     },
+     "s2": [],
+     "s2_bilanz": {
+      "apparaturfehler": [],
+      "beendet": false,
+      "massgeblich": [],
+      "s2": [],
+      "widerspruch": []
+     },
+     "status": "abgeschlossen",
+     "version": "ablauf-2"
+    },
+    "n_auswertbar": 21,
+    "yhat1_gueltig": true
+   },
+   "vollstaendig": true
+  }
+ ],
+ "vorher": {
+  "ablauf_version": "ablauf-1",
+  "checkpoints": "/tmp/pcmms-ablauf-vergleich-20261017 (Prüfsummen wie in ergebnisse.json am Stand 9a1cd2f)",
+  "rechenstand": "13f2a20",
+  "stand": "9a1cd2f294f34897de807a53bb106a0d767007dd"
+ },
+ "vorher_nachher": [
+  {
+   "art": "schlank",
+   "auswahl": {},
+   "ebene": "H",
+   "gleich": true,
+   "index": 0,
+   "plaetze": {},
+   "rollen": {},
+   "s2_bilanz": {
+    "apparaturfehler": [],
+    "beendet": false,
+    "massgeblich": [],
+    "s2": [],
+    "widerspruch": []
+   },
+   "seed": 6421326674948950355,
+   "szenario": "N01-A4",
+   "teil_b_gleich": true,
+   "unterschiede": {},
+   "ursache": [],
+   "variante": "wiederholungen",
+   "x_strich": []
+  },
+  {
+   "art": "schlank",
+   "auswahl": {},
+   "ebene": "H",
+   "gleich": true,
+   "index": 1,
+   "plaetze": {},
+   "rollen": {},
+   "s2_bilanz": {
+    "apparaturfehler": [],
+    "beendet": false,
+    "massgeblich": [],
+    "s2": [],
+    "widerspruch": []
+   },
+   "seed": 941771759588347363,
+   "szenario": "N01-A4",
+   "teil_b_gleich": true,
+   "unterschiede": {},
+   "ursache": [],
+   "variante": "wiederholungen",
+   "x_strich": []
+  },
+  {
+   "art": "schlank",
+   "auswahl": {},
+   "ebene": "H",
+   "gleich": true,
+   "index": 2,
+   "plaetze": {},
+   "rollen": {},
+   "s2_bilanz": {
+    "apparaturfehler": [],
+    "beendet": false,
+    "massgeblich": [],
+    "s2": [],
+    "widerspruch": []
+   },
+   "seed": 1671252940681334300,
+   "szenario": "N01-A4",
+   "teil_b_gleich": true,
+   "unterschiede": {},
+   "ursache": [],
+   "variante": "wiederholungen",
+   "x_strich": [
+    {
+     "abweichung_r0_N": 1.962568914581908e-05,
+     "block": 17,
+     "fall": "V00460",
+     "g1": false,
+     "gueltig": true,
+     "halt": null,
+     "konfiguration": "S122",
+     "nach": "V00464",
+     "nach_rolle": "R3",
+     "s1": null,
+     "versuch": "V00463",
+     "vor": "V00462",
+     "vor_rolle": "R2",
+     "vorgesehen": true,
+     "vorpruefung_ablauf_1": false
+    }
+   ]
+  },
+  {
+   "art": "schlank",
+   "auswahl": {},
+   "ebene": "H",
+   "gleich": true,
+   "index": 3,
+   "plaetze": {},
+   "rollen": {},
+   "s2_bilanz": {
+    "apparaturfehler": [],
+    "beendet": false,
+    "massgeblich": [],
+    "s2": [],
+    "widerspruch": []
+   },
+   "seed": 3742277982765182668,
+   "szenario": "N01-A4",
+   "teil_b_gleich": true,
+   "unterschiede": {},
+   "ursache": [],
+   "variante": "wiederholungen",
+   "x_strich": []
+  },
+  {
+   "art": "schlank",
+   "auswahl": {},
+   "ebene": "H",
+   "gleich": true,
+   "index": 4,
+   "plaetze": {},
+   "rollen": {},
+   "s2_bilanz": {
+    "apparaturfehler": [],
+    "beendet": false,
+    "massgeblich": [],
+    "s2": [],
+    "widerspruch": []
+   },
+   "seed": 655012045435102802,
+   "szenario": "N01-A4",
+   "teil_b_gleich": true,
+   "unterschiede": {},
+   "ursache": [],
+   "variante": "wiederholungen",
+   "x_strich": []
+  },
+  {
+   "art": "schlank",
+   "auswahl": {},
+   "ebene": "H",
+   "gleich": true,
+   "index": 5,
+   "plaetze": {},
+   "rollen": {},
+   "s2_bilanz": {
+    "apparaturfehler": [],
+    "beendet": false,
+    "massgeblich": [],
+    "s2": [],
+    "widerspruch": []
+   },
+   "seed": 3010703880746530213,
+   "szenario": "N01-A4",
+   "teil_b_gleich": true,
+   "unterschiede": {},
+   "ursache": [],
+   "variante": "wiederholungen",
+   "x_strich": [
+    {
+     "abweichung_r0_N": 0.00015097933900776184,
+     "block": 2,
+     "fall": "V00041",
+     "g1": false,
+     "gueltig": true,
+     "halt": null,
+     "konfiguration": "S134",
+     "nach": "V00048",
+     "nach_rolle": "R3",
+     "s1": null,
+     "versuch": "V00047",
+     "vor": "V00046",
+     "vor_rolle": "R2",
+     "vorgesehen": true,
+     "vorpruefung_ablauf_1": false
+    }
+   ]
+  },
+  {
+   "art": "schlank",
+   "auswahl": {},
+   "ebene": "H",
+   "gleich": true,
+   "index": 6,
+   "plaetze": {},
+   "rollen": {},
+   "s2_bilanz": {
+    "apparaturfehler": [],
+    "beendet": false,
+    "massgeblich": [],
+    "s2": [],
+    "widerspruch": []
+   },
+   "seed": 4088570445890746321,
+   "szenario": "N01-A4",
+   "teil_b_gleich": true,
+   "unterschiede": {},
+   "ursache": [],
+   "variante": "wiederholungen",
+   "x_strich": []
+  },
+  {
+   "art": "schlank",
+   "auswahl": {},
+   "ebene": "H",
+   "gleich": true,
+   "index": 7,
+   "plaetze": {},
+   "rollen": {},
+   "s2_bilanz": {
+    "apparaturfehler": [],
+    "beendet": false,
+    "massgeblich": [],
+    "s2": [],
+    "widerspruch": []
+   },
+   "seed": 8609028504085932528,
+   "szenario": "N01-A4",
+   "teil_b_gleich": true,
+   "unterschiede": {},
+   "ursache": [],
+   "variante": "wiederholungen",
+   "x_strich": []
+  },
+  {
+   "art": "schlank",
+   "auswahl": {},
+   "ebene": "H",
+   "gleich": true,
+   "index": 8,
+   "plaetze": {},
+   "rollen": {},
+   "s2_bilanz": {
+    "apparaturfehler": [],
+    "beendet": false,
+    "massgeblich": [],
+    "s2": [],
+    "widerspruch": []
+   },
+   "seed": 6952551792846395683,
+   "szenario": "N01-A4",
+   "teil_b_gleich": true,
+   "unterschiede": {},
+   "ursache": [],
+   "variante": "wiederholungen",
+   "x_strich": []
+  },
+  {
+   "art": "schlank",
+   "auswahl": {},
+   "ebene": "H",
+   "gleich": true,
+   "index": 9,
+   "plaetze": {},
+   "rollen": {},
+   "s2_bilanz": {
+    "apparaturfehler": [],
+    "beendet": false,
+    "massgeblich": [],
+    "s2": [],
+    "widerspruch": []
+   },
+   "seed": 5328013158255319426,
+   "szenario": "N01-A4",
+   "teil_b_gleich": true,
+   "unterschiede": {},
+   "ursache": [],
+   "variante": "wiederholungen",
+   "x_strich": []
+  },
+  {
+   "art": "schlank",
+   "auswahl": {},
+   "ebene": "H",
+   "gleich": true,
+   "index": 0,
+   "plaetze": {},
+   "rollen": {},
+   "s2_bilanz": {
+    "apparaturfehler": [],
+    "beendet": false,
+    "massgeblich": [],
+    "s2": [],
+    "widerspruch": []
+   },
+   "seed": 4202534701440629906,
+   "szenario": "N01-V1G0",
+   "teil_b_gleich": true,
+   "unterschiede": {},
+   "ursache": [],
+   "variante": "wiederholungen",
+   "x_strich": [
+    {
+     "abweichung_r0_N": 5.2701280276679086e-05,
+     "block": 14,
+     "fall": "V00370",
+     "g1": false,
+     "gueltig": true,
+     "halt": null,
+     "konfiguration": "S138",
+     "nach": "V00376",
+     "nach_rolle": "R3",
+     "s1": null,
+     "versuch": "V00375",
+     "vor": "V00374",
+     "vor_rolle": "R2",
+     "vorgesehen": true,
+     "vorpruefung_ablauf_1": false
+    }
+   ]
+  },
+  {
+   "art": "schlank",
+   "auswahl": {},
+   "ebene": "H",
+   "gleich": true,
+   "index": 1,
+   "plaetze": {},
+   "rollen": {},
+   "s2_bilanz": {
+    "apparaturfehler": [],
+    "beendet": false,
+    "massgeblich": [],
+    "s2": [],
+    "widerspruch": []
+   },
+   "seed": 522969386212988845,
+   "szenario": "N01-V1G0",
+   "teil_b_gleich": true,
+   "unterschiede": {},
+   "ursache": [],
+   "variante": "wiederholungen",
+   "x_strich": [
+    {
+     "abweichung_r0_N": 0.0002064188284878199,
+     "block": 1,
+     "fall": "V00022",
+     "g1": false,
+     "gueltig": true,
+     "halt": null,
+     "konfiguration": "S104",
+     "nach": "V00026",
+     "nach_rolle": "R3",
+     "s1": null,
+     "versuch": "V00025",
+     "vor": "V00024",
+     "vor_rolle": "R2",
+     "vorgesehen": true,
+     "vorpruefung_ablauf_1": false
+    }
+   ]
+  },
+  {
+   "art": "schlank",
+   "auswahl": {
+    "fehlt: Halt": [
+     1,
+     3
+    ],
+    "fehlt: spät erkannt": [
+     2,
+     0
+    ]
+   },
+   "ebene": "H",
+   "gleich": false,
+   "index": 2,
+   "plaetze": {
+    "S104|23": [
+     "fehlt: spät erkannt",
+     "fehlt: Halt"
+    ],
+    "S128|23": [
+     "fehlt: spät erkannt",
+     "fehlt: Halt"
+    ]
+   },
+   "rollen": {},
+   "s2_bilanz": {
+    "apparaturfehler": [],
+    "beendet": false,
+    "massgeblich": [],
+    "s2": [],
+    "widerspruch": []
+   },
+   "seed": 6151025590442919715,
+   "szenario": "N01-V1G0",
+   "teil_b_gleich": true,
+   "unterschiede": {
+    "grund": [
+     "S1: G1-Verstoß der Wiederholung X′",
+     "S1: G1-Verstoß der Wiederholung X′ gegen R₂/R₃ (V00665/V00667)"
+    ],
+    "sperren": [
+     [
+      "Phase 1 angehalten: S1: G1-Verstoß der Wiederholung X′ (keine abgeschlossene Kampagne)"
+     ],
+     [
+      "Phase 1 angehalten: S1: G1-Verstoß der Wiederholung X′ gegen R₂/R₃ (V00665/V00667) (keine abgeschlossene Kampagne)"
+     ]
+    ]
+   },
+   "ursache": [
+    "Haltgrund nennt jetzt die Klammer R₂/R₃ von X′ (Korrektur 1); Halt und Zeitpunkt gleich",
+    "Platzstatus aus strukturierten Angaben (Korrektur 1, kein anderer Ablauf): fehlt: spät erkannt → fehlt: Halt"
+   ],
+   "variante": "wiederholungen",
+   "x_strich": [
+    {
+     "abweichung_r0_N": 0.00011256412991134113,
+     "block": 1,
+     "fall": "V00007",
+     "g1": false,
+     "gueltig": true,
+     "halt": null,
+     "konfiguration": "L1",
+     "nach": "V00011",
+     "nach_rolle": "R3",
+     "s1": null,
+     "versuch": "V00010",
+     "vor": "V00009",
+     "vor_rolle": "R2",
+     "vorgesehen": true,
+     "vorpruefung_ablauf_1": false
+    },
+    {
+     "abweichung_r0_N": 0.00016219105984305315,
+     "block": 3,
+     "fall": "V00086",
+     "g1": false,
+     "gueltig": true,
+     "halt": null,
+     "konfiguration": "S106",
+     "nach": "V00090",
+     "nach_rolle": "R3",
+     "s1": null,
+     "versuch": "V00089",
+     "vor": "V00088",
+     "vor_rolle": "R2",
+     "vorgesehen": true,
+     "vorpruefung_ablauf_1": false
+    },
+    {
+     "abweichung_r0_N": 1.2580904806824833e-05,
+     "block": 4,
+     "fall": "V00112",
+     "g1": false,
+     "gueltig": true,
+     "halt": null,
+     "konfiguration": "S100",
+     "nach": "V00117",
+     "nach_rolle": "R3",
+     "s1": null,
+     "versuch": "V00116",
+     "vor": "V00115",
+     "vor_rolle": "R2",
+     "vorgesehen": true,
+     "vorpruefung_ablauf_1": false
+    },
+    {
+     "abweichung_r0_N": 0.00011771963872231339,
+     "block": 4,
+     "fall": "V00121",
+     "g1": false,
+     "gueltig": true,
+     "halt": null,
+     "konfiguration": "S138",
+     "nach": "V00125",
+     "nach_rolle": "R3",
+     "s1": null,
+     "versuch": "V00124",
+     "vor": "V00123",
+     "vor_rolle": "R2",
+     "vorgesehen": true,
+     "vorpruefung_ablauf_1": false
+    },
+    {
+     "abweichung_r0_N": 0.0001514762409353665,
+     "block": 6,
+     "fall": "V00171",
+     "g1": false,
+     "gueltig": true,
+     "halt": null,
+     "konfiguration": "S134",
+     "nach": "V00180",
+     "nach_rolle": "R3",
+     "s1": null,
+     "versuch": "V00179",
+     "vor": "V00178",
+     "vor_rolle": "R2",
+     "vorgesehen": true,
+     "vorpruefung_ablauf_1": false
+    },
+    {
+     "abweichung_r0_N": 8.174969376728569e-05,
+     "block": 11,
+     "fall": "V00317",
+     "g1": false,
+     "gueltig": true,
+     "halt": null,
+     "konfiguration": "S116",
+     "nach": "V00321",
+     "nach_rolle": "R3",
+     "s1": null,
+     "versuch": "V00320",
+     "vor": "V00319",
+     "vor_rolle": "R2",
+     "vorgesehen": true,
+     "vorpruefung_ablauf_1": false
+    },
+    {
+     "abweichung_r0_N": 8.54903985914035e-05,
+     "block": 12,
+     "fall": "V00338",
+     "g1": false,
+     "gueltig": true,
+     "halt": null,
+     "konfiguration": "S134",
+     "nach": "V00342",
+     "nach_rolle": "R3",
+     "s1": null,
+     "versuch": "V00341",
+     "vor": "V00340",
+     "vor_rolle": "R2",
+     "vorgesehen": true,
+     "vorpruefung_ablauf_1": false
+    },
+    {
+     "abweichung_r0_N": 0.00020517508662187822,
+     "block": 13,
+     "fall": "V00376",
+     "g1": false,
+     "gueltig": true,
+     "halt": null,
+     "konfiguration": "S130",
+     "nach": "V00380",
+     "nach_rolle": "R3",
+     "s1": null,
+     "versuch": "V00379",
+     "vor": "V00378",
+     "vor_rolle": "R2",
+     "vorgesehen": true,
+     "vorpruefung_ablauf_1": false
+    },
+    {
+     "abweichung_r0_N": null,
+     "block": 13,
+     "fall": "V00381",
+     "g1": null,
+     "gueltig": false,
+     "halt": null,
+     "konfiguration": "S126",
+     "nach": null,
+     "nach_rolle": null,
+     "s1": null,
+     "versuch": "V00385",
+     "vor": null,
+     "vor_rolle": null,
+     "vorgesehen": null,
+     "vorpruefung_ablauf_1": null
+    },
+    {
+     "abweichung_r0_N": 5.563757493032284e-05,
+     "block": 21,
+     "fall": "V00604",
+     "g1": false,
+     "gueltig": true,
+     "halt": null,
+     "konfiguration": "S140",
+     "nach": "V00608",
+     "nach_rolle": "R3",
+     "s1": null,
+     "versuch": "V00607",
+     "vor": "V00606",
+     "vor_rolle": "R2",
+     "vorgesehen": true,
+     "vorpruefung_ablauf_1": false
+    },
+    {
+     "abweichung_r0_N": 9.696159212957411e-05,
+     "block": 22,
+     "fall": "V00623",
+     "g1": false,
+     "gueltig": true,
+     "halt": null,
+     "konfiguration": "S138",
+     "nach": "V00633",
+     "nach_rolle": "R3",
+     "s1": null,
+     "versuch": "V00632",
+     "vor": "V00631",
+     "vor_rolle": "R2",
+     "vorgesehen": true,
+     "vorpruefung_ablauf_1": false
+    },
+    {
+     "abweichung_r0_N": 3.7183985170941014e-05,
+     "block": 23,
+     "fall": "V00652",
+     "g1": false,
+     "gueltig": true,
+     "halt": null,
+     "konfiguration": "S132",
+     "nach": "V00656",
+     "nach_rolle": "R3",
+     "s1": null,
+     "versuch": "V00655",
+     "vor": "V00654",
+     "vor_rolle": "R2",
+     "vorgesehen": true,
+     "vorpruefung_ablauf_1": false
+    },
+    {
+     "abweichung_r0_N": 0.0001173111090491119,
+     "block": 23,
+     "fall": "V00661",
+     "g1": true,
+     "gueltig": false,
+     "halt": "S1",
+     "konfiguration": "S128",
+     "nach": "V00667",
+     "nach_rolle": "R3",
+     "s1": null,
+     "versuch": "V00666",
+     "vor": "V00665",
+     "vor_rolle": "R2",
+     "vorgesehen": true,
+     "vorpruefung_ablauf_1": false
+    }
+   ]
+  },
+  {
+   "art": "schlank",
+   "auswahl": {},
+   "ebene": "H",
+   "gleich": true,
+   "index": 3,
+   "plaetze": {},
+   "rollen": {},
+   "s2_bilanz": {
+    "apparaturfehler": [],
+    "beendet": false,
+    "massgeblich": [],
+    "s2": [],
+    "widerspruch": []
+   },
+   "seed": 2837871836508963753,
+   "szenario": "N01-V1G0",
+   "teil_b_gleich": true,
+   "unterschiede": {},
+   "ursache": [],
+   "variante": "wiederholungen",
+   "x_strich": [
+    {
+     "abweichung_r0_N": 8.819694652562049e-05,
+     "block": 16,
+     "fall": "V00419",
+     "g1": false,
+     "gueltig": true,
+     "halt": null,
+     "konfiguration": "S114",
+     "nach": "V00429",
+     "nach_rolle": "R3",
+     "s1": null,
+     "versuch": "V00428",
+     "vor": "V00427",
+     "vor_rolle": "R2",
+     "vorgesehen": true,
+     "vorpruefung_ablauf_1": false
+    }
+   ]
+  },
+  {
+   "art": "schlank",
+   "auswahl": {},
+   "ebene": "H",
+   "gleich": true,
+   "index": 4,
+   "plaetze": {},
+   "rollen": {},
+   "s2_bilanz": {
+    "apparaturfehler": [],
+    "beendet": false,
+    "massgeblich": [],
+    "s2": [],
+    "widerspruch": []
+   },
+   "seed": 6541414184217749668,
+   "szenario": "N01-V1G0",
+   "teil_b_gleich": true,
+   "unterschiede": {},
+   "ursache": [],
+   "variante": "wiederholungen",
+   "x_strich": []
+  },
+  {
+   "art": "schlank",
+   "auswahl": {},
+   "ebene": "H",
+   "gleich": true,
+   "index": 5,
+   "plaetze": {},
+   "rollen": {},
+   "s2_bilanz": {
+    "apparaturfehler": [],
+    "beendet": false,
+    "massgeblich": [],
+    "s2": [],
+    "widerspruch": []
+   },
+   "seed": 1911642046984185806,
+   "szenario": "N01-V1G0",
+   "teil_b_gleich": true,
+   "unterschiede": {},
+   "ursache": [],
+   "variante": "wiederholungen",
+   "x_strich": []
+  },
+  {
+   "art": "schlank",
+   "auswahl": {},
+   "ebene": "H",
+   "gleich": true,
+   "index": 6,
+   "plaetze": {},
+   "rollen": {},
+   "s2_bilanz": {
+    "apparaturfehler": [],
+    "beendet": false,
+    "massgeblich": [],
+    "s2": [],
+    "widerspruch": []
+   },
+   "seed": 3825293146687617875,
+   "szenario": "N01-V1G0",
+   "teil_b_gleich": true,
+   "unterschiede": {},
+   "ursache": [],
+   "variante": "wiederholungen",
+   "x_strich": []
+  },
+  {
+   "art": "schlank",
+   "auswahl": {
+    "fehlt: Halt": [
+     0,
+     1
+    ],
+    "fehlt: spät erkannt": [
+     1,
+     0
+    ]
+   },
+   "ebene": "H",
+   "gleich": false,
+   "index": 7,
+   "plaetze": {
+    "S124|13": [
+     "fehlt: spät erkannt",
+     "fehlt: Halt"
+    ]
+   },
+   "rollen": {},
+   "s2_bilanz": {
+    "apparaturfehler": [],
+    "beendet": false,
+    "massgeblich": [],
+    "s2": [],
+    "widerspruch": []
+   },
+   "seed": 3111866991806461631,
+   "szenario": "N01-V1G0",
+   "teil_b_gleich": true,
+   "unterschiede": {
+    "grund": [
+     "S1: G1-Verstoß der Wiederholung X′",
+     "S1: G1-Verstoß der Wiederholung X′ gegen R₂/R₃ (V00363/V00365)"
+    ],
+    "sperren": [
+     [
+      "Phase 1 angehalten: S1: G1-Verstoß der Wiederholung X′ (keine abgeschlossene Kampagne)"
+     ],
+     [
+      "Phase 1 angehalten: S1: G1-Verstoß der Wiederholung X′ gegen R₂/R₃ (V00363/V00365) (keine abgeschlossene Kampagne)"
+     ]
+    ]
+   },
+   "ursache": [
+    "Haltgrund nennt jetzt die Klammer R₂/R₃ von X′ (Korrektur 1); Halt und Zeitpunkt gleich",
+    "Platzstatus aus strukturierten Angaben (Korrektur 1, kein anderer Ablauf): fehlt: spät erkannt → fehlt: Halt"
+   ],
+   "variante": "wiederholungen",
+   "x_strich": [
+    {
+     "abweichung_r0_N": 7.13949488098109e-05,
+     "block": 11,
+     "fall": "V00290",
+     "g1": false,
+     "gueltig": true,
+     "halt": null,
+     "konfiguration": "S134",
+     "nach": "V00294",
+     "nach_rolle": "R3",
+     "s1": null,
+     "versuch": "V00293",
+     "vor": "V00292",
+     "vor_rolle": "R2",
+     "vorgesehen": true,
+     "vorpruefung_ablauf_1": false
+    },
+    {
+     "abweichung_r0_N": 0.00025295375792211416,
+     "block": 13,
+     "fall": "V00361",
+     "g1": true,
+     "gueltig": false,
+     "halt": "S1",
+     "konfiguration": "S124",
+     "nach": "V00365",
+     "nach_rolle": "R3",
+     "s1": null,
+     "versuch": "V00364",
+     "vor": "V00363",
+     "vor_rolle": "R2",
+     "vorgesehen": true,
+     "vorpruefung_ablauf_1": false
+    }
+   ]
+  },
+  {
+   "art": "schlank",
+   "auswahl": {},
+   "ebene": "H",
+   "gleich": true,
+   "index": 8,
+   "plaetze": {},
+   "rollen": {},
+   "s2_bilanz": {
+    "apparaturfehler": [],
+    "beendet": false,
+    "massgeblich": [],
+    "s2": [],
+    "widerspruch": []
+   },
+   "seed": 5605373187149328597,
+   "szenario": "N01-V1G0",
+   "teil_b_gleich": true,
+   "unterschiede": {},
+   "ursache": [],
+   "variante": "wiederholungen",
+   "x_strich": [
+    {
+     "abweichung_r0_N": 9.129033950117105e-06,
+     "block": 9,
+     "fall": "V00238",
+     "g1": false,
+     "gueltig": true,
+     "halt": null,
+     "konfiguration": "S126",
+     "nach": "V00243",
+     "nach_rolle": "R3",
+     "s1": null,
+     "versuch": "V00242",
+     "vor": "V00241",
+     "vor_rolle": "R2",
+     "vorgesehen": true,
+     "vorpruefung_ablauf_1": false
+    },
+    {
+     "abweichung_r0_N": null,
+     "block": 19,
+     "fall": "V00527",
+     "g1": null,
+     "gueltig": false,
+     "halt": null,
+     "konfiguration": "S108",
+     "nach": null,
+     "nach_rolle": null,
+     "s1": null,
+     "versuch": "V00532",
+     "vor": null,
+     "vor_rolle": null,
+     "vorgesehen": null,
+     "vorpruefung_ablauf_1": null
+    },
+    {
+     "abweichung_r0_N": 2.210820741055386e-05,
+     "block": 20,
+     "fall": "V00568",
+     "g1": false,
+     "gueltig": true,
+     "halt": null,
+     "konfiguration": "S136",
+     "nach": "V00572",
+     "nach_rolle": "R3",
+     "s1": null,
+     "versuch": "V00571",
+     "vor": "V00570",
+     "vor_rolle": "R2",
+     "vorgesehen": true,
+     "vorpruefung_ablauf_1": false
+    }
+   ]
+  },
+  {
+   "art": "schlank",
+   "auswahl": {},
+   "ebene": "H",
+   "gleich": true,
+   "index": 9,
+   "plaetze": {},
+   "rollen": {},
+   "s2_bilanz": {
+    "apparaturfehler": [],
+    "beendet": false,
+    "massgeblich": [],
+    "s2": [],
+    "widerspruch": []
+   },
+   "seed": 8923286715072122757,
+   "szenario": "N01-V1G0",
+   "teil_b_gleich": true,
+   "unterschiede": {},
+   "ursache": [],
+   "variante": "wiederholungen",
+   "x_strich": [
+    {
+     "abweichung_r0_N": 6.166398408780083e-05,
+     "block": 1,
+     "fall": "V00018",
+     "g1": false,
+     "gueltig": true,
+     "halt": null,
+     "konfiguration": "S114",
+     "nach": "V00022",
+     "nach_rolle": "R3",
+     "s1": null,
+     "versuch": "V00021",
+     "vor": "V00020",
+     "vor_rolle": "R2",
+     "vorgesehen": true,
+     "vorpruefung_ablauf_1": false
+    }
+   ]
+  },
+  {
+   "art": "schlank",
+   "auswahl": {},
+   "ebene": "H",
+   "gleich": true,
+   "index": 0,
+   "plaetze": {},
+   "rollen": {},
+   "s2_bilanz": {
+    "apparaturfehler": [],
+    "beendet": false,
+    "massgeblich": [],
+    "s2": [],
+    "widerspruch": []
+   },
+   "seed": 795519448574340983,
+   "szenario": "N01-V1G60h",
+   "teil_b_gleich": true,
+   "unterschiede": {},
+   "ursache": [],
+   "variante": "wiederholungen",
+   "x_strich": []
+  },
+  {
+   "art": "schlank",
+   "auswahl": {},
+   "ebene": "H",
+   "gleich": true,
+   "index": 1,
+   "plaetze": {},
+   "rollen": {},
+   "s2_bilanz": {
+    "apparaturfehler": [],
+    "beendet": false,
+    "massgeblich": [],
+    "s2": [],
+    "widerspruch": []
+   },
+   "seed": 6415602612872341321,
+   "szenario": "N01-V1G60h",
+   "teil_b_gleich": true,
+   "unterschiede": {},
+   "ursache": [],
+   "variante": "wiederholungen",
+   "x_strich": []
+  },
+  {
+   "art": "schlank",
+   "auswahl": {},
+   "ebene": "H",
+   "gleich": true,
+   "index": 2,
+   "plaetze": {},
+   "rollen": {},
+   "s2_bilanz": {
+    "apparaturfehler": [],
+    "beendet": false,
+    "massgeblich": [],
+    "s2": [],
+    "widerspruch": []
+   },
+   "seed": 8676972707023640149,
+   "szenario": "N01-V1G60h",
+   "teil_b_gleich": true,
+   "unterschiede": {},
+   "ursache": [],
+   "variante": "wiederholungen",
+   "x_strich": []
+  },
+  {
+   "art": "schlank",
+   "auswahl": {},
+   "ebene": "H",
+   "gleich": true,
+   "index": 3,
+   "plaetze": {},
+   "rollen": {},
+   "s2_bilanz": {
+    "apparaturfehler": [],
+    "beendet": false,
+    "massgeblich": [],
+    "s2": [],
+    "widerspruch": []
+   },
+   "seed": 1085381528517609721,
+   "szenario": "N01-V1G60h",
+   "teil_b_gleich": true,
+   "unterschiede": {},
+   "ursache": [],
+   "variante": "wiederholungen",
+   "x_strich": [
+    {
+     "abweichung_r0_N": 9.843243986118466e-05,
+     "block": 2,
+     "fall": "V00039",
+     "g1": false,
+     "gueltig": true,
+     "halt": null,
+     "konfiguration": "S108",
+     "nach": "V00048",
+     "nach_rolle": "R3",
+     "s1": null,
+     "versuch": "V00047",
+     "vor": "V00046",
+     "vor_rolle": "R2",
+     "vorgesehen": true,
+     "vorpruefung_ablauf_1": false
+    },
+    {
+     "abweichung_r0_N": 0.000128434823007062,
+     "block": 7,
+     "fall": "V00181",
+     "g1": false,
+     "gueltig": true,
+     "halt": null,
+     "konfiguration": "S132",
+     "nach": "V00186",
+     "nach_rolle": "R3",
+     "s1": null,
+     "versuch": "V00185",
+     "vor": "V00184",
+     "vor_rolle": "R2",
+     "vorgesehen": true,
+     "vorpruefung_ablauf_1": false
+    },
+    {
+     "abweichung_r0_N": 0.0001642938148638251,
+     "block": 20,
+     "fall": "V00532",
+     "g1": false,
+     "gueltig": true,
+     "halt": null,
+     "konfiguration": "S100",
+     "nach": "V00537",
+     "nach_rolle": "R3",
+     "s1": null,
+     "versuch": "V00536",
+     "vor": "V00535",
+     "vor_rolle": "R2",
+     "vorgesehen": true,
+     "vorpruefung_ablauf_1": false
+    }
+   ]
+  },
+  {
+   "art": "schlank",
+   "auswahl": {},
+   "ebene": "H",
+   "gleich": true,
+   "index": 4,
+   "plaetze": {},
+   "rollen": {},
+   "s2_bilanz": {
+    "apparaturfehler": [],
+    "beendet": false,
+    "massgeblich": [],
+    "s2": [],
+    "widerspruch": []
+   },
+   "seed": 4992586427391883278,
+   "szenario": "N01-V1G60h",
+   "teil_b_gleich": true,
+   "unterschiede": {},
+   "ursache": [],
+   "variante": "wiederholungen",
+   "x_strich": []
+  },
+  {
+   "art": "schlank",
+   "auswahl": {},
+   "ebene": "H",
+   "gleich": true,
+   "index": 5,
+   "plaetze": {},
+   "rollen": {},
+   "s2_bilanz": {
+    "apparaturfehler": [],
+    "beendet": false,
+    "massgeblich": [],
+    "s2": [],
+    "widerspruch": []
+   },
+   "seed": 2876192135852870702,
+   "szenario": "N01-V1G60h",
+   "teil_b_gleich": true,
+   "unterschiede": {},
+   "ursache": [],
+   "variante": "wiederholungen",
+   "x_strich": []
+  },
+  {
+   "art": "schlank",
+   "auswahl": {},
+   "ebene": "H",
+   "gleich": true,
+   "index": 6,
+   "plaetze": {},
+   "rollen": {},
+   "s2_bilanz": {
+    "apparaturfehler": [],
+    "beendet": false,
+    "massgeblich": [],
+    "s2": [],
+    "widerspruch": []
+   },
+   "seed": 7657828229482855577,
+   "szenario": "N01-V1G60h",
+   "teil_b_gleich": true,
+   "unterschiede": {},
+   "ursache": [],
+   "variante": "wiederholungen",
+   "x_strich": []
+  },
+  {
+   "art": "schlank",
+   "auswahl": {},
+   "ebene": "H",
+   "gleich": true,
+   "index": 7,
+   "plaetze": {},
+   "rollen": {},
+   "s2_bilanz": {
+    "apparaturfehler": [],
+    "beendet": false,
+    "massgeblich": [],
+    "s2": [],
+    "widerspruch": []
+   },
+   "seed": 3187541850860021720,
+   "szenario": "N01-V1G60h",
+   "teil_b_gleich": true,
+   "unterschiede": {},
+   "ursache": [],
+   "variante": "wiederholungen",
+   "x_strich": [
+    {
+     "abweichung_r0_N": 9.166641667945896e-06,
+     "block": 6,
+     "fall": "V00153",
+     "g1": false,
+     "gueltig": true,
+     "halt": null,
+     "konfiguration": "S116",
+     "nach": "V00157",
+     "nach_rolle": "R3",
+     "s1": null,
+     "versuch": "V00156",
+     "vor": "V00155",
+     "vor_rolle": "R2",
+     "vorgesehen": true,
+     "vorpruefung_ablauf_1": false
+    }
+   ]
+  },
+  {
+   "art": "schlank",
+   "auswahl": {},
+   "ebene": "H",
+   "gleich": true,
+   "index": 8,
+   "plaetze": {},
+   "rollen": {},
+   "s2_bilanz": {
+    "apparaturfehler": [],
+    "beendet": false,
+    "massgeblich": [],
+    "s2": [],
+    "widerspruch": []
+   },
+   "seed": 8236900843280286866,
+   "szenario": "N01-V1G60h",
+   "teil_b_gleich": true,
+   "unterschiede": {},
+   "ursache": [],
+   "variante": "wiederholungen",
+   "x_strich": []
+  },
+  {
+   "art": "schlank",
+   "auswahl": {},
+   "ebene": "H",
+   "gleich": true,
+   "index": 9,
+   "plaetze": {},
+   "rollen": {},
+   "s2_bilanz": {
+    "apparaturfehler": [],
+    "beendet": false,
+    "massgeblich": [],
+    "s2": [],
+    "widerspruch": []
+   },
+   "seed": 2511684875737638130,
+   "szenario": "N01-V1G60h",
+   "teil_b_gleich": true,
+   "unterschiede": {},
+   "ursache": [],
+   "variante": "wiederholungen",
+   "x_strich": [
+    {
+     "abweichung_r0_N": 3.9442902963315873e-05,
+     "block": 16,
+     "fall": "V00425",
+     "g1": false,
+     "gueltig": true,
+     "halt": null,
+     "konfiguration": "S134",
+     "nach": "V00430",
+     "nach_rolle": "R3",
+     "s1": null,
+     "versuch": "V00429",
+     "vor": "V00428",
+     "vor_rolle": "R2",
+     "vorgesehen": true,
+     "vorpruefung_ablauf_1": false
+    },
+    {
+     "abweichung_r0_N": 1.444204738199062e-05,
+     "block": 16,
+     "fall": "V00426",
+     "g1": false,
+     "gueltig": true,
+     "halt": null,
+     "konfiguration": "S126",
+     "nach": "V00433",
+     "nach_rolle": "R3",
+     "s1": null,
+     "versuch": "V00432",
+     "vor": "V00431",
+     "vor_rolle": "R2",
+     "vorgesehen": true,
+     "vorpruefung_ablauf_1": false
+    },
+    {
+     "abweichung_r0_N": 0.00015242613089938573,
+     "block": 19,
+     "fall": "V00521",
+     "g1": false,
+     "gueltig": true,
+     "halt": null,
+     "konfiguration": "S108",
+     "nach": "V00528",
+     "nach_rolle": "R3",
+     "s1": null,
+     "versuch": "V00527",
+     "vor": "V00526",
+     "vor_rolle": "R2",
+     "vorgesehen": true,
+     "vorpruefung_ablauf_1": false
+    }
+   ]
+  },
+  {
+   "art": "voll",
+   "auswahl": {},
+   "ebene": "H",
+   "gleich": true,
+   "index": 0,
+   "plaetze": {},
+   "rollen": {},
+   "s2_bilanz": {
+    "apparaturfehler": [],
+    "beendet": false,
+    "massgeblich": [],
+    "s2": [],
+    "widerspruch": []
+   },
+   "seed": 6421326674948950355,
+   "szenario": "N01-A4",
+   "teil_b_gleich": true,
+   "unterschiede": {},
+   "ursache": [],
+   "variante": "wiederholungen",
+   "x_strich": []
+  },
+  {
+   "art": "voll",
+   "auswahl": {},
+   "ebene": "H",
+   "gleich": true,
+   "index": 0,
+   "plaetze": {},
+   "rollen": {},
+   "s2_bilanz": {
+    "apparaturfehler": [],
+    "beendet": false,
+    "massgeblich": [],
+    "s2": [],
+    "widerspruch": []
+   },
+   "seed": 7550300167789857562,
+   "szenario": "A04-R4",
+   "teil_b_gleich": true,
+   "unterschiede": {},
+   "ursache": [],
+   "variante": "wiederholungen",
+   "x_strich": []
+  },
+  {
+   "art": "voll",
+   "auswahl": {},
+   "ebene": "Z",
+   "gleich": true,
+   "index": 0,
+   "plaetze": {},
+   "rollen": {},
+   "s2_bilanz": {
+    "apparaturfehler": [],
+    "beendet": false,
+    "massgeblich": [],
+    "s2": [],
+    "widerspruch": []
+   },
+   "seed": 6421326674948950355,
+   "szenario": "N01-A4",
+   "teil_b_gleich": true,
+   "unterschiede": {},
+   "ursache": [],
+   "variante": "wiederholungen",
+   "x_strich": [
+    {
+     "abweichung_r0_N": 5.5226208544922883e-05,
+     "block": 21,
+     "fall": "V00556",
+     "g1": false,
+     "gueltig": true,
+     "halt": null,
+     "konfiguration": "S134",
+     "nach": "V00560",
+     "nach_rolle": "R3",
+     "s1": null,
+     "versuch": "V00559",
+     "vor": "V00558",
+     "vor_rolle": "R2",
+     "vorgesehen": true,
+     "vorpruefung_ablauf_1": false
+    }
+   ]
+  },
+  {
+   "art": "voll",
+   "auswahl": {},
+   "ebene": "Z",
+   "gleich": true,
+   "index": 0,
+   "plaetze": {},
+   "rollen": {},
+   "s2_bilanz": {
+    "apparaturfehler": [],
+    "beendet": false,
+    "massgeblich": [],
+    "s2": [],
+    "widerspruch": []
+   },
+   "seed": 7550300167789857562,
+   "szenario": "A04-R4",
+   "teil_b_gleich": true,
+   "unterschiede": {},
+   "ursache": [],
+   "variante": "wiederholungen",
+   "x_strich": [
+    {
+     "abweichung_r0_N": 7.793976894809873e-05,
+     "block": 8,
+     "fall": "V00213",
+     "g1": false,
+     "gueltig": true,
+     "halt": null,
+     "konfiguration": "S130",
+     "nach": "V00217",
+     "nach_rolle": "R3",
+     "s1": null,
+     "versuch": "V00216",
+     "vor": "V00215",
+     "vor_rolle": "R2",
+     "vorgesehen": true,
+     "vorpruefung_ablauf_1": false
+    },
+    {
+     "abweichung_r0_N": 8.394465528738237e-05,
+     "block": 13,
+     "fall": "V00348",
+     "g1": false,
+     "gueltig": true,
+     "halt": null,
+     "konfiguration": "S116",
+     "nach": "V00352",
+     "nach_rolle": "R3",
+     "s1": null,
+     "versuch": "V00351",
+     "vor": "V00350",
+     "vor_rolle": "R2",
+     "vorgesehen": true,
+     "vorpruefung_ablauf_1": false
+    },
+    {
+     "abweichung_r0_N": 0.00018326941632906824,
+     "block": 18,
+     "fall": "V00473",
+     "g1": false,
+     "gueltig": true,
+     "halt": null,
+     "konfiguration": "S102",
+     "nach": "V00477",
+     "nach_rolle": "R3",
+     "s1": null,
+     "versuch": "V00476",
+     "vor": "V00475",
+     "vor_rolle": "R2",
+     "vorgesehen": true,
+     "vorpruefung_ablauf_1": false
+    }
+   ]
+  },
+  {
+   "art": "schlank",
+   "auswahl": {},
+   "ebene": "H",
+   "gleich": true,
+   "index": 0,
+   "plaetze": {},
+   "rollen": {},
+   "s2_bilanz": {
+    "apparaturfehler": [],
+    "beendet": false,
+    "massgeblich": [],
+    "s2": [],
+    "widerspruch": []
+   },
+   "seed": 1910311766019208858,
+   "szenario": "S06-saettigung",
+   "teil_b_gleich": true,
+   "unterschiede": {},
+   "ursache": [],
+   "variante": "wiederholungen",
+   "x_strich": []
+  },
+  {
+   "art": "schlank",
+   "auswahl": {},
+   "ebene": "H",
+   "gleich": true,
+   "index": 0,
+   "plaetze": {},
+   "rollen": {},
+   "s2_bilanz": {
+    "apparaturfehler": [],
+    "beendet": false,
+    "massgeblich": [],
+    "s2": [],
+    "widerspruch": []
+   },
+   "seed": 2265562330325795912,
+   "szenario": "H-fehlend",
+   "teil_b_gleich": true,
+   "unterschiede": {},
+   "ursache": [],
+   "variante": "wiederholungen",
+   "x_strich": []
+  },
+  {
+   "art": "schlank",
+   "auswahl": {},
+   "ebene": "H",
+   "gleich": false,
+   "index": 0,
+   "plaetze": {},
+   "rollen": {},
+   "s2_bilanz": {
+    "apparaturfehler": [],
+    "beendet": false,
+    "massgeblich": [
+     "V00031"
+    ],
+    "s2": [
+     "V00031"
+    ],
+    "widerspruch": []
+   },
+   "seed": 8492860313944394542,
+   "szenario": "S02-kontrolllauf",
+   "teil_b_gleich": true,
+   "unterschiede": {
+    "grund": [
+     "S2: Einzelzell-Liftoff in L2; die Konfiguration bleibt in den Blöcken und ist von Tests ausgeschlossen",
+     "S2: Einzelzell-Liftoff im Kontrolllauf L2; ŷ¹ ungültig (§8.2)"
+    ],
+    "sperren": [
+     [
+      "Phase 1 angehalten: S2: Einzelzell-Liftoff in L2; die Konfiguration bleibt in den Blöcken und ist von Tests ausgeschlossen (keine abgeschlossene Kampagne)"
+     ],
+     [
+      "Phase 1 angehalten: S2: Einzelzell-Liftoff im Kontrolllauf L2; ŷ¹ ungültig (§8.2) (keine abgeschlossene Kampagne)"
+     ]
+    ]
+   },
+   "ursache": [
+    "Halttext für S2 im Kontrolllauf: ŷ¹ ungültig statt Ausschluss der Konfiguration (Korrektur 3); Halt und Zeitpunkt gleich"
+   ],
+   "variante": "wiederholungen",
+   "x_strich": []
+  }
+ ],
+ "vorher_nachher_summen": {
+  "nachher": {
+   "N01-A4": {
+    "abgeschlossen": 9,
+    "halte": {
+     "S1 Nullpunktalarm": 1
+    },
+    "n": 10,
+    "plaetze_abgeschlossen": {
+     "ersetzt": 212,
+     "grenze": 1,
+     "gueltig": 4321,
+     "s1_nicht_pruefbar": 0,
+     "sonst": 0,
+     "spaet": 2
+    },
+    "rollen": {
+     "R1": 35,
+     "R2": 2,
+     "R3": 2,
+     "X_strich": 2
+    },
+    "vollstaendig": 9,
+    "x_strich": {
+     "andere_ungueltig": 0,
+     "g1_geprueft": 2,
+     "gueltig": 2,
+     "klammer_r2_r3": 2,
+     "max_verhaeltnis_eps": 0.5571016399862401,
+     "n": 2,
+     "s1": 0,
+     "s1_nicht_pruefbar": 0,
+     "vorpruefung_ablauf_1": 0
+    },
+    "zeit_verhaeltnis_abgeschlossen": 1.052204585537919,
+    "zusaetzlich": 308
+   },
+   "N01-V1G0": {
+    "abgeschlossen": 7,
+    "halte": {
+     "S1 Nullpunktalarm": 1,
+     "S1 X′": 2
+    },
+    "n": 10,
+    "plaetze_abgeschlossen": {
+     "ersetzt": 184,
+     "grenze": 1,
+     "gueltig": 3341,
+     "s1_nicht_pruefbar": 0,
+     "sonst": 0,
+     "spaet": 2
+    },
+    "rollen": {
+     "R1": 38,
+     "R2": 22,
+     "R3": 22,
+     "X_strich": 22
+    },
+    "vollstaendig": 7,
+    "x_strich": {
+     "andere_ungueltig": 2,
+     "g1_geprueft": 20,
+     "gueltig": 18,
+     "klammer_r2_r3": 20,
+     "max_verhaeltnis_eps": 0.9558111535096456,
+     "n": 22,
+     "s1": 2,
+     "s1_nicht_pruefbar": 0,
+     "vorpruefung_ablauf_1": 0
+    },
+    "zeit_verhaeltnis_abgeschlossen": 1.061904761904762,
+    "zusaetzlich": 392
+   },
+   "N01-V1G60h": {
+    "abgeschlossen": 9,
+    "halte": {
+     "S3": 1
+    },
+    "n": 10,
+    "plaetze_abgeschlossen": {
+     "ersetzt": 184,
+     "grenze": 5,
+     "gueltig": 4347,
+     "s1_nicht_pruefbar": 0,
+     "sonst": 0,
+     "spaet": 0
+    },
+    "rollen": {
+     "R1": 20,
+     "R2": 7,
+     "R3": 7,
+     "X_strich": 7
+    },
+    "vollstaendig": 9,
+    "x_strich": {
+     "andere_ungueltig": 0,
+     "g1_geprueft": 7,
+     "gueltig": 7,
+     "klammer_r2_r3": 7,
+     "max_verhaeltnis_eps": 0.6103819351748369,
+     "n": 7,
+     "s1": 0,
+     "s1_nicht_pruefbar": 0,
+     "vorpruefung_ablauf_1": 0
+    },
+    "zeit_verhaeltnis_abgeschlossen": 1.0500881834215166,
+    "zusaetzlich": 295
+   }
+  },
+  "vorher": {
+   "N01-A4": {
+    "abgeschlossen": 9,
+    "halte": {
+     "S1 Nullpunktalarm": 1
+    },
+    "n": 10,
+    "plaetze_abgeschlossen": {
+     "ersetzt": 212,
+     "grenze": 1,
+     "gueltig": 4321,
+     "s1_nicht_pruefbar": 0,
+     "sonst": 0,
+     "spaet": 2
+    },
+    "rollen": {
+     "R1": 35,
+     "R2": 2,
+     "R3": 2,
+     "X_strich": 2
+    },
+    "vollstaendig": 9,
+    "x_strich": null,
+    "zeit_verhaeltnis_abgeschlossen": 1.052204585537919,
+    "zusaetzlich": 308
+   },
+   "N01-V1G0": {
+    "abgeschlossen": 7,
+    "halte": {
+     "S1 Nullpunktalarm": 1,
+     "S1 X′": 2
+    },
+    "n": 10,
+    "plaetze_abgeschlossen": {
+     "ersetzt": 184,
+     "grenze": 1,
+     "gueltig": 3341,
+     "s1_nicht_pruefbar": 0,
+     "sonst": 0,
+     "spaet": 2
+    },
+    "rollen": {
+     "R1": 38,
+     "R2": 22,
+     "R3": 22,
+     "X_strich": 22
+    },
+    "vollstaendig": 7,
+    "x_strich": null,
+    "zeit_verhaeltnis_abgeschlossen": 1.061904761904762,
+    "zusaetzlich": 392
+   },
+   "N01-V1G60h": {
+    "abgeschlossen": 9,
+    "halte": {
+     "S3": 1
+    },
+    "n": 10,
+    "plaetze_abgeschlossen": {
+     "ersetzt": 184,
+     "grenze": 5,
+     "gueltig": 4347,
+     "s1_nicht_pruefbar": 0,
+     "sonst": 0,
+     "spaet": 0
+    },
+    "rollen": {
+     "R1": 20,
+     "R2": 7,
+     "R3": 7,
+     "X_strich": 7
+    },
+    "vollstaendig": 9,
+    "x_strich": null,
+    "zeit_verhaeltnis_abgeschlossen": 1.0500881834215166,
+    "zusaetzlich": 295
+   }
+  }
+ }
+}

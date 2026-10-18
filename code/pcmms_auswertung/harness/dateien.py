@@ -14,7 +14,7 @@ import os
 
 import numpy as np
 
-from .. import anpassung, auswertung, formate, pilot, regeln, stufe1, teil_b, zufall
+from .. import anpassung, auswertung, formate, pilot, regeln, stufe1, teil_b, verfahren as vf, zufall
 from .. import zusammenfassung as zf
 from ..generator import ebene_z, kalibrierdaten, kampagne as kp, szenarien, wahrheit
 from . import kette
@@ -33,8 +33,15 @@ def pfade(ziel):
                 wahrheit=os.path.join(w, 'wahrheit'), p0_wahrheit=os.path.join(w, 'p0_wahrheit'))
 
 
-def generator_schreiben(ziel, sid, stufe, plan, seed, ebene='Z', n_min=None, staerke=None, kennung=None):
-    """Generatorausgaben einer Kampagne in eine frische Struktur; Rückgabe der Pfade."""
+def generator_schreiben(ziel, sid, stufe, plan, seed, ebene='Z', n_min=None, staerke=None, kennung=None,
+                        verfahren=None):
+    """Generatorausgaben einer Kampagne in eine frische Struktur; Rückgabe der Pfade. Die Planangaben nennen das
+    Verfahren (Bindung der Phase-0-Größen in Teil B). Die Dateikette schreibt den statischen Laufplan; ein Verfahren
+    mit Ablauf „zustand“ wird zurückgewiesen statt still statisch gerechnet (Ablauf: kette.kampagne_ablauf)."""
+    v = vf.oder_standard(verfahren)
+    if v.ablauf != 'statisch':
+        raise ValueError(f'Dateikette: Ablauf „{v.ablauf}“ nicht umgesetzt, nur der statische Laufplan; den Ablauf '
+                         'der Phase 1 rechnet kette.kampagne_ablauf (Ebene H oder Z)')
     p = pfade(ziel)
     if os.path.exists(p['eingang']) and os.listdir(p['eingang']):
         raise FileExistsError(f'{p["eingang"]} ist nicht leer (frische Ausgabestruktur verlangt)')
@@ -48,7 +55,7 @@ def generator_schreiben(ziel, sid, stufe, plan, seed, ebene='Z', n_min=None, sta
     pl = kette.plan_info(m, n_min)
     pl.update(seed_bootstrap=zufall.unterseed(seed, 'bootstrap'), seed_reihenfolge=seed,
               seed_teil_b=zufall.unterseed(seed, 'teil_b'), seed_pilot=int(seed), szenario=sid, stufe=stufe,
-              ebene=ebene)
+              ebene=ebene, bindung=v.bindung, verfahren=v.kennung())
     formate.schreibe_objekt(p['planangaben'], formate.kopf('planangaben', kennung), pl)
     if ebene == 'Z':
         kalib_wahr = dict(nullpunkt_adc=kwahr['p01']['nullpunkt_adc'],
@@ -93,7 +100,9 @@ def ap11_teil_b(zusammenfassungen, kalibrierung, planangaben, profil, werkzeug8,
     pe = pilot.pilot_auswerten(tab0, kal, profil, pl['f'], seed=pl['seed_pilot'])
     pilot.schreibe_pilot(ausgabe_pilot, pe, k['kennung'])
     tb = teil_b.erstellen(tab0, kal, pe, profil, pl, lies_werkzeug8(werkzeug8), kennung=k['kennung'],
-                          seed_b0=pl['seed_teil_b'])
+                          seed_b0=pl['seed_teil_b'], bindung=pl.get('bindung', vf.STANDARD.bindung))
+    if pl.get('verfahren') is not None:
+        tb['verfahren'] = pl['verfahren']
     teil_b.schreiben(ausgabe_teil_b, tb, k['kennung'])
     return tb
 
@@ -127,10 +136,11 @@ def _erwartung(klasse):
             'R4': 'H1 falsifiziert mit Power ≥ 0,8 (K07/K21)'}.get(klasse, 'keine Klasse')
 
 
-def kette_dateien(ziel, sid, stufe, profil, plan=None, seed=1, ebene='Z', n_min=None, werkzeug8=None, band_hz=None):
+def kette_dateien(ziel, sid, stufe, profil, plan=None, seed=1, ebene='Z', n_min=None, werkzeug8=None, band_hz=None,
+                  verfahren=None):
     """Alle Schritte nacheinander aus einer frischen Ausgabestruktur; Rückgabe dict(pfade, ergebnis, bewertung)."""
     plan = kp.Plan() if plan is None else plan
-    p = generator_schreiben(ziel, sid, stufe, plan, seed, ebene, n_min)
+    p = generator_schreiben(ziel, sid, stufe, plan, seed, ebene, n_min, verfahren=verfahren)
     regeln.schreibe_profil(p['regelprofil'], profil)
     prof = regeln.lade_profil(p['regelprofil'])
     ap11_kalibrierung(p['p0'], p['kalibrierung'], band_hz or kette.BAND_HZ)

@@ -13,7 +13,9 @@ Effekte (Liste von dicts mit Schlüssel „art“), bekannte Störungen des Gene
   offset_k            {N}: zusätzliche statische Last nur in Kombinationsläufen (S04: H0, G1, S1)
   ereignis            {ereignis: saettigung|indexfehler|stoerung|lauf_drift|aufzeichnung|park|liftoff_zelle,
                       laeufe: [Positionen] oder auswahl: {konfiguration, phase, laufart, nummer}, zelle, modul,
-                      wert}: Einzelereignisse für Gültigkeits- und Abbruchregeln (nummer: n-ter passender Lauf)
+                      wert}: Einzelereignisse für Gültigkeits- und Abbruchregeln (nummer: n-ter passender Lauf);
+                      statt laeufe/auswahl auch versuch: {konfiguration, block, nummer, rolle} für Versuche des
+                      zustandsbehafteten Ablaufs (nummer 0: ursprünglicher Versuch, 1, 2, …: Wiederholungen)
 """
 from dataclasses import dataclass, field
 
@@ -67,9 +69,13 @@ class Generatormodell:
         return [e for e in self.effekte if e['art'] == art]
 
     def ereignis_positionen(self, eff, laeufe):
-        """Positionen der Läufe eines Ereignisses (Liste „laeufe“ oder Auswahl nach Konfiguration, Phase, Laufart)."""
+        """Positionen der Läufe eines Ereignisses (Liste „laeufe“ oder Auswahl nach Konfiguration, Phase, Laufart).
+        Ein Ereignis nur mit „versuch“ (Auswahl unter den Versuchen eines Ablaufs, ablauf.versuch_ereignisse) hat keine
+        geplante Position."""
         if 'laeufe' in eff:
             return list(eff['laeufe'])
+        if 'auswahl' not in eff and 'versuch' in eff:
+            return []
         a = eff['auswahl']
         pos = [l['position'] for l in laeufe
                if l['konfiguration']['id'] == a.get('konfiguration', l['konfiguration']['id'])

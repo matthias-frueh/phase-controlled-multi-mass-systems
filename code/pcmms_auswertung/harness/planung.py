@@ -22,7 +22,7 @@ import math
 import numpy as np
 from scipy import stats
 
-from .. import regeln as rg, zufall
+from .. import regeln as rg, verfahren as vf, zufall
 from ..generator import kampagne as kp, szenarien
 from . import kalibrierung
 
@@ -68,9 +68,12 @@ def fenster_aus_aufruf(e, f_szenario, plan_basis):
 
 
 def haken(sid, stufe, profil, n_kal, n_pruef, seed_basis, n_kandidaten, n0_kandidaten=(20,), plan_basis=None,
-          prozesse=1, protokoll=None, max_aufrufe=None):
+          prozesse=1, protokoll=None, max_aufrufe=None, verfahren=None):
     """Haken für pilot.pilot_auswerten(planung=…). protokoll: Liste, in die jeder Aufruf seine Kandidaten schreibt.
-    max_aufrufe: Entwicklungsgrenze der Simulationen (weitere Paare (k, T_a) ohne Planung, gekennzeichnet)."""
+    max_aufrufe: Entwicklungsgrenze der Simulationen (weitere Paare (k, T_a) ohne Planung, gekennzeichnet).
+    verfahren: Verfahren der simulierten Kampagnen (Vorgabe verfahren.STANDARD); jede simulierte Kampagne bindet ihre
+    Phase-0-Größen an das k des Aufrufs."""
+    verfahren = vf.oder_standard(verfahren)
     zaehler = [0]
     plan_basis = kp.Plan() if plan_basis is None else plan_basis
     sz = szenarien.KATALOG[sid]
@@ -106,8 +109,11 @@ def haken(sid, stufe, profil, n_kal, n_pruef, seed_basis, n_kandidaten, n0_kandi
             k = kalibrierung.kalibrieren(sid, stufe, profil, n_kal, n_pruef, zufall.unterseed(seed_basis, 'planung', n,
                                                                                              n0, e['k'], e['N_z']),
                                          plan=plan, n_min=n, prozesse=prozesse, rauschvarianten=[rausch],
-                                         k_max=e['k'])
+                                         k_max=e['k'], verfahren=verfahren)
             g = k['gemeinsame_bestaetigung']
+            gr = [x['konfiguration']['gruppe'] for x in kp.schnitt_konfigurationen(plan)]
+            N_KI = sum(x in ('schnitt', 'zusatz') for x in gr) + sum(x == 'identifizierbarkeit' for x in gr)
+            zeit_formel = ((N_KI + 8) * plan.n_bloecke + 18 * tage) * plan.T_lauf / (1 - p) if p < 1 else None
             schritte.append(dict(n_min=n, n0=n0, reserve_r=r,
                                  plan_simuliert=dict(n_bloecke=plan.n_bloecke, n0=plan.n0, n_pilot=plan.n_pilot,
                                                      tage=plan.tage, n_zyklen=plan.n_zyklen,
@@ -116,7 +122,10 @@ def haken(sid, stufe, profil, n_kal, n_pruef, seed_basis, n_kandidaten, n0_kandi
                                  zaehler=g['zaehler'], nenner=g['nenner'], c_H1=k['c_H1']['wert'],
                                  intervalltyp_H2=k['h2'].get('schluessel'), pruefrate_c=None if k['pruefung'] is None
                                  else k['pruefung']['rate'], erfuellt=bool(g['rate'] is not None and
-                                                                           g['rate'] >= bedingung)))
+                                                                           g['rate'] >= bedingung),
+                                 messzeit=dict(formel_s=zeit_formel, ablauf=(k.get('raten_pruefung') or {}).get('ablauf'),
+                                               hinweis='Formel §5.3 (c) unverändert (offen, §12); „ablauf“ nur beim '
+                                                       'Verfahren „zustand“: realisierte Laufzahl × T_Lauf')))
             if schritte[-1]['erfuellt']:
                 break
         red = n_kal < rg.NORMATIVE_ZAHLEN['kampagnen_kalibrierung'] or n_pruef < rg.NORMATIVE_ZAHLEN[
@@ -127,7 +136,8 @@ def haken(sid, stufe, profil, n_kal, n_pruef, seed_basis, n_kandidaten, n0_kandi
         treffer = [x for x in schritte if x.get('erfuellt')]
         out = dict(n_min=treffer[0]['n_min'] if treffer else None, n0=treffer[0]['n0'] if treffer else None,
                    kappa=kappa, bedingung=bedingung, kandidaten=schritte, quelle=quelle, reduziert=bool(red),
-                   fenster=fenster, power_bedingung='offen (Regel planung.power), nicht geprüft')
+                   fenster=fenster, power_bedingung='offen (Regel planung.power), nicht geprüft',
+                   verfahren=verfahren.kennung())
         if not treffer:
             out['grund'] = 'kein Kandidat erreicht P(H1 und H2 bestätigt | exakt) ≥ 0,8'
         if protokoll is not None:

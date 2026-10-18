@@ -70,6 +70,21 @@ def _plan(a):
     return kampagne.Plan(n0=a.n0, n_pilot=a.n_pilot, n_bloecke=a.n_bloecke, n_zyklen=a.n_zyklen)
 
 
+VERFAHREN = ('statisch', 'zustand', 'historisch')
+
+
+def _opt_verfahren(ap):
+    ap.add_argument('--verfahren', choices=VERFAHREN, default='statisch',
+                    help='Phase-0-Bindung und Ablauf der Phase 1: statisch (Bindung an k_max des Plans, Laufplan ohne '
+                         'Ablaufentscheidungen; Vorgabe), zustand (Ablauf mit Wiederholungen nach A9.12), historisch '
+                         '(Bindung an k der Pilotgrößen wie bis PR #22, nur zur Nachrechnung)')
+
+
+def _verfahren(a):
+    from . import verfahren as vf
+    return dict(statisch=vf.STATISCH, zustand=vf.ZUSTAND, historisch=vf.HISTORISCH)[a.verfahren]
+
+
 def _json(obj):
     return formate.json_text(obj)
 
@@ -184,8 +199,8 @@ def _ap12(ap, argv):
 
 
 # ── Harness ──────────────────────────────────────────────────────────────────────────────────────────
-@befehl('harness', 'AP-13-Harness: bewerten, kampagnen, kalibrierung, pruefstand, kriterien, pruefsatz, matrix, '
-                   'neulauf, diagnose-e3b-g4')
+@befehl('harness', 'AP-13-Harness: bewerten, kampagnen, kalibrierung, pruefstand, kriterien, pruefsatz, '
+                   'ablauf-pruefsatz, matrix, neulauf, diagnose-e3b-g4, ablauf-vergleich')
 def _harness(ap, argv):
     sp = ap.add_subparsers(dest='was', required=True)
     b = sp.add_parser('bewerten')
@@ -203,6 +218,7 @@ def _harness(ap, argv):
     k.add_argument('--rolle', default='pruefung')
     _opt_profil(k)
     _opt_plan(k)
+    _opt_verfahren(k)
     c = sp.add_parser('kalibrierung')
     c.add_argument('--szenario', required=True, help='Szenario mit exakter Superposition (N01 …)')
     c.add_argument('--stufe', required=True)
@@ -213,6 +229,7 @@ def _harness(ap, argv):
     c.add_argument('--prozesse', type=int, default=1)
     _opt_profil(c)
     _opt_plan(c)
+    _opt_verfahren(c)
     p = sp.add_parser('pruefstand')
     p.add_argument('--ausgabe', required=True)
     p.add_argument('--schritte', default=None, help='Auswahl, kommagetrennt (Vorgabe: alle)')
@@ -226,6 +243,11 @@ def _harness(ap, argv):
     g = q.add_mutually_exclusive_group(required=True)
     g.add_argument('--schreiben')
     g.add_argument('--pruefen')
+    qa = sp.add_parser('ablauf-pruefsatz', help='Prüfsatz des zustandsbehafteten Phase-1-Ablaufs '
+                                                '(harness.ablauf_pruefsatz)')
+    ga = qa.add_mutually_exclusive_group(required=True)
+    ga.add_argument('--schreiben')
+    ga.add_argument('--pruefen')
     m = sp.add_parser('matrix')
     m.add_argument('--ausgabe', required=True)
     m.add_argument('--kampagnen', type=int, required=True)
@@ -257,6 +279,19 @@ def _harness(ap, argv):
                          'Endung) und E3-Auszug erzeugen')
     gd.add_argument('--bericht', action='store_true', help='Auswertung, kompakte Ergebnisse und Berichtstabellen '
                                                            'aus den Checkpoints schreiben')
+    v = sp.add_parser('ablauf-vergleich', help='begrenzte Entwicklungsrechnung zu k-Konsistenz und Wiederholungsablauf '
+                                               '(harness.ablauf_vergleich)')
+    v.add_argument('--auftrag', default=None, help='Auftragsliste (Vorgabe: docs/ap13_kmax_wiederholungen_2026-10-17/'
+                                                    'auftrag.json)')
+    v.add_argument('--nur', default=None, help='nur diese Auftrags-IDs, kommagetrennt')
+    v.add_argument('--startsatz', action='store_true', help='nur der Startsatz (Seeds 0 und 1 je System und Variante)')
+    v.add_argument('--prozesse', type=int, default=None, help='Arbeitsprozesse je Auftrag (Vorgabe: Auftragsliste)')
+    v.add_argument('--ausgabe', default=None, help='Checkpoint-Verzeichnis (Vorgabe: Auftragsliste)')
+    v.add_argument('--korrektur', action='store_true', help='Korrekturrunde vom 18.10.2026 (eigene Auftragsliste '
+                                                            'auftrag_korrektur_2026-10-18.json und Checkpoints)')
+    gv = v.add_mutually_exclusive_group()
+    gv.add_argument('--vorbereiten', action='store_true', help='Auftragsliste schreiben (vor den Rechnungen committen)')
+    gv.add_argument('--bericht', action='store_true', help='Ergebnisse und Berichtstabellen aus den Checkpoints')
     a = ap.parse_args(argv)
     from .harness import dateien, kalibrierung, kampagnen, kriterien, pruefsatz, pruefstand
     if a.was == 'bewerten':
@@ -264,7 +299,7 @@ def _harness(ap, argv):
     elif a.was == 'kampagnen':
         w8 = dateien.lies_werkzeug8(a.werkzeug8) if a.werkzeug8 != 'testvorgabe' else None
         lauf = kampagnen.ausfuehren(a.szenario, a.stufe, _profil(a), a.kampagnen, a.seed, a.rolle, _plan(a), a.n_min,
-                                    w8, prozesse=a.prozesse)
+                                    w8, prozesse=a.prozesse, verfahren=_verfahren(a))
         pf = kampagnen.schreibe(a.ausgabe, lauf)
         rt = kampagnen.raten(lauf)
         print(f'{a.kampagnen} Kampagnen {a.szenario} {a.stufe} ({lauf["meta"]["laufzeit_s"]} s); Wahrheit '
@@ -275,7 +310,7 @@ def _harness(ap, argv):
     elif a.was == 'kalibrierung':
         prof = _profil(a)
         kal = kalibrierung.kalibrieren(a.szenario, a.stufe, prof, a.kampagnen_kal, a.kampagnen_pruef, a.seed,
-                                       _plan(a), a.n_min, a.prozesse)
+                                       _plan(a), a.n_min, a.prozesse, verfahren=_verfahren(a))
         os.makedirs(a.ausgabe, exist_ok=True)
         kenn = formate.synth_kennung('W8', a.szenario, a.stufe, a.seed)
         formate.schreibe_objekt(os.path.join(a.ausgabe, 'werkzeug8'), formate.kopf('werkzeug8', kenn),
@@ -309,6 +344,29 @@ def _harness(ap, argv):
             print(f'Prüfsatz {a.schreiben}.json: SHA-256 {ps["sha256_gesamt"][:16]}…')
         else:
             r = pruefsatz.pruefen(a.pruefen)
+            print(_json(r))
+            return 0 if r['gleich'] else 1
+    elif a.was == 'ablauf-vergleich':
+        from .harness import ablauf_vergleich as av
+        pfad = a.auftrag or (av.KORREKTUR_AUFTRAG if a.korrektur else av.AUFTRAG)
+        if a.vorbereiten:
+            x = av.vorbereiten_korrektur() if a.korrektur else av.vorbereiten()
+            print(f'Auftragsliste {pfad}: {len(x["auftraege"])} Aufträge, {x["budget"]}')
+        elif a.bericht:
+            from .harness import ablauf_vergleich_bericht as avb
+            print(_json(avb.schreiben_korrektur(pfad, a.ausgabe) if a.korrektur else avb.schreiben(pfad, a.ausgabe)))
+        else:
+            nur = a.nur.split(',') if a.nur else None
+            if a.startsatz:
+                nur = [j['id'] for j in av.lies_auftrag(pfad)['auftraege'] if j['id'].endswith('-start')]
+            print(_json(av.ausfuehren(pfad, nur, a.prozesse, a.ausgabe)))
+    elif a.was == 'ablauf-pruefsatz':
+        from .harness import ablauf_pruefsatz
+        if a.schreiben:
+            ps = ablauf_pruefsatz.schreiben(a.schreiben)
+            print(f'Ablauf-Prüfsatz {a.schreiben}.json: SHA-256 {ps["sha256_gesamt"][:16]}…')
+        else:
+            r = ablauf_pruefsatz.pruefen(a.pruefen)
             print(_json(r))
             return 0 if r['gleich'] else 1
     elif a.was == 'matrix':

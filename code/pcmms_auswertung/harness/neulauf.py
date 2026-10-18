@@ -28,7 +28,7 @@ import time
 import numpy as np
 import scipy
 
-from .. import formate, regeln, zufall
+from .. import formate, regeln, verfahren as vf, zufall
 from ..generator import kampagne as kp
 from . import ebenen, kampagnen, kette, pruefstand
 
@@ -204,7 +204,7 @@ def _planung(job, a, prof, plan, w8, w8_sha, ziel, prozesse, protokoll):
     ab = [k for k in ('n_planung', 'planung_kandidaten', 'planung_max_aufrufe') if not _gleich(e[k], st[k])]
     if ab:
         raise AuftragFehler(f'K12: Vorgaben {ab} von pruefstand.STANDARD weichen von der Auftragsliste ab')
-    out = pruefstand.ausfuehren(ziel, None, ['planung'], prozesse, protokoll=protokoll)
+    out = pruefstand.ausfuehren(ziel, None, ['planung'], prozesse, protokoll=protokoll, verfahren=vf.HISTORISCH)
     pl = out['schritte']['planung']
     if not _gleich(pl['zeit'], e['zeit']):
         raise AuftragFehler(f'K12: Zeitangaben {pl["zeit"]} ≠ Auftragsliste {e["zeit"]}')
@@ -225,7 +225,7 @@ def _ebenen(job, a, prof, plan, w8, w8_sha, ziel, prozesse, protokoll):
     g = a['gemeinsam']
     tmp = os.path.join(ziel, 'verrauscht_tmp')
     rv = ebenen.vergleich_verrauscht(job['szenario'], job['stufe'], prof, job['n'], g['seed_basis'], tmp, plan,
-                                     g['n_min'], w8, prozesse=prozesse)
+                                     g['n_min'], w8, prozesse=prozesse, verfahren=vf.HISTORISCH)
     shutil.rmtree(tmp, ignore_errors=True)
     if rv['seeds'] != job['seeds']:
         raise AuftragFehler('K19: Seeds der Rechnung ≠ Auftragsliste')
@@ -242,7 +242,7 @@ def _kampagnen(job, a, prof, plan, w8, w8_sha, ziel, prozesse, protokoll):
     """E3: kampagnen.ausfuehren mit Rolle, Seeds und Werkzeug 8 der Auftragsliste."""
     g = a['gemeinsam']
     lauf = kampagnen.ausfuehren(job['szenario'], job['stufe'], prof, job['n'], g['seed_basis'], job['rolle'], plan,
-                                g['n_min'], w8, prozesse=prozesse)
+                                g['n_min'], w8, prozesse=prozesse, verfahren=vf.HISTORISCH)
     m = lauf['meta']
     if m['seeds'] != job['seeds'] or m['rolle'] != job['rolle']:
         raise AuftragFehler(f'{job["id"]}: Rolle oder Seeds der Rechnung ≠ Auftragsliste')

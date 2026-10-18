@@ -19,8 +19,10 @@ G5   Übersteuerung einer Zelle; G6 Einzelzell-Liftoff min N_c < F_LO,c (ganzer 
      G10 unvollständige Aufzeichnung oder fehlender Kanal.
 S1–S4 (§9.2): S2 Einzelzell-Liftoff in einem Lauf mit bewegten Modulen (ohne G5/G8/G10-ungültige), zweites S2
      beendet Phase 1; S4 G2 in zwei aufeinanderfolgenden Läufen; S3 Drift der Einzelmodulreferenz in einem
-     Kontrolllauf; S1 reproduzierter H0-Verstoß. Wiederholungsläufe kennt der Generator nicht: Für S1 und S3 werden
-     Auslösekandidaten (erste Überschreitung) berichtet, die Reproduktion bleibt „nicht prüfbar“.
+     Kontrolllauf; S1 reproduzierter H0-Verstoß. Im statischen Laufplan gibt es keine Wiederholungsläufe: Für S1 und S3
+     werden Auslösekandidaten (erste Überschreitung) berichtet, die Reproduktion bleibt „nicht prüfbar“. Im
+     zustandsbehafteten Ablauf (ablauf.py; Köpfe mit „versuch“) entscheidet der Ablauf über S1–S4 mit denselben
+     Funktionen (interpolation, g1_verletzt, alarm_kanaele); die Offline-Prüfung muss seine Entscheidungen bestätigen.
 """
 from dataclasses import dataclass, field
 
@@ -87,17 +89,44 @@ def sigma_delta(tab, kmax):
     return out
 
 
-def referenz_interpolation(tab, gueltig_ref=None):
-    """Δ⟨N⟩ (Summe und Zellen) und β jedes Laufs gegen die einschließenden gültigen Referenzläufe (nach Position).
-    Rückgabe (dN (n), dN_zellen (n, 3), beta (n)); nan, wenn ein Nachbar fehlt."""
+def interpolation(N, t, Na, ta, Nb, tb):
+    """Abweichung N − N_s,int von der linearen Interpolation zwischen den Referenzläufen a und b (A1) zur Laufmitte t,
+    für die Summe oder die Zellen; Rückgabe (Abweichung, β). Dieselbe Rechnung offline und im Ablauf (ablauf.py)."""
+    be = (t - ta) / (tb - ta)
+    return N - ((1 - be) * Na + be * Nb), be
+
+
+def g1_verletzt(dN, N, eps_ctrl):
+    """G1: |Δ⟨N⟩| > ε_ctrl (mit Rundungsboden)."""
+    return bool(abs(dN) > eps_ctrl + RUNDUNG_REL * abs(N))
+
+
+def alarm_kanaele(sw, N, Nz, N_vor, Nz_vor):
+    """Kanäle eines Nullpunktalarms (§8.8) eines Referenzlaufs (⟨N⟩, ⟨N_c⟩) gegen den vorangehenden gültigen."""
+    dS = abs(N - N_vor)
+    dZ = np.abs(Nz - Nz_vor)
+    zs = (np.asarray(sw.sigma_ref_zellen) if sw.sigma_ref_zellen is not None else np.full(3, np.inf))
+    bS = RUNDUNG_REL * abs(N)
+    bZ = RUNDUNG_REL * np.abs(Nz)
+    return (['Summe'] if dS > sw.alarm_faktor * sw.sigma_ref + bS else []) + \
+        [f'Zelle {c + 1}' for c in range(3) if dZ[c] > sw.alarm_faktor * zs[c] + bZ[c]]
+
+
+def rolle(kopf):
+    """Rolle eines Laufs im zustandsbehafteten Ablauf (Kopf „versuch“), sonst None (statischer Laufplan)."""
+    v = kopf.get('versuch')
+    return v.get('rolle') if isinstance(v, dict) else None
+
+
+def klammer_indizes(tab, gueltig_ref=None):
+    """Je Lauf mit bewegten Modulen die Indizes (a, b) der einschließenden gültigen Referenzläufe derselben Phase
+    (nach Position); −1, wenn ein Nachbar fehlt, und für Referenzläufe."""
     n = len(tab)
     pos = tab.spalte('position', int)
-    t = 0.5 * (tab.spalte('t_start', float) + tab.spalte('t_ende', float))
     art = tab.spalte('laufart', object)
     ref = np.flatnonzero((art == 'R') & (np.ones(n, bool) if gueltig_ref is None else gueltig_ref))
     ref = ref[np.argsort(pos[ref])]
-    Nm, Nz = tab.daten['N_mittel'], tab.daten['N_mittel_zellen']
-    dN, dZ, beta = np.full(n, np.nan), np.full((n, 3), np.nan), np.full(n, np.nan)
+    ka, kb = np.full(n, -1), np.full(n, -1)
     for i in range(n):
         if art[i] == 'R':
             continue
@@ -108,11 +137,45 @@ def referenz_interpolation(tab, gueltig_ref=None):
         a, b = vor[-1], nach[0]
         if tab.koepfe[a]['phase'] != tab.koepfe[i]['phase'] or tab.koepfe[b]['phase'] != tab.koepfe[i]['phase']:
             continue
-        be = (t[i] - t[a]) / (t[b] - t[a])
-        beta[i] = be
-        dN[i] = Nm[i] - ((1 - be) * Nm[a] + be * Nm[b])
-        dZ[i] = Nz[i] - ((1 - be) * Nz[a] + be * Nz[b])
+        ka[i], kb[i] = a, b
+    return ka, kb
+
+
+def _interpolieren(tab, ka, kb):
+    n = len(tab)
+    t = 0.5 * (tab.spalte('t_start', float) + tab.spalte('t_ende', float))
+    Nm, Nz = tab.daten['N_mittel'], tab.daten['N_mittel_zellen']
+    dN, dZ, beta = np.full(n, np.nan), np.full((n, 3), np.nan), np.full(n, np.nan)
+    for i in np.flatnonzero(ka >= 0):
+        a, b = ka[i], kb[i]
+        dN[i], beta[i] = interpolation(Nm[i], t[i], Nm[a], t[a], Nm[b], t[b])
+        dZ[i] = interpolation(Nz[i], t[i], Nz[a], t[a], Nz[b], t[b])[0]
     return dN, dZ, beta
+
+
+def referenz_interpolation(tab, gueltig_ref=None):
+    """Δ⟨N⟩ (Summe und Zellen) und β jedes Laufs gegen die einschließenden gültigen Referenzläufe (nach Position).
+    Rückgabe (dN (n), dN_zellen (n, 3), beta (n)); nan, wenn ein Nachbar fehlt."""
+    return _interpolieren(tab, *klammer_indizes(tab, gueltig_ref))
+
+
+def x_strich_klammer(koepfe, i, a, b):
+    """Offline-Gegenprobe zur Klammer von X′ (Index i) im zustandsbehafteten Ablauf, nur aus den Köpfen: Sind die
+    einschließenden gültigen Referenzläufe a, b das R₂ und R₃ desselben G1-Falls? Eine nicht reproduzierte
+    Alarmwiederholung wird auf den alarmierten Lauf zurückgeführt, den sie ersetzt (§8.8)."""
+    if a < 0 or b < 0:
+        return False
+    ids = {k['versuch']['id']: j for j, k in enumerate(koepfe) if isinstance(k.get('versuch'), dict)}
+
+    def wurzel(j):
+        v = koepfe[j].get('versuch') or {}
+        while v.get('rolle') == 'alarmwiederholung' and v.get('bezug_versuch') in ids:
+            v = koepfe[ids[v['bezug_versuch']]]['versuch']
+        return v
+    x = (koepfe[i].get('versuch') or {}).get('bezug_versuch')
+    ra, rb = wurzel(a), wurzel(b)
+    return bool(x) and ra.get('rolle') == 'R2' and ra.get('bezug_versuch') == x and rb.get('rolle') == 'R3' \
+        and rb.get('bezug_versuch') == x
 
 
 def sigma_ref(tab, phase=0):
@@ -212,11 +275,17 @@ def pruefe(tab, sw, regeln=('G2', 'G3', 'G4', 'G5', 'G6', 'G7', 'G8', 'G9', 'G10
             erg['G9'][i] = None if k['park_ok'] is None else (not k['park_ok'])
         if 'G10' in regeln:
             erg['G10'][i] = bool((not k['aufzeichnung_ok']) or len(k['fehlende_kanaele']) > 0)
-    # G1 bzw. Nullpunktalarm nach G2–G10
+    # G1 bzw. Nullpunktalarm nach G2–G10. Stützstellen der Interpolation: Referenzläufe ohne Verstoß gegen G2–G10;
+    # im zustandsbehafteten Ablauf (Köpfe mit „versuch“) zusätzlich ohne Nullpunktalarm, weil dort die sofortige
+    # Wiederholung den alarmierten Lauf ersetzt (§8.8); der statische Laufplan behält die bisherige Rechnung.
     ungueltig_vor_g1 = np.array([any(erg[g][i] is True for g in REGELN_G if g != 'G1') for i in range(n)])
     if 'G1' in regeln:
+        alarm = nullpunktalarm(tab, sw, ~ungueltig_vor_g1)
         gref = (art == 'R') & ~ungueltig_vor_g1 if gueltig_ref is None else gueltig_ref
-        dN, dZ, beta = referenz_interpolation(tab, gref)
+        if gueltig_ref is None and any('versuch' in k for k in K):
+            gref = gref & ~np.isin(np.arange(n), [i for i, a in alarm.items() if a['alarm']])
+        klammer = klammer_indizes(tab, gref)
+        dN, dZ, beta = _interpolieren(tab, *klammer)
         for i in range(n):
             if art[i] == 'R':
                 continue
@@ -225,20 +294,20 @@ def pruefe(tab, sw, regeln=('G2', 'G3', 'G4', 'G5', 'G6', 'G7', 'G8', 'G9', 'G10
             elif not np.isfinite(dN[i]):
                 nicht['G1'].append((i, 'kein einschließendes Paar gültiger Referenzläufe'))
             else:
-                erg['G1'][i] = bool(abs(dN[i]) > sw.eps_ctrl + RUNDUNG_REL * abs(d['N_mittel'][i]))
-        alarm = nullpunktalarm(tab, sw, ~ungueltig_vor_g1)
+                erg['G1'][i] = g1_verletzt(dN[i], d['N_mittel'][i], sw.eps_ctrl)
         for i, a in alarm.items():
             erg['G1'][i] = a['alarm']
     else:
-        dN = dZ = beta = None
+        dN = dZ = beta = klammer = None
     gueltig = np.array([not any(erg[g][i] is True for g in REGELN_G) for i in range(n)])
     gruende = [[g for g in REGELN_G if erg[g][i] is True] for i in range(n)]
     return dict(regeln=erg, gueltig=gueltig, gruende=gruende, nicht_pruefbar={g: v for g, v in nicht.items() if v},
-                delta_N=dN, delta_N_zellen=dZ, beta=beta)
+                delta_N=dN, delta_N_zellen=dZ, beta=beta, g1_klammer=klammer)
 
 
 def nullpunktalarm(tab, sw, kandidat):
-    """Nullpunktalarm je Referenzlauf gegen den vorangehenden gültigen Referenzlauf derselben Phase."""
+    """Nullpunktalarm je Referenzlauf gegen den vorangehenden gültigen Referenzlauf derselben Phase. Aufwärm-
+    Referenzläufe des zustandsbehafteten Ablaufs (Rolle „aufwaermen“) lösen keinen Alarm aus und sind Bezug (A9.12)."""
     out = {}
     if sw.sigma_ref is None:
         return out
@@ -250,14 +319,10 @@ def nullpunktalarm(tab, sw, kandidat):
     for i in r:
         if not kandidat[i]:
             continue
-        if vor is not None and tab.koepfe[vor]['phase'] == tab.koepfe[i]['phase']:
-            dS = abs(tab.daten['N_mittel'][i] - tab.daten['N_mittel'][vor])
-            dZ = np.abs(tab.daten['N_mittel_zellen'][i] - tab.daten['N_mittel_zellen'][vor])
-            zs = (np.asarray(sw.sigma_ref_zellen) if sw.sigma_ref_zellen is not None else np.full(3, np.inf))
-            bS = RUNDUNG_REL * abs(tab.daten['N_mittel'][i])
-            bZ = RUNDUNG_REL * np.abs(tab.daten['N_mittel_zellen'][i])
-            kanal = (['Summe'] if dS > sw.alarm_faktor * sw.sigma_ref + bS else []) + \
-                [f'Zelle {c + 1}' for c in range(3) if dZ[c] > sw.alarm_faktor * zs[c] + bZ[c]]
+        if (vor is not None and tab.koepfe[vor]['phase'] == tab.koepfe[i]['phase']
+                and rolle(tab.koepfe[i]) != 'aufwaermen'):
+            kanal = alarm_kanaele(sw, tab.daten['N_mittel'][i], tab.daten['N_mittel_zellen'][i],
+                                  tab.daten['N_mittel'][vor], tab.daten['N_mittel_zellen'][vor])
             out[i] = dict(alarm=bool(kanal), kanaele=kanal)
             if kanal:
                 continue                                                # alarmierter Lauf ist nicht Bezug
@@ -266,28 +331,95 @@ def nullpunktalarm(tab, sw, kandidat):
 
 
 def abbruchregeln(tab, pr, phase=1):
-    """S2 und S4 aus den Gültigkeitsergebnissen; Kandidaten für S1 (reproduzierbar erst mit Wiederholung)."""
+    """S2 und S4 aus den Gültigkeitsergebnissen; Kandidaten für S1 (reproduzierbar erst mit Wiederholung). Im
+    zustandsbehafteten Ablauf (Köpfe mit „versuch“) gelten S2 und S4 nicht für L₁′–L₃′ (offen, §12, wie im Ablauf), und
+    S1/S3 stehen aus dem Ablaufprotokoll in den Köpfen (Halt mit Regel)."""
     d = tab.daten
     art = tab.spalte('laufart', object)
     ph = tab.spalte('phase', int)
     pos = tab.spalte('position', int)
     ordn = np.argsort(pos)
     reg = pr['regeln']
+    zustand = any('versuch' in k for k in tab.koepfe)
+    strich = np.array([zustand and k['laufart'] == 'L' and k['einstellung'] == 2 for k in tab.koepfe])
     s2 = [int(i) for i in ordn if ph[i] == phase and art[i] != 'R' and reg['G6'][i] is True
-          and not any(reg[g][i] is True for g in ('G5', 'G8', 'G10'))]
+          and not any(reg[g][i] is True for g in ('G5', 'G8', 'G10')) and not strich[i]]
     s4 = []
     vor = None
     for i in ordn:
         if ph[i] != phase or art[i] == 'R':
             continue
-        if reg['G2'][i] is True and vor is not None and reg['G2'][vor] is True:
+        if reg['G2'][i] is True and vor is not None and reg['G2'][vor] is True and not strich[i]:
             s4.append(int(i))
         vor = i
     s1_kand = [int(i) for i in ordn if ph[i] == phase and reg['G1'][i] is True]
-    return dict(S2=s2, S2_phase_beendet=len(s2) >= 2, S2_erster=s2[0] if s2 else None, S4=s4,
-                S1_kandidaten=s1_kand, S1='nicht prüfbar ohne Wiederholungsläufe (Generator ohne Wiederholung)',
-                S3='siehe s3_pruefung (Kandidaten ohne Wiederholung)',
-                hinweis='offline aus Laufzusammenfassungen; keine Echtzeit-Abschaltung (AP-10)')
+    out = dict(S2=s2, S2_phase_beendet=len(s2) >= 2, S2_erster=s2[0] if s2 else None, S4=s4,
+               S1_kandidaten=s1_kand, S1='nicht prüfbar ohne Wiederholungsläufe (Generator ohne Wiederholung)',
+               S3='siehe s3_pruefung (Kandidaten ohne Wiederholung)',
+               hinweis='offline aus Laufzusammenfassungen; keine Echtzeit-Abschaltung (AP-10)')
+    if zustand:
+        halt = {g: [tab.koepfe[i]['lauf_id'] for i in ordn if (tab.koepfe[i].get('versuch') or {}).get('halt') == g]
+                for g in ('S1', 'S3')}
+        # maßgebliche S2-Bilanz aus den S2-Versuchen und den protokollierten Ursachenanalysen (wie der Ablauf)
+        bil = s2_bilanz([tab.koepfe[i]['versuch']['id'] for i in s2],
+                        (tab.meta.get('ablauf') or {}).get('ereignisse'))
+        out.update(S1=halt['S1'], S3=halt['S3'], L_strich_offen=[int(i) for i in ordn if strich[i]],
+                   S2_phase_beendet=bil['beendet'], S2_bilanz=bil,
+                   hinweis='Ablaufprotokoll (zustandsbehafteter Ablauf); S2 und S4 für L′ offen (§12)')
+    return out
+
+
+WIEDERAUFNAHME_PFLICHT = ('art', 'quelle', 'zeitpunkt', 'befund', 'mechanischer_eingriff', 'apparaturfehler')
+
+
+def s2_bilanz(s2_versuche, ereignisse):
+    """Maßgebliche S2-Bilanz (§9.2: „ein zweites S2 ohne festgestellten Apparaturfehler beendet Phase 1“), online im
+    Ablauf und offline gleich gerechnet. s2_versuche: Kennungen der S2-Versuche in Ablaufreihenfolge; ereignisse:
+    protokollierte externe Wiederaufnahmen mit dem Halt, den sie beenden. Ein S2 zählt nicht, wenn sein Halt (Regel S2
+    oder ein anderer Halt am selben Versuch) mit einem vollständigen Ereignis fortgesetzt wurde, das einen
+    Apparaturfehler ausdrücklich feststellt (apparaturfehler True, mechanischer_eingriff False, Befund angegeben,
+    Zeitpunkt nicht vor dem Halt). Fehlende, unvollständige oder widersprüchliche Angaben geben kein S2 frei und werden
+    genannt. Die Ausschlüsse nach S2 (Konfiguration, ŷ¹) bleiben davon unberührt."""
+    s2 = list(s2_versuche)
+    frei, widerspruch = [], []
+    for e in ereignisse or []:
+        if not isinstance(e, dict):
+            widerspruch.append('Ereignis ohne Angaben')
+            continue
+        h = e.get('halt') if isinstance(e.get('halt'), dict) else {}
+        if h.get('regel') != 'S2' and h.get('versuch') not in s2:
+            continue                                                    # Halt ohne Bezug zu einem S2
+        fehlt = [x for x in WIEDERAUFNAHME_PFLICHT if x not in e]
+        if fehlt or e.get('art') != 'wiederaufnahme':
+            widerspruch.append(f'Wiederaufnahme nach S2 {h.get("versuch")}: Angaben fehlen ({", ".join(fehlt) or "art"})')
+            continue
+        if not all(isinstance(e[x], bool) for x in ('mechanischer_eingriff', 'apparaturfehler')):
+            widerspruch.append(f'Wiederaufnahme nach S2 {h.get("versuch")}: mechanischer_eingriff/apparaturfehler nicht '
+                               'ausdrücklich wahr oder falsch')
+            continue
+        if e['apparaturfehler'] is not True:
+            continue                                                    # ohne festgestellten Apparaturfehler
+        grund = []
+        if h.get('versuch') not in s2:
+            grund.append('Halt gehört zu keinem S2-Versuch')
+        if e['mechanischer_eingriff'] is not False:
+            grund.append('mechanischer Eingriff')
+        if not str(e['befund']).strip():
+            grund.append('Befund fehlt')
+        try:
+            if float(e['zeitpunkt']) < float(h.get('t', np.inf)):
+                grund.append('Zeitpunkt vor dem Halt')
+        except (TypeError, ValueError):
+            grund.append('Zeitpunkt unlesbar')
+        if h.get('versuch') in frei:
+            grund.append('doppelt')
+        if grund:
+            widerspruch.append(f'Apparaturfehler zu S2 {h.get("versuch")} nicht anerkannt: {", ".join(grund)}')
+            continue
+        frei.append(h['versuch'])
+    massgeblich = [v for v in s2 if v not in frei]
+    return dict(s2=s2, apparaturfehler=frei, massgeblich=massgeblich, beendet=len(massgeblich) >= 2,
+                widerspruch=widerspruch)
 
 
 def s3_pruefung(tab, gueltig, kmax, n_tests=42):

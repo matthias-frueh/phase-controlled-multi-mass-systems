@@ -11,7 +11,7 @@ import os
 
 import numpy as np
 
-from .. import stufe1, zufall
+from .. import stufe1, verfahren as vf, zufall
 from ..generator import ebene_h, ebene_z, kampagne as kp, rauschen, szenarien
 from . import dateien, kette, metriken
 
@@ -61,10 +61,11 @@ def _u_median(erg):
 
 
 def _beide(auftrag):
-    sid, stufe, profil, plan, s, n_min, werkzeug8, ziel, behalten = auftrag
+    sid, stufe, profil, plan, s, n_min, werkzeug8, ziel, behalten, verfahren = auftrag
     rz = dateien.kette_dateien(ziel, sid, stufe, profil, plan=plan, seed=s, ebene='Z', n_min=n_min,
-                               werkzeug8=werkzeug8)
-    rh = kette.kette(sid, stufe, profil, plan=plan, seed=s, n_min=n_min, werkzeug8=werkzeug8, mit_wahrheit=False)
+                               werkzeug8=werkzeug8, verfahren=verfahren)
+    rh = kette.kette(sid, stufe, profil, plan=plan, seed=s, n_min=n_min, werkzeug8=werkzeug8, mit_wahrheit=False,
+                     verfahren=verfahren)
     if not behalten:
         import shutil
         shutil.rmtree(ziel, ignore_errors=True)
@@ -73,12 +74,12 @@ def _beide(auftrag):
 
 
 def vergleich_verrauscht(sid, stufe, profil, n_kampagnen, seed_basis, verzeichnis, plan, n_min=None, werkzeug8=None,
-                         prozesse=1, behalten=False):
+                         prozesse=1, behalten=False, verfahren=None):
     """Getrennte Kampagnen auf Ebene Z (Dateikette mit Stufe 1) und Ebene H; Mediane von u_c und Raten, dazu Seeds,
     Ausgänge und Verarbeitungsstand (herkunft.verarbeitung) je Kampagne und Ebene.
     Die Rohdaten der Ebene Z werden nach der Auswertung gelöscht, außer behalten=True."""
     auftraege = [(sid, stufe, profil, plan, zufall.unterseed(seed_basis, 'ebenen', sid, stufe, i), n_min, werkzeug8,
-                  os.path.join(verzeichnis, f'z{i:03d}'), behalten) for i in range(n_kampagnen)]
+                  os.path.join(verzeichnis, f'z{i:03d}'), behalten, verfahren) for i in range(n_kampagnen)]
     if prozesse > 1:
         from .kampagnen import THREAD_VARIABLEN
         import concurrent.futures as cf
@@ -110,4 +111,5 @@ def vergleich_verrauscht(sid, stufe, profil, n_kampagnen, seed_basis, verzeichni
                 u_c_relativ=dict(zip(GROESSEN, rel.tolist())), u_c_innerhalb_5_prozent=bool(np.all(np.abs(rel) <= 0.05)),
                 raten=raten, seeds=[a[4] for a in auftraege], ausgaenge=aus, verarbeitung=vb,
                 art='statistisch (verrauscht, getrennte Zufallsströme)',
-                lesart='Entwicklungsdiagnostik' if n_kampagnen < 1000 else 'normative Kampagnenzahl')
+                lesart='Entwicklungsdiagnostik' if n_kampagnen < 1000 else 'normative Kampagnenzahl',
+                verfahren=vf.oder_standard(verfahren).kennung())
