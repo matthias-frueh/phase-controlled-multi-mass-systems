@@ -33,7 +33,7 @@ Power-Aussage und keine 0,95-Aussage.
     nach G1-Verstoß von X′ (2), S3 (1).
 - **Frage 3 – Vollständigkeit.** Gemeinsam vollständig sind 25/30 (historisch), 24/30 (k-konsistent ohne
   Wiederholungen) und 25/30 (mit Wiederholungen).
-  - Der k-Effekt betrifft nur A4: 10/10 → 9/10, ein Punkt mit 17 statt 18 gültigen Läufen.
+  - Der k-Effekt betrifft nur A4: 10/10 → 9/10, weil ein Punkt (S116) mit 17 gültigen Läufen unter n_min = 18 fällt.
   - Der Ablauf ändert die Ursache. Ohne Wiederholungen fehlen in 6 Kampagnen einzelne Punkte (weniger als n_min
     gültige Läufe). Mit Wiederholungen ist jede abgeschlossene Kampagne vollständig (mindestens 23 von 24 gültigen
     Läufen je Punkt); verloren gehen Kampagnen nur durch Halte.
@@ -44,13 +44,13 @@ Power-Aussage und keine 0,95-Aussage.
   Laufplan und bei A4 mit Phase-0-Größen bei k = 30 gerechnet. Die Neuläufe sind abgeschätzt, nicht gestartet
   (Abschnitt 5).
 
-**Rechenumfang.** Insgesamt 102 Kampagnenausführungen (Grenze 120):
+**Rechenumfang.** Insgesamt 104 Kampagnenausführungen (Grenze 120):
 
 - 90 Vergleichskampagnen;
 - 6 volle Ketten mit Stufe 2, davon 2 über Ebene Z/Stufe 1 (Grenze 12);
 - 3 Regelpfadfälle;
 - die Fortsetzung, gezählt doppelt (unterbrochen und fortgesetzt sowie ununterbrochen);
-- eine Diagnosekampagne außerhalb der Auftragsliste.
+- außerhalb der Auftragsliste eine Diagnosekampagne (S06) und zwei Gegenproben am Endstand (Abschnitt 7).
 
 Gerechnet mit 4 Prozessen und je einem BLAS-Thread: 0,20 Kernstunden (Grenze 4). Die Wandzeit betrug 33 s für den
 Startsatz und 9 min 19 s für die übrigen Aufträge. Kein Matrixlauf, keine Kalibrierung, keine Schwellenoptimierung.
@@ -69,6 +69,7 @@ Rechnungen laufen nur aus einem sauberen Git-Stand; die Checkpoints liegen unter
 nicht im Repository. Ihr Schlüssel umfasst den Rechencode ohne Kommandozeile und Berichtsteil, den Auftrag, die
 gemeinsamen Einstellungen, das Profil, Werkzeug 8, die Seeds, das Verfahren der Variante (Bindung, Ablauf, Ablaufversion,
 Optionen) und die Bibliotheken. Berichtskorrekturen (`harness/ablauf_vergleich_bericht.py`) wiederholen keine Rechnung.
+Die Checkpoints passen zum Rechencode von 13f2a20; `--bericht` und Übernahmen laufen auf diesem Stand (Abschnitt 7).
 
 ## 1 Phase-0-Größen: bisher an k der Pilotgrößen, jetzt an den Plan gebunden (Frage 1)
 
@@ -453,11 +454,18 @@ teilweise bearbeitet.
 
 ## 7 Herkunft und Dateien
 
-- Branch `ap13-kmax-wiederholungen-2026-10` in einem eigenen Worktree, Basis `main` = 2ab6d28. Commits: k-Konsistenz
-  (9e3bde8), Ablaufsteuerung und Integration (0ea898f), Tests (edb6460), Auftragsliste vor den Rechnungen (13f2a20),
-  danach Ergebnisse mit diesem Bericht und die Dokumentation.
-- Alle Kampagnen sind auf 13f2a20 aus sauberem Arbeitsbaum gerechnet (Git-Stand je Checkpoint vor und nach der
-  Rechnung in `ergebnisse.json`, `checkpoints`), mit vier Arbeitsprozessen und je einem BLAS-Thread.
+- Branch `ap13-kmax-wiederholungen-2026-10` in einem eigenen Worktree, Basis `main` = 2ab6d28. Commits:
+  - k-Konsistenz (9e3bde8), Ablaufsteuerung und Integration (0ea898f), Tests (edb6460);
+  - Auftragsliste vor den Rechnungen (13f2a20);
+  - nach den Rechnungen: Berichtsteil (597fc7c, nur `harness/ablauf_vergleich_bericht.py` und dessen Test, außerhalb
+    des Rechencodes), Ergebnisse mit diesem Bericht (f33f205), Zurückweisung des Ablaufs in der Dateikette (28bc9dc),
+    Dokumentation.
+- Alle Kampagnen der Auftragsliste sind auf 13f2a20 aus sauberem Arbeitsbaum gerechnet (Git-Stand je Checkpoint vor
+  und nach der Rechnung in `ergebnisse.json`, `checkpoints`), mit vier Arbeitsprozessen und je einem BLAS-Thread.
+- 28bc9dc ändert nur die Dateikette, die die Rechnung nicht benutzt. Weil der Rechencode Teil des Checkpoint-Schlüssels
+  ist, passen die Checkpoints aber nur zu 13f2a20; `--bericht` und eine Übernahme laufen deshalb auf 13f2a20.
+- Gegenprobe am Endstand 28bc9dc: zwei Kampagnen neu gerechnet, ihre Befunde sind ohne Laufzeit gleich
+  (`laufprotokoll.txt`). Es sind N01-A4 mit Wiederholungen, Kampagne 0, und N01-V1G0, Kampagne 1 (mit S1-Halt).
 - `auftrag.json`: Aufträge, Seeds und ihre Ableitung, Zufallsströme, Varianten mit Verfahrenskennung, Profil mit
   Prüfsumme, Werkzeug 8 mit Inhaltsprüfsumme, Budget.
 - `ergebnisse.json`: Vergleich, gepaarte Unterschiede, Gegenprobe gegen PR #22, volle Ketten, Regelpfade, Fortsetzung,

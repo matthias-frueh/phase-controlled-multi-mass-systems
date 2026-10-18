@@ -112,3 +112,7 @@ Ende 2026-10-17T18:40:04 monoton 5716.138666809
 kette.kampagne_ablauf('S06-saettigung', 'L1', Plan der Auftragsliste, Seed 1910311766019208858, Profil der Auftragsliste, Werkzeug 8 Testvorgabe, n_min 18, Verfahren zustand), ohne Stufe 2, 2,2 s:
 Status angehalten, Halt S3 bei V00178 (Block 6): Re_N2 von L1 in Kontrollsatz 7 (V00177) und in der sofortigen Wiederholung (V00178) über der Schwelle; beide gültig, ohne Ereignis.
 Übersteuerung (G5) nur in S120 Block 1 (V00009, am gezogenen Platz ersetzt) und im Einzelmodullauf L1 Nr. 2 der Phase 0 (S3-Bezug Modul 1: n0 = 18).
+
+== 4. Gegenprobe am Endstand 28bc9dc (außerhalb der Auftragsliste): ablauf_vergleich.kampagne direkt, Befund ohne Laufzeit gegen den Checkpoint
+N01-A4-wiederholungen-start 0 Seed 6421326674948950355 Befund am Endstand gleich: True 3.8 s abgeschlossen None
+N01-V1G0-wiederholungen-start 1 Seed 522969386212988845 Befund am Endstand gleich: True 2.8 s angehalten S1
