@@ -266,8 +266,24 @@ Aufwand (Einschätzung): 1–2 Personentage, keine Kampagnenrechnung.
 - Gezählt aus `g4_konfigurationen.csv` (960 Läufe je Punkt): Rate je Konfiguration unter der heutigen Regel
   0,83–10,83 % (A4), 0,62–14,06 % (V1-G0), 0,42–14,69 % (V1-G60h); unter v2 0,73–3,12 / 0,42–2,29 / 0,42–2,29 %,
   ohne den Knickpunkt S120 höchstens 2,08 / 1,35 / 1,15 % und homogen (χ², p = 0,27–0,71). An S120 unterschätzt v2
-  die Streuung um den Faktor 0,84–0,90, weil die Jitterstreuung an der Sollphase ausgewertet wird und die Läufe in
-  der Laufphase streuen.
+  die Streuung um den Faktor 0,84–0,90 (von der Nachprüfung erneut gezählt). Ursache: s_i wird an der Sollphase und
+  mit nominalen Modulamplituden ausgewertet, der Knick wandert aber von Lauf zu Lauf mit dem Indexversatz, dem nicht
+  erfassten Phasenrest δ und der Amplitudenstreuung der Module. Die Nachprüfung hat D_F an S120 mit der
+  Generatorstruktur und den Parametern der Stufe L1 nachgebildet (gerechnet, 200 000 Läufe):
+
+  | MAD(D_F) an S120 [mN] | A4 | V1 |
+  |---|---|---|
+  | nur Sollphase | 1,64 | 2,06 |
+  | Laufphase (Versatz und δ) | 2,12 | 2,64 |
+  | alle Laufgrößen | 2,25 | 2,81 |
+  | beobachtet (PR #22) | 2,29 | 2,88 / 2,87 |
+
+  δ allein gibt den Faktor 1,15, die Laufphase 1,28, die Amplitudenstreuung allein ebenfalls 1,28, alle drei
+  zusammen 1,36–1,39. Erst alle drei treffen die Beobachtung auf etwa 2 % und die G4-Rate unter v2 auf 0,1–0,25
+  Prozentpunkte. An den übrigen 20 Punkten liegt beobachtet gegen nachgebildet bei 0,93–1,08.
+- Am Knick hat D_F schwere Ränder (gerechnet in der Nachprüfung): Das 99,9-%-Quantil von |D_F| liegt beim
+  3,8–3,9-Fachen der MAD statt beim 3,29-Fachen. Selbst mit exaktem σ ergibt die 3σ-Regel dort 0,75–0,77 % statt
+  0,27 % Ausschlüsse.
 - p̂ der Piloten (1,0–2,0 %) gegen den Anteil ungültiger Schnittläufe: heute 4,80–4,96 %, v2 1,35–2,12 %. Erst v2
   bildet mit p̂ die Phase 1 ab, wie Reserve und Zeitformel es voraussetzen (gezählt).
 - Die 3σ-Regel mit MAD-Schätzer ist nicht nominal (gerechnet, Normalmodell): je Prüfgröße 0,65 % bei n = 60 und
@@ -285,12 +301,26 @@ Aufwand (Einschätzung): 1–2 Personentage, keine Kampagnenrechnung.
   schon decken.
 - **B: Standardisierung v2** (PR #22): σ²_Δ,F,i = σ²_Δ,F + max(0, s_i² − s̄_P²), s_i aus ŷ⁰, Δδⱼ und σⱼ der Piloten,
   Untergrenze 3·σ_Δ,F.
-- **B+ (empfohlen):** v2 mit drei Korrekturen: (1) s_i einschließlich der Streuung der Laufphase von Lauf zu Lauf,
-  geschätzt aus Phase 0 (Wiederholbarkeit der Indeximpulse, P0.6, oder aus den Lⱼ-Läufen; derselbe Schätzer wie im
-  Generator von Abschnitt 5); (2) an Punkten, deren vorhergesagter Knick innerhalb ±u(Δδⱼ) liegt, das Maximum von s
-  über diesen Bereich; (3) Ziehungen auf Einheitskovarianz normiert oder Delta-Methode (die 512 festen Ziehungen
-  von PR #22 verzerren s_i um den Faktor 0,94–1,04). Dazu: Piloten behalten das gepoolte σ_Δ,F (p̂ unverändert
-  definiert); fehlt s_i, ist G4 „nicht prüfbar“; eine registrierte Zielrate je Konfiguration in A9.11.
+- **B+ (empfohlen):** v2 mit vier Korrekturen (nach der Nachprüfung präzisiert):
+  (1) s_i als Mischung über die Laufgrößen, s_i² = E_{τ,A}[2·Var_e F(φ_i + τ + e; A)], mit den Relativphasen
+  τⱼ = offⱼ + δⱼ − δ₁ (j = 2, 3) und den Modulamplituden A. σ_off,j kommt aus den Laufmitteln φ̄ⱼ und σⱼ der
+  gültigen Piloten (σ²_off,j = max(0, Var φ̄ⱼ − σⱼ²/N_z), ν ≈ 57). σ_δ,j und σ_a,j kommen aus der Quadratur- bzw.
+  Gleichphasenkomponente der Lⱼ-Läufe (P0.8), kohärent über k und Zellen projiziert, ν = 19 je Modul. Der Boden
+  kommt aus den R-Läufen. Derselbe Satz parametriert den Generator (Abschnitt 5). τ darf nicht einfach zu e addiert
+  werden: Das zählte Var_τ E_e F mit, das sich in D_F aufhebt, und überschätzte die steilen Punkte stark. P0.5
+  liefert nur das statische Δδⱼ und P0.6 nur Encodergrößen; beide geben keine Streuung von Lauf zu Lauf her (die
+  erste Fassung nannte sie hier als Quelle).
+  (2) An Punkten, deren vorhergesagter Knick innerhalb ±u(Δδⱼ) liegt, das Maximum von s über diesen Bereich.
+  (3) Ziehungen auf Einheitskovarianz normiert oder Delta-Methode (die 512 festen Ziehungen von PR #22 verzerren s_i
+  um den Faktor 0,94–1,04).
+  (4) Die Zielrate wird am vorhergesagten Rand geprüft und die Schwelle dort über ein Quantil festgelegt statt über
+  die Streuung, wegen der schweren Ränder am Knick.
+  Dazu: Piloten behalten das gepoolte σ_Δ,F (p̂ unverändert definiert), aber s_p der Piloten wird mit derselben
+  Mischung gebildet, weil P2 = (130°, 230°) nahe einem Knick liegt (A4: Sollphase 1,49, mit Mischung 1,78,
+  beobachtet 1,71 mN MAD); sonst ist s̄_P² verzerrt. Fehlt s_i, ist G4 „nicht prüfbar“; eine registrierte Zielrate
+  je Konfiguration in A9.11. Die Lⱼ-Schätzer sind im Generatormodell identifizierbar: Mit ν = 19 liegt σ̂_δ/σ_δ zu
+  90 % zwischen 0,73 und 1,26, der Rauschboden trägt nur 0,4–1,6 % bei; an S120 ändert das MAD(D_F) um höchstens
+  −4/+2,4 % (gerechnet in der Nachprüfung).
 - **D: phasenkorrigierte Fünftel-Differenz.** Von D_F wird die aus den gemessenen Fünftelzeigern und ŷ⁰
   vorhergesagte Änderung abgezogen; eine Schwelle aus den ebenso korrigierten Piloten gilt für alle
   Konfigurationen. Misst den Jitter statt ihn zu modellieren und erhielte nach Gaußabschätzung die
@@ -339,7 +369,10 @@ seit `pilot-0.3`.
   (auch F), Messzeit, p̂ gegen die Phase-1-Ausfälle. Kosten etwa 6–9 Kernstunden (0,7 Kernstunden je 1000
   schlanke Kampagnen, mit den langsameren Laufzeiten der Korrekturrunde bis 1,0).
 - **R2 (Robustheit, Kernfrage B+ gegen D):** farbiger Jitter, zwischen Modulen korrelierter Jitter, lastabhängiger
-  Jitter, konfigurationsabhängiges Rauschen, größere Laufversätze, Phasendrift im Lauf; 6 Szenarien × 3 Systeme ×
+  Jitter, konfigurationsabhängiges Rauschen, größere Laufversätze, Phasendrift im Lauf. Dazu die drei Annahmen, die
+  der Lⱼ-Schätzer selbst nicht trägt: größere Amplitudenstreuung je Modul, Streuung in Kombinationsläufen anders als
+  in Einzelmodulläufen (wie N04, K = 2·L), und eine gemeinsame Laufzeitschwankung der Kette statt eines modulweisen
+  δ (in Lⱼ nicht von δ trennbar, der Lⱼ-Wert ist für die Relativphase dann eine obere Schranke); 6 Szenarien × 3 Systeme ×
   300 statische Kampagnen, Auswertung aller Varianten auf denselben Läufen; etwa 4,5 Kernstunden plus
   Generatoroptionen (gehört zu d).
 - **R3:** Trendempfindlichkeit je Variante für registrierte Trendklassen, nachträglich auf R1/R2-Daten; Minuten.
@@ -350,7 +383,8 @@ seit `pilot-0.3`.
   flachen Punkten (dann B+)?
 - F-b2: Zielrate je Konfiguration als Kriterium in A9.11: ≤ 1,5 % je Lauf, oder ≤ 1 % mit Faktor k(n)?
 - F-b3: Ist eine Formatänderung der Laufzusammenfassung (Fünftelzeiger) vor dem Einfrieren annehmbar
-  (Voraussetzung für D und für die Schätzung der Laufphasenstreuung aus Pilotdaten)?
+  (Voraussetzung für D)? Für B+ ist sie nicht nötig: φ̄ⱼ, σⱼ, Zeiger und Zellharmonische stehen schon in der
+  Laufzusammenfassung (`zusammenfassung.py` Z. 45–47).
 - F-b4: Piloten beim gepoolten σ_Δ,F belassen (p̂ unverändert) oder ebenfalls standardisieren?
 - F-b5: G4 an Lⱼ: σ_Δ über die Module poolen, Faktor k(n), größeres n₀, oder erst R1 abwarten?
 - F-b6: R1 und R2 (zusammen etwa 11–14 Kernstunden plus Code) vor der Neukalibrierung beauftragen?
@@ -688,7 +722,12 @@ Variante von E3 ab.
   Kovarianzen von Lⱼ und R sind immer singulär, die Pilotkovarianz ab k = 10; ein Gauß-Generator zöge in
   Unterräumen. (2) Bei L0 entfallen rund 80 % der Lauf-zu-Lauf-Varianz der Harmonischen auf den über die gemessenen
   Zeiger ρ erfassten Phasenanteil, der im Residuum herausfällt; eingesetzt als Laufrauschen würde er die
-  Residuenstreuung um bis zum Faktor 2,2–2,4 überschätzen (bei L1 1,03–1,21). (3) Konfigurationsabhängigkeit: Das
+  Residuenstreuung um bis zum Faktor 2,2–2,4 überschätzen (bei L1 1,03–1,21). Die Nachprüfung hat das mit den
+  tatsächlichen Summenharmonischen von A4 bestätigt (1,297 / 0,427 / 0,184 N; bei A4 gleich den Zellharmonischen,
+  weil die Zelle unter dem Modul die ganze Modulkraft trägt; für V1-G60h träfe die Gleichsetzung nicht zu). Das gilt
+  für k = 1–3; für k = 4–9 liegt der Faktor bei L0 bei 1,03–1,69, bei L1 bis 1,38. Für F_min des Laufmittels ist er
+  punktabhängig: bei L0 1,96–2,76 mit dem Maximum an S118, bei L1 1,05–1,27. Er ist im Wesentlichen ein Verhältnis
+  von erfasster zu nicht erfasster Phasenstreuung und folgt in Teil B aus dem Laufgrößenmodell. (3) Konfigurationsabhängigkeit: Das
   Verhältnis der Varianz von Re bzw. Im N_k an einem Schnittpunkt zum gepoolten Pilotwert liegt bei
   modulproportionaler Streuung zwischen 0,52 und 1,65 (k = 2) und 0 und 1,63 (k = 3); am Triphasik-Punkt ist bei
   k = 3 alles gleichphasig. (4) Fünftel und F_min stehen in der Pilotkovarianz nicht; die Flankenabhängigkeit von
@@ -713,10 +752,12 @@ Variante von E3 ab.
   an den Schnittpunkten systematisch falsch (oben); nur als Diagnose- oder Sensitivitätsvariante. 1–2 Personentage.
 - **C (empfohlen): Strukturmodell aus Phase 0.** Schätzung im Pilotskript (nur zweite Momente, gebunden an k und
   N_z): Sensorboden aus den R-Läufen (ν ≥ 41 für die Kovarianz der Harmonischen; σ̂_ref aus den
-  Leave-one-out-Werten hat dagegen effektiv nur ν ≈ 21 bei 42 R) und σ_c; Modulanteil je Modul aus den Lⱼ-Läufen
-  (ν = n₀ⱼ − 1) in
-  Gleichphase, Quadratur und Rest je Harmonischer; erfasster Phasenanteil aus den Zeigern; Nullpunktprozess aus
-  der Referenzfolge; Fünftel aus dem laufinternen Anteil. Fortpflanzung auf jede Konfiguration über die gemessenen
+  Leave-one-out-Werten hat dagegen effektiv nur ν ≈ 21 bei 42 R) und σ_c; Laufgrößen je Modul (nach der
+  Nachprüfung präzisiert): σ_a,j und σ_δ,j aus der kohärenten Projektion der Lⱼ-Abweichungen über k und Zellen auf
+  skalare Laufwerte âⱼ,r und δ̂ⱼ,r (ν = n₀ⱼ − 1), σ_off,j aus den Laufmitteln φ̄ⱼ der Piloten, mit Parametern je
+  Modul statt je Laufart (heute `rauschen.py` Z. 23–24); der orthogonale Rest je Harmonischer aus den Lⱼ-Läufen
+  als eigene Komponente; erfasster Phasenanteil aus den Zeigern; Nullpunktprozess aus der Referenzfolge; Fünftel
+  aus dem laufinternen Anteil. Fortpflanzung auf jede Konfiguration über die gemessenen
   Zeiger und ŷ⁰ (Struktur aus Phase 0 am Arbeitspunkt, aus Werkzeug 2 für Kandidatenfrequenzen). Obere 80-%-Grenze
   je Komponente mit eigenem ν nur für die Planungsbedingung; Teil-B-Werte (c, b̂, H2-Typ, E3-Raten, ε_ctrl-Quantil)
   mit Punktschätzern (zweite Simulation). Für den weißen Boden von ⟨N⟩ gilt ein gemeinsamer Faktor für alle
@@ -755,7 +796,12 @@ den Prüfstand als Orakel, (5) Rechnungen, (6) Abgleich mit b (s_i aus demselben
 - Tests: Rundreise Pilot → Generator → Pilot (Wiedergewinnung von s_q, σ_Δ, σ̂_ref, p̂, Komponenten); Modus A
   bitgleich zum Szenariogenerator; Gleichheit der Entscheidungen bei eingesetzter Szenariokovarianz; Singularität
   und Regularisierung; Wahrheitstrennung (kein Zugriff auf Szenario-Wahrheit im Pilotmodus); Verteilung von
-  u = ε_ctrl/(3·√1,5·σ) und Anteil der Kampagnen mit ε aus σ̂_betr gegen die Nullsimulation.
+  u = ε_ctrl/(3·√1,5·σ) und Anteil der Kampagnen mit ε aus σ̂_betr gegen die Nullsimulation; Rundreise
+  Lⱼ → σ̂_δ, σ̂_a mit Kohärenzprüfung über k.
+- Teil B: Felder σ_a,j, σ_δ,j und σ_off,j mit ν in A9.3 Nr. 2. Heute führt P0.8 keine Streuung als Ergebnis
+  (Entwurf Z. 297), und das Pilotskript gibt nur Pilotgrößen aus (Z. 373–374). Der Lⱼ-Schätzer braucht nur N̄⁽ʲ⁾
+  aus demselben Schritt und keine Superpositionsresiduen der Piloten; F-d3 betrifft nur den Übertragungstest
+  L → K an den Piloten.
 - Phase-0-Anordnung: Der Generator setzt in Phase 0 nach je zwei anderen Läufen einen Referenzlauf, also 61 R
   (`generator/kampagne.py` Z. 92, gelesen), P0.7 verlangt einen nach zwölf Läufen und mindestens 42 (Anhang
   Z. 886–887). Haltraten hängen nicht vom Rauschpegel ab, wohl aber von dieser Anordnung: Mit 42 R sind es im
@@ -787,7 +833,7 @@ den Prüfstand als Orakel, (5) Rechnungen, (6) Abgleich mit b (s_i aus demselben
   (a) oder (b)?
 - F-d5: Struktur in der Planung am Arbeitspunkt aus P0.8 oder aus Werkzeug 2 mit den Parametern aus P0.1–P0.5?
 - F-d6: Nicht schätzbare Komponenten als benannte Sensitivitätsszenarien in Teil A, nur berichtet?
-- F-d7: Soll Stufe 1 die Zeiger der Fünftel speichern (farbiger Jitter, Jitterstreuung der Fünftel für G4)?
+- F-d7: Soll Stufe 1 die Zeiger der Fünftel speichern (farbiger Jitter, Option D von G4)? Für B+ genügt σⱼ/√n_f.
 - F-d8: Soll der Prüfstand künftig mit dem Pilotmodell planen und das Szenario nur als Orakel dienen?
 
 ## 6 Reihenfolge, Abhängigkeiten, Paketierung, Entscheidungsliste
@@ -796,8 +842,10 @@ Abhängigkeiten:
 
 - b2 (Halte) setzt a voraus: Die simulierte Wiederaufnahme muss `ablauf-4` abbilden; Ablaufversion und Zählweise
   gehören zum Checkpoint-Schlüssel und zur Bezugsmenge jeder Kalibrierung.
-- b1 (G4) lässt sich als Regel ohne d festlegen; ihre Zahlen für Teil B, die Robustheitsrechnung R2 und der
-  Schätzer der Laufphasenstreuung hängen an d. R1 läuft schon mit dem Szenariogenerator.
+- b1 (G4) lässt sich als Regel ohne d festlegen; ihre Zahlen für Teil B und die Robustheitsrechnung R2 hängen
+  an d. Der Schätzer der Laufphasenstreuung (σ_a,j, σ_δ,j aus den Lⱼ-Läufen, σ_off,j aus den Piloten) hängt nach
+  der Nachprüfung nicht am Strukturmodell: Er ist der gemeinsame erste Baustein von b1 und d im Pilotskript und kann
+  vor dem Strukturmodell umgesetzt werden. R1 läuft schon mit dem Szenariogenerator.
 - c ist von a, b und d unabhängig (eigener Codepfad, keine Wirkung auf die Laufzahl); die Modellprüfung von E3 nutzt
   später das Zellrauschen aus d.
 - d steht vor jeder Neukalibrierung, weil Teil B kein Szenario hat.
@@ -849,11 +897,11 @@ Entscheidungsliste (Kurzform; Empfehlung in Klammern):
 - Die Zahlen aus PR #22 und #23 stammen aus Entwicklungsläufen (reduzierte Replikatzahlen, zehn bis vierzig
   Kampagnen je System) und aus Kampagnen mit statischem Laufplan oder `ablauf-2`/`ablauf-3`; sie zeigen Richtungen,
   keine Raten.
-- Nachprüfungen mit eingeschränkter Tiefe: Fünf geplante unabhängige Nachprüfungen konnten nicht laufen. Sie sind
-  so ersetzt: Bezugsmenge für c durch eigenes Nachlesen von `kalibrierung.py` (3.1); E3b-Konstruktion durch die
-  gezählten und gerechneten Varianten in Abschnitt 4; Reihenfolge und Aufwand durch Abschnitt 6; ε_ctrl als Treiber
-  der Halte durch die Zählung in 3.1 an 30 Kampagnen. Offen bleibt die Herkunft der Laufphasenstreuung von Lauf zu
-  Lauf; B+ stützt sich dafür nur auf P0.6 und den Lⱼ-Schätzer. R2 aus Abschnitt 2 prüft sie mit größeren
-  Laufversätzen.
+- Die Teststatistikrechnungen der Nachprüfungen (Abschnitt 8) bilden S3, G2–G10, Drift und Aufwärmen nicht ab und
+  rechnen mit einem Messtag; die homogene Haltrate der ersten Fassung ist durch sie widerlegt. Die Rechnungen zur
+  Laufphasenstreuung gelten für die Generatorstruktur mit den Parametern der Stufe L1, nicht für eine Apparatur.
+  Offen bleiben dort die Übertragung der Lⱼ-Streuung auf Kombinationsläufe, die Trennung einer gemeinsamen
+  Laufzeitschwankung der Kette von modulweisem δ und die Registrierung der Laufgrößen in Teil B; R2 prüft diese
+  Annahmen.
 - Nicht behandelt: Punkt e) (realer Pilot), die Hardwareentscheidungen von §12 (II) und die Fassung der
   Zeitformel im Einzelnen.
