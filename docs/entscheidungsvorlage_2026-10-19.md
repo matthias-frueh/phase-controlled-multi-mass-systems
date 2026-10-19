@@ -22,7 +22,8 @@ begründen Entscheidungen über Regeln, ersetzen aber keine Kalibrierung.
   ausstehende sofortige Folgeläufe, und eine durch einen Halt unvollständige Klammer wird so behandelt wie eine
   durch ungültiges R₂/R₃ unvollständige (S1 nicht prüfbar, keine weitere Wiederholung). Zwei Nachbarfragen gehören
   in denselben Beschluss: was im Kontrollsatz der Wiederaufnahme als „Alarm“ gilt, und ob nach einer Wiederaufnahme
-  aufgewärmt wird. Umsetzung ohne Kampagnenrechnung (`ablauf-4`).
+  aufgewärmt wird. Nach einem Nullpunkthalt soll ein neuer Bezug R₀ gelten, weil der W-Satz sonst gegen den
+  wahrscheinlichen Ausreißer vergleicht. Umsetzung ohne Kampagnenrechnung (`ablauf-4`).
 - **b) G4.** Die heutige Schwelle je Laufart schließt an steilen Konfigurationen bis zu 14,7 % der Läufe aus
   (gezählt, PR #22), die Begründung „seltene Fehlausschlüsse“ (Tabelle F) trifft dort nicht zu, und p̂ der Piloten
   (1–2 %) bildet die Phase-1-Ausfälle (4,8–5,0 %) nicht ab. Eine konfigurationsabhängige Standardisierung aus
@@ -31,8 +32,11 @@ begründen Entscheidungen über Regeln, ersetzen aber keine Kalibrierung.
 - **b) Vollständigkeit und Halte.** Zählt ein Halt als verlorene Kampagne, begrenzt die Haltrate die 0,8-Bedingung:
   In PR #23 halten 5 von 30 Nullkampagnen an, die A8-Schranken lassen bis etwa 0,3 je Kampagne zu. Empfohlen:
   Werkzeug 8 nimmt Halte wie der Messbetrieb wieder auf (synthetische Ursachenanalyse ohne Befund), berichtet die
-  Haltrate je Regel getrennt und verwendet eine Bezugsmenge für c, Prüfrate und P(H1 und H2). Die Reserveformel
-  bleibt; ein eigenes Vollständigkeitsziel ist dann nicht nötig.
+  Haltrate je Regel getrennt und verwendet für c, b̂, Prüfrate und H2-Überdeckung eine gemeinsame Auswertungsmenge,
+  für P(H1 und H2) alle simulierten Kampagnen als Nenner. Die Reserveformel bleibt; das Ziel 0,95 aus PR #22 wird
+  Bedingung für r über die nicht abgebrochenen Kampagnen. Halte häufen sich in Kampagnen mit kleinem geschätztem
+  ε_ctrl (Dispersionsindex etwa 2), und nach einem Nullpunkthalt verkettet sich der W-Satz über dasselbe R₀; beides
+  gehört in die Festlegung von a) und in die Wahl von W.
 - **c) E3.** Die Intervallregel von A9.13 ist am Schwellenrand ungültig: Bei E3b beträgt die Fehlalarmrate je
   Prüfung das 2- bis 16-Fache von α/m, bei E3a das bis zu 3-Fache (gerechnet); die Bonferroni-Schranke steigt im
   ungünstigsten Fall von 5 % auf etwa 16 %. Empfohlen: am Rand gültige Grenzen (Rice-Konstruktion mit
@@ -102,6 +106,11 @@ ausschließen (notwendige Bedingung R₁ > 0 und S3-Wiederholung > 0 erfüllen 1
 klein; der Punkt muss trotzdem vor jeder Kalibrierung stehen, weil die Ablaufversion zum Checkpoint-Schlüssel
 gehört.
 
+Nachprüfung mit geschätztem σ̂_ref (gerechnet, Teststatistikmodell, Plan von PR #23): Für den Mittelwert trägt die
+Unabhängigkeit von Vorprüfung und S3. Die Vorprüfung ist je Lauf aber 17–26 % häufiger als bei bekanntem σ und
+häuft sich in Kampagnen mit kleinem ε_ctrl. Ein Halt an einem nach G2–G10 gültigen X′ kommt mit dem heutigen Code in
+etwa 0,6–1·10⁻⁴ der Kampagnen vor, 2,4- bis 3,2-mal so oft wie unter Unabhängigkeit; mit N7 entfällt er.
+
 ### 1.2 Optionen
 
 Reihenfolge am Kontrolllauf:
@@ -135,12 +144,18 @@ Halt und Wiederaufnahme:
   Wiederholung, der Platz fehlt (Reserve r). Das ist die heutige Lesart, als Text. **K2**: X′ wird über die
   Unterbrechung geprüft; ist es G1-ungültig und nach G2–G10 gültig, folgt nach dem W-Satz einmalig eine frische
   Klammer R₂′, X″, R₃′ (auch über die Wiederholungsgrenze), S1 an X″. K2 hält S1 dort prüfbar, wo es greifen
-  würde, kostet aber Mechanik für einen Fall von etwa 10⁻² je Kampagne (Halt an R₃, gerechnet), in dem unter K1
-  der Platz bedingt mit etwa 42 % verloren geht. **K3**: R₃ noch vor dem Halt messen. Widerspricht „sofort
-  angehalten“ für S1–S4; nur beim Halt über die W-Regel textlich möglich. Nicht empfohlen.
+  würde, kostet aber Mechanik für einen seltenen Fall: Ein Halt an R₃ kommt in 3–5·10⁻³ der Kampagnen vor
+  (gerechnet in der Nachprüfung, Teststatistikmodell mit geschätztem σ̂_ref; die erste Fassung nannte hier
+  pauschal 10⁻²). Unter K1 geht der Platz dann bedingt mit etwa 42 % verloren. Viermal häufiger ist der Halt an
+  R₂ (1,1–1,7·10⁻² der Kampagnen), den H1 abdeckt: Der G1-Fall wird oft von einem abweichenden R₀ oder R₁
+  ausgelöst, gegen den R₂ dann alarmiert. 36–52 % dieser Halte liegen in Kampagnen mit kleinem ε_ctrl
+  (u = σ̂/σ < 0,85). **K3**: R₃ noch vor dem Halt messen. Widerspricht „sofort angehalten“ für S1–S4; nur beim
+  Halt über die W-Regel textlich möglich. Nicht empfohlen.
 - **S1 über den Halt hinweg prüfen:** nicht empfohlen. X′ läge dann fast auf R₂ (β → 0); die G1-Rate stiege von
   0,61 % (mittig) auf etwa 1,5 % (Randlage, gelesen A8), die S1-Schranke von 2,5·10⁻⁴ je Lauf wäre nicht mehr
-  belegt (gerechnet 5,3·10⁻⁴).
+  belegt (gerechnet 5,3·10⁻⁴). Alle diese Werte sind Mittel über die Streuung von σ̂_ref (nachgerechnet am
+  Befehl in Tab. F, Anhang Z. 1437). In einer gegebenen Kampagne reicht die S1-Rate je Lauf von 2,5·10⁻³
+  (u = 0,7) bis 6·10⁻⁷ (u = 1,2); bei bekanntem σ wären es 2,5·10⁻⁵.
 
 Nachbarfragen, die in denselben Beschluss gehören:
 
@@ -155,12 +170,22 @@ Nachbarfragen, die in denselben Beschluss gehören:
   jeder Wiederaufnahme, der letzte Aufwärmlauf wird R₀ und schließt die offenen G1-Prüfungen; (b) Aufwärmen nur bei
   Tageswechsel, am selben Tag bleibt R₀ bestehen. „Kein Block über Nacht“ (§6 Z. 498) braucht in beiden Fällen die
   Ausnahme „außer nach einem Halt (§9.2)“, oder die Fortsetzung am Folgetag wird ausgeschlossen. Empfohlen: (b),
-  mit tatsächlichem Messtag im Kopf; die Zeitkosten gehören zu b2.
+  mit tatsächlichem Messtag im Kopf und mit einer Ausnahme nach einem Nullpunkthalt (nächster Punkt); die
+  Zeitkosten gehören zu b2.
+- **Kette über dasselbe R₀ (Befund der Nachprüfung, gerechnet und vom Hauptbearbeiter nachgerechnet).** Nach S1
+  über einen reproduzierten Nullpunktalarm ist meist R₀ selbst der Ausreißer. Der W-Satz vergleicht aber weiter mit
+  diesem R₀ (`ablauf.py` Z. 398–414). Sein Referenzlauf alarmiert dann im selben Kanal mit etwa 0,19 bis 0,2 bei
+  u = 1 und 0,27 bei u = 0,8. Hält jeder einzelne Nullpunktalarm im W-Satz an, entstehen 0,28–0,33 weitere Halte
+  je Alarmhalt; 98 % aller Alarme im W-Satz folgen auf einen Alarmhalt. Wird der Alarm im W-Satz nach §8.8
+  wiederholt, reproduziert er sich nur mit 0,057–0,107. N6 (b) erhält diese Kette, N6 (a) bricht sie. Empfohlen
+  wird deshalb (b) mit der Ausnahme, dass nach S1 über einen reproduzierten Nullpunktalarm ein neuer Bezug gilt:
+  Der erste Referenzlauf des W-Satzes wird R₀, ohne Alarmvergleich gegen das alte R₀, wie der letzte Aufwärmlauf
+  unter (a). Ob das im realen Versuch zu Beginn der Ursachenanalyse gehört, entscheidet der Autor.
 
 ### 1.3 Empfehlung
 
-A1 + Z1 + H1 + K1 + N7 (S1–S4 und Nullpunktalarm) + N5 + N6 (b), als Arbeitsfestlegung mit A0-Eintrag und als
-`ablauf-4`. Gründe: wörtlichste Lesart von §9.2 (Halt beendet die Messung mit dem auslösenden Lauf, Wiederaufnahme
+A1 + Z1 + H1 + K1 + N7 (S1–S4 und Nullpunktalarm) + N5 + N6 (b) mit neuem Bezug nach einem Nullpunkthalt, als
+Arbeitsfestlegung mit A0-Eintrag und als `ablauf-4`. Gründe: wörtlichste Lesart von §9.2 (Halt beendet die Messung mit dem auslösenden Lauf, Wiederaufnahme
 nach einem vollständigen Kontrollsatz), A8 bleibt gültig, keine neue Verschachtelungslücke, der Code bleibt klein.
 K2 ist die bessere Regel für S1, wenn der Autor den seltenen Fall „Halt an R₃“ nicht der Reserve überlassen will.
 
@@ -220,8 +245,10 @@ Aufwand (Einschätzung): 1–2 Personentage, keine Kampagnenrechnung.
 - F-a2: Halt: H1 (ausstehende Folgeläufe entfallen; G1-Fall ohne X′ wird nach dem W-Satz vollständig gemessen)?
 - F-a3: Unvollständige Klammer durch Halt: K1 (S1 nicht prüfbar, Platz fehlt) oder K2 (einmalige frische Klammer)?
 - F-a4: N7: gilt eine einzelne S3-Überschreitung im W-Satz als Alarm? Hält ein einzelner Nullpunktalarm im W-Satz
-  an, oder wird er nach §8.8 wiederholt?
-- F-a5: Aufwärmen nach jeder Wiederaufnahme oder nur bei Tageswechsel; Ausnahme von „Kein Block über Nacht“?
+  an, oder wird er nach §8.8 wiederholt? (Halt verkettet mit 0,19–0,27, Wiederholung reproduziert nur mit
+  0,057–0,107; gerechnet, siehe „Kette über dasselbe R₀“.)
+- F-a5: Aufwärmen nach jeder Wiederaufnahme oder nur bei Tageswechsel; Ausnahme von „Kein Block über Nacht“; neuer
+  Bezug R₀ nach S1 über einen reproduzierten Nullpunktalarm?
 - F-a6: Sollen die übrigen Lesarten (Abschnitt 1.3, letzter Absatz) im selben PR Regeltext werden?
 
 ## 2 G4 (b, erster Teil)
@@ -343,29 +370,100 @@ seit `pilot-0.3`.
   Sperre berechnet. Spät angehaltene Kampagnen (PR #23: V1-G0 Nr. 2 mit 21/21 auswertbaren Punkten) gehen damit in
   c und die Prüfrate ein, zählen in P(H1 und H2) aber als nicht bestätigt. Das ist eine Inkonsistenz der
   Bezugsmengen, unabhängig von der gewählten Option.
+- Bezugsmengen im Einzelnen (gelesen, Nachprüfung vom 19.10., vom Hauptbearbeiter am Code bestätigt): Heute gibt es
+  vier, und keine filtert auf den Ablaufstatus. c und Prüfrate laufen über Kampagnen mit allen z endlich
+  (`c_bestimmen`, Z. 63–79 und 199–206). b̂ (`rauschbias`, Z. 38–60) und der Restbias (`_restbias`, Z. 244–260)
+  mitteln punktweise über alle endlichen Werte, also über mehr Kampagnen als c; `_restbias` weist n am Punkt mit
+  den meisten Werten aus. Die H2-Überdeckung (`h2_ueberdeckung`, Z. 98–140) zählt Kampagnen mit vollständigem W
+  und gültigem ŷ¹ und verwendet nur die erste Rauschvariante (Z. 189), c und b̂ dagegen alle. P(H1 und H2) hat
+  alle Kampagnen im Nenner (`kampagnen.py` Z. 204, 221–222); dort steht zusätzlich eine zweite Rate „mindestens
+  ein |z⁰| > c“ mit allen Kampagnen im Nenner (Z. 223–225), die nicht die Prüfrate ist.
+- Wie viele Halte das heute betrifft (gezählt in den Checkpoint-Befunden der 30 Kampagnen von PR #23): Von den
+  fünf angehaltenen Kampagnen hätte genau eine an allen Punkten endliche z⁰ (V1-G0 Nr. 2); die vier übrigen haben
+  0/21 auswertbare Punkte und gehen in keine Schätzung ein, stehen aber im Nenner von P. Die Inkonsistenz betrifft
+  also nur späte Halte.
+- Text gegen Code bei b̂ (gelesen): §5.4 Z. 396–398 und A9.2 (iv) Z. 920–921 definieren b̂ „mit n_min Läufen“
+  bzw. mit n + d Kontrollläufen, also über feste Laufzahlen. Der Code mittelt über die realisierten gültigen Läufe
+  der Kampagnen (`auswertung.py` Z. 257–266); V1-G0 Nr. 2 hat mindestens 22 gültige Läufe je Punkt bei
+  n_min = 18. Eine Festlegung der Bezugsmenge muss diese Abweichung mit auflösen.
 - PR #23 (gezählt, 30 Nullkampagnen mit Ablauf, Entwicklungsplan n = 24, n_min = 18, 630 geplante Läufe): 5 halten
   an (S1 nach reproduziertem Nullpunktalarm 2, S1 nach G1-Verstoß von X′ 2, S3 1); dazu halten die Regelpfade S02
   (S2) und S06 (S3). Gemeinsam vollständig 25/30; jede abgeschlossene Kampagne ist vollständig. Wilson-Intervall
   für die Haltrate 5/30: [0,07; 0,34].
 - Schranken aus A8 (gelesen und nachgerechnet): S1 je Kampagne bis 0,25–0,29 je nach Laufzahl, S3 reproduziert bis
   0,020–0,024; zusammen bis etwa 0,3. Das sind obere Schranken bei exakter Superposition.
+- Lücke in der Herleitung von A8 (Befund der Nachprüfung zu a; vom Hauptbearbeiter mit dem Skript der Nachprüfung
+  und einer Variante bei bekanntem σ nachgerechnet, Summenkanal, 4·10⁶ Läufe): Ein reproduzierter Nullpunktalarm am
+  R₁ der Vorprüfung führt zu S1, weil Alarm und Wiederholung gegen dasselbe R₀ prüfen, das schon die Vorprüfung
+  ausgelöst hat. Diesen Weg enthält die Bonferroni-Summe von A8 nicht (Anhang Z. 747–757: „Die Vorprüfung … senkt
+  die Rate nur“). Er ist der größte einzelne S1-Weg:
+
+  | S1-Weg je Konfigurationslauf | marginal über σ̂_ref | σ bekannt |
+  |---|---|---|
+  | reproduzierter Alarm am R₁ | 2,9–3,0·10⁻⁴ | 5–6·10⁻⁵ |
+  | über X′ | 0,9–2,0·10⁻⁴ | 0,5–1,5·10⁻⁵ |
+  | reproduzierter Alarm an R₂ bzw. R₃ | 0,6–2,6·10⁻⁴ bzw. 1–2·10⁻⁵ | 0,6–4,4·10⁻⁵ bzw. < 2·10⁻⁶ |
+
+  Mit diesem Weg ergäbe die Bonferroni-Summe für 646 Läufe etwa 0,47 statt 0,28. Das vollständige
+  Teststatistikmodell der Nachprüfung zu ε_ctrl enthält den Weg und kommt auf P(mindestens ein Halt) von 0,09
+  (Generator) bis 0,12 (42 R) je Kampagne. Die Kampagnenschranken 0,25–0,28 werden also eingehalten, sind aber nicht
+  hergeleitet. Der Text von A8 ist im PR zu a zu berichtigen.
 - Halte nach ε_ctrl (gezählt aus den Befunden der 30 Kampagnen von PR #23): Die beiden S1-Halte über X′ liegen auf
   Rang 1 und 4 der 30 Kampagnen nach aufsteigendem ε_ctrl (V1-G0 Nr. 2 mit 0,222 mN und 13 X′, Nr. 7 mit
   0,265 mN). Die drei übrigen Halte liegen auf Rang 12, 13 und 17. Die Zahl der G1-Fälle und der X′ fällt mit
-  ε_ctrl (Spearman −0,81 bzw. −0,65). Eine über Kampagnen homogene Haltrate ist deshalb nur eine Näherung; für die
-  Planung zählt die Verteilung von ε_ctrl. Bei 30 Kampagnen ist das ein Hinweis, keine Rate.
+  ε_ctrl (Spearman −0,81 bzw. −0,65; die Nachprüfung hat Ränge und Werte unabhängig bestätigt). „G1-Fälle“ zählt
+  dabei auch Referenzläufe mit Nullpunktalarm mit (`ablauf.py` Z. 407); nur mit Konfigurationsläufen sind es −0,75.
+- Ursache und Größe (gerechnet in der Nachprüfung, Teststatistikmodell: ⟨N⟩ normal, ohne S3, G2–G10, Drift und
+  Aufwärmen, ein Messtag, je Variante 20 000 Kampagnen): Die Korrelation ist die erwartete Folge des Schätzfehlers
+  von σ̂_ref. Im Modell liegt Spearman(ε, G1) im Median bei −0,71, P(≤ −0,81) = 0,14; die Streuung von ε über die
+  30 Kampagnen passt zum Modell (KS-Test p = 0,36). Die Schranke 2,5·10⁻⁴ je Lauf aus A8 ist ein Mittel über die
+  Streuung von σ̂_ref; 72 % davon stammen aus den 9 % der Kampagnen mit u < 0,8. σ̂_ref aus 42 Referenzläufen hat
+  wegen der korrelierten Leave-one-out-Werte effektiv ν ≈ 21, nicht 41 (vom Hauptbearbeiter analytisch und per
+  Monte Carlo nachgerechnet). Die Halte je Kampagne sind deshalb überdispers:
+
+  | Phase-0-Anordnung | Halte je Kampagne | Dispersionsindex | P(≥ 2) | P(≥ 4) | P(≥ 4) bei homogener Rate |
+  |---|---|---|---|---|---|
+  | σ bekannt | 0,037 | 1,5 | 0,005 | 0,0004 | – |
+  | Generator (61 R), mit F-Test | 0,13 | 2,0–2,1 | 0,023 | 0,0034–0,0036 | 1,0·10⁻⁵ |
+  | 42 R nach P0.7, mit F-Test | 0,20 | 2,5 | 0,040 | 0,0076 | 5,2·10⁻⁵ |
+
+  Gezählt sind S1-Halte und Halte im W-Satz, mit unbegrenzter Wiederaufnahme und der strengen Lesart des heutigen
+  Codes. Die 30 Kampagnen von PR #23 sind damit verträglich: 4/30 S1-Halte haben im Modell P = 0,26–0,50, bei
+  bekanntem σ nur 0,012. Der X′-Weg liegt am Rand (2 beobachtet, 0,35 erwartet, P = 0,05).
 - Folgen, wenn ein Halt als verloren zählt (gerechnet aus der empirischen Rate 5 Halte auf 18 215 Versuche):
   P(kein Halt) ≈ 0,82–0,83 für 630–688 Läufe (Bereich 0,63–0,94), 0,74 für n = 30 bei N_K = 23 und N_I = 3. Dann
   gilt P(H1 und H2) ≤ P(kein Halt), und für 0,8 müsste P(bestätigt | ohne Halt) ≥ 0,96 sein. Die Grenze fällt mit
-  der Laufzahl; Reserve und Laufzahl helfen nicht.
-- Reserve unter dem Wiederholungsablauf (gerechnet, Binomial): Ein Platz fehlt erst nach drei ungültigen Versuchen;
-  selbst mit 30 % ungültigen Versuchen ist P(Punkt < n_min) ≤ 2·10⁻³ bei n = 21, r = 3. Die Formel reicht gegen
-  punktweise Ausfälle; über die gemeinsame Vollständigkeit entscheiden die Halte.
+  der Laufzahl; Reserve und Laufzahl helfen nicht. Im Modell der Nachprüfung ist P(kein S1-Halt) für die
+  Nullkampagne von PR #23 0,91 (Generator) bzw. 0,88 (42 R), dazu S3 reproduziert ≤ 0,024 (A8); beobachtet 25/30.
+  Bei gleichem Mittel liegt P(kein Halt) wegen der Mischung über ε etwas über exp(−Mittel).
+- Reserve unter dem Wiederholungsablauf (gerechnet, Binomial, unabhängige Versuche): Ein Platz fehlt erst nach drei
+  ungültigen Versuchen; selbst mit 30 % ungültigen Versuchen ist P(Punkt < n_min) ≈ 2,2·10⁻³ bei n = 21, r = 3, und
+  gemeinsam über 21 unabhängige Punkte sind 0,955 der Kampagnen vollständig. Bei r = 2 wären es 1,6·10⁻² je Punkt
+  und gemeinsam 0,71; bei höchstens 10 % ungültigen Versuchen ist die Vollständigkeit praktisch 1. Die Formel reicht
+  gegen punktweise Ausfälle; über die gemeinsame Vollständigkeit entscheiden die Halte.
+- Ziel 0,95 aus PR #22 (gelesen, `docs/e3b_g4_diagnose_2026-10-17/bericht.md` Z. 611 und 616): Der vorgeschlagene
+  Zusatz zu A9.2 (v) lautet „r = ⌈n_min·p̂/(1 − p̂)⌉ + 2 gilt, wenn alle Punkte in mindestens 95 % der simulierten
+  Kampagnen n_min gültige Läufe erreichen; sonst wird r erhöht, bis das erreicht ist.“ Dort ist 0,95 also eine
+  Bedingung für r, keine Berichtsgröße; der Zahlenwert ist ausdrücklich offen. Der Kontext stützt die gemeinsame
+  Lesart (in 95 % der Kampagnen alle Punkte), nicht die punktweise. PR #22 simulierte noch keine Halte. Teil A,
+  Anhang und Code enthalten das Ziel nicht (`planung.py` Z. 103 bildet r nur aus der Formel).
 - Simulierte Wiederaufnahme (gerechnet): Der W-Satz hätte zu etwa 4,7 % selbst einen Alarm (etwa 1 % je
-  Referenzlauf, 3,7 % S3-Einzelüberschreitung je Satz), Kettenfaktor etwa 1,05; mit der Fassung N7 aus Abschnitt 1
-  weniger. Eine bedingte Zählung ohne S3-Halte verzerrt c im Nullmodell vernachlässigbar (3,4775 gegen 3,4783 in
-  einer vereinfachten Rechnung).
-- Die Prüfschwelle 0,069 setzt 1000 verwertbare Kampagnen voraus (A8); bei 833 wären es 0,0714.
+  Referenzlauf, 3,7 % S3-Einzelüberschreitung je Satz). Den daraus abgeleiteten Kettenfaktor von etwa 1,05 hat die
+  Nachprüfung widerlegt: Mit dem heutigen Code ist er 1,25–1,30, weil der W-Satz nach einem Nullpunkthalt mit
+  demselben R₀ vergleicht (Abschnitt 1.2, „Kette über dasselbe R₀“). Mit neuem Bezug nach einem Nullpunkthalt fällt
+  er nach Einschätzung der Nachprüfung auf etwa 1,02–1,05. Eine bedingte Zählung ohne S3-Halte verzerrt c im
+  Nullmodell vernachlässigbar (3,4775 gegen 3,4783 in einer vereinfachten Rechnung). Unter (iii) fallen aber
+  bevorzugt Kampagnen mit kleinem ε heraus; X′, G1 und R₁ würden um 6–16 % zu niedrig berichtet. Für c gilt das
+  nur, solange der Generator das Rauschen von ⟨N⟩ und der Harmonischen getrennt zieht (`ebene_h.py` Z. 156–158);
+  mit dem Strukturgenerator aus Abschnitt 5 ist es neu zu prüfen.
+- Erschöpfung der Wiederaufnahmen (gerechnet in der Nachprüfung): Bei höchstens W = 3 Wiederaufnahmen wird eine
+  Nullkampagne in 0,36–0,76 % der Fälle nicht fortgesetzt (strenge Lesart), bei W = 2 in 0,8–1,5 %, bei W = 1 in
+  2,3–4,0 %. Die erste Fassung nahm mit homogener Rate 5–7·10⁻⁵ an. Kampagnen mit u < 0,85 stellen 18–39 % der
+  erschöpften.
+- Die Prüfschwelle 0,069 setzt 1000 verwertbare Kampagnen voraus (A8, Z. 734–738; nachgerechnet 0,0695); bei 833
+  wären es 0,0714. Dasselbe gilt für die Überdeckungsschwelle 0,936 (§8.6 Z. 643, „bei 1000 Kampagnen“), die bei
+  833 Kampagnen 0,935 wäre. Beide Werte stehen fest im Profil (`regeln.py` Z. 114, 149) und hängen nicht vom
+  tatsächlichen Nenner ab.
 
 ### 3.2 Optionen
 
@@ -376,7 +474,8 @@ seit `pilot-0.3`.
   Apparaturfehler“, Kontrollsatz nach `ablauf-4`, Fortsetzung des Blocks; Parameter: höchstens W Wiederaufnahmen je
   Kampagne (Vorschlag 3), Analysezeit T_UA, Aufwärmen bei Tageswechsel. Als verloren zählt nur ein Abbruch (zweites
   S2, W erschöpft, mechanischer Eingriff nötig). Nur (ii) erzeugt dieselbe Menge von Kampagnen wie der reale
-  Versuch.
+  Versuch. W = 3 bleibt nach der Nachprüfung vertretbar, aber nur zusammen mit dem neuen Bezug nach einem
+  Nullpunkthalt; sonst ist die Kette über dasselbe R₀ der häufigste Weg zur Erschöpfung.
 - **(iii) bedingte Zählung** nur über Kampagnen ohne Halt. Nachziehen bis zur Sollzahl; im Nullmodell nahe an (ii),
   in Szenarien mit echter Ursache verzerrt.
 - **(iv) getrennte Zielgrößen:** P(H1 und H2 | ohne Halt) als Planungsbedingung, Haltrate je Regel als zweite
@@ -388,13 +487,33 @@ seit `pilot-0.3`.
 Berichtsgrößen aus (iv): Anteil mit mindestens einem Halt je Regel neben der A8-Schranke für die tatsächliche
 Laufzahl, Wiederaufnahmen (Mittel, Maximum), Anteil nicht fortgesetzt, zusätzliche Messzeit, P(H1 und H2 | ohne
 Halt) und (1 − h)·P als Sensitivität. Für Szenarien mit echter Ursache (S04, E07, E09, I02) (ii) und (i)
-nebeneinander berichten. Eine Bezugsmenge für c, b̂, H2-Überdeckung, Prüfrate und P(H1 und H2): abgeschlossene
-Kampagnen nach Wiederaufnahme mit allen z endlich, Ausschlüsse nach Grund gezählt; damit stimmt auch die Herleitung
-der Prüfschwelle wieder. Reserveformel „+2“ beibehalten; kein eigenes Vollständigkeitsziel, weil H1 alle 21 Punkte
-verlangt und die Vollständigkeit damit in P(H1 und H2) enthalten ist (ein Ziel, das Halte einschließt, wäre
-faktisch Option (i); das Ziel 0,95 aus PR #22 G3 wird als Berichtsgröße „alle Punkte ≥ n_min“ geführt). Die
-Zeitformel erhält Terme für Wiederholungen (gemessen +5,4 %, höchstens +9,5 %) und Wiederaufnahmen (W-Satz, T_UA,
-Aufwärmen).
+nebeneinander berichten.
+
+Bezugsmenge in zwei Stufen, gleich in Kalibrier-, Prüf- und Planungssimulation (nach der Nachprüfung geändert; die
+erste Fassung nannte hier nur eine Menge und widersprach damit 3.4 und F-b7):
+
+- Grundmenge G: alle simulierten Kampagnen der Rolle, mit Halten wie im Messbetrieb und über alle Rauschvarianten.
+- Auswertungsmenge A ⊂ G: abgeschlossen nach Wiederaufnahme, ŷ¹ gültig, alle 147 z⁰ endlich (für H1Z alle 441).
+  Über A laufen c, Prüfrate, b̂ mit u(b̂), Restbias und H2-Überdeckung.
+- P(H1 und H2 bestätigt | exakt) hat den Zähler aus A und den Nenner G, also P = P(A)·P(H1 und H2 | A). Jede
+  bestätigte Kampagne liegt ohnehin in A (`h1.py` Z. 64). Nur mit G im Nenner ist die Vollständigkeit in P
+  enthalten.
+- Die Ausschlüsse G \ A werden nach Grund gezählt: Abbruch (zweites S2, W erschöpft, Eingriff), ŷ¹ ungültig,
+  Punkt < n_min, Konfiguration nach S2.
+- Die Sollzahl 1000 gilt für |A| je Simulation: Kampagnen werden nachgezogen, bis |A| = 1000; dann gelten 0,069 und
+  0,936 unverändert. Das Nachziehen wählt nicht nach c oder b̂ aus, weil Ablauf und Gültigkeit nur die Schwellen
+  aus Teil B verwenden (`kette.py` Z. 193–203). Die Alternative ist, beide Schwellen aus |A| zu berechnen.
+- „Alle z endlich“ statt nur „abgeschlossen“, weil H1 auch in unvollständigen, nicht gesperrten Kampagnen
+  falsifizieren kann; ein c aus vollständigen Kampagnen ist für sie konservativ.
+
+Reserveformel „+2“ beibehalten. Zum Ziel 0,95 (nach der Nachprüfung geändert): P ≥ 0,8 erzwingt die Vollständigkeit
+nur bis 0,8, und r steht nicht in der Zielfunktion von §5.4; ohne eigene Bedingung passt nichts r an. Empfohlen wird
+deshalb, 0,95 wie in PR #22 als Bedingung für r zu führen, in der gemeinsamen Lesart und mit dem Nenner „nicht
+abgebrochene Kampagnen“: P(alle 21 Punkte ≥ n_min | nicht abgebrochen) ≥ 0,95, direkt gezählt in der
+Planungssimulation. Abbrüche gehören nicht in diesen Nenner, weil r sie nicht verringert; sonst könnte die Regel
+„r erhöhen, bis erreicht“ nie enden. Nach der Binomialrechnung in 3.1 greift die Bedingung nur bei extremen
+punktweisen Ausfällen. Die Zeitformel erhält Terme für Wiederholungen (gemessen +5,4 %, höchstens +9,5 %) und
+Wiederaufnahmen (W-Satz, T_UA, Aufwärmen).
 
 Voraussetzungen: Abschnitt 1 ist festgelegt (die Wiederaufnahme muss `ablauf-4` simulieren, nicht `ablauf-3`), und
 die Halt- und Wiederaufnahmeraten sind mit R1 (Abschnitt 3.5) gemessen, bevor Werkzeug 8 kalibriert wird.
@@ -405,10 +524,19 @@ die Halt- und Wiederaufnahmeraten sind mit R1 (Abschnitt 3.5) gemessen, bevor We
   fortgesetzte oder abgebrochene Kampagne zählt als nicht bestätigt); §9.2 nach Z. 826 (Alarm im W-Satz → weitere
   Ursachenanalyse; Simulation rechnet Halte als Unterbrechung); A9.11 neuer Absatz „Halte in der Simulation“ (W,
   T_UA, Aufwärmen, Bezugsmenge, Berichtsgrößen); §5.3 (c) Zeitformel; §12 Zeile „Messzeit“ ergänzen; Tabelle F; A0.
+  Dazu: §5.4 Z. 394–400 und A9.2 (iv) definieren b̂ „mit n_min Läufen“, der Code mit den realisierten Laufzahlen;
+  entweder wird der Text auf die Menge A mit realisierten Laufzahlen umgestellt, oder der Code kürzt auf n_min.
+  In §8.4 Z. 583–584 und §8.6 Z. 643 „1000 Kampagnen“ als „1000 gewertete Kampagnen (Menge A)“ präzisieren.
+  A9.2 (v) erhält die Bedingung 0,95 für r. A8 (Z. 740–757): S1-Weg über einen reproduzierten Alarm am R₁ der
+  Vorprüfung ergänzen; kennzeichnen, dass die Raten je Lauf Mittel über die Streuung von σ̂_ref sind und σ̂_ref
+  effektiv etwa 21 Freiheitsgrade hat; Kampagnenschranke neu herleiten oder durch die simulierte Rate ersetzen.
 - Code: Harness-Automatik der Wiederaufnahme in `kampagnen`, `planung`, `kalibrierung` und Prüfstand (synthetisches
-  Ereignis, W, T_UA); Zähler je Regel; Bezugsmenge in `kalibrierung` (Status statt „z endlich“) und `kampagnen`;
-  Statusvorrang „fehlt: Halt“ in `ablauf.bericht` nach erfolgreicher Wiederaufnahme korrigieren; Zeitformel im
-  Planungshaken.
+  Ereignis, W, T_UA); Zähler je Regel; Bezugsmengen G und A in `kalibrierung` (Status und alle z endlich) und
+  `kampagnen`, und zwar in `c_bestimmen`, `rauschbias`, `_restbias`, `_verh`, `h2_ueberdeckung` (alle
+  Rauschvarianten statt nur der ersten) und in der zweiten Rate von `kampagnen.raten` (Z. 223–225); Zähler G \ A
+  nach Grund; Nachziehen bis |A| = 1000; Statusvorrang „fehlt: Halt“ in `ablauf.bericht` nach erfolgreicher
+  Wiederaufnahme korrigieren; Zeitformel und Bedingung 0,95 im Planungshaken. Die Befunde speichern je Kampagne
+  σ̂_ref, σ̂_ref,c, F, den kritischen Wert und die Quelle von ε (heute nur ε_ctrl).
 - Tests: Wiederaufnahme mit synthetischem Ereignis bis W, Abbruchfälle, Bezugsmenge, Zeitkosten, Berichtsgrößen.
 - Aufwand: etwa 1–1,5 Personentage.
 
@@ -416,8 +544,13 @@ die Halt- und Wiederaufnahmeraten sind mit R1 (Abschnitt 3.5) gemessen, bevor We
 
 - **R1-Halte:** Halt- und Wiederaufnahmeraten je Regel mit `ablauf-4`, gepaart für (i) und (ii) mit denselben
   Seeds, A4, V1-G0, V1-G60h je 1000 Kampagnen, Zähldiagnose ohne Stufe 2; dazu die Tabelle ε_ctrl × G1-Fälle ×
-  Halte je Kampagne (Prüfung der Homogenitätsannahme; für die 30 Kampagnen aus PR #23 in 3.1 bereits gezählt) und
-  die A8-Schranken für die tatsächliche Laufzahl. Etwa
+  Halte je Kampagne und die A8-Schranken für die tatsächliche Laufzahl. Die Tabelle für die 30 Kampagnen aus PR #23
+  liegt bisher nur im Scratch-Ordner und die Checkpoints nur flüchtig unter /tmp; Tabelle und Skript kommen mit dem
+  PR für b2 nach docs/. R1 prüft die Teststatistikrechnung aus 3.1 als Gegenprobe: P(≥ 2), P(≥ 4),
+  Kettenfaktor und Halt an R₂, R₃ und X′ nach ε-Klassen, einmal mit der Phase-0-Anordnung des Generators und einmal
+  mit der von P0.7 (ein Referenzlauf nach zwölf Läufen). Mit denselben Seeds zählt R1 ohne Mehraufwand |A|,
+  |G \ A| nach Grund, die H2-Teilmenge außerhalb von A und die gemeinsame Vollständigkeit über die nicht
+  abgebrochenen Kampagnen. Etwa
   4–6 Kernstunden; Monte-Carlo-Fehler der Haltrate etwa 0,012. Lässt sich mit R1 aus Abschnitt 2 in einem Lauf
   verbinden.
 - **R2-Halte:** ob (iii) unter Null eine gute Näherung von (ii) ist, und die Variante „Datenschluss nach §6“ für
@@ -425,7 +558,8 @@ die Halt- und Wiederaufnahmeraten sind mit R1 (Abschnitt 3.5) gemessen, bevor We
 
 ### 3.6 Fragen an den Autor
 
-- F-b7: Zählung (ii) als maßgeblich, mit der 0,8-Bedingung über alle simulierten Kampagnen?
+- F-b7: Zählung (ii) als maßgeblich, mit der 0,8-Bedingung über alle simulierten Kampagnen (Nenner G) und den
+  Schätzungen über die Auswertungsmenge A?
 - F-b8: Parameter der Wiederaufnahme: höchstens W = 3 je Kampagne, Analysezeit T_UA (Vorschlag: Teil-B-Wert, in der
   Entwicklung 1800 s), Aufwärmen bei Tageswechsel?
 - F-b9: Nicht fortsetzbare Kampagne: Sperre aller Ausgänge (konservativ) oder Datenschluss nach §6 mit Auswertung?
@@ -433,6 +567,10 @@ die Halt- und Wiederaufnahmeraten sind mit R1 (Abschnitt 3.5) gemessen, bevor We
 - F-b10: Haltrate je Regel nur Berichtsgröße oder eigenes Kriterium (S1 ≤ A8-Schranke bei tatsächlicher Laufzahl,
   S3 reproduziert ≤ 0,020)?
 - F-b11: Zeitformel um Wiederholungen und Wiederaufnahmen erweitern (§12 „Messzeit“)?
+- F-b12: Ziel 0,95 als Bedingung für r mit dem Nenner „nicht abgebrochene Kampagnen“, direkt gezählt in der
+  Planungssimulation (empfohlen), oder nur als Berichtsgröße?
+- F-b13: Sollzahl 1000 für die Auswertungsmenge A durch Nachziehen (empfohlen) oder Schwellen 0,069 und 0,936 aus
+  |A| berechnen? b̂ über realisierte Laufzahlen (Text anpassen) oder auf n_min gekürzt (Code anpassen)?
 
 ## 4 E3 (c)
 
@@ -574,12 +712,17 @@ Variante von E3 ab.
 - **B: empirische Kovarianz je Laufart direkt (Gauß)** mit den gepoolten Pilotkovarianzen. Wörtliche Lesart, aber
   an den Schnittpunkten systematisch falsch (oben); nur als Diagnose- oder Sensitivitätsvariante. 1–2 Personentage.
 - **C (empfohlen): Strukturmodell aus Phase 0.** Schätzung im Pilotskript (nur zweite Momente, gebunden an k und
-  N_z): Sensorboden aus den R-Läufen (ν ≥ 41) und σ_c; Modulanteil je Modul aus den Lⱼ-Läufen (ν = n₀ⱼ − 1) in
+  N_z): Sensorboden aus den R-Läufen (ν ≥ 41 für die Kovarianz der Harmonischen; σ̂_ref aus den
+  Leave-one-out-Werten hat dagegen effektiv nur ν ≈ 21 bei 42 R) und σ_c; Modulanteil je Modul aus den Lⱼ-Läufen
+  (ν = n₀ⱼ − 1) in
   Gleichphase, Quadratur und Rest je Harmonischer; erfasster Phasenanteil aus den Zeigern; Nullpunktprozess aus
   der Referenzfolge; Fünftel aus dem laufinternen Anteil. Fortpflanzung auf jede Konfiguration über die gemessenen
   Zeiger und ŷ⁰ (Struktur aus Phase 0 am Arbeitspunkt, aus Werkzeug 2 für Kandidatenfrequenzen). Obere 80-%-Grenze
   je Komponente mit eigenem ν nur für die Planungsbedingung; Teil-B-Werte (c, b̂, H2-Typ, E3-Raten, ε_ctrl-Quantil)
-  mit Punktschätzern (zweite Simulation). 6–9 Personentage einschließlich A als Sonderfall.
+  mit Punktschätzern (zweite Simulation). Für den weißen Boden von ⟨N⟩ gilt ein gemeinsamer Faktor für alle
+  Laufarten: Werden R-Läufe mit κ(21) und K/L-Läufe mit κ(57) skaliert, schlägt der F-Test nach A9.8 künstlich in
+  9,1 % statt 5,0 % der Fälle an (gerechnet in der Nachprüfung), und ε_ctrl, G1 und Halte verschieben sich.
+  6–9 Personentage einschließlich A als Sonderfall.
 - **D: Residuen-Bootstrap** der Lⱼ-Abweichungen als nichtparametrische Zusatzvariante (Mehrfachzählung des
   Sensorbodens beachten). 2–3 Personentage auf C.
 - **E: prädiktive Planung** (Inverse-Wishart je Kampagne) statt oberer 80-%-Grenze; höchstens als berichtete
@@ -611,7 +754,13 @@ den Prüfstand als Orakel, (5) Rechnungen, (6) Abgleich mit b (s_i aus demselben
   (Modellquelle), `teil_b.py` (Felder), `regeln.py`.
 - Tests: Rundreise Pilot → Generator → Pilot (Wiedergewinnung von s_q, σ_Δ, σ̂_ref, p̂, Komponenten); Modus A
   bitgleich zum Szenariogenerator; Gleichheit der Entscheidungen bei eingesetzter Szenariokovarianz; Singularität
-  und Regularisierung; Wahrheitstrennung (kein Zugriff auf Szenario-Wahrheit im Pilotmodus).
+  und Regularisierung; Wahrheitstrennung (kein Zugriff auf Szenario-Wahrheit im Pilotmodus); Verteilung von
+  u = ε_ctrl/(3·√1,5·σ) und Anteil der Kampagnen mit ε aus σ̂_betr gegen die Nullsimulation.
+- Phase-0-Anordnung: Der Generator setzt in Phase 0 nach je zwei anderen Läufen einen Referenzlauf, also 61 R
+  (`generator/kampagne.py` Z. 92, gelesen), P0.7 verlangt einen nach zwölf Läufen und mindestens 42 (Anhang
+  Z. 886–887). Haltraten hängen nicht vom Rauschpegel ab, wohl aber von dieser Anordnung: Mit 42 R sind es im
+  Mittel 0,20 statt 0,13 Halte je Kampagne (gerechnet in der Nachprüfung). Für Teil B muss der Generator die
+  tatsächliche Anordnung von P0.7 abbilden.
 - Aufwand: 6–9 Personentage für C mit A, dazu 2–3 für D.
 
 ### 5.5 Rechnungen
@@ -628,7 +777,8 @@ den Prüfstand als Orakel, (5) Rechnungen, (6) Abgleich mit b (s_i aus demselben
 ### 5.6 Fragen an den Autor
 
 - F-d1: Lesart von „Streuungen an ihrer oberen 80-%-Vertrauensgrenze“ für ein mehrteiliges Modell: ein Faktor für
-  alles (heute), jede Komponente mit eigenem ν (empfohlen), oder ein Faktor mit dem kleinsten ν?
+  alles (heute), jede Komponente mit eigenem ν (empfohlen, mit einem gemeinsamen Faktor für den ⟨N⟩-Boden aller
+  Laufarten), oder ein Faktor mit dem kleinsten ν?
 - F-d2: Teil-B-Werte (c, b̂, H2-Typ, E3-Raten, ε_ctrl-Quantil) mit Punktschätzern aus einer zweiten Simulation
   (empfohlen) oder alles an der oberen Grenze („dieselbe Simulation“, A9.11)?
 - F-d3: Darf das Pilotskript die Einzelmodul-Mittelkurven N̄⁽ʲ⁾ für zweite Momente verwenden, ohne gegen §5.4 zu
@@ -675,13 +825,15 @@ Bootstrap) kosten etwa 7–10 Kernstunden, R2 etwa 4,5 Kernstunden. Das liegt we
 Entscheidungsliste (Kurzform; Empfehlung in Klammern):
 
 1. F-a1 Reihenfolge A1 + Z1 (ja). F-a2 Halt H1 (ja). F-a3 K1 oder K2 (K1). F-a4 N7-Fassung (S1–S4 und
-   Nullpunktalarm; Nullpunktalarm im W-Satz: Autor). F-a5 Aufwärmen bei Tageswechsel (ja). F-a6 übrige Lesarten
+   Nullpunktalarm; Nullpunktalarm im W-Satz: Autor). F-a5 Aufwärmen bei Tageswechsel, neuer Bezug nach
+   Nullpunkthalt (ja). F-a6 übrige Lesarten
    im selben PR (ja).
 2. F-b1 B+ oder D (B+, wenn keine Trendempfindlichkeit an steilen Punkten verlangt ist). F-b2 Zielrate (≤ 1,5 %).
    F-b3 Fünftelzeiger im Format (ja, auch für d). F-b4 Piloten gepoolt (ja). F-b5 G4 an Lⱼ (R1 abwarten, Pooling
    bevorzugt). F-b6 R1/R2 beauftragen (ja).
 3. F-b7 Zählung (ii) (ja). F-b8 W = 3, T_UA, Aufwärmen bei Tageswechsel. F-b9 nicht fortsetzbar: Sperre (ja).
-   F-b10 Haltrate als Berichtsgröße (ja). F-b11 Zeitformel erweitern (ja).
+   F-b10 Haltrate als Berichtsgröße (ja). F-b11 Zeitformel erweitern (ja). F-b12 Ziel 0,95 als Bedingung für r
+   (ja). F-b13 Nachziehen bis |A| = 1000 (ja); b̂ über realisierte Laufzahlen (Autor).
 4. F-c1 E3b Option B (ja). F-c2 Rückfall je Prüfgröße (ja). F-c3 E3a mit t (ja). F-c4 ν konservativ (ja). F-c5
    Amplitudenszenario (ja).
 5. F-d1 κ je Komponente (ja). F-d2 Punktschätzer für Teil-B-Werte (ja). F-d3 N̄⁽ʲ⁾ für zweite Momente (ja). F-d4
