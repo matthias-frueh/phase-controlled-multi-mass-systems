@@ -1,6 +1,7 @@
 # Entscheidungsvorlage vom 19.10.2026: Ablaufregeln, G4 und Vollständigkeit, E3, Generator aus Phase 0
 
-Stand `main` 0f63187 (PR #23 gemergt). Vorlage zu den Punkten a) bis d) der Agenda des Autors vom 18.10.2026; Punkt e)
+Stand `main` 0f63187 (PR #23 gemergt); ergänzt am Abend des 19.10.2026 um die Ergebnisse der Nachprüfung
+(Abschnitt 8). Vorlage zu den Punkten a) bis d) der Agenda des Autors vom 18.10.2026; Punkt e)
 (realer V1-Pilot) ist zurückgestellt und hier nicht behandelt. Dieses Dokument ändert keine Regel. Es nennt je Punkt
 den Ist-Stand mit Fundstellen, die Optionen, eine Empfehlung, die zu ändernden Textstellen, den Aufwand und die
 Fragen, die beim Autor liegen. Alle Festlegungen gehören nach §12 zu den Gruppen (I) und (II) und sind als
@@ -11,7 +12,9 @@ Berichte zu PR #21–#23 und deren gespeicherte Ergebnisdateien. Es wurde keine 
 Herkunft: *gelesen* (steht so in Text, Code oder Ergebnisdatei), *gezählt* (aus gespeicherten Dateien ausgezählt),
 *gerechnet* (eigene Rechnung auf Ebene einer Teststatistik, analytisch oder Monte Carlo, Sekunden bis Minuten; die
 Skripte liegen noch außerhalb des Repositorys und werden mit dem jeweiligen Umsetzungs-PR als geprüfte Rechnungen
-nachgereicht) oder *Einschätzung*. Rechnungen auf Statistikebene sind Modellrechnungen mit vereinfachten Annahmen; sie
+nachgereicht; für die E3b-Nachzählung tritt eine Rekonstruktion an die Stelle des verlorenen Originalskripts) oder
+*Einschätzung*. Abschnitt 8 beschreibt die Nachprüfung dieser Vorlage durch sieben unabhängige Prüfer; Zahlen aus
+ihr sind als „gerechnet in der Nachprüfung“ gekennzeichnet. Rechnungen auf Statistikebene sind Modellrechnungen mit vereinfachten Annahmen; sie
 begründen Entscheidungen über Regeln, ersetzen aber keine Kalibrierung.
 
 **Ergebnis in Kürze.**
@@ -40,7 +43,9 @@ begründen Entscheidungen über Regeln, ersetzen aber keine Kalibrierung.
 - **c) E3.** Die Intervallregel von A9.13 ist am Schwellenrand ungültig: Bei E3b beträgt die Fehlalarmrate je
   Prüfung das 2- bis 16-Fache von α/m, bei E3a das bis zu 3-Fache (gerechnet); die Bonferroni-Schranke steigt im
   ungünstigsten Fall von 5 % auf etwa 16 %. Empfohlen: am Rand gültige Grenzen (Rice-Konstruktion mit
-  t-Korrektur für E3b, t-Quantile für E3a), Prüfzahl m = 43 fest, Rückfall je Prüfgröße. Bei der Präzision von L1
+  t-Korrektur für E3b, t-Quantile für E3a), Prüfzahl m = 43 fest, Rückfall je Prüfgröße. Die Nachprüfung hat über
+  ein volles Raster bestätigt, dass die E3b-Grenze am Rand höchstens α/m und „unauffällig“ höchstens 0,05 hält;
+  die freie Rice-Grenze mit eingesetzter Streuung hält dagegen nicht. Bei der Präzision von L1
   kann E3b mit keiner gültigen Regel „unauffällig“ werden; das ist eine Folge der Präzision, nicht der Regel.
 - **d) Generator.** Die Pilotkovarianzen lassen sich nicht unverändert in einen Generator einsetzen: Sie sind
   singulär (Rang ≤ Freiheitsgrade), enthalten den über die Zeiger erfassten Phasenanteil und tragen die
@@ -643,39 +648,74 @@ Warum die Intervallregel am Rand versagt (gerechnet; reproduziert PR #22 exakt):
 - **A: E3b vorerst beschreibend**, E3a dreiwertig mit t-Quantilen, m = 43 fest, Rückfall je Prüfgröße. E3b berichtet
   q_Z, ŝ, Anisotropie und die Grenzen ohne Aussage. Nach dem Einfrieren wäre „beschreibend“ endgültig (A9.11
   Z. 1156–1158).
-- **B (empfohlen): am Rand gültige Grenzen für E3b.** Aus den Bootstrap-Replikaten der komplexen Differenz die
-  2×2-Kovarianz Σ̂ (korrigiert mit n/(n − 1)), ŝ² = λ_max(Σ̂), ν = min(n_A, n_B) − 1. Auffällig, wenn
-  q_Z > κ·ŝ·Rice⁻¹(1 − α/m; q_tol/(κ·ŝ)) mit κ = t(1 − α/m; ν)/z(1 − α/m); unauffällig, wenn
-  q_Z + t(0,95; ν)·ŝ ≤ q_tol. Größe am Rand ≤ 0,96·α/m bzw. ≤ 0,0505 in allen geprüften Fällen (ν ∈ {10, 21, 40,
-  80}, Anisotropie 1 bis 0,1, t ∈ [0,25; 10], drei Richtungen). Ohne κ und mit eingesetztem ŝ bliebe die Regel
-  bei bis zu 2,8·α/m, mit √(Spur/2) statt λ_max bei bis zu 9,9·α/m; eine „Rice-exakte“ Grenze ist nur bei bekanntem
-  s exakt.
-- **C: Vertrauensscheibe** (Mahalanobis-Radius √(2·F⁻¹)); gültig, aber deutlich schwächer (Macht 0,12 statt 0,26 bei
-  0,3° auf L1).
+- **B (empfohlen): am Rand gültige Grenzen für E3b** (nach der Nachprüfung präzisiert). Replikate
+  d_b = (R₋₁,b − R̂₋₁,b)/|R̂₊₁,b| komplex wie in `kontrollen.py` Z. 352, aber ohne Betrag; ungültige Replikate
+  werden ausgelassen. n* = min(n_A, n₀,₁, n₀,₂, n₀,₃) gültige Läufe, Σ̂ = n*/(n* − 1)·Cov_b(Re d_b, Im d_b),
+  ν = n* − 1, ŝ² = λ_max(Σ̂); bei B < 10 000 Replikaten ν_eff = (1/ν + 1/(B − 1))⁻¹ in κ und in t(0,95).
+  Auffällig, wenn q_Z > κ·ŝ·Rice⁻¹(1 − α/m; q_tol/(κ·ŝ)) mit κ = t(1 − α/m; ν)/z(1 − α/m); unauffällig, wenn
+  q_Z + t(0,95; ν)·ŝ ≤ q_tol; „nicht prüfbar“ zusätzlich bei ν < 5. Berichtet werden ŝ, ρ̂ = √(λ_min/λ_max), ν,
+  n_A und n₀ⱼ.
+  Größe am Rand (gerechnet in der Nachprüfung mit bedingt exakter Quadratur über das volle Raster ν ∈ {10, 19, 21,
+  40, 80}, Anisotropie ρ ∈ {1; 0,5; 0,25; 0,1}, t ∈ [0,05; 10], Richtung in 15°-Schritten): „auffällig“ höchstens
+  0,91·α/m, Grenzwert α/m für ρ → 0 und t → ∞, wo B zum einseitigen t-Test wird; vom Hauptbearbeiter an zwei
+  Punkten unabhängig nachgerechnet (0,908 und 0,146·α/m). „Unauffällig“ höchstens 0,05; das folgt unter Gauß- und
+  Wishart-Annahme aus einer Projektionsungleichung und ist damit bewiesen. Bei einem wahren Wert 2 % bzw. 10 % über
+  q_tol höchstens 0,044 bzw. 0,027. Die erste Fassung nannte 0,96·α/m und 0,0505 aus einem Raster, das kein volles
+  Produkt war und ν = 19 nicht enthielt; beide Werte waren Monte-Carlo-Rauschen.
+  Gegenproben: Mit eingesetztem ŝ ohne n/(n − 1) und ohne κ hielte die Regel nur bis 3,1·α/m bei ν = 19 und
+  6,4·α/m bei ν = 10; das ist die Regel „c-2“ des Querschnittsberichts, deren obere Rice-Grenze am Rand außerdem bis
+  0,15 statt 0,05 ergibt. Mit √(Spur/2) statt λ_max wären es bei geschätztem ŝ bis 20–27·α/m, mit κ, aber
+  √(Spur/2), bis 11·α/m, bei bekanntem s bis 9,9·α/m. κ und λ_max sind also beide nötig; eine „Rice-exakte“ Grenze
+  ist nur bei bekanntem s und isotropem Σ exakt.
+  Annahmen: d̂ näherungsweise zweidimensional normal (Nenner nahezu fest); Läufe je Quelle unabhängig ohne Drift,
+  Σ̂ ≈ Wishart mit mindestens ν Freiheitsgraden und unabhängig von d̂; Rauschbias klein gegen q_tol. Robustheit
+  (gerechnet): zusammengesetzte Kovarianz mit ν = min − 1 höchstens 0,59·α/m; schwere Ränder der Einzelläufe
+  0,07–0,63·α/m, „unauffällig“ ≤ 0,049; B = 1000 statt 10 000 erhöht die Größe relativ um etwa 2 %. Nicht geprüft:
+  Drift und serielle Korrelation, Schiefe, Rauschen im Nenner.
+- **C: Vertrauensscheibe** (Mahalanobis-Radius nach Hotelling √(2ν/(ν − 1)·F⁻¹(1 − α/m; 2, ν − 1)), etwa 4,61
+  bei ν = 19); gültig, aber deutlich schwächer (Macht 0,12 statt 0,26 bei 0,3° auf L1, ν = 40).
 - **D: kritische Werte je Richtung aus der vollen Σ̂**, numerisch je Kampagne; mächtiger, aufwendiger, später
   möglich.
 - **E: Rückfall für E3 als Ganzes** (heutiges Profil ENTW „ganz“): nicht empfohlen, weil E3a auf L1 beide Kriterien
   erfüllt und dann mitfiele.
 
-Macht von B (gerechnet, ν = 40, isotrop): bei 0,3° an einem Modul auf L1 0,26 (heutige, ungültige Regel 0,56;
-Scheibe 0,12), bei 1 % Amplitudenänderung ≥ 0,999, bei t = 3 und 0,3° 0,99. Phasenversätze erkennt E3a auf L1
-ohnehin sicher; E3b ergänzt vor allem Amplituden- und Kombinationsänderungen. „Unauffällig“ bei exakter Superposition:
-mit B bei t = 1,5 praktisch 0 (heute 7 %), erst ab t ≈ 3,4 über 0,8; die bestmögliche gültige Regel (Neyman-Pearson,
-s bekannt) erreicht 0,8 ab t ≈ 3,2. Das Kriterium „unauffällig ≥ 0,8“ ist für E3b bei der Präzision von L1 mit
-keiner gültigen Regel erreichbar; der Rückfall je Prüfgröße macht daraus eine einseitige Auswertung, E3a bleibt
-dreiwertig. Modellnachzählung der 570 Kampagnen (gerechnet, isotrope Näherung, m = 43): H03 30/30 → 30/30;
-E07-basisdrift 36/40 → 33/40 (ν = 40) bzw. 32/40 (ν = 21); A06 3/30 → 0; N01-A4/L4 (exakte Superposition) 2/40 → 0;
-E3a auf L4: der eine Fehlalarm bei exakter Superposition (1/40) entfällt mit t-Quantil.
+Macht von B (gerechnet, isotrop; ν = 19 ist der Wert der Regel bei n₀ = 20, PR-#21-Bericht Z. 51): bei 0,3° an
+einem Modul auf L1 0,16 bei ν = 19 und 0,26 bei ν = 40 (heutige, ungültige Regel 0,56; Scheibe 0,12), bei 1 %
+Amplitudenänderung 0,995 bzw. 0,999, bei t = 3 und 0,3° 0,955 bzw. 0,99. Phasenversätze erkennt E3a auf L1 ohnehin
+sicher; E3b ergänzt vor allem Amplituden- und Kombinationsänderungen. „Unauffällig“ bei exakter Superposition: mit B
+bei t = 1,5 praktisch 0 (heute 7 %), über 0,8 erst ab t ≈ 3,8 (ν = 19) bzw. 3,6 (ν = 40); die bestmögliche gültige
+Regel (Neyman-Pearson, s bekannt) erreicht 0,8 ab t ≈ 3,2–3,4. Das Kriterium „unauffällig ≥ 0,8“ ist für E3b bei der
+Präzision von L1 mit keiner gültigen Regel erreichbar; der Rückfall je Prüfgröße macht daraus eine einseitige
+Auswertung, E3a bleibt dreiwertig.
+
+Modellnachzählung der 570 Kampagnen (gerechnet, m = 43; ŝ aus der isotropen Umkehrung von u, weil Σ̂ nicht
+gespeichert ist): H03 30/30 → 30/30; E07-basisdrift 36/40 → 31/40 mit ν = 19 (33/40 mit ν = 40); A06 3/30 → 0;
+N01-A4/L4 (exakte Superposition) 2/40 → 0. „Unauffällig“ mit B: N01-A4/L1 0/200 (heute 14/200), N01-A4/L0 und
+N03-N3bindet je 40/40, sonst 0. Das erzeugende Skript der ersten Nachzählung war überschrieben; die Nachprüfung hat
+es rekonstruiert, und die Rekonstruktion reproduziert die gespeicherte Ausgabe bytegleich. E3a auf L4: Der eine
+Fehlalarm bei exakter Superposition (1/40) entfällt mit dem t-Quantil, wenn u dieser Prüfung mindestens 0,08–0,10°
+ist; bei der Prüfung mit dem größten |Δφ| ist u = 0,120°, dann entfällt er. u je Prüfung ist nicht gespeichert.
+
+Anisotropie und ν lassen sich aus den gespeicherten Daten nicht direkt bestimmen: Es gibt keine Replikate, keine
+2×2-Kovarianz und kein n_A oder n₀ⱼ je Kampagne. Indirekt (N01-A4/L1, 200 Nullkampagnen, synthetischer Generator,
+gerechnet): Kurtosis von q 1,95 [1,76; 2,15], also ρ ≥ 0,67; ŝ im Mittel kalibriert (1,07 [0,93; 1,21]);
+ν_eff ≈ 50 (42–63); der T-Anteil an u_q_Z liegt unter 10⁻⁴. Das stützt ν = 19 als konservativ und zeigt dort
+keine starke Anisotropie; für reale Daten ist damit nichts gezeigt.
 
 ### 4.3 Empfehlung
 
 Option B mit den Festlegungen: Prüfmenge 21 Schnittpunkte (E3a) und Triphasik-Punkt (E3b), ohne
 Identifizierbarkeits- und Zusatzkonfigurationen; m = 43 fest, auch bei nicht auswertbaren Punkten, Rückfall einer
-Prüfgröße oder N_K = 23; Bonferroni für die Gesamtaussage; E3a mit t-Quantilen (ν = n_A − 1, Varianz mit n/(n − 1));
-„E3 unauffällig“ nur, wenn beide Prüfgrößen dreiwertig ausgewertet werden und alle Prüfungen unauffällig sind, sonst
-E3a und E3b getrennt; „nicht prüfbar (Grund)“ bei nicht auswertbarem Triphasik-Punkt oder singulärer Σ̂, m bleibt 43.
-A9.11 erhält ein Gültigkeitskriterium am Rand (auf Statistikebene) und die Modellprüfung in den Kalibrierkampagnen
-(Kalibrierung von ŝ, Isotropie, PIT). Wenn vor realen Daten kein neuer E3b-Code gewünscht ist: Option A mit
+Prüfgröße oder N_K = 23; Bonferroni für die Gesamtaussage; E3a mit t-Quantilen (ν = n_A − 1, n/(n − 1) auf das
+ganze u² einschließlich T, Δδ und Quantisierung, weil das einfach und konservativ ist; gerechnet: bei w = 0 genau
+α/m, sonst weniger, obere Grenze ≤ 0,05). Ist 0,1°/u klein, kommt die Gegenseite hinzu (Faktor ≤ 1,03 für
+0,1°/u ≥ 0,5, bis 2 für 0,1°/u → 0); dann gilt die gefaltete kritische Schranke. L1 ist davon nicht betroffen, L4
+höchstens mit 1,02; „E3 unauffällig“ nur, wenn beide Prüfgrößen dreiwertig ausgewertet werden und alle Prüfungen
+unauffällig sind, sonst E3a und E3b getrennt; „nicht prüfbar (Grund)“ bei nicht auswertbarem Triphasik-Punkt, bei
+nicht endlicher oder singulärer Σ̂ oder bei ν < 5, m bleibt 43. A9.11 erhält ein Gültigkeitskriterium am Rand (auf
+Statistikebene) und die Modellprüfung in den Kalibrierkampagnen: Kalibrierung von ŝ (E q²/(2·E ŝ²) in
+Nullkampagnen), Isotropie über ρ̂, Prüfung von ν über die Streuung von ŝ² und PIT von q_Z. Verfehlt E3b die
+Modellprüfung, ist es nur beschreibend (Rückfall je Prüfgröße). Wenn vor realen Daten kein neuer E3b-Code gewünscht ist: Option A mit
 denselben Festlegungen; B lässt sich vor dem Einfrieren nachziehen, ohne m zu ändern. Die Laufzahl hängt in keiner
 Variante von E3 ab.
 
@@ -684,10 +724,14 @@ Variante von E3 ab.
 - Normtext: A9.13 (Grenzen für E3a und E3b, m = 43, Prüfmenge, Bonferroni, nicht prüfbar); §8.10 und A9.11 (Rückfall
   je Prüfgröße, Gültigkeit am Rand als Kriterium, Modellprüfung); §12 Zeile „Schwellen von E3“ (Option (a) mit
   Rückfall je Prüfgröße festgelegt); A0.
-- Code: `kontrollen.py` (2×2-Kovarianz, κ, Rice-Grenze, t-Quantile, m fest, Urteil je Prüfgröße), `auswertung.py`
-  (Prüfmenge, Profilwerte wirklich binden), `regeln.py` (e3.* festlegen), Kriterienmatrix.
-- Tests auf Statistikebene (Sekunden): Größe am Rand über ν, Anisotropie und t; Gleichheit zu PR #22 bei bekanntem
-  s; E3a-Grenzen; Nachzählung der gespeicherten 570 Prüfgrößen als Regression.
+- Code: `kontrollen.py` (2×2-Kovarianz, κ, Rice-Grenze, t-Quantile, m fest, Urteil je Prüfgröße; je Kampagne Σ̂
+  mit drei Zahlen, ρ̂, ν, n_A und n₀ⱼ in den Befund und in die CSV, sonst ist die Modellprüfung aus 4.3 nicht
+  möglich), `auswertung.py` (Prüfmenge, Profilwerte wirklich binden), `regeln.py` (e3.* festlegen),
+  Kriterienmatrix.
+- Tests auf Statistikebene (Sekunden bis Minuten): Größe am Rand als bedingt exakte Quadratur statt Monte Carlo
+  über ν, Anisotropie, t und Richtung, einschließlich Grenzfall ρ → 0, t → ∞, zusammengesetzter Kovarianz und
+  endlichem B (ein Monte Carlo mit 2·10⁵ Fällen trennt 0,96 nicht von 1); Gleichheit zu PR #22 bei bekanntem s;
+  E3a-Grenzen; Nachzählung der gespeicherten 570 Prüfgrößen als Regression mit der rekonstruierten Nachzählung.
 - Aufwand: etwa 1 Personentag; keine zusätzlichen Kampagnen (die Modellprüfung läuft in den ohnehin geplanten
   Kalibrierkampagnen mit).
 
@@ -696,8 +740,8 @@ Variante von E3 ab.
 - F-c1: E3b jetzt mit gültiger Grenze (B) oder vorerst beschreibend (A), in beiden Fällen m = 43 fest?
 - F-c2: Rückfall je Prüfgröße; „E3 unauffällig“ nur bei beiden dreiwertigen Prüfgrößen?
 - F-c3: E3a auf t-Quantile mit ν = n_A − 1 umstellen (ändert den Wortlaut von A9.13 auch für E3a)?
-- F-c4: Freiheitsgrade konservativ ν = min(n_A, n_B) − 1 (empfohlen) oder Welch-Satterthwaite (mächtiger, leicht
-  antikonservativ)?
+- F-c4: Freiheitsgrade konservativ ν = min(n_A, n₀,₁, n₀,₂, n₀,₃) − 1 (empfohlen) oder Welch-Satterthwaite
+  (mächtiger, mit geschätzten Gewichten aber bis 1,085·α/m, also leicht antikonservativ; gerechnet)?
 - F-c5: Zusätzliches E3b-Szenario mit Amplitudenänderung 0,5 % und 1 % in A9.11, weil E3b dort über E3a hinaus
   etwas zeigt?
 
