@@ -674,9 +674,9 @@ Bootstrap) kosten etwa 7–10 Kernstunden, R2 etwa 4,5 Kernstunden. Das liegt we
 
 Entscheidungsliste (Kurzform; Empfehlung in Klammern):
 
-1. F-a1 Reihenfolge A1 + Z1 (ja). 2. F-a2 Halt H1 (ja). 3. F-a3 K1 oder K2 (K1). 4. F-a4 N7-Fassung (S1–S4 und
-   Nullpunktalarm; Nullpunktalarm im W-Satz: Autor). 5. F-a5 Aufwärmen bei Tageswechsel (ja). 6. F-a6 übrige
-   Lesarten im selben PR (ja).
+1. F-a1 Reihenfolge A1 + Z1 (ja). F-a2 Halt H1 (ja). F-a3 K1 oder K2 (K1). F-a4 N7-Fassung (S1–S4 und
+   Nullpunktalarm; Nullpunktalarm im W-Satz: Autor). F-a5 Aufwärmen bei Tageswechsel (ja). F-a6 übrige Lesarten
+   im selben PR (ja).
 2. F-b1 B+ oder D (B+, wenn keine Trendempfindlichkeit an steilen Punkten verlangt ist). F-b2 Zielrate (≤ 1,5 %).
    F-b3 Fünftelzeiger im Format (ja, auch für d). F-b4 Piloten gepoolt (ja). F-b5 G4 an Lⱼ (R1 abwarten, Pooling
    bevorzugt). F-b6 R1/R2 beauftragen (ja).
