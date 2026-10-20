@@ -54,6 +54,18 @@ def test_konfiguration_wird_streng_geprueft():
                               (dict(szenario='X99'), 'Katalog')):
         with pytest.raises(kb.BeispielFehler, match=muster):
             kb.pruefen(dict(demo, **aenderung))
+    for plan, muster in ((dict(n0=1_000_000), 'n0 = 1000000'), (dict(n_pilot=50), 'n_pilot = 50'),
+                         (dict(n_zyklen=5000), 'n_zyklen = 5000'), (dict(tage=3), 'tage = 3'),
+                         (dict(ref_min_p0=10_000), 'ref_min_p0 = 10000'), (dict(ref_abstand=1), 'ref_abstand = 1[;,]'),
+                         (dict(zusatz=True), 'zusatz = True'), (dict(pruef=[[10, 20]]), 'pruef = '),
+                         (dict(unbekannt=1), 'Plan ungültig')):
+        with pytest.raises(kb.BeispielFehler, match=muster):
+            kb.pruefen(dict(demo, plan=dict(demo['plan'], **plan)))
+    for red in (dict(h3_mc=5000), dict(eps_ctrl_datensaetze=1000)):
+        with pytest.raises(kb.BeispielFehler, match='Demonstration zu groß'):
+            kb.pruefen(dict(demo, reduktion=dict(demo['reduktion'], **red)))
+    with pytest.raises(kb.BeispielFehler, match='n_min'):
+        kb.pruefen(dict(demo, n_min=9))
     with pytest.raises(kb.BeispielFehler, match='soll_A = 1000'):
         kb.pruefen(dict(gross, soll_A=500))
     with pytest.raises(kb.BeispielFehler, match='keine normative'):

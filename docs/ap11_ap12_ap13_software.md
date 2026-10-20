@@ -228,8 +228,9 @@ gemeinsamen Feldern; neu sind nur das optionale Feld `fuenftel_zeiger` und die E
 | Halte in der Simulation | ein Halt beendet die Kampagne | simulierte Wiederaufnahme fortsetzbarer Halte (W = 3, T_UA aus Teil B, Entwicklungsbeispiel 1800 s); zweites S2 oder erschöpftes W beendet endgültig | `harness/kette.py` |
 | Bezugsmengen | alle Kampagnen | G (alle begonnenen) und A (abgeschlossen, alle Prüfgrößen endlich); c, Prüfrate, b̂, u(b̂), Restbias, H2-Überdeckung über A, P(H1 und H2 bestätigt) mit Nenner G; Nachziehen bis \|A\| = soll_A mit Versuchslimit 1,5·\|A\| | `harness/mengen.py`, `harness/kalibrierung.py` |
 | c bei mehreren Rauschmodellen | gepoolt | Fassung (a): Quantil des Standardmodells, die übrigen als Sensitivität (`c_varianten`, `c_sensitivitaet`) | `harness/kalibrierung.py` |
-| Planung | Reserve r = ⌈n_min·p̂/(1 − p̂)⌉ + 2 | zusätzlich Reservebedingung 0,95 mit r += 1 bis zehnmal, sonst „Reservegrenze“; das erhöhte r geht in n = n_min + r der Pilotsuche ein; ist die Bedingung grundsätzlich nicht prüfbar, endet die Suche „offen“; Zielfunktion aus der Regel; Zeitbilanz nach Termen; Ablauf ablauf-4 als Vorgabe beim Szenariopfad | `harness/planung.py`, `harness/reserve.py`, `pilot.py` |
-| Planung, Rauschquelle | Szenariomodell × κ(ν_p) | Phase-0-Modell aus dem Aufruf (Strukturmodell an den oberen 80-%-Grenzen je Komponente, gemeinsamer Bodenfaktor, c_B); Szenario nur als ausdrückliches Orakel | `harness/planung.py`, `generator/phase0_modell.py` |
+| Planung | Reserve r = ⌈n_min·p̂/(1 − p̂)⌉ + 2 | zusätzlich Reservebedingung 0,95 mit r += 1 bis zehnmal, sonst „Reservegrenze“; das erhöhte r geht in n = n_min + r der Pilotsuche ein; ist die Bedingung grundsätzlich nicht prüfbar, endet die Suche „offen“; Zielfunktion aus der Regel; Zeitbilanz nach Termen; Ablauf ablauf-4 als Vorgabe, mit dem Szenario wie mit der Phase-0-Modellquelle | `harness/planung.py`, `harness/reserve.py`, `pilot.py` |
+| Planung, Rauschquelle | Szenariomodell × κ(ν_p) | Phase-0-Modell aus dem Aufruf (Strukturmodell an den oberen 80-%-Grenzen je Komponente, gemeinsamer Bodenfaktor, c_B); Kampagnen aus der Modellquelle mit dem Ablauf (Vorrat des Strukturgenerators, `MessungQuelle`); Szenario nur als ausdrückliches Orakel | `harness/planung.py`, `generator/phase0_modell.py`, `harness/phase0_rechnungen.py` |
+| H2-Intervalltyp bei mehreren Rauschmodellen | nur das erste Modell | Überdeckung je Rauschvariante; ein Typ gilt nur, wenn er in jeder Variante gegen ŷ⁰ und ŷ¹ die Schwelle erreicht (`h2_ueberdeckung_varianten`) | `harness/kalibrierung.py` |
 | Laufgrößen | Pilotstreuungen | Laufgrößenmodell aus Phase 0 (d0) im Pilotskript und in Teil B (`pilot-0.4`, `teil_b-0.4`) | `laufgroessen.py`, `pilot.py`, `teil_b.py` |
 | E3 | Intervallregel (am Schwellenrand nicht gültig) | Option B: m = 43, E3a mit gefaltetem t-Quantil, E3b nach Rice mit κ·λ_max und ν_eff, Rückfall „beschreibend“ je Prüfgröße; Kriterien aus der Prüfsimulation nur bei der normativen Zahl | `e3_grenzen.py`, `auswertung.py`, `teil_b.py` (nr10) |
 
@@ -237,7 +238,7 @@ gemeinsamen Feldern; neu sind nur das optionale Feld `fuenftel_zeiger` und die E
 
 | Kategorie | Inhalt |
 |---|---|
-| implementiert und softwaregetestet | Profile und Regeln 2026-11 mit historischer Bitgleichheit (`test_regelstand_2026_11`, Software- und Ablauf-Prüfsatz ablauf-3); ablauf-4 (`test_ablauf4`, 14 Tests, neuer Ablauf-Prüfsatz `tests/fixtures/ap13_ablauf_pruefsatz_ablauf4.json`); G4-Modi, k(n), Pooling, Fünftelzeiger (`test_g4_2026_11`, 10); Wiederaufnahme, Mengen, Nachziehen, Reserve, Zeitbilanz (`test_harness_mengen`, 9; `test_planung_reserve`, 4); E3 Option B (`test_e3_grenzen`, 8; `test_e3_auswertung`, 13); d0–d2 (`test_d_laufgroessen`, 9; `test_d_phase0_modell`, 13; `test_d_planung_phase0`, 9); Kalibrierbeispiel (`test_kalibrierbeispiel`, 5) |
+| implementiert und softwaregetestet | Profile und Regeln 2026-11 mit historischer Bitgleichheit (`test_regelstand_2026_11`, Software- und Ablauf-Prüfsatz ablauf-3); ablauf-4 (`test_ablauf4`, 19 Tests, neuer Ablauf-Prüfsatz `tests/fixtures/ap13_ablauf_pruefsatz_ablauf4.json`); G4-Modi, k(n), Pooling, Fünftelzeiger (`test_g4_2026_11`, 14); Wiederaufnahme, Mengen, Nachziehen, Reserve, Zeitbilanz, H2 je Rauschvariante (`test_harness_mengen`, 12; `test_planung_reserve`, 4); E3 Option B (`test_e3_grenzen`, 8; `test_e3_auswertung`, 13); d0–d2 mit Ablauf für die Modellquelle (`test_d_laufgroessen`, 11; `test_d_phase0_modell`, 14; `test_d_planung_phase0`, 10); Gleichheit mit `main` unter den historischen Profilen (Referenz mit Toleranz); Kalibrierbeispiel (`test_kalibrierbeispiel`, 5) |
 | an kleinen synthetischen Beispielen untersucht | G4 gepaart an 3 × 3 Kampagnen, End-to-End mit ablauf-4 an 5 Fällen und über Ebene Z ([`rechnungen/regelstand_2026-11/`](../rechnungen/regelstand_2026-11/README.md)); R1-d mit 45 Sätzen, R2-d mit 2 × 2 × (3 + 3), R3-d mit 2 + 2 Kampagnen (unten) |
 | nur als ausführbares Beispiel vorbereitet | normative Kalibrier- und Prüfsimulation mit \|A\| = 1000 je Rolle ([`rechnungen/kalibrierbeispiel/`](../rechnungen/kalibrierbeispiel/README.md): Trockenlauf als Vorgabe, Demonstration „Demonstration, synthetisch, nicht kalibriert“); Auftragslisten R1-d (9 × 1000 Sätze), R2-d, R3-d (`harness/phase0_rechnungen.py`) |
 | nicht statistisch kalibriert | alle Raten und kritischen Werte: Fehlausschlussrate von G4 (Arbeitsziel ≤ 1,5 %), Reservebedingung 0,95, c von H1/H1Z, H2-Überdeckung, E3-Kriterien, Planung mit dem Phase-0-Modell |
@@ -246,7 +247,8 @@ gemeinsamen Feldern; neu sind nur das optionale Feld `fuenftel_zeiger` und die E
 **Teil d in Kleinstgröße** (Endstand der Teilbearbeitung, process_time): R1-d (45 Sätze an N01-A4, N04-laufart,
 N03-ungleich × L0/L2/L4; 19 s): Verhältnis Schätzung/Wahrheit für σ_δ,j, σ_off,j, Jitter und Boden 0,82–1,15 (bei L0
 ist die wahre Amplitudenstreuung 0), Ablehnung der Kohärenzprüfung 0–0,17. R2-d (91 s): Kette läuft, mit 3 Kampagnen
-ohne Aussage. R3-d (27 s; im Gesamtstand für den Phase-0-Haken nachgerechnet, 18 s): Das Szenario-Orakel legt n_min = 18
+ohne Aussage. R3-d mit statischem Laufplan (27 s; im Gesamtstand für den Phase-0-Haken nachgerechnet, 18 s; mit dem
+Ablauf siehe „Zweite Runde“ unten): Das Szenario-Orakel legt n_min = 18
 fest (P = 1,0); der Phase-0-Haken ergibt P = 0, beide Prüfkampagnen mit H1 „nicht entscheidbar“ (im Gesamtstand Grund
 Graubereich; in der Teilbearbeitung vor B+ Datenlage). Der Rauschbias stammt dabei aus einer einzigen verwertbaren
 Kalibrierkampagne (Restbias 2,1 ± 1,2 bzw. 3,2 ± 0,9 u_c); bei dieser Größe ist die Ursache nicht von der
@@ -285,24 +287,55 @@ Monte-Carlo-Streuung zu trennen. Es ist keine Aussage über die Planung mit dem 
 Die übrigen 24 Befunde wurden in der Gegenprüfung widerlegt (Guard, Profilbedingung oder dokumentierte Grenze). Die
 kleinen Proben sind danach neu gerechnet.
 
+**Zweite Runde nach der Prüfung des PR** (20.10.2026):
+
+1. Phase-0-Modell und Ablauf verbunden:
+   - `generator.phase0_modell.Vorrat` ist der Spiegel von `ebene_h.Vorrat`. Ohne zusätzliche Versuche ist er
+     bitgleich zu `erzeuge`, auch mit Zufallspfad, Sprüngen und Laufdriftstreuung. Der Nullpunktpfad wird für neue
+     Zeitpunkte bedingt fortgesetzt (Brownsche Brücke).
+   - `harness.phase0_rechnungen.MessungQuelle` und `kampagne_quelle(…, verfahren=ZUSTAND)` liefern Wiederholungen,
+     Halte, simulierte Wiederaufnahme und die Offline-Gegenprobe. Ohne Ablaufoptionen entstehen dieselben Daten wie
+     beim statischen Laufplan.
+   - Der Planungshaken rechnet auch mit dem Phase-0-Modell mit ablauf-4. Die Reservebedingung ist prüfbar, und die
+     Pilotsuche kann festlegen. Kleinstprobe R3-d (2 + 2 Kampagnen, ein Kandidat): Phase-0-Haken und Orakel legen
+     beide n_min = 18, r = 4, n = 22 fest (P = 1 bei zwei Kampagnen; keine Aussage über die Planungsgüte).
+2. H2-Überdeckung unter allen Rauschvarianten (A9.11): Ein Intervalltyp gilt nur, wenn er in jeder Variante gegen
+   ŷ⁰ und ŷ¹ die Schwelle erreicht. Ausgewiesen werden die kleinste Überdeckung und die Werte je Variante. Geprüft
+   an konstruierten Überdeckungen und an einem Kleinstlauf von `kalibrieren` mit zwei Varianten.
+3. Demonstration des Kalibrierbeispiels: Begrenzt sind zusätzlich n₀, n_Pilot, die Referenzläufe der Phase 0
+   (`ref_min_p0` ≤ 42, `ref_abstand` ≥ 12), n_Zyklen, die Messtage, alle Replikatzahlen und n_min ≤ n. Zusatz-, Prüf- und Einstellung-2-Konfigurationen sind ausgeschlossen, und unbekannte
+   Planfelder werden abgelehnt.
+4. Historische Vergleiche gegen `main`:
+   - Die E3- und Pilot/Teil-B-Prüfungen unter AF/ENTW-2026-10 vergleichen mit einer Referenz, die mit dem Code von
+     `main` (0f63187) gerechnet ist (`tests/historisch_referenz.py`, `tests/fixtures/historisch_main_referenz.json`).
+   - Die Rechnung nutzt die historische Anordnung. Der Vergleich ist strukturell mit Toleranz (rtol 1e-6); Prüfsummen
+     über Gleitkommadaten und die Codeversion sind ausgenommen, lange Zahlenfelder gehen als Kennwerte ein.
+   - Bisher wurden auf 10–12 Stellen gerundete Prüfsummen des Zwischenstands ad8fe2a mit P0.7-Anordnung verglichen.
+     Diese hingen an der Rechenumgebung und belegten nicht die Gleichheit mit `main`.
+   - In dieser Umgebung sind alle Werte ohne Toleranz gleich, auch mit anderem `PYTHONHASHSEED`. Verschieden sind nur
+     die Codeversion und die Kalibrierprüfsumme, deren letzte Bits von P0.4 abhängen.
+
 **Grenzen dieses Stands.**
 
-- Kampagnen aus der Phase-0-Modellquelle haben nur den statischen Laufplan (kein Vorrat des Strukturgenerators für
-  den Ablauf). Die Reservebedingung 0,95 ist dort nicht prüfbar; der Planungshaken legt im Regelstand 2026-11 mit dem
-  Phase-0-Modell deshalb keinen Kandidaten fest und berichtet den Kandidaten nach P allein (`kandidat_nur_P`); die
-  Pilotsuche endet dann nach dem ersten Paar mit „offen“ (kein Befund „kein zulässiger Arbeitspunkt“, keine Rechnung
-  über das ganze Raster).
 - Nicht umgesetzt: Residuen-Bootstrap (Regel: optional), Einstellung 2 im Phase-0-Modell, Gauß-Modus als Generator,
   Modellprüfung der E3-Kriterien, Fassung (b) der Zielfunktion.
+- Das Kalibrierbeispiel rechnet mit dem Szenariomodell als einziger Rauschvariante; weitere Varianten sind dort nicht
+  konfigurierbar. Die H2-Auswahl über mehrere Rauschvarianten wirkt, wo `kalibrieren` mehrere Varianten erhält, im
+  Bestand bei den Werten für Teil B (`planung.teil_b_werte`: Strukturmodell und Familienanpassung); der Planungshaken
+  rechnet je Kandidat mit einer Variante. Die Auswahl ist an einer Attrappe der Überdeckungen und an einem Kleinstlauf
+  mit zwei Varianten (je eine Kampagne) softwaregeprüft, nicht statistisch.
+- Zusätzliche Versuche im Phase-0-Modell: Die bedingte Fortsetzung des Nullpunktpfads und der Sprungfolge ist eine
+  technische Festlegung, nicht an Messdaten geprüft.
 - Die Kalibrierung P0.4 ist in den letzten Bits nicht bitreproduzierbar (χ² der Linearität hängt vom
   `PYTHONHASHSEED` ab, Befund der Teilbearbeitung d); der Bitgleichheitstest von Teil d schließt deshalb die
-  Prüfsummen von Kalibrierung und Pilotausgabe aus. Die Prüfsätze runden auf 12 Stellen und haben in der Endabnahme
-  bestanden; eine Prüfung über verschiedene `PYTHONHASHSEED` ist nicht gemacht.
+  Prüfsummen von Kalibrierung und Pilotausgabe aus. Die Vergleiche mit `main` laufen mit Toleranz. Die Prüfsätze
+  runden auf 12 Stellen und haben in der Endabnahme bestanden. Sie vergleichen gespeicherte Prüfsummen und können in
+  einer anderen Rechenumgebung an den letzten Bits scheitern; ein Prüfsatzvergleich mit Toleranz ist nicht umgesetzt.
 - Werkzeug-8-Werte, Prüfstandsraten, K12 und E3-Zähler früherer Stände sind auf den Regelstand 2026-11 nicht
   übertragbar.
 - Die Stärken der benannten Sensitivitäten und die Regularisierung des Strukturmodells sind technische Regeln mit
   Vorschlagscharakter (`rauschmodelle.sensitivitaeten`, `p0.strukturmodell`), Festlegung beim Autor.
-- Rechenaufwand neben der Testsuite: etwa 0,45 Kernstunden ([Protokoll](../rechnungen/regelstand_2026-11/README.md)).
+- Rechenaufwand neben der Testsuite: etwa 0,5 Kernstunden ([Protokoll](../rechnungen/regelstand_2026-11/README.md)).
   Die große Kalibrierung, die volle Matrix und große Planungsläufe wurden nicht ausgeführt.
 
 ## 1 Erreichter Umfang

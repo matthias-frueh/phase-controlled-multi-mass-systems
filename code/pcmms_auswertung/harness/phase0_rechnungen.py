@@ -4,10 +4,12 @@ Entscheidungsvorlage (Abschnitt 5.5) als Auftragslisten mit Seeds; gestartet wir
 Kampagnen (ausfuehren_quelle): wie harness.kampagnen.ausfuehren, aber Generator generator.phase0_modell.erzeuge mit
 dem Phase0Modell der Quelle (Struktur aus Phase 0, Parameter der Quelle oder der übergebenen Rauschvariante),
 Kalibrierung P0.1–P0.5 aus der Quelle (gemessen, nicht neu erzeugt), Pilotskript, Teil B und Stufe 2 wie
-harness.kette (statischer Laufplan; der zustandsbehaftete Ablauf braucht einen Vorrat des Strukturgenerators und ist
-hier nicht umgesetzt). Seeds: zufall.unterseed(Basis, Rolle, 'phase0', Name der Quelle, i); Rauschvarianten derselben
-Quelle teilen die Seeds (gepaarte Vergleiche). Die Wahrheit der Quelle ist die ihrer Struktur bei exakter
-Superposition (Klasse R0), keine Szenario-Wahrheit; nur der Harness liest sie (H2-Überdeckung).
+harness.kette. Mit einem Verfahren „zustand“ läuft Phase 1 als Ablauf wie harness.kette.kampagne_ablauf
+(Wiederholungen, Halte, simulierte Wiederaufnahme): Die Messung (MessungQuelle) bildet die Versuche aus dem Vorrat des
+Strukturgenerators (generator.phase0_modell.Vorrat; ohne zusätzliche Versuche bitgleich zum statischen Generator).
+Seeds: zufall.unterseed(Basis, Rolle, 'phase0', Name der Quelle, i); Rauschvarianten derselben Quelle teilen die
+Seeds (gepaarte Vergleiche). Die Wahrheit der Quelle ist die ihrer Struktur bei exakter Superposition (Klasse R0),
+keine Szenario-Wahrheit; nur der Harness liest sie (H2-Überdeckung).
 
 Rechnungen (synthetische Phase-0-Daten; sie prüfen Schätz- und Dateikette, keine Apparatur):
   R1-d  Rundreise je Satz: Szenariogenerator (nur Phase 0) → Schätzer (Pilotskript, Satz bei k_max) → Vergleich mit
@@ -26,7 +28,7 @@ import warnings
 
 import numpy as np
 
-from .. import auswertung, formate, pilot, regeln, verfahren as vf, zufall
+from .. import ablauf, auswertung, formate, pilot, regeln, verfahren as vf, zufall
 from .. import laufgroessen as lgm
 from ..generator import ebene_h, kampagne as kp, phase0_modell as p0m, szenarien, wahrheit
 from . import kampagnen, kette
@@ -39,13 +41,68 @@ def _rausch(quelle, rausch):
     return quelle.rausch if rausch is None else rausch
 
 
+class MessungQuelle(kette.MessungH):
+    """Messung eines Versuchs aus der Modellquelle im Ablauf „zustand“: wie kette.MessungH mit dem Vorrat des
+    Strukturgenerators (Ströme „generator“ und „generator_struktur“ wie der statische Generator). Zusätzliche Versuche
+    ziehen aus (seed, „generator_versuch“, i) und (seed, „generator_struktur_versuch“, i); ein neuer Zeitpunkt des
+    Nullpunktpfads oder ein neuer Abschnitt aus (seed, „generator_pfad_versuch“, i)."""
+
+    def __init__(self, modell, laeufe, seed, rausch=None):
+        self.modell, self.seed = modell, int(seed)
+        self.vorrat = p0m.Vorrat(modell, laeufe, zufall.strom(seed, 'generator'), rausch,
+                                 rng_zusatz=zufall.strom(seed, 'generator_struktur'))
+        self.versuch_ereignisse = [e for e in modell.effekte_art('ereignis') if 'versuch' in e]
+
+    def messen(self, spec, versuch):
+        effs = self._effekte(spec, versuch)
+        i = versuch['index']
+        kw = dict(rng_pfad=zufall.strom(self.seed, 'generator_pfad_versuch', i), ereignisse=effs,
+                  messtag=versuch.get('messtag_ist'))
+        if versuch['geplant']:
+            k, d, _ = self.vorrat.lauf(spec, bezug=versuch['bezug'], **kw)
+        else:
+            k, d, _ = self.vorrat.lauf(spec, rng=zufall.strom(self.seed, 'generator_versuch', i),
+                                       rng_zusatz=zufall.strom(self.seed, 'generator_struktur_versuch', i), **kw)
+        return k, d
+
+
+def _kampagne_quelle_ablauf(quelle, profil, plan, seed, werkzeug8, n_min, k_max, v, rausch, effekte):
+    """Kampagne aus der Modellquelle mit Ablauf der Phase 1 (wie kette.kampagne_ablauf und kette._kette_ablauf)."""
+    m = quelle.modell(plan, k_max, _rausch(quelle, rausch), effekte)
+    t = time.perf_counter()
+    rng_r = zufall.strom(seed, 'reihenfolge')
+    laeufe = kp.laufplan(m.plan, rng_r)
+    kennung = formate.synth_kennung('PHASE0', quelle.name, seed)
+    messung = MessungQuelle(m, laeufe, seed, _rausch(quelle, rausch))
+    tab0 = messung.phase0(laeufe)
+    tab0.meta.setdefault('kennung', kennung)
+    w8 = kette.testvorgabe_werkzeug8() if werkzeug8 is None else werkzeug8
+    tb, pe = kette.teil_b_erzeugen(tab0, quelle.kalibrierung, m, profil, w8, seed, n_min, kennung=kennung, verfahren=v)
+    sw = auswertung._schwellen(tb, profil)
+    gueltig0 = {x for e in tb['nr3']['einzel0'] for x in e['lauf_ids']}
+    s3 = ablauf.s3_basis(tab0, gueltig0, sw.kmax)
+    ak = dict(verfahren=v.kennung(), szenario=None, modellquelle=quelle.kennung()['sha256'], stufe=None,
+              seed=int(seed), ebene='H', plan=kp.plan_dict(m.plan), schwellen_sha256=ablauf.schwellen_kennung(sw, s3),
+              profil_sha256=profil.sha256())
+    a = ablauf.Ablauf([l for l in laeufe if l['phase'] == 1], messung, sw, s3, rng_r, v.optionen, m.plan.T_lauf,
+                      m.plan.tag_pause, kennung=ak, fassung=v.fassung)
+    a.ausfuehren()
+    regel = kette.wiederaufnahme_regel(profil, v, tb)
+    wa = kette.wiederaufnehmen(a, regel) if regel is not None else None
+    tab = kette.ablauf_tabelle(dict(tab0=tab0, ablauf=a))
+    erg = auswertung.auswerten(tab, quelle.kalibrierung, tb, profil)
+    return dict(ergebnis=erg, teil_b=tb, tabelle=tab, modell=m, laeufe=laeufe, pilot=pe, verfahren=v.kennung(),
+                laufzeit_s=round(time.perf_counter() - t, 3),
+                ablauf=dict(a.bericht(), harness_wiederaufnahme=wa))
+
+
 def kampagne_quelle(quelle, profil, plan, seed, werkzeug8=None, n_min=None, k_max=None, verfahren=None, rausch=None,
                     effekte=None):
-    """Eine Kampagne (statischer Laufplan) aus der Modellquelle: Generator, Pilotskript, Teil B, Stufe 2."""
+    """Eine Kampagne aus der Modellquelle: Generator, Pilotskript, Teil B, Stufe 2; mit einem Verfahren „zustand“
+    Phase 1 als Ablauf (MessungQuelle)."""
     v = vf.oder_standard(verfahren)
-    if v.ablauf != 'statisch':
-        raise ValueError('Kampagnen aus einer Modellquelle: nur der statische Laufplan (Vorrat des Strukturgenerators '
-                         'für den Ablauf „zustand“ nicht umgesetzt)')
+    if v.ablauf == 'zustand':
+        return _kampagne_quelle_ablauf(quelle, profil, plan, seed, werkzeug8, n_min, k_max, v, rausch, effekte)
     m = quelle.modell(plan, k_max, _rausch(quelle, rausch), effekte)
     t = time.perf_counter()
     laeufe = kp.laufplan(m.plan, zufall.strom(seed, 'reihenfolge'))
@@ -62,7 +119,7 @@ def kampagne_quelle(quelle, profil, plan, seed, werkzeug8=None, n_min=None, k_ma
 def _eine(auftrag):
     quelle, profil, plan, seed, w8, n_min, rausch, k_max, verfahren, effekte = auftrag
     r = kampagne_quelle(quelle, profil, plan, seed, w8, n_min, k_max, verfahren, rausch, effekte)
-    return kampagnen.kurzbefund(r['ergebnis'], r['teil_b'], seed)
+    return kampagnen.kurzbefund(r['ergebnis'], r['teil_b'], seed, r.get('ablauf'))
 
 
 def kampagnen_seed(basis, rolle, quelle, i):

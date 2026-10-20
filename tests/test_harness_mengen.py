@@ -187,3 +187,51 @@ def test_kalibrierung_ohne_verwertbare_kampagne_nicht_abgeschlossen():
     from pcmms_auswertung.harness import planung
     assert not planung._strukturell_nicht_pruefbar(r['reserve_ziel'])
     assert planung._strukturell_nicht_pruefbar(dict(geprueft=False, grund='nur mit Ablauf ablauf-4'))
+
+
+def test_h2_ueberdeckung_unter_allen_rauschvarianten(monkeypatch):
+    """Regelstand 2026-11 (A9.11): Der Intervalltyp von H2 gilt nur, wenn er in jeder Rauschvariante gegen ŷ⁰ und ŷ¹
+    die Schwelle erreicht; die ausgewiesene Überdeckung ist die kleinste über die Varianten; mit einer Variante wie
+    bisher."""
+    def rate(r):
+        return dict(rate=r, zaehler=int(round(1000 * r)), nenner=1000)
+
+    def ueb(werte):
+        return dict(typ='x', schwelle=0.936, schluessel=None,
+                    ueberdeckung={t: dict(yhat0=rate(a), yhat1=rate(b)) for t, (a, b) in werte.items()}, bezug={})
+    je = {'struktur': ueb({'perzentil_0.95': (0.95, 0.95), 'bca_0.95': (0.95, 0.96)}),
+          'familie': ueb({'perzentil_0.95': (0.92, 0.95), 'bca_0.95': (0.94, 0.95)})}
+    monkeypatch.setattr(kalibrierung, 'h2_ueberdeckung', lambda l, p: je[l['meta']['rauschmodell']])
+    laeufe = [dict(meta=dict(rauschmodell='struktur')), dict(meta=dict(rauschmodell='familie'))]
+    h = kalibrierung.h2_ueberdeckung_varianten(laeufe, NEU)
+    assert h['schluessel'] == 'bca_0.95' and h['typ'] == 'bca' and h['niveau'] == 0.95
+    assert h['ueberdeckung']['perzentil_0.95']['yhat0']['rate'] == 0.92
+    assert [x['rauschmodell'] for x in h['je_variante']] == ['struktur', 'familie']
+    assert kalibrierung.h2_ueberdeckung_varianten(laeufe[:1], NEU) is je['struktur']
+    # kein Typ reicht in allen Varianten; ein Typ, den nur eine Variante ausweist, zählt nicht
+    je['struktur'] = ueb({'perzentil_0.95': (0.95, 0.95), 'bca_0.95': (0.95, 0.96), 'perzentil_0.96': (0.97, 0.97)})
+    je['familie'] = ueb({'perzentil_0.95': (0.92, 0.95), 'bca_0.95': (0.93, 0.95)})
+    h = kalibrierung.h2_ueberdeckung_varianten(laeufe, NEU)
+    assert h['schluessel'] is None and h['typ'] == 'keiner' and 'perzentil_0.96' not in h['ueberdeckung']
+
+
+def test_h2_mit_zwei_rauschvarianten_im_echten_pfad():
+    """kalibrieren mit zwei Rauschvarianten (je eine Kalibrier- und eine Prüfkampagne, statischer Laufplan, etwa 13 s):
+    H2 nach der Regel über alle Varianten, je Typ die kleinste Überdeckung, Werkzeug 8 mit dem gewählten Typ."""
+    import dataclasses
+    import warnings
+    from pcmms_auswertung.generator import kampagne as kp, szenarien
+    prof = NEU.mit_reduktion(bootstrap_B=100, h3_mc=100, eps_ctrl_datensaetze=200)
+    plan = kp.Plan(n0=20, n_pilot=20, n_bloecke=4)
+    r1 = szenarien.modell('N01-A4', 'L1', plan=plan).rausch
+    r2 = dataclasses.replace(r1, name=r1.name + '-sigma1.3', sigma_zelle=1.3 * r1.sigma_zelle)
+    with warnings.catch_warnings():                       # MC-Fehler des Restbias bei einer Kampagne nicht bestimmbar
+        warnings.simplefilter('ignore', RuntimeWarning)
+        k = kalibrierung.kalibrieren('N01-A4', 'L1', prof, 1, 1, 4711, plan=plan, n_min=2, rauschvarianten=[r1, r2],
+                                     verfahren=vf.STATISCH)
+    h = k['h2']
+    assert h['regel'].startswith('Typ gilt') and [x['rauschmodell'] for x in h['je_variante']] == [r1.name, r2.name]
+    assert h['ueberdeckung'] and all(
+        h['ueberdeckung'][t][s]['rate'] == min(x['ueberdeckung'][t][s]['rate'] for x in h['je_variante'])
+        for t in h['ueberdeckung'] for s in ('yhat0', 'yhat1'))
+    assert k['werkzeug8']['h2_intervall']['typ'] == h['typ'] and k['werkzeug8']['h2_intervall']['niveau'] == h['niveau']

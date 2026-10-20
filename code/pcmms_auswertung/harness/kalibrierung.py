@@ -103,6 +103,40 @@ def h2_bezug(wahr, W_ids, profil):
     return fit['F_mess'] - fit['F_yhat0'], fit['F_mess'] - fit['F_yhat1']
 
 
+H2_FOLGE = ['perzentil_0.95', 'bca_0.95'] + [f'perzentil_{x:.2f}' for x in (0.96, 0.97, 0.98, 0.99)]
+
+
+def h2_ueberdeckung_varianten(laeufe, profil):
+    """H2-Überdeckung unter allen Rauschvarianten (Regelstand 2026-11, A9.11: „unter allen vorgesehenen
+    Rauschvarianten“): Überdeckung je Variante und Intervalltyp wie h2_ueberdeckung; ein Typ gilt nur, wenn er in
+    jeder Variante gegen ŷ⁰ und ŷ¹ die Schwelle erreicht; gewählt wird der erste solche Typ der Rückfallkette.
+    „ueberdeckung“ nennt je Typ die kleinste Überdeckung über die Varianten (mit Zähler und Nenner der Variante),
+    „je_variante“ die Werte und die allein gewählten Typen. Mit einer Variante gleich h2_ueberdeckung."""
+    je = [h2_ueberdeckung(l, profil) for l in laeufe]
+    if len(je) == 1 or je[0].get('typ') is None or any('schwelle' not in x for x in je):
+        return je[0]
+    schwelle = je[0]['schwelle']
+
+    def kleinste(typ, s):
+        werte = [x['ueberdeckung'].get(typ, {}).get(s) for x in je]
+        if any(w is None or w['rate'] is None for w in werte):
+            return None
+        return min(werte, key=lambda w: w['rate'])
+    ub = {}
+    for typ in sorted(set().union(*(x['ueberdeckung'] for x in je))):
+        y0, y1 = kleinste(typ, 'yhat0'), kleinste(typ, 'yhat1')
+        if y0 is not None and y1 is not None:
+            ub[typ] = dict(yhat0=y0, yhat1=y1)
+    gewaehlt = next((t for t in H2_FOLGE if t in ub and ub[t]['yhat0']['rate'] >= schwelle
+                     and ub[t]['yhat1']['rate'] >= schwelle), None)
+    typ, niveau = (gewaehlt.rsplit('_', 1)[0], float(gewaehlt.rsplit('_', 1)[1])) if gewaehlt else ('keiner', None)
+    return dict(typ=typ, niveau=niveau, schluessel=gewaehlt, schwelle=schwelle, ueberdeckung=ub, folge=H2_FOLGE,
+                bezug=je[0].get('bezug'), regel='Typ gilt, wenn die Überdeckung gegen ŷ⁰ und ŷ¹ in jeder Rauschvariante '
+                                                'die Schwelle erreicht (A9.11)',
+                je_variante=[dict(rauschmodell=l['meta'].get('rauschmodell'), schluessel=x.get('schluessel'),
+                                  ueberdeckung=x['ueberdeckung']) for l, x in zip(laeufe, je)])
+
+
 def h2_ueberdeckung(lauf, profil):
     """Überdeckung je Intervalltyp (getrennt gegen ŷ⁰ und ŷ¹) mit MC-Fehler und gewählter Typ nach der
     Rückfallkette. Ein Typ gilt, wenn beide Überdeckungen die Schwelle erreichen (Regel harness.ueberdeckung_beide)."""
@@ -141,7 +175,7 @@ def h2_ueberdeckung(lauf, profil):
                     u['yhat0']['rate'] >= schwelle and u['yhat1']['rate'] >= schwelle)
     if kette_ != 'a':
         return dict(typ=None, grund=f'Rückfallkette {kette_!r} nicht umgesetzt', ueberdeckung=ub)
-    folge = ['perzentil_0.95', 'bca_0.95'] + [f'perzentil_{x:.2f}' for x in (0.96, 0.97, 0.98, 0.99)]
+    folge = list(H2_FOLGE)
     gewaehlt = next((t for t in folge if erreicht(t)), None)
     typ, niveau = (gewaehlt.rsplit('_', 1)[0], float(gewaehlt.rsplit('_', 1)[1])) if gewaehlt else ('keiner', None)
     return dict(typ=typ, niveau=niveau, schluessel=gewaehlt, schwelle=schwelle, ueberdeckung=ub, folge=folge,
@@ -253,7 +287,7 @@ def kalibrieren(sid, stufe, profil, n_kal, n_pruef, seed_basis, plan=None, n_min
                        c_H1=c_bestimmen(l['befunde'], 'H1', b0['bias'], b0['u'], seed=seed_basis)['c'],
                        c_H1Z=c_bestimmen(l['befunde'], 'H1Z', bz0['bias'], bz0['u'], seed=seed_basis + 1)['c'],
                        n_A=len(l['befunde'])) for rv, l in zip(var, kal_A)]
-    h2 = h2_ueberdeckung(kal_A[0], profil)
+    h2 = h2_ueberdeckung_varianten(kal_A, profil) if neu else h2_ueberdeckung(kal_A[0], profil)
     nu = cB_nu(plan)
     cB = float(stats.t.ppf(1 - 0.05 / 294, nu))
     w8 = werkzeug8(b0, b1, bz0, bz1, c1, cz, h2, len(alle), n_pruef, profil.id)

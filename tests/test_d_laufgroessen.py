@@ -4,12 +4,14 @@ Pilotskript und in Teil B; unter dem historischen Profil bleiben Pilotskript, Te
 
 Alle Datensätze sind synthetisch (Szenariogenerator Ebene H, für den Nullpunkt über die Betriebszeit das
 Strukturmodell aus generator.phase0_modell, nur Phase 0); geprüft wird die Schätzkette, keine Apparatur."""
+import json
+
 import numpy as np
 import pytest
 
-from pcmms_auswertung import formate, laufgroessen as lgm, pilot, regeln, teil_b, zufall
+from pcmms_auswertung import laufgroessen as lgm, pilot, regeln, teil_b, zufall
 from pcmms_auswertung.generator import ebene_h, kampagne as kp, phase0_modell as p0m, rauschen, szenarien
-from pcmms_auswertung.harness import kette, planung
+from pcmms_auswertung.harness import kette
 
 PLAN = kp.Plan(n0=20, n_pilot=20, n_bloecke=24)
 AKTUELL = regeln.profil('ENTW-2026-11').mit_reduktion(eps_ctrl_datensaetze=200, bootstrap_B=50)
@@ -223,68 +225,18 @@ def test_teil_b_felder_sigma_a_delta_off(a4):
     assert tbh['version'] == 'teil_b-0.3' and 'sigma_a_j' not in tbh['nr2'] and 'werte_regel' not in tbh['nr10']
 
 
-# ── historisches Profil bitgleich ────────────────────────────────────────────────────────────────────
-# Prüfsummen mit dem Code des Ausgangsstands ad8fe2a (vor Teil d) berechnet: Pilotskript ohne und mit Planungshaken
-# (Kalibrierung als Attrappe: Argumente und Protokoll des Hakens), Teil B, Satz beim k des Plans. Die Prüfsumme der
-# Kalibrierung und der Pilotausgabe in Teil B nr1 sowie die Codeversion zählen nicht (letzte Bits von P0.4 hängen von
-# der Summationsreihenfolge ab, PYTHONHASHSEED).
-HISTORISCH_SHA = dict(pilot_offen='83350d1a3006b08e', pilot_planung='878f52eac6d1e556',
-                      haken_aufrufe='39572ed712e2f489', haken_protokoll='a982087c6f5ef724', teil_b='346a8e3dcba1fcd7',
-                      satz='461fb4a165208f1f')
-
-
-def _rund(o):
-    if isinstance(o, dict):
-        return {str(k): _rund(v) for k, v in o.items() if k not in ('kalibrierung_sha256', 'pilot_sha256')}
-    if isinstance(o, (list, tuple)):
-        return [_rund(v) for v in o]
-    if isinstance(o, np.ndarray):
-        return _rund(o.tolist())
-    if isinstance(o, (complex, np.complexfloating)):
-        return [_rund(float(np.real(o))), _rund(float(np.imag(o)))]
-    if isinstance(o, (float, np.floating)):
-        o = float(o)
-        return None if not np.isfinite(o) else float(f'{o:.10g}')
-    if isinstance(o, np.integer):
-        return int(o)
-    if isinstance(o, np.bool_):
-        return bool(o)
-    return o
-
-
-def _h(o):
-    return formate.sha256_json(_rund(o))[:16]
-
-
-def test_historisches_profil_bitgleich(monkeypatch):
-    plan = kp.Plan(n0=20, n_pilot=20, n_bloecke=24)
-    m, laeufe, tab = kette.kampagne_erzeugen('N01-A4', 'L1', plan, 5)
-    _, _, kal = kette.kalibrierung_erzeugen(szenarien.KATALOG['N01-A4'], m, 5)
-    t0 = tab.auswahl(tab.spalte('phase', int) == 0)
-    zeit = dict(T_park=2.0, T_ramp=2.0, T_ab=1.0, T_eP=4.0, T_aP=10.0, T_verfuegbar=4 * 86400.0, d=2, N_K=21, N_I=0)
-    out = dict(pilot_offen=_h(pilot.pilot_auswerten(t0, kal, HIST, m.system.f, zeit=zeit, seed=5)))
-    gesehen = []
-
-    def attrappe(sid_, stufe_, profil_, n_kal, n_pruef, seed, plan=None, n_min=None, **kw):
-        gesehen.append(dict(sid=sid_, stufe=stufe_, profil=profil_.id, n_kal=n_kal, n_pruef=n_pruef, seed=seed,
-                            plan=kp.plan_dict(plan), n_min=n_min, rausch=[str(r) for r in kw.get('rauschvarianten')],
-                            k_max=kw.get('k_max'), verfahren=str(kw.get('verfahren'))))
-        return dict(gemeinsame_bestaetigung=dict(rate=0.9 if n_min >= 18 else 0.5, mc_se=0.0, zaehler=1, nenner=1),
-                    c_H1=dict(wert=3.7), h2=dict(schluessel='perzentil_0.95'), pruefung=None)
-    monkeypatch.setattr(planung.kalibrierung, 'kalibrieren', attrappe)
-    prot = []
-    hk = planung.haken('N01-A4', 'L1', HIST, 2, 2, 77, n_kandidaten=(16, 18), n0_kandidaten=(20,), plan_basis=plan,
-                       protokoll=prot, max_aufrufe=2)
-    pe = pilot.pilot_auswerten(t0, kal, HIST, m.system.f, zeit=zeit, seed=5, planung=hk)
-    out.update(pilot_planung=_h(pe), haken_aufrufe=_h(gesehen), haken_protokoll=_h(prot))
-    s = pe['suche']
-    assert s['ergebnis'] == 'festgelegt'
-    pl = dict(kette.plan_info(m, s['n_min']), n=s['n'], r=s['reserve_r'], n0=s['n0'], k_max=s['k_max'], N_z=s['N_z'],
-              zeit=zeit, T_lauf=s['T_lauf'], p_hat=s['p_hat'])
-    tb = teil_b.erstellen(t0, kal, pe, HIST, pl, kette.testvorgabe_werkzeug8(), seed_b0=1, B=50)
-    tb['nr1'] = dict(tb['nr1'], code_version=None)
-    out.update(teil_b=_h(tb), satz=_h(pilot.satz_fuer_plan(t0, kal, HIST, m.system.f, 9, 5)))
-    assert out == HISTORISCH_SHA
+# ── historisches Profil gleich main ──────────────────────────────────────────────────────────────────
+def test_historisches_profil_gleich_main():
+    """Unter ENTW-2026-10 und mit der historischen Anordnung (Stand bis PR #23) sind Pilotskript ohne und mit
+    Planungshaken (Kalibrierung als Attrappe: Argumente und Protokoll des Hakens), Teil B und Satz beim k des Plans gleich
+    der mit dem Code von main berechneten Referenz (tests/historisch_referenz.py: Vergleich mit Toleranz, Prüfsummen
+    über Gleitkommadaten und die Codeversion ausgenommen; die letzten Bits hängen von der Rechenumgebung ab)."""
+    import historisch_referenz as hr
+    ref = hr.lies_referenz()['pilot_teil_b']
+    neu = json.loads(json.dumps(hr.pilot_teil_b()))
+    assert neu['ergebnis_suche'] == 'festgelegt' and neu['teil_b']['version'] == 'teil_b-0.3'
+    abw = hr.vergleich(ref, neu)
+    assert not abw, abw[:10]
 
 
 def test_schaetzer_ohne_generator_harness_und_wahrheit():

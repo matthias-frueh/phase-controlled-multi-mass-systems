@@ -125,6 +125,60 @@ def test_nullpunkt_ueber_betriebszeit_und_spruenge_je_abschnitt():
         p0m.Strukturparameter(nullpunkt_zeit='kalender')
 
 
+def test_vorrat_bitgleich_zu_erzeuge_und_pfad_bedingt():
+    """Vorrat des Strukturgenerators (Ablauf „zustand“): die geplanten Läufe zu ihren geplanten Zeitpunkten sind
+    bitgleich zu erzeuge, auch mit Zufallspfad, Sprüngen und Laufdriftstreuung, auf beiden Zeitachsen; ein Versuch zu
+    einer neuen Zeit erhält einen Wert des Pfads bedingt auf die bekannten Werte (nach dem letzten Zeitpunkt
+    Fortsetzung, zwischen zwei Zeitpunkten Brownsche Brücke), derselbe Zeitpunkt denselben Wert; zusätzliche Versuche
+    verlangen ihren Zusatzstrom."""
+    D = 1e-6
+    plan = PLAN.mit(n_bloecke=2, tage=2)
+    laeufe = kp.laufplan(plan, zufall.strom(8, 'r'))
+    st = p0m.aus_rauschmodell(rauschen.RAUSCHFREI).mit(nullpunkt_diffusion_N2_je_s=D, nullpunkt_sprung_sd_N=1e-3,
+                                                       lauf_drift_sd_N=1e-4, nullpunkt_zeit='betriebszeit')
+    vorraete = {}
+    for zeit in ('betriebszeit', 'global'):
+        m = _modell_a4(st.mit(nullpunkt_zeit=zeit), plan)
+        a = p0m.erzeuge(m, laeufe, zufall.strom(8, 'g'), rng_zusatz=zufall.strom(8, 'z'))
+        v = vorraete[zeit] = p0m.Vorrat(m, laeufe, zufall.strom(8, 'g'), rng_zusatz=zufall.strom(8, 'z'))
+        b = v.tabelle(laeufe)
+        assert all(np.array_equal(a.daten[f], b.daten[f], equal_nan=True) for f in a.daten)
+        assert [k for k in a.koepfe] == [k for k in b.koepfe]
+    with pytest.raises(ValueError, match='rng_zusatz'):
+        p0m.Vorrat(m, laeufe, zufall.strom(8, 'g'))
+    # Betriebszeit: ein Lauf der Phase 1 nach dem letzten geplanten Lauf (Position außerhalb des Plans), Fortsetzung
+    v = vorraete['betriebszeit']
+    l = next(x for x in laeufe if x['phase'] == 1)
+    T, W = (np.array(x) for x in v.pfad)
+    pos = max(x['position'] for x in laeufe) + 3
+    t_neu = (pos + 0.5) * plan.T_lauf
+    assert t_neu > T[-1]
+    spec = dict(l, position=pos, position_geplant=l['position'])
+    k1, d1, _ = v.lauf(spec, bezug=l['lauf_id'], rng_pfad=np.random.default_rng(5))
+    k2, d2, _ = v.lauf(spec, bezug=l['lauf_id'], rng_pfad=np.random.default_rng(6))
+    assert d1['N_mittel'][0] == d2['N_mittel'][0] and v.pfad[0][-1] == t_neu       # einmal gezogen, dann fest
+    assert len(v.pfad[0]) == len(T) + 1 and 0 < abs(v.pfad[1][-1] - W[-1]) <= 6 * np.sqrt(D * (t_neu - T[-1]))
+    # Kampagnenuhr: ein Versuch in der Mitte der größten Lücke erhält den Wert der Brücke zwischen den Nachbarn
+    vg = vorraete['global']
+    T, W = (np.array(x) for x in vg.pfad)
+    i = int(np.argmax(np.diff(T))) + 1
+    t_mitte = 0.5 * (T[i - 1] + T[i])
+    vg.lauf(dict(l, t_start=t_mitte - 1.0, t_ende=t_mitte + 1.0, position_geplant=l['position']), bezug=l['lauf_id'],
+            rng_pfad=np.random.default_rng(5))
+    assert len(vg.pfad[0]) == len(T) + 1 and T[i - 1] < vg.pfad[0][i] < T[i]
+    t, w = vg.pfad[0][i], vg.pfad[1][i]
+    mitte = W[i - 1] + (W[i] - W[i - 1]) * (t - T[i - 1]) / (T[i] - T[i - 1])
+    s_bruecke = np.sqrt(D * (t - T[i - 1]) * (T[i] - t) / (T[i] - T[i - 1]))
+    assert 0 < abs(w - mitte) <= 6 * s_bruecke
+    z = []                                                  # Verteilung der Brücke über viele Ziehungen
+    for s in range(2000):
+        vg.pfad = (list(T), list(W))
+        z.append(vg._pfadwert(t, np.random.default_rng(100 + s)))
+    assert abs(np.mean(z) - mitte) < 4 * s_bruecke / np.sqrt(2000) and 0.9 < np.std(z) / s_bruecke < 1.1
+    with pytest.raises(ValueError, match='Zusatzstrom'):
+        v.lauf(dict(spec, lauf_id='extra'), rng=np.random.default_rng(1), rng_pfad=np.random.default_rng(2))
+
+
 def test_zusatzstrom_ist_pflicht():
     st = p0m.Strukturparameter(lauf_drift_sd_N=1e-4)
     m = _modell_a4(st)

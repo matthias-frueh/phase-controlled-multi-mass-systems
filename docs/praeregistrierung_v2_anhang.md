@@ -1193,7 +1193,8 @@ Kampagnen einer Rolle einschließlich endgültig beendeter; A sind die abgeschlo
 Kampagnen mit gültigem ŷ¹ und allen benötigten endlichen Prüfgrößen (Rohresiduen und Varianzen von H1 und H1Z, die
 H2-Intervalle); H1 und H1Z verwenden dieselbe Menge A. c (H1, H1Z), die Prüfrate, b̂ und u(b̂), der Restbias und die
 H2-Überdeckung beziehen sich auf A, unter allen vorgesehenen Rauschvarianten (c aus dem Standardmodell, die übrigen
-als Sensitivität; b̂ über die halbe Spannweite); P(H1 und H2 bestätigt) hat G im Nenner, und die Gründe für G ohne A
+als Sensitivität; b̂ über die halbe Spannweite; ein Intervalltyp von H2 gilt nur, wenn er in jeder Variante gegen ŷ⁰ und
+ŷ¹ die Überdeckungsschwelle erreicht); P(H1 und H2 bestätigt) hat G im Nenner, und die Gründe für G ohne A
 werden getrennt gezählt. Für die normative Kalibrier- und Prüfsimulation ist |A| = 1000 je Rolle die Sollzahl, mit
 Nachziehen bis zu einem technischen Versuchslimit (1,5·|A|) und dokumentiertem |G|; wird sie nicht erreicht, ist die
 Simulation „nicht abgeschlossen“. Ein aus A bestimmtes c gilt nicht allein wegen einer kleineren Zahl von Tests für

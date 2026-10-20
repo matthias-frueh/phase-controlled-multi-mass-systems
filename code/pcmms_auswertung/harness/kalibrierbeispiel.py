@@ -31,7 +31,13 @@ BESTAETIGUNG = 'grosse Kalibrierung starten'
 MODI = ('demonstration', 'gross')
 PFLICHT = ('schema', 'modus', 'szenario', 'stufe', 'profil', 'plan', 'n_min', 'verfahren', 'seed_basis', 'soll_A',
            'prozesse', 'partie')
-DEMO_GRENZEN = dict(soll_A=5, n_bloecke=4, bootstrap_B=200)       # oberhalb davon ist es keine Demonstration
+# Größengrenzen der Demonstration (oberhalb davon ist es keine Demonstration): Kampagnen, Plan (Phase-0-Laufzahlen
+# einschließlich der Referenzläufe, Blöcke, Messtage, Fensterlänge, keine Zusatz-, Prüf- oder Einstellung-2-
+# Konfigurationen) und Replikate; ref_abstand nach unten begrenzt (kleinere Abstände bedeuten mehr Referenzläufe)
+DEMO_GRENZEN = dict(soll_A=5, n_bloecke=4, n0=20, n_pilot=20, ref_min_p0=42, n_zyklen=100, tage=2, bootstrap_B=200,
+                    h2_replikate=200, h3_mc=200, e3_mc=200, eps_ctrl_datensaetze=300)
+DEMO_UNTERGRENZEN = dict(ref_abstand=12)
+DEMO_PLAN_AUS = ('zusatz', 'pruef', 'einstellung2')                 # in der Demonstration nicht erlaubt
 # Vorgabe der Kostenabschätzung je Modus: Demonstration mit reduzierten Replikaten (PR #23: 5–8 s je Kampagne bei
 # B = 1000); große Rechnung mit den normativen Replikatzahlen (B = 10 000): 82 s je Kampagne nach dem Belegpaket der
 # Entscheidungsvorlage (A4: 45,5 Kernstunden für 1000 + 1000 Kampagnen; Softwaredoku §5: 78 s bei n = 20)
@@ -65,7 +71,10 @@ def pruefen(k):
     red = dict(k.get('reduktion') or {})
     if red:
         prof = prof.mit_reduktion(**red)
-    plan = kp.plan_aus_dict(dict(k['plan'], p0_anordnung=k['plan'].get('p0_anordnung', 'p07')))
+    try:
+        plan = kp.plan_aus_dict(dict(k['plan'], p0_anordnung=k['plan'].get('p0_anordnung', 'p07')))
+    except (TypeError, ValueError) as e:
+        raise BeispielFehler(f'Konfiguration: Plan ungültig ({e})') from None
     if k['verfahren'] not in ('zustand', 'statisch'):
         raise BeispielFehler('Konfiguration: verfahren „zustand“ (ablauf-4) oder „statisch“')
     v = vf.ZUSTAND if k['verfahren'] == 'zustand' else vf.STATISCH
@@ -73,14 +82,19 @@ def pruefen(k):
         raise BeispielFehler('Konfiguration: 1 bis 4 Prozesse (Arbeitsvorgabe: höchstens vier, je ein BLAS-Thread)')
     if int(k['partie']) < 1 or int(k['soll_A']) < 1:
         raise BeispielFehler('Konfiguration: partie ≥ 1 und soll_A ≥ 1')
+    if int(k['n_min']) < 1 or int(k['n_min']) > plan.n_bloecke:
+        raise BeispielFehler(f'Konfiguration: 1 ≤ n_min ≤ n_bloecke ({k["n_min"]}, {plan.n_bloecke})')
     if k['modus'] == 'demonstration':
-        zu_gross = [f'soll_A = {k["soll_A"]}' if int(k['soll_A']) > DEMO_GRENZEN['soll_A'] else None,
-                    f'n_bloecke = {plan.n_bloecke}' if plan.n_bloecke > DEMO_GRENZEN['n_bloecke'] else None,
-                    f'bootstrap_B = {prof.zahl("bootstrap_B")}' if prof.zahl('bootstrap_B') >
-                    DEMO_GRENZEN['bootstrap_B'] else None]
-        zu_gross = [x for x in zu_gross if x]
+        werte = dict(soll_A=int(k['soll_A']), **{x: getattr(plan, x) for x in ('n_bloecke', 'n0', 'n_pilot',
+                                                                                 'ref_min_p0', 'n_zyklen', 'tage')},
+                     **{x: prof.zahl(x) for x in ('bootstrap_B', 'h2_replikate', 'h3_mc', 'e3_mc',
+                                                  'eps_ctrl_datensaetze')})
+        zu_gross = [f'{x} = {v}' for x, v in werte.items() if not 1 <= int(v) <= DEMO_GRENZEN[x]]
+        zu_gross += [f'{x} = {getattr(plan, x)}' for x, u in DEMO_UNTERGRENZEN.items() if getattr(plan, x) < u]
+        zu_gross += [f'{x} = {getattr(plan, x)!r}' for x in DEMO_PLAN_AUS if getattr(plan, x)]
         if zu_gross:
-            raise BeispielFehler(f'Demonstration zu groß ({", ".join(zu_gross)}; Grenzen {DEMO_GRENZEN})')
+            raise BeispielFehler(f'Demonstration zu groß ({", ".join(zu_gross)}; Grenzen {DEMO_GRENZEN}, '
+                                 f'mindestens {DEMO_UNTERGRENZEN}, ohne {", ".join(DEMO_PLAN_AUS)})')
     else:
         if int(k['soll_A']) != regeln.NORMATIVE_ZAHLEN['kampagnen_kalibrierung'] or prof.reduziert:
             raise BeispielFehler('modus „gross“: soll_A = 1000 und keine Reduktion (sonst ist es keine normative '

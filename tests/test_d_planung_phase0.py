@@ -73,7 +73,8 @@ def test_haken_phase0_modellquelle_und_obere_grenzen(a4, monkeypatch):
     def attrappe(sid_, stufe_, profil_, n_kal, n_pruef, seed, plan=None, n_min=None, **kw):
         gesehen.append(dict(sid=sid_, stufe=stufe_, plan=plan, n_min=n_min, **kw))
         return dict(gemeinsame_bestaetigung=dict(rate=0.9, mc_se=0.0, zaehler=1, nenner=1), c_H1=dict(wert=3.7),
-                    h2=dict(schluessel='perzentil_0.95'), pruefung=None)
+                    h2=dict(schluessel='perzentil_0.95'), pruefung=None,
+                    reserve_ziel=dict(geprueft=True, erfuellt=True, rate=1.0, zaehler=1, nenner=1))
 
     def verboten(*a, **kw):
         raise AssertionError('Szenariozugriff im Phase-0-Haken')
@@ -97,10 +98,10 @@ def test_haken_phase0_modellquelle_und_obere_grenzen(a4, monkeypatch):
     assert og['boden_mittel']['faktor'] == pytest.approx(lgm.kappa(e['laufgroessen']['boden']['nu_m']))
     assert 'keine gemeinsame 80-%-Garantie' in og['lesart'] and out['szenario_kennzeichnung'] is None
     assert 'Phase-0-Modell' in out['quelle']
-    # Reservebedingung 0,95 (planung.reserve_ziel) mit dem statischen Laufplan der Modellquelle nicht prüfbar: kein
-    # Kandidat festgelegt, der Kandidat nach P allein nur berichtet
-    assert out['n_min'] is None and out['kandidat_nur_P']['n_min'] == 18 and 'nicht prüfbar' in out['grund']
-    assert out['kandidaten'][0]['P_erfuellt'] and not out['kandidaten'][0]['erfuellt']
+    # Kampagnen aus der Modellquelle laufen mit dem Ablauf (ablauf-4); die Reservebedingung ist prüfbar
+    from pcmms_auswertung import verfahren as vf
+    assert g['verfahren'] == vf.ZUSTAND and out['n_min'] == 18 and out['reserve_pruefbar']
+    assert out['reserve_r'] == out['kandidaten'][0]['reserve_r'] and out['kandidaten'][0]['reserve_ziel']['geprueft']
     pilot.pruefe_ausgabe(dict(planung=out))
     # ohne Laufgrößen im Aufruf: aus Tabelle, Gültigkeit und k berechnet (gleiches Ergebnis)
     e2 = {x: v for x, v in e.items() if x != 'laufgroessen'}
@@ -155,9 +156,28 @@ def test_kampagne_aus_modellquelle_teil_b_und_wahrheit(a4):
     assert w['klasse'] == 'R0' and 'keine Szenario-Wahrheit' in w['quelle']
     b = kampagnen.kurzbefund(r['ergebnis'], tb, 11)
     assert b['seed'] == 11 and b['teil_b']['bindung'] == 'plan'
-    with pytest.raises(ValueError, match='statische Laufplan'):
-        from pcmms_auswertung import verfahren as vf
-        p0r.kampagne_quelle(q, AKTUELL, PLAN, 11, verfahren=vf.ZUSTAND)
+
+
+def test_kampagne_aus_modellquelle_mit_ablauf(a4):
+    """Phase 1 als Ablauf mit Kampagnen aus der Modellquelle (MessungQuelle, Vorrat des Strukturgenerators): ohne
+    Ablaufoptionen dieselben Daten wie der statische Laufplan; mit ablauf-4 Wiederholungen, Halte und simulierte
+    Wiederaufnahme, Stufe 2 mit Offline-Gegenprobe, Ablaufbericht mit gültigen Läufen je Schnittpunkt (Reservebedingung
+    prüfbar)."""
+    from pcmms_auswertung import ablauf, verfahren as vf
+    m, t0, kal = a4
+    q, lg = planung.quelle_aus_aufruf(_aufruf(m, t0, kal), 'oben80', profil=AKTUELL)
+    plan = kp.Plan(n0=20, n_pilot=20, n_bloecke=4)
+    st = p0r.kampagne_quelle(q, AKTUELL, plan, 11, n_min=2)
+    aus = p0r.kampagne_quelle(q, AKTUELL, plan, 11, n_min=2, verfahren=vf.Verfahren('plan', 'zustand', ablauf.AUS))
+    assert all(np.array_equal(st['tabelle'].daten[f], aus['tabelle'].daten[f], equal_nan=True)
+               for f in st['tabelle'].daten)
+    z = p0r.kampagne_quelle(q, AKTUELL, plan, 11, n_min=2, verfahren=vf.ZUSTAND)
+    ab = z['ablauf']
+    assert ab['status'] == 'abgeschlossen' and [h['regel'] for h in ab['halte']] == ['S1', 'S1']
+    assert ab['harness_wiederaufnahme']['wiederaufnahmen'] == 2 and ab['laufzahl']['zusaetzlich'] > 0
+    assert min(ab['gueltig_je_schnittpunkt'].values()) >= 2 and z['ergebnis']['H1']['ausgang'] == 'bestätigt'
+    b = kampagnen.kurzbefund(z['ergebnis'], z['teil_b'], 11, z['ablauf'])
+    assert b['ablauf']['gueltig_je_schnittpunkt'] == ab['gueltig_je_schnittpunkt']
 
 
 def test_c_nach_regel_standardmodell_und_maximum():

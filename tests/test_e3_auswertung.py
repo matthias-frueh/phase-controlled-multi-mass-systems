@@ -6,6 +6,7 @@ Gesamturteil, gespeicherte Felder für die Modellprüfung, historisches Profil b
 Die synthetischen Fälle haben bekannte Zeiger (T aus der Statik, Modulzeiger mit vorgegebenem Phasenfehler) und
 Gaußrauschen; geprüft wird die Logik, nicht eine Rate."""
 import dataclasses
+import json
 
 import numpy as np
 import pytest
@@ -13,7 +14,7 @@ from scipy import stats
 
 from pcmms_auswertung import auswertung, e3_grenzen as eg, formate, kontrollen, konventionen as kv, regeln, zufall
 from pcmms_auswertung.generator import ebene_h, kampagne, szenarien
-from pcmms_auswertung.harness import kampagnen, kette, kriterien, pruefsatz
+from pcmms_auswertung.harness import kampagnen, kette, kriterien
 
 AF11, ENTW11, ENTW10 = regeln.profil('AF-2026-11'), regeln.profil('ENTW-2026-11'), regeln.profil('ENTW-2026-10')
 PUNKTE = [f'S{p:g}' for p in kv.SCHNITT_PHI2]
@@ -299,13 +300,9 @@ def test_felder_fuer_die_modellpruefung_gespeichert():
 
 
 # ── Historischer Modus und Kette ───────────────────────────────────────────────────────────────────────
-# E3-Ausgabe der Kampagne N01-A4/L1, Seed 7, Plan (n₀ 20, Piloten 20, 24 Blöcke), B = 200, mit dem Code vor dieser
-# Änderung (Stand ad8fe2a) berechnet: Prüfsumme exakt und nach Rundung auf 12 Stellen wie im Software-Prüfsatz.
-HISTORISCH_E3 = {
-    'ENTW-2026-10': ('f35396c8057ff298c43251bf3d7877f03cfcff1b74ffbb7c8a13ade0e19cdd29',
-                     '0a7bd36c773c729d84ea77dd4d65e9fe729696cc047f4603434d40e4fbbe8aee'),
-    'AF-2026-10': ('7d38fe107d3c253998d3fb138ecb2bbc267484bd81d612bf13af6021bd5fc6c6',
-                   'e93260a05ae7938856942b4bd9ca7b71eab3367574879aeeef886eaa2d78351c')}
+# E3-Ausgabe der Kampagne N01-A4/L1, Seed 7, Plan (n₀ 20, Piloten 20, 24 Blöcke, historische Anordnung), B = 200: Referenz
+# mit dem Code von main berechnet (tests/historisch_referenz.py, Vergleich mit Toleranz).
+HISTORISCHE_PROFILE = ('AF-2026-10', 'ENTW-2026-10')
 PLAN = kampagne.Plan(n0=20, n_pilot=20, n_bloecke=24)
 
 
@@ -313,13 +310,17 @@ def _red(p):
     return p.mit_reduktion(bootstrap_B=200, eps_ctrl_datensaetze=300, h3_mc=1000)
 
 
-@pytest.mark.parametrize('name', sorted(HISTORISCH_E3))
-def test_historisches_profil_bitgleiche_e3_ausgabe(name):
-    """Unter den historischen Profilen ist die E3-Ausgabe einer vorhandenen kleinen Kampagne bitgleich zum Stand vor
-    dieser Änderung (gerundete Prüfsumme; die exakte gilt auf derselben Rechenumgebung)."""
-    r = kette.kette('N01-A4', 'L1', _red(regeln.profil(name)), plan=PLAN, seed=7, n_min=18, mit_wahrheit=False)
+@pytest.mark.parametrize('name', HISTORISCHE_PROFILE)
+def test_historisches_profil_e3_ausgabe_gleich_main(name):
+    """Unter den historischen Profilen ist die E3-Ausgabe einer kleinen Kampagne mit der historischen Anordnung gleich
+    der mit dem Code von main berechneten Referenz (Vergleich mit Toleranz, nicht über Prüfsummen, die an den letzten
+    Bits der Rechenumgebung hängen)."""
+    import historisch_referenz as hr
+    plan = PLAN.mit(p0_anordnung='historisch')
+    r = kette.kette('N01-A4', 'L1', _red(regeln.profil(name)), plan=plan, seed=7, n_min=18, mit_wahrheit=False)
     e = r['ergebnis']['E3']
-    assert pruefsatz.hash_objekt(e) == HISTORISCH_E3[name][1]
+    abw = hr.vergleich(hr.lies_referenz()['e3'][name], json.loads(json.dumps(hr.jsonbar(e))))
+    assert not abw, abw[:10]
     assert 'regelstand' not in e and 'pruefungen' not in e
     f = _fall(punkte=['S118', 'S120'], B=60)                  # punkte, kriterien: im historischen Modus ohne Wirkung
     a = _e3(f, profil=ENTW10)

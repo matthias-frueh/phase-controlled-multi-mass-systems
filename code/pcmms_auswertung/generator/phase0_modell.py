@@ -587,6 +587,116 @@ def erzeuge(modell, laeufe, rng, rausch=None, rng_zusatz=None):
     return tab
 
 
+class Vorrat:
+    """Spiegel von ebene_h.Vorrat für das Strukturmodell (Ablauf „zustand“ mit Kampagnen aus einer Modellquelle):
+    Ziehungen aller geplanten Läufe wie erzeuge (gleiche Ströme in gleicher Reihenfolge: Zufallspfad und Sprünge des
+    Nullpunkts, dann die Gruppen); der ursprüngliche Versuch eines geplanten Laufs erhält dessen Ziehung, gebildet zu
+    seinem tatsächlichen Zeitpunkt (Betriebszeit (Position + ½)·T_Lauf bzw. Kampagnenuhr bei nullpunkt_zeit 'global').
+    Ohne Verschiebung entsteht genau die Tabelle von erzeuge. Zusätzliche Versuche ziehen aus eigenen Strömen je
+    Versuch (Hauptstrom und Zusatzstrom der Erweiterungen). Der Zufallspfad des Nullpunkts ist ein einziger Pfad: Ein
+    Versuch zu einer neuen Zeit erhält seinen Wert bedingt auf alle schon bekannten Werte (Brownsche Brücke zwischen
+    den Nachbarn, Fortsetzung am Rand) aus dem Pfadstrom des Versuchs; ein Sprung je Abschnitt (Phase, Messtag) gilt
+    für alle Versuche des Abschnitts, ein neuer Abschnitt setzt die Folge fort."""
+
+    def __init__(self, modell, laeufe, rng, rausch=None, rng_zusatz=None):
+        self.modell = modell
+        self.st = st = parameter(modell.rausch if rausch is None else rausch)
+        if st.zusatzstrom_noetig() and rng_zusatz is None:
+            raise ValueError('Strukturmodell: Erweiterungen mit eigener Ziehung (Rest, Zufallspfad, Laufdrift, '
+                             'Fünftel) verlangen rng_zusatz')
+        self.T_lauf = float(modell.plan.T_lauf)
+        td = np.array([self._zeit(l) for l in laeufe])
+        D = st.nullpunkt_diffusion_N2_je_s
+        W = nullpunktpfad(D, td, rng_zusatz) if D > 0 else None
+        self.pfad = None if W is None else (list(td[np.argsort(td, kind='stable')]),
+                                            list(W[np.argsort(td, kind='stable')]))
+        self.sprung = {}
+        if st.nullpunkt_sprung_sd_N > 0:
+            S = nullpunktspruenge(st.nullpunkt_sprung_sd_N, laeufe, rng_zusatz)
+            self.sprung = {(l['phase'], l['messtag']): float(x) for l, x in zip(laeufe, S)}
+        self.ort = {}
+        for idx in ebene_h._gruppen(laeufe):
+            z = _ziehen(modell, [laeufe[i] for i in idx], rng, st, rng_zusatz)
+            for jj, i in enumerate(idx):
+                self.ort[laeufe[i]['lauf_id']] = (z, jj, float(td[i]), None if W is None else float(W[i]))
+        self.ereignisse = {}
+        for eff in modell.effekte_art('ereignis'):
+            for p in modell.ereignis_positionen(eff, laeufe):
+                self.ereignisse.setdefault(p, []).append(eff)
+
+    def _zeit(self, spec):
+        if self.st.nullpunkt_zeit == 'global':
+            return 0.5 * (spec['t_start'] + spec['t_ende'])
+        return (float(spec['position']) + 0.5) * self.T_lauf
+
+    def _pfadwert(self, t, rng):
+        """Wert des Zufallspfads zur Zeit t, bedingt auf die bekannten Werte; neue Werte werden Teil des Pfads."""
+        T, W = self.pfad
+        i = int(np.searchsorted(T, t))
+        if i < len(T) and T[i] == t:
+            return W[i]
+        D = self.st.nullpunkt_diffusion_N2_je_s
+        if rng is None:
+            raise ValueError('Strukturmodell: neuer Zeitpunkt des Nullpunktpfads verlangt einen Pfadstrom')
+        if i == 0:
+            w = W[0] + np.sqrt(D * (T[0] - t)) * rng.standard_normal()
+        elif i == len(T):
+            w = W[-1] + np.sqrt(D * (t - T[-1])) * rng.standard_normal()
+        else:
+            a, b = T[i - 1], T[i]
+            m = W[i - 1] + (W[i] - W[i - 1]) * (t - a) / (b - a)
+            w = m + np.sqrt(D * (t - a) * (b - t) / (b - a)) * rng.standard_normal()
+        T.insert(i, t)
+        W.insert(i, float(w))
+        return float(w)
+
+    def _sprungwert(self, abschnitt, rng):
+        if not self.sprung:
+            return 0.0
+        if abschnitt not in self.sprung:                    # Abschnitt außerhalb des Plans (Verschiebung)
+            vorher = [k for k in sorted(self.sprung) if k < abschnitt]
+            basis = self.sprung[vorher[-1]] if vorher else 0.0
+            self.sprung[abschnitt] = basis + self.st.nullpunkt_sprung_sd_N * rng.standard_normal()
+        return self.sprung[abschnitt]
+
+    def lauf(self, spec, bezug=None, rng=None, rng_zusatz=None, rng_pfad=None, ereignisse=(), messtag=None):
+        """Laufzusammenfassung (Kopf, Datenzeilen) eines Versuchs mit spec (Kopfangaben einschließlich Position,
+        t_start, t_ende). bezug: lauf_id des geplanten Laufs, dessen Ziehung der Versuch verwendet; sonst rng und
+        rng_zusatz: eigene Ströme des zusätzlichen Versuchs. rng_pfad: Strom für einen neuen Zeitpunkt des
+        Nullpunktpfads bzw. einen neuen Abschnitt; messtag: tatsächlicher Messtag (Vorgabe spec['messtag'])."""
+        t = self._zeit(spec)
+        if bezug is not None:
+            z, zeile, t_plan, w_plan = self.ort[bezug]
+        else:
+            if self.st.zusatzstrom_noetig() and rng_zusatz is None:
+                raise ValueError('Strukturmodell: zusätzlicher Versuch ohne Zusatzstrom')
+            z, zeile, t_plan, w_plan = _ziehen(self.modell, [spec], rng, self.st, rng_zusatz), 0, None, None
+        W = None
+        if self.pfad is not None:
+            W = w_plan if (t_plan is not None and t == t_plan) else self._pfadwert(t, rng_pfad)
+        if self.sprung:
+            W = (0.0 if W is None else W) + self._sprungwert((spec['phase'], spec['messtag'] if messtag is None
+                                                               else messtag), rng_pfad)
+        daten = zf.leere_daten(self.modell.k_voll, 1)
+        _bilden(self.modell, z, [zeile], [t], daten, [0], None if W is None else [W])
+        k = ebene_h.kopf(self.modell, spec, z, zeile)
+        effs = list(self.ereignisse.get(spec.get('position_geplant'), ())) if bezug is not None else []
+        for eff in effs + list(ereignisse):
+            ebene_h.ereignis_anwenden(self.modell, eff, k, daten, 0)
+        return k, daten, (z, zeile)
+
+    def tabelle(self, laeufe):
+        """Laufzusammenfassungen geplanter Läufe zu ihren geplanten Zeitpunkten (gleich den Zeilen von erzeuge)."""
+        koepfe, zeilen = [], []
+        for l in laeufe:
+            k, d, _ = self.lauf(dict(l, position_geplant=l['position']), bezug=l['lauf_id'])
+            koepfe.append(k)
+            zeilen.append(d)
+        tab = zf.LaufTabelle(koepfe, {f: np.concatenate([d[f] for d in zeilen]) for f in zeilen[0]})
+        tab.meta['generator'] = dict(version=VERSION, parameter=self.st.name, erweiterungen=self.st.erweiterungen())
+        return tab
+
+
 # ── Parameter aus Phase 0 ───────────────────────────────────────────────────────────────────────────
 GRENZEN = ('punkt', 'oben80')
 # Wert der Regel p0.strukturmodell, den aus_laufgroessen umsetzt (regeln._NEU_11)

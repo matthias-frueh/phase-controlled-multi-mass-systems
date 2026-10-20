@@ -166,14 +166,14 @@ def haken(sid, stufe, profil, n_kal, n_pruef, seed_basis, n_kandidaten, n0_kandi
     verfahren: Verfahren der simulierten Kampagnen (Vorgabe verfahren.STANDARD); jede simulierte Kampagne bindet ihre
     Phase-0-Größen an das k des Aufrufs. rauschquelle: siehe rauschquelle_regel; mit 'phase0_modell' sind sid und
     stufe nur Kennzeichnung (dürfen None sein). Im Regelstand 2026-11 (Regel planung.reserve_ziel) rechnet der Haken
-    mit dem Szenario standardmäßig mit dem Ablauf (verfahren.ZUSTAND, ablauf-4), damit die Reservebedingung 0,95
-    prüfbar ist; Kampagnen aus der Phase-0-Modellquelle haben nur den statischen Laufplan, die Bedingung ist dort
-    nicht prüfbar und kein Kandidat wird festgelegt (Grund im Ergebnis, Kandidat nach P allein nur berichtet)."""
+    standardmäßig mit dem Ablauf (verfahren.ZUSTAND, ablauf-4), mit dem Szenario wie mit der Phase-0-Modellquelle
+    (MessungQuelle), damit die Reservebedingung 0,95 prüfbar ist. Mit einem ausdrücklich statischen Verfahren ist sie
+    nicht prüfbar; dann wird kein Kandidat festgelegt (Grund im Ergebnis, Kandidat nach P allein nur berichtet)."""
     ziel = profil.wert('planung.reserve_ziel') if ('planung.reserve_ziel' in profil.regeln
                                                     and profil.hat('planung.reserve_ziel')) else None
     quelle_art = rauschquelle_regel(profil, rauschquelle)
     phase0 = quelle_art == 'phase0_modell'
-    if verfahren is None and ziel is not None and not phase0:
+    if verfahren is None and ziel is not None:
         verfahren = vf.ZUSTAND
     verfahren = vf.oder_standard(verfahren)
     zaehler = [0]
