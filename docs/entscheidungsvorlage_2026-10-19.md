@@ -296,6 +296,8 @@ Aufwand (Einschätzung): 1–2 Personentage, keine Kampagnenrechnung.
 
 ### 1.5 Fragen an den Autor
 
+> **Stand 20.10.2026:** Die Fragen F-a1 bis F-a6 sind für den Umfang der Umsetzung durch den Auftrag vom 20.10.2026 als Arbeitsvorgaben entschieden (Abschnitt 9). Sie bleiben hier als Begründung der Auswahl stehen; offen bleiben nur die dort ausdrücklich nicht mitentschiedenen Punkte.
+
 - F-a1: Reihenfolge A1 (Referenzfolge zuerst, S3-Wiederholung danach) und Z1?
 - F-a2: Halt: H1 (ausstehende Folgeläufe entfallen; G1-Fall ohne X′ wird nach dem W-Satz vollständig gemessen)?
 - F-a3: Unvollständige Klammer durch Halt: K1 (S1 nicht prüfbar, Platz fehlt) oder K2 (einmalige frische Klammer)?
@@ -435,6 +437,8 @@ seit `pilot-0.3`.
 - **R3:** Trendempfindlichkeit je Variante für registrierte Trendklassen, nachträglich auf R1/R2-Daten; Minuten.
 
 ### 2.6 Fragen an den Autor
+
+> **Stand 20.10.2026:** Die Fragen F-b1 bis F-b6 sind für den Umfang der Umsetzung durch den Auftrag vom 20.10.2026 als Arbeitsvorgaben entschieden (Abschnitt 9). Sie bleiben hier als Begründung der Auswahl stehen; offen bleiben nur die dort ausdrücklich nicht mitentschiedenen Punkte.
 
 - F-b1: Muss G4 an steilen Punkten Amplitudentrends unter etwa 1 % erkennen (dann D), oder genügt die Erkennung an
   flachen Punkten (dann B+)?
@@ -667,6 +671,8 @@ die Halt- und Wiederaufnahmeraten sind mit R1 (Abschnitt 3.5) gemessen, bevor We
 
 ### 3.6 Fragen an den Autor
 
+> **Stand 20.10.2026:** Die Fragen F-b7 bis F-b13 sind für den Umfang der Umsetzung durch den Auftrag vom 20.10.2026 als Arbeitsvorgaben entschieden (Abschnitt 9). Sie bleiben hier als Begründung der Auswahl stehen; offen bleiben nur die dort ausdrücklich nicht mitentschiedenen Punkte.
+
 - F-b7: Zählung (ii) als maßgeblich, mit der 0,8-Bedingung über alle simulierten Kampagnen (Nenner G) und den
   Schätzungen über die Auswertungsmenge A?
 - F-b8: Parameter der Wiederaufnahme: höchstens W = 3 je Kampagne (nur zusammen mit dem neuen Bezug nach einem
@@ -808,6 +814,8 @@ Variante von E3 ab.
   Kalibrierkampagnen mit).
 
 ### 4.5 Fragen an den Autor
+
+> **Stand 20.10.2026:** Die Fragen F-c1 bis F-c5 sind für den Umfang der Umsetzung durch den Auftrag vom 20.10.2026 als Arbeitsvorgaben entschieden (Abschnitt 9). Sie bleiben hier als Begründung der Auswahl stehen; offen bleiben nur die dort ausdrücklich nicht mitentschiedenen Punkte.
 
 - F-c1: E3b jetzt mit gültiger Grenze (B) oder vorerst beschreibend (A), in beiden Fällen m = 43 fest?
 - F-c2: Rückfall je Prüfgröße; „E3 unauffällig“ nur bei beiden dreiwertigen Prüfgrößen?
@@ -955,6 +963,8 @@ den Prüfstand als Orakel, (5) Rechnungen, (6) Abgleich mit b (s_i aus demselben
   gelesen PR #23) sind davon getrennt und AP-21.
 
 ### 5.6 Fragen an den Autor
+
+> **Stand 20.10.2026:** Die Fragen F-d1 bis F-d8 sind für den Umfang der Umsetzung durch den Auftrag vom 20.10.2026 als Arbeitsvorgaben entschieden (Abschnitt 9). Sie bleiben hier als Begründung der Auswahl stehen; offen bleiben nur die dort ausdrücklich nicht mitentschiedenen Punkte.
 
 - F-d1: Lesart von „Streuungen an ihrer oberen 80-%-Vertrauensgrenze“ für ein mehrteiliges Modell: ein Faktor für
   alles (heute), jede Komponente mit eigenem ν (empfohlen, mit einem gemeinsamen Faktor für den ⟨N⟩-Boden aller
