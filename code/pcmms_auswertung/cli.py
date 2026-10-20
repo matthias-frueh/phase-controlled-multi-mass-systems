@@ -13,7 +13,8 @@
                               gezielte Neuläufe K12/K19/E3 mit Checkpoints und Alt-Neu-Vergleich, Diagnose E3b/G4
   kette                       Generator → AP-11 → (Stufe 1) → Teil B → AP-12 → Bewertung aus einer frischen Struktur
 
-Profil: --profil ID (AF-2026-10 oder ENTW-2026-10) mit --red name=wert,… (verringerte Replikat- bzw.
+Profil: --profil ID (aktuell AF-2026-11 oder ENTW-2026-11; historisch AF-2026-10 oder ENTW-2026-10) mit
+--red name=wert,… (verringerte Replikat- bzw.
 Kampagnenzahlen; die Reduktion steht in der Profilkennung und in jedem Ergebnis) oder --profil-datei PFAD.
 Beispiele und Laufzeiten: docs/ap11_ap12_ap13_software.md.
 """
@@ -104,13 +105,15 @@ def _beispiel(ap, argv):
 
 @befehl('regeln', 'Regelprofil ausgeben (JSON) oder Regelmatrix drucken')
 def _regeln(ap, argv):
-    ap.add_argument('--profil', default='ENTW-2026-10', choices=sorted(regeln.PROFILE))
+    ap.add_argument('--profil', default=regeln.STANDARD, choices=sorted(regeln.PROFILE))
     ap.add_argument('--ausgabe', help='Pfad ohne Endung für <pfad>.json')
     ap.add_argument('--matrix', action='store_true', help='Regelmatrix (Markdown) auf die Standardausgabe')
+    ap.add_argument('--stand', default='2026-11', choices=('2026-11', '2026-10'),
+                    help='Regelstand der Matrix (2026-10: historisch)')
     a = ap.parse_args(argv)
     p = regeln.profil(a.profil)
     if a.matrix:
-        sys.stdout.write(regeln.matrix_markdown())
+        sys.stdout.write(regeln.matrix_markdown(a.stand))
     if a.ausgabe:
         h = regeln.schreibe_profil(a.ausgabe, p)
         print(f'{a.ausgabe}.json: Profil {p.id}, SHA-256 Inhalt {p.sha256()[:16]}…, Datei {h["json"][:16]}…')

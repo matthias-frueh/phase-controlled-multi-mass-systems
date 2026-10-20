@@ -117,7 +117,7 @@ def pruefe_gemeinsam(a):
     prof = regeln.profil(g['profil']).mit_reduktion(**g['profil_reduktion'])
     if prof.sha256() != g['profil_sha256']:
         raise AuftragFehler(f'Profil-Hash {prof.sha256()} ≠ {g["profil_sha256"]} (Altlauf)')
-    return prof, kp.Plan(**g['plan'])
+    return prof, kp.plan_aus_dict(g['plan'])
 
 
 def werkzeug8_laden(a, name):

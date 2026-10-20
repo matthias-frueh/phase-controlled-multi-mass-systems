@@ -153,9 +153,8 @@ class MessungZ(MessungH):
 def ablauf_kennung(m, sid, stufe, seed, verfahren, sw, s3, profil, ebene):
     """Herkunft eines Ablaufs (gehört zum Ablaufstand): Verfahren mit Ablaufversion und Optionen, Szenario, Seed,
     Modell, Plan, die Entscheidungsschwellen aus Teil B (gerundet, ablauf.schwellen_kennung) und das Profil."""
-    from dataclasses import asdict
     return dict(verfahren=verfahren.kennung(), szenario=sid, stufe=stufe, seed=int(seed), ebene=ebene,
-                modell_sha256=formate.sha256_json(szenarien.beschreibung(m)), plan=asdict(m.plan),
+                modell_sha256=formate.sha256_json(szenarien.beschreibung(m)), plan=kampagne.plan_dict(m.plan),
                 schwellen_sha256=ablauf.schwellen_kennung(sw, s3), profil_sha256=profil.sha256())
 
 
@@ -198,9 +197,11 @@ def kampagne_ablauf(sid, stufe, plan, seed, profil, werkzeug8=None, n_min=None, 
     geplant = [l for l in laeufe if l['phase'] == 1]
     ak = ablauf_kennung(m, sid, stufe, seed, v, sw, s3, profil, ebene)
     if zustand is None:
-        a = ablauf.Ablauf(geplant, messung, sw, s3, rng_r, v.optionen, m.plan.T_lauf, m.plan.tag_pause, kennung=ak)
+        a = ablauf.Ablauf(geplant, messung, sw, s3, rng_r, v.optionen, m.plan.T_lauf, m.plan.tag_pause, kennung=ak,
+                          fassung=v.fassung)
     else:
-        a = ablauf.Ablauf.aus_zustand(zustand, geplant, messung, sw, s3, rng_r, m.plan.T_lauf, m.plan.tag_pause, ak)
+        a = ablauf.Ablauf.aus_zustand(zustand, geplant, messung, sw, s3, rng_r, m.plan.T_lauf, m.plan.tag_pause, ak,
+                                      fassung=v.fassung)
     if ereignis is not None:
         a.fortsetzen(ereignis)
     else:

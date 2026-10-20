@@ -41,13 +41,13 @@ def hash_objekt(obj):
 
 def katalog_hash():
     """Katalogtabelle und vollständige Modellbeschreibung je Szenario (Stufe L1, Plan des Prüfsatzes)."""
-    plan = kp.Plan(**PRUEFPLAN)
+    plan = kp.plan_aus_dict(PRUEFPLAN)
     besch = {sid: szenarien.beschreibung(szenarien.modell(sid, 'L1', plan=plan)) for sid in szenarien.KATALOG}
     return formate.sha256_json(dict(tabelle=szenarien.katalog_tabelle(), modelle=besch))
 
 
 def testdaten_hash(sid, stufe, seed):
-    plan = kp.Plan(**PRUEFPLAN)
+    plan = kp.plan_aus_dict(PRUEFPLAN)
     m, laeufe, tab = kette.kampagne_erzeugen(sid, stufe, plan, seed)
     sz = szenarien.KATALOG[sid]
     kw = {a: b for a, b in sz.kalibrierung}

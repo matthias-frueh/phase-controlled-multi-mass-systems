@@ -33,14 +33,17 @@ def _profil():
     return regeln.profil(PROFIL[0]).mit_reduktion(**PROFIL[1])
 
 
+FASSUNG = 'ablauf-3'      # historischer Prüfsatz (PR #23): Fassung ablauf-3, Plan ohne p0_anordnung (historisch)
+
+
 def _verfahren(art):
-    return vf.ZUSTAND if art == 'zustand' else vf.Verfahren('plan', 'zustand', ablauf.AUS)
+    return vf.Verfahren('plan', 'zustand', ablauf.Ablaufoptionen() if art == 'zustand' else ablauf.AUS, FASSUNG)
 
 
 def fall(sid, stufe, seed, art):
     """Eine Prüfkampagne: Ablauf, Tabelle, Bericht und die Prüfsummen."""
     prof = _profil()
-    r = kette.kampagne_ablauf(sid, stufe, kp.Plan(**PLAN), seed, prof, n_min=N_MIN, verfahren=_verfahren(art))
+    r = kette.kampagne_ablauf(sid, stufe, kp.plan_aus_dict(PLAN), seed, prof, n_min=N_MIN, verfahren=_verfahren(art))
     a = r['ablauf']
     t1 = a.tabelle()
     b = a.bericht()
@@ -71,7 +74,7 @@ def _gegenprobe(sid, stufe, seed, art, r):
     except formate.FormatFehler as e:
         out.append(f'Stufe 2: {e}')
     if art == 'aus':
-        m, laeufe, alt = kette.kampagne_erzeugen(sid, stufe, kp.Plan(**PLAN), seed)
+        m, laeufe, alt = kette.kampagne_erzeugen(sid, stufe, kp.plan_aus_dict(PLAN), seed)
         if not all(np.array_equal(alt.daten[f], tab.daten[f], equal_nan=True) for f in alt.daten):
             out.append('ohne Ablaufoptionen: Daten ≠ Laufplan des alten Ablaufs')
         if formate.sha256_json([{k: v for k, v in x.items() if k != 'versuch'} for x in tab.koepfe]) != \
@@ -89,7 +92,7 @@ def erstellen():
         gegen[key] = _gegenprobe(sid, st, sd, art, r)
     out = dict(beschreibung='Prüfsatz des zustandsbehafteten Phase-1-Ablaufs (getrennt vom Software-Prüfsatz)',
                umgebung=dict(python=platform.python_version(), numpy=np.__version__, scipy=scipy.__version__),
-               ablauf_version=ablauf.VERSION, verfahren=vf.ZUSTAND.kennung(), plan=PLAN, n_min=N_MIN,
+               ablauf_version=FASSUNG, verfahren=_verfahren('zustand').kennung(), plan=PLAN, n_min=N_MIN,
                profil=dict(id=PROFIL[0], reduktion=PROFIL[1], sha256=_profil().sha256()),
                rundung_stellen=pruefsatz.STELLEN, faelle=faelle, gegenprobe=gegen)
     out['sha256_gesamt'] = formate.sha256_json({k: v for k, v in out.items() if k != 'umgebung'})

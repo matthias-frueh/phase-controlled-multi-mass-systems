@@ -148,7 +148,7 @@ def test_regeln_vollstaendig_gekennzeichnet():
         for r in p.regeln.values():
             assert r.status in regeln.STATUS and r.fundstelle and r.gegenstand
             if r.status == regeln.EP:
-                assert name == 'ENTW-2026-10' and r.herkunft, r.id
+                assert name in ('ENTW-2026-10', 'ENTW-2026-11') and r.herkunft, r.id
             if r.status in (regeln.OF, regeln.NI):
                 assert r.wert is None, r.id
 
@@ -187,9 +187,10 @@ def test_reduktion_sichtbar_und_profil_rundreise(tmp_path):
 
 
 def test_regelmatrix_nennt_jede_regel():
-    m = regeln.matrix_markdown()
-    for rid in regeln.profil('AF-2026-10').regeln:
-        assert f'`{rid}`' in m
+    for stand in ('2026-10', '2026-11'):
+        m = regeln.matrix_markdown(stand)
+        for rid in regeln.profil(f'AF-{stand}').regeln:
+            assert f'`{rid}`' in m
 
 
 # ── Laufzusammenfassung ──────────────────────────────────────────────────────────────────────────────
@@ -283,11 +284,13 @@ def test_beispiel_wahrheit_getrennt_vom_eingang():
 
 
 def test_regelmatrix_dokument_gleich_code():
-    """docs/ap11_ap12_ap13_regelmatrix.md enthält die aus regeln.py erzeugte Tabelle unverändert."""
-    pfad = os.path.join(os.path.dirname(FIXTURE), '..', '..', 'docs', 'ap11_ap12_ap13_regelmatrix.md')
-    text = open(pfad, encoding='utf-8').read()
-    teil = text.split('<!-- MATRIX-ANFANG', 1)[1].split('-->', 1)[1].split('<!-- MATRIX-ENDE -->', 1)[0]
-    assert teil.strip() == regeln.matrix_markdown().strip()
+    """docs/ap11_ap12_ap13_regelmatrix.md (Stand 2026-11) und …_2026-10.md (historisch) enthalten die aus regeln.py
+    erzeugten Tabellen unverändert."""
+    for name, stand in (('ap11_ap12_ap13_regelmatrix.md', '2026-11'), ('ap11_ap12_ap13_regelmatrix_2026-10.md', '2026-10')):
+        pfad = os.path.join(os.path.dirname(FIXTURE), '..', '..', 'docs', name)
+        text = open(pfad, encoding='utf-8').read()
+        teil = text.split('<!-- MATRIX-ANFANG', 1)[1].split('-->', 1)[1].split('<!-- MATRIX-ENDE -->', 1)[0]
+        assert teil.strip() == regeln.matrix_markdown(stand).strip(), name
 
 
 def test_zufallsstroeme_unabhaengig_und_deterministisch():

@@ -181,7 +181,7 @@ def ausfuehren(sid, stufe, profil, n, seed_basis, rolle='pruefung', plan=None, n
 
 def _plan_dict(plan):
     from dataclasses import asdict
-    return {k: (list(v) if isinstance(v, tuple) else v) for k, v in asdict(plan).items()}
+    return {k: (list(v) if isinstance(v, tuple) else v) for k, v in kp.plan_dict(plan).items()}
 
 
 # ── Raten ────────────────────────────────────────────────────────────────────────────────────────────

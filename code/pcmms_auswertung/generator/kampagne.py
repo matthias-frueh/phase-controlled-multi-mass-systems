@@ -6,11 +6,17 @@ statischen Ablauf wird er unverändert gemessen (Gültigkeit entscheidet die Aus
 eingefügte Referenzläufe, Halt und verschobene Zeiten führt der zustandsbehaftete Ablauf (ablauf.py) aus, mit demselben
 Generator für die Wiederholungsplätze.
 
-Phase 0: P0.7 verlangt mindestens 42 Referenzläufe, „je einer nach zwölf anderen Läufen“. Bei wenigen anderen Läufen
-reicht der Abstand 12 dafür nicht; der Generator setzt dann einen Referenzlauf nach je ⌊n_andere/41⌋ (höchstens
-12) anderen Läufen (Entwicklungsannahme, Präreg legt die Phase-0-Reihenfolge nicht fest).
+Phase 0 (P0.7, Anordnung der Referenzläufe, Plan.p0_anordnung):
+  p07         Arbeitsfestlegung vom 20.10.2026 (Regel p0.anordnung): mindestens 42 Referenzläufe, höchstens zwölf andere
+              Läufe zwischen zwei Referenzläufen („nach zwölf“ als größter Abstand); die Referenzläufe stehen am Anfang,
+              am Ende und möglichst gleichmäßig dazwischen. Bei 120 anderen Läufen sind das 42 Referenzläufe mit
+              Abständen von zwei oder drei Läufen. Vorgabe.
+  historisch  Anordnung bis PR #23: ein Referenzlauf nach je ⌊n_andere/41⌋ (höchstens 12) anderen Läufen, also bei
+              120 anderen Läufen 61 Referenzläufe im Abstand 2. Nur ausdrücklich, zur Nachrechnung historischer
+              Ergebnisse; gespeicherte Pläne ohne das Feld p0_anordnung stammen aus dieser Zeit (plan_aus_dict).
 """
-from dataclasses import dataclass, replace
+import math
+from dataclasses import asdict, dataclass, replace
 
 import numpy as np
 
@@ -34,9 +40,43 @@ class Plan:
     ref_min_p0: int = 42
     tag_pause: float = 43200.0      # s zwischen Messtagen
     phase_pause: float = 86400.0    # s zwischen Phase 0 und Phase 1
+    p0_anordnung: str = 'p07'       # 'p07' (Arbeitsfestlegung 20.10.2026) oder 'historisch' (bis PR #23)
+
+    def __post_init__(self):
+        if self.p0_anordnung not in P0_ANORDNUNGEN:
+            raise ValueError(f'Phase-0-Anordnung {self.p0_anordnung!r} unbekannt ({", ".join(P0_ANORDNUNGEN)})')
 
     def mit(self, **kw):
         return replace(self, **kw)
+
+
+P0_ANORDNUNGEN = ('p07', 'historisch')
+
+
+def plan_dict(plan):
+    """Plan als dict für Herkunft und Prüfsummen. Die historische Anordnung erscheint wie in den gespeicherten Plänen
+    bis PR #23 ohne das Feld p0_anordnung (bitgleiche Herkunft historischer Ergebnisse)."""
+    d = asdict(plan)
+    if d.get('p0_anordnung') == 'historisch':
+        d.pop('p0_anordnung')
+    return d
+
+
+def plan_aus_dict(d):
+    """Plan aus einem gespeicherten dict; fehlt p0_anordnung, stammt der Plan aus der Zeit bis PR #23 (historisch)."""
+    d = dict(d)
+    d.setdefault('p0_anordnung', 'historisch')
+    return Plan(**d)
+
+
+def p0_referenzplaetze(n_andere, plan):
+    """Nach wie vielen anderen Läufen jeweils ein Referenzlauf folgt (Liste der Abschnittslängen); vor dem ersten
+    Abschnitt steht ein Referenzlauf. p07: ≥ ref_min_p0 Referenzläufe, Abschnitte ≤ ref_abstand, gleichmäßig."""
+    if n_andere == 0:
+        return []
+    n_ref = max(plan.ref_min_p0, math.ceil(n_andere / plan.ref_abstand) + 1)
+    n_ref = min(n_ref, n_andere + 1)
+    return [len(x) for x in np.array_split(np.arange(n_andere), n_ref - 1)]
 
 
 def _konf(laufart, gruppe, phi=None, modul=None, einstellung=1):
@@ -89,15 +129,22 @@ def laufplan(plan, rng):
         for q in quellen:
             if q:
                 andere.append(q.pop(0))
-    abstand = max(1, min(plan.ref_abstand, len(andere) // (plan.ref_min_p0 - 1)))
     ref = _konf('R', 'referenz')
     neu(ref, 0, None, 1)
-    for i, spec in enumerate(andere):
-        neu(spec, 0, None, 1)
-        if (i + 1) % abstand == 0:
+    if plan.p0_anordnung == 'historisch':
+        abstand = max(1, min(plan.ref_abstand, len(andere) // (plan.ref_min_p0 - 1)))
+        for i, spec in enumerate(andere):
+            neu(spec, 0, None, 1)
+            if (i + 1) % abstand == 0:
+                neu(ref, 0, None, 1)
+        if laeufe[-1]['laufart'] != 'R':
             neu(ref, 0, None, 1)
-    if laeufe[-1]['laufart'] != 'R':
-        neu(ref, 0, None, 1)
+    else:
+        it = iter(andere)
+        for laenge in p0_referenzplaetze(len(andere), plan):
+            for _ in range(laenge):
+                neu(next(it), 0, None, 1)
+            neu(ref, 0, None, 1)
     # Phase 1
     konf = schnitt_konfigurationen(plan)
     kontroll = [ref] + [_konf('L', 'einzel', modul=j) for j in (1, 2, 3)]

@@ -87,7 +87,7 @@ def profil_und_plan(g):
         raise Fehler(f'Profil-Hash {prof.sha256()} ≠ {g["profil_sha256"]}')
     if prof.wert('g4.faktor') != g['g4_faktor']:
         raise Fehler('G4-Faktor des Profils ≠ Auftragsliste')
-    return prof, kp.Plan(**g['plan'])
+    return prof, kp.plan_aus_dict(g['plan'])
 
 
 # ── Flanke, Zielpilot ─────────────────────────────────────────────────────────────────────────────────────
@@ -570,7 +570,7 @@ def vorbereiten(voll, e3_quelle=None, doku=None):
     os.makedirs(doku, exist_ok=True)
     st = pruefstand.STANDARD
     prof = regeln.profil('ENTW-2026-10').mit_reduktion(**st['profil_reduktion'])
-    plan = kp.Plan(**st['plan'])
+    plan = kp.plan_aus_dict(st['plan'])
     w8 = {}
     nl = neulauf.lies_auftrag(os.path.join(neulauf.WURZEL, NEULAUF_AUFTRAG_REL))
     for name in ('A4', 'V1-G0'):

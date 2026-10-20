@@ -1,5 +1,12 @@
 # Regelmatrix der Softwarestufe AP-11 bis AP-13
 
+> **Regelstand 2026-11 (Auftrag des Autors vom 20.10.2026).** Die Tabelle unten gilt für die Profile AF-2026-11 und
+> ENTW-2026-11, die Vorgabe der Software. Die neuen Regeln (Präfixe `ablauf.`, `g4.`, `e3.`, `harness.`, `planung.`,
+> `p0.`) sind methodische Arbeitsfestlegungen; sie sind statistisch nicht kalibriert und experimentell nicht geprüft.
+> Der historische Regelstand 2026-10 (Profile AF-2026-10 und ENTW-2026-10, Stand bis PR #23) steht unverändert in
+> [`ap11_ap12_ap13_regelmatrix_2026-10.md`](ap11_ap12_ap13_regelmatrix_2026-10.md); der Code rechnet unter diesen
+> Profilen wie damals.
+
 Stand 16.10.2026 · Grundlage: Präregistrierung v2, Entwicklungsversion ([Hauptdokument](praeregistrierung_v2_entwurf.md),
 [Anhang](praeregistrierung_v2_anhang.md)) im Stand `a1c9953` · Lizenz CC BY 4.0. *Nur Software und Simulation, keine
 Messdaten, keine Festlegung.* Die Matrix ändert keine Regel der Präregistrierung, nicht A0 und nicht Tabelle F.
@@ -68,7 +75,7 @@ Befunde mit möglicher Ergebniswirkung stehen mit Auswirkung und betroffenem Pfa
 ## Vollständige Matrix
 
 <!-- MATRIX-ANFANG (erzeugt mit: python3 code/pcmms_auswertung regeln --matrix) -->
-| Regel | Gegenstand | Fundstelle | Status | Wert im Entwicklungsprofil ENTW-2026-10 | Umsetzung |
+| Regel | Gegenstand | Fundstelle | Status | Wert im Entwicklungsprofil ENTW-2026-11 | Umsetzung |
 |---|---|---|---|---|---|
 | `verarbeitung.n_theta` | Stützstellen je Zyklus | §4, A1, A9.4 (4), Tab. F | festlegung | 2000 | stufe1 |
 | `verarbeitung.interpolation` | Resampling je Zyklus | A9.4 (4) | regeltext | "linear" | stufe1 |
@@ -78,7 +85,7 @@ Befunde mit möglicher Ergebniswirkung stehen mit Auswirkung und betroffenem Pfa
 | `verarbeitung.t_phi` | Einregelzeit der Phasen je Lauf | §5.4, §6 (T_φ) | technisch | "erster Zyklus nach Rampenende, ab dem alle Indexphasen bis Fensterende innerhalb max(4σⱼ, 0,1°) um das Fenstermittel liegen" | stufe1 |
 | `g2.delta_phi_tol_grad` | Phasentoleranz δφ_tol | §9.1 G2, Tab. F | festlegung | 0.5 | gueltigkeit |
 | `g2.sigma_tol` | Jittertoleranz σ_tol | §9.1 G2, Tab. F | festlegung | 3.0 | gueltigkeit |
-| `g4.faktor` | Fünftelkriterium | §9.1 G4, Tab. F | festlegung | 3.0 | gueltigkeit |
+| `g4.faktor` | Fünftelkriterium (Faktor der Schwelle im historischen Modus je Laufart und für Lⱼ) | §9.1 G4, Tab. F | festlegung | 3.0 | gueltigkeit |
 | `g6.faktor` | Liftoff-Schwelle F_LO,c | §4, A1, Tab. F | festlegung | 5.0 | gueltigkeit |
 | `g7.form` | Form des Temperaturfensters G7 | §9.1 G7, §12 Driftbehandlung | offen → entwicklungsprüffall | "a" | gueltigkeit |
 | `g.einstellung2` | G2–G4 für Läufe bei Einstellung 2 | §9.1, §12 Läufe bei Einstellung 2 | offen | – | gueltigkeit |
@@ -101,7 +108,7 @@ Befunde mit möglicher Ergebniswirkung stehen mit Auswirkung und betroffenem Pfa
 | `h1.c_quelle` | kritischer Wert c von H1 | §8.4, A9.3 Nr. 10 | regeltext | "teil_b" | h1, teil_b |
 | `h1.c_quantil` | Quantil von max|z⁰| | §8.4 | regeltext | 0.95 | h1, teil_b |
 | `h1.c_pruefschwelle` | Prüfrate über 0,069 → gepooltes Quantil | §8.4, A8, Tab. F | festlegung | 0.069 | h1, teil_b |
-| `h1.c_rauschmodelle` | Rauschmodelle und Wahl des Quantils für c | §8.4, §12 Rauschmodelle | offen → entwicklungsprüffall | "a" | h1, teil_b |
+| `h1.c_rauschmodelle` | Rauschmodelle und Wahl des Quantils für c | §8.4, §12 Rauschmodelle | arbeitsfestlegung | "a" | h1, teil_b |
 | `h1.bias` | Rauschbias b̂⁰, b̂¹ getrennt mit u(b̂); dieselbe Korrektur in c | §5.4, §8.3, A9.5 | regeltext | "getrennt" | h1, teil_b |
 | `h1.bias_u` | u(b̂): MC-Fehler und halbe Spannweite über die Rauschmodelle (Rechteck) | A9.5, Tab. F | festlegung | "rechteck" | h1, teil_b |
 | `h1.rueckfall` | Rückfall für H1 bei verfehlten Raten | §12 Rückfall für H1 | offen | – | h1, teil_b |
@@ -146,11 +153,11 @@ Befunde mit möglicher Ergebniswirkung stehen mit Auswirkung und betroffenem Pfa
 | `h3.m` | Testzahl der Familie | §8.4, A8 | regeltext | 18 | h3 |
 | `h4.m` | Testzahl (einseitig) | §8.4, A8 | regeltext | 23 | h4 |
 | `h4.aufnahme` | Aufnahme in V: |γ̂₁| ≥ (c₄ + 1,645)·u_c,erw(γ₁) | §3 H4, §8.5 | regeltext | 1.645 | h4 |
-| `e3.schwellen` | Schwellen von E3 (0,1°, q_tol) | §8.10, §12 Schwellen von E3 | offen → entwicklungsprüffall | {"phase_grad": 0.1, "q_tol": 0.00058} | kontrollen |
-| `e3.pruefzahl` | Zahl der E3-Prüfungen (Bonferroni) | A9.13, §12 | offen → entwicklungsprüffall | "zwei_je_konfiguration_plus_eins" | kontrollen |
-| `e3.rueckfall` | Rückfall von E3 | §8.10, A9.11, §12 | offen → entwicklungsprüffall | "ganz" | kontrollen |
-| `e3.pruefmenge` | Prüfmenge von E3 | §12 Schwellen von E3 | offen → entwicklungsprüffall | "auswertbare_schnittpunkte" | kontrollen |
-| `e3.e3b_form` | E3b als Differenz oder absolut | §8.10, §12 | offen → entwicklungsprüffall | "differenz" | kontrollen |
+| `e3.schwellen` | Schwellen von E3 (0,1°, q_tol) | §8.10, §12 Schwellen von E3 | arbeitsfestlegung | {"phase_grad": 0.1, "q_tol": 0.00058} | kontrollen |
+| `e3.pruefzahl` | Zahl der E3-Prüfungen (Bonferroni) | A9.13, §12 | arbeitsfestlegung | 43 | kontrollen |
+| `e3.rueckfall` | Rückfall von E3 | §8.10, A9.11, §12 | arbeitsfestlegung | "je_pruefgroesse" | kontrollen |
+| `e3.pruefmenge` | Prüfmenge von E3 | §12 Schwellen von E3 | arbeitsfestlegung | "schnitt21_triphasik" | kontrollen |
+| `e3.e3b_form` | E3b als Differenz oder absolut | §8.10, §12 | arbeitsfestlegung | "differenz" | kontrollen |
 | `zuordnung.regel` | Regel der Zuordnung | §8.10, A9.13, §12 Zuordnung | offen → entwicklungsprüffall | "a" | kontrollen |
 | `zuordnung.ausloeser` | Auslöser der Zuordnung | §8.10, §12 Zuordnung | offen → entwicklungsprüffall | "a" | kontrollen |
 | `zuordnung.kriterium` | Kriterium der Zuordnung (A9.11) | A9.11, §12 Zuordnung | offen → entwicklungsprüffall | "a" | kontrollen |
@@ -180,11 +187,11 @@ Befunde mit möglicher Ergebniswirkung stehen mit Auswirkung und betroffenem Pfa
 | `p0.gf_modell` | Modell der Kraftkette G_F aus dem Brückensimulator | §5.2 P0.1, A9.7, Werkzeug 4 | technisch | "g·e^{−i2πfτ}/(1 + if/f_tp); ohne nachweisbaren Tiefpass g·e^{−i2πfτ}" | anpassung |
 | `verarbeitung.kennlinie` | Umrechnung der Rohwerte in Stufe 1 | A9.4 (1) „statische Kalibrierung je Zelle“ | technisch | "linear" | stufe1 |
 | `M.konvention` | Bestimmung von M | §3, §4, P0.2, §12 (I) | arbeitsfestlegung | "b" | anpassung |
-| `rauschmodelle` | Rauschmodelle (Liste in Teil A oder Teil B) | §12 Rauschmodelle …, A9.5 | offen → entwicklungsprüffall | "entwicklungsfamilie" | generator.rauschen, pilot |
-| `harness.c_vollstaendig` | Kampagnen für das Quantil von c | §8.4 „über die 147 korrelierten Tests“ | technisch | "nur Kampagnen mit allen Tests; ausgeschlossene werden gezählt" | harness |
+| `rauschmodelle` | Rauschmodelle (Liste in Teil A oder Teil B) | §12 Rauschmodelle …, A9.5 | arbeitsfestlegung | {"standard": "strukturmodell_phase0", "eingebettet": "familienanpassung", "sensitivitaet": "benannte_szenarien", "bootstrap": "optional"} | generator.rauschen, pilot |
+| `harness.c_vollstaendig` | Kampagnen für das Quantil von c | §8.4 „über die 147 korrelierten Tests“ | arbeitsfestlegung | "menge_A" | harness |
 | `harness.c_pool` | gepooltes Quantil bei Prüfrate > 0,069 | §8.4 | technisch | "95-%-Quantil der vereinigten max∣z⁰∣ beider Simulationen; Prüfsimulation danach neu ausgewertet" | harness |
 | `harness.ueberdeckung_beide` | Überdeckung gegen ŷ⁰ und ŷ¹ | §8.6, A9.6 | technisch | "ein Intervalltyp gilt, wenn beide Überdeckungen die Schwelle erreichen" | harness |
-| `harness.planung_rauschen` | Rauschmodell der Planungssimulation | §5.4, A9.2 | technisch | "Rauschmodell des Szenarios mit κ = √(ν_p/χ²₀,₂(ν_p)) skaliert (obere 80-%-Grenze)" | harness |
+| `harness.planung_rauschen` | Rauschmodell der Planungssimulation | §5.4, A9.2 | arbeitsfestlegung | "phase0_modell" | harness |
 | `harness.seeds` | Seeds der Kampagnen | Plan 4.3 | technisch | "unterseed(Basis, Rolle, Szenario, Stufe, i)" | harness |
 | `ni.fassung_I` | H3 Fassung I (Betriebsimpedanz) | §8.7, §12 (II) | nicht_implementiert | – | – |
 | `ni.gespiegelt` | H1′/H2′ am gespiegelten Schnitt | §3, §6 | nicht_implementiert | – | – |
@@ -195,4 +202,26 @@ Befunde mit möglicher Ergebniswirkung stehen mit Auswirkung und betroffenem Pfa
 | `ni.neuberechnung` | Neuberechnung von b̂ und c nach dem Datenschluss | §12 Rauschmodelle … | nicht_implementiert | – | – |
 | `ni.d2k` | Auswertung von D2_K und Kabelschlaufe (P0.3) | §5.2 P0.3 | nicht_implementiert | – | – |
 | `ni.einzelzell_dynamik` | Einzelzell-Liftoff mit Stoßdynamik (nichtlineares 3-FG-Modell) | Plan 2.2 (c) | nicht_implementiert | – | – |
+| `ablauf.fassung` | Fassung des zustandsbehafteten Ablaufs | §6, §8.8, §9.2, A9.12 | arbeitsfestlegung | "ablauf-4" | ablauf, auswertung |
+| `ablauf.reihenfolge` | Reihenfolge sofortiger Folgeläufe (A1 + Z1) | §9.2, A9.12 | arbeitsfestlegung | "R₁ zuerst; feststehender Verstoß → R₂, X′, R₃ geschlossen, auch bei ungültigem X′; danach übrige sofortige Wiederholungen, die zuletzt ausgelöste zuerst; ein sofortiger Halt hat Vorrang" | ablauf, auswertung |
+| `ablauf.halt` | Ausstehende Folgeläufe und unvollständige Klammer bei Halt (H1 + K1) | §9.2, A9.12 | arbeitsfestlegung | "ausstehende sofortige Folgeläufe verworfen und protokolliert; G1-Fall ohne gemessenes X′ nach dem W-Satz als neue Folge R₂, X′, R₃; unvollständige Klammer: S1 nicht prüfbar, keine Sonderwiederholung, Platz fehlt" | ablauf, auswertung |
+| `ablauf.wiederaufnahme_alarm` | Alarm im Kontrollsatz der Wiederaufnahme (N7) | §9.2, §8.8 | arbeitsfestlegung | "S1–S4; einzelne S3-Überschreitung und einzelner Nullpunktalarm werden wie sonst wiederholt, der reproduzierte Alarm hält an" | ablauf, auswertung |
+| `ablauf.bezugseroeffnung` | Neuer Bezug nach einem Nullpunkthalt | §8.8, §9.2, A9.12 | arbeitsfestlegung | {"ausloeser": ["S1 reproduzierter Nullpunktalarm", "Nullpunktalarm (technische Grenze)"], "lauf": "gesonderter Referenzlauf vor dem W-Satz, ohne Alarmvergleich gegen das verworfene R₀", "grenze_wiederholungen": 2, "danach": "Halt „Bezugseröffnung“ (verbraucht eine Wiederaufnahme)", "ersatz": "letzter gültiger Aufwärmlauf bei Tageswechsel"} | ablauf, auswertung |
+| `ablauf.aufwaermen` | Aufwärmen nach einer Wiederaufnahme | §6, §9.2 | arbeitsfestlegung | "nur_tageswechsel" | ablauf, auswertung |
+| `ablauf.tageswechsel` | Tageswechsel bei der Wiederaufnahme in der Simulation | §6 | technisch | "Ereignisfeld tageswechsel; fehlt es, gilt Zeitpunkt − Halt ≥ tag_pause des Plans" | ablauf, auswertung |
+| `p0.anordnung` | Anordnung der Referenzläufe in Phase 0 (P0.7) | P0.7, A9.2 | arbeitsfestlegung | {"min_referenz": 42, "max_abstand": 12, "verteilung": "gleichmaessig_mit_anfang_und_ende"} | generator.kampagne |
+| `p0.laufgroessen` | Laufgrößenmodell aus Phase 0 (Schätzer d0) | §5.4, A9.2, A9.3 | arbeitsfestlegung | {"amplitude_phase": "kohärente Projektion der Lⱼ-Abweichungen (σ_a,j, σ_δ,j, ν = n₀ⱼ − 1)", "versatz": "Laufmittel der Indexphasen der gültigen Piloten (σ_off,j)", "boden": "Referenzläufe"} | pilot, generator |
+| `g4.verfahren` | Standardisierung der Fünftelschwelle für Konfigurationen | §9.1 G4, A9.2 | arbeitsfestlegung | "b_plus" | gueltigkeit |
+| `g4.b_plus` | Bestandteile von B+ | §9.1 G4 | arbeitsfestlegung | {"mischung": "Laufversatz, Phasenrest, Modulamplitude", "piloten": "dieselbe Mischung für s̄_P", "knick": "Maximum über ±u(Δδⱼ)", "ziehungen": "normiert", "schwelle": "quantil", "untergrenze_faktor": 3.0} | gueltigkeit |
+| `g4.zielrate` | Arbeitsziel der Fehlausschlüsse je Konfiguration und Lauf | A9.11 | arbeitsfestlegung | 0.015 | gueltigkeit |
+| `g4.lj` | G4 an Einzelmodul-Kontrollläufen | §9.1 G4 | arbeitsfestlegung | {"schwelle": "n_abhaengig", "vergleich": "pooling"} | gueltigkeit |
+| `e3.grenzen` | Konstruktion der E3-Grenzen (Option B) | §8.10, A9.13 | arbeitsfestlegung | {"e3a": "t_quantil_gefaltet", "e3b": "rice_kappa_lambda_max", "nu": "min_n_minus_1", "nu_min": 5, "unauffaellig": "t_0.95"} | kontrollen |
+| `e3.zusatzszenarien` | Zusätzliche E3b-Prüffälle | A9.11 | arbeitsfestlegung | [0.005, 0.01] | kontrollen |
+| `harness.wiederaufnahme` | Simulierte Wiederaufnahme fortsetzbarer Halte | §9.2, A9.11 | arbeitsfestlegung | {"W": 3, "T_UA": "Teil B", "T_UA_entwicklung_s": 1800.0, "ereignis": "Ursachenanalyse ohne Befund, kein Eingriff, kein Apparaturfehler"} | harness |
+| `harness.mengen` | Bezugsmengen der Simulationen | §5.4, §8.4, §8.6, A9.11 | arbeitsfestlegung | {"G": "alle begonnenen Kampagnen der Rolle, einschließlich endgültig beendeter", "A": "abgeschlossen (auch nach Wiederaufnahme), ŷ¹ gültig, alle benötigten Prüfgrößen endlich"} | harness |
+| `harness.nachziehen` | Sollzahl der Auswertungsmenge und Nachziehen | §8.4, §8.6 | arbeitsfestlegung | {"soll_A": 1000, "versuchslimit_faktor": 1.5} | harness |
+| `planung.reserve_ziel` | Bedingung für die Reserve r | A9.2 (v) | arbeitsfestlegung | {"anteil": 0.95, "nenner": "nicht_endgueltig_beendet", "zusatz_max": 10} | pilot, harness.planung |
+| `planung.zeitformel` | Terme der Zeitformel | §5.3 (c), §12 Messzeit | arbeitsfestlegung | ["Läufe", "Wiederholungen", "Kontrollsatz der Wiederaufnahme", "Bezugseröffnung", "Ursachenanalyse T_UA", "Aufwärmen bei Tageswechsel"] | pilot, harness.planung |
+| `planung.obere_grenze` | Obere 80-%-Grenze eines mehrteiligen Rauschmodells | §5.4, A9.2 | arbeitsfestlegung | "je_komponente_gemeinsamer_boden" | pilot, harness.planung |
+| `planung.teil_b_werte` | Teil-B-Werte aus Punktschätzern nach der Planung | §8.4, A9.2, A9.11 | arbeitsfestlegung | "punktschaetzer" | pilot, harness.planung |
 <!-- MATRIX-ENDE -->

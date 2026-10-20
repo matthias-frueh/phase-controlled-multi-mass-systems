@@ -355,7 +355,7 @@ def beschreibung(m):
         return v
     s = asdict(m.system)
     return rein(dict(szenario=getattr(m, 'szenario', None), staerke=getattr(m, 'staerke', None), system=s,
-                     rauschen=asdict(m.rausch), plan=asdict(m.plan), effekte=list(m.effekte), k_voll=m.k_voll,
+                     rauschen=asdict(m.rausch), plan=kampagne.plan_dict(m.plan), effekte=list(m.effekte), k_voll=m.k_voll,
                      vollausschlag_N=m.vollausschlag_N,
                      hertz=None if m.hertz is None else m.hertz['modell']))
 

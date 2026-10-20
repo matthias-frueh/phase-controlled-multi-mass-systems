@@ -13,9 +13,15 @@ Status (Regelmatrix in docs/ap11_ap12_ap13_regelmatrix.md):
 
 Es gibt keine stillen Vorgaben: Wer einen Wert braucht, ruft Regelprofil.wert(); bei offenen Regeln folgt RegelOffen
 mit der Fundstelle, und die Auswertung berichtet „nicht entscheidbar (Grund: Regel offen …)“ bzw. nur Prüfgrößen.
-Profile: „AF-2026-10“ (Arbeitsfestlegungen und Regeltext, alles Offene offen) und „ENTW-2026-10“ (dazu die
-Entwicklungsprüffälle). Verringerte Replikat- oder Kampagnenzahlen erzeugen ein abgeleitetes Profil mit Kennung
-„…+red(…)“; die Reduktion steht in jedem Ergebnis.
+Profile: „AF-2026-11“ (Regelstand nach dem Auftrag des Autors vom 20.10.2026: Arbeitsfestlegungen und Regeltext,
+alles Offene offen) und „ENTW-2026-11“ (dazu die Entwicklungsprüffälle) sind der aktuelle Stand und die Vorgabe.
+„AF-2026-10“ und „ENTW-2026-10“ bleiben unverändert erhalten: Gespeicherte Profile und Ergebnisse von PR #20 bis #23
+bleiben ihrem damaligen Stand zugeordnet, und unter diesen Profilen rechnet der Code wie damals (historischer Modus).
+Verringerte Replikat- oder Kampagnenzahlen erzeugen ein abgeleitetes Profil mit Kennung „…+red(…)“; die Reduktion
+steht in jedem Ergebnis.
+
+Die Regeln von 2026-11 sind methodische Arbeitsfestlegungen. Sie sind statistisch nicht kalibriert und experimentell
+nicht geprüft; eine bestandene Softwareprüfung hebt diesen Status nicht auf.
 """
 import copy
 import json
@@ -308,6 +314,123 @@ _ENTW = {
 }
 
 
+# ── Regelstand 2026-11 (Auftrag des Autors vom 20.10.2026, Entscheidungsvorlage vom 19.10.2026) ──────────────
+AUFTRAG = 'Arbeitsfestlegung nach dem Auftrag des Autors vom 20.10.2026 (Entscheidungsvorlage 2026-10-19, Abschnitt 9)'
+_AENDERUNG_11 = [
+    _r('g4.faktor', 'Fünftelkriterium (Faktor der Schwelle im historischen Modus je Laufart und für Lⱼ)',
+       '§9.1 G4, Tab. F', FL, 3.0, '3·σ_Δ,X, σ_Δ = 1,4826·MAD je Laufart; Konfigurationen siehe g4.verfahren'),
+    _r('e3.schwellen', 'Schwellen von E3 (0,1°, q_tol)', '§8.10, §12 Schwellen von E3', AF,
+       dict(phase_grad=0.1, q_tol=5.8e-4), AUFTRAG + '; Schwellen unverändert', 'bericht'),
+    _r('e3.pruefzahl', 'Zahl der E3-Prüfungen (Bonferroni)', 'A9.13, §12', AF, 43,
+       AUFTRAG + '; 21 Schnittpunkte × 2 E3a-Prüfungen + E3b; fehlende Punkte und Rückfall verringern m nicht',
+       'bericht'),
+    _r('e3.rueckfall', 'Rückfall von E3', '§8.10, A9.11, §12', AF, 'je_pruefgroesse',
+       AUFTRAG + '; E3b beschreibend bzw. einseitig, E3a bleibt dreiwertig', 'bericht'),
+    _r('e3.pruefmenge', 'Prüfmenge von E3', '§12 Schwellen von E3', AF, 'schnitt21_triphasik',
+       AUFTRAG + '; ohne Identifizierbarkeits- und Zusatzkonfigurationen', 'bericht'),
+    _r('e3.e3b_form', 'E3b als Differenz oder absolut', '§8.10, §12', AF, 'differenz', AUFTRAG, 'bericht'),
+    _r('h1.c_rauschmodelle', 'Rauschmodelle und Wahl des Quantils für c', '§8.4, §12 Rauschmodelle', AF, 'a',
+       AUFTRAG + '; Fassung (a): Quantil aus dem Standardmodell, die Modellliste als Sensitivität'),
+    _r('h1.bias', 'Rauschbias b̂⁰, b̂¹ getrennt mit u(b̂); dieselbe Korrektur in c', '§5.4, §8.3, A9.5', RT,
+       'getrennt', 'mit den tatsächlich realisierten gültigen Laufzahlen der Auswertungsmenge A (Auftrag 20.10.2026)'),
+    _r('rauschmodelle', 'Rauschmodelle (Liste in Teil A oder Teil B)', '§12 Rauschmodelle …, A9.5', AF,
+       dict(standard='strukturmodell_phase0', eingebettet='familienanpassung', sensitivitaet='benannte_szenarien',
+            bootstrap='optional'), AUFTRAG, 'planung'),
+    _r('harness.c_vollstaendig', 'Kampagnen für das Quantil von c', '§8.4 „über die 147 korrelierten Tests“', AF,
+       'menge_A', AUFTRAG + '; Auswertungsmenge A (harness.mengen), Ausschlüsse nach Grund gezählt', 'planung'),
+    _r('harness.planung_rauschen', 'Rauschmodell der Planungssimulation', '§5.4, A9.2', AF,
+       'phase0_modell', AUFTRAG + '; Modell aus Phase 0, obere 80-%-Grenze je identifizierbarer Komponente '
+       '(planung.obere_grenze); das Szenariomodell bleibt unabhängige Referenz', 'planung'),
+]
+_NEU_11 = [
+    # Ablauf der Phase 1 (A9.12, §9.2)
+    _r('ablauf.fassung', 'Fassung des zustandsbehafteten Ablaufs', '§6, §8.8, §9.2, A9.12', AF, 'ablauf-4', AUFTRAG,
+       'ablauf'),
+    _r('ablauf.reihenfolge', 'Reihenfolge sofortiger Folgeläufe (A1 + Z1)', '§9.2, A9.12', AF,
+       'R₁ zuerst; feststehender Verstoß → R₂, X′, R₃ geschlossen, auch bei ungültigem X′; danach übrige sofortige '
+       'Wiederholungen, die zuletzt ausgelöste zuerst; ein sofortiger Halt hat Vorrang', AUFTRAG, 'ablauf'),
+    _r('ablauf.halt', 'Ausstehende Folgeläufe und unvollständige Klammer bei Halt (H1 + K1)', '§9.2, A9.12', AF,
+       'ausstehende sofortige Folgeläufe verworfen und protokolliert; G1-Fall ohne gemessenes X′ nach dem W-Satz als '
+       'neue Folge R₂, X′, R₃; unvollständige Klammer: S1 nicht prüfbar, keine Sonderwiederholung, Platz fehlt',
+       AUFTRAG, 'ablauf'),
+    _r('ablauf.wiederaufnahme_alarm', 'Alarm im Kontrollsatz der Wiederaufnahme (N7)', '§9.2, §8.8', AF,
+       'S1–S4; einzelne S3-Überschreitung und einzelner Nullpunktalarm werden wie sonst wiederholt, der reproduzierte '
+       'Alarm hält an', AUFTRAG, 'ablauf'),
+    _r('ablauf.bezugseroeffnung', 'Neuer Bezug nach einem Nullpunkthalt', '§8.8, §9.2, A9.12', AF,
+       dict(ausloeser=['S1 reproduzierter Nullpunktalarm', 'Nullpunktalarm (technische Grenze)'],
+            lauf='gesonderter Referenzlauf vor dem W-Satz, ohne Alarmvergleich gegen das verworfene R₀',
+            grenze_wiederholungen=2, danach='Halt „Bezugseröffnung“ (verbraucht eine Wiederaufnahme)',
+            ersatz='letzter gültiger Aufwärmlauf bei Tageswechsel'), AUFTRAG, 'ablauf'),
+    _r('ablauf.aufwaermen', 'Aufwärmen nach einer Wiederaufnahme', '§6, §9.2', AF, 'nur_tageswechsel',
+       AUFTRAG + '; durch Halt unterbrochener Block darf über Nacht fortgesetzt werden', 'ablauf'),
+    _r('ablauf.tageswechsel', 'Tageswechsel bei der Wiederaufnahme in der Simulation', '§6', TD,
+       'Ereignisfeld tageswechsel; fehlt es, gilt Zeitpunkt − Halt ≥ tag_pause des Plans',
+       'Simulationsdetail, keine Fachregel', 'ablauf'),
+    # Phase 0
+    _r('p0.anordnung', 'Anordnung der Referenzläufe in Phase 0 (P0.7)', 'P0.7, A9.2', AF,
+       dict(min_referenz=42, max_abstand=12, verteilung='gleichmaessig_mit_anfang_und_ende'),
+       AUFTRAG + '; „nach zwölf“ als größter Abstand; tatsächliche gültige Zahl und Anordnung werden ausgewiesen',
+       'generator'),
+    _r('p0.laufgroessen', 'Laufgrößenmodell aus Phase 0 (Schätzer d0)', '§5.4, A9.2, A9.3', AF,
+       dict(amplitude_phase='kohärente Projektion der Lⱼ-Abweichungen (σ_a,j, σ_δ,j, ν = n₀ⱼ − 1)',
+            versatz='Laufmittel der Indexphasen der gültigen Piloten (σ_off,j)', boden='Referenzläufe'),
+       AUFTRAG, 'planung'),
+    # G4
+    _r('g4.verfahren', 'Standardisierung der Fünftelschwelle für Konfigurationen', '§9.1 G4, A9.2', AF, 'b_plus',
+       AUFTRAG + '; D (phasenkorrigierte Fünftel-Differenz) wählbarer Diagnosemodus, je_laufart historisch'),
+    _r('g4.b_plus', 'Bestandteile von B+', '§9.1 G4', AF,
+       dict(mischung='Laufversatz, Phasenrest, Modulamplitude', piloten='dieselbe Mischung für s̄_P',
+            knick='Maximum über ±u(Δδⱼ)', ziehungen='normiert', schwelle='quantil', untergrenze_faktor=3.0),
+       AUFTRAG),
+    _r('g4.zielrate', 'Arbeitsziel der Fehlausschlüsse je Konfiguration und Lauf', 'A9.11', AF, 0.015,
+       AUFTRAG + '; Zielvorgabe unter dem benannten Nullmodell, keine bestätigte Rate', 'bericht'),
+    _r('g4.lj', 'G4 an Einzelmodul-Kontrollläufen', '§9.1 G4', AF,
+       dict(schwelle='n_abhaengig', vergleich='pooling'), AUFTRAG),
+    # E3
+    _r('e3.grenzen', 'Konstruktion der E3-Grenzen (Option B)', '§8.10, A9.13', AF,
+       dict(e3a='t_quantil_gefaltet', e3b='rice_kappa_lambda_max', nu='min_n_minus_1', nu_min=5,
+            unauffaellig='t_0.95'), AUFTRAG, 'bericht'),
+    _r('e3.zusatzszenarien', 'Zusätzliche E3b-Prüffälle', 'A9.11', AF, [0.005, 0.01],
+       AUFTRAG + '; Amplitudenänderung 0,5 % und 1 % als kleine Zusatzprüffälle', 'bericht'),
+    # Harness, Planung
+    _r('harness.wiederaufnahme', 'Simulierte Wiederaufnahme fortsetzbarer Halte', '§9.2, A9.11', AF,
+       dict(W=3, T_UA='Teil B', T_UA_entwicklung_s=1800.0,
+            ereignis='Ursachenanalyse ohne Befund, kein Eingriff, kein Apparaturfehler'),
+       AUFTRAG + '; nur im synthetischen Harness, nie für reale Daten', 'planung'),
+    _r('harness.mengen', 'Bezugsmengen der Simulationen', '§5.4, §8.4, §8.6, A9.11', AF,
+       dict(G='alle begonnenen Kampagnen der Rolle, einschließlich endgültig beendeter',
+            A='abgeschlossen (auch nach Wiederaufnahme), ŷ¹ gültig, alle benötigten Prüfgrößen endlich'),
+       AUFTRAG + '; P(H1 und H2) mit Nenner G', 'planung'),
+    _r('harness.nachziehen', 'Sollzahl der Auswertungsmenge und Nachziehen', '§8.4, §8.6', AF,
+       dict(soll_A=1000, versuchslimit_faktor=1.5),
+       AUFTRAG + '; nur im Kalibrierbeispiel, bei Nichterreichen „nicht abgeschlossen“', 'planung'),
+    _r('planung.reserve_ziel', 'Bedingung für die Reserve r', 'A9.2 (v)', AF,
+       dict(anteil=0.95, nenner='nicht_endgueltig_beendet', zusatz_max=10),
+       AUFTRAG + '; alle Schnittpunkte gemeinsam ≥ n_min', 'planung'),
+    _r('planung.zeitformel', 'Terme der Zeitformel', '§5.3 (c), §12 Messzeit', AF,
+       ['Läufe', 'Wiederholungen', 'Kontrollsatz der Wiederaufnahme', 'Bezugseröffnung', 'Ursachenanalyse T_UA',
+        'Aufwärmen bei Tageswechsel'], AUFTRAG, 'planung'),
+    _r('planung.obere_grenze', 'Obere 80-%-Grenze eines mehrteiligen Rauschmodells', '§5.4, A9.2', AF,
+       'je_komponente_gemeinsamer_boden',
+       AUFTRAG + '; marginale Grenzen, keine gemeinsame 80-%-Garantie', 'planung'),
+    _r('planung.teil_b_werte', 'Teil-B-Werte aus Punktschätzern nach der Planung', '§8.4, A9.2, A9.11', AF,
+       'punktschaetzer', AUFTRAG + '; Planung mit c_B an der oberen Grenze, danach Parameterschätzung', 'planung'),
+]
+_ENTW_ENTSCHIEDEN_11 = ('e3.schwellen', 'e3.pruefzahl', 'e3.rueckfall', 'e3.pruefmenge', 'e3.e3b_form',
+                        'h1.c_rauschmodelle', 'rauschmodelle')
+
+
+def _grund_2026_11():
+    ersatz = {r.id: r for r in _AENDERUNG_11}
+    out = [ersatz.get(r.id, r) for r in _GRUND]
+    ids = {r.id for r in out}
+    for r in _NEU_11:
+        if r.id in ids:
+            raise ValueError(f'Regel {r.id} doppelt')
+        out.append(r)
+    return out
+
+
 class Regelprofil:
     def __init__(self, profil_id, beschreibung, regeln, reduktion=None):
         self.id, self.beschreibung = profil_id, beschreibung
@@ -390,10 +513,40 @@ def _profil_entw():
                        'Entwicklungsprüffälle (Testvarianten und Vorschläge des Entwurfs); keine Festlegung', regeln)
 
 
-PROFILE = {'AF-2026-10': _profil_af, 'ENTW-2026-10': _profil_entw}
+def _profil_af_11():
+    return Regelprofil('AF-2026-11', 'Regelstand nach dem Auftrag vom 20.10.2026: Arbeitsfestlegungen, Regeltext und '
+                       'Tabelle F der Präregistrierung v2 (Entwicklungsversion); alle offenen Regeln offen',
+                       _grund_2026_11())
 
 
-def profil(name='ENTW-2026-10'):
+def _profil_entw_11():
+    regeln = []
+    for r in _grund_2026_11():
+        if r.id in _ENTW and r.id not in _ENTW_ENTSCHIEDEN_11:
+            wert, herkunft = _ENTW[r.id]
+            r = Regel(r.id, r.gegenstand, r.fundstelle, EP, wert, herkunft, r.wirkung)
+        regeln.append(r)
+    return Regelprofil('ENTW-2026-11', 'Entwicklungsprofil: wie AF-2026-11, dazu ausdrücklich gewählte '
+                       'Entwicklungsprüffälle (Testvarianten und Vorschläge des Entwurfs); keine Festlegung', regeln)
+
+
+PROFILE = {'AF-2026-10': _profil_af, 'ENTW-2026-10': _profil_entw, 'AF-2026-11': _profil_af_11,
+           'ENTW-2026-11': _profil_entw_11}
+AKTUELL = ('AF-2026-11', 'ENTW-2026-11')
+HISTORISCH = ('AF-2026-10', 'ENTW-2026-10')
+STANDARD = 'ENTW-2026-11'
+
+
+def stand(p):
+    """Regelstand eines Profils: '2026-11' (aktuell) oder '2026-10' (historisch)."""
+    return p.id.split('+')[0].split('-', 1)[1]
+
+
+def ist_historisch(p):
+    return p.id.split('+')[0] in HISTORISCH
+
+
+def profil(name=STANDARD):
     basis = name.split('+')[0]
     if basis not in PROFILE:
         raise KeyError(f'unbekanntes Regelprofil {name!r} (bekannt: {", ".join(PROFILE)})')
@@ -422,7 +575,8 @@ UMSETZUNG = (                           # Präfix der Regel → umsetzendes Modu
     ('h0.', 'gueltigkeit'), ('h1z.', 'h1'), ('h1.', 'h1, teil_b'), ('drift.', 'h1'), ('bootstrap.', 'bootstrap'),
     ('h2.', 'zeltfit, h2'), ('h3.', 'h3'), ('h4.', 'h4'), ('e3.', 'kontrollen'), ('zuordnung.', 'kontrollen'),
     ('punkte_I', 'kontrollen, generator'), ('einstellung2.', 'generator'), ('kontaktast.', 'teil_b, auswertung'),
-    ('a6.', 'generator.ebene_z'), ('planung.', 'pilot, harness.planung'), ('p0.', 'anpassung'),
+    ('a6.', 'generator.ebene_z'), ('planung.', 'pilot, harness.planung'), ('p0.anordnung', 'generator.kampagne'),
+    ('p0.laufgroessen', 'pilot, generator'), ('p0.', 'anpassung'), ('ablauf.', 'ablauf, auswertung'),
     ('M.', 'anpassung'), ('rauschmodelle', 'generator.rauschen, pilot'), ('harness.', 'harness'), ('ni.', '–'))
 
 
@@ -433,10 +587,11 @@ def umsetzung(rid):
     return '–'
 
 
-def matrix_markdown(p=None):
-    """Regelmatrix als Markdown-Tabelle (Grundlage von docs/ap11_ap12_ap13_regelmatrix.md)."""
-    af, entw = profil('AF-2026-10'), profil('ENTW-2026-10')
-    zeilen = ['| Regel | Gegenstand | Fundstelle | Status | Wert im Entwicklungsprofil ENTW-2026-10 | Umsetzung |',
+def matrix_markdown(stand_='2026-11'):
+    """Regelmatrix als Markdown-Tabelle: Stand 2026-11 in docs/ap11_ap12_ap13_regelmatrix.md, der historische Stand
+    2026-10 unverändert in docs/ap11_ap12_ap13_regelmatrix_2026-10.md."""
+    af, entw = profil(f'AF-{stand_}'), profil(f'ENTW-{stand_}')
+    zeilen = [f'| Regel | Gegenstand | Fundstelle | Status | Wert im Entwicklungsprofil {entw.id} | Umsetzung |',
               '|---|---|---|---|---|---|']
     for rid, r in af.regeln.items():
         e = entw.regeln[rid]

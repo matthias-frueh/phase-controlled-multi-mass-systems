@@ -72,8 +72,10 @@ from scipy import stats
 
 from . import formate, gueltigkeit, konventionen as kv, zusammenfassung as zf
 
-VERSION = 'ablauf-3'            # ablauf-2: X′ ohne Vorprüfung mit R₂/R₃ geprüft; S2-Bilanz aus den Ereignissen;
-                                # ablauf-3: R₃ folgt unmittelbar auf X′ (S3-Wiederholung eines X′ erst nach R₃)
+VERSION = 'ablauf-4'            # ablauf-2: X′ ohne Vorprüfung mit R₂/R₃ geprüft; S2-Bilanz aus den Ereignissen;
+                                # ablauf-3: R₃ folgt unmittelbar auf X′ (S3-Wiederholung eines X′ erst nach R₃);
+                                # ablauf-4: Auftrag vom 20.10.2026 (A1 + Z1 + H1 + K1 + N5–N7, Bezugseröffnung)
+FASSUNGEN = ('ablauf-3', 'ablauf-4')    # ablauf-3 nur zur Nachrechnung historischer Ergebnisse (PR #23)
 GRENZE_KONFIGURATION = 2        # §6, A9.12: höchstens zwei Wiederholungen je Konfiguration und Block
 GRENZE_KONTROLLE = 2            # A9.12: Kontrolllauf höchstens zweimal sofort wiederholt
 GRENZE_AUFWAERMEN = 10          # §6: höchstens zehn Aufwärm-Referenzläufe
@@ -161,7 +163,11 @@ class Ablauf:
     (auswertung._schwellen); s3: s3_basis; rng: Reihenfolgegenerator nach dem Ziehen des Laufplans; optionen:
     Ablaufoptionen; T_lauf, tag_pause aus dem Plan; kennung: Herkunft (Verfahren, Seeds, Teil B, Plan)."""
 
-    def __init__(self, geplant, messung, sw, s3, rng, optionen, T_lauf, tag_pause, kennung=None, _zustand=None):
+    def __init__(self, geplant, messung, sw, s3, rng, optionen, T_lauf, tag_pause, kennung=None, _zustand=None,
+                 fassung=VERSION):
+        if fassung not in FASSUNGEN:
+            raise AblaufFehler(f'Ablauffassung {fassung!r} unbekannt ({", ".join(FASSUNGEN)})')
+        self.fassung = fassung
         self.messung, self.sw, self.s3, self.rng, self.opt = messung, sw, s3, rng, optionen
         self.T_lauf, self.tag_pause = float(T_lauf), float(tag_pause)
         self.kennung = kennung
@@ -177,7 +183,7 @@ class Ablauf:
         if _zustand is not None:
             self.z = _zustand
             return
-        self.z = dict(version=VERSION, status='bereit', tag=-1, queue=[], t=float(self.geplant[0]['t_start']),
+        self.z = dict(version=fassung, status='bereit', tag=-1, queue=[], t=float(self.geplant[0]['t_start']),
                       position0=int(self.geplant[0]['position']), versuche=[], r0=None, offen_g1=[], wdh={}, kwdh={},
                       s3_offen={}, schluss_begonnen=[], s2=[], s2_zaehler=0, s4_vor=False, ziehungen=[], halt=None,
                       ende=None, luecken=[], ausgeschlossen=[], ereignisse=[], aufwaermen=[], alarmkette=0,
@@ -762,7 +768,7 @@ class Ablauf:
         """Ablaufstand für die Tabelle (meta „ablauf“): Status, Halt, Kennung, Optionen, Lücken und die Angaben, aus
         denen Stufe 2 die S2-Bilanz selbst nachrechnet (S2-Versuche, protokollierte Wiederaufnahmen mit ihrem Halt)."""
         z = self.z
-        return dict(version=VERSION, status=z['status'], ende=z['ende'], halt=z['halt'], kennung=self.kennung,
+        return dict(version=self.fassung, status=z['status'], ende=z['ende'], halt=z['halt'], kennung=self.kennung,
                     optionen=asdict(self.opt), luecken=list(z['luecken']), s2=list(z['s2']),
                     ereignisse=copy.deepcopy(z['ereignisse']), s2_bilanz=gueltigkeit.s2_bilanz(z['s2'], z['ereignisse']))
 
@@ -776,13 +782,14 @@ class Ablauf:
         return z
 
     @classmethod
-    def aus_zustand(cls, zustand, geplant, messung, sw, s3, rng, T_lauf, tag_pause, kennung):
-        """Fortsetzung aus einem gespeicherten Ablaufstand; Kennung und Optionen müssen übereinstimmen."""
+    def aus_zustand(cls, zustand, geplant, messung, sw, s3, rng, T_lauf, tag_pause, kennung, fassung=VERSION):
+        """Fortsetzung aus einem gespeicherten Ablaufstand; Kennung, Fassung und Optionen müssen übereinstimmen."""
         if formate.sha256_json(zustand.get('kennung')) != formate.sha256_json(kennung):
             raise AblaufFehler('Ablaufstand mit anderer Kennung (Verfahren, Optionen, Seeds, Teil B oder Plan): keine '
                                'Fortsetzung')
-        if zustand.get('version') != VERSION:
-            raise AblaufFehler(f'Ablaufstand der Version {zustand.get("version")} ≠ {VERSION}')
+        if zustand.get('version') != fassung:
+            raise AblaufFehler(f'Ablaufstand der Version {zustand.get("version")} ≠ {fassung}: keine stille '
+                               'Fortsetzung über Ablauffassungen hinweg')
         z = copy.deepcopy(zustand)
         rng.bit_generator.state = z.pop('rng')
         ks = z.pop('ks')
@@ -790,7 +797,7 @@ class Ablauf:
         z.pop('kennung')
         for v in z['versuche']:
             v['daten'] = {f: np.asarray(x) for f, x in v['daten'].items()}
-        a = cls(geplant, messung, sw, s3, rng, opt, T_lauf, tag_pause, kennung, _zustand=z)
+        a = cls(geplant, messung, sw, s3, rng, opt, T_lauf, tag_pause, kennung, _zustand=z, fassung=fassung)
         a.ks = ks
         return a
 
@@ -868,7 +875,7 @@ def bericht(a):
             e['gueltig'] += int(bool(v['gueltig']) and v['g1'] is not True)
             e['fehlt'] += int(bool(v.get('grenze')))
     return dict(
-        version=VERSION, status=z['status'], ende=z['ende'], halt=z['halt'], optionen=asdict(a.opt),
+        version=a.fassung, status=z['status'], ende=z['ende'], halt=z['halt'], optionen=asdict(a.opt),
         laufzahl=dict(geplant=len(geplant), geplant_ausgefuehrt=sum(bool(v['geplant']) for v in vs),
                       ausgefuehrt=len(vs), zusaetzlich=sum(not v['geplant'] for v in vs)),
         messzeit_s=dict(geplant_laeufe=len(geplant) * T, realisiert_laeufe=len(vs) * T, geplant_spanne=t_plan,
