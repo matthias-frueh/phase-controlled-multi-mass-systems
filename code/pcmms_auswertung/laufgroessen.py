@@ -336,36 +336,34 @@ def _modul(tab, Lj, k, s2c, nu_h, N_z, n_f, kk):
     nu = n - 1
     sa = komponente(float(a.var(ddof=1)), fa, nu, '1', quelle, nu_boden=nu_h)
     sd = komponente(float(dl.var(ddof=1)), fd, nu, '°', quelle, nu_boden=nu_h, skala=np.degrees(1.0))
-    # Kohärenz über k: Projektion je Harmonischer, Q = Σ_r Σ_k (â_rk − â_r)²/f_k
+    # Kohärenz über k: je Harmonischer z_rk = Σ_c w·conj(N̄_ck)·X_rck / Σ_c w|N̄_ck|², Laufwerte log-polar (Amplitude
+    # ln|z_rk|, Phase −arg(z_rk)/k; exakt für A·e^{−ikδ}, auch bei großer Phasenstreuung); Q = Σ_r Σ_k (x_rk − x̄_r)²/f_k
+    # mit x̄_r dem gewichteten Mittel über k, f_k = 1/U_k bzw. 1/(k²U_k)
     koh = {}
-    for name, basis, werte, B in (('amplitude', u, a, U), ('phase', v, dl, V)):
-        je, gew, s2k = [], [], []
-        for i in range(k):
-            ai, Ui = _projektion(D[:, :, i], basis[:, i], W[:, i])
-            if ai is None or Ui <= 1e-12 * B:
-                je.append(None)
-                gew.append(0.0)
-                s2k.append(None)
-                continue
-            je.append(ai)
-            gew.append(Ui)
-            s2k.append(float(ai.var(ddof=1)))
-        Qs, dof = 0.0, 0
-        for i in range(k):
-            if je[i] is None:
-                continue
-            Qs += float(((je[i] - werte) ** 2).sum() * gew[i]) if gewichtet else 0.0
-            dof += 1
-        dof = (dof - 1) * (n - 1)
-        skala = 1.0 if name == 'amplitude' else np.degrees(1.0)
-        bod = [None if g == 0 else 1.0 / g for g in gew]
-        koh[name] = dict(Q=float(Qs) if gewichtet else None, nu=int(dof),
-                         p=float(stats.chi2.sf(Qs, dof)) if gewichtet and dof > 0 else None,
-                         streuung_je_k=[None if s is None else float(np.sqrt(max(0.0, s - b)) * skala)
-                                        for s, b in zip(s2k, bod)],
-                         s_gesamt_je_k=[None if s is None else float(np.sqrt(s) * skala) for s in s2k],
-                         gewicht_je_k=[float(g / B) for g in gew],
-                         hinweis='Q ~ χ²(ν) bei kohärenter Laufgröße über k; kleines p: Streuung hängt von k ab')
+    Uk = (W * np.abs(u) ** 2).sum(0)                                       # (k,)
+    gueltig_k = Uk > 1e-12 * U
+    with np.errstate(invalid='ignore', divide='ignore'):
+        zk = (W[None] * np.conj(u)[None] * X).sum(1) / np.where(gueltig_k, Uk, 1.0)[None]       # (n, k)
+    for name, x, gew, skala in (('amplitude', np.log(np.abs(zk)), Uk, 1.0),
+                                ('phase', -np.angle(zk) / kk[None, :], kk ** 2 * Uk, np.degrees(1.0))):
+        gk = np.where(gueltig_k & np.isfinite(x).all(0), gew, 0.0)
+        xs = np.where(gk[None] > 0, x - np.nanmean(np.where(gk[None] > 0, x, 0.0), 0)[None], 0.0)
+        s2k = [float(xs[:, i].var(ddof=1)) if gk[i] > 0 else None for i in range(k)]
+        nk = int((gk > 0).sum())
+        if gewichtet and nk >= 2:
+            xr = (xs * gk[None]).sum(1) / gk.sum()
+            Qs = float((((xs - xr[:, None]) ** 2) * gk[None]).sum())
+        else:
+            Qs = None
+        dof = max(nk - 1, 0) * (n - 1)
+        bod = [None if g == 0 else 1.0 / g for g in gk]
+        koh[name] = dict(Q=Qs, nu=int(dof), p=float(stats.chi2.sf(Qs, dof)) if Qs is not None and dof > 0 else None,
+                         streuung_je_k=[None if s_ is None or b_ is None else float(np.sqrt(max(0.0, s_ - b_)) * skala)
+                                        for s_, b_ in zip(s2k, bod)],
+                         s_gesamt_je_k=[None if s_ is None else float(np.sqrt(s_) * skala) for s_ in s2k],
+                         gewicht_je_k=[float(g / gk.sum()) if gk.sum() > 0 else 0.0 for g in gk],
+                         hinweis='Q ~ χ²(ν) bei kohärenter Laufgröße über k (Laufwerte je k log-polar); kleines p: '
+                                 'Streuung hängt von k ab')
     # Fünftel: Amplituden- und Phasenänderung letztes − erstes Fünftel (Summe über Zellen)
     li = None
     Fk = tab.daten['fuenftel_Nk'][Lj][:, :, :k]

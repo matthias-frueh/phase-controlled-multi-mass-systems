@@ -21,6 +21,10 @@ Modul 2 und 3 (2) bzw. je Zelle (3)):
   rest_N               orthogonaler Rest je Modul, Zelle, Harmonischer (3, 3, k) [N je Re/Im], laufweise, vor der
                        Kette; in Kombinationsläufen mit den Zeigern des Laufs übertragen
   nullpunkt_diffusion_N2_je_s  Zufallspfad des Nullpunkts der Summe [N²/s] (zu den Laufzeitpunkten)
+  nullpunkt_zeit       Zeitachse von Nullpunktdrift und Zufallspfad: 'global' (Kampagnenuhr mit Pausen, wie der
+                       Szenariogenerator) oder 'betriebszeit' ((Position + ½)·T_Lauf, ohne Pausen zwischen Messtagen
+                       und Phasen: Phase 0 enthält keine Pause, die Drift über eine Pause ist nicht identifizierbar)
+  nullpunkt_sprung_sd_N  zufälliger Nullpunktsprung je Abschnitt (Phase, Messtag) [N] (Sensitivität drift_messtage)
   lauf_drift_sd_N      Streuung der Drift von ⟨N⟩ im Lauf je Lauf [N] (Fünftel ∓0,4·d)
   laufintern_amp_sd/_mittel, laufintern_phase_sd_grad/_mittel_grad  Änderung von Amplitude [1] und Phasenrest [°]
                        zwischen erstem und letztem Fünftel je Modul (lineare Änderung im Lauf, Laufmittel unverändert)
@@ -57,6 +61,7 @@ from .systeme import antworten
 
 VERSION = 'phase0_modell-0.1'
 F_S_BEZUG = rauschen.F_S_REF
+NULLPUNKT_ZEITEN = ('global', 'betriebszeit')
 
 
 def _arr(x, n=3):
@@ -94,12 +99,18 @@ class Strukturparameter:
     phase_gemeinsam_K: bool = False
     rest_N: object = None
     nullpunkt_diffusion_N2_je_s: float = 0.0
+    nullpunkt_zeit: str = 'global'
+    nullpunkt_sprung_sd_N: float = 0.0
     lauf_drift_sd_N: float = 0.0
     laufintern_amp_sd: object = 0.0
     laufintern_amp_mittel: object = 0.0
     laufintern_phase_sd_grad: object = 0.0
     laufintern_phase_mittel_grad: object = 0.0
     herkunft: tuple = ()
+
+    def __post_init__(self):
+        if self.nullpunkt_zeit not in NULLPUNKT_ZEITEN:
+            raise ValueError(f'nullpunkt_zeit {self.nullpunkt_zeit!r} unbekannt ({", ".join(NULLPUNKT_ZEITEN)})')
 
     # Schnittstelle von rauschen.Rauschmodell (ebene_h, ebene_z)
     def a(self, laufart):
@@ -128,7 +139,7 @@ class Strukturparameter:
     def zusatzstrom_noetig(self):
         """Ziehen die Erweiterungen aus einem eigenen Strom (rng_zusatz)?"""
         return bool(self.rest_N is not None and np.any(np.asarray(self.rest_N, float) > 0)
-                    or self.nullpunkt_diffusion_N2_je_s > 0 or self.lauf_drift_sd_N > 0
+                    or self.nullpunkt_diffusion_N2_je_s > 0 or self.lauf_drift_sd_N > 0 or self.nullpunkt_sprung_sd_N > 0
                     or np.any(_arr(self.laufintern_amp_sd) > 0) or np.any(_arr(self.laufintern_phase_sd_grad) > 0))
 
     def erweiterungen(self):
@@ -138,7 +149,7 @@ class Strukturparameter:
         aus = []
         for f in ('sigma_h_zelle', 'sigma_m_zelle', 'versatz_korrelation', 'jitter_korrelation', 'jitter_ar1',
                   'jitter_last', 'phasendrift_grad', 'phase_gemeinsam_K', 'rest_N', 'nullpunkt_diffusion_N2_je_s',
-                  'lauf_drift_sd_N', 'laufintern_amp_sd', 'laufintern_amp_mittel', 'laufintern_phase_sd_grad',
+                  'nullpunkt_sprung_sd_N', 'lauf_drift_sd_N', 'laufintern_amp_sd', 'laufintern_amp_mittel', 'laufintern_phase_sd_grad',
                   'laufintern_phase_mittel_grad'):
             v = x[f]
             if v is None or v is False:
@@ -147,6 +158,8 @@ class Strukturparameter:
                 aus.append(f)
         if any(np.ndim(np.asarray(v, float)) > 0 for _, v in self.amp + self.phase_grad):
             aus.append('je_modul')
+        if self.nullpunkt_zeit != 'global':
+            aus.append('nullpunkt_zeit')
         return aus
 
     def beschreibung(self):
@@ -537,6 +550,14 @@ def nullpunktpfad(D, t, rng):
     return out
 
 
+def nullpunktspruenge(sd, laeufe, rng):
+    """Zufälliger Nullpunkt je Abschnitt (Phase, Messtag) in Laufreihenfolge, erster Abschnitt 0 [N]."""
+    abschnitte = sorted({(l['phase'], l['messtag']) for l in laeufe})
+    werte = np.r_[0.0, sd * rng.standard_normal(len(abschnitte) - 1)].cumsum()
+    ort = dict(zip(abschnitte, werte))
+    return np.array([ort[(l['phase'], l['messtag'])] for l in laeufe])
+
+
 def erzeuge(modell, laeufe, rng, rausch=None, rng_zusatz=None):
     """Laufzusammenfassungen (LaufTabelle) wie ebene_h.erzeuge mit Strukturparametern (rausch: Strukturparameter oder
     rauschen.Rauschmodell; Vorgabe modell.rausch). rng_zusatz: eigener Strom der Erweiterungen mit Ziehung; ohne ihn
@@ -549,11 +570,15 @@ def erzeuge(modell, laeufe, rng, rausch=None, rng_zusatz=None):
     daten = zf.leere_daten(modell.k_voll, n)
     koepfe = [None] * n
     tm = np.array([0.5 * (l['t_start'] + l['t_ende']) for l in laeufe])
-    W = nullpunktpfad(st.nullpunkt_diffusion_N2_je_s, tm, rng_zusatz) if st.nullpunkt_diffusion_N2_je_s > 0 else None
+    td = tm if st.nullpunkt_zeit == 'global' else (np.array([l['position'] for l in laeufe], float) + 0.5) * \
+        modell.plan.T_lauf
+    W = nullpunktpfad(st.nullpunkt_diffusion_N2_je_s, td, rng_zusatz) if st.nullpunkt_diffusion_N2_je_s > 0 else None
+    if st.nullpunkt_sprung_sd_N > 0:
+        W = (np.zeros(n) if W is None else W) + nullpunktspruenge(st.nullpunkt_sprung_sd_N, laeufe, rng_zusatz)
     for idx in ebene_h._gruppen(laeufe):
         specs = [laeufe[i] for i in idx]
         z = _ziehen(modell, specs, rng, st, rng_zusatz)
-        _bilden(modell, z, np.arange(len(idx)), tm[idx], daten, idx, None if W is None else W[idx])
+        _bilden(modell, z, np.arange(len(idx)), td[idx], daten, idx, None if W is None else W[idx])
         for jj, i in enumerate(idx):
             koepfe[i] = ebene_h.kopf(modell, laeufe[i], z, jj)
     ebene_h._ereignisse(modell, laeufe, koepfe, daten)
@@ -572,7 +597,9 @@ STRUKTURREGEL = dict(punkt='√max(0, s² − Boden), abgeschnitten bei null',
                      rest='orthogonaler Rest je Modul und Harmonischer als Vielfaches des Zellbodens, laufweise',
                      kombination='Streuung der Kombinationsläufe wie in den Lⱼ-Läufen (Übertragungstest an den '
                                  'Piloten)',
-                     boden='weiß über die Zyklen (σ ∝ 1/√T_a)')
+                     boden='weiß über die Zyklen (σ ∝ 1/√T_a)',
+                     nullpunkt='Drift und Zufallspfad über die Betriebszeit (ohne Pausen); Sprünge zwischen '
+                               'Messtagen und Phasen: Sensitivität drift_messtage')
 
 
 def regeln_pruefen(profil, sensitivitaeten=False):
@@ -660,7 +687,8 @@ def aus_laufgroessen(lg, grenze='punkt', name=None):
             ('bindung', dict(k=k, N_z=b['N_z'], T_a_s=Ta0)), ('laufgroessen_version', lg['version']),
             ('faktor_boden_mittel', fak_m), ('nicht_identifizierbar', tuple(map(str, fehlt))),
             ('annahmen', ('Streuung der Kombinationsläufe gleich Lⱼ (je Modul)', 'Boden weiß über T_a (σ ∝ 1/√T_a)',
-                          'orthogonaler Rest ∝ Zellboden, laufweise', 'Fünftelanteile linear im Lauf')),
+                          'orthogonaler Rest ∝ Zellboden, laufweise', 'Fünftelanteile linear im Lauf',
+                          'Nullpunktdrift und Zufallspfad über die Betriebszeit, ohne Pausen')),
             ('lesart', 'marginale Grenzen je Komponente; keine gemeinsame 80-%-Garantie' if grenze == 'oben80'
              else 'Punktschätzer'))
     return Strukturparameter(
@@ -668,6 +696,7 @@ def aus_laufgroessen(lg, grenze='punkt', name=None):
         amp=(('L', _tupel(a)), ('K', _tupel(a))), phase_grad=(('L', _tupel(d)), ('K', _tupel(d))),
         jitter_grad=_tupel(jit), index_versatz_grad=_tupel(off), nullpunkt_drift_N_je_s=float(drift),
         lauf_drift_N=float(ld_mw), t_phi_s=tphi, f_streuung_hz=float(te['f_streuung_hz'] or 0.0), temperatur_C=temp,
+        nullpunkt_zeit='betriebszeit',
         sigma_h_zelle=_tupel(sh * np.sqrt(F_S_BEZUG * Ta0 / 2)), sigma_m_zelle=_tupel(sm * np.sqrt(F_S_BEZUG * Ta0)),
         versatz_korrelation=r, rest_N=tuple(tuple(tuple(float(v) for v in zeile) for zeile in m) for m in rest)
         if rest.any() else None,
@@ -725,6 +754,8 @@ SENSITIVITAETEN = {
                                              'Varianz am Abstand von P0.7 etwa verdoppelt)', diffusion_relativ=1.0),
     'drift_phase1': dict(beschreibung='Drift der Einzelmodulbasis zwischen Phase 0 und Phase 1: +0,1 % Amplitude '
                                       'aller Module in Phase 1', effekt=dict(art='drift_basis', faktor=0.001)),
+    'drift_messtage': dict(beschreibung='Nullpunktsprung zwischen Messtagen und zwischen den Phasen, zufällig je '
+                                        'Abschnitt mit Streuung 2·σ_m,Σ', sprung_relativ=2.0),
 }
 
 
@@ -757,6 +788,13 @@ def sensitivitaet(st, name, plan=None, f=None):
         sm = st.sigma_mittel(plan.n_zyklen / f)
         sm2 = float((np.asarray(sm, float) ** 2).sum()) if np.ndim(sm) else 3.0 * float(sm) ** 2
         kw['nullpunkt_diffusion_N2_je_s'] = rel * sm2 / (13 * plan.T_lauf)
+    if 'sprung_relativ' in s:
+        rel = s.pop('sprung_relativ')
+        if plan is None or f is None:
+            raise ValueError('Sensitivität drift_messtage verlangt plan und f')
+        sm = st.sigma_mittel(plan.n_zyklen / f)
+        kw['nullpunkt_sprung_sd_N'] = rel * float(np.sqrt((np.asarray(sm, float) ** 2).sum() if np.ndim(sm)
+                                                           else 3.0 * float(sm) ** 2))
     if 'effekt' in s:
         eff = (dict(s.pop('effekt')),)
     kw.update(s)

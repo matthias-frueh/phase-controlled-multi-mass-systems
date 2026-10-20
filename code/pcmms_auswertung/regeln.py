@@ -424,7 +424,9 @@ _NEU_11 = [
             nicht_identifizierbar='0, ausdrücklich benannt, als benannte Sensitivität geführt',
             rest='orthogonaler Rest je Modul und Harmonischer als Vielfaches des Zellbodens, laufweise',
             kombination='Streuung der Kombinationsläufe wie in den Lⱼ-Läufen (Übertragungstest an den Piloten)',
-            boden='weiß über die Zyklen (σ ∝ 1/√T_a)'),
+            boden='weiß über die Zyklen (σ ∝ 1/√T_a)',
+            nullpunkt='Drift und Zufallspfad über die Betriebszeit (ohne Pausen); Sprünge zwischen Messtagen und '
+                      'Phasen: Sensitivität drift_messtage'),
        'Umsetzung Teil d2 (generator.phase0_modell); Klärung am Normtext (A9.2, A9.11)', 'planung'),
     _r('rauschmodelle.sensitivitaeten', 'Benannte Sensitivitätsszenarien des Rauschmodells mit festen Stärken',
        '§12 Rauschmodelle, A9.11', TD,
@@ -440,7 +442,9 @@ _NEU_11 = [
            'nullpunkt_diffusion': 'Zufallspfad des Nullpunkts mit D·13·T_Lauf = σ²_m,Σ (Leave-one-out-Varianz am '
                                   'Abstand von P0.7 etwa verdoppelt)',
            'drift_phase1': 'Drift der Einzelmodulbasis zwischen Phase 0 und Phase 1: +0,1 % Amplitude aller Module '
-                           'in Phase 1'}),
+                           'in Phase 1',
+           'drift_messtage': 'Nullpunktsprung zwischen Messtagen und zwischen den Phasen, zufällig je Abschnitt mit '
+                             'Streuung 2·σ_m,Σ'}),
        'Vorschlag der Umsetzung Teil d2, nur berichtet (keine Wirkung auf Ausgänge); Festlegung in Teil A ausstehend',
        'bericht'),
 ]

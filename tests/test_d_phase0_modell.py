@@ -105,6 +105,26 @@ def test_wiedergewinnung_je_modul_und_erweiterungen():
     assert mw[22] == pytest.approx(0.05, rel=0.1) and mw[24] == pytest.approx(0.1, rel=0.1) and mw[23] < 0.02
 
 
+def test_nullpunkt_ueber_betriebszeit_und_spruenge_je_abschnitt():
+    """Strukturmodell: Drift und Zufallspfad des Nullpunkts laufen über die Betriebszeit (keine Extrapolation über
+    die Pausen zwischen Messtagen und Phasen); Sprünge je Abschnitt nur als Sensitivität."""
+    plan = PLAN.mit(n_bloecke=4, tage=2)
+    laeufe = kp.laufplan(plan, zufall.strom(8, 'r'))
+    st = p0m.aus_rauschmodell(rauschen.RAUSCHFREI).mit(nullpunkt_drift_N_je_s=1e-6, nullpunkt_zeit='betriebszeit')
+    t = p0m.erzeuge(_modell_a4(st, plan), laeufe, zufall.strom(8, 'g'))
+    N = t.daten['N_mittel'] - t.daten['N_mittel'][0]
+    pos = np.array([l['position'] for l in laeufe], float)
+    assert np.allclose(N, 1e-6 * pos * plan.T_lauf, atol=1e-12)                     # ohne Pausen
+    g = p0m.erzeuge(_modell_a4(st.mit(nullpunkt_zeit='global'), plan), laeufe, zufall.strom(8, 'g'))
+    tm = np.array([0.5 * (l['t_start'] + l['t_ende']) for l in laeufe])
+    assert np.allclose(g.daten['N_mittel'] - g.daten['N_mittel'][0], 1e-6 * (tm - tm[0]), atol=1e-12)
+    sp = p0m.nullpunktspruenge(1.0, laeufe, np.random.default_rng(1))
+    abschnitt = [(l['phase'], l['messtag']) for l in laeufe]
+    assert sp[0] == 0 and len({(a, round(v, 12)) for a, v in zip(abschnitt, sp)}) == len(set(abschnitt)) == 3
+    with pytest.raises(ValueError, match='unbekannt'):
+        p0m.Strukturparameter(nullpunkt_zeit='kalender')
+
+
 def test_zusatzstrom_ist_pflicht():
     st = p0m.Strukturparameter(lauf_drift_sd_N=1e-4)
     m = _modell_a4(st)
@@ -275,7 +295,9 @@ def test_benannte_sensitivitaeten_feste_staerken():
             b = p1 & (art != 'R')
             assert not np.array_equal(t.daten['Nk_zellen'][b], ref.daten['Nk_zellen'][b])
         else:                                                               # Nullpunkt: ⟨N⟩ ändert sich
-            assert name == 'nullpunkt_diffusion' and not np.array_equal(t.daten['N_mittel'], ref.daten['N_mittel'])
+            assert name in ('nullpunkt_diffusion', 'drift_messtage')
+            assert not np.array_equal(t.daten['N_mittel'], ref.daten['N_mittel'])
+            assert np.array_equal(t.daten['Nk_zellen'], ref.daten['Nk_zellen'])
     with pytest.raises(ValueError, match='unbekannt'):
         p0m.sensitivitaet(base, 'jitter_rosa')
 
