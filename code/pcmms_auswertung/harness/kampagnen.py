@@ -35,14 +35,34 @@ def _roh(T, bias, achse=None):
 
 def _e3_kurz(e3):
     """Kompakter E3-Befund: Bewertung, Status, Prüfgrößen je Konfiguration und Modul (|Δφ_Z|, u, u ohne T-Anteil) und
-    für E3b (q_Z, u, u ohne T-Anteil), z_B, m sowie die Diagnose der T-Ziehungen (Teil B nr5.unsicherheit)."""
+    für E3b (q_Z, u, u ohne T-Anteil), z_B, m sowie die Diagnose der T-Ziehungen (Teil B nr5.unsicherheit).
+    Regelstand 2026-11 zusätzlich, für die Modellprüfung in den Kalibrierkampagnen: je E3a-Zeile die Größen
+    e3_grenzen.KURZ_E3A (vorzeichenbehafteter Wert, korrigiertes u, ν, ν_eff, n_A, gültige Replikate, gefalteter
+    Faktor, Grenzen) und das Ergebnis, für E3b die Größen e3_grenzen.KURZ_E3B (d̂ komplex, Σ̂ als [Σ_rr, Σ_ri, Σ_ii],
+    ŝ, ρ̂, Richtung, ν, ν_eff, n_A, n₀ⱼ, n*, κ, Grenzen), Stufe und Urteil je Prüfgröße und Ergebnis und Grund aller 43
+    Prüfungen."""
     a = [[abs(v['delta_phi_Z_grad']), v['u_grad'], v.get('u_ohne_T_grad', np.nan)]
          for e in e3.get('e3a') or [] for v in e['e3a'].values()]
     b = e3.get('e3b')
-    return dict(bewertung=e3.get('bewertung'), status=e3.get('status'), z_B=e3.get('z_B'), m=e3.get('m'),
-                e3a=np.asarray(a, float).reshape(-1, 3),
-                e3b=None if not b else np.array([b['q_Z'], b['u_q_Z'], b.get('u_q_Z_ohne_T', np.nan)], float),
-                t=e3.get('t_unsicherheit'))
+    out = dict(bewertung=e3.get('bewertung'), status=e3.get('status'), z_B=e3.get('z_B'), m=e3.get('m'),
+               e3a=np.asarray(a, float).reshape(-1, 3),
+               e3b=None if not b else np.array([b['q_Z'], b['u_q_Z'], b.get('u_q_Z_ohne_T', np.nan)], float),
+               t=e3.get('t_unsicherheit'))
+    if e3.get('regelstand') == '2026-11':
+        from ..e3_grenzen import KURZ_E3A, KURZ_E3B
+        P = [v.get('pruefung') or {} for e in e3.get('e3a') or [] for v in e['e3a'].values()]
+        pb = (b or {}).get('pruefung')
+        out.update(regelstand='2026-11', alpha_m=e3.get('alpha_m'),
+                   e3a_pruefung=np.array([[np.nan if p.get(k) is None else p[k] for k in KURZ_E3A] for p in P],
+                                         float).reshape(-1, len(KURZ_E3A)),
+                   e3a_ergebnis=[p.get('ergebnis') for p in P],
+                   e3b_modell=None if not pb else {k: pb.get(k) for k in KURZ_E3B},
+                   pruefgroessen={g: {k: v[k] for k in ('stufe', 'urteil', 'gruende', 'zaehlung')}
+                                  for g, v in (e3.get('pruefgroessen') or {}).items()},
+                   pruefungen=[dict(id=p['id'], ergebnis=p['ergebnis'], grund=p['grund'])
+                               for p in e3.get('pruefungen') or []],
+                   kriterien_a9_11=e3.get('kriterien_a9_11'))
+    return out
 
 
 def _e3_fehlt(tb):

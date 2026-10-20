@@ -428,7 +428,9 @@ def auswerten(zusammenfassungen, kalibrierung, teil_b, regeln, seed=None, bootst
     if e2:
         zu = _zuordnung(e2, t1, d, lauf, kontroll, auswertbar, tb, T0, T1, schnitt, c_H1, idx, B0, kmax, prof,
                         Nbar0, Nbar1)
-    # E3
+    # E3 (Regelstand 2026-11: Prüfmenge schnitt21_triphasik = alle 21 Schnittpunkte, auch nicht auswertbare, und der
+    # Triphasik-Punkt; Kriterien von A9.11 aus Teil B nr10.e3_kriterien, sofern Werkzeug 8 sie ausweist; historische
+    # Profile lesen punkte und kriterien nicht)
     E3 = None
     nr5 = tb['nr5']
     T = nr5.get('T')
@@ -448,7 +450,8 @@ def auswerten(zusammenfassungen, kalibrierung, teil_b, regeln, seed=None, bootst
                   else None)
             E3 = kontrollen.e3_auswerten(KE, E0, {k: idx[f'A/{k}'] for k in KE}, idxB0, np.asarray(T), xy,
                                          n2['delta_delta_grad'], n2['u_delta_delta_grad'], None, 'S120', prof,
-                                         bs.mc_strom(seed, reihenfolge, 'E3'), uq, T_zieh=tz)
+                                         bs.mc_strom(seed, reihenfolge, 'E3'), uq, T_zieh=tz, punkte=list(schnitt),
+                                         kriterien=(tb.get('nr10') or {}).get('e3_kriterien'))
     # beschreibend: A und F_max je Schnittpunkt mit Vorhersage
     beschr = {}
     for kid in schnitt:

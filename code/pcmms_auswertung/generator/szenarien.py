@@ -225,6 +225,54 @@ _neu('S-indexfehler', 'A9.4', 'Indexfehler (fehlender Impuls von Modul 2) in ein
      abweichung='kein eigener Planpunkt; Ergänzung nach Auftrag Etappe 5')
 
 
+# — Zusatzprüffälle E3b (Regelstand 2026-11, Regel e3.zusatzszenarien) ————————————————————————————————————————————————
+# Nicht im KATALOG: Katalogtabelle, Katalog-Hash und Software-Prüfsatz (harness.pruefsatz) bleiben bitgleich. Aufruf
+# über das Szenarioobjekt, z. B. modell(ZUSATZ_E3['E3b-amp10'], 'L1', plan=…); Kalibrierung wie N01-A4 (keine
+# Kalibrierabweichung).
+ZUSATZ_E3 = {}
+ZUSATZ_MODUL = 2
+
+
+def zusatz_id(anteil):
+    """Kennung eines Zusatzprüffalls: Amplitudenänderung in Promille, z. B. 0,005 → „E3b-amp05“, 0,01 → „E3b-amp10“."""
+    return f'E3b-amp{int(round(1000 * anteil)):02d}'
+
+
+def zusatz_e3b(anteile):
+    """Zusatzprüffälle für E3b (A9.11, Auftrag vom 20.10.2026): Amplitude von Modul 2 nur in den Kombinationsläufen
+    × (1 + a) (Effekt modul_k), sonst exakte Superposition (A4, identische Module). Nicht unterstützte Werte →
+    ValueError."""
+    if not isinstance(anteile, (list, tuple)) or not anteile:
+        raise ValueError(f'e3.zusatzszenarien {anteile!r}: Liste von Amplitudenänderungen verlangt')
+    out = []
+    for a in anteile:
+        if isinstance(a, bool) or not isinstance(a, (int, float)) or not 0 < a <= 0.1 or \
+                abs(1000 * a - round(1000 * a)) > 1e-9:
+            raise ValueError(f'e3.zusatzszenarien: {a!r} nicht unterstützt (Anteil in (0; 0,1] in ganzen Promille)')
+        out.append(Szenario(
+            zusatz_id(a), 'A9.11', f'Amplitudenänderung von Modul {ZUSATZ_MODUL} nur in den Kombinationsläufen um '
+            f'{100 * a:g} % (A4, sonst exakte Superposition)', 'statistisch', 'A4', ('E3', 'H1'),
+            f'E3b: wahre Differenz |d| ≈ a/3 ≈ {a / 3 / 5.8e-4:.2f}·q_tol am Triphasik-Punkt (Vorlage 4.2: 1 % ≙ '
+            '5,74·q_tol); E3a unberührt (kein Phasenversatz); kleiner Funktionsnachweis, keine Rate',
+            effekte=(lambda x: ({'art': 'modul_k', 'modul': ZUSATZ_MODUL, 'faktor': x},)), staerke=float(a),
+            abweichung='Zusatzprüffall nach Auftrag vom 20.10.2026 (e3.zusatzszenarien), nicht im Katalog des '
+                       'Plans'))
+    if len({s.id for s in out}) != len(out):
+        raise ValueError(f'e3.zusatzszenarien {anteile!r}: doppelte Werte')
+    return out
+
+
+def _zusatz_anlegen():
+    from .. import regeln
+    for s in zusatz_e3b(regeln.profil('AF-2026-11').wert('e3.zusatzszenarien')):
+        if s.id in KATALOG or s.id in ZUSATZ_E3:
+            raise ValueError(f'Szenario {s.id} doppelt')
+        ZUSATZ_E3[s.id] = s
+
+
+_zusatz_anlegen()
+
+
 # — Modellbildung ——————————————————————————————————————————————————————————————————————————————————————————————————————
 
 def _plan(sz, plan=None):

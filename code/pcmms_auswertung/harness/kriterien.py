@@ -221,13 +221,24 @@ def bewerten(ps):
           f'bestätigt {_fmt((kal or {}).get("raten_pruefung", {}).get("H1Z: bestätigt"))}; ' +
           raten_text(['E04-kette'], 'H1Z: falsifiziert'),
           'Grenzen von H1Z: Entwicklungsprüffall Δ_q/3; Prüfrate von c_H1Z nicht gesondert simuliert')
-    zeile('E3', 'fachlich offen',
-          '; '.join(f'{x}: ' + ', '.join(f'{k.split(": ", 1)[1]} {_fmt(v)}' for k, v in
-                                         sz[f'{x}/{st}']['raten'].items() if k.startswith('E3'))
-                    for x in ('N03-ungleich', 'A06-phase') if f'{x}/{st}' in sz) +
-          ('' if not kal else '; N01-A4: ' + ', '.join(f'{k.split(": ", 1)[1]} {_fmt(v)}' for k, v in
-                                                        kal['raten_pruefung'].items() if k.startswith('E3'))),
-          'Schwellen, Prüfmenge und Rückfall von E3 offen (§12); Phasenversatzszenarien 0,1°/0,3° fehlen')
+    from ..regeln import HISTORISCH
+    e3_hist = ps['profil'].split('+')[0] in HISTORISCH
+    e3_befund = ('; '.join(f'{x}: ' + ', '.join(f'{k.split(": ", 1)[1]} {_fmt(v)}' for k, v in
+                                               sz[f'{x}/{st}']['raten'].items() if k.startswith('E3'))
+                           for x in ('N03-ungleich', 'A06-phase') + (() if e3_hist else ('E3b-amp05', 'E3b-amp10'))
+                           if f'{x}/{st}' in sz) +
+                 ('' if not kal else '; N01-A4: ' + ', '.join(f'{k.split(": ", 1)[1]} {_fmt(v)}' for k, v in
+                                                              kal['raten_pruefung'].items() if k.startswith('E3'))))
+    if e3_hist:
+        zeile('E3', 'fachlich offen', e3_befund,
+              'Schwellen, Prüfmenge und Rückfall von E3 offen (§12); Phasenversatzszenarien 0,1°/0,3° fehlen')
+    else:                               # Regelstand 2026-11: Regeln festgelegt, Kriterien nicht abgenommen
+        zeile('E3', 'nur probeweise gerechnet' if e3_befund else 'fehlt', e3_befund,
+              'Regelstand 2026-11: Option B mit Rückfall je Prüfgröße, m = 43 fest (e3.grenzen); Randgültigkeit nur '
+              'auf Statistikebene (Quadratur unter Gauß-, Wishart- und Unabhängigkeitsannahmen); Kriterien von A9.11 '
+              'nicht mit normativer Kampagnenzahl, Modellprüfung von E3b nicht ausgeführt (keine Kalibrierabnahme); '
+              'Phasenversatzszenarien 0,1°/0,3° fehlen; Amplitudenänderung 0,5 %/1 % (E3b-amp05/-amp10) nur als '
+              'Funktionsnachweis')
     zeile('Zuordnung', 'fachlich offen',
           '; '.join(f'{x}: ' + ', '.join(f'{k.split(": ", 1)[1]} {_fmt(v)}' for k, v in
                                          sz[f'{x}/{st}']['raten'].items() if k.startswith('Zuordnung'))

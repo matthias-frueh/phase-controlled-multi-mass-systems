@@ -25,13 +25,16 @@ Ziehungen von Δδⱼ (je Modul eine), der Quantisierung der Zeitstempel (Rechte
 (A9.13): je Replikat ein Parametersatz (g, x, y aus P0.1, Kette je Zelle, f_n und ζ aus P0.4) für alle Konfigurationen
 und beide Harmonischen; E3b zieht nur die Zelllagen, gemeinsam für Messung und Vorhersage. Ohne Beschreibung der
 Unsicherheit von T (Teil B nr5) gibt es nur numerische Diagnostik, keine dreiwertige Aussage.
+Regelstand 2026-11 (AF-/ENTW-2026-11, Regeln e3.* festgelegt): Grenzen nach Option B mit Rückfall je Prüfgröße und
+m = 43 fest (e3_grenzen: gefaltete t-Grenze für E3a, κ·ŝ·Rice⁻¹ mit ŝ² = λ_max(Σ̂) aus den komplexen Replikaten für
+E3b); die historischen Profile AF-/ENTW-2026-10 rechnen unverändert (z-Quantil, m aus den ausgewerteten Punkten).
 """
 import time
 
 import numpy as np
 from scipy import stats
 
-from . import anpassung, bootstrap as bs, konventionen as kv, vorhersage as vh
+from . import anpassung, bootstrap as bs, e3_grenzen as e3g, konventionen as kv, regeln as rg, vorhersage as vh
 from .regeln import RegelOffen
 
 
@@ -274,18 +277,27 @@ def moment(Nz1, xy):
 
 
 def e3_auswerten(K, E0, idxA, idxB0, T, xy, dd, u_dd, phi_mess, triphasik, profil, rng, u_quant_grad, kmax=2,
-                 T_zieh=None):
+                 T_zieh=None, punkte=None, kriterien=None):
     """K: id → dict(Xz (n, 3, Kv) Zellharmonische, Z, nz); E0: Einzelmodul-Zellharmonische Phase 0 je Modul
     (n_j, 3, Kv); T: Nennwert (k, Zelle, Modul); xy: Zelllagen (3, 2); dd, u_dd: Δδⱼ und u(Δδⱼ); phi_mess: id → φ̄ⱼ^P
     (3). T_zieh: Ergebnis von t_ziehungen mit so vielen Ziehungen wie Bootstrap-Replikaten (Replikat b verwendet T_b
     und die Zelllagen von b für alle Konfigurationen, Messung und Vorhersage); None: keine Unsicherheitsbeschreibung,
     nur numerische Diagnostik mit festem T, keine dreiwertige Aussage. Je Prüfgröße steht zusätzlich u ohne T-Anteil
-    (dieselben Replikate, T und Zelllagen fest) als Diagnose; die Bewertung nutzt sie nicht."""
+    (dieselben Replikate, T und Zelllagen fest) als Diagnose; die Bewertung nutzt sie nicht.
+
+    Regelstand 2026-11 (regeln.stand(profil) == '2026-11'): Grenzen nach Option B mit Rückfall je Prüfgröße
+    (e3_grenzen); punkte: die 21 Schnittpunkte der Prüfmenge (auch nicht auswertbare), kriterien: Kriterienbefund
+    von A9.11 aus Teil B (nr10.e3_kriterien) oder None. Historische Profile rechnen unverändert; punkte und
+    kriterien werden dort nicht gelesen."""
+    neu = rg.stand(profil) == '2026-11'
     T = np.asarray(T)
     kond = np.linalg.cond(T)
     if not np.all(np.isfinite(kond)) or np.any(kond > KOND_MAX):
-        return dict(status='nicht auswertbar: T(kω) singulär oder schlecht konditioniert (Zell- und Modullagen '
-                           'trennen die Module nicht)', bewertung=None, kondition=np.asarray(kond).tolist())
+        aus = dict(status='nicht auswertbar: T(kω) singulär oder schlecht konditioniert (Zell- und Modullagen '
+                          'trennen die Module nicht)', bewertung=None, kondition=np.asarray(kond).tolist())
+        if neu:
+            aus.update(regelstand='2026-11', m=e3g.regeln_lesen(profil)['m'])
+        return aus
     Tinv = np.linalg.inv(T)                                             # (k, Modul, Zelle)
     Nbar0 = np.stack([e.mean(0) for e in E0])                           # (Modul, Zelle, Kv)
     B = idxA[next(iter(idxA))].shape[0]
@@ -301,9 +313,11 @@ def e3_auswerten(K, E0, idxA, idxB0, T, xy, dd, u_dd, phi_mess, triphasik, profi
         Tinv_b = np.broadcast_to(Tinv, (B,) + Tinv.shape)
         xy_b = np.broadcast_to(np.asarray(xy, float), (B, 3, 2))
     erg = []
+    roh = {}                                                            # Regelstand 2026-11: Replikate je Prüfung
     for kid, d in K.items():
         X = d['Xz'][..., :kmax]
         n = X.shape[0]
+        roh[kid] = dict(n_A=int(n), e3a={})
         C = bs.zaehlmatrix(idxA[kid], n)
         yb = (C @ X.reshape(n, -1)).reshape(-1, 3, kmax) / n
         rb = (C @ d['Z'][..., :kmax].reshape(n, -1)).reshape(-1, 3, kmax) / (C @ d['nz'])[:, None, None]
@@ -329,9 +343,10 @@ def e3_auswerten(K, E0, idxA, idxB0, T, xy, dd, u_dd, phi_mess, triphasik, profi
                 u_fest = float(np.sqrt(np.var(dzf, ddof=1) + u_quant_grad ** 2))
             res[f'modul{j + 1}'] = dict(delta_phi_Z_grad=float(dz), u_grad=u, u_ohne_T_grad=u_fest,
                                         delta_phi_Z_k2_grad=None if d2 is None else float(d2))
+            roh[kid]['e3a'][f'modul{j + 1}'] = (float(dz), dzb)
         erg.append(dict(id=kid, e3a=res, amplitude=np.abs(Ch[:, 0]).tolist()))
     # E3b am Triphasik-Punkt: Zelllagen je Replikat gemeinsam für Messung und Vorhersage, T kommt nicht vor
-    e3b = None
+    e3b = roh_b = None
     if triphasik in K:
         d = K[triphasik]
         X = d['Xz'][..., :1]
@@ -358,6 +373,9 @@ def e3_auswerten(K, E0, idxA, idxB0, T, xy, dd, u_dd, phi_mess, triphasik, profi
             u_q_fest = float(np.std(np.abs(Rmf - Rmhf) / np.abs(Rphf), ddof=1))
         e3b = dict(id=triphasik, q_Z=q, u_q_Z=float(np.nanstd(qb, ddof=1)), u_q_Z_ohne_T=u_q_fest,
                    verhaeltnis_messung=float(abs(Rm) / abs(Rp)), verhaeltnis_vorhersage=float(abs(Rmh) / abs(Rph)))
+        with np.errstate(invalid='ignore', divide='ignore'):          # unzulässige T-Ziehungen: NaN-Replikate
+            roh_b = dict(d=complex((Rm - Rmh) / abs(Rph)), q=q, d_b=(Rmb - Rmhb) / np.abs(Rphb),
+                         nenner_b=np.abs(Rphb), n_A=int(n), n0=[int(e.shape[0]) for e in E0])
     out = dict(e3a=erg, e3b=e3b, T_hinweis='T aus Statik (P0.1), Kette und 1 FG; Kippmoden vernachlässigt',
                u_ohne_T_hinweis='u_ohne_T_grad, u_q_Z_ohne_T: Diagnose aus denselben Replikaten mit festem T(kω) und '
                                 'festen Zelllagen (Lesart vor Korrektur E); nicht Teil der Bewertung',
@@ -378,6 +396,8 @@ def e3_auswerten(K, E0, idxA, idxB0, T, xy, dd, u_dd, phi_mess, triphasik, profi
                      if T_zieh['unvollstaendig'] else
                      f'{n_ung} von {B} T-Ziehungen unzulässig ({T_zieh["gruende"]}); u nur aus den zulässigen '
                      'Ziehungen, keine dreiwertige Aussage' if n_ung else None)
+    if neu:
+        return _e3_2026_11(out, roh, roh_b, punkte, triphasik, profil, grund_num, kriterien, u_quant_grad)
     try:
         sw = profil.wert('e3.schwellen')
         profil.wert('e3.pruefzahl')
@@ -399,4 +419,42 @@ def e3_auswerten(K, E0, idxA, idxB0, T, xy, dd, u_dd, phi_mess, triphasik, profi
     unauff = all(x + 1.645 * u <= s for x, u, s in pruef)
     out.update(z_B=zB, m=m, bewertung='auffällig' if auff else ('unauffällig' if unauff else 'unbestimmt'),
                status='Entwicklungsprofil (dreiwertig nur als Entwicklungsprüffall)')
+    return out
+
+
+def _e3_2026_11(out, roh, roh_b, punkte, triphasik, profil, grund_num, kriterien, u_quant_grad):
+    """Bewertung im Regelstand 2026-11 (e3_grenzen): je E3a-Prüfung gefaltete t-Grenzen mit ũ² = n/(n − 1)·u²,
+    E3b aus den komplexen Replikaten (Σ̂, λ_max, κ, Rice), m = 43 fest, Rückfall je Prüfgröße. Die Zahlen der
+    historischen Felder bleiben; neu sind je Prüfung „pruefung“ sowie pruefungen, pruefgroessen und das Urteil."""
+    out['regelstand'] = '2026-11'
+    try:
+        regel = e3g.regeln_lesen(profil)
+    except RegelOffen as e:
+        out.update(status=f'nur beschreibend: {e.grund}', bewertung=None)
+        return out
+    if punkte is None:
+        raise ValueError('E3 im Regelstand 2026-11 verlangt die Prüfmenge (punkte: die 21 Schnittpunkte)')
+    sw, am, nm = regel['schwellen'], regel['alpha_m'], regel['grenzen']['nu_min']
+    pa = {}
+    for e in out['e3a']:
+        r = roh[e['id']]
+        pa[e['id']] = {}
+        for mod, (x, xb) in r['e3a'].items():
+            xb = np.asarray(xb, float)
+            ok = np.isfinite(xb)
+            u2 = float(np.var(xb[ok], ddof=1) + u_quant_grad ** 2) if ok.sum() > 1 else float('nan')
+            p = e3g.e3a_pruefung(x, u2, r['n_A'], int(xb.size), int(ok.sum()), sw['phase_grad'], am, nm)
+            e['e3a'][mod]['pruefung'] = p
+            pa[e['id']][mod] = p
+    pb = None
+    if out['e3b'] is not None:
+        pb = e3g.e3b_pruefung(roh_b['d'], roh_b['d_b'], roh_b['n_A'], roh_b['n0'], sw['q_tol'], am, nm,
+                              nenner_b=roh_b['nenner_b'], q=roh_b['q'])
+        out['e3b']['pruefung'] = pb
+    bew = e3g.bewerten(pa, pb, list(punkte), triphasik, regel, grund_beschreibend=grund_num, kriterien=kriterien)
+    out.update(grenzen_version=e3g.VERSION, m=regel['m'], alpha=regel['alpha'], alpha_m=am,
+               regeln={k: regel[k] for k in ('schwellen', 'grenzen', 'rueckfall', 'pruefmenge', 'e3b_form')},
+               pruefmenge=dict(punkte=list(punkte), triphasik=triphasik,
+                               ausgewertet=[k for k in punkte if k in pa], fehlend=[k for k in punkte if k not in pa]),
+               annahmen=list(e3g.ANNAHMEN), **bew)
     return out
