@@ -321,11 +321,11 @@ def _modul(tab, Lj, k, s2c, nu_h, N_z, n_f, kk):
     q = np.zeros(k)
     for i in range(k):
         nu_i = float((n - 1) * (2 - h[:, i]).sum())
+        # Rest o²_c = q·σ²_c (Vielfaches des Zellbodens) hat dieselben Hebel wie der Boden: E[V] = (1 + q)·σ²_c·(2 − h)
         R_i = float(Vck[:, i].sum() / erw[:, i].sum()) if gewichtet else np.nan
-        nenner = 2 * sig2.sum()
-        qi = max(0.0, (Vck[:, i].sum() - erw[:, i].sum()) / nenner) if gewichtet else 0.0
+        qi = max(0.0, R_i - 1.0) if gewichtet else 0.0
         k80 = kappa(nu_i)
-        qo = max(0.0, (R_i * k80 ** 2 - 1) * erw[:, i].sum() / nenner) if gewichtet else None
+        qo = max(0.0, R_i * k80 ** 2 - 1.0) if gewichtet else None
         fk = _f_quantil(nu_i, float(nu_h)) if nu_h else np.inf
         q[i] = qi
         rest.append(dict(k=i + 1, q=float(qi), q_oben80=None if qo is None else float(qo), verhaeltnis=_f(R_i),
@@ -442,7 +442,8 @@ def _piloten(tab, P, N_z):
 def kovarianz_harmonische(Nbar, rho, s2_a, s2_d_rad, k, boden_summe, q=None, s2c=None):
     """Modellkovarianz (2×2, Re/Im) der Summenharmonischen N_k einer Konfiguration aus den nicht erfassten Laufgrößen:
     Σⱼ σ²_a,j·g gᵀ + k²σ²_δ,j·h hᵀ mit g = (Re, Im)(ρⱼₖ N̄ⱼₖ), h = (Re, Im)(−i·ρⱼₖ N̄ⱼₖ), dazu Boden (Summe über die
-    Zellen, je Re/Im) und orthogonaler Rest q_jk·Σ_c σ²_c·|ρⱼₖ|². Nbar (3,) Summenharmonische je Modul bei k, rho (3,)."""
+    Zellen, je Re/Im) und orthogonaler Rest q_jk·Σ_c σ²_c·|ρⱼₖ|². Nbar (3,) Summenharmonische je Modul bei k,
+    rho (3,)."""
     C = np.eye(2) * boden_summe
     for j in range(3):
         z = rho[j] * Nbar[j]

@@ -415,6 +415,34 @@ _NEU_11 = [
        AUFTRAG + '; marginale Grenzen, keine gemeinsame 80-%-Garantie', 'planung'),
     _r('planung.teil_b_werte', 'Teil-B-Werte aus Punktschätzern nach der Planung', '§8.4, A9.2, A9.11', AF,
        'punktschaetzer', AUFTRAG + '; Planung mit c_B an der oberen Grenze, danach Parameterschätzung', 'planung'),
+    # Teil d2: Umsetzung des Strukturmodells (technisch; Begründung: der Auftrag verlangt, Regularisierung und nicht
+    # identifizierbare Komponenten ausdrücklich zu behandeln und nicht Identifizierbares als benannte Sensitivitäten
+    # mit festen Stärken zu führen; die Stärken sind ein Vorschlag der Umsetzung, ihre Festlegung gehört in Teil A)
+    _r('p0.strukturmodell', 'Regularisierung und Annahmen des Strukturmodells aus Phase 0', '§5.4, A9.2, A9.11', TD,
+       dict(punkt='√max(0, s² − Boden), abgeschnitten bei null',
+            obere_grenze='√max(0, s²·ν/χ²₀,₂(ν) − Boden) je Komponente; Boden von ⟨N⟩: ein Faktor für alle Laufarten',
+            nicht_identifizierbar='0, ausdrücklich benannt, als benannte Sensitivität geführt',
+            rest='orthogonaler Rest je Modul und Harmonischer als Vielfaches des Zellbodens, laufweise',
+            kombination='Streuung der Kombinationsläufe wie in den Lⱼ-Läufen (Übertragungstest an den Piloten)',
+            boden='weiß über die Zyklen (σ ∝ 1/√T_a)'),
+       'Umsetzung Teil d2 (generator.phase0_modell); Klärung am Normtext (A9.2, A9.11)', 'planung'),
+    _r('rauschmodelle.sensitivitaeten', 'Benannte Sensitivitätsszenarien des Rauschmodells mit festen Stärken',
+       '§12 Rauschmodelle, A9.11', TD,
+       dict(version='sensitivitaeten-0.1', szenarien={
+           'jitter_farbig': 'farbiger Jitter: AR(1) über die Zyklen mit Koeffizient 0,9',
+           'jitter_korreliert': 'Jitter der Module 2 und 3 je Zyklus korreliert (ρ = 0,5)',
+           'jitter_lastabhaengig': 'Jitter der Kombinationsläufe × (1 + 0,5·q₁(φ))',
+           'phasendrift_lauf': 'lineare Indexphasendrift 0,1° über den Kombinationslauf (Module 2, 3)',
+           'kombination_doppelt': 'Amplituden- und Phasenstreuung der Kombinationsläufe doppelt so groß wie in Lⱼ',
+           'laufzeit_gemeinsam': 'gemeinsame Laufzeitschwankung der Kette statt modulweisem δ in den '
+                                 'Kombinationsläufen',
+           'amplitude_doppelt': 'Amplitudenstreuung je Modul doppelt so groß (alle Laufarten)',
+           'nullpunkt_diffusion': 'Zufallspfad des Nullpunkts mit D·13·T_Lauf = σ²_m,Σ (Leave-one-out-Varianz am '
+                                  'Abstand von P0.7 etwa verdoppelt)',
+           'drift_phase1': 'Drift der Einzelmodulbasis zwischen Phase 0 und Phase 1: +0,1 % Amplitude aller Module '
+                           'in Phase 1'}),
+       'Vorschlag der Umsetzung Teil d2, nur berichtet (keine Wirkung auf Ausgänge); Festlegung in Teil A ausstehend',
+       'bericht'),
 ]
 _ENTW_ENTSCHIEDEN_11 = ('e3.schwellen', 'e3.pruefzahl', 'e3.rueckfall', 'e3.pruefmenge', 'e3.e3b_form',
                         'h1.c_rauschmodelle', 'rauschmodelle')
@@ -601,8 +629,11 @@ UMSETZUNG = (                           # Präfix der Regel → umsetzendes Modu
     ('h2.', 'zeltfit, h2'), ('h3.', 'h3'), ('h4.', 'h4'), ('e3.', 'kontrollen'), ('zuordnung.', 'kontrollen'),
     ('punkte_I', 'kontrollen, generator'), ('einstellung2.', 'generator'), ('kontaktast.', 'teil_b, auswertung'),
     ('a6.', 'generator.ebene_z'), ('planung.', 'pilot, harness.planung'), ('p0.anordnung', 'generator.kampagne'),
-    ('p0.laufgroessen', 'pilot, generator'), ('p0.', 'anpassung'), ('ablauf.', 'ablauf, auswertung'),
-    ('M.', 'anpassung'), ('rauschmodelle', 'generator.rauschen, pilot'), ('harness.', 'harness'), ('ni.', '–'))
+    ('p0.laufgroessen', 'laufgroessen, pilot, teil_b'),
+    ('p0.strukturmodell', 'generator.phase0_modell, harness.planung'), ('p0.', 'anpassung'),
+    ('ablauf.', 'ablauf, auswertung'), ('M.', 'anpassung'),
+    ('rauschmodelle.sensitivitaeten', 'generator.phase0_modell, harness.planung'),
+    ('rauschmodelle', 'generator.rauschen, pilot'), ('harness.', 'harness'), ('ni.', '–'))
 
 
 UMSETZUNG_11 = (                        # Stand 2026-11: zusätzliche bzw. genauere Module (vor UMSETZUNG geprüft)
