@@ -415,3 +415,16 @@ def _teil_fortsetzen(a, ereignis, bis):
         a.fortsetzen(ereignis)
     finally:
         a.ausfuehren = orig
+
+
+def test_ablauf_pruefsatz_ablauf4_nachrechenbar():
+    """Prüfsatz des Regelstands 2026-11 (ablauf-4, ENTW-2026-11, P0.7-Anordnung) neben dem unveränderten historischen:
+    Inhalt, Prüfsummen und Gegenprobe rechnen sich nach; der S2-Fall wird mit der simulierten Wiederaufnahme
+    abgeschlossen."""
+    import os
+    from pcmms_auswertung.harness import ablauf_pruefsatz
+    r = ablauf_pruefsatz.pruefen(os.path.join(os.path.dirname(__file__), 'fixtures', 'ap13_ablauf_pruefsatz_ablauf4'))
+    assert r['gleich'], r['abweichungen']
+    assert r['inhalt']['N01-A4/L1/13/aus']['laufzahl']['zusaetzlich'] == 0
+    s = r['inhalt']['S02-kontrolllauf/L1/7/zustand']
+    assert s['status'] == 'abgeschlossen' and s['s2'] and s['halt'] is None

@@ -268,7 +268,8 @@ def test_kalibrierung_schreiben_lesen_und_trennung(tmp_path):
         formate.lies(str(tmp_path / 'eingang' / 'kalibrierung'), 'wahrheit')
 
 
-@pytest.mark.parametrize('datei', ['anpassung.py', 'pilot.py', 'gueltigkeit.py'])
+@pytest.mark.parametrize('datei', ['anpassung.py', 'pilot.py', 'gueltigkeit.py', 'laufgroessen.py', 'g4.py',
+                                   'e3_grenzen.py', 'teil_b.py'])
 def test_ap11_importiert_weder_generator_noch_harness(datei):
     baum = ast.parse(open(os.path.join(CODE, datei), encoding='utf-8').read())
     namen = set()
