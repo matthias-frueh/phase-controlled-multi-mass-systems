@@ -1,0 +1,31 @@
+N01-A4|0 abges nichtK_G4 1 kwdh_G4 1 Diff 0 | R ausserhalb Kontrollsatz 29 | s3wdh 0 | sum(gueltig_je_modul)-75 0 | regeln {'G1': 1, 'G4': 38} n_laeufe 670
+N01-A4|1 abges nichtK_G4 1 kwdh_G4 1 Diff 0 | R ausserhalb Kontrollsatz 28 | s3wdh 1 | sum(gueltig_je_modul)-75 1 | regeln {'G1': 1, 'G4': 11} n_laeufe 644
+N01-A4|2 abges nichtK_G4 1 kwdh_G4 1 Diff 0 | R ausserhalb Kontrollsatz 38 | s3wdh 2 | sum(gueltig_je_modul)-75 2 | regeln {'G1': 2, 'G4': 40} n_laeufe 685
+N01-A4|3 abges nichtK_G4 4 kwdh_G4 3 Diff 1 | R ausserhalb Kontrollsatz 31 | s3wdh 0 | sum(gueltig_je_modul)-75 0 | regeln {'G1': 1, 'G4': 18} n_laeufe 653
+N01-A4|4 angeh nichtK_G4 2 kwdh_G4 2 Diff 0 | R ausserhalb Kontrollsatz 14 | s3wdh 0 | sum(gueltig_je_modul)-75 -48 | regeln {'G1': 3, 'G4': 7} n_laeufe 239
+N01-A4|5 abges nichtK_G4 1 kwdh_G4 1 Diff 0 | R ausserhalb Kontrollsatz 34 | s3wdh 1 | sum(gueltig_je_modul)-75 1 | regeln {'G1': 2, 'G4': 23} n_laeufe 664
+N01-A4|6 abges nichtK_G4 1 kwdh_G4 1 Diff 0 | R ausserhalb Kontrollsatz 36 | s3wdh 0 | sum(gueltig_je_modul)-75 -2 | regeln {'G1': 3, 'G4': 29} n_laeufe 669
+N01-A4|7 abges nichtK_G4 1 kwdh_G4 1 Diff 0 | R ausserhalb Kontrollsatz 39 | s3wdh 0 | sum(gueltig_je_modul)-75 0 | regeln {'G1': 1, 'G4': 22} n_laeufe 665
+N01-A4|8 abges nichtK_G4 1 kwdh_G4 1 Diff 0 | R ausserhalb Kontrollsatz 27 | s3wdh 1 | sum(gueltig_je_modul)-75 1 | regeln {'G4': 27} n_laeufe 659
+N01-A4|9 abges nichtK_G4 2 kwdh_G4 2 Diff 0 | R ausserhalb Kontrollsatz 27 | s3wdh 0 | sum(gueltig_je_modul)-75 0 | regeln {'G4': 26} n_laeufe 657
+N01-V1G0|0 abges nichtK_G4 4 kwdh_G4 4 Diff 0 | R ausserhalb Kontrollsatz 29 | s3wdh 1 | sum(gueltig_je_modul)-75 1 | regeln {'G1': 1, 'G4': 29} n_laeufe 664
+N01-V1G0|1 angeh nichtK_G4 3 kwdh_G4 3 Diff 0 | R ausserhalb Kontrollsatz 12 | s3wdh 0 | sum(gueltig_je_modul)-75 -60 | regeln {'G1': 3, 'G4': 8} n_laeufe 143
+N01-V1G0|2 angeh nichtK_G4 4 kwdh_G4 4 Diff 0 | R ausserhalb Kontrollsatz 69 | s3wdh 0 | sum(gueltig_je_modul)-75 -9 | regeln {'G1': 19, 'G4': 21} n_laeufe 668
+N01-V1G0|3 abges nichtK_G4 3 kwdh_G4 3 Diff 0 | R ausserhalb Kontrollsatz 34 | s3wdh 2 | sum(gueltig_je_modul)-75 2 | regeln {'G1': 2, 'G4': 19} n_laeufe 660
+N01-V1G0|4 abges nichtK_G4 1 kwdh_G4 1 Diff 0 | R ausserhalb Kontrollsatz 30 | s3wdh 0 | sum(gueltig_je_modul)-75 0 | regeln {'G4': 46} n_laeufe 680
+N01-V1G0|5 abges nichtK_G4 4 kwdh_G4 4 Diff 0 | R ausserhalb Kontrollsatz 31 | s3wdh 1 | sum(gueltig_je_modul)-75 0 | regeln {'G1': 6, 'G4': 14} n_laeufe 652
+N01-V1G0|6 abges nichtK_G4 2 kwdh_G4 1 Diff 1 | R ausserhalb Kontrollsatz 31 | s3wdh 0 | sum(gueltig_je_modul)-75 0 | regeln {'G1': 1, 'G4': 29} n_laeufe 663
+N01-V1G0|7 angeh nichtK_G4 4 kwdh_G4 4 Diff 0 | R ausserhalb Kontrollsatz 25 | s3wdh 0 | sum(gueltig_je_modul)-75 -37 | regeln {'G1': 4, 'G4': 14} n_laeufe 366
+N01-V1G0|8 abges nichtK_G4 0 kwdh_G4 0 Diff 0 | R ausserhalb Kontrollsatz 38 | s3wdh 0 | sum(gueltig_je_modul)-75 0 | regeln {'G1': 3, 'G4': 46} n_laeufe 690
+N01-V1G0|9 abges nichtK_G4 3 kwdh_G4 3 Diff 0 | R ausserhalb Kontrollsatz 34 | s3wdh 3 | sum(gueltig_je_modul)-75 3 | regeln {'G1': 2, 'G4': 32} n_laeufe 674
+N01-V1G60h|0 abges nichtK_G4 0 kwdh_G4 0 Diff 0 | R ausserhalb Kontrollsatz 32 | s3wdh 4 | sum(gueltig_je_modul)-75 4 | regeln {'G4': 10} n_laeufe 649
+N01-V1G60h|1 abges nichtK_G4 2 kwdh_G4 2 Diff 0 | R ausserhalb Kontrollsatz 28 | s3wdh 0 | sum(gueltig_je_modul)-75 0 | regeln {'G4': 40} n_laeufe 670
+N01-V1G60h|2 abges nichtK_G4 2 kwdh_G4 2 Diff 0 | R ausserhalb Kontrollsatz 29 | s3wdh 1 | sum(gueltig_je_modul)-75 1 | regeln {'G4': 39} n_laeufe 673
+N01-V1G60h|3 abges nichtK_G4 1 kwdh_G4 1 Diff 0 | R ausserhalb Kontrollsatz 36 | s3wdh 0 | sum(gueltig_je_modul)-75 0 | regeln {'G1': 3, 'G4': 14} n_laeufe 657
+N01-V1G60h|4 abges nichtK_G4 2 kwdh_G4 2 Diff 0 | R ausserhalb Kontrollsatz 30 | s3wdh 2 | sum(gueltig_je_modul)-75 2 | regeln {'G4': 17} n_laeufe 652
+N01-V1G60h|5 abges nichtK_G4 0 kwdh_G4 0 Diff 0 | R ausserhalb Kontrollsatz 31 | s3wdh 3 | sum(gueltig_je_modul)-75 3 | regeln {'G4': 8} n_laeufe 646
+N01-V1G60h|6 abges nichtK_G4 1 kwdh_G4 1 Diff 0 | R ausserhalb Kontrollsatz 27 | s3wdh 1 | sum(gueltig_je_modul)-75 1 | regeln {'G4': 21} n_laeufe 652
+N01-V1G60h|7 angeh nichtK_G4 1 kwdh_G4 1 Diff 0 | R ausserhalb Kontrollsatz 13 | s3wdh 1 | sum(gueltig_je_modul)-75 -51 | regeln {'G1': 2, 'G4': 4} n_laeufe 196
+N01-V1G60h|8 abges nichtK_G4 1 kwdh_G4 1 Diff 0 | R ausserhalb Kontrollsatz 31 | s3wdh 1 | sum(gueltig_je_modul)-75 1 | regeln {'G1': 1, 'G4': 37} n_laeufe 673
+N01-V1G60h|9 abges nichtK_G4 4 kwdh_G4 4 Diff 0 | R ausserhalb Kontrollsatz 40 | s3wdh 0 | sum(gueltig_je_modul)-75 0 | regeln {'G1': 3, 'G4': 35} n_laeufe 682
+{'nk': 57, 'kg4': 55, 'nR_aus': 933, 'nk_ab': 43, 'kg4_ab': 41, 'nR_aus_ab': 800, 's3_ab': 24, 'ueber_ab': 21}

@@ -1,0 +1,335 @@
+{
+ "abschaetzung": {
+  "lo_je_system": 18.38888888888889,
+  "up_je_system": 81.08333333333333,
+  "lo_drei": 55.166666666666664,
+  "up_drei_max": 243.25,
+  "up_drei_je_system": {
+   "A4": 45.5,
+   "V1G0": 81.08333333333333,
+   "V1G60h": 39.666666666666664
+  },
+  "up_drei_summe": 166.25,
+  "zaehl_je_1000": 0.7194444444444444,
+  "bootstrap_anteil_B1000": 3.05,
+  "lin_B10000": 33.09,
+  "gelesen": {
+   "kal_je_system": [
+    18.4,
+    81.1
+   ],
+   "drei": [
+    55.1,
+    243.3
+   ],
+   "zaehl": 0.7
+  }
+ },
+ "abschaetzung_korrektur": {
+  "lo_je_system": 26.0,
+  "up_je_system": 81.08333333333333,
+  "lo_drei": 78.0,
+  "up_drei_max": 243.25,
+  "up_drei_je_system": {
+   "A4": 45.5,
+   "V1G0": 81.08333333333333,
+   "V1G60h": 39.666666666666664
+  },
+  "up_drei_summe": 166.25,
+  "zaehl_je_1000": 0.9833333333333333,
+  "bootstrap_anteil_B1000": 4.32,
+  "lin_B10000": 46.74,
+  "gelesen": {
+   "kal_je_system": [
+    26.0,
+    81.1
+   ],
+   "drei": [
+    77.9,
+    243.3
+   ],
+   "zaehl": 1.0
+  }
+ },
+ "r1_r2": {
+  "R1_G4_3sys_x1000_x3var (Vorlage)": {
+   "kampagnen": 9000,
+   "kernstunden_schnell_langsam": [
+    6.47,
+    8.85
+   ]
+  },
+  "R1_Halte_nur_ii_3sys_x1000_x2anordnungen": {
+   "kampagnen": 6000,
+   "kernstunden_schnell_langsam": [
+    4.32,
+    5.9
+   ]
+  },
+  "R1_Halte_i_und_ii_getrennt_x2anordnungen": {
+   "kampagnen": 12000,
+   "kernstunden_schnell_langsam": [
+    8.63,
+    11.8
+   ]
+  },
+  "R1_gemeinsam_3var_eine_anordnung (Vorlage 7-10)": {
+   "kampagnen": 9000,
+   "kernstunden_schnell_langsam": [
+    6.47,
+    8.85
+   ]
+  },
+  "R1_gemeinsam_3var_plus_zweite_anordnung_fuer_1var": {
+   "kampagnen": 12000,
+   "kernstunden_schnell_langsam": [
+    8.63,
+    11.8
+   ]
+  },
+  "R1_gemeinsam_3var_x2anordnungen_voll_faktoriell": {
+   "kampagnen": 18000,
+   "kernstunden_schnell_langsam": [
+    12.95,
+    17.7
+   ]
+  },
+  "R2_6szen_3sys_300_statisch": {
+   "kampagnen": 5400,
+   "kernstunden_schnell_langsam": [
+    3.03,
+    4.69
+   ]
+  },
+  "R2_9szen_3sys_300_statisch (Arbeitskopie: +3 Annahmen)": {
+   "kampagnen": 8100,
+   "kernstunden_schnell_langsam": [
+    4.54,
+    7.04
+   ]
+  },
+  "R2d_2pkt_2gen_400_B1000_Ablauf": {
+   "kampagnen": 1600,
+   "kernstunden_schnell_langsam": [
+    2.51,
+    3.49
+   ]
+  },
+  "R2d_2pkt_2gen_400_B1000_statisch": {
+   "kampagnen": 1600,
+   "kernstunden_schnell_langsam": [
+    2.26,
+    3.24
+   ]
+  }
+ },
+ "r2_sek_je_statische_kampagne_aus_4.5h": 3.0,
+ "phase0": {
+  "andere": 120,
+  "R_generator": 61,
+  "laeufe_generator": 181,
+  "laeufe_42R": 162,
+  "phase1": 630,
+  "anteil_aenderung": -0.023427866831072786,
+  "R_bei_abstand_12": 11,
+  "andere_noetig_fuer_42R_abstand12": 492
+ },
+ "nachziehen": {
+  "ii_W3_erschoepft_0.36-0.76%": {
+   "faktor": [
+    1.0036,
+    1.0077
+   ],
+   "mehr_kh_je_system": [
+    0.07,
+    0.62
+   ],
+   "mehr_kh_drei": [
+    0.2,
+    1.86
+   ]
+  },
+  "ii_mit_Zuschlag_1%": {
+   "faktor": [
+    1.0101,
+    1.0101
+   ],
+   "mehr_kh_je_system": [
+    0.19,
+    0.82
+   ],
+   "mehr_kh_drei": [
+    0.56,
+    2.46
+   ]
+  },
+  "i_halt_verloren_0.09-0.17": {
+   "faktor": [
+    1.0989,
+    1.2048
+   ],
+   "mehr_kh_je_system": [
+    1.82,
+    16.61
+   ],
+   "mehr_kh_drei": [
+    5.45,
+    49.83
+   ]
+  },
+  "i_beobachtet_5/30": {
+   "faktor": [
+    1.2,
+    1.2
+   ],
+   "mehr_kh_je_system": [
+    3.68,
+    16.22
+   ],
+   "mehr_kh_drei": [
+    11.02,
+    48.66
+   ]
+  }
+ },
+ "kappa": {
+  "19": 1.1769727057611257,
+  "21": 1.166060802688659,
+  "41": 1.1104326111519696,
+  "57": 1.0911406901482563
+ },
+ "bhat": {
+  "A4": {
+   "herkunft": "Kalibriersimulation (AP-13) mit 200 Kampagnen (reduziert: Entwicklungsdiagnostik), Profil ENTW-2026-10+red(bootstrap_B=1000,e3_mc=1000,eps_ctrl_datensaetze=1000,h2_replikate=1000,h3_mc=1000): Mittel der Rohresiduen von F_min − ⟨N⟩",
+   "n_annahme": 200,
+   "bias0": {
+    "max_abs_mN": 0.16659999043993845,
+    "u_min_max_mN": [
+     0.054871716348551834,
+     0.07628289364569606
+    ],
+    "max_abs_z": 2.680853319303834,
+    "chi2_21": 21.621908703722056,
+    "p_chi2": 0.4215708753358139,
+    "sd_je_kampagne_mN_min_max": [
+     0.7760032545081149,
+     1.0788030277080776
+    ],
+    "max_abs_b_durch_sd": 0.18956495614462057,
+    "u_bei_1000_mN_min_max": [
+     0.02453937755948969,
+     0.03411474714243263
+    ],
+    "delta_b_kappa57_mN_max": 0.015184038107388895,
+    "delta_z_kappa57_max": 0.017277080930944662,
+    "delta_b_kappa57_durch_u1000_max": 0.5463492706084742,
+    "delta_b_kappa19_mN_max": 0.029483651087933577,
+    "delta_z_kappa19_max": 0.03354782320640263,
+    "delta_b_kappa19_durch_u1000_max": 1.0608753187288538
+   },
+   "bias1": {
+    "max_abs_mN": 0.11052336082585268,
+    "u_min_max_mN": [
+     0.05263219177359853,
+     0.07291811717034354
+    ],
+    "max_abs_z": 1.6725542873100954,
+    "chi2_21": 11.759874549848762,
+    "p_chi2": 0.9458745763768083,
+    "sd_je_kampagne_mN_min_max": [
+     0.7443315942364468,
+     1.031217902450103
+    ],
+    "max_abs_b_durch_sd": 0.11826744784596015,
+    "u_bei_1000_mN_min_max": [
+     0.023537831722114304,
+     0.032609973356836554
+    ],
+    "delta_b_kappa57_mN_max": 0.01007317538317297,
+    "delta_z_kappa57_max": 0.010778976818753717,
+    "delta_b_kappa57_durch_u1000_max": 0.34086117593417714,
+    "delta_b_kappa19_mN_max": 0.01955961821516435,
+    "delta_z_kappa19_max": 0.02093011024876238,
+    "delta_b_kappa19_durch_u1000_max": 0.6618682006452252
+   }
+  },
+  "V1G0": {
+   "herkunft": "Kalibriersimulation (AP-13) mit 60 Kampagnen (reduziert: Entwicklungsdiagnostik), Profil ENTW-2026-10+red(bootstrap_B=1000,e3_mc=1000,eps_ctrl_datensaetze=1000,h2_replikate=1000,h3_mc=1000): Mittel der Rohresiduen von F_min − ⟨N⟩",
+   "n_annahme": 60,
+   "bias0": {
+    "max_abs_mN": 0.20038065099355906,
+    "u_min_max_mN": [
+     0.11285262415617402,
+     0.17847537841781339
+    ],
+    "max_abs_z": 1.1671332140400759,
+    "chi2_21": 8.631782219172282,
+    "p_chi2": 0.9918271336720681,
+    "sd_je_kampagne_mN_min_max": [
+     0.8741526678653336,
+     1.3824643366405158
+    ],
+    "max_abs_b_durch_sd": 0.15067625002609167,
+    "u_bei_1000_mN_min_max": [
+     0.027643134531671335,
+     0.04371736087737801
+    ],
+    "delta_b_kappa57_mN_max": 0.018262830823909858,
+    "delta_z_kappa57_max": 0.01373273741632922,
+    "delta_b_kappa57_durch_u1000_max": 0.43426728744616316,
+    "delta_b_kappa19_mN_max": 0.03546190598850594,
+    "delta_z_kappa19_max": 0.026665583661057323,
+    "delta_b_kappa19_durch_u1000_max": 0.8432397950671251
+   },
+   "bias1": {
+    "max_abs_mN": 0.22305698098629542,
+    "u_min_max_mN": [
+     0.12054685822527252,
+     0.18401172177946315
+    ],
+    "max_abs_z": 1.4839827896484168,
+    "chi2_21": 11.697249025831,
+    "p_chi2": 0.9474327007398461,
+    "sd_je_kampagne_mN_min_max": [
+     0.9337519486882141,
+     1.4253486679176268
+    ],
+    "max_abs_b_durch_sd": 0.19158135434555806,
+    "u_bei_1000_mN_min_max": [
+     0.0295278292747543,
+     0.04507348250506669
+    ],
+    "delta_b_kappa57_mN_max": 0.02032956718947745,
+    "delta_z_kappa57_max": 0.01746085685459181,
+    "delta_b_kappa57_durch_u1000_max": 0.552160775586736,
+    "delta_b_kappa19_mN_max": 0.03947499746405266,
+    "delta_z_kappa19_max": 0.0339046706519144,
+    "delta_b_kappa19_durch_u1000_max": 1.072159825779154
+   }
+  },
+  "V1G60h": {
+   "herkunft": "Kalibriersimulation (AP-13) mit 60 Kampagnen (reduziert: Entwicklungsdiagnostik), Profil ENTW-2026-10+red(bootstrap_B=1000,e3_mc=1000,eps_ctrl_datensaetze=1000,h2_replikate=1000,h3_mc=1000): Mittel der Rohresiduen von F_min − ⟨N⟩",
+   "n_annahme": null,
+   "bias0": {
+    "max_abs_mN": 0.2730147548428913,
+    "u_min_max_mN": [
+     0.1172295700689284,
+     0.20679258646213203
+    ],
+    "max_abs_z": 1.721700448510574,
+    "chi2_21": 15.152547389177203,
+    "p_chi2": 0.8152202952481451
+   },
+   "bias1": {
+    "max_abs_mN": 0.3721473412409235,
+    "u_min_max_mN": [
+     0.11808617026042517,
+     0.17832943065864765
+    ],
+    "max_abs_z": 2.3108978626439196,
+    "chi2_21": 23.291684746118737,
+    "p_chi2": 0.3286257102556823
+   }
+  }
+ }
+}

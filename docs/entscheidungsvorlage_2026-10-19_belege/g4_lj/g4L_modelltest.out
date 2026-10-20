@@ -1,0 +1,19 @@
+(a) PR #23, Modell b-g4, Exposition aus rollen.kontrolle (L je Modul = kontrolle/4):
+    alle 30: beobachtet 55, Modell Mittel 86.5 (davon Kontroll-R 4.55), 5-%-Quantil 61, P(≤ beob.) = 0.0187
+    25 abgeschlossene: beobachtet 41, Modell Mittel 79.1, P(≤ beob.) = 0.0029
+    5 angehaltene: beobachtet 14 bei 230 Kontrollläufen, Modell Mittel 7.4, P(≥ beob.) = 0.084
+    N01-A4: beob. 14, Modell Mittel 29.7, P(≤ beob.) 0.030
+    N01-V1G0: beob. 27, Modell Mittel 27.3, P(≤ beob.) 0.546
+    N01-V1G60h: beob. 14, Modell Mittel 29.4, P(≤ beob.) 0.036
+    Modell je vollständiger Kampagne: Mittel 3.18, Varianz 10.13, P(0) 0.166, P(≥5) 0.246
+    beobachtet (25 abgeschlossene): Mittel 1.64, Varianz 1.49, Anteil 0 0.120, max 4
+
+(b) PR #22, statischer Plan, G4 der 126 Nicht-K-Läufe (75 L + 51 R) je Kampagne, je System 40 Kampagnen:
+    N01-A4: beobachtet 62 (Mittel 1.55, Var 2.82); Modell Mittel 122.4, 90-%-Bereich [95; 152], P(≤ beob.) 0.000; Modell je Kampagne Var 7.35
+    N01-V1G0: beobachtet 134 (Mittel 3.35, Var 8.64); Modell Mittel 122.4, 90-%-Bereich [95; 152], P(≤ beob.) 0.764; Modell je Kampagne Var 7.35
+    N01-V1G60h: beobachtet 90 (Mittel 2.25, Var 5.42); Modell Mittel 122.4, 90-%-Bereich [95; 152], P(≤ beob.) 0.027; Modell je Kampagne Var 7.35
+
+(c) bedingt auf die tatsächlichen σ̂ (PR-#22-Phase-0 = PR-#23-Phase-0), wahres σ = Mittel σ̂ über 40 / 0,958 bzw. 0,987:
+    N01-V1G0: alle 10: beob. 27, erwartet 30.4, Poisson-P(≤ beob.) 0.307; abgeschlossene: beob. 16, erwartet 20.6, P(≤) 0.187
+    N01-V1G60h: alle 10: beob. 14, erwartet 25.2, Poisson-P(≤ beob.) 0.011; abgeschlossene: beob. 13, erwartet 22.9, P(≤) 0.018
+    N01-A4: alle 10: beob. 14, erwartet 24.9, Poisson-P(≤ beob.) 0.013; abgeschlossene: beob. 12, erwartet 22.1, P(≤) 0.014 (A4: σ̂_F,L in PR #22 bei k = 30, in PR #23 bei k = 9 – nicht übertragbar)

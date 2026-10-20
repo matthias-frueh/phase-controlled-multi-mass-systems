@@ -1,0 +1,23 @@
+σ_h je Re/Im und Zelle = 0.0645 mN; κ(19) = 1.177, κ(57) = 1.091
+90-%-Intervall σ̂/σ bei ν = 19: [0.730, 1.260]
+== A4: Rauschen des Laufschätzers δ̂ = 0.0022° (k ≤ 9), 0.0022° (k ≤ 3); Â: 0.0047 %
+   L0: Rauschanteil an Var(δ̂) = 0.0119; an Var(Â) = 1.000
+   L1: Rauschanteil an Var(δ̂) = 0.0053; an Var(Â) = 0.000
+   L2: Rauschanteil an Var(δ̂) = 0.0005; an Var(Â) = 0.000
+   MC L0: σ̂_δ/σ_δ Median 0.980, 5–95 % [0.726, 1.258] (χ²₁₉: [0.730, 1.260]); Kreuzkovarianz k=1·2: Median 0.979, 5–95 % [0.724, 1.260]
+   MC L1: σ̂_δ/σ_δ Median 0.980, 5–95 % [0.725, 1.257] (χ²₁₉: [0.730, 1.260]); Kreuzkovarianz k=1·2: Median 0.980, 5–95 % [0.725, 1.257]
+== V1-G0: Rauschen des Laufschätzers δ̂ = 0.0018° (k ≤ 12), 0.0019° (k ≤ 3); Â: 0.0039 %
+   L0: Rauschanteil an Var(δ̂) = 0.0081; an Var(Â) = 1.000
+   L1: Rauschanteil an Var(δ̂) = 0.0036; an Var(Â) = 0.000
+   L2: Rauschanteil an Var(δ̂) = 0.0003; an Var(Â) = 0.000
+   MC L0: σ̂_δ/σ_δ Median 0.980, 5–95 % [0.726, 1.261] (χ²₁₉: [0.730, 1.260]); Kreuzkovarianz k=1·2: Median 0.980, 5–95 % [0.725, 1.263]
+   MC L1: σ̂_δ/σ_δ Median 0.982, 5–95 % [0.730, 1.261] (χ²₁₉: [0.730, 1.260]); Kreuzkovarianz k=1·2: Median 0.982, 5–95 % [0.731, 1.260]
+== V1-G60h: Rauschen des Laufschätzers δ̂ = 0.0026° (k ≤ 12), 0.0026° (k ≤ 3); Â: 0.0055 %
+   L0: Rauschanteil an Var(δ̂) = 0.0161; an Var(Â) = 1.000
+   L1: Rauschanteil an Var(δ̂) = 0.0072; an Var(Â) = 0.000
+   L2: Rauschanteil an Var(δ̂) = 0.0007; an Var(Â) = 0.000
+   MC L0: σ̂_δ/σ_δ Median 0.982, 5–95 % [0.721, 1.269] (χ²₁₉: [0.730, 1.260]); Kreuzkovarianz k=1·2: Median 0.981, 5–95 % [0.712, 1.274]
+   MC L1: σ̂_δ/σ_δ Median 0.985, 5–95 % [0.731, 1.262] (χ²₁₉: [0.730, 1.260]); Kreuzkovarianz k=1·2: Median 0.985, 5–95 % [0.727, 1.266]
+Indexversatz 0,05° aus 60 Piloten: σ̂/σ Median 0.993, 5–95 % [0.817, 1.173]
+Relativphase Versatz 0.05°, δ 0.03°: σ_τ = 0.0656°, ν_eff = 94.9, κ = 1.068; ohne δ-Pooling über Module
+Relativphase Versatz 0.05°, δ 0.02°: σ_τ = 0.0574°, ν_eff = 86.1, κ = 1.072; ohne δ-Pooling über Module

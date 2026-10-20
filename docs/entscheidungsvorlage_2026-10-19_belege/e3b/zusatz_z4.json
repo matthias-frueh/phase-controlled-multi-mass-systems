@@ -1,0 +1,100 @@
+{
+ "Z4": [
+  {
+   "verteilung": "normal",
+   "rho": 1.0,
+   "t": 1.5,
+   "faktor": 0.161,
+   "se2": 0.017,
+   "O1_fehler": 0.0001
+  },
+  {
+   "verteilung": "normal",
+   "rho": 1.0,
+   "t": 10.0,
+   "faktor": 0.161,
+   "se2": 0.017,
+   "O1_fehler": 0.0261
+  },
+  {
+   "verteilung": "normal",
+   "rho": 0.1,
+   "t": 1.5,
+   "faktor": 0.645,
+   "se2": 0.033,
+   "O1_fehler": 0.0074
+  },
+  {
+   "verteilung": "normal",
+   "rho": 0.1,
+   "t": 10.0,
+   "faktor": 0.901,
+   "se2": 0.039,
+   "O1_fehler": 0.0497
+  },
+  {
+   "verteilung": "t5",
+   "rho": 1.0,
+   "t": 1.5,
+   "faktor": 0.074,
+   "se2": 0.011,
+   "O1_fehler": 0.0003
+  },
+  {
+   "verteilung": "t5",
+   "rho": 1.0,
+   "t": 10.0,
+   "faktor": 0.102,
+   "se2": 0.013,
+   "O1_fehler": 0.0236
+  },
+  {
+   "verteilung": "t5",
+   "rho": 0.1,
+   "t": 1.5,
+   "faktor": 0.471,
+   "se2": 0.028,
+   "O1_fehler": 0.0134
+  },
+  {
+   "verteilung": "t5",
+   "rho": 0.1,
+   "t": 10.0,
+   "faktor": 0.628,
+   "se2": 0.033,
+   "O1_fehler": 0.049
+  },
+  {
+   "verteilung": "kontaminiert",
+   "rho": 1.0,
+   "t": 1.5,
+   "faktor": 0.071,
+   "se2": 0.011,
+   "O1_fehler": 0.0007
+  },
+  {
+   "verteilung": "kontaminiert",
+   "rho": 1.0,
+   "t": 10.0,
+   "faktor": 0.076,
+   "se2": 0.011,
+   "O1_fehler": 0.0218
+  },
+  {
+   "verteilung": "kontaminiert",
+   "rho": 0.1,
+   "t": 1.5,
+   "faktor": 0.42,
+   "se2": 0.027,
+   "O1_fehler": 0.017
+  },
+  {
+   "verteilung": "kontaminiert",
+   "rho": 0.1,
+   "t": 10.0,
+   "faktor": 0.579,
+   "se2": 0.032,
+   "O1_fehler": 0.0481
+  }
+ ]
+}

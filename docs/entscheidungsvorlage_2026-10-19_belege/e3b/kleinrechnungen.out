@@ -1,0 +1,12 @@
+E3a obere Grenze heute, n=22, w=0: 0.0615
+L4 K31: u falls gleiche Prüfung wie max|Δφ| = 0.1203
+  n_A=20: t·√(n/(n−1)) = 3.604; untere Grenze mit u=0.120: 0.0768; mit u=0.160 (Median): -0.0664; nötiges u für Wegfall: 0.0788
+  n_A=22: t·√(n/(n−1)) = 3.545; untere Grenze mit u=0.120: 0.0840; mit u=0.160 (Median): -0.0569; nötiges u für Wegfall: 0.0882
+  n_A=24: t·√(n/(n−1)) = 3.497; untere Grenze mit u=0.120: 0.0898; mit u=0.160 (Median): -0.0492; nötiges u für Wegfall: 0.0976
+Faltung h=0.5: 1.034·α/m
+Faltung h=0.6: 1.016·α/m
+Faltung h=1.0: 1.001·α/m
+ν=19: t(1−α/m)=3.5130, κ=1.1536, t(0,95)=1.7291
+ν=21: t(1−α/m)=3.4632, κ=1.1373, t(0,95)=1.7207
+ν=40: t(1−α/m)=3.2527, κ=1.0682, t(0,95)=1.6839
+z_B = 3.0452 α/m = 0.0011627906976744186

@@ -7,18 +7,22 @@ den Ist-Stand mit Fundstellen, die Optionen, eine Empfehlung, die zu ändernden 
 Fragen, die beim Autor liegen. Alle Festlegungen gehören nach §12 zu den Gruppen (I) und (II) und sind als
 Arbeitsfestlegung mit Eintrag und Grund in A0 vorgesehen (Entwurf Z. 997–1004).
 
+**Stand 20.10.2026.** Mit dem Auftrag des Autors zur Gesamtumsetzung vom 20.10.2026 sind die Empfehlungen dieser
+Vorlage für den Umfang der Umsetzung als Arbeitsvorgaben entschieden (Abschnitt 9). Die große Kalibrierung wird in
+diesem Vorhabensteil nicht ausgeführt; das ist eine feste Entscheidung des Autors, weil die Rechenressourcen fehlen
+und die vorhandenen Daten synthetisch sind. Sie wird nur als startfreies Beispiel vorbereitet, die
+Kalibrierabnahme bleibt offen, und sie ist kein angekündigter nächster Schritt.
+
 **Arbeitsweise und Kennzeichnung.** Grundlage sind der Präregistrierungsentwurf mit Anhang, der Code auf 0f63187, die
-Berichte zu PR #21–#23 und deren gespeicherte Ergebnisdateien. Es wurde keine Kampagne mit der Codekette von Werkzeug
-8 gerechnet; die Nachprüfung hat Kampagnen nur auf
-Ebene der Teststatistik simuliert. Zahlen tragen eine
+Berichte zu PR #21–#23 und deren gespeicherte Ergebnisdateien. Es wurde keine Kampagne mit der Codekette von
+Werkzeug 8 gerechnet; die Nachprüfung hat Kampagnen nur auf Ebene der Teststatistik simuliert. Zahlen tragen eine
 Herkunft: *gelesen* (steht so in Text, Code oder Ergebnisdatei), *gezählt* (aus gespeicherten Dateien ausgezählt),
 *gerechnet* (eigene Rechnung auf Ebene einer Teststatistik, analytisch oder Monte Carlo, Sekunden bis Minuten; die
-Skripte liegen noch außerhalb des Repositorys und werden mit dem jeweiligen Umsetzungs-PR als geprüfte Rechnungen
-nachgereicht; für die E3b-Nachzählung tritt eine Rekonstruktion an die Stelle des verlorenen Originalskripts) oder
+Skripte, kompakten Eingaben und Ausgaben liegen im Belegpaket `docs/entscheidungsvorlage_2026-10-19_belege/`;
+für die E3b-Nachzählung tritt dort eine Rekonstruktion an die Stelle des verlorenen Originalskripts) oder
 *Einschätzung*. Abschnitt 8 beschreibt die Nachprüfung dieser Vorlage durch sieben unabhängige Prüfer; Zahlen aus
 ihr sind als „gerechnet in der Nachprüfung“ gekennzeichnet. Rechnungen auf Statistikebene sind Modellrechnungen mit
-vereinfachten Annahmen; sie
-begründen Entscheidungen über Regeln, ersetzen aber keine Kalibrierung.
+vereinfachten Annahmen; sie begründen Entscheidungen über Regeln, ersetzen aber keine Kalibrierung.
 
 **Ergebnis in Kürze.**
 
@@ -28,8 +32,9 @@ begründen Entscheidungen über Regeln, ersetzen aber keine Kalibrierung.
   ausstehende sofortige Folgeläufe, und eine durch einen Halt unvollständige Klammer wird so behandelt wie eine
   durch ungültiges R₂/R₃ unvollständige (S1 nicht prüfbar, keine weitere Wiederholung). Zwei Nachbarfragen gehören
   in denselben Beschluss: was im Kontrollsatz der Wiederaufnahme als „Alarm“ gilt, und ob nach einer Wiederaufnahme
-  aufgewärmt wird. Nach einem Nullpunkthalt soll ein neuer Bezug R₀ gelten, weil der W-Satz sonst gegen den
-  wahrscheinlichen Ausreißer vergleicht. Umsetzung ohne Kampagnenrechnung (`ablauf-4`).
+  aufgewärmt wird. Nach einem Nullpunkthalt eröffnet ein gesonderter Referenzlauf vor dem Kontrollsatz der
+  Wiederaufnahme einen neuen Bezug R₀; sonst verglichen der Kontrollsatz und jede Vorprüfung weiter mit dem
+  wahrscheinlichen Ausreißer. Umsetzung ohne Kampagnenrechnung (`ablauf-4`).
 - **b) G4.** Die heutige Schwelle je Laufart schließt an steilen Konfigurationen bis zu 14,7 % der Läufe aus
   (gezählt, PR #22), die Begründung „seltene Fehlausschlüsse“ (Tabelle F) trifft dort nicht zu, und p̂ der Piloten
   (1–2 %) bildet die Phase-1-Ausfälle (4,8–5,0 %) nicht ab. Eine konfigurationsabhängige Standardisierung aus
@@ -50,17 +55,22 @@ begründen Entscheidungen über Regeln, ersetzen aber keine Kalibrierung.
   ungünstigsten Fall von 5 % auf etwa 16 %. Empfohlen: am Rand gültige Grenzen (Rice-Konstruktion mit
   t-Korrektur für E3b, t-Quantile für E3a), Prüfzahl m = 43 fest, Rückfall je Prüfgröße. Die Nachprüfung hat über
   ein volles Raster bestätigt, dass die E3b-Grenze am Rand höchstens α/m und „unauffällig“ höchstens 0,05 hält;
-  die freie Rice-Grenze mit eingesetzter Streuung hält dagegen nicht. Bei der Präzision von L1
-  kann E3b mit keiner gültigen Regel „unauffällig“ werden; das ist eine Folge der Präzision, nicht der Regel.
+  die freie Rice-Grenze mit eingesetzter Streuung hält dagegen nicht. Bei der Präzision von L1 ist das Ziel von
+  mindestens 80 % unauffälligen Kampagnen für E3b mit einer gültigen Regel nicht erreichbar; einzelne unauffällige
+  Ergebnisse sind damit nicht ausgeschlossen. Das ist eine Folge der Präzision, nicht der Regel.
 - **d) Generator.** Die Pilotkovarianzen lassen sich nicht unverändert in einen Generator einsetzen: Sie sind
   singulär (Rang ≤ Freiheitsgrade), enthalten den über die Zeiger erfassten Phasenanteil und tragen die
   Konfigurationsabhängigkeit der Harmonischen und der Fünftel nicht. Empfohlen: ein Strukturmodell, dessen
   Komponenten aus Phase 0 geschätzt und über die gemessenen Zeiger auf jede Konfiguration fortgepflanzt werden.
-  Das ist der größte Posten (geschätzt 6–9 Personentage) und muss vor der Neukalibrierung von Werkzeug 8 stehen.
-- **Reihenfolge.** a und c zuerst und parallel (kleine, voneinander unabhängige Codepfade), dann d, dann b1 (G4) und
-  b2 (Halte) mit Zähldiagnosen, dann die Neukalibrierung. Jede Festlegung als eigener PR mit Normtext, `regeln.py`,
-  Code, Tests, Regelmatrix und Prüfsätzen. Ohne Festlegung von a und b2 lässt sich nicht kalibrieren, weil
-  Ablaufversion und Zählweise zum Checkpoint-Schlüssel und zur Bezugsmenge gehören.
+  Das ist der größte Posten (geschätzt 6–9 Personentage). Er zerfällt in d0 (Schätzer der Laufphasenstreuung im
+  Pilotskript), d1 (Generatoroptionen einschließlich Phase-0-Anordnung) und d2 (vollständiges Strukturmodell mit
+  Planungshaken ohne Szenario).
+- **Reihenfolge (wie Abschnitt 6).** a und c zuerst und parallel, dazu d0 und d1; dann der Code für b1 und b2 und
+  die Zähldiagnose R1. R1 braucht d0 und den neuen Ablauf, aber nicht das ganze d2; R2 braucht nur d1; d2 läuft
+  parallel. Ablaufversion und Zählweise gehören zum Checkpoint-Schlüssel und zur Bezugsmenge jeder späteren
+  Kalibrierung. Nach dem Auftrag vom 20.10.2026 werden die Etappen als ein Gesamt-PR umgesetzt; R1, R2 und R1-d
+  bis R3-d laufen dabei nur als kleine Proben, ihre vollen Umfänge und die große Kalibrierung sind startfreie
+  Beispiele (Abschnitt 9).
 
 Die Fragen an den Autor stehen je Punkt und gesammelt in Abschnitt 6.
 
@@ -189,15 +199,33 @@ Nachbarfragen, die in denselben Beschluss gehören:
   u = 1 und 0,27 bei u = 0,8. Hält jeder einzelne Nullpunktalarm im W-Satz an, entstehen 0,28–0,33 weitere Halte
   je Alarmhalt; 98 % aller Alarme im W-Satz folgen auf einen Alarmhalt. Wird der Alarm im W-Satz nach §8.8
   wiederholt, reproduziert er sich nur mit 0,057–0,107. N6 (b) erhält diese Kette, N6 (a) bricht sie. Empfohlen
-  wird deshalb (b) mit der Ausnahme, dass nach einem Nullpunkthalt ein neuer Bezug gilt. Nullpunkthalt heißt hier:
-  S1 über einen reproduzierten Nullpunktalarm und, wenn F-a4 so entschieden wird, ein Halt durch einen einzelnen
-  Nullpunktalarm im W-Satz. Der erste Referenzlauf des W-Satzes wird R₀, ohne Alarmvergleich gegen das alte R₀, wie
-  der letzte Aufwärmlauf
-  unter (a). Ob das im realen Versuch zu Beginn der Ursachenanalyse gehört, entscheidet der Autor.
+  wird deshalb (b) mit einer Bezugseröffnung nach jedem Nullpunkthalt. Nullpunkthalt heißt: S1 über einen
+  reproduzierten Nullpunktalarm; im W-Satz wird ein einzelner Nullpunktalarm nach §8.8 wiederholt, erst der
+  reproduzierte hält an (F-a4, entschieden am 20.10.2026). Reihenfolge der Bezugseröffnung (Präzisierung vom
+  20.10.2026):
+  1. Nach dem protokollierten Ereignis „Ursachenanalyse ohne Befund“ wird vor den zufällig geordneten Läufen des
+     W-Satzes ein gesonderter Referenzlauf gemessen, der Bezugslauf.
+  2. Er wird nicht gegen das verworfene R₀ auf Nullpunktalarm geprüft; alle übrigen Gültigkeitsprüfungen bleiben
+     wirksam. Ist er gültig, wird er R₀.
+  3. Erst danach beginnt der vollständige W-Satz in seiner gezogenen Reihenfolge; der Bezugslauf zählt gesondert und
+     ist kein Mitglied des W-Satzes.
+  4. Bis ein gültiger neuer Bezug vorliegt, gibt es keine Vorprüfung und keinen Nullpunktalarm gegen den
+     verworfenen Bezug, und die Wiederaufnahme gilt nicht als erfolgreich.
+  5. Ein ungültiger Bezugslauf wird sofort wiederholt, höchstens zweimal wie ein ungültiger Kontrolllauf (§6);
+     ist auch die zweite Wiederholung ungültig, folgt ein Halt „Bezugseröffnung gescheitert“, der eine weitere
+     Wiederaufnahme verbraucht. Mit W ist die Zahl der Versuche begrenzt; eine Endlosschleife gibt es nicht.
+  6. Altes und neues R₀ und ihre Differenz bleiben im Protokoll; eine reale Nullpunktänderung wird durch den
+     neuen Bezug weder widerlegt noch aus dem Protokoll entfernt.
+  Ohne diese Reihenfolge könnte ein zufällig zuerst gezogener L-Lauf des W-Satzes noch eine Vorprüfung gegen den
+  verworfenen Bezug auslösen. Bei Tageswechsel kann der letzte gültige Aufwärmlauf den Bezugslauf ersetzen. Offene
+  G1-Prüfungen von Läufen vor dem Halt schließt wie bisher die festgelegte Interpolation zwischen dem Referenzlauf,
+  der bei ihrer Messung galt, und dem ersten gültigen Referenzlauf nach dem Halt; das kann der Bezugslauf sein.
+  Für Läufe nach dem Halt ist der verworfene Bezug kein Stützpunkt mehr.
 
 ### 1.3 Empfehlung
 
-A1 + Z1 + H1 + K1 + N7 (S1–S4; Nullpunktalarm nach F-a4) + N5 + N6 (b) mit neuem Bezug nach einem Nullpunkthalt,
+A1 + Z1 + H1 + K1 + N7 (S1–S4; einzelner Nullpunktalarm im W-Satz nach §8.8) + N5 + N6 (b) mit Bezugseröffnung nach
+einem Nullpunkthalt,
 als Arbeitsfestlegung mit A0-Eintrag und als `ablauf-4`. Gründe: wörtlichste Lesart von §9.2 (Halt beendet die
 Messung mit dem auslösenden Lauf, Wiederaufnahme nach einem vollständigen Kontrollsatz), die Mittellage von X′, die
 A8 voraussetzt, bleibt erhalten, keine neue Verschachtelungslücke, der Code bleibt klein.
@@ -220,8 +248,7 @@ Normtext (Vorschläge, Wortlaut zur Entscheidung):
   Laufs (A9.12).“
 - §9.2 „Nach einem Abbruch“: „…; beim Halt noch ausstehende sofortige Folgeläufe entfallen (A9.12); der
   unterbrochene Block wird in der gezogenen Reihenfolge fortgesetzt, gültige Läufe bleiben gültig. Als Alarm im
-  Kontrollsatz der Wiederaufnahme gelten S1–S4 und [der Nullpunktalarm | der nach §8.8 reproduzierte
-  Nullpunktalarm] (F-a4).“ Der Entwurf nennt den Halt mit Wiederaufnahme „Abbruch“; diese Vorlage sagt dafür
+  Kontrollsatz der Wiederaufnahme gelten S1–S4 und der nach §8.8 reproduzierte Nullpunktalarm.“ Der Entwurf nennt den Halt mit Wiederaufnahme „Abbruch“; diese Vorlage sagt dafür
   „Halt“ und meint mit „endgültig beendet“ nur das Ende nach zweitem S2, erschöpftem W oder Eingriff.
 - A9.12, neuer Punkt „Reihenfolge sofortiger Folgeläufe“ (Definition der sofortigen Folgeläufe; (1) begonnene
   Referenzfolge wird nicht unterbrochen; (2) feststehender Verstoß → unmittelbar R₂, X′, R₃; (3) danach die übrigen
@@ -232,13 +259,16 @@ Normtext (Vorschläge, Wortlaut zur Entscheidung):
 - A9.12, neuer Punkt „Halt und Wiederaufnahme“ (ausstehende Folgeläufe entfallen und werden protokolliert; G1-Fall
   ohne gemessenes X′ nach dem W-Satz vollständig; offene G1-Prüfungen schließt der erste gültige Referenzlauf nach
   der Wiederaufnahme; eingeschobene Referenzläufe gehören nicht zum W-Satz; Aufwärmen bei Tageswechsel; nach einem
-  Nullpunkthalt wird der erste Referenzlauf des W-Satzes neues R₀, ohne Alarmvergleich gegen das alte R₀; Messtag;
+  Nullpunkthalt eröffnet ein gesonderter Bezugslauf vor dem W-Satz den neuen Bezug, Reihenfolge und Grenzen wie in
+  1.2; Messtag;
   „Kein Block über Nacht“ mit Ausnahme).
 - A8 (Anhang Z. 740–757): S1-Weg über einen reproduzierten Nullpunktalarm am R₁ der Vorprüfung ergänzen; die Raten
   je Lauf als Mittel über die Streuung von σ̂_ref kennzeichnen, σ̂_ref mit effektiv etwa 21 Freiheitsgraden;
   Kampagnenschranke neu herleiten oder durch die simulierte Rate ersetzen (Abschnitt 3.1).
-- P0.7 (Anhang Z. 886–887): Lesart festlegen. 42 Referenzläufe im Abstand von zwölf Läufen brauchen mindestens
-  492 andere Läufe; Phase 0 hat bei n₀ = 20 und 20 Piloten nur 120 (Abschnitt 5.4).
+- P0.7 (Anhang Z. 886–887), Arbeitsfestlegung vom 20.10.2026: mindestens 42 Referenzläufe über Phase 0 verteilt,
+  höchstens zwölf andere Läufe zwischen zwei Referenzläufen („nach zwölf“ als größter Abstand). Bei 120 anderen
+  Läufen werden 42 Referenzläufe einschließlich Anfang und Ende möglichst gleichmäßig verteilt; die tatsächlich
+  gültige Zahl und Anordnung wird ausgewiesen. Die alte Generatoranordnung bleibt als historischer Prüfmodus.
 - §12 (I): neue Zeile „Ablauf der Phase 1 (A9.12)“ mit der Arbeitsfestlegung; A0-Eintrag.
 
 Code und Tests:
@@ -246,7 +276,7 @@ Code und Tests:
 - `ablauf.py` (`ablauf-4`): `_klammer_offen` → allgemeiner Vorrang (R₁ des eigenen Laufs oder R₃ des eigenen Falls an
   der Spitze), `_s3` und `_kontrolle_ungueltig` fügen dahinter ein; `fortsetzen` verwirft ausstehende Einschübe mit
   Protokoll, misst einen G1-Fall ohne X′ nach dem W-Satz vollständig und ordnet daraus folgende Einschübe hinter
-  den W-Satz; N7-Fassung in `_s3`/`_referenz`; neues R₀ nach einem Nullpunkthalt; Aufwärmen und Messtag bei
+  den W-Satz; N7-Fassung in `_s3`/`_referenz`; Bezugseröffnung nach einem Nullpunkthalt; Aufwärmen und Messtag bei
   Tageswechsel. Das Verwerfen gehört in
   `fortsetzen`, nicht in `_halt`, sonst ändern sich die Prüfsummen des Prüffalls S02 ohne fachlichen Grund.
 - `auswertung.py`: Offline-Gegenprobe der Folgen (R₁ unmittelbar nach seinem Lauf; nach einem Halt beginnt der
@@ -255,7 +285,8 @@ Code und Tests:
 - `regeln.py`: Präfix `ablauf.` mit allen Ablaufregeln (Status Arbeitsfestlegung), Aufnahme in die Regelmatrix.
 - Tests: Zusammentreffen Vorprüfung/S3 am gewöhnlichen Lⱼ (heute ungetestet), verschachtelte Vorprüfung der
   S3-Wiederholung, ungültiges Lⱼ-X′ (Z1), Halt an R₂ und an R₃, W-Satz mit S3-Überschreitung und mit
-  Nullpunktalarm, Wiederaufnahme nach Nullpunkthalt mit neuem R₀ (kein Alarm gegen das alte R₀), Fortsetzung aus
+  Nullpunktalarm, Wiederaufnahme nach Nullpunkthalt mit Bezugslauf (kein Alarm gegen das alte R₀, keine Vorprüfung
+  eines zufällig zuerst gezogenen L-Laufs gegen den verworfenen Bezug, ungültiger Bezugslauf), Fortsetzung aus
   dem Ablaufstand, Tageswechsel. Ablauf-Prüfsatz neu (Version); Software-Prüfsatz
   unverändert.
 - Ergebnisse: Die Zahlen von PR #23 bleiben `ablauf-3`-Werte und werden so gekennzeichnet; eine Neurechnung ist
@@ -621,8 +652,8 @@ die Halt- und Wiederaufnahmeraten sind mit R1 (Abschnitt 3.5) gemessen, bevor We
 - **R1-Halte:** Halt- und Wiederaufnahmeraten je Regel mit `ablauf-4`, gepaart für (i) und (ii) mit denselben
   Seeds, A4, V1-G0, V1-G60h je 1000 Kampagnen, Zähldiagnose ohne Stufe 2; dazu die Tabelle ε_ctrl × G1-Fälle ×
   Halte je Kampagne und die A8-Schranken für die tatsächliche Laufzahl. Die Tabelle für die 30 Kampagnen aus PR #23
-  liegt bisher nur im Scratch-Ordner und die Checkpoints nur flüchtig unter /tmp; Tabelle und Skript kommen mit dem
-  PR für b2 nach docs/. R1 prüft die Teststatistikrechnung aus 3.1 als Gegenprobe: P(≥ 2), P(≥ 4),
+  steht mit Skript im Belegpaket (`eps_ctrl/eps_ctrl_halte_je_kampagne.csv`); die Checkpoints selbst waren flüchtig
+  und sind nicht aufgenommen (Stand 20.10.2026). R1 prüft die Teststatistikrechnung aus 3.1 als Gegenprobe: P(≥ 2), P(≥ 4),
   Kettenfaktor und Halt an R₂, R₃ und X′ nach ε-Klassen, einmal mit der Phase-0-Anordnung des Generators und einmal
   mit der von P0.7 (ein Referenzlauf nach zwölf Läufen). Mit denselben Seeds zählt R1 ohne Mehraufwand |A|,
   |G \ A| nach Grund, die H2-Teilmenge außerhalb von A und die gemeinsame Vollständigkeit über die nicht
@@ -704,7 +735,7 @@ Warum die Intervallregel am Rand versagt (gerechnet; reproduziert PR #22 exakt):
   Produkt war und ν = 19 nicht enthielt; beide Werte waren Monte-Carlo-Rauschen.
   Gegenproben: Mit eingesetztem ŝ ohne n/(n − 1) und ohne κ hielte die Regel nur bis 3,1·α/m bei ν = 19 und
   6,4·α/m bei ν = 10; das ist die Regel „c-2“ des Querschnittsberichts, deren obere Rice-Grenze am Rand außerdem bis
-  0,15 statt 0,05 ergibt. Mit √(Spur/2) statt λ_max wären es bei geschätztem ŝ bis 20–27·α/m, mit κ, aber
+  0,154 (ν = 19) bzw. 0,160 (ν = 10) statt 0,05 ergibt (Belegpaket, `e3b/zusatz_z1_z6.out`). Mit √(Spur/2) statt λ_max wären es bei geschätztem ŝ bis 20–27·α/m, mit κ, aber
   √(Spur/2), bis 11·α/m, bei bekanntem s bis 9,9·α/m. κ und λ_max sind also beide nötig; eine „Rice-exakte“ Grenze
   ist nur bei bekanntem s und isotropem Σ exakt.
   Annahmen: d̂ näherungsweise zweidimensional normal (Nenner nahezu fest); Läufe je Quelle unabhängig ohne Drift,
@@ -976,7 +1007,8 @@ Gemeinsame Reihenfolge (sie verträgt sich mit allen Reihenfolgen der Leseberich
 2. Parallel: a (PR 1), c (PR 2), d0 und d1 (PR 3a).
 3. Code für b1 und b2 (PR 4 und 5), dann R1 mit dem Szenariogenerator in beiden Phase-0-Anordnungen.
 4. R2, danach die Entscheidungen zu b1 und b2; parallel d2 mit R1-d bis R3-d (PR 3b).
-5. Neukalibrierung von Werkzeug 8, danach Planungssimulation, Prüfstandsauswahl und E3-Punkte.
+5. Neukalibrierung von Werkzeug 8, danach Planungssimulation, Prüfstandsauswahl und E3-Punkte. Nach der
+   Entscheidung vom 20.10.2026 nicht Teil dieses Vorhabensteils; nur als startfreies Beispiel vorbereitet.
 6. Teil B (AP-21): Planung an der oberen Grenze, Teil-B-Werte und Kriterien mit den Pilotkovarianzen.
 
 Vorgeschlagene Paketierung, je PR mit Normtext (§12-Zeile, A0, Regelstelle), `regeln.py`, Code, Tests,
@@ -991,9 +1023,9 @@ Regelmatrix und Prüfsätzen:
 | 4 | b1: G4 B+ (oder D), Zielrate | R1 gemeinsam mit PR 5; R2 4,5–7,0 Kernstunden; R3 Minuten | 1,5–5 Personentage |
 | 5 | b2: Wiederaufnahme in Werkzeug 8, Bezugsmengen G und A, Berichtsgrößen, Zeitformel, Ziel 0,95 | R1 gemeinsam mit PR 4: 8,6–11,8 Kernstunden | 1–1,5 Personentage |
 | 3b | d2: Strukturmodell, Pilotschätzer, Planungshaken | R1-d 0,5–2,0, R2-d 2,3–3,5, R3-d 1,25–1,75 je Kandidat; zusammen mindestens 3–6 Kernstunden | übriger Teil der 6–9 Personentage |
-| danach | Neukalibrierung von Werkzeug 8, drei Systeme × (1000 + 1000) Kampagnen, normativ | 55–243 Kernstunden; mit den Laufzeiten der Korrekturrunde 78–243; oben 166, wenn je System die gemessene Laufzeit statt der von V1-G0 gilt; Nachziehen bis \|A\| = 1000 unter (ii) +0,2–2,5 | AP-13 |
-| danach | Planungssimulation je Kandidat, Paar (k, T_a) und System | 18,4–81,1 Kernstunden je Einheit | AP-13 |
-| danach | Prüfstandsauswahl, E3-Punkte | nicht beziffert | AP-13 |
+| nicht beauftragt, nur Beispiel | Neukalibrierung von Werkzeug 8, drei Systeme × (1000 + 1000) Kampagnen, normativ | 55–243 Kernstunden; mit den Laufzeiten der Korrekturrunde 78–243; oben 166, wenn je System die gemessene Laufzeit statt der von V1-G0 gilt; Nachziehen bis \|A\| = 1000 unter (ii) +0,2–2,5 | AP-13 |
+| nicht beauftragt, nur Beispiel | Planungssimulation je Kandidat, Paar (k, T_a) und System | 18,4–81,1 Kernstunden je Einheit | AP-13 |
+| nicht beauftragt | Prüfstandsauswahl, E3-Punkte | nicht beziffert | AP-13 |
 | nicht enthalten | volle M4-Matrix (Katalog × L0–L5) | Plan 200–235 Kernstunden, Softwaredoku etwa 450 bei B = 1000 | eigener Auftrag |
 
 Rechenbudget der Zähldiagnosen (gerechnet aus gelesenen 2,6–3,5 s je schlanker und 2,0–3,1 s je statischer
@@ -1011,10 +1043,14 @@ etwa 4,4 Standardfehlern (gerechnet in der Nachprüfung); voll faktoriell wären
 Kernstunden allein für R1. In R1 ist kein Nachziehen nötig, weil R1 |A| und G \ A bei |G| = 1000 zählt. Die
 Obergrenze 243 Kernstunden der Neukalibrierung setzt die 139 s von V1-G0 für alle drei Systeme; die Messungen gelten
 für n = 20, und ob es Kern- oder Wandsekunden sind, sagt die Softwaredoku an dieser Stelle nicht. Das Budget liegt
-weit über den bisherigen Zusatzbudgets (40 Ausführungen) und braucht einen eigenen Auftrag mit Auftragsliste, Seeds
-und Checkpoints wie in PR #22 und PR #23.
+weit über den bisherigen Zusatzbudgets. Nach dem Auftrag vom 20.10.2026 werden die vollen Umfänge von R1, R2 und
+R1-d bis R3-d nur als Auftragslisten mit Seeds und Checkpoints vorbereitet; innerhalb des Auftrags laufen kleine,
+gepaarte Proben mit zusammen höchstens zwei Kernstunden neben der Testsuite. Solche Proben zeigen, dass ein
+Verfahren durchläuft oder einen Fehler erkennt; sie belegen keine seltene Fehlalarmrate, keine Power von 0,8 und
+keine Vollständigkeitsrate von 0,95.
 
-Entscheidungsliste (Kurzform; Empfehlung in Klammern):
+Entscheidungsliste (Kurzform; Empfehlung in Klammern). Mit dem Auftrag vom 20.10.2026 sind alle Punkte für den
+Umfang der Umsetzung als Arbeitsvorgaben entschieden; Abschnitt 9 nennt sie, einschließlich F-a4:
 
 1. F-a1 Reihenfolge A1 + Z1 (ja). F-a2 Halt H1 (ja). F-a3 K1 oder K2 (K1). F-a4 N7-Fassung (S1–S4 als Alarm; ob
    ein einzelner Nullpunktalarm im W-Satz anhält oder nach §8.8 wiederholt wird: Autor, die Wiederholung verkettet
@@ -1040,8 +1076,10 @@ Entscheidungsliste (Kurzform; Empfehlung in Klammern):
 
 - Alle Rechnungen sind Rechnungen auf Statistikebene mit vereinfachten Annahmen (Normalmodelle, Unabhängigkeit,
   Isotropie; die homogene Haltrate der ersten Fassung ist durch die Nachprüfung widerlegt); sie sind gekennzeichnet
-  und ersetzen keine Kalibrierung. Die Skripte liegen noch
-  außerhalb des Repositorys und werden mit den jeweiligen PRs als geprüfte Rechnungen nachgereicht.
+  und ersetzen keine Kalibrierung. Skripte, kompakte Eingaben und Ausgaben liegen seit dem 20.10.2026 im
+  Belegpaket `docs/entscheidungsvorlage_2026-10-19_belege/` (mit Herkunft, Seeds, Softwareständen und
+  Ausführungsanweisung); die dort benannten Lücken (unter anderem das verlorene Originalskript der E3b-Nachzählung,
+  die nicht aufgenommenen npz-Dateien und einzelne Gegenproben ohne gespeichertes Skript) bleiben bestehen.
 - Die Zahlen aus PR #22 und #23 stammen aus Entwicklungsläufen (reduzierte Replikatzahlen, zehn bis vierzig
   Kampagnen je System) und aus Kampagnen mit statischem Laufplan oder `ablauf-2`/`ablauf-3`; sie zeigen Richtungen,
   keine Raten.
@@ -1107,6 +1145,39 @@ Gegenüber der ersten Fassung geänderte Empfehlungen:
 Unverändert geblieben sind die Grundrichtungen: A1 + Z1 + H1 + K1 + N7 für den Ablauf, B+ gegen D für G4, Zählung
 (ii) für Halte, Option B für E3b und das Strukturmodell C für den Generator.
 
-Die Skripte und Ergebnisse der Prüfer liegen im Scratch-Ordner der Sitzung, nicht im Repository. Sie kommen wie die
-übrigen Rechnungen mit den Umsetzungs-PRs nach docs/; das gilt besonders für die Tabelle ε_ctrl je Kampagne und die
-rekonstruierte E3b-Nachzählung, weil die zugrunde liegenden Checkpoints nur flüchtig unter /tmp liegen.
+Die Skripte und Ergebnisse der Prüfer und der Gegenproben sind am 20.10.2026 in das Belegpaket
+`docs/entscheidungsvorlage_2026-10-19_belege/` übernommen worden, darunter die Tabelle ε_ctrl je Kampagne, die
+A8-Wege einschließlich des Alarms am R₁, die rekonstruierte E3b-Nachzählung mit Vergleichsausgabe (die Rekonstruktion
+gibt die erhaltene Originalausgabe bytegleich wieder; das Originalskript ist verloren), die Randgültigkeit der
+E3-Grenzen, die effektiven Freiheitsgrade von σ̂_ref und die Kostenrechnung. Die README des Pakets ordnet jede Zahl
+Skript, Ausgabe und Herkunft zu und benennt die Lücken. Für das Paket wurden 46 kleine Rechnungen mit zusammen etwa
+6,4 Kernminuten neu ausgeführt.
+
+## 9 Auftrag vom 20.10.2026: Ressourcenentscheidung und Arbeitsvorgaben
+
+**Ressourcenentscheidung des Autors.** Die normative Kalibrier- und Prüfsimulation mit 1000 + 1000 verwertbaren
+Kampagnen je System, die volle M4-Matrix und große Planungssimulationen je Kandidat werden in diesem Vorhabensteil
+nicht ausgeführt. Das ist eine feste Entscheidung, weil die Rechenressourcen fehlen und die vorhandenen Daten
+synthetisch sind. Diese Rechnungen werden als startfreie Beispiele vorbereitet. Ihre Nichtausführung ist kein Fehler
+der Umsetzung; die Kalibrierabnahme bleibt offen und wird weder durch niedrigere Sollzahlen noch durch gelockerte
+Kriterien ersetzt. Für die Umsetzung gelten höchstens vier Prozesse mit je einem BLAS-Thread und neben der
+Testsuite höchstens zwei Kernstunden für neue Diagnose- und Demonstrationsrechnungen.
+
+**Arbeitsvorgaben.** Sie ersetzen die Auswahlfragen dieser Vorlage für den Umfang der Umsetzung. Weitergehende
+Fachfragen, etwa δ_H2 und δ_H3, sind damit nicht mitentschieden. Alle Vorgaben sind methodische
+Arbeitsfestlegungen; sie sind statistisch nicht kalibriert und experimentell nicht geprüft.
+
+| Fragen | Arbeitsvorgabe |
+|---|---|
+| F-a1 bis F-a3 | A1 + Z1: R₁ zuerst, bei feststehendem Verstoß R₂, X′, R₃ als geschlossene Folge, auch bei ungültigem X′; H1 mit neuer vollständiger Folge für einen G1-Fall ohne gemessenes X′; K1 bei unvollständiger Klammer |
+| F-a4 | Im Kontrollsatz der Wiederaufnahme gelten S1–S4 als Alarm; eine einzelne S3-Überschreitung und ein einzelner Nullpunktalarm werden wie sonst wiederholt, erst der reproduzierte Alarm hält an |
+| F-a5 | Aufwärmen nur bei Tageswechsel; Bezugseröffnung nach einem Nullpunkthalt in der Reihenfolge von 1.2; Ausnahme für einen durch Halt unterbrochenen Block über Nacht im Normtext |
+| F-a6, A8, P0.7 | übrige Lesarten im selben Regelstand; A8 um den S1-Weg über das R₁ ergänzen; P0.7 mit höchstens zwölf anderen Läufen zwischen zwei Referenzläufen, 42 Referenzläufe gleichmäßig verteilt, alte Anordnung als historischer Prüfmodus |
+| F-b1 bis F-b5 | B+ als Standard, D als wählbarer Diagnose- und Entwicklungsmodus, bisherige Regel als historische Vergleichsvariante; Arbeitsziel höchstens 1,5 % Fehlausschlüsse je Konfiguration und Lauf unter dem benannten Nullmodell als Zielvorgabe; Fünftelzeiger im Format für D; s̄_P der Piloten mit derselben Mischung; für Lⱼ eine von n abhängige Schwelle, Pooling als Vergleich |
+| F-b6 | R1 und R2 funktional implementiert, kleine Proben; volle Umfänge als Auftragslisten |
+| F-b7 bis F-b13 | Zählung (ii) mit W = 3 und T_UA aus Teil B (Entwicklung 1800 s); Mengen G und A; endgültig beendete Kampagne sperrt ihre Ausgänge; Haltraten berichtet; Zeitformel erweitert; Ziel 0,95 als Bedingung für r über die nicht endgültig beendeten Kampagnen mit technischer Grenze; |A| = 1000 mit Nachziehen und Versuchslimit nur im Kalibrierbeispiel; b̂ über die realisierten Laufzahlen |
+| F-c1 bis F-c5 | Option B mit beschreibendem Rückfall je Prüfgröße; m = 43 fest; E3a mit t-Quantilen und Berücksichtigung der Gegenseite; ν konservativ; Amplitudenänderungen 0,5 % und 1 % als kleine Zusatzprüffälle |
+| F-d1 bis F-d8 | Strukturmodell als Standard, Familienanpassung eingebettet; κ je identifizierbarer Komponente mit gemeinsamem Faktor für den ⟨N⟩-Boden, marginale Grenzen ohne gemeinsame Garantie; Planung und nachgelagerte Parameterschätzung im Normtext getrennt; N̄⁽ʲ⁾ für Schätzung und Übertragungstest zulässig, keine Superpositionsresiduen der Piloten; c aus dem Standardmodell, Modellliste als Sensitivität; P0.8 am Arbeitspunkt, Werkzeug 2 für Kandidaten; nicht identifizierbare Komponenten als benannte Sensitivitäten; Planungshaken ohne Szenario, Szenariomodell als unabhängige Referenz; Residuen-Bootstrap optional |
+
+Die Umsetzung erfolgt als ein Gesamt-PR mit den Etappen von Abschnitt 6 als Commits. Ergebnisse alter
+Ablaufversionen bleiben historische Ergebnisse und werden nicht umetikettiert.

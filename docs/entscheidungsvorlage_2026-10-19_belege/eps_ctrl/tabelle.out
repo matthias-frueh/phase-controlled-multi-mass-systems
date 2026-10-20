@@ -1,0 +1,17 @@
+korr-N01-A4-wiederholungen sha256 ok git c8c0a36 ablauf-2
+korr-N01-V1G0-wiederholungen sha256 ok git c8c0a36 ablauf-2
+korr-N01-V1G60h-wiederholungen sha256 ok git c8c0a36 ablauf-2
+Kampagnen 30 Abweichungen zu kampagnen.csv 0 Zeilen kampagnen.csv 30
+eps min/median/max 0.2222 0.29445 0.3639 Mittel 0.3009 sd 0.0353
+3*sqrt(1.5)*sigma_true [mN] 0.2905 u median 1.0137
+Spearman eps~G1: -0.808 p=6.6e-08; Kendall -0.651 p=2.8e-06
+Spearman eps~G1_konfig: -0.753 p=1.6e-06; Kendall -0.636 p=1.1e-05
+Spearman eps~X_strich: -0.646 p=0.00011; Kendall -0.543 p=0.0002
+Spearman eps~R1: -0.735 p=3.7e-06; Kendall -0.564 p=2.9e-05
+ohne V1G0#2 Spearman eps~G1 -0.787 4.1e-07
+ohne V1G0#2 Spearman eps~X -0.603 0.00053
+Halt N01-A4 4 S1 (S1 V00238) eps 0.2952 Rang (aufsteigend) von 30: 17
+Halt N01-V1G0 1 S1 (S1 V00142) eps 0.2853 Rang (aufsteigend) von 30: 12
+Halt N01-V1G0 2 S1 (S1 V00666) eps 0.2222 Rang (aufsteigend) von 30: 1
+Halt N01-V1G0 7 S1 (S1 V00364) eps 0.2646 Rang (aufsteigend) von 30: 4
+Halt N01-V1G60h 7 S3 (S3 V00195) eps 0.2865 Rang (aufsteigend) von 30: 13

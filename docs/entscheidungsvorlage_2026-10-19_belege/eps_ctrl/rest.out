@@ -1,0 +1,8 @@
+u < 0.8: Anteil Datensätze 0.093, Anteil an p1 0.72
+u < 0.9: Anteil Datensätze 0.266, Anteil an p1 0.92
+u < 1.0: Anteil Datensätze 0.515, Anteil an p1 0.99
+p1 marginal 0.00025, Median der bedingten p1 2.8e-05, 90-%-Quantil 0.00057
+σ_betr/σ_ref = 1.0000: P(F > 1,581) = 0.050
+σ_betr/σ_ref = 1.0177: P(F > 1,581) = 0.059
+σ_betr/σ_ref = 1.0690: P(F > 1,581) = 0.091
+κ(21)/κ(57) = 1.0687, κ(41)/κ(57) = 1.0177

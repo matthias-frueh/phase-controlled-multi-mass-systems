@@ -1,0 +1,15 @@
+n_kal=1000 n_pruef=1000: SE_pruef=0.00689 SE_c(Ratenskala)=0.00689 gesamt=0.00975 Schwelle=0.06949  nur Prüffehler=0.06378  P(Rate > 0,05+2SE_pruef | korrekt)=0.0786
+n_kal=833 n_pruef=833: SE_pruef=0.00755 SE_c(Ratenskala)=0.00755 gesamt=0.01068 Schwelle=0.07136  nur Prüffehler=0.06510  P(Rate > 0,05+2SE_pruef | korrekt)=0.0786
+n_kal=950 n_pruef=950: SE_pruef=0.00707 SE_c(Ratenskala)=0.00707 gesamt=0.01000 Schwelle=0.07000  nur Prüffehler=0.06414  P(Rate > 0,05+2SE_pruef | korrekt)=0.0786
+n_kal=1000 n_pruef=833: SE_pruef=0.00755 SE_c(Ratenskala)=0.00689 gesamt=0.01022 Schwelle=0.07045  nur Prüffehler=0.06510  P(Rate > 0,05+2SE_pruef | korrekt)=0.0698
+Überdeckungsschwelle bei n=1000: 0.93622
+Überdeckungsschwelle bei n=950: 0.93586
+Überdeckungsschwelle bei n=833: 0.93490
+p=0.01 n_min=18 r=2: P(Platz fehlt)=1.00e-06 P(Punkt<n_min)=1.14e-15 P(alle 21 Punkte >= n_min, unabh.)=1.0000
+p=0.01 n_min=18 r=3: P(Platz fehlt)=1.00e-06 P(Punkt<n_min)=5.98e-21 P(alle 21 Punkte >= n_min, unabh.)=1.0000
+p=0.05 n_min=18 r=2: P(Platz fehlt)=1.25e-04 P(Punkt<n_min)=2.22e-09 P(alle 21 Punkte >= n_min, unabh.)=1.0000
+p=0.05 n_min=18 r=3: P(Platz fehlt)=1.25e-04 P(Punkt<n_min)=1.46e-12 P(alle 21 Punkte >= n_min, unabh.)=1.0000
+p=0.10 n_min=18 r=2: P(Platz fehlt)=1.00e-03 P(Punkt<n_min)=1.13e-06 P(alle 21 Punkte >= n_min, unabh.)=1.0000
+p=0.10 n_min=18 r=3: P(Platz fehlt)=1.00e-03 P(Punkt<n_min)=5.90e-09 P(alle 21 Punkte >= n_min, unabh.)=1.0000
+p=0.30 n_min=18 r=2: P(Platz fehlt)=2.70e-02 P(Punkt<n_min)=1.59e-02 P(alle 21 Punkte >= n_min, unabh.)=0.7141
+p=0.30 n_min=18 r=3: P(Platz fehlt)=2.70e-02 P(Punkt<n_min)=2.20e-03 P(alle 21 Punkte >= n_min, unabh.)=0.9548

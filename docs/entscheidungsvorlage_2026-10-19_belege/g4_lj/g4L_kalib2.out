@@ -1,0 +1,11 @@
+(1) PR #22 V1 (80 Kampagnen): beobachtet 224, Modell κ = 1 Mittel 244.5, P(≤ beob.) 0.218, P(≥ beob.) 0.793
+    V1G0 134 gegen V1G60h 90: Permutations-p (zweiseitig) 0.073
+(2) V1 gepoolt: Rate/L [2.80; 3.59; 4.37] % → κ [0.959; 1.003; 1.058], Wdh./Kampagne [2.29; 2.97; 3.65], G4-Halt an Lⱼ [2.58; 3.81; 5.23] %
+(2) N01-V1G0: Rate/L [3.11; 4.32; 5.54] % → κ [0.907; 0.961; 1.035], Wdh./Kampagne [2.55; 3.60; 4.67], G4-Halt an Lⱼ [3.03; 5.13; 7.67] %
+(2) N01-V1G60h: Rate/L [1.89; 2.85; 3.82] % → κ [0.989; 1.054; 1.147], Wdh./Kampagne [1.53; 2.34; 3.16], G4-Halt an Lⱼ [1.42; 2.66; 4.20] %
+(3) κ = 1.000: erwartete G4-Halte an Lⱼ in den 30 Kampagnen 1.13, P(0 Halte) 0.32
+(3) κ = 1.003: erwartete G4-Halte an Lⱼ in den 30 Kampagnen 1.09, P(0 Halte) 0.33
+(3) κ = 0.962: erwartete G4-Halte an Lⱼ in den 30 Kampagnen 1.46, P(0 Halte) 0.22
+(3) κ = 1.054: erwartete G4-Halte an Lⱼ in den 30 Kampagnen 0.78, P(0 Halte) 0.45
+(3) κ = 1.144: erwartete G4-Halte an Lⱼ in den 30 Kampagnen 0.42, P(0 Halte) 0.66
+(4) κ = 1: Anteil der Haltwahrscheinlichkeit aus dem Zehntel der Kampagnen mit der höchsten Modulrate: 0.69; dort Rate des ungünstigsten Moduls ≥ 15.8 %
