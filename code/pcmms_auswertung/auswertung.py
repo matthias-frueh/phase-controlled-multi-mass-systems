@@ -71,18 +71,19 @@ def _online_gueltig(v):
     return bool(v.get('gueltig')) and v.get('g1') is not True
 
 
-def _x_strich_gegenprobe(t1, pr):
+def _x_strich_gegenprobe(t1, pr, v4=False):
     """X′ des zustandsbehafteten Ablaufs offline nachgeprüft: Die einschließenden gültigen Referenzläufe gleichen dem
     Bezug des Ablaufs, „vorgesehen“ (R₂/R₃ desselben G1-Falls) folgt allein aus den Köpfen, und ein S1 an X′ setzt die
     vorgesehene Klammer voraus. Auf ein nach G2–G10 gültiges X′ folgt unmittelbar das R₃ seines Falls (sonst hätte ein
-    anderer Versuch die Klammer unterbrochen); ausgenommen ist ein Halt an X′ selbst vor R₃ (andere Regel als S1)."""
+    anderer Versuch die Klammer unterbrochen); ausgenommen ist ein Halt an X′ selbst vor R₃ (andere Regel als S1).
+    ablauf-4 (Z1): R₃ folgt auch auf ein nach G2–G10 ungültiges X′, außer bei einem Halt an X′."""
     ka, kb = pr['g1_klammer'] if pr.get('g1_klammer') is not None else (None, None)
     abw = []
     for i, k in enumerate(t1.koepfe):
         v = k['versuch']
         if v.get('rolle') != 'X_strich':
             continue
-        if i + 1 < len(t1.koepfe) and set(pr['gruende'][i]) <= {'G1'} and v.get('halt') in (None, 'S1'):
+        if i + 1 < len(t1.koepfe) and (v4 or set(pr['gruende'][i]) <= {'G1'}) and v.get('halt') in (None, 'S1'):
             w = t1.koepfe[i + 1]['versuch']
             if w.get('rolle') != 'R3' or w.get('bezug_versuch') != v.get('bezug_versuch'):
                 abw.append(f'{v["id"]}: auf X′ folgt {w.get("id")} ({w.get("rolle")}), nicht R₃ des Falls '
@@ -99,6 +100,41 @@ def _x_strich_gegenprobe(t1, pr):
             abw.append(f'{v["id"]}: S1 ohne vorgesehene Klammer R₂/R₃')
     if abw:
         raise formate.FormatFehler('X′ offline ≠ Ablauf: ' + '; '.join(abw[:5]))
+
+
+def _folgen_gegenprobe(t1, abl):
+    """ablauf-4 offline: R₁ folgt unmittelbar auf seinen Lauf (also nie über eine Unterbrechung); nach einem Halt beginnt
+    die Wiederaufnahme mit dem Aufwärmen (Tageswechsel), dem Bezugslauf (Nullpunkthalt) oder dem Kontrollsatz; R₂, X′
+    und R₃ zu einem Lauf von vor der Wiederaufnahme kommen erst nach deren Kontrollsatz (verworfene Folgeläufe und neue
+    Folge, H1); jeder Bezugswechsel nennt einen gültigen Referenzlauf ohne Nullpunktalarm als neuen Bezug."""
+    V = [k['versuch'] for k in t1.koepfe]
+    pos = {v['id']: i for i, v in enumerate(V)}
+    abw = []
+    for i, v in enumerate(V):
+        if v.get('rolle') == 'R1' and (i == 0 or V[i - 1]['id'] != v.get('bezug_versuch')):
+            abw.append(f'{v["id"]}: R₁ folgt nicht unmittelbar auf {v.get("bezug_versuch")}')
+    for w in abl.get('wiederaufnahmen') or []:
+        h = pos.get(w.get('nach_versuch'))
+        if h is None or h + 1 >= len(V):
+            continue
+        erwartet = 'aufwaermen' if w['tageswechsel'] else ('bezugslauf' if w['bezugseroeffnung'] else
+                                                          'wiederaufnahme_kontrolle')
+        if V[h + 1].get('rolle') != erwartet:
+            abw.append(f'Wiederaufnahme {w["nummer"]}: erster Versuch {V[h + 1]["id"]} ({V[h + 1].get("rolle")}), '
+                       f'erwartet {erwartet}')
+        ks = [j for j, v in enumerate(V) if v.get('kontrollsatz') == w['kontrollsatz']]
+        for j in range(h + 1, len(V)):
+            v = V[j]
+            if v.get('rolle') in ('R2', 'X_strich', 'R3') and pos.get(v.get('bezug_versuch'), len(V)) <= h \
+                    and ks and j < ks[-1]:
+                abw.append(f'{v["id"]}: {v["rolle"]} zu {v["bezug_versuch"]} vor dem Ende des Kontrollsatzes '
+                           f'{w["kontrollsatz"]}')
+    for b in abl.get('bezugswechsel') or []:
+        j = pos.get(b['neu'])
+        if j is None or not V[j].get('gueltig') or V[j].get('alarm'):
+            abw.append(f'Bezugswechsel {b}: neuer Bezug kein gültiger Referenzlauf ohne Alarm')
+    if abw:
+        raise formate.FormatFehler('Folgen offline ≠ ablauf-4: ' + '; '.join(abw[:5]))
 
 
 def _s2_gegenprobe(ab, abl):
@@ -196,7 +232,10 @@ def datenlage(tab, tb, prof):
         doppelt = sorted(x for x, c in zahl.items() if c > 1)
         if doppelt:
             raise formate.FormatFehler(f'mehr als ein gültiger Versuch je Konfiguration und Block: {doppelt[:5]}')
-        _x_strich_gegenprobe(t1, pr)
+        v4 = abl.get('version') == 'ablauf-4'
+        _x_strich_gegenprobe(t1, pr, v4=v4)
+        if v4:
+            _folgen_gegenprobe(t1, abl)
         _s2_gegenprobe(ab, abl)
         if abl.get('status') != 'abgeschlossen':
             sperren_alle.append(('Datenlage', f'Phase 1 {abl.get("status")}: {(abl.get("ende") or {}).get("grund")} '

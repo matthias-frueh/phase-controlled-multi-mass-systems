@@ -307,7 +307,8 @@ def pruefe(tab, sw, regeln=('G2', 'G3', 'G4', 'G5', 'G6', 'G7', 'G8', 'G9', 'G10
 
 def nullpunktalarm(tab, sw, kandidat):
     """Nullpunktalarm je Referenzlauf gegen den vorangehenden gültigen Referenzlauf derselben Phase. Aufwärm-
-    Referenzläufe des zustandsbehafteten Ablaufs (Rolle „aufwaermen“) lösen keinen Alarm aus und sind Bezug (A9.12)."""
+    Referenzläufe des zustandsbehafteten Ablaufs (Rolle „aufwaermen“) und der Bezugslauf nach einem Nullpunkthalt
+    (Rolle „bezugslauf“, ablauf-4) lösen keinen Alarm aus und sind Bezug (A9.12)."""
     out = {}
     if sw.sigma_ref is None:
         return out
@@ -320,7 +321,7 @@ def nullpunktalarm(tab, sw, kandidat):
         if not kandidat[i]:
             continue
         if (vor is not None and tab.koepfe[vor]['phase'] == tab.koepfe[i]['phase']
-                and rolle(tab.koepfe[i]) != 'aufwaermen'):
+                and rolle(tab.koepfe[i]) not in ('aufwaermen', 'bezugslauf')):
             kanal = alarm_kanaele(sw, tab.daten['N_mittel'][i], tab.daten['N_mittel_zellen'][i],
                                   tab.daten['N_mittel'][vor], tab.daten['N_mittel_zellen'][vor])
             out[i] = dict(alarm=bool(kanal), kanaele=kanal)

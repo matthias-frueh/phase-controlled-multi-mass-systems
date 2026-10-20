@@ -251,7 +251,7 @@ u_c < Δ_q/t_eq, Auslegungsgrenze nach A8); Fassung A und Faktor 0,1 erscheinen 
 | σ_c, σ_Σ, F_LO,c, F_LO,Σ | Standardabweichung der Rohwerte von Zelle c bzw. der Summe in Referenzläufen; Liftoff-Schwellen 5·σ_c bzw. 5·σ_Σ über dem Nullpunkt (P0.1) |
 | Einzelzell-Liftoff | mindestens ein Rohwert N_c < F_LO,c im ganzen Lauf einschließlich Rampe und Einschwingzeit |
 | N_s, N_s,int, β | Zeitmittel von N in Referenzläufen; N_s,int = (1 − β)·N_s,a + β·N_s,b, zeitlich linear interpoliert zwischen den beiden Referenzläufen a und b, die einen Lauf einschließen; β ∈ [0, 1] relative Lage des Laufs |
-| Δ⟨N⟩, σ̂_ref, ε_ctrl | Δ⟨N⟩ = ⟨N⟩_Lauf − N_s,int. σ̂_ref ist die Standardabweichung derselben Statistik für Referenzläufe: Jeder Referenzlauf der Phase 0 wird gegen die Interpolation seiner beiden Nachbarn ausgewertet (leave-one-out), aus mindestens 42 Referenzläufen der Phase 0 (P0.7), also mindestens 40 Werten; σ̂_ref,c ebenso je Zelle. ε_ctrl = 3·σ̂_ref oder 3·σ̂_betr (§8.8) |
+| Δ⟨N⟩, σ̂_ref, ε_ctrl | Δ⟨N⟩ = ⟨N⟩_Lauf − N_s,int. σ̂_ref ist die Standardabweichung derselben Statistik für Referenzläufe: Jeder Referenzlauf der Phase 0 wird gegen die Interpolation seiner beiden Nachbarn ausgewertet (leave-one-out), aus mindestens 42 Referenzläufen der Phase 0 (P0.7), also mindestens 40 Werten; σ̂_ref,c ebenso je Zelle. Weil benachbarte Leave-one-out-Werte korreliert sind, hat σ̂_ref weniger effektive Freiheitsgrade als Werte; sie hängen von Zahl und Anordnung der Referenzläufe ab (gleichmäßig verteilt, weißes Rauschen: etwa 21 bei 42, etwa 31 bei 61 Referenzläufen; A8). ε_ctrl = 3·σ̂_ref oder 3·σ̂_betr (§8.8) |
 | σ̂_betr | Standardabweichung der auf mittige Lage normierten Werte Δ⟨N⟩·√(1,5/(1 + β² + (1 − β)²)) der nach G2–G10 gültigen Pilot- und Einzelmodulläufe der Phase 0 (§8.8, A9.8) |
 | s_q, ν_p | s_q: gepoolte Standardabweichung über Läufe der Größe q, quadratisches Mittel der Standardabweichungen der Pilotkonfigurationen; ν_p = Σ(n_p,i − 1) mit den gültigen Läufen n_p,i |
 | u_c, u_c,erw | u_c: kombinierte Unsicherheit einer Differenz Messung − Vorhersage (§8.3, A9.5). u_c,erw: vor Phase 1 erwarteter Wert, u_c,erw² = s_q²/n_min + u²(ŷ_q); für γ₁ mit u(γ̂₁) aus dem Bootstrap der Vorhersage |
@@ -738,27 +738,44 @@ deshalb 0,069 (§8.4). Eine Schwelle mit nur dem Fehler der Prüfung (0,064) wü
 etwa 8 % der Fälle überschritten.
 
 **Fehlalarme bei korrekter Funktion.** Annahmen: ⟨N⟩ aller Laufarten normalverteilt mit derselben
-Streuung, keine Drift, σ̂_ref aus 42 gleich getakteten Referenzläufen (leave-one-out). Die Angaben zu S1
-und S3 sind obere Schranken, keine Raten des Verfahrens.
+Streuung, keine Drift, σ̂_ref aus 42 gleich getakteten Referenzläufen (leave-one-out). Unterschieden werden
+(Berichtigung vom 20.10.2026): **bewiesene Schranken** (exakte Rechnung oder Bonferroni über exakt gerechnete
+Summanden), **Modellrechnungen** (Monte Carlo in einem benannten Modell) und **empirische Häufigkeiten** aus
+synthetischen Diagnosekampagnen. Die Angaben je Lauf sind Bonferroni-Größen, keine Raten des Verfahrens.
+σ̂_ref hat effektiv etwa ν = 21 Freiheitsgrade bei 42 und etwa 31 bei 61 gleichmäßig verteilten
+Referenzläufen (analytisch aus der Kovarianz der Leave-one-out-Werte; Monte Carlo 19,8 bei 42); die Zahl hängt
+von der Anordnung ab und ist keine allgemeine Konstante. Die Schranken je Lauf sind Mittel über die Streuung
+von σ̂_ref; bei bekanntem σ sind sie etwa zehnmal kleiner.
 
 - **G1:** je Lauf höchstens 1,5 % (ungünstigste Lage: Interpolation ganz auf einen Referenzlauf), 0,61 %
   mittig zwischen zwei Referenzläufen (Monte Carlo über die Streuung von σ̂_ref).
 - **S1 über G1:** Der erste Lauf wird mit der ungünstigsten Lage angesetzt, die Wiederholung liegt mittig
   zwischen den frischen Referenzläufen R₂ und R₃; beide Prüfungen sind bei gegebenem σ̂_ref unabhängig. Die
-  Vorprüfung wird nicht berücksichtigt; sie senkt die Rate nur. Schranke je Lauf: 2,5·10⁻⁴.
+  Vorprüfung senkt diesen Weg nur. Schranke je Lauf: 2,5·10⁻⁴ (Modellrechnung, Mittel über σ̂_ref).
+- **S1 über einen reproduzierten Nullpunktalarm am R₁ der Vorprüfung** (ergänzt am 20.10.2026): Alarm und
+  Wiederholung prüfen gegen dasselbe R₀, das schon die Vorprüfung ausgelöst hat. Größe je Konfigurationslauf
+  2,9–3,0·10⁻⁴ marginal über σ̂_ref, 5–6·10⁻⁵ bei bekanntem σ (Modellrechnung, Summenkanal, ungünstige
+  Interpolationslagen). Dieser Weg fehlte in der früheren Kampagnensumme; er ist der größte einzelne S1-Weg.
+  Über X′ sind es 0,9–2,0·10⁻⁴, über einen reproduzierten Alarm an R₂ bzw. R₃ 0,6–2,6·10⁻⁴ bzw. 1–2·10⁻⁵
+  (Belege: docs/entscheidungsvorlage_2026-10-19_belege).
 - **S1 über Nullpunktalarme:** Alarm und Wiederholung teilen den vorangehenden Referenzlauf und sind
   deshalb korreliert. Schranke je Referenzlauf und Kanal: 7,3·10⁻⁴ (Monte Carlo); vier Kanäle (Summe und
   drei Zellen).
 - **S1 über eine Kampagne:** Bei 20 Blöcken mit 23 Konfigurationen und drei
   Identifizierbarkeitskonfigurationen an einem Messtag sind es ohne Aufwärm- und Wiederholungsläufe 688
   Läufe: 520 Kombinations-, 126 Einzelmodul- und 42 Referenzläufe (21 in den Kontrollsätzen, 20 in der
-  Blockmitte, ein Schlussreferenzlauf), 21 Kontrollsätze aus je sieben Läufen. Bonferroni-Schranke:
-  646·2,5·10⁻⁴ + 42·4·7,3·10⁻⁴ ≈ 0,28. Ohne Identifizierbarkeitsläufe (Kontrollsätze aus vier Läufen) wären
-  es 565 Läufe (460, 63, 42) und 523·2,5·10⁻⁴ + 42·4·7,3·10⁻⁴ ≈ 0,25. Allgemein sind es (N_K + N_I + 8)·n +
-  8·d Läufe; jeder weitere Messtag bringt einen Kontrollsatz und einen Schlussreferenzlauf und erhöht die
-  Schranke um 6·2,5·10⁻⁴ + 2·4·7,3·10⁻⁴ ≈ 0,007. Aufwärmläufe tragen nichts bei (A9.12); Wiederholungen
-  erhöhen die Schranke je Lauf wie oben.
-- **S3:** Die Statistik (x − x̄₀)/(s·√(1 + 1/n₀ⱼ)) ist t-verteilt mit n₀ⱼ − 1 Freiheitsgraden; mit
+  Blockmitte, ein Schlussreferenzlauf), 21 Kontrollsätze aus je sieben Läufen. Die früher angegebene Summe
+  646·2,5·10⁻⁴ + 42·4·7,3·10⁻⁴ ≈ 0,28 (ohne Identifizierbarkeitsläufe ≈ 0,25) ist keine hergeleitete obere
+  Schranke, weil der Weg über das R₁ fehlt; mit ihm ergäbe die Bonferroni-Summe etwa 0,47, was als Schranke
+  nichts aussagt. Eine hergeleitete Kampagnenschranke für S1 gibt es deshalb nicht. Modellrechnung
+  (Teststatistikmodell der Nachprüfung vom 19.10.2026: ⟨N⟩ normal, F-Test nach A9.8, wirkliche Lagen,
+  gemeinsames R₀, ohne S3, G2–G10, Drift und Aufwärmen, ein Messtag): P(mindestens ein S1-Halt oder Halt im
+  Kontrollsatz der Wiederaufnahme) etwa 0,09 mit 61 und 0,12 mit 42 Referenzläufen in Phase 0; die Halte sind
+  wegen des Schätzfehlers von σ̂_ref überdispers. Empirisch (30 synthetische Nullkampagnen von PR #23,
+  ablauf-3) hielten 5 an; das ist mit dem Modell verträglich und keine Rate. Allgemein sind es
+  (N_K + N_I + 8)·n + 8·d Läufe; Aufwärmläufe tragen nichts bei (A9.12), Wiederholungen und Bezugsläufe
+  (A9.12) kommen hinzu.
+- **S3** (bewiesene Schranke): Die Statistik (x − x̄₀)/(s·√(1 + 1/n₀ⱼ)) ist t-verteilt mit n₀ⱼ − 1 Freiheitsgraden; mit
   c_S = t(1 − 0,05/42; n₀ⱼ − 1) (bei n₀ⱼ = 20: 3,503) löst ein Kontrollsatz über die 21 Größen mit höchstens
   5 % aus (Bonferroni-Schranke, exakt je Größe). Reproduktion durch die sofortige Wiederholung: höchstens
   9,5·10⁻⁴ je Kontrollsatz (Bonferroni über 21 Größen; der Summand je Größe per Monte Carlo, weil erste
@@ -883,8 +900,12 @@ und S3 sind obere Schranken, keine Raten des Verfahrens.
 - **Laufdauer in Phase 0.** Alle Läufe bei einer Frequenz haben dieselbe Dauer, mit Einschwingzeit T_e,P
   und Fenster T_a,P [Teil B]. Ausgewertet werden die ersten ganzen Zyklen der Länge T_a, die T_e nach Ende
   der Rampe beginnen (Kürzen auf die ersten Zyklen); dazu muss T_e + T_a ≤ T_e,P + T_a,P sein.
-- **P0.7** Mindestens 42 Referenzläufe, verschachtelt mit P0.8–P0.10 bei jeder gemessenen Frequenz, je einer
-  nach zwölf anderen Läufen; σ̂_ref und σ̂_ref,c aus den Läufen bei f.
+- **P0.7** Mindestens 42 Referenzläufe, verschachtelt mit P0.8–P0.10 bei jeder gemessenen Frequenz; zwischen
+  zwei Referenzläufen liegen höchstens zwölf andere Läufe („nach zwölf“ als größter Abstand). Bei den üblichen
+  120 anderen Läufen werden 42 Referenzläufe einschließlich Anfang und Ende möglichst gleichmäßig verteilt
+  (Abstände zwei oder drei; Arbeitsfestlegung vom 20.10.2026). Berichtet werden die tatsächlich gültige Zahl
+  und die Anordnung; zu wenige gültige Referenzläufe werden nicht verdeckt qualifiziert. σ̂_ref und σ̂_ref,c
+  aus den Läufen bei f.
 - **Einstellung 2 (§5.5).** Nach der Wahl von f: P0.5′, dann je Modul n₀′ ≥ 20 Einzelmodulläufe Lⱼ′ (Umfang
   offen, §12),
   verschachtelt mit Referenzläufen wie P0.7. Die P0.5′-Ergebnisse werden hinterlegt, bevor Kraftdaten der
@@ -1181,6 +1202,44 @@ die Fassung dieser Regeln (§12).
   noch nicht begonnen hat; danach festgestellte Verstöße werden weder wiederholt noch nach S1 geprüft. X′
   wird auch jenseits der Wiederholungsgrenze gemessen und zählt als Wiederholung. S1 greift nur bei einem
   G1-Verstoß von X′.
+- **Reihenfolge sofortiger Folgeläufe** (Arbeitsfestlegung vom 20.10.2026, Fassung ablauf-4). Löst X die
+  Vorprüfung aus, ist R₁ der nächste Lauf; andere von X ausgelöste Wiederholungen (etwa die S3-Wiederholung)
+  folgen danach. Steht der G1-Verstoß fest, folgen R₂, X′, R₃ als geschlossene Folge. X′ erhält keine eigene
+  Vorprüfung; seine sonstigen Wiederholungen folgen nach R₃, auch wenn X′ nach G2–G10 ungültig ist. Danach
+  folgen die übrigen sofortigen Wiederholungen, die zuletzt ausgelöste zuerst. Jede Einfügung nennt Ursache und
+  Bezug. Ein sofortiger Halt hat Vorrang vor noch nicht gemessenen Folgeläufen.
+- **Halt und Wiederaufnahme** (ablauf-4). Wiederaufgenommen wird nur mit einem protokollierten externen
+  Ereignis (Ursachenanalyse mit Befund, Angaben zu mechanischem Eingriff und Apparaturfehler); ein mechanischer
+  Eingriff hat keinen automatischen Ersatzweg (§9.2). Beim Wiederaufnehmen werden alle noch ausstehenden
+  sofortigen Folgeläufe verworfen und einzeln protokolliert. War X′ eines G1-Falls noch nicht gemessen, wird
+  der Fall nach dem vollständigen Kontrollsatz einmal als neue Folge R₂, X′, R₃ gemessen. Offene G1-Prüfungen
+  von Läufen vor dem Halt schließt der erste gültige Referenzlauf danach (Interpolation über die
+  Unterbrechung); daraus entstehende Folgen R₂, X′, R₃ werden erst nach dem Kontrollsatz gemessen. Ist die
+  Klammer von X′ durch einen Halt an X′ oder R₃ oder durch ungültige Referenzläufe unvollständig: G1 nur gegen
+  die einschließenden gültigen Referenzläufe, S1 nicht prüfbar, keine weitere Sonderwiederholung; verletzt X′
+  G1, fehlt der Platz (Reserve r).
+- **Kontrollsatz der Wiederaufnahme** (ablauf-4). Er wird in gezogener Reihenfolge gemessen; S1–S4 gelten. Eine
+  einzelne S3-Überschreitung und ein einzelner Nullpunktalarm werden wie sonst sofort wiederholt (§8.8, §9.2),
+  erst der reproduzierte Alarm hält an. Eingeschobene R₁, R₂, R₃ gehören nicht zum Kontrollsatz. Die
+  Wiederaufnahme gilt erst als erfolgreich, wenn alle Mitglieder des Kontrollsatzes gemessen sind.
+- **Bezugseröffnung nach einem Nullpunkthalt** (ablauf-4). Nach einem Halt über einen reproduzierten
+  Nullpunktalarm (oder an der technischen Grenze der Alarmkette) und einer protokollierten Ursachenanalyse
+  ohne Befund: (1) Vor dem Kontrollsatz wird ein gesonderter Referenzlauf gemessen. (2) Er wird nicht gegen das
+  verworfene R₀ auf Nullpunktalarm geprüft; die übrigen Gültigkeitsprüfungen gelten. (3) Ist er gültig, wird er
+  R₀; danach beginnt der Kontrollsatz in seiner gezogenen Reihenfolge. Der Bezugslauf wird gesondert gezählt.
+  (4) Bis ein gültiger neuer Bezug vorliegt, wird nichts gegen den verworfenen Bezug vorgeprüft, und die
+  Wiederaufnahme gilt nicht als erfolgreich. (5) Ein ungültiger Bezugslauf wird höchstens zweimal sofort
+  wiederholt; ist auch die zweite Wiederholung ungültig, wird erneut angehalten (Halt „Bezugseröffnung“, der
+  eine Wiederaufnahme verbraucht); die nächste Wiederaufnahme beginnt wieder mit einem Bezugslauf. Die
+  Grenze ist unabhängig von der Kontrollwiederholungsgrenze; eine Endlosschleife ist ausgeschlossen. (6) Altes
+  und neues R₀ und ihre Differenz werden protokolliert und berichtet; eine tatsächliche Nullpunktänderung wird
+  durch den neuen Bezug weder widerlegt noch aus dem Protokoll entfernt. Stufe 2 vollzieht denselben
+  Bezugswechsel offline nach.
+- **Aufwärmen nach einer Wiederaufnahme** (ablauf-4). Nur bei einem Tageswechsel zwischen Halt und
+  Wiederaufnahme wird aufgewärmt (§6); der letzte gültige Aufwärmlauf ist dann Bezug und ersetzt den
+  gesonderten Bezugslauf. Der unterbrochene Block darf über Nacht fortgesetzt werden (§6). Tatsächlicher
+  Messtag und Zusatzzeiten (Bezugslauf, Kontrollsatz, Aufwärmen, Dauer des Halts) werden je Versuch bzw.
+  Wiederaufnahme geführt.
 - **Kontrollläufe.** Ein aus anderem Grund als G1 ungültiger Kontrolllauf (bei R auch ein nicht reproduzierter
   Nullpunktalarm, §8.8) wird sofort wiederholt, höchstens zweimal; ist auch die zweite Wiederholung
   ungültig, wird angehalten und nach §9.2 verfahren. Für L₁′, L₂′, L₃′ gilt das nicht: Nach zwei ungültigen
@@ -1300,7 +1359,7 @@ Gewählte Zahlenwerte ohne Messung, je mit einer Zeile Begründung.
 | ε_ctrl = 3·σ̂_ref bzw. 3·σ̂_betr | §8.8 | Form aus Einordnung §4; seltene Fehlausschlüsse (A8) |
 | Nullpunktalarm 3·√(4/3)·σ̂_ref | §8.8 | dieselbe Schwelle in Standardabweichungen wie G1 für die Differenz zweier Referenzläufe |
 | mindestens 42 Referenzläufe | §4, P0.7 | mindestens 40 Leave-one-out-Werte für σ̂_ref |
-| Referenzlauf nach je zwölf anderen Läufen in Phase 0 | P0.7 | etwa der Abstand in Phase 1 (Blockmitte, Kontrollsätze) |
+| höchstens zwölf andere Läufe zwischen zwei Referenzläufen in Phase 0, 42 gleichmäßig verteilt | P0.7 | höchstens der Abstand in Phase 1 (Blockmitte, Kontrollsätze); Arbeitsfestlegung vom 20.10.2026 |
 | 5·σ für F_LO | §4 | Rauschen löst praktisch keinen Liftoff-Befund aus |
 | c_S mit höchstens 5 % Fehlalarm je Kontrollsatz | §9.2 S3 | ein Kontrollsatz je Block; Reproduktion durch Wiederholung senkt die Rate weiter |
 | σ_tol = dreifacher Median von σⱼ der Pilotläufe | G2 | robust gegen einzelne Ausreißer der Pilotläufe |

@@ -251,6 +251,9 @@ def _harness(ap, argv):
     ga = qa.add_mutually_exclusive_group(required=True)
     ga.add_argument('--schreiben')
     ga.add_argument('--pruefen')
+    qa.add_argument('--fassung', default='ablauf-3', choices=('ablauf-3', 'ablauf-4'),
+                    help='Stand beim Schreiben: ablauf-3 (historisch, PR #23) oder ablauf-4 (Regelstand 2026-11); '
+                         '--pruefen liest den Stand aus der Datei')
     m = sp.add_parser('matrix')
     m.add_argument('--ausgabe', required=True)
     m.add_argument('--kampagnen', type=int, required=True)
@@ -366,7 +369,7 @@ def _harness(ap, argv):
     elif a.was == 'ablauf-pruefsatz':
         from .harness import ablauf_pruefsatz
         if a.schreiben:
-            ps = ablauf_pruefsatz.schreiben(a.schreiben)
+            ps = ablauf_pruefsatz.schreiben(a.schreiben, fassung=a.fassung)
             print(f'Ablauf-Prüfsatz {a.schreiben}.json: SHA-256 {ps["sha256_gesamt"][:16]}…')
         else:
             r = ablauf_pruefsatz.pruefen(a.pruefen)

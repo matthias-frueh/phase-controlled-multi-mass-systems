@@ -293,7 +293,7 @@ nach dem Datenschluss wiederholt. Verfahren im Einzelnen: A9.2.
 | P0.4 | Übertragungsfunktion je Zelle und Summe, zwei Amplituden, exzentrische Anregung (Orientierung DKD-R 3-10 Blatt 1 und 2); Betriebslastprüfung: nach P0.9 (Zeitpunkt offen, §12) Sinusanregung bei f, 2f, 3f über den Modulpositionen in Höhe der Betriebslast je Zelle (unten) | K, C, f_n, ζ; Moden f_m, ζ_m; G_F(ω); Linearität; Schein-Oberwellen ≤ 0,3·u_c,erw (Klirrkriterium) |
 | P0.5 | Profilmessung bei f und bei Einstellung 2 | x_k⁽ʲ⁾, a_k⁽ʲ⁾, Δδⱼ mit u ≤ 0,1°, G_x(ω), Parkposition; dieselben Größen bei Einstellung 2; bei zweitem Nockensatz Wiederholbarkeit nach Umschaltung |
 | P0.6 | Phasensteuerung | Versatz, Jitter σⱼ, Wiederholbarkeit der Indeximpulse |
-| P0.7 | ≥ 42 Referenzläufe, verschachtelt mit P0.8–P0.10, je einer nach zwölf anderen Läufen | σ̂_ref, σ̂_ref,c, σ_c, F_LO |
+| P0.7 | ≥ 42 Referenzläufe, verschachtelt mit P0.8–P0.10, höchstens zwölf andere Läufe zwischen zwei Referenzläufen, gleichmäßig verteilt einschließlich Anfang und Ende | σ̂_ref, σ̂_ref,c, σ_c, F_LO |
 | P0.8 | Einzelmodulläufe, je Modul ≥ 20, auf n₀ ergänzt; bei Einstellung 2 je Modul n₀′ ≥ 20 (Umfang offen, §12) | N̄⁽ʲ⁾(θ) gesamt und je Zelle, auch bei Einstellung 2; s; ε_ctrl (§8.8) |
 | P0.9 | Arbeitspunkt (§5.3) | f, k_max |
 | P0.10 | Pilotläufe (§5.4) | s_q, σ_Δ, σ_tol, T_φ, Rauschkovarianzen, p̂, T_a, T_ramp, n₀, n_min, n |
@@ -490,12 +490,17 @@ wird, wird wiederholt, höchstens zweimal je Konfiguration und Block, an einem P
 gleichverteilt unter den offenen Konfigurationsplätzen und dem Platz vor dem Schlusskontrollsatz zieht.
 G1-Verstöße behandelt S1 (§9.2). Ein ungültiger Kontrolllauf wird sofort wiederholt, höchstens zweimal;
 danach wird angehalten (§9.2), außer bei L₁′, L₂′, L₃′: Dort fehlt der Lauf danach, ohne Halt. Später
-erkannte ungültige Läufe werden nicht wiederholt. Einzelheiten: A9.12.
+erkannte ungültige Läufe werden nicht wiederholt. Stehen mehrere sofortige Folgeläufe an, kommt das R₁ der
+Vorprüfung zuerst, dann eine Folge R₂, X′, R₃ geschlossen, dann die übrigen sofortigen Wiederholungen, die
+zuletzt ausgelöste zuerst (Arbeitsfestlegung vom 20.10.2026, A9.12). Einzelheiten: A9.12.
 
 **Messtag und Lauf:** Die Messelektronik ist mindestens T_warm eingeschaltet. Es folgen Aufwärm-
 Referenzläufe, bis zwei aufeinanderfolgende um weniger als σ̂_ref differieren, höchstens zehn (sonst
 Ursachenanalyse nach §9.2); der letzte gilt als gültiger Referenzlauf für N_s,int und den Nullpunktalarm.
-Kein Block über Nacht. Jeder Lauf mit bewegten Modulen: Startstellung der Sollphasen → Rampe auf f in
+Kein Block über Nacht; ausgenommen ist ein durch einen Halt (§9.2) unterbrochener Block: Liegt zwischen Halt
+und Wiederaufnahme ein Tageswechsel, wird er am nächsten Messtag nach dem Aufwärmen fortgesetzt
+(Arbeitsfestlegung vom 20.10.2026). Nach einer Wiederaufnahme am selben Messtag wird nicht erneut
+aufgewärmt. Der tatsächliche Messtag jedes Laufs wird protokolliert. Jeder Lauf mit bewegten Modulen: Startstellung der Sollphasen → Rampe auf f in
 T_ramp mit aktiver Phasenregelung (nie durch die synchrone Phasung) → Einschwingzeit
 T_e = max(T_φ, 10·max_m τ_m), aufgerundet auf ganze Sekunden, mit τ_m = 1/(2π·ζ_m·f_m) für alle Moden bis
 k_max·f und T_φ der längsten Einregelzeit der Phasen in den Pilotläufen → Auswertefenster T_a aus ganzen
@@ -687,7 +692,9 @@ Wert aus einer Simulation ohne Zusatzstreuung, α = 0,05), gilt ε_ctrl = 3·σ�
 **Nullpunktalarm**, wenn ein Referenzlauf um mehr als 3·√(4/3)·σ̂_ref (Summe) bzw. 3·√(4/3)·σ̂_ref,c
 (Zelle) vom vorangehenden gültigen Referenzlauf abweicht. Er wird sofort wiederholt;
 überschreitet die Wiederholung im selben Kanal wieder die Schwelle, greift S1, sonst ist der alarmierte
-Lauf ungültig und die Wiederholung ersetzt ihn. Berichtet wird ein Welch-t-Test von Δ⟨N⟩ der
+Lauf ungültig und die Wiederholung ersetzt ihn. Nach einem Halt über einen reproduzierten Nullpunktalarm
+(Nullpunkthalt) ist der bisherige Bezug verworfen: Vor weiteren Vergleichen wird ein neuer Bezug eröffnet
+(§9.2, A9.12); bis dahin wird nicht gegen den verworfenen Bezug geprüft. Berichtet wird ein Welch-t-Test von Δ⟨N⟩ der
 Kombinationsläufe gegen die Referenzläufe (A9.8), ohne Einfluss auf H1–H4: Differenz, 95-%-Intervall [L, U]
 und Lage zu ±ε_ctrl mit dem Vermerk „Einzellauftoleranz, keine Äquivalenzgrenze für das Mittel“, dazu genau
 eine von zwei Aussagen (Arbeitsfestlegung, §12): bei 0 ∉ [L, U] „Unterschied nachgewiesen“, sonst „kein Unterschied
@@ -806,7 +813,10 @@ Die Messung wird sofort angehalten bei:
   erst mit einem planmäßigen Referenzlauf, führt zu R₂, der Wiederholung X′ und R₃, auch über die
   Wiederholungsgrenze hinaus; S1 greift, wenn X′ G1 verletzt (mit R₂ und R₃). Ein gültiges X′ ersetzt X
   und zählt als Wiederholung; ist X′ aus anderem Grund ungültig, gilt §6. S1 greift auch bei einem
-  reproduzierten Nullpunktalarm.
+  reproduzierten Nullpunktalarm. Reihenfolge (Arbeitsfestlegung vom 20.10.2026): R₁ ist der nächste Lauf
+  nach X, andere von X ausgelöste Wiederholungen folgen danach; R₂, X′, R₃ bilden eine geschlossene Folge, X′
+  erhält keine eigene Vorprüfung, und auch ein nach G2–G10 ungültiges X′ lässt keine Wiederholung vor R₃
+  springen; ein sofortiger Halt hat Vorrang vor noch nicht gemessenen Folgeläufen (A9.12).
 - **S2 — Einzelzell-Liftoff** in einem Lauf mit bewegten Modulen (ausgenommen Läufe, die nach G5, G8 oder
   G10 ungültig sind).
 - **S3 — Drift der Einzelmodulreferenz:** In einem Kontrolllauf weicht eine der 21 Größen F_min⁽ʲ⁾ −
@@ -819,15 +829,25 @@ Die Messung wird sofort angehalten bei:
 Ob S1, S2 und S4 auch für L₁′, L₂′, L₃′ gelten, ist offen (§12).
 
 Bei korrekter Funktion löst S3 je Kontrollsatz mit höchstens 5 % aus und reproduziert sich mit höchstens
-9,5·10⁻⁴; S1 greift in einer Kampagne mit 20 Blöcken zu 23 Konfigurationen und drei
-Identifizierbarkeitskonfigurationen an einem Messtag (688 Läufe ohne Aufwärm- und Wiederholungsläufe) mit
-höchstens etwa 28 %, ohne Identifizierbarkeitsläufe (565 Läufe) mit höchstens etwa 25 % (Bonferroni-
-Schranken, A8); die Schranke wächst mit der Zahl der Läufe. Ein Fehlalarm kostet eine Ursachenanalyse,
-keine Daten.
+9,5·10⁻⁴ (Bonferroni-Schranken, A8). Für S1 gibt A8 Bonferroni-Größen je Lauf und Weg, darunter den Weg über
+einen reproduzierten Nullpunktalarm am R₁ der Vorprüfung; ihre Summe über eine Kampagne (etwa 0,47 bei 646
+Läufen) ist keine nützliche Schranke, eine hergeleitete Kampagnenschranke für S1 gibt es nicht. Eine
+Modellrechnung (A8) ergibt für eine Kampagne an einem Messtag eine Haltwahrscheinlichkeit von etwa 0,09–0,12;
+sie ist eine Modellangabe, keine Zusicherung. Ein Fehlalarm kostet eine Ursachenanalyse, keine Daten.
 
 **Nach einem Abbruch:** Ursachenanalyse, Eintrag im Abweichungsprotokoll, Wiederaufnahme nach einem
-vollständigen Kontrollsatz ohne Alarm; der unterbrochene Block wird in der gezogenen Reihenfolge
-fortgesetzt, gültige Läufe bleiben gültig. Nach einem mechanischen Eingriff werden vorher je Modul
+vollständigen Kontrollsatz in gezogener Reihenfolge; der unterbrochene Block wird in der gezogenen Reihenfolge
+fortgesetzt, gültige Läufe bleiben gültig. Wiederaufgenommen wird nur mit einem protokollierten externen
+Ereignis. Im Kontrollsatz gelten S1–S4; eine einzelne S3-Überschreitung und ein einzelner Nullpunktalarm
+werden wie sonst sofort wiederholt, erst der reproduzierte Alarm hält erneut an. Beim Halt noch ausstehende
+sofortige Folgeläufe werden verworfen und protokolliert; ein G1-Fall, dessen X′ noch nicht gemessen war, wird
+nach dem Kontrollsatz einmal als neue Folge R₂, X′, R₃ gemessen. Ist die Klammer von X′ durch den Halt
+unvollständig, wird G1 von X′ gegen die einschließenden gültigen Referenzläufe geprüft, S1 ist nicht prüfbar,
+es gibt keine weitere Sonderwiederholung, und bei einem G1-Verstoß fehlt der Platz. Nach einem Nullpunkthalt
+wird vor dem Kontrollsatz ein gesonderter Referenzlauf ohne Nullpunktvergleich mit dem verworfenen Bezug
+gemessen (Bezugseröffnung); ist er ungültig, wird er höchstens zweimal wiederholt, danach erneut angehalten.
+Bei einem Tageswechsel ersetzt der letzte gültige Aufwärmlauf diesen Referenzlauf. Altes und neues R₀ und ihre
+Differenz werden berichtet. Einzelheiten: A9.12 (Arbeitsfestlegungen vom 20.10.2026). Nach einem mechanischen Eingriff werden vorher je Modul
 mindestens n₀ Einzelmodulläufe mit Phase 0 verglichen (Welch-t, zweiseitig, Bonferroni über 21,
 α = 0,05); ist eine Differenz signifikant, endet Phase 1, und ein neuer Teil B ist nötig (Testlogik offen, §12).
 Nach S2 ist die

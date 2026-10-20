@@ -9,6 +9,11 @@ prüft zusätzlich inhaltlich, ohne gespeicherte Sollwerte: Der Fall ohne Ablauf
 Laufplan des alten Ablaufs, Laufzahl = ausgeführte geplante + zusätzliche Versuche (alle geplanten genau dann, wenn
 der Ablauf abgeschlossen ist), die Auswahl deckt jeden geplanten Platz genau einmal, und die Offline-Gültigkeit von
 Stufe 2 gleicht den Entscheidungen des Ablaufs.
+
+Zwei Stände (Auftrag vom 20.10.2026): der historische Prüfsatz (ablauf-3, Profil ENTW-2026-10, Phase-0-Anordnung
+„historisch“; Datei tests/fixtures/ap13_ablauf_pruefsatz.json, unverändert) und der Prüfsatz des Regelstands 2026-11
+(ablauf-4, ENTW-2026-11, P0.7-Anordnung; tests/fixtures/ap13_ablauf_pruefsatz_ablauf4.json). pruefen() liest den Stand
+aus der Datei und rechnet mit genau diesem Stand nach.
 """
 import platform
 
@@ -29,21 +34,31 @@ FAELLE = (('N01-A4', 'L1', 13, 'zustand'),          # reguläre Wiederholungen, 
           ('I01-amplitude', 'L1', 7, 'zustand'))    # Einstellung 2: L′, Lücken G2–G4 und S-Regeln für L′
 
 
-def _profil():
-    return regeln.profil(PROFIL[0]).mit_reduktion(**PROFIL[1])
-
-
 FASSUNG = 'ablauf-3'      # historischer Prüfsatz (PR #23): Fassung ablauf-3, Plan ohne p0_anordnung (historisch)
+STAENDE = {'ablauf-3': dict(profil=PROFIL, plan=PLAN),
+           'ablauf-4': dict(profil=('ENTW-2026-11', PROFIL[1]), plan=dict(PLAN, p0_anordnung='p07'))}
 
 
-def _verfahren(art):
-    return vf.Verfahren('plan', 'zustand', ablauf.Ablaufoptionen() if art == 'zustand' else ablauf.AUS, FASSUNG)
+def _stand(fassung):
+    if fassung not in STAENDE:
+        raise ValueError(f'Ablauf-Prüfsatz: Fassung {fassung!r} unbekannt ({", ".join(STAENDE)})')
+    return STAENDE[fassung]
 
 
-def fall(sid, stufe, seed, art):
+def _profil(fassung=FASSUNG):
+    p = _stand(fassung)['profil']
+    return regeln.profil(p[0]).mit_reduktion(**p[1])
+
+
+def _verfahren(art, fassung=FASSUNG):
+    return vf.Verfahren('plan', 'zustand', ablauf.Ablaufoptionen() if art == 'zustand' else ablauf.AUS, fassung)
+
+
+def fall(sid, stufe, seed, art, fassung=FASSUNG):
     """Eine Prüfkampagne: Ablauf, Tabelle, Bericht und die Prüfsummen."""
-    prof = _profil()
-    r = kette.kampagne_ablauf(sid, stufe, kp.plan_aus_dict(PLAN), seed, prof, n_min=N_MIN, verfahren=_verfahren(art))
+    prof = _profil(fassung)
+    r = kette.kampagne_ablauf(sid, stufe, kp.plan_aus_dict(_stand(fassung)['plan']), seed, prof, n_min=N_MIN,
+                              verfahren=_verfahren(art, fassung))
     a = r['ablauf']
     t1 = a.tabelle()
     b = a.bericht()
@@ -56,7 +71,7 @@ def fall(sid, stufe, seed, art):
     return dict(inhalt=inhalt, hashes=h), r
 
 
-def _gegenprobe(sid, stufe, seed, art, r):
+def _gegenprobe(sid, stufe, seed, art, r, fassung=FASSUNG):
     """Inhaltliche Prüfung ohne gespeicherte Sollwerte; Rückgabe Liste der Abweichungen."""
     a, out = r['ablauf'], []
     b = a.bericht()
@@ -70,11 +85,11 @@ def _gegenprobe(sid, stufe, seed, art, r):
         out.append('Auswahl deckt die geplanten Plätze nicht genau einmal')
     tab = kette.ablauf_tabelle(r)
     try:
-        auswertung.datenlage(tab, r['teil_b'], _profil())
+        auswertung.datenlage(tab, r['teil_b'], _profil(fassung))
     except formate.FormatFehler as e:
         out.append(f'Stufe 2: {e}')
     if art == 'aus':
-        m, laeufe, alt = kette.kampagne_erzeugen(sid, stufe, kp.plan_aus_dict(PLAN), seed)
+        m, laeufe, alt = kette.kampagne_erzeugen(sid, stufe, kp.plan_aus_dict(_stand(fassung)['plan']), seed)
         if not all(np.array_equal(alt.daten[f], tab.daten[f], equal_nan=True) for f in alt.daten):
             out.append('ohne Ablaufoptionen: Daten ≠ Laufplan des alten Ablaufs')
         if formate.sha256_json([{k: v for k, v in x.items() if k != 'versuch'} for x in tab.koepfe]) != \
@@ -83,24 +98,26 @@ def _gegenprobe(sid, stufe, seed, art, r):
     return out
 
 
-def erstellen():
+def erstellen(fassung=FASSUNG):
+    st_ = _stand(fassung)
     faelle, gegen = {}, {}
     for sid, st, sd, art in FAELLE:
-        f, r = fall(sid, st, sd, art)
+        f, r = fall(sid, st, sd, art, fassung)
         key = f'{sid}/{st}/{sd}/{art}'
         faelle[key] = f
-        gegen[key] = _gegenprobe(sid, st, sd, art, r)
+        gegen[key] = _gegenprobe(sid, st, sd, art, r, fassung)
     out = dict(beschreibung='Prüfsatz des zustandsbehafteten Phase-1-Ablaufs (getrennt vom Software-Prüfsatz)',
                umgebung=dict(python=platform.python_version(), numpy=np.__version__, scipy=scipy.__version__),
-               ablauf_version=FASSUNG, verfahren=_verfahren('zustand').kennung(), plan=PLAN, n_min=N_MIN,
-               profil=dict(id=PROFIL[0], reduktion=PROFIL[1], sha256=_profil().sha256()),
+               ablauf_version=fassung, verfahren=_verfahren('zustand', fassung).kennung(), plan=st_['plan'],
+               n_min=N_MIN,
+               profil=dict(id=st_['profil'][0], reduktion=st_['profil'][1], sha256=_profil(fassung).sha256()),
                rundung_stellen=pruefsatz.STELLEN, faelle=faelle, gegenprobe=gegen)
     out['sha256_gesamt'] = formate.sha256_json({k: v for k, v in out.items() if k != 'umgebung'})
     return out
 
 
-def schreiben(pfad, ps=None):
-    ps = ps or erstellen()
+def schreiben(pfad, ps=None, fassung=FASSUNG):
+    ps = ps or erstellen(fassung)
     if any(ps['gegenprobe'].values()):
         raise ValueError(f'Gegenprobe nicht bestanden: {ps["gegenprobe"]}')
     formate.schreibe_objekt(pfad, formate.kopf('pruefsatz', formate.synth_kennung('ABLAUF-PRUEFSATZ')), ps)
@@ -110,7 +127,7 @@ def schreiben(pfad, ps=None):
 def pruefen(pfad):
     """Neuberechnung gegen den gespeicherten Prüfsatz: Inhalt, Prüfsummen und Gegenprobe; Rückgabe dict(gleich, …)."""
     _, alt = formate.lies_objekt(pfad, 'pruefsatz')
-    neu = erstellen()
+    neu = erstellen(alt.get('ablauf_version'))
     abw = [k for k in ('ablauf_version', 'verfahren', 'plan', 'n_min', 'profil', 'rundung_stellen')
            if formate.sha256_json(alt.get(k)) != formate.sha256_json(neu.get(k))]
     for key, f in alt['faelle'].items():

@@ -45,6 +45,31 @@ Regeln (maßgeblich ist die Präregistrierung; Lesarten unten):
 - Einstellung 2: G2–G4 nicht gefasst (nicht prüfbar); ob S1, S2 und S4 für L₁′–L₃′ gelten, ist offen (§12) – nicht
   angewandt und als Lücke vermerkt. Für Einstellung 2 gibt es keine Qualifikationsaussage.
 
+Fassung ablauf-4 (Arbeitsfestlegungen vom 20.10.2026, Regeln ablauf.* des Profilstands 2026-11; ablauf-3 bleibt zur
+Nachrechnung historischer Ergebnisse unverändert):
+- Reihenfolge (A1 + Z1): Löst ein Lauf die Vorprüfung aus, folgt als nächster Lauf R₁; andere von ihm ausgelöste
+  Wiederholungen (S3-Wiederholung) folgen danach. Steht mit R₁ ein G1-Verstoß fest, folgen R₂, X′, R₃ als geschlossene
+  Folge vor den übrigen sofortigen Wiederholungen; die zuletzt ausgelöste kommt zuerst. Auch ein nach G2–G10 ungültiges
+  Lⱼ-X′ lässt seine Kontrollwiederholung nicht vor R₃ springen. Ein sofortiger Halt hat Vorrang.
+- Halt (H1 + K1): Bei der Wiederaufnahme werden noch ausstehende sofortige Folgeläufe verworfen und einzeln
+  protokolliert. Ein G1-Fall, dessen X′ noch nicht gemessen war, wird nach dem Kontrollsatz der Wiederaufnahme einmal als
+  neue vollständige Folge R₂, X′, R₃ gemessen. Offene G1-Prüfungen von Läufen vor dem Halt schließt der erste gültige
+  Referenzlauf danach (Interpolation über die Unterbrechung); daraus entstehende Folgen R₂, X′, R₃ kommen nach dem
+  Kontrollsatz. Eine unvollständige Klammer (Halt an X′ oder R₃, ungültiges R₂/R₃): S1 nicht prüfbar, keine
+  Sonderwiederholung, der Platz fehlt.
+- Kontrollsatz der Wiederaufnahme (N5 + N7): S1–S4 halten an; eine einzelne S3-Überschreitung und ein einzelner
+  Nullpunktalarm werden wie sonst wiederholt, erst der reproduzierte Alarm hält an. Eingeschobene R₁/R₂/R₃ gehören nicht
+  zum Kontrollsatz. Die Wiederaufnahme gilt als erfolgreich, wenn alle Mitglieder des Kontrollsatzes gemessen sind.
+- Bezugseröffnung nach einem Nullpunkthalt (S1 über einen reproduzierten Nullpunktalarm oder Halt an der technischen
+  Grenze der Alarmkette): Vor dem Kontrollsatz wird ein gesonderter Referenzlauf gemessen (Rolle „bezugslauf“), ohne
+  Nullpunktvergleich mit dem verworfenen R₀; gültig wird er R₀. Bis dahin gibt es keinen Bezug, also keine Vorprüfung
+  und keinen Alarmvergleich gegen den verworfenen. Ein ungültiger Bezugslauf wird höchstens zweimal sofort wiederholt,
+  danach Halt „Bezugseröffnung“ (fortsetzbar, verbraucht eine Wiederaufnahme). Altes und neues R₀ und ihre Differenz
+  stehen im Protokoll (bezugswechsel).
+- Aufwärmen (N6): nur bei einem Tageswechsel zwischen Halt und Wiederaufnahme (Ereignisfeld tageswechsel, sonst
+  Zeitpunkt − Halt ≥ tag_pause); der letzte gültige Aufwärmlauf ersetzt dann den Bezugslauf. Der tatsächliche Messtag
+  steht je Versuch in messtag_ist; ein durch Halt unterbrochener Block wird auch über Nacht fortgesetzt.
+
 Lesarten, wo die Präregistrierung nicht ausdrücklich ist (im Bericht als offen geführt):
 - Schlusskontrollsatz eines Blocks ist der Kontrollsatz an seinem Ende (Plankennung block = b); ein mit dem Folgeblock
   geteilter Satz gehört als Schlusskontrollsatz zum vorangehenden Block.
@@ -83,6 +108,9 @@ GRENZE_ALARMKETTE = 10          # technische Grenze (keine Fachregel): Alarmwied
 REGELN_LAUF = ('G2', 'G3', 'G4', 'G5', 'G6', 'G7', 'G8', 'G9', 'G10')
 SOFORT = ('R1', 'R2', 'X_strich', 'R3', 'kontrollwiederholung', 'alarmwiederholung', 's3_wiederholung',
           'aufwaermen', 'wiederaufnahme_kontrolle')
+VERWERFEN = ('R1', 'R2', 'X_strich', 'R3', 'kontrollwiederholung', 'alarmwiederholung', 's3_wiederholung',
+             'aufwaermen', 'wiederaufnahme_kontrolle', 'bezugslauf')     # ablauf-4: bei Wiederaufnahme verworfen
+GRENZE_BEZUG = 2                # ablauf-4: ungültiger Bezugslauf höchstens zweimal sofort wiederholt
 LUECKEN_E2 = ('Einstellung 2: G2–G4 nicht gefasst (f′, δf_tol′, σ_tol′, σ_Δ′ offen, §12)',
               'S1, S2 und S4 für L₁′–L₃′ offen (§12): nicht angewandt')
 
@@ -168,6 +196,7 @@ class Ablauf:
         if fassung not in FASSUNGEN:
             raise AblaufFehler(f'Ablauffassung {fassung!r} unbekannt ({", ".join(FASSUNGEN)})')
         self.fassung = fassung
+        self.v4 = fassung == 'ablauf-4'
         self.messung, self.sw, self.s3, self.rng, self.opt = messung, sw, s3, rng, optionen
         self.T_lauf, self.tag_pause = float(T_lauf), float(tag_pause)
         self.kennung = kennung
@@ -188,6 +217,9 @@ class Ablauf:
                       s3_offen={}, schluss_begonnen=[], s2=[], s2_zaehler=0, s4_vor=False, ziehungen=[], halt=None,
                       ende=None, luecken=[], ausgeschlossen=[], ereignisse=[], aufwaermen=[], alarmkette=0,
                       wiederaufnahmen=0, entscheidungen=[])
+        if self.v4:
+            self.z.update(messtag_ist=int(self.geplant[0]['messtag']), verworfen=[], bezugswechsel=[],
+                          bezug_offen=None, bezug_wdh=0, w_aktiv=None, w_start=None, protokoll_wiederaufnahmen=[])
 
     # ── Plan ────────────────────────────────────────────────────────────────────────────────────────────
     def _kontrollsaetze(self):
@@ -241,13 +273,29 @@ class Ablauf:
                     break
                 self._neuer_tag()
                 continue
-            self._schritt(self.z['queue'].pop(0))
+            el = self.z['queue'].pop(0)
+            if (self.v4 and self.z['bezug_offen'] is not None and self.z['r0'] is None
+                    and el['rolle'] not in ('aufwaermen', 'bezugslauf')):
+                el = self._bezug_vorziehen(el)
+            self._schritt(el)
         return self.z['status']
+
+    def _bezug_vorziehen(self, el):
+        """ablauf-4: Ist der Bezug nach einem Nullpunkthalt noch nicht eröffnet (etwa nach einem ungültigen Aufwärmlauf
+        ohne Aufwärmoption), kommt vor jedem weiteren Lauf ein Bezugslauf; das Element bleibt vorn in der Warteschlange."""
+        self.z['queue'].insert(0, el)
+        spec = dict(el['spec'])
+        spec.update(laufart='R', modul=None, einstellung=1, kontrollsatz=None, lauf_id=None, position=None,
+                    konfiguration=dict(id='R', gruppe='referenz', phi_soll_grad=None))
+        return dict(spec=spec, rolle='bezugslauf', geplant=False, bezug=None, nummer=0,
+                    anlass='Bezugseröffnung: kein gültiger Bezug vor dem nächsten Lauf')
 
     def _neuer_tag(self):
         z = self.z
         if z['tag'] >= 0:
             z['t'] += self.tag_pause
+            if self.v4:
+                z['messtag_ist'] += 1
         z['tag'] += 1
         z['queue'] = [self._element(l) for l in self.tage[z['tag']]]
         z['aufwaermen'] = []
@@ -281,6 +329,8 @@ class Ablauf:
         for x in ('alarm_vor', 's3_groessen'):
             if x in el:
                 v[x] = el[x]
+        if self.v4:
+            v['messtag_ist'] = int(z['messtag_ist'])
         kopf, daten = self.messung.messen(spec, v)
         kopf = dict(kopf, versuch=v)
         z['versuche'].append(dict(kopf=kopf, daten=daten))
@@ -335,7 +385,7 @@ class Ablauf:
         el.update(extra)
         return el
 
-    def _halt(self, n, regel, grund, endgueltig=False):
+    def _halt(self, n, regel, grund, endgueltig=False, nullpunkt=False):
         z = self.z
         if not self.opt.halt:
             self._notiz(n, f'{regel}: {grund} – ohne Halt (Ablaufoption halt aus)')
@@ -343,6 +393,10 @@ class Ablauf:
         self._v(n)['halt'] = regel
         z['halt'] = dict(regel=regel, grund=grund, versuch=self._v(n)['id'], t=z['t'], block=self._v(n)['block'],
                          fortsetzbar=not endgueltig)
+        if self.v4:
+            z['halt']['nullpunkt'] = bool(nullpunkt)
+            if z['w_aktiv'] is not None:
+                self._wiederaufnahme_protokoll(erfolgreich=False, grund=f'Halt {regel} vor Ende des Kontrollsatzes')
         z['status'] = 'abgebrochen' if endgueltig else 'angehalten'
         z['ende'] = dict(status=z['status'], grund=f'{regel}: {grund}')
         self._notiz(n, f'Halt {regel}: {grund}' if not endgueltig else f'Phase 1 beendet ({regel}): {grund}')
@@ -364,10 +418,14 @@ class Ablauf:
                 self._luecke(t)
         if el['rolle'] == 'aufwaermen':
             self._aufwaermen(n)
+        elif el['rolle'] == 'bezugslauf':
+            self._bezugslauf(n)
         elif k['laufart'] == 'R':
             self._referenz(n)
         else:
             self._lauf(n)
+        if self.v4:
+            self._w_ende(n)
 
     def _aufwaermen(self, n):
         z = self.z
@@ -413,9 +471,10 @@ class Ablauf:
             v['gruende'] = ['G1']
             vorher = v.get('alarm_vor') or []
             if set(kan) & set(vorher):
-                self._halt(n, 'S1', f'reproduzierter Nullpunktalarm ({", ".join(sorted(set(kan) & set(vorher)))})')
+                self._halt(n, 'S1', f'reproduzierter Nullpunktalarm ({", ".join(sorted(set(kan) & set(vorher)))})',
+                           nullpunkt=True)
                 return
-            if self._wiederaufnahme(n):
+            if self._wiederaufnahme(n) and not self.v4:
                 self._halt(n, 'Wiederaufnahme', f'Nullpunktalarm ({", ".join(kan)}) im Kontrollsatz der Wiederaufnahme')
                 return
             if not self.opt.wiederholungen:
@@ -427,7 +486,7 @@ class Ablauf:
             z['alarmkette'] += 1
             if z['alarmkette'] > GRENZE_ALARMKETTE:
                 self._halt(n, 'Nullpunktalarm', f'mehr als {GRENZE_ALARMKETTE} Alarmwiederholungen ohne Regelausgang '
-                                                '(technische Grenze)')
+                                                '(technische Grenze)', nullpunkt=True)
                 return
             self._notiz(n, f'Nullpunktalarm ({", ".join(kan)}): sofortige Wiederholung (§8.8)')
             self._vorn(self._einschub(n, 'alarmwiederholung', f'Nullpunktalarm {", ".join(kan)}', art='R',
@@ -442,7 +501,7 @@ class Ablauf:
         """n ist gültiger Referenzlauf: G1 aller offenen Läufe steht fest; n wird R₀."""
         z = self.z
         offen, z['offen_g1'] = z['offen_g1'], []
-        einschuebe = []
+        einschuebe, einschuebe_nach = [], []
         for i in offen:
             vi = self._v(i)
             dN, _ = gueltigkeit.interpolation(self._wert(i, 'N_mittel'), self._tmitte(i),
@@ -460,10 +519,18 @@ class Ablauf:
                 continue
             vi['gueltig'] = False
             vi['gruende'] = sorted(set(vi['gruende']) | {'G1'}, key=gueltigkeit.REGELN_G.index)
-            einschuebe += self._g1_verstoss(i)
+            ein = self._g1_verstoss(i)
+            if self.v4 and z['w_aktiv'] is not None and self._vor_wiederaufnahme(i):
+                einschuebe_nach += ein
+            else:
+                einschuebe += ein
         z['r0'] = n
+        if self.v4 and z['bezug_offen'] is not None:
+            self._bezug_eroeffnet(n)
         if einschuebe:
             self._vorn(*einschuebe)
+        if einschuebe_nach:
+            self._nach_w_satz(einschuebe_nach)
 
     def _vor_schluss(self, i):
         """Steht für Versuch i der Schlusskontrollsatz seines Blocks noch bevor?"""
@@ -539,6 +606,21 @@ class Ablauf:
         return int(v['rolle'] == 'X_strich' and bool(q) and q[0]['rolle'] == 'R3'
                    and q[0].get('bezug_versuch') == v.get('bezug_versuch'))
 
+    def _folge_offen(self, n):
+        """Zahl der Elemente vorn in der Warteschlange, die zur begonnenen Referenzfolge von Versuch n gehören und vor
+        weiteren von n ausgelösten Wiederholungen stehen: ablauf-4 das R₁ der Vorprüfung von n und das R₃ des Falls,
+        wenn n ein X′ ist (A1 + Z1); ablauf-3 nur das R₃ eines X′."""
+        if not self.v4:
+            return self._klammer_offen(n)
+        v = self._v(n)
+        q = self.z['queue']
+        k = 0
+        while k < len(q) and ((q[k]['rolle'] == 'R1' and q[k].get('bezug_versuch') == v['id']) or
+                              (v['rolle'] == 'X_strich' and q[k]['rolle'] == 'R3'
+                               and q[k].get('bezug_versuch') == v.get('bezug_versuch'))):
+            k += 1
+        return k
+
     def _lauf(self, n):
         """Lauf mit bewegten Modulen (Konfiguration oder Kontrolllauf Lⱼ, Lⱼ′)."""
         z = self.z
@@ -554,6 +636,8 @@ class Ablauf:
             self._luecke(LUECKEN_E2[1])
             self._notiz(n, 'Einzelzell-Liftoff in L′: S2 für L′ offen (§12), nicht angewandt')
             s2 = False
+        if self.v4 and z['r0'] is None and z['bezug_offen'] is not None:
+            raise AblaufFehler('ablauf-4: Lauf mit bewegten Modulen vor der Bezugseröffnung (kein gültiger Bezug)')
         if not v['gueltig']:
             if k['laufart'] == 'K':
                 self._konfiguration_ungueltig(n)
@@ -647,8 +731,10 @@ class Ablauf:
         extra = dict(alarm_vor=alarm) if alarm else {}
         if v.get('s3_groessen'):
             extra['s3_groessen'] = v['s3_groessen']
-        self._notiz(n, f'Kontrolllauf {anlass}: sofortige Wiederholung {z["kwdh"][key]}')
-        self._vorn(self._einschub(n, 'kontrollwiederholung', anlass, **extra))
+        nach = self._folge_offen(n) if self.v4 else 0
+        self._notiz(n, f'Kontrolllauf {anlass}: sofortige Wiederholung {z["kwdh"][key]}'
+                    + (' nach der begonnenen Referenzfolge' if nach else ''))
+        self._vorn(self._einschub(n, 'kontrollwiederholung', anlass, **extra), nach=nach)
         return False
 
     def _s3(self, n):
@@ -670,13 +756,14 @@ class Ablauf:
             else:
                 self._notiz(n, 'S3 nicht reproduziert')
             return
-        if ueber and self._wiederaufnahme(n):
+        if ueber and self._wiederaufnahme(n) and not self.v4:
             self._halt(n, 'Wiederaufnahme', f'S3-Überschreitung ({", ".join(ueber)}) im Kontrollsatz der Wiederaufnahme')
             return
         if ueber and self.opt.wiederholungen:
-            nach = self._klammer_offen(n)
+            nach = self._folge_offen(n)
             self._notiz(n, f'S3-Überschreitung ({", ".join(ueber)}): sofortige Wiederholung'
-                        + (' nach R₃ (Klammer R₂/X′/R₃)' if nach else ''))
+                        + ((' nach der begonnenen Referenzfolge' if self.v4 else ' nach R₃ (Klammer R₂/X′/R₃)')
+                           if nach else ''))
             self._vorn(self._einschub(n, 's3_wiederholung', f'S3 {", ".join(ueber)}', s3_groessen=ueber), nach=nach)
 
     def _s2(self, n, halten=True):
@@ -705,7 +792,125 @@ class Ablauf:
         else:
             self._halt(n, 'S2', f'Einzelzell-Liftoff im Kontrolllauf {v["konfiguration"]}; ŷ¹ ungültig (§8.2)')
 
-    # ── Wiederaufnahme ─────────────────────────────────────────────────────────────────────────────────
+    # ── Wiederaufnahme (ablauf-4: Bezugseröffnung, verworfene Folgeläufe, Aufwärmen bei Tageswechsel) ───────
+    def _vor_wiederaufnahme(self, i):
+        return self.z['w_start'] is not None and i < self.z['w_start']
+
+    def _nach_w_satz(self, elemente):
+        """Folge R₂, X′, R₃ aus einer G1-Prüfung von vor dem Halt: hinter das letzte noch ausstehende Element des
+        Kontrollsatzes der Wiederaufnahme (H1)."""
+        q = self.z['queue']
+        w = self.z['w_aktiv']
+        letzte = max((i for i, el in enumerate(q) if str(el['spec'].get('kontrollsatz')) == w), default=-1)
+        q[letzte + 1:letzte + 1] = list(elemente)
+
+    def _bezugslauf(self, n):
+        """Gesonderter Referenzlauf der Bezugseröffnung: kein Nullpunktvergleich mit dem verworfenen R₀ (es gibt keinen
+        Bezug); gültig wird er R₀, ungültig wird er höchstens GRENZE_BEZUG-mal sofort wiederholt, dann Halt."""
+        z = self.z
+        v = self._v(n)
+        self._pruefen(n)
+        if v['gueltig']:
+            z['alarmkette'] = 0
+            self._gueltige_referenz(n)
+            return
+        if z['bezug_wdh'] >= GRENZE_BEZUG:
+            v['grenze'] = True
+            self._halt(n, 'Bezugseröffnung', f'Bezugslauf nach {GRENZE_BEZUG} Wiederholungen ungültig '
+                                             f'({", ".join(v["gruende"])})')
+            return
+        z['bezug_wdh'] += 1
+        self._notiz(n, f'Bezugslauf ungültig ({", ".join(v["gruende"])}): sofortige Wiederholung {z["bezug_wdh"]}')
+        self._vorn(self._einschub(n, 'bezugslauf', f'Bezugseröffnung, Wiederholung {z["bezug_wdh"]}', art='R'))
+
+    def _bezug_eroeffnet(self, n):
+        z = self.z
+        alt = z['bezug_offen']
+        eintrag = dict(wiederaufnahme=z['wiederaufnahmen'], alt=self._v(alt)['id'] if alt is not None else None,
+                       neu=self._v(n)['id'], rolle_neu=self._v(n)['rolle'],
+                       differenz_N=None if alt is None else float(self._wert(n, 'N_mittel') - self._wert(alt, 'N_mittel')),
+                       differenz_zellen=None if alt is None else
+                       np.asarray(self._wert(n, 'N_mittel_zellen') - self._wert(alt, 'N_mittel_zellen'), float).tolist())
+        z['bezugswechsel'].append(eintrag)
+        z['bezug_offen'] = None
+        self._notiz(n, f'neuer Bezug R₀ = {eintrag["neu"]} nach Nullpunkthalt (verworfen: {eintrag["alt"]}, '
+                       f'Δ⟨N⟩ = {eintrag["differenz_N"]:.6g} N)' if eintrag['differenz_N'] is not None else
+                    f'neuer Bezug R₀ = {eintrag["neu"]}')
+
+    def _wiederaufnahme_protokoll(self, erfolgreich, grund):
+        z = self.z
+        if z['protokoll_wiederaufnahmen'] and z['protokoll_wiederaufnahmen'][-1].get('erfolgreich') is None:
+            z['protokoll_wiederaufnahmen'][-1].update(erfolgreich=bool(erfolgreich), ergebnis=grund,
+                                                      ende_versuch=self._v(len(z['versuche']) - 1)['id'])
+        z['w_aktiv'] = None
+
+    def _w_ende(self, n):
+        """Ist der Kontrollsatz der laufenden Wiederaufnahme vollständig gemessen (kein Mitglied mehr ausstehend)?"""
+        z = self.z
+        w = z['w_aktiv']
+        if w is None or z['status'] != 'laufend' or z['r0'] is None:
+            return
+        if str(self._v(n)['kontrollsatz']) != w:
+            return
+        if any(str(el['spec'].get('kontrollsatz')) == w for el in z['queue']):
+            return
+        self._wiederaufnahme_protokoll(True, 'Kontrollsatz vollständig gemessen')
+
+    def _fortsetzen_v4(self, ereignis, b, ks, els):
+        """ablauf-4: verworfene Folgeläufe, neue Folge für G1-Fälle ohne X′, Bezugseröffnung, Aufwärmen bei Tageswechsel."""
+        z = self.z
+        halt = z['ereignisse'][-1]['halt']
+        t_halt = float(halt['t'])
+        tw = ereignis.get('tageswechsel')
+        tageswechsel = bool(tw) if tw is not None else (float(ereignis['zeitpunkt']) - t_halt >= self.tag_pause)
+        bleib, verworfen = [], []
+        for el in z['queue']:
+            if not el['geplant'] and el['rolle'] in VERWERFEN:
+                verworfen.append(el)
+            else:
+                bleib.append(el)
+        neu_folge = []
+        for el in verworfen:
+            eintrag = dict(wiederaufnahme=z['wiederaufnahmen'], rolle=el['rolle'], anlass=el['anlass'],
+                           bezug_versuch=el.get('bezug_versuch'), grund='Halt: ausstehender sofortiger Folgelauf verworfen (H1)')
+            z['verworfen'].append(eintrag)
+            if el['rolle'] == 'X_strich':
+                i = int(el['bezug_versuch'][1:])
+                anl = f'G1 {el["bezug_versuch"]} (neue Folge nach Wiederaufnahme {z["wiederaufnahmen"]})'
+                neu_folge += [self._einschub(i, 'R2', anl, art='R'), self._einschub(i, 'X_strich', anl),
+                              self._einschub(i, 'R3', anl, art='R')]
+        vorlauf = []
+        if tageswechsel:
+            z['messtag_ist'] += 1
+            z['aufwaermen'] = []
+            vorlauf.append(dict(spec=dict(laufart='R', modul=None, einstellung=1, phase=1, block=None,
+                                          messtag=els[0]['spec']['messtag'], kontrollsatz=None,
+                                          konfiguration=dict(id='R', gruppe='referenz', phi_soll_grad=None),
+                                          lauf_id=None, position=None),
+                                rolle='aufwaermen', geplant=False, bezug=None, nummer=0,
+                                anlass=f'Aufwärmen nach Tageswechsel (Wiederaufnahme {z["wiederaufnahmen"]})'))
+        if halt.get('nullpunkt') or z['bezug_offen'] is not None:
+            if halt.get('nullpunkt'):
+                z['bezug_offen'] = z['r0']
+                z['r0'] = None
+            z['bezug_wdh'] = 0
+            if not tageswechsel:
+                vorlauf.append(dict(spec=dict(laufart='R', modul=None, einstellung=1, phase=1, block=b,
+                                              messtag=els[0]['spec']['messtag'], kontrollsatz=None,
+                                              konfiguration=dict(id='R', gruppe='referenz', phi_soll_grad=None),
+                                              lauf_id=None, position=None),
+                                    rolle='bezugslauf', geplant=False, bezug=None, nummer=0,
+                                    anlass=f'Bezugseröffnung nach Nullpunkthalt (Wiederaufnahme {z["wiederaufnahmen"]})'))
+        z['queue'] = vorlauf + els + neu_folge + bleib
+        z['w_aktiv'] = ks
+        z['w_start'] = len(z['versuche'])
+        z['protokoll_wiederaufnahmen'].append(dict(
+            nummer=z['wiederaufnahmen'], halt=dict(halt), nach_versuch=self._v(len(z['versuche']) - 1)['id'],
+            zeitpunkt=float(ereignis['zeitpunkt']),
+            dauer_halt_s=float(ereignis['zeitpunkt']) - t_halt, tageswechsel=tageswechsel,
+            bezugseroeffnung=z['bezug_offen'] is not None, verworfen=len(verworfen), neue_g1_folgen=len(neu_folge) // 3,
+            kontrollsatz=ks, erfolgreich=None))
+
     def fortsetzen(self, ereignis):
         """Wiederaufnahme nach einem Halt mit einem ausdrücklich protokollierten externen Ereignis
         dict(art='wiederaufnahme', quelle, zeitpunkt (s, nicht vor dem Halt), befund, mechanischer_eingriff (bool),
@@ -741,14 +946,20 @@ class Ablauf:
         z['ziehungen'].append(dict(art='Wiederaufnahme', kontrollsatz=ks, reihenfolge=[int(i) for i in ordnung],
                                    regel='rng.permutation des Reihenfolgegenerators'))
         els = []
+        tag_halt = self._v(int(z['halt']['versuch'][1:]))['messtag'] if self.v4 else None
         for i in ordnung:
             l = mitglieder[int(i)]
             spec = {x: l[x] for x in ('laufart', 'modul', 'einstellung', 'konfiguration', 'messtag')}
             spec.update(phase=1, block=b, kontrollsatz=ks, lauf_id=None, position=None)
+            if self.v4:
+                spec['messtag'] = tag_halt
             els.append(dict(spec=spec, rolle='wiederaufnahme_kontrolle', geplant=False, bezug=None, nummer=0,
                             anlass=f'Wiederaufnahme {z["wiederaufnahmen"]}'))
         self.ks['saetze'][ks] = dict(block=b, schluss=False)
-        z['queue'][0:0] = els
+        if self.v4:
+            self._fortsetzen_v4(ereignis, b, ks, els)
+        else:
+            z['queue'][0:0] = els
         z['halt'] = None
         z['ende'] = None
         z['status'] = 'bereit'
@@ -768,9 +979,13 @@ class Ablauf:
         """Ablaufstand für die Tabelle (meta „ablauf“): Status, Halt, Kennung, Optionen, Lücken und die Angaben, aus
         denen Stufe 2 die S2-Bilanz selbst nachrechnet (S2-Versuche, protokollierte Wiederaufnahmen mit ihrem Halt)."""
         z = self.z
-        return dict(version=self.fassung, status=z['status'], ende=z['ende'], halt=z['halt'], kennung=self.kennung,
-                    optionen=asdict(self.opt), luecken=list(z['luecken']), s2=list(z['s2']),
-                    ereignisse=copy.deepcopy(z['ereignisse']), s2_bilanz=gueltigkeit.s2_bilanz(z['s2'], z['ereignisse']))
+        out = dict(version=self.fassung, status=z['status'], ende=z['ende'], halt=z['halt'], kennung=self.kennung,
+                   optionen=asdict(self.opt), luecken=list(z['luecken']), s2=list(z['s2']),
+                   ereignisse=copy.deepcopy(z['ereignisse']), s2_bilanz=gueltigkeit.s2_bilanz(z['s2'], z['ereignisse']))
+        if self.v4:
+            out.update(bezugswechsel=copy.deepcopy(z['bezugswechsel']), verworfen=copy.deepcopy(z['verworfen']),
+                       wiederaufnahmen=copy.deepcopy(z['protokoll_wiederaufnahmen']))
+        return out
 
     def zustand(self):
         """Vollständiger Ablaufstand (für Checkpoints): alle Versuche mit Daten, Warteschlange, Zähler, Generator."""
@@ -844,14 +1059,18 @@ def bericht(a):
             status = 'gueltig' if p['gueltig'][0] == (vv[0]['id'] if vv else None) else 'ersetzt'
         elif not vv:
             status = 'nicht gemessen'
-        elif any(x.get('halt') for x in vv):                          # ein Versuch dieses Platzes hielt an
-            status = 'fehlt: Halt'
+        elif any(x.get('halt') for x in vv) and (not a.v4 or z['status'] in ('angehalten', 'abgebrochen')):
+            status = 'fehlt: Halt'                                     # ein Versuch dieses Platzes hielt an
         elif any(x.get('grenze') for x in vv):
             status = 'fehlt: Grenze ausgeschöpft'
         elif any(x.get('spaet_erkannt') for x in vv):                  # Ungültigkeit nach Beginn des Schlusssatzes
             status = 'fehlt: spät erkannt'
         elif any(x.get('s1') == 'nicht prüfbar' for x in vv):         # X′ ohne vollständige Klammer R₂/R₃
             status = 'fehlt: S1 nicht prüfbar'
+        elif a.v4 and any(e.get('bezug_versuch') in p['versuche'] for e in z['verworfen']):
+            status = 'fehlt: Folgelauf beim Halt verworfen'
+        elif a.v4 and any(x.get('halt') for x in vv):
+            status = 'fehlt: Halt (wiederaufgenommen)'
         elif z['status'] != 'abgeschlossen':
             status = 'fehlt: Halt'
         else:
@@ -886,7 +1105,16 @@ def bericht(a):
         grenzen=[v['id'] for v in vs if v.get('grenze')], ziehungen=list(z['ziehungen']), s2=list(z['s2']),
         ausgeschlossen=list(z['ausgeschlossen']), luecken=list(z['luecken']), ereignisse=list(z['ereignisse']),
         halte=[dict(versuch=v['id'], regel=v['halt']) for v in vs if v.get('halt')],
-        qualifikation_einstellung2='ausgeschlossen' if z['luecken'] else 'nicht betroffen')
+        qualifikation_einstellung2='ausgeschlossen' if z['luecken'] else 'nicht betroffen',
+        **(dict(wiederaufnahmen=copy.deepcopy(z['protokoll_wiederaufnahmen']),
+                bezugswechsel=copy.deepcopy(z['bezugswechsel']), verworfen=copy.deepcopy(z['verworfen']),
+                zusatzlaeufe=dict(bezugslauf=rollen.get('bezugslauf', 0),
+                                  wiederaufnahme_kontrolle=rollen.get('wiederaufnahme_kontrolle', 0),
+                                  aufwaermen_nach_halt=sum(1 for v in vs if v['rolle'] == 'aufwaermen'
+                                                           and 'Wiederaufnahme' in v['anlass'])),
+                halt_dauer_s=sum(w['dauer_halt_s'] for w in z['protokoll_wiederaufnahmen']),
+                messtage_ist=sorted({v['messtag_ist'] for v in vs}))
+           if a.v4 else {}))
 
 
 def speichern(pfad, a, kennung='SYNTH-ABLAUFSTAND'):
