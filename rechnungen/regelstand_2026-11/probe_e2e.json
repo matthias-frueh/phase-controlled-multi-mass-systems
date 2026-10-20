@@ -38,11 +38,12 @@
    "zusatzlaeufe": {
     "bezugslauf": 0,
     "wiederaufnahme_kontrolle": 0,
-    "aufwaermen_nach_halt": 0
+    "aufwaermen_nach_halt": 0,
+    "aufwaermen_tagesbeginn": 1
    },
    "laufzeit_s": {
-    "ablauf": 4.856,
-    "ap12_stufe2": 0.683
+    "ablauf": 4.985,
+    "ap12_stufe2": 0.866
    }
   },
   "N01-V1G0/202": {
@@ -65,11 +66,12 @@
    "zusatzlaeufe": {
     "bezugslauf": 0,
     "wiederaufnahme_kontrolle": 0,
-    "aufwaermen_nach_halt": 0
+    "aufwaermen_nach_halt": 0,
+    "aufwaermen_tagesbeginn": 1
    },
    "laufzeit_s": {
-    "ablauf": 3.828,
-    "ap12_stufe2": 0.703
+    "ablauf": 3.5,
+    "ap12_stufe2": 0.898
    }
   },
   "A04-R4/203": {
@@ -92,11 +94,12 @@
    "zusatzlaeufe": {
     "bezugslauf": 0,
     "wiederaufnahme_kontrolle": 0,
-    "aufwaermen_nach_halt": 0
+    "aufwaermen_nach_halt": 0,
+    "aufwaermen_tagesbeginn": 1
    },
    "laufzeit_s": {
-    "ablauf": 3.68,
-    "ap12_stufe2": 0.636
+    "ablauf": 3.652,
+    "ap12_stufe2": 0.744
    }
   },
   "S02-kontrolllauf/204": {
@@ -121,11 +124,12 @@
    "zusatzlaeufe": {
     "bezugslauf": 0,
     "wiederaufnahme_kontrolle": 4,
-    "aufwaermen_nach_halt": 0
+    "aufwaermen_nach_halt": 0,
+    "aufwaermen_tagesbeginn": 1
    },
    "laufzeit_s": {
-    "ablauf": 4.196,
-    "ap12_stufe2": 0.288
+    "ablauf": 4.258,
+    "ap12_stufe2": 0.234
    }
   },
   "S01a-liftoff/205": {
@@ -148,30 +152,36 @@
    "zusatzlaeufe": {
     "bezugslauf": 0,
     "wiederaufnahme_kontrolle": 4,
-    "aufwaermen_nach_halt": 0
+    "aufwaermen_nach_halt": 0,
+    "aufwaermen_tagesbeginn": 3
    },
    "laufzeit_s": {
-    "ablauf": 6.291,
-    "ap12_stufe2": 0.096
+    "ablauf": 6.753,
+    "ap12_stufe2": 0.121
    }
   }
  },
  "ebene_z": {
   "status": "abgeschlossen",
-  "versuche": 86,
+  "versuche": 87,
   "fuenftelzeiger": true,
   "verarbeitung": {
-   "stufe1-0.2": 248
+   "stufe1-0.2": 249
   }
  },
- "laufzeit_s": 104.1,
+ "laufzeit_s": 104.6,
  "lesart": "je Fall eine Kampagne; Ausgänge sind Beispiele, keine Raten",
  "code_version": {
   "paket": "0.1.0",
-  "git": "706072a79065bbe0cf783d8cc17d19fee00e31a9+geändert"
+  "git": "ff3123d54354d6ada9ab351fea00ebc7f6f2f176+geändert"
  },
  "umgebung": {
   "python": "3.13.16",
-  "numpy": "2.5.3"
+  "numpy": "2.5.3",
+  "threads": {
+   "OMP_NUM_THREADS": "1",
+   "OPENBLAS_NUM_THREADS": "1",
+   "MKL_NUM_THREADS": "1"
+  }
  }
 }

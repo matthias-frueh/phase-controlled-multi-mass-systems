@@ -5,11 +5,11 @@
   "faelle": {
    "I01-amplitude/L1/7/zustand": {
     "hashes": {
-     "daten": "26a3d3b5b4604b7c709730cc3c9ecdd971dd04178a35a31e321fb793cae5ec92",
-     "entscheidungen": "2e34dc6fd86b4d91effa9667dddd399b84273a920148a71a991318e5be812ab2",
-     "koepfe": "262c67b6f9b482e6e5d9b5c8bca58cdfb7db0cf61510c7f33f65dd960698eba9",
-     "schwellen": "bae2ee5ac41d28dfff99ad302754a935d868adeccff7b31db27f39c3ab8d0e24",
-     "ziehungen": "264851aad02b1f5db42162881fb56b73ea124870c8a40a75f44d22f7bcba07d4"
+     "daten": "3a3788b47ceb3c266824f5a1cc5689a80272cc3aab0e2b33fea910edfbfd53ba",
+     "entscheidungen": "b164e883af654d5ce211aed37d4623f0c27fd9146a84839f38baf90bf0b1a000",
+     "koepfe": "9e8a9670ee59af7e8d869fe1f5f811f57ba2a55324ea0932aa9d0ccb6981ba32",
+     "schwellen": "e606c89eac99ddae53b90fe5602f1796d1641690fb3cd570c290c4df1de8d61d",
+     "ziehungen": "d7dde20851f922d80a855fc295cb8935ec17f158f8ae7cf5c3e0739e0d20d1c4"
     },
     "inhalt": {
      "auswahl": {
@@ -19,10 +19,10 @@
      "grenzen": 0,
      "halt": null,
      "laufzahl": {
-      "ausgefuehrt": 210,
+      "ausgefuehrt": 212,
       "geplant": 201,
       "geplant_ausgefuehrt": 201,
-      "zusaetzlich": 9
+      "zusaetzlich": 11
      },
      "luecken": [
       "Einstellung 2: G2–G4 nicht gefasst (f′, δf_tol′, σ_tol′, σ_Δ′ offen, §12)",
@@ -30,16 +30,19 @@
      ],
      "rollen": {
       "R1": 3,
+      "R2": 1,
+      "R3": 1,
+      "X_strich": 1,
       "aufwaermen": 3,
       "konfiguration": 144,
       "kontrolle": 49,
       "referenz_block": 6,
       "schlussreferenz": 1,
-      "wiederholung": 4
+      "wiederholung": 3
      },
      "s2": [],
      "status": "abgeschlossen",
-     "ziehungen": 4
+     "ziehungen": 3
     }
    },
    "N01-A4/L1/13/aus": {
@@ -47,7 +50,7 @@
      "daten": "d7f77a54711da3fa1f6251c2af747be0717d51a9ec0275107d769aa7a55ece21",
      "entscheidungen": "11b557a49caf405b133f57a0d0658e711cc94bc769eebaffe0ec38474955d49f",
      "koepfe": "16e9ef897b3d327c206075b915366655dae42d9c11ff9ac8039addeecae9a3ed",
-     "schwellen": "f0b9e9d7ba2d658102abd9c2bb864bf30a8b91786a55b1ac1c6dc6e09ba18a9d",
+     "schwellen": "687204c26c5d1efd213ae9e59580c91c461c2923a7a75d4ed333b1d2c5a9f7cd",
      "ziehungen": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
     },
     "inhalt": {
@@ -81,7 +84,7 @@
      "daten": "6a27c97b09c0d03ad17de92efc079ceef88c2fb2c7f315157d16ca7f469ae57f",
      "entscheidungen": "e7f6a634400b32579c6dee0f086e46a7d79912dd315d721ad92747e222306af7",
      "koepfe": "4161055369f6db1d09e72a618ac38d91d0b3559e48c7e4d74f914e75aaeebb23",
-     "schwellen": "f0b9e9d7ba2d658102abd9c2bb864bf30a8b91786a55b1ac1c6dc6e09ba18a9d",
+     "schwellen": "687204c26c5d1efd213ae9e59580c91c461c2923a7a75d4ed333b1d2c5a9f7cd",
      "ziehungen": "cff031148af655a4e8b7e18855a4ba70860f48635c0f6dbaad4a5cb5d15d2b43"
     },
     "inhalt": {
@@ -117,24 +120,24 @@
    },
    "S02-kontrolllauf/L1/7/zustand": {
     "hashes": {
-     "daten": "ca9a8c424a0549732da92a6245e1aefbde1d4b66c7515c7310e38dc5b80ca6f2",
-     "entscheidungen": "8759a551cba520e6f998a03cda70fa71e4a9bb934dbc5abbeb35a21053fd02e4",
-     "koepfe": "ed776c181d74c535a29f0d4f5508692e4367c4e0d9adc26819528a81f4c42c93",
-     "schwellen": "11a84ece4f0fa3b75e9ab2920e1cb323925ebc5a9cba8e457715d9e1aa62a1b5",
-     "ziehungen": "10b286098f9de43c73c8fcf9457be5421975b33f95615b47b8c1a6fce7786dac"
+     "daten": "74f69060351983ae5e1bdc5e74de77e5fa3eef2535330480ce26562b731fd5c7",
+     "entscheidungen": "61788526ba6bbbf11c269f8ab87302f33449a50d9ab8fa3c4d81946eeef4ac55",
+     "koepfe": "b4e0be60096ee25237d3c63831fef3c274f1919869ed2de36f977156582e2fc5",
+     "schwellen": "12cb509ec26ca3a8ee489c055d5ea51302c8eb1253ffb69f664d7fa7c9357f6f",
+     "ziehungen": "16456d6ab6cb70f0d9a410e80132735ad73fb6c940fd5acbbb448827c83e0048"
     },
     "inhalt": {
      "auswahl": {
-      "ersetzt": 8,
-      "gueltig": 118
+      "ersetzt": 9,
+      "gueltig": 117
      },
      "grenzen": 0,
      "halt": null,
      "laufzahl": {
-      "ausgefuehrt": 186,
+      "ausgefuehrt": 187,
       "geplant": 162,
       "geplant_ausgefuehrt": 162,
-      "zusaetzlich": 24
+      "zusaetzlich": 25
      },
      "luecken": [],
      "rollen": {
@@ -149,35 +152,35 @@
       "referenz_block": 6,
       "schlussreferenz": 1,
       "wiederaufnahme_kontrolle": 4,
-      "wiederholung": 7
+      "wiederholung": 8
      },
      "s2": [
       "V00035"
      ],
      "status": "abgeschlossen",
-     "ziehungen": 7
+     "ziehungen": 8
     }
    },
    "S06-saettigung/L1/7/zustand": {
     "hashes": {
-     "daten": "88f1a0a88b71ab9016c5be0ce088697bf40f4037241798e3ae1ef8f07e3f5644",
-     "entscheidungen": "9e8dc65934be523eb79ab5e5d9c987eedcdb8a4eccc493b3cc1b2499537df547",
-     "koepfe": "9142b72239c9e6aa7b590e7258e634edfb91ce8fda80cabd82262f7ec434df9d",
-     "schwellen": "82ea29e679f0b93f83ce335be6594b9768c1496d174e3e3611a256fd05290cce",
-     "ziehungen": "c36308b4a7739fba604ebb76c116e50ff26bd04b406a64a4488937874b8acc40"
+     "daten": "17a21aa0fb1af73f46e782bc40f4beb4ae01658504c320f08aa06529681ee5d1",
+     "entscheidungen": "2139377fb06e58f655c9933e46014eb1a4b0c275bcd320c82f45eb0f02154fb9",
+     "koepfe": "5d7e2ddbba17f697c40cdef96c7e47ed6b240ae7c3b6837653a7191c673a2d2e",
+     "schwellen": "83e6a2a37cd17f6cdf7a4de89454da8ea24d69a0d18d3ee74b5645cf24f752cb",
+     "ziehungen": "c3896f463441da6c7131ae9e8ae1c858811ab54e875aa53460a5feffa3d4012b"
     },
     "inhalt": {
      "auswahl": {
-      "ersetzt": 7,
-      "gueltig": 119
+      "ersetzt": 8,
+      "gueltig": 118
      },
      "grenzen": 0,
      "halt": null,
      "laufzahl": {
-      "ausgefuehrt": 175,
+      "ausgefuehrt": 176,
       "geplant": 162,
       "geplant_ausgefuehrt": 162,
-      "zusaetzlich": 13
+      "zusaetzlich": 14
      },
      "luecken": [],
      "rollen": {
@@ -188,11 +191,11 @@
       "kontrolle": 28,
       "referenz_block": 6,
       "schlussreferenz": 1,
-      "wiederholung": 7
+      "wiederholung": 8
      },
      "s2": [],
      "status": "abgeschlossen",
-     "ziehungen": 7
+     "ziehungen": 8
     }
    }
   },
@@ -220,7 +223,7 @@
    "sha256": "bb72f65641197540d1a8fc7c4b1cacfc42558023c12f6311b3cc16adb6c32647"
   },
   "rundung_stellen": 12,
-  "sha256_gesamt": "f92dc3e4f7d7fe0c9e7f371280f2a15dbc53a80f00e9229c1c459010623c3329",
+  "sha256_gesamt": "daea5cb37820fa23312cc7da82344bbb1b2acef6dcfe32e3252f3d930ff74627",
   "umgebung": {
    "numpy": "2.5.3",
    "python": "3.13.16",
@@ -240,7 +243,7 @@
  },
  "kopf": {
   "code_version": {
-   "git": "3632c3407055bfc55940294c0fe2121939cd5db8+geändert",
+   "git": "ff3123d54354d6ada9ab351fea00ebc7f6f2f176+geändert",
    "paket": "0.1.0"
   },
   "datenart": "synthetisch",

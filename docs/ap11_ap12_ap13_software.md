@@ -252,6 +252,39 @@ Graubereich; in der Teilbearbeitung vor B+ Datenlage). Der Rauschbias stammt dab
 Kalibrierkampagne (Restbias 2,1 ± 1,2 bzw. 3,2 ± 0,9 u_c); bei dieser Größe ist die Ursache nicht von der
 Monte-Carlo-Streuung zu trennen. Es ist keine Aussage über die Planung mit dem Phase-0-Modell.
 
+**Statischer Review vor dem PR** (20.10.2026, fünf Prüfrichtungen mit Gegenprüfung je Richtung, ohne Rechnungen):
+46 Befunde gemeldet, 22 nach Gegenprüfung bestätigt, alle behoben, je mit Regressionstest:
+
+- Ablauf ablauf-4:
+  - Aufgeschobene Folgen R₂/X′/R₃ nach einer Wiederaufnahme wurden durch ein X′ bzw. eine Sofortfolge eines
+    W-Mitglieds getrennt (Online/Offline-Widerspruch).
+  - Bei Tageswechsel wird der letzte gültige Aufwärmlauf als neuer Bezug protokolliert.
+  - Die Alarmkette beginnt bei jeder Bezugseröffnung neu.
+  - Zusätzliche Aufwärmläufe stehen unter „Aufwärmen bei Tageswechsel“; die Offline-Gegenprobe prüft zusätzlich, dass
+    auf R₂ das X′ desselben Falls folgt.
+- G4:
+  - Die Phase-1-Schwellen beruhen auf den gültigen Phase-0-Läufen (dieselbe Stichprobe wie k(n₀ⱼ)).
+  - Die Pilotgröße von B+ wird an der Soll-Lage gebildet.
+  - Die Bartlett-Prüfung des Pooling-Vergleichs rechnet mit den effektiven Freiheitsgraden des MAD-Schätzers.
+- Laufgrößen: Nullpunktdrift und Zufallspfad werden über die Betriebszeit geschätzt, mit Ausweis von Pausen.
+- Planung und Pilotsuche:
+  - Das erhöhte r geht in n = n_min + r ein.
+  - Bei grundsätzlich nicht prüfbarer Reservebedingung endet die Suche „offen“.
+  - Neuer Abbruchgrund „Reservegrenze“.
+- Kalibrierung:
+  - |b̂|/u_c wird über A gebildet.
+  - Bei |A| = 0 lautet das Ergebnis „nicht abgeschlossen“.
+  - Die Kennzeichnung folgt dem realisierten |A|.
+- Vorgaben: Historische Profile rechnen ohne übergebenen Plan bzw. Verfahren wieder mit der Anordnung „historisch“
+  und ablauf-3.
+- Kalibrierbeispiel: Die Kosten der großen Rechnung sind mit den normativen Replikatzahlen berechnet (82 s je
+  Kampagne statt 7,5 s, also etwa 46–103 statt 4–9 Kernstunden je System).
+- Probenskript: Die Threadvariablen werden vor dem Import von NumPy gesetzt.
+- Doku: Lⱼ-Pooling steht nur als Vergleich.
+
+Die übrigen 24 Befunde wurden in der Gegenprüfung widerlegt (Guard, Profilbedingung oder dokumentierte Grenze). Die
+kleinen Proben sind danach neu gerechnet.
+
 **Grenzen dieses Stands.**
 
 - Kampagnen aus der Phase-0-Modellquelle haben nur den statischen Laufplan (kein Vorrat des Strukturgenerators für
@@ -269,7 +302,7 @@ Monte-Carlo-Streuung zu trennen. Es ist keine Aussage über die Planung mit dem 
   übertragbar.
 - Die Stärken der benannten Sensitivitäten und die Regularisierung des Strukturmodells sind technische Regeln mit
   Vorschlagscharakter (`rauschmodelle.sensitivitaeten`, `p0.strukturmodell`), Festlegung beim Autor.
-- Rechenaufwand neben der Testsuite: etwa 0,4 Kernstunden ([Protokoll](../rechnungen/regelstand_2026-11/README.md)).
+- Rechenaufwand neben der Testsuite: etwa 0,45 Kernstunden ([Protokoll](../rechnungen/regelstand_2026-11/README.md)).
   Die große Kalibrierung, die volle Matrix und große Planungsläufe wurden nicht ausgeführt.
 
 ## 1 Erreichter Umfang
