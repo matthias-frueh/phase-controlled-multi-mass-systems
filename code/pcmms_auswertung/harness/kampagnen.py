@@ -285,6 +285,22 @@ def ablauf_raten(ab, **kw):
 
 
 # ── Ausgabe ──────────────────────────────────────────────────────────────────────────────────────────
+E3_SPALTEN = ('E3a_stufe', 'E3a_urteil', 'E3b_stufe', 'E3b_urteil', 'E3b_q_Z', 'E3b_s_hat', 'E3b_rho_hat', 'E3b_nu',
+              'E3b_n_A')
+
+
+def _e3_spalten(e3):
+    """E3 je Prüfgröße für die CSV (Regelstand 2026-11; sonst leer)."""
+    if not e3 or e3.get('regelstand') != '2026-11':
+        return [''] * len(E3_SPALTEN)
+    pg = e3.get('pruefgroessen') or {}
+    m = e3.get('e3b_modell') or {}
+    return [(pg.get('E3a') or {}).get('stufe', ''), (pg.get('E3a') or {}).get('urteil') or '',
+            (pg.get('E3b') or {}).get('stufe', ''), (pg.get('E3b') or {}).get('urteil') or '',
+            '' if e3.get('e3b') is None else float(e3['e3b'][0]), m.get('s_hat', ''), m.get('rho_hat', ''),
+            m.get('nu', ''), m.get('n_A', '')]
+
+
 def schreibe(verzeichnis, lauf, kennung=None):
     """JSON+NPZ des Laufs (Befunde mit Feldern) und eine CSV-Tabelle je Kampagne; Rückgabe der Pfade."""
     os.makedirs(verzeichnis, exist_ok=True)
@@ -295,12 +311,13 @@ def schreibe(verzeichnis, lauf, kennung=None):
     with open(p + '.csv', 'w', newline='', encoding='utf-8') as fh:
         w = csv.writer(fh)
         w.writerow(['kampagne', 'seed', 'H1', 'H1_grund', 'H1_zusaetze', 'max_abs_z0', 'c', 'H1Z', 'H2', 'H2_grund',
-                    'delta_phi0', 'delta_phi1', 'H3', 'H4', 'E3', 'Zuordnung', 'ungueltig', 'auswertbar'])
+                    'delta_phi0', 'delta_phi1', 'H3', 'H4', 'E3', 'Zuordnung', 'ungueltig', 'auswertbar']
+                   + list(E3_SPALTEN))
         for i, b in enumerate(lauf['befunde']):
             w.writerow([i, b['seed'], b['H1']['ausgang'], b['H1']['grund'] or '', '; '.join(b['H1']['zusaetze']),
                         b['H1']['max_abs_z0'], b['H1']['c'], b['H1Z']['ausgang'], b['H2']['ausgang'],
                         b['H2']['grund'] or '', b['H2']['delta_phi0'], b['H2']['delta_phi1'], b['H3']['ausgang'],
                         b['H4']['ausgang'], (b['E3'] or {}).get('bewertung', ''),
                         (b['zuordnung'] or {}).get('ergebnis', ''), b['gueltigkeit']['n_ungueltig'],
-                        b['n_auswertbar']])
+                        b['n_auswertbar']] + _e3_spalten(b.get('E3')))
     return dict(objekt=p, csv=p + '.csv')

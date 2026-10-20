@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "pcmms-kalibrierbeispiel-1",
+  "title": "Konfiguration des Kalibrierbeispiels (harness.kalibrierbeispiel)",
+  "type": "object",
+  "required": ["schema", "modus", "szenario", "stufe", "profil", "plan", "n_min", "verfahren", "seed_basis", "soll_A", "prozesse", "partie"],
+  "properties": {
+    "schema": {"const": "pcmms-kalibrierbeispiel-1"},
+    "modus": {"enum": ["demonstration", "gross"], "description": "gross: normative Rechnung (soll_A = 1000, keine Reduktion, nur mit --bestaetigung); demonstration: höchstens soll_A = 5, 4 Blöcke, B = 200"},
+    "beschreibung": {"type": "string"},
+    "szenario": {"type": "string", "description": "Szenario-ID aus generator.szenarien.KATALOG"},
+    "stufe": {"type": "string", "description": "Präzisionsstufe, z. B. L1"},
+    "profil": {"enum": ["AF-2026-11", "ENTW-2026-11"], "description": "Regelstand 2026-11; historische Profile werden abgelehnt"},
+    "reduktion": {"type": "object", "description": "nur für modus demonstration: reduzierte Replikatzahlen (regeln.NORMATIVE_ZAHLEN)"},
+    "plan": {"type": "object", "description": "Felder von generator.kampagne.Plan; p0_anordnung Vorgabe p07"},
+    "n_min": {"type": "integer", "minimum": 1},
+    "verfahren": {"enum": ["zustand", "statisch"], "description": "zustand: ablauf-4 mit simulierter Wiederaufnahme"},
+    "seed_basis": {"type": "integer"},
+    "soll_A": {"type": "integer", "minimum": 1, "description": "Sollzahl der Auswertungsmenge A je Rolle"},
+    "prozesse": {"type": "integer", "minimum": 1, "maximum": 4},
+    "partie": {"type": "integer", "minimum": 1, "description": "Kampagnen je Checkpoint"},
+    "sekunden_je_kampagne": {"type": "number", "description": "für die Kostenabschätzung"}
+  },
+  "additionalProperties": false
+}

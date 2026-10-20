@@ -254,6 +254,12 @@ def _harness(ap, argv):
     qa.add_argument('--fassung', default='ablauf-3', choices=('ablauf-3', 'ablauf-4'),
                     help='Stand beim Schreiben: ablauf-3 (historisch, PR #23) oder ablauf-4 (Regelstand 2026-11); '
                          '--pruefen liest den Stand aus der Datei')
+    kb = sp.add_parser('kalibrierbeispiel', help='Beispiel der großen Kalibrierung (harness.kalibrierbeispiel): '
+                                                 'Vorgabe Trockenlauf; rechnet nur mit --ausfuehren')
+    kb.add_argument('--konfig', required=True, help='JSON nach Schema pcmms-kalibrierbeispiel-1')
+    kb.add_argument('--ausgabe', default=None, help='Ergebnis- und Checkpointverzeichnis (für --ausfuehren)')
+    kb.add_argument('--ausfuehren', action='store_true', help='rechnen (Demonstration; groß nur mit --bestaetigung)')
+    kb.add_argument('--bestaetigung', default=None, help='für modus „gross“ genau: "grosse Kalibrierung starten"')
     m = sp.add_parser('matrix')
     m.add_argument('--ausgabe', required=True)
     m.add_argument('--kampagnen', type=int, required=True)
@@ -375,6 +381,17 @@ def _harness(ap, argv):
             r = ablauf_pruefsatz.pruefen(a.pruefen)
             print(_json(r))
             return 0 if r['gleich'] else 1
+    elif a.was == 'kalibrierbeispiel':
+        from .harness import kalibrierbeispiel as kb
+        k = kb.lies(a.konfig)
+        if not a.ausfuehren:
+            print(_json(kb.trockenlauf(k)))
+            return 0
+        if not a.ausgabe:
+            print('kalibrierbeispiel --ausfuehren verlangt --ausgabe')
+            return 2
+        r = kb.ausfuehren(k, a.ausgabe, a.bestaetigung)
+        print(_json({x: r[x] for x in ('kennzeichnung', 'status', 'abgeschlossen', 'checkpoints', 'konfiguration_sha256')}))
     elif a.was == 'matrix':
         from .generator import szenarien
         stufen = a.stufen.split(',')

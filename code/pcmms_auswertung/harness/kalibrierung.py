@@ -263,6 +263,8 @@ def kalibrieren(sid, stufe, profil, n_kal, n_pruef, seed_basis, plan=None, n_min
             pr_A = mengen.in_A(pr['befunde']) if neu else pr['befunde']
     rp = kpn.raten(pr)
     gemeinsam = rp['raten']['H1 und H2 bestätigt']                  # Nenner: alle begonnenen Kampagnen (G)
+    if neu:
+        w8['e3_kriterien'] = _e3_kriterien(pr_A)['kriterien']
     restbias = None if w8['bias0'] is None or not pr_A else _restbias(pr_A, w8)
     return dict(
         meta=dict(szenario=sid, stufe=stufe, profil=profil.id, profil_sha256=profil.sha256(), seed_basis=seed_basis,
@@ -291,10 +293,31 @@ def kalibrieren(sid, stufe, profil, n_kal, n_pruef, seed_basis, plan=None, n_min
                                                          pruefung=pr['meta'].get('nachziehen'))),
         c_sensitivitaet=c_sens,
         reserve_ziel=_reserve_ziel(pr['befunde'], profil, n_min) if neu else None,
+        e3=_e3_kriterien(pr_A) if neu else None,
         zeitbilanz=_zeitbilanz(pr['befunde'], profil, plan) if neu else None,
         zmax=dict(kalibrierung=c1_roh['werte'], kalibrierung_vollstaendig=c1_roh['vollstaendig'], pruefung=zp,
                   pruefung_vollstaendig=vp),
         laeufe=dict(kalibrierung=[l['meta'] for l in kal], pruefung=pr['meta']))
+
+
+def _e3_kriterien(befunde):
+    """E3-Kriterien von A9.11 je Prüfgröße aus der Prüfsimulation (Menge A, exakte Superposition): Raten „auffällig“
+    und „unauffällig“ mit Zähler und Nenner; als Kriterienbefund für Teil B (nr10.e3_kriterien) nur bei der
+    normativen Kampagnenzahl, sonst None je Kriterium (nicht ausgewiesen). Die Modellprüfung ist nicht umgesetzt
+    (None); die dafür nötigen Größen stehen in den Kurzbefunden (Σ̂, ŝ, ρ̂, ν, n_A, n₀ⱼ)."""
+    bf = [b for b in befunde if (b.get('E3') or {}).get('regelstand') == '2026-11']
+    voll = len(bf) >= rg.NORMATIVE_ZAHLEN['kampagnen_pruefung']
+    raten, krit = {}, dict(herkunft=f'Prüfsimulation (AP-13), {len(bf)} Kampagnen der Menge A'
+                                    + ('' if voll else ' – reduziert: Kriterien nicht ausgewiesen (None)'))
+    for g in ('E3a', 'E3b'):
+        u = [((b['E3'].get('pruefgroessen') or {}).get(g) or {}).get('urteil') for b in bf]
+        ra = metriken.rate(sum(x == 'auffällig' for x in u), len(u), f'P({g} auffällig | exakt)')
+        ru = metriken.rate(sum(x == 'unauffällig' for x in u), len(u), f'P({g} unauffällig | exakt)')
+        raten[g] = dict(auffaellig=ra, unauffaellig=ru)
+        krit[g] = dict(auffaellig=bool(ra['rate'] <= 0.05) if voll and ra['rate'] is not None else None,
+                       unauffaellig=bool(ru['rate'] >= 0.8) if voll and ru['rate'] is not None else None,
+                       modellpruefung=None)
+    return dict(raten=raten, kriterien=krit)
 
 
 def _ist_ablauf4(befunde):

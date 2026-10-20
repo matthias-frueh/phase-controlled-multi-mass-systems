@@ -244,6 +244,10 @@ def erstellen(tab0, kal, pilot_erg, profil, plan, werkzeug8=None, kennung=None, 
     T_lauf, p_hat); werkzeug8: dict (c_H1, c_H1Z, bias0, bias1, u_bias0, u_bias1 (je (21,) Summe; *_zellen (21, 3)),
     h2_intervall, eps_kritisch, …) oder None; bindung: Phase-0-Satz an den Plan ('plan') oder historisch (phase0_satz)."""
     w8 = dict(werkzeug8 or {})
+    if str(w8.get('kennzeichnung', '')).startswith('Demonstration') and not str(kennung or '').startswith(
+            formate.PRAEFIX_SYNTH):
+        raise ValueError('Teil B: Werkzeug-8-Werte des Demonstrationsmodus („Demonstration, synthetisch, nicht '
+                         'kalibriert“) nur für synthetische Kennungen, nie für ein Teil B zu Messdaten')
     kmax = int(plan['k_max'])
     K = int(tab0.k_voll)
     B = profil.zahl('bootstrap_B') if B is None else int(B)
@@ -383,6 +387,8 @@ def erstellen(tab0, kal, pilot_erg, profil, plan, werkzeug8=None, kennung=None, 
                 c_H1Z=w8.get('c_H1Z'), c_H1Z_herkunft=w8.get('c_H1Z_herkunft', 'fehlt (Werkzeug 8)'),
                 pruefrate=w8.get('pruefrate'), h2_intervall=w8.get('h2_intervall'),
                 eps_kritisch=satz['eps_ctrl'].get('kritisch'), raten=w8.get('raten'))
+    if not regeln.ist_historisch(profil) and w8.get('e3_kriterien') is not None:
+        nr10['e3_kriterien'] = w8['e3_kriterien']                      # Rückfall je Prüfgröße (E3, A9.11)
     if not regeln.ist_historisch(profil):
         nr10['werte_regel'] = dict(planung_teil_b_werte=profil.wert_oder_none('planung.teil_b_werte'),
                                    modellquelle=w8.get('modellquelle', 'nicht angegeben (Werkzeug 8)'),
