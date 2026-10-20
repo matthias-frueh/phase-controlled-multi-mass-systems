@@ -26,14 +26,12 @@ nur ausdrücklich wählbar (rauschquelle='szenario_orakel'). teil_b_werte rechne
 mit Punktschätzern (Strukturmodell als Standard, Familienanpassung für die Spannweite von b̂, c nach
 h1.c_rauschmodelle) und die benannten Sensitivitäten.
 """
-import math
-
 import numpy as np
 from scipy import stats
 
 from .. import laufgroessen as lgm, regeln as rg, verfahren as vf, zufall
 from ..generator import kampagne as kp, phase0_modell as p0m, szenarien
-from . import kalibrierung
+from . import kalibrierung, reserve as rs
 
 RAUSCHQUELLEN = ('szenario', 'phase0_modell', 'szenario_orakel')
 
@@ -51,8 +49,8 @@ def skaliert(rausch, faktor):
                       jitter_grad=rausch.jitter_grad * faktor)
 
 
-def kandidaten_ordnen(n_liste, n0_liste, N_K=21):
-    return sorted(((int(n), int(n0)) for n in n_liste for n0 in n0_liste), key=lambda x: (N_K * x[0] + 3 * x[1], x))
+def kandidaten_ordnen(n_liste, n0_liste, N_K=21, fassung='a'):
+    return rs.kandidaten_ordnen(n_liste, n0_liste, N_K, fassung)
 
 
 def fenster_aus_aufruf(e, f_szenario, plan_basis):
@@ -167,16 +165,23 @@ def haken(sid, stufe, profil, n_kal, n_pruef, seed_basis, n_kandidaten, n0_kandi
     max_aufrufe: Entwicklungsgrenze der Simulationen (weitere Paare (k, T_a) ohne Planung, gekennzeichnet).
     verfahren: Verfahren der simulierten Kampagnen (Vorgabe verfahren.STANDARD); jede simulierte Kampagne bindet ihre
     Phase-0-Größen an das k des Aufrufs. rauschquelle: siehe rauschquelle_regel; mit 'phase0_modell' sind sid und
-    stufe nur Kennzeichnung (dürfen None sein)."""
+    stufe nur Kennzeichnung (dürfen None sein). Im Regelstand 2026-11 (Regel planung.reserve_ziel) rechnet der Haken
+    mit dem Szenario standardmäßig mit dem Ablauf (verfahren.ZUSTAND, ablauf-4), damit die Reservebedingung 0,95
+    prüfbar ist; Kampagnen aus der Phase-0-Modellquelle haben nur den statischen Laufplan, die Bedingung ist dort
+    nicht prüfbar und kein Kandidat wird festgelegt (Grund im Ergebnis, Kandidat nach P allein nur berichtet)."""
+    ziel = profil.wert('planung.reserve_ziel') if ('planung.reserve_ziel' in profil.regeln
+                                                    and profil.hat('planung.reserve_ziel')) else None
+    quelle_art = rauschquelle_regel(profil, rauschquelle)
+    phase0 = quelle_art == 'phase0_modell'
+    if verfahren is None and ziel is not None and not phase0:
+        verfahren = vf.ZUSTAND
     verfahren = vf.oder_standard(verfahren)
     zaehler = [0]
     plan_basis = kp.Plan() if plan_basis is None else plan_basis
-    quelle_art = rauschquelle_regel(profil, rauschquelle)
-    phase0 = quelle_art == 'phase0_modell'
     mit_cB = c_planung(profil)
     sz = None if phase0 else szenarien.KATALOG[sid]
     bedingung = profil.wert('planung.bedingung')
-    profil.wert('planung.zielfunktion')
+    zielfunktion = profil.wert('planung.zielfunktion')
     n0_min = profil.wert('planung.n0_min')
     reserve = profil.wert('planung.reserve')
 
@@ -208,17 +213,31 @@ def haken(sid, stufe, profil, n_kal, n_pruef, seed_basis, n_kandidaten, n0_kandi
             kw_kal['c_planung'] = True
         p = float(e['p_hat'])
         schritte = []
-        for n, n0 in kandidaten_ordnen(n_kandidaten, [x for x in n0_kandidaten if x >= n0_min]):
-            r = math.ceil(n * p / (1 - p)) + reserve if p < 1 else None
-            if r is None or (e.get('n_max') is not None and n + r > e['n_max']):
+        N_K_ziel = 21 if ziel is None else int((e.get('zeit') or {}).get('N_K') or 21)
+        n_max = e.get('n_max')
+        for n, n0 in rs.kandidaten_ordnen(n_kandidaten, [x for x in n0_kandidaten if x >= n0_min], N_K_ziel,
+                                          zielfunktion):
+            r = rs.reserve_r(n, p, reserve)
+            if r is None or (n_max is not None and n + r > n_max):
                 schritte.append(dict(n_min=n, n0=n0, reserve_r=r, uebersprungen='n = n_min + r > n_max'))
                 continue
-            plan = plan_basis.mit(n_bloecke=n + r, n0=n0, n_zyklen=fenster['N_z'], T_lauf=fenster['T_lauf_s'],
-                                  tage=tage)
-            k = kalibrierung.kalibrieren(sid, stufe, profil, n_kal, n_pruef, zufall.unterseed(seed_basis, 'planung', n,
-                                                                                             n0, e['k'], e['N_z']),
-                                         plan=plan, n_min=n, prozesse=prozesse, rauschvarianten=[rausch],
-                                         k_max=e['k'], verfahren=verfahren, **kw_kal)
+            verlauf, grenze = [], None
+            while True:                                 # planung.reserve_ziel: r += 1 bis zusatz_max (Regelstand 2026-11)
+                plan = plan_basis.mit(n_bloecke=n + r, n0=n0, n_zyklen=fenster['N_z'], T_lauf=fenster['T_lauf_s'],
+                                      tage=tage)
+                k = kalibrierung.kalibrieren(sid, stufe, profil, n_kal, n_pruef,
+                                             zufall.unterseed(seed_basis, 'planung', n, n0, e['k'], e['N_z']),
+                                             plan=plan, n_min=n, prozesse=prozesse, rauschvarianten=[rausch],
+                                             k_max=e['k'], verfahren=verfahren, **kw_kal)
+                rz = None if ziel is None else (k.get('reserve_ziel') or dict(geprueft=False, grund='nicht berechnet'))
+                if ziel is None or not rz.get('geprueft') or rz.get('erfuellt'):
+                    break
+                verlauf.append(dict(reserve_r=r, zaehler=rz['zaehler'], nenner=rz['nenner'], rate=rz['rate']))
+                if len(verlauf) > int(ziel['zusatz_max']) or (n_max is not None and n + r + 1 > n_max):
+                    grenze = (f'Reservegrenze: Bedingung nach zusatz_max = {ziel["zusatz_max"]} Erhöhungen verfehlt'
+                              if len(verlauf) > int(ziel['zusatz_max']) else 'Reservegrenze: n_min + r + 1 > n_max')
+                    break
+                r += 1
             g = k['gemeinsame_bestaetigung']
             gr = [x['konfiguration']['gruppe'] for x in kp.schnitt_konfigurationen(plan)]
             N_KI = sum(x in ('schnitt', 'zusatz') for x in gr) + sum(x == 'identifizierbarkeit' for x in gr)
@@ -235,6 +254,18 @@ def haken(sid, stufe, profil, n_kal, n_pruef, seed_basis, n_kandidaten, n0_kandi
                                  messzeit=dict(formel_s=zeit_formel, ablauf=(k.get('raten_pruefung') or {}).get('ablauf'),
                                                hinweis='Formel §5.3 (c) unverändert (offen, §12); „ablauf“ nur beim '
                                                        'Verfahren „zustand“: realisierte Laufzahl × T_Lauf')))
+            if ziel is not None:
+                c = schritte[-1]
+                c['P_erfuellt'] = c['erfuellt']
+                c.update(reserve_ziel=rz, reserve_verlauf=verlauf, reserve_zusatz=len(verlauf) - (grenze is not None))
+                c['messzeit']['zeitbilanz'] = k.get('zeitbilanz')
+                if grenze is not None:
+                    c.update(erfuellt=False, grund=grenze)
+                elif not rz.get('geprueft'):
+                    c.update(erfuellt=False, grund=f'Reservebedingung planung.reserve_ziel nicht prüfbar: '
+                                                   f'{rz.get("grund")}')
+                    if c['P_erfuellt']:                 # weitere Kandidaten wären ebenso nicht prüfbar
+                        break
             if schritte[-1]['erfuellt']:
                 break
         red = n_kal < rg.NORMATIVE_ZAHLEN['kampagnen_kalibrierung'] or n_pruef < rg.NORMATIVE_ZAHLEN[
@@ -256,11 +287,20 @@ def haken(sid, stufe, profil, n_kal, n_pruef, seed_basis, n_kandidaten, n0_kandi
                    verfahren=verfahren.kennung())
         if not rg.ist_historisch(profil):
             out.update(rauschquelle=quelle_art, c_planung='c_B' if mit_cB else 'kalibriert')
+        if ziel is not None:
+            out.update(zielfunktion=dict(fassung=zielfunktion, N_K=N_K_ziel), reserve_ziel_regel=ziel)
+            nur_p = [x for x in schritte if x.get('P_erfuellt')]
+            if not treffer and nur_p:
+                out['kandidat_nur_P'] = dict(n_min=nur_p[0]['n_min'], n0=nur_p[0]['n0'], grund=nur_p[0].get('grund'),
+                                             lesart='erfüllt P ≥ 0,8, aber nicht die Reservebedingung; nicht festgelegt')
             if grenzen is not None:
                 out['obere_grenzen'] = grenzen
                 out['szenario_kennzeichnung'] = sid
         if not treffer:
             out['grund'] = 'kein Kandidat erreicht P(H1 und H2 bestätigt | exakt) ≥ 0,8'
+            if ziel is not None and out.get('kandidat_nur_P'):
+                out['grund'] = ('kein Kandidat erfüllt P ≥ 0,8 und die Reservebedingung: '
+                                + str(out['kandidat_nur_P']['grund']))
         if protokoll is not None:
             protokoll.append(dict(k=e['k'], N_z=e['N_z'], **out))
         return out

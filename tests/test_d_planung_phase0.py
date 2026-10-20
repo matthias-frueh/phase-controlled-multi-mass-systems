@@ -96,7 +96,11 @@ def test_haken_phase0_modellquelle_und_obere_grenzen(a4, monkeypatch):
     assert og['sigma_a']['oben80'] == e['laufgroessen']['komponenten']['sigma_a_oben80']
     assert og['boden_mittel']['faktor'] == pytest.approx(lgm.kappa(e['laufgroessen']['boden']['nu_m']))
     assert 'keine gemeinsame 80-%-Garantie' in og['lesart'] and out['szenario_kennzeichnung'] is None
-    assert 'Phase-0-Modell' in out['quelle'] and out['n_min'] == 18
+    assert 'Phase-0-Modell' in out['quelle']
+    # Reservebedingung 0,95 (planung.reserve_ziel) mit dem statischen Laufplan der Modellquelle nicht prüfbar: kein
+    # Kandidat festgelegt, der Kandidat nach P allein nur berichtet
+    assert out['n_min'] is None and out['kandidat_nur_P']['n_min'] == 18 and 'nicht prüfbar' in out['grund']
+    assert out['kandidaten'][0]['P_erfuellt'] and not out['kandidaten'][0]['erfuellt']
     pilot.pruefe_ausgabe(dict(planung=out))
     # ohne Laufgrößen im Aufruf: aus Tabelle, Gültigkeit und k berechnet (gleiches Ergebnis)
     e2 = {x: v for x, v in e.items() if x != 'laufgroessen'}
