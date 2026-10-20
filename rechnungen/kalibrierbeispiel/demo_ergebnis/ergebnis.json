@@ -185,7 +185,7 @@
    ],
    "G_pruefung": 3,
    "code_version": {
-    "git": "600a8a4b17096f6fe9d74a1d4ceb68eece0a380a",
+    "git": "13d6f0accc82e36f7131375643b662e10ebbfe24",
     "paket": "0.1.0"
    },
    "lesart": "Entwicklungsdiagnostik: weniger Kampagnen oder Replikate als normativ; keine Kalibrierabnahme",
@@ -365,7 +365,7 @@
  },
  "kopf": {
   "code_version": {
-   "git": "600a8a4b17096f6fe9d74a1d4ceb68eece0a380a",
+   "git": "13d6f0accc82e36f7131375643b662e10ebbfe24",
    "paket": "0.1.0"
   },
   "daten": {
