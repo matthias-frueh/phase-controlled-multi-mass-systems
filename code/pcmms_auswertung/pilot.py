@@ -26,16 +26,41 @@ zusammengehöriger Satz mit seiner Bindung ausgegeben (k, N_z, Prüfsumme der Ph
 (bis pilot-0.2 ohne Bindungsangabe); nach erfolgreicher Suche steht der Satz des festgelegten Paars (k_max, N_z) unter
 suche.satz. Teil B verwendet nur einen Satz, der zu k_max und N_z des tatsächlich verwendeten Plans passt
 (teil_b.phase0_satz), und berechnet ihn sonst mit satz_fuer_plan neu.
+
+Laufgrößen (ab pilot-0.4, nur Regelstand 2026-11, Regel p0.laufgroessen): Jeder Satz enthält zusätzlich die
+Komponentenschätzer des Strukturmodells (laufgroessen.schaetzen bei k und N_z des Satzes: Boden aus den R-Läufen,
+σ_a,j und σ_δ,j aus den Lⱼ-Läufen, σ_off,j und Jitter aus den Laufmitteln der gültigen Piloten, orthogonaler Rest,
+Nullpunktprozess, laufinterne Fünftelanteile, Übertragungstest L → K). Sie verwenden die Einzelmodul-Mittelkurven
+N̄⁽ʲ⁾ zusammen mit den Zeigern der Piloten nur für zweite Momente; Superpositionsresiduen und Vorhersagen der Piloten
+werden weiterhin weder berechnet noch ausgegeben. Der Planungshaken erhält den Satz als „laufgroessen“. Unter den
+historischen Profilen (2026-10) rechnet und schreibt das Skript wie pilot-0.3 (Version, Felder, Bindung).
 """
 import math
 
 import numpy as np
 from scipy import stats
 
-from . import formate, gueltigkeit, konventionen as kv, zufall
+from . import formate, gueltigkeit, konventionen as kv, laufgroessen, regeln, zufall
 
-VERSION = 'pilot-0.3'                   # 0.2: Begründung der Suche nach dem tatsächlichen Abbruchgrund; 0.3: Satz mit
-                                        # Bindung (k, N_z, Daten, Seed), Satz der Suche beim festgelegten Paar
+VERSION = 'pilot-0.4'                   # 0.2: Begründung der Suche nach dem tatsächlichen Abbruchgrund; 0.3: Satz mit
+                                        # Bindung (k, N_z, Daten, Seed), Satz der Suche beim festgelegten Paar;
+                                        # 0.4: Laufgrößen im Satz (nur Regelstand 2026-11)
+VERSION_HISTORISCH = 'pilot-0.3'        # unter den historischen Profilen unveränderte Ausgabe
+
+
+def version(profil):
+    """Version der Pilotausgabe unter dem Profil: historische Profile rechnen und schreiben wie pilot-0.3."""
+    return VERSION_HISTORISCH if regeln.ist_historisch(profil) else VERSION
+
+
+def mit_laufgroessen(profil):
+    """Laufgrößen im Satz? Nur im Regelstand 2026-11; dort ist die Regel p0.laufgroessen an den Code gebunden."""
+    if regeln.ist_historisch(profil):
+        return False
+    laufgroessen.regel(profil)
+    return True
+
+
 VERBOTEN_TEIL = ('residu', 'yhat', 'vorhersage', 'superposition', 'bestaetigt', 'falsifiziert', 'entscheid', 'ausgang')
 VERBOTEN_NAME = ('r', 'z', 'r0', 'r1', 'z0', 'z1', 'h1', 'h2', 'h3', 'h4', 'h1z')
 
@@ -251,7 +276,7 @@ def _satz(tab, sw0, k, profil, seed, n_sim, f_soll, quelle):
     s = dict(
         bindung=dict(k=int(k), N_z=int(N_z), n_fuenftel=int(n_f), T_a_s=float(N_z / f_soll), quelle=quelle,
                      phase0_sha256=daten_sha256(tab), n_laeufe=len(tab), n_pilot=int(pil.sum()),
-                     seed_eps_ctrl=int(seed), n_sim_eps_ctrl=int(n_sim), version=VERSION),
+                     seed_eps_ctrl=int(seed), n_sim_eps_ctrl=int(n_sim), version=version(profil)),
         sigma_ref=dict(sigma_ref=sr['sigma_ref'], sigma_ref_zellen=sr['sigma_ref_zellen'], n=sr['n'],
                        werte=sr['werte'], mindestzahl=profil.wert('h0.referenzlaeufe_min'),
                        ausreichend=bool(sr['n'] >= profil.wert('h0.referenzlaeufe_min'))),
@@ -267,6 +292,8 @@ def _satz(tab, sw0, k, profil, seed, n_sim, f_soll, quelle):
         p_hat_hinweis=('untere Schranke: ' + ', '.join(sorted(pr['nicht_pruefbar'])) + ' nicht prüfbar'
                        if pr['nicht_pruefbar'] else 'alle Regeln geprüft'),
         kovarianzen=kovarianzen(tab, gp, k), streuungen=streuungen(tab, gp & pil, k))
+    if mit_laufgroessen(profil):
+        s['laufgroessen'] = laufgroessen.schaetzen(tab, gp, k)
     return s, pr
 
 
@@ -284,6 +311,8 @@ def satz_oberste_ebene(pe):
     s = {x: pe.get(x) for x in SATZ_FELDER if x != 'streuungen'}
     s['streuungen'] = pe.get('streuungen_volles_fenster')
     s['bindung'] = pe.get('bindung')
+    if 'laufgroessen' in pe:
+        s['laufgroessen'] = pe['laufgroessen']
     return s
 
 
@@ -328,7 +357,8 @@ def pilot_auswerten(tab, kal, profil, f_soll, zeit=None, seed=0, planung=None, t
     n_sim = profil.zahl('eps_ctrl_datensaetze')
     # σ_c, σ_Σ, F_LO aus den Referenzläufen; σ_tol aus allen Pilotläufen
     sw0, s0 = _schwellen0(tab, kal, profil, f_soll)
-    out = dict(version=VERSION, f_soll=f_soll, k_voll=K_voll, f_1_hz=f1, f_1_untere_schranke=f1_schranke, k_b=k_b,
+    out = dict(version=version(profil), f_soll=f_soll, k_voll=K_voll, f_1_hz=f1, f_1_untere_schranke=f1_schranke,
+               k_b=k_b,
                sigma_c=s0['sigma_c'].tolist(), sigma_summe=s0['sigma_summe'], F_LO_zellen=s0['F_LO'].tolist(),
                F_LO_summe=s0['fak_lo'] * s0['sigma_summe'], sigma_tol_grad=s0['sigma_tol'], profil=profil.kurz())
     # T_φ und Rampe
@@ -341,6 +371,8 @@ def pilot_auswerten(tab, kal, profil, f_soll, zeit=None, seed=0, planung=None, t
     s, _ = _satz(tab, sw0, k_val, profil, seed, n_sim, f_soll, 'vorläufig: k = max(min(k_b, K), 3) vor der Suche')
     for x in SATZ_FELDER:
         out['streuungen_volles_fenster' if x == 'streuungen' else x] = s[x]
+    if 'laufgroessen' in s:
+        out['laufgroessen'] = s['laufgroessen']
     out['k_pilotgroessen'] = k_val
     out['bindung'] = s['bindung']
     out['seed'] = int(seed)
@@ -396,9 +428,12 @@ def suche(tab, kal, profil, f, k_start, basis, zeit, planung, tabelle_fuer, N_z_
                 return dict(ergebnis='offen', grund='Planungssimulation (P(H1 und H2 bestätigt | exakt) ≥ 0,8) nicht '
                                                     'angebunden; nur vorbereitende Pilotgrößen', schritte=schritte,
                             reduktion=reduktion)
-            pl = planung(dict(k=k, N_z=Nz, T_a=T_a, T_e=T_e, T_lauf=T_lauf, zeit=dict(zeit), s_q=st,
-                              kovarianzen=satz_k['kovarianzen'], p_hat=p_hat, n_max=nmax, tabelle=t,
-                              gueltig=pr['gueltig'], kal=kal, f=f))
+            aufruf = dict(k=k, N_z=Nz, T_a=T_a, T_e=T_e, T_lauf=T_lauf, zeit=dict(zeit), s_q=st,
+                          kovarianzen=satz_k['kovarianzen'], p_hat=p_hat, n_max=nmax, tabelle=t,
+                          gueltig=pr['gueltig'], kal=kal, f=f)
+            if 'laufgroessen' in satz_k:                                 # Regelstand 2026-11: Strukturmodell
+                aufruf.update(laufgroessen=satz_k['laufgroessen'], bindung=satz_k['bindung'])
+            pl = planung(aufruf)
             schritt['planung'] = {kk: v for kk, v in pl.items() if kk not in ('details',)}
             schritte.append(schritt)
             if pl.get('n_min') is None:
@@ -485,7 +520,7 @@ def pruefe_ausgabe(obj, pfad=''):
 
 def schreibe_pilot(pfad, out, kennung):
     pruefe_ausgabe(out)
-    return formate.schreibe_objekt(pfad, formate.kopf('pilot', kennung, version=VERSION), out)
+    return formate.schreibe_objekt(pfad, formate.kopf('pilot', kennung, version=out.get('version', VERSION)), out)
 
 
 def lies_pilot(pfad):

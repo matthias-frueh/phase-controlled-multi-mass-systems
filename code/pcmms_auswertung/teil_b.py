@@ -20,18 +20,35 @@ teil_b-0.2 stammten diese Größen aus dem vorläufigen Satz bei k der Pilotgrö
 Bindung ist als „historisch“ nur ausdrücklich und gekennzeichnet wählbar. nr2.arbeitspunkt prüft den Plan mit dem
 gebundenen p̂ erneut (Reserve, n_max, Herkunft aus der Suche) und gibt einen nicht mehr abgesicherten Plan als solchen aus;
 nachoptimiert wird nicht.
+
+Laufgrößen (ab teil_b-0.4, nur Regelstand 2026-11): nr2.laufgroessen enthält die Komponentenschätzer des gebundenen
+Satzes (laufgroessen.schaetzen bei k_max und N_z; aus der Pilotausgabe übernommen oder hier aus den gültigen Läufen
+des Satzes berechnet), nr2.sigma_a_j, nr2.sigma_delta_j und nr2.sigma_off_j je Modul mit ν und marginaler oberer
+80-%-Grenze (A9.3 Nr. 2, Entwurf). nr10.werte_regel nennt die Regel planung.teil_b_werte (Teil-B-Werte aus
+Punktschätzern nach der Planung) und die Modellquelle der Werkzeug-8-Werte. Unter den historischen Profilen bleibt
+Teil B unverändert (teil_b-0.3).
 """
 import math
 
 import numpy as np
 from scipy import stats
 
-from . import bootstrap as bs, formate, h2, kontrollen, konventionen as kv, pilot, vorhersage as vh, zeltfit as zfit
+from . import bootstrap as bs, formate, h2, kontrollen, konventionen as kv, laufgroessen, pilot, regeln
+from . import vorhersage as vh, zeltfit as zfit
 from . import zusammenfassung as zf
 from .regeln import RegelOffen
 
-VERSION = 'teil_b-0.3'          # 0.2: nr5.unsicherheit (Korrektur E), nr1.phase0_verarbeitung (Korrektur B);
-                                # 0.3: Phase-0-Satz an k_max und N_z des Plans gebunden, nr2.arbeitspunkt
+VERSION = 'teil_b-0.4'          # 0.2: nr5.unsicherheit (Korrektur E), nr1.phase0_verarbeitung (Korrektur B);
+                                # 0.3: Phase-0-Satz an k_max und N_z des Plans gebunden, nr2.arbeitspunkt;
+                                # 0.4: Laufgrößen in nr2 (nur Regelstand 2026-11)
+VERSION_HISTORISCH = 'teil_b-0.3'
+
+
+def version(profil):
+    """Version von Teil B unter dem Profil: historische Profile bilden Teil B wie teil_b-0.3."""
+    return VERSION_HISTORISCH if regeln.ist_historisch(profil) else VERSION
+
+
 BINDUNGEN = ('plan', 'historisch')
 # Felder einer Bindung, die den Satz bestimmen (Phase-0-Daten, k, Fenster, Code und Seed); die Quellangabe zählt nicht
 BINDUNG_IDENTITAET = ('k', 'N_z', 'n_fuenftel', 'T_a_s', 'phase0_sha256', 'n_laeufe', 'n_pilot', 'seed_eps_ctrl',
@@ -112,6 +129,8 @@ def phase0_satz(tab0, kal, pilot_erg, profil, plan, bindung='plan', seed_pilot=N
                     qualifiziert=False, neu_berechnet=False, bindung=s.get('bindung'),
                     grund='nicht an k_max des Plans gebunden' if info['k_pilotgroessen'] != k else
                     'Bindung an k_max zufällig gleich, aber nicht geprüft')
+        if pilot.mit_laufgroessen(profil) and 'laufgroessen' not in s and info['k_pilotgroessen'] is not None:
+            return _mit_laufgroessen(s, t, profil, int(info['k_pilotgroessen']), info)
         return s, info
     h = pilot.daten_sha256(t)
     such = pilot_erg.get('suche') or {}
@@ -127,7 +146,7 @@ def phase0_satz(tab0, kal, pilot_erg, profil, plan, bindung='plan', seed_pilot=N
     if passend:
         name, s = passend[0]
         info.update(quelle=name, k=k, qualifiziert=True, neu_berechnet=False, bindung=s['bindung'])
-        return s, info
+        return _mit_laufgroessen(s, t, profil, k, info)
     seed = pilot_erg.get('seed', seed_pilot)
     if seed is None:
         raise ValueError(f'Teil B: Pilotgrößen nicht an k_max = {k}, N_z = {N_z} gebunden ({einordnung["bedeutung"]}) '
@@ -137,6 +156,22 @@ def phase0_satz(tab0, kal, pilot_erg, profil, plan, bindung='plan', seed_pilot=N
                                     f'{pilot_erg.get("k_pilotgroessen")}')
     info.update(quelle='neu berechnet (Code des Pilotskripts)', k=k, qualifiziert=True, neu_berechnet=True,
                 bindung=s['bindung'])
+    return _mit_laufgroessen(s, t, profil, k, info)
+
+
+def _mit_laufgroessen(s, t, profil, k, info):
+    """Regelstand 2026-11: Laufgrößen des Satzes; fehlen sie (Pilotausgabe eines historischen Profils), werden sie aus
+    den gültigen Läufen des Satzes bei dessen k berechnet und so gekennzeichnet."""
+    if not pilot.mit_laufgroessen(profil):
+        return s, info
+    if 'laufgroessen' in s:
+        info['laufgroessen_quelle'] = ('mit dem Satz neu berechnet (Code des Pilotskripts)' if info.get('neu_berechnet')
+                                       else 'Satz der Pilotausgabe')
+        return s, info
+    ungueltig = set(s['gueltigkeit']['gruende'])
+    maske = np.array([kk['lauf_id'] not in ungueltig for kk in t.koepfe])
+    s = dict(s, laufgroessen=laufgroessen.schaetzen(t, maske, k))
+    info['laufgroessen_quelle'] = 'in Teil B aus den gültigen Läufen des gebundenen Satzes berechnet'
     return s, info
 
 
@@ -323,7 +358,7 @@ def erstellen(tab0, kal, pilot_erg, profil, plan, werkzeug8=None, kennung=None, 
     if nr5['unsicherheit'] is not None:
         nr5['unsicherheit']['herkunft'] = dict(quelle='Kalibrierung (AP-11): P0.1 Laststellen und Brücke, P0.4 '
                                                      'Einfreiheitsgrad', kalibrierung_sha256=formate.sha256_json(kal),
-                                               teil_b_version=VERSION)
+                                               teil_b_version=version(profil))
     nr2 = dict(f=float(plan['f']), k_max=kmax, k_voll=K, delta_delta_grad=dd,
                u_delta_delta_grad=np.asarray(p05['u_delta_delta_grad'], float),
                sigma_tol_grad=pilot_erg['sigma_tol_grad'], delta_f_tol=plan.get('delta_f_tol'),
@@ -338,11 +373,18 @@ def erstellen(tab0, kal, pilot_erg, profil, plan, werkzeug8=None, kennung=None, 
                pilot_suche={x: pilot_erg.get('suche', {}).get(x) for x in ('ergebnis', 'grund')},
                phase0_bindung=bindung_info, arbeitspunkt=arbeitspunkt(plan, satz, bindung_info, pilot_erg, profil),
                N_z=bindung_info['N_z'])
+    if 'laufgroessen' in satz:                                          # Regelstand 2026-11 (A9.3 Nr. 2, Entwurf)
+        nr2.update(laufgroessen_felder(satz['laufgroessen']))
     nr10 = dict(c_H1=w8.get('c_H1'), c_H1_herkunft=w8.get('c_H1_herkunft', 'fehlt (Werkzeug 8)'),
                 c_H1Z=w8.get('c_H1Z'), c_H1Z_herkunft=w8.get('c_H1Z_herkunft', 'fehlt (Werkzeug 8)'),
                 pruefrate=w8.get('pruefrate'), h2_intervall=w8.get('h2_intervall'),
                 eps_kritisch=satz['eps_ctrl'].get('kritisch'), raten=w8.get('raten'))
-    return dict(version=VERSION, kennung=kennung,
+    if not regeln.ist_historisch(profil):
+        nr10['werte_regel'] = dict(planung_teil_b_werte=profil.wert_oder_none('planung.teil_b_werte'),
+                                   modellquelle=w8.get('modellquelle', 'nicht angegeben (Werkzeug 8)'),
+                                   hinweis='Planung an der oberen Grenze mit c_B; Teil-B-Werte aus Punktschätzern '
+                                           'der Kalibrierung nach der Planung')
+    return dict(version=version(profil), kennung=kennung,
                 nr1=dict(kalibrierung_sha256=formate.sha256_json(kal),
                          phase0_sha256=formate.sha256_bytes(formate.npz_bytes(tab0.daten)),
                          phase0_verarbeitung=zf.verarbeitungsstand(tab0.koepfe),
@@ -353,8 +395,22 @@ def erstellen(tab0, kal, pilot_erg, profil, plan, werkzeug8=None, kennung=None, 
                 nr10=nr10, seed_bootstrap=plan.get('seed_bootstrap'), profil=profil.kurz())
 
 
+def laufgroessen_felder(lg):
+    """Felder von nr2 aus den Laufgrößen: σ_a,j, σ_δ,j, σ_off,j je Modul mit ν und oberer 80-%-Grenze (marginal)."""
+    f = lg['komponenten']
+    out = dict(laufgroessen=lg)
+    for name, quelle, einheit in (('sigma_a_j', 'sigma_a', '1 (relativ)'),
+                                  ('sigma_delta_j', 'sigma_delta_grad', '°'),
+                                  ('sigma_off_j', 'sigma_off_grad', '°')):
+        out[name] = dict(wert=f[quelle], nu=f[quelle + '_nu'], oben80=f[quelle + '_oben80'], einheit=einheit,
+                         bindung=dict(k=lg['bindung']['k'], N_z=lg['bindung']['N_z']),
+                         hinweis='marginale obere 80-%-Grenze je Komponente, keine gemeinsame Garantie')
+    return out
+
+
 def schreiben(pfad, inhalt, kennung):
-    return formate.schreibe_objekt(pfad, formate.kopf('teil_b', kennung, version=VERSION), inhalt)
+    return formate.schreibe_objekt(pfad, formate.kopf('teil_b', kennung, version=inhalt.get('version', VERSION)),
+                                   inhalt)
 
 
 def lesen(pfad):
