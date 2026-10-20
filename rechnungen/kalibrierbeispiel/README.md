@@ -81,6 +81,9 @@ von drei Kampagnen je Rolle: Funktionsnachweis, keine Kalibrierung (Kriterien de
 
 `konfig_demo.json`, ein Prozess, 9 Kampagnen (3 Kalibrierung, 3 Prüfung, 3 Pool-Neuberechnung), 43 s; Fortsetzung aus
 den Checkpoints in 1 s (6 Partien geladen, keine neu gerechnet). In der Endabnahme auf dem Endstand des Branches in ein
-leeres Verzeichnis wiederholt (43 s): alle Rechenwerte gleich, verschieden nur Codestand und Checkpoint-Zähler. |A| = |G| = 3 je Rolle; eine Prüfkampagne mit
+leeres Verzeichnis wiederholt (43 s); `demo_ergebnis/` enthält dieses Ergebnis. Gegenüber dem ersten Lauf gleich sind c,
+Prüfrate, b̂, H2 und alle Raten; neu bzw. geändert sind nur Codestand, Profilprüfsumme (Regeln des Regelstands 2026-11
+ergänzt), die realisierten Kampagnenzahlen G je Rolle und die Zuordnung der Aufwärmläufe am Tagesbeginn zum Zeitterm
+„Aufwärmen bei Tageswechsel“. |A| = |G| = 3 je Rolle; eine Prüfkampagne mit
 simulierter Wiederaufnahme (Bezugslauf, Kontrollsatz, T_UA = 1800 s); Pool-Regel gegriffen (bei drei Kampagnen ohne
 Aussage). Die Zahlen in `demo_ergebnis/` sind keine Werte für Teil B.

@@ -19,8 +19,8 @@
    "wert": 4.230963020658352
   },
   "checkpoints": {
-   "geladen": 6,
-   "gerechnet": 0
+   "geladen": 0,
+   "gerechnet": 6
   },
   "e3": {
    "kriterien": {
@@ -180,15 +180,19 @@
    }
   },
   "meta": {
+   "G_kalibrierung": [
+    3
+   ],
+   "G_pruefung": 3,
    "code_version": {
-    "git": "e2bef289ed352a28ed0350784b4fac2d52608435+geändert",
+    "git": "600a8a4b17096f6fe9d74a1d4ceb68eece0a380a",
     "paket": "0.1.0"
    },
    "lesart": "Entwicklungsdiagnostik: weniger Kampagnen oder Replikate als normativ; keine Kalibrierabnahme",
    "n_kalibrierung": 3,
    "n_pruefung": 3,
    "profil": "ENTW-2026-11+red(bootstrap_B=100,e3_mc=100,eps_ctrl_datensaetze=200,h2_replikate=100,h3_mc=100)",
-   "profil_sha256": "e7bcd33aaede730ab1536786e451fb8c84bd8b24c4f9c0fa9c24d4dc07492314",
+   "profil_sha256": "2ed770cfc05b269c9c0cf83dc9482d902d15fbad5e383517fa4b81e6ac014ec2",
    "rauschvarianten": 1,
    "reduziert": true,
    "seed_basis": 20261021,
@@ -327,9 +331,9 @@
    "nenner": 3,
    "terme": {
     "Aufwärmen bei Tageswechsel": {
-     "mittel_s": 0.0,
+     "mittel_s": 22.666666666666668,
      "nenner": 3,
-     "summe_s": 0.0
+     "summe_s": 68.0
     },
     "Bezugseröffnung": {
      "mittel_s": 5.666666666666667,
@@ -352,16 +356,16 @@
      "summe_s": 1800.0
     },
     "Wiederholungen": {
-     "mittel_s": 124.66666666666667,
+     "mittel_s": 102.0,
      "nenner": 3,
-     "summe_s": 374.0
+     "summe_s": 306.0
     }
    }
   }
  },
  "kopf": {
   "code_version": {
-   "git": "e2bef289ed352a28ed0350784b4fac2d52608435+geändert",
+   "git": "600a8a4b17096f6fe9d74a1d4ceb68eece0a380a",
    "paket": "0.1.0"
   },
   "daten": {
