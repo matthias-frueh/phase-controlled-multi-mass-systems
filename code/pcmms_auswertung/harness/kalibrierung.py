@@ -199,11 +199,17 @@ def _lauf(sid, stufe, profil, n, seed_basis, rolle, plan, n_min, w8, rv, prozess
 
 
 def kalibrieren(sid, stufe, profil, n_kal, n_pruef, seed_basis, plan=None, n_min=None, prozesse=1,
-                rauschvarianten=None, fortschritt=None, k_max=None, verfahren=None, soll_A=None, ausfuehren=None):
+                rauschvarianten=None, fortschritt=None, k_max=None, verfahren=None, soll_A=None, ausfuehren=None,
+                quelle=None, c_planung=False):
     """Kalibrier- und Prüfsimulation an einem Szenariopunkt mit exakter Superposition (vgl. N01/N02); verfahren wie
     harness.kampagnen.ausfuehren (alle Kampagnen der Kalibrierung und Prüfung mit demselben Verfahren). soll_A:
     Sollzahl der Auswertungsmenge je Rolle und Variante mit Nachziehen (nur Profilstand 2026-11; n_kal, n_pruef sind
-    dann die erste Partie). ausfuehren: Ersatz für kampagnen.ausfuehren (Checkpoints des Kalibrierbeispiels)."""
+    dann die erste Partie). ausfuehren: Ersatz für kampagnen.ausfuehren (Checkpoints des Kalibrierbeispiels).
+    quelle (Teil d2): Modellquelle ohne Szenario (generator.phase0_modell.Modellquelle); die Kampagnen kommen dann aus
+    harness.phase0_rechnungen.ausfuehren_quelle, sid und stufe sind nur Kennzeichnung. c_planung: die Prüfsimulation
+    rechnet mit c_B statt mit dem kalibrierten c (Planung nach planung.teil_b_werte; kein Poolen). Im Regelstand
+    2026-11 mit mehreren Rauschvarianten gilt für c die Regel h1.c_rauschmodelle ('a': Quantil des Standardmodells,
+    der ersten Variante, die übrigen als Sensitivität; 'b': größtes Quantil); historisch wie bisher gepoolt."""
     neu = 'harness.mengen' in profil.regeln and profil.hat('harness.mengen')     # Profilstand 2026-11
     if soll_A is not None and not ('harness.nachziehen' in profil.regeln and profil.hat('harness.nachziehen')):
         raise ValueError('kalibrieren: Nachziehen (soll_A) verlangt die Regel harness.nachziehen (Profilstand 2026-11)')
@@ -212,10 +218,16 @@ def kalibrieren(sid, stufe, profil, n_kal, n_pruef, seed_basis, plan=None, n_min
         c_regel = None
     except rg.RegelOffen as e:
         c_fassung, c_regel = None, e.grund
-    if neu and c_fassung != 'a':
-        raise ValueError(f'h1.c_rauschmodelle {c_fassung!r} nicht umgesetzt (nur Fassung (a): Quantil des '
-                         'Standardmodells)')
+    if neu and c_fassung not in ('a', 'b'):
+        raise ValueError(f'h1.c_rauschmodelle {c_fassung!r} nicht umgesetzt (Fassungen (a), (b))')
     var = rauschvarianten or [None]
+    if quelle is not None:
+        if ausfuehren is not None:
+            raise ValueError('kalibrieren: quelle und ausfuehren schließen sich aus')
+        from . import phase0_rechnungen
+
+        def ausfuehren(sid_, stufe_, *a, **kw):
+            return phase0_rechnungen.ausfuehren_quelle(quelle, *a, **kw)
     kw_l = dict(prozesse=prozesse, fortschritt=fortschritt, k_max=k_max, verfahren=verfahren, soll_A=soll_A,
                 ausfuehren=ausfuehren)
     kal = [_lauf(sid, stufe, profil, n_kal, seed_basis, 'kalibrierung_c', plan, n_min, None, rv, **kw_l)
@@ -226,6 +238,9 @@ def kalibrieren(sid, stufe, profil, n_kal, n_pruef, seed_basis, plan=None, n_min
     bz0, bz1 = rauschbias(kal_A, 'rz0'), rauschbias(kal_A, 'rz1')
     alle = kal_A[0]['befunde'] if neu else [b for lauf in kal for b in lauf['befunde']]
     c1 = c_bestimmen(alle, 'H1', b0['bias'], b0['u'], seed=seed_basis)
+    c_var = None
+    if len(kal) > 1 and not rg.ist_historisch(profil) and c_regel is None:
+        c1, c_var = c_nach_regel(kal_A, c_fassung, b0, seed_basis)
     c1_roh = c1
     cz = c_bestimmen(alle, 'H1Z', bz0['bias'], bz0['u'], seed=seed_basis + 1)
     c_sens = None
@@ -240,6 +255,12 @@ def kalibrieren(sid, stufe, profil, n_kal, n_pruef, seed_basis, plan=None, n_min
     w8 = werkzeug8(b0, b1, bz0, bz1, c1, cz, h2, len(alle), n_pruef, profil.id)
     if c_regel:
         w8.update(c_H1=None, c_H1Z=None, c_H1_herkunft=f'offen: {c_regel}', c_H1Z_herkunft=f'offen: {c_regel}')
+    if c_planung:                                                       # Planung mit c_B (§8.4, A9.2)
+        cBZ_ = float(stats.t.ppf(1 - 0.05 / 882, nu))
+        w8.update(c_H1=cB, c_H1Z=cBZ_, c_H1_herkunft=f'c_B = t(1 − 0,05/294; {nu}) (Planung, §8.4, A9.2)',
+                  c_H1Z_herkunft=f'c_B = t(1 − 0,05/882; {nu}) (Planung)')
+    if quelle is not None:
+        w8['modellquelle'] = quelle.kennung()['beschreibung'].get('name')
     # Prüfsimulation
     pr = _lauf(sid, stufe, profil, n_pruef, seed_basis, 'pruefung_c', plan, n_min, w8, var[0], **kw_l)
     kw = dict(szenario=sid, stufe=stufe, profil=profil.id, normativ=rg.NORMATIVE_ZAHLEN['kampagnen_pruefung'])
@@ -249,7 +270,10 @@ def kalibrieren(sid, stufe, profil, n_kal, n_pruef, seed_basis, plan=None, n_min
     vp = np.array([bool(np.isfinite(b['felder']['z0']).all()) for b in pr_A], bool)
     pruefung = None
     gepoolt = False
-    if w8['c_H1'] is not None:
+    if w8['c_H1'] is not None and c_planung:
+        pruefung = metriken.rate(int((zp[vp] > w8['c_H1']).sum()), int(vp.sum()),
+                                 'Anteil mit mindestens einem |z⁰| > c_B (Planung, exakt)', **kw)
+    elif w8['c_H1'] is not None:
         pruefung = metriken.rate(int((zp[vp] > w8['c_H1']).sum()), int(vp.sum()),
                                  'Prüfrate: Anteil mit mindestens einem |z⁰| > c (exakt)', **kw)
         schwelle = profil.wert('h1.c_pruefschwelle')
@@ -258,6 +282,8 @@ def kalibrieren(sid, stufe, profil, n_kal, n_pruef, seed_basis, plan=None, n_min
             pool = np.r_[c1['werte'][c1['vollstaendig']], zp[vp]]
             c1 = dict(c1, c=float(np.quantile(pool, 0.95)), n_vollstaendig=int(pool.size), gepoolt=True)
         w8 = werkzeug8(b0, b1, bz0, bz1, c1, cz, h2, len(alle), n_pruef, profil.id, pruefung, gepoolt)
+        if quelle is not None:
+            w8['modellquelle'] = quelle.kennung()['beschreibung'].get('name')
         if gepoolt:
             pr = _lauf(sid, stufe, profil, n_pruef, seed_basis, 'pruefung_c', plan, n_min, w8, var[0], **kw_l)
             pr_A = mengen.in_A(pr['befunde']) if neu else pr['befunde']
@@ -297,7 +323,25 @@ def kalibrieren(sid, stufe, profil, n_kal, n_pruef, seed_basis, plan=None, n_min
         zeitbilanz=_zeitbilanz(pr['befunde'], profil, plan) if neu else None,
         zmax=dict(kalibrierung=c1_roh['werte'], kalibrierung_vollstaendig=c1_roh['vollstaendig'], pruefung=zp,
                   pruefung_vollstaendig=vp),
-        laeufe=dict(kalibrierung=[l['meta'] for l in kal], pruefung=pr['meta']))
+        laeufe=dict(kalibrierung=[l['meta'] for l in kal], pruefung=pr['meta']),
+        **({} if c_var is None else dict(c_varianten=c_var)),
+        **({} if not c_planung else dict(c_planung='c_B')),
+        **({} if quelle is None else dict(modellquelle=quelle.kennung())))
+
+
+def c_nach_regel(kal, regel, b0, seed):
+    """c bei mehreren Rauschvarianten nach Regel h1.c_rauschmodelle: 'a' Quantil des Standardmodells (erste Variante),
+    'b' größtes Quantil über die Varianten; die Quantile je Variante als Sensitivität. Rückgabe (c-dict, je
+    Variante)."""
+    je = [c_bestimmen(l['befunde'], 'H1', b0['bias'], b0['u'], seed=seed) for l in kal]
+    if regel == 'a':
+        c = je[0]
+    elif regel == 'b':
+        c = max((x for x in je if x['c'] is not None), key=lambda x: x['c'], default=je[0])
+    else:
+        raise ValueError(f'Regel h1.c_rauschmodelle = {regel!r} nicht umgesetzt (a, b)')
+    return dict(c, regel=regel), [dict(rauschmodell=l['meta'].get('rauschmodell'), c=x['c'], se=x['se'],
+                                       n=x['n_vollstaendig']) for l, x in zip(kal, je)]
 
 
 def _e3_kriterien(befunde):
