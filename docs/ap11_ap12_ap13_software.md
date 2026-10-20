@@ -238,7 +238,7 @@ gemeinsamen Feldern; neu sind nur das optionale Feld `fuenftel_zeiger` und die E
 
 | Kategorie | Inhalt |
 |---|---|
-| implementiert und softwaregetestet | Profile und Regeln 2026-11 mit historischer Bitgleichheit (`test_regelstand_2026_11`, Software- und Ablauf-Prüfsatz ablauf-3); ablauf-4 (`test_ablauf4`, 19 Tests, neuer Ablauf-Prüfsatz `tests/fixtures/ap13_ablauf_pruefsatz_ablauf4.json`); G4-Modi, k(n), Pooling, Fünftelzeiger (`test_g4_2026_11`, 14); Wiederaufnahme, Mengen, Nachziehen, Reserve, Zeitbilanz, H2 je Rauschvariante (`test_harness_mengen`, 12; `test_planung_reserve`, 4); E3 Option B (`test_e3_grenzen`, 8; `test_e3_auswertung`, 13); d0–d2 mit Ablauf für die Modellquelle (`test_d_laufgroessen`, 11; `test_d_phase0_modell`, 14; `test_d_planung_phase0`, 10); Gleichheit mit `main` unter den historischen Profilen (Referenz mit Toleranz); Kalibrierbeispiel (`test_kalibrierbeispiel`, 5) |
+| implementiert und softwaregetestet | Profile und Regeln 2026-11 mit historischer Bitgleichheit (`test_regelstand_2026_11`, Software- und Ablauf-Prüfsatz ablauf-3); ablauf-4 (`test_ablauf4`, 19 Tests, neuer Ablauf-Prüfsatz `tests/fixtures/ap13_ablauf_pruefsatz_ablauf4.json`); G4-Modi, k(n), Pooling, Fünftelzeiger (`test_g4_2026_11`, 14); Wiederaufnahme, Mengen, Nachziehen, Reserve, Zeitbilanz, H2 je Rauschvariante (`test_harness_mengen`, 12; `test_planung_reserve`, 4); E3 Option B (`test_e3_grenzen`, 8; `test_e3_auswertung`, 13); d0–d2 mit Ablauf für die Modellquelle (`test_d_laufgroessen`, 12; `test_d_phase0_modell`, 14; `test_d_planung_phase0`, 10); Gleichheit mit `main` unter den historischen Profilen (Referenz mit Toleranz); Kalibrierbeispiel (`test_kalibrierbeispiel`, 5) |
 | an kleinen synthetischen Beispielen untersucht | G4 gepaart an 3 × 3 Kampagnen, End-to-End mit ablauf-4 an 5 Fällen und über Ebene Z ([`rechnungen/regelstand_2026-11/`](../rechnungen/regelstand_2026-11/README.md)); R1-d mit 45 Sätzen, R2-d mit 2 × 2 × (3 + 3), R3-d mit 2 + 2 Kampagnen (unten) |
 | nur als ausführbares Beispiel vorbereitet | normative Kalibrier- und Prüfsimulation mit \|A\| = 1000 je Rolle ([`rechnungen/kalibrierbeispiel/`](../rechnungen/kalibrierbeispiel/README.md): Trockenlauf als Vorgabe, Demonstration „Demonstration, synthetisch, nicht kalibriert“); Auftragslisten R1-d (9 × 1000 Sätze), R2-d, R3-d (`harness/phase0_rechnungen.py`) |
 | nicht statistisch kalibriert | alle Raten und kritischen Werte: Fehlausschlussrate von G4 (Arbeitsziel ≤ 1,5 %), Reservebedingung 0,95, c von H1/H1Z, H2-Überdeckung, E3-Kriterien, Planung mit dem Phase-0-Modell |
@@ -321,6 +321,16 @@ kleinen Proben sind danach neu gerechnet.
      Diese hingen an der Rechenumgebung und belegten nicht die Gleichheit mit `main`.
    - In dieser Umgebung sind alle Werte ohne Toleranz gleich, auch mit anderem `PYTHONHASHSEED`. Verschieden sind nur
      die Codeversion und die Kalibrierprüfsumme, deren letzte Bits von P0.4 abhängen.
+   - Nicht identifizierbarer P0.4-Fit (N01-A4, starre Auflage: f_n ≈ 4 MHz weit über dem Band 20–600 Hz, ζ an der
+     unteren Grenze): Wert, statistische Kovarianz und Verschiebungen je Kettenrichtung sind Haltepunkte des Lösers.
+     Schon bei Störungen der P0.4-Eingänge von 1e-15 streuen sie um 1–99 % (f_n 1,7–4,3 MHz); in einer anderen
+     Rechenumgebung schlug der Vergleich deshalb fehl, mit dem Code von `main` ebenso. Sie werden nicht
+     weiterverwendet (`kontrollen.t_ziehungen` zieht f_n, ζ dann nicht). Verglichen werden stattdessen der Rückfall
+     (Nichtidentifizierbarkeit nach der Regel von `p04_auswerten` aus den gespeicherten Kovarianzen, f_n oberhalb des
+     Bands, Text „H(kω) nominal“, Zellen und Spalten der Kettenrichtungen) und das Übertragungsverhalten: H bei den
+     Betriebsfrequenzen k·f und die Starrheit im Band (|H − 1| < 1e-3); T selbst bleibt mit derselben Toleranz
+     verglichen (`historisch_referenz.p04_rueckfall`). Acht gestörte Läufe ergeben damit keine Abweichung; eine
+     Änderung des Flags, f_n im Band, ein fehlender Rückfalltext, eine bestimmte Kovarianz oder T um 1e-5 fallen auf.
 
 **Grenzen dieses Stands.**
 

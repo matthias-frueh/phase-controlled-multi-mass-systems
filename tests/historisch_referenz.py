@@ -11,7 +11,10 @@ relativ bis rtol = 1e-6; in Zahlenfeldern gilt zusätzlich eine absolute Grenze 
 nicht als Darstellungstext. Damit hängt die Prüfung nicht an den letzten Bits der Rechenumgebung (BLAS, libm,
 Summationsreihenfolge, Darstellung von NumPy-Zahlen). Grenze: Zahlenfelder mit mehr als LANG Werten gehen nur über
 Kennwerte ein (Form, Summen, Extrema, erste Werte und zwei positionsgewichtete Summen); diese erkennen Wertänderungen
-und Vertauschungen, aber nicht jede denkbare Änderung, die alle Kennwerte zugleich erhält.
+und Vertauschungen, aber nicht jede denkbare Änderung, die alle Kennwerte zugleich erhält. Ist der P0.4-Fit nicht
+identifizierbar, vergleicht vergleich_pilot_teil_b statt seiner Rohwerte (f_n, ζ, Kovarianz, Kettenverschiebungen;
+Haltepunkte des Lösers, die schon bei Störungen von 1e-15 um Prozente streuen) den Rückfall und das
+Übertragungsverhalten (p04_rueckfall); die Toleranz bleibt dieselbe.
 
 Referenz erzeugen (Code von main in VERZEICHNIS/code):
     python3 tests/historisch_referenz.py VERZEICHNIS tests/fixtures/historisch_main_referenz.json
@@ -161,6 +164,59 @@ def lies_referenz():
     with open(os.path.join(os.path.dirname(__file__), 'fixtures', 'historisch_main_referenz.json'),
               encoding='utf-8') as f:
         return json.load(f)
+
+
+BAND_P04_HZ = (20.0, 600.0)     # Anpassungsband von P0.4 im Harness (harness.kette.BAND_HZ, in main wie hier)
+
+
+def _h1fg(f, f_n, zeta):
+    """1-FG-Übertragung der Summe wie anpassung.h1fg: H = (1 + 2iζr)/(1 − r² + 2iζr), r = f/f_n."""
+    import numpy as np
+    r = np.asarray(f, float) / f_n
+    return (1 + 2j * zeta * r) / (1 - r ** 2 + 2j * zeta * r)
+
+
+def p04_rueckfall(out):
+    """Ausgabe von pilot_teil_b mit dem Rückfall bei nicht identifizierbarem P0.4-Fit statt seiner Rohwerte.
+
+    Ist f_n, ζ nicht identifizierbar (Teil B nr5, fn_zeta.gezogen falsch), sind Wert, statistische Kovarianz und die
+    Verschiebungen je Kettenrichtung Haltepunkte eines Lösers in einem flachen Tal: Sie streuen schon bei Störungen der
+    Eingänge von 1e-15 um Prozente bis Faktoren und werden nicht weiterverwendet (kontrollen.t_ziehungen zieht sie
+    nicht). Verglichen werden stattdessen der Rückfall (Nichtidentifizierbarkeit nach der Regel von
+    anpassung.p04_auswerten aus den gespeicherten Kovarianzen, f_n oberhalb des Anpassungsbands, Text „H(kω) nominal“,
+    Zellen und Spalten der Kettenrichtungen) und das Übertragungsverhalten: H bei den Betriebsfrequenzen k·f, aus dem
+    T entsteht, und die Starrheit im Band (größte Abweichung |H − 1| unter 1e-3). Alles Übrige, auch T selbst, bleibt
+    unverändert. Bei identifizierbarem Fit (gezogen wahr) bleibt die Ausgabe unverändert."""
+    import copy
+    import numpy as np
+    u = ((out.get('teil_b') or {}).get('nr5') or {}).get('unsicherheit') or {}
+    fz = u.get('fn_zeta')
+    if not fz or fz.get('gezogen') is not False:
+        return out
+    out = copy.deepcopy(out)
+    u = out['teil_b']['nr5']['unsicherheit']
+    f_n, zeta = fz['wert']
+    kov = np.asarray(fz['kovarianz_statistisch'], float)
+    for d in fz['kette_richtungen']:
+        kov = kov + np.outer(d['d_fn_zeta'], d['d_fn_zeta'])
+    s = np.sqrt(np.clip(np.diag(kov), 0.0, None))
+    h_kw = _h1fg(np.asarray(u['ks'], float) * float(u['f_hz']), f_n, zeta)
+    h_band = _h1fg(np.linspace(*BAND_P04_HZ, 59), f_n, zeta)
+    u['fn_zeta'] = dict(
+        gezogen=False,
+        rueckfall=dict(nicht_identifizierbar_nach_regel=bool(s[0] > 0.2 * f_n or s[1] > zeta),
+                       f_n_ueber_band=bool(f_n > BAND_P04_HZ[1]),
+                       text_nominal=any('P0.4 nicht identifizierbar' in x and 'H(kω) nominal' in x
+                                        for x in u.get('nicht_gezogen') or []),
+                       starr_im_band=bool(np.abs(h_band - 1).max() < 1e-3)),
+        H_kw=[[float(h.real), float(h.imag)] for h in h_kw],
+        kette_richtungen=[dict(zelle=d['zelle'], spalte=d['spalte']) for d in fz['kette_richtungen']])
+    return out
+
+
+def vergleich_pilot_teil_b(ref, neu):
+    """Abweichungen der Ausgabe von pilot_teil_b gegen die Referenz, mit dem P0.4-Rückfall statt der Rohwerte."""
+    return vergleich(p04_rueckfall(ref), p04_rueckfall(neu))
 
 
 def _groesster_betrag(o):

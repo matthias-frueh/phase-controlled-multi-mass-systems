@@ -230,13 +230,50 @@ def test_historisches_profil_gleich_main():
     """Unter ENTW-2026-10 und mit der historischen Anordnung (Stand bis PR #23) sind Pilotskript ohne und mit
     Planungshaken (Kalibrierung als Attrappe: Argumente und Protokoll des Hakens), Teil B und Satz beim k des Plans gleich
     der mit dem Code von main berechneten Referenz (tests/historisch_referenz.py: Vergleich mit Toleranz, Prüfsummen
-    über Gleitkommadaten und die Codeversion ausgenommen; die letzten Bits hängen von der Rechenumgebung ab)."""
+    über Gleitkommadaten und die Codeversion ausgenommen; die letzten Bits hängen von der Rechenumgebung ab). Der
+    P0.4-Fit ist hier nicht identifizierbar (starre Auflage A4, f_n weit über dem Band): Statt seiner Rohwerte werden
+    der Rückfall und das Übertragungsverhalten verglichen (hr.p04_rueckfall)."""
     import historisch_referenz as hr
     ref = hr.lies_referenz()['pilot_teil_b']
     neu = json.loads(json.dumps(hr.pilot_teil_b()))
     assert neu['ergebnis_suche'] == 'festgelegt' and neu['teil_b']['version'] == 'teil_b-0.3'
-    abw = hr.vergleich(ref, neu)
+    for x in (ref, neu):                                   # Rückfall greift auf beiden Seiten und ist vollständig
+        fz = hr.p04_rueckfall(x)['teil_b']['nr5']['unsicherheit']['fn_zeta']
+        assert fz['gezogen'] is False and all(fz['rueckfall'].values()), fz['rueckfall']
+    abw = hr.vergleich_pilot_teil_b(ref, neu)
     assert not abw, abw[:10]
+
+
+def test_historischer_vergleich_p04_rueckfall_statt_rohwerten():
+    """Der Vergleich ersetzt nur die Rohwerte des nicht identifizierbaren P0.4-Fits (Wert, statistische Kovarianz,
+    Verschiebungen je Kettenrichtung): Deren Streuung zwischen Rechenumgebungen fällt nicht auf, eine Änderung des
+    Rückfalls, des Übertragungsverhaltens oder von T dagegen schon. Die allgemeine Toleranz bleibt unverändert."""
+    import copy
+    import historisch_referenz as hr
+    ref = hr.lies_referenz()['pilot_teil_b']
+
+    def mit(f):
+        b = copy.deepcopy(ref)
+        f(b['teil_b']['nr5']['unsicherheit'], b['teil_b']['nr5'])
+        return b
+    # Rohwerte wie in gestörten Läufen (f_n 1,7–4,3 MHz, Kovarianzen und Kettenverschiebungen um bis zu 99 %)
+    roh = mit(lambda u, n: u['fn_zeta'].update(
+        wert=[1.69e6, u['fn_zeta']['wert'][1]],
+        kovarianz_statistisch=[[x * 0.01 for x in z] for z in u['fn_zeta']['kovarianz_statistisch']],
+        kette_richtungen=[dict(r, d_fn_zeta=[r['d_fn_zeta'][0] * 0.1, r['d_fn_zeta'][1] + 7.6e-3])
+                          for r in u['fn_zeta']['kette_richtungen']]))
+    assert hr.vergleich(ref, roh) and not hr.vergleich_pilot_teil_b(ref, roh)
+    gezogen = mit(lambda u, n: u['fn_zeta'].update(gezogen=True))
+    im_band = mit(lambda u, n: u['fn_zeta'].update(wert=[300.0, 0.05]))
+    ohne_text = mit(lambda u, n: u.update(nicht_gezogen=u['nicht_gezogen'][:2]))
+    bestimmt = mit(lambda u, n: u['fn_zeta'].update(
+        kovarianz_statistisch=[[1.0, 0.0], [0.0, 1e-14]],
+        kette_richtungen=[dict(r, d_fn_zeta=[0.0, 0.0]) for r in u['fn_zeta']['kette_richtungen']]))
+    t_anders = mit(lambda u, n: n['T'][0][0][0].__setitem__(0, n['T'][0][0][0][0] * (1 + 1e-5)))
+    for b, pfad in ((gezogen, 'fn_zeta/gezogen'), (im_band, 'fn_zeta/H_kw'), (ohne_text, 'text_nominal'),
+                    (bestimmt, 'nicht_identifizierbar_nach_regel'), (t_anders, 'nr5/T')):
+        abw = hr.vergleich_pilot_teil_b(ref, b)
+        assert any(pfad in x for x in abw), (pfad, abw)
 
 
 def test_schaetzer_ohne_generator_harness_und_wahrheit():
