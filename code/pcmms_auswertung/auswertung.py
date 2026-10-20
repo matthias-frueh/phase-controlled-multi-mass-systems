@@ -36,16 +36,38 @@ def _hash_objekt(obj):
                                     if felder else None))
 
 
+G4_LJ_REGEL = dict(schwelle='n_abhaengig', vergleich='pooling')
+
+
+def _g4_2026_11(tb, profil):
+    """G4-Modus, Schwellen je Konfiguration und Lⱼ-Schwellen aus Teil B nr2.g4 im Profilstand 2026-11 (g4.verfahren,
+    g4.lj). Historische Profile: (None, None, None). Fehlt der Block in Teil B, bleiben die Größen leer und G4 der
+    betroffenen Läufe ist „nicht prüfbar“ (kein stiller Rückgriff auf die Regel je Laufart)."""
+    if 'g4.verfahren' not in profil.regeln or not profil.hat('g4.verfahren'):
+        return None, None, None
+    from . import g4
+    modus = profil.wert('g4.verfahren')
+    if modus not in g4.MODI:
+        raise ValueError(f'g4.verfahren {modus!r} nicht umgesetzt ({", ".join(g4.MODI)})')
+    if profil.wert('g4.lj') != G4_LJ_REGEL:
+        raise ValueError(f'g4.lj {profil.wert("g4.lj")!r} nicht umgesetzt ({G4_LJ_REGEL})')
+    blk = tb['nr2'].get('g4') or {}
+    konfig = blk.get(modus) if modus in ('b_plus', 'd') else None
+    lj = {g: dict(N=v['N'], F=v['F']) for g, v in ((blk.get('lj') or {}).get('n_abhaengig') or {}).items()}
+    return modus, konfig, lj
+
+
 def _schwellen(tb, profil):
     n2 = tb['nr2']
     st = n2.get('sigma_tol_grad') or {}
+    g4m, g4k, g4l = _g4_2026_11(tb, profil)
     return gueltigkeit.Schwellen(
         f_soll=n2['f'], kmax=n2['k_max'], delta_phi_tol_grad=profil.wert('g2.delta_phi_tol_grad'),
         sigma_tol_grad={int(k): v for k, v in st.items()} if st else None, sigma_delta=n2.get('sigma_delta'),
         F_LO_zellen=n2.get('F_LO_zellen'), delta_delta_grad=n2['delta_delta_grad'], delta_f_tol=n2.get('delta_f_tol'),
         eps_ctrl=n2.get('eps_ctrl'), sigma_ref=n2.get('sigma_ref'), sigma_ref_zellen=n2.get('sigma_ref_zellen'),
         g4_faktor=profil.wert('g4.faktor'), alarm_faktor=profil.wert('h0.alarm_faktor'), T_P0=n2.get('T_P0'),
-        Delta_T=n2.get('Delta_T'))
+        Delta_T=n2.get('Delta_T'), g4_modus=g4m, g4_konfig=g4k, g4_lj=g4l)
 
 
 def _quellen(t1, pr, konf):

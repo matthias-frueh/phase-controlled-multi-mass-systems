@@ -191,6 +191,11 @@ def laufzusammenfassung(laufdatei, kalibrierung, teil_b=None, k_voll=None, profi
                 zeiger[j - 1] = np.exp(-1j * np.outer(np.radians(ph), k)).sum(0)
                 pm[j - 1], sg[j - 1] = kv.zirkulaer_mittel_grad(ph)
             out['zeiger'], out['phi_mittel_grad'], out['sigma_grad'] = zeiger, pm, sg
+            if nf >= 1:                                               # Fünftelzeiger (k = 1) für G4-Modus D
+                for j in bew:
+                    ph = np.radians(phi[j])
+                    out['fuenftel_zeiger'][0, j - 1] = np.exp(-1j * ph[:nf]).sum()
+                    out['fuenftel_zeiger'][1, j - 1] = np.exp(-1j * ph[n_zyklen - nf:]).sum()
             # Einregelzeit der Phasen (geregelte Module 2, 3 im Kombinationslauf)
             if art == 'K':
                 idx1 = np.asarray(daten['index_modul1'], float)

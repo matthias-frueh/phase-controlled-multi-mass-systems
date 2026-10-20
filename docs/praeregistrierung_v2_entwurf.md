@@ -352,7 +352,10 @@ Kalibriersimulation ein (A9.11; Nachweisform und Folge offen, §12).
   Wert, wenn Einstellung 2 eine andere Frequenz hat). Die Konstanten zählen den Referenzlauf der Blockmitte
   und Kontrollsätze aus sieben Läufen, darunter L₁′, L₂′, L₃′ bei Einstellung 2 (Zählung: A9.12). Die
   Einzelmodulläufe und P0.5 bei Einstellung 2 verlängern zusätzlich Phase 0 (§6). Zeitformel und Vorrang der
-  Zusatzläufe sind offen (§12).
+  Zusatzläufe sind offen (§12). Arbeitsfestlegung vom 20.10.2026: Die Planungssimulation weist die Zeit je
+  Kampagne zusätzlich nach Termen aus (Läufe, Wiederholungen, Kontrollsatz der Wiederaufnahme, Bezugseröffnung,
+  Ursachenanalyse T_UA, Aufwärmen nach einer Wiederaufnahme mit Tageswechsel) mit Zähler und Nenner; die Formel
+  oben bleibt die Bedingung für n_max.
 - **(d) Grenzen der Apparatur:** Antrieb, Nennlast, Abtastrate.
 
 **Regel.** f_u ist die kleinste ganzzahlige Frequenz, die (d) erfüllt, f_zul die größte, die (a) nach dem
@@ -394,12 +397,16 @@ erste Paar (k, T_a), das damit n ≤ n_max erfüllt, legt k_max = k, T_a, n_min 
 werden verwendet. Gibt es keines, ist f unzulässig. **Rauschbias:** Für jeden Schnittpunkt wird
 b_i = E[min N̄_Messung] − E[min N̂] aus den Rauschkovarianzen simuliert, mit getrennten Rauschmodellen für
 Einzelmodul- und Kombinationsläufe. Der Bias hängt vom Verhältnis der Rauschpegel von Mess- und
-Vorhersageseite ab; er wird deshalb für beide Vorhersagen getrennt bestimmt: b_i⁰ mit n_min Läufen und n₀
-Einzelmodulläufen je Modul, b_i¹ mit n_min Läufen und den geplanten n + d Kontrollläufen je Modul der Phase 1
-(A9.12). Die Schätzwerte b̂_i⁰ und b̂_i¹ stehen in Teil B. Sie werden vom Residuum r_i⁰(F_min) bzw. r_i¹(F_min)
+Vorhersageseite ab; er wird deshalb für beide Vorhersagen getrennt bestimmt: b_i⁰ mit n₀ Einzelmodulläufen je
+Modul, b_i¹ mit den Kontrollläufen je Modul der Phase 1 (A9.12), beide mit den in den simulierten Kampagnen der
+Auswertungsmenge A tatsächlich realisierten gültigen Laufzahlen (geplant n Blöcke, n + d Kontrollläufe;
+Präzisierung vom 20.10.2026, A9.2, A9.11; bisher „mit n_min Läufen“). Die Schätzwerte b̂_i⁰ und b̂_i¹ stehen in Teil B. Sie werden vom Residuum r_i⁰(F_min) bzw. r_i¹(F_min)
 abgezogen, und ihre Unsicherheiten u(b̂_i⁰) bzw. u(b̂_i¹) gehen in u_c ein (§8.3, A9.5). Die Simulation von c
 verwendet dieselbe Korrektur (§8.4). Über die Zulässigkeit von f entscheidet der Rauschbias nicht. Geplant
-werden n = n_min + r Läufe je Konfiguration (n Blöcke), r = ⌈n_min·p̂/(1 − p̂)⌉ + 2.
+werden n = n_min + r Läufe je Konfiguration (n Blöcke), r = ⌈n_min·p̂/(1 − p̂)⌉ + 2; zusätzlich müssen in der
+Planungssimulation alle Schnittpunkte gemeinsam in mindestens 95 % der nicht endgültig beendeten Kampagnen n_min
+gültige Läufe erreichen, sonst wird r schrittweise erhöht, höchstens zehnmal (A9.2 (v), Arbeitsfestlegung vom
+20.10.2026).
 
 ### 5.5 Identifizierbarkeitsläufe
 
@@ -785,7 +792,17 @@ Ein Lauf ist ungültig bei:
   Punkte i (∂ŷ/∂f aus dem Auslegungswerkzeug einschließlich H(kω)).
 - **G4** |X(erstes Fünftel) − X(letztes Fünftel)| > 3·σ_Δ,X für X = ⟨N⟩ oder F_min − ⟨N⟩, jeweils aus der
   bandbegrenzten Mittelkurve der ersten bzw. letzten ⌊N_z/5⌋ der N_z Zyklen; σ_Δ,X = 1,4826·MAD dieser
-  Differenz über alle Phase-0-Läufe derselben Laufart (Pilotläufe gepoolt, P0.8 je Modul, P0.7).
+  Differenz über alle Phase-0-Läufe derselben Laufart (Pilotläufe gepoolt, P0.8 je Modul, P0.7), ausgewertet bei
+  k_max und N_z des Plans. Arbeitsfestlegung vom 20.10.2026 (A9.2, A9.11): Für Kombinationsläufe der Phase 1 gilt
+  für F_min − ⟨N⟩ eine Schwelle T_i je Konfiguration (Standardisierung B+): Die aus Phase 0 vorhergesagte Streuung
+  der Fünftel-Differenz durch den Jitter der Indexphasen wird über die Laufgrößen gemischt (Laufversatz, Phasenrest
+  und Amplitude je Modul aus den Pilot- und Einzelmodulläufen), an Punkten mit Knick über ±u(Δδⱼ) maximiert und mit
+  dem Boden der Piloten zu einer Skalenmischung verbunden; T_i ist ihr Quantil zur Rate 2·Φ(−3), mindestens
+  3·σ_Δ,F der Piloten. Fehlt die Standardisierung einer Konfiguration, ist G4 dort nicht prüfbar. Für die Piloten
+  bleibt σ_Δ,F gepoolt. Für Einzelmodul-Kontrollläufe ersetzt k(n₀ⱼ) den Faktor 3 (die Rate je Größe ist dann unter
+  dem Normalmodell die der 3σ-Regel bei bekanntem σ). Arbeitsziel ist höchstens 1,5 % Fehlausschlüsse je
+  Konfiguration und Lauf unter dem benannten Nullmodell; das ist eine Zielvorgabe, keine bestätigte Rate. Die
+  phasenkorrigierte Fünftel-Differenz (A9.2) ist ein Diagnosemodus, nicht die Regel.
 - **G5** einem Rohwert eines Kraftkanals am ADC-Endwert oder einem Übersteuerungssignal.
 - **G6** Einzelzell-Liftoff.
 - **G7** einer Zelltemperatur außerhalb T_P0 ± ΔT (T_P0: Mittel während P0.8 bei f;

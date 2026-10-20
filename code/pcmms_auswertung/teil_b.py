@@ -33,7 +33,7 @@ import math
 import numpy as np
 from scipy import stats
 
-from . import bootstrap as bs, formate, h2, kontrollen, konventionen as kv, laufgroessen, pilot, regeln
+from . import bootstrap as bs, formate, g4, h2, kontrollen, konventionen as kv, laufgroessen, pilot, regeln
 from . import vorhersage as vh, zeltfit as zfit
 from . import zusammenfassung as zf
 from .regeln import RegelOffen
@@ -375,6 +375,10 @@ def erstellen(tab0, kal, pilot_erg, profil, plan, werkzeug8=None, kennung=None, 
                N_z=bindung_info['N_z'])
     if 'laufgroessen' in satz:                                          # Regelstand 2026-11 (A9.3 Nr. 2, Entwurf)
         nr2.update(laufgroessen_felder(satz['laufgroessen']))
+    if 'g4.verfahren' in profil.regeln and profil.hat('g4.verfahren'):     # Regelstand 2026-11: G4 B+, D, Lⱼ (g4.py)
+        nr2['g4'] = g4.teil_b_block(tab0, ungueltig, satz['sigma_delta'], Nbar0.sum(1), dd,
+                                    np.asarray(p05['u_delta_delta_grad'], float), sig, kmax, konf,
+                                    satz.get('laufgroessen'), profil)
     nr10 = dict(c_H1=w8.get('c_H1'), c_H1_herkunft=w8.get('c_H1_herkunft', 'fehlt (Werkzeug 8)'),
                 c_H1Z=w8.get('c_H1Z'), c_H1Z_herkunft=w8.get('c_H1Z_herkunft', 'fehlt (Werkzeug 8)'),
                 pruefrate=w8.get('pruefrate'), h2_intervall=w8.get('h2_intervall'),
@@ -384,9 +388,11 @@ def erstellen(tab0, kal, pilot_erg, profil, plan, werkzeug8=None, kennung=None, 
                                    modellquelle=w8.get('modellquelle', 'nicht angegeben (Werkzeug 8)'),
                                    hinweis='Planung an der oberen Grenze mit c_B; Teil-B-Werte aus Punktschätzern '
                                            'der Kalibrierung nach der Planung')
+    nr1_neu = {} if regeln.ist_historisch(profil) else dict(phase0_optionale_sha256={
+        k: formate.sha256_bytes(formate.npz_bytes({k: v})) for k, v in tab0.daten.items() if k in zf.OPTIONALE_FELDER})
     return dict(version=version(profil), kennung=kennung,
-                nr1=dict(kalibrierung_sha256=formate.sha256_json(kal),
-                         phase0_sha256=formate.sha256_bytes(formate.npz_bytes(tab0.daten)),
+                nr1=dict(kalibrierung_sha256=formate.sha256_json(kal), **nr1_neu,
+                         phase0_sha256=formate.sha256_bytes(formate.npz_bytes(zf.pflichtfelder(tab0.daten))),
                          phase0_verarbeitung=zf.verarbeitungsstand(tab0.koepfe),
                          pilot_sha256=formate.sha256_json(pilot_erg), code_version=formate.code_version()),
                 nr2=nr2, nr3=nr3, nr4=nr4, nr5=nr5, nr6=nr6, nr7=dict(hinweis='H3-Vorhersage rechnet Stufe 2 aus der '

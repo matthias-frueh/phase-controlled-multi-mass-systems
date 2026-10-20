@@ -181,7 +181,8 @@ def schwellen_kennung(sw, s3, stellen=12):
         if isinstance(x, (float, np.floating)):
             return None if not np.isfinite(x) else round(float(x), stellen)
         return x
-    felder = {k: rund(v) for k, v in sw.__dict__.items() if k != 'herkunft'}
+    felder = {k: rund(v) for k, v in sw.__dict__.items() if k != 'herkunft'
+              and not (k in gueltigkeit.NEUE_FELDER_2026_11 and v is None)}
     return formate.sha256_json(dict(schwellen=felder, s3=rund(s3)))
 
 
@@ -1106,7 +1107,8 @@ def bericht(a):
         ausgeschlossen=list(z['ausgeschlossen']), luecken=list(z['luecken']), ereignisse=list(z['ereignisse']),
         halte=[dict(versuch=v['id'], regel=v['halt']) for v in vs if v.get('halt')],
         qualifikation_einstellung2='ausgeschlossen' if z['luecken'] else 'nicht betroffen',
-        **(dict(wiederaufnahmen=copy.deepcopy(z['protokoll_wiederaufnahmen']),
+        **(dict(gueltig_je_schnittpunkt=_gueltig_je_schnittpunkt(geplant, auswahl),
+                wiederaufnahmen=copy.deepcopy(z['protokoll_wiederaufnahmen']),
                 bezugswechsel=copy.deepcopy(z['bezugswechsel']), verworfen=copy.deepcopy(z['verworfen']),
                 zusatzlaeufe=dict(bezugslauf=rollen.get('bezugslauf', 0),
                                   wiederaufnahme_kontrolle=rollen.get('wiederaufnahme_kontrolle', 0),
@@ -1126,9 +1128,34 @@ def laden(pfad):
     return formate.lies_objekt(pfad, 'ablaufstand')[1]
 
 
+def _gueltig_je_schnittpunkt(geplant, auswahl):
+    """Zahl der Blöcke mit gültigem (oder ersetztem, nicht S2-ausgeschlossenem) Lauf je Schnittpunkt."""
+    schnitt = {_konfig(l) for l in geplant if l['laufart'] == 'K' and l['konfiguration'].get('gruppe') == 'schnitt'}
+    je = {k: 0 for k in sorted(schnitt)}
+    for x in auswahl.values():
+        if x['konfiguration'] in je and x['status'] in ('gueltig', 'ersetzt'):
+            je[x['konfiguration']] += 1
+    return je
+
+
 def kurz(b):
-    """Kompakter Ablaufbericht je Kampagne für Harness und Planung (ohne Versuchslisten)."""
-    return dict(status=b['status'], halt=(b['halt'] or {}).get('regel'), grund=(b['ende'] or {}).get('grund'),
-                laufzahl=b['laufzahl'], messzeit_s={k: v for k, v in b['messzeit_s'].items() if k != 'hinweis'},
-                anlaesse=b['anlaesse'], auswahl=b['auswahl_zaehler'], grenzen=len(b['grenzen']), s2=len(b['s2']),
-                luecken=b['luecken'], ziehungen=sum(1 for x in b['ziehungen'] if 'gezogen' in x))
+    """Kompakter Ablaufbericht je Kampagne für Harness und Planung (ohne Versuchslisten); bei ablauf-4 zusätzlich
+    Halte nach Ursache, Wiederaufnahmen, Bezugswechsel, verworfene Folgeläufe, Zusatzläufe und Haltdauer, und die
+    simulierte Wiederaufnahme des Harness (harness_wiederaufnahme)."""
+    out = dict(status=b['status'], halt=(b['halt'] or {}).get('regel'), grund=(b['ende'] or {}).get('grund'),
+               laufzahl=b['laufzahl'], messzeit_s={k: v for k, v in b['messzeit_s'].items() if k != 'hinweis'},
+               anlaesse=b['anlaesse'], auswahl=b['auswahl_zaehler'], grenzen=len(b['grenzen']), s2=len(b['s2']),
+               luecken=b['luecken'], ziehungen=sum(1 for x in b['ziehungen'] if 'gezogen' in x))
+    if b.get('version') == 'ablauf-4' and 'wiederaufnahmen' in b:
+        halte = {}
+        for h in b['halte']:
+            halte[h['regel']] = halte.get(h['regel'], 0) + 1
+        out.update(halte_nach_ursache=halte, wiederaufnahmen=len(b['wiederaufnahmen']),
+                   wiederaufnahmen_erfolgreich=sum(bool(w.get('erfolgreich')) for w in b['wiederaufnahmen']),
+                   bezugswechsel=len(b['bezugswechsel']), verworfen=len(b['verworfen']),
+                   zusatzlaeufe=dict(b['zusatzlaeufe']), halt_dauer_s=b['halt_dauer_s'],
+                   gueltig_je_schnittpunkt=dict(b['gueltig_je_schnittpunkt']),
+                   messtage_ist=list(b['messtage_ist']))
+    if b.get('harness_wiederaufnahme') is not None:
+        out['harness_wiederaufnahme'] = dict(b['harness_wiederaufnahme'])
+    return out

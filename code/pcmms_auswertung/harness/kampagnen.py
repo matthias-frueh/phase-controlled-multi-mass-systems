@@ -150,12 +150,13 @@ def wahrheit_kurz(sid, stufe, plan, staerke=None, k_max=None):
 
 
 def ausfuehren(sid, stufe, profil, n, seed_basis, rolle='pruefung', plan=None, n_min=None, werkzeug8=None, rausch=None,
-               staerke=None, prozesse=1, fortschritt=None, k_max=None, verfahren=None):
+               staerke=None, prozesse=1, fortschritt=None, k_max=None, verfahren=None, start=0):
     """n Kampagnen des Szenariopunkts; Rückgabe dict(meta, befunde, wahrheit). verfahren: Bindung der Phase-0-Größen
-    und Ablauf der Phase 1 (Vorgabe verfahren.STANDARD), in der Herkunft vermerkt."""
+    und Ablauf der Phase 1 (Vorgabe verfahren.STANDARD), in der Herkunft vermerkt. start: erster Kampagnenindex der
+    Rolle (Nachziehen setzt die Seedfolge fort)."""
     plan = kp.Plan() if plan is None else plan
     verfahren = vf.oder_standard(verfahren)
-    seeds = [kampagnen_seed(seed_basis, rolle, sid, stufe, i) for i in range(n)]
+    seeds = [kampagnen_seed(seed_basis, rolle, sid, stufe, i) for i in range(start, start + n)]
     auftraege = [(sid, stufe, profil, plan, s, werkzeug8, n_min, rausch, staerke, k_max, verfahren) for s in seeds]
     t = time.perf_counter()
     if prozesse > 1:
@@ -169,6 +170,7 @@ def ausfuehren(sid, stufe, profil, n, seed_basis, rolle='pruefung', plan=None, n
     dauer = time.perf_counter() - t
     meta = dict(szenario=sid, stufe=stufe, profil=profil.id, profil_sha256=profil.sha256(), n=n,
                 seed_basis=int(seed_basis), rolle=rolle, seeds=seeds, plan=_plan_dict(plan), n_min=n_min,
+                **({'start': int(start)} if start else {}),
                 werkzeug8_herkunft=None if werkzeug8 is None else werkzeug8.get('c_H1_herkunft'),
                 werkzeug8=('TESTVORGABE' if werkzeug8 is None else 'übergeben'),
                 normative_kampagnenzahl=regeln.NORMATIVE_ZAHLEN['kampagnen_pruefung'],

@@ -55,7 +55,13 @@ class Schwellen:
     T_P0: object = None
     Delta_T: float = None
     einstellung2_g2_g4: bool = False          # Regel g.einstellung2 offen: G2–G4 für Einstellung 2 nicht prüfbar
+    g4_modus: str = None                      # Profilstand 2026-11 (g4.verfahren): 'b_plus', 'd', 'je_laufart'
+    g4_konfig: dict = None                    # B+: Teil B nr2.g4 (schwellen_F je Konfiguration); D: sigma_D, Nbar0, n_f
+    g4_lj: dict = None                        # Lⱼ: Schwellen je Modul (N, F), n-abhängig (g4.lj)
     herkunft: dict = field(default_factory=dict)
+
+
+NEUE_FELDER_2026_11 = ('g4_modus', 'g4_konfig', 'g4_lj')   # leer (None): Verhalten und Kennung wie bis PR #23
 
 
 def g4_gruppe(kopf):
@@ -247,6 +253,12 @@ def pruefe(tab, sw, regeln=('G2', 'G3', 'G4', 'G5', 'G6', 'G7', 'G8', 'G9', 'G10
                 nicht['G4'].append((i, 'Einstellung 2: G4 nicht gefasst'))
             elif sw.sigma_delta is None or g not in sw.sigma_delta:
                 nicht['G4'].append((i, f'σ_Δ der Laufart {g} fehlt'))
+            elif k['phase'] == 1 and ((art[i] == 'K' and sw.g4_modus in ('b_plus', 'd')) or
+                                      (art[i] == 'L' and sw.g4_lj is not None)):
+                v, grund = _g4_2026_11(sw, k, i, d, DN, DF, tab)
+                erg['G4'][i] = v
+                if grund:
+                    nicht['G4'].append((i, grund))
             else:
                 s = sw.sigma_delta[g]
                 boden = RUNDUNG_REL * abs(d['N_mittel'][i])
@@ -303,6 +315,41 @@ def pruefe(tab, sw, regeln=('G2', 'G3', 'G4', 'G5', 'G6', 'G7', 'G8', 'G9', 'G10
     gruende = [[g for g in REGELN_G if erg[g][i] is True] for i in range(n)]
     return dict(regeln=erg, gueltig=gueltig, gruende=gruende, nicht_pruefbar={g: v for g, v in nicht.items() if v},
                 delta_N=dN, delta_N_zellen=dZ, beta=beta, g1_klammer=klammer)
+
+
+def _g4_2026_11(sw, k, i, d, DN, DF, tab):
+    """G4 im Profilstand 2026-11 (g4.py): Konfigurationen nach B+ (Schwelle von D_F je Konfiguration aus Teil B) oder
+    D (phasenkorrigierte Fünftel-Differenz, Schwelle aus den Piloten), D_N wie je Laufart; Lⱼ mit der n-abhängigen
+    Schwelle je Modul. Rückgabe (verletzt oder None, Grund für „nicht prüfbar“)."""
+    from . import g4
+    boden = RUNDUNG_REL * abs(d['N_mittel'][i])
+    if k['laufart'] == 'L':
+        s = (sw.g4_lj or {}).get(f'L{k["modul"]}')
+        if s is None:
+            return None, f'G4 Lⱼ: Schwelle für L{k["modul"]} fehlt (Teil B nr2.g4.lj)'
+        v = bool(abs(DN[i]) > s['N'] + boden)
+        return v or (s.get('F') is not None and bool(abs(DF[i]) > s['F'] + boden)), None
+    sK = sw.sigma_delta['K']
+    vN = bool(abs(DN[i]) > sw.g4_faktor * sK['N'] + boden)
+    c = sw.g4_konfig
+    if sw.g4_modus == 'b_plus':
+        T = None if c is None else (c.get('schwellen_F') or {}).get(k['konfiguration']['id'])
+        if T is None:
+            return (True if vN else None), (None if vN else
+                                           f'G4 B+: Standardisierung für {k["konfiguration"]["id"]} fehlt '
+                                           '(nicht prüfbar)')
+        return vN or bool(abs(DF[i]) > T + boden), None
+    if sw.g4_modus == 'd':
+        if c is None or c.get('schwelle_D') is None:
+            return (True if vN else None), (None if vN else 'G4 D: Schwelle aus den Piloten fehlt (nicht prüfbar)')
+        if 'fuenftel_zeiger' not in d:
+            return (True if vN else None), (None if vN else 'G4 D: Fünftelzeiger fehlen (Laufzusammenfassung vor '
+                                                            'dem 20.10.2026); nicht durch B+ ersetzt')
+        D = g4.d_statistik(DF[i], d['fuenftel_zeiger'][i], np.asarray(c['Nbar0']), int(c['n_f']), sw.kmax)
+        if not np.isfinite(D):
+            return (True if vN else None), (None if vN else 'G4 D: Fünftelzeiger unvollständig (nicht prüfbar)')
+        return vN or bool(abs(D) > c['schwelle_D'] + boden), None
+    raise ValueError(f'g4.verfahren {sw.g4_modus!r} nicht umgesetzt ({", ".join(g4.MODI)})')
 
 
 def nullpunktalarm(tab, sw, kandidat):

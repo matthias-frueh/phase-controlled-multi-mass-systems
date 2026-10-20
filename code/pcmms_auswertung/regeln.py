@@ -431,11 +431,15 @@ def _grund_2026_11():
     return out
 
 
+DIAGNOSEWERTE = {'g4.verfahren': ('d', 'je_laufart')}    # wählbare Diagnose-/Vergleichsmodi (nicht Standard)
+
+
 class Regelprofil:
-    def __init__(self, profil_id, beschreibung, regeln, reduktion=None):
+    def __init__(self, profil_id, beschreibung, regeln, reduktion=None, diagnose=None):
         self.id, self.beschreibung = profil_id, beschreibung
         self.regeln = {r.id: r for r in regeln}
         self.reduktion = dict(reduktion or {})
+        self.diagnose = dict(diagnose or {})
 
     def eintrag(self, rid):
         if rid not in self.regeln:
@@ -471,9 +475,30 @@ class Regelprofil:
                     raise ValueError(f'{k} folgt bootstrap_B (gemeinsame Zeilen der Indexmatrizen)')
                 zahlen[k] = zahlen['bootstrap_B']
         red = {**self.reduktion, **{k: int(v) for k, v in zahlen.items() if int(v) != NORMATIVE_ZAHLEN[k]}}
-        kenn = self.id.split('+')[0] + ('+red(' + ','.join(f'{k}={v}' for k, v in sorted(red.items())) + ')'
-                                        if red else '')
-        return Regelprofil(kenn, self.beschreibung, self.regeln.values(), red)
+        return Regelprofil(self._kennung(red, self.diagnose), self.beschreibung, self.regeln.values(), red,
+                           self.diagnose)
+
+    def _kennung(self, red, diag):
+        return (self.id.split('+')[0]
+                + ('+diag(' + ','.join(f'{k}={v}' for k, v in sorted(diag.items())) + ')' if diag else '')
+                + ('+red(' + ','.join(f'{k}={v}' for k, v in sorted(red.items())) + ')' if red else ''))
+
+    def mit_diagnose(self, **werte):
+        """Abgeleitetes Profil mit einem ausdrücklich gewählten Diagnose-/Vergleichsmodus (DIAGNOSEWERTE, z. B.
+        g4.verfahren='d'); Kennung „+diag(…)“, der Status der Regel wird EP (Entwicklungsprüffall). Nur für Regeln
+        des Profilstands, die den Modus vorsehen."""
+        werte = {k.replace('__', '.'): v for k, v in werte.items()}
+        neu = dict(self.regeln)
+        for rid, v in werte.items():
+            if rid not in DIAGNOSEWERTE or v not in DIAGNOSEWERTE[rid]:
+                raise ValueError(f'Diagnosemodus {rid}={v!r} nicht vorgesehen ({DIAGNOSEWERTE})')
+            if rid not in self.regeln:
+                raise KeyError(f'Regel {rid!r} nicht im Profil {self.id}')
+            r = self.regeln[rid]
+            neu[rid] = Regel(r.id, r.gegenstand, r.fundstelle, EP, v,
+                             f'Diagnosemodus (nicht Standard; Standard {r.wert!r}): {r.herkunft}', r.wirkung)
+        diag = {**self.diagnose, **werte}
+        return Regelprofil(self._kennung(self.reduktion, diag), self.beschreibung, neu.values(), self.reduktion, diag)
 
     @property
     def reduziert(self):

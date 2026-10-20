@@ -10,7 +10,7 @@ import platform
 import numpy as np
 import scipy
 
-from .. import formate, regeln, zufall
+from .. import formate, regeln, zufall, zusammenfassung as zf
 from ..generator import kalibrierdaten, kampagne as kp, szenarien
 from . import kette
 
@@ -30,8 +30,12 @@ def _rund(x):
     return a
 
 
-def hash_felder(felder):
-    return formate.sha256_bytes(formate.npz_bytes({k: _rund(v) for k, v in felder.items()}))
+def hash_felder(felder, ohne=()):
+    """Prüfsumme gerundeter Felder; ohne: Felder, die es zum Stand eines historischen Prüfsatzes noch nicht gab."""
+    return formate.sha256_bytes(formate.npz_bytes({k: _rund(v) for k, v in felder.items() if k not in ohne}))
+
+
+HISTORISCH_OHNE = tuple(zf.OPTIONALE_FELDER)   # Fünftelzeiger seit 20.10.2026: nicht in historischen Prüfsummen
 
 
 def hash_objekt(obj):
@@ -53,7 +57,7 @@ def testdaten_hash(sid, stufe, seed):
     kw = {a: b for a, b in sz.kalibrierung}
     mes, _ = kalibrierdaten.p0_messungen(m.system, zufall.strom(seed, 'p0'), p01=kw.get('p01'), p04=kw.get('p04'),
                                          p05=kw.get('p05'))
-    return dict(zusammenfassungen=hash_felder(tab.daten), koepfe=formate.sha256_json(tab.koepfe),
+    return dict(zusammenfassungen=hash_felder(tab.daten, HISTORISCH_OHNE), koepfe=formate.sha256_json(tab.koepfe),
                 p0_messung=hash_objekt(mes), n_laeufe=len(tab))
 
 

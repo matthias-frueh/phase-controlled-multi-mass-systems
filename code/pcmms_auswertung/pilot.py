@@ -41,6 +41,7 @@ import numpy as np
 from scipy import stats
 
 from . import formate, gueltigkeit, konventionen as kv, laufgroessen, regeln, zufall
+from . import zusammenfassung as zf
 
 VERSION = 'pilot-0.4'                   # 0.2: Begründung der Suche nach dem tatsächlichen Abbruchgrund; 0.3: Satz mit
                                         # Bindung (k, N_z, Daten, Seed), Satz der Suche beim festgelegten Paar;
@@ -240,7 +241,7 @@ def daten_sha256(tab):
     """Prüfsumme der Phase-0-Läufe (Kennungen in Laufreihenfolge, Datenfelder), an die ein Satz gebunden ist."""
     t = tab.auswahl(tab.spalte('phase', int) == 0).sortiert()
     return formate.sha256_json(dict(laeufe=[k['lauf_id'] for k in t.koepfe],
-                                    daten=formate.sha256_bytes(formate.npz_bytes(t.daten))))
+                                    daten=formate.sha256_bytes(formate.npz_bytes(zf.pflichtfelder(t.daten)))))
 
 
 def _schwellen0(tab, kal, profil, f_soll):

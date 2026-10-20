@@ -158,17 +158,63 @@ def ablauf_kennung(m, sid, stufe, seed, verfahren, sw, s3, profil, ebene):
                 schwellen_sha256=ablauf.schwellen_kennung(sw, s3), profil_sha256=profil.sha256())
 
 
+SYNTH_EREIGNIS = dict(art='wiederaufnahme', quelle='synthetisch: Harness (Regel harness.wiederaufnahme), kein reales '
+                                               'Ereignis', befund='Ursachenanalyse ohne Befund, kein Eingriff, kein '
+                                                               'Apparaturfehler (synthetisch)',
+                      mechanischer_eingriff=False, apparaturfehler=False)
+
+
+def wiederaufnahme_regel(profil, verfahren, tb):
+    """Simulierte Wiederaufnahme fortsetzbarer Halte (Regel harness.wiederaufnahme, Profilstand 2026-11, nur mit
+    ablauf-4): W, T_UA und dessen Quelle (Teil B nr2.T_UA_s, sonst das Entwicklungsbeispiel der Regel). None, wenn die
+    Regel im Profil fehlt (historische Profile: ein Halt beendet die simulierte Kampagne wie bisher)."""
+    if 'harness.wiederaufnahme' not in profil.regeln or not profil.hat('harness.wiederaufnahme') \
+            or verfahren.fassung != 'ablauf-4':
+        return None
+    r = profil.wert('harness.wiederaufnahme')
+    if r.get('T_UA') != 'Teil B':
+        raise ValueError(f'harness.wiederaufnahme: T_UA-Quelle {r.get("T_UA")!r} nicht unterstützt')
+    t_ua = (tb.get('nr2') or {}).get('T_UA_s')
+    quelle = 'Teil B (nr2.T_UA_s)'
+    if t_ua is None:
+        t_ua, quelle = float(r['T_UA_entwicklung_s']), 'Entwicklungsbeispiel der Regel (Teil B ohne T_UA)'
+    return dict(W=int(r['W']), T_UA_s=float(t_ua), T_UA_quelle=quelle, ereignis=r['ereignis'])
+
+
+def wiederaufnehmen(a, regel):
+    """Fortsetzbare Halte mit dem synthetischen Ereignis wiederaufnehmen, bis der Ablauf endet, ein Halt nicht
+    fortsetzbar ist (zweites S2, Abbruch) oder W Wiederaufnahmen verbraucht sind. Nur im synthetischen Harness; für
+    reale Daten bleibt die Ursachenanalyse eine externe Handlung. Rückgabe der Zusammenfassung."""
+    n0 = a.z['wiederaufnahmen']
+    while a.status == 'angehalten' and a.z['halt'].get('fortsetzbar') and a.z['wiederaufnahmen'] - n0 < regel['W']:
+        a.fortsetzen(dict(SYNTH_EREIGNIS, zeitpunkt=float(a.z['halt']['t']) + regel['T_UA_s']))
+    k = a.z['wiederaufnahmen'] - n0
+    if a.status == 'abgeschlossen':
+        ende = None
+    elif a.status == 'abgebrochen' or not (a.z['halt'] or {}).get('fortsetzbar', True):
+        ende = 'endgültig: nicht fortsetzbar (' + str(((a.z['ende'] or {}).get('grund')) or (a.z['halt'] or {}).get(
+            'regel')) + ')'
+    elif a.status == 'angehalten':
+        ende = f'endgültig: W = {regel["W"]} Wiederaufnahmen ausgeschöpft (Halt {a.z["halt"]["regel"]})'
+    else:
+        ende = None                                                     # technische Unterbrechung (bis)
+    return dict(W=regel['W'], T_UA_s=regel['T_UA_s'], T_UA_quelle=regel['T_UA_quelle'], wiederaufnahmen=k,
+                ursachenanalyse_s=k * regel['T_UA_s'], endgueltig=ende is not None, grund=ende,
+                ereignis='synthetisch: ' + regel['ereignis'])
+
+
 def kampagne_ablauf(sid, stufe, plan, seed, profil, werkzeug8=None, n_min=None, verfahren=None, staerke=None,
                     rausch=None, k_max=None, modell=None, ebene='H', verzeichnis=None, zustand=None, bis=None,
-                    ereignis=None):
+                    ereignis=None, wiederaufnahme=None):
     """Kampagne mit zustandsbehaftetem Ablauf der Phase 1: Laufplan (Strom „reihenfolge“), Phase 0 zu den geplanten
     Zeitpunkten, Kalibrierung, Pilotanalyse, Teil B (Bindung an den Plan), dann Phase 1 als Ablauf; der
     Reihenfolgegenerator zieht danach die Wiederholungsplätze. modell: vorgegebenes Generatormodell (Prüffälle mit
     Ereignissen; Kalibrierabweichungen weiter aus dem Szenario sid). ebene 'Z': Rohdaten und Stufe 1 in verzeichnis.
     zustand: gespeicherter Ablaufstand (Fortsetzung; die Kennung muss passen); bis: technische Unterbrechung nach so
     vielen Phase-1-Versuchen; ereignis: protokollierte Wiederaufnahme eines angehaltenen gespeicherten Ablaufstands
-    (Ablauf.fortsetzen statt ausfuehren). Rückgabe dict(modell, laeufe, tab0, kalibrierung, teil_b, pilot, ablauf,
-    kennung, …)."""
+    (Ablauf.fortsetzen statt ausfuehren). wiederaufnahme: None = nach Profil (Regel harness.wiederaufnahme, synthetisch
+    bis W Wiederaufnahmen), False = keine. Rückgabe dict(modell, laeufe, tab0, kalibrierung, teil_b, pilot, ablauf,
+    kennung, wiederaufnahme, …)."""
     v = verfahren if verfahren is not None else vf.ZUSTAND
     if v.ablauf != 'zustand':
         raise ValueError('kampagne_ablauf verlangt ein Verfahren mit Ablauf „zustand“')
@@ -206,8 +252,12 @@ def kampagne_ablauf(sid, stufe, plan, seed, profil, werkzeug8=None, n_min=None, 
         a.fortsetzen(ereignis)
     else:
         a.ausfuehren(bis)
+    regel = None if wiederaufnahme is False else wiederaufnahme_regel(profil, v, tb)
+    wa = None
+    if regel is not None and bis is None:
+        wa = wiederaufnehmen(a, regel)
     out = dict(modell=m, laeufe=laeufe, tab0=tab0, kalibrierung=kal, teil_b=tb, pilot=pe, ablauf=a, kennung=ak,
-               messung=messung, p0_messung=mes, p0_wahrheit=kwahr)
+               messung=messung, p0_messung=mes, p0_wahrheit=kwahr, wiederaufnahme=wa)
     return out
 
 
@@ -270,7 +320,7 @@ def _kette_ablauf(sid, stufe, profil, plan, seed, werkzeug8, staerke, kalibrieru
     zeit['ap12_stufe2'] = time.perf_counter() - t
     out = dict(ergebnis=erg, teil_b=r['teil_b'], kalibrierung=r['kalibrierung'], tabelle=tab, modell=r['modell'],
                laeufe=r['laeufe'], pilot=r['pilot'], laufzeit_s={k: round(x, 3) for k, x in zeit.items()},
-               verfahren=v.kennung(), ablauf=r['ablauf'].bericht())
+               verfahren=v.kennung(), ablauf=dict(r['ablauf'].bericht(), harness_wiederaufnahme=r['wiederaufnahme']))
     if mit_wahrheit:
         out['wahrheit'] = wahrheit.berechne(r['modell'], kampagne.schnitt_konfigurationen(r['modell'].plan))
     return out

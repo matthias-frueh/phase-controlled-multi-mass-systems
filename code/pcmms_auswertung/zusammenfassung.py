@@ -21,6 +21,12 @@ Felder je Lauf (Kopf: JSON-Werte; Daten: Felder fester Form, k = 1 … k_voll, k
           Rampe und Einschwingzeit (G6, S2); sigma_roh_zellen (3), sigma_roh_summe: Standardabweichung der
           kalibrierten Rohwerte im Auswertefenster (in Referenzläufen σ_c, σ_Σ für F_LO, A1); uebersteuert_zellen (3)
           (G5); temperatur_min/max_zellen (3) (G7); t_phi (3): Einregelzeit der Phasen [s].
+  Optional fuenftel_zeiger (2, 3) = Σ_c e^{−iφⱼ,c} (k = 1) der Indexphasen über die Zyklen des ersten und letzten
+          Fünftels (Modul 1: n_f; nicht laufende Module: nan), seit dem Auftrag vom 20.10.2026 für die
+          phasenkorrigierte Fünftel-Differenz (G4-Modus D). Ältere Zusammenfassungen ohne das Feld bleiben gültig und
+          werden erkannt (hat_fuenftelzeiger); D ist dann nicht prüfbar. Die Prüfsummen der Phase-0-Daten (Bindung
+          des Satzes, Teil B nr1.phase0_sha256) decken nur die Pflichtfelder ab (pflichtfelder); Teil B des
+          Regelstands 2026-11 führt die optionalen Felder gesondert (nr1.phase0_optionale_sha256).
 Fehlende Kanäle werden in fehlende_kanaele genannt; die abhängigen Felder sind nan, nie null-ergänzt.
 """
 import numpy as np
@@ -56,6 +62,9 @@ DATENFELDER = {                         # Name: (dtype, Form je Lauf; 'k' = k_vo
     'temperatur_min_zellen': ('float64', (3,)),
     'temperatur_max_zellen': ('float64', (3,)),
     't_phi': ('float64', (3,)),
+}
+OPTIONALE_FELDER = {                   # Felder, die ältere Zusammenfassungen nicht haben (ausdrücklich erkannt)
+    'fuenftel_zeiger': ('complex128', (2, 3)),
 }
 KOPFFELDER = ('lauf_id', 'laufart', 'modul', 'einstellung', 'konfiguration', 'phase', 'block', 'messtag', 'position',
               'kontrollsatz', 't_start', 't_ende', 'f_soll', 'f_mittel', 'n_zyklen', 'n_fuenftel', 'k_voll', 'n_theta',
@@ -115,22 +124,35 @@ def _form(spec, kv):
     return tuple(kv if s == 'k' else s for s in spec)
 
 
+def pflichtfelder(daten):
+    """Nur die Pflichtfelder (für Prüfsummen, die vor den optionalen Feldern festgelegt wurden: Bindung des
+    Phase-0-Satzes, Teil B nr1, historische Prüfsätze)."""
+    return {k: v for k, v in daten.items() if k in DATENFELDER}
+
+
+def hat_fuenftelzeiger(daten):
+    """Trägt die Zusammenfassung bzw. Tabelle die Fünftelzeiger (Format seit dem 20.10.2026)?"""
+    return 'fuenftel_zeiger' in daten
+
+
 def pruefe_daten(d, kv, n=None):
-    """Feldnamen, Datentypen und Formen (n: Zahl der Läufe bei Tabellen)."""
-    if set(d) != set(DATENFELDER):
-        raise formate.FormatFehler(f'Datenfelder {sorted(set(d) ^ set(DATENFELDER))} fehlen oder sind unbekannt')
-    for name, (dt, spec) in DATENFELDER.items():
+    """Feldnamen, Datentypen und Formen (n: Zahl der Läufe bei Tabellen); optionale Felder dürfen fehlen."""
+    if not set(DATENFELDER) <= set(d) <= set(DATENFELDER) | set(OPTIONALE_FELDER):
+        raise formate.FormatFehler(f'Datenfelder {sorted((set(d) ^ set(DATENFELDER)) - set(OPTIONALE_FELDER))} '
+                                   'fehlen oder sind unbekannt')
+    for name, (dt, spec) in {**DATENFELDER, **{k: v for k, v in OPTIONALE_FELDER.items() if k in d}}.items():
         form = ((n,) if n is not None else ()) + _form(spec, kv)
         a = np.asarray(d[name])
         if str(a.dtype) != dt or a.shape != form:
             raise formate.FormatFehler(f'Feld {name}: {a.dtype}{a.shape} statt {dt}{form}')
 
 
-def leere_daten(kv, n=None):
-    """Datenfelder mit nan (bzw. 0 bei Zählern, False bei Merkern) als Startwert für Erzeuger."""
+def leere_daten(kv, n=None, optionale=True):
+    """Datenfelder mit nan (bzw. 0 bei Zählern, False bei Merkern) als Startwert für Erzeuger; optionale=False:
+    nur die Pflichtfelder (Format vor dem 20.10.2026)."""
     pre = (n,) if n is not None else ()
     out = {}
-    for name, (dt, spec) in DATENFELDER.items():
+    for name, (dt, spec) in {**DATENFELDER, **(OPTIONALE_FELDER if optionale else {})}.items():
         form = pre + _form(spec, kv)
         if dt.startswith('complex'):
             out[name] = np.full(form, np.nan + 1j * np.nan, complex)
@@ -189,7 +211,8 @@ class LaufTabelle:
         laeufe = list(laeufe)
         if not laeufe:
             raise formate.FormatFehler('keine Läufe')
-        daten = {n: np.stack([l.daten[n] for l in laeufe]) for n in DATENFELDER}
+        namen = list(DATENFELDER) + [n for n in OPTIONALE_FELDER if all(n in l.daten for l in laeufe)]
+        daten = {n: np.stack([l.daten[n] for l in laeufe]) for n in namen}
         return cls([l.kopf for l in laeufe], daten, meta)
 
     def lauf(self, i):

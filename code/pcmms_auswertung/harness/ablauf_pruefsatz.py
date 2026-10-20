@@ -65,7 +65,8 @@ def fall(sid, stufe, seed, art, fassung=FASSUNG):
     inhalt = dict(status=a.status, halt=(a.z['halt'] or {}).get('regel'), laufzahl=b['laufzahl'], rollen=b['rollen'],
                   auswahl=b['auswahl_zaehler'], s2=b['s2'], luecken=b['luecken'], grenzen=len(b['grenzen']),
                   ziehungen=sum(1 for x in b['ziehungen'] if 'gezogen' in x))
-    h = dict(daten=pruefsatz.hash_felder(t1.daten), koepfe=formate.sha256_json(t1.koepfe),
+    ohne = pruefsatz.HISTORISCH_OHNE if fassung == 'ablauf-3' else ()
+    h = dict(daten=pruefsatz.hash_felder(t1.daten, ohne), koepfe=formate.sha256_json(t1.koepfe),
              entscheidungen=formate.sha256_json(a.z['entscheidungen']), ziehungen=formate.sha256_json(a.z['ziehungen']),
              schwellen=a.kennung['schwellen_sha256'])
     return dict(inhalt=inhalt, hashes=h), r

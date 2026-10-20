@@ -923,7 +923,18 @@ von σ̂_ref; bei bekanntem σ sind sie etwa zehnmal kleiner.
 - **Reihenfolge der Schwellen.** (1) G2–G10 auf die Phase-0-Läufe anwenden, mit σ_tol und σ_Δ aus allen
   Läufen der jeweiligen Art (Median bzw. MAD, G2, G4). (2) ε_ctrl nach §8.8 und A9.8 aus den danach
   gültigen Läufen. (3) G1 anwenden. p̂ ist der Anteil der danach ungültigen Pilotläufe; alle Streuungen
-  stammen aus den gültigen Läufen.
+  stammen aus den gültigen Läufen. Alle Größen gelten bei k_max und N_z des Plans (G4 mit k ≤ k_max).
+  (4) Arbeitsfestlegung vom 20.10.2026: G4-Schwellen der Phase 1 aus den gültigen Läufen. Für Kombinationsläufe
+  (B+): s_i² = E_{τ,A}[2·Var_e F(φ_i + τ + e; A)] mit den Relativphasen τⱼ = offⱼ + δⱼ − δ₁ und den Amplituden A
+  aus den Komponentenschätzern der Laufgrößen (σ_off,j aus den Laufmitteln der gültigen Piloten abzüglich σⱼ²/N_z,
+  σ_δ,j und σ_a,j aus der kohärenten Projektion der Lⱼ-Abweichungen, ν = n₀ⱼ − 1; P0.5 und P0.6 liefern keine
+  Streuung von Lauf zu Lauf) und e den Fünftelmitteln der Indexphasen (σⱼ/√n_f), mit festen, auf Einheitskovarianz
+  normierten Ziehungen; die Pilotgröße s̄_P² mit derselben Mischung; s_i als Maximum über die Verschiebungen um
+  ±u(Δδⱼ); Boden σ_W² = max(0, σ²_Δ,F,P − s̄_P²); T_i aus E[2·Φ̄(T_i/√(v + σ_W²))] = 2·Φ̄(3) über die Ziehungen
+  der Laufgrößen, mindestens 3·σ_Δ,F,P. Für Lⱼ: k(n₀ⱼ)·σ_Δ,X,Lⱼ mit E_σ̂[2·Φ̄(k·σ̂/σ)] = 2·Φ̄(3) für den
+  MAD-Schätzer aus n₀ⱼ Werten; als Vergleich die über die Module gepoolte Schwelle mit Bartlett-Prüfung der
+  Homogenität. Diagnosemodus D: D = D_F − (F̂_letzt − F̂_erst) aus den Fünftelzeigern und N̄⁽ʲ⁾, Schwelle 3·σ_D
+  aus den ebenso korrigierten gültigen Piloten; ohne Fünftelzeiger nicht prüfbar.
 - **Frequenzsuche.** (1) f_u und f_zul bestimmen (§5.3; (a) mit dem Auslegungswerkzeug, den Parametern aus
   P0.1–P0.4 und dem Konstruktionsprofil, ohne Zusatzkonfigurationen). (2) Bei f_zul P0.5–P0.8 und P0.10
   ausführen; (a) mit der Superposition je Zelle ohne Bandbegrenzung prüfen; k_max nach §5.4 bestimmen.
@@ -938,9 +949,14 @@ von σ̂_ref; bei bekanntem σ sind sie etwa zehnmal kleiner.
   n_min minimieren N_K·n_min + 3·n₀ (Zielfunktion und Laufzahl von H1 offen, §12) unter den
   Bedingungen von §5.4 (gemeinsame Bestätigung von H1 und H2 nach §8.5, §8.6 und §9.3 bei exakter
   Superposition mit Wahrscheinlichkeit ≥ 0,8, Arbeitsfestlegung, §12; n_min ≥ (3·1°/(SNR·δ_H2))², δ_H2 offen,
-  §12), bei Gleichstand das kleinere n_min; (iv) Rauschbias b̂_i⁰ mit diesen
-  n_min und n₀, b̂_i¹ mit n_min und n + d Kontrollläufen je Modul, jeweils mit Unsicherheit; (v) n = n_min + r
-  ≤ n_max (§5.3 c) prüfen. Das erste Paar (k, T_a), das (v) erfüllt, legt k_max, T_a, n_min und n₀ fest.
+  §12), bei Gleichstand das kleinere n_min; (iv) Rauschbias b̂_i⁰ und b̂_i¹ über die Auswertungsmenge A der
+  Simulation (A9.11) mit den dort tatsächlich realisierten gültigen Laufzahlen je Punkt und Modul (geplant n
+  Blöcke mit n₀ und n + d Kontrollläufen je Modul), jeweils mit Unsicherheit (Präzisierung vom 20.10.2026; bisher
+  „mit n_min Läufen“); (v) n = n_min + r ≤ n_max (§5.3 c) prüfen, und zusätzlich (Arbeitsfestlegung vom
+  20.10.2026): Alle Schnittpunkte erreichen gemeinsam in mindestens 95 % der nicht endgültig beendeten simulierten
+  Kampagnen n_min gültige Läufe; sonst r um eins erhöhen und erneut simulieren, höchstens zehnmal (danach Abbruch
+  des Kandidaten mit Grund „Reservegrenze“). Endgültig beendete Kampagnen zählen nicht in diesen bedingten Nenner,
+  wohl aber im Nenner von P(H1 und H2 bestätigt). Das erste Paar (k, T_a), das (v) erfüllt, legt k_max, T_a, n_min und n₀ fest.
   Obere 80-%-Vertrauensgrenze einer Streuung s mit ν Freiheitsgraden: s·√(ν/χ²₀,₂(ν)); t-Quantile mit dem
   erwarteten ν_eff; c als c_B. Der Rauschbias berücksichtigt, dass Messkurve und vorhergesagte Summe dreier
   Einzelmodulkurven verschiedene Rauschpegel haben; die Simulation verwendet getrennte Rauschmodelle für
@@ -1115,6 +1131,25 @@ Pilotstreuungen, mit getrennten Rauschmodellen für Einzelmodul- und Kombination
 liefert n_min, n₀, den Rauschbias b̂⁰ und b̂¹ und c (§8.4; ob sie nach dem Datenschluss mit den tatsächlichen
 Laufzahlen neu berechnet werden, ist offen, §12). Den kritischen Wert für ε_ctrl liefert eine eigene
 Simulation nach A9.8.
+
+**Halte und Bezugsmengen der Simulationen** (Arbeitsfestlegungen vom 20.10.2026). Fortsetzbare Halte werden im
+synthetischen Harness wie im Ablauf behandelt (A9.12): höchstens W = 3 Wiederaufnahmen je Kampagne mit dem
+protokollierten synthetischen Ereignis „Ursachenanalyse ohne Befund, kein Eingriff, kein Apparaturfehler“, Analysezeit
+T_UA aus Teil B (Entwicklungsbeispiel 1800 s), Bezugseröffnung und Aufwärmen mit ihren Zeitkosten. Ein zweites
+maßgebliches S2, erschöpftes W oder ein nötiger Eingriff beendet die Kampagne endgültig; sie sperrt ihre Ausgänge.
+Für reale Daten bleibt die Ursachenanalyse eine externe Handlung. Mengen: G sind alle begonnenen simulierten
+Kampagnen einer Rolle einschließlich endgültig beendeter; A sind die abgeschlossenen (auch nach Wiederaufnahme)
+Kampagnen mit gültigem ŷ¹ und allen benötigten endlichen Prüfgrößen (Rohresiduen und Varianzen von H1 und H1Z, die
+H2-Intervalle); H1 und H1Z verwenden dieselbe Menge A. c (H1, H1Z), die Prüfrate, b̂ und u(b̂), der Restbias und die
+H2-Überdeckung beziehen sich auf A, unter allen vorgesehenen Rauschvarianten (c aus dem Standardmodell, die übrigen
+als Sensitivität; b̂ über die halbe Spannweite); P(H1 und H2 bestätigt) hat G im Nenner, und die Gründe für G ohne A
+werden getrennt gezählt. Für die normative Kalibrier- und Prüfsimulation ist |A| = 1000 je Rolle die Sollzahl, mit
+Nachziehen bis zu einem technischen Versuchslimit (1,5·|A|) und dokumentiertem |G|; wird sie nicht erreicht, ist die
+Simulation „nicht abgeschlossen“. Ein aus A bestimmtes c gilt nicht allein wegen einer kleineren Zahl von Tests für
+jede anders selektierte unvollständige Kampagne; das bleibt eine nur unter benannten Annahmen geltende Eigenschaft.
+Berichtet werden je Rolle Halte nach Ursache, Wiederaufnahmen, Ausschlüsse, Zusatzversuche und Zeiten. G4: Arbeitsziel
+höchstens 1,5 % Fehlausschlüsse je Konfiguration und Lauf unter dem Nullmodell der Simulation (berichtet mit Zähler,
+Nenner und Standardfehler; eine kleine Probe bestätigt keine Rate).
 
 **Schätzung der Grenzen.** In jeder simulierten Kampagne werden D_q, Δ_q und Δ_rel,q wie in der Auswertung als
 Punktwert aus dem simulierten ŷ⁰ geschätzt, also aus den simulierten Einzelmodulläufen der Phase 0 dieser Kampagne,
@@ -1373,6 +1408,9 @@ Gewählte Zahlenwerte ohne Messung, je mit einer Zeile Begründung.
 | zehn Zeitkonstanten für T_e | §6 | Restamplitude e⁻¹⁰ ≈ 4,5·10⁻⁵ |
 | T_e auf ganze Sekunden aufgerundet | §6 | einfache Steuerung; verlängert nur |
 | Fünftel und 3·σ_Δ für G4 | G4 | Anfang und Ende mit gleich vielen Zyklen; seltene Fehlausschlüsse |
+| B+ für Kombinationsläufe der Phase 1, Rate 2·Φ(−3), Untergrenze 3·σ_Δ,F; k(n₀ⱼ) für Lⱼ; Arbeitsziel ≤ 1,5 % je Konfiguration und Lauf | G4, A9.2 (4), A9.11 | Jitter der Indexphasen mal Flankensteigung und Laufgrößen machen σ_Δ,F konfigurationsabhängig; MAD aus n₀ = 20 Läufen erhöht die Rate (Arbeitsfestlegung vom 20.10.2026, Zielvorgabe ohne bestätigte Rate) |
+| W = 3 Wiederaufnahmen, T_UA aus Teil B (Entwicklung 1800 s), Mengen G/A, \|A\| = 1000 mit Nachziehen bis 1,5·\|A\| | A9.11 | Halte zählen in der Simulation wie im Ablauf; gemeinsamer Nenner der Prüfschwellen (Arbeitsfestlegung vom 20.10.2026) |
+| Reservebedingung 0,95, höchstens zehn Erhöhungen von r | §5.4, A9.2 (v) | gemeinsame Vollständigkeit der Schnittpunkte; technische Grenze statt unbeschränkten Erhöhens (Arbeitsfestlegung vom 20.10.2026) |
 | drei Pilotkonfigurationen mit je mindestens 20 gültigen Läufen | §5.4 | gepoolt mindestens 57 Freiheitsgrade für die Streuungen |
 | jeder Pilotabstand mindestens 10° von 120° | §5.4, A7 | keine Pilotkonfiguration ist zu einem Schnittpunkt äquivalent, auch nicht bei Phasenfehlern weit über δφ_tol; kein physikalisches Abstandsmaß |
 | Verdopplung von T_ramp bei Liftoff in der Rampe | §5.4 | endliche, eindeutige Anpassung |
