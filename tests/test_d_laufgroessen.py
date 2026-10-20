@@ -2,13 +2,13 @@
 Pilotskript und in Teil B; unter dem historischen Profil bleiben Pilotskript, Teil B und Planungshaken bitgleich
 (Prüfsummen aus dem Ausgangsstand ad8fe2a, Werte auf 10 Stellen gerundet).
 
-Alle Datensätze sind synthetisch (Szenariogenerator Ebene H, nur Phase 0); geprüft wird die Schätzkette, keine
-Apparatur."""
+Alle Datensätze sind synthetisch (Szenariogenerator Ebene H, für den Nullpunkt über die Betriebszeit das
+Strukturmodell aus generator.phase0_modell, nur Phase 0); geprüft wird die Schätzkette, keine Apparatur."""
 import numpy as np
 import pytest
 
 from pcmms_auswertung import formate, laufgroessen as lgm, pilot, regeln, teil_b, zufall
-from pcmms_auswertung.generator import ebene_h, kampagne as kp, rauschen, szenarien
+from pcmms_auswertung.generator import ebene_h, kampagne as kp, phase0_modell as p0m, rauschen, szenarien
 from pcmms_auswertung.harness import kette, planung
 
 PLAN = kp.Plan(n0=20, n_pilot=20, n_bloecke=24)
@@ -115,6 +115,54 @@ def test_nicht_identifizierbar_und_rauschfrei():
     # nicht aus Phase 0 identifizierbare Unterschiede sind ausdrücklich benannt
     namen = ' '.join(x['komponente'] for x in lg0['nicht_identifizierbar'])
     assert 'farbiger Jitter' in namen and 'Drift zwischen Phase 0 und Phase 1' in namen
+
+
+# ── Nullpunkt über die Betriebszeit ──────────────────────────────────────────────────────────────────
+def _mit_pause(tab, nach, dauer=3600.0):
+    """Kopie von tab mit einer Pause in Phase 0: alle Läufe nach den ersten nach Läufen (zeitliche Reihenfolge) liegen
+    um dauer [s] später; Messwerte unverändert."""
+    t = tab.auswahl(np.arange(len(tab)))
+    for i in np.argsort(t.spalte('t_start', float), kind='stable')[nach:]:
+        t.koepfe[i].update(t_start=t.koepfe[i]['t_start'] + dauer, t_ende=t.koepfe[i]['t_ende'] + dauer)
+    return t
+
+
+def test_betriebszeit_lueckenlos_gleich_uhrzeit():
+    """Synthetischer Laufplan: Phase 0 lückenlos ab t = 0 (Beginn jedes Laufs = Ende des vorigen); die Betriebszeit
+    der Laufmitte ist genau die Uhrzeit der Laufmitte, die Korrektur dort also ohne Wirkung (bitgleich). Mit Pause
+    bleibt die Betriebszeit gleich, die Lücke wird ausgewiesen."""
+    _, tab = _phase0('N01-A4', 'L2', 7)
+    t0, t1 = tab.spalte('t_start', float), tab.spalte('t_ende', float)
+    o = np.argsort(t0)
+    assert t0[o][0] == 0.0 and np.array_equal(t0[o][1:], t1[o][:-1])
+    tb, luecken = lgm.betriebszeit(tab)
+    assert np.array_equal(tb, 0.5 * (t0 + t1)) and luecken.size == len(tab) - 1 and not luecken.any()
+    tbp, lp = lgm.betriebszeit(_mit_pause(tab, 40))
+    assert np.array_equal(tbp, tb) and lp.sum() == 3600.0 and np.count_nonzero(lp) == 1
+
+
+def test_nullpunkt_ueber_betriebszeit_pause_ohne_wirkung():
+    """A9.2, Regel p0.strukturmodell: Nullpunktdrift [N/s] und Zufallspfad D [N²/s] je Sekunde Betriebszeit, wie sie
+    das Strukturmodell anwendet (nullpunkt_zeit = 'betriebszeit'). Eine Pause von 1 h nach der Hälfte der Phase-0-Läufe
+    (gleiche Messwerte, spätere Läufe nur verschoben) ändert Drift und Diffusion nicht; die Pause steht im Ergebnis."""
+    m = szenarien.modell('N01-A4', 'L2', plan=PLAN)
+    s2m = 3 * m.rausch.sigma_mittel(PLAN.n_zyklen / m.system.f) ** 2               # Boden von ⟨N⟩ der Summe
+    st = p0m.aus_rauschmodell(m.rausch).mit(nullpunkt_drift_N_je_s=2e-5, nullpunkt_zeit='betriebszeit',
+                                            nullpunkt_diffusion_N2_je_s=20 * s2m / (13 * m.plan.T_lauf))
+    laeufe = [l for l in kp.laufplan(m.plan, zufall.strom(21, 'reihenfolge')) if l['phase'] == 0]
+    tab = p0m.erzeuge(m, laeufe, zufall.strom(21, 'generator'), st, rng_zusatz=zufall.strom(21, 'zusatz'))
+    a = lgm.schaetzen(tab, _alle(tab), 9, uebertragungstest=False)['nullpunkt']
+    b = lgm.schaetzen(_mit_pause(tab, len(tab) // 2), _alle(tab), 9, uebertragungstest=False)['nullpunkt']
+    assert a['diffusion']['identifiziert'] and a['diffusion']['nachgewiesen'] and a['diffusion']['wert'] > 0
+    for x, f in (('drift', 'wert'), ('drift', 'u'), ('diffusion', 'wert'), ('diffusion', 'oben80'),
+                 ('diffusion', 'u'), ('sigma_loo', 'wert')):
+        assert b[x][f] == pytest.approx(a[x][f], rel=1e-9), (x, f)
+    # Pause sichtbar: Summe der Lücken, Verhältnis der Spannen der Referenzfolge in Uhrzeit und Betriebszeit
+    za, zb = a['zeitachse'], b['zeitachse']
+    assert za['lueckenlos'] and za['summe_luecken_s'] == 0.0 and za['verhaeltnis_uhrzeit_betriebszeit'] == 1.0
+    assert not zb['lueckenlos'] and zb['summe_luecken_s'] == 3600.0 and zb['n_luecken'] == 1
+    assert zb['groesste_luecke_s'] == 3600.0 and zb['spanne_betriebszeit_s'] == za['spanne_betriebszeit_s']
+    assert zb['verhaeltnis_uhrzeit_betriebszeit'] == pytest.approx(1 + 3600.0 / zb['spanne_betriebszeit_s'])
 
 
 def test_obere_grenze_marginal_je_komponente():

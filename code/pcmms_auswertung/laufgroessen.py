@@ -26,7 +26,9 @@ Felder:
                 Der Boden von ⟨N⟩ gilt für alle Laufarten (ein gemeinsamer Faktor in der Planung).
   nullpunkt     lineare Drift [N/s] und Diffusion eines Zufallspfads [N²/s] der Summe aus der Referenzfolge
                 (Leave-one-out gegen die Interpolation der Nachbarn, Brückenvarianz), getrennt vom Boden aus den
-                Fünfteln; sigma_loo [N] (σ̂_ref-artig, ν_eff analytisch).
+                Fünfteln; sigma_loo [N] (σ̂_ref-artig, ν_eff analytisch). Zeitachse ist die Betriebszeit (A9.2, Regel
+                p0.strukturmodell; betriebszeit), wie im Strukturmodell; zeitachse weist Lücken (Pausen) zwischen den
+                Phase-0-Läufen und das Verhältnis Uhrzeit/Betriebszeit der Referenzfolge aus.
   laufintern    Drift von ⟨N⟩ im Lauf (D_N = F₅ − F₁ der R-Läufe: Mittel und Zusatzstreuung über dem Boden) [N];
                 je Modul Amplituden- und Phasenänderung letztes − erstes Fünftel aus den Lⱼ-Läufen (kohärente
                 Projektion der Fünftelharmonischen) [1], [°], mit dem orthogonalen Fünftelrest als Prüfgröße.
@@ -55,7 +57,8 @@ Annahmen (gekennzeichnet, nicht aus Phase 0 prüfbar): Zellen und Läufe unabhä
 Amplituden- und Phasenstreuung der Kombinationsläufe wie in den Lⱼ-Läufen (prüft der Übertragungstest nur an den
 Piloten); eine gemeinsame Laufzeitschwankung der Kette ist in Lⱼ nicht von modulweisem δ trennbar; farbiger,
 korrelierter oder lastabhängiger Jitter und Drift zwischen Phase 0 und Phase 1 sind nicht identifizierbar
-(benannte Sensitivitäten, Strukturmodell in generator.phase0_modell).
+(benannte Sensitivitäten, Strukturmodell in generator.phase0_modell); Nullpunktdrift und Zufallspfad schreiten nur in
+der Betriebszeit fort, eine Änderung während einer Lücke zwischen den Läufen geht in die Brücke über die Lücke ein.
 """
 from functools import lru_cache
 
@@ -206,9 +209,48 @@ def _zellanteile_mittel(tab, R):
     return v / v.sum() if v.sum() > 0 else np.full(3, 1 / 3)
 
 
+def betriebszeit(tab):
+    """Betriebszeit der Laufmitte [s] je Zeile von tab (A9.2, Regel p0.strukturmodell: Drift und Zufallspfad über die
+    Betriebszeit, ohne Pausen): Uhrzeit der Laufmitte ab dem Beginn des ersten Phase-0-Laufs abzüglich der Lücken
+    zwischen den Phase-0-Läufen (alle Laufarten und Einstellungen, auch ungültige) in zeitlicher Reihenfolge, also die
+    kumulierte Laufdauer bis zur Laufmitte; Zeilen anderer Phasen nan. Lückenlos ab t = 0 (synthetischer Laufplan)
+    ist das genau die Uhrzeit der Laufmitte. Rückgabe (Betriebszeit, Lücken t_start − t_ende des Vorgängers [s] in
+    zeitlicher Reihenfolge; negativ: Überlappung, nicht abgezogen)."""
+    t0, t1 = tab.spalte('t_start', float), tab.spalte('t_ende', float)
+    i0 = np.flatnonzero(tab.spalte('phase', int) == 0)
+    o = i0[np.lexsort((tab.spalte('position', int)[i0], t0[i0]))]
+    tb = np.full(len(tab), np.nan)
+    if o.size == 0:
+        return tb, np.zeros(0)
+    luecken = t0[o][1:] - t1[o][:-1]
+    tb[o] = 0.5 * (t0[o] + t1[o]) - t0[o[0]] - np.r_[0.0, np.cumsum(np.maximum(luecken, 0.0))]
+    return tb, luecken
+
+
+def _zeitachse(tab, R):
+    """Hinweis zur Zeitachse des Nullpunkts: Lücken (Pausen) zwischen den Phase-0-Läufen und Verhältnis der Spannen
+    der Referenzfolge (gültige R-Läufe) in Uhrzeit und Betriebszeit (1 bei lückenloser Phase 0)."""
+    tb, lu = betriebszeit(tab)
+    tu = 0.5 * (tab.spalte('t_start', float) + tab.spalte('t_ende', float))
+    r = np.flatnonzero(R)
+    su, sb = (float(np.ptp(tu[r])), float(np.ptp(tb[r]))) if r.size >= 2 else (None, None)
+    lp = np.maximum(lu, 0.0)
+    return dict(achse='Betriebszeit', einheit='s', lueckenlos=bool(not (lu > 0).any()),
+                summe_luecken_s=float(lp.sum()), n_luecken=int((lu > 0).sum()),
+                groesste_luecke_s=float(lp.max()) if lp.size else 0.0, n_ueberlappungen=int((lu < 0).sum()),
+                spanne_uhrzeit_s=su, spanne_betriebszeit_s=sb,
+                verhaeltnis_uhrzeit_betriebszeit=float(su / sb) if sb else None,
+                hinweis='Drift [N/s] und Diffusion [N²/s] je Sekunde Betriebszeit (kumulierte Laufdauer der '
+                        'Phase-0-Läufe, Lücken zwischen den Läufen abgezogen), wie das Strukturmodell sie anwendet; '
+                        'eine Änderung des Nullpunkts während einer Lücke ist nicht getrennt identifizierbar (sie geht '
+                        'in die Brücke über die Lücke ein)')
+
+
 def _ref_folge(tab, R):
+    """Referenzfolge über die Betriebszeit: Ordnung nach Position, Gewicht β des späteren Nachbarn, w = 1 + β² +
+    (1 − β)², Brückenfaktor b = β(1 − β)·(t₂ − t₀); Rückgabe (dict, Betriebszeiten der Folge)."""
     pos = tab.spalte('position', int)
-    t = 0.5 * (tab.spalte('t_start', float) + tab.spalte('t_ende', float))
+    t, _ = betriebszeit(tab)
     idx = np.flatnonzero(R)
     o = np.argsort(pos[idx])
     tt = t[idx][o]
@@ -231,9 +273,10 @@ def _nu_loo(beta):
 def _nullpunkt(tab, R, s2m, nu_m):
     x, tt = _ref_folge(tab, R)
     n = tt.size
+    za = _zeitachse(tab, R)
     if n < 3:
         return dict(n=n, drift=None, diffusion=komponente(None, None, None, 'N²/s', 'Referenzfolge', False,
-                                                          'weniger als drei gültige Referenzläufe'))
+                                                          'weniger als drei gültige Referenzläufe'), zeitachse=za)
     N = tab.daten['N_mittel'][R][x['ordnung']]
     A = np.c_[np.ones(n), tt - tt.mean()]
     c, *_ = np.linalg.lstsq(A, N, rcond=None)
@@ -243,10 +286,13 @@ def _nullpunkt(tab, R, s2m, nu_m):
     sw, sb = x['w'].sum(), x['b'].sum()
     s2_loo = float((d ** 2).sum() / sw)
     nu_l = _nu_loo(x['beta'])
-    out = dict(n=n, drift=dict(wert=float(c[1]), einheit='N/s', u=se, quelle='Referenzfolge: lineare Regression',
+    out = dict(n=n, drift=dict(wert=float(c[1]), einheit='N/s', u=se,
+                               quelle='Referenzfolge: lineare Regression über die Betriebszeit',
                                hinweis='u ohne Berücksichtigung eines Zufallspfads'),
                sigma_loo=dict(wert=float(np.sqrt(d.var(ddof=1))), einheit='N', nu_eff=nu_l, n_werte=int(d.size),
-                              hinweis='Streuung der Leave-one-out-Werte (wie σ̂_ref), ν_eff analytisch für weißes ⟨N⟩'))
+                              hinweis='Streuung der Leave-one-out-Werte (wie σ̂_ref, β über die Betriebszeit), ν_eff '
+                                      'analytisch für weißes ⟨N⟩'),
+               zeitachse=za)
     if not np.isfinite(s2m) or sb <= 0:
         out['diffusion'] = komponente(None, None, None, 'N²/s', 'Referenzfolge', False,
                                       'Boden von ⟨N⟩ aus den Fünfteln fehlt: Zufallspfad nicht vom Boden trennbar')
@@ -259,7 +305,8 @@ def _nullpunkt(tab, R, s2m, nu_m):
                             oben80=float(max(0.0, s2_loo * kappa(nu_l) ** 2 - s2m) * skala), s_gesamt=None,
                             boden=float(s2m), u=float(s2_loo * np.sqrt(2.0 / nu_l) * skala), identifiziert=True,
                             nachgewiesen=bool(s2m > 0 and s2_loo / s2m > fk), grund=None,
-                            quelle='Referenzfolge: Leave-one-out gegen den Fünftelboden (Brückenvarianz β(1 − β)·Δt)',
+                            quelle='Referenzfolge: Leave-one-out gegen den Fünftelboden (Brückenvarianz β(1 − β)·Δt, '
+                                   'Betriebszeit)',
                             hinweis='Varianzgröße D [N²/s] eines Zufallspfads, keine Streuung; u: Standardunsicherheit '
                                     'von D')
     return out
