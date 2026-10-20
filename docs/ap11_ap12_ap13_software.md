@@ -213,17 +213,22 @@ Auftrag des Autors vom 20.10.2026 auf Grundlage der [Entscheidungsvorlage vom 19
 bestandene Softwareprüfung ersetzt sie nicht. Normtext: Präregistrierung §5.2, §5.4, §6, §8.8, §8.10, §9.1, §9.2, §12,
 A0, A8, A9.2, A9.3, A9.5, A9.11–A9.13 als Arbeitsfestlegungen vom 20.10.2026.
 
-**Geändertes Verhalten unter den Profilen 2026-11** (historische Profile, Prüfsätze und Ergebnisse bis PR #23 unverändert):
+**Geändertes Verhalten unter den Profilen 2026-11** (historische Profile, Prüfsätze und Ergebnisse bis PR #23
+unverändert). Ohne übergebenen Plan bzw. Verfahren wählen Harness und CLI die Vorgaben nach dem Regelprofil
+(`kampagne.plan_vorgabe`, `verfahren.zustand_fuer`, CLI `--p0-anordnung`): unter AF/ENTW-2026-10 die Anordnung
+„historisch“ und `ablauf-3`, sonst P0.7 und `ablauf-4`; ein ausdrücklich übergebener Plan gilt, wie er ist. Gegenprobe
+gegen `main` (PR #23) unter ENTW-2026-10: Dateikette A04-R4 (Ebene H) und zwei Ablaufkampagnen S02 bitgleich in allen
+gemeinsamen Feldern; neu sind nur das optionale Feld `fuenftel_zeiger` und die E3-Spalten der Kampagnen-CSV.
 
 | Bereich | bisher (2026-10) | jetzt (2026-11) | Code |
 |---|---|---|---|
 | Ablauf der Phase 1 | `ablauf-3` | `ablauf-4`: R₁ zuerst, R₂/X′/R₃ geschlossen (A1 + Z1); beim Halt entfallen ausstehende Folgeläufe, ein G1-Fall ohne gemessenes X′ erhält nach dem W-Satz eine neue Folge (H1); unvollständige Klammer: S1 nicht prüfbar, keine Sonderwiederholung (K1); Kontrollsatz mit S1–S4 (N5 + N7); Bezugseröffnung nach einem Nullpunkthalt (Rolle `bezugslauf`, `bezugswechsel`); Aufwärmen nur bei Tageswechsel; Offline-Gegenprobe in Stufe 2 | `ablauf.py`, `auswertung._folgen_gegenprobe` |
 | P0.7 | historische Anordnung | höchstens zwölf andere Läufe zwischen zwei Referenzläufen (`Plan.p0_anordnung = 'p07'`) | `generator/kampagne.py` |
-| G4 | Schwelle je Laufart | B+ für Kombinationsläufe (Mischung über die Laufgrößen, Verschiebung ±u(Δδ), Untergrenze 3σ_P), Lⱼ mit k(n₀ⱼ) und gepoolter Varianz; D als Diagnosemodus (`Regelprofil.mit_diagnose`); Fünftelzeiger als optionales Feld der Laufzusammenfassung | `g4.py`, `gueltigkeit.py`, `teil_b.py`, `stufe1.py`, `zusammenfassung.py` |
+| G4 | Schwelle je Laufart | B+ für Kombinationsläufe (Mischung über die Laufgrößen, Verschiebung ±u(Δδ), Untergrenze 3σ_P), Lⱼ mit k(n₀ⱼ)·σ_Δ,X,Lⱼ je Modul (gepoolte Schwelle mit Bartlett-Prüfung nur als Vergleich); D als Diagnosemodus (`Regelprofil.mit_diagnose`); Fünftelzeiger als optionales Feld der Laufzusammenfassung | `g4.py`, `gueltigkeit.py`, `teil_b.py`, `stufe1.py`, `zusammenfassung.py` |
 | Halte in der Simulation | ein Halt beendet die Kampagne | simulierte Wiederaufnahme fortsetzbarer Halte (W = 3, T_UA aus Teil B, Entwicklungsbeispiel 1800 s); zweites S2 oder erschöpftes W beendet endgültig | `harness/kette.py` |
 | Bezugsmengen | alle Kampagnen | G (alle begonnenen) und A (abgeschlossen, alle Prüfgrößen endlich); c, Prüfrate, b̂, u(b̂), Restbias, H2-Überdeckung über A, P(H1 und H2 bestätigt) mit Nenner G; Nachziehen bis \|A\| = soll_A mit Versuchslimit 1,5·\|A\| | `harness/mengen.py`, `harness/kalibrierung.py` |
 | c bei mehreren Rauschmodellen | gepoolt | Fassung (a): Quantil des Standardmodells, die übrigen als Sensitivität (`c_varianten`, `c_sensitivitaet`) | `harness/kalibrierung.py` |
-| Planung | Reserve r = ⌈n_min·p̂/(1 − p̂)⌉ + 2 | zusätzlich Reservebedingung 0,95 mit r += 1 bis zehnmal, sonst „Reservegrenze“; Zielfunktion aus der Regel; Zeitbilanz nach Termen; Ablauf ablauf-4 als Vorgabe beim Szenariopfad | `harness/planung.py`, `harness/reserve.py` |
+| Planung | Reserve r = ⌈n_min·p̂/(1 − p̂)⌉ + 2 | zusätzlich Reservebedingung 0,95 mit r += 1 bis zehnmal, sonst „Reservegrenze“; das erhöhte r geht in n = n_min + r der Pilotsuche ein; ist die Bedingung grundsätzlich nicht prüfbar, endet die Suche „offen“; Zielfunktion aus der Regel; Zeitbilanz nach Termen; Ablauf ablauf-4 als Vorgabe beim Szenariopfad | `harness/planung.py`, `harness/reserve.py`, `pilot.py` |
 | Planung, Rauschquelle | Szenariomodell × κ(ν_p) | Phase-0-Modell aus dem Aufruf (Strukturmodell an den oberen 80-%-Grenzen je Komponente, gemeinsamer Bodenfaktor, c_B); Szenario nur als ausdrückliches Orakel | `harness/planung.py`, `generator/phase0_modell.py` |
 | Laufgrößen | Pilotstreuungen | Laufgrößenmodell aus Phase 0 (d0) im Pilotskript und in Teil B (`pilot-0.4`, `teil_b-0.4`) | `laufgroessen.py`, `pilot.py`, `teil_b.py` |
 | E3 | Intervallregel (am Schwellenrand nicht gültig) | Option B: m = 43, E3a mit gefaltetem t-Quantil, E3b nach Rice mit κ·λ_max und ν_eff, Rückfall „beschreibend“ je Prüfgröße; Kriterien aus der Prüfsimulation nur bei der normativen Zahl | `e3_grenzen.py`, `auswertung.py`, `teil_b.py` (nr10) |
@@ -251,7 +256,9 @@ Monte-Carlo-Streuung zu trennen. Es ist keine Aussage über die Planung mit dem 
 
 - Kampagnen aus der Phase-0-Modellquelle haben nur den statischen Laufplan (kein Vorrat des Strukturgenerators für
   den Ablauf). Die Reservebedingung 0,95 ist dort nicht prüfbar; der Planungshaken legt im Regelstand 2026-11 mit dem
-  Phase-0-Modell deshalb keinen Kandidaten fest und berichtet den Kandidaten nach P allein (`kandidat_nur_P`).
+  Phase-0-Modell deshalb keinen Kandidaten fest und berichtet den Kandidaten nach P allein (`kandidat_nur_P`); die
+  Pilotsuche endet dann nach dem ersten Paar mit „offen“ (kein Befund „kein zulässiger Arbeitspunkt“, keine Rechnung
+  über das ganze Raster).
 - Nicht umgesetzt: Residuen-Bootstrap (Regel: optional), Einstellung 2 im Phase-0-Modell, Gauß-Modus als Generator,
   Modellprüfung der E3-Kriterien, Fassung (b) der Zielfunktion.
 - Die Kalibrierung P0.4 ist in den letzten Bits nicht bitreproduzierbar (χ² der Linearität hängt vom

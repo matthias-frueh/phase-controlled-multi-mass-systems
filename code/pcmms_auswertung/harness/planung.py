@@ -177,7 +177,7 @@ def haken(sid, stufe, profil, n_kal, n_pruef, seed_basis, n_kandidaten, n0_kandi
         verfahren = vf.ZUSTAND
     verfahren = vf.oder_standard(verfahren)
     zaehler = [0]
-    plan_basis = kp.Plan() if plan_basis is None else plan_basis
+    plan_basis = kp.plan_vorgabe(profil) if plan_basis is None else plan_basis
     mit_cB = c_planung(profil)
     sz = None if phase0 else szenarien.KATALOG[sid]
     bedingung = profil.wert('planung.bedingung')
@@ -288,7 +288,10 @@ def haken(sid, stufe, profil, n_kal, n_pruef, seed_basis, n_kandidaten, n0_kandi
         if not rg.ist_historisch(profil):
             out.update(rauschquelle=quelle_art, c_planung='c_B' if mit_cB else 'kalibriert')
         if ziel is not None:
-            out.update(zielfunktion=dict(fassung=zielfunktion, N_K=N_K_ziel), reserve_ziel_regel=ziel)
+            out.update(zielfunktion=dict(fassung=zielfunktion, N_K=N_K_ziel), reserve_ziel_regel=ziel,
+                       reserve_pruefbar=not any(_strukturell_nicht_pruefbar(x.get('reserve_ziel')) for x in schritte))
+            if treffer:                                 # erhöhte Reserve des Treffers (A9.2 (v)) für die Pilotsuche
+                out.update(reserve_r=treffer[0]['reserve_r'], n=treffer[0]['n_min'] + treffer[0]['reserve_r'])
             nur_p = [x for x in schritte if x.get('P_erfuellt')]
             if not treffer and nur_p:
                 out['kandidat_nur_P'] = dict(n_min=nur_p[0]['n_min'], n0=nur_p[0]['n0'], grund=nur_p[0].get('grund'),
@@ -305,6 +308,11 @@ def haken(sid, stufe, profil, n_kal, n_pruef, seed_basis, n_kandidaten, n0_kandi
             protokoll.append(dict(k=e['k'], N_z=e['N_z'], **out))
         return out
     return planung
+
+
+def _strukturell_nicht_pruefbar(rz):
+    """Reservebedingung grundsätzlich nicht prüfbar (Verfahren ohne Ablauf), nicht nur in diesem Kandidaten (|A| = 0)."""
+    return bool(rz) and rz.get('geprueft') is False and rz.get('art') != 'daten'
 
 
 def teil_b_werte(e, profil, n_kal, n_pruef, seed_basis, plan, n_min, prozesse=1, sensitivitaeten=(), verfahren=None):

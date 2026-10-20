@@ -194,7 +194,9 @@ def _lauf(sid, stufe, profil, n, seed_basis, rolle, plan, n_min, w8, rv, prozess
     nz = mengen.nachziehen(laufe, int(soll_A), float(regel['versuchslimit_faktor']), start_n=n)
     meta = dict(teile[0]['meta'], n=nz['G'], seeds=[x for t in teile for x in t['meta']['seeds']],
                 laufzeit_s=round(sum(t['meta']['laufzeit_s'] for t in teile), 2),
-                nachziehen={k: v for k, v in nz.items() if k != 'befunde'})
+                nachziehen={k: v for k, v in nz.items() if k != 'befunde'},
+                reduziert=bool(nz['A'] < rg.NORMATIVE_ZAHLEN['kampagnen_pruefung'] or nz['status'] != 'abgeschlossen'
+                               or profil.reduziert))
     return dict(teile[0], meta=meta, befunde=nz['befunde'])
 
 
@@ -234,6 +236,8 @@ def kalibrieren(sid, stufe, profil, n_kal, n_pruef, seed_basis, plan=None, n_min
            for rv in var]
     mengen_kal = [mengen.aufteilen(l['befunde']) for l in kal] if neu else None
     kal_A = [dict(l, befunde=mengen.in_A(l['befunde'])) for l in kal] if neu else kal
+    if neu and any(not l['befunde'] for l in kal_A):
+        return _ohne_A(sid, stufe, profil, seed_basis, kal, mengen_kal, var, n_pruef, cB_nu(plan))
     b0, b1 = rauschbias(kal_A, 'r0'), rauschbias(kal_A, 'r1')
     bz0, bz1 = rauschbias(kal_A, 'rz0'), rauschbias(kal_A, 'rz1')
     alle = kal_A[0]['befunde'] if neu else [b for lauf in kal for b in lauf['befunde']]
@@ -250,7 +254,7 @@ def kalibrieren(sid, stufe, profil, n_kal, n_pruef, seed_basis, plan=None, n_min
                        c_H1Z=c_bestimmen(l['befunde'], 'H1Z', bz0['bias'], bz0['u'], seed=seed_basis + 1)['c'],
                        n_A=len(l['befunde'])) for rv, l in zip(var, kal_A)]
     h2 = h2_ueberdeckung(kal_A[0], profil)
-    nu = max(2, (plan.n_bloecke if plan is not None else 20) - 1)
+    nu = cB_nu(plan)
     cB = float(stats.t.ppf(1 - 0.05 / 294, nu))
     w8 = werkzeug8(b0, b1, bz0, bz1, c1, cz, h2, len(alle), n_pruef, profil.id)
     if c_regel:
@@ -281,7 +285,8 @@ def kalibrieren(sid, stufe, profil, n_kal, n_pruef, seed_basis, plan=None, n_min
             gepoolt = True
             pool = np.r_[c1['werte'][c1['vollstaendig']], zp[vp]]
             c1 = dict(c1, c=float(np.quantile(pool, 0.95)), n_vollstaendig=int(pool.size), gepoolt=True)
-        w8 = werkzeug8(b0, b1, bz0, bz1, c1, cz, h2, len(alle), n_pruef, profil.id, pruefung, gepoolt)
+        w8 = werkzeug8(b0, b1, bz0, bz1, c1, cz, h2, len(alle), len(pr['befunde']) if neu else n_pruef, profil.id,
+                       pruefung, gepoolt)
         if quelle is not None:
             w8['modellquelle'] = quelle.kennung()['beschreibung'].get('name')
         if gepoolt:
@@ -292,15 +297,20 @@ def kalibrieren(sid, stufe, profil, n_kal, n_pruef, seed_basis, plan=None, n_min
     if neu:
         w8['e3_kriterien'] = _e3_kriterien(pr_A)['kriterien']
     restbias = None if w8['bias0'] is None or not pr_A else _restbias(pr_A, w8)
+    n_pr = len(pr_A) if neu else n_pruef                # Regelstand 2026-11: realisiertes |A| der Prüfung
+    red = bool(len(alle) < rg.NORMATIVE_ZAHLEN['kampagnen_kalibrierung'] or
+               n_pr < rg.NORMATIVE_ZAHLEN['kampagnen_pruefung']) or profil.reduziert
+    if neu:
+        red = red or any((l['meta'].get('nachziehen') or {}).get('status', 'abgeschlossen') != 'abgeschlossen'
+                         for l in kal + [pr])
     return dict(
         meta=dict(szenario=sid, stufe=stufe, profil=profil.id, profil_sha256=profil.sha256(), seed_basis=seed_basis,
-                  n_kalibrierung=len(alle), n_pruefung=n_pruef, rauschvarianten=len(var),
-                  verfahren=pr['meta']['verfahren'],
-                  reduziert=bool(len(alle) < rg.NORMATIVE_ZAHLEN['kampagnen_kalibrierung'] or
-                                 n_pruef < rg.NORMATIVE_ZAHLEN['kampagnen_pruefung']) or profil.reduziert,
+                  n_kalibrierung=len(alle), n_pruefung=n_pr, rauschvarianten=len(var),
+                  verfahren=pr['meta']['verfahren'], reduziert=red,
                   lesart=('Entwicklungsdiagnostik: weniger Kampagnen oder Replikate als normativ; keine '
-                          'Kalibrierabnahme' if (len(alle) < 1000 or n_pruef < 1000 or profil.reduziert) else
-                          'normative Kampagnenzahl'),
+                          'Kalibrierabnahme' if red else 'normative Kampagnenzahl'),
+                  **({} if not neu else dict(G_pruefung=len(pr['befunde']), G_kalibrierung=[len(l['befunde'])
+                                                                                            for l in kal])),
                   code_version=formate.code_version()),
         c_H1=dict(wert=c1['c'], se=c1['se'], n=c1['n_vollstaendig'], ausgeschlossen=c1['ausgeschlossen'],
                   gepoolt=gepoolt, c_B=cB, regel=c_regel),
@@ -309,7 +319,7 @@ def kalibrieren(sid, stufe, profil, n_kal, n_pruef, seed_basis, plan=None, n_min
         rauschbias=dict(b0=b0['bias'], u_b0=b0['u'], b1=b1['bias'], u_b1=b1['u'], halbe_spannweite0=b0['halbe_spannweite'],
                         n_varianten=b0['n_varianten'],
                         verhaeltnis_zu_u_c=dict(
-                            b0=_verh(b0['bias'], kal), b1=_verh(b1['bias'], kal, 'u0'))),
+                            b0=_verh(b0['bias'], kal_A), b1=_verh(b1['bias'], kal_A, 'u0'))),
         pruefung=pruefung, pruefschwelle=profil.wert('h1.c_pruefschwelle'), gepoolt=gepoolt, restbias=restbias,
         h2=h2, gemeinsame_bestaetigung=gemeinsam, werkzeug8=w8, raten_pruefung=rp,
         mengen=None if not neu else dict(kalibrierung=mengen_kal, pruefung=mengen.aufteilen(pr['befunde']),
@@ -327,6 +337,34 @@ def kalibrieren(sid, stufe, profil, n_kal, n_pruef, seed_basis, plan=None, n_min
         **({} if c_var is None else dict(c_varianten=c_var)),
         **({} if not c_planung else dict(c_planung='c_B')),
         **({} if quelle is None else dict(modellquelle=quelle.kennung())))
+
+
+def cB_nu(plan):
+    return max(2, (plan.n_bloecke if plan is not None else 20) - 1)
+
+
+def _ohne_A(sid, stufe, profil, seed_basis, kal, mengen_kal, var, n_pruef, nu):
+    """Ergebnis ohne verwertbare Kalibrierkampagne (|A| = 0 in einer Variante, Regelstand 2026-11): keine Werte für
+    Teil B, keine Prüfsimulation; Status „nicht abgeschlossen“ statt Abbruch."""
+    grund = 'Kalibrierung ohne verwertbare Kampagne (|A| = 0): b̂, c und H2 nicht bestimmbar, keine Prüfsimulation'
+    leer = dict(wert=None, se=None, n=0, ausgeschlossen=None)
+    kw = dict(szenario=sid, stufe=stufe, profil=profil.id, normativ=rg.NORMATIVE_ZAHLEN['kampagnen_pruefung'])
+    return dict(
+        status='nicht abgeschlossen', grund=grund,
+        meta=dict(szenario=sid, stufe=stufe, profil=profil.id, profil_sha256=profil.sha256(), seed_basis=seed_basis,
+                  n_kalibrierung=0, n_pruefung=0, rauschvarianten=len(var), verfahren=kal[0]['meta']['verfahren'],
+                  reduziert=True, lesart='nicht abgeschlossen: ' + grund, G_pruefung=0,
+                  G_kalibrierung=[len(l['befunde']) for l in kal], code_version=formate.code_version()),
+        c_H1=dict(leer, gepoolt=False, c_B=float(stats.t.ppf(1 - 0.05 / 294, nu)), regel=None),
+        c_H1Z=dict(leer, c_B=float(stats.t.ppf(1 - 0.05 / 882, nu))), rauschbias=None, pruefung=None,
+        pruefschwelle=profil.wert('h1.c_pruefschwelle'), gepoolt=False, restbias=None,
+        h2=dict(typ=None, grund=grund, ueberdeckung={}),
+        gemeinsame_bestaetigung=metriken.rate(0, 0, 'P(H1 und H2 bestätigt) (keine Prüfsimulation)', **kw),
+        werkzeug8=None, raten_pruefung=None,
+        mengen=dict(kalibrierung=mengen_kal, pruefung=None, hinweis=grund,
+                    nachziehen=dict(kalibrierung=[l['meta'].get('nachziehen') for l in kal], pruefung=None)),
+        c_sensitivitaet=None, reserve_ziel=dict(geprueft=False, grund=grund, art='daten'), e3=None, zeitbilanz=None,
+        laeufe=dict(kalibrierung=[l['meta'] for l in kal], pruefung=None))
 
 
 def c_nach_regel(kal, regel, b0, seed):

@@ -42,8 +42,9 @@ python3 -m pcmms_auswertung.cli harness kalibrierbeispiel --konfig ../rechnungen
 
 Der Trockenlauf gibt den vollständigen Ausführungsbefehl aus (mit `--ausgabe` und, bei der großen Rechnung,
 `--bestaetigung`). Der Trockenlauf der großen Konfiguration schätzt 2000 bis 4500 Kampagnen (ohne bzw. mit Pool-Neuberechnung und
-ausgeschöpftem Versuchslimit), bei 7,5 s je Kampagne etwa 4,2 bis 9,4 Kernstunden, mit vier Prozessen etwa 1,0 bis
-2,3 Stunden Wandzeit, für **ein** System. Vor einer großen Rechnung die Sekunden je Kampagne mit einer kleinen
+ausgeschöpftem Versuchslimit), bei 82 s je Kampagne mit den normativen Replikatzahlen (B = 10 000; Belegpaket der
+Entscheidungsvorlage: A4 45,5 Kernstunden für 1000 + 1000 Kampagnen) etwa 46 bis 103 Kernstunden, mit vier Prozessen
+etwa 11 bis 26 Stunden Wandzeit, für **ein** System (V1-G0 nach dem Belegpaket bis etwa das 1,8-Fache). Vor einer großen Rechnung die Sekunden je Kampagne mit einer kleinen
 Laufzeitprobe ersetzen (Feld `sekunden_je_kampagne`).
 
 ## Sicherungen

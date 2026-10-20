@@ -174,7 +174,7 @@ def ausfuehren(sid, stufe, profil, n, seed_basis, rolle='pruefung', plan=None, n
     """n Kampagnen des Szenariopunkts; Rückgabe dict(meta, befunde, wahrheit). verfahren: Bindung der Phase-0-Größen
     und Ablauf der Phase 1 (Vorgabe verfahren.STANDARD), in der Herkunft vermerkt. start: erster Kampagnenindex der
     Rolle (Nachziehen setzt die Seedfolge fort)."""
-    plan = kp.Plan() if plan is None else plan
+    plan = kp.plan_vorgabe(profil) if plan is None else plan
     verfahren = vf.oder_standard(verfahren)
     seeds = [kampagnen_seed(seed_basis, rolle, sid, stufe, i) for i in range(start, start + n)]
     auftraege = [(sid, stufe, profil, plan, s, werkzeug8, n_min, rausch, staerke, k_max, verfahren) for s in seeds]

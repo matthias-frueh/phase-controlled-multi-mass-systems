@@ -215,11 +215,11 @@ def kampagne_ablauf(sid, stufe, plan, seed, profil, werkzeug8=None, n_min=None, 
     (Ablauf.fortsetzen statt ausfuehren). wiederaufnahme: None = nach Profil (Regel harness.wiederaufnahme, synthetisch
     bis W Wiederaufnahmen), False = keine. Rückgabe dict(modell, laeufe, tab0, kalibrierung, teil_b, pilot, ablauf,
     kennung, wiederaufnahme, …)."""
-    v = verfahren if verfahren is not None else vf.ZUSTAND
+    v = verfahren if verfahren is not None else vf.zustand_fuer(profil)
     if v.ablauf != 'zustand':
         raise ValueError('kampagne_ablauf verlangt ein Verfahren mit Ablauf „zustand“')
     sz = szenarien.KATALOG[sid]
-    plan = kampagne.Plan() if plan is None else plan
+    plan = kampagne.plan_vorgabe(profil) if plan is None else plan
     m = modell if modell is not None else szenarien.modell(sid, stufe, plan=plan, staerke=staerke, rausch=rausch,
                                                             k_max=k_max)
     kennung = formate.synth_kennung('ABLAUF', sid, stufe, seed)
@@ -279,7 +279,7 @@ def kette(sid, stufe, profil, plan=None, seed=1, werkzeug8=None, staerke=None, k
         return _kette_ablauf(sid, stufe, profil, plan, seed, werkzeug8, staerke, kalibrierung, n_min, mit_wahrheit,
                              rausch, k_max, v)
     sz = szenarien.KATALOG[sid]
-    plan = kampagne.Plan() if plan is None else plan
+    plan = kampagne.plan_vorgabe(profil) if plan is None else plan
     kennung = formate.synth_kennung('KETTE', sid, stufe, seed)
     zeit = {}
     t = time.perf_counter()

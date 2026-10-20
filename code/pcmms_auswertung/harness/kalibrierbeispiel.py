@@ -32,7 +32,10 @@ MODI = ('demonstration', 'gross')
 PFLICHT = ('schema', 'modus', 'szenario', 'stufe', 'profil', 'plan', 'n_min', 'verfahren', 'seed_basis', 'soll_A',
            'prozesse', 'partie')
 DEMO_GRENZEN = dict(soll_A=5, n_bloecke=4, bootstrap_B=200)       # oberhalb davon ist es keine Demonstration
-SEKUNDEN_JE_KAMPAGNE = 7.5            # Vorgabe der Kostenabschätzung (PR #23: 5–8 s je Kampagne, B = 1000)
+# Vorgabe der Kostenabschätzung je Modus: Demonstration mit reduzierten Replikaten (PR #23: 5–8 s je Kampagne bei
+# B = 1000); große Rechnung mit den normativen Replikatzahlen (B = 10 000): 82 s je Kampagne nach dem Belegpaket der
+# Entscheidungsvorlage (A4: 45,5 Kernstunden für 1000 + 1000 Kampagnen; Softwaredoku §5: 78 s bei n = 20)
+SEKUNDEN_JE_KAMPAGNE = dict(demonstration=7.5, gross=82.0)
 
 
 class BeispielFehler(ValueError):
@@ -114,7 +117,7 @@ def auftragsliste(k):
 
 
 def kosten(k, sekunden=None):
-    s = float(sekunden or k.get('sekunden_je_kampagne') or SEKUNDEN_JE_KAMPAGNE)
+    s = float(sekunden or k.get('sekunden_je_kampagne') or SEKUNDEN_JE_KAMPAGNE[k['modus']])
     soll = int(k['soll_A'])
     limit = int(math.ceil(float(k['_profil'].wert('harness.nachziehen')['versuchslimit_faktor']) * soll))
     n_min, n_max = 2 * soll, 3 * limit                              # ohne bzw. mit Pool-Neuberechnung und Limit
@@ -208,7 +211,7 @@ def ausfuehren(k, verzeichnis, bestaetigung=None):
                                  prozesse=int(k['prozesse']), verfahren=k['_verfahren'], soll_A=int(k['soll_A']),
                                  ausfuehren=cp)
     kenn = KENNZEICHNUNG_DEMO if k['modus'] == 'demonstration' else KENNZEICHNUNG_GROSS
-    w8 = dict(r['werkzeug8'], kennzeichnung=kenn)
+    w8 = dict(r['werkzeug8'] or {}, kennzeichnung=kenn)                 # ohne Werte bei |A| = 0
     nz = r['mengen']['nachziehen']
     abgeschlossen = all((x or {}).get('status') == 'abgeschlossen' for x in nz['kalibrierung'] + [nz['pruefung']])
     out = dict(kennzeichnung=kenn, gerechnet=True, konfiguration_sha256=sha, betriebsart=k['modus'],

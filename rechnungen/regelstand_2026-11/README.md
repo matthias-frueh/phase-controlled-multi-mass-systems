@@ -5,7 +5,9 @@ Stand 20.10.2026 · Skript [`kleine_proben.py`](kleine_proben.py) · Lizenz: Cod
 Die Proben gehören zum Auftrag vom 20.10.2026 (Gesamtumsetzung a–d der Entscheidungsvorlage vom 19.10.2026, **ohne
 große Kalibrierung**). Es sind Funktionsnachweise und Beispiele mit festen Seeds und kleinen Zahlen. Sie bestätigen
 weder eine Fehlausschlussrate noch eine Power, eine Überdeckung oder eine Vollständigkeitsrate. Profil
-`ENTW-2026-11` mit reduzierten Replikaten (B = 100, H3-MC = 100, ε_ctrl-Datensätze 200). Ein Prozess, ein BLAS-Thread.
+`ENTW-2026-11` mit reduzierten Replikaten (B = 100, H3-MC = 100, ε_ctrl-Datensätze 200). Ein Prozess, ein BLAS-Thread (die
+Umgebungsvariablen waren bei den Läufen gesetzt; das Skript setzt sie inzwischen selbst vor dem Import von NumPy und
+hält sie im Ergebnis fest).
 
 ```
 python3 rechnungen/regelstand_2026-11/kleine_proben.py g4    # → probe_g4.json

@@ -66,6 +66,13 @@ ZUSTAND_HISTORISCH = Verfahren('plan', 'zustand', Ablaufoptionen(), 'ablauf-3') 
 STANDARD = STATISCH
 
 
+def zustand_fuer(profil):
+    """Verfahren „zustand“ in der Ablauffassung des Regelprofils: ablauf-3 unter historischen Profilen
+    (AF/ENTW-2026-10, Ergebnisse bis PR #23), sonst die aktuelle Fassung."""
+    from . import regeln
+    return ZUSTAND_HISTORISCH if profil is not None and regeln.ist_historisch(profil) else ZUSTAND
+
+
 def oder_standard(v):
     return STANDARD if v is None else v
 

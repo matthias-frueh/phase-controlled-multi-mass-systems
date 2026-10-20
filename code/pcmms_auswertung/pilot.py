@@ -437,9 +437,17 @@ def suche(tab, kal, profil, f, k_start, basis, zeit, planung, tabelle_fuer, N_z_
             pl = planung(aufruf)
             schritt['planung'] = {kk: v for kk, v in pl.items() if kk not in ('details',)}
             schritte.append(schritt)
+            if pl.get('reserve_pruefbar') is False:     # Regelstand 2026-11: an keinem Paar prüfbar, Suche offen
+                return dict(ergebnis='offen', grund='Reservebedingung planung.reserve_ziel in der Planungssimulation '
+                                                    'nicht prüfbar (' + str(pl.get('grund')) + '); kein Paar (k, T_a) '
+                                                    'kann sie erfüllen, die Suche endet ohne Festlegung',
+                            schritte=schritte, reduktion=reduktion, kandidat_nur_P=pl.get('kandidat_nur_P'))
             if pl.get('n_min') is None:
                 continue
             r = math.ceil(pl['n_min'] * p_hat / (1 - p_hat)) + profil.wert('planung.reserve')
+            if pl.get('reserve_r') is not None:         # Regelstand 2026-11: Reserve nach planung.reserve_ziel
+                schritt['reserve_r_formel'] = r
+                r = int(pl['reserve_r'])
             n = pl['n_min'] + r
             schritt.update(reserve_r=r, n=n, erfuellt=bool(n <= nmax))
             if n <= nmax:
@@ -461,6 +469,8 @@ def _klasse_paar(schritt):
     if grund.startswith('nicht simuliert'):
         return 'aufrufgrenze', None
     kand = p.get('kandidaten') or []
+    if any(c.get('P_erfuellt') and not c.get('erfuellt') for c in kand):
+        return 'reserve', None                        # Regelstand 2026-11: P ≥ 0,8 erreicht, Reservegrenze erreicht
     if any('uebersprungen' not in c for c in kand):
         return 'bedingung', None                      # simuliert, kein Kandidat erfüllt die gemeinsame Bedingung
     if kand:
@@ -476,9 +486,10 @@ def _paare(n, fall='dativ'):
 
 def grund_ohne_arbeitspunkt(schritte, reduktion=None):
     """Begründung, wenn die Suche ohne Arbeitspunkt endet, aus den tatsächlichen Rückgaben je Paar (k, T_a): Grenze der
-    Planungsaufrufe, gemeinsame Bedingung von keinem simulierten Kandidaten erreicht, Zeitbudget n = n_min + r > n_max
-    oder ein sonstiger Grund des Hakens; bei mehreren Gründen alle mit der Zahl der Paare. Ist die Suche reduziert
-    (Aufrufgrenze, verringertes N_z-Raster), wird keine Unzulässigkeit außerhalb dieser Suche behauptet."""
+    Planungsaufrufe, gemeinsame Bedingung von keinem simulierten Kandidaten erreicht, Reservegrenze (Regelstand 2026-11),
+    Zeitbudget n = n_min + r > n_max oder ein sonstiger Grund des Hakens; bei mehreren Gründen alle mit der Zahl der
+    Paare. Ist die Suche reduziert (Aufrufgrenze, verringertes N_z-Raster), wird keine Unzulässigkeit außerhalb dieser
+    Suche behauptet."""
     if not schritte:
         return ('kein Paar (k, T_a) im Suchraster: T_e + T_a > T_e,P + T_a,P für alle k'
                 + (f' ({reduktion})' if reduktion else ''))
@@ -492,6 +503,9 @@ def grund_ohne_arbeitspunkt(schritte, reduktion=None):
     if 'bedingung' in zahl:
         teile.append(f'an {_paare(zahl["bedingung"])} (k, T_a) erreicht kein simulierter Kandidat '
                      'P(H1 und H2 bestätigt | exakt) ≥ 0,8')
+    if 'reserve' in zahl:
+        teile.append(f'an {_paare(zahl["reserve"])} (k, T_a) erreicht ein Kandidat P ≥ 0,8, verfehlt aber die '
+                     'Reservebedingung 0,95 auch nach den zulässigen Erhöhungen von r (Reservegrenze)')
     if 'zeitbudget' in zahl and len(zahl) > 1:
         teile.append(f'an {_paare(zahl["zeitbudget"])} überschreitet n = n_min + r das Zeitbudget n_max')
     if 'aufrufgrenze' in zahl:

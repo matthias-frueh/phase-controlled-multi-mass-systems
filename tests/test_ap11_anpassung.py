@@ -412,6 +412,54 @@ def test_suchbegruendung_im_ablauf_mit_aufrufgrenze(phase0):
                                     'Suche')
 
 
+RESERVEGRENZE = dict(n_min=None, n0=None, grund='kein Kandidat erfüllt P ≥ 0,8 und die Reservebedingung: Reservegrenze',
+                     kandidaten=[dict(n_min=18, n0=20, reserve_r=12, P_gemeinsam=0.9, P_erfuellt=True, erfuellt=False,
+                                      grund='Reservegrenze: Bedingung nach zusatz_max = 10 Erhöhungen verfehlt')])
+
+
+def test_suchbegruendung_reservegrenze_eigener_grund():
+    """Regelstand 2026-11: Ein Paar, an dem P ≥ 0,8 erreicht, die Reservebedingung aber verfehlt wird, steht nicht
+    unter „kein Kandidat erreicht P ≥ 0,8“."""
+    g = pilot.grund_ohne_arbeitspunkt([_paar(RESERVEGRENZE), _paar(BEDINGUNG)])
+    assert g == ('an 1 Paar (k, T_a) erreicht kein simulierter Kandidat P(H1 und H2 bestätigt | exakt) ≥ 0,8; an 1 Paar '
+                 '(k, T_a) erreicht ein Kandidat P ≥ 0,8, verfehlt aber die Reservebedingung 0,95 auch nach den '
+                 'zulässigen Erhöhungen von r (Reservegrenze)')
+
+
+def test_suche_uebernimmt_die_erhoehte_reserve_des_hakens(phase0):
+    """A9.2 (v): Hat der Haken r wegen der Reservebedingung erhöht, legt die Suche n = n_min + r mit diesem r fest
+    (nicht mit der Formel allein); ohne Angabe des Hakens gilt die Formel wie bisher."""
+    m, kal, laeufe, tab = phase0
+    prof = regeln.profil('ENTW-2026-10').mit_reduktion(eps_ctrl_datensaetze=200)
+
+    def haken(e):
+        return dict(n_min=18, n0=20, reserve_r=9, n=27, kandidaten=[], quelle='Test')
+    s = pilot.pilot_auswerten(tab, kal, prof, 10.0, zeit=ZEIT, seed=3, planung=haken)['suche']
+    assert s['ergebnis'] == 'festgelegt' and s['reserve_r'] == 9 and s['n'] == 27
+    assert s['schritte'][-1]['reserve_r_formel'] < 9
+
+    def ohne(e):
+        return dict(n_min=18, n0=20, kandidaten=[], quelle='Test')
+    s0 = pilot.pilot_auswerten(tab, kal, prof, 10.0, zeit=ZEIT, seed=3, planung=ohne)['suche']
+    assert s0['reserve_r'] == s['schritte'][-1]['reserve_r_formel'] and 'reserve_r_formel' not in s0['schritte'][-1]
+
+
+def test_suche_offen_wenn_die_reservebedingung_nicht_pruefbar_ist(phase0):
+    """Meldet der Haken die Reservebedingung als nicht prüfbar (Phase-0-Modellquelle mit statischem Laufplan), endet
+    die Suche nach dem ersten Paar „offen“, statt alle Paare zu simulieren und Unzulässigkeit zu melden."""
+    m, kal, laeufe, tab = phase0
+    prof = regeln.profil('ENTW-2026-10').mit_reduktion(eps_ctrl_datensaetze=200)
+    aufrufe = []
+
+    def haken(e):
+        aufrufe.append(e['k'])
+        return dict(n_min=None, n0=None, reserve_pruefbar=False, kandidaten=[], kandidat_nur_P=dict(n_min=18, n0=20),
+                    grund='kein Kandidat erfüllt P ≥ 0,8 und die Reservebedingung: nicht prüfbar')
+    s = pilot.pilot_auswerten(tab, kal, prof, 10.0, zeit=ZEIT, seed=3, planung=haken)['suche']
+    assert s['ergebnis'] == 'offen' and len(aufrufe) == 1 and 'nicht prüfbar' in s['grund']
+    assert s['kandidat_nur_P']['n_min'] == 18
+
+
 def test_pilot_eps_ctrl_betriebsstreuung_und_p_hat(phase0):
     m, kal, laeufe, tab = phase0
     prof = regeln.profil('ENTW-2026-10').mit_reduktion(eps_ctrl_datensaetze=2000)

@@ -16,7 +16,11 @@ import os
 import sys
 import time
 
-import numpy as np
+THREADS = ('OMP_NUM_THREADS', 'OPENBLAS_NUM_THREADS', 'MKL_NUM_THREADS')
+for _v in THREADS:                                  # ein BLAS-Thread je Prozess; wirkt nur vor dem Import von NumPy
+    os.environ.setdefault(_v, '1')
+
+import numpy as np  # noqa: E402
 
 WURZEL = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..'))
 sys.path.insert(0, os.path.join(WURZEL, 'code'))
@@ -142,9 +146,9 @@ def main(argv=None):
     ap.add_argument('teil', choices=('g4', 'e2e'))
     ap.add_argument('--ausgabe', default=os.path.join(WURZEL, 'rechnungen', 'regelstand_2026-11'))
     a = ap.parse_args(argv)
-    os.environ.setdefault('OMP_NUM_THREADS', '1')
     r = g4_probe() if a.teil == 'g4' else e2e_probe(a.ausgabe)
-    r.update(code_version=formate.code_version(), umgebung=dict(python=sys.version.split()[0], numpy=np.__version__))
+    r.update(code_version=formate.code_version(), umgebung=dict(python=sys.version.split()[0], numpy=np.__version__,
+                                                                threads={v: os.environ.get(v) for v in THREADS}))
     pfad = os.path.join(a.ausgabe, f'probe_{a.teil}.json')
     with open(pfad, 'w', encoding='utf-8') as f:
         json.dump(formate._json_wert(r), f, ensure_ascii=False, indent=1)

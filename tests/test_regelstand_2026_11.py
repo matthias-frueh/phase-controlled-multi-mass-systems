@@ -82,3 +82,20 @@ def test_ablauffassung_in_kennung_und_keine_stille_fortsetzung():
         vf.Verfahren('plan', 'statisch', None, 'ablauf-4')
     with pytest.raises(ablauf.AblaufFehler, match='unbekannt'):
         ablauf.Ablauf([], None, None, None, None, ablauf.Ablaufoptionen(), 1.0, 1.0, fassung='ablauf-9')
+
+
+def test_vorgaben_ohne_plan_und_verfahren_nach_dem_profil():
+    """Ohne übergebenen Plan bzw. Verfahren rechnen historische Profile mit der Anordnung „historisch“ und ablauf-3
+    (Ergebnisse bis PR #23), die Profile 2026-11 mit P0.7 und ablauf-4; ein ausdrücklicher Plan gilt, wie er ist."""
+    import argparse
+    from pcmms_auswertung import cli, verfahren as vf
+    from pcmms_auswertung.generator import kampagne as kp
+    alt, neu = regeln.profil('ENTW-2026-10').mit_reduktion(bootstrap_B=100), regeln.profil('AF-2026-11')
+    assert kp.plan_vorgabe(alt).p0_anordnung == 'historisch' and kp.plan_vorgabe(neu).p0_anordnung == 'p07'
+    assert kp.plan_vorgabe(alt, p0_anordnung='p07').p0_anordnung == 'p07' and kp.plan_vorgabe().p0_anordnung == 'p07'
+    assert vf.zustand_fuer(alt) == vf.ZUSTAND_HISTORISCH and vf.zustand_fuer(neu) == vf.ZUSTAND
+    a = argparse.Namespace(n0=20, n_pilot=20, n_bloecke=4, n_zyklen=100, p0_anordnung=None, verfahren='zustand')
+    assert cli._plan(a, alt).p0_anordnung == 'historisch' and cli._plan(a, neu).p0_anordnung == 'p07'
+    assert cli._verfahren(a, alt).fassung == 'ablauf-3' and cli._verfahren(a, neu).fassung == 'ablauf-4'
+    a.p0_anordnung = 'p07'
+    assert cli._plan(a, alt).p0_anordnung == 'p07'

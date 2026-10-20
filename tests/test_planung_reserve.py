@@ -51,6 +51,7 @@ def test_reserve_wird_erhoeht_bis_die_bedingung_erfuellt_ist(monkeypatch):
     assert c['reserve_r'] == 5 and c['reserve_zusatz'] == 3 and [x['reserve_r'] for x in c['reserve_verlauf']] == \
         [2, 3, 4]
     assert c['erfuellt'] and c['plan_simuliert']['n_bloecke'] == 7 and out['n_min'] == 2
+    assert out['reserve_r'] == 5 and out['n'] == 7 and out['reserve_pruefbar']      # an die Pilotsuche (A9.2 (v))
     assert c['messzeit']['zeitbilanz'] == dict(terme={}, nenner=2)
     assert out['zielfunktion'] == dict(fassung='a', N_K=21) and out['reserve_ziel_regel']['anteil'] == 0.95
     assert gesehen[0]['verfahren'] == vf.ZUSTAND and out['verfahren'] == vf.ZUSTAND.kennung()   # ablauf-4
@@ -75,6 +76,7 @@ def test_nicht_pruefbar_ohne_ablauf_kein_kandidat(monkeypatch):
                         rauschquelle=ORAKEL)(_aufruf())
     assert len(gesehen) == 1 and out['n_min'] is None and 'nicht prüfbar' in out['grund']
     assert out['kandidat_nur_P']['n_min'] == 2 and len(out['kandidaten']) == 1     # weitere ebenso nicht prüfbar
+    assert out['reserve_pruefbar'] is False and 'reserve_r' not in out
 
 
 def test_zielfunktion_aus_der_regel_und_historisch_unveraendert(monkeypatch):

@@ -27,7 +27,7 @@ def test_trockenlauf_startet_nichts_und_nennt_kosten(kein_rechnen, capsys):
     t = kb.trockenlauf(k)
     assert t['gerechnet'] is False and t['betriebsart'] == 'trockenlauf'
     assert t['profil']['id'] == 'ENTW-2026-11' and t['plan']['p0_anordnung'] == 'p07'
-    assert t['kosten']['kampagnen_min'] == 2000 and t['kosten']['kernstunden_min'] > 4
+    assert t['kosten']['kampagnen_min'] == 2000 and t['kosten']['kernstunden_min'] > 40     # B = 10 000
     assert [r['rolle'] for r in t['auftragsliste']][:2] == ['kalibrierung_c', 'pruefung_c']
     assert t['auftragsliste'][0]['versuchslimit'] == 1500 and len(t['auftragsliste'][0]['erste_seeds']) == 5
     assert '--bestaetigung' in t['ausfuehrung'] and '--ausgabe' in t['ausfuehrung']

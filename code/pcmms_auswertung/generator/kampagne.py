@@ -12,8 +12,10 @@ Phase 0 (P0.7, Anordnung der Referenzläufe, Plan.p0_anordnung):
               am Ende und möglichst gleichmäßig dazwischen. Bei 120 anderen Läufen sind das 42 Referenzläufe mit
               Abständen von zwei oder drei Läufen. Vorgabe.
   historisch  Anordnung bis PR #23: ein Referenzlauf nach je ⌊n_andere/41⌋ (höchstens 12) anderen Läufen, also bei
-              120 anderen Läufen 61 Referenzläufe im Abstand 2. Nur ausdrücklich, zur Nachrechnung historischer
-              Ergebnisse; gespeicherte Pläne ohne das Feld p0_anordnung stammen aus dieser Zeit (plan_aus_dict).
+              120 anderen Läufen 61 Referenzläufe im Abstand 2. Zur Nachrechnung historischer Ergebnisse; gespeicherte
+              Pläne ohne das Feld p0_anordnung stammen aus dieser Zeit (plan_aus_dict).
+Ohne übergebenen Plan wählen die Einstiege der Harness und die CLI die Anordnung nach dem Regelprofil (plan_vorgabe):
+'historisch' unter den historischen Profilen (AF/ENTW-2026-10), sonst 'p07'. Ein übergebener Plan gilt, wie er ist.
 """
 import math
 from dataclasses import asdict, dataclass, replace
@@ -60,6 +62,15 @@ def plan_dict(plan):
     if d.get('p0_anordnung') == 'historisch':
         d.pop('p0_anordnung')
     return d
+
+
+def plan_vorgabe(profil=None, **kw):
+    """Plan mit der Phase-0-Anordnung des Regelprofils: 'historisch' unter historischen Profilen (regeln.ist_historisch),
+    sonst die Vorgabe 'p07'; ohne Profil 'p07'. kw: übrige Planfelder; eine ausdrückliche p0_anordnung gilt."""
+    from .. import regeln
+    if 'p0_anordnung' not in kw and profil is not None and regeln.ist_historisch(profil):
+        kw['p0_anordnung'] = 'historisch'
+    return Plan(**kw)
 
 
 def plan_aus_dict(d):

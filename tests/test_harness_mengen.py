@@ -166,3 +166,24 @@ def test_zeitbilanz_nach_termen_und_zielfunktion():
     assert reserve.kandidaten_ordnen([3, 2], [20, 30])[0] == (2, 20)
     with pytest.raises(ValueError, match='nicht umgesetzt'):
         reserve.kandidaten_ordnen([3], [20], fassung='b')
+
+
+def test_kalibrierung_ohne_verwertbare_kampagne_nicht_abgeschlossen():
+    """|A| = 0 in der Kalibrierung (Regelstand 2026-11): Ergebnis „nicht abgeschlossen“ ohne Werte für Teil B und ohne
+    Prüfsimulation statt eines Abbruchs; der Planungshaken wertet das als Kandidat ohne P, nicht als grundsätzlich
+    nicht prüfbare Reservebedingung."""
+    from pcmms_auswertung.generator import kampagne as kp
+    rollen = []
+
+    def ausfuehren(sid, stufe, profil, n, seed_basis, rolle, plan, n_min, w8, rv, **kw):
+        rollen.append(rolle)
+        return dict(meta=dict(n=n, seeds=list(range(n)), laufzeit_s=0.0, verfahren=vf.ZUSTAND.kennung()),
+                    befunde=[dict(seed=i, ablauf=dict(status='abgebrochen')) for i in range(n)], wahrheit={})
+    r = kalibrierung.kalibrieren('N01-A4', 'L1', NEU, 2, 2, 5, plan=kp.Plan(n0=20, n_pilot=20, n_bloecke=4), n_min=2,
+                                 verfahren=vf.ZUSTAND, ausfuehren=ausfuehren)
+    assert rollen == ['kalibrierung_c'] and r['status'] == 'nicht abgeschlossen' and r['werkzeug8'] is None
+    assert r['mengen']['kalibrierung'][0]['A'] == 0 and r['gemeinsame_bestaetigung']['rate'] is None
+    assert r['reserve_ziel'] == dict(geprueft=False, grund=r['grund'], art='daten') and r['meta']['reduziert']
+    from pcmms_auswertung.harness import planung
+    assert not planung._strukturell_nicht_pruefbar(r['reserve_ziel'])
+    assert planung._strukturell_nicht_pruefbar(dict(geprueft=False, grund='nur mit Ablauf ablauf-4'))

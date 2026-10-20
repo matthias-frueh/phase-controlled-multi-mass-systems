@@ -64,11 +64,17 @@ def _opt_plan(ap):
     ap.add_argument('--n-bloecke', type=int, default=24, help='Blöcke n in Phase 1')
     ap.add_argument('--n-zyklen', type=int, default=100, help='Zyklen im Auswertefenster')
     ap.add_argument('--n-min', type=int, default=None, help='n_min für Teil B (Vorgabe: n − 2)')
+    ap.add_argument('--p0-anordnung', choices=('p07', 'historisch'), default=None,
+                    help='Anordnung der Referenzläufe in Phase 0 (P0.7); Vorgabe nach dem Regelprofil: historisch unter '
+                         'AF/ENTW-2026-10, sonst p07')
 
 
-def _plan(a):
+def _plan(a, profil=None):
     from .generator import kampagne
-    return kampagne.Plan(n0=a.n0, n_pilot=a.n_pilot, n_bloecke=a.n_bloecke, n_zyklen=a.n_zyklen)
+    kw = dict(n0=a.n0, n_pilot=a.n_pilot, n_bloecke=a.n_bloecke, n_zyklen=a.n_zyklen)
+    if getattr(a, 'p0_anordnung', None):
+        kw['p0_anordnung'] = a.p0_anordnung
+    return kampagne.plan_vorgabe(profil, **kw)
 
 
 VERFAHREN = ('statisch', 'zustand', 'historisch')
@@ -81,9 +87,10 @@ def _opt_verfahren(ap):
                          '(Bindung an k der Pilotgrößen wie bis PR #22, nur zur Nachrechnung)')
 
 
-def _verfahren(a):
+def _verfahren(a, profil=None):
+    """Verfahren der CLI; „zustand“ in der Ablauffassung des Regelprofils (ablauf-3 unter AF/ENTW-2026-10)."""
     from . import verfahren as vf
-    return dict(statisch=vf.STATISCH, zustand=vf.ZUSTAND, historisch=vf.HISTORISCH)[a.verfahren]
+    return dict(statisch=vf.STATISCH, zustand=vf.zustand_fuer(profil), historisch=vf.HISTORISCH)[a.verfahren]
 
 
 def _json(obj):
@@ -310,8 +317,9 @@ def _harness(ap, argv):
         print(_json(dateien.bewerten(a.ergebnis, a.wahrheit, a.ausgabe)))
     elif a.was == 'kampagnen':
         w8 = dateien.lies_werkzeug8(a.werkzeug8) if a.werkzeug8 != 'testvorgabe' else None
-        lauf = kampagnen.ausfuehren(a.szenario, a.stufe, _profil(a), a.kampagnen, a.seed, a.rolle, _plan(a), a.n_min,
-                                    w8, prozesse=a.prozesse, verfahren=_verfahren(a))
+        prof = _profil(a)
+        lauf = kampagnen.ausfuehren(a.szenario, a.stufe, prof, a.kampagnen, a.seed, a.rolle, _plan(a, prof), a.n_min,
+                                    w8, prozesse=a.prozesse, verfahren=_verfahren(a, prof))
         pf = kampagnen.schreibe(a.ausgabe, lauf)
         rt = kampagnen.raten(lauf)
         print(f'{a.kampagnen} Kampagnen {a.szenario} {a.stufe} ({lauf["meta"]["laufzeit_s"]} s); Wahrheit '
@@ -322,7 +330,7 @@ def _harness(ap, argv):
     elif a.was == 'kalibrierung':
         prof = _profil(a)
         kal = kalibrierung.kalibrieren(a.szenario, a.stufe, prof, a.kampagnen_kal, a.kampagnen_pruef, a.seed,
-                                       _plan(a), a.n_min, a.prozesse, verfahren=_verfahren(a))
+                                       _plan(a, prof), a.n_min, a.prozesse, verfahren=_verfahren(a, prof))
         os.makedirs(a.ausgabe, exist_ok=True)
         kenn = formate.synth_kennung('W8', a.szenario, a.stufe, a.seed)
         formate.schreibe_objekt(os.path.join(a.ausgabe, 'werkzeug8'), formate.kopf('werkzeug8', kenn),
@@ -455,7 +463,8 @@ def _kette(ap, argv):
     _opt_plan(ap)
     a = ap.parse_args(argv)
     from .harness import dateien
-    r = dateien.kette_dateien(a.ausgabe, a.szenario, a.stufe, _profil(a), _plan(a), a.seed, a.ebene, a.n_min,
+    prof = _profil(a)
+    r = dateien.kette_dateien(a.ausgabe, a.szenario, a.stufe, prof, _plan(a, prof), a.seed, a.ebene, a.n_min,
                               a.werkzeug8, a.band)
     print(r['ergebnis']['text'])
     bw = r['bewertung']
