@@ -30,7 +30,7 @@ def test_trockenlauf_startet_nichts_und_nennt_kosten(kein_rechnen, capsys):
     assert t['kosten']['kampagnen_min'] == 2000 and t['kosten']['kernstunden_min'] > 4
     assert [r['rolle'] for r in t['auftragsliste']][:2] == ['kalibrierung_c', 'pruefung_c']
     assert t['auftragsliste'][0]['versuchslimit'] == 1500 and len(t['auftragsliste'][0]['erste_seeds']) == 5
-    assert '--bestaetigung' in t['ausfuehrung']
+    assert '--bestaetigung' in t['ausfuehrung'] and '--ausgabe' in t['ausfuehrung']
     assert cli.main(['harness', 'kalibrierbeispiel', '--konfig', GROSS]) == 0
     assert json.loads(capsys.readouterr().out)['gerechnet'] is False
 

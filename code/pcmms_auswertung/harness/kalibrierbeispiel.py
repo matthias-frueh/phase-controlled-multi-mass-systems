@@ -136,7 +136,8 @@ def trockenlauf(k):
                 modell=dict(szenario=k['szenario'], stufe=k['stufe'], rauschmodell='Szenario (Katalog)',
                             hinweis='Planungs- und Kalibriermodell aus Phase 0 siehe harness.planung (Teil d)'),
                 code_version=formate.code_version(), auftragsliste=auftragsliste(k), kosten=kosten(k),
-                ausfuehrung=('python3 -m pcmms_auswertung.cli harness kalibrierbeispiel --konfig <datei> --ausfuehren'
+                ausfuehrung=('python3 -m pcmms_auswertung.cli harness kalibrierbeispiel --konfig <datei> --ausfuehren '
+                             '--ausgabe <leeres Verzeichnis>'
                              + ('' if k['modus'] == 'demonstration' else f' --bestaetigung "{BESTAETIGUNG}"')))
 
 

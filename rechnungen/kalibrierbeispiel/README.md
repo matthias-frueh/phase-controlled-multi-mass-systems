@@ -40,7 +40,8 @@ python3 -m pcmms_auswertung.cli harness kalibrierbeispiel --konfig ../rechnungen
     --ausfuehren --ausgabe /pfad/zu/einem/leeren/verzeichnis --bestaetigung "grosse Kalibrierung starten"
 ```
 
-Der Trockenlauf der großen Konfiguration schätzt 2000 bis 4500 Kampagnen (ohne bzw. mit Pool-Neuberechnung und
+Der Trockenlauf gibt den vollständigen Ausführungsbefehl aus (mit `--ausgabe` und, bei der großen Rechnung,
+`--bestaetigung`). Der Trockenlauf der großen Konfiguration schätzt 2000 bis 4500 Kampagnen (ohne bzw. mit Pool-Neuberechnung und
 ausgeschöpftem Versuchslimit), bei 7,5 s je Kampagne etwa 4,2 bis 9,4 Kernstunden, mit vier Prozessen etwa 1,0 bis
 2,3 Stunden Wandzeit, für **ein** System. Vor einer großen Rechnung die Sekunden je Kampagne mit einer kleinen
 Laufzeitprobe ersetzen (Feld `sekunden_je_kampagne`).
@@ -62,7 +63,7 @@ Laufzeitprobe ersetzen (Feld `sekunden_je_kampagne`).
 
 | Feld | Bedeutung |
 |---|---|
-| `kennzeichnung`, `betriebsart`, `status`, `abgeschlossen` | Demonstration oder große Rechnung; „nicht abgeschlossen“, wenn |A| je Rolle nicht erreicht wurde |
+| `kennzeichnung`, `betriebsart`, `status`, `abgeschlossen` | Demonstration oder große Rechnung; Status „nicht abgeschlossen“, wenn \|A\| je Rolle nicht erreicht wurde; `abgeschlossen` ist nur bei der großen Rechnung mit erreichtem \|A\| wahr |
 | `werkzeug8` | Werte für Teil B (c_H1, c_H1Z, Rauschbias mit u, H2-Intervall, Prüfrate, `e3_kriterien`) mit Kennzeichnung |
 | `c_H1`, `c_H1Z`, `pruefung`, `gepoolt`, `h2` | kritische Werte mit Bootstrap-Fehler, Prüfrate, Pool-Regel, gewählter H2-Typ |
 | `gemeinsame_bestaetigung` | P(H1 und H2 bestätigt) mit Nenner G |
@@ -78,6 +79,7 @@ von drei Kampagnen je Rolle: Funktionsnachweis, keine Kalibrierung (Kriterien de
 ## Demonstrationslauf vom 20.10.2026
 
 `konfig_demo.json`, ein Prozess, 9 Kampagnen (3 Kalibrierung, 3 Prüfung, 3 Pool-Neuberechnung), 43 s; Fortsetzung aus
-den Checkpoints in 1 s (6 Partien geladen, keine neu gerechnet). |A| = |G| = 3 je Rolle; eine Prüfkampagne mit
+den Checkpoints in 1 s (6 Partien geladen, keine neu gerechnet). In der Endabnahme auf dem Endstand des Branches in ein
+leeres Verzeichnis wiederholt (43 s): alle Rechenwerte gleich, verschieden nur Codestand und Checkpoint-Zähler. |A| = |G| = 3 je Rolle; eine Prüfkampagne mit
 simulierter Wiederaufnahme (Bezugslauf, Kontrollsatz, T_UA = 1800 s); Pool-Regel gegriffen (bei drei Kampagnen ohne
 Aussage). Die Zahlen in `demo_ergebnis/` sind keine Werte für Teil B.
