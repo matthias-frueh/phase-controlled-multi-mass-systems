@@ -78,13 +78,14 @@ Laufzusammenfassung vorhanden (`stufe1-0.2`).
 | Gegenprobe der historischen Vorgaben gegen `main` (ENTW-2026-10: Dateikette, zwei Ablaufkampagnen, je Stand) | | 20 | Softwaredoku, Abschnitt 1d |
 | Zweite Runde: Vorrat bitgleich zu erzeuge, Modellquelle mit Ablauf (3 Kampagnen ablauf-4, 1 ohne Optionen), R3-d-Kleinstprobe mit Ablauf (Phase-0-Haken und Orakel, je 2 + 2 Kampagnen) | | 68 | Softwaredoku, Abschnitt 1d |
 | Zweite Runde: Referenz der historischen Profile mit dem Code von `main` und Vergleich (je dreimal E3 und Pilot/Teil B) | | ≈ 90 | `tests/fixtures/historisch_main_referenz.json` |
-| Zweite Runde, Nachprüfung: Kleinstlauf `kalibrieren` mit zwei Rauschvarianten (zweimal je 1 + 1 Kampagnen je Variante), Mutationsprobe der Brownschen Brücke | | ≈ 30 | `tests/test_harness_mengen.py`, `tests/test_d_phase0_modell.py` |
+| Zweite Runde, Nachprüfung: Kleinstlauf `kalibrieren` mit zwei Rauschvarianten (zweimal je eine Kalibrierkampagne je Variante und eine Prüfkampagne), Mutationsprobe der Brownschen Brücke | | ≈ 30 | `tests/test_harness_mengen.py`, `tests/test_d_phase0_modell.py` |
+| Zweite Runde, nach dem statischen Review: Referenz mit dem Code von `main` neu (gehärteter Vergleich), Mutationsproben des Vergleichs, Demonstration auf dem Endstand | | ≈ 65 | `tests/fixtures/historisch_main_referenz.json`, `rechnungen/kalibrierbeispiel/demo_ergebnis/` |
 | Demonstration des Kalibrierbeispiels | 9 Kampagnen, Fortsetzung aus Checkpoints | 73 | [`rechnungen/kalibrierbeispiel/demo_ergebnis/`](../kalibrierbeispiel/README.md) |
 | Laufzeitproben vor den Teilrechnungen, Kleinstproben während der Umsetzung | | ≈ 20 | – |
 | R3-d-Nachrechnung des Phase-0-Hakens im Gesamtstand | 2 + 2 Kampagnen, ein Kandidat | 18 | Softwaredoku, Abschnitt 1d |
 | Ablauf-Prüfsatz ablauf-4 (Erzeugung) | 5 Prüfkampagnen | 23 | `tests/fixtures/ap13_ablauf_pruefsatz_ablauf4.json` |
 
-Zusammen etwa 1750 Kernsekunden (≈ 0,5 Kernstunden) neben der Testsuite, unter der Grenze von zwei Kernstunden;
+Zusammen etwa 1800 Kernsekunden (≈ 0,5 Kernstunden) neben der Testsuite, unter der Grenze von zwei Kernstunden;
 höchstens vier Prozesse, ein BLAS-Thread je Prozess. Die Angaben „≈“ sind aus den Berichten der Teilbearbeitungen
 übernommen (process_time bzw. Wandzeit bei einem Prozess). **Die große Kalibrierung, die volle Matrix und große
 Planungsläufe wurden nicht ausgeführt.**

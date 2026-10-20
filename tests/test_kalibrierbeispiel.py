@@ -58,14 +58,28 @@ def test_konfiguration_wird_streng_geprueft():
                          (dict(n_zyklen=5000), 'n_zyklen = 5000'), (dict(tage=3), 'tage = 3'),
                          (dict(ref_min_p0=10_000), 'ref_min_p0 = 10000'), (dict(ref_abstand=1), 'ref_abstand = 1[;,]'),
                          (dict(zusatz=True), 'zusatz = True'), (dict(pruef=[[10, 20]]), 'pruef = '),
-                         (dict(unbekannt=1), 'Plan ungültig')):
+                         (dict(n_bloecke=5), 'n_bloecke = 5'), (dict(einstellung2=dict(art='amplitude', s=0.5)),
+                                                                 'einstellung2 = '),
+                         (dict(unbekannt=1), 'Plan ungültig'), (dict(n_bloecke=4.5), 'plan.n_bloecke = 4.5'),
+                         (dict(n0=20.0), 'plan.n0 = 20.0'), (dict(tage=True), 'plan.tage = True'),
+                         (dict(ref_abstand=float('nan')), 'plan.ref_abstand = nan'),
+                         (dict(T_lauf=float('inf')), 'plan.T_lauf = inf'), (dict(ref_min_p0=1), 'ref_min_p0 ≥ 2')):
         with pytest.raises(kb.BeispielFehler, match=muster):
             kb.pruefen(dict(demo, plan=dict(demo['plan'], **plan)))
-    for red in (dict(h3_mc=5000), dict(eps_ctrl_datensaetze=1000)):
-        with pytest.raises(kb.BeispielFehler, match='Demonstration zu groß'):
+    for red, muster in ((dict(bootstrap_B=500), 'bootstrap_B = 500'), (dict(h3_mc=5000), 'h3_mc = 5000'),
+                        (dict(eps_ctrl_datensaetze=1000), 'eps_ctrl_datensaetze = 1000')):
+        with pytest.raises(kb.BeispielFehler, match=muster):
             kb.pruefen(dict(demo, reduktion=dict(demo['reduktion'], **red)))
-    with pytest.raises(kb.BeispielFehler, match='n_min'):
-        kb.pruefen(dict(demo, n_min=9))
+    # Planfelder des Katalogszenarios zählen mit (S3-Prüfpunkte, Einstellung 2 mit eigenen Phase-0-Läufen)
+    for sid, muster in (('F01-S3', r'pruef = .*\(mit Szenario F01-S3\)'),
+                        ('I01-amplitude', r'einstellung2 = .*\(mit Szenario I01-amplitude\)')):
+        with pytest.raises(kb.BeispielFehler, match=muster):
+            kb.pruefen(dict(demo, szenario=sid))
+    assert kb.trockenlauf(kb.pruefen(demo))['plan_wirksam'] == kb.trockenlauf(kb.pruefen(demo))['plan']
+    for aenderung, muster in ((dict(n_min=9), 'n_min'), (dict(n_min=2.0), 'n_min = 2.0'),
+                              (dict(soll_A=True), 'soll_A = True')):
+        with pytest.raises(kb.BeispielFehler, match=muster):
+            kb.pruefen(dict(demo, **aenderung))
     with pytest.raises(kb.BeispielFehler, match='soll_A = 1000'):
         kb.pruefen(dict(gross, soll_A=500))
     with pytest.raises(kb.BeispielFehler, match='keine normative'):

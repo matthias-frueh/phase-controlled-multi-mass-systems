@@ -54,7 +54,9 @@ Laufzeitprobe ersetzen (Feld `sekunden_je_kampagne`).
   ohne Reduktion. Der Demonstrationsmodus ist begrenzt (`DEMO_GRENZEN`, `DEMO_UNTERGRENZEN`): soll_A ≤ 5; Plan mit
   n₀ ≤ 20, n_Pilot ≤ 20, Mindestzahl der Phase-0-Referenzläufe `ref_min_p0` ≤ 42, Referenzabstand ≥ 12, höchstens
   4 Blöcke, n_Zyklen ≤ 100 und höchstens 2 Messtagen, ohne Zusatz-, Prüf- und Einstellung-2-Konfigurationen; B,
-  H2-Replikate, H3- und E3-MC ≤ 200, ε_ctrl-Datensätze ≤ 300; 1 ≤ n_min ≤ n. Unbekannte Planfelder werden abgelehnt.
+  H2-Replikate, H3- und E3-MC ≤ 200, ε_ctrl-Datensätze ≤ 300; 1 ≤ n_min ≤ n. Die Grenzen gelten für den wirksamen
+  Plan einschließlich der Planfelder des Katalogszenarios (Trockenlauf: `plan_wirksam`). Laufzahlen müssen ganze
+  Zahlen sein, Zeiten endlich; unbekannte Planfelder werden abgelehnt.
 - Ein Ausgabeverzeichnis mit Ergebnissen einer anderen Konfiguration wird nicht überschrieben
   (`konfiguration.json` mit Prüfsumme); Checkpoints mit anderem Schlüssel (Profil, Plan, Verfahren, Szenario, Seeds,
   Codestand) werden abgelehnt, nicht vermischt. Die Pool-Neuberechnung der Prüfung (gleiche Seeds, andere

@@ -1,13 +1,17 @@
-"""Historische Referenz für die Bitgleichheitsprüfungen unter AF/ENTW-2026-10 (gegen main, Stand PR #23).
+"""Historische Referenz für die Gleichheitsprüfungen unter AF/ENTW-2026-10 (gegen main, Stand PR #23).
 
 Dieselben Rechnungen laufen mit dem Code von main (Erzeugung der Referenzdatei) und mit dem aktuellen Code (Tests
 test_e3_auswertung, test_d_laufgroessen): E3-Ausgabe einer kleinen Kampagne unter beiden historischen Profilen und
 Pilotskript, Planungshaken (Kalibrierung als Attrappe), Teil B und Satz beim k des Plans unter ENTW-2026-10. Der Plan
 hat die historische Anordnung der Referenzläufe (wie main). Verglichen wird strukturell mit Toleranz (vergleich):
-gleiche Schlüssel, Zeichenketten, Wahrheitswerte und ganze Zahlen exakt, Gleitkommazahlen bis rtol = 1e-6 und
-atol = 1e-9, Prüfsummen über Gleitkommadaten (Schlüssel mit „sha256“ oder „hash“) und die Codeversion ausgenommen.
-Damit hängt die Prüfung nicht an den letzten Bits der Rechenumgebung (BLAS, libm, Summationsreihenfolge), erkennt aber
-jede fachliche Abweichung.
+gleiche Schlüssel, Zeichenketten und Wahrheitswerte exakt, ganze Zahlen exakt (wenn beide ganz sind), Zahlen sonst
+relativ bis rtol = 1e-6; in Zahlenfeldern gilt zusätzlich eine absolute Grenze von 1e-12 des größten Betrags im Feld
+(Auslöschungsreste), Kennwerte sind auf den größten Betrag normiert. Prüfsummen über Gleitkommadaten (Schlüssel mit
+„sha256“ oder „hash“) und die Codeversion sind ausgenommen; Rauschmodelle und Ablaufoptionen gehen als Struktur ein,
+nicht als Darstellungstext. Damit hängt die Prüfung nicht an den letzten Bits der Rechenumgebung (BLAS, libm,
+Summationsreihenfolge, Darstellung von NumPy-Zahlen). Grenze: Zahlenfelder mit mehr als LANG Werten gehen nur über
+Kennwerte ein (Form, Summen, Extrema, erste Werte und zwei positionsgewichtete Summen); diese erkennen Wertänderungen
+und Vertauschungen, aber nicht jede denkbare Änderung, die alle Kennwerte zugleich erhält.
 
 Referenz erzeugen (Code von main in VERZEICHNIS/code):
     python3 tests/historisch_referenz.py VERZEICHNIS tests/fixtures/historisch_main_referenz.json
@@ -15,9 +19,11 @@ Referenz erzeugen (Code von main in VERZEICHNIS/code):
 import json
 import sys
 
-RTOL, ATOL = 1e-6, 1e-9
+RTOL = 1e-6                 # relativ, für alle Zahlen
+FELD_ATOL = 1e-12           # absolut, bezogen auf den größten Betrag eines Zahlenfelds bzw. normierte Kennwerte
 AUSGENOMMEN = ('sha256', 'hash', 'code_version')
 ZEIT = dict(T_park=2.0, T_ramp=2.0, T_ab=1.0, T_eP=4.0, T_aP=10.0, T_verfuegbar=4 * 86400.0, d=2, N_K=21, N_I=0)
+SCHRITT = 0.7548776662466927    # irrationale Schrittweite der Positionsgewichte
 
 
 def _plan(kp, **kw):
@@ -30,21 +36,30 @@ LANG = 64          # längere Zahlenfelder (etwa Bootstrap-Replikate) gehen als 
 
 
 def _kennwerte(a):
-    """Kennwerte eines langen Zahlenfelds: Form, Zahl der nicht endlichen Werte, Summe, Quadratsumme, Extrema und die
-    ersten vier Werte (je Real- und Imaginärteil); erkennt jede fachliche Änderung, ohne das Feld zu speichern."""
+    """Kennwerte eines langen Zahlenfelds (je Real- und Imaginärteil): Form, Zahl und Lage der nicht endlichen Werte,
+    größter Betrag (_skala) und, auf ihn normiert, Summe, Quadratsumme, Extrema, die ersten vier Werte und zwei
+    positionsgewichtete Summen (Gewichte cos und sin der Position mal SCHRITT; erkennen Vertauschungen)."""
     import numpy as np
     a = np.asarray(a)
     teile = (('re', a.real), ('im', a.imag)) if np.iscomplexobj(a) else (('', a.astype(float)),)
     out = dict(_form=list(a.shape))
     for name, x in teile:
+        x = x.ravel()
         f = np.isfinite(x)
-        v = x[f]
+        v = np.where(f, x, 0.0)
+        s = float(np.abs(v).max()) if v.size else 0.0
+        q = s if s > 0 else 1.0
+        w = np.arange(x.size) * SCHRITT
         out[name + '_nicht_endlich'] = int((~f).sum())
-        out[name + '_summe'] = float(v.sum()) if v.size else 0.0
-        out[name + '_quadrate'] = float((v * v).sum()) if v.size else 0.0
-        out[name + '_min'] = float(v.min()) if v.size else None
-        out[name + '_max'] = float(v.max()) if v.size else None
-        out[name + '_erste'] = [float(y) if np.isfinite(y) else None for y in x.ravel()[:4]]
+        out[name + '_nicht_endlich_lage'] = float((np.flatnonzero(~f) * SCHRITT % 1.0).sum())
+        out[name + '_skala'] = s
+        out[name + '_summe'] = float(v.sum() / q)
+        out[name + '_quadrate'] = float((v * v).sum() / q / q)
+        out[name + '_min'] = float(x[f].min() / q) if f.any() else None
+        out[name + '_max'] = float(x[f].max() / q) if f.any() else None
+        out[name + '_erste'] = [float(y / q) if np.isfinite(y) else None for y in x[:4]]
+        out[name + '_cos'] = float(v @ np.cos(w) / q)
+        out[name + '_sin'] = float(v @ np.sin(w) / q)
     return out
 
 
@@ -77,6 +92,12 @@ def jsonbar(o):
     return o
 
 
+def _struktur(o):
+    """Datenklasse als Struktur (ihre Zahlen werden mit Toleranz verglichen), sonst ihr Text."""
+    import dataclasses
+    return jsonbar(dataclasses.asdict(o)) if dataclasses.is_dataclass(o) and not isinstance(o, type) else str(o)
+
+
 def e3_ausgaben():
     from pcmms_auswertung import regeln
     from pcmms_auswertung.generator import kampagne as kp
@@ -92,7 +113,7 @@ def e3_ausgaben():
 
 def _verfahren(v):
     """Bindung, Ablauf und Optionen eines Verfahrens (ohne die Darstellung, die neue Felder ändern)."""
-    return None if v is None else dict(bindung=v.bindung, ablauf=v.ablauf, optionen=str(v.optionen))
+    return None if v is None else dict(bindung=v.bindung, ablauf=v.ablauf, optionen=_struktur(v.optionen))
 
 
 def pilot_teil_b():
@@ -112,7 +133,7 @@ def pilot_teil_b():
 
     def attrappe(sid_, stufe_, profil_, n_kal, n_pruef, seed, plan=None, n_min=None, **kw):
         gesehen.append(dict(sid=sid_, stufe=stufe_, profil=profil_.id, n_kal=n_kal, n_pruef=n_pruef, seed=seed,
-                            plan=plan_dict(plan), n_min=n_min, rausch=[str(r) for r in kw.get('rauschvarianten')],
+                            plan=plan_dict(plan), n_min=n_min, rausch=[_struktur(r) for r in kw.get('rauschvarianten')],
                             k_max=kw.get('k_max'), verfahren=_verfahren(kw.get('verfahren'))))
         return dict(gemeinsame_bestaetigung=dict(rate=0.9 if n_min >= 18 else 0.5, mc_se=0.0, zaehler=1, nenner=1),
                     c_H1=dict(wert=3.7), h2=dict(schluessel='perzentil_0.95'), pruefung=None)
@@ -142,10 +163,18 @@ def lies_referenz():
         return json.load(f)
 
 
-def vergleich(a, b, pfad=''):
+def _groesster_betrag(o):
+    """Größter Betrag der Zahlen eines (geschachtelten) Zahlenfelds, ohne in Strukturen abzusteigen."""
+    if isinstance(o, list):
+        return max((_groesster_betrag(x) for x in o), default=0.0)
+    return abs(o) if isinstance(o, (int, float)) and not isinstance(o, bool) else 0.0
+
+
+def vergleich(a, b, pfad='', atol=0.0, im_feld=False):
     """Abweichungen zwischen zwei JSON-Strukturen (Liste von Texten, leer bei Gleichheit im Sinne des Moduls)."""
     import math
     if isinstance(a, dict) and isinstance(b, dict):
+        kennwerte = '_form' in a or '_form' in b
         out = []
         for k in sorted(set(a) | set(b)):
             if any(x in k for x in AUSGENOMMEN):
@@ -153,17 +182,22 @@ def vergleich(a, b, pfad=''):
             if k not in a or k not in b:
                 out.append(f'{pfad}/{k}: nur in {"neu" if k not in a else "Referenz"}')
                 continue
-            out += vergleich(a[k], b[k], f'{pfad}/{k}')
+            tol = FELD_ATOL if kennwerte and not k.endswith('_skala') else 0.0       # Kennwerte sind normiert
+            out += vergleich(a[k], b[k], f'{pfad}/{k}', tol)
         return out
     if isinstance(a, list) and isinstance(b, list):
         if len(a) != len(b):
             return [f'{pfad}: Länge {len(a)} ≠ {len(b)}']
-        return [x for i, (u, v) in enumerate(zip(a, b)) for x in vergleich(u, v, f'{pfad}/{i}')]
-    if isinstance(a, bool) or isinstance(b, bool) or not isinstance(a, (int, float)) or not isinstance(b, (int, float)):
+        if not im_feld:
+            atol = max(atol, FELD_ATOL * max(_groesster_betrag(a), _groesster_betrag(b)))
+        return [x for i, (u, v) in enumerate(zip(a, b)) for x in vergleich(u, v, f'{pfad}/{i}', atol, True)]
+    if isinstance(a, bool) or isinstance(b, bool):
+        return [] if type(a) is type(b) and a == b else [f'{pfad}: {a!r} ≠ {b!r}']
+    if not isinstance(a, (int, float)) or not isinstance(b, (int, float)):
         return [] if a == b else [f'{pfad}: {a!r} ≠ {b!r}']
     if isinstance(a, int) and isinstance(b, int):
         return [] if a == b else [f'{pfad}: {a} ≠ {b}']
-    return [] if math.isclose(a, b, rel_tol=RTOL, abs_tol=ATOL) else [f'{pfad}: {a!r} ≠ {b!r}']
+    return [] if math.isclose(a, b, rel_tol=RTOL, abs_tol=atol) else [f'{pfad}: {a!r} ≠ {b!r}']
 
 
 if __name__ == '__main__':

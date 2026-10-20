@@ -303,13 +303,20 @@ kleinen Proben sind danach neu gerechnet.
    ŷ⁰ und ŷ¹ die Schwelle erreicht. Ausgewiesen werden die kleinste Überdeckung und die Werte je Variante. Geprüft
    an konstruierten Überdeckungen und an einem Kleinstlauf von `kalibrieren` mit zwei Varianten.
 3. Demonstration des Kalibrierbeispiels: Begrenzt sind zusätzlich n₀, n_Pilot, die Referenzläufe der Phase 0
-   (`ref_min_p0` ≤ 42, `ref_abstand` ≥ 12), n_Zyklen, die Messtage, alle Replikatzahlen und n_min ≤ n. Zusatz-, Prüf- und Einstellung-2-Konfigurationen sind ausgeschlossen, und unbekannte
-   Planfelder werden abgelehnt.
+   (`ref_min_p0` ≤ 42, `ref_abstand` ≥ 12), n_Zyklen, die Messtage, alle Replikatzahlen und n_min ≤ n. Zusatz-,
+   Prüf- und Einstellung-2-Konfigurationen sind ausgeschlossen. Die Grenzen gelten für den wirksamen Plan
+   einschließlich der Planfelder des Katalogszenarios (etwa die S3-Prüfpunkte von F01-S3 oder Einstellung 2 von
+   I01-amplitude); der Trockenlauf zeigt ihn als `plan_wirksam`. Laufzahlen müssen ganze Zahlen sein, Zeiten endlich;
+   unbekannte Planfelder werden abgelehnt (alles vor dem Start der Rechnung).
 4. Historische Vergleiche gegen `main`:
    - Die E3- und Pilot/Teil-B-Prüfungen unter AF/ENTW-2026-10 vergleichen mit einer Referenz, die mit dem Code von
      `main` (0f63187) gerechnet ist (`tests/historisch_referenz.py`, `tests/fixtures/historisch_main_referenz.json`).
-   - Die Rechnung nutzt die historische Anordnung. Der Vergleich ist strukturell mit Toleranz (rtol 1e-6); Prüfsummen
-     über Gleitkommadaten und die Codeversion sind ausgenommen, lange Zahlenfelder gehen als Kennwerte ein.
+   - Die Rechnung nutzt die historische Anordnung. Der Vergleich ist strukturell: Texte, Wahrheitswerte und ganze
+     Zahlen exakt, Gleitkommazahlen relativ bis 1e-6, in Zahlenfeldern mit einer absoluten Untergrenze von 1e-12 des
+     größten Betrags im Feld; kleine Größen wie Kovarianzen der Laufzeiten bleiben so geprüft. Prüfsummen über
+     Gleitkommadaten und die Codeversion sind ausgenommen; Rauschmodelle und Ablaufoptionen gehen als Struktur ein,
+     nicht als Text. Felder mit mehr als 64 Werten gehen als normierte Kennwerte ein (Summen, Extrema, erste Werte und
+     zwei positionsgewichtete Summen, die Vertauschungen erkennen).
    - Bisher wurden auf 10–12 Stellen gerundete Prüfsummen des Zwischenstands ad8fe2a mit P0.7-Anordnung verglichen.
      Diese hingen an der Rechenumgebung und belegten nicht die Gleichheit mit `main`.
    - In dieser Umgebung sind alle Werte ohne Toleranz gleich, auch mit anderem `PYTHONHASHSEED`. Verschieden sind nur

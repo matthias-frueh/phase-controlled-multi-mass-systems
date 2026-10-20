@@ -37,6 +37,12 @@ PFLICHT = ('schema', 'modus', 'szenario', 'stufe', 'profil', 'plan', 'n_min', 'v
 DEMO_GRENZEN = dict(soll_A=5, n_bloecke=4, n0=20, n_pilot=20, ref_min_p0=42, n_zyklen=100, tage=2, bootstrap_B=200,
                     h2_replikate=200, h3_mc=200, e3_mc=200, eps_ctrl_datensaetze=300)
 DEMO_UNTERGRENZEN = dict(ref_abstand=12)
+# Planfelder mit ganzzahligem Wert bzw. endlicher Zeit (sonst bricht die Rechnung erst nach dem Start ab oder rechnet
+# mit abgeschnittenen Werten anders als geprüft); die Grenzen gelten für den wirksamen Plan einschließlich der
+# Planfelder des Katalogszenarios (szenarien._plan)
+PLAN_GANZZAHLIG = ('n0', 'n_pilot', 'n_bloecke', 'tage', 'n_zyklen', 'ref_abstand', 'ref_min_p0')
+PLAN_ZEITEN = ('T_lauf', 'tag_pause', 'phase_pause')
+KONFIG_GANZZAHLIG = ('n_min', 'seed_basis', 'soll_A', 'prozesse', 'partie')
 DEMO_PLAN_AUS = ('zusatz', 'pruef', 'einstellung2')                 # in der Demonstration nicht erlaubt
 # Vorgabe der Kostenabschätzung je Modus: Demonstration mit reduzierten Replikaten (PR #23: 5–8 s je Kampagne bei
 # B = 1000); große Rechnung mit den normativen Replikatzahlen (B = 10 000): 82 s je Kampagne nach dem Belegpaket der
@@ -75,6 +81,20 @@ def pruefen(k):
         plan = kp.plan_aus_dict(dict(k['plan'], p0_anordnung=k['plan'].get('p0_anordnung', 'p07')))
     except (TypeError, ValueError) as e:
         raise BeispielFehler(f'Konfiguration: Plan ungültig ({e})') from None
+
+    def ganz(x):
+        return isinstance(x, int) and not isinstance(x, bool)
+    falsch = [f'plan.{x} = {getattr(plan, x)!r}' for x in PLAN_GANZZAHLIG if not ganz(getattr(plan, x))]
+    falsch += [f'plan.{x} = {getattr(plan, x)!r}' for x in PLAN_ZEITEN
+               if not (isinstance(getattr(plan, x), (int, float)) and not isinstance(getattr(plan, x), bool)
+                       and math.isfinite(getattr(plan, x)) and getattr(plan, x) >= 0)]
+    falsch += [f'{x} = {k[x]!r}' for x in KONFIG_GANZZAHLIG if not ganz(k[x])]
+    if falsch:
+        raise BeispielFehler(f'Konfiguration: Werte ungültig ({", ".join(falsch)}; ganze Zahlen bzw. endliche '
+                             f'Zeiten ≥ 0)')
+    if plan.T_lauf <= 0 or plan.ref_abstand < 1 or plan.ref_min_p0 < 2:
+        raise BeispielFehler('Konfiguration: T_lauf > 0, ref_abstand ≥ 1 und ref_min_p0 ≥ 2')
+    wirksam = szenarien._plan(szenarien.KATALOG[k['szenario']], plan)     # mit den Planfeldern des Szenarios
     if k['verfahren'] not in ('zustand', 'statisch'):
         raise BeispielFehler('Konfiguration: verfahren „zustand“ (ablauf-4) oder „statisch“')
     v = vf.ZUSTAND if k['verfahren'] == 'zustand' else vf.STATISCH
@@ -82,16 +102,18 @@ def pruefen(k):
         raise BeispielFehler('Konfiguration: 1 bis 4 Prozesse (Arbeitsvorgabe: höchstens vier, je ein BLAS-Thread)')
     if int(k['partie']) < 1 or int(k['soll_A']) < 1:
         raise BeispielFehler('Konfiguration: partie ≥ 1 und soll_A ≥ 1')
-    if int(k['n_min']) < 1 or int(k['n_min']) > plan.n_bloecke:
-        raise BeispielFehler(f'Konfiguration: 1 ≤ n_min ≤ n_bloecke ({k["n_min"]}, {plan.n_bloecke})')
+    if k['n_min'] < 1 or k['n_min'] > wirksam.n_bloecke:
+        raise BeispielFehler(f'Konfiguration: 1 ≤ n_min ≤ n_bloecke ({k["n_min"]}, {wirksam.n_bloecke})')
     if k['modus'] == 'demonstration':
-        werte = dict(soll_A=int(k['soll_A']), **{x: getattr(plan, x) for x in ('n_bloecke', 'n0', 'n_pilot',
-                                                                                 'ref_min_p0', 'n_zyklen', 'tage')},
+        werte = dict(soll_A=k['soll_A'], **{x: getattr(wirksam, x) for x in ('n_bloecke', 'n0', 'n_pilot',
+                                                                               'ref_min_p0', 'n_zyklen', 'tage')},
                      **{x: prof.zahl(x) for x in ('bootstrap_B', 'h2_replikate', 'h3_mc', 'e3_mc',
                                                   'eps_ctrl_datensaetze')})
-        zu_gross = [f'{x} = {v}' for x, v in werte.items() if not 1 <= int(v) <= DEMO_GRENZEN[x]]
-        zu_gross += [f'{x} = {getattr(plan, x)}' for x, u in DEMO_UNTERGRENZEN.items() if getattr(plan, x) < u]
-        zu_gross += [f'{x} = {getattr(plan, x)!r}' for x in DEMO_PLAN_AUS if getattr(plan, x)]
+        zu_gross = [f'{x} = {v}' for x, v in werte.items() if not 1 <= v <= DEMO_GRENZEN[x]]
+        zu_gross += [f'{x} = {getattr(wirksam, x)}' for x, u in DEMO_UNTERGRENZEN.items() if getattr(wirksam, x) < u]
+        zu_gross += [f'{x} = {getattr(wirksam, x)!r}' for x in DEMO_PLAN_AUS if getattr(wirksam, x)]
+        if wirksam != plan:
+            zu_gross = [f'{x} (mit Szenario {k["szenario"]})' for x in zu_gross]
         if zu_gross:
             raise BeispielFehler(f'Demonstration zu groß ({", ".join(zu_gross)}; Grenzen {DEMO_GRENZEN}, '
                                  f'mindestens {DEMO_UNTERGRENZEN}, ohne {", ".join(DEMO_PLAN_AUS)})')
@@ -99,7 +121,7 @@ def pruefen(k):
         if int(k['soll_A']) != regeln.NORMATIVE_ZAHLEN['kampagnen_kalibrierung'] or prof.reduziert:
             raise BeispielFehler('modus „gross“: soll_A = 1000 und keine Reduktion (sonst ist es keine normative '
                                  'Kalibrierung; niedrigere Sollzahlen ersetzen die Abnahme nicht)')
-    out = dict(k, _profil=prof, _plan=plan, _verfahren=v)
+    out = dict(k, _profil=prof, _plan=plan, _plan_wirksam=wirksam, _verfahren=v)
     return out
 
 
@@ -149,7 +171,7 @@ def trockenlauf(k):
     return dict(betriebsart='trockenlauf', kennzeichnung=KENNZEICHNUNG_DEMO if k['modus'] == 'demonstration'
                 else KENNZEICHNUNG_GROSS, gerechnet=False, konfiguration_sha256=konfig_sha(k),
                 profil=dict(id=prof.id, sha256=prof.sha256(), stand=regeln.stand(prof)),
-                verfahren=v.kennung(), plan=kp.plan_dict(plan),
+                verfahren=v.kennung(), plan=kp.plan_dict(plan), plan_wirksam=kp.plan_dict(k['_plan_wirksam']),
                 modell=dict(szenario=k['szenario'], stufe=k['stufe'], rauschmodell='Szenario (Katalog)',
                             hinweis='Planungs- und Kalibriermodell aus Phase 0 siehe harness.planung (Teil d)'),
                 code_version=formate.code_version(), auftragsliste=auftragsliste(k), kosten=kosten(k),
