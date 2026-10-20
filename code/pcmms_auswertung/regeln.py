@@ -605,8 +605,15 @@ UMSETZUNG = (                           # Präfix der Regel → umsetzendes Modu
     ('M.', 'anpassung'), ('rauschmodelle', 'generator.rauschen, pilot'), ('harness.', 'harness'), ('ni.', '–'))
 
 
-def umsetzung(rid):
-    for pre, mod in UMSETZUNG:
+UMSETZUNG_11 = (                        # Stand 2026-11: zusätzliche bzw. genauere Module (vor UMSETZUNG geprüft)
+    ('g4.', 'gueltigkeit, g4, teil_b'), ('e3.', 'kontrollen, e3_grenzen'), ('h1.c_rauschmodelle', 'harness.kalibrierung'),
+    ('harness.mengen', 'harness.mengen, harness.kalibrierung'), ('harness.nachziehen', 'harness.mengen'),
+    ('harness.wiederaufnahme', 'harness.kette, ablauf'), ('planung.reserve', 'harness.reserve, harness.planung'),
+    ('planung.zeitformel', 'harness.reserve'), ('p0.laufgroessen', 'laufgroessen, pilot, teil_b'))
+
+
+def umsetzung(rid, stand_=None):
+    for pre, mod in (UMSETZUNG_11 if stand_ == '2026-11' else ()) + UMSETZUNG:
         if rid.startswith(pre):
             return mod
     return '–'
@@ -623,5 +630,5 @@ def matrix_markdown(stand_='2026-11'):
         wert = '–' if not e.verfuegbar() else json.dumps(formate._json_wert(e.wert), ensure_ascii=False)
         st = r.status + (' → entwicklungsprüffall' if e.status == EP else '')
         zeilen.append(f'| `{rid}` | {r.gegenstand} | {r.fundstelle} | {st} | {wert.replace("|", "∣")} | '
-                      f'{umsetzung(rid)} |')
+                      f'{umsetzung(rid, stand_)} |')
     return '\n'.join(zeilen) + '\n'

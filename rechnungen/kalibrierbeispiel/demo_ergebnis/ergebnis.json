@@ -1,0 +1,435 @@
+{
+ "inhalt": {
+  "abgeschlossen": false,
+  "betriebsart": "demonstration",
+  "c_H1": {
+   "ausgeschlossen": 0,
+   "c_B": 18.582448057190767,
+   "gepoolt": true,
+   "n": 6,
+   "regel": null,
+   "se": 0.06446403323294686,
+   "wert": 6.336601468155434
+  },
+  "c_H1Z": {
+   "ausgeschlossen": 0,
+   "c_B": 26.848800990802225,
+   "n": 3,
+   "se": 0.16003011504171422,
+   "wert": 4.230963020658352
+  },
+  "checkpoints": {
+   "geladen": 6,
+   "gerechnet": 0
+  },
+  "e3": {
+   "kriterien": {
+    "E3a": {
+     "auffaellig": null,
+     "modellpruefung": null,
+     "unauffaellig": null
+    },
+    "E3b": {
+     "auffaellig": null,
+     "modellpruefung": null,
+     "unauffaellig": null
+    },
+    "herkunft": "Prüfsimulation (AP-13), 3 Kampagnen der Menge A – reduziert: Kriterien nicht ausgewiesen (None)"
+   },
+   "raten": {
+    "E3a": {
+     "auffaellig": {
+      "groesse": "P(E3a auffällig | exakt)",
+      "lesart": "Entwicklungsdiagnostik (weniger Kampagnen als normativ)",
+      "mc_se": 0.0,
+      "nenner": 3,
+      "normative_kampagnenzahl": 1000,
+      "profil": null,
+      "rate": 0.0,
+      "reduziert": true,
+      "stufe": null,
+      "szenario": null,
+      "zaehler": 0
+     },
+     "unauffaellig": {
+      "groesse": "P(E3a unauffällig | exakt)",
+      "lesart": "Entwicklungsdiagnostik (weniger Kampagnen als normativ)",
+      "mc_se": 0.0,
+      "nenner": 3,
+      "normative_kampagnenzahl": 1000,
+      "profil": null,
+      "rate": 0.0,
+      "reduziert": true,
+      "stufe": null,
+      "szenario": null,
+      "zaehler": 0
+     }
+    },
+    "E3b": {
+     "auffaellig": {
+      "groesse": "P(E3b auffällig | exakt)",
+      "lesart": "Entwicklungsdiagnostik (weniger Kampagnen als normativ)",
+      "mc_se": 0.0,
+      "nenner": 3,
+      "normative_kampagnenzahl": 1000,
+      "profil": null,
+      "rate": 0.0,
+      "reduziert": true,
+      "stufe": null,
+      "szenario": null,
+      "zaehler": 0
+     },
+     "unauffaellig": {
+      "groesse": "P(E3b unauffällig | exakt)",
+      "lesart": "Entwicklungsdiagnostik (weniger Kampagnen als normativ)",
+      "mc_se": 0.0,
+      "nenner": 3,
+      "normative_kampagnenzahl": 1000,
+      "profil": null,
+      "rate": 0.0,
+      "reduziert": true,
+      "stufe": null,
+      "szenario": null,
+      "zaehler": 0
+     }
+    }
+   }
+  },
+  "gemeinsame_bestaetigung": {
+   "groesse": "P(H1 und H2 bestätigt)",
+   "lesart": "Entwicklungsdiagnostik (weniger Kampagnen als normativ)",
+   "mc_se": 0.0,
+   "nenner": 3,
+   "normative_kampagnenzahl": 1000,
+   "profil": "ENTW-2026-11+red(bootstrap_B=100,e3_mc=100,eps_ctrl_datensaetze=200,h2_replikate=100,h3_mc=100)",
+   "rate": 1.0,
+   "reduziert": true,
+   "stufe": "L1",
+   "szenario": "N01-A4",
+   "zaehler": 3
+  },
+  "gepoolt": true,
+  "gerechnet": true,
+  "h2": {
+   "schluessel": "perzentil_0.95",
+   "typ": "perzentil"
+  },
+  "kennzeichnung": "Demonstration, synthetisch, nicht kalibriert",
+  "konfiguration_sha256": "ec1c70ad439c0134fb8451a971d23e8d9f61f848f30077ff9fe6b1a05c41289a",
+  "mengen": {
+   "hinweis": "P(H1 und H2 bestätigt) mit Nenner G; c, Prüfrate, b̂, u(b̂), Restbias und H2-Überdeckung über A",
+   "kalibrierung": [
+    {
+     "A": 3,
+     "G": 3,
+     "ausschluesse": {},
+     "ausschluesse_genau": {},
+     "definition": "G: alle begonnenen Kampagnen der Rolle; A: abgeschlossen, ŷ¹ gültig, H1-/H1Z-Prüfgrößen endlich, H2-Intervalle vorhanden (Regel harness.mengen)",
+     "indizes_A": [
+      0,
+      1,
+      2
+     ]
+    }
+   ],
+   "nachziehen": {
+    "kalibrierung": [
+     {
+      "A": 3,
+      "G": 3,
+      "grund": null,
+      "limit": 5,
+      "partien": [
+       {
+        "A_danach": 3,
+        "n": 3,
+        "start": 0
+       }
+      ],
+      "soll_A": 3,
+      "status": "abgeschlossen"
+     }
+    ],
+    "pruefung": {
+     "A": 3,
+     "G": 3,
+     "grund": null,
+     "limit": 5,
+     "partien": [
+      {
+       "A_danach": 3,
+       "n": 3,
+       "start": 0
+      }
+     ],
+     "soll_A": 3,
+     "status": "abgeschlossen"
+    }
+   },
+   "pruefung": {
+    "A": 3,
+    "G": 3,
+    "ausschluesse": {},
+    "ausschluesse_genau": {},
+    "definition": "G: alle begonnenen Kampagnen der Rolle; A: abgeschlossen, ŷ¹ gültig, H1-/H1Z-Prüfgrößen endlich, H2-Intervalle vorhanden (Regel harness.mengen)",
+    "indizes_A": [
+     0,
+     1,
+     2
+    ]
+   }
+  },
+  "meta": {
+   "code_version": {
+    "git": "e2bef289ed352a28ed0350784b4fac2d52608435+geändert",
+    "paket": "0.1.0"
+   },
+   "lesart": "Entwicklungsdiagnostik: weniger Kampagnen oder Replikate als normativ; keine Kalibrierabnahme",
+   "n_kalibrierung": 3,
+   "n_pruefung": 3,
+   "profil": "ENTW-2026-11+red(bootstrap_B=100,e3_mc=100,eps_ctrl_datensaetze=200,h2_replikate=100,h3_mc=100)",
+   "profil_sha256": "e7bcd33aaede730ab1536786e451fb8c84bd8b24c4f9c0fa9c24d4dc07492314",
+   "rauschvarianten": 1,
+   "reduziert": true,
+   "seed_basis": 20261021,
+   "stufe": "L1",
+   "szenario": "N01-A4",
+   "verfahren": {
+    "ablauf": "zustand",
+    "ablauf_version": "ablauf-4",
+    "bindung": "plan",
+    "optionen": {
+     "aufwaermen": true,
+     "halt": true,
+     "wiederholungen": true
+    },
+    "version": "verfahren-1"
+   }
+  },
+  "platzhalter": [],
+  "pruefung": {
+   "groesse": "Prüfrate: Anteil mit mindestens einem |z⁰| > c (exakt)",
+   "lesart": "Entwicklungsdiagnostik (weniger Kampagnen als normativ)",
+   "mc_se": 0.2721655269759087,
+   "nenner": 3,
+   "normative_kampagnenzahl": 1000,
+   "profil": "ENTW-2026-11+red(bootstrap_B=100,e3_mc=100,eps_ctrl_datensaetze=200,h2_replikate=100,h3_mc=100)",
+   "rate": 0.6666666666666666,
+   "reduziert": true,
+   "stufe": "L1",
+   "szenario": "N01-A4",
+   "zaehler": 2
+  },
+  "reserve_ziel": {
+   "G": 3,
+   "anteil_soll": 0.95,
+   "endgueltig_beendet": 0,
+   "erfuellt": true,
+   "geprueft": true,
+   "hinweis": "kleine Proben: Zähler und Nenner, keine bestätigte Rate",
+   "mc_se": 0.0,
+   "nenner": 3,
+   "rate": 1.0,
+   "zaehler": 3
+  },
+  "status": "Demonstration: keine Kalibrierung",
+  "werkzeug8": {
+   "bias0": {
+    "npz": "werkzeug8__bias0"
+   },
+   "bias0_zellen": {
+    "npz": "werkzeug8__bias0_zellen"
+   },
+   "bias1": {
+    "npz": "werkzeug8__bias1"
+   },
+   "bias1_zellen": {
+    "npz": "werkzeug8__bias1_zellen"
+   },
+   "bias_herkunft": "Kalibriersimulation (AP-13) mit 3 Kampagnen (reduziert: Entwicklungsdiagnostik), Profil ENTW-2026-11+red(bootstrap_B=100,e3_mc=100,eps_ctrl_datensaetze=200,h2_replikate=100,h3_mc=100): Mittel der Rohresiduen von F_min − ⟨N⟩",
+   "c_H1": 6.336601468155434,
+   "c_H1Z": 4.230963020658352,
+   "c_H1Z_herkunft": "Kalibriersimulation (AP-13) mit 3 Kampagnen (reduziert: Entwicklungsdiagnostik), Profil ENTW-2026-11+red(bootstrap_B=100,e3_mc=100,eps_ctrl_datensaetze=200,h2_replikate=100,h3_mc=100): q95 von max|z⁰| über 441 Tests, n = 3",
+   "c_H1_herkunft": "Kalibriersimulation (AP-13) mit 3 Kampagnen (reduziert: Entwicklungsdiagnostik), Profil ENTW-2026-11+red(bootstrap_B=100,e3_mc=100,eps_ctrl_datensaetze=200,h2_replikate=100,h3_mc=100): q95 von max|z⁰| über 147 Tests, n = 6; Prüfrate 0.6667 ± 0.2722 aus 3 vollständigen von 3 Kampagnen; gepooltes Quantil (Prüfrate > 0,069)",
+   "e3_kriterien": {
+    "E3a": {
+     "auffaellig": null,
+     "modellpruefung": null,
+     "unauffaellig": null
+    },
+    "E3b": {
+     "auffaellig": null,
+     "modellpruefung": null,
+     "unauffaellig": null
+    },
+    "herkunft": "Prüfsimulation (AP-13), 3 Kampagnen der Menge A – reduziert: Kriterien nicht ausgewiesen (None)"
+   },
+   "h2_intervall": {
+    "niveau": 0.95,
+    "quelle": "Kalibriersimulation (AP-13) mit 3 Kampagnen (reduziert: Entwicklungsdiagnostik), Profil ENTW-2026-11+red(bootstrap_B=100,e3_mc=100,eps_ctrl_datensaetze=200,h2_replikate=100,h3_mc=100)",
+    "typ": "perzentil",
+    "ueberdeckung": {
+     "bca_0.95": {
+      "yhat0": 0.6666666666666666,
+      "yhat1": 1.0
+     },
+     "perzentil_0.95": {
+      "yhat0": 1.0,
+      "yhat1": 1.0
+     },
+     "perzentil_0.96": {
+      "yhat0": 1.0,
+      "yhat1": 1.0
+     },
+     "perzentil_0.97": {
+      "yhat0": 1.0,
+      "yhat1": 1.0
+     },
+     "perzentil_0.98": {
+      "yhat0": 1.0,
+      "yhat1": 1.0
+     },
+     "perzentil_0.99": {
+      "yhat0": 1.0,
+      "yhat1": 1.0
+     }
+    }
+   },
+   "kennzeichnung": "Demonstration, synthetisch, nicht kalibriert",
+   "pruefrate": {
+    "gepoolt": true,
+    "mc_se": 0.2721655269759087,
+    "n": 3,
+    "rate": 0.6666666666666666
+   },
+   "reduziert": true,
+   "u_bias0": {
+    "npz": "werkzeug8__u_bias0"
+   },
+   "u_bias0_zellen": {
+    "npz": "werkzeug8__u_bias0_zellen"
+   },
+   "u_bias1": {
+    "npz": "werkzeug8__u_bias1"
+   },
+   "u_bias1_zellen": {
+    "npz": "werkzeug8__u_bias1_zellen"
+   }
+  },
+  "zeitbilanz": {
+   "formel_s": null,
+   "gesamt": {
+    "n": 3,
+    "se": 702.0000000000001,
+    "wert": 2623.0
+   },
+   "hinweis": "Zeit je Kampagne aus der Simulation; T_UA nur für simulierte Wiederaufnahmen",
+   "nenner": 3,
+   "terme": {
+    "Aufwärmen bei Tageswechsel": {
+     "mittel_s": 0.0,
+     "nenner": 3,
+     "summe_s": 0.0
+    },
+    "Bezugseröffnung": {
+     "mittel_s": 5.666666666666667,
+     "nenner": 3,
+     "summe_s": 17.0
+    },
+    "Kontrollsatz der Wiederaufnahme": {
+     "mittel_s": 22.666666666666668,
+     "nenner": 3,
+     "summe_s": 68.0
+    },
+    "Läufe": {
+     "mittel_s": 1870.0,
+     "nenner": 3,
+     "summe_s": 5610.0
+    },
+    "Ursachenanalyse T_UA": {
+     "mittel_s": 600.0,
+     "nenner": 3,
+     "summe_s": 1800.0
+    },
+    "Wiederholungen": {
+     "mittel_s": 124.66666666666667,
+     "nenner": 3,
+     "summe_s": 374.0
+    }
+   }
+  }
+ },
+ "kopf": {
+  "code_version": {
+   "git": "e2bef289ed352a28ed0350784b4fac2d52608435+geändert",
+   "paket": "0.1.0"
+  },
+  "daten": {
+   "datei": "ergebnis.npz",
+   "felder": {
+    "werkzeug8__bias0": {
+     "dtype": "float64",
+     "form": [
+      21
+     ]
+    },
+    "werkzeug8__bias0_zellen": {
+     "dtype": "float64",
+     "form": [
+      21,
+      3
+     ]
+    },
+    "werkzeug8__bias1": {
+     "dtype": "float64",
+     "form": [
+      21
+     ]
+    },
+    "werkzeug8__bias1_zellen": {
+     "dtype": "float64",
+     "form": [
+      21,
+      3
+     ]
+    },
+    "werkzeug8__u_bias0": {
+     "dtype": "float64",
+     "form": [
+      21
+     ]
+    },
+    "werkzeug8__u_bias0_zellen": {
+     "dtype": "float64",
+     "form": [
+      21,
+      3
+     ]
+    },
+    "werkzeug8__u_bias1": {
+     "dtype": "float64",
+     "form": [
+      21
+     ]
+    },
+    "werkzeug8__u_bias1_zellen": {
+     "dtype": "float64",
+     "form": [
+      21,
+      3
+     ]
+    }
+   },
+   "sha256": "e4e7e109368ce3181cff21eaad1ca7204d0c3c552da3c17d92cd512518a61322"
+  },
+  "datenart": "synthetisch",
+  "erzeugt_von": {
+   "programm": "pcmms_auswertung",
+   "version": "0.1.0"
+  },
+  "kennung": "SYNTH-KALBSP-N01-A4-demonstration",
+  "registrierung": "keine (synthetisch)",
+  "schema": "pcmms.bewertung",
+  "schema_version": "0.1"
+ }
+}

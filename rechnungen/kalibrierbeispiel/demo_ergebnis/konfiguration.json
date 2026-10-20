@@ -1,0 +1,28 @@
+{
+ "konfiguration_sha256": "ec1c70ad439c0134fb8451a971d23e8d9f61f848f30077ff9fe6b1a05c41289a",
+ "konfiguration": {
+  "schema": "pcmms-kalibrierbeispiel-1",
+  "modus": "demonstration",
+  "beschreibung": "Sehr kleiner Funktionstest des Kalibrierbeispiels. Ergebnis: Demonstration, synthetisch, nicht kalibriert.",
+  "szenario": "N01-A4",
+  "stufe": "L1",
+  "profil": "ENTW-2026-11",
+  "reduktion": {
+   "bootstrap_B": 100,
+   "h3_mc": 100,
+   "eps_ctrl_datensaetze": 200
+  },
+  "plan": {
+   "n0": 20,
+   "n_pilot": 20,
+   "n_bloecke": 4,
+   "p0_anordnung": "p07"
+  },
+  "n_min": 2,
+  "verfahren": "zustand",
+  "seed_basis": 20261021,
+  "soll_A": 3,
+  "prozesse": 1,
+  "partie": 2
+ }
+}
