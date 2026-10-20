@@ -319,8 +319,10 @@ def pruefe(tab, sw, regeln=('G2', 'G3', 'G4', 'G5', 'G6', 'G7', 'G8', 'G9', 'G10
 
 def _g4_2026_11(sw, k, i, d, DN, DF, tab):
     """G4 im Profilstand 2026-11 (g4.py): Konfigurationen nach B+ (Schwelle von D_F je Konfiguration aus Teil B) oder
-    D (phasenkorrigierte Fünftel-Differenz, Schwelle aus den Piloten), D_N wie je Laufart; Lⱼ mit der n-abhängigen
-    Schwelle je Modul. Rückgabe (verletzt oder None, Grund für „nicht prüfbar“)."""
+    D (phasenkorrigierte Fünftel-Differenz, Schwelle aus den Piloten), D_N mit g4.faktor·σ_Δ,N der gültigen Piloten
+    (Teil B nr2.g4, A9.2 (4); fehlt der Eintrag, weil B+ bzw. D nicht gebildet ist oder Teil B älter ist, wie bisher
+    nr2.sigma_delta); Lⱼ mit der n-abhängigen Schwelle je Modul. Rückgabe (verletzt oder None, Grund für „nicht
+    prüfbar“)."""
     from . import g4
     boden = RUNDUNG_REL * abs(d['N_mittel'][i])
     if k['laufart'] == 'L':
@@ -329,9 +331,9 @@ def _g4_2026_11(sw, k, i, d, DN, DF, tab):
             return None, f'G4 Lⱼ: Schwelle für L{k["modul"]} fehlt (Teil B nr2.g4.lj)'
         v = bool(abs(DN[i]) > s['N'] + boden)
         return v or (s.get('F') is not None and bool(abs(DF[i]) > s['F'] + boden)), None
-    sK = sw.sigma_delta['K']
-    vN = bool(abs(DN[i]) > sw.g4_faktor * sK['N'] + boden)
     c = sw.g4_konfig
+    sK = (c or {}).get('sigma_delta_K') or sw.sigma_delta['K']
+    vN = bool(abs(DN[i]) > sw.g4_faktor * sK['N'] + boden)
     if sw.g4_modus == 'b_plus':
         T = None if c is None else (c.get('schwellen_F') or {}).get(k['konfiguration']['id'])
         if T is None:

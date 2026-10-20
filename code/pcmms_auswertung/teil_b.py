@@ -380,9 +380,8 @@ def erstellen(tab0, kal, pilot_erg, profil, plan, werkzeug8=None, kennung=None, 
     if 'laufgroessen' in satz:                                          # Regelstand 2026-11 (A9.3 Nr. 2, Entwurf)
         nr2.update(laufgroessen_felder(satz['laufgroessen']))
     if 'g4.verfahren' in profil.regeln and profil.hat('g4.verfahren'):     # Regelstand 2026-11: G4 B+, D, Lⱼ (g4.py)
-        nr2['g4'] = g4.teil_b_block(tab0, ungueltig, satz['sigma_delta'], Nbar0.sum(1), dd,
-                                    np.asarray(p05['u_delta_delta_grad'], float), sig, kmax, konf,
-                                    satz.get('laufgroessen'), profil)
+        nr2['g4'] = g4.teil_b_block(tab0, ungueltig, Nbar0.sum(1), dd, np.asarray(p05['u_delta_delta_grad'], float),
+                                    sig, kmax, konf, satz.get('laufgroessen'), profil)   # σ_Δ aus den gültigen Läufen
     nr10 = dict(c_H1=w8.get('c_H1'), c_H1_herkunft=w8.get('c_H1_herkunft', 'fehlt (Werkzeug 8)'),
                 c_H1Z=w8.get('c_H1Z'), c_H1Z_herkunft=w8.get('c_H1Z_herkunft', 'fehlt (Werkzeug 8)'),
                 pruefrate=w8.get('pruefrate'), h2_intervall=w8.get('h2_intervall'),

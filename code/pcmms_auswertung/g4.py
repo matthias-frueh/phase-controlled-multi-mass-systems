@@ -8,15 +8,16 @@ Modi (g4.verfahren):
       Relativphasen τⱼ = offⱼ + δⱼ − δ₁ (j = 2, 3) und den Modulamplituden A aus den Komponentenschätzern von Phase 0
       (laufgroessen: σ_off,j aus den Pilot-Laufmitteln, σ_δ,j und σ_a,j aus den Lⱼ-Läufen; dieselben wie im Generator),
       e die Fünftelmittel der Indexphasen (σⱼ/√n_f). τ wird nicht zu e addiert (Var_τ E_e F fällt in D_F heraus).
-      Die Pilotgröße s̄_P² wird mit derselben Mischung gebildet.
+      Die Pilotgröße s̄_P² wird mit derselben Mischung an der Soll-Lage der Piloten gebildet.
   (2) Liegt der vorhergesagte Knick innerhalb ±u(Δδⱼ), das Maximum von s über diesen Bereich; gerechnet wird das
-      Maximum über die Verschiebungen 0, ±u(Δδ₂), ±u(Δδ₃) an jedem Punkt (an glatten Punkten ändert es s kaum;
-      konservativ).
+      Maximum über die Verschiebungen 0, ±u(Δδ₂), ±u(Δδ₃) an jeder Konfiguration (an glatten Punkten ändert es s
+      kaum; konservativ). Nicht für s̄_P²: σ_Δ,F,P ist an der tatsächlichen Lage der Piloten beobachtet, ein Maximum
+      vergrößerte s̄_P² und verkleinerte damit σ_W und jedes T_i oberhalb der Untergrenze.
   (3) Feste Ziehungen, auf Mittel null und Einheitskovarianz normiert (antithetisch, Cholesky der Stichprobe).
   (4) Schwelle über ein Quantil statt über die Streuung: Die bedingte Verteilung von D_F bei gegebenen Laufgrößen ist
       näherungsweise normal mit Varianz 2·Var_e F + σ_W² (σ_W² = max(0, σ²_Δ,F,P − s̄_P²), Boden aus den Piloten); über
       die Laufgrößen gemischt hat D_F schwere Ränder. T_i löst E_{τ,A}[2·Φ̄(T_i/√v)] = α mit α = 2·Φ̄(3), Untergrenze
-      3·σ_Δ,F,P. Die endliche Schätzunsicherheit von σ_Δ,F,P (MAD aus den Piloten) erhöht die Rate wie bei der
+      3·σ_Δ,F,P. Die endliche Schätzunsicherheit von σ_Δ,F,P (MAD aus den gültigen Piloten) erhöht die Rate wie bei der
       3σ-MAD-Regel; das Arbeitsziel ≤ 1,5 % je Konfiguration und Lauf (g4.zielrate, D_N und D_F zusammen) ist eine
       Zielvorgabe unter dem benannten Nullmodell, keine bestätigte Rate.
   Gebunden an k_max, N_z (n_f), den Kalibrierstand (Δδⱼ, u(Δδⱼ)) und die Konfiguration. Fehlt s_i (Konfiguration
@@ -28,7 +29,10 @@ Modi (g4.verfahren):
 - 'je_laufart' (historisch): 3·σ_Δ,X je Laufart wie bis PR #23.
 Lⱼ (g4.lj): Schwelle k(n₀ⱼ)·σ_Δ,X,Lⱼ mit dem von n abhängigen Faktor, der unter dem Normalmodell mit MAD-Schätzer aus n
 Läufen dieselbe Rate je Prüfgröße ergibt wie 3σ bei bekanntem σ; dazu als Vergleich die Pooling-Variante über die mit
-dem Phase-0-Betrag ihrer Größe standardisierten Module (n = Σn₀ⱼ) mit einer Homogenitätsprüfung der Modulstreuungen.
+dem Phase-0-Betrag ihrer Größe standardisierten Module (n = Σn₀ⱼ) mit einer Homogenitätsprüfung der Modulstreuungen
+(Bartlett mit den effektiven Freiheitsgraden des MAD-Schätzers, genähert).
+Alle Schwellen der Phase 1 (σ_Δ,F,P und σ_Δ,N,K der Piloten, σ_Δ,X,Lⱼ mit n₀ⱼ) stammen aus den gültigen Phase-0-Läufen
+(A9.2 (4)); G4 der Phase 0 und p̂ rechnen mit σ_Δ aus allen Läufen (A9.2 (1), Satz der Pilotanalyse).
 """
 from functools import lru_cache
 
@@ -37,7 +41,7 @@ from scipy import optimize, special, stats
 
 from . import konventionen as kv, vorhersage as vh
 
-VERSION = 'g4-2026-11.1'
+VERSION = 'g4-2026-11.2'
 MODI = ('b_plus', 'd', 'je_laufart')
 N_MISCHUNG = 32                      # Ziehungen der Laufgrößen (τ, A), antithetisch verdoppelt
 N_FUENFTEL = 12                      # Ziehungen der Fünftelmittel e, antithetisch verdoppelt
@@ -132,8 +136,9 @@ def bplus(konfigurationen, piloten, Nbar0, dd, u_dd, jitter_grad, n_f, kmax, sig
 
     konfigurationen: [(id, (0, φ₂, φ₃))]; piloten: [(0, φ₂, φ₃)]; Nbar0 (3, K) Einzelmodul-Mittelkurven (Summe der
     Zellen) aus P0.8; dd, u_dd (3,) Δδⱼ und u(Δδⱼ) [°]; jitter_grad (3,) σⱼ der Piloten [°]; n_f Zyklen je Fünftel;
-    sigma_P_F gepooltes σ_Δ,F der Piloten (unverändert definiert); lg: laufgroessen.schaetzen; regel: Wert von
-    g4.b_plus. Rückgabe dict(schwellen_F, s, s_P, sigma_W, knick, alpha, …)."""
+    sigma_P_F gepooltes σ_Δ,F der gültigen Piloten (A9.2 (4)); lg: laufgroessen.schaetzen; regel: Wert von g4.b_plus.
+    s_i mit dem Maximum über die Verschiebungen ±u(Δδⱼ), s_P der Piloten mit derselben Mischung an der Soll-Lage.
+    Rückgabe dict(schwellen_F, s, s_P, sigma_W, knick, alpha, …)."""
     erwartet = dict(mischung='Laufversatz, Phasenrest, Modulamplitude', piloten='dieselbe Mischung für s̄_P',
                     knick='Maximum über ±u(Δδⱼ)', ziehungen='normiert', schwelle='quantil')
     if {k: regel.get(k) for k in erwartet} != erwartet:
@@ -148,7 +153,7 @@ def bplus(konfigurationen, piloten, Nbar0, dd, u_dd, jitter_grad, n_f, kmax, sig
         V = np.stack([bedingte_varianzen(phi, Nbar0, dd, jitter_grad, n_f, kmax, lg, v) for v in versch])
         j = int(np.argmax(V.mean(1)))
         return V[j], j
-    s_P2 = [float(var_max(p)[0].mean()) for p in piloten]
+    s_P2 = [float(bedingte_varianzen(p, Nbar0, dd, jitter_grad, n_f, kmax, lg).mean()) for p in piloten]   # Soll-Lage
     sbar_P2 = float(np.mean(s_P2))
     sigma_W2 = max(0.0, float(sigma_P_F) ** 2 - sbar_P2)
     out_T, out_s, knick = {}, {}, {}
@@ -217,10 +222,23 @@ def faktor_n(n, faktor=FAKTOR, n_mc=40_000, seed=SEED_ZIEHUNGEN):
     return float(optimize.brentq(f, faktor, 4 * faktor, xtol=1e-10))
 
 
+@lru_cache(maxsize=64)
+def freiheitsgrade_mad(n, n_mc=40_000, seed=SEED_ZIEHUNGEN):
+    """Effektive Freiheitsgrade f_eff(n) = 2/Var(ln σ̂²) für σ̂ = 1,4826·MAD aus n Normalwerten (feste Ziehungen wie
+    faktor_n, deterministisch). Für die Stichprobenvarianz wäre das ≈ n − 1; für den MAD asymptotisch ≈ 0,37·n
+    (Effizienz 0,37 am Normalmodell)."""
+    n = int(n)
+    if n < 3:
+        raise ValueError('freiheitsgrade_mad: n ≥ 3')
+    x = np.random.default_rng(seed + n).standard_normal((n_mc, n))
+    s = 1.4826 * np.median(np.abs(x - np.median(x, 1, keepdims=True)), 1)
+    return float(2.0 / np.var(2.0 * np.log(s), ddof=1))
+
+
 def lj_schwellen(sigma_delta, n0, skalen=None, faktor=FAKTOR):
     """Lⱼ-Schwellen: n-abhängig (Standard) je Modul und Größe; Pooling-Vergleich über die mit `skalen` (je Modul
-    {'N': …, 'F': …}, Phase-0-Betrag der Größe) standardisierten Streuungen, mit F-Test der Homogenität.
-    sigma_delta: {'L1': {'N', 'F'}, …}; n0: {'L1': n, …}."""
+    {'N': …, 'F': …}, Phase-0-Betrag der Größe) standardisierten Streuungen, mit Bartlett-Prüfung der Homogenität.
+    sigma_delta: {'L1': {'N', 'F'}, …}; n0: {'L1': n, …} (Zahl der Läufe, aus denen sigma_delta stammt)."""
     out = dict(n_abhaengig={}, pooling=None, faktor=faktor)
     for g in ('L1', 'L2', 'L3'):
         if g not in sigma_delta or g not in n0:
@@ -249,19 +267,27 @@ def lj_schwellen(sigma_delta, n0, skalen=None, faktor=FAKTOR):
 
 
 def _bartlett(s2, n):
-    """Bartlett-Test gleicher Varianzen aus Stichprobenvarianzen s2 (hier aus MAD, näherungsweise) und Umfängen n."""
-    f = n - 1
+    """Bartlett-Test gleicher Varianzen für Varianzen s2 aus dem MAD-Schätzer (1,4826·MAD) und Umfänge n. Die
+    χ²-Näherung setzt Var(ln s²) ≈ 2/f voraus; Statistik und Korrektur rechnen daher mit den effektiven
+    Freiheitsgraden f_eff(n) des MAD-Schätzers statt n − 1 (mit n − 1 wäre der p-Wert deutlich zu klein: bei drei
+    homogenen Modulen mit n₀ = 20 rund 30 % statt 5 % unter 0,05). σ̂²_MAD ist nicht skaliert χ²-verteilt; p ist eine
+    Näherung (unter dem Normalmodell bei drei Modulen mit n₀ = 20 rund 3,5 % unter 0,05, leicht konservativ)."""
+    f = np.array([freiheitsgrade_mad(int(m)) for m in np.asarray(n)])
     sp = float(np.sum(f * s2) / f.sum())
     T = (f.sum() * np.log(sp) - np.sum(f * np.log(s2))) / (1 + (np.sum(1 / f) - 1 / f.sum()) / (3 * (len(s2) - 1)))
-    return dict(statistik=float(T), df=len(s2) - 1, p=float(stats.chi2.sf(T, len(s2) - 1)))
+    return dict(statistik=float(T), df=len(s2) - 1, p=float(stats.chi2.sf(T, len(s2) - 1)), freiheitsgrade=f.tolist(),
+                hinweis='Näherung: Bartlett mit den effektiven Freiheitsgraden f_eff = 2/Var(ln σ̂²) des '
+                        'MAD-Schätzers (Simulation mit festen Ziehungen) statt n − 1; p genähert, nicht exakt')
 
 
 # ── Teil B: Block nr2.g4 ─────────────────────────────────────────────────────────────────────────────────
-def teil_b_block(tab0, ungueltig, sigma_delta, Nbar0, dd, u_dd, jitter_grad, kmax, konfigurationen, lg, profil):
+def teil_b_block(tab0, ungueltig, Nbar0, dd, u_dd, jitter_grad, kmax, konfigurationen, lg, profil):
     """nr2.g4 im Profilstand 2026-11 aus den gebundenen Phase-0-Größen (Fenster N_z und k_max des Plans): B+ (Standard,
     immer gebildet), D (wenn die Phase-0-Läufe Fünftelzeiger tragen) und die Lⱼ-Schwellen. Keine Phase-1-Daten.
     tab0: Phase-0-Läufe des Satzes; ungueltig: Lauf-IDs ungültiger Läufe; Nbar0 (3, K) Einzelmodul-Mittelkurven
-    (Summe der Zellen); konfigurationen: Teil-B-Liste (id, phi, einstellung); lg: Laufgrößen des Satzes."""
+    (Summe der Zellen); konfigurationen: Teil-B-Liste (id, phi, einstellung); lg: Laufgrößen des Satzes.
+    σ_Δ,X und n je Laufart werden aus den gültigen Phase-0-Läufen neu gebildet (A9.2 (4): G4-Schwellen der Phase 1
+    aus den gültigen Läufen); nr2.sigma_delta des Satzes (alle Läufe, G4 der Phase 0 und p̂) bleibt unverändert."""
     from . import gueltigkeit, zusammenfassung as zf
     t = tab0.auswahl(tab0.spalte('phase', int) == 0)
     nf = {int(k['n_fuenftel']) for k in t.koepfe}
@@ -277,27 +303,32 @@ def teil_b_block(tab0, ungueltig, sigma_delta, Nbar0, dd, u_dd, jitter_grad, kma
                                                                  u_delta_delta_grad=list(map(float, u_dd))))
     konf = [(c['id'], tuple(c['phi'])) for c in konfigurationen if c['einstellung'] == 1]
     piloten = [(0.0, p2, p3) for p2, p3 in kv.PILOTEN]
-    sK = (sigma_delta or {}).get('K') or {}
+    gut = np.array([k['lauf_id'] not in ungueltig for k in t.koepfe])
+    sd1 = gueltigkeit.sigma_delta(t.auswahl(gut), int(kmax))           # σ_Δ,X und n aus derselben (gültigen) Stichprobe
+    out['sigma_delta_phase1'] = sd1
+    out['sigma_delta_quelle'] = ('gültige Phase-0-Läufe je Laufart (A9.2 (4)); G4 der Phase 0 und p̂ mit σ_Δ aus allen '
+                                 'Läufen (nr2.sigma_delta)')
+    sK = sd1.get('K') or {}
     if lg is None or sK.get('F') is None:
         out['b_plus'] = None
-        out['b_plus_grund'] = 'Laufgrößen oder σ_Δ,F der Piloten fehlen: B+ nicht bildbar (G4 nicht prüfbar)'
+        out['b_plus_grund'] = 'Laufgrößen oder σ_Δ,F der gültigen Piloten fehlen: B+ nicht bildbar (G4 nicht prüfbar)'
     else:
-        out['b_plus'] = bplus(konf, piloten, Nbar0, dd, u_dd, jitter_grad, n_f, kmax, sK['F'], lg,
-                              profil.wert('g4.b_plus'))
-    gut = np.array([k['lauf_id'] not in ungueltig for k in t.koepfe])
+        out['b_plus'] = dict(bplus(konf, piloten, Nbar0, dd, u_dd, jitter_grad, n_f, kmax, sK['F'], lg,
+                                   profil.wert('g4.b_plus')), sigma_delta_K=sK)
     pil = np.array([k['konfiguration']['gruppe'] == 'pilot' and k['laufart'] == 'K' for k in t.koepfe]) & gut
     if zf.hat_fuenftelzeiger(t.daten) and pil.any():
         _, DF = gueltigkeit.fuenftel_differenzen(t, int(kmax))
         D = d_statistik(DF[pil], t.daten['fuenftel_zeiger'][pil], Nbar0, n_f, int(kmax))
         dd_ = d_schwelle(D)
-        out['d'] = None if dd_ is None else dict(dd_, Nbar0=Nbar0, n_f=n_f)
+        out['d'] = None if dd_ is None else dict(dd_, Nbar0=Nbar0, n_f=n_f, sigma_delta_K=sK)
     else:
         out['d'] = None
         out['d_grund'] = 'Fünftelzeiger fehlen in den Phase-0-Läufen (Format vor dem 20.10.2026): D nicht prüfbar'
-    n0 = {f'L{j}': int(sum(1 for k, g in zip(t.koepfe, gut) if g and k['laufart'] == 'L' and k['modul'] == j
-                           and k['einstellung'] == 1)) for j in (1, 2, 3)}
+    sd_lj = {g: sd1[g] for g in ('L1', 'L2', 'L3') if g in sd1}
+    n0 = {g: int(v['n']) for g, v in sd_lj.items()}                     # n₀ⱼ: Zahl der Läufe des MAD
     skalen = {f'L{j}': dict(N=1.0, F=float(abs(vh.fmin_rel_viele(Nbar0[j - 1][:int(kmax)])))) for j in (1, 2, 3)}
-    out['lj'] = lj_schwellen({g: v for g, v in (sigma_delta or {}).items() if g in n0}, n0, skalen)
-    out['lj']['hinweis'] = ('Standard: n-abhängige Schwelle k(n₀ⱼ)·σ_Δ,X je Modul; Pooling nur als Vergleich '
-                            '(D_N ohne Standardisierung, D_F mit |F_min − ⟨N⟩| von N̄⁽ʲ⁾ standardisiert)')
+    out['lj'] = lj_schwellen(sd_lj, n0, skalen)
+    out['lj']['hinweis'] = ('Standard: n-abhängige Schwelle k(n₀ⱼ)·σ_Δ,X je Modul, σ_Δ,X und n₀ⱼ aus den gültigen '
+                            'Lⱼ-Läufen der Phase 0; Pooling nur als Vergleich (D_N ohne Standardisierung, D_F mit '
+                            '|F_min − ⟨N⟩| von N̄⁽ʲ⁾ standardisiert)')
     return out
