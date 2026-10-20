@@ -294,7 +294,7 @@ nach dem Datenschluss wiederholt. Verfahren im Einzelnen: A9.2.
 | P0.5 | Profilmessung bei f und bei Einstellung 2 | x_k⁽ʲ⁾, a_k⁽ʲ⁾, Δδⱼ mit u ≤ 0,1°, G_x(ω), Parkposition; dieselben Größen bei Einstellung 2; bei zweitem Nockensatz Wiederholbarkeit nach Umschaltung |
 | P0.6 | Phasensteuerung | Versatz, Jitter σⱼ, Wiederholbarkeit der Indeximpulse |
 | P0.7 | ≥ 42 Referenzläufe, verschachtelt mit P0.8–P0.10, höchstens zwölf andere Läufe zwischen zwei Referenzläufen, gleichmäßig verteilt einschließlich Anfang und Ende | σ̂_ref, σ̂_ref,c, σ_c, F_LO |
-| P0.8 | Einzelmodulläufe, je Modul ≥ 20, auf n₀ ergänzt; bei Einstellung 2 je Modul n₀′ ≥ 20 (Umfang offen, §12) | N̄⁽ʲ⁾(θ) gesamt und je Zelle, auch bei Einstellung 2; s; ε_ctrl (§8.8) |
+| P0.8 | Einzelmodulläufe, je Modul ≥ 20, auf n₀ ergänzt; bei Einstellung 2 je Modul n₀′ ≥ 20 (Umfang offen, §12) | N̄⁽ʲ⁾(θ) gesamt und je Zelle, auch bei Einstellung 2; s; σ_a,j, σ_δ,j (A9.2); ε_ctrl (§8.8) |
 | P0.9 | Arbeitspunkt (§5.3) | f, k_max |
 | P0.10 | Pilotläufe (§5.4) | s_q, σ_Δ, σ_tol, T_φ, Rauschkovarianzen, p̂, T_a, T_ramp, n₀, n_min, n |
 | P0.11 | Vorhersagen (§8) | Vorhersagen mit Unsicherheiten |
@@ -373,8 +373,12 @@ mit dem Fenster T_a,P [Teil B]. Ihre zyklischen Phasenabstände (110°/140°/110
 110°/142°/108°) enthalten keinen Abstand von 120°; damit ist keine, auch nach Modulvertauschung und
 Zeitverschiebung, zu einem Punkt eines Schnitts äquivalent (A7). T_ramp [Teil B] wird vor den Pilotläufen
 gewählt; zeigt ein Pilotlauf in der Rampe Einzelzell-Liftoff, wird T_ramp verdoppelt, und die Pilotläufe
-werden wiederholt. Ein registriertes Skript gibt nur Streuungen, T_φ, Rauschkovarianzen und den Anteil p̂
-ungültiger Läufe aus; Superpositionsresiduen der Piloten werden vor Teil B nicht berechnet. Die Pilotdaten
+werden wiederholt. Ein registriertes Skript gibt nur Streuungen, T_φ, Rauschkovarianzen, die Komponenten des
+Laufgrößenmodells (A9.2) und den Anteil p̂ ungültiger Läufe aus. Es darf die Einzelmodul-Mittelkurven N̄⁽ʲ⁾ aus P0.8
+zusammen mit den Pilotläufen nur für zweite Momente verwenden (erfasster Phasenanteil aus den gemessenen Zeigern,
+Übertragungstest der Streuungen von Einzelmodul- auf Kombinationsläufe); Superpositionsresiduen, Vorhersagen an den
+Pilotkonfigurationen und daraus abgeleitete Größen werden vor Teil B weder berechnet noch ausgegeben
+(Arbeitsfestlegung vom 20.10.2026; bisher: Superpositionsresiduen der Piloten werden nicht berechnet). Die Pilotdaten
 werden bei der Aufnahme gehasht, nach der Auswertung veröffentlicht (§10.2) und nicht konfirmatorisch
 verwendet. s_q ist je Größe das quadratische Mittel der Streuungen über die Pilotkonfigurationen
 (gepoolt), auch für s(γ₁) der Zusatzkonfigurationen.
@@ -385,8 +389,11 @@ Zyklen gekürzten Pilotläufen gebildet. n_min und n₀ ≥ 20 minimieren N_K·n
 bei Gleichstand das kleinere n_min) unter der gemeinsamen Bedingung P(H1 und H2 bestätigt | exakt) ≥ 0,8
 (Arbeitsfestlegung, §12): Die Planungssimulation
 (§12, Punkt 8) bestätigt bei exakter Superposition H1 und H2 nach den Regeln von §8.5, §8.6 und §9.3 zusammen
-mit Wahrscheinlichkeit ≥ 0,8, mit Streuungen an ihrer oberen 80-%-Vertrauensgrenze (eine zusätzliche
-Power-Bedingung ist offen, §12: Laufzahl von H1). Die Einhaltung wird mit Werkzeug 8 geprüft (A9.11). Mit der
+mit Wahrscheinlichkeit ≥ 0,8, mit dem Strukturmodell aus Phase 0 (A9.2), dessen identifizierbare Komponenten je an
+ihrer oberen 80-%-Vertrauensgrenze mit eigenem ν stehen; für den Boden von ⟨N⟩ gilt ein gemeinsamer Faktor für alle
+Laufarten. Die Grenzen sind marginal; eine gemeinsame 80-%-Aussage über alle Komponenten folgt daraus nicht
+(Arbeitsfestlegung vom 20.10.2026; bisher „mit Streuungen an ihrer oberen 80-%-Vertrauensgrenze“). Eine zusätzliche
+Power-Bedingung ist offen (§12: Laufzahl von H1). Die Einhaltung wird mit Werkzeug 8 geprüft (A9.11). Mit der
 gemeinsamen Bedingung ist P(H2 bestätigt | exakt) ≥ 0,8 bei der geplanten Laufzahl von selbst erfüllt; wie das
 Kriterium „H2 auch bei hoher Präzision entscheidbar“ (A9.11) zu lesen ist, bleibt offen (§12). Zusätzlich gilt
 n_min ≥ (3·1°/(SNR·δ_H2))², also eine erwartete H2-Halbbreite ≤ δ_H2 (notwendig, weil ein breiteres Intervall
@@ -395,8 +402,9 @@ Mittel der beiden Flankensteigungen des Zeltfits an der Vorhersage im Fitfenster
 F_min − ⟨N⟩ (Faustregel für die H2-Halbbreite, A9.2); SNR steht in Teil B. Das
 erste Paar (k, T_a), das damit n ≤ n_max erfüllt, legt k_max = k, T_a, n_min und n₀ fest; alle k ≤ k_max
 werden verwendet. Gibt es keines, ist f unzulässig. **Rauschbias:** Für jeden Schnittpunkt wird
-b_i = E[min N̄_Messung] − E[min N̂] aus den Rauschkovarianzen simuliert, mit getrennten Rauschmodellen für
-Einzelmodul- und Kombinationsläufe. Der Bias hängt vom Verhältnis der Rauschpegel von Mess- und
+b_i = E[min N̄_Messung] − E[min N̂] aus dem Strukturmodell aus Phase 0 mit Punktschätzern simuliert, mit getrennten
+Komponenten für Einzelmodul- und Kombinationsläufe und den gemessenen Zeigern, nach der Planung bei den geplanten
+Laufzahlen (A9.2, A9.11; Arbeitsfestlegung vom 20.10.2026; bisher „aus den Rauschkovarianzen“). Der Bias hängt vom Verhältnis der Rauschpegel von Mess- und
 Vorhersageseite ab; er wird deshalb für beide Vorhersagen getrennt bestimmt: b_i⁰ mit n₀ Einzelmodulläufen je
 Modul, b_i¹ mit den Kontrollläufen je Modul der Phase 1 (A9.12), beide mit den in den simulierten Kampagnen der
 Auswertungsmenge A tatsächlich realisierten gültigen Laufzahlen (geplant n Blöcke, n + d Kontrollläufe;
@@ -1029,7 +1037,8 @@ Woodward-Effekt). Simulationszahlen sind keine Vorhersage für den Aufbau. Linie
    entscheidbar“ der erwartete Ausgang (§8.5). Je Szenario 1000 Kampagnen über mehrere Präzisionsstufen für
    Fehlerraten, den kritischen Wert c von H1 und H1Z, Überdeckung, Power, n_min, n₀, Rauschbias, das Quantil
    für ε_ctrl, die Trefferquote der Zuordnung sowie die Fehlalarmrate und die Raten „unauffällig“ und
-   „unbestimmt“ von E3 (A9.11). Jede simulierte Kampagne schätzt D_q, Δ_q und Δ_rel,q wie die Auswertung als
+   „unbestimmt“ von E3 (A9.11). Die Planungssimulation rechnet mit dem Phase-0-Modell (A9.2); das Szenariomodell
+   bleibt unabhängige Referenz (Orakel) im Pipelinetest (Arbeitsfestlegung vom 20.10.2026). Jede simulierte Kampagne schätzt D_q, Δ_q und Δ_rel,q wie die Auswertung als
    Punktwert aus ihrem simulierten ŷ⁰ (Einzelmodulläufe ihrer Phase 0), in Fassung B und in den
    Sensitivitätsvarianten (Faktor 0,1; Fassung A); die Kriterien von A9.11 gelten für das vollständige Verfahren
    einschließlich dieser Schätzung, Bezugswerte der wahren Abweichung sind Δ_q und Δ_rel aus der rauschfreien
@@ -1061,7 +1070,10 @@ Wiederaufnahme, Kontrollsatz mit S1–S4, Bezugseröffnung nach einem Nullpunkth
 Kombinationsläufe und k(n₀ⱼ) für Lⱼ (§9.1, A9.2); die Bezugsmengen G und A, die simulierte Wiederaufnahme, das
 Nachziehen bis |A| = 1000 und die Reservebedingung 0,95 (§5.4, A9.2, A9.11); E3 nach Option B mit m = 43, Rückfall
 je Prüfgröße, Prüfmenge ohne Identifizierbarkeits- und Zusatzkonfigurationen und E3b als Differenz (§8.10, A9.13);
-c nach Fassung (a) aus dem Standardmodell mit den übrigen Rauschmodellen als Sensitivität. Die Zeilen unten nennen
+c nach Fassung (a) aus dem Standardmodell mit den übrigen Rauschmodellen als Sensitivität; Laufgrößen und Rauschmodelle
+aus Phase 0 (Laufgrößenmodell und Strukturmodell, Planung an den oberen 80-%-Grenzen je Komponente mit c_B, Werte für
+Teil B mit Punktschätzern danach, nicht identifizierbare Komponenten als benannte Sensitivitäten, Ausgabeverbot vor
+Teil B; §5.4, A9.2, A9.3, A9.5, A9.11). Die Zeilen unten nennen
 die frühere Auswahl; wo sie überholt ist, steht der Vermerk „Arbeitsfestlegung vom 20.10.2026“.
 
 **(I) Unabhängig von der Hardware entscheidbar.**

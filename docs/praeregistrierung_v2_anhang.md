@@ -228,7 +228,12 @@ Grund: die Schwelle je Laufart schloss je Konfiguration 0,4–15 % der Läufe au
 (§5.4, A9.2, A9.11): simulierte Wiederaufnahme (W = 3, T_UA), Mengen G und A, |A| = 1000 mit Nachziehen,
 Reservebedingung 0,95 mit Grenze, b̂ mit den realisierten Laufzahlen, Zeit nach Termen. (6) E3 (§8.10, A9.13):
 Option B mit m = 43 und Rückfall je Prüfgröße. Grund: Die Intervallregel war am Schwellenrand nicht gültig (PR #22).
-(7) Laufgrößen und Rauschmodelle aus Phase 0 (§5.4, A9.2, A9.3, A9.5; Teil d der Vorlage). δ_H2, δ_H3 und die übrigen
+(7) Laufgrößen und Rauschmodelle aus Phase 0 (§5.4, A9.2, A9.3, A9.5, A9.11; Teil d der Vorlage): Laufgrößenmodell
+mit Komponenten je Modul und Bindung an k und N_z, Planung mit dem Strukturmodell an den oberen 80-%-Grenzen je
+Komponente und c_B, danach Kalibriersimulation mit Punktschätzern über die Modellliste {Strukturmodell,
+Familienanpassung}, nicht identifizierbare Komponenten als benannte Sensitivitäten, Ausgabeverbot für
+Superpositionsresiduen und Vorhersagen an den Piloten vor Teil B. Grund: Ein gemeinsamer Faktor für alle Streuungen
+und „dieselbe Simulation“ für Planung und c waren nicht gleichzeitig erfüllbar (Vorlage 5.1). δ_H2, δ_H3 und die übrigen
 offenen Punkte von §12 sind nicht mitentschieden.
 
 ## A1 · Definitionen
@@ -967,7 +972,8 @@ von σ̂_ref; bei bekanntem σ sind sie etwa zehnmal kleiner.
   Arbeitspunkt“, veröffentlicht; der Aufbau wird überarbeitet. In Teil B gehen nur Werte bei f ein.
 - **k_max, T_a und Laufzahl** (§5.4), in dieser Reihenfolge: Für k = k_b, k_b − 1, …, 3 und je k für T_a =
   N_z/f mit N_z = 1, 2, …, solange T_e + T_a ≤ T_e,P + T_a,P: (i) s_q(T_a) aus den Pilotläufen, gekürzt auf
-  die ersten N_z Zyklen; (ii) T_e und T_Lauf mit den Moden bis k·f; (iii) Planungssimulation: n₀ ≥ 20 und
+  die ersten N_z Zyklen; (ii) T_e und T_Lauf mit den Moden bis k·f; (iii) Planungssimulation mit dem Strukturmodell
+  aus Phase 0 an den oberen Grenzen je Komponente und c_B (Arbeitsfestlegung vom 20.10.2026): n₀ ≥ 20 und
   n_min minimieren N_K·n_min + 3·n₀ (Zielfunktion und Laufzahl von H1 offen, §12) unter den
   Bedingungen von §5.4 (gemeinsame Bestätigung von H1 und H2 nach §8.5, §8.6 und §9.3 bei exakter
   Superposition mit Wahrscheinlichkeit ≥ 0,8, Arbeitsfestlegung, §12; n_min ≥ (3·1°/(SNR·δ_H2))², δ_H2 offen,
@@ -979,13 +985,27 @@ von σ̂_ref; bei bekanntem σ sind sie etwa zehnmal kleiner.
   Kampagnen n_min gültige Läufe; sonst r um eins erhöhen und erneut simulieren, höchstens zehnmal (danach Abbruch
   des Kandidaten mit Grund „Reservegrenze“). Endgültig beendete Kampagnen zählen nicht in diesen bedingten Nenner,
   wohl aber im Nenner von P(H1 und H2 bestätigt). Das erste Paar (k, T_a), das (v) erfüllt, legt k_max, T_a, n_min und n₀ fest.
-  Obere 80-%-Vertrauensgrenze einer Streuung s mit ν Freiheitsgraden: s·√(ν/χ²₀,₂(ν)); t-Quantile mit dem
-  erwarteten ν_eff; c als c_B. Der Rauschbias berücksichtigt, dass Messkurve und vorhergesagte Summe dreier
+  Obere 80-%-Vertrauensgrenze einer Komponente mit Gesamtstreuung s, ν Freiheitsgraden und Bodenanteil b:
+  √max(0, s²·ν/χ²₀,₂(ν) − b), je identifizierbarer Komponente mit eigenem ν; der Boden von ⟨N⟩ erhält einen
+  gemeinsamen Faktor für alle Laufarten (bisher ein Faktor s·√(ν/χ²₀,₂(ν)) für alle Streuungen). t-Quantile mit dem
+  erwarteten ν_eff. Die Planung rechnet mit c_B = t(1 − α/294; n − 1), weil das kalibrierte c erst aus der
+  Kalibriersimulation mit den Laufzahlen des Plans folgt; Rauschbias, c, Intervalltyp von H2 und die Raten der
+  Kriterien folgen danach aus der Kalibriersimulation mit Punktschätzern (A9.11). Der Rauschbias berücksichtigt, dass Messkurve und vorhergesagte Summe dreier
   Einzelmodulkurven verschiedene Rauschpegel haben; die Simulation verwendet getrennte Rauschmodelle für
   Einzelmodul- und Kombinationsläufe. Die Faustregel n ≥ (3·1°/(SNR·δ_H2))² gibt die Laufzahl,
   bei der die H2-Halbbreite etwa δ_H2 erreicht (Halbbreite ≈ 3/(SNR·√n) für n₀ = n; Faktor 3: Tabelle F; bei
   der Testvariante δ_H2 = 1° die bisherige Regel n ≥ (3/SNR)²; δ_H2 offen, §12). Für die Bestätigung von H2
   ist das notwendig, nicht hinreichend; maßgeblich bleibt die Planungssimulation.
+- **Laufgrößenmodell** (Arbeitsfestlegung vom 20.10.2026; Regeln p0.laufgroessen, p0.strukturmodell,
+  rauschmodelle). Sensorboden je Zelle aus P0.7; Boden von ⟨N⟩ aus den Fünfteln. σ_a,j und σ_δ,j aus der kohärenten,
+  mit dem Zellboden gewichteten Projektion der Lⱼ-Abweichungen über k ≤ k_max und Zellen (ν = n₀ⱼ − 1), mit
+  Kohärenzprüfung über k; orthogonaler Rest je Harmonischer. σ²_off,j = max(0, Var φ̄ⱼ − σ̄ⱼ²/N_z) aus den gültigen
+  Piloten. Nullpunktdrift und Zufallspfad aus der Referenzfolge, über die Betriebszeit; laufinterne Fünftelanteile.
+  Alle Komponenten sind an k und N_z gebunden. Struktur am Arbeitspunkt aus P0.8, für Kandidatenfrequenzen aus dem
+  Auslegungswerkzeug mit den Parametern aus P0.1–P0.5. Punktschätzer werden bei null abgeschnitten; nicht aus Phase 0
+  identifizierbare Komponenten (etwa Drift zwischen Phase 0 und Phase 1 oder zwischen Messtagen, farbiger oder
+  lastabhängiger Jitter, Phasendrift im Lauf, abweichende Streuung der Kombinationsläufe) werden ausdrücklich benannt
+  und als benannte Sensitivitäten mit festen Stärken gerechnet und nur berichtet (A9.11).
 
 ### A9.3 Inhalt von Teil B
 
@@ -996,7 +1016,10 @@ von σ̂_ref; bei bekanntem σ sind sie etwa zehnmal kleiner.
    T_ramp, T_e, T_e,P, T_a, T_a,P, T_ab, T_Lauf; σ_tol, δf_tol; T_P0, TK_C, ΔT; σ̂_ref, σ̂_ref,c, ε_ctrl
    (mit Prüfgröße, kritischem Wert und gegebenenfalls σ̂_betr), σ_c, σ_Σ, F_LO; σ_Δ; n₀, n_min, r, n, n_max,
    d; T_verfügbar; Einstellung 2 (Amplitude oder Frequenz), s, I, N_I, n₀′; Spalt; g (örtlich bestimmt), V_außen
-   und m_hyd (für m_L), Ergebnis der Gesamtwägung oder begründeter Verzicht (A9.2);
+   und m_hyd (für m_L), Ergebnis der Gesamtwägung oder begründeter Verzicht (A9.2); σ_a,j, σ_δ,j und σ_off,j je
+   Modul mit ν und oberer 80-%-Grenze, gebunden an k_max und N_z, und die übrigen Komponenten des
+   Laufgrößenmodells (Boden je Zelle, Boden von ⟨N⟩, Nullpunktprozess, laufinterne Anteile, orthogonaler Rest) mit
+   Übertragungstest (A9.2);
 3. die Einzelmodul-Mittelkurven N̄⁽ʲ⁾(θ), gesamt und je Zelle, mit ihren Bootstrap-Replikaten als Datei;
    zusammen mit dem registrierten Code legen sie die Vorhersage für jede gemessene Phasenlage fest;
 4. die Vorhersage bei den Sollphasen und dem Jitter aus P0.6: F̂_min − N_s, N̂_k (k = 1 … 3), γ̂₁, Â, F̂_max
@@ -1013,7 +1036,8 @@ von σ̂_ref; bei bekanntem σ sind sie etwa zehnmal kleiner.
    Einzelmodul-Harmonischen wird vor dem Datenschluss nicht berechnet;
 8. die Prüfmenge V und die Entscheidung über Zusatzkonfigurationen und gespiegelten Schnitt;
 9. die Laufreihenfolge;
-10. die Ergebnisse der Planungs- und Kalibriersimulation, auch die gemeinsame Bestätigungswahrscheinlichkeit
+10. die Ergebnisse der Planungs- und Kalibriersimulation mit Angabe des Rauschmodells und der benannten
+    Sensitivitäten, auch die gemeinsame Bestätigungswahrscheinlichkeit
     von H1 und H2 bei exakter Superposition (§5.4), die Bestätigungswahrscheinlichkeit von H4 und H1Z, den
     kritischen Wert für ε_ctrl, die kritischen Werte c von H1 und H1Z mit der Prüfrate (§8.4), den
     Intervalltyp von H2 mit simulierter Überdeckung, gegebenenfalls mit Nominalniveau (§8.6), die
@@ -1044,8 +1068,9 @@ Zurücklegen ziehen (Phase 0 für ŷ⁰, Phase-1-Kontrollläufe für ŷ¹), ρ�
 Var_B, für lineare und nichtlineare Größen gleich. Ein eigener Phasenterm entfällt, weil die Vorhersage mit
 den gemessenen Zeigern derselben Läufe gebildet wird. Für F_min − ⟨N⟩ wird r⁰ um b̂_i⁰ und r¹ um b̂_i¹
 korrigiert, und u_c² = Var_A + Var_B + u²(b̂_i) mit dem jeweiligen b̂_i. u(b̂_i) kombiniert quadratisch den
-Monte-Carlo-Fehler und die halbe Spannweite von b̂_i über die in Teil B festgelegten Rauschmodelle (Festlegung
-in Teil B oder als Liste in Teil A offen, §12), diese als
+Monte-Carlo-Fehler und die halbe Spannweite von b̂_i über die in Teil A benannten Rauschmodelle {Strukturmodell aus
+Phase 0 (Standard), Familienanpassung (eingebettete Alternative)} mit den in Teil B gesetzten Parametern
+(Arbeitsfestlegung vom 20.10.2026; bisher offen, §12), diese als
 Rechteckverteilung (geteilt durch √3). ν_eff nach §8.3: n_A = gültige Läufe der Konfiguration (H3: gültige
 Phase-1-Kontrollläufe des Moduls), n_B = min_j der gültigen Einzelmodulläufe der jeweiligen Basis, Monte Carlo
 mit ν = ∞, also ν_eff = (n_A − 1)·u_c⁴/Var_A² in H3. H1Z, die Zuordnung und E3 verwenden dieselben
@@ -1148,11 +1173,15 @@ Einzelmodul- und Kombinationsläufe aus `linear_solver.py` mit Rauschen, Jitter 
 bestätigen; Daten mit bekannter Nichtlinearität (etwa ein Hertzscher Kontakt nach Testebene T0 des
 Literaturabgleichs) oder mit eingebauter Modulkopplung müssen H1 falsifizieren, wenn ihr größtes Residuum
 mindestens 2·Δ_rel beträgt (Power-Kriterium unten); knapp über Δ_rel ist „nicht entscheidbar“ zu erwarten.
-Vor Teil B zusätzlich je Szenario 1000 synthetische Kampagnen mit den geplanten n, n₀ und den
-Pilotstreuungen, mit getrennten Rauschmodellen für Einzelmodul- und Kombinationsläufe; dieselbe Simulation
-liefert n_min, n₀, den Rauschbias b̂⁰ und b̂¹ und c (§8.4; ob sie nach dem Datenschluss mit den tatsächlichen
-Laufzahlen neu berechnet werden, ist offen, §12). Den kritischen Wert für ε_ctrl liefert eine eigene
-Simulation nach A9.8.
+Vor Teil B zwei Simulationen (Arbeitsfestlegung vom 20.10.2026; bisher eine Simulation mit den Pilotstreuungen, die
+n_min, n₀, b̂ und c zugleich lieferte): (1) die Planungssimulation (A9.2 (iii)) mit dem Strukturmodell aus Phase 0 an
+den oberen 80-%-Grenzen je Komponente und c_B; sie liefert n_min und n₀; (2) danach die Kalibriersimulation bei den
+geplanten n, n₀ mit Punktschätzern der Laufgrößen und |A| = 1000 Kampagnen je Rolle (unten); sie liefert b̂⁰ und b̂¹
+mit u(b̂) über die Modellliste (A9.5), c als Quantil des Standardmodells mit der Familienanpassung als Sensitivität
+(§8.4), den Intervalltyp von H2 und die Raten der Kriterien. Ob b̂ und c nach dem Datenschluss mit den tatsächlichen
+Laufzahlen neu berechnet werden, ist offen (§12). Die benannten Sensitivitätsszenarien (Liste mit festen Stärken,
+A9.2) werden mitgerechnet und nur berichtet. Den kritischen Wert für ε_ctrl liefert eine eigene Simulation nach
+A9.8.
 
 **Halte und Bezugsmengen der Simulationen** (Arbeitsfestlegungen vom 20.10.2026). Fortsetzbare Halte werden im
 synthetischen Harness wie im Ablauf behandelt (A9.12): höchstens W = 3 Wiederaufnahmen je Kampagne mit dem
@@ -1184,8 +1213,7 @@ Fassung B bindet; berichtet werden dann die nötige Präzision und Laufzahl.
 
 Kriterien vor dem Einfrieren (Kalibrierung mit angenommenen Rauschmodellen über mehrere Präzisionsstufen
 (Umfang der Stufen und Laufzahl je Stufe offen, §12), von reinem Sensorrauschen bis zu mehreren Prozent
-Lauf-zu-Lauf-Streuung je Modul) und in Teil B (mit den
-Pilotkovarianzen):
+Lauf-zu-Lauf-Streuung je Modul) und in Teil B (mit dem Strukturmodell aus Phase 0, Punktschätzer):
 
 - P(falsifiziert | exakte Superposition oder lineares, zeitinvariantes Artefakt) ≤ 0,05;
 - P(falsifiziert | größte wahre Abweichung < Δ_rel) ≤ 0,05;
