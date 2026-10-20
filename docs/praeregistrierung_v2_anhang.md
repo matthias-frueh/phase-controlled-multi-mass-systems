@@ -211,6 +211,26 @@ u_c < Δ_q/t_eq, Auslegungsgrenze nach A8); Fassung A und Faktor 0,1 erscheinen 
 
 ---
 
+**Regelstand 2026-11 (Auftrag des Autors vom 20.10.2026; Entscheidungsvorlage vom 19.10.2026).** Methodische
+Arbeitsfestlegungen vor dem Einfrieren, begründet mit Rechnungen auf Statistikebene und synthetischen Entwicklungsläufen
+(Belegpaket `docs/entscheidungsvorlage_2026-10-19_belege/`), nicht mit Messdaten und ohne statistische Kalibrierung;
+die große Kalibrierung ist ausdrücklich nicht beauftragt. Profile AF-2026-11 und ENTW-2026-11; AF/ENTW-2026-10 und die
+Ergebnisse bis PR #23 bleiben ihrem Stand zugeordnet (Ablauffassung ablauf-3, Phase-0-Anordnung „historisch“).
+(1) Ablauf ablauf-4 (§6, §8.8, §9.2, A9.12): R₁ zuerst, R₂/X′/R₃ geschlossen, verworfene Folgeläufe beim Halt, neue
+Folge für einen G1-Fall ohne gemessenes X′, unvollständige Klammer ohne Sonderwiederholung, Kontrollsatz mit S1–S4,
+Bezugseröffnung nach einem Nullpunkthalt, Aufwärmen nur bei Tageswechsel. Grund: Lücken der Reihenfolge und des
+Bezugs nach einem Halt (Vorlage 1.1). (2) P0.7: höchstens zwölf andere Läufe zwischen zwei Referenzläufen. Grund:
+„je einer nach zwölf“ war mit 42 Referenzläufen und 120 anderen Läufen nicht erfüllbar. (3) A8: S1-Weg über den
+Alarm am R₁ ergänzt, frühere Kampagnensumme nicht mehr als Schranke; Schranken, Modellrechnungen und empirische
+Häufigkeiten getrennt; effektive Freiheitsgrade von σ̂_ref anordnungsabhängig. (4) G4 (§9.1, A9.2): B+ für
+Kombinationsläufe, k(n₀ⱼ) für Lⱼ, D als Diagnosemodus, Fünftelzeiger als optionales Feld der Laufzusammenfassung.
+Grund: die Schwelle je Laufart schloss je Konfiguration 0,4–15 % der Läufe aus (PR #22). (5) Halte und Mengen
+(§5.4, A9.2, A9.11): simulierte Wiederaufnahme (W = 3, T_UA), Mengen G und A, |A| = 1000 mit Nachziehen,
+Reservebedingung 0,95 mit Grenze, b̂ mit den realisierten Laufzahlen, Zeit nach Termen. (6) E3 (§8.10, A9.13):
+Option B mit m = 43 und Rückfall je Prüfgröße. Grund: Die Intervallregel war am Schwellenrand nicht gültig (PR #22).
+(7) Laufgrößen und Rauschmodelle aus Phase 0 (§5.4, A9.2, A9.3, A9.5; Teil d der Vorlage). δ_H2, δ_H3 und die übrigen
+offenen Punkte von §12 sind nicht mitentschieden.
+
 ## A1 · Definitionen
 
 | Größe | Definition |
@@ -242,6 +262,8 @@ u_c < Δ_q/t_eq, Auslegungsgrenze nach A8); Fassung A und Faktor 0,1 erscheinen 
 | T(kω), Ĉⱼ,ₖ | Übertragungsmatrix von den Modulkräften zu den Zellkräften bei der Harmonischen k: Statik der Dreipunktlagerung mit Zelllagen und relativen Zellverstärkungen aus P0.1, G_F je Zelle und Kippmoden aus P0.4 (A2.7); Ĉⱼ,ₖ = [T(kω)⁻¹·(N₁,ₖ, N₂,ₖ, N₃,ₖ)ᵀ]ⱼ, Zeiger von Modul j aus den Zellen |
 | φⱼ^{P,Z}, Δφⱼ^Z | Profilphase von Modul j aus den Zellen, arg Ĉ₁,₁ − arg Ĉⱼ,₁; Abweichung Δφⱼ^Z = φⱼ^{P,Z} − φ̄ⱼ^P (E3a, §8.10) |
 | R₊₁, R₋₁, q_Z, q_tol | gleich- und gegenläufige Komponente der ersten Harmonischen des Kippmoments aus den Zellkräften (A2.7); q_Z = \|R₋₁ − R̂₋₁\|/\|R̂₊₁\| am Triphasik-Punkt, R̂ aus der zellweisen Superposition (Differenz gegen die Vorhersage); q_tol = 5,8·10⁻⁴ (E3b, §8.10) |
+| Σ̂, ŝ, ρ̂, n*, κ, ν_eff (E3) | Σ̂: 2×2-Kovarianz der komplexen Bootstrap-Residuen von E3b mit n*/(n* − 1), n* = min(n_A, n₀,₁, n₀,₂, n₀,₃); ŝ² = λ_max(Σ̂); ρ̂ = √(λ_min/λ_max) (Anisotropie); κ = t(1 − α/m; ν)/z(1 − α/m); ν_eff = (1/ν + 1/(B − 1))⁻¹ bei endlichem B (A9.13) |
+| s_i, T_i, k(n) (G4) | s_i: aus Phase 0 über die Laufgrößen gemischte Jitterstreuung der Fünftel-Differenz D_F an Konfiguration i; T_i: Schwelle von D_F nach B+; k(n): Faktor der Lⱼ-Schwelle bei MAD aus n Läufen (A9.2) |
 | Schein-Oberwelle | Anteil der Kraft bei der 2- und 3-fachen Anregungsfrequenz in P0.4 über die vom Referenzaufnehmer gemessenen Oberwellen der Anregung hinaus (A9.2) |
 | Betriebslast (P0.4) | je Zelle die größte vorhergesagte Harmonische der Zellkraft bei der Anregungsfrequenz in den Kombinations- und Einzelmodulläufen bei f (§5.2, A9.2) |
 | F_min, F_max | Minimum und Maximum der bandbegrenzten Konfigurationsmittelkurve auf ihren N_θ Stützstellen; konfirmatorisch verglichen wird F_min − ⟨N⟩. Zyklusweise Minima und Minima ungefilterter Kurven sind nicht konfirmatorisch und werden nur beschreibend berichtet (E4) |
@@ -1197,11 +1219,15 @@ Zelllage- und Zellverstärkungsfehler innerhalb und außerhalb der Unsicherheit 
 - H1Z: P(falsifiziert | exakte Superposition oder lineares, zeitinvariantes Artefakt) ≤ 0,05; berichtet:
   Bestätigungswahrscheinlichkeit und Prüfrate von c wie bei H1;
 - E3: P(auffällig | exakte Superposition, Kalibrierung innerhalb ihrer Unsicherheit) ≤ 0,05 und
-  P(unauffällig | exakte Superposition, Kalibrierung innerhalb ihrer Unsicherheit) ≥ 0,8; berichtet: Rate
-  „unbestimmt“ und Rate „auffällig“ bei 0,1° und 0,3° Phasenversatz eines Moduls. Die Laufzahl richtet sich
-  nicht nach E3. Verfehlt E3 eines der beiden Kriterien in Teil B mit den Pilotkovarianzen, werden die
-  E3-Prüfgrößen nur beschreibend mit Unsicherheit berichtet, ohne dreiwertige Aussage (§8.10; Rückfall je
-  Prüfgröße oder für E3 als Ganzes offen, §12). Vor dem
+  P(unauffällig | exakte Superposition, Kalibrierung innerhalb ihrer Unsicherheit) ≥ 0,8, je Prüfgröße (E3a,
+  E3b); berichtet: Rate „unbestimmt“ und Rate „auffällig“ bei 0,1° und 0,3° Phasenversatz eines Moduls und, als
+  kleine Zusatzprüffälle, bei 0,5 % und 1 % Amplitudenänderung eines Moduls nur in den Kombinationsläufen
+  (Arbeitsfestlegung vom 20.10.2026). Die Laufzahl richtet sich nicht nach E3. Rückfall je Prüfgröße (§8.10):
+  Verfehlt eine Prüfgröße das Kriterium „auffällig“ oder die Modellprüfung (Vergleich von E q_Z² mit 2·E ŝ², der
+  Verteilung von ρ̂ und ŝ² und der Lage von q_Z in den Kalibrierkampagnen; bisher nicht umgesetzt, die Größen
+  werden gespeichert), wird sie nur beschreibend berichtet; verfehlt sie nur „unauffällig“, wird sie einseitig
+  ausgewertet. Der Kriterienbefund steht in Teil B (nr10.e3_kriterien) und wird nur bei der normativen
+  Kampagnenzahl ausgewiesen. Vor dem
   Einfrieren zeigt die Kalibrierung über die Präzisionsstufen, ab welcher Unsicherheit der Zellharmonischen
   das Kriterium erreichbar ist.
 
@@ -1209,7 +1235,7 @@ Erfüllt die Kalibrierung vor dem Einfrieren ein Kriterium nicht, werden die Reg
 §8.10 überarbeitet und die Änderung in A0 vermerkt. Erreicht die Zuordnung die Trefferquote auch mit
 geänderter Einstellung 2 oder geänderten Punkten I nicht, wird sie nur beschreibend berichtet. Für das
 E3-Kriterium „unauffällig“, das von der erst in Phase 0 bekannten Präzision abhängt, gilt stattdessen der
-Rückfall oben. In Teil B werden die Ergebnisse berichtet; die Regeln bleiben, wie in Teil A festgelegt,
+einseitige Rückfall der betroffenen Prüfgröße (oben). In Teil B werden die Ergebnisse berichtet; die Regeln bleiben, wie in Teil A festgelegt,
 einschließlich der Regeln für c (§8.4) und den Intervalltyp mit Rückfall (§8.6); offen sind ein Rückfall für H1 und
 die Fassung dieser Regeln (§12).
 
@@ -1314,10 +1340,24 @@ die Fassung dieser Regeln (§12).
   der Vorhersage.
 - **Vertrauensgrenzen.** Bootstrap wie A9.5, zusätzlich mit Ziehungen aus der Unsicherheit von T, bei E3a
   auch aus u(Δδⱼ) (normalverteilt, je Modul eine Ziehung für alle Konfigurationen) und aus der Quantisierung
-  der Zeitstempel (Rechteckverteilung). Auffällig:
-  |x̂| − z_B·u(x̂) > Schwelle, z_B das einseitige Bonferroni-Quantil zu α = 0,05 über alle E3-Prüfungen
-  (zwei je auswertbarer Konfiguration und E3b; Zahl der Prüfungen offen, §12). Unauffällig: |x̂| + 1,645·u(x̂) ≤
-  Schwelle für alle Prüfungen.
+  der Zeitstempel (Rechteckverteilung). Grenzen nach Option B (Arbeitsfestlegung vom 20.10.2026; bis dahin
+  |x̂| − z_B·u(x̂) > Schwelle und |x̂| + 1,645·u(x̂) ≤ Schwelle, deren Größe am Schwellenrand nicht gesichert war),
+  α = 0,05, m = 43:
+  **E3a**, gefalteter Betrag: ũ² = n_A/(n_A − 1)·u², ν = n_A − 1; auffällig, wenn |x̂| > 0,1° + k·ũ mit k aus
+  F̄_t(k; ν) + F̄_t(k + 2·0,1°/ũ; ν) = α/m (beide Vorzeichen); unauffällig, wenn |x̂| + t(0,95; ν)·ũ ≤ 0,1°.
+  **E3b**: komplexe Bootstrap-Residuen d_b = (R₋₁,b − R̂₋₁,b)/|R̂₊₁,b| vor der Betragsbildung,
+  n* = min(n_A, n₀,₁, n₀,₂, n₀,₃), Σ̂ = n*/(n* − 1)·Cov_b(Re d_b, Im d_b), ŝ² = λ_max(Σ̂), ν = n* − 1; auffällig,
+  wenn q_Z > κ·ŝ·Rice⁻¹(1 − α/m; q_tol/(κ·ŝ)) mit κ = t(1 − α/m; ν)/z(1 − α/m); unauffällig, wenn
+  q_Z + t(0,95; ν)·ŝ ≤ q_tol. Bei weniger als 10 000 gültigen Replikaten gilt in allen Quantilen
+  ν_eff = (1/ν + 1/(B − 1))⁻¹. Nicht prüfbar mit Grund (m bleibt 43): Punkt nicht auswertbar, Triphasik-Punkt
+  fehlt, ν_eff < 5, Σ̂ nicht endlich oder singulär, Streuung null, ungültige Replikate (ausgelassen und gezählt).
+  Berichtet und gespeichert: Σ̂, ŝ, ρ̂ = √(λ_min/λ_max), Richtung, ν, ν_eff, n_A, n₀ⱼ, n*, κ und der Prüfstatus.
+  Gültigkeit: unter den Gauß-, Wishart- und Unabhängigkeitsannahmen (Schätzer näherungsweise normal, Nenner
+  |R̂₊₁| nahezu fest, Σ̂ ≈ Wishart(ν)/ν unabhängig vom Schätzer, Läufe unabhängig ohne Drift) ist die Größe am
+  Rand höchstens α/m und die Rate „unauffällig“ am Rand höchstens 0,05, gezeigt auf Statistikebene durch
+  deterministische Quadratur über ν ≥ 5, Anisotropie, Richtung und den gefalteten E3a-Fall (Tabelle Z); eine
+  eingesetzte Rice-Verteilung ohne κ und ohne λ_max ist bei geschätzter oder anisotroper Streuung keine gültige
+  Grenze. Nicht geprüft: zusammengesetzte Kovarianzen, Drift, Schiefe und Rauschen im Nenner.
   Sonst unbestimmt.
 
 ---
@@ -1552,4 +1592,7 @@ Hauptdokument; A0–A9, Tab. C, Tab. F und Z Anhang.
 | Umschaltungen eines zweiten Nockensatzes bei Randomisierung nach §6 (R ohne Einstellung, n = 20, ein Messtag, 5000 Kampagnen): im Mittel 189 bzw. 188 je Kampagne (N_K = 23 bzw. 21, N_I = 3), 9,5 bzw. 9,4 je Block; N_I = 5: 12,4 je Block; Läufe bei Einstellung 2 je Block und Kontrollsatz zusammenhängend: 4,0 je Block | §5.2, §5.5, §6, §12; A9.2, Tab. F | `python3 -c "import numpy as np;g=np.random.default_rng(7);c=lambda q:int((np.diff(np.concatenate(q))!=0).sum());F=lambda NK,NI:c([g.permutation([1]*3+[2]*3)]+[a for _ in range(20) for a in (g.permutation([1]*NK+[2]*NI),g.permutation([1]*3+[2]*3))]);G=lambda m,r:(lambda i:[1]*i+[2]*m+[1]*(r-i))(int(g.integers(0,r+1)));B=lambda NK,NI:c([G(3,3)]+[a for _ in range(20) for a in (G(NI,NK),G(3,3))]);z=[float(np.mean([F(k,i) for _ in range(5000)])) for k,i in ((23,3),(21,3),(23,5))];b=float(np.mean([B(23,3) for _ in range(5000)]));print([round(v) for v in z],[round(v/20,1) for v in z],round(b/20,1))"` |
 | Gemeinsame Versorgung als Aktorkopplung (Beispiel A4, k_max = 9): 0,1 % Amplitude von Modul 1 / 2 / 3 nur in den Kombinationsläufen → 1,02 / 1,01 / 1,02 mN größtes \|ΔF_min\| auf dem Schnitt; aller Module 1,22 mN | Tab. C | `python3 -c "import sys;sys.path.insert(0,'code');import linear_solver as L,numpy as np;P,n=L.profile_spectrum();k=np.arange(1,10);N=2*0.4*L.M*P[1:10]/3/n;t=2*np.pi*np.arange(2000)/2000;c=lambda X:(X.real@np.cos(np.outer(k,t))-X.imag@np.sin(np.outer(k,t))).min();f=lambda p,a:c(a[0]*N+a[1]*N*np.exp(-1j*k*np.radians(p))+a[2]*N*np.exp(-1j*k*np.radians(240)));p=np.arange(100,141,2.);F=np.array([f(x,(1,1,1)) for x in p]);print([round(1e3*float(abs(np.array([f(x,a) for x in p])-F).max()),2) for a in ((1.001,1,1),(1,1.001,1),(1,1,1.001),(1.001,)*3)])"` |
 | Erreichbarkeit der E3-Schwellen (Beispiel A4, Module über den Zellen, \|N₁⁽ʲ⁾\| = 1,30 N): E3a „unauffällig“ möglich erst bei u ≈ 0,97 mN je Komponente einer Zellharmonischen (1,645·√2·u/1,30 N = 0,1°); q_Z bei exakter Superposition und 1 mN in Messung und Vorhersage im quadratischen Mittel √12·u/(3·1,30 N) = 8,9·10⁻⁴; u(Δδⱼ) ≈ 0,03° für 1,645·u(Δδⱼ) = 0,05° | §8.10, §12 | `python3 -c "import sys;sys.path.insert(0,'code');import linear_solver as L,numpy as np;P,n=L.profile_spectrum();C=float(abs(2*0.4*L.M*P[1]/3/n));u=np.radians(0.1)*C/(1.645*2**0.5);print(round(C,2),round(1e3*u,2),'%.1e'%(12**0.5/3*1e-3/C),round(0.05/1.645,3))"` |
+| Randgültigkeit der E3-Grenzen nach Option B (Größe ≤ α/m, „unauffällig“ ≤ 0,05 am Rand; E3b für ν ∈ {5, 6, 8, 19}, ρ ∈ {1; 0,25; 0,1; 0,03}, t bis 30; Maximum 0,98·α/m bei ν = 5, ρ = 0,03, t = 30; E3a gefaltet für ν = 4 … 100) | §8.10; A9.13 | `python3 -m pytest tests/test_e3_grenzen.py -q` (deterministische Quadratur); Belege `docs/entscheidungsvorlage_2026-10-19_belege/e3b/` |
+| effektive Freiheitsgrade von σ̂_ref: 20,8 bei 42 und 30,6 bei 61 gleichmäßig verteilten Referenzläufen | A1, A8 | `python3 docs/entscheidungsvorlage_2026-10-19_belege/freiheitsgrade/nu_eff_sigma_ref.py` |
+| k(n) der Lⱼ-Schwelle: 4,30 (n = 20), 3,38 (n = 60), 3,05 (n = 400) | A9.2 | `python3 -c "import sys;sys.path.insert(0,'code');from pcmms_auswertung import g4;print([round(g4.faktor_n(n),2) for n in (20,60,400)])"` |
 | Zitate: drei Wägezellen im Dreieck genannt; Wegkanal, Encoder und Hilfskanäle erwogen, Kanalzahl offen, Nennlast nicht hergeleitet (Exposé, Nachträge vom 2. Oktober 2026); historisch 10 kg und „11 Kanäle“ bei neun aufgezählten (drei Zellen, Weg, drei Encoder, Beschleunigung, Temperatur; Exposé im Stand des Tags `stand-2026-09-28`); 50,6 N, 7,69 mm, 0,650 kg, 16 N·s/m (README); 2,2 Hz (zehn_fragen); 0,2–0,5 % (v1); Ausgabe 2019 (DKD-R 3-10 Blatt 2; PTB-OAR, Websuche, kein Befehl); vorhandener programmierbarer Linearaktor (historisch: Arbeitspapier v2.4 im Stand des Tags `stand-2026-09-28`, Z. 2104; heutiger Quelltext: Hardwarestand offen, Abschnitt „Hardwarestand Linearaktor“) | §5.1, §12; A0, A3, A4 | `grep -n -e "Erwogen" -e "Kanalzahl" -e "Nennlast der" -e "nicht hergeleitet" docs/expose_2026-09.md`; historisch (Git-Klon mit Tags): `git grep -n -e "10 kg" -e "11 Kanäle" stand-2026-09-28 -- docs/expose_2026-09.md`; `git grep -n -A1 "11 Kanäle:" stand-2026-09-28 -- docs/expose_2026-09.md`; `grep -n -e "50,6 N" -e "7,69 mm" -e "0,650 kg" -e "16 N·s/m" README.md`; `grep -n "2,2 Hz" docs/zehn_fragen.md`; `grep -n "0,2–0,5" docs/praeregistrierung_2026-06.md`; historisch: `git grep -n "bereits vorliegt" stand-2026-09-28 -- docs/arbeitspapier/PCMMS_Arbeitspapier_v2_4.tex`; `grep -n -A1 "Hardwarestand Linearaktor" docs/arbeitspapier/PCMMS_Arbeitspapier_v2_5.tex` |
