@@ -139,7 +139,7 @@ def _erwartung(klasse):
 def kette_dateien(ziel, sid, stufe, profil, plan=None, seed=1, ebene='Z', n_min=None, werkzeug8=None, band_hz=None,
                   verfahren=None):
     """Alle Schritte nacheinander aus einer frischen Ausgabestruktur; Rückgabe dict(pfade, ergebnis, bewertung)."""
-    plan = kp.Plan() if plan is None else plan
+    plan = kp.plan_vorgabe(profil) if plan is None else plan
     p = generator_schreiben(ziel, sid, stufe, plan, seed, ebene, n_min, verfahren=verfahren)
     regeln.schreibe_profil(p['regelprofil'], profil)
     prof = regeln.lade_profil(p['regelprofil'])

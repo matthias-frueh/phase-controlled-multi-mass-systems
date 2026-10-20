@@ -13,7 +13,8 @@
                               gezielte Neuläufe K12/K19/E3 mit Checkpoints und Alt-Neu-Vergleich, Diagnose E3b/G4
   kette                       Generator → AP-11 → (Stufe 1) → Teil B → AP-12 → Bewertung aus einer frischen Struktur
 
-Profil: --profil ID (AF-2026-10 oder ENTW-2026-10) mit --red name=wert,… (verringerte Replikat- bzw.
+Profil: --profil ID (aktuell AF-2026-11 oder ENTW-2026-11; historisch AF-2026-10 oder ENTW-2026-10) mit
+--red name=wert,… (verringerte Replikat- bzw.
 Kampagnenzahlen; die Reduktion steht in der Profilkennung und in jedem Ergebnis) oder --profil-datei PFAD.
 Beispiele und Laufzeiten: docs/ap11_ap12_ap13_software.md.
 """
@@ -63,11 +64,17 @@ def _opt_plan(ap):
     ap.add_argument('--n-bloecke', type=int, default=24, help='Blöcke n in Phase 1')
     ap.add_argument('--n-zyklen', type=int, default=100, help='Zyklen im Auswertefenster')
     ap.add_argument('--n-min', type=int, default=None, help='n_min für Teil B (Vorgabe: n − 2)')
+    ap.add_argument('--p0-anordnung', choices=('p07', 'historisch'), default=None,
+                    help='Anordnung der Referenzläufe in Phase 0 (P0.7); Vorgabe nach dem Regelprofil: historisch unter '
+                         'AF/ENTW-2026-10, sonst p07')
 
 
-def _plan(a):
+def _plan(a, profil=None):
     from .generator import kampagne
-    return kampagne.Plan(n0=a.n0, n_pilot=a.n_pilot, n_bloecke=a.n_bloecke, n_zyklen=a.n_zyklen)
+    kw = dict(n0=a.n0, n_pilot=a.n_pilot, n_bloecke=a.n_bloecke, n_zyklen=a.n_zyklen)
+    if getattr(a, 'p0_anordnung', None):
+        kw['p0_anordnung'] = a.p0_anordnung
+    return kampagne.plan_vorgabe(profil, **kw)
 
 
 VERFAHREN = ('statisch', 'zustand', 'historisch')
@@ -80,9 +87,10 @@ def _opt_verfahren(ap):
                          '(Bindung an k der Pilotgrößen wie bis PR #22, nur zur Nachrechnung)')
 
 
-def _verfahren(a):
+def _verfahren(a, profil=None):
+    """Verfahren der CLI; „zustand“ in der Ablauffassung des Regelprofils (ablauf-3 unter AF/ENTW-2026-10)."""
     from . import verfahren as vf
-    return dict(statisch=vf.STATISCH, zustand=vf.ZUSTAND, historisch=vf.HISTORISCH)[a.verfahren]
+    return dict(statisch=vf.STATISCH, zustand=vf.zustand_fuer(profil), historisch=vf.HISTORISCH)[a.verfahren]
 
 
 def _json(obj):
@@ -104,13 +112,15 @@ def _beispiel(ap, argv):
 
 @befehl('regeln', 'Regelprofil ausgeben (JSON) oder Regelmatrix drucken')
 def _regeln(ap, argv):
-    ap.add_argument('--profil', default='ENTW-2026-10', choices=sorted(regeln.PROFILE))
+    ap.add_argument('--profil', default=regeln.STANDARD, choices=sorted(regeln.PROFILE))
     ap.add_argument('--ausgabe', help='Pfad ohne Endung für <pfad>.json')
     ap.add_argument('--matrix', action='store_true', help='Regelmatrix (Markdown) auf die Standardausgabe')
+    ap.add_argument('--stand', default='2026-11', choices=('2026-11', '2026-10'),
+                    help='Regelstand der Matrix (2026-10: historisch)')
     a = ap.parse_args(argv)
     p = regeln.profil(a.profil)
     if a.matrix:
-        sys.stdout.write(regeln.matrix_markdown())
+        sys.stdout.write(regeln.matrix_markdown(a.stand))
     if a.ausgabe:
         h = regeln.schreibe_profil(a.ausgabe, p)
         print(f'{a.ausgabe}.json: Profil {p.id}, SHA-256 Inhalt {p.sha256()[:16]}…, Datei {h["json"][:16]}…')
@@ -248,6 +258,15 @@ def _harness(ap, argv):
     ga = qa.add_mutually_exclusive_group(required=True)
     ga.add_argument('--schreiben')
     ga.add_argument('--pruefen')
+    qa.add_argument('--fassung', default='ablauf-3', choices=('ablauf-3', 'ablauf-4'),
+                    help='Stand beim Schreiben: ablauf-3 (historisch, PR #23) oder ablauf-4 (Regelstand 2026-11); '
+                         '--pruefen liest den Stand aus der Datei')
+    kb = sp.add_parser('kalibrierbeispiel', help='Beispiel der großen Kalibrierung (harness.kalibrierbeispiel): '
+                                                 'Vorgabe Trockenlauf; rechnet nur mit --ausfuehren')
+    kb.add_argument('--konfig', required=True, help='JSON nach Schema pcmms-kalibrierbeispiel-1')
+    kb.add_argument('--ausgabe', default=None, help='Ergebnis- und Checkpointverzeichnis (für --ausfuehren)')
+    kb.add_argument('--ausfuehren', action='store_true', help='rechnen (Demonstration; groß nur mit --bestaetigung)')
+    kb.add_argument('--bestaetigung', default=None, help='für modus „gross“ genau: "grosse Kalibrierung starten"')
     m = sp.add_parser('matrix')
     m.add_argument('--ausgabe', required=True)
     m.add_argument('--kampagnen', type=int, required=True)
@@ -298,8 +317,9 @@ def _harness(ap, argv):
         print(_json(dateien.bewerten(a.ergebnis, a.wahrheit, a.ausgabe)))
     elif a.was == 'kampagnen':
         w8 = dateien.lies_werkzeug8(a.werkzeug8) if a.werkzeug8 != 'testvorgabe' else None
-        lauf = kampagnen.ausfuehren(a.szenario, a.stufe, _profil(a), a.kampagnen, a.seed, a.rolle, _plan(a), a.n_min,
-                                    w8, prozesse=a.prozesse, verfahren=_verfahren(a))
+        prof = _profil(a)
+        lauf = kampagnen.ausfuehren(a.szenario, a.stufe, prof, a.kampagnen, a.seed, a.rolle, _plan(a, prof), a.n_min,
+                                    w8, prozesse=a.prozesse, verfahren=_verfahren(a, prof))
         pf = kampagnen.schreibe(a.ausgabe, lauf)
         rt = kampagnen.raten(lauf)
         print(f'{a.kampagnen} Kampagnen {a.szenario} {a.stufe} ({lauf["meta"]["laufzeit_s"]} s); Wahrheit '
@@ -310,7 +330,7 @@ def _harness(ap, argv):
     elif a.was == 'kalibrierung':
         prof = _profil(a)
         kal = kalibrierung.kalibrieren(a.szenario, a.stufe, prof, a.kampagnen_kal, a.kampagnen_pruef, a.seed,
-                                       _plan(a), a.n_min, a.prozesse, verfahren=_verfahren(a))
+                                       _plan(a, prof), a.n_min, a.prozesse, verfahren=_verfahren(a, prof))
         os.makedirs(a.ausgabe, exist_ok=True)
         kenn = formate.synth_kennung('W8', a.szenario, a.stufe, a.seed)
         formate.schreibe_objekt(os.path.join(a.ausgabe, 'werkzeug8'), formate.kopf('werkzeug8', kenn),
@@ -363,12 +383,23 @@ def _harness(ap, argv):
     elif a.was == 'ablauf-pruefsatz':
         from .harness import ablauf_pruefsatz
         if a.schreiben:
-            ps = ablauf_pruefsatz.schreiben(a.schreiben)
+            ps = ablauf_pruefsatz.schreiben(a.schreiben, fassung=a.fassung)
             print(f'Ablauf-Prüfsatz {a.schreiben}.json: SHA-256 {ps["sha256_gesamt"][:16]}…')
         else:
             r = ablauf_pruefsatz.pruefen(a.pruefen)
             print(_json(r))
             return 0 if r['gleich'] else 1
+    elif a.was == 'kalibrierbeispiel':
+        from .harness import kalibrierbeispiel as kb
+        k = kb.lies(a.konfig)
+        if not a.ausfuehren:
+            print(_json(kb.trockenlauf(k)))
+            return 0
+        if not a.ausgabe:
+            print('kalibrierbeispiel --ausfuehren verlangt --ausgabe')
+            return 2
+        r = kb.ausfuehren(k, a.ausgabe, a.bestaetigung)
+        print(_json({x: r[x] for x in ('kennzeichnung', 'status', 'abgeschlossen', 'checkpoints', 'konfiguration_sha256')}))
     elif a.was == 'matrix':
         from .generator import szenarien
         stufen = a.stufen.split(',')
@@ -432,7 +463,8 @@ def _kette(ap, argv):
     _opt_plan(ap)
     a = ap.parse_args(argv)
     from .harness import dateien
-    r = dateien.kette_dateien(a.ausgabe, a.szenario, a.stufe, _profil(a), _plan(a), a.seed, a.ebene, a.n_min,
+    prof = _profil(a)
+    r = dateien.kette_dateien(a.ausgabe, a.szenario, a.stufe, prof, _plan(a, prof), a.seed, a.ebene, a.n_min,
                               a.werkzeug8, a.band)
     print(r['ergebnis']['text'])
     bw = r['bewertung']

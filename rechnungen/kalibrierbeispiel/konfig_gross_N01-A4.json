@@ -1,0 +1,16 @@
+{
+  "schema": "pcmms-kalibrierbeispiel-1",
+  "modus": "gross",
+  "beschreibung": "Beispiel der normativen Kalibrier- und Prüfsimulation für N01-A4 (exakte Superposition). Im Auftrag vom 20.10.2026 NICHT ausgeführt; nur Trockenlauf.",
+  "szenario": "N01-A4",
+  "stufe": "L1",
+  "profil": "ENTW-2026-11",
+  "plan": {"n0": 20, "n_pilot": 20, "n_bloecke": 24, "p0_anordnung": "p07"},
+  "n_min": 18,
+  "verfahren": "zustand",
+  "seed_basis": 20261020,
+  "soll_A": 1000,
+  "prozesse": 4,
+  "partie": 50,
+  "sekunden_je_kampagne": 82
+}

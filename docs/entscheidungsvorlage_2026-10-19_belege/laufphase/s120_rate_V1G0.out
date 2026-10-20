@@ -1,0 +1,18 @@
+S120 soll                 N01-V1G0   : MAD 2.055 mN; v2-Schwelle Mittel 2.505; P(|D_F|>3σ_v2) = 0.29 %, mit D_N (gezählt 0.73 %) 1.02 %; gezählt v2 22/960 = 2.29 %; P(|D_F| > 3·MAD) = 0.91 %
+S120 soll                 N01-V1G60h : MAD 2.055 mN; v2-Schwelle Mittel 2.567; P(|D_F|>3σ_v2) = 0.26 %, mit D_N (gezählt 0.83 %) 1.09 %; gezählt v2 22/960 = 2.29 %; P(|D_F| > 3·MAD) = 0.91 %
+S120 Phase (Versatz + δ)  N01-V1G0   : MAD 2.640 mN; v2-Schwelle Mittel 2.505; P(|D_F|>3σ_v2) = 1.42 %, mit D_N (gezählt 0.73 %) 2.13 %; gezählt v2 22/960 = 2.29 %; P(|D_F| > 3·MAD) = 0.87 %
+S120 Phase (Versatz + δ)  N01-V1G60h : MAD 2.640 mN; v2-Schwelle Mittel 2.567; P(|D_F|>3σ_v2) = 1.26 %, mit D_N (gezählt 0.83 %) 2.09 %; gezählt v2 22/960 = 2.29 %; P(|D_F| > 3·MAD) = 0.87 %
+S120 voll L1              N01-V1G0   : MAD 2.814 mN; v2-Schwelle Mittel 2.505; P(|D_F|>3σ_v2) = 1.82 %, mit D_N (gezählt 0.73 %) 2.54 %; gezählt v2 22/960 = 2.29 %; P(|D_F| > 3·MAD) = 0.77 %
+S120 voll L1              N01-V1G60h : MAD 2.814 mN; v2-Schwelle Mittel 2.567; P(|D_F|>3σ_v2) = 1.63 %, mit D_N (gezählt 0.83 %) 2.45 %; gezählt v2 22/960 = 2.29 %; P(|D_F| > 3·MAD) = 0.77 %
+S118 soll                 N01-V1G0   : MAD 3.955 mN; v2-Schwelle Mittel 4.048; P(|D_F|>3σ_v2) = 0.21 %, mit D_N (gezählt 0.52 %) 0.73 %; gezählt v2 8/960 = 0.83 %; P(|D_F| > 3·MAD) = 0.25 %
+S118 soll                 N01-V1G60h : MAD 3.955 mN; v2-Schwelle Mittel 4.040; P(|D_F|>3σ_v2) = 0.22 %, mit D_N (gezählt 0.52 %) 0.74 %; gezählt v2 5/960 = 0.52 %; P(|D_F| > 3·MAD) = 0.25 %
+S118 Phase (Versatz + δ)  N01-V1G0   : MAD 3.959 mN; v2-Schwelle Mittel 4.048; P(|D_F|>3σ_v2) = 0.22 %, mit D_N (gezählt 0.52 %) 0.74 %; gezählt v2 8/960 = 0.83 %; P(|D_F| > 3·MAD) = 0.27 %
+S118 Phase (Versatz + δ)  N01-V1G60h : MAD 3.959 mN; v2-Schwelle Mittel 4.040; P(|D_F|>3σ_v2) = 0.23 %, mit D_N (gezählt 0.52 %) 0.75 %; gezählt v2 5/960 = 0.52 %; P(|D_F| > 3·MAD) = 0.27 %
+S118 voll L1              N01-V1G0   : MAD 3.965 mN; v2-Schwelle Mittel 4.048; P(|D_F|>3σ_v2) = 0.22 %, mit D_N (gezählt 0.52 %) 0.74 %; gezählt v2 8/960 = 0.83 %; P(|D_F| > 3·MAD) = 0.26 %
+S118 voll L1              N01-V1G60h : MAD 3.965 mN; v2-Schwelle Mittel 4.040; P(|D_F|>3σ_v2) = 0.22 %, mit D_N (gezählt 0.52 %) 0.74 %; gezählt v2 5/960 = 0.52 %; P(|D_F| > 3·MAD) = 0.26 %
+S100 soll                 N01-V1G0   : MAD 1.953 mN; v2-Schwelle Mittel 2.020; P(|D_F|>3σ_v2) = 0.35 %, mit D_N (gezählt 0.62 %) 0.97 %; gezählt v2 7/960 = 0.73 %; P(|D_F| > 3·MAD) = 0.27 %
+S100 soll                 N01-V1G60h : MAD 1.953 mN; v2-Schwelle Mittel 1.996; P(|D_F|>3σ_v2) = 0.43 %, mit D_N (gezählt 0.31 %) 0.74 %; gezählt v2 7/960 = 0.73 %; P(|D_F| > 3·MAD) = 0.27 %
+S100 Phase (Versatz + δ)  N01-V1G0   : MAD 1.957 mN; v2-Schwelle Mittel 2.020; P(|D_F|>3σ_v2) = 0.34 %, mit D_N (gezählt 0.62 %) 0.97 %; gezählt v2 7/960 = 0.73 %; P(|D_F| > 3·MAD) = 0.27 %
+S100 Phase (Versatz + δ)  N01-V1G60h : MAD 1.957 mN; v2-Schwelle Mittel 1.996; P(|D_F|>3σ_v2) = 0.43 %, mit D_N (gezählt 0.31 %) 0.74 %; gezählt v2 7/960 = 0.73 %; P(|D_F| > 3·MAD) = 0.27 %
+S100 voll L1              N01-V1G0   : MAD 1.970 mN; v2-Schwelle Mittel 2.020; P(|D_F|>3σ_v2) = 0.35 %, mit D_N (gezählt 0.62 %) 0.97 %; gezählt v2 7/960 = 0.73 %; P(|D_F| > 3·MAD) = 0.26 %
+S100 voll L1              N01-V1G60h : MAD 1.970 mN; v2-Schwelle Mittel 1.996; P(|D_F|>3σ_v2) = 0.44 %, mit D_N (gezählt 0.31 %) 0.75 %; gezählt v2 7/960 = 0.73 %; P(|D_F| > 3·MAD) = 0.26 %

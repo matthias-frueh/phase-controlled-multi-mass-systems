@@ -10,7 +10,7 @@ from pcmms_auswertung.generator import kampagne as kp, szenarien
 from pcmms_auswertung.harness import kette
 
 PROFIL = regeln.profil('ENTW-2026-10').mit_reduktion(bootstrap_B=200, h3_mc=200, eps_ctrl_datensaetze=500)
-PLAN = kp.Plan(n0=20, n_pilot=20, n_bloecke=24)
+PLAN = kp.Plan(n0=20, n_pilot=20, n_bloecke=24, p0_anordnung='historisch')   # Seedeigenschaft der alten Anordnung
 W8 = kette.testvorgabe_werkzeug8()
 
 

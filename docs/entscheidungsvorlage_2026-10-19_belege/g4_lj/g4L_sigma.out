@@ -1,0 +1,47 @@
+Theorie Normal-MAD: n=20 E=0.958 CV=0.262; n=61 E=0.987 CV=0.151
+Modell b-g4 (n0=20, beide Größen): mittlere Rate je L-Lauf 3.659 %
+
+== N01-A4 k_b 30 k_max 9
+  L1 N: n=20 Mittel 0.233 mN, Median 0.229, CV 0.228, min/max 0.135/0.371
+  L1 F: n=20 Mittel 1.542 mN, Median 1.557, CV 0.289, min/max 0.669/2.488
+  L2 N: n=20 Mittel 0.235 mN, Median 0.229, CV 0.252, min/max 0.125/0.356
+  L2 F: n=20 Mittel 1.530 mN, Median 1.475, CV 0.240, min/max 0.858/2.296
+  L3 N: n=20 Mittel 0.257 mN, Median 0.259, CV 0.229, min/max 0.142/0.398
+  L3 F: n=20 Mittel 1.680 mN, Median 1.623, CV 0.226, min/max 1.039/2.493
+  R N: n=61 Mittel 0.256 mN, Median 0.258, CV 0.164, min/max 0.169/0.364
+  K N: n=60 Mittel 0.236 mN, Median 0.234, CV 0.157, min/max 0.167/0.339
+  K F: n=60 Mittel 1.946 mN, Median 1.977, CV 0.164, min/max 1.345/2.638
+  G4 Nicht-K (126 Läufe) beobachtet: Summe 62 über 40, Mittel 1.55, Varianz 2.82, Verteilung [(np.int64(0), 11), (np.int64(1), 15), (np.int64(2), 5), (np.int64(3), 3), (np.int64(4), 5), (np.int64(8), 1)]
+  Normalmodell bei gegebenem σ̂ (wahres σ = Mittel σ̂ / E-Faktor): L 97.2, R 15.0, zusammen 112.2; Rang-Korrelation beob./vorh. 0.57 (p=0.00)
+  G1 Nicht-K beobachtet Summe 55; Spearman(G4, G1) -0.02
+  erste 10 Kampagnen: beob [1, 0, 0, 2, 1, 1, 0, 1, 0, 1]  vorh [4.2, 2.4, 3.2, 2.9, 6.7, 1.8, 2.5, 3.7, 0.2, 2.0]
+
+== N01-V1G0 k_b 12 k_max 12
+  L1 N: n=20 Mittel 0.244 mN, Median 0.239, CV 0.316, min/max 0.105/0.447
+  L1 F: n=20 Mittel 1.220 mN, Median 1.135, CV 0.298, min/max 0.658/1.908
+  L2 N: n=20 Mittel 0.238 mN, Median 0.230, CV 0.261, min/max 0.124/0.407
+  L2 F: n=20 Mittel 1.153 mN, Median 1.149, CV 0.244, min/max 0.723/1.733
+  L3 N: n=20 Mittel 0.236 mN, Median 0.232, CV 0.269, min/max 0.105/0.399
+  L3 F: n=20 Mittel 1.127 mN, Median 1.126, CV 0.301, min/max 0.573/1.900
+  R N: n=61 Mittel 0.245 mN, Median 0.238, CV 0.152, min/max 0.195/0.338
+  K N: n=60 Mittel 0.253 mN, Median 0.252, CV 0.146, min/max 0.164/0.346
+  K F: n=60 Mittel 1.952 mN, Median 1.941, CV 0.138, min/max 1.538/2.602
+  G4 Nicht-K (126 Läufe) beobachtet: Summe 134 über 40, Mittel 3.35, Varianz 8.64, Verteilung [(np.int64(0), 6), (np.int64(1), 8), (np.int64(2), 4), (np.int64(3), 5), (np.int64(4), 6), (np.int64(5), 4), (np.int64(6), 2), (np.int64(8), 2), (np.int64(10), 2), (np.int64(11), 1)]
+  Normalmodell bei gegebenem σ̂ (wahres σ = Mittel σ̂ / E-Faktor): L 116.7, R 12.3, zusammen 129.1; Rang-Korrelation beob./vorh. 0.80 (p=0.00)
+  G1 Nicht-K beobachtet Summe 45; Spearman(G4, G1) -0.11
+  erste 10 Kampagnen: beob [3, 10, 4, 3, 1, 4, 2, 8, 0, 3]  vorh [4.0, 7.5, 3.5, 3.6, 2.8, 3.7, 2.9, 7.9, 1.4, 2.7]
+
+== N01-V1G60h k_b 12 k_max 12
+  L1 N: n=20 Mittel 0.260 mN, Median 0.258, CV 0.231, min/max 0.140/0.401
+  L1 F: n=20 Mittel 1.186 mN, Median 1.181, CV 0.233, min/max 0.691/1.932
+  L2 N: n=20 Mittel 0.251 mN, Median 0.257, CV 0.289, min/max 0.107/0.421
+  L2 F: n=20 Mittel 1.086 mN, Median 1.020, CV 0.275, min/max 0.604/1.795
+  L3 N: n=20 Mittel 0.256 mN, Median 0.265, CV 0.220, min/max 0.114/0.354
+  L3 F: n=20 Mittel 1.132 mN, Median 1.074, CV 0.253, min/max 0.733/1.948
+  R N: n=61 Mittel 0.244 mN, Median 0.239, CV 0.149, min/max 0.176/0.348
+  K N: n=60 Mittel 0.251 mN, Median 0.252, CV 0.122, min/max 0.167/0.308
+  K F: n=60 Mittel 1.925 mN, Median 1.910, CV 0.138, min/max 1.316/2.433
+  G4 Nicht-K (126 Läufe) beobachtet: Summe 90 über 40, Mittel 2.25, Varianz 5.42, Verteilung [(np.int64(0), 9), (np.int64(1), 9), (np.int64(2), 10), (np.int64(3), 3), (np.int64(4), 3), (np.int64(5), 1), (np.int64(6), 4), (np.int64(11), 1)]
+  Normalmodell bei gegebenem σ̂ (wahres σ = Mittel σ̂ / E-Faktor): L 98.7, R 11.9, zusammen 110.6; Rang-Korrelation beob./vorh. 0.62 (p=0.00)
+  G1 Nicht-K beobachtet Summe 54; Spearman(G4, G1) 0.34
+  erste 10 Kampagnen: beob [0, 2, 2, 1, 2, 0, 1, 6, 1, 4]  vorh [3.3, 4.9, 1.4, 3.3, 1.4, 0.6, 1.8, 6.7, 1.2, 3.9]

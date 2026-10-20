@@ -55,7 +55,7 @@ def test_checkpointschluessel_enthaelt_das_verfahren():
     j1 = av._job('x', 'N01-A4', 'k_konsistent', [0])
     j2 = dict(j1, variante='wiederholungen')
     k1, k2 = av.schluessel(a, j1, prof, None), av.schluessel(a, j2, prof, None)
-    assert k1['verfahren'] == vf.STATISCH.kennung() and k2['verfahren'] == vf.ZUSTAND.kennung() and k1 != k2
+    assert k1['verfahren'] == vf.STATISCH.kennung() and k2['verfahren'] == vf.ZUSTAND_HISTORISCH.kennung() and k1 != k2
 
 
 def test_berichtstabellen_lassen_den_text_zwischen_leeren_markierungen_stehen():

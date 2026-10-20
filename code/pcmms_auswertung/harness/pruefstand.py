@@ -70,7 +70,7 @@ def ausfuehren(ziel, konfiguration=None, schritte=None, prozesse=4, protokoll=pr
             'reproduzierbarkeit', 'wahrheit', 'referenz', 'zeltfit', 'planung', 'pruefsatz')
     schritte = alle if schritte is None else tuple(schritte)
     prof = regeln.profil('ENTW-2026-10').mit_reduktion(**kf['profil_reduktion'])
-    plan = kp.Plan(**kf['plan'])
+    plan = kp.plan_aus_dict(kf['plan'])
     st, seed, n_min = kf['stufe'], int(kf['seed']), kf['n_min']
     out = dict(konfiguration={k: (list(v) if isinstance(v, tuple) else v) for k, v in kf.items()}, profil=prof.id,
                profil_sha256=prof.sha256(), code_version=formate.code_version(), schritte={}, laufzeit_s={},

@@ -1,0 +1,8 @@
+n=12 w=0.00: heutig  6.04·α′ | t(n−1) mit n/(n−1)  0.99·α′ | t(n−1) ohne Korrektur  1.32·α′ | obere: heutig 0.0719, t(0,95) korr. 0.0502
+n=12 w=0.25: heutig  3.07·α′ | t(n−1) mit n/(n−1)  0.26·α′ | t(n−1) ohne Korrektur  0.35·α′ | obere: heutig 0.0630, t(0,95) korr. 0.0437
+n=12 w=0.50: heutig  1.87·α′ | t(n−1) mit n/(n−1)  0.09·α′ | t(n−1) ohne Korrektur  0.11·α′ | obere: heutig 0.0566, t(0,95) korr. 0.0394
+n=12 w=0.75: heutig  1.23·α′ | t(n−1) mit n/(n−1)  0.05·α′ | t(n−1) ohne Korrektur  0.06·α′ | obere: heutig 0.0526, t(0,95) korr. 0.0372
+n=22 w=0.00: heutig  3.09·α′ | t(n−1) mit n/(n−1)  0.99·α′ | t(n−1) ohne Korrektur  1.20·α′ | obere: heutig 0.0615, t(0,95) korr. 0.0499
+n=22 w=0.25: heutig  2.01·α′ | t(n−1) mit n/(n−1)  0.53·α′ | t(n−1) ohne Korrektur  0.62·α′ | obere: heutig 0.0570, t(0,95) korr. 0.0467
+n=22 w=0.50: heutig  1.44·α′ | t(n−1) mit n/(n−1)  0.35·α′ | t(n−1) ohne Korrektur  0.40·α′ | obere: heutig 0.0537, t(0,95) korr. 0.0443
+n=22 w=0.75: heutig  1.12·α′ | t(n−1) mit n/(n−1)  0.26·α′ | t(n−1) ohne Korrektur  0.28·α′ | obere: heutig 0.0512, t(0,95) korr. 0.0430

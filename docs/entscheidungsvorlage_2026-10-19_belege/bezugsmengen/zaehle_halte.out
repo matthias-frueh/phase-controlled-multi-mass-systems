@@ -1,0 +1,6 @@
+N01-A4 4 angehalten S1 auswertbar 0 / 21 min_gueltig 8 yhat1 True vollstaendig False sperren ['Phase 1 angehalten: S1: reproduzierter Nullpunktalarm (Zelle 3) (keine abgeschlossene Kampagne)']
+N01-V1G0 1 angehalten S1 auswertbar 0 / 21 min_gueltig 4 yhat1 True vollstaendig False sperren ['Phase 1 angehalten: S1: reproduzierter Nullpunktalarm (Zelle 2) (keine abgeschlossene Kampagne)']
+N01-V1G0 2 angehalten S1 auswertbar 21 / 21 min_gueltig 22 yhat1 True vollstaendig False sperren ['Phase 1 angehalten: S1: G1-Verstoß der Wiederholung X′ gegen R₂/R₃ (V00665/V00667) (keine abgeschlossene Kampagne)']
+N01-V1G0 7 angehalten S1 auswertbar 0 / 21 min_gueltig 12 yhat1 True vollstaendig False sperren ['Phase 1 angehalten: S1: G1-Verstoß der Wiederholung X′ gegen R₂/R₃ (V00363/V00365) (keine abgeschlossene Kampagne)']
+N01-V1G60h 7 angehalten S3 auswertbar 0 / 21 min_gueltig 7 yhat1 True vollstaendig False sperren ['Phase 1 angehalten: S3: Drift der Einzelmodulreferenz reproduziert (Im_N3) (keine abgeschlossene Kampagne)']
+{'n': 30, 'halt': 5, 'halt_z_alle': 1, 'halt_z_teil': 0, 'halt_z_keine': 4, 'abg': 25, 'abg_voll': 25}

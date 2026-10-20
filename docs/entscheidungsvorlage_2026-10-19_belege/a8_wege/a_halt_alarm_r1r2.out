@@ -1,0 +1,7 @@
+P(Vorpruefung)                    = 0.0154
+P(Alarm an R1 | Vorpruefung)       = 0.0795   (unbedingt je R: 0.0060)
+P(S1 an R1 | Vorpruefung)          = 1.91e-02  (unbedingt je R und Kanal: 7.16e-04)
+P(G1-Verstoss | Vorpruefung, R1 ok) = 0.2926
+P(Alarm an R2 | G1-Fall)           = 0.0273
+P(S1 an R2 | G1-Fall)              = 2.90e-03
+Anzahl G1-Faelle in Stichprobe     = 8290

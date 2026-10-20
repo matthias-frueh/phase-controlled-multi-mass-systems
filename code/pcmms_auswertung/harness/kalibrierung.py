@@ -16,6 +16,14 @@ Reihenfolge (Plan 1.2, Betriebsart „geplant“, hier bei gegebener Laufzahl):
 
 Weniger Kampagnen als normativ (1000 je Simulation) sind Entwicklungsdiagnostik; das steht am Ergebnis und in der
 Herkunft der Werte für Teil B. Eine Kalibrierung „bestanden“ gibt es hier nicht.
+
+Profilstand 2026-11 (Regeln harness.mengen, harness.nachziehen, h1.c_rauschmodelle, Auftrag vom 20.10.2026): b̂, u(b̂),
+c (H1, H1Z), Prüfrate, Restbias und H2-Überdeckung beziehen sich auf die Auswertungsmenge A (harness.mengen), P(H1
+und H2 bestätigt) auf G; b̂ mittelt die Rohresiduen mit den tatsächlich realisierten gültigen Laufzahlen der
+Kampagnen in A. c ist das Quantil des Standardmodells (erste Rauschvariante, Fassung (a)); die übrigen Varianten
+geben c als Sensitivität und gehen über die halbe Spannweite in u(b̂) ein. Mit soll_A wird je Rolle und Variante bis
+|A| = soll_A nachgezogen, höchstens bis zum technischen Versuchslimit; sonst „nicht abgeschlossen“. Historische
+Profile rechnen unverändert (alle Kampagnen, vollständige Tests für c).
 """
 import warnings
 
@@ -23,7 +31,7 @@ import numpy as np
 from scipy import stats
 
 from .. import formate, konventionen as kv, regeln as rg, zeltfit
-from . import kampagnen as kpn, metriken
+from . import kampagnen as kpn, mengen, metriken, reserve as rs
 
 
 def _z(r, v, bias, u_bias):
@@ -95,6 +103,40 @@ def h2_bezug(wahr, W_ids, profil):
     return fit['F_mess'] - fit['F_yhat0'], fit['F_mess'] - fit['F_yhat1']
 
 
+H2_FOLGE = ['perzentil_0.95', 'bca_0.95'] + [f'perzentil_{x:.2f}' for x in (0.96, 0.97, 0.98, 0.99)]
+
+
+def h2_ueberdeckung_varianten(laeufe, profil):
+    """H2-Überdeckung unter allen Rauschvarianten (Regelstand 2026-11, A9.11: „unter allen vorgesehenen
+    Rauschvarianten“): Überdeckung je Variante und Intervalltyp wie h2_ueberdeckung; ein Typ gilt nur, wenn er in
+    jeder Variante gegen ŷ⁰ und ŷ¹ die Schwelle erreicht; gewählt wird der erste solche Typ der Rückfallkette.
+    „ueberdeckung“ nennt je Typ die kleinste Überdeckung über die Varianten (mit Zähler und Nenner der Variante),
+    „je_variante“ die Werte und die allein gewählten Typen. Mit einer Variante gleich h2_ueberdeckung."""
+    je = [h2_ueberdeckung(l, profil) for l in laeufe]
+    if len(je) == 1 or je[0].get('typ') is None or any('schwelle' not in x for x in je):
+        return je[0]
+    schwelle = je[0]['schwelle']
+
+    def kleinste(typ, s):
+        werte = [x['ueberdeckung'].get(typ, {}).get(s) for x in je]
+        if any(w is None or w['rate'] is None for w in werte):
+            return None
+        return min(werte, key=lambda w: w['rate'])
+    ub = {}
+    for typ in sorted(set().union(*(x['ueberdeckung'] for x in je))):
+        y0, y1 = kleinste(typ, 'yhat0'), kleinste(typ, 'yhat1')
+        if y0 is not None and y1 is not None:
+            ub[typ] = dict(yhat0=y0, yhat1=y1)
+    gewaehlt = next((t for t in H2_FOLGE if t in ub and ub[t]['yhat0']['rate'] >= schwelle
+                     and ub[t]['yhat1']['rate'] >= schwelle), None)
+    typ, niveau = (gewaehlt.rsplit('_', 1)[0], float(gewaehlt.rsplit('_', 1)[1])) if gewaehlt else ('keiner', None)
+    return dict(typ=typ, niveau=niveau, schluessel=gewaehlt, schwelle=schwelle, ueberdeckung=ub, folge=H2_FOLGE,
+                bezug=je[0].get('bezug'), regel='Typ gilt, wenn die Überdeckung gegen ŷ⁰ und ŷ¹ in jeder Rauschvariante '
+                                                'die Schwelle erreicht (A9.11)',
+                je_variante=[dict(rauschmodell=l['meta'].get('rauschmodell'), schluessel=x.get('schluessel'),
+                                  ueberdeckung=x['ueberdeckung']) for l, x in zip(laeufe, je)])
+
+
 def h2_ueberdeckung(lauf, profil):
     """Überdeckung je Intervalltyp (getrennt gegen ŷ⁰ und ŷ¹) mit MC-Fehler und gewählter Typ nach der
     Rückfallkette. Ein Typ gilt, wenn beide Überdeckungen die Schwelle erreichen (Regel harness.ueberdeckung_beide)."""
@@ -133,7 +175,7 @@ def h2_ueberdeckung(lauf, profil):
                     u['yhat0']['rate'] >= schwelle and u['yhat1']['rate'] >= schwelle)
     if kette_ != 'a':
         return dict(typ=None, grund=f'Rückfallkette {kette_!r} nicht umgesetzt', ueberdeckung=ub)
-    folge = ['perzentil_0.95', 'bca_0.95'] + [f'perzentil_{x:.2f}' for x in (0.96, 0.97, 0.98, 0.99)]
+    folge = list(H2_FOLGE)
     gewaehlt = next((t for t in folge if erreicht(t)), None)
     typ, niveau = (gewaehlt.rsplit('_', 1)[0], float(gewaehlt.rsplit('_', 1)[1])) if gewaehlt else ('keiner', None)
     return dict(typ=typ, niveau=niveau, schluessel=gewaehlt, schwelle=schwelle, ueberdeckung=ub, folge=folge,
@@ -168,40 +210,108 @@ def werkzeug8(bias0, bias1, biasz0, biasz1, c1, cz, h2, n_kal, n_pruef, profil_i
                 reduziert=red)
 
 
+def _lauf(sid, stufe, profil, n, seed_basis, rolle, plan, n_min, w8, rv, prozesse, fortschritt, k_max, verfahren,
+          soll_A, ausfuehren=None):
+    """Kampagnen einer Rolle und Rauschvariante; mit soll_A nachgezogen bis |A| = soll_A (harness.nachziehen).
+    ausfuehren: Ersatz für kampagnen.ausfuehren mit derselben Signatur (etwa mit Checkpoints je Partie)."""
+    lauf = ausfuehren or kpn.ausfuehren
+    if soll_A is None:
+        return lauf(sid, stufe, profil, n, seed_basis, rolle, plan, n_min, w8, rv, prozesse=prozesse,
+                    fortschritt=fortschritt, k_max=k_max, verfahren=verfahren)
+    regel = profil.wert('harness.nachziehen')
+    teile = []
+
+    def laufe(start, k):
+        teile.append(lauf(sid, stufe, profil, k, seed_basis, rolle, plan, n_min, w8, rv, prozesse=prozesse,
+                          fortschritt=fortschritt, k_max=k_max, verfahren=verfahren, start=start))
+        return teile[-1]['befunde']
+    nz = mengen.nachziehen(laufe, int(soll_A), float(regel['versuchslimit_faktor']), start_n=n)
+    meta = dict(teile[0]['meta'], n=nz['G'], seeds=[x for t in teile for x in t['meta']['seeds']],
+                laufzeit_s=round(sum(t['meta']['laufzeit_s'] for t in teile), 2),
+                nachziehen={k: v for k, v in nz.items() if k != 'befunde'},
+                reduziert=bool(nz['A'] < rg.NORMATIVE_ZAHLEN['kampagnen_pruefung'] or nz['status'] != 'abgeschlossen'
+                               or profil.reduziert))
+    return dict(teile[0], meta=meta, befunde=nz['befunde'])
+
+
 def kalibrieren(sid, stufe, profil, n_kal, n_pruef, seed_basis, plan=None, n_min=None, prozesse=1,
-                rauschvarianten=None, fortschritt=None, k_max=None, verfahren=None):
+                rauschvarianten=None, fortschritt=None, k_max=None, verfahren=None, soll_A=None, ausfuehren=None,
+                quelle=None, c_planung=False):
     """Kalibrier- und Prüfsimulation an einem Szenariopunkt mit exakter Superposition (vgl. N01/N02); verfahren wie
-    harness.kampagnen.ausfuehren (alle Kampagnen der Kalibrierung und Prüfung mit demselben Verfahren)."""
+    harness.kampagnen.ausfuehren (alle Kampagnen der Kalibrierung und Prüfung mit demselben Verfahren). soll_A:
+    Sollzahl der Auswertungsmenge je Rolle und Variante mit Nachziehen (nur Profilstand 2026-11; n_kal, n_pruef sind
+    dann die erste Partie). ausfuehren: Ersatz für kampagnen.ausfuehren (Checkpoints des Kalibrierbeispiels).
+    quelle (Teil d2): Modellquelle ohne Szenario (generator.phase0_modell.Modellquelle); die Kampagnen kommen dann aus
+    harness.phase0_rechnungen.ausfuehren_quelle, sid und stufe sind nur Kennzeichnung. c_planung: die Prüfsimulation
+    rechnet mit c_B statt mit dem kalibrierten c (Planung nach planung.teil_b_werte; kein Poolen). Im Regelstand
+    2026-11 mit mehreren Rauschvarianten gilt für c die Regel h1.c_rauschmodelle ('a': Quantil des Standardmodells,
+    der ersten Variante, die übrigen als Sensitivität; 'b': größtes Quantil); historisch wie bisher gepoolt."""
+    neu = 'harness.mengen' in profil.regeln and profil.hat('harness.mengen')     # Profilstand 2026-11
+    if soll_A is not None and not ('harness.nachziehen' in profil.regeln and profil.hat('harness.nachziehen')):
+        raise ValueError('kalibrieren: Nachziehen (soll_A) verlangt die Regel harness.nachziehen (Profilstand 2026-11)')
     try:
-        profil.wert('h1.c_rauschmodelle')
+        c_fassung = profil.wert('h1.c_rauschmodelle')
         c_regel = None
     except rg.RegelOffen as e:
-        c_regel = e.grund
+        c_fassung, c_regel = None, e.grund
+    if neu and c_fassung not in ('a', 'b'):
+        raise ValueError(f'h1.c_rauschmodelle {c_fassung!r} nicht umgesetzt (Fassungen (a), (b))')
     var = rauschvarianten or [None]
-    kal = [kpn.ausfuehren(sid, stufe, profil, n_kal, seed_basis, 'kalibrierung_c', plan, n_min, None, rv,
-                          prozesse=prozesse, fortschritt=fortschritt, k_max=k_max, verfahren=verfahren) for rv in var]
-    b0, b1 = rauschbias(kal, 'r0'), rauschbias(kal, 'r1')
-    bz0, bz1 = rauschbias(kal, 'rz0'), rauschbias(kal, 'rz1')
-    alle = [b for lauf in kal for b in lauf['befunde']]
+    if quelle is not None:
+        if ausfuehren is not None:
+            raise ValueError('kalibrieren: quelle und ausfuehren schließen sich aus')
+        from . import phase0_rechnungen
+
+        def ausfuehren(sid_, stufe_, *a, **kw):
+            return phase0_rechnungen.ausfuehren_quelle(quelle, *a, **kw)
+    kw_l = dict(prozesse=prozesse, fortschritt=fortschritt, k_max=k_max, verfahren=verfahren, soll_A=soll_A,
+                ausfuehren=ausfuehren)
+    kal = [_lauf(sid, stufe, profil, n_kal, seed_basis, 'kalibrierung_c', plan, n_min, None, rv, **kw_l)
+           for rv in var]
+    mengen_kal = [mengen.aufteilen(l['befunde']) for l in kal] if neu else None
+    kal_A = [dict(l, befunde=mengen.in_A(l['befunde'])) for l in kal] if neu else kal
+    if neu and any(not l['befunde'] for l in kal_A):
+        return _ohne_A(sid, stufe, profil, seed_basis, kal, mengen_kal, var, n_pruef, cB_nu(plan))
+    b0, b1 = rauschbias(kal_A, 'r0'), rauschbias(kal_A, 'r1')
+    bz0, bz1 = rauschbias(kal_A, 'rz0'), rauschbias(kal_A, 'rz1')
+    alle = kal_A[0]['befunde'] if neu else [b for lauf in kal for b in lauf['befunde']]
     c1 = c_bestimmen(alle, 'H1', b0['bias'], b0['u'], seed=seed_basis)
+    c_var = None
+    if len(kal) > 1 and not rg.ist_historisch(profil) and c_regel is None:
+        c1, c_var = c_nach_regel(kal_A, c_fassung, b0, seed_basis)
     c1_roh = c1
     cz = c_bestimmen(alle, 'H1Z', bz0['bias'], bz0['u'], seed=seed_basis + 1)
-    h2 = h2_ueberdeckung(kal[0], profil)
-    nu = max(2, (plan.n_bloecke if plan is not None else 20) - 1)
+    c_sens = None
+    if neu and len(var) > 1:
+        c_sens = [dict(variante=getattr(rv, 'name', None) or 'Szenario',
+                       c_H1=c_bestimmen(l['befunde'], 'H1', b0['bias'], b0['u'], seed=seed_basis)['c'],
+                       c_H1Z=c_bestimmen(l['befunde'], 'H1Z', bz0['bias'], bz0['u'], seed=seed_basis + 1)['c'],
+                       n_A=len(l['befunde'])) for rv, l in zip(var, kal_A)]
+    h2 = h2_ueberdeckung_varianten(kal_A, profil) if neu else h2_ueberdeckung(kal_A[0], profil)
+    nu = cB_nu(plan)
     cB = float(stats.t.ppf(1 - 0.05 / 294, nu))
     w8 = werkzeug8(b0, b1, bz0, bz1, c1, cz, h2, len(alle), n_pruef, profil.id)
     if c_regel:
         w8.update(c_H1=None, c_H1Z=None, c_H1_herkunft=f'offen: {c_regel}', c_H1Z_herkunft=f'offen: {c_regel}')
+    if c_planung:                                                       # Planung mit c_B (§8.4, A9.2)
+        cBZ_ = float(stats.t.ppf(1 - 0.05 / 882, nu))
+        w8.update(c_H1=cB, c_H1Z=cBZ_, c_H1_herkunft=f'c_B = t(1 − 0,05/294; {nu}) (Planung, §8.4, A9.2)',
+                  c_H1Z_herkunft=f'c_B = t(1 − 0,05/882; {nu}) (Planung)')
+    if quelle is not None:
+        w8['modellquelle'] = quelle.kennung()['beschreibung'].get('name')
     # Prüfsimulation
-    pr = kpn.ausfuehren(sid, stufe, profil, n_pruef, seed_basis, 'pruefung_c', plan, n_min, w8, var[0],
-                        prozesse=prozesse, fortschritt=fortschritt, k_max=k_max, verfahren=verfahren)
+    pr = _lauf(sid, stufe, profil, n_pruef, seed_basis, 'pruefung_c', plan, n_min, w8, var[0], **kw_l)
     kw = dict(szenario=sid, stufe=stufe, profil=profil.id, normativ=rg.NORMATIVE_ZAHLEN['kampagnen_pruefung'])
+    pr_A = mengen.in_A(pr['befunde']) if neu else pr['befunde']
     zp = np.array([np.abs(b['felder']['z0'][np.isfinite(b['felder']['z0'])]).max() if np.isfinite(
-        b['felder']['z0']).any() else np.nan for b in pr['befunde']])
-    vp = np.array([bool(np.isfinite(b['felder']['z0']).all()) for b in pr['befunde']])
+        b['felder']['z0']).any() else np.nan for b in pr_A])
+    vp = np.array([bool(np.isfinite(b['felder']['z0']).all()) for b in pr_A], bool)
     pruefung = None
     gepoolt = False
-    if w8['c_H1'] is not None:
+    if w8['c_H1'] is not None and c_planung:
+        pruefung = metriken.rate(int((zp[vp] > w8['c_H1']).sum()), int(vp.sum()),
+                                 'Anteil mit mindestens einem |z⁰| > c_B (Planung, exakt)', **kw)
+    elif w8['c_H1'] is not None:
         pruefung = metriken.rate(int((zp[vp] > w8['c_H1']).sum()), int(vp.sum()),
                                  'Prüfrate: Anteil mit mindestens einem |z⁰| > c (exakt)', **kw)
         schwelle = profil.wert('h1.c_pruefschwelle')
@@ -209,22 +319,32 @@ def kalibrieren(sid, stufe, profil, n_kal, n_pruef, seed_basis, plan=None, n_min
             gepoolt = True
             pool = np.r_[c1['werte'][c1['vollstaendig']], zp[vp]]
             c1 = dict(c1, c=float(np.quantile(pool, 0.95)), n_vollstaendig=int(pool.size), gepoolt=True)
-        w8 = werkzeug8(b0, b1, bz0, bz1, c1, cz, h2, len(alle), n_pruef, profil.id, pruefung, gepoolt)
+        w8 = werkzeug8(b0, b1, bz0, bz1, c1, cz, h2, len(alle), len(pr['befunde']) if neu else n_pruef, profil.id,
+                       pruefung, gepoolt)
+        if quelle is not None:
+            w8['modellquelle'] = quelle.kennung()['beschreibung'].get('name')
         if gepoolt:
-            pr = kpn.ausfuehren(sid, stufe, profil, n_pruef, seed_basis, 'pruefung_c', plan, n_min, w8, var[0],
-                                prozesse=prozesse, fortschritt=fortschritt, k_max=k_max, verfahren=verfahren)
+            pr = _lauf(sid, stufe, profil, n_pruef, seed_basis, 'pruefung_c', plan, n_min, w8, var[0], **kw_l)
+            pr_A = mengen.in_A(pr['befunde']) if neu else pr['befunde']
     rp = kpn.raten(pr)
-    gemeinsam = rp['raten']['H1 und H2 bestätigt']
-    restbias = None if w8['bias0'] is None else _restbias(pr['befunde'], w8)
+    gemeinsam = rp['raten']['H1 und H2 bestätigt']                  # Nenner: alle begonnenen Kampagnen (G)
+    if neu:
+        w8['e3_kriterien'] = _e3_kriterien(pr_A)['kriterien']
+    restbias = None if w8['bias0'] is None or not pr_A else _restbias(pr_A, w8)
+    n_pr = len(pr_A) if neu else n_pruef                # Regelstand 2026-11: realisiertes |A| der Prüfung
+    red = bool(len(alle) < rg.NORMATIVE_ZAHLEN['kampagnen_kalibrierung'] or
+               n_pr < rg.NORMATIVE_ZAHLEN['kampagnen_pruefung']) or profil.reduziert
+    if neu:
+        red = red or any((l['meta'].get('nachziehen') or {}).get('status', 'abgeschlossen') != 'abgeschlossen'
+                         for l in kal + [pr])
     return dict(
         meta=dict(szenario=sid, stufe=stufe, profil=profil.id, profil_sha256=profil.sha256(), seed_basis=seed_basis,
-                  n_kalibrierung=len(alle), n_pruefung=n_pruef, rauschvarianten=len(var),
-                  verfahren=pr['meta']['verfahren'],
-                  reduziert=bool(len(alle) < rg.NORMATIVE_ZAHLEN['kampagnen_kalibrierung'] or
-                                 n_pruef < rg.NORMATIVE_ZAHLEN['kampagnen_pruefung']) or profil.reduziert,
+                  n_kalibrierung=len(alle), n_pruefung=n_pr, rauschvarianten=len(var),
+                  verfahren=pr['meta']['verfahren'], reduziert=red,
                   lesart=('Entwicklungsdiagnostik: weniger Kampagnen oder Replikate als normativ; keine '
-                          'Kalibrierabnahme' if (len(alle) < 1000 or n_pruef < 1000 or profil.reduziert) else
-                          'normative Kampagnenzahl'),
+                          'Kalibrierabnahme' if red else 'normative Kampagnenzahl'),
+                  **({} if not neu else dict(G_pruefung=len(pr['befunde']), G_kalibrierung=[len(l['befunde'])
+                                                                                            for l in kal])),
                   code_version=formate.code_version()),
         c_H1=dict(wert=c1['c'], se=c1['se'], n=c1['n_vollstaendig'], ausgeschlossen=c1['ausgeschlossen'],
                   gepoolt=gepoolt, c_B=cB, regel=c_regel),
@@ -233,12 +353,104 @@ def kalibrieren(sid, stufe, profil, n_kal, n_pruef, seed_basis, plan=None, n_min
         rauschbias=dict(b0=b0['bias'], u_b0=b0['u'], b1=b1['bias'], u_b1=b1['u'], halbe_spannweite0=b0['halbe_spannweite'],
                         n_varianten=b0['n_varianten'],
                         verhaeltnis_zu_u_c=dict(
-                            b0=_verh(b0['bias'], kal), b1=_verh(b1['bias'], kal, 'u0'))),
+                            b0=_verh(b0['bias'], kal_A), b1=_verh(b1['bias'], kal_A, 'u0'))),
         pruefung=pruefung, pruefschwelle=profil.wert('h1.c_pruefschwelle'), gepoolt=gepoolt, restbias=restbias,
         h2=h2, gemeinsame_bestaetigung=gemeinsam, werkzeug8=w8, raten_pruefung=rp,
+        mengen=None if not neu else dict(kalibrierung=mengen_kal, pruefung=mengen.aufteilen(pr['befunde']),
+                                         hinweis='P(H1 und H2 bestätigt) mit Nenner G; c, Prüfrate, b̂, u(b̂), Restbias '
+                                                 'und H2-Überdeckung über A',
+                                         nachziehen=dict(kalibrierung=[l['meta'].get('nachziehen') for l in kal],
+                                                         pruefung=pr['meta'].get('nachziehen'))),
+        c_sensitivitaet=c_sens,
+        reserve_ziel=_reserve_ziel(pr['befunde'], profil, n_min) if neu else None,
+        e3=_e3_kriterien(pr_A) if neu else None,
+        zeitbilanz=_zeitbilanz(pr['befunde'], profil, plan) if neu else None,
         zmax=dict(kalibrierung=c1_roh['werte'], kalibrierung_vollstaendig=c1_roh['vollstaendig'], pruefung=zp,
                   pruefung_vollstaendig=vp),
-        laeufe=dict(kalibrierung=[l['meta'] for l in kal], pruefung=pr['meta']))
+        laeufe=dict(kalibrierung=[l['meta'] for l in kal], pruefung=pr['meta']),
+        **({} if c_var is None else dict(c_varianten=c_var)),
+        **({} if not c_planung else dict(c_planung='c_B')),
+        **({} if quelle is None else dict(modellquelle=quelle.kennung())))
+
+
+def cB_nu(plan):
+    return max(2, (plan.n_bloecke if plan is not None else 20) - 1)
+
+
+def _ohne_A(sid, stufe, profil, seed_basis, kal, mengen_kal, var, n_pruef, nu):
+    """Ergebnis ohne verwertbare Kalibrierkampagne (|A| = 0 in einer Variante, Regelstand 2026-11): keine Werte für
+    Teil B, keine Prüfsimulation; Status „nicht abgeschlossen“ statt Abbruch."""
+    grund = 'Kalibrierung ohne verwertbare Kampagne (|A| = 0): b̂, c und H2 nicht bestimmbar, keine Prüfsimulation'
+    leer = dict(wert=None, se=None, n=0, ausgeschlossen=None)
+    kw = dict(szenario=sid, stufe=stufe, profil=profil.id, normativ=rg.NORMATIVE_ZAHLEN['kampagnen_pruefung'])
+    return dict(
+        status='nicht abgeschlossen', grund=grund,
+        meta=dict(szenario=sid, stufe=stufe, profil=profil.id, profil_sha256=profil.sha256(), seed_basis=seed_basis,
+                  n_kalibrierung=0, n_pruefung=0, rauschvarianten=len(var), verfahren=kal[0]['meta']['verfahren'],
+                  reduziert=True, lesart='nicht abgeschlossen: ' + grund, G_pruefung=0,
+                  G_kalibrierung=[len(l['befunde']) for l in kal], code_version=formate.code_version()),
+        c_H1=dict(leer, gepoolt=False, c_B=float(stats.t.ppf(1 - 0.05 / 294, nu)), regel=None),
+        c_H1Z=dict(leer, c_B=float(stats.t.ppf(1 - 0.05 / 882, nu))), rauschbias=None, pruefung=None,
+        pruefschwelle=profil.wert('h1.c_pruefschwelle'), gepoolt=False, restbias=None,
+        h2=dict(typ=None, grund=grund, ueberdeckung={}),
+        gemeinsame_bestaetigung=metriken.rate(0, 0, 'P(H1 und H2 bestätigt) (keine Prüfsimulation)', **kw),
+        werkzeug8=None, raten_pruefung=None,
+        mengen=dict(kalibrierung=mengen_kal, pruefung=None, hinweis=grund,
+                    nachziehen=dict(kalibrierung=[l['meta'].get('nachziehen') for l in kal], pruefung=None)),
+        c_sensitivitaet=None, reserve_ziel=dict(geprueft=False, grund=grund, art='daten'), e3=None, zeitbilanz=None,
+        laeufe=dict(kalibrierung=[l['meta'] for l in kal], pruefung=None))
+
+
+def c_nach_regel(kal, regel, b0, seed):
+    """c bei mehreren Rauschvarianten nach Regel h1.c_rauschmodelle: 'a' Quantil des Standardmodells (erste Variante),
+    'b' größtes Quantil über die Varianten; die Quantile je Variante als Sensitivität. Rückgabe (c-dict, je
+    Variante)."""
+    je = [c_bestimmen(l['befunde'], 'H1', b0['bias'], b0['u'], seed=seed) for l in kal]
+    if regel == 'a':
+        c = je[0]
+    elif regel == 'b':
+        c = max((x for x in je if x['c'] is not None), key=lambda x: x['c'], default=je[0])
+    else:
+        raise ValueError(f'Regel h1.c_rauschmodelle = {regel!r} nicht umgesetzt (a, b)')
+    return dict(c, regel=regel), [dict(rauschmodell=l['meta'].get('rauschmodell'), c=x['c'], se=x['se'],
+                                       n=x['n_vollstaendig']) for l, x in zip(kal, je)]
+
+
+def _e3_kriterien(befunde):
+    """E3-Kriterien von A9.11 je Prüfgröße aus der Prüfsimulation (Menge A, exakte Superposition): Raten „auffällig“
+    und „unauffällig“ mit Zähler und Nenner; als Kriterienbefund für Teil B (nr10.e3_kriterien) nur bei der
+    normativen Kampagnenzahl, sonst None je Kriterium (nicht ausgewiesen). Die Modellprüfung ist nicht umgesetzt
+    (None); die dafür nötigen Größen stehen in den Kurzbefunden (Σ̂, ŝ, ρ̂, ν, n_A, n₀ⱼ)."""
+    bf = [b for b in befunde if (b.get('E3') or {}).get('regelstand') == '2026-11']
+    voll = len(bf) >= rg.NORMATIVE_ZAHLEN['kampagnen_pruefung']
+    raten, krit = {}, dict(herkunft=f'Prüfsimulation (AP-13), {len(bf)} Kampagnen der Menge A'
+                                    + ('' if voll else ' – reduziert: Kriterien nicht ausgewiesen (None)'))
+    for g in ('E3a', 'E3b'):
+        u = [((b['E3'].get('pruefgroessen') or {}).get(g) or {}).get('urteil') for b in bf]
+        ra = metriken.rate(sum(x == 'auffällig' for x in u), len(u), f'P({g} auffällig | exakt)')
+        ru = metriken.rate(sum(x == 'unauffällig' for x in u), len(u), f'P({g} unauffällig | exakt)')
+        raten[g] = dict(auffaellig=ra, unauffaellig=ru)
+        krit[g] = dict(auffaellig=bool(ra['rate'] <= 0.05) if voll and ra['rate'] is not None else None,
+                       unauffaellig=bool(ru['rate'] >= 0.8) if voll and ru['rate'] is not None else None,
+                       modellpruefung=None)
+    return dict(raten=raten, kriterien=krit)
+
+
+def _ist_ablauf4(befunde):
+    return bool(befunde) and all((b.get('ablauf') or {}).get('gueltig_je_schnittpunkt') is not None for b in befunde)
+
+
+def _reserve_ziel(befunde, profil, n_min):
+    """Bedingung planung.reserve_ziel in der Prüfsimulation (nur mit ablauf-4 und gegebenem n_min)."""
+    if n_min is None or not _ist_ablauf4(befunde):
+        return dict(geprueft=False, grund='nur mit Ablauf ablauf-4 und gegebenem n_min')
+    return dict(rs.bedingung(befunde, int(n_min), profil.wert('planung.reserve_ziel')), geprueft=True)
+
+
+def _zeitbilanz(befunde, profil, plan):
+    if plan is None or not _ist_ablauf4(befunde):
+        return None
+    return rs.zeitbilanz(befunde, float(plan.T_lauf), profil.wert('planung.zeitformel'))
 
 
 def _restbias(befunde, w8):

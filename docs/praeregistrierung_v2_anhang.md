@@ -211,6 +211,31 @@ u_c < Δ_q/t_eq, Auslegungsgrenze nach A8); Fassung A und Faktor 0,1 erscheinen 
 
 ---
 
+**Regelstand 2026-11 (Auftrag des Autors vom 20.10.2026; Entscheidungsvorlage vom 19.10.2026).** Methodische
+Arbeitsfestlegungen vor dem Einfrieren, begründet mit Rechnungen auf Statistikebene und synthetischen Entwicklungsläufen
+(Belegpaket `docs/entscheidungsvorlage_2026-10-19_belege/`), nicht mit Messdaten und ohne statistische Kalibrierung;
+die große Kalibrierung ist ausdrücklich nicht beauftragt. Profile AF-2026-11 und ENTW-2026-11; AF/ENTW-2026-10 und die
+Ergebnisse bis PR #23 bleiben ihrem Stand zugeordnet (Ablauffassung ablauf-3, Phase-0-Anordnung „historisch“).
+(1) Ablauf ablauf-4 (§6, §8.8, §9.2, A9.12): R₁ zuerst, R₂/X′/R₃ geschlossen, verworfene Folgeläufe beim Halt, neue
+Folge für einen G1-Fall ohne gemessenes X′, unvollständige Klammer ohne Sonderwiederholung, Kontrollsatz mit S1–S4,
+Bezugseröffnung nach einem Nullpunkthalt, Aufwärmen nur bei Tageswechsel. Grund: Lücken der Reihenfolge und des
+Bezugs nach einem Halt (Vorlage 1.1). (2) P0.7: höchstens zwölf andere Läufe zwischen zwei Referenzläufen. Grund:
+„je einer nach zwölf“ war mit 42 Referenzläufen und 120 anderen Läufen nicht erfüllbar. (3) A8: S1-Weg über den
+Alarm am R₁ ergänzt, frühere Kampagnensumme nicht mehr als Schranke; Schranken, Modellrechnungen und empirische
+Häufigkeiten getrennt; effektive Freiheitsgrade von σ̂_ref anordnungsabhängig. (4) G4 (§9.1, A9.2): B+ für
+Kombinationsläufe, k(n₀ⱼ) für Lⱼ, D als Diagnosemodus, Fünftelzeiger als optionales Feld der Laufzusammenfassung.
+Grund: die Schwelle je Laufart schloss je Konfiguration 0,4–15 % der Läufe aus (PR #22). (5) Halte und Mengen
+(§5.4, A9.2, A9.11): simulierte Wiederaufnahme (W = 3, T_UA), Mengen G und A, |A| = 1000 mit Nachziehen,
+Reservebedingung 0,95 mit Grenze, b̂ mit den realisierten Laufzahlen, Zeit nach Termen. (6) E3 (§8.10, A9.13):
+Option B mit m = 43 und Rückfall je Prüfgröße. Grund: Die Intervallregel war am Schwellenrand nicht gültig (PR #22).
+(7) Laufgrößen und Rauschmodelle aus Phase 0 (§5.4, A9.2, A9.3, A9.5, A9.11; Teil d der Vorlage): Laufgrößenmodell
+mit Komponenten je Modul und Bindung an k und N_z, Planung mit dem Strukturmodell an den oberen 80-%-Grenzen je
+Komponente und c_B, danach Kalibriersimulation mit Punktschätzern über die Modellliste {Strukturmodell,
+Familienanpassung}, nicht identifizierbare Komponenten als benannte Sensitivitäten, Ausgabeverbot für
+Superpositionsresiduen und Vorhersagen an den Piloten vor Teil B. Grund: Ein gemeinsamer Faktor für alle Streuungen
+und „dieselbe Simulation“ für Planung und c waren nicht gleichzeitig erfüllbar (Vorlage 5.1). δ_H2, δ_H3 und die übrigen
+offenen Punkte von §12 sind nicht mitentschieden.
+
 ## A1 · Definitionen
 
 | Größe | Definition |
@@ -242,6 +267,8 @@ u_c < Δ_q/t_eq, Auslegungsgrenze nach A8); Fassung A und Faktor 0,1 erscheinen 
 | T(kω), Ĉⱼ,ₖ | Übertragungsmatrix von den Modulkräften zu den Zellkräften bei der Harmonischen k: Statik der Dreipunktlagerung mit Zelllagen und relativen Zellverstärkungen aus P0.1, G_F je Zelle und Kippmoden aus P0.4 (A2.7); Ĉⱼ,ₖ = [T(kω)⁻¹·(N₁,ₖ, N₂,ₖ, N₃,ₖ)ᵀ]ⱼ, Zeiger von Modul j aus den Zellen |
 | φⱼ^{P,Z}, Δφⱼ^Z | Profilphase von Modul j aus den Zellen, arg Ĉ₁,₁ − arg Ĉⱼ,₁; Abweichung Δφⱼ^Z = φⱼ^{P,Z} − φ̄ⱼ^P (E3a, §8.10) |
 | R₊₁, R₋₁, q_Z, q_tol | gleich- und gegenläufige Komponente der ersten Harmonischen des Kippmoments aus den Zellkräften (A2.7); q_Z = \|R₋₁ − R̂₋₁\|/\|R̂₊₁\| am Triphasik-Punkt, R̂ aus der zellweisen Superposition (Differenz gegen die Vorhersage); q_tol = 5,8·10⁻⁴ (E3b, §8.10) |
+| Σ̂, ŝ, ρ̂, n*, κ, ν_eff (E3) | Σ̂: 2×2-Kovarianz der komplexen Bootstrap-Residuen von E3b mit n*/(n* − 1), n* = min(n_A, n₀,₁, n₀,₂, n₀,₃); ŝ² = λ_max(Σ̂); ρ̂ = √(λ_min/λ_max) (Anisotropie); κ = t(1 − α/m; ν)/z(1 − α/m); ν_eff = (1/ν + 1/(B − 1))⁻¹ bei endlichem B (A9.13) |
+| s_i, T_i, k(n) (G4) | s_i: aus Phase 0 über die Laufgrößen gemischte Jitterstreuung der Fünftel-Differenz D_F an Konfiguration i; T_i: Schwelle von D_F nach B+; k(n): Faktor der Lⱼ-Schwelle bei MAD aus n Läufen (A9.2) |
 | Schein-Oberwelle | Anteil der Kraft bei der 2- und 3-fachen Anregungsfrequenz in P0.4 über die vom Referenzaufnehmer gemessenen Oberwellen der Anregung hinaus (A9.2) |
 | Betriebslast (P0.4) | je Zelle die größte vorhergesagte Harmonische der Zellkraft bei der Anregungsfrequenz in den Kombinations- und Einzelmodulläufen bei f (§5.2, A9.2) |
 | F_min, F_max | Minimum und Maximum der bandbegrenzten Konfigurationsmittelkurve auf ihren N_θ Stützstellen; konfirmatorisch verglichen wird F_min − ⟨N⟩. Zyklusweise Minima und Minima ungefilterter Kurven sind nicht konfirmatorisch und werden nur beschreibend berichtet (E4) |
@@ -251,7 +278,7 @@ u_c < Δ_q/t_eq, Auslegungsgrenze nach A8); Fassung A und Faktor 0,1 erscheinen 
 | σ_c, σ_Σ, F_LO,c, F_LO,Σ | Standardabweichung der Rohwerte von Zelle c bzw. der Summe in Referenzläufen; Liftoff-Schwellen 5·σ_c bzw. 5·σ_Σ über dem Nullpunkt (P0.1) |
 | Einzelzell-Liftoff | mindestens ein Rohwert N_c < F_LO,c im ganzen Lauf einschließlich Rampe und Einschwingzeit |
 | N_s, N_s,int, β | Zeitmittel von N in Referenzläufen; N_s,int = (1 − β)·N_s,a + β·N_s,b, zeitlich linear interpoliert zwischen den beiden Referenzläufen a und b, die einen Lauf einschließen; β ∈ [0, 1] relative Lage des Laufs |
-| Δ⟨N⟩, σ̂_ref, ε_ctrl | Δ⟨N⟩ = ⟨N⟩_Lauf − N_s,int. σ̂_ref ist die Standardabweichung derselben Statistik für Referenzläufe: Jeder Referenzlauf der Phase 0 wird gegen die Interpolation seiner beiden Nachbarn ausgewertet (leave-one-out), aus mindestens 42 Referenzläufen der Phase 0 (P0.7), also mindestens 40 Werten; σ̂_ref,c ebenso je Zelle. ε_ctrl = 3·σ̂_ref oder 3·σ̂_betr (§8.8) |
+| Δ⟨N⟩, σ̂_ref, ε_ctrl | Δ⟨N⟩ = ⟨N⟩_Lauf − N_s,int. σ̂_ref ist die Standardabweichung derselben Statistik für Referenzläufe: Jeder Referenzlauf der Phase 0 wird gegen die Interpolation seiner beiden Nachbarn ausgewertet (leave-one-out), aus mindestens 42 Referenzläufen der Phase 0 (P0.7), also mindestens 40 Werten; σ̂_ref,c ebenso je Zelle. Weil benachbarte Leave-one-out-Werte korreliert sind, hat σ̂_ref weniger effektive Freiheitsgrade als Werte; sie hängen von Zahl und Anordnung der Referenzläufe ab (gleichmäßig verteilt, weißes Rauschen: etwa 21 bei 42, etwa 31 bei 61 Referenzläufen; A8). ε_ctrl = 3·σ̂_ref oder 3·σ̂_betr (§8.8) |
 | σ̂_betr | Standardabweichung der auf mittige Lage normierten Werte Δ⟨N⟩·√(1,5/(1 + β² + (1 − β)²)) der nach G2–G10 gültigen Pilot- und Einzelmodulläufe der Phase 0 (§8.8, A9.8) |
 | s_q, ν_p | s_q: gepoolte Standardabweichung über Läufe der Größe q, quadratisches Mittel der Standardabweichungen der Pilotkonfigurationen; ν_p = Σ(n_p,i − 1) mit den gültigen Läufen n_p,i |
 | u_c, u_c,erw | u_c: kombinierte Unsicherheit einer Differenz Messung − Vorhersage (§8.3, A9.5). u_c,erw: vor Phase 1 erwarteter Wert, u_c,erw² = s_q²/n_min + u²(ŷ_q); für γ₁ mit u(γ̂₁) aus dem Bootstrap der Vorhersage |
@@ -738,27 +765,44 @@ deshalb 0,069 (§8.4). Eine Schwelle mit nur dem Fehler der Prüfung (0,064) wü
 etwa 8 % der Fälle überschritten.
 
 **Fehlalarme bei korrekter Funktion.** Annahmen: ⟨N⟩ aller Laufarten normalverteilt mit derselben
-Streuung, keine Drift, σ̂_ref aus 42 gleich getakteten Referenzläufen (leave-one-out). Die Angaben zu S1
-und S3 sind obere Schranken, keine Raten des Verfahrens.
+Streuung, keine Drift, σ̂_ref aus 42 gleich getakteten Referenzläufen (leave-one-out). Unterschieden werden
+(Berichtigung vom 20.10.2026): **bewiesene Schranken** (exakte Rechnung oder Bonferroni über exakt gerechnete
+Summanden), **Modellrechnungen** (Monte Carlo in einem benannten Modell) und **empirische Häufigkeiten** aus
+synthetischen Diagnosekampagnen. Die Angaben je Lauf sind Bonferroni-Größen, keine Raten des Verfahrens.
+σ̂_ref hat effektiv etwa ν = 21 Freiheitsgrade bei 42 und etwa 31 bei 61 gleichmäßig verteilten
+Referenzläufen (analytisch aus der Kovarianz der Leave-one-out-Werte; Monte Carlo 19,8 bei 42); die Zahl hängt
+von der Anordnung ab und ist keine allgemeine Konstante. Die Schranken je Lauf sind Mittel über die Streuung
+von σ̂_ref; bei bekanntem σ sind sie etwa zehnmal kleiner.
 
 - **G1:** je Lauf höchstens 1,5 % (ungünstigste Lage: Interpolation ganz auf einen Referenzlauf), 0,61 %
   mittig zwischen zwei Referenzläufen (Monte Carlo über die Streuung von σ̂_ref).
 - **S1 über G1:** Der erste Lauf wird mit der ungünstigsten Lage angesetzt, die Wiederholung liegt mittig
   zwischen den frischen Referenzläufen R₂ und R₃; beide Prüfungen sind bei gegebenem σ̂_ref unabhängig. Die
-  Vorprüfung wird nicht berücksichtigt; sie senkt die Rate nur. Schranke je Lauf: 2,5·10⁻⁴.
+  Vorprüfung senkt diesen Weg nur. Schranke je Lauf: 2,5·10⁻⁴ (Modellrechnung, Mittel über σ̂_ref).
+- **S1 über einen reproduzierten Nullpunktalarm am R₁ der Vorprüfung** (ergänzt am 20.10.2026): Alarm und
+  Wiederholung prüfen gegen dasselbe R₀, das schon die Vorprüfung ausgelöst hat. Größe je Konfigurationslauf
+  2,9–3,0·10⁻⁴ marginal über σ̂_ref, 5–6·10⁻⁵ bei bekanntem σ (Modellrechnung, Summenkanal, ungünstige
+  Interpolationslagen). Dieser Weg fehlte in der früheren Kampagnensumme; er ist der größte einzelne S1-Weg.
+  Über X′ sind es 0,9–2,0·10⁻⁴, über einen reproduzierten Alarm an R₂ bzw. R₃ 0,6–2,6·10⁻⁴ bzw. 1–2·10⁻⁵
+  (Belege: docs/entscheidungsvorlage_2026-10-19_belege).
 - **S1 über Nullpunktalarme:** Alarm und Wiederholung teilen den vorangehenden Referenzlauf und sind
   deshalb korreliert. Schranke je Referenzlauf und Kanal: 7,3·10⁻⁴ (Monte Carlo); vier Kanäle (Summe und
   drei Zellen).
 - **S1 über eine Kampagne:** Bei 20 Blöcken mit 23 Konfigurationen und drei
   Identifizierbarkeitskonfigurationen an einem Messtag sind es ohne Aufwärm- und Wiederholungsläufe 688
   Läufe: 520 Kombinations-, 126 Einzelmodul- und 42 Referenzläufe (21 in den Kontrollsätzen, 20 in der
-  Blockmitte, ein Schlussreferenzlauf), 21 Kontrollsätze aus je sieben Läufen. Bonferroni-Schranke:
-  646·2,5·10⁻⁴ + 42·4·7,3·10⁻⁴ ≈ 0,28. Ohne Identifizierbarkeitsläufe (Kontrollsätze aus vier Läufen) wären
-  es 565 Läufe (460, 63, 42) und 523·2,5·10⁻⁴ + 42·4·7,3·10⁻⁴ ≈ 0,25. Allgemein sind es (N_K + N_I + 8)·n +
-  8·d Läufe; jeder weitere Messtag bringt einen Kontrollsatz und einen Schlussreferenzlauf und erhöht die
-  Schranke um 6·2,5·10⁻⁴ + 2·4·7,3·10⁻⁴ ≈ 0,007. Aufwärmläufe tragen nichts bei (A9.12); Wiederholungen
-  erhöhen die Schranke je Lauf wie oben.
-- **S3:** Die Statistik (x − x̄₀)/(s·√(1 + 1/n₀ⱼ)) ist t-verteilt mit n₀ⱼ − 1 Freiheitsgraden; mit
+  Blockmitte, ein Schlussreferenzlauf), 21 Kontrollsätze aus je sieben Läufen. Die früher angegebene Summe
+  646·2,5·10⁻⁴ + 42·4·7,3·10⁻⁴ ≈ 0,28 (ohne Identifizierbarkeitsläufe ≈ 0,25) ist keine hergeleitete obere
+  Schranke, weil der Weg über das R₁ fehlt; mit ihm ergäbe die Bonferroni-Summe etwa 0,47, was als Schranke
+  nichts aussagt. Eine hergeleitete Kampagnenschranke für S1 gibt es deshalb nicht. Modellrechnung
+  (Teststatistikmodell der Nachprüfung vom 19.10.2026: ⟨N⟩ normal, F-Test nach A9.8, wirkliche Lagen,
+  gemeinsames R₀, ohne S3, G2–G10, Drift und Aufwärmen, ein Messtag): P(mindestens ein S1-Halt oder Halt im
+  Kontrollsatz der Wiederaufnahme) etwa 0,09 mit 61 und 0,12 mit 42 Referenzläufen in Phase 0; die Halte sind
+  wegen des Schätzfehlers von σ̂_ref überdispers. Empirisch (30 synthetische Nullkampagnen von PR #23,
+  ablauf-3) hielten 5 an; das ist mit dem Modell verträglich und keine Rate. Allgemein sind es
+  (N_K + N_I + 8)·n + 8·d Läufe; Aufwärmläufe tragen nichts bei (A9.12), Wiederholungen und Bezugsläufe
+  (A9.12) kommen hinzu.
+- **S3** (bewiesene Schranke): Die Statistik (x − x̄₀)/(s·√(1 + 1/n₀ⱼ)) ist t-verteilt mit n₀ⱼ − 1 Freiheitsgraden; mit
   c_S = t(1 − 0,05/42; n₀ⱼ − 1) (bei n₀ⱼ = 20: 3,503) löst ein Kontrollsatz über die 21 Größen mit höchstens
   5 % aus (Bonferroni-Schranke, exakt je Größe). Reproduktion durch die sofortige Wiederholung: höchstens
   9,5·10⁻⁴ je Kontrollsatz (Bonferroni über 21 Größen; der Summand je Größe per Monte Carlo, weil erste
@@ -883,8 +927,12 @@ und S3 sind obere Schranken, keine Raten des Verfahrens.
 - **Laufdauer in Phase 0.** Alle Läufe bei einer Frequenz haben dieselbe Dauer, mit Einschwingzeit T_e,P
   und Fenster T_a,P [Teil B]. Ausgewertet werden die ersten ganzen Zyklen der Länge T_a, die T_e nach Ende
   der Rampe beginnen (Kürzen auf die ersten Zyklen); dazu muss T_e + T_a ≤ T_e,P + T_a,P sein.
-- **P0.7** Mindestens 42 Referenzläufe, verschachtelt mit P0.8–P0.10 bei jeder gemessenen Frequenz, je einer
-  nach zwölf anderen Läufen; σ̂_ref und σ̂_ref,c aus den Läufen bei f.
+- **P0.7** Mindestens 42 Referenzläufe, verschachtelt mit P0.8–P0.10 bei jeder gemessenen Frequenz; zwischen
+  zwei Referenzläufen liegen höchstens zwölf andere Läufe („nach zwölf“ als größter Abstand). Bei den üblichen
+  120 anderen Läufen werden 42 Referenzläufe einschließlich Anfang und Ende möglichst gleichmäßig verteilt
+  (Abstände zwei oder drei; Arbeitsfestlegung vom 20.10.2026). Berichtet werden die tatsächlich gültige Zahl
+  und die Anordnung; zu wenige gültige Referenzläufe werden nicht verdeckt qualifiziert. σ̂_ref und σ̂_ref,c
+  aus den Läufen bei f.
 - **Einstellung 2 (§5.5).** Nach der Wahl von f: P0.5′, dann je Modul n₀′ ≥ 20 Einzelmodulläufe Lⱼ′ (Umfang
   offen, §12),
   verschachtelt mit Referenzläufen wie P0.7. Die P0.5′-Ergebnisse werden hinterlegt, bevor Kraftdaten der
@@ -902,7 +950,18 @@ und S3 sind obere Schranken, keine Raten des Verfahrens.
 - **Reihenfolge der Schwellen.** (1) G2–G10 auf die Phase-0-Läufe anwenden, mit σ_tol und σ_Δ aus allen
   Läufen der jeweiligen Art (Median bzw. MAD, G2, G4). (2) ε_ctrl nach §8.8 und A9.8 aus den danach
   gültigen Läufen. (3) G1 anwenden. p̂ ist der Anteil der danach ungültigen Pilotläufe; alle Streuungen
-  stammen aus den gültigen Läufen.
+  stammen aus den gültigen Läufen. Alle Größen gelten bei k_max und N_z des Plans (G4 mit k ≤ k_max).
+  (4) Arbeitsfestlegung vom 20.10.2026: G4-Schwellen der Phase 1 aus den gültigen Läufen. Für Kombinationsläufe
+  (B+): s_i² = E_{τ,A}[2·Var_e F(φ_i + τ + e; A)] mit den Relativphasen τⱼ = offⱼ + δⱼ − δ₁ und den Amplituden A
+  aus den Komponentenschätzern der Laufgrößen (σ_off,j aus den Laufmitteln der gültigen Piloten abzüglich σⱼ²/N_z,
+  σ_δ,j und σ_a,j aus der kohärenten Projektion der Lⱼ-Abweichungen, ν = n₀ⱼ − 1; P0.5 und P0.6 liefern keine
+  Streuung von Lauf zu Lauf) und e den Fünftelmitteln der Indexphasen (σⱼ/√n_f), mit festen, auf Einheitskovarianz
+  normierten Ziehungen; die Pilotgröße s̄_P² mit derselben Mischung; s_i als Maximum über die Verschiebungen um
+  ±u(Δδⱼ); Boden σ_W² = max(0, σ²_Δ,F,P − s̄_P²); T_i aus E[2·Φ̄(T_i/√(v + σ_W²))] = 2·Φ̄(3) über die Ziehungen
+  der Laufgrößen, mindestens 3·σ_Δ,F,P. Für Lⱼ: k(n₀ⱼ)·σ_Δ,X,Lⱼ mit E_σ̂[2·Φ̄(k·σ̂/σ)] = 2·Φ̄(3) für den
+  MAD-Schätzer aus n₀ⱼ Werten; als Vergleich die über die Module gepoolte Schwelle mit Bartlett-Prüfung der
+  Homogenität. Diagnosemodus D: D = D_F − (F̂_letzt − F̂_erst) aus den Fünftelzeigern und N̄⁽ʲ⁾, Schwelle 3·σ_D
+  aus den ebenso korrigierten gültigen Piloten; ohne Fünftelzeiger nicht prüfbar.
 - **Frequenzsuche.** (1) f_u und f_zul bestimmen (§5.3; (a) mit dem Auslegungswerkzeug, den Parametern aus
   P0.1–P0.4 und dem Konstruktionsprofil, ohne Zusatzkonfigurationen). (2) Bei f_zul P0.5–P0.8 und P0.10
   ausführen; (a) mit der Superposition je Zelle ohne Bandbegrenzung prüfen; k_max nach §5.4 bestimmen.
@@ -913,20 +972,40 @@ und S3 sind obere Schranken, keine Raten des Verfahrens.
   Arbeitspunkt“, veröffentlicht; der Aufbau wird überarbeitet. In Teil B gehen nur Werte bei f ein.
 - **k_max, T_a und Laufzahl** (§5.4), in dieser Reihenfolge: Für k = k_b, k_b − 1, …, 3 und je k für T_a =
   N_z/f mit N_z = 1, 2, …, solange T_e + T_a ≤ T_e,P + T_a,P: (i) s_q(T_a) aus den Pilotläufen, gekürzt auf
-  die ersten N_z Zyklen; (ii) T_e und T_Lauf mit den Moden bis k·f; (iii) Planungssimulation: n₀ ≥ 20 und
+  die ersten N_z Zyklen; (ii) T_e und T_Lauf mit den Moden bis k·f; (iii) Planungssimulation mit dem Strukturmodell
+  aus Phase 0 an den oberen Grenzen je Komponente und c_B (Arbeitsfestlegung vom 20.10.2026): n₀ ≥ 20 und
   n_min minimieren N_K·n_min + 3·n₀ (Zielfunktion und Laufzahl von H1 offen, §12) unter den
   Bedingungen von §5.4 (gemeinsame Bestätigung von H1 und H2 nach §8.5, §8.6 und §9.3 bei exakter
   Superposition mit Wahrscheinlichkeit ≥ 0,8, Arbeitsfestlegung, §12; n_min ≥ (3·1°/(SNR·δ_H2))², δ_H2 offen,
-  §12), bei Gleichstand das kleinere n_min; (iv) Rauschbias b̂_i⁰ mit diesen
-  n_min und n₀, b̂_i¹ mit n_min und n + d Kontrollläufen je Modul, jeweils mit Unsicherheit; (v) n = n_min + r
-  ≤ n_max (§5.3 c) prüfen. Das erste Paar (k, T_a), das (v) erfüllt, legt k_max, T_a, n_min und n₀ fest.
-  Obere 80-%-Vertrauensgrenze einer Streuung s mit ν Freiheitsgraden: s·√(ν/χ²₀,₂(ν)); t-Quantile mit dem
-  erwarteten ν_eff; c als c_B. Der Rauschbias berücksichtigt, dass Messkurve und vorhergesagte Summe dreier
+  §12), bei Gleichstand das kleinere n_min; (iv) Rauschbias b̂_i⁰ und b̂_i¹ über die Auswertungsmenge A der
+  Simulation (A9.11) mit den dort tatsächlich realisierten gültigen Laufzahlen je Punkt und Modul (geplant n
+  Blöcke mit n₀ und n + d Kontrollläufen je Modul), jeweils mit Unsicherheit (Präzisierung vom 20.10.2026; bisher
+  „mit n_min Läufen“); (v) n = n_min + r ≤ n_max (§5.3 c) prüfen, und zusätzlich (Arbeitsfestlegung vom
+  20.10.2026): Alle Schnittpunkte erreichen gemeinsam in mindestens 95 % der nicht endgültig beendeten simulierten
+  Kampagnen n_min gültige Läufe; sonst r um eins erhöhen und erneut simulieren, höchstens zehnmal (danach Abbruch
+  des Kandidaten mit Grund „Reservegrenze“). Endgültig beendete Kampagnen zählen nicht in diesen bedingten Nenner,
+  wohl aber im Nenner von P(H1 und H2 bestätigt). Das erste Paar (k, T_a), das (v) erfüllt, legt k_max, T_a, n_min und n₀ fest.
+  Obere 80-%-Vertrauensgrenze einer Komponente mit Gesamtstreuung s, ν Freiheitsgraden und Bodenanteil b:
+  √max(0, s²·ν/χ²₀,₂(ν) − b), je identifizierbarer Komponente mit eigenem ν; der Boden von ⟨N⟩ erhält einen
+  gemeinsamen Faktor für alle Laufarten (bisher ein Faktor s·√(ν/χ²₀,₂(ν)) für alle Streuungen). t-Quantile mit dem
+  erwarteten ν_eff. Die Planung rechnet mit c_B = t(1 − α/294; n − 1), weil das kalibrierte c erst aus der
+  Kalibriersimulation mit den Laufzahlen des Plans folgt; Rauschbias, c, Intervalltyp von H2 und die Raten der
+  Kriterien folgen danach aus der Kalibriersimulation mit Punktschätzern (A9.11). Der Rauschbias berücksichtigt, dass Messkurve und vorhergesagte Summe dreier
   Einzelmodulkurven verschiedene Rauschpegel haben; die Simulation verwendet getrennte Rauschmodelle für
   Einzelmodul- und Kombinationsläufe. Die Faustregel n ≥ (3·1°/(SNR·δ_H2))² gibt die Laufzahl,
   bei der die H2-Halbbreite etwa δ_H2 erreicht (Halbbreite ≈ 3/(SNR·√n) für n₀ = n; Faktor 3: Tabelle F; bei
   der Testvariante δ_H2 = 1° die bisherige Regel n ≥ (3/SNR)²; δ_H2 offen, §12). Für die Bestätigung von H2
   ist das notwendig, nicht hinreichend; maßgeblich bleibt die Planungssimulation.
+- **Laufgrößenmodell** (Arbeitsfestlegung vom 20.10.2026; Regeln p0.laufgroessen, p0.strukturmodell,
+  rauschmodelle). Sensorboden je Zelle aus P0.7; Boden von ⟨N⟩ aus den Fünfteln. σ_a,j und σ_δ,j aus der kohärenten,
+  mit dem Zellboden gewichteten Projektion der Lⱼ-Abweichungen über k ≤ k_max und Zellen (ν = n₀ⱼ − 1), mit
+  Kohärenzprüfung über k; orthogonaler Rest je Harmonischer. σ²_off,j = max(0, Var φ̄ⱼ − σ̄ⱼ²/N_z) aus den gültigen
+  Piloten. Nullpunktdrift und Zufallspfad aus der Referenzfolge, über die Betriebszeit; laufinterne Fünftelanteile.
+  Alle Komponenten sind an k und N_z gebunden. Struktur am Arbeitspunkt aus P0.8, für Kandidatenfrequenzen aus dem
+  Auslegungswerkzeug mit den Parametern aus P0.1–P0.5. Punktschätzer werden bei null abgeschnitten; nicht aus Phase 0
+  identifizierbare Komponenten (etwa Drift zwischen Phase 0 und Phase 1 oder zwischen Messtagen, farbiger oder
+  lastabhängiger Jitter, Phasendrift im Lauf, abweichende Streuung der Kombinationsläufe) werden ausdrücklich benannt
+  und als benannte Sensitivitäten mit festen Stärken gerechnet und nur berichtet (A9.11).
 
 ### A9.3 Inhalt von Teil B
 
@@ -937,7 +1016,10 @@ und S3 sind obere Schranken, keine Raten des Verfahrens.
    T_ramp, T_e, T_e,P, T_a, T_a,P, T_ab, T_Lauf; σ_tol, δf_tol; T_P0, TK_C, ΔT; σ̂_ref, σ̂_ref,c, ε_ctrl
    (mit Prüfgröße, kritischem Wert und gegebenenfalls σ̂_betr), σ_c, σ_Σ, F_LO; σ_Δ; n₀, n_min, r, n, n_max,
    d; T_verfügbar; Einstellung 2 (Amplitude oder Frequenz), s, I, N_I, n₀′; Spalt; g (örtlich bestimmt), V_außen
-   und m_hyd (für m_L), Ergebnis der Gesamtwägung oder begründeter Verzicht (A9.2);
+   und m_hyd (für m_L), Ergebnis der Gesamtwägung oder begründeter Verzicht (A9.2); σ_a,j, σ_δ,j und σ_off,j je
+   Modul mit ν und oberer 80-%-Grenze, gebunden an k_max und N_z, und die übrigen Komponenten des
+   Laufgrößenmodells (Boden je Zelle, Boden von ⟨N⟩, Nullpunktprozess, laufinterne Anteile, orthogonaler Rest) mit
+   Übertragungstest (A9.2);
 3. die Einzelmodul-Mittelkurven N̄⁽ʲ⁾(θ), gesamt und je Zelle, mit ihren Bootstrap-Replikaten als Datei;
    zusammen mit dem registrierten Code legen sie die Vorhersage für jede gemessene Phasenlage fest;
 4. die Vorhersage bei den Sollphasen und dem Jitter aus P0.6: F̂_min − N_s, N̂_k (k = 1 … 3), γ̂₁, Â, F̂_max
@@ -954,7 +1036,8 @@ und S3 sind obere Schranken, keine Raten des Verfahrens.
    Einzelmodul-Harmonischen wird vor dem Datenschluss nicht berechnet;
 8. die Prüfmenge V und die Entscheidung über Zusatzkonfigurationen und gespiegelten Schnitt;
 9. die Laufreihenfolge;
-10. die Ergebnisse der Planungs- und Kalibriersimulation, auch die gemeinsame Bestätigungswahrscheinlichkeit
+10. die Ergebnisse der Planungs- und Kalibriersimulation mit Angabe des Rauschmodells und der benannten
+    Sensitivitäten, auch die gemeinsame Bestätigungswahrscheinlichkeit
     von H1 und H2 bei exakter Superposition (§5.4), die Bestätigungswahrscheinlichkeit von H4 und H1Z, den
     kritischen Wert für ε_ctrl, die kritischen Werte c von H1 und H1Z mit der Prüfrate (§8.4), den
     Intervalltyp von H2 mit simulierter Überdeckung, gegebenenfalls mit Nominalniveau (§8.6), die
@@ -985,8 +1068,9 @@ Zurücklegen ziehen (Phase 0 für ŷ⁰, Phase-1-Kontrollläufe für ŷ¹), ρ�
 Var_B, für lineare und nichtlineare Größen gleich. Ein eigener Phasenterm entfällt, weil die Vorhersage mit
 den gemessenen Zeigern derselben Läufe gebildet wird. Für F_min − ⟨N⟩ wird r⁰ um b̂_i⁰ und r¹ um b̂_i¹
 korrigiert, und u_c² = Var_A + Var_B + u²(b̂_i) mit dem jeweiligen b̂_i. u(b̂_i) kombiniert quadratisch den
-Monte-Carlo-Fehler und die halbe Spannweite von b̂_i über die in Teil B festgelegten Rauschmodelle (Festlegung
-in Teil B oder als Liste in Teil A offen, §12), diese als
+Monte-Carlo-Fehler und die halbe Spannweite von b̂_i über die in Teil A benannten Rauschmodelle {Strukturmodell aus
+Phase 0 (Standard), Familienanpassung (eingebettete Alternative)} mit den in Teil B gesetzten Parametern
+(Arbeitsfestlegung vom 20.10.2026; bisher offen, §12), diese als
 Rechteckverteilung (geteilt durch √3). ν_eff nach §8.3: n_A = gültige Läufe der Konfiguration (H3: gültige
 Phase-1-Kontrollläufe des Moduls), n_B = min_j der gültigen Einzelmodulläufe der jeweiligen Basis, Monte Carlo
 mit ν = ∞, also ν_eff = (n_A − 1)·u_c⁴/Var_A² in H3. H1Z, die Zuordnung und E3 verwenden dieselben
@@ -1089,11 +1173,35 @@ Einzelmodul- und Kombinationsläufe aus `linear_solver.py` mit Rauschen, Jitter 
 bestätigen; Daten mit bekannter Nichtlinearität (etwa ein Hertzscher Kontakt nach Testebene T0 des
 Literaturabgleichs) oder mit eingebauter Modulkopplung müssen H1 falsifizieren, wenn ihr größtes Residuum
 mindestens 2·Δ_rel beträgt (Power-Kriterium unten); knapp über Δ_rel ist „nicht entscheidbar“ zu erwarten.
-Vor Teil B zusätzlich je Szenario 1000 synthetische Kampagnen mit den geplanten n, n₀ und den
-Pilotstreuungen, mit getrennten Rauschmodellen für Einzelmodul- und Kombinationsläufe; dieselbe Simulation
-liefert n_min, n₀, den Rauschbias b̂⁰ und b̂¹ und c (§8.4; ob sie nach dem Datenschluss mit den tatsächlichen
-Laufzahlen neu berechnet werden, ist offen, §12). Den kritischen Wert für ε_ctrl liefert eine eigene
-Simulation nach A9.8.
+Vor Teil B zwei Simulationen (Arbeitsfestlegung vom 20.10.2026; bisher eine Simulation mit den Pilotstreuungen, die
+n_min, n₀, b̂ und c zugleich lieferte): (1) die Planungssimulation (A9.2 (iii)) mit dem Strukturmodell aus Phase 0 an
+den oberen 80-%-Grenzen je Komponente und c_B; sie liefert n_min und n₀; (2) danach die Kalibriersimulation bei den
+geplanten n, n₀ mit Punktschätzern der Laufgrößen und |A| = 1000 Kampagnen je Rolle (unten); sie liefert b̂⁰ und b̂¹
+mit u(b̂) über die Modellliste (A9.5), c als Quantil des Standardmodells mit der Familienanpassung als Sensitivität
+(§8.4), den Intervalltyp von H2 und die Raten der Kriterien. Ob b̂ und c nach dem Datenschluss mit den tatsächlichen
+Laufzahlen neu berechnet werden, ist offen (§12). Die benannten Sensitivitätsszenarien (Liste mit festen Stärken,
+A9.2) werden mitgerechnet und nur berichtet. Den kritischen Wert für ε_ctrl liefert eine eigene Simulation nach
+A9.8.
+
+**Halte und Bezugsmengen der Simulationen** (Arbeitsfestlegungen vom 20.10.2026). Fortsetzbare Halte werden im
+synthetischen Harness wie im Ablauf behandelt (A9.12): höchstens W = 3 Wiederaufnahmen je Kampagne mit dem
+protokollierten synthetischen Ereignis „Ursachenanalyse ohne Befund, kein Eingriff, kein Apparaturfehler“, Analysezeit
+T_UA aus Teil B (Entwicklungsbeispiel 1800 s), Bezugseröffnung und Aufwärmen mit ihren Zeitkosten. Ein zweites
+maßgebliches S2, erschöpftes W oder ein nötiger Eingriff beendet die Kampagne endgültig; sie sperrt ihre Ausgänge.
+Für reale Daten bleibt die Ursachenanalyse eine externe Handlung. Mengen: G sind alle begonnenen simulierten
+Kampagnen einer Rolle einschließlich endgültig beendeter; A sind die abgeschlossenen (auch nach Wiederaufnahme)
+Kampagnen mit gültigem ŷ¹ und allen benötigten endlichen Prüfgrößen (Rohresiduen und Varianzen von H1 und H1Z, die
+H2-Intervalle); H1 und H1Z verwenden dieselbe Menge A. c (H1, H1Z), die Prüfrate, b̂ und u(b̂), der Restbias und die
+H2-Überdeckung beziehen sich auf A, unter allen vorgesehenen Rauschvarianten (c aus dem Standardmodell, die übrigen
+als Sensitivität; b̂ über die halbe Spannweite; ein Intervalltyp von H2 gilt nur, wenn er in jeder Variante gegen ŷ⁰ und
+ŷ¹ die Überdeckungsschwelle erreicht); P(H1 und H2 bestätigt) hat G im Nenner, und die Gründe für G ohne A
+werden getrennt gezählt. Für die normative Kalibrier- und Prüfsimulation ist |A| = 1000 je Rolle die Sollzahl, mit
+Nachziehen bis zu einem technischen Versuchslimit (1,5·|A|) und dokumentiertem |G|; wird sie nicht erreicht, ist die
+Simulation „nicht abgeschlossen“. Ein aus A bestimmtes c gilt nicht allein wegen einer kleineren Zahl von Tests für
+jede anders selektierte unvollständige Kampagne; das bleibt eine nur unter benannten Annahmen geltende Eigenschaft.
+Berichtet werden je Rolle Halte nach Ursache, Wiederaufnahmen, Ausschlüsse, Zusatzversuche und Zeiten. G4: Arbeitsziel
+höchstens 1,5 % Fehlausschlüsse je Konfiguration und Lauf unter dem Nullmodell der Simulation (berichtet mit Zähler,
+Nenner und Standardfehler; eine kleine Probe bestätigt keine Rate).
 
 **Schätzung der Grenzen.** In jeder simulierten Kampagne werden D_q, Δ_q und Δ_rel,q wie in der Auswertung als
 Punktwert aus dem simulierten ŷ⁰ geschätzt, also aus den simulierten Einzelmodulläufen der Phase 0 dieser Kampagne,
@@ -1106,8 +1214,7 @@ Fassung B bindet; berichtet werden dann die nötige Präzision und Laufzahl.
 
 Kriterien vor dem Einfrieren (Kalibrierung mit angenommenen Rauschmodellen über mehrere Präzisionsstufen
 (Umfang der Stufen und Laufzahl je Stufe offen, §12), von reinem Sensorrauschen bis zu mehreren Prozent
-Lauf-zu-Lauf-Streuung je Modul) und in Teil B (mit den
-Pilotkovarianzen):
+Lauf-zu-Lauf-Streuung je Modul) und in Teil B (mit dem Strukturmodell aus Phase 0, Punktschätzer):
 
 - P(falsifiziert | exakte Superposition oder lineares, zeitinvariantes Artefakt) ≤ 0,05;
 - P(falsifiziert | größte wahre Abweichung < Δ_rel) ≤ 0,05;
@@ -1141,11 +1248,15 @@ Zelllage- und Zellverstärkungsfehler innerhalb und außerhalb der Unsicherheit 
 - H1Z: P(falsifiziert | exakte Superposition oder lineares, zeitinvariantes Artefakt) ≤ 0,05; berichtet:
   Bestätigungswahrscheinlichkeit und Prüfrate von c wie bei H1;
 - E3: P(auffällig | exakte Superposition, Kalibrierung innerhalb ihrer Unsicherheit) ≤ 0,05 und
-  P(unauffällig | exakte Superposition, Kalibrierung innerhalb ihrer Unsicherheit) ≥ 0,8; berichtet: Rate
-  „unbestimmt“ und Rate „auffällig“ bei 0,1° und 0,3° Phasenversatz eines Moduls. Die Laufzahl richtet sich
-  nicht nach E3. Verfehlt E3 eines der beiden Kriterien in Teil B mit den Pilotkovarianzen, werden die
-  E3-Prüfgrößen nur beschreibend mit Unsicherheit berichtet, ohne dreiwertige Aussage (§8.10; Rückfall je
-  Prüfgröße oder für E3 als Ganzes offen, §12). Vor dem
+  P(unauffällig | exakte Superposition, Kalibrierung innerhalb ihrer Unsicherheit) ≥ 0,8, je Prüfgröße (E3a,
+  E3b); berichtet: Rate „unbestimmt“ und Rate „auffällig“ bei 0,1° und 0,3° Phasenversatz eines Moduls und, als
+  kleine Zusatzprüffälle, bei 0,5 % und 1 % Amplitudenänderung eines Moduls nur in den Kombinationsläufen
+  (Arbeitsfestlegung vom 20.10.2026). Die Laufzahl richtet sich nicht nach E3. Rückfall je Prüfgröße (§8.10):
+  Verfehlt eine Prüfgröße das Kriterium „auffällig“ oder die Modellprüfung (Vergleich von E q_Z² mit 2·E ŝ², der
+  Verteilung von ρ̂ und ŝ² und der Lage von q_Z in den Kalibrierkampagnen; bisher nicht umgesetzt, die Größen
+  werden gespeichert), wird sie nur beschreibend berichtet; verfehlt sie nur „unauffällig“, wird sie einseitig
+  ausgewertet. Der Kriterienbefund steht in Teil B (nr10.e3_kriterien) und wird nur bei der normativen
+  Kampagnenzahl ausgewiesen. Vor dem
   Einfrieren zeigt die Kalibrierung über die Präzisionsstufen, ab welcher Unsicherheit der Zellharmonischen
   das Kriterium erreichbar ist.
 
@@ -1153,7 +1264,7 @@ Erfüllt die Kalibrierung vor dem Einfrieren ein Kriterium nicht, werden die Reg
 §8.10 überarbeitet und die Änderung in A0 vermerkt. Erreicht die Zuordnung die Trefferquote auch mit
 geänderter Einstellung 2 oder geänderten Punkten I nicht, wird sie nur beschreibend berichtet. Für das
 E3-Kriterium „unauffällig“, das von der erst in Phase 0 bekannten Präzision abhängt, gilt stattdessen der
-Rückfall oben. In Teil B werden die Ergebnisse berichtet; die Regeln bleiben, wie in Teil A festgelegt,
+einseitige Rückfall der betroffenen Prüfgröße (oben). In Teil B werden die Ergebnisse berichtet; die Regeln bleiben, wie in Teil A festgelegt,
 einschließlich der Regeln für c (§8.4) und den Intervalltyp mit Rückfall (§8.6); offen sind ein Rückfall für H1 und
 die Fassung dieser Regeln (§12).
 
@@ -1181,6 +1292,44 @@ die Fassung dieser Regeln (§12).
   noch nicht begonnen hat; danach festgestellte Verstöße werden weder wiederholt noch nach S1 geprüft. X′
   wird auch jenseits der Wiederholungsgrenze gemessen und zählt als Wiederholung. S1 greift nur bei einem
   G1-Verstoß von X′.
+- **Reihenfolge sofortiger Folgeläufe** (Arbeitsfestlegung vom 20.10.2026, Fassung ablauf-4). Löst X die
+  Vorprüfung aus, ist R₁ der nächste Lauf; andere von X ausgelöste Wiederholungen (etwa die S3-Wiederholung)
+  folgen danach. Steht der G1-Verstoß fest, folgen R₂, X′, R₃ als geschlossene Folge. X′ erhält keine eigene
+  Vorprüfung; seine sonstigen Wiederholungen folgen nach R₃, auch wenn X′ nach G2–G10 ungültig ist. Danach
+  folgen die übrigen sofortigen Wiederholungen, die zuletzt ausgelöste zuerst. Jede Einfügung nennt Ursache und
+  Bezug. Ein sofortiger Halt hat Vorrang vor noch nicht gemessenen Folgeläufen.
+- **Halt und Wiederaufnahme** (ablauf-4). Wiederaufgenommen wird nur mit einem protokollierten externen
+  Ereignis (Ursachenanalyse mit Befund, Angaben zu mechanischem Eingriff und Apparaturfehler); ein mechanischer
+  Eingriff hat keinen automatischen Ersatzweg (§9.2). Beim Wiederaufnehmen werden alle noch ausstehenden
+  sofortigen Folgeläufe verworfen und einzeln protokolliert. War X′ eines G1-Falls noch nicht gemessen, wird
+  der Fall nach dem vollständigen Kontrollsatz einmal als neue Folge R₂, X′, R₃ gemessen. Offene G1-Prüfungen
+  von Läufen vor dem Halt schließt der erste gültige Referenzlauf danach (Interpolation über die
+  Unterbrechung); daraus entstehende Folgen R₂, X′, R₃ werden erst nach dem Kontrollsatz gemessen. Ist die
+  Klammer von X′ durch einen Halt an X′ oder R₃ oder durch ungültige Referenzläufe unvollständig: G1 nur gegen
+  die einschließenden gültigen Referenzläufe, S1 nicht prüfbar, keine weitere Sonderwiederholung; verletzt X′
+  G1, fehlt der Platz (Reserve r).
+- **Kontrollsatz der Wiederaufnahme** (ablauf-4). Er wird in gezogener Reihenfolge gemessen; S1–S4 gelten. Eine
+  einzelne S3-Überschreitung und ein einzelner Nullpunktalarm werden wie sonst sofort wiederholt (§8.8, §9.2),
+  erst der reproduzierte Alarm hält an. Eingeschobene R₁, R₂, R₃ gehören nicht zum Kontrollsatz. Die
+  Wiederaufnahme gilt erst als erfolgreich, wenn alle Mitglieder des Kontrollsatzes gemessen sind.
+- **Bezugseröffnung nach einem Nullpunkthalt** (ablauf-4). Nach einem Halt über einen reproduzierten
+  Nullpunktalarm (oder an der technischen Grenze der Alarmkette) und einer protokollierten Ursachenanalyse
+  ohne Befund: (1) Vor dem Kontrollsatz wird ein gesonderter Referenzlauf gemessen. (2) Er wird nicht gegen das
+  verworfene R₀ auf Nullpunktalarm geprüft; die übrigen Gültigkeitsprüfungen gelten. (3) Ist er gültig, wird er
+  R₀; danach beginnt der Kontrollsatz in seiner gezogenen Reihenfolge. Der Bezugslauf wird gesondert gezählt.
+  (4) Bis ein gültiger neuer Bezug vorliegt, wird nichts gegen den verworfenen Bezug vorgeprüft, und die
+  Wiederaufnahme gilt nicht als erfolgreich. (5) Ein ungültiger Bezugslauf wird höchstens zweimal sofort
+  wiederholt; ist auch die zweite Wiederholung ungültig, wird erneut angehalten (Halt „Bezugseröffnung“, der
+  eine Wiederaufnahme verbraucht); die nächste Wiederaufnahme beginnt wieder mit einem Bezugslauf. Die
+  Grenze ist unabhängig von der Kontrollwiederholungsgrenze; eine Endlosschleife ist ausgeschlossen. (6) Altes
+  und neues R₀ und ihre Differenz werden protokolliert und berichtet; eine tatsächliche Nullpunktänderung wird
+  durch den neuen Bezug weder widerlegt noch aus dem Protokoll entfernt. Stufe 2 vollzieht denselben
+  Bezugswechsel offline nach.
+- **Aufwärmen nach einer Wiederaufnahme** (ablauf-4). Nur bei einem Tageswechsel zwischen Halt und
+  Wiederaufnahme wird aufgewärmt (§6); der letzte gültige Aufwärmlauf ist dann Bezug und ersetzt den
+  gesonderten Bezugslauf. Der unterbrochene Block darf über Nacht fortgesetzt werden (§6). Tatsächlicher
+  Messtag und Zusatzzeiten (Bezugslauf, Kontrollsatz, Aufwärmen, Dauer des Halts) werden je Versuch bzw.
+  Wiederaufnahme geführt.
 - **Kontrollläufe.** Ein aus anderem Grund als G1 ungültiger Kontrolllauf (bei R auch ein nicht reproduzierter
   Nullpunktalarm, §8.8) wird sofort wiederholt, höchstens zweimal; ist auch die zweite Wiederholung
   ungültig, wird angehalten und nach §9.2 verfahren. Für L₁′, L₂′, L₃′ gilt das nicht: Nach zwei ungültigen
@@ -1220,10 +1369,24 @@ die Fassung dieser Regeln (§12).
   der Vorhersage.
 - **Vertrauensgrenzen.** Bootstrap wie A9.5, zusätzlich mit Ziehungen aus der Unsicherheit von T, bei E3a
   auch aus u(Δδⱼ) (normalverteilt, je Modul eine Ziehung für alle Konfigurationen) und aus der Quantisierung
-  der Zeitstempel (Rechteckverteilung). Auffällig:
-  |x̂| − z_B·u(x̂) > Schwelle, z_B das einseitige Bonferroni-Quantil zu α = 0,05 über alle E3-Prüfungen
-  (zwei je auswertbarer Konfiguration und E3b; Zahl der Prüfungen offen, §12). Unauffällig: |x̂| + 1,645·u(x̂) ≤
-  Schwelle für alle Prüfungen.
+  der Zeitstempel (Rechteckverteilung). Grenzen nach Option B (Arbeitsfestlegung vom 20.10.2026; bis dahin
+  |x̂| − z_B·u(x̂) > Schwelle und |x̂| + 1,645·u(x̂) ≤ Schwelle, deren Größe am Schwellenrand nicht gesichert war),
+  α = 0,05, m = 43:
+  **E3a**, gefalteter Betrag: ũ² = n_A/(n_A − 1)·u², ν = n_A − 1; auffällig, wenn |x̂| > 0,1° + k·ũ mit k aus
+  F̄_t(k; ν) + F̄_t(k + 2·0,1°/ũ; ν) = α/m (beide Vorzeichen); unauffällig, wenn |x̂| + t(0,95; ν)·ũ ≤ 0,1°.
+  **E3b**: komplexe Bootstrap-Residuen d_b = (R₋₁,b − R̂₋₁,b)/|R̂₊₁,b| vor der Betragsbildung,
+  n* = min(n_A, n₀,₁, n₀,₂, n₀,₃), Σ̂ = n*/(n* − 1)·Cov_b(Re d_b, Im d_b), ŝ² = λ_max(Σ̂), ν = n* − 1; auffällig,
+  wenn q_Z > κ·ŝ·Rice⁻¹(1 − α/m; q_tol/(κ·ŝ)) mit κ = t(1 − α/m; ν)/z(1 − α/m); unauffällig, wenn
+  q_Z + t(0,95; ν)·ŝ ≤ q_tol. Bei weniger als 10 000 gültigen Replikaten gilt in allen Quantilen
+  ν_eff = (1/ν + 1/(B − 1))⁻¹. Nicht prüfbar mit Grund (m bleibt 43): Punkt nicht auswertbar, Triphasik-Punkt
+  fehlt, ν_eff < 5, Σ̂ nicht endlich oder singulär, Streuung null, ungültige Replikate (ausgelassen und gezählt).
+  Berichtet und gespeichert: Σ̂, ŝ, ρ̂ = √(λ_min/λ_max), Richtung, ν, ν_eff, n_A, n₀ⱼ, n*, κ und der Prüfstatus.
+  Gültigkeit: unter den Gauß-, Wishart- und Unabhängigkeitsannahmen (Schätzer näherungsweise normal, Nenner
+  |R̂₊₁| nahezu fest, Σ̂ ≈ Wishart(ν)/ν unabhängig vom Schätzer, Läufe unabhängig ohne Drift) ist die Größe am
+  Rand höchstens α/m und die Rate „unauffällig“ am Rand höchstens 0,05, gezeigt auf Statistikebene durch
+  deterministische Quadratur über ν ≥ 5, Anisotropie, Richtung und den gefalteten E3a-Fall (Tabelle Z); eine
+  eingesetzte Rice-Verteilung ohne κ und ohne λ_max ist bei geschätzter oder anisotroper Streuung keine gültige
+  Grenze. Nicht geprüft: zusammengesetzte Kovarianzen, Drift, Schiefe und Rauschen im Nenner.
   Sonst unbestimmt.
 
 ---
@@ -1300,7 +1463,7 @@ Gewählte Zahlenwerte ohne Messung, je mit einer Zeile Begründung.
 | ε_ctrl = 3·σ̂_ref bzw. 3·σ̂_betr | §8.8 | Form aus Einordnung §4; seltene Fehlausschlüsse (A8) |
 | Nullpunktalarm 3·√(4/3)·σ̂_ref | §8.8 | dieselbe Schwelle in Standardabweichungen wie G1 für die Differenz zweier Referenzläufe |
 | mindestens 42 Referenzläufe | §4, P0.7 | mindestens 40 Leave-one-out-Werte für σ̂_ref |
-| Referenzlauf nach je zwölf anderen Läufen in Phase 0 | P0.7 | etwa der Abstand in Phase 1 (Blockmitte, Kontrollsätze) |
+| höchstens zwölf andere Läufe zwischen zwei Referenzläufen in Phase 0, 42 gleichmäßig verteilt | P0.7 | höchstens der Abstand in Phase 1 (Blockmitte, Kontrollsätze); Arbeitsfestlegung vom 20.10.2026 |
 | 5·σ für F_LO | §4 | Rauschen löst praktisch keinen Liftoff-Befund aus |
 | c_S mit höchstens 5 % Fehlalarm je Kontrollsatz | §9.2 S3 | ein Kontrollsatz je Block; Reproduktion durch Wiederholung senkt die Rate weiter |
 | σ_tol = dreifacher Median von σⱼ der Pilotläufe | G2 | robust gegen einzelne Ausreißer der Pilotläufe |
@@ -1314,6 +1477,9 @@ Gewählte Zahlenwerte ohne Messung, je mit einer Zeile Begründung.
 | zehn Zeitkonstanten für T_e | §6 | Restamplitude e⁻¹⁰ ≈ 4,5·10⁻⁵ |
 | T_e auf ganze Sekunden aufgerundet | §6 | einfache Steuerung; verlängert nur |
 | Fünftel und 3·σ_Δ für G4 | G4 | Anfang und Ende mit gleich vielen Zyklen; seltene Fehlausschlüsse |
+| B+ für Kombinationsläufe der Phase 1, Rate 2·Φ(−3), Untergrenze 3·σ_Δ,F; k(n₀ⱼ) für Lⱼ; Arbeitsziel ≤ 1,5 % je Konfiguration und Lauf | G4, A9.2 (4), A9.11 | Jitter der Indexphasen mal Flankensteigung und Laufgrößen machen σ_Δ,F konfigurationsabhängig; MAD aus n₀ = 20 Läufen erhöht die Rate (Arbeitsfestlegung vom 20.10.2026, Zielvorgabe ohne bestätigte Rate) |
+| W = 3 Wiederaufnahmen, T_UA aus Teil B (Entwicklung 1800 s), Mengen G/A, \|A\| = 1000 mit Nachziehen bis 1,5·\|A\| | A9.11 | Halte zählen in der Simulation wie im Ablauf; gemeinsamer Nenner der Prüfschwellen (Arbeitsfestlegung vom 20.10.2026) |
+| Reservebedingung 0,95, höchstens zehn Erhöhungen von r | §5.4, A9.2 (v) | gemeinsame Vollständigkeit der Schnittpunkte; technische Grenze statt unbeschränkten Erhöhens (Arbeitsfestlegung vom 20.10.2026) |
 | drei Pilotkonfigurationen mit je mindestens 20 gültigen Läufen | §5.4 | gepoolt mindestens 57 Freiheitsgrade für die Streuungen |
 | jeder Pilotabstand mindestens 10° von 120° | §5.4, A7 | keine Pilotkonfiguration ist zu einem Schnittpunkt äquivalent, auch nicht bei Phasenfehlern weit über δφ_tol; kein physikalisches Abstandsmaß |
 | Verdopplung von T_ramp bei Liftoff in der Rampe | §5.4 | endliche, eindeutige Anpassung |
@@ -1455,4 +1621,7 @@ Hauptdokument; A0–A9, Tab. C, Tab. F und Z Anhang.
 | Umschaltungen eines zweiten Nockensatzes bei Randomisierung nach §6 (R ohne Einstellung, n = 20, ein Messtag, 5000 Kampagnen): im Mittel 189 bzw. 188 je Kampagne (N_K = 23 bzw. 21, N_I = 3), 9,5 bzw. 9,4 je Block; N_I = 5: 12,4 je Block; Läufe bei Einstellung 2 je Block und Kontrollsatz zusammenhängend: 4,0 je Block | §5.2, §5.5, §6, §12; A9.2, Tab. F | `python3 -c "import numpy as np;g=np.random.default_rng(7);c=lambda q:int((np.diff(np.concatenate(q))!=0).sum());F=lambda NK,NI:c([g.permutation([1]*3+[2]*3)]+[a for _ in range(20) for a in (g.permutation([1]*NK+[2]*NI),g.permutation([1]*3+[2]*3))]);G=lambda m,r:(lambda i:[1]*i+[2]*m+[1]*(r-i))(int(g.integers(0,r+1)));B=lambda NK,NI:c([G(3,3)]+[a for _ in range(20) for a in (G(NI,NK),G(3,3))]);z=[float(np.mean([F(k,i) for _ in range(5000)])) for k,i in ((23,3),(21,3),(23,5))];b=float(np.mean([B(23,3) for _ in range(5000)]));print([round(v) for v in z],[round(v/20,1) for v in z],round(b/20,1))"` |
 | Gemeinsame Versorgung als Aktorkopplung (Beispiel A4, k_max = 9): 0,1 % Amplitude von Modul 1 / 2 / 3 nur in den Kombinationsläufen → 1,02 / 1,01 / 1,02 mN größtes \|ΔF_min\| auf dem Schnitt; aller Module 1,22 mN | Tab. C | `python3 -c "import sys;sys.path.insert(0,'code');import linear_solver as L,numpy as np;P,n=L.profile_spectrum();k=np.arange(1,10);N=2*0.4*L.M*P[1:10]/3/n;t=2*np.pi*np.arange(2000)/2000;c=lambda X:(X.real@np.cos(np.outer(k,t))-X.imag@np.sin(np.outer(k,t))).min();f=lambda p,a:c(a[0]*N+a[1]*N*np.exp(-1j*k*np.radians(p))+a[2]*N*np.exp(-1j*k*np.radians(240)));p=np.arange(100,141,2.);F=np.array([f(x,(1,1,1)) for x in p]);print([round(1e3*float(abs(np.array([f(x,a) for x in p])-F).max()),2) for a in ((1.001,1,1),(1,1.001,1),(1,1,1.001),(1.001,)*3)])"` |
 | Erreichbarkeit der E3-Schwellen (Beispiel A4, Module über den Zellen, \|N₁⁽ʲ⁾\| = 1,30 N): E3a „unauffällig“ möglich erst bei u ≈ 0,97 mN je Komponente einer Zellharmonischen (1,645·√2·u/1,30 N = 0,1°); q_Z bei exakter Superposition und 1 mN in Messung und Vorhersage im quadratischen Mittel √12·u/(3·1,30 N) = 8,9·10⁻⁴; u(Δδⱼ) ≈ 0,03° für 1,645·u(Δδⱼ) = 0,05° | §8.10, §12 | `python3 -c "import sys;sys.path.insert(0,'code');import linear_solver as L,numpy as np;P,n=L.profile_spectrum();C=float(abs(2*0.4*L.M*P[1]/3/n));u=np.radians(0.1)*C/(1.645*2**0.5);print(round(C,2),round(1e3*u,2),'%.1e'%(12**0.5/3*1e-3/C),round(0.05/1.645,3))"` |
+| Randgültigkeit der E3-Grenzen nach Option B (Größe ≤ α/m, „unauffällig“ ≤ 0,05 am Rand; E3b für ν ∈ {5, 6, 8, 19}, ρ ∈ {1; 0,25; 0,1; 0,03}, t bis 30; Maximum 0,98·α/m bei ν = 5, ρ = 0,03, t = 30; E3a gefaltet für ν = 4 … 100) | §8.10; A9.13 | `python3 -m pytest tests/test_e3_grenzen.py -q` (deterministische Quadratur); Belege `docs/entscheidungsvorlage_2026-10-19_belege/e3b/` |
+| effektive Freiheitsgrade von σ̂_ref: 20,8 bei 42 und 30,6 bei 61 gleichmäßig verteilten Referenzläufen | A1, A8 | `python3 docs/entscheidungsvorlage_2026-10-19_belege/freiheitsgrade/nu_eff_sigma_ref.py` |
+| k(n) der Lⱼ-Schwelle: 4,30 (n = 20), 3,38 (n = 60), 3,05 (n = 400) | A9.2 | `python3 -c "import sys;sys.path.insert(0,'code');from pcmms_auswertung import g4;print([round(g4.faktor_n(n),2) for n in (20,60,400)])"` |
 | Zitate: drei Wägezellen im Dreieck genannt; Wegkanal, Encoder und Hilfskanäle erwogen, Kanalzahl offen, Nennlast nicht hergeleitet (Exposé, Nachträge vom 2. Oktober 2026); historisch 10 kg und „11 Kanäle“ bei neun aufgezählten (drei Zellen, Weg, drei Encoder, Beschleunigung, Temperatur; Exposé im Stand des Tags `stand-2026-09-28`); 50,6 N, 7,69 mm, 0,650 kg, 16 N·s/m (README); 2,2 Hz (zehn_fragen); 0,2–0,5 % (v1); Ausgabe 2019 (DKD-R 3-10 Blatt 2; PTB-OAR, Websuche, kein Befehl); vorhandener programmierbarer Linearaktor (historisch: Arbeitspapier v2.4 im Stand des Tags `stand-2026-09-28`, Z. 2104; heutiger Quelltext: Hardwarestand offen, Abschnitt „Hardwarestand Linearaktor“) | §5.1, §12; A0, A3, A4 | `grep -n -e "Erwogen" -e "Kanalzahl" -e "Nennlast der" -e "nicht hergeleitet" docs/expose_2026-09.md`; historisch (Git-Klon mit Tags): `git grep -n -e "10 kg" -e "11 Kanäle" stand-2026-09-28 -- docs/expose_2026-09.md`; `git grep -n -A1 "11 Kanäle:" stand-2026-09-28 -- docs/expose_2026-09.md`; `grep -n -e "50,6 N" -e "7,69 mm" -e "0,650 kg" -e "16 N·s/m" README.md`; `grep -n "2,2 Hz" docs/zehn_fragen.md`; `grep -n "0,2–0,5" docs/praeregistrierung_2026-06.md`; historisch: `git grep -n "bereits vorliegt" stand-2026-09-28 -- docs/arbeitspapier/PCMMS_Arbeitspapier_v2_4.tex`; `grep -n -A1 "Hardwarestand Linearaktor" docs/arbeitspapier/PCMMS_Arbeitspapier_v2_5.tex` |

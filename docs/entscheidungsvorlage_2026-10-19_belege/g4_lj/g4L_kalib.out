@@ -1,0 +1,102 @@
+1) PR #23 je Kampagne (ablauf-2, mit Wiederholungen) und PR #22 statisch (gleicher Seed)
+   Kampagne       Status/Halt   Kontr. kwdh_G4 kwdh_Alarm nichtK_G4 R_außerhalb | PR22 nichtK_G4 (126) | PR22 vorh.|σ̂
+   N01-A4|0       fertig         100      1        0         1       29    |    1
+   N01-A4|1       fertig         100      1        0         1       28    |    0
+   N01-A4|2       fertig         100      1        0         1       38    |    0
+   N01-A4|3       fertig         100      3        1         4       31    |    2
+   N01-A4|4       Halt None       36      2        1         2       14    |    1
+   N01-A4|5       fertig         100      1        1         1       34    |    1
+   N01-A4|6       fertig         100      1        0         1       36    |    0
+   N01-A4|7       fertig         100      1        0         1       39    |    1
+   N01-A4|8       fertig         100      1        0         1       27    |    0
+   N01-A4|9       fertig         100      2        0         2       27    |    1
+   N01-V1G0|0     fertig         100      4        0         4       29    |    3
+   N01-V1G0|1     Halt None       20      3        0         3       12    |   10
+   N01-V1G0|2     Halt None       92      4        0         4       69    |    4
+   N01-V1G0|3     fertig         100      3        0         3       34    |    3
+   N01-V1G0|4     fertig         100      1        0         1       30    |    1
+   N01-V1G0|5     fertig         100      4        2         4       31    |    4
+   N01-V1G0|6     fertig         100      1        0         2       31    |    2
+   N01-V1G0|7     Halt None       52      4        0         4       25    |    8
+   N01-V1G0|8     fertig         100      0        0         0       38    |    0
+   N01-V1G0|9     fertig         100      3        0         3       34    |    3
+   N01-V1G60h|0   fertig         100      0        0         0       32    |    0
+   N01-V1G60h|1   fertig         100      2        0         2       28    |    2
+   N01-V1G60h|2   fertig         100      2        0         2       29    |    2
+   N01-V1G60h|3   fertig         100      1        0         1       36    |    1
+   N01-V1G60h|4   fertig         100      2        0         2       30    |    2
+   N01-V1G60h|5   fertig         100      0        0         0       31    |    0
+   N01-V1G60h|6   fertig         100      1        0         1       27    |    1
+   N01-V1G60h|7   Halt None       30      1        0         1       13    |    6
+   N01-V1G60h|8   fertig         100      1        0         1       31    |    1
+   N01-V1G60h|9   fertig         100      4        0         4       40    |    4
+   Halte nach Regel: Counter({None: 5})
+   Summen: kwdh_G4 alle 55, abgeschlossen 41; kwdh_Alarm 5; nichtK_G4 57
+   abgeschlossene (25): je Kampagne [(np.int64(0), 3), (np.int64(1), 12), (np.int64(2), 4), (np.int64(3), 3), (np.int64(4), 3)], Mittel 1.64, Var 1.49
+
+2) Referenzläufe: G4-Rate (nur ⟨N⟩, σ̂_Δ,R aus 61 Phase-0-Referenzläufen)
+   PR #23, R außerhalb der Kontrollsätze (nicht wiederholt, ablauf.py Z. 390–396): 2 G4 in 933 Läufen = 0.21 % [95 %: 0.026; 0.77 %]
+   Normal-MAD-Modell (n = 61, unbedingt): 0.656 % je Lauf
+   N01-V1G0, abgeschlossene: PR22 statisch (75 L + 51 R) 16, PR23 kwdh_G4 (L + Kontroll-R) 16, PR23 nichtK_G4 17
+   N01-V1G60h, abgeschlossene: PR22 statisch (75 L + 51 R) 13, PR23 kwdh_G4 (L + Kontroll-R) 13, PR23 nichtK_G4 13
+   erwartete Kontroll-R unter den G4-Kontrollwiederholungen (empirisch, 0.21 %): alle 30: 1.46 von 55 (682 Kontroll-R), abgeschlossene: 1.34 von 41; Poisson-P(≥ 1) 0.77
+   erwartete Kontroll-R unter den G4-Kontrollwiederholungen (Modell, 0.66 %): alle 30: 4.48 von 55 (682 Kontroll-R), abgeschlossene: 4.10 von 41; Poisson-P(≥ 1) 0.99
+
+3) G4-Rate je L-Lauf (Original, D_N oder D_F)
+   N01-A4, PR #23 (10 Kampagnen, Exposition 702 geplante L): kwdh_G4 14 → 1.92 % je L-Lauf (R empirisch abgezogen; Poisson-95 % der Rohrate [1.09; 3.35 %])
+   N01-V1G0, PR #22 (40 Kampagnen, je 75 L + 51 R, nicht selektiert): G4 134, abzüglich R (R empirisch) 129.6 → 4.32 % je L-Lauf (± 0.62 % SE aus Kampagnenstreuung)
+   N01-V1G0, PR #22 (40 Kampagnen, je 75 L + 51 R, nicht selektiert): G4 134, abzüglich R (R Modell) 120.6 → 4.02 % je L-Lauf (± 0.62 % SE aus Kampagnenstreuung)
+   N01-V1G0, PR #23 (10 Kampagnen, Exposition 648 geplante L): kwdh_G4 27 → 4.10 % je L-Lauf (R empirisch abgezogen; Poisson-95 % der Rohrate [2.75; 6.06 %])
+   N01-V1G60h, PR #22 (40 Kampagnen, je 75 L + 51 R, nicht selektiert): G4 90, abzüglich R (R empirisch) 85.6 → 2.85 % je L-Lauf (± 0.49 % SE aus Kampagnenstreuung)
+   N01-V1G60h, PR #22 (40 Kampagnen, je 75 L + 51 R, nicht selektiert): G4 90, abzüglich R (R Modell) 76.6 → 2.55 % je L-Lauf (± 0.49 % SE aus Kampagnenstreuung)
+   N01-V1G60h, PR #23 (10 Kampagnen, Exposition 698 geplante L): kwdh_G4 14 → 1.94 % je L-Lauf (R empirisch abgezogen; Poisson-95 % der Rohrate [1.10; 3.37 %])
+
+4) Streuung über die Kampagnen (PR #22, Zählung je Kampagne der 126 Nicht-K-Läufe)
+   N01-V1G0: Mittel 3.35, Var 8.64, Dispersionsindex 2.58; SD der Kampagnenrate (Momente) 2.30 Läufe ≈ 3.07 %-Punkte je L-Lauf
+      Bootstrap-90-% des Dispersionsindex [1.74; 3.33]
+   N01-V1G60h: Mittel 2.25, Var 5.42, Dispersionsindex 2.41; SD der Kampagnenrate (Momente) 1.78 Läufe ≈ 2.38 %-Punkte je L-Lauf
+      Bootstrap-90-% des Dispersionsindex [1.37; 3.43]
+   Normal-MAD-Modell (κ = 1): Mittel 3.06, Var 7.95, Dispersionsindex 2.60, SD der Kampagnenrate 2.20 Läufe
+
+5) Selektion: G4-Zählung (PR #22, gleiche Seeds) nach Ausgang der PR-#23-Kampagne (nur V1, Phase 0 bitgleich)
+   N01-V1G0: abgeschlossen [3, 3, 1, 4, 2, 0, 3] (Mittel 2.29); angehalten [10, 4, 8] (Mittel 7.33)
+   N01-V1G60h: abgeschlossen [0, 2, 2, 1, 2, 0, 1, 1, 4] (Mittel 1.44); angehalten [6] (Mittel 6.00)
+   V1 gesamt: Mann-Whitney (angehalten > abgeschlossen) p = 0.002
+   zum Vergleich PR #22 V1, alle 80: Mittel 2.80; Seeds 0–9: 2.85
+   N01-A4: Spearman(ε_ctrl, mittleres σ̂_N,L) +0.43; ε_ctrl angehalten [0.295] mN, abgeschlossen Median 0.294 mN
+   N01-V1G0: Spearman(ε_ctrl, mittleres σ̂_N,L) +0.32; ε_ctrl angehalten [0.285, 0.222, 0.265] mN, abgeschlossen Median 0.312 mN
+   N01-V1G60h: Spearman(ε_ctrl, mittleres σ̂_N,L) +0.12; ε_ctrl angehalten [0.286] mN, abgeschlossen Median 0.330 mN
+
+6) Neukalibrierung: Skalenfaktor κ in P(|D| > 3·σ̂) = 2·Φ(−3·κ·σ̂/σ) (κ = 1: Normalmodell b-g4)
+   N01-A4: Zielrate 1.92 % je L-Lauf → κ = 1.144
+   N01-V1G0: Zielrate 4.32 % je L-Lauf → κ = 0.962
+   N01-V1G60h: Zielrate 2.85 % je L-Lauf → κ = 1.054
+   V1 gepoolt: Zielrate 3.59 % je L-Lauf → κ = 1.003
+   κ = 1 (b-g4): 3.64 % je L-Lauf
+   Varianten (25 Kontrollsätze, L₁–L₃; Kontroll-R nicht enthalten):
+   κ-Quelle            Variante                    Rate/L   90-%-Q.  Wdh./Kampagne  P(G4-Halt an Lⱼ)/Kampagne
+   b-g4 (κ = 1)        n₀ = 20 je Modul           3.63 %    9.46 %    3.00          3.877 %
+   b-g4 (κ = 1)        gepoolt n = 60             1.30 %    2.88 %    1.00          0.112 %
+   b-g4 (κ = 1)        n₀ = 40 je Modul           1.79 %    4.25 %    1.40          0.414 %
+   b-g4 (κ = 1)        k(20) = 4,33               0.54 %    1.31 %    0.42          0.239 %
+   N01-V1G0            n₀ = 20 je Modul           4.32 %   11.00 %    3.60          5.152 %
+   N01-V1G0            gepoolt n = 60             1.70 %    3.66 %    1.32          0.197 %
+   N01-V1G0            n₀ = 40 je Modul           2.27 %    5.23 %    1.79          0.664 %
+   N01-V1G0            k(20) = 4,33               0.68 %    1.73 %    0.54          0.332 %
+   N01-V1G60h          n₀ = 20 je Modul           2.85 %    7.61 %    2.34          2.666 %
+   N01-V1G60h          gepoolt n = 60             0.89 %    2.05 %    0.68          0.050 %
+   N01-V1G60h          n₀ = 40 je Modul           1.29 %    3.16 %    1.00          0.223 %
+   N01-V1G60h          k(20) = 4,33               0.39 %    0.89 %    0.31          0.151 %
+   N01-A4              n₀ = 20 je Modul           1.92 %    5.25 %    1.56          1.468 %
+   N01-A4              gepoolt n = 60             0.47 %    1.13 %    0.36          0.015 %
+   N01-A4              n₀ = 40 je Modul           0.74 %    1.87 %    0.57          0.082 %
+   N01-A4              k(20) = 4,33               0.24 %    0.45 %    0.19          0.084 %
+   V1 gepoolt          n₀ = 20 je Modul           3.57 %    9.28 %    2.95          3.763 %
+   V1 gepoolt          gepoolt n = 60             1.28 %    2.85 %    0.99          0.110 %
+   V1 gepoolt          n₀ = 40 je Modul           1.77 %    4.19 %    1.38          0.406 %
+   V1 gepoolt          k(20) = 4,33               0.53 %    1.29 %    0.42          0.231 %
+
+7) Wirkung einer Korrelation ρ von D_N und D_F auf die Rate je L-Lauf (κ = 1, n₀ = 20)
+   ρ = 0.0: Rate je L-Lauf 3.62 %
+   ρ = 0.3: Rate je L-Lauf 3.59 %
+   ρ = 0.6: Rate je L-Lauf 3.48 %

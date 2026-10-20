@@ -36,16 +36,38 @@ def _hash_objekt(obj):
                                     if felder else None))
 
 
+G4_LJ_REGEL = dict(schwelle='n_abhaengig', vergleich='pooling')
+
+
+def _g4_2026_11(tb, profil):
+    """G4-Modus, Schwellen je Konfiguration und Lⱼ-Schwellen aus Teil B nr2.g4 im Profilstand 2026-11 (g4.verfahren,
+    g4.lj). Historische Profile: (None, None, None). Fehlt der Block in Teil B, bleiben die Größen leer und G4 der
+    betroffenen Läufe ist „nicht prüfbar“ (kein stiller Rückgriff auf die Regel je Laufart)."""
+    if 'g4.verfahren' not in profil.regeln or not profil.hat('g4.verfahren'):
+        return None, None, None
+    from . import g4
+    modus = profil.wert('g4.verfahren')
+    if modus not in g4.MODI:
+        raise ValueError(f'g4.verfahren {modus!r} nicht umgesetzt ({", ".join(g4.MODI)})')
+    if profil.wert('g4.lj') != G4_LJ_REGEL:
+        raise ValueError(f'g4.lj {profil.wert("g4.lj")!r} nicht umgesetzt ({G4_LJ_REGEL})')
+    blk = tb['nr2'].get('g4') or {}
+    konfig = blk.get(modus) if modus in ('b_plus', 'd') else None
+    lj = {g: dict(N=v['N'], F=v['F']) for g, v in ((blk.get('lj') or {}).get('n_abhaengig') or {}).items()}
+    return modus, konfig, lj
+
+
 def _schwellen(tb, profil):
     n2 = tb['nr2']
     st = n2.get('sigma_tol_grad') or {}
+    g4m, g4k, g4l = _g4_2026_11(tb, profil)
     return gueltigkeit.Schwellen(
         f_soll=n2['f'], kmax=n2['k_max'], delta_phi_tol_grad=profil.wert('g2.delta_phi_tol_grad'),
         sigma_tol_grad={int(k): v for k, v in st.items()} if st else None, sigma_delta=n2.get('sigma_delta'),
         F_LO_zellen=n2.get('F_LO_zellen'), delta_delta_grad=n2['delta_delta_grad'], delta_f_tol=n2.get('delta_f_tol'),
         eps_ctrl=n2.get('eps_ctrl'), sigma_ref=n2.get('sigma_ref'), sigma_ref_zellen=n2.get('sigma_ref_zellen'),
         g4_faktor=profil.wert('g4.faktor'), alarm_faktor=profil.wert('h0.alarm_faktor'), T_P0=n2.get('T_P0'),
-        Delta_T=n2.get('Delta_T'))
+        Delta_T=n2.get('Delta_T'), g4_modus=g4m, g4_konfig=g4k, g4_lj=g4l)
 
 
 def _quellen(t1, pr, konf):
@@ -71,18 +93,19 @@ def _online_gueltig(v):
     return bool(v.get('gueltig')) and v.get('g1') is not True
 
 
-def _x_strich_gegenprobe(t1, pr):
+def _x_strich_gegenprobe(t1, pr, v4=False):
     """X′ des zustandsbehafteten Ablaufs offline nachgeprüft: Die einschließenden gültigen Referenzläufe gleichen dem
     Bezug des Ablaufs, „vorgesehen“ (R₂/R₃ desselben G1-Falls) folgt allein aus den Köpfen, und ein S1 an X′ setzt die
     vorgesehene Klammer voraus. Auf ein nach G2–G10 gültiges X′ folgt unmittelbar das R₃ seines Falls (sonst hätte ein
-    anderer Versuch die Klammer unterbrochen); ausgenommen ist ein Halt an X′ selbst vor R₃ (andere Regel als S1)."""
+    anderer Versuch die Klammer unterbrochen); ausgenommen ist ein Halt an X′ selbst vor R₃ (andere Regel als S1).
+    ablauf-4 (Z1): R₃ folgt auch auf ein nach G2–G10 ungültiges X′, außer bei einem Halt an X′."""
     ka, kb = pr['g1_klammer'] if pr.get('g1_klammer') is not None else (None, None)
     abw = []
     for i, k in enumerate(t1.koepfe):
         v = k['versuch']
         if v.get('rolle') != 'X_strich':
             continue
-        if i + 1 < len(t1.koepfe) and set(pr['gruende'][i]) <= {'G1'} and v.get('halt') in (None, 'S1'):
+        if i + 1 < len(t1.koepfe) and (v4 or set(pr['gruende'][i]) <= {'G1'}) and v.get('halt') in (None, 'S1'):
             w = t1.koepfe[i + 1]['versuch']
             if w.get('rolle') != 'R3' or w.get('bezug_versuch') != v.get('bezug_versuch'):
                 abw.append(f'{v["id"]}: auf X′ folgt {w.get("id")} ({w.get("rolle")}), nicht R₃ des Falls '
@@ -99,6 +122,71 @@ def _x_strich_gegenprobe(t1, pr):
             abw.append(f'{v["id"]}: S1 ohne vorgesehene Klammer R₂/R₃')
     if abw:
         raise formate.FormatFehler('X′ offline ≠ Ablauf: ' + '; '.join(abw[:5]))
+
+
+def _w_satz_ende(t1, V, pos, h, ks):
+    """Ende des Kontrollsatzes ks einer Wiederaufnahme nach Versuch h, offline wie im Ablauf: der erste Versuch mit der
+    Kennung ks, nach dem kein Mitglied mehr aussteht und kein später gemessener Versuch mit der Kennung ks schon
+    ausgelöst war. Eine Kontroll- oder S3-Wiederholung löst ihr Lauf aus, ein X′ der gültige Referenzlauf, der den
+    G1-Verstoß seines Falls feststellt (der erste nach dem Fall); ein erst nach dem Ende ausgelöstes X′ eines Mitglieds
+    verlängert den Kontrollsatz nicht. None ohne Versuch mit der Kennung ks."""
+    W = [j for j in range(h + 1, len(V)) if V[j].get('kontrollsatz') == ks]
+
+    def ausloeser(j):
+        v = V[j]
+        if v.get('rolle') == 'wiederaufnahme_kontrolle':
+            return h
+        if v.get('rolle') == 'X_strich':
+            i = pos.get(v.get('bezug_versuch'), h)
+            return next((k for k in range(i + 1, j) if t1.koepfe[k]['laufart'] == 'R' and _online_gueltig(V[k])), h)
+        return pos.get(v.get('bezug_versuch'), h)
+    return next((m for m in W if all(ausloeser(j) > m for j in W if j > m)), None)
+
+
+def _folgen_gegenprobe(t1, abl):
+    """ablauf-4 offline: R₁ folgt unmittelbar auf seinen Lauf (also nie über eine Unterbrechung); auf R₂ folgt (nach
+    nicht reproduzierten Alarmwiederholungen von R₂) das X′ desselben Falls, außer bei einem Halt (Z1, geschlossene
+    Folge); nach einem Halt beginnt die Wiederaufnahme mit dem Aufwärmen (Tageswechsel), dem Bezugslauf (Nullpunkthalt)
+    oder dem Kontrollsatz; R₂, X′ und R₃ zu einem Lauf von vor der Wiederaufnahme kommen erst nach dem Ende von deren
+    Kontrollsatz (_w_satz_ende; verworfene Folgeläufe und neue Folge, H1); jeder Bezugswechsel nennt einen gültigen
+    Referenzlauf ohne Nullpunktalarm als neuen Bezug."""
+    V = [k['versuch'] for k in t1.koepfe]
+    pos = {v['id']: i for i, v in enumerate(V)}
+    abw = []
+    for i, v in enumerate(V):
+        if v.get('rolle') == 'R1' and (i == 0 or V[i - 1]['id'] != v.get('bezug_versuch')):
+            abw.append(f'{v["id"]}: R₁ folgt nicht unmittelbar auf {v.get("bezug_versuch")}')
+        if v.get('rolle') == 'R2':
+            j = i + 1
+            while j < len(V) and V[j].get('rolle') == 'alarmwiederholung' \
+                    and V[j].get('bezug_versuch') == V[j - 1]['id']:
+                j += 1
+            if j < len(V) and not V[j - 1].get('halt') and (V[j].get('rolle') != 'X_strich'
+                                                            or V[j].get('bezug_versuch') != v.get('bezug_versuch')):
+                abw.append(f'{v["id"]}: auf R₂ folgt {V[j]["id"]} ({V[j].get("rolle")}), nicht X′ des Falls '
+                           f'{v.get("bezug_versuch")}')
+    for w in abl.get('wiederaufnahmen') or []:
+        h = pos.get(w.get('nach_versuch'))
+        if h is None or h + 1 >= len(V):
+            continue
+        erwartet = 'aufwaermen' if w['tageswechsel'] else ('bezugslauf' if w['bezugseroeffnung'] else
+                                                          'wiederaufnahme_kontrolle')
+        if V[h + 1].get('rolle') != erwartet:
+            abw.append(f'Wiederaufnahme {w["nummer"]}: erster Versuch {V[h + 1]["id"]} ({V[h + 1].get("rolle")}), '
+                       f'erwartet {erwartet}')
+        ende = _w_satz_ende(t1, V, pos, h, w['kontrollsatz'])
+        for j in range(h + 1, len(V)):
+            v = V[j]
+            if v.get('rolle') in ('R2', 'X_strich', 'R3') and pos.get(v.get('bezug_versuch'), len(V)) <= h \
+                    and ende is not None and j < ende:
+                abw.append(f'{v["id"]}: {v["rolle"]} zu {v["bezug_versuch"]} vor dem Ende des Kontrollsatzes '
+                           f'{w["kontrollsatz"]}')
+    for b in abl.get('bezugswechsel') or []:
+        j = pos.get(b['neu'])
+        if j is None or not V[j].get('gueltig') or V[j].get('alarm'):
+            abw.append(f'Bezugswechsel {b}: neuer Bezug kein gültiger Referenzlauf ohne Alarm')
+    if abw:
+        raise formate.FormatFehler('Folgen offline ≠ ablauf-4: ' + '; '.join(abw[:5]))
 
 
 def _s2_gegenprobe(ab, abl):
@@ -196,7 +284,10 @@ def datenlage(tab, tb, prof):
         doppelt = sorted(x for x, c in zahl.items() if c > 1)
         if doppelt:
             raise formate.FormatFehler(f'mehr als ein gültiger Versuch je Konfiguration und Block: {doppelt[:5]}')
-        _x_strich_gegenprobe(t1, pr)
+        v4 = abl.get('version') == 'ablauf-4'
+        _x_strich_gegenprobe(t1, pr, v4=v4)
+        if v4:
+            _folgen_gegenprobe(t1, abl)
         _s2_gegenprobe(ab, abl)
         if abl.get('status') != 'abgeschlossen':
             sperren_alle.append(('Datenlage', f'Phase 1 {abl.get("status")}: {(abl.get("ende") or {}).get("grund")} '
@@ -367,7 +458,9 @@ def auswerten(zusammenfassungen, kalibrierung, teil_b, regeln, seed=None, bootst
     if e2:
         zu = _zuordnung(e2, t1, d, lauf, kontroll, auswertbar, tb, T0, T1, schnitt, c_H1, idx, B0, kmax, prof,
                         Nbar0, Nbar1)
-    # E3
+    # E3 (Regelstand 2026-11: Prüfmenge schnitt21_triphasik = alle 21 Schnittpunkte, auch nicht auswertbare, und der
+    # Triphasik-Punkt; Kriterien von A9.11 aus Teil B nr10.e3_kriterien, sofern Werkzeug 8 sie ausweist; historische
+    # Profile lesen punkte und kriterien nicht)
     E3 = None
     nr5 = tb['nr5']
     T = nr5.get('T')
@@ -387,7 +480,8 @@ def auswerten(zusammenfassungen, kalibrierung, teil_b, regeln, seed=None, bootst
                   else None)
             E3 = kontrollen.e3_auswerten(KE, E0, {k: idx[f'A/{k}'] for k in KE}, idxB0, np.asarray(T), xy,
                                          n2['delta_delta_grad'], n2['u_delta_delta_grad'], None, 'S120', prof,
-                                         bs.mc_strom(seed, reihenfolge, 'E3'), uq, T_zieh=tz)
+                                         bs.mc_strom(seed, reihenfolge, 'E3'), uq, T_zieh=tz, punkte=list(schnitt),
+                                         kriterien=(tb.get('nr10') or {}).get('e3_kriterien'))
     # beschreibend: A und F_max je Schnittpunkt mit Vorhersage
     beschr = {}
     for kid in schnitt:

@@ -1,0 +1,14 @@
+erwartete Zahl Kampagnen mit S1 (volle Länge): 1.75 (davon X′-Pfad λ-Summe 0.31, Alarm 1.80); beobachtet 4
+homogen: je Kampagne λ = 0.071 → 2.04
+N01-V1G0 2 u 0.7649 λ_X 0.1688 λ_A 0.7229 Halt S1 (S1 V00666)
+N01-V1G60h 9 u 0.8597 λ_X 0.0351 λ_A 0.2038 Halt -
+N01-V1G0 8 u 0.8798 λ_X 0.0245 λ_A 0.147 Halt -
+N01-V1G0 7 u 0.9111 λ_X 0.0128 λ_A 0.096 Halt S1 (S1 V00364)
+N01-A4 6 u 0.9228 λ_X 0.0108 λ_A 0.0832 Halt -
+N01-A4 5 u 0.933 λ_X 0.0094 λ_A 0.074 Halt -
+N01-A4 2 u 0.9406 λ_X 0.0085 λ_A 0.0679 Halt -
+N01-V1G60h 3 u 0.9543 λ_X 0.0069 λ_A 0.0561 Halt -
+Anteil λ_X von V1-G0 Nr. 2 an der Summe: 0.54
+κ(ν) obere 80-%: ν=41 1.1104, ν=39 1.1137, ν=21 1.1661, ν=31 1.1305, ν=57 1.0911, ν=19 1.1770
+ν_eff analytisch n = 40 20.6
+ν_eff analytisch n = 59 30.3

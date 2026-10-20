@@ -35,14 +35,34 @@ def _roh(T, bias, achse=None):
 
 def _e3_kurz(e3):
     """Kompakter E3-Befund: Bewertung, Status, Prüfgrößen je Konfiguration und Modul (|Δφ_Z|, u, u ohne T-Anteil) und
-    für E3b (q_Z, u, u ohne T-Anteil), z_B, m sowie die Diagnose der T-Ziehungen (Teil B nr5.unsicherheit)."""
+    für E3b (q_Z, u, u ohne T-Anteil), z_B, m sowie die Diagnose der T-Ziehungen (Teil B nr5.unsicherheit).
+    Regelstand 2026-11 zusätzlich, für die Modellprüfung in den Kalibrierkampagnen: je E3a-Zeile die Größen
+    e3_grenzen.KURZ_E3A (vorzeichenbehafteter Wert, korrigiertes u, ν, ν_eff, n_A, gültige Replikate, gefalteter
+    Faktor, Grenzen) und das Ergebnis, für E3b die Größen e3_grenzen.KURZ_E3B (d̂ komplex, Σ̂ als [Σ_rr, Σ_ri, Σ_ii],
+    ŝ, ρ̂, Richtung, ν, ν_eff, n_A, n₀ⱼ, n*, κ, Grenzen), Stufe und Urteil je Prüfgröße und Ergebnis und Grund aller 43
+    Prüfungen."""
     a = [[abs(v['delta_phi_Z_grad']), v['u_grad'], v.get('u_ohne_T_grad', np.nan)]
          for e in e3.get('e3a') or [] for v in e['e3a'].values()]
     b = e3.get('e3b')
-    return dict(bewertung=e3.get('bewertung'), status=e3.get('status'), z_B=e3.get('z_B'), m=e3.get('m'),
-                e3a=np.asarray(a, float).reshape(-1, 3),
-                e3b=None if not b else np.array([b['q_Z'], b['u_q_Z'], b.get('u_q_Z_ohne_T', np.nan)], float),
-                t=e3.get('t_unsicherheit'))
+    out = dict(bewertung=e3.get('bewertung'), status=e3.get('status'), z_B=e3.get('z_B'), m=e3.get('m'),
+               e3a=np.asarray(a, float).reshape(-1, 3),
+               e3b=None if not b else np.array([b['q_Z'], b['u_q_Z'], b.get('u_q_Z_ohne_T', np.nan)], float),
+               t=e3.get('t_unsicherheit'))
+    if e3.get('regelstand') == '2026-11':
+        from ..e3_grenzen import KURZ_E3A, KURZ_E3B
+        P = [v.get('pruefung') or {} for e in e3.get('e3a') or [] for v in e['e3a'].values()]
+        pb = (b or {}).get('pruefung')
+        out.update(regelstand='2026-11', alpha_m=e3.get('alpha_m'),
+                   e3a_pruefung=np.array([[np.nan if p.get(k) is None else p[k] for k in KURZ_E3A] for p in P],
+                                         float).reshape(-1, len(KURZ_E3A)),
+                   e3a_ergebnis=[p.get('ergebnis') for p in P],
+                   e3b_modell=None if not pb else {k: pb.get(k) for k in KURZ_E3B},
+                   pruefgroessen={g: {k: v[k] for k in ('stufe', 'urteil', 'gruende', 'zaehlung')}
+                                  for g, v in (e3.get('pruefgroessen') or {}).items()},
+                   pruefungen=[dict(id=p['id'], ergebnis=p['ergebnis'], grund=p['grund'])
+                               for p in e3.get('pruefungen') or []],
+                   kriterien_a9_11=e3.get('kriterien_a9_11'))
+    return out
 
 
 def _e3_fehlt(tb):
@@ -150,12 +170,13 @@ def wahrheit_kurz(sid, stufe, plan, staerke=None, k_max=None):
 
 
 def ausfuehren(sid, stufe, profil, n, seed_basis, rolle='pruefung', plan=None, n_min=None, werkzeug8=None, rausch=None,
-               staerke=None, prozesse=1, fortschritt=None, k_max=None, verfahren=None):
+               staerke=None, prozesse=1, fortschritt=None, k_max=None, verfahren=None, start=0):
     """n Kampagnen des Szenariopunkts; Rückgabe dict(meta, befunde, wahrheit). verfahren: Bindung der Phase-0-Größen
-    und Ablauf der Phase 1 (Vorgabe verfahren.STANDARD), in der Herkunft vermerkt."""
-    plan = kp.Plan() if plan is None else plan
+    und Ablauf der Phase 1 (Vorgabe verfahren.STANDARD), in der Herkunft vermerkt. start: erster Kampagnenindex der
+    Rolle (Nachziehen setzt die Seedfolge fort)."""
+    plan = kp.plan_vorgabe(profil) if plan is None else plan
     verfahren = vf.oder_standard(verfahren)
-    seeds = [kampagnen_seed(seed_basis, rolle, sid, stufe, i) for i in range(n)]
+    seeds = [kampagnen_seed(seed_basis, rolle, sid, stufe, i) for i in range(start, start + n)]
     auftraege = [(sid, stufe, profil, plan, s, werkzeug8, n_min, rausch, staerke, k_max, verfahren) for s in seeds]
     t = time.perf_counter()
     if prozesse > 1:
@@ -169,6 +190,7 @@ def ausfuehren(sid, stufe, profil, n, seed_basis, rolle='pruefung', plan=None, n
     dauer = time.perf_counter() - t
     meta = dict(szenario=sid, stufe=stufe, profil=profil.id, profil_sha256=profil.sha256(), n=n,
                 seed_basis=int(seed_basis), rolle=rolle, seeds=seeds, plan=_plan_dict(plan), n_min=n_min,
+                **({'start': int(start)} if start else {}),
                 werkzeug8_herkunft=None if werkzeug8 is None else werkzeug8.get('c_H1_herkunft'),
                 werkzeug8=('TESTVORGABE' if werkzeug8 is None else 'übergeben'),
                 normative_kampagnenzahl=regeln.NORMATIVE_ZAHLEN['kampagnen_pruefung'],
@@ -181,7 +203,7 @@ def ausfuehren(sid, stufe, profil, n, seed_basis, rolle='pruefung', plan=None, n
 
 def _plan_dict(plan):
     from dataclasses import asdict
-    return {k: (list(v) if isinstance(v, tuple) else v) for k, v in asdict(plan).items()}
+    return {k: (list(v) if isinstance(v, tuple) else v) for k, v in kp.plan_dict(plan).items()}
 
 
 # ── Raten ────────────────────────────────────────────────────────────────────────────────────────────
@@ -263,6 +285,22 @@ def ablauf_raten(ab, **kw):
 
 
 # ── Ausgabe ──────────────────────────────────────────────────────────────────────────────────────────
+E3_SPALTEN = ('E3a_stufe', 'E3a_urteil', 'E3b_stufe', 'E3b_urteil', 'E3b_q_Z', 'E3b_s_hat', 'E3b_rho_hat', 'E3b_nu',
+              'E3b_n_A')
+
+
+def _e3_spalten(e3):
+    """E3 je Prüfgröße für die CSV (Regelstand 2026-11; sonst leer)."""
+    if not e3 or e3.get('regelstand') != '2026-11':
+        return [''] * len(E3_SPALTEN)
+    pg = e3.get('pruefgroessen') or {}
+    m = e3.get('e3b_modell') or {}
+    return [(pg.get('E3a') or {}).get('stufe', ''), (pg.get('E3a') or {}).get('urteil') or '',
+            (pg.get('E3b') or {}).get('stufe', ''), (pg.get('E3b') or {}).get('urteil') or '',
+            '' if e3.get('e3b') is None else float(e3['e3b'][0]), m.get('s_hat', ''), m.get('rho_hat', ''),
+            m.get('nu', ''), m.get('n_A', '')]
+
+
 def schreibe(verzeichnis, lauf, kennung=None):
     """JSON+NPZ des Laufs (Befunde mit Feldern) und eine CSV-Tabelle je Kampagne; Rückgabe der Pfade."""
     os.makedirs(verzeichnis, exist_ok=True)
@@ -273,12 +311,13 @@ def schreibe(verzeichnis, lauf, kennung=None):
     with open(p + '.csv', 'w', newline='', encoding='utf-8') as fh:
         w = csv.writer(fh)
         w.writerow(['kampagne', 'seed', 'H1', 'H1_grund', 'H1_zusaetze', 'max_abs_z0', 'c', 'H1Z', 'H2', 'H2_grund',
-                    'delta_phi0', 'delta_phi1', 'H3', 'H4', 'E3', 'Zuordnung', 'ungueltig', 'auswertbar'])
+                    'delta_phi0', 'delta_phi1', 'H3', 'H4', 'E3', 'Zuordnung', 'ungueltig', 'auswertbar']
+                   + list(E3_SPALTEN))
         for i, b in enumerate(lauf['befunde']):
             w.writerow([i, b['seed'], b['H1']['ausgang'], b['H1']['grund'] or '', '; '.join(b['H1']['zusaetze']),
                         b['H1']['max_abs_z0'], b['H1']['c'], b['H1Z']['ausgang'], b['H2']['ausgang'],
                         b['H2']['grund'] or '', b['H2']['delta_phi0'], b['H2']['delta_phi1'], b['H3']['ausgang'],
                         b['H4']['ausgang'], (b['E3'] or {}).get('bewertung', ''),
                         (b['zuordnung'] or {}).get('ergebnis', ''), b['gueltigkeit']['n_ungueltig'],
-                        b['n_auswertbar']])
+                        b['n_auswertbar']] + _e3_spalten(b.get('E3')))
     return dict(objekt=p, csv=p + '.csv')

@@ -43,7 +43,7 @@ AUSGANGSSTAND = '2ab6d2818a80e67aaa927de00060f99167ed8c25'
 SEED_BASIS = 20261017
 STUFE = 'L1'
 SYSTEME = ('N01-A4', 'N01-V1G0', 'N01-V1G60h')
-VARIANTEN = dict(historisch=vf.HISTORISCH, k_konsistent=vf.STATISCH, wiederholungen=vf.ZUSTAND)
+VARIANTEN = dict(historisch=vf.HISTORISCH, k_konsistent=vf.STATISCH, wiederholungen=vf.ZUSTAND_HISTORISCH)
 N_SEEDS = 10
 N_START = 2                 # Startsatz je System und Variante (vorab festgelegt): Laufzeit, Hochrechnung
 FORTSETZUNG_BIS = 300       # technische Unterbrechung nach so vielen Phase-1-Versuchen (echte Fortsetzung)
@@ -71,7 +71,7 @@ def profil_und_plan(g):
     prof = regeln.profil(g['profil']).mit_reduktion(**g['profil_reduktion'])
     if prof.sha256() != g['profil_sha256']:
         raise Fehler(f'Profil-Hash {prof.sha256()} ≠ {g["profil_sha256"]}')
-    return prof, kp.Plan(**g['plan'])
+    return prof, kp.plan_aus_dict(g['plan'])
 
 
 # ── eine Kampagne ─────────────────────────────────────────────────────────────────────────────────────────

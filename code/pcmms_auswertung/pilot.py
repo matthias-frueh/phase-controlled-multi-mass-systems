@@ -26,16 +26,42 @@ zusammengehöriger Satz mit seiner Bindung ausgegeben (k, N_z, Prüfsumme der Ph
 (bis pilot-0.2 ohne Bindungsangabe); nach erfolgreicher Suche steht der Satz des festgelegten Paars (k_max, N_z) unter
 suche.satz. Teil B verwendet nur einen Satz, der zu k_max und N_z des tatsächlich verwendeten Plans passt
 (teil_b.phase0_satz), und berechnet ihn sonst mit satz_fuer_plan neu.
+
+Laufgrößen (ab pilot-0.4, nur Regelstand 2026-11, Regel p0.laufgroessen): Jeder Satz enthält zusätzlich die
+Komponentenschätzer des Strukturmodells (laufgroessen.schaetzen bei k und N_z des Satzes: Boden aus den R-Läufen,
+σ_a,j und σ_δ,j aus den Lⱼ-Läufen, σ_off,j und Jitter aus den Laufmitteln der gültigen Piloten, orthogonaler Rest,
+Nullpunktprozess, laufinterne Fünftelanteile, Übertragungstest L → K). Sie verwenden die Einzelmodul-Mittelkurven
+N̄⁽ʲ⁾ zusammen mit den Zeigern der Piloten nur für zweite Momente; Superpositionsresiduen und Vorhersagen der Piloten
+werden weiterhin weder berechnet noch ausgegeben. Der Planungshaken erhält den Satz als „laufgroessen“. Unter den
+historischen Profilen (2026-10) rechnet und schreibt das Skript wie pilot-0.3 (Version, Felder, Bindung).
 """
 import math
 
 import numpy as np
 from scipy import stats
 
-from . import formate, gueltigkeit, konventionen as kv, zufall
+from . import formate, gueltigkeit, konventionen as kv, laufgroessen, regeln, zufall
+from . import zusammenfassung as zf
 
-VERSION = 'pilot-0.3'                   # 0.2: Begründung der Suche nach dem tatsächlichen Abbruchgrund; 0.3: Satz mit
-                                        # Bindung (k, N_z, Daten, Seed), Satz der Suche beim festgelegten Paar
+VERSION = 'pilot-0.4'                   # 0.2: Begründung der Suche nach dem tatsächlichen Abbruchgrund; 0.3: Satz mit
+                                        # Bindung (k, N_z, Daten, Seed), Satz der Suche beim festgelegten Paar;
+                                        # 0.4: Laufgrößen im Satz (nur Regelstand 2026-11)
+VERSION_HISTORISCH = 'pilot-0.3'        # unter den historischen Profilen unveränderte Ausgabe
+
+
+def version(profil):
+    """Version der Pilotausgabe unter dem Profil: historische Profile rechnen und schreiben wie pilot-0.3."""
+    return VERSION_HISTORISCH if regeln.ist_historisch(profil) else VERSION
+
+
+def mit_laufgroessen(profil):
+    """Laufgrößen im Satz? Nur im Regelstand 2026-11; dort ist die Regel p0.laufgroessen an den Code gebunden."""
+    if regeln.ist_historisch(profil):
+        return False
+    laufgroessen.regel(profil)
+    return True
+
+
 VERBOTEN_TEIL = ('residu', 'yhat', 'vorhersage', 'superposition', 'bestaetigt', 'falsifiziert', 'entscheid', 'ausgang')
 VERBOTEN_NAME = ('r', 'z', 'r0', 'r1', 'z0', 'z1', 'h1', 'h2', 'h3', 'h4', 'h1z')
 
@@ -215,7 +241,7 @@ def daten_sha256(tab):
     """Prüfsumme der Phase-0-Läufe (Kennungen in Laufreihenfolge, Datenfelder), an die ein Satz gebunden ist."""
     t = tab.auswahl(tab.spalte('phase', int) == 0).sortiert()
     return formate.sha256_json(dict(laeufe=[k['lauf_id'] for k in t.koepfe],
-                                    daten=formate.sha256_bytes(formate.npz_bytes(t.daten))))
+                                    daten=formate.sha256_bytes(formate.npz_bytes(zf.pflichtfelder(t.daten)))))
 
 
 def _schwellen0(tab, kal, profil, f_soll):
@@ -251,7 +277,7 @@ def _satz(tab, sw0, k, profil, seed, n_sim, f_soll, quelle):
     s = dict(
         bindung=dict(k=int(k), N_z=int(N_z), n_fuenftel=int(n_f), T_a_s=float(N_z / f_soll), quelle=quelle,
                      phase0_sha256=daten_sha256(tab), n_laeufe=len(tab), n_pilot=int(pil.sum()),
-                     seed_eps_ctrl=int(seed), n_sim_eps_ctrl=int(n_sim), version=VERSION),
+                     seed_eps_ctrl=int(seed), n_sim_eps_ctrl=int(n_sim), version=version(profil)),
         sigma_ref=dict(sigma_ref=sr['sigma_ref'], sigma_ref_zellen=sr['sigma_ref_zellen'], n=sr['n'],
                        werte=sr['werte'], mindestzahl=profil.wert('h0.referenzlaeufe_min'),
                        ausreichend=bool(sr['n'] >= profil.wert('h0.referenzlaeufe_min'))),
@@ -267,6 +293,8 @@ def _satz(tab, sw0, k, profil, seed, n_sim, f_soll, quelle):
         p_hat_hinweis=('untere Schranke: ' + ', '.join(sorted(pr['nicht_pruefbar'])) + ' nicht prüfbar'
                        if pr['nicht_pruefbar'] else 'alle Regeln geprüft'),
         kovarianzen=kovarianzen(tab, gp, k), streuungen=streuungen(tab, gp & pil, k))
+    if mit_laufgroessen(profil):
+        s['laufgroessen'] = laufgroessen.schaetzen(tab, gp, k)
     return s, pr
 
 
@@ -284,6 +312,8 @@ def satz_oberste_ebene(pe):
     s = {x: pe.get(x) for x in SATZ_FELDER if x != 'streuungen'}
     s['streuungen'] = pe.get('streuungen_volles_fenster')
     s['bindung'] = pe.get('bindung')
+    if 'laufgroessen' in pe:
+        s['laufgroessen'] = pe['laufgroessen']
     return s
 
 
@@ -328,7 +358,8 @@ def pilot_auswerten(tab, kal, profil, f_soll, zeit=None, seed=0, planung=None, t
     n_sim = profil.zahl('eps_ctrl_datensaetze')
     # σ_c, σ_Σ, F_LO aus den Referenzläufen; σ_tol aus allen Pilotläufen
     sw0, s0 = _schwellen0(tab, kal, profil, f_soll)
-    out = dict(version=VERSION, f_soll=f_soll, k_voll=K_voll, f_1_hz=f1, f_1_untere_schranke=f1_schranke, k_b=k_b,
+    out = dict(version=version(profil), f_soll=f_soll, k_voll=K_voll, f_1_hz=f1, f_1_untere_schranke=f1_schranke,
+               k_b=k_b,
                sigma_c=s0['sigma_c'].tolist(), sigma_summe=s0['sigma_summe'], F_LO_zellen=s0['F_LO'].tolist(),
                F_LO_summe=s0['fak_lo'] * s0['sigma_summe'], sigma_tol_grad=s0['sigma_tol'], profil=profil.kurz())
     # T_φ und Rampe
@@ -341,6 +372,8 @@ def pilot_auswerten(tab, kal, profil, f_soll, zeit=None, seed=0, planung=None, t
     s, _ = _satz(tab, sw0, k_val, profil, seed, n_sim, f_soll, 'vorläufig: k = max(min(k_b, K), 3) vor der Suche')
     for x in SATZ_FELDER:
         out['streuungen_volles_fenster' if x == 'streuungen' else x] = s[x]
+    if 'laufgroessen' in s:
+        out['laufgroessen'] = s['laufgroessen']
     out['k_pilotgroessen'] = k_val
     out['bindung'] = s['bindung']
     out['seed'] = int(seed)
@@ -396,14 +429,25 @@ def suche(tab, kal, profil, f, k_start, basis, zeit, planung, tabelle_fuer, N_z_
                 return dict(ergebnis='offen', grund='Planungssimulation (P(H1 und H2 bestätigt | exakt) ≥ 0,8) nicht '
                                                     'angebunden; nur vorbereitende Pilotgrößen', schritte=schritte,
                             reduktion=reduktion)
-            pl = planung(dict(k=k, N_z=Nz, T_a=T_a, T_e=T_e, T_lauf=T_lauf, zeit=dict(zeit), s_q=st,
-                              kovarianzen=satz_k['kovarianzen'], p_hat=p_hat, n_max=nmax, tabelle=t,
-                              gueltig=pr['gueltig'], kal=kal, f=f))
+            aufruf = dict(k=k, N_z=Nz, T_a=T_a, T_e=T_e, T_lauf=T_lauf, zeit=dict(zeit), s_q=st,
+                          kovarianzen=satz_k['kovarianzen'], p_hat=p_hat, n_max=nmax, tabelle=t,
+                          gueltig=pr['gueltig'], kal=kal, f=f)
+            if 'laufgroessen' in satz_k:                                 # Regelstand 2026-11: Strukturmodell
+                aufruf.update(laufgroessen=satz_k['laufgroessen'], bindung=satz_k['bindung'])
+            pl = planung(aufruf)
             schritt['planung'] = {kk: v for kk, v in pl.items() if kk not in ('details',)}
             schritte.append(schritt)
+            if pl.get('reserve_pruefbar') is False:     # Regelstand 2026-11: an keinem Paar prüfbar, Suche offen
+                return dict(ergebnis='offen', grund='Reservebedingung planung.reserve_ziel in der Planungssimulation '
+                                                    'nicht prüfbar (' + str(pl.get('grund')) + '); kein Paar (k, T_a) '
+                                                    'kann sie erfüllen, die Suche endet ohne Festlegung',
+                            schritte=schritte, reduktion=reduktion, kandidat_nur_P=pl.get('kandidat_nur_P'))
             if pl.get('n_min') is None:
                 continue
             r = math.ceil(pl['n_min'] * p_hat / (1 - p_hat)) + profil.wert('planung.reserve')
+            if pl.get('reserve_r') is not None:         # Regelstand 2026-11: Reserve nach planung.reserve_ziel
+                schritt['reserve_r_formel'] = r
+                r = int(pl['reserve_r'])
             n = pl['n_min'] + r
             schritt.update(reserve_r=r, n=n, erfuellt=bool(n <= nmax))
             if n <= nmax:
@@ -425,6 +469,8 @@ def _klasse_paar(schritt):
     if grund.startswith('nicht simuliert'):
         return 'aufrufgrenze', None
     kand = p.get('kandidaten') or []
+    if any(c.get('P_erfuellt') and not c.get('erfuellt') for c in kand):
+        return 'reserve', None                        # Regelstand 2026-11: P ≥ 0,8 erreicht, Reservegrenze erreicht
     if any('uebersprungen' not in c for c in kand):
         return 'bedingung', None                      # simuliert, kein Kandidat erfüllt die gemeinsame Bedingung
     if kand:
@@ -440,9 +486,10 @@ def _paare(n, fall='dativ'):
 
 def grund_ohne_arbeitspunkt(schritte, reduktion=None):
     """Begründung, wenn die Suche ohne Arbeitspunkt endet, aus den tatsächlichen Rückgaben je Paar (k, T_a): Grenze der
-    Planungsaufrufe, gemeinsame Bedingung von keinem simulierten Kandidaten erreicht, Zeitbudget n = n_min + r > n_max
-    oder ein sonstiger Grund des Hakens; bei mehreren Gründen alle mit der Zahl der Paare. Ist die Suche reduziert
-    (Aufrufgrenze, verringertes N_z-Raster), wird keine Unzulässigkeit außerhalb dieser Suche behauptet."""
+    Planungsaufrufe, gemeinsame Bedingung von keinem simulierten Kandidaten erreicht, Reservegrenze (Regelstand 2026-11),
+    Zeitbudget n = n_min + r > n_max oder ein sonstiger Grund des Hakens; bei mehreren Gründen alle mit der Zahl der
+    Paare. Ist die Suche reduziert (Aufrufgrenze, verringertes N_z-Raster), wird keine Unzulässigkeit außerhalb dieser
+    Suche behauptet."""
     if not schritte:
         return ('kein Paar (k, T_a) im Suchraster: T_e + T_a > T_e,P + T_a,P für alle k'
                 + (f' ({reduktion})' if reduktion else ''))
@@ -456,6 +503,9 @@ def grund_ohne_arbeitspunkt(schritte, reduktion=None):
     if 'bedingung' in zahl:
         teile.append(f'an {_paare(zahl["bedingung"])} (k, T_a) erreicht kein simulierter Kandidat '
                      'P(H1 und H2 bestätigt | exakt) ≥ 0,8')
+    if 'reserve' in zahl:
+        teile.append(f'an {_paare(zahl["reserve"])} (k, T_a) erreicht ein Kandidat P ≥ 0,8, verfehlt aber die '
+                     'Reservebedingung 0,95 auch nach den zulässigen Erhöhungen von r (Reservegrenze)')
     if 'zeitbudget' in zahl and len(zahl) > 1:
         teile.append(f'an {_paare(zahl["zeitbudget"])} überschreitet n = n_min + r das Zeitbudget n_max')
     if 'aufrufgrenze' in zahl:
@@ -485,7 +535,7 @@ def pruefe_ausgabe(obj, pfad=''):
 
 def schreibe_pilot(pfad, out, kennung):
     pruefe_ausgabe(out)
-    return formate.schreibe_objekt(pfad, formate.kopf('pilot', kennung, version=VERSION), out)
+    return formate.schreibe_objekt(pfad, formate.kopf('pilot', kennung, version=out.get('version', VERSION)), out)
 
 
 def lies_pilot(pfad):

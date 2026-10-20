@@ -1,0 +1,43 @@
+System Idx Status Halt | kwdh_G4 kwdh_Alarm kwdh_sonst | rollen.kontrolle kontrollwdh | gueltig_je_modul | PR22: sonst_G4 (126 R+L), Seed gleich
+N01-A4|0 abgeschlossen None | 1 0 0 | 100 1 | [25, 25, 25] | 1 True
+N01-A4|1 abgeschlossen None | 1 0 0 | 100 1 | [25, 25, 26] | 0 True
+N01-A4|2 abgeschlossen None | 1 0 0 | 100 1 | [25, 25, 27] | 0 True
+N01-A4|3 abgeschlossen None | 3 1 0 | 100 4 | [25, 25, 25] | 2 True
+N01-A4|4 angehalten S1 | 2 1 0 | 36 3 | [9, 9, 9] | 1 True
+N01-A4|5 abgeschlossen None | 1 1 0 | 100 2 | [25, 26, 25] | 1 True
+N01-A4|6 abgeschlossen None | 1 0 0 | 100 1 | [25, 24, 24] | 0 True
+N01-A4|7 abgeschlossen None | 1 0 0 | 100 1 | [25, 25, 25] | 1 True
+N01-A4|8 abgeschlossen None | 1 0 0 | 100 1 | [25, 25, 26] | 0 True
+N01-A4|9 abgeschlossen None | 2 0 0 | 100 2 | [25, 25, 25] | 1 True
+N01-V1G0|0 abgeschlossen None | 4 0 0 | 100 4 | [25, 25, 26] | 3 True
+N01-V1G0|1 angehalten S1 | 3 0 0 | 20 3 | [5, 5, 5] | 10 True
+N01-V1G0|2 angehalten S1 | 4 0 0 | 92 4 | [21, 23, 22] | 4 True
+N01-V1G0|3 abgeschlossen None | 3 0 0 | 100 3 | [25, 27, 25] | 3 True
+N01-V1G0|4 abgeschlossen None | 1 0 0 | 100 1 | [25, 25, 25] | 1 True
+N01-V1G0|5 abgeschlossen None | 4 2 0 | 100 6 | [25, 25, 25] | 4 True
+N01-V1G0|6 abgeschlossen None | 1 0 0 | 100 1 | [25, 25, 25] | 2 True
+N01-V1G0|7 angehalten S1 | 4 0 0 | 52 4 | [12, 13, 13] | 8 True
+N01-V1G0|8 abgeschlossen None | 0 0 0 | 100 None | [25, 25, 25] | 0 True
+N01-V1G0|9 abgeschlossen None | 3 0 0 | 100 3 | [26, 25, 27] | 3 True
+N01-V1G60h|0 abgeschlossen None | 0 0 0 | 100 None | [27, 25, 27] | 0 True
+N01-V1G60h|1 abgeschlossen None | 2 0 0 | 100 2 | [25, 25, 25] | 2 True
+N01-V1G60h|2 abgeschlossen None | 2 0 0 | 100 2 | [25, 26, 25] | 2 True
+N01-V1G60h|3 abgeschlossen None | 1 0 0 | 100 1 | [25, 25, 25] | 1 True
+N01-V1G60h|4 abgeschlossen None | 2 0 0 | 100 2 | [27, 25, 25] | 2 True
+N01-V1G60h|5 abgeschlossen None | 0 0 0 | 100 None | [25, 25, 28] | 0 True
+N01-V1G60h|6 abgeschlossen None | 1 0 0 | 100 1 | [25, 25, 26] | 1 True
+N01-V1G60h|7 angehalten S3 | 1 0 0 | 30 1 | [7, 9, 8] | 6 True
+N01-V1G60h|8 abgeschlossen None | 1 0 0 | 100 1 | [25, 25, 26] | 1 True
+N01-V1G60h|9 abgeschlossen None | 4 0 0 | 100 4 | [25, 25, 25] | 4 True
+
+Summe kontrollwiederholung: Nullpunktalarm (Zelle 1) 1
+Summe kontrollwiederholung: Nullpunktalarm (Zelle 2) 1
+Summe kontrollwiederholung: Nullpunktalarm (Zelle 3) 3
+Summe kontrollwiederholung: ungültig (G4) 55
+
+('N01-A4', False) {'n': 1, 'kg4': 2, 'kal': 1, 'kso': 0, 's22': 1, 'kontrolle': 36}
+('N01-A4', True) {'n': 9, 'kg4': 12, 'kal': 2, 'kso': 0, 's22': 6, 'kontrolle': 900}
+('N01-V1G0', False) {'n': 3, 'kg4': 11, 'kal': 0, 'kso': 0, 's22': 22, 'kontrolle': 164}
+('N01-V1G0', True) {'n': 7, 'kg4': 16, 'kal': 2, 'kso': 0, 's22': 16, 'kontrolle': 700}
+('N01-V1G60h', False) {'n': 1, 'kg4': 1, 'kal': 0, 'kso': 0, 's22': 6, 'kontrolle': 30}
+('N01-V1G60h', True) {'n': 9, 'kg4': 13, 'kal': 0, 'kso': 0, 's22': 13, 'kontrolle': 900}

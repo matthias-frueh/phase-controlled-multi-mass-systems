@@ -1,0 +1,4 @@
+k= 1 m= 1: P(Vorpr.)=0.0093 P(G1-Fall)=0.0027 | S1 je Lauf: ueber X' 7.50e-06, Alarm R1 5.28e-05, Alarm R2 8.00e-06, Alarm R3 2.50e-07, Summe 6.85e-05
+k= 6 m= 6: P(Vorpr.)=0.0094 P(G1-Fall)=0.0019 | S1 je Lauf: ueber X' 4.75e-06, Alarm R1 5.10e-05, Alarm R2 5.75e-06, Alarm R3 5.00e-07, Summe 6.20e-05
+k=12 m= 1: P(Vorpr.)=0.0094 P(G1-Fall)=0.0070 | S1 je Lauf: ueber X' 1.47e-05, Alarm R1 5.80e-05, Alarm R2 4.40e-05, Alarm R3 1.25e-06, Summe 1.18e-04
+A8: S1 ueber G1 je Lauf 2,5e-4 (Vorpruefung nicht beruecksichtigt), Nullpunktalarm 7,3e-4 je Referenzlauf und Kanal

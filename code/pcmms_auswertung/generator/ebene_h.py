@@ -81,7 +81,9 @@ def gruppe_signal(modell, specs, rng, rausch):
     else:
         Nkr = [np.einsum('njk,jck->nck', F, ant.Nz_kraft) for F in (Fa, Ff, Fl)]
     zeiger = np.where(bew[None, :, None], Za, np.nan + 1j * np.nan)
+    fz = np.where(bew[None, None, :], np.stack([Zf[:, :, 0], Zl[:, :, 0]], 1), np.nan + 1j * np.nan)
     return dict(n=n, art=art, einstellung=e, ant=ant, K=K, Nz=Nz, nf=nf, phi_c=phi_c, zeiger=zeiger, A=A, dl=dl,
+                fuenftel_zeiger=fz,
                 bew=bew, fak=fak, phi_idx=phi_idx, Nkraft=Nkr[0], Nkraft_f=Nkr[1], Nkraft_l=Nkr[2], phase1=phase1)
 
 
@@ -176,7 +178,8 @@ def ziehen(modell, specs, rng, rausch):
         drift=rausch.nullpunkt_drift_N_je_s,
         fest=dict(Nk_zellen=Nrun, Nk_summe=Nrun.sum(1), fuenftel_Nk=np.stack([(Nh_f + r5[:, 0]).sum(1),
                                                                             (Nh_l + r5[:, 4]).sum(1)], 1),
-                  zeiger=g['zeiger'], phi_mittel_grad=np.where(g['bew'][None], pm, np.nan),
+                  zeiger=g['zeiger'], fuenftel_zeiger=g['fuenftel_zeiger'],
+                  phi_mittel_grad=np.where(g['bew'][None], pm, np.nan),
                   sigma_grad=np.where(g['bew'][None], sg, np.nan),
                   sigma_roh_zellen=np.sqrt(0.5 * (np.abs(Nh) ** 2).sum(-1) + sz ** 2),
                   sigma_roh_summe=np.sqrt(0.5 * (np.abs(Nh.sum(1)) ** 2).sum(-1) + 3 * sz ** 2),

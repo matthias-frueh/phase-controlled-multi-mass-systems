@@ -1,0 +1,28 @@
+Effektive Freiheitsgrade von σ̂_ref (Leave-one-out) und A8-Rate p1 je Lauf
+
+1) ν_eff analytisch (gleich getaktet): (n − 2)/(1 + 2·((2/3)² + (1/6)²)) = (n − 2)/1,9444
+   n = 11 Referenzläufe (9 LOO-Werte): ν_eff =   4.63
+   n = 41 Referenzläufe (39 LOO-Werte): ν_eff =  20.06
+   n = 42 Referenzläufe (40 LOO-Werte): ν_eff =  20.57
+   n = 61 Referenzläufe (59 LOO-Werte): ν_eff =  30.34
+
+2) exakte Momente (Satterthwaite über die Kovarianz der LOO-Werte)
+   ν_E: bezogen auf E[σ̂²]; ν_nom: bezogen auf die nominale LOO-Varianz (gleich getaktet 1,5·σ²)
+   gleich        n = 11: ν_E =   4.86, ν_nom =   3.91, E[σ̂²] = 1.6736, nominal 1.5000
+   gleich        n = 41: ν_E =  20.32, ν_nom =  19.30, E[σ̂²] = 1.5388, nominal 1.5000
+   gleich        n = 42: ν_E =  20.83, ν_nom =  19.82, E[σ̂²] = 1.5378, nominal 1.5000
+   gleich        n = 61: ν_E =  30.60, ν_nom =  29.59, E[σ̂²] = 1.5256, nominal 1.5000
+   ungleich_1_3  n = 42: ν_E =  20.71, ν_nom =  19.72, E[σ̂²] = 1.6652, nominal 1.6250
+   ungleich_1_3  n = 61: ν_E =  30.15, ν_nom =  29.15, E[σ̂²] = 1.6527, nominal 1.6250
+
+3) Monte Carlo (400000 Datensätze je Fall) und p1 marginal über σ̂_ref (Formel Anhang Tab. F Z. 1437)
+   gleich        n = 42 (Seed 1): ν_E =  20.83, ν_nom =  19.82; q(1,5) = 0.0061, q(2) = 0.0155, p1 = 2.502e-04; P(u < 0,8) = 0.093 mit Anteil 0.72 an p1
+   gleich        n = 61 (Seed 2): ν_E =  30.59, ν_nom =  29.60; q(1,5) = 0.0049, q(2) = 0.0135, p1 = 1.445e-04; P(u < 0,8) = 0.052 mit Anteil 0.51 an p1
+   ungleich_1_3  n = 42 (Seed 3): ν_E =  20.67, ν_nom =  19.68; q(1,5) = 0.0047, q(2) = 0.0124, p1 = 1.791e-04; P(u < 0,8) = 0.063 mit Anteil 0.69 an p1
+   σ bekannt (σ̂_ref = √1,5·σ): q(1,5) = 0.0027, q(2) = 0.0094, p1 = 2.531e-05
+
+4) p1 unter der Näherung σ̂_ref² ~ 1,5·σ²·χ²_ν/ν (Quadratur): naiv ν = n − 2 gegen ν_eff
+   n = 42, naiv ν = 40        (ν = 40.00): p1 = 1.177e-04 =  4.7-fach gegenüber σ bekannt
+   n = 42, ν_eff analytisch   (ν = 20.57): p1 = 3.208e-04 = 12.7-fach gegenüber σ bekannt
+   n = 61, naiv ν = 59        (ν = 59.00): p1 = 7.690e-05 =  3.0-fach gegenüber σ bekannt
+   n = 61, ν_eff analytisch   (ν = 30.34): p1 = 1.711e-04 =  6.8-fach gegenüber σ bekannt

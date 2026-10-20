@@ -1,0 +1,259 @@
+{
+ "inhalt": {
+  "ablauf_version": "ablauf-4",
+  "beschreibung": "Prüfsatz des zustandsbehafteten Phase-1-Ablaufs (getrennt vom Software-Prüfsatz)",
+  "faelle": {
+   "I01-amplitude/L1/7/zustand": {
+    "hashes": {
+     "daten": "3a3788b47ceb3c266824f5a1cc5689a80272cc3aab0e2b33fea910edfbfd53ba",
+     "entscheidungen": "b164e883af654d5ce211aed37d4623f0c27fd9146a84839f38baf90bf0b1a000",
+     "koepfe": "9e8a9670ee59af7e8d869fe1f5f811f57ba2a55324ea0932aa9d0ccb6981ba32",
+     "schwellen": "e606c89eac99ddae53b90fe5602f1796d1641690fb3cd570c290c4df1de8d61d",
+     "ziehungen": "d7dde20851f922d80a855fc295cb8935ec17f158f8ae7cf5c3e0739e0d20d1c4"
+    },
+    "inhalt": {
+     "auswahl": {
+      "ersetzt": 4,
+      "gueltig": 140
+     },
+     "grenzen": 0,
+     "halt": null,
+     "laufzahl": {
+      "ausgefuehrt": 212,
+      "geplant": 201,
+      "geplant_ausgefuehrt": 201,
+      "zusaetzlich": 11
+     },
+     "luecken": [
+      "Einstellung 2: G2–G4 nicht gefasst (f′, δf_tol′, σ_tol′, σ_Δ′ offen, §12)",
+      "S1, S2 und S4 für L₁′–L₃′ offen (§12): nicht angewandt"
+     ],
+     "rollen": {
+      "R1": 3,
+      "R2": 1,
+      "R3": 1,
+      "X_strich": 1,
+      "aufwaermen": 3,
+      "konfiguration": 144,
+      "kontrolle": 49,
+      "referenz_block": 6,
+      "schlussreferenz": 1,
+      "wiederholung": 3
+     },
+     "s2": [],
+     "status": "abgeschlossen",
+     "ziehungen": 3
+    }
+   },
+   "N01-A4/L1/13/aus": {
+    "hashes": {
+     "daten": "d7f77a54711da3fa1f6251c2af747be0717d51a9ec0275107d769aa7a55ece21",
+     "entscheidungen": "11b557a49caf405b133f57a0d0658e711cc94bc769eebaffe0ec38474955d49f",
+     "koepfe": "16e9ef897b3d327c206075b915366655dae42d9c11ff9ac8039addeecae9a3ed",
+     "schwellen": "687204c26c5d1efd213ae9e59580c91c461c2923a7a75d4ed333b1d2c5a9f7cd",
+     "ziehungen": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "inhalt": {
+     "auswahl": {
+      "fehlt": 7,
+      "gueltig": 119
+     },
+     "grenzen": 0,
+     "halt": null,
+     "laufzahl": {
+      "ausgefuehrt": 162,
+      "geplant": 162,
+      "geplant_ausgefuehrt": 162,
+      "zusaetzlich": 0
+     },
+     "luecken": [],
+     "rollen": {
+      "aufwaermen": 1,
+      "konfiguration": 126,
+      "kontrolle": 28,
+      "referenz_block": 6,
+      "schlussreferenz": 1
+     },
+     "s2": [],
+     "status": "abgeschlossen",
+     "ziehungen": 0
+    }
+   },
+   "N01-A4/L1/13/zustand": {
+    "hashes": {
+     "daten": "6a27c97b09c0d03ad17de92efc079ceef88c2fb2c7f315157d16ca7f469ae57f",
+     "entscheidungen": "e7f6a634400b32579c6dee0f086e46a7d79912dd315d721ad92747e222306af7",
+     "koepfe": "4161055369f6db1d09e72a618ac38d91d0b3559e48c7e4d74f914e75aaeebb23",
+     "schwellen": "687204c26c5d1efd213ae9e59580c91c461c2923a7a75d4ed333b1d2c5a9f7cd",
+     "ziehungen": "cff031148af655a4e8b7e18855a4ba70860f48635c0f6dbaad4a5cb5d15d2b43"
+    },
+    "inhalt": {
+     "auswahl": {
+      "ersetzt": 7,
+      "gueltig": 119
+     },
+     "grenzen": 0,
+     "halt": null,
+     "laufzahl": {
+      "ausgefuehrt": 174,
+      "geplant": 162,
+      "geplant_ausgefuehrt": 162,
+      "zusaetzlich": 12
+     },
+     "luecken": [],
+     "rollen": {
+      "R2": 1,
+      "R3": 1,
+      "X_strich": 1,
+      "aufwaermen": 3,
+      "konfiguration": 126,
+      "kontrolle": 28,
+      "referenz_block": 6,
+      "s3_wiederholung": 1,
+      "schlussreferenz": 1,
+      "wiederholung": 6
+     },
+     "s2": [],
+     "status": "abgeschlossen",
+     "ziehungen": 6
+    }
+   },
+   "S02-kontrolllauf/L1/7/zustand": {
+    "hashes": {
+     "daten": "74f69060351983ae5e1bdc5e74de77e5fa3eef2535330480ce26562b731fd5c7",
+     "entscheidungen": "61788526ba6bbbf11c269f8ab87302f33449a50d9ab8fa3c4d81946eeef4ac55",
+     "koepfe": "b4e0be60096ee25237d3c63831fef3c274f1919869ed2de36f977156582e2fc5",
+     "schwellen": "12cb509ec26ca3a8ee489c055d5ea51302c8eb1253ffb69f664d7fa7c9357f6f",
+     "ziehungen": "16456d6ab6cb70f0d9a410e80132735ad73fb6c940fd5acbbb448827c83e0048"
+    },
+    "inhalt": {
+     "auswahl": {
+      "ersetzt": 9,
+      "gueltig": 117
+     },
+     "grenzen": 0,
+     "halt": null,
+     "laufzahl": {
+      "ausgefuehrt": 187,
+      "geplant": 162,
+      "geplant_ausgefuehrt": 162,
+      "zusaetzlich": 25
+     },
+     "luecken": [],
+     "rollen": {
+      "R1": 4,
+      "R2": 2,
+      "R3": 2,
+      "X_strich": 2,
+      "alarmwiederholung": 1,
+      "aufwaermen": 3,
+      "konfiguration": 126,
+      "kontrolle": 28,
+      "referenz_block": 6,
+      "schlussreferenz": 1,
+      "wiederaufnahme_kontrolle": 4,
+      "wiederholung": 8
+     },
+     "s2": [
+      "V00035"
+     ],
+     "status": "abgeschlossen",
+     "ziehungen": 8
+    }
+   },
+   "S06-saettigung/L1/7/zustand": {
+    "hashes": {
+     "daten": "17a21aa0fb1af73f46e782bc40f4beb4ae01658504c320f08aa06529681ee5d1",
+     "entscheidungen": "2139377fb06e58f655c9933e46014eb1a4b0c275bcd320c82f45eb0f02154fb9",
+     "koepfe": "5d7e2ddbba17f697c40cdef96c7e47ed6b240ae7c3b6837653a7191c673a2d2e",
+     "schwellen": "83e6a2a37cd17f6cdf7a4de89454da8ea24d69a0d18d3ee74b5645cf24f752cb",
+     "ziehungen": "c3896f463441da6c7131ae9e8ae1c858811ab54e875aa53460a5feffa3d4012b"
+    },
+    "inhalt": {
+     "auswahl": {
+      "ersetzt": 8,
+      "gueltig": 118
+     },
+     "grenzen": 0,
+     "halt": null,
+     "laufzahl": {
+      "ausgefuehrt": 176,
+      "geplant": 162,
+      "geplant_ausgefuehrt": 162,
+      "zusaetzlich": 14
+     },
+     "luecken": [],
+     "rollen": {
+      "R1": 3,
+      "alarmwiederholung": 1,
+      "aufwaermen": 3,
+      "konfiguration": 126,
+      "kontrolle": 28,
+      "referenz_block": 6,
+      "schlussreferenz": 1,
+      "wiederholung": 8
+     },
+     "s2": [],
+     "status": "abgeschlossen",
+     "ziehungen": 8
+    }
+   }
+  },
+  "gegenprobe": {
+   "I01-amplitude/L1/7/zustand": [],
+   "N01-A4/L1/13/aus": [],
+   "N01-A4/L1/13/zustand": [],
+   "S02-kontrolllauf/L1/7/zustand": [],
+   "S06-saettigung/L1/7/zustand": []
+  },
+  "n_min": 4,
+  "plan": {
+   "n0": 20,
+   "n_bloecke": 6,
+   "n_pilot": 20,
+   "p0_anordnung": "p07"
+  },
+  "profil": {
+   "id": "ENTW-2026-11",
+   "reduktion": {
+    "bootstrap_B": 200,
+    "eps_ctrl_datensaetze": 300,
+    "h3_mc": 200
+   },
+   "sha256": "bb72f65641197540d1a8fc7c4b1cacfc42558023c12f6311b3cc16adb6c32647"
+  },
+  "rundung_stellen": 12,
+  "sha256_gesamt": "daea5cb37820fa23312cc7da82344bbb1b2acef6dcfe32e3252f3d930ff74627",
+  "umgebung": {
+   "numpy": "2.5.3",
+   "python": "3.13.16",
+   "scipy": "1.18.1"
+  },
+  "verfahren": {
+   "ablauf": "zustand",
+   "ablauf_version": "ablauf-4",
+   "bindung": "plan",
+   "optionen": {
+    "aufwaermen": true,
+    "halt": true,
+    "wiederholungen": true
+   },
+   "version": "verfahren-1"
+  }
+ },
+ "kopf": {
+  "code_version": {
+   "git": "ff3123d54354d6ada9ab351fea00ebc7f6f2f176+geändert",
+   "paket": "0.1.0"
+  },
+  "datenart": "synthetisch",
+  "erzeugt_von": {
+   "programm": "pcmms_auswertung",
+   "version": "0.1.0"
+  },
+  "kennung": "SYNTH-ABLAUF-PRUEFSATZ",
+  "registrierung": "keine (synthetisch)",
+  "schema": "pcmms.pruefsatz",
+  "schema_version": "0.1"
+ }
+}

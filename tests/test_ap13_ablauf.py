@@ -117,10 +117,11 @@ class Skript:
         return k, d
 
 
-def lauf(regel=None, plan=None, optionen=ablauf.Ablaufoptionen(aufwaermen=False), s3=None, rng=None, sw=SW):
+def lauf(regel=None, plan=None, optionen=ablauf.Ablaufoptionen(aufwaermen=False), s3=None, rng=None, sw=SW,
+         fassung='ablauf-4'):
     geplant = plan if plan is not None else plan_klein()
     a = ablauf.Ablauf(geplant, Skript(regel), sw, S3 if s3 is None else s3, rng or np.random.default_rng(1), optionen,
-                      10.0, 500.0, kennung=dict(test=True))
+                      10.0, 500.0, kennung=dict(test=True), fassung=fassung)
     a.ausfuehren()
     return a
 
@@ -496,8 +497,9 @@ def test_s3_wiederholung_von_x_strich_schliesst_die_klammer_nicht():
     """Am Stand 836f2c4 folgte die S3-Wiederholung eines X′ (Kontrolllauf L₁) vor R₃; das R₁ ihrer Vorprüfung schloss X′
     gegen R₂/R₁, S1 war „nicht prüfbar“, und der Ablauf lief ohne Halt durch. Jetzt folgt R₃ unmittelbar auf X′: X′
     weicht 0,015 N von der Klammer R₂/R₃ ab, S1 hält nach R₃ an; die S3-Wiederholung bleibt vorgemerkt und folgt nach
-    dem Kontrollsatz der Wiederaufnahme."""
-    a = lauf(_regel_verschachtelt(0.015))
+    dem Kontrollsatz der Wiederaufnahme. Historische Fassung ablauf-3 (ablauf-4 verwirft die ausstehende Wiederholung
+    beim Halt, test_ablauf4)."""
+    a = lauf(_regel_verschachtelt(0.015), fassung='ablauf-3')
     vs = versuche(a)
     rollen = [v['rolle'] for v in vs]
     i = rollen.index('X_strich')
@@ -539,7 +541,7 @@ def test_offline_gegenprobe_erkennt_die_unterbrochene_klammer(monkeypatch):
     weist die Tabelle an der Folge der Versuche zurück, obwohl die Klammer R₂/R₁ („nicht prüfbar“) in sich stimmt. Der
     Haken stellt die alte Platzierung nach; am Stand 836f2c4 fehlt er und die alte Folge entsteht von selbst."""
     monkeypatch.setattr(ablauf.Ablauf, '_klammer_offen', lambda self, n: 0, raising=False)
-    a = lauf(_regel_verschachtelt(0.015))
+    a = lauf(_regel_verschachtelt(0.015), fassung='ablauf-3')                # Platzierung der Fassung ablauf-3
     vs = versuche(a)
     rollen = [v['rolle'] for v in vs]
     i = rollen.index('X_strich')
@@ -578,7 +580,8 @@ def test_verschachtelt_fortsetzung_aus_dem_ablaufstand(tmp_path):
 def test_halt_an_x_strich_unterbricht_die_klammer():
     """Hält der Ablauf an X′ selbst an (S3 im Kontrollsatz einer Wiederaufnahme), folgt R₃ erst nach dem Kontrollsatz
     der nächsten Wiederaufnahme; dessen Referenzlauf schließt X′ mit unvollständiger Klammer, S1 ist „nicht prüfbar“
-    (wie bei ungültigem R₂ oder R₃). Stufe 2 nimmt diese Folge nur mit dem Halt an X′ an."""
+    (wie bei ungültigem R₂ oder R₃). Stufe 2 nimmt diese Folge nur mit dem Halt an X′ an. Historische Fassung ablauf-3:
+    In ablauf-4 hält eine einzelne S3-Überschreitung im Kontrollsatz nicht an (N7, test_ablauf4)."""
     def regel(spec, v):
         if spec['konfiguration']['id'] == 'S100' and v['nummer'] == 0:
             return dict(G6=True)                                         # S2: Halt, Wiederaufnahme W1
@@ -586,7 +589,7 @@ def test_halt_an_x_strich_unterbricht_die_klammer():
             return dict(dN=0.05)                                         # G1 im Kontrollsatz W1 → R₂, X′, R₃
         if v['rolle'] == 'X_strich':
             return dict(dN=0.015, S3=1.0)
-    a = lauf(regel, rng=FesteZiehung(0))
+    a = lauf(regel, rng=FesteZiehung(0), fassung='ablauf-3')
     assert a.status == 'angehalten' and a.z['halt']['regel'] == 'S2'
     _wiederaufnahme(a, EREIGNIS)
     vs = versuche(a)

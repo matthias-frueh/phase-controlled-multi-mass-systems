@@ -1,0 +1,187 @@
+{
+ "profil": "ENTW-2026-11+red(bootstrap_B=100,e3_mc=100,eps_ctrl_datensaetze=200,h2_replikate=100,h3_mc=100)",
+ "plan": {
+  "n0": 20,
+  "n_pilot": 20,
+  "n_bloecke": 8,
+  "tage": 1,
+  "zusatz": false,
+  "pruef": [],
+  "pruef_bilder": true,
+  "einstellung2": null,
+  "n_zyklen": 100,
+  "T_lauf": 17.0,
+  "ref_abstand": 12,
+  "ref_min_p0": 42,
+  "tag_pause": 43200.0,
+  "phase_pause": 86400.0,
+  "p0_anordnung": "p07"
+ },
+ "faelle": {
+  "N01-A4/201": {
+   "H1": "bestätigt",
+   "H1_grund": null,
+   "H2": "bestätigt",
+   "H3": "nicht entscheidbar",
+   "H4": "bestätigt",
+   "E3": "unbestimmt",
+   "E3_stufen": {
+    "E3a": "dreiwertig",
+    "E3b": "dreiwertig"
+   },
+   "g4_ungueltig": 2,
+   "ablauf_status": "abgeschlossen",
+   "halte": [],
+   "wiederaufnahmen": 0,
+   "endgueltig": null,
+   "bezugswechsel": 0,
+   "zusatzlaeufe": {
+    "bezugslauf": 0,
+    "wiederaufnahme_kontrolle": 0,
+    "aufwaermen_nach_halt": 0,
+    "aufwaermen_tagesbeginn": 1
+   },
+   "laufzeit_s": {
+    "ablauf": 4.985,
+    "ap12_stufe2": 0.866
+   }
+  },
+  "N01-V1G0/202": {
+   "H1": "bestätigt",
+   "H1_grund": null,
+   "H2": "bestätigt",
+   "H3": "bestätigt",
+   "H4": "bestätigt",
+   "E3": "unbestimmt",
+   "E3_stufen": {
+    "E3a": "dreiwertig",
+    "E3b": "dreiwertig"
+   },
+   "g4_ungueltig": 2,
+   "ablauf_status": "abgeschlossen",
+   "halte": [],
+   "wiederaufnahmen": 0,
+   "endgueltig": null,
+   "bezugswechsel": 0,
+   "zusatzlaeufe": {
+    "bezugslauf": 0,
+    "wiederaufnahme_kontrolle": 0,
+    "aufwaermen_nach_halt": 0,
+    "aufwaermen_tagesbeginn": 1
+   },
+   "laufzeit_s": {
+    "ablauf": 3.5,
+    "ap12_stufe2": 0.898
+   }
+  },
+  "A04-R4/203": {
+   "H1": "falsifiziert",
+   "H1_grund": null,
+   "H2": "bestätigt",
+   "H3": "nicht entscheidbar",
+   "H4": "bestätigt",
+   "E3": "unbestimmt",
+   "E3_stufen": {
+    "E3a": "dreiwertig",
+    "E3b": "dreiwertig"
+   },
+   "g4_ungueltig": 1,
+   "ablauf_status": "abgeschlossen",
+   "halte": [],
+   "wiederaufnahmen": 0,
+   "endgueltig": null,
+   "bezugswechsel": 0,
+   "zusatzlaeufe": {
+    "bezugslauf": 0,
+    "wiederaufnahme_kontrolle": 0,
+    "aufwaermen_nach_halt": 0,
+    "aufwaermen_tagesbeginn": 1
+   },
+   "laufzeit_s": {
+    "ablauf": 3.652,
+    "ap12_stufe2": 0.744
+   }
+  },
+  "S02-kontrolllauf/204": {
+   "H1": "nicht entscheidbar",
+   "H1_grund": "Datenlage",
+   "H2": "nicht entscheidbar",
+   "H3": "nicht entscheidbar",
+   "H4": "bestätigt",
+   "E3": "unbestimmt",
+   "E3_stufen": {
+    "E3a": "dreiwertig",
+    "E3b": "dreiwertig"
+   },
+   "g4_ungueltig": 3,
+   "ablauf_status": "abgeschlossen",
+   "halte": [
+    "S2"
+   ],
+   "wiederaufnahmen": 1,
+   "endgueltig": null,
+   "bezugswechsel": 0,
+   "zusatzlaeufe": {
+    "bezugslauf": 0,
+    "wiederaufnahme_kontrolle": 4,
+    "aufwaermen_nach_halt": 0,
+    "aufwaermen_tagesbeginn": 1
+   },
+   "laufzeit_s": {
+    "ablauf": 4.258,
+    "ap12_stufe2": 0.234
+   }
+  },
+  "S01a-liftoff/205": {
+   "H1": "nicht entscheidbar",
+   "H1_grund": "Datenlage",
+   "H2": "nicht entscheidbar",
+   "H3": "nicht entscheidbar",
+   "H4": "nicht entscheidbar",
+   "E3": null,
+   "E3_stufen": {},
+   "g4_ungueltig": 0,
+   "ablauf_status": "abgebrochen",
+   "halte": [
+    "S2",
+    "S2"
+   ],
+   "wiederaufnahmen": 1,
+   "endgueltig": "endgültig: nicht fortsetzbar (S2: zweites S2 ohne festgestellten Apparaturfehler)",
+   "bezugswechsel": 0,
+   "zusatzlaeufe": {
+    "bezugslauf": 0,
+    "wiederaufnahme_kontrolle": 4,
+    "aufwaermen_nach_halt": 0,
+    "aufwaermen_tagesbeginn": 3
+   },
+   "laufzeit_s": {
+    "ablauf": 6.753,
+    "ap12_stufe2": 0.121
+   }
+  }
+ },
+ "ebene_z": {
+  "status": "abgeschlossen",
+  "versuche": 87,
+  "fuenftelzeiger": true,
+  "verarbeitung": {
+   "stufe1-0.2": 249
+  }
+ },
+ "laufzeit_s": 104.6,
+ "lesart": "je Fall eine Kampagne; Ausgänge sind Beispiele, keine Raten",
+ "code_version": {
+  "paket": "0.1.0",
+  "git": "ff3123d54354d6ada9ab351fea00ebc7f6f2f176+geändert"
+ },
+ "umgebung": {
+  "python": "3.13.16",
+  "numpy": "2.5.3",
+  "threads": {
+   "OMP_NUM_THREADS": "1",
+   "OPENBLAS_NUM_THREADS": "1",
+   "MKL_NUM_THREADS": "1"
+  }
+ }
+}

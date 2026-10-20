@@ -1,0 +1,9 @@
+S120 soll                 N01-A4     : MAD 1.643 mN; v2-Schwelle Mittel 1.921; P(|D_F|>3σ_v2) = 0.51 %, mit D_N (gezählt 0.73 %) 1.23 %; gezählt v2 30/960 = 3.12 %; P(|D_F| > 3·MAD) = 0.89 %
+S120 Phase (Versatz + δ)  N01-A4     : MAD 2.118 mN; v2-Schwelle Mittel 1.921; P(|D_F|>3σ_v2) = 1.95 %, mit D_N (gezählt 0.73 %) 2.67 %; gezählt v2 30/960 = 3.12 %; P(|D_F| > 3·MAD) = 0.82 %
+S120 voll L1              N01-A4     : MAD 2.248 mN; v2-Schwelle Mittel 1.921; P(|D_F|>3σ_v2) = 2.51 %, mit D_N (gezählt 0.73 %) 3.22 %; gezählt v2 30/960 = 3.12 %; P(|D_F| > 3·MAD) = 0.75 %
+S118 soll                 N01-A4     : MAD 3.177 mN; v2-Schwelle Mittel 3.179; P(|D_F|>3σ_v2) = 0.31 %, mit D_N (gezählt 1.04 %) 1.35 %; gezählt v2 13/960 = 1.35 %; P(|D_F| > 3·MAD) = 0.29 %
+S118 Phase (Versatz + δ)  N01-A4     : MAD 3.176 mN; v2-Schwelle Mittel 3.179; P(|D_F|>3σ_v2) = 0.29 %, mit D_N (gezählt 1.04 %) 1.33 %; gezählt v2 13/960 = 1.35 %; P(|D_F| > 3·MAD) = 0.27 %
+S118 voll L1              N01-A4     : MAD 3.165 mN; v2-Schwelle Mittel 3.179; P(|D_F|>3σ_v2) = 0.27 %, mit D_N (gezählt 1.04 %) 1.31 %; gezählt v2 13/960 = 1.35 %; P(|D_F| > 3·MAD) = 0.26 %
+S100 soll                 N01-A4     : MAD 1.953 mN; v2-Schwelle Mittel 1.872; P(|D_F|>3σ_v2) = 0.64 %, mit D_N (gezählt 0.94 %) 1.57 %; gezählt v2 12/960 = 1.25 %; P(|D_F| > 3·MAD) = 0.26 %
+S100 Phase (Versatz + δ)  N01-A4     : MAD 1.953 mN; v2-Schwelle Mittel 1.872; P(|D_F|>3σ_v2) = 0.68 %, mit D_N (gezählt 0.94 %) 1.61 %; gezählt v2 12/960 = 1.25 %; P(|D_F| > 3·MAD) = 0.28 %
+S100 voll L1              N01-A4     : MAD 1.954 mN; v2-Schwelle Mittel 1.872; P(|D_F|>3σ_v2) = 0.67 %, mit D_N (gezählt 0.94 %) 1.60 %; gezählt v2 12/960 = 1.25 %; P(|D_F| > 3·MAD) = 0.28 %
