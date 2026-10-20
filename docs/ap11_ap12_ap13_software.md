@@ -1,11 +1,14 @@
 # AP-11 bis AP-13: Anpassung, Auswertung und synthetischer Pipelinetest — erste Softwarestufe
 
-Stand 16.10.2026, mit den Korrekturen A–E vom selben Tag (Abschnitt 1a) und der k-Konsistenz mit dem Ablauf der Phase 1
-vom 17.10.2026 (Abschnitt 1b) · Basis `a1c9953` (`main` nach PR #19) · Paket [`code/pcmms_auswertung/`](../code/pcmms_auswertung/)
+Stand 16.10.2026, mit den Korrekturen A–E vom selben Tag (Abschnitt 1a), der k-Konsistenz mit dem Ablauf der Phase 1
+vom 17.10.2026 (Abschnitt 1b), den Korrekturen vom 18.10.2026 (Abschnitt 1c) und dem Regelstand 2026-11 vom 20.10.2026
+(Abschnitt 1d) · Basis `a1c9953` (`main` nach PR #19) · Paket [`code/pcmms_auswertung/`](../code/pcmms_auswertung/)
 (Code MIT, dieses Dokument CC BY 4.0) · Umgebung der Prüfläufe: Python 3.13.16, NumPy 2.5.3, SciPy 1.18.1, 4 Kerne.
 *Nur Software und Simulation.* Es gibt keine Messdaten, keine Hardwarewahl, keine Festlegung offener Regeln und kein
 ausgefülltes Teil B; synthetische Kennungen beginnen mit `SYNTH-` und behaupten keine Registrierung. Die
-Präregistrierung, A0, Tabelle F, das Arbeitspapier v2.5 und das Formelverzeichnis v2.8 sind unverändert.
+Präregistrierung, A0, Tabelle F, das Arbeitspapier v2.5 und das Formelverzeichnis v2.8 sind bis zum Stand vom
+18.10.2026 unverändert; der Regelstand 2026-11 (Abschnitt 1d) ändert Normtext der Präregistrierung als
+Arbeitsfestlegungen des Autors vom 20.10.2026 (A0).
 
 Begleitdokumente: [Schnittstellen](ap11_ap12_ap13_schnittstellen.md) (Formate, Trennstelle, Zufallsströme,
 Ausgabestruktur), [Regelmatrix](ap11_ap12_ap13_regelmatrix.md) (jede Regel mit Fundstelle, Status und Wert, aus dem
@@ -14,6 +17,11 @@ Prüfstand erzeugt), Plan [AP-13](plan_ap13_pipelinetest.md) mit Vermerk vom 16.
 
 ## Kurzfassung
 
+- **Regelstand 2026-11** (20.10.2026, Abschnitt 1d): Ablauf ablauf-4, P0.7-Anordnung, G4 mit B+ und k(n), simulierte
+  Wiederaufnahme, Bezugsmengen G/A mit Nachziehen, Reservebedingung 0,95, E3 nach Option B, Laufgrößen- und
+  Strukturmodell aus Phase 0 für Planung und Teil B; implementiert und softwaregetestet, an kleinen Beispielen
+  untersucht, **nicht statistisch kalibriert**: Die große Kalibrierung ist nach Entscheidung des Autors nicht
+  ausgeführt, ein ausführbares Beispiel liegt in [`rechnungen/kalibrierbeispiel/`](../rechnungen/kalibrierbeispiel/README.md).
 - **Ausführbare Kette.** Generator (Ebene Z mit Rohzeitreihen, Ebene H mit Laufzusammenfassungen; Wahrheit getrennt) →
   AP-11 (Kalibrierung aus P0-Daten, Pilotanalyse, Teil B) → AP-12 (Stufe 1, Stufe 2) → Bewertung gegen die Wahrheit,
   aus einer frischen Ausgabestruktur ohne Handarbeit (`kette`) oder in Einzelschritten; dazu Harness-Befehle für
@@ -195,6 +203,67 @@ zeigen und jetzt bestehen ([Bericht](ap13_kmax_wiederholungen_2026-10-17/bericht
   Inhalt und alle Prüfsummen der fünf Prüfkampagnen sind gleich. Die Ergebnisse der Korrekturrunde sind mit
   `ablauf-2` gerechnet und gelten unverändert für `ablauf-3`; ihre Checkpoints passen nicht mehr zum heutigen
   Rechencode, neu gerechnet ist nichts.
+
+## 1d Regelstand 2026-11 vom 20.10.2026 (Gesamtumsetzung a–d, ohne große Kalibrierung)
+
+Auftrag des Autors vom 20.10.2026 auf Grundlage der [Entscheidungsvorlage vom 19.10.2026](entscheidungsvorlage_2026-10-19.md)
+(Abschnitt 9) und ihres [Belegpakets](entscheidungsvorlage_2026-10-19_belege/README.md). Neue Profile `AF-2026-11` und
+`ENTW-2026-11` (Standard `ENTW-2026-11`); `AF/ENTW-2026-10` bleiben bitgleich und historisch (`regeln.ist_historisch`).
+**Die große Kalibrierung ist nach Entscheidung des Autors nicht ausgeführt**; es gibt keine Kalibrierabnahme, und eine
+bestandene Softwareprüfung ersetzt sie nicht. Normtext: Präregistrierung §5.2, §5.4, §6, §8.8, §8.10, §9.1, §9.2, §12,
+A0, A8, A9.2, A9.3, A9.5, A9.11–A9.13 als Arbeitsfestlegungen vom 20.10.2026.
+
+**Geändertes Verhalten unter den Profilen 2026-11** (historische Profile, Prüfsätze und Ergebnisse bis PR #23 unverändert):
+
+| Bereich | bisher (2026-10) | jetzt (2026-11) | Code |
+|---|---|---|---|
+| Ablauf der Phase 1 | `ablauf-3` | `ablauf-4`: R₁ zuerst, R₂/X′/R₃ geschlossen (A1 + Z1); beim Halt entfallen ausstehende Folgeläufe, ein G1-Fall ohne gemessenes X′ erhält nach dem W-Satz eine neue Folge (H1); unvollständige Klammer: S1 nicht prüfbar, keine Sonderwiederholung (K1); Kontrollsatz mit S1–S4 (N5 + N7); Bezugseröffnung nach einem Nullpunkthalt (Rolle `bezugslauf`, `bezugswechsel`); Aufwärmen nur bei Tageswechsel; Offline-Gegenprobe in Stufe 2 | `ablauf.py`, `auswertung._folgen_gegenprobe` |
+| P0.7 | historische Anordnung | höchstens zwölf andere Läufe zwischen zwei Referenzläufen (`Plan.p0_anordnung = 'p07'`) | `generator/kampagne.py` |
+| G4 | Schwelle je Laufart | B+ für Kombinationsläufe (Mischung über die Laufgrößen, Verschiebung ±u(Δδ), Untergrenze 3σ_P), Lⱼ mit k(n₀ⱼ) und gepoolter Varianz; D als Diagnosemodus (`Regelprofil.mit_diagnose`); Fünftelzeiger als optionales Feld der Laufzusammenfassung | `g4.py`, `gueltigkeit.py`, `teil_b.py`, `stufe1.py`, `zusammenfassung.py` |
+| Halte in der Simulation | ein Halt beendet die Kampagne | simulierte Wiederaufnahme fortsetzbarer Halte (W = 3, T_UA aus Teil B, Entwicklungsbeispiel 1800 s); zweites S2 oder erschöpftes W beendet endgültig | `harness/kette.py` |
+| Bezugsmengen | alle Kampagnen | G (alle begonnenen) und A (abgeschlossen, alle Prüfgrößen endlich); c, Prüfrate, b̂, u(b̂), Restbias, H2-Überdeckung über A, P(H1 und H2 bestätigt) mit Nenner G; Nachziehen bis \|A\| = soll_A mit Versuchslimit 1,5·\|A\| | `harness/mengen.py`, `harness/kalibrierung.py` |
+| c bei mehreren Rauschmodellen | gepoolt | Fassung (a): Quantil des Standardmodells, die übrigen als Sensitivität (`c_varianten`, `c_sensitivitaet`) | `harness/kalibrierung.py` |
+| Planung | Reserve r = ⌈n_min·p̂/(1 − p̂)⌉ + 2 | zusätzlich Reservebedingung 0,95 mit r += 1 bis zehnmal, sonst „Reservegrenze“; Zielfunktion aus der Regel; Zeitbilanz nach Termen; Ablauf ablauf-4 als Vorgabe beim Szenariopfad | `harness/planung.py`, `harness/reserve.py` |
+| Planung, Rauschquelle | Szenariomodell × κ(ν_p) | Phase-0-Modell aus dem Aufruf (Strukturmodell an den oberen 80-%-Grenzen je Komponente, gemeinsamer Bodenfaktor, c_B); Szenario nur als ausdrückliches Orakel | `harness/planung.py`, `generator/phase0_modell.py` |
+| Laufgrößen | Pilotstreuungen | Laufgrößenmodell aus Phase 0 (d0) im Pilotskript und in Teil B (`pilot-0.4`, `teil_b-0.4`) | `laufgroessen.py`, `pilot.py`, `teil_b.py` |
+| E3 | Intervallregel (am Schwellenrand nicht gültig) | Option B: m = 43, E3a mit gefaltetem t-Quantil, E3b nach Rice mit κ·λ_max und ν_eff, Rückfall „beschreibend“ je Prüfgröße; Kriterien aus der Prüfsimulation nur bei der normativen Zahl | `e3_grenzen.py`, `auswertung.py`, `teil_b.py` (nr10) |
+
+**Status nach Kategorien.**
+
+| Kategorie | Inhalt |
+|---|---|
+| implementiert und softwaregetestet | Profile und Regeln 2026-11 mit historischer Bitgleichheit (`test_regelstand_2026_11`, Software- und Ablauf-Prüfsatz ablauf-3); ablauf-4 (`test_ablauf4`, 14 Tests, neuer Ablauf-Prüfsatz `tests/fixtures/ap13_ablauf_pruefsatz_ablauf4.json`); G4-Modi, k(n), Pooling, Fünftelzeiger (`test_g4_2026_11`, 10); Wiederaufnahme, Mengen, Nachziehen, Reserve, Zeitbilanz (`test_harness_mengen`, 9; `test_planung_reserve`, 4); E3 Option B (`test_e3_grenzen`, 8; `test_e3_auswertung`, 13); d0–d2 (`test_d_laufgroessen`, 9; `test_d_phase0_modell`, 13; `test_d_planung_phase0`, 9); Kalibrierbeispiel (`test_kalibrierbeispiel`, 5) |
+| an kleinen synthetischen Beispielen untersucht | G4 gepaart an 3 × 3 Kampagnen, End-to-End mit ablauf-4 an 5 Fällen und über Ebene Z ([`rechnungen/regelstand_2026-11/`](../rechnungen/regelstand_2026-11/README.md)); R1-d mit 45 Sätzen, R2-d mit 2 × 2 × (3 + 3), R3-d mit 2 + 2 Kampagnen (unten) |
+| nur als ausführbares Beispiel vorbereitet | normative Kalibrier- und Prüfsimulation mit \|A\| = 1000 je Rolle ([`rechnungen/kalibrierbeispiel/`](../rechnungen/kalibrierbeispiel/README.md): Trockenlauf als Vorgabe, Demonstration „Demonstration, synthetisch, nicht kalibriert“); Auftragslisten R1-d (9 × 1000 Sätze), R2-d, R3-d (`harness/phase0_rechnungen.py`) |
+| nicht statistisch kalibriert | alle Raten und kritischen Werte: Fehlausschlussrate von G4 (Arbeitsziel ≤ 1,5 %), Reservebedingung 0,95, c von H1/H1Z, H2-Überdeckung, E3-Kriterien, Planung mit dem Phase-0-Modell |
+| nicht experimentell geprüft | alles: keine Messdaten, kein Teil B, keine Hardware |
+
+**Teil d in Kleinstgröße** (Endstand der Teilbearbeitung, process_time): R1-d (45 Sätze an N01-A4, N04-laufart,
+N03-ungleich × L0/L2/L4; 19 s): Verhältnis Schätzung/Wahrheit für σ_δ,j, σ_off,j, Jitter und Boden 0,82–1,15 (bei L0
+ist die wahre Amplitudenstreuung 0), Ablehnung der Kohärenzprüfung 0–0,17. R2-d (91 s): Kette läuft, mit 3 Kampagnen
+ohne Aussage. R3-d (27 s; im Gesamtstand für den Phase-0-Haken nachgerechnet, 18 s): Das Szenario-Orakel legt n_min = 18
+fest (P = 1,0); der Phase-0-Haken ergibt P = 0, beide Prüfkampagnen mit H1 „nicht entscheidbar“ (im Gesamtstand Grund
+Graubereich; in der Teilbearbeitung vor B+ Datenlage). Der Rauschbias stammt dabei aus einer einzigen verwertbaren
+Kalibrierkampagne (Restbias 2,1 ± 1,2 bzw. 3,2 ± 0,9 u_c); bei dieser Größe ist die Ursache nicht von der
+Monte-Carlo-Streuung zu trennen. Es ist keine Aussage über die Planung mit dem Phase-0-Modell.
+
+**Grenzen dieses Stands.**
+
+- Kampagnen aus der Phase-0-Modellquelle haben nur den statischen Laufplan (kein Vorrat des Strukturgenerators für
+  den Ablauf). Die Reservebedingung 0,95 ist dort nicht prüfbar; der Planungshaken legt im Regelstand 2026-11 mit dem
+  Phase-0-Modell deshalb keinen Kandidaten fest und berichtet den Kandidaten nach P allein (`kandidat_nur_P`).
+- Nicht umgesetzt: Residuen-Bootstrap (Regel: optional), Einstellung 2 im Phase-0-Modell, Gauß-Modus als Generator,
+  Modellprüfung der E3-Kriterien, Fassung (b) der Zielfunktion.
+- Die Kalibrierung P0.4 ist in den letzten Bits nicht bitreproduzierbar (χ² der Linearität hängt vom
+  `PYTHONHASHSEED` ab, Befund der Teilbearbeitung d); der Bitgleichheitstest von Teil d schließt deshalb die
+  Prüfsummen von Kalibrierung und Pilotausgabe aus. Die Prüfsätze runden auf 12 Stellen und haben in der Endabnahme
+  bestanden; eine Prüfung über verschiedene `PYTHONHASHSEED` ist nicht gemacht.
+- Werkzeug-8-Werte, Prüfstandsraten, K12 und E3-Zähler früherer Stände sind auf den Regelstand 2026-11 nicht
+  übertragbar.
+- Die Stärken der benannten Sensitivitäten und die Regularisierung des Strukturmodells sind technische Regeln mit
+  Vorschlagscharakter (`rauschmodelle.sensitivitaeten`, `p0.strukturmodell`), Festlegung beim Autor.
+- Rechenaufwand neben der Testsuite: etwa 0,4 Kernstunden ([Protokoll](../rechnungen/regelstand_2026-11/README.md)).
+  Die große Kalibrierung, die volle Matrix und große Planungsläufe wurden nicht ausgeführt.
 
 ## 1 Erreichter Umfang
 
