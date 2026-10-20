@@ -50,7 +50,8 @@ Nachrechnung historischer Ergebnisse unverändert):
 - Reihenfolge (A1 + Z1): Löst ein Lauf die Vorprüfung aus, folgt als nächster Lauf R₁; andere von ihm ausgelöste
   Wiederholungen (S3-Wiederholung) folgen danach. Steht mit R₁ ein G1-Verstoß fest, folgen R₂, X′, R₃ als geschlossene
   Folge vor den übrigen sofortigen Wiederholungen; die zuletzt ausgelöste kommt zuerst. Auch ein nach G2–G10 ungültiges
-  Lⱼ-X′ lässt seine Kontrollwiederholung nicht vor R₃ springen. Ein sofortiger Halt hat Vorrang.
+  Lⱼ-X′ lässt seine Kontrollwiederholung nicht vor R₃ springen; was ein R₂ feststellt (G1 offener Läufe), folgt nach
+  dessen R₃. Ein sofortiger Halt hat Vorrang.
 - Halt (H1 + K1): Bei der Wiederaufnahme werden noch ausstehende sofortige Folgeläufe verworfen und einzeln
   protokolliert. Ein G1-Fall, dessen X′ noch nicht gemessen war, wird nach dem Kontrollsatz der Wiederaufnahme einmal als
   neue vollständige Folge R₂, X′, R₃ gemessen. Offene G1-Prüfungen von Läufen vor dem Halt schließt der erste gültige
@@ -435,6 +436,8 @@ class Ablauf:
         z['aufwaermen'].append(n)
         if v['gueltig']:
             self._gueltige_referenz(n)
+            if self.v4:
+                self._bezug_aufwaermen(n)
         if not self.opt.aufwaermen:
             return
         a = z['aufwaermen']
@@ -528,10 +531,11 @@ class Ablauf:
         z['r0'] = n
         if self.v4 and z['bezug_offen'] is not None:
             self._bezug_eroeffnet(n)
+        nach = self._folge_offen(n) if self.v4 else 0      # ablauf-4: nicht zwischen R₂ und X′, R₃ desselben Falls
         if einschuebe:
-            self._vorn(*einschuebe)
+            self._vorn(*einschuebe, nach=nach)
         if einschuebe_nach:
-            self._nach_w_satz(einschuebe_nach)
+            self._nach_w_satz(einschuebe_nach, ab=nach)
 
     def _vor_schluss(self, i):
         """Steht für Versuch i der Schlusskontrollsatz seines Blocks noch bevor?"""
@@ -610,11 +614,20 @@ class Ablauf:
     def _folge_offen(self, n):
         """Zahl der Elemente vorn in der Warteschlange, die zur begonnenen Referenzfolge von Versuch n gehören und vor
         weiteren von n ausgelösten Wiederholungen stehen: ablauf-4 das R₁ der Vorprüfung von n und das R₃ des Falls,
-        wenn n ein X′ ist (A1 + Z1); ablauf-3 nur das R₃ eines X′."""
+        wenn n ein X′ ist (A1 + Z1), sowie X′ und R₃ des Falls, wenn n dessen R₂ ist (oder die nicht reproduzierte
+        Alarmwiederholung, die es ersetzt): Was ein R₂ feststellt (G1 offener Läufe, etwa eines W-Mitglieds vor der
+        neuen Folge nach H1), folgt erst nach R₃ (Z1); ablauf-3 nur das R₃ eines X′."""
         if not self.v4:
             return self._klammer_offen(n)
         v = self._v(n)
         q = self.z['queue']
+        r = self._wurzel(n)
+        if r['rolle'] == 'R2':
+            k = 0
+            while k < min(2, len(q)) and q[k]['rolle'] == ('X_strich', 'R3')[k] \
+                    and q[k].get('bezug_versuch') == r.get('bezug_versuch'):
+                k += 1
+            return k
         k = 0
         while k < len(q) and ((q[k]['rolle'] == 'R1' and q[k].get('bezug_versuch') == v['id']) or
                               (v['rolle'] == 'X_strich' and q[k]['rolle'] == 'R3'
@@ -797,13 +810,18 @@ class Ablauf:
     def _vor_wiederaufnahme(self, i):
         return self.z['w_start'] is not None and i < self.z['w_start']
 
-    def _nach_w_satz(self, elemente):
+    def _nach_w_satz(self, elemente, ab=0):
         """Folge R₂, X′, R₃ aus einer G1-Prüfung von vor dem Halt: hinter das letzte noch ausstehende Element des
-        Kontrollsatzes der Wiederaufnahme (H1)."""
+        Kontrollsatzes der Wiederaufnahme (H1), frühestens an Platz ab (_folge_offen), nie zwischen X′ und R₃: Das X′
+        eines Mitglieds trägt die Kennung des Kontrollsatzes, sein R₃ nicht (Z1, geschlossene Folge)."""
         q = self.z['queue']
         w = self.z['w_aktiv']
         letzte = max((i for i, el in enumerate(q) if str(el['spec'].get('kontrollsatz')) == w), default=-1)
-        q[letzte + 1:letzte + 1] = list(elemente)
+        if 0 <= letzte < len(q) - 1 and q[letzte]['rolle'] == 'X_strich' and q[letzte + 1]['rolle'] == 'R3' \
+                and q[letzte + 1].get('bezug_versuch') == q[letzte].get('bezug_versuch'):
+            letzte += 1
+        pos = max(letzte + 1, ab)
+        q[pos:pos] = list(elemente)
 
     def _bezugslauf(self, n):
         """Gesonderter Referenzlauf der Bezugseröffnung: kein Nullpunktvergleich mit dem verworfenen R₀ (es gibt keinen
@@ -824,19 +842,37 @@ class Ablauf:
         self._notiz(n, f'Bezugslauf ungültig ({", ".join(v["gruende"])}): sofortige Wiederholung {z["bezug_wdh"]}')
         self._vorn(self._einschub(n, 'bezugslauf', f'Bezugseröffnung, Wiederholung {z["bezug_wdh"]}', art='R'))
 
+    def _bezug_eintrag(self, alt, n):
+        return dict(wiederaufnahme=self.z['wiederaufnahmen'], alt=self._v(alt)['id'] if alt is not None else None,
+                    neu=self._v(n)['id'], rolle_neu=self._v(n)['rolle'],
+                    differenz_N=None if alt is None else float(self._wert(n, 'N_mittel') - self._wert(alt, 'N_mittel')),
+                    differenz_zellen=None if alt is None else
+                    np.asarray(self._wert(n, 'N_mittel_zellen') - self._wert(alt, 'N_mittel_zellen'), float).tolist())
+
     def _bezug_eroeffnet(self, n):
+        """Erster gültiger Referenzlauf nach einem Nullpunkthalt: neuer Bezug R₀; die Alarmkette beginnt neu, ob er ein
+        Bezugslauf oder ein Aufwärmlauf (Tageswechsel) ist."""
         z = self.z
-        alt = z['bezug_offen']
-        eintrag = dict(wiederaufnahme=z['wiederaufnahmen'], alt=self._v(alt)['id'] if alt is not None else None,
-                       neu=self._v(n)['id'], rolle_neu=self._v(n)['rolle'],
-                       differenz_N=None if alt is None else float(self._wert(n, 'N_mittel') - self._wert(alt, 'N_mittel')),
-                       differenz_zellen=None if alt is None else
-                       np.asarray(self._wert(n, 'N_mittel_zellen') - self._wert(alt, 'N_mittel_zellen'), float).tolist())
+        eintrag = self._bezug_eintrag(z['bezug_offen'], n)
         z['bezugswechsel'].append(eintrag)
         z['bezug_offen'] = None
+        z['alarmkette'] = 0
         self._notiz(n, f'neuer Bezug R₀ = {eintrag["neu"]} nach Nullpunkthalt (verworfen: {eintrag["alt"]}, '
                        f'Δ⟨N⟩ = {eintrag["differenz_N"]:.6g} N)' if eintrag['differenz_N'] is not None else
                     f'neuer Bezug R₀ = {eintrag["neu"]}')
+
+    def _bezug_aufwaermen(self, n):
+        """A9.12: Ersetzt das Aufwärmen nach einem Tageswechsel den Bezugslauf, ist der letzte gültige Aufwärmlauf
+        Bezug; jeder weitere gültige Aufwärmlauf derselben Folge schreibt den Bezugswechsel fort (neu, Differenz)."""
+        z = self.z
+        bw = z['bezugswechsel'][-1] if z['bezugswechsel'] else None
+        if bw is None or bw['rolle_neu'] != 'aufwaermen' or bw['neu'] == self._v(n)['id'] \
+                or int(bw['neu'][1:]) not in z['aufwaermen']:
+            return
+        neu = self._bezug_eintrag(None if bw['alt'] is None else int(bw['alt'][1:]), n)
+        bw.update({k: neu[k] for k in ('neu', 'rolle_neu', 'differenz_N', 'differenz_zellen')})
+        self._notiz(n, f'Bezug R₀ = {bw["neu"]} fortgeschrieben (letzter gültiger Aufwärmlauf; verworfen: {bw["alt"]}'
+                    + (f', Δ⟨N⟩ = {bw["differenz_N"]:.6g} N)' if bw['differenz_N'] is not None else ')'))
 
     def _wiederaufnahme_protokoll(self, erfolgreich, grund):
         z = self.z
@@ -1112,8 +1148,7 @@ def bericht(a):
                 bezugswechsel=copy.deepcopy(z['bezugswechsel']), verworfen=copy.deepcopy(z['verworfen']),
                 zusatzlaeufe=dict(bezugslauf=rollen.get('bezugslauf', 0),
                                   wiederaufnahme_kontrolle=rollen.get('wiederaufnahme_kontrolle', 0),
-                                  aufwaermen_nach_halt=sum(1 for v in vs if v['rolle'] == 'aufwaermen'
-                                                           and 'Wiederaufnahme' in v['anlass'])),
+                                  **_aufwaermen_zusatz(vs)),
                 halt_dauer_s=sum(w['dauer_halt_s'] for w in z['protokoll_wiederaufnahmen']),
                 messtage_ist=sorted({v['messtag_ist'] for v in vs}))
            if a.v4 else {}))
@@ -1126,6 +1161,24 @@ def speichern(pfad, a, kennung='SYNTH-ABLAUFSTAND'):
 
 def laden(pfad):
     return formate.lies_objekt(pfad, 'ablaufstand')[1]
+
+
+def _aufwaermen_zusatz(vs):
+    """ablauf-4: zusätzliche (ungeplante) Aufwärmläufe nach dem Anfang ihrer Folge (über bezug_versuch an den
+    vorangehenden Aufwärmlauf gekettet, §6): nach einer Wiederaufnahme mit Tageswechsel (erster Lauf aus fortsetzen,
+    Anlass „Wiederaufnahme“) oder am Beginn eines Messtags (geplanter Aufwärmlauf)."""
+    out = dict(aufwaermen_nach_halt=0, aufwaermen_tagesbeginn=0)
+    for v in vs:
+        if v['rolle'] != 'aufwaermen' or v['geplant']:
+            continue
+        w = v
+        while not w['geplant'] and w.get('bezug_versuch') and vs[int(w['bezug_versuch'][1:])]['rolle'] == 'aufwaermen':
+            w = vs[int(w['bezug_versuch'][1:])]
+        if w['geplant']:
+            out['aufwaermen_tagesbeginn'] += 1
+        elif 'Wiederaufnahme' in w['anlass']:
+            out['aufwaermen_nach_halt'] += 1
+    return out
 
 
 def _gueltig_je_schnittpunkt(geplant, auswahl):

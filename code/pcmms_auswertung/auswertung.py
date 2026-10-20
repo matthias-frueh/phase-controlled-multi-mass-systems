@@ -124,17 +124,47 @@ def _x_strich_gegenprobe(t1, pr, v4=False):
         raise formate.FormatFehler('X′ offline ≠ Ablauf: ' + '; '.join(abw[:5]))
 
 
+def _w_satz_ende(t1, V, pos, h, ks):
+    """Ende des Kontrollsatzes ks einer Wiederaufnahme nach Versuch h, offline wie im Ablauf: der erste Versuch mit der
+    Kennung ks, nach dem kein Mitglied mehr aussteht und kein später gemessener Versuch mit der Kennung ks schon
+    ausgelöst war. Eine Kontroll- oder S3-Wiederholung löst ihr Lauf aus, ein X′ der gültige Referenzlauf, der den
+    G1-Verstoß seines Falls feststellt (der erste nach dem Fall); ein erst nach dem Ende ausgelöstes X′ eines Mitglieds
+    verlängert den Kontrollsatz nicht. None ohne Versuch mit der Kennung ks."""
+    W = [j for j in range(h + 1, len(V)) if V[j].get('kontrollsatz') == ks]
+
+    def ausloeser(j):
+        v = V[j]
+        if v.get('rolle') == 'wiederaufnahme_kontrolle':
+            return h
+        if v.get('rolle') == 'X_strich':
+            i = pos.get(v.get('bezug_versuch'), h)
+            return next((k for k in range(i + 1, j) if t1.koepfe[k]['laufart'] == 'R' and _online_gueltig(V[k])), h)
+        return pos.get(v.get('bezug_versuch'), h)
+    return next((m for m in W if all(ausloeser(j) > m for j in W if j > m)), None)
+
+
 def _folgen_gegenprobe(t1, abl):
-    """ablauf-4 offline: R₁ folgt unmittelbar auf seinen Lauf (also nie über eine Unterbrechung); nach einem Halt beginnt
-    die Wiederaufnahme mit dem Aufwärmen (Tageswechsel), dem Bezugslauf (Nullpunkthalt) oder dem Kontrollsatz; R₂, X′
-    und R₃ zu einem Lauf von vor der Wiederaufnahme kommen erst nach deren Kontrollsatz (verworfene Folgeläufe und neue
-    Folge, H1); jeder Bezugswechsel nennt einen gültigen Referenzlauf ohne Nullpunktalarm als neuen Bezug."""
+    """ablauf-4 offline: R₁ folgt unmittelbar auf seinen Lauf (also nie über eine Unterbrechung); auf R₂ folgt (nach
+    nicht reproduzierten Alarmwiederholungen von R₂) das X′ desselben Falls, außer bei einem Halt (Z1, geschlossene
+    Folge); nach einem Halt beginnt die Wiederaufnahme mit dem Aufwärmen (Tageswechsel), dem Bezugslauf (Nullpunkthalt)
+    oder dem Kontrollsatz; R₂, X′ und R₃ zu einem Lauf von vor der Wiederaufnahme kommen erst nach dem Ende von deren
+    Kontrollsatz (_w_satz_ende; verworfene Folgeläufe und neue Folge, H1); jeder Bezugswechsel nennt einen gültigen
+    Referenzlauf ohne Nullpunktalarm als neuen Bezug."""
     V = [k['versuch'] for k in t1.koepfe]
     pos = {v['id']: i for i, v in enumerate(V)}
     abw = []
     for i, v in enumerate(V):
         if v.get('rolle') == 'R1' and (i == 0 or V[i - 1]['id'] != v.get('bezug_versuch')):
             abw.append(f'{v["id"]}: R₁ folgt nicht unmittelbar auf {v.get("bezug_versuch")}')
+        if v.get('rolle') == 'R2':
+            j = i + 1
+            while j < len(V) and V[j].get('rolle') == 'alarmwiederholung' \
+                    and V[j].get('bezug_versuch') == V[j - 1]['id']:
+                j += 1
+            if j < len(V) and not V[j - 1].get('halt') and (V[j].get('rolle') != 'X_strich'
+                                                            or V[j].get('bezug_versuch') != v.get('bezug_versuch')):
+                abw.append(f'{v["id"]}: auf R₂ folgt {V[j]["id"]} ({V[j].get("rolle")}), nicht X′ des Falls '
+                           f'{v.get("bezug_versuch")}')
     for w in abl.get('wiederaufnahmen') or []:
         h = pos.get(w.get('nach_versuch'))
         if h is None or h + 1 >= len(V):
@@ -144,11 +174,11 @@ def _folgen_gegenprobe(t1, abl):
         if V[h + 1].get('rolle') != erwartet:
             abw.append(f'Wiederaufnahme {w["nummer"]}: erster Versuch {V[h + 1]["id"]} ({V[h + 1].get("rolle")}), '
                        f'erwartet {erwartet}')
-        ks = [j for j, v in enumerate(V) if v.get('kontrollsatz') == w['kontrollsatz']]
+        ende = _w_satz_ende(t1, V, pos, h, w['kontrollsatz'])
         for j in range(h + 1, len(V)):
             v = V[j]
             if v.get('rolle') in ('R2', 'X_strich', 'R3') and pos.get(v.get('bezug_versuch'), len(V)) <= h \
-                    and ks and j < ks[-1]:
+                    and ende is not None and j < ende:
                 abw.append(f'{v["id"]}: {v["rolle"]} zu {v["bezug_versuch"]} vor dem Ende des Kontrollsatzes '
                            f'{w["kontrollsatz"]}')
     for b in abl.get('bezugswechsel') or []:

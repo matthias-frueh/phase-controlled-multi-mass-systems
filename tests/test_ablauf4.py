@@ -7,7 +7,8 @@ Monte-Carlo-Raten."""
 import numpy as np
 import pytest
 
-from pcmms_auswertung import ablauf, auswertung, formate, gueltigkeit
+from pcmms_auswertung import ablauf, auswertung, formate, gueltigkeit, regeln
+from pcmms_auswertung.harness import reserve
 from test_ap13_ablauf import EREIGNIS, S3, SW, FesteZiehung, Skript, _regel_verschachtelt, nach_id, plan_klein, versuche
 
 OHNE_AUFWAERMEN = ablauf.Ablaufoptionen(aufwaermen=False)
@@ -415,6 +416,163 @@ def _teil_fortsetzen(a, ereignis, bis):
         a.fortsetzen(ereignis)
     finally:
         a.ausfuehren = orig
+
+
+# ── Folgen nach der Wiederaufnahme, Bezug, Alarmkette und Zeitbilanz ─────────────────────────────────
+def test_aufgeschobene_folge_steht_hinter_r3_der_folge_eines_w_mitglieds():
+    """H1 + Z1: S100 weicht −0,0099 N ab (keine Vorprüfung), S102 hält mit S2 an (kein Nullpunkthalt); G1 von S100 ist
+    beim Halt offen. Im W-Satz [L₁, R] verletzt L₁ G1 ohne Vorprüfung, das R des W-Satzes schließt beide Prüfungen. Die
+    sofortige Folge R₂, X′, R₃ von L₁ (X′ trägt die Kennung W1) bleibt geschlossen; die aufgeschobene Folge von S100
+    kommt danach, nicht zwischen X′ und R₃."""
+    def regel(s, v):
+        if s['block'] == 1 and v['rolle'] == 'konfiguration':
+            if s['konfiguration']['id'] == 'S100':
+                return dict(dN=-0.0099)
+            if s['konfiguration']['id'] == 'S102':
+                return dict(G6=True)
+        if v['rolle'] == 'wiederaufnahme_kontrolle':
+            return dict(dN=-0.0099 if s['laufart'] == 'L' else 0.003)
+    a = lauf(regel, rng=Umgekehrt(0))
+    assert a.z['halt']['regel'] == 'S2' and not a.z['halt']['nullpunkt']
+    wieder(a, nach=10.0)
+    vs = versuche(a)
+    s100 = nach_id(a, 'S100', 1)[0]
+    w = [i for i, v in enumerate(vs) if v['rolle'] == 'wiederaufnahme_kontrolle']
+    l1 = vs[w[0]]
+    assert [vs[i]['konfiguration'] for i in w] == ['L1', 'R'] and s100['g1'] is True and l1['g1'] is True
+    folge = vs[w[-1] + 1:w[-1] + 7]
+    assert [(v['rolle'], v['bezug_versuch']) for v in folge] == [
+        ('R2', l1['id']), ('X_strich', l1['id']), ('R3', l1['id']),
+        ('R2', s100['id']), ('X_strich', s100['id']), ('R3', s100['id'])]
+    assert all(v['g1_klammer']['vorgesehen'] for v in folge if v['rolle'] == 'X_strich')
+    assert a.status == 'abgeschlossen' and a.bericht()['auswahl']['S100|1']['status'] == 'ersetzt'
+    offline(a)
+
+
+def test_sofortfolge_eines_nachlaufenden_w_lj_unterbricht_die_neue_folge_nicht():
+    """Z1 + H1: Nullpunkthalt an R₂ von S102, die neue Folge R₂, X′, R₃ steht hinter dem W-Satz [R, L₁]. L₁ weicht
+    −0,0099 N ab (keine Vorprüfung), das neue R₂ +0,003 N (kein Alarm): Der G1-Verstoß von L₁ steht erst mit dem neuen
+    R₂ fest, nach dem Ende des Kontrollsatzes. Seine Folge kommt nach dem R₃ der neuen Folge, deren Klammer vorgesehen
+    bleibt. Offline verlängert dieses später ausgelöste X′ den Kontrollsatz nicht; die alte Reihenfolge (Folge von L₁
+    zwischen R₂ und X′ der neuen Folge) erkennt die Gegenprobe."""
+    regel0, zustand = _regel_nullpunkthalt()
+
+    def regel(s, v):
+        c = dict(regel0(s, v) or {})
+        if zustand['halt'] is not None and s['t_start'] >= zustand['halt']:
+            if v['rolle'] == 'wiederaufnahme_kontrolle' and s['laufart'] == 'L':
+                c['dN'] -= 0.0099
+            if v['rolle'] == 'R2' and 'neue Folge' in v['anlass']:
+                c['dN'] += 0.003
+        return c
+    a = lauf(regel, rng=FesteZiehung(0))
+    zustand['halt'] = a.z['halt']['t']
+    wieder(a)
+    vs, r = versuche(a), rollen(a)
+    x = nach_id(a, 'S102', 1)[0]
+    w = [i for i, v in enumerate(vs) if v['rolle'] == 'wiederaufnahme_kontrolle']
+    l1 = vs[w[-1]]
+    assert [vs[i]['konfiguration'] for i in w] == ['R', 'L1'] and l1['g1'] is True and r[w[-1] + 1] != 'R1'
+    folge = vs[w[-1] + 1:w[-1] + 7]
+    assert [(v['rolle'], v['bezug_versuch']) for v in folge] == [
+        ('R2', x['id']), ('X_strich', x['id']), ('R3', x['id']),
+        ('R2', l1['id']), ('X_strich', l1['id']), ('R3', l1['id'])]
+    assert l1['g1_bezug'][1] == folge[0]['id']
+    assert all(v['g1_klammer']['vorgesehen'] and v.get('s1') is None for v in folge if v['rolle'] == 'X_strich')
+    assert a.status == 'abgeschlossen' and a.kurz()['wiederaufnahmen'][0]['ende_versuch'] == l1['id']
+    t, _ = offline(a)
+    i = w[-1] + 1
+    k = t.koepfe[i:i + 6]
+    t.koepfe[i:i + 6] = [k[0], k[3], k[4], k[5], k[1], k[2]]
+    with pytest.raises(formate.FormatFehler, match='nicht X′ des Falls'):
+        auswertung._folgen_gegenprobe(t, a.kurz())
+
+
+def _regel_aufwaermen_nach_halt():
+    """Nullpunkthalt wie _regel_nullpunkthalt; nach dem Halt drei Aufwärmläufe bis zum Kriterium: +0,03 N, +0,02 N
+    (|Δ⟨N⟩| > σ̂_ref), +0,0205 N (|Δ⟨N⟩| < σ̂_ref)."""
+    regel0, zustand = _regel_nullpunkthalt()
+    folge = iter((0.03, 0.02, 0.0205))
+
+    def regel(s, v):
+        if zustand['halt'] is not None and v['rolle'] == 'aufwaermen' and s['t_start'] >= zustand['halt']:
+            return dict(dN=next(folge))
+        return regel0(s, v)
+    return regel, zustand
+
+
+def test_bezugswechsel_nennt_den_letzten_gueltigen_aufwaermlauf():
+    """A9.12: Bei einem Tageswechsel ist der letzte gültige Aufwärmlauf Bezug; der Bezugswechsel nennt ihn und die
+    Differenz gegen das verworfene R₀, nicht den ersten Aufwärmlauf."""
+    regel, zustand = _regel_aufwaermen_nach_halt()
+    a = lauf(regel, optionen=ablauf.Ablaufoptionen(), rng=FesteZiehung(0))
+    r0_alt = a.z['r0']
+    zustand['halt'] = a.z['halt']['t']
+    wieder(a, nach=3600.0, tageswechsel=True)
+    vs, r = versuche(a), rollen(a)
+    h = next(i for i, v in enumerate(vs) if v.get('halt') == 'S1')
+    assert r[h + 1:h + 5] == ['aufwaermen'] * 3 + ['wiederaufnahme_kontrolle']
+    bw = a.kurz()['bezugswechsel']
+    assert len(bw) == 1 and bw[0]['alt'] == vs[r0_alt]['id'] and bw[0]['neu'] == vs[h + 3]['id']
+    assert bw[0]['rolle_neu'] == 'aufwaermen' and bw[0]['differenz_N'] == pytest.approx(0.0205, abs=1e-12)
+    assert bw[0]['differenz_zellen'] == pytest.approx([0.0205 / 3] * 3, abs=1e-12)
+    assert a.bericht()['bezugswechsel'] == bw and a.status == 'abgeschlossen'
+    offline(a)
+
+
+def test_alarmkette_wird_auch_bei_bezugseroeffnung_ueber_das_aufwaermen_zurueckgesetzt():
+    """Halt an der technischen Grenze der Alarmkette (Referenzlauf der Blockmitte, abwechselnd nur Summe und nur
+    Zellen): Nullpunkthalt. Nach der Wiederaufnahme löst L₁ des W-Satzes die Vorprüfung aus, sein R₁ zeigt einen
+    einzelnen Alarm: sofortige Wiederholung (§8.8), mit Bezugslauf (derselbe Tag) wie mit Aufwärmlauf (Tageswechsel)."""
+    for tw in (False, True):
+        halt = dict(t=None)
+
+        def regel(s, v, halt=halt):
+            if halt['t'] is None:
+                if v['rolle'] in ('referenz_block', 'alarmwiederholung'):
+                    if 'Summe' in (v.get('alarm_vor') or []):
+                        return dict(dN=0.012, dN_summe=-0.012)          # nur die Zellen über der Alarmschwelle
+                    return dict(dN_summe=0.005)                         # nur die Summe
+                return None
+            if v['rolle'] == 'wiederaufnahme_kontrolle' and s['laufart'] == 'L':
+                return dict(dN=0.015)
+            if v['rolle'] == 'R1':
+                return dict(dN_summe=0.005)
+        a = lauf(regel, plan=plan_klein(mitte=1), rng=Umgekehrt(0))
+        assert a.z['halt']['regel'] == 'Nullpunktalarm' and a.z['halt']['nullpunkt']
+        assert a.z['alarmkette'] == ablauf.GRENZE_ALARMKETTE + 1
+        halt['t'] = a.z['halt']['t']
+        wieder(a, nach=3600.0 if tw else 600.0, tageswechsel=tw)
+        vs, r = versuche(a), rollen(a)
+        h = next(i for i, v in enumerate(vs) if v.get('halt'))
+        assert r[h + 1] == ('aufwaermen' if tw else 'bezugslauf') and vs[h + 1]['gueltig']
+        i = r.index('R1')
+        assert vs[i]['alarm'] == ['Summe'] and r[i + 1] == 'alarmwiederholung' and not vs[i].get('halt'), tw
+        assert a.status == 'abgeschlossen' and a.kurz()['wiederaufnahmen'][0]['erfolgreich']
+        offline(a)
+
+
+def test_zusaetzliche_aufwaermlaeufe_im_zaehler_und_in_der_zeitbilanz():
+    """Alle zusätzlichen Aufwärmläufe nach einer Wiederaufnahme mit Tageswechsel zählen unter aufwaermen_nach_halt, die
+    eingeschobenen am Beginn eines Messtags unter aufwaermen_tagesbeginn; die Zeitbilanz führt beide unter „Aufwärmen
+    bei Tageswechsel“, nicht unter „Wiederholungen“. Die Summe der Terme bleibt die Laufzeit aller Versuche."""
+    formel = regeln.profil('ENTW-2026-11').wert('planung.zeitformel')
+    regel, zustand = _regel_aufwaermen_nach_halt()
+    a = lauf(regel, optionen=ablauf.Ablaufoptionen(), rng=FesteZiehung(0))
+    zustand['halt'] = a.z['halt']['t']
+    wieder(a, nach=3600.0, tageswechsel=True)
+    ohne_halt = lauf(plan=plan_klein(tage=((3,), (2,))), optionen=ablauf.Ablaufoptionen())
+    for x, nach_halt, tagesbeginn, wk in ((a, 3, 1, 2), (ohne_halt, 0, 2, 0)):
+        assert [v['geplant'] for v in versuche(x) if v['rolle'] == 'aufwaermen'].count(False) == nach_halt + tagesbeginn
+        b = x.bericht()
+        assert b['zusatzlaeufe'] == dict(bezugslauf=0, wiederaufnahme_kontrolle=wk, aufwaermen_nach_halt=nach_halt,
+                                         aufwaermen_tagesbeginn=tagesbeginn)
+        lz = b['laufzahl']
+        z = reserve.zeitbilanz([dict(ablauf=ablauf.kurz(b))], 10.0, formel)
+        t = z['terme']
+        assert t['Aufwärmen bei Tageswechsel']['summe_s'] == (nach_halt + tagesbeginn) * 10.0
+        assert t['Wiederholungen']['summe_s'] == (lz['zusaetzlich'] - wk - nach_halt - tagesbeginn) * 10.0
+        assert z['gesamt']['wert'] == pytest.approx(lz['ausgefuehrt'] * 10.0)
 
 
 def test_ablauf_pruefsatz_ablauf4_nachrechenbar():

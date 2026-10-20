@@ -7,8 +7,9 @@ planung.zeitformel, planung.zielfunktion; Präreg §5.3 (c), §5.4, A9.2 (v)).
   bestätigt). Verfehlt ein Kandidat die Bedingung, wird r um eins erhöht, höchstens zusatz_max-mal; danach endet der
   Kandidat mit dem Grund „Reservegrenze“ (kein unbeschränktes Erhöhen).
 - Zeitbilanz (planung.zeitformel): Läufe des Plans, Wiederholungen, Kontrollsatz der Wiederaufnahme, Bezugseröffnung,
-  Ursachenanalyse T_UA und Aufwärmen nach einer Wiederaufnahme mit Tageswechsel, je Term als Mittel über die
-  simulierten Kampagnen mit Zähler und Nenner; daneben die Formel von §5.3 (c).
+  Ursachenanalyse T_UA und Aufwärmen bei Tageswechsel, je Term als Mittel über die simulierten Kampagnen mit Zähler
+  und Nenner; daneben die Formel von §5.3 (c). Zum Aufwärmen gehören alle zusätzlichen Aufwärmläufe nach einer
+  Wiederaufnahme mit Tageswechsel und die am Beginn eines Messtags eingeschobenen (§6), nicht die Wiederholungen.
 - Zielfunktion (planung.zielfunktion): nur Fassung (a) N_K·n_min + 3·n₀ ist umgesetzt; andere Werte sind ein Fehler.
 
 Kleine Proben belegen keine Rate von 0,95; berichtet werden Zähler, Nenner und Standardfehler, kein „Ziel erreicht“
@@ -56,7 +57,9 @@ def bedingung(befunde, n_min, regel):
 
 
 def zeitbilanz(befunde, T_lauf, regel, formel_s=None):
-    """Zeit je simulierter Kampagne nach Termen (Mittel, Zähler/Nenner); Läufe × T_Lauf plus T_UA je Wiederaufnahme."""
+    """Zeit je simulierter Kampagne nach Termen (Mittel, Zähler/Nenner); Läufe × T_Lauf plus T_UA je Wiederaufnahme.
+    Aufwärmen bei Tageswechsel: zusätzliche Aufwärmläufe nach einer Wiederaufnahme mit Tageswechsel und am Beginn eines
+    Messtags (Ablaufbericht zusatzlaeufe); Wiederholungen: die übrigen zusätzlichen Läufe."""
     erwartet = ['Läufe', 'Wiederholungen', 'Kontrollsatz der Wiederaufnahme', 'Bezugseröffnung',
                 'Ursachenanalyse T_UA', 'Aufwärmen bei Tageswechsel']
     if list(regel) != erwartet:
@@ -67,7 +70,8 @@ def zeitbilanz(befunde, T_lauf, regel, formel_s=None):
         lz = ab.get('laufzahl') or {}
         zl = ab.get('zusatzlaeufe') or {}
         w = ab.get('harness_wiederaufnahme') or {}
-        bez, wk, auf = (int(zl.get(x, 0)) for x in ('bezugslauf', 'wiederaufnahme_kontrolle', 'aufwaermen_nach_halt'))
+        bez, wk = (int(zl.get(x, 0)) for x in ('bezugslauf', 'wiederaufnahme_kontrolle'))
+        auf = sum(int(zl.get(x, 0)) for x in ('aufwaermen_nach_halt', 'aufwaermen_tagesbeginn'))
         terme['Läufe'].append(lz.get('geplant_ausgefuehrt', 0) * T_lauf)
         terme['Wiederholungen'].append((lz.get('zusaetzlich', 0) - bez - wk - auf) * T_lauf)
         terme['Kontrollsatz der Wiederaufnahme'].append(wk * T_lauf)
