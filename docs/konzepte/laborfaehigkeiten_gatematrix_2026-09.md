@@ -24,7 +24,9 @@
 >   ε_⊥ definiert das [Arbeitspapier v2.5](../arbeitspapier/PCMMS_Arbeitspapier_v2_5.tex) (Abschnitt „Nachweisschwelle“)
 >   als „maximal zulässige laterale Kraftunwucht an der Auflage“, ohne Zahlenwert; die Präregistrierung v2 führt ε_⊥
 >   nicht. Das ε_⊥ der [Entscheidungsvorlage](../entscheidungsvorlage_2026-10-19.md) (Abschnitt 4.1) ist eine andere
->   Größe (Rauschanteil quer zum Residuum). ε_⊥ bleibt offen.
+>   Größe (Rauschanteil quer zum Residuum). Nur zur Veranschaulichung der Größenordnung, unverbindlich und frei
+>   gewählt: 1 % der Gewichtskraft, ε_⊥ = 0,01·Mg ≈ 0,064 N bei M = 0,650 kg; das begründet keine Ausschlussgrenze.
+>   Der zulässige Wert bleibt offen, bis Querempfindlichkeit und Einkopplung in den Normalkanal geprüft sind.
 > - **Asymmetrieverhältnis:** A = (F_max − Mg)/(Mg − F_min) steht heute in der [README](../../README.md) („Worum es
 >   geht“) und im [Formelverzeichnis v2.8](../formelverzeichnis/README.md) (A_pk, getrennt vom Peak-to-Mean Π_N). Die
 >   Präregistrierung vom Juni 2026 bleibt unverändert; sie nennt das Spitzen-zu-Mittel-Verhältnis, eine andere Größe
