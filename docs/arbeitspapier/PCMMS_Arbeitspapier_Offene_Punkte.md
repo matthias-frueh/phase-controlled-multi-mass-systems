@@ -27,6 +27,17 @@ Historischer Ausgangsstand: 05.09.2026 · Quelle: PCMMS_Dissertation_v2.tex, **9
    Formelverzeichnis v2.7 übernommen und ungeprüft (Anhang C, Punkt 42).
 9. Parameterabgleich: Forschungsrahmen v3_5 (2,2 Hz / 0,80) gegen Simulation
    und Laborplan (10 Hz / 0,65). Nur noch: Forschungsrahmen nachziehen?
+   *Nachtrag 22.10.2026:* Der Forschungsrahmen v3.5
+   ([`forschungsrahmen_v3_5_2026-05.md`](../linie_b/forschungsrahmen_v3_5_2026-05.md))
+   nennt 10 Hz bzw. ≥ 10 Hz (§9.1, §9.2) und T_f/T ≈ 0,8 (Gl. 4), keine 2,2 Hz.
+   Die Angabe 2,2 Hz mit 0,650 kg je Modul (Mg ≈ 19,1 N) stammt aus dem Index
+   der Ablage („00_INDEX“, außerhalb des Repositorys). Das Anforderungsprofil
+   ([`anforderungsprofil_wissenschaftlich_2026-09.md`](../konzepte/anforderungsprofil_wissenschaftlich_2026-09.md),
+   §2.1) beschreibt diesen Parameterkonflikt und verweist zur Auflösung auf den
+   Code: Dort gelten M = 0,650 kg gesamt (drei Module à M/3) und f = 10 Hz
+   (`code/pcmms_v3a_phasen_sweep.py`, [`data/README.md`](../../data/README.md)).
+   Offen bleibt nur, im Forschungsrahmen T_f/T ≈ 0,8 (Vorwärtsanteil) gegen den
+   Halteanteil 0,65 nachzuziehen (Punkt 23).
 10. ~~„Yoshimura et al. 2008" im Messtechnik-Konzept v2 streichen —
     wahrscheinlich Fehlzuschreibung von Wakou/Ochiai/Isobe 2008.~~ **Für das
     Repository geschlossen 03.10.** — Im Repository steht die Angabe nur in

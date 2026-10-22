@@ -2,6 +2,34 @@
 
 *PCMMS · Phase-Controlled Multi-Mass Systems  —  Matthias Früh  ·  ORCID 0009-0005-9984-4207  ·  Mai 2026*
 
+> **Vermerk (22.10.2026).** Originaldatei `PCMMS_Laborplan_Variante2_mittelteuer_Frueh_2026.md`, Stand Mai 2026; hier
+> unverändert bis auf diesen Vermerk. **Nebeninformation; keine Entscheidung, keine Beschaffung.** Variante 2 des
+> Laborplans neben [Variante 1](laborplan_v1_2026-05.md) und [Variante 3](laborplan_v3_2026-05.md); nicht umgesetzt,
+> keine Messdaten. Bezug: AP-01, AP-04, AP-05 und AP-06, alle „noch nicht umgesetzt“
+> ([`../arbeitsplan_status.md`](../arbeitsplan_status.md)). Die Arbeitspakete AP1–AP5 in Abschnitt 12 sind die des Plans,
+> nicht die des Arbeitsplans. Seit Mai 2026 überholt oder eingeschränkt (Parameter, Antrieb, Zielgrößen und Regeln,
+> Messkette und Sicherheit wie im Vermerk zu Variante 1):
+> - **Parameter:** Die Richtwerte (M ≈ 0,65 kg, Mg ≈ 6,4 N, 10 Hz) sind die des Simulations-Referenzsatzes. Der
+>   Auslegungskandidat des Werkzeugs [`../../code/auslegung.py`](../../code/auslegung.py) rechnet mit steifem Kontakt,
+>   drei Modulen à 100 g und 8 mm Hub; Arbeitspunkt, Geometrie und Zellen sind nicht festgelegt (AP-04).
+> - **Antrieb:** Voice-Coil mit Positionsrückführung ist eine Option des Plans; der Antrieb ist offen (AP-01,
+>   Entscheidung des Autors).
+> - **Zielgrößen und Regeln:** Schiefe, Liftoff-Anteil und Spitzen-zu-Mittel-Verhältnis (Abschnitte 2 und 9) sind
+>   durch die Rangfolge nach dem Entwurf der Präregistrierung v2 abgelöst: F_min − ⟨N⟩ und die Harmonischen 1–3 primär,
+>   γ₁ sekundär, A beschreibend, λ explorativ ([`../../README.md`](../../README.md), „Worum es geht“).
+>   Spitzen-zu-Mittel-Verhältnis und Asymmetrieverhältnis sind verschiedene Größen ([`../overview.md`](../overview.md)).
+>   Erfolgs- und Falsifikationskriterium (Abschnitt 10) sind durch die Entscheidungsregeln der
+>   [Präregistrierung v2](../praeregistrierung_v2_entwurf.md) (§8, §9) ersetzt; der „harte Stopp“ bei ⟨N⟩ ≠ Mg
+>   entspricht ihrer Kontrollgröße H0.
+> - **Messkette:** Eine Kraftmessdose (Abschnitt 5) ist der Stand des Plans; AP-06 sieht drei DC-fähige Zellkanäle,
+>   eine Abtastrate nach Anhang A6 der Präregistrierung v2 und eine dynamische Kalibrierung vor; Kanalzahl, Wegkanal
+>   und Abtastrate sind offen (Entscheidung des Autors).
+> - **Sicherheit:** Hüpfzustände mit Stoßspitzen von einigen 100 N sind im Modell des steifen Aufbaus möglich
+>   ([`../einzugsgebiete_v1_kandidat.md`](../einzugsgebiete_v1_kandidat.md)); ein Sicherheitskonzept (AP-05) steht aus.
+> - **Kosten:** Kostenrahmen (Abschnitt 13) und Stückliste sind Schätzungen vom Mai 2026.
+>
+> Lizenz wie der Ordner: CC BY 4.0 ([`../../LICENSE-CC-BY-4.0`](../../LICENSE-CC-BY-4.0)).
+
 ## 1 · Zweck und Messprinzip
 
 Variante 2 verfolgt dasselbe Ziel wie Variante 1 — der Nachweis, dass die relative Phasenlage die Form der Kontaktkraft N(t) eines Mehrmassensystems auf einseitigem Kontakt steuert —, hebt es aber von der *qualitativen* auf die *quantitative* Ebene. Statt nur die drei Regime sichtbar zu machen, wird die Karte φ → (Schiefe, Liftoff, Spitzenverhältnis) zahlenmäßig mit dem Simulationsmodell verglichen.

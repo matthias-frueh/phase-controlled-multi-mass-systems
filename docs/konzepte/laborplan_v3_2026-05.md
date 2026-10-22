@@ -2,6 +2,36 @@
 
 *PCMMS · Phase-Controlled Multi-Mass Systems  —  Matthias Früh  ·  ORCID 0009-0005-9984-4207  ·  Mai 2026*
 
+> **Vermerk (22.10.2026).** Originaldatei `PCMMS_Laborplan_Variante3_teuer_Frueh_2026.md`, Stand Mai 2026; hier
+> unverändert bis auf diesen Vermerk. **Nebeninformation; keine Entscheidung, keine Beschaffung.** Variante 3 des
+> Laborplans neben [Variante 1](laborplan_v1_2026-05.md) und [Variante 2](laborplan_v2_2026-05.md); nicht umgesetzt,
+> keine Messdaten. Bezug: AP-01, AP-04, AP-05 und AP-06, alle „noch nicht umgesetzt“; Experiment B gehört zu Linie B
+> (Stufe S5, AP-28, Status „später“; [`../arbeitsplan_status.md`](../arbeitsplan_status.md)). Die Arbeitspakete AP1–AP5
+> in Abschnitt 13 sind die des Plans, nicht die des Arbeitsplans. Seit Mai 2026 überholt oder eingeschränkt:
+> - **Experiment A:** Es gelten die Punkte des Vermerks zu [Variante 2](laborplan_v2_2026-05.md): Richtwerte des
+>   Simulations-Referenzsatzes, Auslegungskandidat abweichend (AP-04), Antrieb offen (AP-01), Zielgrößen und Regeln
+>   durch die Präregistrierung v2 abgelöst, Messkette AP-06, Sicherheitskonzept AP-05.
+> - **Experiment B, Dichtegesetz (Abschnitte 1, 7, 10, 11):** Die Vorhersage „Drift ∝ ρ“ ist nach den
+>   Linie-B-Kontrollrechnungen eingeschränkt: Die Kraft ist ∝ ρ nur bei festem C_D und fester Bewegung, bei KC ≪ 1 ist
+>   auch das nicht belegt; die stationäre freie Drift ist im rein quadratischen Modell dichteunabhängig, mit linearem
+>   Zusatzwiderstand unterhalb von ρ* ∝ ρ (LB-06 in
+>   [`../../rechnungen/linie_b/PROTOKOLL.md`](../../rechnungen/linie_b/PROTOKOLL.md);
+>   [Gegenprüfung](../../rechnungen/linie_b/verifikation/PROTOKOLL.md);
+>   [Richtungsnotiz v5.2](../linie_b/richtungsnotiz_medienkopplung_2026-09-06_v5_2.md), §4.2). Für einen glatten Träger
+>   ist das quasistationäre Widerstandsgesetz bei KC ≪ 1 nicht gültig; scharfe Kanten sind offen (LB-01, LB-02;
+>   Richtungsnotiz v5.2, §6). Dass der Effekt im
+>   Vakuum ohne Reaktionspartner verschwindet, bleibt Teil der Hypothese ([`../einordnung.md`](../einordnung.md),
+>   „Linie B“).
+> - **Experiment B, Kammer (Abschnitte 7, 9):** Die [Prüfarchitektur](../linie_b/pruefarchitektur_2026-09-01.md) führt die
+>   evakuierbare Kammer als späteren Versuch; Vorrang haben V1 und Linie A (Kopf und Abschnitt 7 dort). Sie nennt
+>   Störmechanismen mit derselben Signatur am Vakuumende: radiometrisch (an beiden Enden gegen null) sowie akustisch
+>   und Kammerwandreflexion (verschwindet im Vakuum, „formal wie H1_fluid“); „Wer nur Vorhandensein und Abwesenheit
+>   misst, kann ihn nicht ausschließen“ (Abschnitt 4 dort). H1_fluid erhält nach dem Entwurf der
+>   [Präregistrierung v2](../praeregistrierung_v2_entwurf.md) (§0) eine eigene Präregistrierung.
+> - **Kosten:** Kostenrahmen (Abschnitt 14) und Stückliste sind Schätzungen vom Mai 2026.
+>
+> Lizenz wie der Ordner: CC BY 4.0 ([`../../LICENSE-CC-BY-4.0`](../../LICENSE-CC-BY-4.0)).
+
 ## 1 · Zweck und Messprinzip
 
 Variante 3 ist die Metrologie-Klasse. Sie bringt die Wellenform-Messung auf rückführbare, quantitative Genauigkeit mit ausgewiesenem Unsicherheitsbudget und erschließt zugleich ein zweites, eigenständiges Experiment. Damit deckt V3 zwei Fragestellungen ab:

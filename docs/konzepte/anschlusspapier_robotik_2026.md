@@ -11,7 +11,7 @@ Matthias Früh · Unabhängige Forschung · ORCID 0009-0005-9984-4207 · Fassung
 > Status „später; Konzept des Messrahmens vorgezogen (11.10.2026)“, [`../arbeitsplan_status.md`](../arbeitsplan_status.md)).
 > Robotik als mögliche nachgelagerte Validierungsebene, nicht als Voraussetzung, führen auch [`../einordnung.md`](../einordnung.md)
 > und [`../zehn_fragen.md`](../zehn_fragen.md) (Frage 8). Seit der Fassung überholt oder offen:
-> - **Baustein 14:** ist historisch und liegt wie Baustein 13 und „Systemarchitektur und Modulhierarchie“ nicht im
+> - **Baustein 14:** liegt wie Baustein 13 und „Systemarchitektur und Modulhierarchie“ nicht im
 >   Repository. „… ist in Baustein 14 als generativer Mechanismus vollständig spezifiziert“ (Abschnitt 1) ist die
 >   Aussage des damaligen Dokuments. Hypothesen, Kontrollen und Entscheidungsregeln stehen heute in der
 >   [Präregistrierung v2](../praeregistrierung_v2_entwurf.md) (Entwicklungsversion); Messkette und Kalibrierplan sind

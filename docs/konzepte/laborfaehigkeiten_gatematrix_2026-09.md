@@ -2,6 +2,54 @@
 
 *Phase-Controlled Multi-Mass Systems — Matthias Früh · ORCID 0009-0005-9984-4207 · Stand September 2026*
 
+> **Vermerk (22.10.2026).** Originaldatei `PCMMS_Laborfaehigkeiten_Gatematrix_Frueh_2026-09.md`, Stand September 2026;
+> hier unverändert bis auf diesen Vermerk. **Nebeninformation; keine Entscheidung, keine Beschaffung.** Vorstufe des
+> [Anforderungsprofils](anforderungsprofil_wissenschaftlich_2026-09.md): Beide führen denselben Fähigkeitskatalog F1–F10
+> und nahezu dieselben Gates G0–G5; das Anforderungsprofil ergänzt Statusmarker, Risikoregister und Deckungsmatrix
+> und verweist Räumliches und Organisatorisches in sein Dokument 2, das nicht im Repository liegt. Eigenständig sind
+> hier Abschnitt 8 (Flächenbedarf je Gate) und Abschnitt 9 (organisatorische Festlegungen mit den Varianten A
+> Partnerlabor, B eigener kleiner Aufbau, C institutionelle Einbettung); diese Wahl betrifft die offene Entscheidung
+> des Autors zu AP-18 (institutionelle Anbindung). Bezug außerdem AP-01 und AP-06; alle drei „noch nicht umgesetzt“
+> ([`../arbeitsplan_status.md`](../arbeitsplan_status.md)). Die ersetzte zonenbasierte Infrastrukturliste („Vorgängerliste“)
+> liegt nicht im Repository. Die Gates sind Begriffe des Dokuments, weder die Stufen S1–S5 des Arbeitsplans noch die
+> Gültigkeitsregeln G1–G10 der Präregistrierung v2 (§9.1). Seit September 2026 überholt oder eingeschränkt:
+> - **Parameterkonflikt (Abschnitt 1.1):** Der vom Dokument geforderte Abgleich mit dem Code ergibt M = 0,650 kg gesamt (drei
+>   Module à M/3) und f = 10 Hz ([`../../code/pcmms_v3a_phasen_sweep.py`](../../code/pcmms_v3a_phasen_sweep.py),
+>   [`../../data/README.md`](../../data/README.md)). Die Angaben 0,650 kg je Modul und 2,2 Hz stammen aus dem Index der
+>   Ablage („00_INDEX“, außerhalb des Repositorys). Für die Apparatur wählt die Präregistrierung v2 f nach §5.3 (§12);
+>   siehe auch den Nachtrag zu Nr. 9 der [Offenen Punkte](../arbeitspapier/PCMMS_Arbeitspapier_Offene_Punkte.md).
+> - **Schwellen:** ε_phys ist im Entwurf der [Präregistrierung v2](../praeregistrierung_v2_entwurf.md) für die
+>   Wellenformgrößen durch standardisierte Residuen, einen Äquivalenztest und einen Mindesteffekttest ersetzt (§8.4,
+>   §8.5); ε_ctrl ist dort mit einer Formel festgelegt (§4, §8.8; [`../werkstattbericht.md`](../werkstattbericht.md)).
+>   ε_⊥ definiert das [Arbeitspapier v2.5](../arbeitspapier/PCMMS_Arbeitspapier_v2_5.tex) (Abschnitt „Nachweisschwelle“)
+>   als „maximal zulässige laterale Kraftunwucht an der Auflage“, ohne Zahlenwert; die Präregistrierung v2 führt ε_⊥
+>   nicht. Das ε_⊥ der [Entscheidungsvorlage](../entscheidungsvorlage_2026-10-19.md) (Abschnitt 4.1) ist eine andere
+>   Größe (Rauschanteil quer zum Residuum). ε_⊥ bleibt offen.
+> - **Asymmetrieverhältnis:** A = (F_max − Mg)/(Mg − F_min) steht heute in der [README](../../README.md) („Worum es
+>   geht“) und im [Formelverzeichnis v2.8](../formelverzeichnis/README.md) (A_pk, getrennt vom Peak-to-Mean Π_N). Die
+>   Präregistrierung vom Juni 2026 bleibt unverändert; sie nennt das Spitzen-zu-Mittel-Verhältnis, eine andere Größe
+>   ([`../overview.md`](../overview.md)). Laborplan V1 und der Mess- und Prüfrahmen tragen die ältere Bezeichnung mit
+>   Vermerk; ein „Messtechnik-Konzept“ liegt nicht im Repository (Nr. 10 der
+>   [Offenen Punkte](../arbeitspapier/PCMMS_Arbeitspapier_Offene_Punkte.md)).
+> - **Zielgrößen:** F_min, Liftoff-Anteil, Schiefe und Asymmetrieverhältnis „primär“ sind durch die Rangfolge nach dem
+>   Entwurf der Präregistrierung v2 abgelöst: F_min − ⟨N⟩ und die Harmonischen 1–3 primär, γ₁ sekundär, A beschreibend,
+>   λ explorativ (README, „Worum es geht“).
+> - **Bereich, Kanäle, Firmware:** Im Modell des steifen Aufbaus sind Stoßspitzen von einigen 100 N möglich
+>   ([`../einzugsgebiete_v1_kandidat.md`](../einzugsgebiete_v1_kandidat.md)); die Nennlast ist offen (AP-05). Kanalzahl,
+>   Abtastrate (Präregistrierung v2, Anhang A6) und dynamische Kalibrierung sind Gegenstand von AP-06. Die vorhandenen
+>   Firmware-Muster gehören zu Demonstratoren und Tischtests mit zwei Aktoren; eine V1-Firmware liegt nicht vor
+>   ([`../../code/firmware/README.md`](../../code/firmware/README.md)).
+> - **Linie B (Abschnitt 6):** Linie B liegt in Stufe S5, AP-28, Status „später“. Eine Proportionalität, die die
+>   ρ-Steigung prüfen könnte, ist nicht abgesichert: Die Kraft ist ∝ ρ nur bei festem C_D und fester Bewegung, bei
+>   KC ≪ 1 ist auch das nicht belegt; die stationäre freie Drift ist im rein quadratischen Modell dichteunabhängig, mit
+>   linearem Zusatzwiderstand unterhalb von ρ* ∝ ρ (LB-02, LB-06 in
+>   [`../../rechnungen/linie_b/PROTOKOLL.md`](../../rechnungen/linie_b/PROTOKOLL.md)); nach der
+>   [Richtungsnotiz v5.2](../linie_b/richtungsnotiz_medienkopplung_2026-09-06_v5_2.md) (§5) ist F̄_C bei unverändertem
+>   Bewegungsverlauf ∝ ρ·C_D(Re) und nur bei konstantem C_D eine Gerade. Das Pendeltest-Protokoll liegt mit Vermerk vor
+>   ([`demonstrator_pendeltest_horizontal_2026-05.md`](demonstrator_pendeltest_horizontal_2026-05.md)).
+>
+> Lizenz wie der Ordner: CC BY 4.0 ([`../../LICENSE-CC-BY-4.0`](../../LICENSE-CC-BY-4.0)).
+
 Ersetzt die zonenbasierte Infrastrukturliste (`PCMMS_Labor_und_Infrastrukturplanung_2026-09.md`).
 
 ---
