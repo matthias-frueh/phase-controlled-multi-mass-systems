@@ -41,12 +41,13 @@ ist mit dem Arbeitspapier v2.4 (Abschnitt 4.8) zurückgezogen. Die alten Gleichu
   Kein Effektanspruch; ⟨N⟩ = M·g als Erhaltungs-Nullgröße. Dokumente, Code und Daten dieses Repositorys gehören
   zu Linie A; ausgenommen sind die als Linie B oder C gekennzeichneten Unterlagen: die Dokumente in
   [`docs/linie_b/`](docs/linie_b/README.md), die Demonstrator-Unterlagen in [`docs/konzepte/`](docs/konzepte/README.md)
-  und [`code/demonstrator/`](code/demonstrator/README.md), die Kontrollrechnungen in
+  und [`code/demonstrator/`](code/demonstrator/README.md), die BLDC- und LRA-Sketche des Ballon-Demonstrators in
+  [`code/firmware/`](code/firmware/README.md), die Kontrollrechnungen in
   [`rechnungen/linie_b/`](rechnungen/linie_b/) und die Notiz zu Linie C (geparkt) in `docs/konzepte/`.
 - **Linie B (optional, separate Apparatur):** gerichtete Nettobewegung durch Impulsübertrag an ein
   umgebendes Medium (Luft); das Medium ist der Reaktionspartner, das Vakuum der Nullfall. Ihre Unterlagen
   liegen gekennzeichnet in [`docs/linie_b/`](docs/linie_b/README.md) (Demonstrator: `docs/konzepte/`,
-  `code/demonstrator/`); Messdaten gibt es nicht.
+  `code/demonstrator/`, BLDC- und LRA-Sketche in `code/firmware/`); Messdaten gibt es nicht.
 
 ## Inhalt des Repositories
 
@@ -69,7 +70,7 @@ ist mit dem Arbeitspapier v2.4 (Abschnitt 4.8) zurückgezogen. Die alten Gleichu
 | [`docs/arbeitsplan_status.md`](docs/arbeitsplan_status.md) | Bearbeitungsstand der Arbeitspakete AP-01 bis AP-30 (vorhanden, vorläufig, in Bearbeitung, noch nicht umgesetzt, später) und offene Entscheidungen des Autors |
 | [`code/`](code/) | Simulations-Engine ([`pcmms_v3a_phasen_sweep.py`](code/pcmms_v3a_phasen_sweep.py)), 2°-Feinsweep ([`finesweep.py`](code/finesweep.py)), analytische Lösung für den liftoff-freien Bereich ([`linear_solver.py`](code/linear_solver.py)), Auslegungswerkzeug für den Arbeitspunkt mit Zellkräften ([`auslegung.py`](code/auslegung.py); Präregistrierung v2 §12, Werkzeug 2), ereignisgenauer Löser mit Einzugsprüfung für Liftoff und Hüpfzustände ([`ereignisloeser.py`](code/ereignisloeser.py)), Attraktorkarten des V1-Kandidaten ([`einzugsgebiete.py`](code/einzugsgebiete.py); Ergebnisse in [`docs/einzugsgebiete_v1_kandidat.md`](docs/einzugsgebiete_v1_kandidat.md)) und Abbildungen ([`plot_figures.py`](code/plot_figures.py)); Paket [`pcmms_auswertung/`](code/pcmms_auswertung/) für AP-11 bis AP-13 (Anpassung, Pilotskript, Auswertung, Generator und Harness des Pipelinetests, nur synthetische Daten); Tests in [`tests/`](tests/) |
 | [`code/firmware/`](code/firmware/) | Firmware-Muster (ESP32) der Demonstratoren und Tischtests mit zwei Aktoren; keine V1-Firmware ([`code/firmware/README.md`](code/firmware/README.md)) |
-| [`code/demonstrator/`](code/demonstrator/) | Tracking- und Auswerteskripte des Ballon-Demonstrators und des Pendeltests der Linie B (Video → Höhen-CSV → Drift); nicht getestet, keine Messdaten ([`code/demonstrator/README.md`](code/demonstrator/README.md)) |
+| [`code/demonstrator/`](code/demonstrator/) | Tracking- und Auswerteskripte des Ballon-Demonstrators der Linie B (Video → Höhen-CSV → Drift) und Marker-Tracker des Pendeltests (Pixelkoordinaten ohne Maßstab, passt nicht zum Eingang der Drift-Auswertung); nicht getestet, keine Messdaten ([`code/demonstrator/README.md`](code/demonstrator/README.md)) |
 | [`docs/figures/`](docs/figures/) | Abbildungen aus den Simulationsdaten, je in heller und dunkler Fassung |
 | [`data/`](data/) | Simulationsausgaben: 19×19-Phasensweep, 2°-Feinsweep, Langläufe der Regimeanalyse (2400 s, 23 Punkte, Erzeugungsskript nicht überliefert) und Attraktorkarten des V1-Kandidaten ([`data/README.md`](data/README.md)) |
 | [`rechnungen/`](rechnungen/) | Rechen- und Prüfskripte der Gesamtprojektanalyse 10/2026 mit gespeicherten Ergebnissen und Protokollen: Auslegung, Engine-Prüfung, Kippmoment, Statistik, Symmetrie und Randterm, Linie-B-Kontrollrechnungen, Bewertungen, dazu die Kurzmessungen zum Pipelinetest und die Kontrollrechnung zu den Entscheidungsregeln ([`rechnungen/README.md`](rechnungen/README.md); Simulation und Analytik, historischer Stand 02.10.2026); außerdem die Konzeptrechnung zum Sechs-Nadel-Messrahmen ([`rechnungen/nadelrahmen/`](rechnungen/nadelrahmen/PROTOKOLL.md), 11.10.2026). Nachweisarchiv, für den Einstieg nicht nötig; Kennungen wie „L1a-019“ verweisen auf nicht veröffentlichte Arbeitsdokumente (siehe `rechnungen/README.md`). |

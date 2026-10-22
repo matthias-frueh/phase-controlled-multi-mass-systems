@@ -17,7 +17,8 @@ Zenodo: DOI 10.5281/zenodo.20080915
 >   Linie-B-Kontrollrechnungen eingeschränkt: „Kraft ∝ ρ; stationäre Drift nur im reinen Quadratmodell
 >   dichteunabhängig; mit linearem Zusatzwiderstand unterhalb von ρ* ∝ ρ“
 >   ([Gegenprüfung LB-06](../../rechnungen/linie_b/verifikation/PROTOKOLL.md);
->   [`../../rechnungen/linie_b/PROTOKOLL.md`](../../rechnungen/linie_b/PROTOKOLL.md) LB-06).
+>   [`../../rechnungen/linie_b/PROTOKOLL.md`](../../rechnungen/linie_b/PROTOKOLL.md) LB-06). „Wegen LB-02 ist bei
+>   KC ≪ 1 aber auch F̄ ∝ ρ nicht belegt.“ (ebd., LB-06)
 > - **Mechanismus (Abschnitte 3, 8):** Welches Kraftmodell bei der kleinen Keulegan-Carpenter-Zahl gilt, ist offen; ein
 >   quasistationäres quadratisches Widerstandsgesetz ist dort nicht begründet (Einordnung, „Linie B“; LB-02; AP-28).
 >   „Theorie, Elektronik und Auswertungstools fertig“ ist der Stand des Dokuments.

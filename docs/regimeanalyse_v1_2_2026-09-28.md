@@ -25,8 +25,10 @@
 >   ein Lyapunov-Test zu (9,9) liegen nicht vor; Nr. 34 und 41 der
 >   [Offenen Punkte](arbeitspapier/PCMMS_Arbeitspapier_Offene_Punkte.md) sind offen. Die Engine-Prüfung der
 >   Gesamtprojektanalyse (Stand 02.10.2026) hat das 19×19-Raster mit drei Starts über 40 s im Festschritt, in der
->   Gegenprüfung auch ereignisgenau über 20–30 s, und einzelne Paare ereignisgenau nachgerechnet; an (12,17) (§7)
->   koexistieren dort ein stabiler Hüpfzustand und ein aperiodischer Zustand um 35 %
+>   Gegenprüfung auch ereignisgenau mit zwei Starts (Standardstart über 20 s, impulskonsistenter Start über 30 s), und
+>   einzelne Paare ereignisgenau nachgerechnet; an (12,17) (§7) koexistieren dort ein stabiler Hüpfzustand und ein
+>   aperiodischer Zustand um 35 %, dieser ereignisgenau nur über 40 s, in der Gegenprüfung über 100 s und ohne
+>   Floquet-Analyse geprüft; ein sehr langer Transient ist nicht ausgeschlossen
 >   ([`../rechnungen/engine/PROTOKOLL.md`](../rechnungen/engine/PROTOKOLL.md), ENG-08, ENG-09;
 >   [Gegenprüfung](../rechnungen/engine/verifikation/PROTOKOLL.md)). Attraktorkarten gibt es nur für den V1-Kandidaten
 >   mit anderen Parametern ([`einzugsgebiete_v1_kandidat.md`](einzugsgebiete_v1_kandidat.md)). Die Nacharbeit der

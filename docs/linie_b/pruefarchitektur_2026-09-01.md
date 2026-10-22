@@ -12,13 +12,14 @@
 >   [`PROTOKOLL.md`](../../rechnungen/linie_b/PROTOKOLL.md)); stationär sind es 0,00105 m/s, das Verhältnis im
 >   Freifallargument wird 7.300 : 1, der Schluss bleibt
 >   ([`skriptkorrekturen_2026-09-06.md`](skriptkorrekturen_2026-09-06.md) §5 Nr. 3).
-> - **Auflösung (§2):** mit F̄_A neu zu bewerten; für die Skriptparameter in Luft ist ⟨x⟩ ≈ 23 nm bei L = 1 m,
->   „Sub-Millimeter“ liegt vier Größenordnungen darüber (Skriptkorrekturen §5 Nr. 2). Bei der kleinen KC-Zahl des
+> - **Auflösung (§2):** mit F̄_A neu zu bewerten; für die Skriptparameter in Luft ist ⟨x⟩ ≈ 23 nm bei (0°, 0°) und
+>   L = 1 m, „Sub-Millimeter“ liegt vier Größenordnungen darüber (Skriptkorrekturen §5 Nr. 2). Bei der kleinen KC-Zahl des
 >   Trägers ist ein quasistationäres Widerstandsgesetz nicht begründet (für einen glatten Träger nicht gültig); der
 >   Betrag der mittleren Kraft ist offen (LB-01, LB-02).
 > - **Druckreihe (§3):** Die [Richtungsnotiz v5.2](richtungsnotiz_medienkopplung_2026-09-06_v5_2.md) (§5) schlägt vor,
->   „Δv(p)“ als ΔF̄_C(p) bzw. Δ⟨x⟩(p) zu führen. Die Dichteabhängigkeit ist modellabhängig: die Kraft bei festem C_D ∝ ρ,
->   die stationäre Drift nur im rein quadratischen Modell dichteunabhängig (LB-06).
+>   „Δv(p)“ als ΔF̄_C(p) bzw. Δ⟨x⟩(p) zu führen. Die Dichteabhängigkeit ist modellabhängig: die Kraft ∝ ρ nur bei festem
+>   C_D und fester Bewegung, bei KC ≪ 1 ist auch das nicht belegt; die stationäre Drift ist nur im rein quadratischen
+>   Modell dichteunabhängig (LB-06). Über die Druckreihe ist C_D nicht konstant (Richtungsnotiz §5).
 > - **Störmechanismen (§4):** Mechanismus 2 (dynamische Instabilität) ist nach Richtungsnotiz §12 zu ergänzen.
 > - **H1_fluid:** erhält nach dem Entwurf der [Präregistrierung v2](../praeregistrierung_v2_entwurf.md) (§0) eine
 >   eigene Präregistrierung.

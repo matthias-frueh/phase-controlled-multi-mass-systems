@@ -21,8 +21,9 @@
 >   jeder Definition.
 > - **Offene Modellfrage (§6):** präzisiert, nicht gelöst. Für einen glatten Träger (Ersatzkugel) ist das
 >   quasistationäre Gesetz nicht gültig, die Kraft in führender Ordnung linear mit Periodenmittel null; bei
->   vorn-hinten-symmetrischer Hülle entsteht ein Mittelwert frühestens in dritter Ordnung, sein Betrag ist nicht
->   abgeschätzt; scharfe Kanten sind offen (LB-02). Das Kraftmodell bei kleiner KC-Zahl ist Gegenstand von AP-28.
+>   vorn-hinten-symmetrischer Hülle in symmetrischer Umgebung entsteht ein Mittelwert frühestens in dritter Ordnung
+>   (Aufhängung und Wände brechen die Symmetrie schwach), sein Betrag ist nicht abgeschätzt; scharfe Kanten sind offen
+>   (LB-02). Das Kraftmodell bei kleiner KC-Zahl ist Gegenstand von AP-28.
 > - **Modell B (§4.2):** Dichteunabhängigkeit bei c₁ = 0 und ∝ ρ unterhalb des Crossovers bei c₁ > 0 sind
 >   nachgerechnet (LB-06; [Gegenprüfung](../../rechnungen/linie_b/verifikation/PROTOKOLL.md) LB-06). Bedingung (iii)
 >   prüft nur den Widerstand; in Wasser beträgt die zugesetzte Masse ≈ 2,6·M_ges, die Rückstoßkinematik gilt dort nicht

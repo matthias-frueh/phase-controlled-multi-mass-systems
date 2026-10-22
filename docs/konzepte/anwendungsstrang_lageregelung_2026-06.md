@@ -14,12 +14,13 @@ Stand: 14. Juni 2026
 >   nur ihren Kopf als Quelle außerhalb des Repositorys gelesen
 >   ([`../../rechnungen/bewertung_b/PROTOKOLL.md`](../../rechnungen/bewertung_b/PROTOKOLL.md), Abschnitt 1). Sie rechnet
 >   nach Abschnitt 7 mit idealem Rad; ein PCMMS-Modul als Stellglied ist dort erst vorgeschlagen.
-> - **Strang (1), Vakuum „= 0 (skaliert mit ρ)“:** Mit ρ skaliert die Kraft; die stationäre Drift ist im quadratischen
->   Widerstandsmodell ohne linearen Anteil dichteunabhängig, und bei kleiner Keulegan-Carpenter-Zahl ist auch die
->   Kraftaussage nicht belegt ([`../../rechnungen/linie_b/PROTOKOLL.md`](../../rechnungen/linie_b/PROTOKOLL.md), LB-02,
->   LB-06).
-> - **Strang (3), Zielgrößen:** Für die Messkampagne sind heute F_min − ⟨N⟩ und die Harmonischen 1–3 primär, γ₁
->   sekundär, A beschreibend und λ explorativ; Spitzen-zu-Mittel-Verhältnis und Asymmetrieverhältnis sind verschiedene
+> - **Strang (1), Vakuum „= 0 (skaliert mit ρ)“:** Mit ρ skaliert im Modell die Kraft (bei festem C_D
+>   und fester Bewegung); die stationäre Drift ist nur im quadratischen Widerstandsmodell ohne linearen Anteil
+>   dichteunabhängig, mit linearem Zusatzwiderstand unterhalb von ρ* ∝ ρ; bei kleiner Keulegan-Carpenter-Zahl ist auch
+>   die Kraftaussage nicht belegt ([`../../rechnungen/linie_b/PROTOKOLL.md`](../../rechnungen/linie_b/PROTOKOLL.md),
+>   LB-02, LB-06; [Gegenprüfung LB-06](../../rechnungen/linie_b/verifikation/PROTOKOLL.md)).
+> - **Strang (3), Zielgrößen:** Für die Messkampagne sind nach dem Entwurf der Präregistrierung v2 F_min − ⟨N⟩
+>   und die Harmonischen 1–3 primär, γ₁ sekundär, A beschreibend und λ explorativ; Spitzen-zu-Mittel-Verhältnis und Asymmetrieverhältnis sind verschiedene
 >   Größen ([`../overview.md`](../overview.md)).
 >
 > Lizenz wie der Ordner: CC BY 4.0 ([`../../LICENSE-CC-BY-4.0`](../../LICENSE-CC-BY-4.0)).

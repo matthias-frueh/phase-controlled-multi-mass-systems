@@ -76,7 +76,7 @@ Schiefe (Arbeitspapier v2.4, Abschnitt 4.8).
 
 ## Was nicht im Repository liegt
 
-Arbeitsstände in Bearbeitung (Forschungsrahmen v3.6). Die Linie-B-Notizen liegen seit 22.10.2026 in
+Der Forschungsrahmen v3.6 ist vorgesehen (AP-28, Status „später“) und liegt nicht vor. Die Linie-B-Notizen liegen seit 22.10.2026 in
 [`linie_b/`](linie_b/README.md), die Linie-B-Modelle v2 und ihre Kontrollrechnungen in
 [`../rechnungen/linie_b/`](../rechnungen/linie_b/). Die Labor- und Messtechnikplanung liegt
 als Konzeptsammlung in [`konzepte/`](konzepte/) (Stand Mai bis Oktober 2026); die Planung von Räumen, Personal und

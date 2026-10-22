@@ -9,7 +9,7 @@ Matthias Früh · Unabhängige Forschung · ORCID 0009-0005-9984-4207 · Fassung
 > „… · Seite“ am Ende stammt aus der Quelldatei). Anschlussdokument ohne ausgeführte Regelung oder robotische
 > Validierung; Messdaten gibt es nicht. Arbeitspaket AP-27 (Räumliche Last, N Module, Regelung, Robotik; Stufe S4,
 > Status „später; Konzept des Messrahmens vorgezogen (11.10.2026)“, [`../arbeitsplan_status.md`](../arbeitsplan_status.md)).
-> Robotik als nachgelagerte Validierungsebene, nicht als Voraussetzung, führen auch [`../einordnung.md`](../einordnung.md)
+> Robotik als mögliche nachgelagerte Validierungsebene, nicht als Voraussetzung, führen auch [`../einordnung.md`](../einordnung.md)
 > und [`../zehn_fragen.md`](../zehn_fragen.md) (Frage 8). Seit der Fassung überholt oder offen:
 > - **Baustein 14:** ist historisch und liegt wie Baustein 13 und „Systemarchitektur und Modulhierarchie“ nicht im
 >   Repository. „… ist in Baustein 14 als generativer Mechanismus vollständig spezifiziert“ (Abschnitt 1) ist die
