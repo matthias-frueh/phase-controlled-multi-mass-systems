@@ -6,6 +6,32 @@
 
 Matthias Früh · Gravidon Systemics Research · 2026 · ORCID 0009-0005-9984-4207
 
+> **Vermerk (22.10.2026).** Originaldatei `PCMMS_Arbeitspapier_Ringstruktur_Mehrkanal_Inversion_Frueh_2026.md`,
+> Fassung 2026 ohne Tagesdatum; Textfassung der Quelldatei (PDF) des Autors, hier unverändert bis auf diesen Vermerk
+> (die Fußzeile „… · Seite“ stammt aus der Quelldatei). Nach eigener Angabe ein internes, lebendes Arbeitspapier, kein
+> Preprint. Die gelben Markierungen des Originals sind im Klartext nicht mehr sichtbar; offene Punkte sind im Text mit
+> „**offen:**“ eingeleitet (Abschnitte 4, 4.1 und 5). Konzept; die Tests T-A bis T-E (Abschnitt 6) sind im Repository
+> nicht gerechnet, Messdaten gibt es nicht. Linie A (Randbedingung mean(F) = Mg, Gegenstand ist die Wellenform);
+> Arbeitspaket AP-27 (Räumliche Last, N Module, Regelung, Robotik; Status „später; Konzept des Messrahmens vorgezogen
+> (11.10.2026)“) mit Bezug zu AP-09 (Teil A: Identifizierbarkeit, Kontrollen, Tabelle C, E3; vorläufig),
+> [`../arbeitsplan_status.md`](../arbeitsplan_status.md). Nach heutigem Repo-Stand eingeschränkt:
+> - **Mehrkanal-Baustein (Abschnitte 2 und 5):** entspricht dem Konzeptbaustein
+>   [`mehrkanal_messarchitektur_2026-05.md`](mehrkanal_messarchitektur_2026-05.md); nach dessen Vermerk gilt die
+>   1/√N-Abschätzung nur für weißes, stationäres Rauschen.
+> - **Zerlegung F = Mg + S + C:** Im [Formelverzeichnis v2.8](../formelverzeichnis/README.md) ist C der Sammelterm
+>   relativ zum gewählten Vorwärtsmodell; ohne Kontrollen ist seine Zerlegung nicht eindeutig (Abschnitt „Zentrale
+>   Messgleichung“). Ob phasenkorrelierte Anteile von C von S trennbar sind, hält Abschnitt 4.1 selbst als offen fest.
+> - **Residuum:** Die primäre Prüfung der Präregistrierung v2 (H1) vergleicht die gemessene Kombination mit der
+>   Superpositionsvorhersage aus gemessenen Einzelmodulantworten, nicht mit einem Vorwärtsmodell
+>   ([Präregistrierung v2](../praeregistrierung_v2_entwurf.md), §3, §8.2).
+> - **Messseite:** Rang und Nullraum der Nadelanordnung und den Rang des Kalibrier-Lastsatzes behandelt das Konzept zum
+>   Sechs-Nadel-Messrahmen ([`nadelrahmen_dreimassenkoerper_2026-10.md`](nadelrahmen_dreimassenkoerper_2026-10.md);
+>   NR-01 bis NR-09 in [`../../rechnungen/nadelrahmen/`](../../rechnungen/nadelrahmen/PROTOKOLL.md)); eine Schätzung
+>   von (p, q) enthält es nicht.
+> - **Baustein 13** (Abschnitte 1.3 und 7) liegt nicht im Repository.
+>
+> Lizenz wie der Ordner: CC BY 4.0 ([`../../LICENSE-CC-BY-4.0`](../../LICENSE-CC-BY-4.0)).
+
 **Charakter dieses Dokuments. **Dies ist ein internes, lebendes Arbeitspapier — kein Preprint und keine Veröffentlichung. Es hält einen Arbeitsstand fest, markiert offene Punkte (gelb hinterlegt) und sammelt Testideen. Formulierungen sind bewusst vorläufig. Eine spätere, veröffentlichungsfähige Fassung wird erst nach numerischer Prüfung der hier skizzierten Ansätze erstellt.
 
 *Geltende Randbedingung (durchgängig): mean(F) = Mg im eingeschwungenen Zustand. Alles Folgende betrifft die Form und Zerlegung der Welle, nicht ihren Mittelwert. Kein gerichteter Eigenantrieb.*

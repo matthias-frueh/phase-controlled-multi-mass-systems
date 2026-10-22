@@ -8,6 +8,37 @@
 **Schwerpunkt:** Linie A – Kontakt-/Regimedynamik im 19×19-Phasenraum  
 **Ersetzt:** `PCMMS_Regimeanalyse_v1_1_2026-09-23.md`; neu ist der Nachtrag zur Bistabilität der Satelliteninseln (§7a), Änderungsvermerk am Ende
 
+> **Vermerk (22.10.2026).** Originaldatei `PCMMS_Regimeanalyse_v1_2_2026-09-28.md`, Stand 28.09.2026 (v1.2; ersetzt
+> v1.1 vom 23.09.2026, die nicht im Repository liegt); interne numerische Prüf- und Ergebnisnotiz, hier unverändert bis
+> auf diesen Vermerk. Linie A, Modell der Referenz-Engine (v3a, Festschritt-RK4); nur Simulation, keine Messdaten,
+> keine Chaos-Aussage; die Reihenfolge Ereignislöser → Basin-Scan → Lyapunov-Test steht in §0 und §13. Ausgewertet sind
+> 2400-s-Läufe an 23 Punkten des 19×19-Rasters mit stroboskopischen Größen; die Tabelle in §3 gibt
+> [`../data/regime_2400s.csv`](../data/regime_2400s.csv) und [`../data/regime_2400s_dt2.csv`](../data/regime_2400s_dt2.csv)
+> gerundet wieder. Das Skript, das beide erzeugt hat, ist nicht überliefert ([`../data/README.md`](../data/README.md));
+> die Zusatzläufe zu (12,17) und (9,9) (§1.2) liegen nicht im Repository. Seit dem 28.09.2026 erledigt oder offen:
+> - **Ereignislöser (§0, §13 Schritt 1):** liegt vor ([`../code/ereignisloeser.py`](../code/ereignisloeser.py); AP-03
+>   „vorhanden“, [`arbeitsplan_status.md`](arbeitsplan_status.md)) und bestätigt an der Insel (35°, 116°) beide
+>   Zustände, den Hüpfzustand vom Standardstart (λ = 75,8154 %) und den Kontaktorbit (F_min = 0,3665 N)
+>   ([`abnahme_ap02_ap03.md`](abnahme_ap02_ap03.md), Abschnitt AP-03). Nach dieser Abnahme ist eine Δt/2-Differenz im
+>   Kelvin-Voigt-Hüpfbereich auch für die Engine keine Fehlerschätzung; das betrifft die Gruppen A–D (§2–§6).
+> - **Offen (§13 Schritte 2–6):** Ereignisgenaue 2400-s-Läufe der 23 Punkte mit Konvergenzfolge, ein Basin-Scan und
+>   ein Lyapunov-Test zu (9,9) liegen nicht vor; Nr. 34 und 41 der
+>   [Offenen Punkte](arbeitspapier/PCMMS_Arbeitspapier_Offene_Punkte.md) sind offen. Die Engine-Prüfung der
+>   Gesamtprojektanalyse (Stand 02.10.2026) hat das 19×19-Raster mit drei Starts über 40 s im Festschritt, in der
+>   Gegenprüfung auch ereignisgenau über 20–30 s, und einzelne Paare ereignisgenau nachgerechnet; an (12,17) (§7)
+>   koexistieren dort ein stabiler Hüpfzustand und ein aperiodischer Zustand um 35 %
+>   ([`../rechnungen/engine/PROTOKOLL.md`](../rechnungen/engine/PROTOKOLL.md), ENG-08, ENG-09;
+>   [Gegenprüfung](../rechnungen/engine/verifikation/PROTOKOLL.md)). Attraktorkarten gibt es nur für den V1-Kandidaten
+>   mit anderen Parametern ([`einzugsgebiete_v1_kandidat.md`](einzugsgebiete_v1_kandidat.md)). Die Nacharbeit der
+>   Numerik der Linie A (Karten als Attraktormengen) ist AP-25, Status „später“.
+> - **Mehrstabilität (§7a, §14, §15):** Im Liftoff-Bereich koexistieren an mindestens 99 von 361 Rasterpunkten mehrere
+>   stabile Zustände (drei Starts, Festschritt-RK4; Arbeitspapier v2.5, Anhang B.6; Offene Punkte Nr. 38, Nachtrag
+>   03.10.2026).
+> - **Literatur (§9):** Die Kandidaten zu Impact-Oszillatoren sind vor einer Aufnahme gegen die Primärquellen zu prüfen
+>   (Offene Punkte Nr. 42; AP-16, „vorhanden, mit Prüfbedarf“).
+>
+> Lizenz wie der Ordner `docs/`: CC BY 4.0 ([`../LICENSE-CC-BY-4.0`](../LICENSE-CC-BY-4.0)).
+
 ---
 
 ## 0. Kernaussage dieser Revision

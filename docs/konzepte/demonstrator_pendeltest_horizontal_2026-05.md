@@ -2,6 +2,26 @@
 
 *PCMMS · Phase-Controlled Multi-Mass Systems  —  Matthias Früh  ·  ORCID 0009-0005-9984-4207  ·  Mai 2026*
 
+> **Vermerk (22.10.2026).** Originaldatei `PCMMS_Pendeltest_Protokoll_horizontal_Frueh_2026.md`, Stand Mai 2026; hier
+> unverändert bis auf diesen Vermerk. Protokollentwurf eines Pendeltests der Linie B („Strang b“); im Arbeitsplan
+> Stufe S5 (geparkt), AP-28, Status „später“ ([`../arbeitsplan_status.md`](../arbeitsplan_status.md)). Die
+> Protokolltabellen in Abschnitt 10 und die Zusammenfassung in Abschnitt 11 sind nicht ausgefüllt; eine Messung gibt
+> es nicht. Seit Mai 2026 eingeschränkt:
+> - **Bewertung:** Die Gesamtprojektanalyse (Stand 02.10.2026) hat die Datei
+>   `PCMMS_Pendeltest_Protokoll_horizontal_Frueh_2026.docx.txt` (§1–9, außerhalb des Repositorys) gelesen und empfiehlt
+>   „parken“: „Kontrollset ja, Vorzeichenkriterium auf geometrische Spiegelung umstellen; Tracker zu grob“
+>   ([`../../rechnungen/bewertung_b/PROTOKOLL.md`](../../rechnungen/bewertung_b/PROTOKOLL.md), B14).
+> - **Vorzeichenumkehr-Test (Abschnitt 4):** Der Vergleich „analog zur v3c↔v3d-Symmetrie“ bezieht sich auf den
+>   Simulationszyklus v3a–v3d, dessen Mittelwertverschiebung ein Artefakt war
+>   ([Archiv-Vermerk](../archiv_vermerk_kernhypothese_v3.md)).
+> - **Tracking und Auswertung (Abschnitte 5, 8, 10):** Die Skripte liegen, nicht getestet, in
+>   [`../../code/demonstrator/`](../../code/demonstrator/README.md). `pcmms_pendel_tracker.py` schreibt
+>   `frame,time_sec,x,y,x_smoothed,y_smoothed` in Pixeln ohne Maßstab, nicht `t_s, x_m, y_m`; `pcmms_drift_analyse.py`
+>   erwartet `t_s,h_m` und liest sonst die ersten beiden Zahlenspalten als Zeit und Höhe. Die in Abschnitt 8
+>   vorgesehene Umstellung auf x(t) liegt nicht vor.
+>
+> Lizenz wie der Ordner: CC BY 4.0 ([`../../LICENSE-CC-BY-4.0`](../../LICENSE-CC-BY-4.0)).
+
 ## 1 · Zweck und Messprinzip
 
 Geprüft wird, ob phasengesteuerte interne Oszillation eine reproduzierbare, phasenabhängige **horizontale** Netto-Verschiebung in ruhiger Luft erzeugt — oberhalb der Eigendrift und der Run-zu-Run-Streuung. Der Mechanismus ist ehrlich benannt: Der Impuls geht an die Luft (Vibrationsschwimmer; nichtlinearer Widerstand, mitbewegte Luftmasse). Die Luft ist der Reaktionspartner; es ist kein reactionless drive.

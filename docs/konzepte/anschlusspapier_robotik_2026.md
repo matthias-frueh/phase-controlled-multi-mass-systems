@@ -4,6 +4,29 @@ Nachgelagerte Vergleichs- und Validierungsebene
 
 Matthias Früh · Unabhängige Forschung · ORCID 0009-0005-9984-4207 · Fassung 2026 · Anschlussdokument zu Baustein 14
 
+> **Vermerk (22.10.2026).** Originaldatei `PCMMS_Anschlusspapier_Robotik_Frueh_2026-3.md`, Fassung 2026 ohne
+> Tagesdatum; Textfassung der Quelldatei (DOCX) des Autors, hier unverändert bis auf diesen Vermerk (die Fußzeile
+> „… · Seite“ am Ende stammt aus der Quelldatei). Anschlussdokument ohne ausgeführte Regelung oder robotische
+> Validierung; Messdaten gibt es nicht. Arbeitspaket AP-27 (Räumliche Last, N Module, Regelung, Robotik; Stufe S4,
+> Status „später; Konzept des Messrahmens vorgezogen (11.10.2026)“, [`../arbeitsplan_status.md`](../arbeitsplan_status.md)).
+> Robotik als nachgelagerte Validierungsebene, nicht als Voraussetzung, führen auch [`../einordnung.md`](../einordnung.md)
+> und [`../zehn_fragen.md`](../zehn_fragen.md) (Frage 8). Seit der Fassung überholt oder offen:
+> - **Baustein 14:** ist historisch und liegt wie Baustein 13 und „Systemarchitektur und Modulhierarchie“ nicht im
+>   Repository. „… ist in Baustein 14 als generativer Mechanismus vollständig spezifiziert“ (Abschnitt 1) ist die
+>   Aussage des damaligen Dokuments. Hypothesen, Kontrollen und Entscheidungsregeln stehen heute in der
+>   [Präregistrierung v2](../praeregistrierung_v2_entwurf.md) (Entwicklungsversion); Messkette und Kalibrierplan sind
+>   offen (AP-06, „noch nicht umgesetzt“).
+> - **Kraftkanal (Abschnitt 3):** „Abtastrate ≥ 100 Hz“ ist der Stand von Baustein 14; für die Wellenform verlangt die
+>   Präregistrierung v2 bei k_max = 9 und f = 10 Hz etwa f_s ≥ 6,3 kHz ([Anhang A6](../praeregistrierung_v2_anhang.md)).
+> - **Ebenen L0–L3 (Abschnitt 2):** Die Rollen beschreibt das [Formelverzeichnis v2.8](../formelverzeichnis/README.md)
+>   (Abschnitt „Mehrpunkt-, Mehrinterface- und Mehrkanalmessung“); für keine Ebene existiert ein gebauter Aufbau. Ein
+>   Messrahmen mit sechs Messschnittstellen liegt als Konzept vor
+>   ([`nadelrahmen_dreimassenkoerper_2026-10.md`](nadelrahmen_dreimassenkoerper_2026-10.md), AP-27).
+> - **Kernhypothese v3** (Anschlussdokumente am Ende) ist zurückgezogen; neue Texte zitieren sie nicht mehr
+>   ([`../archiv_vermerk_kernhypothese_v3.md`](../archiv_vermerk_kernhypothese_v3.md)).
+>
+> Lizenz wie der Ordner: CC BY 4.0 ([`../../LICENSE-CC-BY-4.0`](../../LICENSE-CC-BY-4.0)).
+
 # **1  Ausgangslage**
 
 Die PCMMS-Grunddynamik ist in Baustein 14 als generativer Mechanismus vollständig spezifiziert: Zyklusaufbau, Wellenformbibliothek, Phasenkontrolle, Nebenbedingungen, Messkette, Auswertung und Falsifikationskriterium liegen mit Zahlenwerten vor. Dieses Papier regelt ausschließlich, in welchem Verhältnis robotische Systeme dazu stehen.

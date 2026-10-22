@@ -6,6 +6,39 @@
 ORCID: 0009-0005-9984-4207
 Mai 2026 · Version 3.5
 
+> **Vermerk (22.10.2026).** Originaldatei `PCMMS_Forschungsrahmen_v3_5_Frueh_2026.md`, Stand Mai 2026, Version 3.5;
+> hier unverändert bis auf diesen Vermerk. Linie B, Arbeitspaket AP-28 (Stufe S5, Status „später“,
+> [`../arbeitsplan_status.md`](../arbeitsplan_status.md)); nach [`../einordnung.md`](../einordnung.md)
+> korrekturbedürftig, Nachfolger v3.6 vorgesehen; Abgleichpunkte sowie Streich- und Ersatzliste im
+> [Literaturabgleich](../literaturabgleich_2026-09-12.md), §2 und §3. Keine Messdaten. Seit Mai 2026 überholt oder
+> eingeschränkt:
+> - **Einordnung:** „Fortbewegung“ im Titel betrifft Linie B, nicht Linie A. Primär ist Linie A, die Wellenform der
+>   Kontaktkraft eines ruhenden Körpers ohne Effektanspruch ([`../../README.md`](../../README.md), „Zwei
+>   Forschungslinien“); v3.5 entstand vor dieser Umstellung ([`../overview.md`](../overview.md)). Der Literaturabgleich
+>   (§2.2) schlägt vor, die Wellenformgrößen (§6) als Gegenstand von Linie A festzuschreiben. Die Rückzugsliste der
+>   README („Worum es geht“), darunter die gerichtete Netto-Impulsübertragung ohne äußeren Partner, gilt unverändert;
+>   der Rahmen nennt das Medium als äußeren Reaktionspartner (§1–§3).
+> - **Effektzahlen (§9, §9.2, §17):** „10⁻⁷ bis 10⁻⁴ N“ und die Auslenkung von rund 35 nm beruhen auf der
+>   Driftwiderstandskraft (v1 „F_eff“); für Konfiguration D maßgeblich ist F̄_A, im Fall S (hier M1) 6,67·10⁻⁶ N und
+>   680 nm ([`skriptkorrekturen_2026-09-06.md`](skriptkorrekturen_2026-09-06.md) §4, §5 Nr. 1;
+>   [`../../rechnungen/linie_b/PROTOKOLL.md`](../../rechnungen/linie_b/PROTOKOLL.md) LB-08). Beide Zahlenreihen gelten
+>   nur im Zweiterm-Ansatz. Der 80/20-Nullbefund gilt für das reduzierte Skript, nicht als allgemeiner Satz
+>   (Literaturabgleich §2.3).
+> - **Kraftmodell und Dichte:** Die Fälle des Begleitskripts liegen bei KC ≪ 1 (Fall S 0,063, Fall R 0,25; LB-01), die
+>   Effektspanne ist dort nicht abgesichert (LB-08). Für einen glatten Träger ist das quasistationäre
+>   Widerstandsgesetz bei KC ≪ 1 nicht gültig, die Kraft in führender Ordnung linear mit Periodenmittel null; scharfe
+>   Kanten sind offen (LB-02, für den Träger des Driftskripts). C_medium ∝ ρ (§5, §10, §11) ist nicht begründet
+>   (PROTOKOLL, Abschnitt 3); dichteunabhängig ist die stationäre freie Drift nur im rein quadratischen Modell (LB-06).
+> - **Begleitskript und Parameter:** `pcmms_medienkopplung_modell.py` liegt als v1 (§9.1, §9.2 nur in `-1.py`) in
+>   [`quelle_v1/`](../../rechnungen/linie_b/review_2026-09-06/quelle_v1/), korrigiert als v2 in
+>   [`quelle_kopie/`](../../rechnungen/linie_b/quelle_kopie/). T_f/T ≈ 0,8 (Gl. 4) ist ein Vorwärtsanteil, eine andere
+>   Profilfestlegung als der Halteanteil 0,65 des Simulationssatzes; offen ist nur, den Rahmen nachzuziehen (Nr. 9 und
+>   23 der [Offenen Punkte](../arbeitspapier/PCMMS_Arbeitspapier_Offene_Punkte.md)).
+> - **Zenodo (§15):** Frühere Zenodo-Stände (April–Mai 2026) dokumentieren den Weg, nicht den aktuellen Stand
+>   ([`../../README.md`](../../README.md), „Zitieren“).
+>
+> Lizenz wie der Ordner: CC BY 4.0 ([`../../LICENSE-CC-BY-4.0`](../../LICENSE-CC-BY-4.0)).
+
 ---
 
 ## Zusammenfassung

@@ -3,6 +3,27 @@
 **Matthias Früh · Gravidon Systemics Research · ORCID 0009-0005-9984-4207**
 Stand: 14. Juni 2026
 
+> **Vermerk (22.10.2026).** Originaldatei `PCMMS_Anwendungsstrang_Lageregelung_Frueh_2026.md`, Stand 14.06.2026; hier
+> unverändert bis auf diesen Vermerk. Anwendungsdokument; eine Lageregelung mit PCMMS-Modulen ist nicht ausgeführt: Im
+> Repository gibt es dazu weder Code noch Rechnung, Messdaten ebenso wenig. Arbeitspaket AP-27 (Räumliche Last,
+> N Module, Regelung, Robotik; Stufe S4, Status „später; Konzept des Messrahmens vorgezogen (11.10.2026)“,
+> [`../arbeitsplan_status.md`](../arbeitsplan_status.md)). Das Dokument nennt keine Forschungslinie; von den drei
+> Strängen der Tabelle in Abschnitt 4 entspricht der Fluid-Schub (1) Linie B, die Interface-Statistik (3) Linie A
+> ([`../../README.md`](../../README.md), „Zwei Forschungslinien“). Seit Juni 2026 überholt oder offen:
+> - **Simulation (Abschnitt 7):** `pcmms_lageregelung_3achs.py` liegt nicht im Repository; die Gesamtprojektanalyse hat
+>   nur ihren Kopf als Quelle außerhalb des Repositorys gelesen
+>   ([`../../rechnungen/bewertung_b/PROTOKOLL.md`](../../rechnungen/bewertung_b/PROTOKOLL.md), Abschnitt 1). Sie rechnet
+>   nach Abschnitt 7 mit idealem Rad; ein PCMMS-Modul als Stellglied ist dort erst vorgeschlagen.
+> - **Strang (1), Vakuum „= 0 (skaliert mit ρ)“:** Mit ρ skaliert die Kraft; die stationäre Drift ist im quadratischen
+>   Widerstandsmodell ohne linearen Anteil dichteunabhängig, und bei kleiner Keulegan-Carpenter-Zahl ist auch die
+>   Kraftaussage nicht belegt ([`../../rechnungen/linie_b/PROTOKOLL.md`](../../rechnungen/linie_b/PROTOKOLL.md), LB-02,
+>   LB-06).
+> - **Strang (3), Zielgrößen:** Für die Messkampagne sind heute F_min − ⟨N⟩ und die Harmonischen 1–3 primär, γ₁
+>   sekundär, A beschreibend und λ explorativ; Spitzen-zu-Mittel-Verhältnis und Asymmetrieverhältnis sind verschiedene
+>   Größen ([`../overview.md`](../overview.md)).
+>
+> Lizenz wie der Ordner: CC BY 4.0 ([`../../LICENSE-CC-BY-4.0`](../../LICENSE-CC-BY-4.0)).
+
 ---
 
 ## Kurzfassung

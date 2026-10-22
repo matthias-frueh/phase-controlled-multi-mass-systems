@@ -8,7 +8,9 @@ Lizenz dieses Ordners: CC BY 4.0, siehe [`../LICENSE-CC-BY-4.0`](../LICENSE-CC-B
 Herkunft: erzeugt mit der Referenz-Engine [`../code/pcmms_v3a_phasen_sweep.py`](../code/pcmms_v3a_phasen_sweep.py)
 (19×19-Sweep) und [`../code/finesweep.py`](../code/finesweep.py) (2°-Feinsweep). Engine-Stand im Repository:
 Commit `1f75564` vom 20.09.2026, mit dem Engine und Datensätze gemeinsam abgelegt wurden. Ein Erzeugungsdatum
-ist in den CSV-Dateien nicht hinterlegt.
+ist in den CSV-Dateien nicht hinterlegt. Eigene Herkunft und eigene Laufparameter haben die Regime-Langläufe
+`regime_2400s*.csv` (Erzeugungsskript nicht überliefert) und die Attraktorkarten `einzugsgebiete_v1_kandidat*.csv`;
+siehe ihre Einträge.
 
 Gemeinsamer Parametersatz (identisch mit dem Abschnitt „Simulationsstand“ der [README](../README.md);
 Variablennamen aus [`../code/pcmms_v3a_phasen_sweep.py`](../code/pcmms_v3a_phasen_sweep.py), Block „Systemparameter“):
@@ -68,6 +70,10 @@ zu kleineren φ₂ und ≈ 0,19 N je Grad zu größeren φ₂ (0,77 N bei φ₂ 
 K = 10⁴ N/m, weil 2f/f_n = 1,013; bei festem ζ und K = 3·10⁴ … 10⁷ N/m 0,09–0,12 N je Grad, siehe
 `../code/linear_solver.py --harmonics`) · 90,7 % des Fensters liftoff-frei ·
 |⟨F⟩ − M·g| ≤ 0,2 mN durchgehend.
+Nach der CSV schreibt [`../code/finesweep.py`](../code/finesweep.py) die Datei `series_regime.npz` ins
+Arbeitsverzeichnis: Kontaktkraft N(t) über 0,3 s ab Ende des Einschwingens für (0°, 0°), (151,579°, 265,263°) und
+(120°, 240°); Arrays `t` (s), `F` (N, eine Spalte je Punkt, 5999 × 3), `phi2`, `phi3`. Die Datei ist ein Laufartefakt
+(`.gitignore`), liegt nicht im Repository und wird mit dem Skript neu erzeugt.
 
 ### `sweep_7x7_sinus.csv` — Kontrollsweep mit Sinusprofil, 49 Konfigurationen
 Gleiche Engine-Parameter, aber sinusförmiges statt Egg-Bewegungsprofil; Raster 7×7 über [0°, 360°),
@@ -76,6 +82,40 @@ die Zeigersumme R. Das erzeugende Skript (Sinus-Variante der Engine) ist noch ni
 Die Sinusamplitude ist nicht mit abgelegt; rekonstruiert aus den Daten beträgt sie (RTOP + RBOT)/2 ≈ 3,85 mm,
 also derselbe Hub von 7,69 mm Spitze-Spitze wie beim Egg-Profil. Mit dieser Amplitude reproduziert die Engine
 die liftoff-freien Punkte auf 10⁻⁵ N.
+
+### `regime_2400s.csv` — Langläufe über 2400 s an 23 Rasterpunkten, Δt = 50 µs
+Grundlage der Regimeanalyse v1.2 (Linie A;
+[`../docs/regimeanalyse_v1_2_2026-09-28.md`](../docs/regimeanalyse_v1_2_2026-09-28.md), §1–§4): eine Zeile je Punkt
+mit stroboskopischen Kenngrößen eines Langlaufs mit Festschritt-RK4 (`dt` = 5·10⁻⁵ s); 23 Zeilen, die 23 ursprünglich
+auffälligen Punkte des 19×19-Rasters (Notiz §14). Modell laut Notiz das v3a-Modell der Engine (§0; Beispielrechnung
+mit C = 16 N·s/m in §5.1); weitere Parameter stehen nicht in der Datei. **Das Erzeugungsskript ist nicht
+überliefert:** Weder das Repository noch seine Historie enthalten ein Skript mit diesen Spaltennamen. Startzustand,
+Einschwingdauer, Auswertefenster und Wiederkehrkriterium stehen weder in der Datei noch in der Notiz; die Datei ist
+aus dem Repository nicht reproduzierbar und unverändert übernommen (Paket vom 22.10.2026). Die Tabelle in §3 der Notiz
+gibt `recur_frac`, `recur_switches`, `passk`, `meanv` und `sdv` beider Dateien gerundet wieder.
+
+| Spalte | Bedeutung, soweit die Notiz sie erklärt |
+|---|---|
+| `i2`, `i3` | Punkt im 19×19-Raster als Indexpaar 0…18 für Modul 2 und 3; in der Notiz als (i2, i3) geschrieben |
+| `cycles`, `dt` | 24 000 in allen Zeilen (in der Notiz nicht erklärt) und Zeitschritt in s |
+| `passk` | Periode k, mit der das Periodenkriterium erfüllt ist; 0: keine (in der Notiz „–“) |
+| `bestk` | „bestes k“ (§4, §13) |
+| `meanv`, `sdv` | Mittelwert und Streuung der stroboskopischen Proben ż(nT); kein kontinuierliches Zeitmittel der Geschwindigkeit und keine Netto-Drift (§3, §7) |
+| `recur_frac` | Wiederkehranteil der stroboskopischen Folge; 1: vollständig wiederkehrend (§2) |
+| `recur_switches` | Zahl der Wechsel zwischen Wiederkehr und Nichtwiederkehr (§2) |
+| `bestjv`, `bestjz`, `meanz`, `sdz`, `minv`, `maxv`, `zlast`, `vlast` | in der Notiz nicht erklärt (`bestjv`, `bestjz` nur in §1.1 aufgezählt) |
+
+Bekannte Eigenheiten: Festschritt-RK4 über die Kontaktumschaltung. Nach der Notiz ist die Klassifikation ihrer Gruppen
+C und D mit diesem Integrator nicht konvergiert (§5.2); nach der Abnahme von AP-03
+([`../docs/abnahme_ap02_ap03.md`](../docs/abnahme_ap02_ap03.md)) ist eine Δt/2-Differenz im Kelvin-Voigt-Hüpfbereich
+keine Fehlerschätzung. Eine ereignisgenaue Nachrechnung der 23 Punkte mit
+[`../code/ereignisloeser.py`](../code/ereignisloeser.py) liegt nicht vor. Die Zusatzläufe der Notiz zu (12,17) und
+(9,9) (§1.2) gehören nicht zu dieser Datei und liegen nicht im Repository.
+
+### `regime_2400s_dt2.csv` — dieselben 23 Punkte mit halbiertem Zeitschritt
+Wie [`regime_2400s.csv`](regime_2400s.csv): gleiche Spalten, Punkte und `cycles`, aber `dt` = 2,5·10⁻⁵ s („Die zweite
+Datei verwendet den halbierten Schritt.“, Notiz §1.1). Der Vergleich beider Dateien ist die Grundlage der Gruppen A–D
+der Notiz (§2, §5.2). Erzeugungsskript ebenfalls nicht überliefert; Daten unverändert übernommen.
 
 ### `einzugsgebiete_v1_kandidat*.csv` — Attraktorkarten des V1-Kandidaten (ereignisgenau)
 Andere Parameter als oben: V1-Kandidat aus [`../code/auslegung.py`](../code/auslegung.py) (Restmasse 0,350 kg,

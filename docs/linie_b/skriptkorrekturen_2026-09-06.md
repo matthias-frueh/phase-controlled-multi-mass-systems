@@ -4,6 +4,31 @@
 Zwei Korrekturaufgaben belegt: stationäre Driftkarte neu bestimmen; F_eff von der Pendelkraft trennen.
 **Originale unverändert.** Neue Dateien liegen daneben.
 
+> **Vermerk (22.10.2026).** Originaldatei `PCMMS_Skriptkorrekturen_LinieB_2026-09-06.md`, Stand 06.09.2026; hier
+> unverändert bis auf diesen Vermerk. Korrekturbeleg der Linie B zur externen Skriptprüfung
+> ([`review_leitfaden_skripte_2026-09-06.md`](review_leitfaden_skripte_2026-09-06.md)), Arbeitspaket AP-28 (Stufe S5,
+> Status „später“, [`../arbeitsplan_status.md`](../arbeitsplan_status.md)). Simulation, keine Messdaten. Seit dem
+> 06.09.2026:
+> - **Dateien (§2):** Die v2-Skripte liegen unverändert in [`quelle_kopie/`](../../rechnungen/linie_b/quelle_kopie/),
+>   die Karte als [`sweep_13x13_drift_v2.csv`](../../rechnungen/linie_b/sweep_13x13_drift_v2.csv) (LB-04); die
+>   v1-Originale in [`quelle_v1/`](../../rechnungen/linie_b/review_2026-09-06/quelle_v1/), die v1-Karte
+>   `sweep_13x13_drift.csv` als historische
+>   [`daten/sweep_13x13_drift_v1.csv`](../../rechnungen/linie_b/daten/sweep_13x13_drift_v1.csv).
+> - **Nachgerechnet:** Karte, integrierte Kontrolle und Dichteunabhängigkeit (§1, §3) in
+>   [`PROTOKOLL.md`](../../rechnungen/linie_b/PROTOKOLL.md) LB-04, LB-05 und LB-07, F_drag_drift gegen F̄_A (§4) in
+>   LB-08. Die Dichteunabhängigkeit gilt nur für c₁ = 0 (LB-06;
+>   [Gegenprüfung](../../rechnungen/linie_b/verifikation/PROTOKOLL.md) LB-06); τ und F̄_A für Wasser sind wegen der
+>   zugesetzten Masse nicht belastbar (LB-03).
+> - **Offen (§6):** Die KC-Zahl des Trägers beträgt 0,004–0,006 statt ≈ 10⁻² (LB-01); dort ist ein quasistationäres
+>   Widerstandsgesetz nicht begründet, für einen glatten Träger nicht gültig (LB-02). Die Zahlen bleiben Modellgrößen
+>   des Zweiterm-Ansatzes; eine integrierte Pendelsimulation (Modell C) liegt weiterhin nicht vor.
+> - **Folgen für den Korpus (§5):** nicht in die Dokumente eingearbeitet; Forschungsrahmen v3.5 und Prüfarchitektur
+>   liegen hier in ihren Fassungen vom Mai bzw. 01.09.2026 (Vermerke dort), v3.6 ist vorgesehen (AP-28). Das
+>   [Formelverzeichnis v2.8](../formelverzeichnis/README.md) übernimmt die Trennung von Driftwiderstandskraft und
+>   Pendelkraft (Abschnitt „Anschluss an Linie B und C“), nicht die Zahlen.
+>
+> Lizenz wie der Ordner: CC BY 4.0 ([`../../LICENSE-CC-BY-4.0`](../../LICENSE-CC-BY-4.0)).
+
 ## 1 · Was die Prüfung bestätigt hat (und ich übernehme)
 
 - Trägerkinematik `Vcm - RATIO*r_dot` exakt (Impulskinematik); Näherung erst beim Ersetzen der

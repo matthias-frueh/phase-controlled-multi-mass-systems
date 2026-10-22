@@ -4,6 +4,35 @@
 **Gilt für:** Linie B (H1_fluid), Forschungsrahmen v3.5 §1, §7, §9, Notiz Prüfarchitektur Linie B (01.09.2026)
 **Autor:** Matthias Früh · ORCID 0009-0005-9984-4207
 
+> **Vermerk (22.10.2026).** Originaldatei `PCMMS_Notiz_Richtung_Medienkopplung_2026-09-06_v5.2.md`, Stand 06.09.2026,
+> Fassung v5.2 (die Kopfzeile nennt „v5“; v5.1 und v5.2 stehen im Änderungslog, §14); hier unverändert bis auf diesen
+> Vermerk. Die Vorfassungen v1–v5.1 liegen nicht im Repository. Linie B, Arbeitspaket AP-28 (Stufe S5, Status
+> „später“, [`../arbeitsplan_status.md`](../arbeitsplan_status.md)). Keine Messdaten. Seit dem 06.09.2026 nachgerechnet,
+> berichtigt oder offen:
+> - **Dateien (§7, §13, §14):** Skriptkorrekturen, Forschungsrahmen v3.5 und Prüfarchitektur liegen in diesem Ordner
+>   ([`skriptkorrekturen_2026-09-06.md`](skriptkorrekturen_2026-09-06.md),
+>   [`forschungsrahmen_v3_5_2026-05.md`](forschungsrahmen_v3_5_2026-05.md),
+>   [`pruefarchitektur_2026-09-01.md`](pruefarchitektur_2026-09-01.md)). `pcmms_fluid_drift.py` und
+>   `pcmms_medienkopplung_modell.py` liegen als v1 in [`quelle_v1/`](../../rechnungen/linie_b/review_2026-09-06/quelle_v1/),
+>   als v2 in [`quelle_kopie/`](../../rechnungen/linie_b/quelle_kopie/); `sweep_13x13_drift.csv` ist
+>   [`daten/sweep_13x13_drift_v1.csv`](../../rechnungen/linie_b/daten/sweep_13x13_drift_v1.csv) (nicht eingeschwungen).
+> - **Kennzahlen (§6):** a = 0,134 mm (halbe Spitze-Spitze), KC = 2πa/D ≈ 0,0042 bzw. U_max·T/D ≈ 0,0060 statt 0,009,
+>   β ≈ 2,67·10⁴ ([`PROTOKOLL.md`](../../rechnungen/linie_b/PROTOKOLL.md) LB-01, Abschnitt 3 Nr. 1–2); KC ≪ 1 gilt in
+>   jeder Definition.
+> - **Offene Modellfrage (§6):** präzisiert, nicht gelöst. Für einen glatten Träger (Ersatzkugel) ist das
+>   quasistationäre Gesetz nicht gültig, die Kraft in führender Ordnung linear mit Periodenmittel null; bei
+>   vorn-hinten-symmetrischer Hülle entsteht ein Mittelwert frühestens in dritter Ordnung, sein Betrag ist nicht
+>   abgeschätzt; scharfe Kanten sind offen (LB-02). Das Kraftmodell bei kleiner KC-Zahl ist Gegenstand von AP-28.
+> - **Modell B (§4.2):** Dichteunabhängigkeit bei c₁ = 0 und ∝ ρ unterhalb des Crossovers bei c₁ > 0 sind
+>   nachgerechnet (LB-06; [Gegenprüfung](../../rechnungen/linie_b/verifikation/PROTOKOLL.md) LB-06). Bedingung (iii)
+>   prüft nur den Widerstand; in Wasser beträgt die zugesetzte Masse ≈ 2,6·M_ges, die Rückstoßkinematik gilt dort nicht
+>   (LB-03).
+> - **Prüfprogramm (§7):** Punkte 2 und 3 sind erledigt (Vermerke im Text) und nachgerechnet (LB-05, LB-07). Die
+>   Kennzahlen aus Punkt 1 sind für die Skriptparameter gerechnet; Trägergeometrie und Wahl des Kraftmodells sind offen
+>   (LB-01, LB-02). Modell C (Punkt 4) ist in keiner Skriptfassung integriert (Skriptkorrekturen §6).
+>
+> Lizenz wie der Ordner: CC BY 4.0 ([`../../LICENSE-CC-BY-4.0`](../../LICENSE-CC-BY-4.0)).
+
 > **Vorrang:** V1 und Linie A unverändert. Diese Notiz ersetzt keine bestehende Projektfassung und
 > ändert die Präregistrierung nicht.
 >

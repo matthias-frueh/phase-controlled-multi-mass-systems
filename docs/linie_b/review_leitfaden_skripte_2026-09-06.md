@@ -3,6 +3,31 @@
 **Datum:** 06.09.2026 · **Zweck:** externe Prüfung der beiden Skripte, auf die sich die Notiz
 `PCMMS_Notiz_Richtung_Medienkopplung_2026-09-06_v5.md` stützt · **Autor:** Matthias Früh
 
+> **Vermerk (22.10.2026).** Originaldatei `PCMMS_Review_Leitfaden_Skripte_LinieB_2026-09-06.md`, Stand 06.09.2026;
+> hier unverändert bis auf diesen Vermerk. Prüfanleitung der externen Skriptprüfung zu Linie B, Arbeitspaket AP-28
+> (Stufe S5, Status „später“, [`../arbeitsplan_status.md`](../arbeitsplan_status.md)). Simulation, keine Messdaten.
+> Zuordnung und Stand:
+> - **Dateien (§1):** Die drei v1-Skripte liegen unverändert in
+>   [`quelle_v1/`](../../rechnungen/linie_b/review_2026-09-06/quelle_v1/), Reproduktionsskript und Ausgabe in
+>   [`review_2026-09-06/`](../../rechnungen/linie_b/review_2026-09-06/) (Aufruf in
+>   [`rechnungen/README.md`](../../rechnungen/README.md), Abschnitt `linie_b/`); `sweep_13x13_drift.csv` ist
+>   [`daten/sweep_13x13_drift_v1.csv`](../../rechnungen/linie_b/daten/sweep_13x13_drift_v1.csv). Die MD5-Angaben der
+>   Tabelle stimmen für diese fünf Dateien (geprüft 22.10.2026); `-2.py` liegt nicht im Repository. Die v1-Skripte sind
+>   Prüfgegenstand, kein Werkzeug. Die geprüfte Notiz „v5“ liegt in der Fassung v5.2 vor
+>   ([Richtungsnotiz v5.2](richtungsnotiz_medienkopplung_2026-09-06_v5_2.md)).
+> - **Fragen (§4):** laut [`skriptkorrekturen_2026-09-06.md`](skriptkorrekturen_2026-09-06.md) (Kopf) von der Prüfung
+>   beantwortet; die Antworten selbst liegen nicht im Repository. Übernommene Befunde dort §1, darunter abweichend vom
+>   Leitfaden: Die 0,2 % im Dichtevergleich (§3) waren Resteinschwingen, die Profilamplitude im Fall M2 (heute Fall R)
+>   beträgt 400 mm/s; Umsetzung in den v2-Skripten in [`quelle_kopie/`](../../rechnungen/linie_b/quelle_kopie/).
+> - **Ergebnisse (§3):** nachgerechnet in [`PROTOKOLL.md`](../../rechnungen/linie_b/PROTOKOLL.md) LB-04 bis LB-08;
+>   die Dichteunabhängigkeit gilt nur für c₁ = 0 (LB-06), τ und F̄_A für Wasser sind wegen der zugesetzten Masse nicht
+>   belastbar (LB-03).
+> - **Nicht Gegenstand (§5):** Die KC-Zahl beträgt 0,004–0,006 statt ≈ 10⁻² (LB-01); dort ist ein quasistationäres
+>   Widerstandsgesetz nicht begründet, für einen glatten Träger nicht gültig (LB-02). Das Kraftmodell ist Gegenstand
+>   von AP-28.
+>
+> Lizenz wie der Ordner: CC BY 4.0 ([`../../LICENSE-CC-BY-4.0`](../../LICENSE-CC-BY-4.0)).
+
 ## 1 · Dateien im Paket
 
 | Datei | Zeilen | MD5 | Status |

@@ -9,6 +9,23 @@ GitHub: github.com/matthias-frueh/phase-controlled-multi-mass-systems
 Zenodo DOI: 10.5281/zenodo.20080915  
 Stand: Mai 2026
 
+> **Vermerk (22.10.2026).** Originaldatei `PCMMS_Technischer_Begleitbericht_2026.md`, Stand Mai 2026; hier unverändert
+> bis auf diesen Vermerk. Bauteilliste, Schaltung und ESP32-Code zum Ballon-Demonstrator
+> ([`demonstrator_ballon_2026-05.md`](demonstrator_ballon_2026-05.md)) der Linie B; im Arbeitsplan Stufe S5 (geparkt),
+> AP-28, Status „später“ ([`../arbeitsplan_status.md`](../arbeitsplan_status.md)). Mit dem Aufbau wurden keine
+> Messdaten erzeugt. Seit Mai 2026 eingeordnet oder eingeschränkt:
+> - **Code (Abschnitt 3):** liegt als [`pcmms_phasen_automatik.ino`](../../code/firmware/pcmms_phasen_automatik.ino) im
+>   Repository; dort weichen nur Kommentare, Schreibweise und Textausgaben ab (u. a. „Bouncing-aehnlich (180°)“ statt
+>   „Bouncing (180°)“). Die [Firmware-README](../../code/firmware/README.md) ordnet den Sketch dem Tisch- und
+>   Pendeltest zu. Er stellt nur die Phase der PWM-Hüllkurve ein (keine Regelung, keine Messung der mechanischen
+>   Phase), erzeugt nicht das Egg-Profil der Simulation und wurde bei der Übernahme ins Repository weder übersetzt noch
+>   getestet (ebd.).
+> - **Bauteilliste (Abschnitt 1):** Die Preise sind Schätzungen vom Mai 2026.
+> - **Zenodo-DOI (Kopf):** siehe den Vermerk in [`demonstrator_ballon_2026-05.md`](demonstrator_ballon_2026-05.md).
+>
+> Lizenz wie der Ordner: CC BY 4.0 ([`../../LICENSE-CC-BY-4.0`](../../LICENSE-CC-BY-4.0)); der Sketch unter
+> `code/firmware/` steht unter MIT.
+
 ## 1. Bauteilliste
 
 | Komponente              | Vorschlag                          | ca. Preis |

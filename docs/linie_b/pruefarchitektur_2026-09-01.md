@@ -3,6 +3,30 @@
 **Datum:** 01.09.2026 · **Status:** Entwurf, ausdrücklich **nicht** der nächste Schritt
 **Gilt für:** H1_fluid (Linie B, in der Präregistrierung als optional geführt)
 
+> **Vermerk (22.10.2026).** Originaldatei `PCMMS_Notiz_Pruefarchitektur_LinieB.md`, Stand 01.09.2026, Entwurf; hier
+> unverändert bis auf diesen Vermerk. Linie B, Arbeitspaket AP-28 (Stufe S5, Status „später“,
+> [`../arbeitsplan_status.md`](../arbeitsplan_status.md)). Nicht umgesetzt; keine Messdaten. Seit dem 01.09.2026
+> überholt oder offen:
+> - **Drift (§1):** „maximal 0,00069 m/s“ stammt aus der nicht eingeschwungenen v1-Karte
+>   ([`sweep_13x13_drift_v1.csv`](../../rechnungen/linie_b/daten/sweep_13x13_drift_v1.csv); LB-07 in
+>   [`PROTOKOLL.md`](../../rechnungen/linie_b/PROTOKOLL.md)); stationär sind es 0,00105 m/s, das Verhältnis im
+>   Freifallargument wird 7.300 : 1, der Schluss bleibt
+>   ([`skriptkorrekturen_2026-09-06.md`](skriptkorrekturen_2026-09-06.md) §5 Nr. 3).
+> - **Auflösung (§2):** mit F̄_A neu zu bewerten; für die Skriptparameter in Luft ist ⟨x⟩ ≈ 23 nm bei L = 1 m,
+>   „Sub-Millimeter“ liegt vier Größenordnungen darüber (Skriptkorrekturen §5 Nr. 2). Bei der kleinen KC-Zahl des
+>   Trägers ist ein quasistationäres Widerstandsgesetz nicht begründet (für einen glatten Träger nicht gültig); der
+>   Betrag der mittleren Kraft ist offen (LB-01, LB-02).
+> - **Druckreihe (§3):** Die [Richtungsnotiz v5.2](richtungsnotiz_medienkopplung_2026-09-06_v5_2.md) (§5) schlägt vor,
+>   „Δv(p)“ als ΔF̄_C(p) bzw. Δ⟨x⟩(p) zu führen. Die Dichteabhängigkeit ist modellabhängig: die Kraft bei festem C_D ∝ ρ,
+>   die stationäre Drift nur im rein quadratischen Modell dichteunabhängig (LB-06).
+> - **Störmechanismen (§4):** Mechanismus 2 (dynamische Instabilität) ist nach Richtungsnotiz §12 zu ergänzen.
+> - **H1_fluid:** erhält nach dem Entwurf der [Präregistrierung v2](../praeregistrierung_v2_entwurf.md) (§0) eine
+>   eigene Präregistrierung.
+> - **Geometrische Phase (§6):** laut Dokument eine unbelegte Vermutung; die erwogene „dritte Linie“ ist im Repository
+>   nicht weitergeführt.
+>
+> Lizenz wie der Ordner: CC BY 4.0 ([`../../LICENSE-CC-BY-4.0`](../../LICENSE-CC-BY-4.0)).
+
 > **Vorrang:** V1 und Linie A. Diese Notiz beschreibt eine Prüfarchitektur, die erst sinnvoll wird,
 > wenn Linie A reale Messdaten geliefert hat. Der elegantere Versuch ist nicht der richtige erste
 > Versuch — die Kammer kostet rund das Zehnfache von V1 und prüft die Nebenlinie.

@@ -4,6 +4,23 @@
 **Stand:** 5. September 2026  
 **Status:** Methodische Arbeitsnotiz; keine neue Simulation und kein experimenteller Nachweis.
 
+> **Vermerk (22.10.2026).** Originaldatei `PCMMS_Notiz_Energiebilanz_und_Modellvergleich_2026-09-05.md`, Stand
+> 05.09.2026; hier unverändert bis auf diesen Vermerk. Methodische Arbeitsnotiz ohne Simulation, Empfängerwahl oder
+> Messung (Kopf und Abschnitt 8). Linie C, Arbeitspaket AP-29 (Linie C: Wiederaufnahmebedingungen; Stufe S5, Status
+> „später (geparkt)“, [`../arbeitsplan_status.md`](../arbeitsplan_status.md)). Seit September 2026 überholt oder offen:
+> - **Einordnung von Linie C:** Das [Formelverzeichnis v2.8](../formelverzeichnis/README.md) vom 16.10.2026 fasst
+>   Linie C als mögliche Umlenkung oder Abspaltung außerhalb der Systemgrenze, nicht als Energieaufnahme und
+>   -verteilung innerhalb des Körpers (Abschnitt „Anschluss an Linie B und C“). Die Notiz ist älter;
+>   Kopplungsmechanismus, Empfänger und Messstrategie lässt sie offen (Abschnitt 1).
+> - **Wiederaufnahme:** Festzulegen sind danach äußerer Träger (Medium oder Feld), Ziel der Umlenkung oder Abspaltung,
+>   Mechanismus, äußere Messgröße sowie Energie- und Impulsbilanz über die Systemgrenze; mit einem Medium als Träger
+>   setzt Linie C die Klärung von Linie B voraus. Weder ein erhöhter Kraft-RMS noch eine veränderte Schiefe ist für sich
+>   ein Nachweis einer solchen Wirkung oder verbesserter Energieeffizienz (ebd.).
+> - **Bezugsdokumente:** „PCMMS – Projektfortführung und phasenselektive Energieübertragung“ (Abschnitt 1) und
+>   `PCMMS_Zusammenfassung_Energieerweiterung_2026-09-05.md` (Abschnitt 9) liegen außerhalb des Repositorys.
+>
+> Lizenz wie der Ordner: CC BY 4.0 ([`../../LICENSE-CC-BY-4.0`](../../LICENSE-CC-BY-4.0)).
+
 ## 1. Zweck und Einordnung
 
 Diese Notiz ergänzt „PCMMS – Projektfortführung und phasenselektive Energieübertragung“ um die Präzisierungen aus der anschließenden Diskussion. Sie hält die korrekte Energiebilanz, die Bedeutung linearer Überlagerung, getrennte Zielgrößen und Anforderungen an einen aussagekräftigen Modellvergleich fest.
