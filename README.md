@@ -39,11 +39,15 @@ ist mit dem Arbeitspapier v2.4 (Abschnitt 4.8) zurückgezogen. Die alten Gleichu
 
 - **Linie A (primär):** Wellenformstatistik der einseitigen Kontaktkraft eines *ruhenden* Körpers.
   Kein Effektanspruch; ⟨N⟩ = M·g als Erhaltungs-Nullgröße. Dokumente, Code und Daten dieses Repositorys gehören
-  zu Linie A; die Kontrollrechnungen zu Linie B in [`rechnungen/linie_b/`](rechnungen/linie_b/) sind als solche
-  gekennzeichnet.
+  zu Linie A; ausgenommen sind die als Linie B oder C gekennzeichneten Unterlagen: die Dokumente in
+  [`docs/linie_b/`](docs/linie_b/README.md), die Demonstrator-Unterlagen in [`docs/konzepte/`](docs/konzepte/README.md)
+  und [`code/demonstrator/`](code/demonstrator/README.md), die BLDC- und LRA-Sketche des Ballon-Demonstrators in
+  [`code/firmware/`](code/firmware/README.md), die Kontrollrechnungen in
+  [`rechnungen/linie_b/`](rechnungen/linie_b/) und die Notiz zu Linie C (geparkt) in `docs/konzepte/`.
 - **Linie B (optional, separate Apparatur):** gerichtete Nettobewegung durch Impulsübertrag an ein
-  umgebendes Medium (Luft); das Medium ist der Reaktionspartner, das Vakuum der Nullfall. Linie B ist
-  hier noch nicht abgelegt.
+  umgebendes Medium (Luft); das Medium ist der Reaktionspartner, das Vakuum der Nullfall. Ihre Unterlagen
+  liegen gekennzeichnet in [`docs/linie_b/`](docs/linie_b/README.md) (Demonstrator: `docs/konzepte/`,
+  `code/demonstrator/`, BLDC- und LRA-Sketche in `code/firmware/`); Messdaten gibt es nicht.
 
 ## Inhalt des Repositories
 
@@ -58,14 +62,17 @@ ist mit dem Arbeitspapier v2.4 (Abschnitt 4.8) zurückgezogen. Die alten Gleichu
 | [`docs/neuheitsgrad.md`](docs/neuheitsgrad.md) | Was daran nicht neu ist — und was übrig bleibt |
 | [`docs/literaturabgleich_2026-09-12.md`](docs/literaturabgleich_2026-09-12.md) | Abgleich mit der Ratchet-, Tribologie- und Kontaktdynamik-Literatur, 12 Referenzen mit Prüfvermerk des Dokuments, davon 10 mit DOI; noch nicht ins Arbeitspapier übernommen |
 | [`docs/archiv_vermerk_kernhypothese_v3.md`](docs/archiv_vermerk_kernhypothese_v3.md) | Dokumentierter Rückzug der früheren Hypothese |
-| [`docs/konzepte/`](docs/konzepte/) | Konzepte zu Laboraufbau, Messtechnik und Steuerung (Mai bis Oktober 2026): Laborplan V1, Mess- und Prüfrahmen, Mehrkanal-Messarchitektur, Sechs-Nadel-Messrahmen mit eingebettetem Dreimassenkörper (Rundum-Messung, [`nadelrahmen_dreimassenkoerper_2026-10.md`](docs/konzepte/nadelrahmen_dreimassenkoerper_2026-10.md)); als Konzepte gekennzeichnet, nicht umgesetzt ([`docs/konzepte/README.md`](docs/konzepte/README.md)) |
+| [`docs/regimeanalyse_v1_2_2026-09-28.md`](docs/regimeanalyse_v1_2_2026-09-28.md) | Regimeanalyse v1.2 (28.09.2026, Linie A): Langläufe über 2400 s an 23 Rasterpunkten mit Festschritt-RK4, numerische Gruppen, Reihenfolge Ereignislöser → Basin-Scan → Lyapunov-Test; interne Notiz ohne Chaos-Aussage, mit Vermerk zum heutigen Stand; Daten in [`data/`](data/README.md) |
+| [`docs/konzepte/`](docs/konzepte/) | Konzepte zu Laboraufbau, Messtechnik und Steuerung (Mai bis Oktober 2026): Laborplan V1, Mess- und Prüfrahmen, Mehrkanal-Messarchitektur, Sechs-Nadel-Messrahmen mit eingebettetem Dreimassenkörper (Rundum-Messung, [`nadelrahmen_dreimassenkoerper_2026-10.md`](docs/konzepte/nadelrahmen_dreimassenkoerper_2026-10.md)), Ringstruktur und Mehrkanal-Inversion; dazu die Demonstrator-Unterlagen der Linie B, Anwendungs- und Anschlusspapiere (Lageregelung, Robotik) und eine Notiz zu Linie C; als Konzepte gekennzeichnet, nicht umgesetzt ([`docs/konzepte/README.md`](docs/konzepte/README.md)) |
+| [`docs/linie_b/`](docs/linie_b/) | Linie B (Stufe S5, AP-28, später): Forschungsrahmen v3.5, Richtungsnotiz v5.2, Skriptkorrekturen, Leitfaden der Skriptprüfung und Prüfarchitektur (Mai bis September 2026), je mit Vermerk zum heutigen Stand; keine Messdaten ([`docs/linie_b/README.md`](docs/linie_b/README.md)) |
 | [`docs/plan_ap13_pipelinetest.md`](docs/plan_ap13_pipelinetest.md) | Plan des Pipelinetests (Werkzeug 8 der Präregistrierung v2): Abnahmekriterien, Architektur, Szenarienkatalog, Rechenbudget; erste Softwarestufe umgesetzt, vollständige Kalibrierung offen |
 | [`docs/ap11_ap12_ap13_software.md`](docs/ap11_ap12_ap13_software.md) | AP-11 bis AP-13, erste Softwarestufe: Anpassverfahren und Pilotskript, Auswertung Stufe 1 und 2, synthetischer Pipelinetest; Umfang, Aufrufe, Prüfergebnisse, Befunde, Grenzen; dazu [Schnittstellen](docs/ap11_ap12_ap13_schnittstellen.md), [Regelmatrix](docs/ap11_ap12_ap13_regelmatrix.md) und [Kriterienmatrix](docs/ap11_ap12_ap13_kriterien.md) |
 | [`docs/arbeitsplan_status.md`](docs/arbeitsplan_status.md) | Bearbeitungsstand der Arbeitspakete AP-01 bis AP-30 (vorhanden, vorläufig, in Bearbeitung, noch nicht umgesetzt, später) und offene Entscheidungen des Autors |
 | [`code/`](code/) | Simulations-Engine ([`pcmms_v3a_phasen_sweep.py`](code/pcmms_v3a_phasen_sweep.py)), 2°-Feinsweep ([`finesweep.py`](code/finesweep.py)), analytische Lösung für den liftoff-freien Bereich ([`linear_solver.py`](code/linear_solver.py)), Auslegungswerkzeug für den Arbeitspunkt mit Zellkräften ([`auslegung.py`](code/auslegung.py); Präregistrierung v2 §12, Werkzeug 2), ereignisgenauer Löser mit Einzugsprüfung für Liftoff und Hüpfzustände ([`ereignisloeser.py`](code/ereignisloeser.py)), Attraktorkarten des V1-Kandidaten ([`einzugsgebiete.py`](code/einzugsgebiete.py); Ergebnisse in [`docs/einzugsgebiete_v1_kandidat.md`](docs/einzugsgebiete_v1_kandidat.md)) und Abbildungen ([`plot_figures.py`](code/plot_figures.py)); Paket [`pcmms_auswertung/`](code/pcmms_auswertung/) für AP-11 bis AP-13 (Anpassung, Pilotskript, Auswertung, Generator und Harness des Pipelinetests, nur synthetische Daten); Tests in [`tests/`](tests/) |
 | [`code/firmware/`](code/firmware/) | Firmware-Muster (ESP32) der Demonstratoren und Tischtests mit zwei Aktoren; keine V1-Firmware ([`code/firmware/README.md`](code/firmware/README.md)) |
+| [`code/demonstrator/`](code/demonstrator/) | Tracking- und Auswerteskripte des Ballon-Demonstrators der Linie B (Video → Höhen-CSV → Drift) und Marker-Tracker des Pendeltests (Pixelkoordinaten ohne Maßstab, passt nicht zum Eingang der Drift-Auswertung); nicht getestet, keine Messdaten ([`code/demonstrator/README.md`](code/demonstrator/README.md)) |
 | [`docs/figures/`](docs/figures/) | Abbildungen aus den Simulationsdaten, je in heller und dunkler Fassung |
-| [`data/`](data/) | Simulationsausgaben: 19×19-Phasensweep, 2°-Feinsweep und Attraktorkarten des V1-Kandidaten ([`data/README.md`](data/README.md)) |
+| [`data/`](data/) | Simulationsausgaben: 19×19-Phasensweep, 2°-Feinsweep, Langläufe der Regimeanalyse (2400 s, 23 Punkte, Erzeugungsskript nicht überliefert) und Attraktorkarten des V1-Kandidaten ([`data/README.md`](data/README.md)) |
 | [`rechnungen/`](rechnungen/) | Rechen- und Prüfskripte der Gesamtprojektanalyse 10/2026 mit gespeicherten Ergebnissen und Protokollen: Auslegung, Engine-Prüfung, Kippmoment, Statistik, Symmetrie und Randterm, Linie-B-Kontrollrechnungen, Bewertungen, dazu die Kurzmessungen zum Pipelinetest und die Kontrollrechnung zu den Entscheidungsregeln ([`rechnungen/README.md`](rechnungen/README.md); Simulation und Analytik, historischer Stand 02.10.2026); außerdem die Konzeptrechnung zum Sechs-Nadel-Messrahmen ([`rechnungen/nadelrahmen/`](rechnungen/nadelrahmen/PROTOKOLL.md), 11.10.2026). Nachweisarchiv, für den Einstieg nicht nötig; Kennungen wie „L1a-019“ verweisen auf nicht veröffentlichte Arbeitsdokumente (siehe `rechnungen/README.md`). |
 
 Die Präregistrierung v2 für die Messkampagne liegt als [Entwurf](docs/praeregistrierung_v2_entwurf.md) vor (nicht eingefroren, nicht registriert).

@@ -1,6 +1,6 @@
 # Wegweiser durch die Dokumente
 
-Stand: 25. September 2026, Nachträge 2., 4., 11. und 16. Oktober 2026. Diese Datei ersetzt die Übersicht vom April 2026.
+Stand: 25. September 2026, Nachträge 2., 4., 11., 16. und 22. Oktober 2026. Diese Datei ersetzt die Übersicht vom April 2026.
 
 Lizenz dieses Ordners: CC BY 4.0, siehe [`../LICENSE-CC-BY-4.0`](../LICENSE-CC-BY-4.0). Namensnennung: „Matthias Früh, PCMMS“, https://github.com/matthias-frueh/phase-controlled-multi-mass-systems
 
@@ -17,11 +17,16 @@ Lizenz dieses Ordners: CC BY 4.0, siehe [`../LICENSE-CC-BY-4.0`](../LICENSE-CC-B
    10/2026 mit Ergebnissen und Protokollen (Simulation und Analytik, Stand 02.10.2026).
 9. [`konzepte/README.md`](konzepte/README.md) — Konzepte zu Laboraufbau, Messtechnik und Steuerung (Mai bis
    Oktober 2026, darunter der Sechs-Nadel-Messrahmen mit eingebettetem Dreimassenkörper), als Konzepte
-   gekennzeichnet; Firmware-Muster in [`../code/firmware/`](../code/firmware/).
+   gekennzeichnet; dazu die Demonstrator-Unterlagen der Linie B, Anwendungs- und Anschlusspapiere (Lageregelung,
+   Robotik) und eine Notiz zu Linie C. Firmware-Muster in [`../code/firmware/`](../code/firmware/), Auswerteskripte
+   des Demonstrators in [`../code/demonstrator/`](../code/demonstrator/README.md).
 10. [`plan_ap13_pipelinetest.md`](plan_ap13_pipelinetest.md) — Plan des Pipelinetests (Werkzeug 8 der Präregistrierung v2);
     Plan, nicht umgesetzt.
 11. [`arbeitsplan_status.md`](arbeitsplan_status.md) — Bearbeitungsstand der Arbeitspakete AP-01 bis AP-30 und offene
     Entscheidungen des Autors.
+12. [`linie_b/README.md`](linie_b/README.md) — Unterlagen der optionalen Linie B (Forschungsrahmen v3.5,
+    Richtungsnotiz v5.2, Skriptkorrekturen, Leitfaden der Skriptprüfung, Prüfarchitektur), je mit Vermerk zum
+    heutigen Stand; Stufe S5, später.
 
 **Zurückgezogen** sind frühere Aussagen zu einer Mittelwertverschiebung (Ursache: Kontaktmodell mit
 vorgeschriebener Eindrückung; Archiv-Vermerk), zu einer gerichteten Netto-Impulsübertragung ohne äußeren
@@ -39,7 +44,7 @@ Schiefe (Arbeitspapier v2.4, Abschnitt 4.8).
   nach dem [Entwurf der Präregistrierung v2](praeregistrierung_v2_entwurf.md) F_min − ⟨N⟩ und die
   Harmonischen 1–3 der Kontaktkraft N(t) primär, γ₁ sekundär, A beschreibend und λ explorativ.
 - **Linie A** (ruhender Körper, Wellenformstatistik) ist die primäre Linie; **Linie B** (Bewegung durch
-  Mediumkopplung) ist optional und hier nicht abgelegt.
+  Mediumkopplung) ist optional; ihre Unterlagen liegen gekennzeichnet in [`linie_b/`](linie_b/README.md).
 
 ## Hinweise zu einzelnen Dateien
 
@@ -56,8 +61,12 @@ Schiefe (Arbeitspapier v2.4, Abschnitt 4.8).
   [`formelverzeichnis/`](formelverzeichnis/). Die PDFs vom 16.10.2026 enthalten die Nachträge vom Oktober 2026; PDF
   und Quelltext stimmen überein (Bauanleitung in den README-Dateien beider Ordner).
 - Der **Literaturabgleich** ist ein Arbeitsdokument für die nächste Fassung des Forschungsrahmens (v3.6);
-  die dort genannte Fassung v3.5 ist noch nicht im Repository abgelegt, weil sie vor der Umstellung auf
-  Linie A als primäre Linie entstand.
+  die dort genannte Fassung v3.5 liegt seit 22.10.2026 mit Vermerk in
+  [`linie_b/forschungsrahmen_v3_5_2026-05.md`](linie_b/forschungsrahmen_v3_5_2026-05.md); sie entstand vor der
+  Umstellung auf Linie A als primäre Linie.
+- Die **Regimeanalyse** v1.2 ([`regimeanalyse_v1_2_2026-09-28.md`](regimeanalyse_v1_2_2026-09-28.md)) ist eine interne
+  numerische Prüfnotiz vom 28.09.2026 zu Langläufen der Engine; ihr Vermerk nennt, was seither erledigt und was offen
+  ist.
 - Das **Exposé** und die Kurznotizen beziehen alle Zahlen auf den Parametersatz der Engine
   (`../data/README.md`). Dieser Referenzsatz hat einen weichen Kontakt (K = 10⁴ N/m); Leitzahlen wie
   5,33 N, Zeltsteilheit und positive Schiefe am Triphasik-Punkt sind dessen Effekte und keine Vorhersagen für
@@ -67,8 +76,9 @@ Schiefe (Arbeitspapier v2.4, Abschnitt 4.8).
 
 ## Was nicht im Repository liegt
 
-Arbeitsstände in Bearbeitung (Forschungsrahmen v3.6) und die Linie-B-Notizen; die Linie-B-Modelle v2 und ihre
-Kontrollrechnungen liegen in [`../rechnungen/linie_b/`](../rechnungen/linie_b/). Die Labor- und Messtechnikplanung liegt
+Der Forschungsrahmen v3.6 ist vorgesehen (AP-28, Status „später“) und liegt nicht vor. Die Linie-B-Notizen liegen seit 22.10.2026 in
+[`linie_b/`](linie_b/README.md), die Linie-B-Modelle v2 und ihre Kontrollrechnungen in
+[`../rechnungen/linie_b/`](../rechnungen/linie_b/). Die Labor- und Messtechnikplanung liegt
 als Konzeptsammlung in [`konzepte/`](konzepte/) (Stand Mai bis Oktober 2026); die Planung von Räumen, Personal und
 Kosten ist nicht Gegenstand des Repositorys.
 

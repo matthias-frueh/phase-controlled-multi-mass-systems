@@ -125,7 +125,7 @@ Offen:
 - 31 Karten (λ, γ₁, A, N_min) aus der Nachrechnung neu zeichnen und die 22 nicht stationären Punkte markieren; Periodenkarte mit Randtermklassen als neue Abbildung.
 - [x] 32 Formelverzeichnis v2.6 (26.09.2026): δ, δ_w, δ_Q und v_S,max in Abschnitt 3.2 ergänzt, Nachrechnung in die Codezuordnung aufgenommen.
 - 33 Rasterabbildungen durch Vektororiginale ersetzen.
-- 34 Befunde der Regimeanalyse (Zeitschrittabhängigkeit an Regimegrenzen, Bistabilität der Satelliteninseln) erst nach Abschluss mit exaktem Ereignislöser aufnehmen.
+- 34 Befunde der Regimeanalyse (Zeitschrittabhängigkeit an Regimegrenzen, Bistabilität der Satelliteninseln) erst nach Abschluss mit exaktem Ereignislöser aufnehmen ([`regimeanalyse_v1_2_2026-09-28.md`](../regimeanalyse_v1_2_2026-09-28.md)).
 
 Aktuelle Ausgabe: 103 Seiten · XeLaTeX/BibTeX · keine unaufgelösten Verweise.
 
