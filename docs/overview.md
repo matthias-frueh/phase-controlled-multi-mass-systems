@@ -1,6 +1,6 @@
 # Wegweiser durch die Dokumente
 
-Stand: 25. September 2026, Nachträge 2., 4., 11., 16. und 22. Oktober 2026. Diese Datei ersetzt die Übersicht vom April 2026.
+Stand: 25. September 2026, Nachträge 2., 4., 11., 16., 22. und 29. Oktober 2026. Diese Datei ersetzt die Übersicht vom April 2026.
 
 Lizenz dieses Ordners: CC BY 4.0, siehe [`../LICENSE-CC-BY-4.0`](../LICENSE-CC-BY-4.0). Namensnennung: „Matthias Früh, PCMMS“, https://github.com/matthias-frueh/phase-controlled-multi-mass-systems
 
@@ -18,15 +18,22 @@ Lizenz dieses Ordners: CC BY 4.0, siehe [`../LICENSE-CC-BY-4.0`](../LICENSE-CC-B
 9. [`konzepte/README.md`](konzepte/README.md) — Konzepte zu Laboraufbau, Messtechnik und Steuerung (Mai bis
    Oktober 2026, darunter der Sechs-Nadel-Messrahmen mit eingebettetem Dreimassenkörper), als Konzepte
    gekennzeichnet; dazu die Demonstrator-Unterlagen der Linie B, Anwendungs- und Anschlusspapiere (Lageregelung,
-   Robotik) und eine Notiz zu Linie C. Firmware-Muster in [`../code/firmware/`](../code/firmware/), Auswerteskripte
-   des Demonstrators in [`../code/demonstrator/`](../code/demonstrator/README.md).
+   Robotik), eine Notiz zu Linie C und seit 29.10.2026 die Anforderungsspezifikation einer dualen Armführung der
+   inneren Massen (Entwurf v0.4, Konzept ohne Bau- oder Antriebsentscheidung). Firmware-Muster in
+   [`../code/firmware/`](../code/firmware/), Auswerteskripte des Demonstrators in
+   [`../code/demonstrator/`](../code/demonstrator/README.md).
 10. [`plan_ap13_pipelinetest.md`](plan_ap13_pipelinetest.md) — Plan des Pipelinetests (Werkzeug 8 der Präregistrierung v2);
     Plan, nicht umgesetzt.
 11. [`arbeitsplan_status.md`](arbeitsplan_status.md) — Bearbeitungsstand der Arbeitspakete AP-01 bis AP-30 und offene
     Entscheidungen des Autors.
 12. [`linie_b/README.md`](linie_b/README.md) — Unterlagen der optionalen Linie B (Forschungsrahmen v3.5,
     Richtungsnotiz v5.2, Skriptkorrekturen, Leitfaden der Skriptprüfung, Prüfarchitektur), je mit Vermerk zum
-    heutigen Stand; Stufe S5, später.
+    heutigen Stand; Stufe S5, später. Seit 29.10.2026 dazu der Abgrenzungsentwurf für den Forschungsrahmen v3.6
+    (Entwurf 3): zwei B-Fassungen gegenübergestellt, Teilung B1/B2 als Vorschlag, Entscheidung D-2 des Autors offen.
+13. [`abgleichnotiz_2026-10-29_v4.md`](abgleichnotiz_2026-10-29_v4.md) — Sitzungs- und Entscheidungsnotiz vom
+    29.10.2026: Abgrenzung der Linien A/B/C durch den Autor, Abgleich mit dem Projektstand, Entscheidung D-1
+    (Stufenfolge bleibt, B2 nur als Randbedingung für AP-01, AP-04, AP-06), offene Entscheidungen D-2 bis D-6,
+    Prüfvermerke und Korrekturen.
 
 **Zurückgezogen** sind frühere Aussagen zu einer Mittelwertverschiebung (Ursache: Kontaktmodell mit
 vorgeschriebener Eindrückung; Archiv-Vermerk), zu einer gerichteten Netto-Impulsübertragung ohne äußeren
@@ -76,7 +83,7 @@ Schiefe (Arbeitspapier v2.4, Abschnitt 4.8).
 
 ## Was nicht im Repository liegt
 
-Der Forschungsrahmen v3.6 ist vorgesehen (AP-28, Status „später“) und liegt nicht vor. Die Linie-B-Notizen liegen seit 22.10.2026 in
+Der Forschungsrahmen v3.6 ist vorgesehen (AP-28, Status „später“) und liegt nicht vor; ein Abgrenzungsentwurf dazu (29.10.2026) liegt in [`linie_b/`](linie_b/README.md). Die Notiz „Trennungsbedingungen“ des Autors zur Linie C (v4, 28./29.10.2026) liegt nicht im Repository. Die Linie-B-Notizen liegen seit 22.10.2026 in
 [`linie_b/`](linie_b/README.md), die Linie-B-Modelle v2 und ihre Kontrollrechnungen in
 [`../rechnungen/linie_b/`](../rechnungen/linie_b/). Die Labor- und Messtechnikplanung liegt
 als Konzeptsammlung in [`konzepte/`](konzepte/) (Stand Mai bis Oktober 2026); die Planung von Räumen, Personal und
