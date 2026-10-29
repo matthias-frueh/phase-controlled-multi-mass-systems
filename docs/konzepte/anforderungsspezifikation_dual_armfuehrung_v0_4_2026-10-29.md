@@ -1,6 +1,6 @@
 # PCMMS – Anforderungsspezifikation Dual-Armführung der inneren Massen (Ebene L2)
 
-Version 0.4 (Entwurf) – 29.10.2026 – ersetzt v0.3, v0.2 und v0.1 vom selben Tag
+Version 0.4 (Entwurf) – 29.10.2026 – ersetzt v0.3, v0.2 und v0.1 vom selben Tag; Nachtrag zu AF-21 vom 29.10.2026 (siehe Änderungslog)
 
 Projekt: Phasenkontrollierte Mehrmassensysteme (PCMMS)
 Autor: Matthias Früh, ORCID 0009-0005-9984-4207
@@ -10,7 +10,7 @@ Bezug: Formelverzeichnis v2.8 (§3 Gl. 3–6, §10.6 Egg-Profil und aktiv gefüh
 Lizenz: CC BY 4.0 (Ordner docs/, siehe LICENSE-CC-BY-4.0)
 
 > **Vermerk (29.10.2026).** Originaldatei `PCMMS_Anforderungsspezifikation_Dual-Armfuehrung_v0_4_2026-10-29.md`,
-> Entwurf v0.4 vom 29.10.2026; hier unverändert bis auf diesen Vermerk und die Lizenzzeile. Anforderungsspezifikation für eine duale,
+> Entwurf v0.4 vom 29.10.2026; hier unverändert bis auf diesen Vermerk, die Lizenzzeile und den Nachtrag zu AF-21 vom 29.10.2026 (Änderungslog). Anforderungsspezifikation für eine duale,
 > armähnliche Führung der inneren Massen (Ebene L2), angelegt nach der Abgrenzung der Linien A/B/C durch den Autor vom
 > 29.10.2026 ([`../abgleichnotiz_2026-10-29_v4.md`](../abgleichnotiz_2026-10-29_v4.md)). Zuordnung: Linie B nach
 > dieser Abgrenzung, Stufe S5 / AP-28; zugleich eine Ausprägung der Antriebsoption „programmierbarer Aktor“ (AP-01,
@@ -123,7 +123,7 @@ Kennung AF-xx. Prüfart: R = Rechnung/Simulation, I = Inspektion/Dokument, P = P
 ### 3.5 Kinematikmessung (AP-07)
 
 - AF-20 Die Position jeder gehaltenen Masse wird zeitsynchron mit dem Kraftkanal erfasst; Auflösung, Abtastrate und Übertragungsfunktion erlauben die Rekonstruktion von z̈_k(t) mindestens bis zur dritten Harmonischen der Grundfrequenz mit Reserve. Zahlenwerte gehören zu AP-06/AP-10 (AÜT-Punkte 17–18). [I]
-- AF-21 Aus Gl. 4 [FV] folgt F_c − ⟨F_c⟩ = (S_true − ⟨S_true⟩) − (F_ext,z − ⟨F_ext,z⟩). Der Vergleich der rekonstruierten Größe S_true(t) mit F_c(t) − ⟨F_c⟩ ist nur dann ein Nulltest der Messkette (zweiter Pfad neben ΔF̄_Zustand), wenn der zeitveränderliche Anteil von F_ext,z vernachlässigbar ist oder getrennt gemessen wird; diese Bedingung wird je Versuch benannt und belegt. In Linie A ist sie für F_par und Luftkräfte nachzuweisen (AÜT-Punkt 23); in Linie B mit Medienkraft ist sie nicht erfüllt – dort ist das Residuum −(F_med,z − ⟨F_med,z⟩) ein Messsignal, kein Nulltest. Bei Liftoff oder elastischer Aufstellung geht die Rahmenbewegung m₀·z̈₀ ein (Gl. 5 [FV]). [R, P]
+- AF-21 Aus Gl. 4 [FV] folgt für die zentrierten Größen F_c − ⟨F_c⟩ = (S_true − ⟨S_true⟩) − (F_ext,z − ⟨F_ext,z⟩). Verglichen werden die rekonstruierte, zentrierte Größe S_true − ⟨S_true⟩ und die zentrierte Kontaktkraft F_c − ⟨F_c⟩. Das Residuum r = (F_c − ⟨F_c⟩) − (S_true − ⟨S_true⟩) = −(F_ext,z − ⟨F_ext,z⟩) enthält die Schwankungen aller äußeren Kräfte: Auftrieb (Drift, Hüllenbewegung), parasitäre Kraftpfade F_par und Medienkraft F_med,z. Der Vergleich ist ein Nulltest der Messkette (zweiter Pfad neben ΔF̄_Zustand), wenn diese Schwankungen vernachlässigbar sind oder getrennt bestimmt und abgezogen werden; die Bedingung wird je Versuch benannt und belegt – in Linie A für F_par und Luftkräfte (AÜT-Punkt 23). In Linie B mit Medienkraft ist der Vergleich eine Bilanzkontrolle: Erst nach Abzug der getrennt bestimmten Anteile von Auftrieb und F_par darf der verbleibende Rest der Medienkraft zugeordnet werden; ohne diese Trennung ist er weder Nulltest noch Medienkraftsignal. Bei Liftoff oder elastischer Aufstellung geht die Rahmenbewegung m₀·z̈₀ ein (Gl. 5 [FV]). [R, P]
 - AF-22 Kontaktverlust und Wiederanlage werden unabhängig vom Kraftsignal erkannt (Kontakt-, Weg- oder Kinematikkanal; AÜT-Punkt 17), kompatibel mit dem Ereignislöser (AP-03). [I, P]
 
 ### 3.6 Lasten, Steifigkeit, Spiel
@@ -183,6 +183,7 @@ Kennung AF-xx. Prüfart: R = Rechnung/Simulation, I = Inspektion/Dokument, P = P
 
 ## Änderungslog
 
+- v0.4, Nachtrag (29.10.2026, Folgecommit in PR #27): AF-21 nach der Prüfung des PR durch den Autor und die externe Rückmeldung präzisiert – verglichen werden die zentrierten Größen S_true − ⟨S_true⟩ und F_c − ⟨F_c⟩; das Residuum enthält die Schwankungen aller äußeren Kräfte (Auftrieb, F_par, Medienkraft) und wird erst nach deren getrennter Bestimmung der Medienkraft zugeordnet; „in Linie B kein Nulltest“ ersetzt durch „Bilanzkontrolle nach Abzug der getrennt bestimmten äußeren Kräfte“. Keine weitere Änderung; Versionsnummer und Dateiname bleiben.
 - v0.4 (29.10.2026, im Dokumentations-PR): vier Korrekturen nach Prüfung des Autors (K-1 bis K-4, Abgleichnotiz v4 Abschnitt 7): K-1 AF-30 – Vorzeichen der Fesselbilanz berichtigt, ⟨F_F⟩ = F_auf − M·g + ⟨F_med,z⟩ (v0.3 hatte ein Minus vor der Medienkraft); K-2 AF-21 – Nulltest vollständig formuliert, Bedingung an den zeitveränderlichen Anteil von F_ext,z benannt, in Linie B kein Nulltest; K-3 AF-30 – „ein Lauf, ein Regime“ ersetzt durch eindeutige Versuchskonfiguration je Lauf mit Erkennung und getrennter Auswertung von Kontaktzustandswechseln; K-4 AF-29 – Leerlauf-Modus als Gegenprobe statt Abdeckung, thermische Vergleichbarkeit nachzuweisen, Füllgastemperatur als Kanal. Keine inhaltliche Festlegung darüber hinaus geändert.
 - v0.3 (29.10.2026): Reststellenprüfung vor dem Dokumentations-PR (dritte Rückmeldung R-6): AF-07 – verbliebener Satz „Für Linie B sind horizontale Freiheitsgrade vorzusehen“ entfernt, Freiheitsgrade bleiben Teil der Kinematikauslegung (O-6); AF-29 – Driftmechanismus nach Hüllentyp unterschieden (gespannt: Umgebungsdichte; frei: Gas–Luft-Temperaturdifferenz, Feuchte, Permeation), betriebskorrelierte Drift durch Eigenwärme ergänzt, Leerlauf-Modus als Gegenprobe benannt, Überschlag auf 0,6–0,7 m³ und 7–8 N präzisiert (O-14 neu); AF-30 – Vorzeichenkonvention der Fesselbilanz ergänzt, Gl. 3 und 6 nachgerechnet; Abschnitt 2 (Liftoff-Bedingung) gegen Gl. 4 nachgerechnet, unverändert. Keine inhaltliche Festlegung geändert.
 - v0.2 (29.10.2026): zweite externe Rückmeldung vom 29.10. eingearbeitet, Präzisierungen des Autors: R-1 D-1 übernommen (Abschnitt 1, Abschnitt 4, O-2); R-2 AF-06 bedingt gefasst – geschlossene Schleife als Konsequenz, nicht als Wahl; Schleife ≠ statische Überbestimmung; Auslegung offen (O-6); R-3 AF-07 als Grenzwertanforderung für Querkräfte und Kippmomente statt „keine Horizontalbewegung“; Konstruktionsweg offen (O-13 neu); R-4 Zahlenherkunft [FV]/[AÜT]/[PA]/[AP]/[Ü]/[LB] durchgehend; R-5 B1/B2 ausdrücklich als Vorschlag gekennzeichnet (Abschnitt 1, Abschnitt 4). Keine neue Bau- oder Linienentscheidung.
