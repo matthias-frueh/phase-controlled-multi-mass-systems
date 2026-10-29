@@ -170,3 +170,8 @@ Repository geschlossen), 12, 13, 18, 20, 28, 38 und „Stand des Dokuments“ (0
     Titelblatt (Arbeitspapier) und Datum (Formelverzeichnis) nennen weiter 26.09. bzw. 28.09.2026 und sind
     beim Neusatz anzupassen.~~ **erledigt 16.10.** — Neusatz als Arbeitspapier v2.5 und Formelverzeichnis
     v2.8 (16.10.2026); Titelblatt und Datum angepasst, Quelltext und PDF stimmen überein.
+44. Formelverzeichnis: Symbol für den Auftrieb einer Hülle anlegen. Die Anforderungsspezifikation Dual-Armführung v0.4
+    (29.10.2026, [`../konzepte/anforderungsspezifikation_dual_armfuehrung_v0_4_2026-10-29.md`](../konzepte/anforderungsspezifikation_dual_armfuehrung_v0_4_2026-10-29.md), O-11)
+    schlägt F_auf vor; F̄_A ist durch Modell A der Richtungsnotiz v5.2 belegt. Beim Anlegen die Symbolkonflikte M, A,
+    R und β beachten (Pflegepunkt der Arbeitsübersicht Technik vom 29.10.2026, nicht im Repository). Das Formelverzeichnis selbst ist nicht geändert
+    (29.10.2026).
