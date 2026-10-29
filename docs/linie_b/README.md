@@ -1,6 +1,6 @@
 # Linie B: Forschungsrahmen und Notizen zur Medienkopplung
 
-Stand: 22. Oktober 2026. Lizenz dieses Ordners: CC BY 4.0, siehe [`../../LICENSE-CC-BY-4.0`](../../LICENSE-CC-BY-4.0). Namensnennung: „Matthias Früh, PCMMS“, https://github.com/matthias-frueh/phase-controlled-multi-mass-systems
+Stand: 22. Oktober 2026, Nachtrag 29. Oktober 2026 (Abgrenzungsentwurf für v3.6). Lizenz dieses Ordners: CC BY 4.0, siehe [`../../LICENSE-CC-BY-4.0`](../../LICENSE-CC-BY-4.0). Namensnennung: „Matthias Früh, PCMMS“, https://github.com/matthias-frueh/phase-controlled-multi-mass-systems
 
 Dieser Ordner enthält die Dokumente der Linie B, der optionalen zweiten Forschungslinie des Projekts: gerichtete
 Nettobewegung durch Impulsübertrag an ein umgebendes Medium, mit separater Apparatur
@@ -21,6 +21,7 @@ unverändert.
 | [`richtungsnotiz_medienkopplung_2026-09-06_v5_2.md`](richtungsnotiz_medienkopplung_2026-09-06_v5_2.md) | Richtungsnotiz „Gleichrichtung und mögliche Einsatzschwellen phasenstrukturierter Medienkopplung“: Modelle A, B und C mit Übertragungsregeln, Dichteabhängigkeit und Symmetriekontrollen, offene Modellfrage zum quasistationären Widerstandsgesetz, rechnerisches Prüfprogramm, Regime der Druckreihe, Mechanismus 2 | 6. September 2026 (v5.2) | AP-28 | später; Prüfprogramm Punkte 2 und 3 erledigt, offene Modellfrage (§6) präzisiert, nicht gelöst; Kennzahlen in §6 berichtigt (LB-01) (Vermerk) |
 | [`review_leitfaden_skripte_2026-09-06.md`](review_leitfaden_skripte_2026-09-06.md) | Leitfaden der externen Skriptprüfung: Dateien mit MD5, Zuordnung von Notiz und Code, Reproduktionsergebnisse, zehn Prüffragen | 6. September 2026 | AP-28 | später; Prüfanleitung; Fragen laut Skriptkorrekturen beantwortet (Befunde dort §1); Prüfgegenstand (v1-Skripte) und Reproduktion in [`review_2026-09-06/`](../../rechnungen/linie_b/review_2026-09-06/) (Vermerk) |
 | [`skriptkorrekturen_2026-09-06.md`](skriptkorrekturen_2026-09-06.md) | Korrekturbeleg v1 → v2 nach der Skriptprüfung: stationäre Driftkarte, Trennung von Driftwiderstandskraft und Pendelkraft F̄_A, Kennzahlen, Folgen für den Korpus | 6. September 2026 | AP-28 | später; Korrekturbeleg; v2-Skripte in [`quelle_kopie/`](../../rechnungen/linie_b/quelle_kopie/), nachgerechnet in LB-04 bis LB-08; Folgen für den Korpus nicht eingearbeitet (Vermerk) |
+| [`abgrenzung_v3_6_entwurf3_2026-10-29.md`](abgrenzung_v3_6_entwurf3_2026-10-29.md) | Abgrenzungsentwurf für den Forschungsrahmen v3.6: Gegenüberstellung der B-Fassung von v3.5 und Richtungsnotiz v5.2 (Medienkopplung) mit der Abgrenzung des Autors vom 29.10.2026 (grenznahe Kontaktdynamik mit Auftriebshilfe und Armführung), Gemeinsamkeiten, Unterschiede, Varianten V-1 bis V-3 mit Vorschlag V-2 (Teilung B1/B2), Kurzformel, messtechnische Folgen, Änderungsliste gegenüber v3.5, offene Fragen F-1 bis F-8 | 29. Oktober 2026 (Entwurf 3) | AP-28 (mit AP-14, AP-29) | später; Entwurf zur Entscheidung D-2 des Autors; Forschungsrahmen v3.5 bleibt gültig; Teilung B1/B2 ist Vorschlag, nicht beschlossen; Entscheidung D-1 (Stufenfolge bleibt) aufgenommen; Überschläge zur Auftriebsdrift und zugesetzten Luftmasse modellabhängig und so gekennzeichnet (Vermerk) |
 
 Skripte und Daten: die korrigierten Modelle v2 in
 [`../../rechnungen/linie_b/quelle_kopie/`](../../rechnungen/linie_b/quelle_kopie/), die stationäre Driftkarte
@@ -34,7 +35,8 @@ nicht das der Linie A (LB-14). Demonstrator-Unterlagen der Linie B (Ballon, Begl
 [`../../code/demonstrator/`](../../code/demonstrator/README.md).
 
 **Nicht vorhanden.** Der Forschungsrahmen v3.6 ist vorgesehen (AP-28); Abgleichpunkte gegen v3.5 stehen im
-[Literaturabgleich](../literaturabgleich_2026-09-12.md). Ein Kraftmodell bei kleiner Keulegan-Carpenter-Zahl (AP-28)
+[Literaturabgleich](../literaturabgleich_2026-09-12.md), ein Abgrenzungsentwurf zur Linienstruktur seit 29.10.2026 in
+diesem Ordner (Entwurf 3, Entscheidung D-2 offen). Ein Kraftmodell bei kleiner Keulegan-Carpenter-Zahl (AP-28)
 und eine integrierte Pendelsimulation (Modell C, Skriptkorrekturen §6) liegen nicht vor. H1_fluid erhält nach dem
 Entwurf der [Präregistrierung v2](../praeregistrierung_v2_entwurf.md) (§0) eine eigene Präregistrierung; sie liegt
 nicht vor. Die Vorfassungen v1–v5.1 der Richtungsnotiz und die Antworten der externen Skriptprüfung liegen nicht im

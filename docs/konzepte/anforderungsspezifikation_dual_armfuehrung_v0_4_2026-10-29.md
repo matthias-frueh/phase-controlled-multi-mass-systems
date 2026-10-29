@@ -25,6 +25,30 @@ Lizenz: CC BY 4.0 (Ordner docs/, siehe LICENSE-CC-BY-4.0)
 > Anschlusspapiers offen (D-4). Zahlenherkunft ist im Dokument gekennzeichnet; das Ergebnis der Prüfung der
 > [AP]-Angaben gegen das Arbeitspapier v2.5 und des Abgleichs mit Anforderungsprofil, Anschlusspapier Robotik und
 > Lageregelung steht in der Statusspalte von [`README.md`](README.md) und im Pull Request vom 29.10.2026.
+>
+> **Prüfvermerk (29.10.2026, Pull Request).** Ergebnis der Prüfung nach Abschnitt S3 des Auftrags, getrennt nach
+> bestätigt, abweichend und ungeprüft; der Dokumenttext ist nicht verändert, die Kennzeichnung [AP] im Text gilt mit
+> dieser Zuordnung als [AP✓], wo eine Fundstelle genannt ist.
+> - *Bestätigt* (Arbeitspapier v2.5, Quelltext `../arbeitspapier/PCMMS_Arbeitspapier_v2_5.tex`): AF-11 Sinus-Kollaps
+>   der Phasenkarte auf R, keine Schiefe im Dauerkontakt (Z. 113, Z. 5120–5126); AF-32 dynamische Liftoff-Schwelle
+>   R_c = 1,45 aus R_c^qs = 1,94 und Transmissibilität 1,34, numerisch 1,44–1,48 (Z. 4168–4204, Gl. eq:Rc-dyn);
+>   AF-32 Umschlag vom kurzzeitigen Abheben zum prellenden Betrieb zwischen R = 1,62 und 1,70 (Z. 4209–4212);
+>   AF-23 Spitzenkraft näherungsweise ∝ √k (Z. 4337–4340) und 15,9·Mg bei ζ = 0,05 (Tabelle Z. 4402, Text Z. 4440);
+>   AF-18 Zeltkurve ≈ 0,23 N je Grad zu kleineren und ≈ 0,19 N je Grad zu größeren φ₂ (Z. 4076–4077), Spannweite
+>   4,56 N am Referenzsatz und 0,56 N am Kandidaten (Z. 2378–2379, 4094–4095); AF-26 Leerlauf mit bestromter, aber
+>   blockierter Aktuierung als wichtigster Einzelversuch der Kampagne (Z. 3271–3274). Präregistrierung v2
+>   (`../praeregistrierung_v2_entwurf.md`): H1 mit F_min − ⟨N⟩ und N₁, N₂, N₃ primär (Z. 161–162), H2 primär
+>   (Z. 172), H3 und H4 (Schiefe) sekundär (Z. 186, 196), A und F_max beschreibend (Z. 220).
+> - *Abweichend oder zu präzisieren*: AF-11 „Exzenter- oder Kurbeltriebe … scheiden als Zielantrieb aus“ – das
+>   Arbeitspapier führt sie bei konstanter Drehzahl als Referenzlauf, der den Beitrag der Profilasymmetrie beziffert
+>   (Z. 2278–2282); mit AF-11, AF-15 und AF-28 vereinbar, eine ausdrückliche Ergänzung um den Referenzlauf ist offen.
+>   Abschnitt 2, „Liftoff-Anteil Λ explorativ“: in der Präregistrierung v2 nicht belegt (λ dort nur in §9 als nicht
+>   ausschließender Wert, Z. 835); bleibt [AP] ohne Haken.
+> - *Ungeprüft*: O-1, der vollständige Volltextabgleich mit Anforderungsprofil, Anschlusspapier Robotik und
+>   Lageregelung; stichprobenartig stimmen die Ebenen L0–L3 (Anforderungsprofil Z. 107–110, Anschlusspapier Z. 46–49)
+>   und die Begriffe Primär-/Sekundärkanal (Anschlusspapier Z. 57, 71) mit diesem Dokument überein. Die Bilanzen in
+>   Abschnitt 2 und AF-30 wurden mit Formelverzeichnis v2.8 Gl. (3), (4), (6) nachvollzogen; die Fesselbilanz ist in
+>   v0.4 nach Korrektur des Autors (K-1) berichtigt.
 
 ## 0. Zweck, Geltung, Zahlenherkunft
 
