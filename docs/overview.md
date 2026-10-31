@@ -1,6 +1,6 @@
 # Wegweiser durch die Dokumente
 
-Stand: 25. September 2026, Nachträge 2., 4., 11., 16., 22. und 29. Oktober 2026. Diese Datei ersetzt die Übersicht vom April 2026.
+Stand: 25. September 2026, Nachträge 2., 4., 11., 16., 22., 29. und 31. Oktober 2026. Diese Datei ersetzt die Übersicht vom April 2026.
 
 Lizenz dieses Ordners: CC BY 4.0, siehe [`../LICENSE-CC-BY-4.0`](../LICENSE-CC-BY-4.0). Namensnennung: „Matthias Früh, PCMMS“, https://github.com/matthias-frueh/phase-controlled-multi-mass-systems
 
@@ -19,7 +19,10 @@ Lizenz dieses Ordners: CC BY 4.0, siehe [`../LICENSE-CC-BY-4.0`](../LICENSE-CC-B
    Oktober 2026, darunter der Sechs-Nadel-Messrahmen mit eingebettetem Dreimassenkörper), als Konzepte
    gekennzeichnet; dazu die Demonstrator-Unterlagen der Linie B, Anwendungs- und Anschlusspapiere (Lageregelung,
    Robotik), eine Notiz zu Linie C und seit 29.10.2026 die Anforderungsspezifikation einer dualen Armführung der
-   inneren Massen (Entwurf v0.4, Konzept ohne Bau- oder Antriebsentscheidung). Firmware-Muster in
+   inneren Massen (Entwurf v0.4, Konzept ohne Bau- oder Antriebsentscheidung), seit 31.10.2026 außerdem die
+   Konzeptentwürfe zur Massenkonzentration auf die bewegten Hauptmassen (Auslegungsbegleitung für verschiedene
+   Konstruktionsmodelle, Zielanteile offen) und zur schwerkraftbezogenen Messung mit lageadaptiver Bewegungsführung
+   (Mess- und Führungsoption, nicht ausgeführt). Firmware-Muster in
    [`../code/firmware/`](../code/firmware/), Auswerteskripte des Demonstrators in
    [`../code/demonstrator/`](../code/demonstrator/README.md).
 10. [`plan_ap13_pipelinetest.md`](plan_ap13_pipelinetest.md) — Plan des Pipelinetests (Werkzeug 8 der Präregistrierung v2);
