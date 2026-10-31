@@ -8,7 +8,8 @@ Status: Konzeptentwurf, methodisch; keine ausgeführte Regelung, Simulation oder
 Lizenz: CC BY 4.0, siehe [`../../LICENSE-CC-BY-4.0`](../../LICENSE-CC-BY-4.0). Namensnennung: „Matthias Früh, PCMMS“.
 
 > **Einpflegevermerk (31.10.2026).** Grundlage ist der Quelldraft `PCMMS_Messoption_Schwerkraftbezug_Lageadaptive_Fuehrung_v0_1_2026-10-31.md` des Autors. Vor der Einpflege wurde er mit dem [Konzeptentwurf Massenkonzentration](massenkonzentration_v0_1_2026-10-31.md), der [Anforderungsspezifikation Dual-Armführung v0.4](anforderungsspezifikation_dual_armfuehrung_v0_4_2026-10-29.md) einschließlich AF-21, dem [Formelverzeichnis v2.8](../formelverzeichnis/README.md), dem [Anwendungsstrang Lageregelung](anwendungsstrang_lageregelung_2026-06.md) und, zur M-Konvention, der [Präregistrierung v2](../praeregistrierung_v2_entwurf.md) abgeglichen. Korrigiert, präzisiert oder ergänzt sind:
-> - Systemgrenze (Abschnitte 2 und 3): Lage von L1 und Sensoraufsätzen je Versuch nach AF-01, externe Referenzen außerhalb von M, Leitungen nach AF-02, F_c als Kraft an der Grenze des bilanzierten Systems, Hinweis auf die M-Konvention (AF-31; Präregistrierung v2, Konvention (b)) ohne Festlegung.
+> - Systemgrenze (Abschnitte 2 und 3): Lage von L1 und Sensoraufsätzen je Versuch nach AF-01, externe Referenzen außerhalb von M, Leitungen nach AF-02, F_c als Kraft an der Grenze des bilanzierten Systems.
+> - Massen- und Referenzbegriffe (Nachtrag 31.10.2026 auf Vorgabe des Autors; Abschnitte 2, 4 und 8): M ist die materielle Gesamtmasse. Die operative Referenzlast F̂_base schätzt F_stat = M·g − F_ext,z^(0) und wird getrennt geführt. Der Anschluss an Konvention (b) der Präregistrierung v2 ist erläutert; die Präregistrierung selbst bleibt unverändert. Systemgrenze und Referenzangaben werden je Variante protokolliert.
 > - Lastreferenz Mg − F_ext,z: Vorzeichentabelle (Abschnitt 3), korrigierter Beschleunigungsbeitrag und Rechenbeispiel mit der Lastreferenz 98 N bei +2 N äußerer Kraft (Abschnitt 4).
 > - Live-Abzug (Abschnitt 4): Er setzt am kalibrierten Messkanal F_N an (Formelverzeichnis: F_c physikalische Kontaktkraft, F_N kalibriertes Signal). y_W ist als abgeleiteter Anzeigekanal gekennzeichnet. Die Nullmessung liefert F̂_base und prüft die Referenzbeiträge nur gemeinsam. Ŵ_0 fällt im zentrierten Vergleich nach AF-21 heraus.
 > - Räumlicher Bezug (Abschnitte 5 und 6): statischer Momentenbezug zur Mehrkanalnotation und Inhalt einer Abweichung davon im Betrieb, Starrkörper-Hebelarmbeziehung und Montagerotation der IMU, Einführung der IMU-Symbole, Kontaktzustand unabhängig vom Kraftsignal nach AF-22.
@@ -45,8 +46,9 @@ Als erste Ausprägung wird eine vertikale, geführte Anordnung mit Kraft- und We
 | O | Markierter, trägerfester Bezugspunkt, dessen Position verfolgt wird; zugleich Bezugspunkt der Momente |
 | p_O^I, R_IB | Position von O im Labor und Orientierung des Trägers als Rotationsmatrix; R_IB bildet B-Koordinaten nach I ab. Das Symbol q ist im Anwendungsstrang Lageregelung für die Quaternion vergeben und wird hier nicht für die Orientierung verwendet |
 | e_g^I = −e_z^I, g^I = −g e_z^I | Einheitsvektor der örtlichen Schwerkraftrichtung nach unten und Schwerebeschleunigung als Vektor; g > 0 ist ihr Betrag |
-| M | Tatsächliche materielle Gesamtmasse innerhalb der festgelegten Systemgrenze |
-| W_0 = Mg | Betrag des Gewichtskraftbezugs; g wird als örtliche Referenz verwendet |
+| M | Materielle Gesamtmasse innerhalb der angegebenen Systemgrenze; verwendet für Massenanteile, Schwerpunktbildung und die tatsächliche Gewichtskraft |
+| W_0 = Mg | Betrag der tatsächlichen Gewichtskraft (Gewichtskraftbezug), entspricht der theoretischen Referenz F_base des Formelverzeichnisses; g wird als örtliche Referenz verwendet |
+| F_ext,z^(0), F_stat, F̂_base | Äußere Vertikalkraft im ruhenden Referenzzustand, physikalische Stützkraft F_stat = Mg − F_ext,z^(0) in diesem Zustand und deren messtechnische Schätzung (operative Referenzlast; Abschnitt 4) |
 | k = 0 … n | Teilkörperindex in Erweiterung des Formelverzeichnisses v2.8 (dort k = 1 … n Module): k = 0 wie dort der übrige Körper bzw. Rahmen, bei L1 innerhalb von M der Träger mit seinen trägerfesten Teilen; k = 1 … n die übrigen Teilkörper innerhalb der Systemgrenze (Hauptmassen, Arme, Antriebsteile, mitbewegte Sensoraufsätze). n ist hier deren Anzahl und nicht zwingend die Modulzahl; i bleibt Abtastindex |
 | m_k, z_k, r_k^B | Masse des Teilkörpers k, absolute vertikale Schwerpunktkoordinate im Laborsystem und Schwerpunktlage relativ zu O in B-Koordinaten |
 | S | Gesamtschwerpunkt aller Teilkörper innerhalb der Systemgrenze (Index S wie in z_S des Formelverzeichnisses) |
@@ -54,7 +56,7 @@ Als erste Ausprägung wird eine vertikale, geführte Anordnung mit Kraft- und We
 
 Für die erste vertikale Anordnung ist der Boden horizontal. Bei geneigtem Untergrund werden Bodennormale und Lotrichtung separat geführt. Eine einzelne Sensorrichtung kann ebenfalls von beiden abweichen.
 
-Die Massenteilung folgt dem [Konzept zur Massenkonzentration](massenkonzentration_v0_1_2026-10-31.md): M = M_H + M_B + M_T. Ob der Träger L1 und welche Sensoraufsätze innerhalb von M liegen, wird nach AF-01 je Versuch festgelegt. Mitgetragene Sensoren der Messoption (IMU, Marker), ihre Halter und Leitungen gehören dann zu M und werden ihrer tatsächlichen Funktionsgruppe zugeordnet. Externe Referenzen wie optische Messung oder Abstandskanäle am Labor liegen außerhalb von M; Leitungen zwischen Labor und Körper sind Kraftpfade nach AF-02. Nach Materialwechsel, Massenentnahme oder Ergänzung werden M, Schwerpunkt- und Trägheitsdaten aktualisiert. Auftrieb geht in die äußeren Kräfte ein; eine hydrodynamisch zugesetzte Masse ist ein Dynamikparameter und wird nicht ungeprüft als zusätzliche materielle Gewichtskraft behandelt. Die M-Konvention wird je Versuch angegeben (vgl. AF-01; zur Hülle AF-31). Für Messungen nach der [Präregistrierung v2](../praeregistrierung_v2_entwurf.md) (§12, „Bestimmung von M“; [Anhang](../praeregistrierung_v2_anhang.md) A1) gilt deren vorläufige Arbeitsfestlegung Konvention (b): Mg ist dort die statische Last bei P0.2 einschließlich Auftrieb und gleichbleibender äußerer Kräfte; Ŵ_0 enthielte dann diese Beiträge und F_ext,z nur Abweichungen davon. Die Definitionen dieses Entwurfs (M als materielle Masse, Auftrieb in F_ext,z) entsprechen dieser Arbeitsfestlegung nicht unmittelbar; welche Konvention für Messungen mit dieser Option gilt, ist offen.
+Die Massenteilung folgt dem [Konzept zur Massenkonzentration](massenkonzentration_v0_1_2026-10-31.md): M = M_H + M_B + M_T. Ob der Träger L1 und welche Sensoraufsätze innerhalb von M liegen, wird nach AF-01 je Versuch festgelegt. Mitgetragene Sensoren der Messoption (IMU, Marker), ihre Halter und Leitungen gehören dann zu M und werden ihrer tatsächlichen Funktionsgruppe zugeordnet. Externe Referenzen wie optische Messung oder Abstandskanäle am Labor liegen außerhalb von M; Leitungen zwischen Labor und Körper sind Kraftpfade nach AF-02. Nach Materialwechsel, Massenentnahme oder Ergänzung werden M, Schwerpunkt- und Trägheitsdaten aktualisiert. Auftrieb geht in die äußeren Kräfte ein; eine hydrodynamisch zugesetzte Masse ist ein Dynamikparameter und wird nicht ungeprüft als zusätzliche materielle Gewichtskraft behandelt. M wird dabei stets als materielle Gesamtmasse geführt. Die operative Referenzlast und der Anschluss an Konvention (b) der Präregistrierung v2 stehen in Abschnitt 4.
 
 Der trägerfeste Punkt O und der veränderliche Gesamtschwerpunkt S werden unterschieden:
 
@@ -160,13 +162,33 @@ Angenommen sind W_0 = 100 N und ein kalibrierter Kraftwert von 108 N bei idealer
 | Vollständige Lastabweichung δF_W | +8 N |
 | Relative Lastabweichung δF_W/Ŵ_0 | +8 % |
 
-Die 28 N der Teilkompensation sind daher nicht mit einem isolierten dynamischen Anteil gleichzusetzen. Falls zusätzlich eine äußere Vertikalkraft von +2 N bekannt wäre, betrüge die Lastreferenz 98 N, und es ergäbe sich S_true = 108 − 100 + 2 = 10 N.
+Die 28 N der Teilkompensation sind daher nicht mit einem isolierten dynamischen Anteil gleichzusetzen. Falls zusätzlich eine äußere Vertikalkraft von +2 N bekannt wäre, betrüge die Lastreferenz 98 N, und es ergäbe sich S_true = 108 − 100 + 2 = 10 N. Gegen eine operative Referenz F̂_base = 98 N, die diese gleichbleibende äußere Kraft bereits enthält, ergibt sich direkt δF = 108 − 98 = 10 N; 108 − 98 + 2 = 12 N wäre eine Doppelzählung.
 
 ### Referenzbestimmung und Filterung
 
 M wird aus dem dokumentierten Aufbau bestimmt; g und die Ausrichtung werden als Referenz kalibriert. Eine Nullmessung ohne innere Bewegung liefert den gemessenen Referenzmittelwert F̂_base und prüft damit Ŵ_0, den Kraftbezug und die vorhandenen äußeren Kräfte gemeinsam; die Differenz F̂_base − Ŵ_0 ist ohne weitere Kontrollen keiner einzelnen Ursache zuzuordnen (Formelverzeichnis v2.8, „Theoretische und operative Basislinie“). Die laufende Kontaktkraft wird nicht ungeprüft als momentaner Schätzer für Mg benutzt: Sonst würden langsame Nutzsignalanteile oder äußere Kräfte in die Referenz übernommen.
 
 Die Gewichtskraftkompensation erfolgt bevorzugt durch modellgestützten Referenzabzug. Ein pauschaler Hochpass trennt langsame Dynamik, Schwerkraftprojektion und Drift nicht eindeutig. Für jede zusätzliche Filterung sind Amplituden- und Phasenverhalten, Verzögerung und gültiges Frequenzband zu dokumentieren. Eine intern bereits schwerkraftbereinigte IMU-Ausgabe wird nicht nochmals mit derselben Korrektur beaufschlagt.
+
+### Operative Referenzlast und Anschluss an Konvention (b)
+
+M bleibt die materielle Gesamtmasse innerhalb der angegebenen Systemgrenze; sie wird für Massenanteile, Schwerpunktbildung und die tatsächliche Gewichtskraft W_0 = Mg verwendet. Davon getrennt wird die operative Referenzlast geführt. Im idealen ruhenden Referenzzustand (Hochindex (0): innere Massen in Referenzlage, Träger in Ruhe) gilt für die physikalische Stützkraft:
+
+$$
+F_{\mathrm{stat}}=Mg-F_{\mathrm{ext},z}^{(0)}.
+$$
+
+F̂_base ist deren messtechnische Schätzung mit entsprechender Unsicherheit (im Formelverzeichnis v2.8 der gemessene Mittelwert des Referenzzustands). Wird gegen diese operative Referenz gerechnet, sind die im Referenzzustand vorhandenen äußeren Kräfte darin bereits enthalten und werden nicht nochmals vollständig abgezogen; maßgeblich sind dann deren Änderungen gegenüber dem Referenzzustand:
+
+$$
+\delta F(t)=F_N(t)-\widehat F_{\mathrm{base}},
+\qquad
+\Delta F_{\mathrm{ext},z}(t)=F_{\mathrm{ext},z}(t)-F_{\mathrm{ext},z}^{(0)}.
+$$
+
+Im idealen Fall (F_N = F_c, F̂_base = F_stat) gilt δF = S_true − ΔF_ext,z. Der isolierbare Dynamikanteil folgt dann aus Ŝ_true^(F) = δF + ΔF̂_ext,z und stimmt mit der Darstellung über Ŵ_0 und F̂_ext,z überein. δF ist die Referenzabweichung des Formelverzeichnisses; δF_W bezieht sich dagegen auf die tatsächliche Gewichtskraft.
+
+Anschluss an die Präregistrierung v2: Ihre vorläufige Arbeitsfestlegung Konvention (b) ([Präregistrierung v2](../praeregistrierung_v2_entwurf.md), §12, „Bestimmung von M“; [Anhang](../praeregistrierung_v2_anhang.md) A1) bezeichnet als M die aus der statischen Zelllast abgeleitete Größe Σ_c F_c,stat/g aus P0.2. In der Notation dieses Entwurfs entspricht sie F̂_base/g, einer Schätzung von F_stat/g = M − F_ext,z^(0)/g; Auftrieb, Innenluft und gleichbleibende äußere Kräfte sind darin enthalten. Diese Größe darf die materielle Masse M in Schwerpunkt-, Trägheits- oder Gewichtskraftberechnungen nicht ungeprüft ersetzen. Wird nach Konvention (b) gerechnet, gehen die bereits enthaltenen äußeren Kräfte nur mit ihren Änderungen gegenüber P0.2 ein. Die Präregistrierung selbst bleibt unverändert.
 
 ## 5. Räumliche Gewichtskraft und Momentenbezug
 
@@ -281,7 +303,7 @@ Die folgenden Punkte sind ein vorgeschlagener Prüfweg; sie wurden für diesen E
 6. **Adaptive Führung:** Beobachtungsbetrieb, abschnittsweise und laufende Anpassung bei dokumentierten Anfangszuständen und gleicher Messfrage vergleichen.
 7. **Massen- und Kopplungsvarianten:** Geänderte Hauptmassen, Halter, Sensorbestückung oder Kopplungen nach dem [Konzept zur Massenkonzentration](massenkonzentration_v0_1_2026-10-31.md) vergleichen; Aufbau, Referenzen und Beobachtermodell jeweils nachführen.
 
-Zu protokollieren sind mindestens: Rohkräfte, kalibrierte Summen-/Vektorkanäle, Referenzbetrag und ξ_W, interne Ist-Kinematik, externe Posemessung, IMU-Roh- beziehungsweise eindeutig bezeichnete verarbeitete Kanäle, geschätzter Zustand mit Güteangabe, Sollprofile und Änderungen, Zeitzuordnung sowie Kontaktzustandswechsel.
+Zu protokollieren sind mindestens: Systemgrenze (Lage von L1 und Sensoraufsätzen), materielle Masse M und operative Referenzlast F̂_base mit Referenzzustand, Rohkräfte, kalibrierte Summen-/Vektorkanäle, Referenzbetrag und ξ_W, interne Ist-Kinematik, externe Posemessung, IMU-Roh- beziehungsweise eindeutig bezeichnete verarbeitete Kanäle, geschätzter Zustand mit Güteangabe, Sollprofile und Änderungen, Zeitzuordnung sowie Kontaktzustandswechsel.
 
 Die zusätzliche Aussagekraft des Beobachters wird gegen eine tatsächlich unabhängige Referenz bewertet. Eine bereits zum Beobachter gehörende Messung ist nicht zugleich seine unabhängige Validierung. Für die erste vertikale Ausprägung kann hierfür beispielsweise ein gesonderter Referenzwegkanal vorgesehen oder eine geeignete Prüfgeometrie verwendet werden.
 
