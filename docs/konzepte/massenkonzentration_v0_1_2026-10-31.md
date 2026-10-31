@@ -7,7 +7,7 @@ Projekt: Phase-Controlled Multi-Mass Systems (PCMMS), Matthias Früh
 Status: Konzeptentwurf zur Auslegungsbegleitung und zum gezielten Variantenvergleich; keine Messdaten oder nachgewiesene Apparaturauslegung.
 Lizenz: CC BY 4.0, siehe [`../../LICENSE-CC-BY-4.0`](../../LICENSE-CC-BY-4.0). Namensnennung: „Matthias Früh, PCMMS“.
 
-> **Einpflegevermerk (31.10.2026).** Grundlage ist der am 31.10.2026 um Zielkonflikte und Messvarianten erweiterte Quelldraft `PCMMS_Konzept_Massenkonzentration_v0_1_2026-10-31.md`. Redaktionell angepasst sind: relativer Verweis auf die Dual-Arm-Spezifikation, Status- und Lizenzangaben, Formelblöcke als `$$`-Blöcke für die Darstellung auf GitHub, ein Satz zur Lage des Trägers L1 innerhalb der Systemgrenze nach AF-01 (Abschnitt 2), „übrige Masse“ statt „übrige Apparatur“ für die 40 kg (Abschnitt 3.3), neutrale Herkunftsangaben (Abschnitt 7, Schritt 1, und „Quellen und Herkunft“) sowie der Schlusssatz des Änderungsvermerks. Die vorhandenen Anforderungen werden durch dieses Begleitkonzept nicht neu festgelegt.
+> **Einpflegevermerk (31.10.2026).** Grundlage ist der am 31.10.2026 um Zielkonflikte und Messvarianten erweiterte Quelldraft `PCMMS_Konzept_Massenkonzentration_v0_1_2026-10-31.md`. Redaktionell angepasst sind: relativer Verweis auf die Dual-Arm-Spezifikation, Status- und Lizenzangaben, Formelblöcke als `$$`-Blöcke für die Darstellung auf GitHub, ein Satz zur Lage des Trägers L1 innerhalb der Systemgrenze nach AF-01 (Abschnitt 2), „übrige Masse“ statt „übrige Apparatur“ für die 40 kg (Abschnitt 3.3), neutrale Herkunftsangaben (Abschnitt 7, Schritt 1, und „Quellen und Herkunft“) sowie der Schlusssatz des Änderungsvermerks. Beim gemeinsamen Abgleich mit der Messoption (31.10.2026) zusätzlich: Zuordnung rotierender Motorteile in Abschnitt 3.2 an Abschnitt 2 angeglichen; Körperindex in Abschnitt 5 von i und z_{G_i} auf k und z_k des Formelverzeichnisses umgestellt (i ist dort der Abtastindex); η_H und η_H,bew als konzepteigene Kennzahlen gekennzeichnet; Querverweis auf die Messoption in Abschnitt 8. Die vorhandenen Anforderungen werden durch dieses Begleitkonzept nicht neu festgelegt.
 
 Grundlage: Konstruktionsziel und ergänzende Vorgaben des Autors vom 31.10.2026; Abgleich mit der Anforderungsspezifikation Dual-Armführung v0.4 vom 29.10.2026 einschließlich AF-21-Nachtrag. Die nachfolgenden Kennzahlen und Budgetgleichungen sind Vorschläge dieses Konzeptentwurfs. Zahlenbeispiele sind Rechenbeispiele, keine Apparaturparameter oder nachgewiesenen Auslegungen. Die bestehende Spezifikation wird durch diesen Entwurf nicht geändert.
 
@@ -53,7 +53,7 @@ $$
 \eta_H = \frac{M_H}{M_H+M_B+M_T}.
 $$
 
-Diese Kennzahl beschreibt, wie viel der Gesamtmasse tatsächlich in den vorgesehenen Hauptmassen liegt. Sie unterstützt die Auslegung zusammen mit den erreichbaren Bewegungs- und Messeigenschaften der jeweiligen Variante.
+Diese Kennzahl beschreibt, wie viel der Gesamtmasse tatsächlich in den vorgesehenen Hauptmassen liegt. η_H und η_H,bew sind Kennzahlen dieses Konzepts und nicht im Formelverzeichnis v2.8 geführt; dort bezeichnet η ohne diesen Index das Rauschen. Sie unterstützt die Auslegung zusammen mit den erreichbaren Bewegungs- und Messeigenschaften der jeweiligen Variante.
 
 ### 3.2 Hauptmassenanteil innerhalb der bewegten Baugruppen
 
@@ -63,7 +63,7 @@ $$
 
 Diese Kennzahl zeigt, wie groß der Anteil der Hauptmassen gegenüber der mitbewegten Mechanik ist. Sie beschreibt ein Massenverhältnis; unterschiedliche Bahnen, Beschleunigungen und Rotationsträgheiten sind damit noch nicht bewertet.
 
-Ein Motor am Träger kann den bewegten Anteil gegenüber einer Anordnung am Arm verringern. Seine Masse bleibt dabei in M_T und damit in der Gesamtmasse M. Beide Kennzahlen werden deshalb gemeinsam geführt.
+Ein Motor am Träger kann den bewegten Anteil gegenüber einer Anordnung am Arm verringern. Stator und Gehäuse zählen dann zu M_T, der Rotor als rotierendes Teil nach Abschnitt 2 weiterhin zu M_B; die gesamte Motormasse bleibt in der Gesamtmasse M. Beide Kennzahlen werden deshalb gemeinsam geführt.
 
 ### 3.3 Beispiel des Autors
 
@@ -124,7 +124,7 @@ Für die gesamte Vertikalkraftbilanz werden die Schwerpunkte aller Körper erfas
 
 $$
 S_{\mathrm{true}}(t)
-= \sum_{i\in\mathrm{alle\ Körper}}m_i\ddot z_{G_i}(t)
+= \sum_{k=0}^{n}m_k\ddot z_k(t)
 = S_H(t)+S_B(t)+S_T(t),
 $$
 
@@ -132,7 +132,7 @@ $$
 F_c(t)=Mg+S_{\mathrm{true}}(t)-F_{\mathrm{ext},z}(t).
 $$
 
-Dies ist die Aufgliederung der bestehenden Bilanz aus §2 der Dual-Arm-Spezifikation, keine zusätzliche Kraftquelle. Bei einem räumlich ruhenden, starren Träger ist S_T = 0. Bei Trägerbewegung oder Verformung wird der entsprechende Beitrag mitgeführt. Die Schwerpunktbildung aus allen Teilkörpern entspricht der üblichen Mehrkörperdynamik [1].
+Der Index k = 0 … n läuft wie im Formelverzeichnis v2.8 über die Teilkörper innerhalb der Systemgrenze, hier über alle Körper einschließlich Hauptmassen, Arme, Antriebsteile und, soweit innerhalb von M, Träger; z_k ist die absolute vertikale Schwerpunktkoordinate des Teilkörpers k, m_H,k die Masse einer Hauptmasse. S_H, S_B und S_T sind die Teilsummen über die Teilkörper der Gruppen M_H, M_B und M_T. Dies ist die Aufgliederung der bestehenden Bilanz aus §2 der Dual-Arm-Spezifikation, keine zusätzliche Kraftquelle. Bei einem räumlich ruhenden, starren Träger ist S_T = 0. Bei Trägerbewegung oder Verformung wird der entsprechende Beitrag mitgeführt. Die Schwerpunktbildung aus allen Teilkörpern entspricht der üblichen Mehrkörperdynamik [1].
 
 Für jeden bewegten starren Körper gehören Masse, Schwerpunktlage und Trägheitstensor ins Modell [2]. Die vertikale Summenkraft hängt von den Schwerpunktbeschleunigungen ab; Rotationsträgheiten bestimmen zusätzlich Antriebsmomente, Lagerlasten und Momentenreaktionen. Ein Rotor mit ortsfestem Schwerpunkt kann deshalb trotz verschwindendem eigenem Vertikalkraftbeitrag relevant sein.
 
@@ -248,6 +248,8 @@ Das Konzept ergänzt AF-01 (Systemgrenze), AF-08/09 (Schwerpunktbahnen), AF-21 (
 Als späterer Anforderungstext bietet sich an:
 
 > Für jede Konstruktions- und Messvariante sind der Anteil der gezielt geführten Hauptmassen an der Gesamtmasse und ihr Anteil innerhalb der bewegten Baugruppen auszuweisen. Arme, Aufnahmen, Antriebe und übrige Apparatur werden mit getrennten Massenbudgets geführt. Das geeignete Verhältnis wird für das jeweilige Modell und die Messaufgabe unter Berücksichtigung von Stabilität, erreichbarer Geschwindigkeit, Profiltreue, Belastbarkeit und Messqualität bestimmt. Die Beiträge aller bewegten Körper zur Kraft- und Momentendynamik werden berücksichtigt. Gezielte Massenentnahme, Massenergänzung, Umverteilung, Materialwechsel, Änderungen des benötigten Funktions- und Messumfangs sowie Varianten von Halterungen, Bewegungsapparaten und Kopplungen sind mit ihren Auswirkungen auf Bilanz, Dynamik und Messvergleich zu dokumentieren.
+
+Wie Gewichtskraftbezug, Lastabweichung, Lage und Position für solche Varianten gemessen und für eine lageabhängige Führung genutzt werden können, beschreibt der Konzeptentwurf [Schwerkraftbezogene Messung und lageadaptive Bewegungsführung](messoption_schwerkraftbezug_lageadaptive_fuehrung_v0_1_2026-10-31.md).
 
 Offen bleiben die konkreten Zielanteile, der Apparaturparametersatz, Materialien und Geometrien, die erreichbaren Budgets und Arbeitsbereiche sowie die Prioritäten der einzelnen Modell- und Messaufgaben. Die geltende Stufenfolge und die offene Wahl der Antriebsarchitektur werden durch dieses Begleitkonzept nicht neu entschieden.
 
