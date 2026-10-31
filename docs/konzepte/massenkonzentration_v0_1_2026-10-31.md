@@ -7,7 +7,7 @@ Projekt: Phase-Controlled Multi-Mass Systems (PCMMS), Matthias Früh
 Status: Konzeptentwurf zur Auslegungsbegleitung und zum gezielten Variantenvergleich; keine Messdaten oder nachgewiesene Apparaturauslegung.
 Lizenz: CC BY 4.0, siehe [`../../LICENSE-CC-BY-4.0`](../../LICENSE-CC-BY-4.0). Namensnennung: „Matthias Früh, PCMMS“.
 
-> **Einpflegevermerk (31.10.2026).** Grundlage ist der am 31.10.2026 um Zielkonflikte und Messvarianten erweiterte Quelldraft `PCMMS_Konzept_Massenkonzentration_v0_1_2026-10-31.md`. Die öffentliche Fassung verwendet einen relativen Verweis auf die Dual-Arm-Spezifikation und ergänzt Status- und Lizenzangaben. Für die Darstellung auf GitHub sind die Formelblöcke als `$$`-Blöcke gesetzt; in Abschnitt 2 ist ein Satz zur Lage des Trägers L1 innerhalb der Systemgrenze nach AF-01 ergänzt. Die vorhandenen Anforderungen werden durch dieses Begleitkonzept nicht neu festgelegt.
+> **Einpflegevermerk (31.10.2026).** Grundlage ist der am 31.10.2026 um Zielkonflikte und Messvarianten erweiterte Quelldraft `PCMMS_Konzept_Massenkonzentration_v0_1_2026-10-31.md`. Redaktionell angepasst sind: relativer Verweis auf die Dual-Arm-Spezifikation, Status- und Lizenzangaben, Formelblöcke als `$$`-Blöcke für die Darstellung auf GitHub, ein Satz zur Lage des Trägers L1 innerhalb der Systemgrenze nach AF-01 (Abschnitt 2), „übrige Masse“ statt „übrige Apparatur“ für die 40 kg (Abschnitt 3.3), neutrale Herkunftsangaben (Abschnitt 7, Schritt 1, und „Quellen und Herkunft“) sowie der Schlusssatz des Änderungsvermerks. Die vorhandenen Anforderungen werden durch dieses Begleitkonzept nicht neu festgelegt.
 
 Grundlage: Konstruktionsziel und ergänzende Vorgaben des Autors vom 31.10.2026; Abgleich mit der Anforderungsspezifikation Dual-Armführung v0.4 vom 29.10.2026 einschließlich AF-21-Nachtrag. Die nachfolgenden Kennzahlen und Budgetgleichungen sind Vorschläge dieses Konzeptentwurfs. Zahlenbeispiele sind Rechenbeispiele, keine Apparaturparameter oder nachgewiesenen Auslegungen. Die bestehende Spezifikation wird durch diesen Entwurf nicht geändert.
 
@@ -78,7 +78,7 @@ $$
 \eta_H = \frac{6}{46} \approx 13{,}0\,\%.
 $$
 
-40 kg übrige Apparatur stehen 6 kg Hauptmassen gegenüber, entsprechend etwa 6,67 kg übriger Masse je Kilogramm Hauptmasse. Hinsichtlich der angestrebten Massenkonzentration ist dieses Verhältnis ungünstig. Die Eignung für eine konkrete Messaufgabe hängt zusätzlich von den damit erreichten Eigenschaften ab.
+40 kg übrige Masse stehen 6 kg Hauptmassen gegenüber, entsprechend etwa 6,67 kg übriger Masse je Kilogramm Hauptmasse. Hinsichtlich der angestrebten Massenkonzentration ist dieses Verhältnis ungünstig. Die Eignung für eine konkrete Messaufgabe hängt zusätzlich von den damit erreichten Eigenschaften ab.
 
 Die 30 kg sind noch in bewegte und trägerfeste Anteile zu zerlegen. Ohne diese Aufteilung lässt sich η_H,bew nicht bestimmen. Falls die gesamten 30 kg relativ zum Träger bewegt würden und die 10 kg trägerfest wären, ergäbe sich η_H,bew = 6/36 ≈ 16,7 %; das ist lediglich ein bedingter Rechenfall.
 
@@ -225,7 +225,7 @@ Halterungen, Bewegungsapparate und Kopplungen sind gleichberechtigte Variationsg
 
 ## 7. Arbeitsablauf für den Variantenvergleich
 
-1. Modell- und Messaufgabe sowie die dafür benötigten Funktionen und Messmittel festlegen. Hauptmassen, Schwerpunktbahnen, Hub, Frequenz, Phasenbereich und Beschleunigungs-/Ruckgrenzen für die betreffende Variante bestimmen. Die 3 × 2 kg aus diesem Gespräch bleiben bis zu einer solchen Festlegung ein Beispiel.
+1. Modell- und Messaufgabe sowie die dafür benötigten Funktionen und Messmittel festlegen. Hauptmassen, Schwerpunktbahnen, Hub, Frequenz, Phasenbereich und Beschleunigungs-/Ruckgrenzen für die betreffende Variante bestimmen. Die 3 × 2 kg aus dem Beispiel des Autors (Abschnitt 3.3) bleiben bis zu einer solchen Festlegung ein Beispiel.
 2. Alle Baugruppen mit Masse, Funktionszuordnung und Bewegungsart erfassen. Bei bewegten Körpern Schwerpunktlage und Trägheit ergänzen; Unsicherheiten der Schätzwerte angeben.
 3. η_H und η_H,bew berechnen und daraus vorläufige Budgets für Arme, Aufnahmen, Antrieb, Träger und Versorgung ableiten. Gemeinsame Bauteile nur einmal zählen. Den Weg der Massenänderung und die erwarteten Zielkonflikte benennen.
 4. Bei reinen Konstruktionsvergleichen die Kandidaten auf dieselben geforderten Hauptmassenbahnen auslegen. Bei gezielten Messvarianten bewusst geänderte Massen, Materialien, Profile, Funktionen oder Kopplungen sowie die gleich gehaltenen Größen festlegen. Tatsächlich erreichbare Geschwindigkeit, Bahn- und Phasentreue sowie Spitzenlasten mitprüfen.
@@ -262,4 +262,4 @@ Ergänzung vom 31.10.2026 auf Vorgabe des Autors: Zielkonflikte zwischen Hauptma
 - [2] Drake, MIT: [Spatial Mass Matrix (Spatial Inertia)](https://drake.mit.edu/doxygen_cxx/group__multibody__spatial__inertia.html). Masse, Schwerpunktlage und Rotationsträgheit eines starren Körpers; abgerufen am 31.10.2026.
 - [3] Russ Tedrake, MIT: [Underactuated Robotics – Multi-Body Dynamics](https://underactuated.mit.edu/multibody.html). Mehrkörperdynamik und kinematische Zwangsbedingungen; abgerufen am 31.10.2026.
 
-Das Konstruktionsziel und die ergänzten Variationsmöglichkeiten stammen aus dem vorliegenden Gespräch. Kennzahlen, Budgetbeispiele, Einordnung der Zielkonflikte und der vorgeschlagene Arbeitsablauf sind projektspezifische Ableitungen. Die Quellen begründen die mechanische Modellierung; sie belegen keine technische Erreichbarkeit der beispielhaften Massenbudgets und keine allgemeine monotone Beziehung zwischen Hauptmassenanteil, Stabilität und Geschwindigkeit.
+Das Konstruktionsziel und die ergänzten Variationsmöglichkeiten stammen aus den Vorgaben des Autors vom 31.10.2026. Kennzahlen, Budgetbeispiele, Einordnung der Zielkonflikte und der vorgeschlagene Arbeitsablauf sind projektspezifische Ableitungen. Die Quellen begründen die mechanische Modellierung; sie belegen keine technische Erreichbarkeit der beispielhaften Massenbudgets und keine allgemeine monotone Beziehung zwischen Hauptmassenanteil, Stabilität und Geschwindigkeit.

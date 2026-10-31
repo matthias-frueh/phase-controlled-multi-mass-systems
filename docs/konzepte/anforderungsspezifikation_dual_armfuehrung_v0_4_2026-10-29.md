@@ -9,8 +9,8 @@ Zuordnung: Antriebsoption „programmierbarer Aktor“ (AP-01; Arbeitsübersicht
 Bezug: Formelverzeichnis v2.8 (§3 Gl. 3–6, §10.6 Egg-Profil und aktiv geführte Rückholung, §10.7 Referenzprofil, §11.1 Anschluss an Linie B und C); Arbeitspapier v2.5; Präregistrierung v2 (Entwurf); Anschlusspapier Robotik (Evidenzmatrix L4-027 bis L4-030); `PCMMS_Arbeitsuebersicht_Technik_2026-10-29.md` (nachfolgend AÜT-Punkt); Abgleichnotiz 2026-10-29 v4
 Lizenz: CC BY 4.0 (Ordner docs/, siehe LICENSE-CC-BY-4.0)
 
-> **Vermerk (29.10.2026).** Originaldatei `PCMMS_Anforderungsspezifikation_Dual-Armfuehrung_v0_4_2026-10-29.md`,
-> Entwurf v0.4 vom 29.10.2026; hier unverändert bis auf diesen Vermerk, die Lizenzzeile, den Nachtrag zu AF-21 vom 29.10.2026 und den Querverweis vom 31.10.2026 in Abschnitt 6 (Änderungslog). Anforderungsspezifikation für eine duale,
+> **Vermerk (29.10.2026, Nachtrag 31.10.2026).** Originaldatei `PCMMS_Anforderungsspezifikation_Dual-Armfuehrung_v0_4_2026-10-29.md`,
+> Entwurf v0.4 vom 29.10.2026; hier unverändert bis auf diesen Vermerk, die Lizenzzeile, den Nachtrag zu AF-21 vom 29.10.2026 und den Querverweis vom 31.10.2026 in Abschnitt 6 (beides im Änderungslog vermerkt). Anforderungsspezifikation für eine duale,
 > armähnliche Führung der inneren Massen (Ebene L2), angelegt nach der Abgrenzung der Linien A/B/C durch den Autor vom
 > 29.10.2026 ([`../abgleichnotiz_2026-10-29_v4.md`](../abgleichnotiz_2026-10-29_v4.md)). Zuordnung: Linie B nach
 > dieser Abgrenzung, Stufe S5 / AP-28; zugleich eine Ausprägung der Antriebsoption „programmierbarer Aktor“ (AP-01,
