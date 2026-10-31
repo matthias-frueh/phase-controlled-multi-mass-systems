@@ -181,7 +181,7 @@ Kennung AF-xx. Prüfart: R = Rechnung/Simulation, I = Inspektion/Dokument, P = P
 - `PCMMS_Arbeitsuebersicht_Technik_2026-10-29.md`: Punkte 03, 04, 09, 10, 12, 13, 17–19, 22–25, 32, 33, 36, 57, 65.
 - Abgleichnotiz 2026-10-29 v4 (Entscheidungen D-1 bis D-6, Rückmeldungen R-1 bis R-7, Reststellenprüfung und Korrekturen K-1 bis K-4).
 - Querverweis (31.10.2026): Konzeptentwurf [Massenkonzentration auf die bewegten Hauptmassen](massenkonzentration_v0_1_2026-10-31.md) v0.1 – Massenteilung, Hauptmassenanteile und Variantenvergleich als Begleitung der Auslegung zu AF-01, AF-06/07, AF-08/09, AF-21 und AF-23 bis AF-25; die Anforderungen dieser Spezifikation bleiben unverändert.
-- Querverweis (31.10.2026): Konzeptentwurf [Schwerkraftbezogene Messung und lageadaptive Bewegungsführung](messoption_schwerkraftbezug_lageadaptive_fuehrung_v0_1_2026-10-31.md) v0.1 – Gewichtskraftbezug, Lastabweichung gegenüber Mg − F_ext,z, Positions- und Orientierungsreferenz und Betriebsarten als Mess- und Führungsoption zu AF-01/02, AF-06 bis AF-09, AF-12/16, AF-17 bis AF-22 und AF-23 bis AF-25; die Anforderungen dieser Spezifikation bleiben unverändert.
+- Querverweis (31.10.2026): Konzeptentwurf [Schwerkraftbezogene Messung und lageadaptive Bewegungsführung](messoption_schwerkraftbezug_lageadaptive_fuehrung_v0_1_2026-10-31.md) v0.1 – Gewichtskraftbezug, Lastwirkung gegenüber der Lastreferenz Mg − F_ext,z mit Trennung von Anzeigekanal, Lastabweichung und isolierbarem Dynamikanteil, Positions- und Orientierungsreferenz und Betriebsarten als Mess- und Führungsoption zu AF-01/02, AF-06 bis AF-09, AF-12/16, AF-17 bis AF-22 und AF-23 bis AF-25; die Anforderungen dieser Spezifikation bleiben unverändert.
 
 ## Änderungslog
 
