@@ -10,7 +10,7 @@ Bezug: Formelverzeichnis v2.8 (§3 Gl. 3–6, §10.6 Egg-Profil und aktiv gefüh
 Lizenz: CC BY 4.0 (Ordner docs/, siehe LICENSE-CC-BY-4.0)
 
 > **Vermerk (29.10.2026).** Originaldatei `PCMMS_Anforderungsspezifikation_Dual-Armfuehrung_v0_4_2026-10-29.md`,
-> Entwurf v0.4 vom 29.10.2026; hier unverändert bis auf diesen Vermerk, die Lizenzzeile und den Nachtrag zu AF-21 vom 29.10.2026 (Änderungslog). Anforderungsspezifikation für eine duale,
+> Entwurf v0.4 vom 29.10.2026; hier unverändert bis auf diesen Vermerk, die Lizenzzeile, den Nachtrag zu AF-21 vom 29.10.2026 und den Querverweis vom 31.10.2026 in Abschnitt 6 (Änderungslog). Anforderungsspezifikation für eine duale,
 > armähnliche Führung der inneren Massen (Ebene L2), angelegt nach der Abgrenzung der Linien A/B/C durch den Autor vom
 > 29.10.2026 ([`../abgleichnotiz_2026-10-29_v4.md`](../abgleichnotiz_2026-10-29_v4.md)). Zuordnung: Linie B nach
 > dieser Abgrenzung, Stufe S5 / AP-28; zugleich eine Ausprägung der Antriebsoption „programmierbarer Aktor“ (AP-01,
@@ -180,9 +180,11 @@ Kennung AF-xx. Prüfart: R = Rechnung/Simulation, I = Inspektion/Dokument, P = P
 - Anschlusspapier Robotik (über Evidenzmatrix L4-027 bis L4-030).
 - `PCMMS_Arbeitsuebersicht_Technik_2026-10-29.md`: Punkte 03, 04, 09, 10, 12, 13, 17–19, 22–25, 32, 33, 36, 57, 65.
 - Abgleichnotiz 2026-10-29 v4 (Entscheidungen D-1 bis D-6, Rückmeldungen R-1 bis R-7, Reststellenprüfung und Korrekturen K-1 bis K-4).
+- Querverweis (31.10.2026): Konzeptentwurf [Massenkonzentration auf die bewegten Hauptmassen](massenkonzentration_v0_1_2026-10-31.md) v0.1 – Massenteilung, Hauptmassenanteile und Variantenvergleich als Begleitung der Auslegung zu AF-01, AF-06/07, AF-08/09, AF-21 und AF-23 bis AF-25; die Anforderungen dieser Spezifikation bleiben unverändert.
 
 ## Änderungslog
 
+- v0.4, Querverweis (31.10.2026): Abschnitt 6 um den Verweis auf den Konzeptentwurf Massenkonzentration ergänzt. Keine Anforderung geändert; Versionsnummer und Dateiname bleiben.
 - v0.4, Nachtrag (29.10.2026, Folgecommit in PR #27): AF-21 nach der Prüfung des PR durch den Autor und die externe Rückmeldung präzisiert – verglichen werden die zentrierten Größen S_true − ⟨S_true⟩ und F_c − ⟨F_c⟩; das Residuum enthält die Schwankungen aller äußeren Kräfte (Auftrieb, F_par, Medienkraft) und wird erst nach deren getrennter Bestimmung der Medienkraft zugeordnet; „in Linie B kein Nulltest“ ersetzt durch „Bilanzkontrolle nach Abzug der getrennt bestimmten äußeren Kräfte“. Keine weitere Änderung; Versionsnummer und Dateiname bleiben.
 - v0.4 (29.10.2026, im Dokumentations-PR): vier Korrekturen nach Prüfung des Autors (K-1 bis K-4, Abgleichnotiz v4 Abschnitt 7): K-1 AF-30 – Vorzeichen der Fesselbilanz berichtigt, ⟨F_F⟩ = F_auf − M·g + ⟨F_med,z⟩ (v0.3 hatte ein Minus vor der Medienkraft); K-2 AF-21 – Nulltest vollständig formuliert, Bedingung an den zeitveränderlichen Anteil von F_ext,z benannt, in Linie B kein Nulltest; K-3 AF-30 – „ein Lauf, ein Regime“ ersetzt durch eindeutige Versuchskonfiguration je Lauf mit Erkennung und getrennter Auswertung von Kontaktzustandswechseln; K-4 AF-29 – Leerlauf-Modus als Gegenprobe statt Abdeckung, thermische Vergleichbarkeit nachzuweisen, Füllgastemperatur als Kanal. Keine inhaltliche Festlegung darüber hinaus geändert.
 - v0.3 (29.10.2026): Reststellenprüfung vor dem Dokumentations-PR (dritte Rückmeldung R-6): AF-07 – verbliebener Satz „Für Linie B sind horizontale Freiheitsgrade vorzusehen“ entfernt, Freiheitsgrade bleiben Teil der Kinematikauslegung (O-6); AF-29 – Driftmechanismus nach Hüllentyp unterschieden (gespannt: Umgebungsdichte; frei: Gas–Luft-Temperaturdifferenz, Feuchte, Permeation), betriebskorrelierte Drift durch Eigenwärme ergänzt, Leerlauf-Modus als Gegenprobe benannt, Überschlag auf 0,6–0,7 m³ und 7–8 N präzisiert (O-14 neu); AF-30 – Vorzeichenkonvention der Fesselbilanz ergänzt, Gl. 3 und 6 nachgerechnet; Abschnitt 2 (Liftoff-Bedingung) gegen Gl. 4 nachgerechnet, unverändert. Keine inhaltliche Festlegung geändert.
