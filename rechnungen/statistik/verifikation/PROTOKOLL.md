@@ -180,7 +180,7 @@ besteht, kann H1 signifikant falsifizieren“ gilt daher für nichtlineare Artef
 ## STA-00 · Lokale Überarbeitung → **bestätigt** (Stichprobe)
 
 md5 der Abschnitte A8, A9.6, Tabelle F in Repo- und lokaler Fassung identisch; A4 verschieden; die PB1-Zeilen (0,0327/0,0269 N)
-kommen im diff nicht vor.
+kommen im Diff nicht vor.
 
 ## Nicht geprüft
 

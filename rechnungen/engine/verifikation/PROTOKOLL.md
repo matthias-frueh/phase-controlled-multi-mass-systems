@@ -31,7 +31,7 @@ Hüpfzustand der Insel (λ 75,8154 % gegen 75,8156 % bei Δt/2); Impulsbilanz im
 
 Eigene Fehlerprüfung: Grad/Radiant (τ über Grad, Fourierphase über `np.radians`), Phasenvorzeichen (Modul k bei
 e(t − τ_k), Koeffizient P_k·e^{−ikφ}), Linksrechteck gegen RK4-gewichtet getrennt ausgewiesen (`Q`), Startdefinition
-imp: ż(0) = −ē′(0), Rampe: V(0) = 0. Ein Fehler wurde während der Arbeit gefunden und behoben: die erste
+imp: ż(0) = −ē′(0), Rampe: V(0) = 0. Ein Fehler wurde während der Arbeit gefunden und behoben: Die erste
 Fassung von `vk_kontakt.py` summierte die Fourier-Reihe direkt auf 10⁵ Punkten (zu langsam, nicht falsch);
 ersetzt durch exakte irfft-Auswertung, Kontrolle direkte Summe gegen irfft: 9·10⁻¹⁶ N.
 
@@ -74,7 +74,7 @@ Starts std/imp/Orbit; (d) SA-Stöße Δż = ±0,3, ±1, ±3 m/s an Zyklusphase 0
 | (110°,252°) | −0,178137 | 1,31637 / 1,31635 N | 10,954 N |
 
 |µ| = exp(−1,2308) = 0,2921 (analytisch). SA: alle Starts → derselbe Orbit, Einschwingen |Δż| < 10⁻⁶ nach
-0,8–0,9 s, < 10⁻⁸ nach 1,0–1,3 s. Stöße: alle 72 Läufe enden im Kontakt (λ = 0 in den letzten 5 s, F_min
+0,8–0,9 s, < 10⁻⁸ nach 1,0–1,3 s. Stöße: Alle 72 Läufe enden im Kontakt (λ = 0 in den letzten 5 s, F_min
 identisch mit dem Orbit), obwohl die Stöße zwischenzeitlich bis zu 100 % Liftoff je Zyklus erzeugen.
 
 **Reproduktion.** `timeout 540 python3 vk_kontakt.py base`; `for r in "0 2" "2 4" "4 6"; do timeout 540 python3 vk_kontakt.py kicks $r; done`
@@ -106,7 +106,7 @@ bei passender Phase genügt ≤ 0,046 N·s (0,07 m/s). Im Befundtext ist die Spa
 
 ---
 
-## ENG-03 Hot-Spot (0°, 208,421°) — **eingeschränkt**: das lange Einschwingen ist ein Δt-Artefakt
+## ENG-03 Hot-Spot (0°, 208,421°) — **eingeschränkt**: Das lange Einschwingen ist ein Δt-Artefakt
 
 **Frage.** Ist das Einschwingen (AP §8.3: 18,8 s; CSV 5–15 s: −43,46 mN, λ 74,35 %, F_max 44,1 N) eine Eigenschaft
 des Modells, und ist seine Dauer „keine Eigenschaft der Konfiguration“ (Gruppe: 7–19 s je nach 1-ULP-Rundung)?
@@ -164,7 +164,7 @@ nur für die Festschritt-Trajektorie bei Δt = 50 µs; bei Δt/2 und im exakten 
 nicht (ENG-03). Die Korrektur der Quelle sollte lauten: Alle Einträge der Tabelle sind Numerik (Transient der
 50-µs-RK4 plus Linksrechteck-Rest), physikalisch gilt ⟨N⟩ = Mg + R mit |R| ≤ 4 ppm ab 5 s.
 
-**Reproduktion.** wie ENG-03 → `vk_hotspot_*_ausgabe.txt`
+**Reproduktion.** Wie ENG-03 → `vk_hotspot_*_ausgabe.txt`
 
 ---
 
@@ -255,7 +255,7 @@ Zusätzlich das ganze Raster mit SA (std, CSV-Phasen, 20 s) und mit SA (imp, 30 
   Punkte; > 5: 17/93; λ > 74 % erreichbar in 40 von 70 Bahnen; Mediane std 32,27 / imp 44,86 / ramp2 27,95 %;
   Punkte λ > 74 %: 140 / 165 / 119; verletzte Punkte/Bahnen (λ > 0,5, 30–40 s): std 54/11, imp 51/9, ramp2 20/4
   (Gruppe: 54/10, 57/10, 18/3). Alle Kernzahlen der Gruppe mit anderer Diskretisierung reproduziert.
-- SA-Fortsetzung: in **allen 18** markierten Bahnen bleiben zwei Zustände über 20 s getrennt (z. B. Bahn 37: 7,87 % P1
+- SA-Fortsetzung: In **allen 18** markierten Bahnen bleiben zwei Zustände über 20 s getrennt (z. B. Bahn 37: 7,87 % P1
   gegen 75,86 %; Bahn 38: 24,57 % gegen 75,52 %; Bahn 5: 28,40 % P2 gegen 75,92 %). Die 99 Punkte sind damit auch im
   exakten Modell eine Untergrenze.
 - SA std-Raster: Symmetrieverletzungen λ > 0,5: 57/11 (5–15 s), 52/11 (10–20 s) gegen CSV 56/11; 9 der 11 CSV-Bahnen

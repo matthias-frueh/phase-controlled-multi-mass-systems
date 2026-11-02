@@ -43,7 +43,7 @@ Beitragsbehauptungen in aktiven Dokumenten
 
 Aufruf jeweils: `PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=../../code timeout 540 python3 <skript>`. Kein `__pycache__` im Repo-Baum (geprüft), `git status` leer.
 
-Analytische Eigenleistung (ohne Skript): Die 1-FG-Bewegungsgleichung (P2 ENG-01; `code/linear_solver.py` Z. 4–8: M·ẍ + C·ẋ + K·x = −μ·M·ā(t)) ist formgleich mit einem einseitig gestützten Einmassenschwinger unter Fußpunkterregung mit der Beschleunigung μ·ā(t) = (μ/3)·Σ aₖ(t − τₖ). Im Liftoff-Bereich ist das Modell daher ein Impact-Oszillator bzw. „Bouncing Ball“ mit nicht-sinusförmiger Fußpunktbeschleunigung; die Phasenlage formt nur die Wellenform dieser wirksamen Anregung (Φₖ). Der Ähnlichkeitsparameter ε = μ·π²·Hub·f²/(THOLD·g) (P2 AUS-07) ist μ·a_hold,max/g (Spitzenbeschleunigung der Haltephase 11,68 m/s² bei RTOP = 5 mm, P1 L6a-035), also das Gegenstück der dimensionslosen Beschleunigung Γ der Bouncing-Ball-Literatur.
+Analytische Eigenleistung (ohne Skript): Die 1-FG-Bewegungsgleichung (P2 ENG-01; `code/linear_solver.py` Z. 4–8: M·ẍ + C·ẋ + K·x = −μ·M·ā(t)) ist formgleich mit einem einseitig gestützten Einmassenschwinger unter Fußpunkterregung mit der Beschleunigung μ·ā(t) = (μ/3)·Σ aₖ(t − τₖ). Im Liftoff-Bereich ist das Modell daher ein Impact-Oszillator bzw. „Bouncing Ball“ mit nichtsinusförmiger Fußpunktbeschleunigung; die Phasenlage formt nur die Wellenform dieser wirksamen Anregung (Φₖ). Der Ähnlichkeitsparameter ε = μ·π²·Hub·f²/(THOLD·g) (P2 AUS-07) ist μ·a_hold,max/g (Spitzenbeschleunigung der Haltephase 11,68 m/s² bei RTOP = 5 mm, P1 L6a-035), also das Gegenstück der dimensionslosen Beschleunigung Γ der Bouncing-Ball-Literatur.
 
 ## 3 Bewertungsregeln
 

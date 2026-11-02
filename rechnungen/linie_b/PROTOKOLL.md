@@ -141,7 +141,7 @@ export PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=../../code
 
 - **Methode [R]:**
   - Egg-Lageprofil der Engine (`finesweep.z_egg_zdd`), Hub 7,692 mm, v_max = 0,2417 m/s, a = −11,68 … +21,69 m/s².
-  - Modul als Kugel R = 1,45 cm (100 g Stahl) bzw. 2,5 cm, oder als breitseitig angeströmte Scheibe R = 4 cm [A].
+  - Modul als Kugel R = 1,45 cm (100 g Stahl) bzw. 2,5 cm oder als breitseitig angeströmte Scheibe R = 4 cm [A].
   - Stokes-Kugel exakt; quadratischer Widerstand mit C_D = 2 als **obere Schranke**; Schallabstrahlung R_rad = (π/3)ρc·a²(ka)⁴.
 - **Ergebnis:**
   - Kennzahlen: KC = 0,30–0,83, β = 560–4300, δ/a = 0,18, Re_s = 62. Die Module selbst liegen also nicht im Bereich KC ≪ 1.

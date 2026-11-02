@@ -54,7 +54,7 @@ Aufruf mit `PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=../../code timeout 540`, Arbeit
 - Literatur nur aus dem Bestand; Prüfvermerke des Bestands sind Behauptungen des Bestands.
 - Ergebnisse der Schwesterrollen (`zusatz_p2`, `bewertung_a`) nur als ergänzende Analyseergebnisse, nicht als Bestand.
 
-## 4 Hauptbefunde (Kurz)
+## 4 Hauptbefunde (kurz)
 
 1. Kern der Rolle hält: keine empirischen Ergebnisse; Mechanik bekannt (1-FG = Fußpunkterregung, linear_solver.py Z. 4–8); Beitrag = enge Kombination als Messfrage plus kleine methodische Bausteine; Literaturbestand dünn; viele überzogene Aussagen bestätigt.
 2. Kategorien uneinheitlich: Standardanwendungen werden mal „methodischer_beitrag“ (⟨N⟩-Kontrolle, Gleichrichtung, Superposition, Präreg, Spiegelpaare), mal „bekannte_mechanik“ (Triaden, Äquivalenzlogik, Ähnlichkeitsgesetz) genannt.

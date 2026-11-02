@@ -89,7 +89,7 @@ zurückgezogen. Schon ein einzelnes Modul kann bei geänderter Kontaktübertragu
 linksschief werden. Die positiven Werte auf den geprüften Linien des Referenzrasters (A3) bleiben
 beschränkte Simulationsbefunde und begründen keine allgemeine Regel. Auch das Vorzeichen an einem
 einzelnen dephasierten Punkt hängt vom Kontakt ab (Triphasik-Punkt: γ₁ = +0,067 bei K = 10⁴ N/m,
-−0,450 bei starrer Auflage). Statt der zurückgezogenen Regel sieht v2 weiterhin H4 vor: das Vorzeichen
+−0,450 bei starrer Auflage). Statt der zurückgezogenen Regel sieht v2 weiterhin H4 vor: Das Vorzeichen
 wird gegen die Superpositionsvorhersage aus den gemessenen Einzelmodulantworten geprüft.
 
 **Schwellen.** ε_ctrl wird hier mit einer Definition von σ̂_ref festgelegt (§4, §8.8). Die Einordnung (§4)
@@ -161,7 +161,7 @@ ein Effekt; er macht den Lauf ungültig (G1) und kann den Messbetrieb stoppen (S
 **H1 — Superposition (primär).** An jedem der 21 Schnittpunkte stimmen F_min − ⟨N⟩ sowie Real- und
 Imaginärteil von N₁, N₂, N₃ der Konfigurationsmittelkurve mit der Superpositionsvorhersage überein
 (147 Tests). Bestätigt (äquivalent) ist H1 nur, wenn jede der 147 Abweichungen gegen beide Vorhersagen ŷ⁰
-und ŷ¹ (§8.2) nachweislich innerhalb der Äquivalenzgrenze ±Δ_q liegt, einem Viertel der vorhergesagten
+und ŷ¹ (§8.2) nachweislich innerhalb der Äquivalenzgrenze ±Δ_q liegt, eines Viertels der vorhergesagten
 Struktur über den Schnitt (Δ_q = 0,25·D_q, D_q als Punktwert aus ŷ⁰; Äquivalenztest, PB1, §8.5; Arbeitsfestlegung,
 §12). Falsifiziert (relevant abweichend) ist H1 nur, wenn an einem Test die Abweichung gegen beide Vorhersagen
 nachweislich größer als die Relevanzgrenze Δ_rel = Δ_q ist (Mindesteffekttest, §8.5; Arbeitsfestlegung, §12).
@@ -256,7 +256,7 @@ Entscheidungsrelevant; die vollständige Tabelle steht im Anhang A1.
 ### 5.1 Aufbau
 
 Teil A geht für V1 von drei Wägezellen im Dreieck, optischem Wegkanal, drei Phasenencodern mit Indeximpuls,
-Beschleunigungssensor und Temperatur aus (Kanäle: A9.1), mit Nocke oder programmierbarem Aktuator für das
+Beschleunigungssensor und Temperatur aus (Kanäle: A9.1), mit Nocke oder programmierbarem Aktor für das
 Profil; festgelegt ist dieser Kanalsatz damit nicht. Das Exposé nennt die drei Wägezellen im Dreieck;
 Wegkanal, Phasenencoder, Beschleunigungssensor und Temperaturfühler stehen dort als erwogen, die Kanalzahl
 als offen.
