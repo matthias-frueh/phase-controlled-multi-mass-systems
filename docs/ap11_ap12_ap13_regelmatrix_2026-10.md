@@ -100,11 +100,11 @@ Befunde mit möglicher Ergebniswirkung stehen mit Auswirkung und betroffenem Pfa
 | `h1.delta_rel` | Relevanzgrenze Δ_rel,q | §8.5, A8, §12 (I) | arbeitsfestlegung | "gleich_delta_q" | h1, teil_b |
 | `h1.sensitivitaet` | Sensitivitätsvarianten (ohne Ausgangswirkung) | §8.5, §8.9, A9.9 | arbeitsfestlegung | {"faktor": 0.1, "fassung_A": true, "c_B": true} | h1, teil_b |
 | `h1.grenzen_quelle` | D_q, Δ_q, Δ_rel als Punktwert aus ŷ⁰ | §8.5, A9.11, §12 (I) | arbeitsfestlegung | "yhat0_teil_b" | h1, teil_b |
-| `h1.tost` | PB1: TOST mit t(0,95; ν_eff), IUT gegen ŷ⁰ und ŷ¹, ohne „kein |z| > c“ | §8.5, A8, Tab. F | arbeitsfestlegung | 0.95 | h1, teil_b |
+| `h1.tost` | PB1: TOST mit t(0,95; ν_eff), IUT gegen ŷ⁰ und ŷ¹, ohne „kein \|z\| > c“ | §8.5, A8, Tab. F | arbeitsfestlegung | 0.95 | h1, teil_b |
 | `h1.vollstaendigkeit` | Bestätigung nur bei 21 auswertbaren Punkten | §9.3 | regeltext | 21 | h1, teil_b |
-| `h1.mindesteffekt` | |r⁰| − c·u⁰ > Δ_rel und |r¹| − c·u¹ > Δ_rel, gleiches Vorzeichen | §8.5, §9.3 | regeltext | "beide_gleiches_vorzeichen" | h1, teil_b |
+| `h1.mindesteffekt` | \|r⁰\| − c·u⁰ > Δ_rel und \|r¹\| − c·u¹ > Δ_rel, gleiches Vorzeichen | §8.5, §9.3 | regeltext | "beide_gleiches_vorzeichen" | h1, teil_b |
 | `h1.c_quelle` | kritischer Wert c von H1 | §8.4, A9.3 Nr. 10 | regeltext | "teil_b" | h1, teil_b |
-| `h1.c_quantil` | Quantil von max|z⁰| | §8.4 | regeltext | 0.95 | h1, teil_b |
+| `h1.c_quantil` | Quantil von max\|z⁰\| | §8.4 | regeltext | 0.95 | h1, teil_b |
 | `h1.c_pruefschwelle` | Prüfrate über 0,069 → gepooltes Quantil | §8.4, A8, Tab. F | festlegung | 0.069 | h1, teil_b |
 | `h1.c_rauschmodelle` | Rauschmodelle und Wahl des Quantils für c | §8.4, §12 Rauschmodelle | offen → entwicklungsprüffall | "a" | h1, teil_b |
 | `h1.bias` | Rauschbias b̂⁰, b̂¹ getrennt mit u(b̂); dieselbe Korrektur in c | §5.4, §8.3, A9.5 | regeltext | "getrennt" | h1, teil_b |
@@ -150,7 +150,7 @@ Befunde mit möglicher Ergebniswirkung stehen mit Auswirkung und betroffenem Pfa
 | `h3.mc` | Monte-Carlo-Ziehungen | A9.7, Tab. F | festlegung | 10000 | h3 |
 | `h3.m` | Testzahl der Familie | §8.4, A8 | regeltext | 18 | h3 |
 | `h4.m` | Testzahl (einseitig) | §8.4, A8 | regeltext | 23 | h4 |
-| `h4.aufnahme` | Aufnahme in V: |γ̂₁| ≥ (c₄ + 1,645)·u_c,erw(γ₁) | §3 H4, §8.5 | regeltext | 1.645 | h4 |
+| `h4.aufnahme` | Aufnahme in V: \|γ̂₁\| ≥ (c₄ + 1,645)·u_c,erw(γ₁) | §3 H4, §8.5 | regeltext | 1.645 | h4 |
 | `e3.schwellen` | Schwellen von E3 (0,1°, q_tol) | §8.10, §12 Schwellen von E3 | offen → entwicklungsprüffall | {"phase_grad": 0.1, "q_tol": 0.00058} | kontrollen |
 | `e3.pruefzahl` | Zahl der E3-Prüfungen (Bonferroni) | A9.13, §12 | offen → entwicklungsprüffall | "zwei_je_konfiguration_plus_eins" | kontrollen |
 | `e3.rueckfall` | Rückfall von E3 | §8.10, A9.11, §12 | offen → entwicklungsprüffall | "ganz" | kontrollen |
@@ -167,7 +167,7 @@ Befunde mit möglicher Ergebniswirkung stehen mit Auswirkung und betroffenem Pfa
 | `kontaktast.reserve` | Mindestabstand 25 % der statischen Zelllast | §5.3 (a), Tab. F | festlegung | 0.25 | teil_b, auswertung |
 | `kontaktast.resonanz` | Resonanzabstand k·f ≤ f₁/2 | §5.3 (b), A6, Tab. F | festlegung | 0.5 | teil_b, auswertung |
 | `a6.interpolation` | Abtastrate (π·k_max·f/f_s)²/2 ≤ 10⁻³ | §5.1, A6, Tab. F | festlegung | 0.001 | generator.ebene_z |
-| `planung.bedingung` | P(H1 und H2 bestätigt | exakt) ≥ 0,8, Streuungen an der oberen 80-%-Grenze | §5.4, A9.2, §12 (I) | arbeitsfestlegung | 0.8 | pilot, harness.planung |
+| `planung.bedingung` | P(H1 und H2 bestätigt \| exakt) ≥ 0,8, Streuungen an der oberen 80-%-Grenze | §5.4, A9.2, §12 (I) | arbeitsfestlegung | 0.8 | pilot, harness.planung |
 | `planung.faustregel` | n_min ≥ (3·1°/(SNR·δ_H2))², notwendig, nicht hinreichend | §5.4, A9.2 | regeltext | 3.0 | pilot, harness.planung |
 | `planung.zielfunktion` | Zielfunktion der Laufzahlplanung | §5.4, §12 Messzeit | offen → entwicklungsprüffall | "a" | pilot, harness.planung |
 | `planung.power` | zusätzliche Power-Bedingung (Laufzahl von H1) | §5.4, §12 Rauschmodelle … | offen | – | pilot, harness.planung |
