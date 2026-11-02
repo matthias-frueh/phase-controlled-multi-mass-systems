@@ -10,6 +10,8 @@
 **Redaktioneller Neusatz (02.11.2026).** Die PDF wird wie das Arbeitspapier mit pdfLaTeX und eingebetteten
 Type-1-Schriften neu erzeugt, damit die Schriftwiedergabe auf Android zuverlässiger ist.
 Unicode-Zuordnungen der Schriften unterstützen Kopieren und Suchen. Fachstand und Version bleiben v2.8.
+Die Silbentrennung folgt den deutschen Trennmustern (ngerman) mit Ausnahmen für Zusammensetzungen wie
+Kontakt-übertragung; der Zenodo-DOI im Änderungsvermerk wird nicht mehr getrennt.
 
 ## Änderungen
 

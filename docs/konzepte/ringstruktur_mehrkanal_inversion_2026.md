@@ -99,11 +99,11 @@ Vorgeschlagenes Vorgehen, stufenweise von einfach nach anspruchsvoll. Bewusst no
 
 - **Wellenform-Kennzahlen als reduzierte Beobachter.** Statt der vollen Zeitreihe zunächst nur Schiefe, Liftoff-Anteil, Spitzen-zu-Mittel-Verhältnis und Ungerade/Gerade-Spektralverhältnis als Zielgrößen. Sie sind robust und niedrigdimensional.
 
-- **Parameterschätzung.** Least-Squares oder Bayessche Schätzung von (p, q), die alle Kanäle gleichzeitig erklärt. Kostenfunktion gewichtet Kanal-Residuen mit ihrem jeweiligen Rauschen.
+- **Parameterschätzung.** Least-Squares oder bayessche Schätzung von (p, q), die alle Kanäle gleichzeitig erklärt. Kostenfunktion gewichtet Kanal-Residuen mit ihrem jeweiligen Rauschen.
 
 - **Identifizierbarkeit prüfen.** Welche Parameter sind aus welchen Kanälen überhaupt eindeutig bestimmbar? Sensitivitätsanalyse / Fisher-Information. Entartete Richtungen markieren.
 
-**offen:** Punkt 3: Entscheiden, ob Least-Squares reicht oder ob die Artefakt-Korrelation eine volle Bayessche Behandlung mit Priors auf q erzwingt. Hängt von der Identifizierbarkeit aus Punkt 4 ab, also evtl. iterativ.
+**offen:** Punkt 3: Entscheiden, ob Least-Squares reicht oder ob die Artefakt-Korrelation eine volle bayessche Behandlung mit Priors auf q erzwingt. Hängt von der Identifizierbarkeit aus Punkt 4 ab, also evtl. iterativ.
 
 ## 4.1 Trennung S von C — der Kern
 

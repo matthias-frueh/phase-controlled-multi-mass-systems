@@ -49,7 +49,7 @@ ist mit dem Arbeitspapier v2.4 (Abschnitt 4.8) zurückgezogen. Die alten Gleichu
   liegen gekennzeichnet in [`docs/linie_b/`](docs/linie_b/README.md) (Demonstrator: `docs/konzepte/`,
   `code/demonstrator/`, BLDC- und LRA-Sketche in `code/firmware/`); Messdaten gibt es nicht.
 
-## Inhalt des Repositories
+## Inhalt des Repositorys
 
 | Pfad | Inhalt |
 |---|---|

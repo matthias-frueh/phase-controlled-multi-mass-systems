@@ -244,7 +244,7 @@ gerechnet.
 
 **Begründung.** Die Δt/2-Kontrolle ist für Festschritt-Integratoren gedacht: Die Differenz zweier Läufe mit Δt und
 Δt/2 schätzt den Fehler, wenn die Ordnung des Verfahrens bekannt ist und sich nicht ändert. Der ereignisgenaue Löser
-hat keinen Zeitschritt. Kelvin-Voigt (unterkritisch) löst er je knickfreiem Stück geschlossen, Hunt-Crossley mit
+hat keinen Zeitschritt. Kelvin-Voigt (unterkritisch) löst er je knickfreies Stück geschlossen, Hunt-Crossley mit
 solve_ivp; Kontaktwechsel werden als Nullstellen lokalisiert. Seine Genauigkeit bestimmen vier Parameter:
 
 | Parameter | Standard | bestimmt |

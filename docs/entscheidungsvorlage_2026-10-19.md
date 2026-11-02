@@ -301,7 +301,7 @@ Aufwand (Einschätzung): 1–2 Personentage, keine Kampagnenrechnung.
 - F-a1: Reihenfolge A1 (Referenzfolge zuerst, S3-Wiederholung danach) und Z1?
 - F-a2: Halt: H1 (ausstehende Folgeläufe entfallen; G1-Fall ohne X′ wird nach dem W-Satz vollständig gemessen)?
 - F-a3: Unvollständige Klammer durch Halt: K1 (S1 nicht prüfbar, Platz fehlt) oder K2 (einmalige frische Klammer)?
-- F-a4: N7: gilt eine einzelne S3-Überschreitung im W-Satz als Alarm? Hält ein einzelner Nullpunktalarm im W-Satz
+- F-a4: N7: Gilt eine einzelne S3-Überschreitung im W-Satz als Alarm? Hält ein einzelner Nullpunktalarm im W-Satz
   an, oder wird er nach §8.8 wiederholt? (Halt verkettet mit 0,19–0,27, Wiederholung reproduziert nur mit
   0,057–0,107; gerechnet, siehe „Kette über dasselbe R₀“.)
 - F-a5: Aufwärmen nach jeder Wiederaufnahme oder nur bei Tageswechsel; Ausnahme von „Kein Block über Nacht“; neuer
@@ -381,7 +381,7 @@ Aufwand (Einschätzung): 1–2 Personentage, keine Kampagnenrechnung.
   −4/+2,4 % (gerechnet in der Nachprüfung).
 - **D: phasenkorrigierte Fünftel-Differenz.** Von D_F wird die aus den gemessenen Fünftelzeigern und ŷ⁰
   vorhergesagte Änderung abgezogen; eine Schwelle aus den ebenso korrigierten Piloten gilt für alle
-  Konfigurationen. Misst den Jitter statt ihn zu modellieren und erhielte nach Gaußabschätzung die
+  Konfigurationen. Misst den Jitter, statt ihn zu modellieren, und erhielte nach Gaußabschätzung die
   Trendempfindlichkeit an steilen Punkten (unter B+ wird ein Amplitudentrend von 0,5 % dort nur in 5–7 % der Läufe
   erkannt, gelesen PR #22). Braucht die Fünftelzeiger in der Laufzusammenfassung (Formatänderung) und 3–5
   Personentage.
@@ -1185,7 +1185,7 @@ Arbeitsfestlegungen; sie sind statistisch nicht kalibriert und experimentell nic
 | F-a6, A8, P0.7 | übrige Lesarten im selben Regelstand; A8 um den S1-Weg über das R₁ ergänzen; P0.7 mit höchstens zwölf anderen Läufen zwischen zwei Referenzläufen, 42 Referenzläufe gleichmäßig verteilt, alte Anordnung als historischer Prüfmodus |
 | F-b1 bis F-b5 | B+ als Standard, D als wählbarer Diagnose- und Entwicklungsmodus, bisherige Regel als historische Vergleichsvariante; Arbeitsziel höchstens 1,5 % Fehlausschlüsse je Konfiguration und Lauf unter dem benannten Nullmodell als Zielvorgabe; Fünftelzeiger im Format für D; s̄_P der Piloten mit derselben Mischung; für Lⱼ eine von n abhängige Schwelle, Pooling als Vergleich |
 | F-b6 | R1 und R2 funktional implementiert, kleine Proben; volle Umfänge als Auftragslisten |
-| F-b7 bis F-b13 | Zählung (ii) mit W = 3 und T_UA aus Teil B (Entwicklung 1800 s); Mengen G und A; endgültig beendete Kampagne sperrt ihre Ausgänge; Haltraten berichtet; Zeitformel erweitert; Ziel 0,95 als Bedingung für r über die nicht endgültig beendeten Kampagnen mit technischer Grenze; |A| = 1000 mit Nachziehen und Versuchslimit nur im Kalibrierbeispiel; b̂ über die realisierten Laufzahlen |
+| F-b7 bis F-b13 | Zählung (ii) mit W = 3 und T_UA aus Teil B (Entwicklung 1800 s); Mengen G und A; endgültig beendete Kampagne sperrt ihre Ausgänge; Haltraten berichtet; Zeitformel erweitert; Ziel 0,95 als Bedingung für r über die nicht endgültig beendeten Kampagnen mit technischer Grenze; \|A\| = 1000 mit Nachziehen und Versuchslimit nur im Kalibrierbeispiel; b̂ über die realisierten Laufzahlen |
 | F-c1 bis F-c5 | Option B mit beschreibendem Rückfall je Prüfgröße; m = 43 fest; E3a mit t-Quantilen und Berücksichtigung der Gegenseite; ν konservativ; Amplitudenänderungen 0,5 % und 1 % als kleine Zusatzprüffälle |
 | F-d1 bis F-d8 | Strukturmodell als Standard, Familienanpassung eingebettet; κ je identifizierbarer Komponente mit gemeinsamem Faktor für den ⟨N⟩-Boden, marginale Grenzen ohne gemeinsame Garantie; Planung und nachgelagerte Parameterschätzung im Normtext getrennt; N̄⁽ʲ⁾ für Schätzung und Übertragungstest zulässig, keine Superpositionsresiduen der Piloten; c aus dem Standardmodell, Modellliste als Sensitivität; P0.8 am Arbeitspunkt, Werkzeug 2 für Kandidaten; nicht identifizierbare Komponenten als benannte Sensitivitäten; Planungshaken ohne Szenario, Szenariomodell als unabhängige Referenz; Residuen-Bootstrap optional |
 

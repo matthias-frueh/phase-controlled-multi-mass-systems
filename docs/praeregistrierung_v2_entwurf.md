@@ -76,7 +76,7 @@ Zellverstärkungen aus P0.1 (§8.10).
 
 ## 1 · Verhältnis zu v1 und zum Exposé
 
-v1 fragte qualitativ nach einer Phasenabhängigkeit der Wellenform, die aus dem Newtonschen Gesetz folgt
+v1 fragte qualitativ nach einer Phasenabhängigkeit der Wellenform, die aus dem newtonschen Gesetz folgt
 (§2). v2 prüft quantitative Vorhersagen und registriert zweistufig, weil die Vorhersagen von Größen
 abhängen, die erst Phase 0 misst. Die Bezeichnung H1 ist neu belegt. Alle Änderungen mit Gründen: Anhang A0.
 
@@ -116,7 +116,7 @@ Kontrollschwelle ab (H0).
 
 **Grundlage.** Im Kontaktast ist das Modell linear; jede Harmonische ist die Summe der
 Einzelmodulantworten, N_k = Σⱼ N_k⁽ʲ⁾·e^{−ikφⱼ} (φ₁ = 0), ohne K, C oder μ zu kennen (Anhang A2.1). Dass
-die Wellenform von der Phasenlage abhängt, folgt aus dem Newtonschen Gesetz und ist keine Hypothese. Bei
+die Wellenform von der Phasenlage abhängt, folgt aus dem newtonschen Gesetz und ist keine Hypothese. Bei
 identischen Modulen hat F_min bei 120° für jeden linearen Kontakt einen Knick mit relativem Maximum (A2.2);
 ob er das Maximum des Schnitts ist, hängt vom Kontakt ab (A5).
 

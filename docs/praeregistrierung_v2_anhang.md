@@ -17,7 +17,7 @@ Repositorys oder daraus abgeleitet.
 | v1 | v2 | Grund |
 |---|---|---|
 | Arbeitsfassung, internes Grundlagendokument | zweistufig, extern registriert, an Commit-Hashes gebunden | Vorhersagen hängen von Größen ab, die erst Phase 0 misst |
-| §1: Nachweis phasenabhängiger Strukturen | quantitative Fragestellung (§2) | Die Phasenabhängigkeit folgt aus dem Newtonschen Gesetz |
+| §1: Nachweis phasenabhängiger Strukturen | quantitative Fragestellung (§2) | Die Phasenabhängigkeit folgt aus dem newtonschen Gesetz |
 | §2 H0 im Fehlerbudget | H0 je Lauf, ε_ctrl = 3·σ̂_ref oder 3·σ̂_betr (§8.8) | Schwelle war offen |
 | §2 H1: Wellenformstatistik hängt von der Phase ab | H1 Superposition, H2 Zeltspitze, H3 Kontaktmodell, H4 Vorzeichen der Schiefe | Das qualitative H1 ist praktisch garantiert |
 | §2 H1_fluid | eigene Präregistrierung | anderer Aufbau |
@@ -337,7 +337,7 @@ bezogen auf seinen eigenen Takt, und jede Phasenkonfiguration ist die Summe
 Weil N_k⁽ʲ⁾ in den Einzelmodulläufen gemessen wird, gilt diese Superposition für jedes lineare,
 zeitinvariante System, auch bei ungleichen Modulen und einer beliebigen Übertragung; K, C und μ werden
 nicht gebraucht. Im Zeitbereich lautet sie N̂(t) = N_s + Σⱼ [N⁽ʲ⁾(t − τⱼ) − N_s] mit τⱼ = φⱼ/(2πf). Für
-starre Auflage (H = 1) bleibt N(t) = M·g + Σⱼ m_j·a_j(t − τⱼ), das Newtonsche Gesetz für den ruhenden
+starre Auflage (H = 1) bleibt N(t) = M·g + Σⱼ m_j·a_j(t − τⱼ), das newtonsche Gesetz für den ruhenden
 Körper; dass die Wellenform von der Phasenlage abhängt, ist damit keine offene Frage. Bei identischen
 Modulen entspricht ein Einzelmodullauf im Modell der synchronen Phasung mit μ/3; so wird er im
 Zahlennachweis gerechnet.
@@ -1170,7 +1170,7 @@ Bediener, Ergebnis der Gültigkeitsprüfung mit Grund, Protokollnotizen.
 ### A9.11 Pipelinetest und Simulationen
 
 Einzelmodul- und Kombinationsläufe aus `linear_solver.py` mit Rauschen, Jitter und Drift müssen H1
-bestätigen; Daten mit bekannter Nichtlinearität (etwa ein Hertzscher Kontakt nach Testebene T0 des
+bestätigen; Daten mit bekannter Nichtlinearität (etwa ein hertzscher Kontakt nach Testebene T0 des
 Literaturabgleichs) oder mit eingebauter Modulkopplung müssen H1 falsifizieren, wenn ihr größtes Residuum
 mindestens 2·Δ_rel beträgt (Power-Kriterium unten); knapp über Δ_rel ist „nicht entscheidbar“ zu erwarten.
 Vor Teil B zwei Simulationen (Arbeitsfestlegung vom 20.10.2026; bisher eine Simulation mit den Pilotstreuungen, die
@@ -1238,7 +1238,7 @@ Lauf-zu-Lauf-Streuung je Modul) und in Teil B (mit dem Strukturmodell aus Phase 
 **Zuordnung, H1Z und E3.** Zusätzliche Szenarien, jeweils für beide Arten von Einstellung 2 (zweite Amplitude,
 zweite Frequenz mit festem Hub): Aktorkopplung fester relativer Stärke (0,1 % und 1 %; Simulationsannahmen, keine
 Vorhersagen für die reale Apparatur V1); Kopplung, deren Stärke mit der Last wächst; quadratische Kettenkennlinie;
-Hertzscher Kontakt in Reihe zur Zelle; lastabhängiger Phasenversatz eines Moduls; Wechselwirkung der Antriebe;
+hertzscher Kontakt in Reihe zur Zelle; lastabhängiger Phasenversatz eines Moduls; Wechselwirkung der Antriebe;
 Zelllage- und Zellverstärkungsfehler innerhalb und außerhalb der Unsicherheit aus P0.1. Kriterien:
 
 - Zuordnung (Kriterium offen, §12: feste Anker oder Zuordnungsgrenze): Trefferquote ≥ 0,8 bei der geplanten

@@ -61,7 +61,7 @@ Eine Nachrechnung dieses Rasters mit adaptivem Burn-in (13.09.2026) liegt unter
 
 ### `finesweep_2deg_120_240.csv` — 2°-Feinraster, 441 Konfigurationen
 Erzeugt mit [`../code/finesweep.py`](../code/finesweep.py) (vektorisierte Reproduktion der Engine mit identischen Parametern,
-gegen [`sweep_19x19.csv`](sweep_19x19.csv) geprüft mit `--validate`: liftoff-arme Punkte stimmen auf sechs
+gegen [`sweep_19x19.csv`](sweep_19x19.csv) geprüft mit `--validate`: Liftoff-arme Punkte stimmen auf sechs
 Nachkommastellen, am Punkt (0°, 0°) mit 75,8 % Liftoff weicht F_mean um 1,7·10⁻⁴ N ab —
 Unterschied der Auswertungsreihenfolge zwischen skalarer und vektorisierter Fassung). Fenster φ₂ ∈ [100°, 140°],
 φ₃ ∈ [220°, 260°], Schrittweite 2°.
@@ -77,7 +77,7 @@ Arbeitsverzeichnis: Kontaktkraft N(t) über 0,3 s ab Ende des Einschwingens für
 
 ### `sweep_7x7_sinus.csv` — Kontrollsweep mit Sinusprofil, 49 Konfigurationen
 Gleiche Engine-Parameter, aber sinusförmiges statt Egg-Bewegungsprofil; Raster 7×7 über [0°, 360°),
-Schrittweite 360°/7. Ergebnis: ohne Liftoff ist die Schiefe exakt null; die Phasenkarte kollabiert auf
+Schrittweite 360°/7. Ergebnis: Ohne Liftoff ist die Schiefe exakt null; die Phasenkarte kollabiert auf
 die Zeigersumme R. Das erzeugende Skript (Sinus-Variante der Engine) ist noch nicht im Repository abgelegt.
 Die Sinusamplitude ist nicht mit abgelegt; rekonstruiert aus den Daten beträgt sie (RTOP + RBOT)/2 ≈ 3,85 mm,
 also derselbe Hub von 7,69 mm Spitze-Spitze wie beim Egg-Profil. Mit dieser Amplitude reproduziert die Engine

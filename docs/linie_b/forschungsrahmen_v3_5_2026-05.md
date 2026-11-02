@@ -250,7 +250,7 @@ x = F_eff · L / (M·g)
 
 Torsionswaagen erreichen nN-Schub routinemäßig (eben jene Technik, mit der EM-Drive-Schübe gemessen/widerlegt wurden, Tajmar 2018). M2 ist damit klar messbar, M1 grenzwertig-aber-erreichbar. **Die experimentelle Strategie ist Schubwaage, nicht Fahrschlitten.**
 
-**Messpraktische Grenzen (Aufhängung):** Die stationäre M1-Auslenkung (35 nm) ist mit kommerziellen Interferometern auflösbar, erfordert aber typischerweise Mittelung über viele Minuten und aktive Schwingungsisolierung (Luftfedertisch). Die Relaxationszeit des luftgedämpften Pendels ist vorab zu bestimmen, damit im eingeschwungenen Zustand gemessen wird (sonst alternativ Frequenzgang-/Lock-in-Auswertung). Das thermische (Brownsche) Rauschen ist bei steifer Aufhängung unkritisch (für `M=1 kg`, `k≈Mg/L≈10 N/m`: RMS-Auslenkung `√(k_BT/k) ≈ 2·10⁻¹¹ m`, weit unter 35 nm), wächst aber bei weicherer Aufhängung — Steifigkeit also gegen Auslesegewinn abwägen.
+**Messpraktische Grenzen (Aufhängung):** Die stationäre M1-Auslenkung (35 nm) ist mit kommerziellen Interferometern auflösbar, erfordert aber typischerweise Mittelung über viele Minuten und aktive Schwingungsisolierung (Luftfedertisch). Die Relaxationszeit des luftgedämpften Pendels ist vorab zu bestimmen, damit im eingeschwungenen Zustand gemessen wird (sonst alternativ Frequenzgang-/Lock-in-Auswertung). Das thermische (brownsche) Rauschen ist bei steifer Aufhängung unkritisch (für `M=1 kg`, `k≈Mg/L≈10 N/m`: RMS-Auslenkung `√(k_BT/k) ≈ 2·10⁻¹¹ m`, weit unter 35 nm), wächst aber bei weicherer Aufhängung — Steifigkeit also gegen Auslesegewinn abwägen.
 
 ## 10. Falsifikationskriterium (messgeräte-gekoppelt)
 
@@ -358,7 +358,7 @@ Alle Arbeiten auf Zenodo unter ORCID 0009-0005-9984-4207. Als Belege zu Abschnit
 ## Änderungs-Log v3.4 → v3.5 (fünftes Review — redaktioneller Feinschliff, publikationsreif)
 
 - **Pkt 1 (Sim-Validierung Tempus):** §8 von „reproduziert“ auf „wird erwartungsgemäß reproduzieren (in Vorbereitung)“ — keine bereits erfolgte Validierung behauptet; A-priori-Ausschluss steht unabhängig.
-- **Pkt 2 (Aufhängung):** §9.2 um Relaxationszeit, Schwingungsisolierung und thermisches Rauschen (Brownsche Grenze ~2·10⁻¹¹ m ≪ 35 nm) ergänzt.
+- **Pkt 2 (Aufhängung):** §9.2 um Relaxationszeit, Schwingungsisolierung und thermisches Rauschen (brownsche Grenze ~2·10⁻¹¹ m ≪ 35 nm) ergänzt.
 - **Pkt 3 (A↔D-Kalibrierung):** §6 explizit als *empirische* Korrelation (keine theoretische Vorhersage) formuliert.
 - **Pkt 4 (Zusammenfassung):** „falsifiziert dokumentiert“ → „durch Schwerpunktsatz ausgeschlossen (theoretische Falsifikation)“ — empirische Konnotation entfernt.
 - **Pkt 5 (Redaktion):** `v_drift`-Definition in Klartext; µ-Tabelle unverändert (Aussage „tot“ bleibt korrekt).

@@ -284,7 +284,7 @@ Der Faktor 20·f sichert die Oberwellen der Kontaktflanken, der Faktor 5·f_c di
 | Dummy-Kanal | über die gesamte Kampagne mitlaufend | **[B]** |
 | Auswertung | blockweise; Welch–Satterthwaite bei α = 0,05 | **[B]** |
 
-**Diese Fähigkeit kostet nichts und ersetzt einen erheblichen Teil der klassischen Umgebungsinfrastruktur** — Messfundament, Klimatisierung, EMV-Umgebung. Sie ist methodisch außerdem stärker, weil sie Drift **nachweist** statt sie zu unterstellen. Eine randomisierte Reihenfolge mit Referenzrückkehr trennt Driftartefakte von φ-Abhängigkeit; ein ruhiger Raum tut das nicht.
+**Diese Fähigkeit kostet nichts und ersetzt einen erheblichen Teil der klassischen Umgebungsinfrastruktur** — Messfundament, Klimatisierung, EMV-Umgebung. Sie ist methodisch außerdem stärker, weil sie Drift **nachweist**, statt sie zu unterstellen. Eine randomisierte Reihenfolge mit Referenzrückkehr trennt Driftartefakte von φ-Abhängigkeit; ein ruhiger Raum tut das nicht.
 
 Sie ist deshalb **nicht** eine Fähigkeit unter zehn, sondern der methodische Hebel, der die Infrastrukturfrage entschärft.
 
@@ -328,7 +328,7 @@ Zielkette: `u(t) → x(t) → y_meas(t) → Auswertefenster → Kennzahl → sta
 
 **[O]** Verfahren jetzt festzulegen, **[G1]** Wert aus F7.
 
-Empfohlene Bindung: ε_phys als Vielfaches der empirischen Wiederholstreuung des jeweiligen Observablen über Blöcke, nicht als absolute Kraftgröße. Damit ist die Schwelle apparaturbezogen und bleibt bei Aufbauänderung nachvollziehbar anpassbar.
+Empfohlene Bindung: ε_phys als Vielfaches der empirischen Wiederholstreuung der jeweiligen Observablen über Blöcke, nicht als absolute Kraftgröße. Damit ist die Schwelle apparaturbezogen und bleibt bei Aufbauänderung nachvollziehbar anpassbar.
 
 ### 5.2 ε_⊥
 

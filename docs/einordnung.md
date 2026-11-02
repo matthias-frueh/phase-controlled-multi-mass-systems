@@ -166,7 +166,7 @@ Die mechanischen Grundelemente von PCMMS sind alle besetzt. Das ist bekannt und 
 Kandidat, bibliografisch ungeprüft.** Arbeiten um Fang und Xu untersuchen Dynamik und Phasenkoordination
 von Mehrmodul-Vibrationsrobotern mit linearen und nichtlinearen Verbindungen und suchen
 Phasendifferenzen, die die mittlere Dauergeschwindigkeit maximieren. Genannt werden außerdem
-stückweise-glatte Mehrmodulsysteme mit Trockenreibung und diskontinuitätsinduzierte Gleitbifurkationen
+stückweise glatte Mehrmodulsysteme mit Trockenreibung und diskontinuitätsinduzierte Gleitbifurkationen
 (*Commun. Nonlinear Sci. Numer. Simul.* 114, 106704, 2022) und eine bi-objektive Optimierung der
 Lokomotionsleistung durch Diao, Zhang & Fang (*Arch. Appl. Mech.* 91, 2073–2088, 2021). Diese Angaben
 sind nicht gegen die Primärquellen geprüft; in anderen Projektunterlagen stehen dazu abweichende
@@ -185,7 +185,7 @@ Der Roboter BERT nutzt Eigenschwingungen. Mechanische Bewegungserzeugung über S
 über Servoregelung ist damit etablierter, aktiv betriebener Forschungsstand — angrenzend, aber kein
 Vorläufer von PCMMS: dort geht es um Energieeffizienz der Bewegung, nicht um die Kontaktkraft.
 
-**Vibro-impact-Forschung.** Intermittierender Kontakt, Liftoff, Normalkraftdynamik bei starker
+**Vibro-Impact-Forschung.** Intermittierender Kontakt, Liftoff, Normalkraftdynamik bei starker
 Vibrationsanregung — etabliert; dazu gehören Impact-Oszillatoren, Hüpfzustände und Grazing. Arbeiten zu
 Crawl-/Flug-Regimen bei Bürstenrobotern sind ohne Fundstelle genannt und zu prüfen.
 
