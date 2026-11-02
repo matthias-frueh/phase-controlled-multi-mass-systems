@@ -40,8 +40,8 @@ Zwei Korrekturaufgaben belegt: stationäre Driftkarte neu bestimmen; F_eff von d
   Reproduktionslauf waren Resteinschwingen.
 - F_eff (kd·v_d²) ≠ Pendelkraft F̄_A: Faktor 19,7 im Fall S; kein allgemeiner Korrekturfaktor.
 - Zeitschritt unkritisch; Brent-Klammer geeignet; Profilamplitude im Fall R 400 mm/s (meine
-  Angabe „100 mm/s" war falsch).
-- Namenskonflikt „M2": im Skript richtungsabhängiger Widerstand, in der Notiz dynamische
+  Angabe „100 mm/s“ war falsch).
+- Namenskonflikt „M2“: im Skript richtungsabhängiger Widerstand, in der Notiz dynamische
   Instabilität → getrennt.
 
 ## 2 · Neue Dateien
@@ -50,7 +50,7 @@ Zwei Korrekturaufgaben belegt: stationäre Driftkarte neu bestimmen; F_eff von d
 |---|---|
 | `pcmms_fluid_drift_v2.py` | Stationäre Drift primär über die gemittelte Bilanz (ganze Karte in < 2 s); integriertes RK4-Modell nur als Kontrolle mit Abbruchkriterium über Periodenmittel; rho als Parameter; je Punkt F̄_A und τ; CSV im Schreibmodus |
 | `sweep_13x13_drift_v2.csv` | Stationäre Karte, rho = 1000: v_d, F̄_A, τ je Rasterpunkt |
-| `pcmms_medienkopplung_modell_v2.py` | Basis 112-Zeilen-Fassung; Rückgabe von F_drag_drift (v1: „F_eff") **und** F̄_A; Pendelauslenkung aus F̄_A; Fälle Z / S / R statt „M1/M2"; Konsolentexte berichtigt |
+| `pcmms_medienkopplung_modell_v2.py` | Basis 112-Zeilen-Fassung; Rückgabe von F_drag_drift (v1: „F_eff“) **und** F̄_A; Pendelauslenkung aus F̄_A; Fälle Z / S / R statt „M1/M2“; Konsolentexte berichtigt |
 
 ## 3 · Kennzahlen der stationären Karte (rho = 1000, Skriptparameter)
 
@@ -65,7 +65,7 @@ Zwei Korrekturaufgaben belegt: stationäre Driftkarte neu bestimmen; F_eff von d
 
 ## 4 · Ausgaben des Medienkopplungsmodells v2 (M = 1 kg, A = 0,02 m², rho = 1,2)
 
-| Fall | v_d | F_drag_drift (v1 „F_eff") | F̄_A | ⟨x⟩ aus F̄_A (1 kg, 1 m) |
+| Fall | v_d | F_drag_drift (v1 „F_eff“) | F̄_A | ⟨x⟩ aus F̄_A (1 kg, 1 m) |
 |---|---|---|---|---|
 | Z zweistufig 80/20 | 0 | 0 | 0 | 0 |
 | S schiefe v | 5,31 mm/s | 3,39×10⁻⁷ N | 6,67×10⁻⁶ N | 680 nm (v1: 34,5 nm) |
@@ -73,18 +73,18 @@ Zwei Korrekturaufgaben belegt: stationäre Driftkarte neu bestimmen; F_eff von d
 
 ## 5 · Folgen für den Korpus (aufgelistet, nicht eingearbeitet)
 
-1. Forschungsrahmen v3.5 §9: „effektiver Schub 10⁻⁷–10⁻⁴ N" und „34,7 nm" beruhen auf
+1. Forschungsrahmen v3.5 §9: „effektiver Schub 10⁻⁷–10⁻⁴ N“ und „34,7 nm“ beruhen auf
    F_drag_drift. Für Konfiguration D ist F̄_A maßgeblich (Faktor ≈ 2⟨|v_osc|⟩/|v_d|, fallabhängig
    10–20). Beide Zahlenreihen gelten nur im Zweiterm-Ansatz (Notiz §6 offen).
 2. Prüfarchitektur Linie B §2: Auflösungsanforderung mit F̄_A neu bewerten — Skriptparameter in
    Luft: ⟨x⟩ = F̄_A·L/(Mg) ≈ 1,7×10⁻⁷ N × 1 m / 7,36 N ≈ 23 nm bei (0°, 0°); Sub-Millimeter bleibt
    vier Größenordnungen darüber.
-3. Prüfarchitektur §1: „vorhergesagte Drift maximal 0,00069 m/s" → stationär 0,00105 m/s (Wasser-
+3. Prüfarchitektur §1: „vorhergesagte Drift maximal 0,00069 m/s“ → stationär 0,00105 m/s (Wasser-
    und Luft-Wert gleich); das Verhältnis 11.000 : 1 im Freifallargument wird 7.300 : 1 — Schluss
    unverändert.
 4. Jede Zitierung von `sweep_13x13_drift.csv` (v1) ist durch `sweep_13x13_drift_v2.csv` zu ersetzen
-   oder als „nicht eingeschwungen" zu kennzeichnen.
-5. Bezeichnung „Mechanismus 2" bleibt der Notiz (dynamische Instabilität) vorbehalten; im Skript
+   oder als „nicht eingeschwungen“ zu kennzeichnen.
+5. Bezeichnung „Mechanismus 2“ bleibt der Notiz (dynamische Instabilität) vorbehalten; im Skript
    heißt der richtungsabhängige Widerstand Fall R.
 
 ## 6 · Offen

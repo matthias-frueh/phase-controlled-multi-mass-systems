@@ -67,7 +67,7 @@ Dieser Wert ist **keine Entdeckung, sondern die Nulllinie**, an der die gesamte 
 wird. Weicht das gemessene Zeitmittel dauerhaft ab, ist die Messkette defekt — nicht die Physik.
 Das ist per Protokoll ein Abbruchgrund, keine Interpretation.
 
-Die eigentliche Frage lautet also nicht „wie groß ist die Kraft", sondern: **verändert sich die
+Die eigentliche Frage lautet also nicht „wie groß ist die Kraft“, sondern: **verändert sich die
 Form der Kraftkurve?**
 
 ---

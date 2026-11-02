@@ -2,18 +2,25 @@
 
 \usepackage[ngerman,provide=*]{babel}
 \usepackage{iftex}
+% Veröffentlichte PDFs mit pdfLaTeX: T1-Latin-Modern als Type-1-Schriften.
 \ifTUTeX
   \usepackage{fontspec}% XeLaTeX/LuaLaTeX: Latin Modern OpenType
 \else
+  \usepackage[utf8]{inputenc}
   \usepackage[T1]{fontenc}
   \usepackage{lmodern}
 \fi
+\ifPDFTeX
+  \input{glyphtounicode}
+  \pdfgentounicode=1
+\fi
 \usepackage{amsmath,amssymb,graphicx}
+\usepackage{microtype}
 \usepackage{geometry}
 \geometry{margin=2.5cm}
 \usepackage{placeins}
 \usepackage{booktabs,array,longtable}
-\setlength{\emergencystretch}{3em}
+\setlength{\emergencystretch}{6em}
 \hyphenation{Elek-tro-ma-gne-ti-sche Schwin-gungs-kopp-lung}
 \usepackage[hidelinks,unicode]{hyperref}
 \hypersetup{
@@ -25,6 +32,7 @@
 
 \begin{document}
 
+\hypersetup{pageanchor=false}
 \begin{titlepage}
 \thispagestyle{empty}
 \centering
@@ -55,6 +63,7 @@ Numerische Ergebnisse und Messkonzept; eigene experimentelle Nachweise stehen au
 \end{titlepage}
 
 \pagenumbering{roman}
+\hypersetup{pageanchor=true}
 \tableofcontents
 \clearpage
 
@@ -284,10 +293,10 @@ PR~\#4 stammen aus \texttt{pcmms\_pruefung\_pr4\_linearloeser.py}. Die
 mit v2.4 neuen Symbole führt das Formelverzeichnis v2.6 noch nicht.
 
 Der in der Arbeit zitierte Repository-Stand 2026-09 ist über
-\href{https://doi.org/10.5281/zenodo.22864178}{doi:10.5281/zenodo.22864178}
+\href{https://doi.org/10.5281/zenodo.22864178}{doi:\allowbreak 10.5281/\allowbreak zenodo.22864178}
 referenziert. Dieser DOI bezeichnet das Repository-Paket, nicht das
 vorliegende Arbeitspapier. Der Quellcode ist unter
-\href{https://github.com/matthias-frueh/phase-controlled-multi-mass-systems}{GitHub: matthias-frueh/phase-controlled-multi-mass-systems}
+\href{https://github.com/matthias-frueh/phase-controlled-multi-mass-systems}{GitHub: matthias-frueh/\allowbreak phase-controlled-\allowbreak multi-mass-systems}
 zugänglich. Datensatz, Skripte und Ergebnisnotiz der Nachrechnung vom
 13.~September 2026 liegen dem Quellpaket dieser Fassung bei (Ordner
 \texttt{nachrechnung\_2026-09-13}); im Repository-Stand 2026-09 sind sie
@@ -753,7 +762,7 @@ wahrnehmungsbezogenen Reiz oder auf die Fortbewegung eines Körpers. Die Kraft a
 Auflagefläche und insbesondere die statistische Form ihres Zeitverlaufs
 sind dabei nicht die Zielgröße, sondern eine Begleiterscheinung.
 
-\section{Unilateraler Kontakt und Vibro-Impact-Verhalten}
+\section{Unilateraler Kontakt und Vibro-\allowbreak Impact-Verhalten}
 \label{sec:stand-kontakt}
 
 Am nächsten liegt der vorliegenden Arbeit die Untersuchung
@@ -765,7 +774,7 @@ Für harmonische Anregung untersuchen sie einen vorgespannten
 Doppelkugel-Ebene-Kontakt, der durch das Gewicht einer beweglichen Masse
 belastet wird, und werten Antwortkurven, Zeitverläufe und
 Spektralinhalte über mehrere Anregungsniveaus aus \cite{rigaud2003}. Für
-stochastische Anregung durch weißes Gaußsches Rauschen analysieren sie
+stochastische Anregung durch weißes gaußsches Rauschen analysieren sie
 in einer zweiten Arbeit ausdrücklich \emph{Spektralinhalte und
 Statistiken der übertragenen stationären Normalkraft}
 \cite{perretliaudet2003}. In späteren Arbeiten zur subharmonischen und zur superharmonischen
@@ -2561,6 +2570,7 @@ Kraftverlauf ausgewertet.
 
 \begin{table}[htbp]
   \centering
+  \setlength{\tabcolsep}{5pt}
   \begin{tabular}{lrrrrr}
     \hline
     Regime & $\lambda$ / \% & $N_{\max}/Mg$ & $t_{10-90}$ / ms & $t_{\mathrm{Kontakt}}$ / ms & $f_{99}$ / Hz \\
@@ -3566,7 +3576,7 @@ Defizit an Präzision, das durch weitere Läufe behebbar ist.
 Die frühere Go/No-Go-Klassifikation, bei der die Ablehnung der
 Nullhypothese den positiven Ausgang darstellte, wird nicht verwendet.
 Unter Gleichung~\eqref{eq:baseline-ch3} würde sie ausgerechnet einen
-Apparaturfehler mit „Go" bezeichnen.
+Apparaturfehler mit „Go“ bezeichnen.
 
 \section{Robustheitsprüfungen}
 
@@ -5248,7 +5258,7 @@ Alle Zahlenwerte des Kapitels~\ref{chap:simulation} stammen aus einer
 einzigen Datei, \texttt{sweep\_19x19.csv}, mit $361$ Zeilen und acht
 Spalten. Jede Zeile entspricht einer unabhängig integrierten
 Phasenkonfiguration. Der Feinsweep in Abschnitt~\ref{sec:wertebereich}
-(Datei \texttt{finesweep\_2deg\_120\_240.csv}, $441$ Zeilen, gleiche
+(Datei \texttt{finesweep\_\allowbreak 2deg\_\allowbreak 120\_\allowbreak 240.csv}, $441$ Zeilen, gleiche
 Spalten) ergänzt ihn. Beide Dateien und die Engine liegen im
 Repository-Stand 2026-09 \cite{frueh2026repo}.
 
@@ -5300,7 +5310,7 @@ $N_{\max}/\langle N \rangle$ liest, erhält systematisch falsche Werte.
 
 Der Sweep mit sinusförmigem Bahnprofil nach
 Abschnitt~\ref{sec:sinus-sweep} liegt als
-\texttt{sweep\_7x7\_sinus.csv} vor: $49$ Zeilen, Spalten
+\texttt{sweep\_\allowbreak 7x7\_\allowbreak sinus.csv} vor: $49$ Zeilen, Spalten
 \texttt{phi2}, \texttt{phi3}, \texttt{F\_mean}, \texttt{F\_skew},
 \texttt{liftoff}, \texttt{F\_max}, \texttt{F\_min}, \texttt{asym},
 \texttt{R}. Die Spalte \texttt{asym} enthält das Asymmetrieverhältnis
@@ -5461,7 +5471,7 @@ Kapitel~\ref{chap:statistik} zu berücksichtigen sind:
       zu konservativ. Eine Multiplizitätskorrektur, die von
       Unabhängigkeit ausgeht, senkt die Teststärke unnötig. Umgekehrt
       wäre die Aussage „mindestens ein Funktional hängt von der
-      Phasenlage ab" bei $r \approx 0{,}97$ näher an einem Test als an
+      Phasenlage ab“ bei $r \approx 0{,}97$ näher an einem Test als an
       vieren.
 \item $N_{\min}$ ist nicht ein Funktional unter vieren, sondern der
       informativste. Es sollte in der Auswertung entsprechend

@@ -1,4 +1,4 @@
-# PCMMS — Notiz: Richtung „Gleichrichtung und mögliche Einsatzschwellen phasenstrukturierter Medienkopplung"
+# PCMMS — Notiz: Richtung „Gleichrichtung und mögliche Einsatzschwellen phasenstrukturierter Medienkopplung“
 
 **Datum:** 06.09.2026 · **Version:** v5 — ersetzt v1–v4 vom selben Tag · **Status:** Richtungsnotiz, redaktioneller Prüfzyklus abgeschlossen (vier externe Prüfungen) · offene Modellfrage §6 bleibt offen · ausdrücklich **nicht** der nächste Schritt
 **Gilt für:** Linie B (H1_fluid), Forschungsrahmen v3.5 §1, §7, §9, Notiz Prüfarchitektur Linie B (01.09.2026)
@@ -118,7 +118,7 @@ schnelleren Trägerbewegung**. In der Rückstoßnäherung
 
 entspricht das der Richtung des schnellen **massengewichteten** Innenmassenhubs. Bei dephasierten
 Modulen zählt die Summenbewegung, nicht die schnelle Phase eines einzelnen Moduls. Für allgemeine
-Wellenformen und Phasenkonfigurationen reicht „positive Phase schneller" nicht aus; die Richtung wird
+Wellenformen und Phasenkonfigurationen reicht „positive Phase schneller“ nicht aus; die Richtung wird
 aus dem vollständigen Geschwindigkeitsprofil berechnet. Gilt im quasistationären Modell; vgl. §6.
 
 ### 4.1 Modell A — vorgegebene Trägerbewegung (Kraftmodell)
@@ -203,9 +203,9 @@ vier Größenordnungen über dem Signal.
 
 **Dichte (Modell C):** F̄_C ∝ ρ·C_D(Re) bei unverändertem Bewegungsverlauf; nur bei konstantem C_D
 eine Gerade. Über die Druckreihe fällt Re_D von ≈ 320 auf ≈ 0,02 (§8); C_D ist dort nicht konstant.
-Im Stokes-Grenzfall (C_D = 24/Re) wird der „quadratische" Term selbst linear und richtet nichts
+Im Stokes-Grenzfall (C_D = 24/Re) wird der „quadratische“ Term selbst linear und richtet nichts
 gleich. Die Erwartungskurve ist aus einem regimeabhängigen Kraftmodell zu **berechnen**. In der
-Prüfarchitektur ist „Δv(p)" als **ΔF̄_C(p) bzw. Δ⟨x⟩(p)** zu führen — Vorschlag, noch keine
+Prüfarchitektur ist „Δv(p)“ als **ΔF̄_C(p) bzw. Δ⟨x⟩(p)** zu führen — Vorschlag, noch keine
 abgesicherte Korrektur, solange §6 offen ist.
 
 **Symmetriekontrollen — Nullvorhersagen sind Periodenmittel, nicht Geschwindigkeiten:**
@@ -220,10 +220,10 @@ Der Träger schwingt in allen drei Fällen weiter; null sind die Periodenmittel.
 Aufbau: bei Spiegelung → richtungsabhängiger Widerstand oder Geometrieasymmetrie; bei Zeitumkehr →
 Beiträge jenseits der Profilgleichrichtung, **nicht** automatisch Bias; bei Sinus → Geometrie- oder
 Strömungsbias, weitere Kopplungen. Das Profilquartett Egg / gespiegelt / zeitumgekehrt /
-gespiegelt-zeitumgekehrt trennt Profilgleichrichtung von Richtungsbias. „Zeitasymmetrisch" garantiert
+gespiegelt-zeitumgekehrt trennt Profilgleichrichtung von Richtungsbias. „Zeitasymmetrisch“ garantiert
 für sich nicht ⟨V|V|⟩ ≠ 0; die Größe ist aus der tatsächlichen Trägerbewegung zu berechnen. Die
 Phase formt das massengewichtete Summenprofil und kann Harmonische auslöschen — keine allgemeine
-Monotonie in „Phasenkohärenz".
+Monotonie in „Phasenkohärenz“.
 
 ---
 
@@ -342,16 +342,16 @@ Flügeln (Childress, Vandenberghe, Zhang 2006), starre Pyramide (Weathers et al.
 
 ## 10 · Gestrichen gegenüber v1–v4
 
-- v1: „unterhalb exakt null"; harte Schwelle beim Übergang linear → quadratisch; „einfachster belegter
+- v1: „unterhalb exakt null“; harte Schwelle beim Übergang linear → quadratisch; „einfachster belegter
   Fall"; garantierte Monotonie in Dichte und Phasenkohärenz; Einsatzschwelle als Klassenbedingung.
-- v2: „Träger gehalten" für Konfiguration D; „Gerade durch den Ursprung"; Zeitumkehr als exakte
+- v2: „Träger gehalten“ für Konfiguration D; „Gerade durch den Ursprung“; Zeitumkehr als exakte
   allgemeine Nullkontrolle; Knudsen-Werte um Faktor zehn; Re_f* ≈ 20–55 ohne Definition.
-- v3: Vorzeichen in Drift- und Pendelformel; „Sinus → v = 0" statt Periodenmittel; Fehlerordnung
+- v3: Vorzeichen in Drift- und Pendelformel; „Sinus → v = 0“ statt Periodenmittel; Fehlerordnung
   O(Widerstand/Trägheit) für die volle Dynamik; in §6 effektive Fläche D·δ, Faktor δ/D, Überschlag
   10⁻¹⁰ N, Honji als maßgebliche Instabilität, KC ≳ 2 als Ausweg; Hysterese als notwendige Signatur.
-- v4: eine modellübergreifende Kraftgröße F̄ („Auslenkung und Drift folgen dem Vorzeichen von F̄");
+- v4: eine modellübergreifende Kraftgröße F̄ („Auslenkung und Drift folgen dem Vorzeichen von F̄“);
   Richtungsregel ohne Einschränkung auf gleich geformte Hübe und massengewichtete Summenbewegung;
-  endliche Fensterbilanz nur mit Ortsrandterm; „stationäres C_D setzt abgelöste Strömung voraus";
+  endliche Fensterbilanz nur mit Ortsrandterm; „stationäres C_D setzt abgelöste Strömung voraus“;
   Zweiterm-Formel als allgemeine Aussage in §4.1.
 
 ---
@@ -371,7 +371,7 @@ außerhalb dieses Rahmens ist nicht Bestandteil des Korpus.
 - Forschungsrahmen v3.5 §1: Klassenformulierung als Ergänzung.
 - Forschungsrahmen v3.5 §9: Effektgrößenschätzung unter Vorbehalt von §6 dieser Notiz; Hinweis auf
   Modelltrennung A/B/C, indizierte Kraftgrößen F̄_A/F̄_B/F̄_C und τ ∝ 1/ρ.
-- Prüfarchitektur Linie B: §3 dort — Erwartungskurve modellweise berechnen, „Δv(p)" als
+- Prüfarchitektur Linie B: §3 dort — Erwartungskurve modellweise berechnen, „Δv(p)“ als
   ΔF̄_C(p)/Δ⟨x⟩(p); §2 dort — Auflösungsanforderung der Aufhängung nach Klärung von §6 neu bewerten;
   §4 dort — Mechanismus 2 mit möglicher Signatur Hysterese/Bistabilität ergänzen.
 - Präregistrierung: unverändert. H1_fluid bleibt optional.

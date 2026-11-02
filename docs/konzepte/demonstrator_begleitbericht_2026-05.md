@@ -32,7 +32,7 @@ Stand: Mai 2026
 |-------------------------|------------------------------------|-----------|
 | Mikrocontroller        | ESP32 Dev Board (DOIT DEVKIT V1)  | 8,00 €   |
 | Motortreiber           | 2x IRLZ44N N-Kanal MOSFET         | 1,00 €   |
-| Vibrationsmotoren      | 2x Münzvibrationsmotor (10mm, 3V) | 2,00 €/St. |
+| Vibrationsmotoren      | 2x Münzvibrationsmotor (10 mm, 3 V) | 2,00 €/St. |
 | Freilaufdioden         | 2x 1N4007                         | 0,10 €   |
 | Akku                   | LiPo 1S 500 mAh + JST             | 6,00 €   |
 | Kleinkram              | Breadboard, Kabel, Widerstände    | 5,00 €   |

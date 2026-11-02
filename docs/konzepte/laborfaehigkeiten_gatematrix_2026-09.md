@@ -79,14 +79,14 @@ In der Ablage stehen zwei unvereinbare Parametersätze:
 | Quelle | M | f |
 |---|---|---|
 | Bindende Parameter (00_INDEX) | 0,650 kg **je Modul**, 3 Module → Mg ≈ 19,1 N | **2,2 Hz** |
-| Laborplan V1/V2 (Mai 2026) | ≈ 0,65 kg **gesamt** → Mg ≈ 6,4 N | **10 Hz**, Hub „einige mm" |
+| Laborplan V1/V2 (Mai 2026) | ≈ 0,65 kg **gesamt** → Mg ≈ 6,4 N | **10 Hz**, Hub „einige mm“ |
 
 Die Differenz ist auslegungsbestimmend, nicht kosmetisch:
 
-- Gleiche Spitzenbeschleunigung skaliert mit A ∝ 1/f². (10 / 2,2)² ≈ **21**. Bei 2,2 Hz braucht dieselbe Liftoff-Bedingung rund zwanzigfachen Hub — aus „einige mm" wird ~10 cm. Das ändert Aktuatorklasse, Modulgeometrie, Gehäuse, Aufstandsfläche und Fertigungsbedarf.
+- Gleiche Spitzenbeschleunigung skaliert mit A ∝ 1/f². (10 / 2,2)² ≈ **21**. Bei 2,2 Hz braucht dieselbe Liftoff-Bedingung rund zwanzigfachen Hub — aus „einige mm“ wird ~10 cm. Das ändert Aktuatorklasse, Modulgeometrie, Gehäuse, Aufstandsfläche und Fertigungsbedarf.
 - Mg legt Messbereich, Überlastgrenze und Auflösung fest.
 
-Indiz: F_min erreicht im Feinsweep maximal ≈ 5,33 N. Das passt zu Mg ≈ 6,4 N, nicht zu 19,1 N. Der Verdacht richtet sich damit gegen die Zeile „0,650 kg je Modul", nicht gegen die Laborpläne. **Zu prüfen an `pcmms_v3a_phasen_sweep.py`, nicht an den Textdokumenten.**
+Indiz: F_min erreicht im Feinsweep maximal ≈ 5,33 N. Das passt zu Mg ≈ 6,4 N, nicht zu 19,1 N. Der Verdacht richtet sich damit gegen die Zeile „0,650 kg je Modul“, nicht gegen die Laborpläne. **Zu prüfen an `pcmms_v3a_phasen_sweep.py`, nicht an den Textdokumenten.**
 
 Bis zur Klärung sind alle Spezifikationen unten **parametrisch in M und f** formuliert und bleiben dadurch in beiden Zweigen gültig.
 

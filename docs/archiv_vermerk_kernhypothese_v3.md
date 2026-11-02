@@ -6,7 +6,7 @@
 
 ## Kernfehler
 
-Die Dokumente erklären ΔF̄ ≠ 0 bei unterbrechbarem (unilateralem) Kontakt für „physikalisch offen". Das ist falsch. Für **beschränkte periodische Bewegung** gilt ⟨F_Kontakt⟩ = M·g **auch mit Liftoff**: Der Schwerpunktsatz mittelt Σ mₖ·z̈ₖ über die Periode zu null; die Kontakt-Nichtlinearität verlagert Information ausschließlich in die **Form** der Kraft (höhere Spitzen kompensieren die Nullphasen), nicht in ihr Zeitmittel.
+Die Dokumente erklären ΔF̄ ≠ 0 bei unterbrechbarem (unilateralem) Kontakt für „physikalisch offen“. Das ist falsch. Für **beschränkte periodische Bewegung** gilt ⟨F_Kontakt⟩ = M·g **auch mit Liftoff**: Der Schwerpunktsatz mittelt Σ mₖ·z̈ₖ über die Periode zu null; die Kontakt-Nichtlinearität verlagert Information ausschließlich in die **Form** der Kraft (höhere Spitzen kompensieren die Nullphasen), nicht in ihr Zeitmittel.
 
 ## Belege
 
@@ -21,7 +21,7 @@ Die Dokumente erklären ΔF̄ ≠ 0 bei unterbrechbarem (unilateralem) Kontakt f
 ## Maßnahme
 
 - Beide Kernhypothese-Dateien mit Präfix `ARCHIV_` versehen bzw. diesen Vermerk als Deckblatt voranstellen; in neuen Texten **nicht mehr zitieren**.
-- Hinweis Dateihygiene: Beide Dateien (und weitere „.docx" im Projekt, u. a. Playbooks und Warnung) sind Klartext mit falscher Endung — bei Gelegenheit in `.md` umbenennen, sonst scheitert das Öffnen in Word.
+- Hinweis Dateihygiene: Beide Dateien (und weitere „.docx“ im Projekt, u. a. Playbooks und Warnung) sind Klartext mit falscher Endung — bei Gelegenheit in `.md` umbenennen, sonst scheitert das Öffnen in Word.
 
 ## Nachtrag 25.09.2026 zum Konvergenztest (Beleg 2)
 

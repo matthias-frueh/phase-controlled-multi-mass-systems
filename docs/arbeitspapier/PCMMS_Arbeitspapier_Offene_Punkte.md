@@ -38,7 +38,7 @@ Historischer Ausgangsstand: 05.09.2026 · Quelle: PCMMS_Dissertation_v2.tex, **9
    (`code/pcmms_v3a_phasen_sweep.py`, [`data/README.md`](../../data/README.md)).
    Offen bleibt nur, im Forschungsrahmen T_f/T ≈ 0,8 (Vorwärtsanteil) gegen den
    Halteanteil 0,65 nachzuziehen (Punkt 23).
-10. ~~„Yoshimura et al. 2008" im Messtechnik-Konzept v2 streichen —
+10. ~~„Yoshimura et al. 2008“ im Messtechnik-Konzept v2 streichen —
     wahrscheinlich Fehlzuschreibung von Wakou/Ochiai/Isobe 2008.~~ **Für das
     Repository geschlossen 03.10.** — Im Repository steht die Angabe nur in
     Anhang C des Arbeitspapiers unter „Nicht aufgenommene Angaben“, als
@@ -73,17 +73,17 @@ Vorrang: Präzisierung, kein zusätzlicher Umfang.
 15. **Äquivalenzlogik statt Nichtsignifikanz.** Spur 1: qualifiziert nur, wenn das
     KI von µ_Δ vollständig innerhalb ±ε_ctrl liegt; außerhalb null → Fehler; breiter
     als Toleranz → unbestimmt. Spur 2 Nullergebnis: KI jeder Differenz innerhalb
-    ±ε_phys. Vierter Ausgang „unbestimmt" wieder einführen. Kap. 10, Kap. 6, Fazit,
+    ±ε_phys. Vierter Ausgang „unbestimmt“ wieder einführen. Kap. 10, Kap. 6, Fazit,
     Kurzfassung.
 16. **Weicher Kontakt falsch erklärt.** k=10³ ist Isolationsbereich (f > f_n,
     Transmissibilität ≈ 0,66), nicht quasistatisch. Formel N ≈ Mg − (M/3)Σz̈ gehört
     zum steifen Grenzfall. Korrektur in §sens-k, Anhang B, Fazit, Kurzfassung.
 17. **R_c = 1,94 ist die quasistatische Schwelle.** Dynamisch ≈ 1,94/1,34 ≈ 1,45.
     Feine R-Abtastung 1,3–1,6 (8 Punkte), Transmissibilitätskorrektur in den Text.
-18. **„Nocke zwingend" → „asymmetrisches Profil zwingend".** Nocke oder
+18. **„Nocke zwingend“ → „asymmetrisches Profil zwingend“.** Nocke oder
     programmierbarer Aktor; Exzenter/Kurbel bei konstanter Drehzahl ausgeschlossen.
     *Überholt durch die Nachträge vom 02.10.2026, siehe Punkt 12.*
-19. **„Auslegungsfenster" / „gesichert für ζ ≲ 0,1" auf „nach Stichproben"
+19. **„Auslegungsfenster“ / „gesichert für ζ ≲ 0,1“ auf „nach Stichproben“
     zurücknehmen.** Kap. 11, Fazit, Kurzfassung.
 20. **Lastreserve abschließen:** ≥16·Mg (20-kg-Dose) bei ungemessener Dämpfung;
     ≥10 kg nur nach nachgewiesenem ζ ≥ 0,1. Kap. 7 und Punkt 13 oben.
@@ -95,16 +95,16 @@ Vorrang: Präzisierung, kein zusätzlicher Umfang.
 - [x] 15 Äquivalenzlogik, vier Ausgänge, ε_ctrl eingeführt — Kap. 6, 9, 10, 13, Fazit, Kurzfassung, Abstract, §1.5, Symbolverzeichnis
 - [x] 16 Weicher Kontakt: Isolationsbereich statt quasistatisch — §sens-k, Anhang B, Kap. 6, Fazit
 - [x] 17 R_c: quasistatisch 1,94 → dynamisch 1,45 über Transmissibilität; feine Abtastung bestätigt 1,44–1,48
-- [x] 18 „asymmetrisches Profil zwingend" statt „Nocke zwingend" — sechs Stellen; überholt durch die Nachträge vom 02.10.2026 (Punkt 12)
-- [x] 19 „nach Stichproben" statt „gesichert"/„Fenster" — Kap. 11, Fazit, Kurzfassung, Abstract
+- [x] 18 „asymmetrisches Profil zwingend“ statt „Nocke zwingend“ — sechs Stellen; überholt durch die Nachträge vom 02.10.2026 (Punkt 12)
+- [x] 19 „nach Stichproben“ statt „gesichert“/„Fenster“ — Kap. 11, Fazit, Kurzfassung, Abstract
 - [x] 20 Lastreserve zweistufig ~~abgeschlossen~~ — Kap. 7, Kap. 8, Fazit; überholt durch die Nachträge vom 02.10.2026: Nennlast nicht hergeleitet (Punkt 13)
-- [x] 21 Literaturkandidaten geprüft und aufgenommen: Osadchyy 2023 (Sensors, DOI 10.3390/s23042170), Gurskyi/Korendiy 2023 (Machines, DOI 10.3390/machines11010097 — „Korendiy 2026" nicht auffindbar, ersetzt), Chatzinikolaidis 2020 + 2021 (IEEE RA-L). 21 Einträge.
+- [x] 21 Literaturkandidaten geprüft und aufgenommen: Osadchyy 2023 (Sensors, DOI 10.3390/s23042170), Gurskyi/Korendiy 2023 (Machines, DOI 10.3390/machines11010097 — „Korendiy 2026“ nicht auffindbar, ersetzt), Chatzinikolaidis 2020 + 2021 (IEEE RA-L). 21 Einträge.
 
 ## Stand 20.09.2026 (v2.1) — Abgleich mit Repository-Stand 2026-09 und Symbolverzeichnis v2.5
 
 - [x] 22 Symbol Θ → β_h (Hold-Zeitanteil), 12 Stellen: Symbolverzeichnis, Tab. 9.1, Anhang Egg-Profil. Symbolverzeichnis v2.5 führt Θ (Dissertation v2) → β_h in der Migrationstabelle.
-- [x] 23 „Halteanteil von 0,80" (Status der Parameter) → Vorwärtsanteil β ≈ 0,80 als andere Profilfestlegung; „Verhältnis nicht geklärt" ersetzt durch Verweis auf Symbolverzeichnis v2.5 (10.6, 10.7, B.2). Satz „Abgleich steht aus" bleibt, betrifft die Übertragung auf die Apparatur. Schließt Punkt 9 zur Hälfte; offen bleibt nur: Forschungsrahmen v3_5 nachziehen.
-- [x] 24 „kein hinterlegter Datensatz" (§ Wertebereich, nach Abb. schnitt_nmin) ersetzt durch Feinsweep-Absatz: 2°-Raster, 441 Konfigurationen, N_min-Spitze 5,3304 N bei (120°, 240°), Abfall ≈ 0,23 / 0,19 N je Grad, 90,7 % liftoff-frei, |⟨N⟩ − Mg| ≤ 0,2 mN. Datensatz finesweep_2deg_120_240.csv, zitiert als frueh2026repo (Zenodo 10.5281/zenodo.22864178, GitHub-Tag 2026-09). Anhang A „Datensatz" ergänzt.
+- [x] 23 „Halteanteil von 0,80“ (Status der Parameter) → Vorwärtsanteil β ≈ 0,80 als andere Profilfestlegung; „Verhältnis nicht geklärt“ ersetzt durch Verweis auf Symbolverzeichnis v2.5 (10.6, 10.7, B.2). Satz „Abgleich steht aus“ bleibt, betrifft die Übertragung auf die Apparatur. Schließt Punkt 9 zur Hälfte; offen bleibt nur: Forschungsrahmen v3_5 nachziehen.
+- [x] 24 „kein hinterlegter Datensatz“ (§ Wertebereich, nach Abb. schnitt_nmin) ersetzt durch Feinsweep-Absatz: 2°-Raster, 441 Konfigurationen, N_min-Spitze 5,3304 N bei (120°, 240°), Abfall ≈ 0,23 / 0,19 N je Grad, 90,7 % liftoff-frei, |⟨N⟩ − Mg| ≤ 0,2 mN. Datensatz finesweep_2deg_120_240.csv, zitiert als frueh2026repo (Zenodo 10.5281/zenodo.22864178, GitHub-Tag 2026-09). Anhang A „Datensatz“ ergänzt.
 - [x] 25 In Arbeitspapier v2.2 umgesetzt: Titelblatt und Vorspann umgestellt; Hochschul-, Grad- und Betreuungsplatzhalter sowie Prüfungserklärung entfernt; Status- und Versionshinweis ergänzt.
 
 Stand des Dokuments: 101 Seiten · 22 Literatureinträge · 9 Abbildungen · Datensätze sweep_19x19.csv, finesweep_2deg_120_240.csv, sweep_7x7_sinus.csv, sens_k_*.csv · Vorschau-PDF vom 20.09. mit XeLaTeX/Latin Modern gesetzt (Abbildungen aus den JPEG-Exporten).

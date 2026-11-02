@@ -33,7 +33,7 @@
 | Datei | Zeilen | MD5 | Status |
 |---|---|---|---|
 | `pcmms_fluid_drift.py` | 178 | f49f5cd4… | Original, unverändert. Erzeugt `sweep_13x13_drift.csv` |
-| `pcmms_medienkopplung_modell.py` | 79 | 95a9d926… | Original, „kanonisch" |
+| `pcmms_medienkopplung_modell.py` | 79 | 95a9d926… | Original, „kanonisch“ |
 | `pcmms_medienkopplung_modell-1.py` | 112 | 7c010a27… | Original, mit v3.4-Erweiterung (Mehrmassen, Reibung, Pendel). Im Projekt existiert `-2.py` mit identischem MD5 |
 | `sweep_13x13_drift.csv` | 169 Punkte | 10ff7a9e… | Original; keine Duplikate, Raster 0…332,3° in Schritten von 27,69° |
 | `pcmms_review_reproduktion_2026-09-06.py` | — | 94886b12… | **Neu**, von der Prüfung getrennt zu lesen; importiert die Originale, verändert sie nicht |
@@ -51,7 +51,7 @@
 | Egg-Profil: schnelle Phase 35 %, langsame 65 %, gleicher Weg | `pcmms_fluid_drift.py` Z. 31–33, 44–51 | Bestätigt (V_SLOW·HOLD = V_FAST·(1−HOLD)) |
 | Richtungsregel: Drift in Richtung des schnellen Innenmassenhubs (§4) | Z. 49 (schnelle Phase +V_FAST) → CSV (0,0) = +0,6916 mm/s | Konsistent: Innenmassen schnell nach +, Träger schnell nach −, mittlere Medienkraft nach +, Drift + |
 | Auslenkung x = F·L/(M·g) (§4.3) | `-1.py` Z. 98–100 | Bestätigt |
-| „Bloß zeitliche Asymmetrie reicht nicht" (§5: ⟨V|V|⟩ ≠ 0 nicht garantiert) | `pcmms_medienkopplung_modell.py` Z. 36–43 (`two_level`) | Bestätigt: zweistufige Kraft → Sägezahn-v mit gleichverteilter Geschwindigkeit → Drift = 0 |
+| „Bloß zeitliche Asymmetrie reicht nicht“ (§5: ⟨V|V|⟩ ≠ 0 nicht garantiert) | `pcmms_medienkopplung_modell.py` Z. 36–43 (`two_level`) | Bestätigt: zweistufige Kraft → Sägezahn-v mit gleichverteilter Geschwindigkeit → Drift = 0 |
 
 ## 3 · Reproduktionsergebnisse (Skriptparameter, Referenzpunkt φ₂ = φ₃ = 0)
 
@@ -64,7 +64,7 @@ gerechnet; ihre Absolutwerte sind entsprechend zu klein, die Vorzeichen und die 
 sind davon nicht notwendig betroffen (zu prüfen).
 
 **Gemittelte Bilanz (Modell B, c₁ = 0, v_osc = −RATIO·ṙ):** v_d = **1,0549 mm/s** — stimmt mit
-dem integrierten Modell auf vier Stellen überein. Die Näherung „Widerstand ≪ Trägheit" ist für diese
+dem integrierten Modell auf vier Stellen überein. Die Näherung „Widerstand ≪ Trägheit“ ist für diese
 Parameter erfüllt.
 
 **Dichtevergleich (ρ = 100, T_SIM = 400 s):** Periodenmittel bei 100 / 200 / 300 / 400 s:
@@ -72,13 +72,13 @@ Parameter erfüllt.
 Dichteunabhängigkeit der stationären Drift innerhalb 0,2 % über einen Faktor 10 in ρ; die
 Einschwingzeit skaliert wie τ ≈ M/(2c₂ρ⟨|v_osc|⟩): 5,8 s / 58 s / 4870 s für ρ = 1000 / 100 / 1,2.
 
-**Definition „effektiver Schub" (Medienkopplungsmodell, Fall M1):** Das Skript gibt
+**Definition „effektiver Schub“ (Medienkopplungsmodell, Fall M1):** Das Skript gibt
 F_eff = kd·v_d·|v_d| zurück (Z. 43, 51, 60) — den Widerstand, den ein stationär mit v_d bewegter
 Körper erführe. Die Notiz verwendet für Konfiguration D die Gleichrichtungskraft bei vorgegebener
 mittelwertfreier Bewegung, F̄_A = −kd·⟨v_osc|v_osc|⟩. Für M1: v_d = 5,31 mm/s, ⟨|v_osc|⟩ = 51,9 mm/s;
 F_eff(Skript) = 3,39×10⁻⁷ N, F̄_A = 6,67×10⁻⁶ N, **Verhältnis 19,7** ≈ 2⟨|v_osc|⟩/|v_d|.
 Pendelauslenkung (L = 1 m, M = 1 kg): 34,5 nm nach Skriptdefinition, 680 nm nach F̄_A.
-Die Zahlen „Schub ~10⁻⁷–10⁻⁴ N" und „34,7 nm" im Forschungsrahmen §9 folgen der Skriptdefinition.
+Die Zahlen „Schub ~10⁻⁷–10⁻⁴ N“ und „34,7 nm“ im Forschungsrahmen §9 folgen der Skriptdefinition.
 
 ## 4 · Fragen an die Prüfung
 
@@ -89,13 +89,13 @@ Die Zahlen „Schub ~10⁻⁷–10⁻⁴ N" und „34,7 nm" im Forschungsrahmen 
    Forschungsrahmen §9 (Schub, Pendelauslenkung) und Prüfarchitektur §2 (Auflösung) um den Faktor
    2⟨|v_osc|⟩/|v_d| zu korrigieren — für M1 ≈ 20, für die Driftskript-Parameter ≈ 10. Bitte
    unabhängig herleiten.
-3. **Konvergenz der Karte.** Reicht die Aussage „Absolutwerte um ~35 % zu klein, Struktur erhalten",
+3. **Konvergenz der Karte.** Reicht die Aussage „Absolutwerte um ~35 % zu klein, Struktur erhalten“,
    oder ist die Karte mit T_BURN ≥ 40 s und T_SIM ≥ 60 s neu zu rechnen, bevor sie zitiert wird?
 4. **Raster.** Das 13er-Raster (Schritt 27,69°) enthält weder 120° noch 240°; die triphasische
    Konfiguration ist in der CSV nicht enthalten (nächster Punkt (110,8°; 249,2°): −0,024 mm/s).
-   Aussagen über „Triphasik" dürfen sich nicht auf diese CSV stützen. Zustimmung?
+   Aussagen über „Triphasik“ dürfen sich nicht auf diese CSV stützen. Zustimmung?
 5. **Vorzeichenwechsel.** 54 von 169 Rasterpunkten haben negative Drift. Ist das konsistent mit der
-   Richtungsregel der Notiz („Richtung aus dem vollständigen massengewichteten Summenprofil"), oder
+   Richtungsregel der Notiz („Richtung aus dem vollständigen massengewichteten Summenprofil“), oder
    deutet es auf einen Implementierungsfehler (z. B. in der Phasenverschiebung `egg_vel(t - tau)`)?
 6. **Numerik.** RK4 mit zeitabhängigem r_dot an Halbschritten (Z. 70–78), DT = 5×10⁻⁵ bei 10 Hz:
    ausreichend? Periodenmittel über ganze Perioden (4 s = 40 Perioden) im Original zufällig erfüllt;

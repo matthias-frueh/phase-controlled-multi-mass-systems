@@ -38,13 +38,13 @@ Die beiden entscheidenden Aufwertungen: (a) das echte, frei programmierbare Hold
 
 ## 2 · Messgröße, Variablen und feste Parameter
 
-- **Zielobservablen: **Schiefe, Liftoff-Anteil, Spitzen-zu-Mittel-Verhältnis von N(t) — quantitativ.
+- **Zielobservablen:** Schiefe, Liftoff-Anteil, Spitzen-zu-Mittel-Verhältnis von N(t) — quantitativ.
 
-- **Kontrollgröße: **zeitlicher Mittelwert ⟨N⟩ (DC-Pfad, muss der statischen Last entsprechen).
+- **Kontrollgröße:** zeitlicher Mittelwert ⟨N⟩ (DC-Pfad, muss der statischen Last entsprechen).
 
-- **Unabhängige Variablen: **relative Phase (φ₂, φ₃); optional die Kontaktsteifigkeit k als zweite Achse.
+- **Unabhängige Variablen:** relative Phase (φ₂, φ₃); optional die Kontaktsteifigkeit k als zweite Achse.
 
-- **Verifiziert statt angenommen: **die tatsächlich aufgeprägte Innenbewegung (Soll-Ist-Vergleich des Egg-Profils).
+- **Verifiziert statt angenommen:** die tatsächlich aufgeprägte Innenbewegung (Soll-Ist-Vergleich des Egg-Profils).
 
 *Richtwerte:*
 
@@ -66,23 +66,23 @@ Drei Module in einem steifen Gehäuse, das frei auf definierten Kontaktelementen
 
 Drei Voice-Coil-Linearaktuatoren (Moving-Coil) bewegen je eine Modulmasse mit einigen mm Hub und werden über eine programmierbare Sollkurve angesteuert. Damit lässt sich das asymmetrische Hold-Schnell-Profil *exakt* aufprägen — nicht nur per Kurbel approximieren — und die relative Phase φ₂, φ₃ in Software mit hoher Treue setzen. Eine Lageregelung mit Positionsrückführung (Encoder oder LVDT) je Modul hält und verifiziert die Trajektorie. Bei 10 Hz und einigen mm Hub liegt die Aufwärtsbeschleunigung sicher über g, sodass in einem Teil der Phasenlagen Liftoff auftritt.
 
-**Am Rande — obere Kante der Mittelklasse: **Wer die Anregung als prescribed acceleration im laborüblichen Sinn will, kann statt Voice-Coils kleine elektrodynamische Mini-Shaker mit Leistungsverstärker einsetzen. Saubere, lehrbuchnahe Krafteinleitung, aber spürbar teurer — sinnvoll erst, wenn das Budget Richtung Variante 3 wandert.
+**Am Rande — obere Kante der Mittelklasse:** Wer die Anregung als prescribed acceleration im laborüblichen Sinn will, kann statt Voice-Coils kleine elektrodynamische Mini-Shaker mit Leistungsverstärker einsetzen. Saubere, lehrbuchnahe Krafteinleitung, aber spürbar teurer — sinnvoll erst, wenn das Budget Richtung Variante 3 wandert.
 
 ## 5 · Kraftmessung: kalibrierte Messdose + dediziertes Mess-DAQ
 
 Eine kalibrierte DMS-Kraftmessdose (rückführbare Kalibrierung über Referenzmassen oder Herstellerzertifikat) wird über ein simultan abtastendes Mehrkanal-Mess-DAQ ausgelesen (24-bit, ≥ 10 kSPS pro Kanal). „Simultan‘ ist hier der Kern: Kraft, Modulposition und Antriebsreferenz liegen auf einem gemeinsamen Takt, wodurch die Phasenbeziehungen exakt sind und Phasenmittelung, Lock-in und Kreuzkorrelation sauber funktionieren. Der DMS-Pfad ist DC-fähig und liefert damit zugleich die Kontrolle ⟨N⟩ = Mg.
 
-**Am Rande — Piezo-Option und die DC-Falle: **Für höchste dynamische Treue ließe sich ein Piezo-Kraftsensor mit Ladungsverstärker nutzen. Piezo ist jedoch AC-gekoppelt und kann den echten Mittelwert nicht liefern — die ⟨N⟩-=-Mg-Kontrolle bräuchte dann einen separaten DC-Kanal (Präzisionswaage oder parallele DMS-Zelle). Die rückführbare DMS-Dose bleibt der saubere Mittelklasse-Weg.
+**Am Rande — Piezo-Option und die DC-Falle:** Für höchste dynamische Treue ließe sich ein Piezo-Kraftsensor mit Ladungsverstärker nutzen. Piezo ist jedoch AC-gekoppelt und kann den echten Mittelwert nicht liefern — die ⟨N⟩-=-Mg-Kontrolle bräuchte dann einen separaten DC-Kanal (Präzisionswaage oder parallele DMS-Zelle). Die rückführbare DMS-Dose bleibt der saubere Mittelklasse-Weg.
 
-**Am Rande — konkrete Teile (Beispiel): **kalibrierte Wägezelle/Kraftsensor mit Zertifikat (~€200–800), simultanes Mehrkanal-DAQ (z. B. MCC/NI-Klasse, 24-bit, ~€500–2000), IEPE-Beschleunigungssensor (~€100–300), Encoder/LVDT je Modul (~€150–600).
+**Am Rande — konkrete Teile (Beispiel):** kalibrierte Wägezelle/Kraftsensor mit Zertifikat (~€200–800), simultanes Mehrkanal-DAQ (z. B. MCC/NI-Klasse, 24-bit, ~€500–2000), IEPE-Beschleunigungssensor (~€100–300), Encoder/LVDT je Modul (~€150–600).
 
 ## 6 · Sekundär- und Referenzsensorik
 
-- **Positionsrückführung je Modul: **Encoder oder LVDT → Soll-Ist-Vergleich des aufgeprägten Egg-Profils (Profilverifikation).
+- **Positionsrückführung je Modul:** Encoder oder LVDT → Soll-Ist-Vergleich des aufgeprägten Egg-Profils (Profilverifikation).
 
-- **Beschleunigungssensor am Rahmen: **IEPE-Sensor, Liftoff über Freifall-Beschleunigung gegenprüfen.
+- **Beschleunigungssensor am Rahmen:** IEPE-Sensor, Liftoff über Freifall-Beschleunigung gegenprüfen.
 
-- **Gemeinsame Synchronisation: **alle Kanäle auf einem DAQ-Takt → exakte Phase, Voraussetzung für quantitative Observablen.
+- **Gemeinsame Synchronisation:** alle Kanäle auf einem DAQ-Takt → exakte Phase, Voraussetzung für quantitative Observablen.
 
 ## 7 · Kontakt und Schwingungsisolation
 
@@ -90,19 +90,19 @@ Definierte, austauschbare Kontaktelemente (kalibrierte Federn oder charakterisie
 
 ## 8 · Kontrollen (das wissenschaftliche Rückgrat)
 
-- **Rückführbare Kraftkalibrierung **mit Referenzmassen → quantitative Kraftskala und Ruhebasis ⟨N⟩ = Mg.
+- **Rückführbare Kraftkalibrierung** mit Referenzmassen → quantitative Kraftskala und Ruhebasis ⟨N⟩ = Mg.
 
-- **Profilverifikation: **aufgeprägte Trajektorie messen und gegen das kommandierte Egg-Profil abgleichen (neu in V2, da das Profil programmierbar ist).
+- **Profilverifikation:** aufgeprägte Trajektorie messen und gegen das kommandierte Egg-Profil abgleichen (neu in V2, da das Profil programmierbar ist).
 
-- **Referenzlauf **(φ = 0 bzw. Einzelmodul) → Bezugswellenform.
+- **Referenzlauf** (φ = 0 bzw. Einzelmodul) → Bezugswellenform.
 
-- **Dummy-/Null-Lauf: **Antrieb an, Amplitude null → schließt elektromagnetische Einkopplung und Rig-Resonanz aus.
+- **Dummy-/Null-Lauf:** Antrieb an, Amplitude null → schließt elektromagnetische Einkopplung und Rig-Resonanz aus.
 
-- **Rig-FRF: **Strukturresonanzen vermessen, Antriebsfrequenz fernhalten.
+- **Rig-FRF:** Strukturresonanzen vermessen, Antriebsfrequenz fernhalten.
 
-- **Wiederholbarkeit: **Regime-Zentren und Übergang mehrfach → quantitativer Rauschboden je Observable.
+- **Wiederholbarkeit:** Regime-Zentren und Übergang mehrfach → quantitativer Rauschboden je Observable.
 
-- **Confounds: **Temperaturdrift, Montagewiederholbarkeit, Netzbrumm, Kabelmikrofonie, Isolationsgüte.
+- **Confounds:** Temperaturdrift, Montagewiederholbarkeit, Netzbrumm, Kabelmikrofonie, Isolationsgüte.
 
 ## 9 · Messablauf pro Phasenpunkt
 
@@ -118,17 +118,17 @@ Definierte, austauschbare Kontaktelemente (kalibrierte Federn oder charakterisie
 
 ## 10 · Erfolgs- und Abbruchkriterium
 
-**Erfolg.  **Die gemessene Karte φ → Wellenform stimmt quantitativ (innerhalb der kombinierten Unsicherheit) mit dem Modell überein; die Lage der drei Regime und ihre Übergänge werden zahlenmäßig reproduziert, einschließlich der k-Abhängigkeit.
+**Erfolg.** Die gemessene Karte φ → Wellenform stimmt quantitativ (innerhalb der kombinierten Unsicherheit) mit dem Modell überein; die Lage der drei Regime und ihre Übergänge werden zahlenmäßig reproduziert, einschließlich der k-Abhängigkeit.
 
-**Falsifikation (für den getesteten Bereich).  **Die vorhergesagte Regime-Struktur ist nach allen Kontrollen nicht oberhalb des Rauschbodens nachweisbar, oder die quantitative Abweichung übersteigt systematisch die Unsicherheit ohne benennbare Ursache.
+**Falsifikation (für den getesteten Bereich).** Die vorhergesagte Regime-Struktur ist nach allen Kontrollen nicht oberhalb des Rauschbodens nachweisbar, oder die quantitative Abweichung übersteigt systematisch die Unsicherheit ohne benennbare Ursache.
 
-**Harter Stopp (Schutz gegen die alte Falle).  **Weicht ⟨N⟩ dauerhaft von der statischen Last ab, jenseits der Kalibrierunsicherheit, ist das eine defekte Messkette — keine Entdeckung. Apparatur prüfen und reparieren, nicht interpretieren.
+**Harter Stopp (Schutz gegen die alte Falle).** Weicht ⟨N⟩ dauerhaft von der statischen Last ab, jenseits der Kalibrierunsicherheit, ist das eine defekte Messkette — keine Entdeckung. Apparatur prüfen und reparieren, nicht interpretieren.
 
 ## 11 · Leistungsgrenzen von Variante 2
 
-**Kann:  **das echte Egg-Profil verifiziert aufprägen; die Wellenform quantitativ vermessen; k gezielt variieren; saubere Phasenmittelung; zahlenmäßiger Modellabgleich statt nur Strukturnachweis.
+**Kann:** das echte Egg-Profil verifiziert aufprägen; die Wellenform quantitativ vermessen; k gezielt variieren; saubere Phasenmittelung; zahlenmäßiger Modellabgleich statt nur Strukturnachweis.
 
-**Kann nicht:  **Vakuum- oder Medienkontrolle, µN-Metrologie, Klima-/Temperaturkammer, eichfähige Rückführung auf nationale Normale — das bleibt Variante 3.
+**Kann nicht:** Vakuum- oder Medienkontrolle, µN-Metrologie, Klima-/Temperaturkammer, eichfähige Rückführung auf nationale Normale — das bleibt Variante 3.
 
 ## 12 · Arbeitspakete
 

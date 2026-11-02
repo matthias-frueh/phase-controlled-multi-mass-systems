@@ -32,7 +32,7 @@ Matthias Früh · Gravidon Systemics Research · 2026 · ORCID 0009-0005-9984-42
 >
 > Lizenz wie der Ordner: CC BY 4.0 ([`../../LICENSE-CC-BY-4.0`](../../LICENSE-CC-BY-4.0)).
 
-**Charakter dieses Dokuments. **Dies ist ein internes, lebendes Arbeitspapier — kein Preprint und keine Veröffentlichung. Es hält einen Arbeitsstand fest, markiert offene Punkte (gelb hinterlegt) und sammelt Testideen. Formulierungen sind bewusst vorläufig. Eine spätere, veröffentlichungsfähige Fassung wird erst nach numerischer Prüfung der hier skizzierten Ansätze erstellt.
+**Charakter dieses Dokuments.** Dies ist ein internes, lebendes Arbeitspapier — kein Preprint und keine Veröffentlichung. Es hält einen Arbeitsstand fest, markiert offene Punkte (gelb hinterlegt) und sammelt Testideen. Formulierungen sind bewusst vorläufig. Eine spätere, veröffentlichungsfähige Fassung wird erst nach numerischer Prüfung der hier skizzierten Ansätze erstellt.
 
 *Geltende Randbedingung (durchgängig): mean(F) = Mg im eingeschwungenen Zustand. Alles Folgende betrifft die Form und Zerlegung der Welle, nicht ihren Mittelwert. Kein gerichteter Eigenantrieb.*
 
@@ -95,15 +95,15 @@ ist der Schlüssel: Ein Kraftbeitrag ohne korrespondierende Bewegung ist verdäc
 
 Vorgeschlagenes Vorgehen, stufenweise von einfach nach anspruchsvoll. Bewusst noch nicht festgelegt — zum Durchspielen.
 
-- **Vorwärtssimulation kalibrieren. **Synthetische Kanäle aus bekanntem (p, q) erzeugen, Rauschen aufprägen, Verarbeitungskette anwenden. Ground Truth ist bekannt — ideal zum Testen des Schätzers.
+- **Vorwärtssimulation kalibrieren.** Synthetische Kanäle aus bekanntem (p, q) erzeugen, Rauschen aufprägen, Verarbeitungskette anwenden. Ground Truth ist bekannt — ideal zum Testen des Schätzers.
 
-- **Wellenform-Kennzahlen als reduzierte Beobachter. **Statt der vollen Zeitreihe zunächst nur Schiefe, Liftoff-Anteil, Spitzen-zu-Mittel-Verhältnis und Ungerade/Gerade-Spektralverhältnis als Zielgrößen. Sie sind robust und niedrigdimensional.
+- **Wellenform-Kennzahlen als reduzierte Beobachter.** Statt der vollen Zeitreihe zunächst nur Schiefe, Liftoff-Anteil, Spitzen-zu-Mittel-Verhältnis und Ungerade/Gerade-Spektralverhältnis als Zielgrößen. Sie sind robust und niedrigdimensional.
 
-- **Parameterschätzung. **Least-Squares oder Bayessche Schätzung von (p, q), die alle Kanäle gleichzeitig erklärt. Kostenfunktion gewichtet Kanal-Residuen mit ihrem jeweiligen Rauschen.
+- **Parameterschätzung.** Least-Squares oder Bayessche Schätzung von (p, q), die alle Kanäle gleichzeitig erklärt. Kostenfunktion gewichtet Kanal-Residuen mit ihrem jeweiligen Rauschen.
 
-- **Identifizierbarkeit prüfen. **Welche Parameter sind aus welchen Kanälen überhaupt eindeutig bestimmbar? Sensitivitätsanalyse / Fisher-Information. Entartete Richtungen markieren.
+- **Identifizierbarkeit prüfen.** Welche Parameter sind aus welchen Kanälen überhaupt eindeutig bestimmbar? Sensitivitätsanalyse / Fisher-Information. Entartete Richtungen markieren.
 
-**offen: **Punkt 3: Entscheiden, ob Least-Squares reicht oder ob die Artefakt-Korrelation eine volle Bayessche Behandlung mit Priors auf q erzwingt. Hängt von der Identifizierbarkeit aus Punkt 4 ab, also evtl. iterativ.
+**offen:** Punkt 3: Entscheiden, ob Least-Squares reicht oder ob die Artefakt-Korrelation eine volle Bayessche Behandlung mit Priors auf q erzwingt. Hängt von der Identifizierbarkeit aus Punkt 4 ab, also evtl. iterativ.
 
 ## 4.1 Trennung S von C — der Kern
 
@@ -115,7 +115,7 @@ Die eigentliche Schwierigkeit: S (intendiert) und C (Artefakt) können ähnliche
 
 - Off-State-Referenz: Der Referenzkanal liefert C ohne S — direkte Subtraktionsbasis.
 
-**offen: **Prüfen, ob die Phasenstarrheit als Trennkriterium ausreicht, wenn ein Teil von C (tangentiale Strukturkopplung) selbst phasenkorreliert ist. Verdacht: das ist der harte Fall. Gegentest mit gezielt phasenkorreliertem C in der Simulation.
+**offen:** Prüfen, ob die Phasenstarrheit als Trennkriterium ausreicht, wenn ein Teil von C (tangentiale Strukturkopplung) selbst phasenkorreliert ist. Verdacht: das ist der harte Fall. Gegentest mit gezielt phasenkorreliertem C in der Simulation.
 
 # 5. Anschluss an die Detektionsschwelle
 
@@ -125,7 +125,7 @@ Aus dem Mehrkanal-Baustein übernommen, hier als Designgröße der Inversion:
 
 mit Eigenrauschen des limitierenden Kanals *sigma_kanal*, Zahl kohärent gemittelter Zyklen N und Strategie-Effizienz *eta_strategie* (typisch 0,1 bis 1,0). Die Inversionsstrategie bestimmt eta direkt: ein gut konditionierter Schätzer mit sauberer Identifizierbarkeit hebt eta, eine entartete Parametrierung senkt es. Das verknüpft Abschnitt 4 quantitativ mit der erreichbaren Schwelle.
 
-**offen: **eta_strategie ist derzeit ein Platzhalter. Ziel: eta aus der Fisher-Information des Schätzers (Punkt 4.4) ableiten statt zu raten. Das wäre ein eigenständiger, publikationsfähiger Beitrag.
+**offen:** eta_strategie ist derzeit ein Platzhalter. Ziel: eta aus der Fisher-Information des Schätzers (Punkt 4.4) ableiten statt zu raten. Das wäre ein eigenständiger, publikationsfähiger Beitrag.
 
 # 6. Testplan (numerisch, vor jeder Hardware)
 
@@ -153,6 +153,6 @@ Sammelstelle für Gedanken, die noch keinen Platz haben — wird laufend ergänz
 
 - Lässt sich die Lateralbilanz (Baustein 13, Abschnitt 4) als zusätzliche Constraint in die Schätzung einbringen? Könnte Identifizierbarkeit verbessern.
 
-**Arbeitsstand. **Das Vorwärtsmodell (Abschnitt 1) und die Messseite (Abschnitt 3) stehen. Das inverse Problem (Abschnitt 2, 4) ist die eigentliche neue Arbeit und noch unerprobt. Nächster Schritt ist Test T-A: die geschlossene Schleife aus synthetischen Kanälen, um den Schätzer überhaupt zu validieren. Erst danach lohnt sich T-B, der den wissenschaftlichen Kern (Trennung S von C) prüft.
+**Arbeitsstand.** Das Vorwärtsmodell (Abschnitt 1) und die Messseite (Abschnitt 3) stehen. Das inverse Problem (Abschnitt 2, 4) ist die eigentliche neue Arbeit und noch unerprobt. Nächster Schritt ist Test T-A: die geschlossene Schleife aus synthetischen Kanälen, um den Schätzer überhaupt zu validieren. Erst danach lohnt sich T-B, der den wissenschaftlichen Kern (Trennung S von C) prüft.
 
 PCMMS · Arbeitspapier Ringstruktur/Inversion · intern · Gravidon Systemics Research · 2026 · Seite

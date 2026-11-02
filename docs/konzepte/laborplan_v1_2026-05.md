@@ -28,17 +28,17 @@
 
 Ziel der Kampagne ist der experimentelle Nachweis, dass die *relative Phasenlage* mehrerer periodisch bewegter Module die Form der Kontaktkraft N(t) eines Mehrmassensystems auf einseitigem Kontakt deterministisch steuert — bei konstantem mittlerem Lastfall. Gemessen werden die Wellenform-Observablen Schiefe, Liftoff-Anteil und Spitzen-zu-Mittel-Verhältnis, kontrolliert wird die Bindung des Mittelwerts an das Gewicht (⟨N⟩ = Mg).
 
-**Leitgedanke der Auslegung: **Das gesuchte Signal ist eine Order-1-Größe (Liftoff 0 → ≈75 %, Schiefe 0 → ≈+1,7), keine mN- oder µN-Jagd. Die Apparatur braucht deshalb nicht Präzision, sondern Bandbreite. Genau das macht eine kostengünstige Realisierung wissenschaftlich tragfähig.
+**Leitgedanke der Auslegung:** Das gesuchte Signal ist eine Order-1-Größe (Liftoff 0 → ≈75 %, Schiefe 0 → ≈+1,7), keine mN- oder µN-Jagd. Die Apparatur braucht deshalb nicht Präzision, sondern Bandbreite. Genau das macht eine kostengünstige Realisierung wissenschaftlich tragfähig.
 
 ## 2 · Messgröße, Variablen und feste Parameter
 
-- **Zielobservablen: **Schiefe, Liftoff-Anteil und Spitzen-zu-Mittel-Verhältnis von N(t).
+- **Zielobservablen:** Schiefe, Liftoff-Anteil und Spitzen-zu-Mittel-Verhältnis von N(t).
 
-- **Kontrollgröße: **zeitlicher Mittelwert ⟨N⟩ (muss der statischen Last entsprechen).
+- **Kontrollgröße:** zeitlicher Mittelwert ⟨N⟩ (muss der statischen Last entsprechen).
 
-- **Unabhängige Variable: **relative Phase (φ₂, φ₃) ∈ [0°, 360°)².
+- **Unabhängige Variable:** relative Phase (φ₂, φ₃) ∈ [0°, 360°)².
 
-- **Konstant gehalten: **Masse, Antriebsfrequenz, Hub, Kontaktsteifigkeit, Geometrie.
+- **Konstant gehalten:** Masse, Antriebsfrequenz, Hub, Kontaktsteifigkeit, Geometrie.
 
 *Richtwerte (an das Simulationsmodell angelehnt):*
 
@@ -60,23 +60,23 @@ Drei Module sitzen in einem möglichst steifen Gehäuse, das *frei* auf einem na
 
 Drei kleine getriebene DC-Motoren mit Exzenter bzw. Kurbel/Nocke bewegen je eine Modulmasse (~50–150 g) mit einigen mm Hub. 600 U/min ergeben 10 Hz; eine Kurbel approximiert die sinusförmige, eine Nocke die asymmetrische (Egg-)Bewegung. Die relative Phasenlage φ₂, φ₃ wird über die vorhandene ESP32-Steuerung per Timing bzw. Encoder gesetzt. Damit trifft die Apparatur direkt den 10-Hz-Bereich der Simulation und nutzt die bestehende Phasen-Firmware.
 
-**Design-Bedingung: **Frequenz, Masse und Kontaktsteifigkeit so abstimmen, dass in einem Teil der Phasenlagen tatsächlich Liftoff auftritt — wo dieser Bereich liegt, gibt die Simulation vorab an.
+**Design-Bedingung:** Frequenz, Masse und Kontaktsteifigkeit so abstimmen, dass in einem Teil der Phasenlagen tatsächlich Liftoff auftritt — wo dieser Bereich liegt, gibt die Simulation vorab an.
 
-**Am Rande — LRA-Option: **Vorhandene LRAs laufen physikalisch nicht bei 10 Hz, sondern resonieren bei ~150–235 Hz mit µm-Hub. Nutzbar nur, wenn man bei LRA-Resonanz fährt und die Kontaktsteifigkeit k (und die Masse) so skaliert, dass die dimensionslosen Verhältnisse, die Liftoff und Schiefe bestimmen, dem 10-Hz-Modell entsprechen. Bei ~175 Hz ist ω² so groß, dass Liftoff (a > g) schon bei wenigen µm entsteht — das funktioniert, ist aber eine Mikro-Version bei verschobener Frequenz. Für ‚voll und sicher‘ bleibt es bei 10 Hz (Motor + Kurbel); LRA-Resonanz nur als Notnagel.
+**Am Rande — LRA-Option:** Vorhandene LRAs laufen physikalisch nicht bei 10 Hz, sondern resonieren bei ~150–235 Hz mit µm-Hub. Nutzbar nur, wenn man bei LRA-Resonanz fährt und die Kontaktsteifigkeit k (und die Masse) so skaliert, dass die dimensionslosen Verhältnisse, die Liftoff und Schiefe bestimmen, dem 10-Hz-Modell entsprechen. Bei ~175 Hz ist ω² so groß, dass Liftoff (a > g) schon bei wenigen µm entsteht — das funktioniert, ist aber eine Mikro-Version bei verschobener Frequenz. Für ‚voll und sicher‘ bleibt es bei 10 Hz (Motor + Kurbel); LRA-Resonanz nur als Notnagel.
 
 ## 5 · Kraftmessung: schnelle Messdose + DAQ
 
 Eine DMS-Wägezelle (Biegebalken, ~3–5 kg Bereich — Headroom über Mg ≈ 6,4 N) wird über einen schnellen 24-bit-ADC mit programmierbarem Vorverstärker (PGA) ausgelesen. Die Abtastrate liegt bei ≥ 2 kSPS (rund 200× die Grundfrequenz), damit die scharfen Liftoff-Flanken und Kraftspitzen zeitlich aufgelöst werden. Der DC-fähige Pfad liefert gleichzeitig die statische Kontrolle ⟨N⟩ = Mg.
 
-**Wichtig: **Ein HX711 (80 SPS) ist zu langsam für Liftoff und Spitzen und scheidet aus. Als Host genügt ein Raspberry Pi (SPI) oder — am günstigsten — der ESP32 als SPI-Master, der die Rohdaten an einen Laptop streamt.
+**Wichtig:** Ein HX711 (80 SPS) ist zu langsam für Liftoff und Spitzen und scheidet aus. Als Host genügt ein Raspberry Pi (SPI) oder — am günstigsten — der ESP32 als SPI-Master, der die Rohdaten an einen Laptop streamt.
 
-**Am Rande — konkrete Teile (Beispiel, ~€50): **Wägezelle 5 kg (~€8), ADS1256-Breakout (24-bit, bis 30 kSPS, PGA bis 64×, ~€20), Pi oder vorhandener ESP32 als Logger; Beschleunigungssensor MPU-6050 oder ADXL345 (~€3) am Rahmen zur Liftoff-Gegenprobe.
+**Am Rande — konkrete Teile (Beispiel, ~€50):** Wägezelle 5 kg (~€8), ADS1256-Breakout (24-bit, bis 30 kSPS, PGA bis 64×, ~€20), Pi oder vorhandener ESP32 als Logger; Beschleunigungssensor MPU-6050 oder ADXL345 (~€3) am Rahmen zur Liftoff-Gegenprobe.
 
 ## 6 · Sekundär- und Referenzsensorik
 
-- **Beschleunigungssensor am Rahmen: **Liftoff über die Freifall-Beschleunigung (≈ 0 g) gegenprüfen und die Innenbewegung verifizieren.
+- **Beschleunigungssensor am Rahmen:** Liftoff über die Freifall-Beschleunigung (≈ 0 g) gegenprüfen und die Innenbewegung verifizieren.
 
-- **Referenz-/Sync-Kanal: **das Phasen-/Antriebssignal des ESP32 mitschneiden → ermöglicht Phasenmittelung, Lock-in und Kreuzkorrelation (die Mehrkanal-Messarchitektur, [`mehrkanal_messarchitektur_2026-05.md`](mehrkanal_messarchitektur_2026-05.md), hier am richtigen Ort).
+- **Referenz-/Sync-Kanal:** das Phasen-/Antriebssignal des ESP32 mitschneiden → ermöglicht Phasenmittelung, Lock-in und Kreuzkorrelation (die Mehrkanal-Messarchitektur, [`mehrkanal_messarchitektur_2026-05.md`](mehrkanal_messarchitektur_2026-05.md), hier am richtigen Ort).
 
 ## 7 · Kontakt und Schwingungsisolation
 
@@ -84,17 +84,17 @@ Weiches Elastomerpad oder Feder mit bekanntem k, c als einseitiger Kontakt. Das 
 
 ## 8 · Kontrollen (das wissenschaftliche Rückgrat)
 
-- **Statische Kalibrierung **mit Referenzmassen → Kraftskala und Ruhebasis ⟨N⟩ = Mg.
+- **Statische Kalibrierung** mit Referenzmassen → Kraftskala und Ruhebasis ⟨N⟩ = Mg.
 
-- **Referenzlauf **(φ = 0 bzw. Einzelmodul) → Bezugswellenform.
+- **Referenzlauf** (φ = 0 bzw. Einzelmodul) → Bezugswellenform.
 
-- **Dummy-/Null-Lauf: **Aktuatoren an, Amplitude null (oder inerte Ersatzmasse) → schließt elektromagnetische Einkopplung des Antriebs und Rig-Resonanz als Scheinsignal aus.
+- **Dummy-/Null-Lauf:** Aktuatoren an, Amplitude null (oder inerte Ersatzmasse) → schließt elektromagnetische Einkopplung des Antriebs und Rig-Resonanz als Scheinsignal aus.
 
-- **Rig-FRF: **Strukturresonanzen einmal vermessen und die Antriebsfrequenz davon fernhalten.
+- **Rig-FRF:** Strukturresonanzen einmal vermessen und die Antriebsfrequenz davon fernhalten.
 
-- **Wiederholbarkeit: **drei Regime-Zentren und der Übergang je 3–5× → empirischer Rauschboden (Power-Analyse-Logik auf die reale Streuung angewandt).
+- **Wiederholbarkeit:** drei Regime-Zentren und der Übergang je 3–5× → empirischer Rauschboden (Power-Analyse-Logik auf die reale Streuung angewandt).
 
-- **Confounds prüfen: **Temperaturdrift, Sitz-/Montagewiederholbarkeit, 50-Hz-Netzbrumm, Kabelmikrofonie, Isolationsgüte.
+- **Confounds prüfen:** Temperaturdrift, Sitz-/Montagewiederholbarkeit, 50-Hz-Netzbrumm, Kabelmikrofonie, Isolationsgüte.
 
 ## 9 · Messablauf pro Phasenpunkt
 
@@ -110,17 +110,17 @@ Weiches Elastomerpad oder Feder mit bekanntem k, c als einseitiger Kontakt. Das 
 
 ## 10 · Erfolgs- und Abbruchkriterium
 
-**Erfolg.  **Die drei Regime erscheinen an den vorhergesagten Phasenlagen oberhalb des Rauschbodens; die Struktur (nicht die exakten Zahlenwerte) reproduziert die Simulation.
+**Erfolg.** Die drei Regime erscheinen an den vorhergesagten Phasenlagen oberhalb des Rauschbodens; die Struktur (nicht die exakten Zahlenwerte) reproduziert die Simulation.
 
-**Falsifikation (für den getesteten Bereich).  **Die Regime-Struktur ist nach allen Kontrollen nicht über dem Rauschboden nachweisbar.
+**Falsifikation (für den getesteten Bereich).** Die Regime-Struktur ist nach allen Kontrollen nicht über dem Rauschboden nachweisbar.
 
-**Harter Stopp (Schutz gegen die alte Falle).  **Weicht ⟨N⟩ dauerhaft von der statischen Last ab, jenseits der Kalibrierunsicherheit, ist das eine defekte Messkette — keine Entdeckung. Dann wird die Apparatur geprüft und repariert, nicht interpretiert.
+**Harter Stopp (Schutz gegen die alte Falle).** Weicht ⟨N⟩ dauerhaft von der statischen Last ab, jenseits der Kalibrierunsicherheit, ist das eine defekte Messkette — keine Entdeckung. Dann wird die Apparatur geprüft und repariert, nicht interpretiert.
 
 ## 11 · Leistungsgrenzen von Variante 1
 
-**Kann:  **die drei Regime und die gesamte φ → Wellenform-Karte sichtbar machen, Modell und Messung vergleichen, ⟨N⟩ = Mg kontrollieren.
+**Kann:** die drei Regime und die gesamte φ → Wellenform-Karte sichtbar machen, Modell und Messung vergleichen, ⟨N⟩ = Mg kontrollieren.
 
-**Kann nicht:  **ein sauberes Egg-Profil (die Kurbel ist nur näherungsweise) und eine feine Quantifizierung der Spitzenkraft (Pad-Nichtlinearität, ADC-Rauschen). Für den Nachweis der Struktur reicht es — und die Struktur ist die Aussage.
+**Kann nicht:** ein sauberes Egg-Profil (die Kurbel ist nur näherungsweise) und eine feine Quantifizierung der Spitzenkraft (Pad-Nichtlinearität, ADC-Rauschen). Für den Nachweis der Struktur reicht es — und die Struktur ist die Aussage.
 
 ## 12 · Arbeitspakete
 

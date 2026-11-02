@@ -29,7 +29,7 @@ Stand: 14. Juni 2026
 
 ## Kurzfassung
 
-Die phasengekoppelte Mehrmassen-Hardware lässt sich als **Drehimpuls-Stellglied** nutzen: die Orientierung eines Starrkörpers steuern, **ohne Außenwirkung** — das Reaktionsrad-Prinzip der Satelliten-Lageregelung. Voll innerhalb der klassischen Mechanik, vakuumgültig, schwerpunkterhaltend. Das ist der defensivste „Wofür ist das gut?"-Strang des Projekts.
+Die phasengekoppelte Mehrmassen-Hardware lässt sich als **Drehimpuls-Stellglied** nutzen: die Orientierung eines Starrkörpers steuern, **ohne Außenwirkung** — das Reaktionsrad-Prinzip der Satelliten-Lageregelung. Voll innerhalb der klassischen Mechanik, vakuumgültig, schwerpunkterhaltend. Das ist der defensivste „Wofür ist das gut?“-Strang des Projekts.
 
 ## 1. Was es ist
 
@@ -39,7 +39,7 @@ Die phasengekoppelte Mehrmassen-Hardware lässt sich als **Drehimpuls-Stellglied
 
 - **Szenario A (Slew):** Der Körper dreht auf das Zielquaternion und hält. Die Räder geben Drehimpuls ab und kehren zu ~0 zurück. Der Gesamtdrehimpuls `|H|` bleibt erhalten (Start 0), die Schwerpunkt-Translation ist 0.
 - **Szenario B (Halten gegen Störmoment):** Die Lage wird gehalten, aber die Räder müssen Drehimpuls *aufladen* → die Radrate rampt linear bis zur **Sättigung**. Danach geht nichts mehr ohne externes Moment.
-- **Ehrliche Grenze:** Inneres Tauschen verteilt Drehimpuls nur **um**. Das *Ändern* des Gesamt-`H` braucht ein Außen (Desaturation per externem Moment — Magnetorquer, Düsen o. Ä.). Genau hier ist die Trennlinie zwischen „legitim" und „unmöglich".
+- **Ehrliche Grenze:** Inneres Tauschen verteilt Drehimpuls nur **um**. Das *Ändern* des Gesamt-`H` braucht ein Außen (Desaturation per externem Moment — Magnetorquer, Düsen o. Ä.). Genau hier ist die Trennlinie zwischen „legitim“ und „unmöglich“.
 
 ## 3. Bezug zur PCMMS-Hardware
 
