@@ -33,7 +33,7 @@ Status: konzeptuell · nicht hardwarespezifisch · keine Bauanleitung. Die Notiz
 
 ## 1 · Grundprinzip: Warum mehrere Kanäle
 
-Eine einzelne Präzisionswaage misst F_c(t), aber ihr Signal ist überlagert von Drift, Temperatur, Untergrundvibration, Eigenresonanzen der Lagerung und thermischem Rauschen. Bei einer Zielobservablen, die in der Wellenformstatistik sitzt – nicht im Mittelwert – ist die einzelne Waage nicht ausreichend.
+Eine einzelne Präzisionswaage misst F_c(t), aber ihr Signal ist überlagert von Drift, Temperatur, Untergrundvibration, Eigenresonanzen der Lagerung und thermischem Rauschen. Bei einer Zielobservablen, die in der Wellenformstatistik sitzt – nicht im Mittelwert –, ist die einzelne Waage nicht ausreichend.
 
 Mehrkanalmessung adressiert dieses Problem durch drei Mechanismen:
 
@@ -60,7 +60,7 @@ Die Architektur folgt damit derselben Logik wie moderne Präzisionsmessungen in 
 | Eigenschaft | Beschreibung |
 |---|---|
 | Zweck | Direkte, mechanisch entkoppelte Messung des vertikalen Versatzes z(t) des Rahmens oder eines definierten Referenzpunkts am System. |
-| Sensorklasse | Laser-Interferometer (sub-nm-Auflösung) oder konfokale/triangulierende Laser-Wegsensoren (sub-µm). Wahl nach Bandbreite und Bewegungsamplitude. |
+| Sensorklasse | Laser-Interferometer (Sub-nm-Auflösung) oder konfokale/triangulierende Laser-Wegsensoren (sub-µm). Wahl nach Bandbreite und Bewegungsamplitude. |
 | Erwartete Auflösung | Interferometer: 10⁻⁹ – 10⁻¹² m je nach Aufbau. Triangulation/Konfokal: 10⁻⁶ – 10⁻⁸ m bei höherer Bandbreite. |
 | Bandbreite | Bis in den kHz-Bereich, oberhalb der mechanischen Eigenfrequenzen relevant. |
 | Hauptlimitierungen | Luftbrechungsindex-Schwankungen, Streulicht, Targetreflektivität, Wahl des Referenzkörpers (was ist „in Ruhe“?). |
@@ -80,7 +80,7 @@ Die Architektur folgt damit derselben Logik wie moderne Präzisionsmessungen in 
 |---|---|
 | Zweck | Beschleunigungssensor am Rahmen des PCMMS – misst direkt z̈(t) als unabhängige Bestätigung der modellierten Dynamik. |
 | Sensorklasse | MEMS-Beschleunigungssensor (µg-Klasse) oder seismische Beschleunigungsmesser für tiefe Frequenzen. |
-| Verwendung | Konsistenzprüfung: aus z̈(t) und Modell folgt F_c-Vorhersage, die mit der direkten Kraftmessung verglichen wird. Diskrepanzen sind diagnostisch. |
+| Verwendung | Konsistenzprüfung: Aus z̈(t) und Modell folgt F_c-Vorhersage, die mit der direkten Kraftmessung verglichen wird. Diskrepanzen sind diagnostisch. |
 
 ## 3 · Mechanischer Aufbau: Einseitige Federlagerung
 
@@ -129,7 +129,7 @@ Das PCMMS wird mit präzise bekannter Frequenz angeregt. Phasenstarre Demodulati
 
 ### 6.3 · Kreuzkorrelation Kraft × Weg
 
-Ein echter Wellenform-Effekt zeigt eine spezifische Phasenbeziehung zwischen F_c(t) und z(t), die das lineare Modell nicht reproduziert. Die Kreuzkorrelation als Funktion der Phasenverschiebung ist der diagnostische Test: ein Effekt erzeugt eine charakteristische Signatur, ein Artefakt typischerweise nicht.
+Ein echter Wellenform-Effekt zeigt eine spezifische Phasenbeziehung zwischen F_c(t) und z(t), die das lineare Modell nicht reproduziert. Die Kreuzkorrelation als Funktion der Phasenverschiebung ist der diagnostische Test: Ein Effekt erzeugt eine charakteristische Signatur, ein Artefakt typischerweise nicht.
 
 ### 6.4 · Residualstatistik gegen Modell
 
@@ -169,7 +169,7 @@ Tiefere Detektionsklassen erfordern entweder bessere Sensoren (kryogene Lagerung
 
 ## Schlussbemerkung
 
-Eine Hypothese ist nur so prüfbar wie die Architektur, mit der sie gemessen wird. v3b reformuliert die Frage – dieser Baustein beschreibt das Werkzeug, das die Frage beantworten könnte. Beide Notizen sind unabhängig vom Existenznachweis des Effekts wertvoll: sie definieren die methodische Infrastruktur einer ehrlichen Untersuchung.
+Eine Hypothese ist nur so prüfbar wie die Architektur, mit der sie gemessen wird. v3b reformuliert die Frage – dieser Baustein beschreibt das Werkzeug, das die Frage beantworten könnte. Beide Notizen sind unabhängig vom Existenznachweis des Effekts wertvoll: Sie definieren die methodische Infrastruktur einer ehrlichen Untersuchung.
 
 Die hier skizzierte Struktur ist nicht neu – sie folgt etablierter Praxis in der Präzisionsmesstechnik. Ihr Wert liegt darin, dass sie auf das spezifische PCMMS-Setting zugeschnitten ist und an die übrigen Bausteine direkt anschließt.
 

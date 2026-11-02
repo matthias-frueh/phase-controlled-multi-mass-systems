@@ -140,7 +140,7 @@ Der lineare Anteil trägt nichts bei. Entspricht der Bilanzrechnung in
 
 Eingeschwungen, über ganze Perioden: c₁⟨V⟩ + c₂ρ⟨V|V|⟩ = 0, also F̄_B = 0 — Drift bei
 verschwindender mittlerer Gesamtkraft und verschwindender mittlerer Medienkraft. Näherung
-V = v_d + v_osc mit v_osc ≈ Rückstoßbewegung, gültig wenn Widerstand ≪ Trägheitskraft:
+V = v_d + v_osc mit v_osc ≈ Rückstoßbewegung, gültig, wenn Widerstand ≪ Trägheitskraft:
 c₂ρ·v_osc/(M·2πf) ≈ 4×10⁻⁶ (Luft), 3×10⁻³ (Wasser) mit Skriptparametern.
 
 - Mit |v_d| ≪ |v_osc|:
@@ -343,7 +343,7 @@ Flügeln (Childress, Vandenberghe, Zhang 2006), starre Pyramide (Weathers et al.
 ## 10 · Gestrichen gegenüber v1–v4
 
 - v1: „unterhalb exakt null“; harte Schwelle beim Übergang linear → quadratisch; „einfachster belegter
-  Fall"; garantierte Monotonie in Dichte und Phasenkohärenz; Einsatzschwelle als Klassenbedingung.
+  Fall“; garantierte Monotonie in Dichte und Phasenkohärenz; Einsatzschwelle als Klassenbedingung.
 - v2: „Träger gehalten“ für Konfiguration D; „Gerade durch den Ursprung“; Zeitumkehr als exakte
   allgemeine Nullkontrolle; Knudsen-Werte um Faktor zehn; Re_f* ≈ 20–55 ohne Definition.
 - v3: Vorzeichen in Drift- und Pendelformel; „Sinus → v = 0“ statt Periodenmittel; Fehlerordnung

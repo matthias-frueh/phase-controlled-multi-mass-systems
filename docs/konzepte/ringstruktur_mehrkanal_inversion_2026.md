@@ -42,7 +42,7 @@ Die Ringstruktur-Skizze beschreibt die gemessene Kontaktkraft als Summe dreier k
 
 *F(t) = Mg + S(t; p) + C(t; q)*
 
-Die architektonische Trennung ist der eigentliche Wert: ein fester Gewichtsterm, ein intendierter Signalterm und ein Kopplungs-/Artefaktterm, der Spiel, Kontakte und Strukturkopplung ausdrücklich mitführt statt sie zu ignorieren.
+Die architektonische Trennung ist der eigentliche Wert: ein fester Gewichtsterm, ein intendierter Signalterm und ein Kopplungs-/Artefaktterm, der Spiel, Kontakte und Strukturkopplung ausdrücklich mitführt, statt sie zu ignorieren.
 
 ## 1.1 Signalterm S(t; p)
 
@@ -64,7 +64,7 @@ mit radialen und tangentialen Kopplungsbeiträgen sowie kurzen, nicht-idealen Pu
 
 *psi_k(t) = ( t − phi_k − lambda·(Theta(t) + theta_k(t)) ) mod T*
 
-Die Phasenkonstruktion erlaubt eine langsame, übergeordnete Modulation über *Theta(t)* — das ist der direkte Anschluss an die Zwei-Zeitskalen-Architektur aus Baustein 13. Parameterbereiche: T, dt_eff, A_k, m_k, lambda, sowie die Kopplungs- und Dämpfungskoeffizienten radial und tangential.
+Die Phasenkonstruktion erlaubt eine langsame, übergeordnete Modulation über *Theta(t)* — das ist der direkte Anschluss an die Zwei-Zeitskalen-Architektur aus Baustein 13. Parameterbereiche: T, dt_eff, A_k, m_k, lambda sowie die Kopplungs- und Dämpfungskoeffizienten radial und tangential.
 
 # 2. Die Lücke: das inverse Problem
 
@@ -125,7 +125,7 @@ Aus dem Mehrkanal-Baustein übernommen, hier als Designgröße der Inversion:
 
 mit Eigenrauschen des limitierenden Kanals *sigma_kanal*, Zahl kohärent gemittelter Zyklen N und Strategie-Effizienz *eta_strategie* (typisch 0,1 bis 1,0). Die Inversionsstrategie bestimmt eta direkt: ein gut konditionierter Schätzer mit sauberer Identifizierbarkeit hebt eta, eine entartete Parametrierung senkt es. Das verknüpft Abschnitt 4 quantitativ mit der erreichbaren Schwelle.
 
-**offen:** eta_strategie ist derzeit ein Platzhalter. Ziel: eta aus der Fisher-Information des Schätzers (Punkt 4.4) ableiten statt zu raten. Das wäre ein eigenständiger, publikationsfähiger Beitrag.
+**offen:** eta_strategie ist derzeit ein Platzhalter. Ziel: eta aus der Fisher-Information des Schätzers (Punkt 4.4) ableiten, statt zu raten. Das wäre ein eigenständiger, publikationsfähiger Beitrag.
 
 # 6. Testplan (numerisch, vor jeder Hardware)
 

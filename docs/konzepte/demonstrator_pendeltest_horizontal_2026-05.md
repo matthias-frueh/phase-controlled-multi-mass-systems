@@ -60,7 +60,7 @@ Zwei bis drei Vibrationsmodule (Exzentermassen) werden über die ESP32-Steuerung
 
 - **OpenCV-Tracking** des roten Markers → x(t) und y(t), ≥ 30 fps; Kalibrierung mm/Pixel über den Maßstab; gemeinsame Zeitbasis.
 
-- **Ausgabe** als CSV „t_s, x_m, y_m‘ — direkt in die Auswertepipeline einlesbar.
+- **Ausgabe** als CSV „t_s, x_m, y_m“ — direkt in die Auswertepipeline einlesbar.
 
 ## 6 · Kontrollen (das wissenschaftliche Rückgrat)
 
@@ -84,7 +84,7 @@ Zwei bis drei Vibrationsmodule (Exzentermassen) werden über die ESP32-Steuerung
 
 - Je Bedingung 3–5 Wiederholungen; Bedingungsreihenfolge randomisiert, Kontrollen interleaved.
 
-- Pflicht-Set pro Sitzung: AUS, Zufallsphase, balancierte Masse, 0°/90°/180°/270°, sowie ein gespiegeltes Muster.
+- Pflicht-Set pro Sitzung: AUS, Zufallsphase, balancierte Masse, 0°/90°/180°/270° sowie ein gespiegeltes Muster.
 
 - Tracking-CSV und Video je Lauf sichern (offen auf Zenodo/GitHub).
 

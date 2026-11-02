@@ -68,7 +68,7 @@ Diese Hypothese ist **erhaltungskonform** (der Impuls geht an die Luft), **falsi
 
 - **Kein reaktionsloser Antrieb.** Der Reaktionspartner ist explizit das Medium; ohne Medium keine Bewegung (siehe Null-Ergebnis, Abschnitt 8). Genau diese Mediumsabhängigkeit unterscheidet H1 von reaktionslosen Behauptungen.
 - **Keine Gewichtsreduktion, keine Antigravitation.** Das Zeitmittel der Kontaktnormalkraft auf einer Unterlage bleibt durch `mean(F_N) = M·g` festgelegt (Abschnitt 3).
-- **Abgrenzung zu EM-Drive / Woodward:** deren Kernproblem ist die fehlende Trennung kleiner Signale von thermischen/messtechnischen Artefakten (vgl. Tajmar et al., 2018). H1 macht das Medium zum *kontrollierten, variierbaren* Reaktionspartner und erlaubt damit gerade die saubere Trennung (Abschnitt 11).
+- **Abgrenzung zu EM-Drive / Woodward:** Deren Kernproblem ist die fehlende Trennung kleiner Signale von thermischen/messtechnischen Artefakten (vgl. Tajmar et al., 2018). H1 macht das Medium zum *kontrollierten, variierbaren* Reaktionspartner und erlaubt damit gerade die saubere Trennung (Abschnitt 11).
 
 ## 3. Erhaltungssatz als Randbedingung — die zwei Grenzfälle
 
@@ -107,7 +107,7 @@ z̈_k(t) = z̈_k,∥(t) + z̈_k,⊥(t)                       (5)
 Die Asymmetrie formt die **Wellenform** der Kraft und — im Medium — die **Asymmetrie der Medienreaktion**. Sie verändert nicht das Zeitmittel der Innendynamik (`∫z̈ dt = 0`/Periode).
 
 **Zwei Messkonfigurationen:**
-- **Konfiguration A — gebunden (auf Kraftsensor):** Reaktionspartner = Unterlage. `⟨F_N⟩` durch Schwerpunktsatz fixiert; messbar ist die *Wellenform* und die Medienreaktion im Residuum. Dient der Pipeline-Validierung und der C-Charakterisierung.
+- **Konfiguration A — gebunden (auf Kraftsensor):** Reaktionspartner = Unterlage. `⟨F_N⟩` durch Schwerpunktsatz fixiert; messbar sind die *Wellenform* und die Medienreaktion im Residuum. Dient der Pipeline-Validierung und der C-Charakterisierung.
 - **Konfiguration B/C — frei bzw. reibungsarm rollend:** Reaktionspartner = Luft. **Achtung:** reibungslimitiert — der erwartete Schub (Abschnitt 9: 10⁻⁷–10⁻⁴ N) liegt *unter* typischer Roll-/Gleitreibung (~10⁻² N) und sogar unter Luftlager-Reibung (~10⁻⁴ N). Freie Drift setzt sich für diese Schubwerte **nicht** in Bewegung. Nur als Negativ-/Kontrollkonfiguration sinnvoll.
 - **Konfiguration D — Schub-Pendel / Torsionswaage (primäre Messkonfiguration):** Das System hängt an einer reibungsfreien Aufhängung. Der stetige, gleichgerichtete Schub deflektiert die Aufhängung statisch (`x = F_eff·L/(M·g)`); keine Haftreibungsschwelle. Dies ist die etablierte Methode für µN–nN-Schub (vgl. Schubwaagen bei EM-Drive-Tests, Tajmar 2018) und die einzige für die erwartete Effektgröße taugliche Konfiguration (Abschnitt 9).
 
@@ -158,19 +158,19 @@ Ohne diese Schwellen wäre die Wellenform-Analyse nicht falsifizierbar; sie sind
 
 **Rechenbeispiel (illustrativ):** `K = 50` Blöcke, daraus `σ_γ ≈ 0.04` → `Δγ_min ≈ 0.08`. Eine Schiefeänderung unter 0.08 gilt dann als nicht auflösbar. (Konkrete Zahlen pro Aufbau einsetzen — `K`, `T_b`, `σ_γ` aus den realen Daten.) Analog für Liftoff-Anteil (Fraktion, gekoppelt an die Nulldurchgangs-Auflösung des Sensors) und Nettoverschiebung (Tracking-Auflösung × Mittelung über Zyklen).
 
-## 8. Status der Leerraum-Hypothese: a-priori-Ausschluss + Pipeline-Validierung
+## 8. Status der Leerraum-Hypothese: A-priori-Ausschluss + Pipeline-Validierung
 
 **Historische Hypothese (H0_alt, zurückgezogen):** Frühere Versionen dieses Rahmens vermuteten einen gerichteten Netto-Effekt aus interner Bewegung *im nahezu leeren Raum*.
 
 **Status — präzise getrennt nach Evidenzart:**
 
-1. **A-priori-Ausschluss (theoretisch, beleglos weil Theorem):** H0_alt ist durch den Schwerpunktsatz ausgeschlossen — für ein geschlossenes System mit beschränkter Innenbewegung kann der Schwerpunkt sich im Vakuum nicht netto verschieben (Abschnitt 3). Dies ist die stärkste Aussage und braucht keinen Datensatz.
+1. **A-priori-Ausschluss (theoretisch, beleglos, weil Theorem):** H0_alt ist durch den Schwerpunktsatz ausgeschlossen — für ein geschlossenes System mit beschränkter Innenbewegung kann der Schwerpunkt sich im Vakuum nicht netto verschieben (Abschnitt 3). Dies ist die stärkste Aussage und braucht keinen Datensatz.
 
 2. **Pipeline-Validierung (in Vorbereitung):** Die Simulationspipeline **wird erwartungsgemäß** diesen Ausschluss reproduzieren — als korrekt implementierte Newton'sche Integration *muss* sie den Schwerpunktsatz erfüllen; das wäre keine eigenständige „Bestätigung“, sondern eine **Validierung der Auswerteverfahren gegen einen bekannten Referenzfall** (Erkenntniswert allein: keine Falsch-Positiven bei ppm-Niveau). Diese Validierung ist **in Vorbereitung** (begleitende Arbeiten *„Simulation-Based Evaluation…“*, *„Null-Ergebnis Einzelmasse…“*; DOIs siehe §15). Der A-priori-Ausschluss (1) steht unabhängig davon. Das beiliegende Skript `pcmms_medienkopplung_modell.py` deckt die Dynamik aus §9 ab, nicht die ppm-Mittelkraft-Simulationen.
 
 3. **Experimentelle Falsifikation (steht aus):** Eine dedizierte *physikalische* Falsifikation von H0_alt liegt **noch nicht** vor; sie ist nicht erforderlich, da (1) den Ausschluss bereits liefert, wird aber als Vollständigkeit im Ausblick geführt.
 
-Es wird also **kein** unbelegter experimenteller Befund behauptet: der Ausschluss ist theoretisch, die Pipeline numerisch validiert, das Experiment offen.
+Es wird also **kein** unbelegter experimenteller Befund behauptet: Der Ausschluss ist theoretisch, die Pipeline numerisch validiert, das Experiment offen.
 
 Empirische Teilbefunde der Simulationen:
 1. Keine Verschiebung unter balancierter Anregung.
@@ -191,9 +191,9 @@ M · v'(t) = F_int(t) − ½ · ρ · c_w · A · v(t)|v(t)|
 ```
 mit `F_int(t)` der **mittelwertfreien** (impulserhaltenden) Kraft der inneren Massen auf die Hülle (`⟨F_int⟩ = 0` über die Periode), `ρ` Luftdichte, `c_w` Widerstandsbeiwert, `A` wirksame Fläche. Drag-Vorzeichen über `v|v|` (quadratisch, richtungsrichtig).
 
-**Kernresultat (Notwendige Bedingung für Drift):**
+**Kernresultat (notwendige Bedingung für Drift):**
 - **Linearer Widerstand** → Drift exakt null (lineares System, mittelwertfreie Anregung → mittelwertfreie Antwort).
-- **Quadratischer Widerstand + zweistufige (rein zeitlich asymmetrische) Kraft** → Drift **ebenfalls null**: eine stückweise konstante Kraft erzeugt eine stückweise lineare (Dreieck-)Geschwindigkeit, deren Werteverteilung **gleichverteilt und symmetrisch** ist (`⟨v|v|⟩ = 0`). **Bloße Timing-Asymmetrie genügt nicht.**
+- **Quadratischer Widerstand + zweistufige (rein zeitlich asymmetrische) Kraft** → Drift **ebenfalls null**: Eine stückweise konstante Kraft erzeugt eine stückweise lineare (Dreieck-)Geschwindigkeit, deren Werteverteilung **gleichverteilt und symmetrisch** ist (`⟨v|v|⟩ = 0`). **Bloße Timing-Asymmetrie genügt nicht.**
 - Drift entsteht nur, wenn (M1) die **Geschwindigkeit eine Schiefe ≠ 0** besitzt — erzeugt über Wellenform-Oberwellen — oder (M2) der **Widerstand richtungsabhängig** ist (`c_w,vor ≠ c_w,zurück`, d. h. Körperform-Asymmetrie).
 
 Damit ist die **Schiefe** (Abschnitt 6) nicht nur eine Observable, sondern der **physikalische Treiber** des Effekts.
@@ -226,11 +226,11 @@ Das ist exakt die zwei-harmonische Kraft des M1-Falls (a, b). Konkret (`m₁=m�
 | 1 (Grundton) | 10 Hz | 1.27 cm | 50 m/s² ≈ 5.1 g | 5 N |
 | 2 (2. Harmon.) | 20 Hz | 0.19 cm | 30 m/s² ≈ 3.1 g | 3 N |
 
-Realisierbar mit Voice-Coil-Aktuatoren / Linearmotoren (wenige g, cm-Hub). Die **Phase φ steuert die Geschwindigkeits-Schiefe** und damit Vorzeichen/Größe des Drifts. Damit ist die Verbindung „Mehrmassen-Phasenkontrolle → F_int → Drift“ konkret, nicht behauptet.
+Realisierbar mit Voice-Coil-Aktuatoren / Linearmotoren (wenige g, cm-Hub). Die **Phase φ steuert die Geschwindigkeits-Schiefe** und damit Vorzeichen/Größe der Drift. Damit ist die Verbindung „Mehrmassen-Phasenkontrolle → F_int → Drift“ konkret, nicht behauptet.
 
 ### 9.2 Reibung und Messkonfiguration: Schub-Pendel statt freier Drift
 
-Entscheidend für die Machbarkeit: schlägt der Schub die Reibung? Reibungsboden `F_fric = µ·M·g` (M=1 kg):
+Entscheidend für die Machbarkeit: Schlägt der Schub die Reibung? Reibungsboden `F_fric = µ·M·g` (M=1 kg):
 
 | Lagerung | µ | F_fric | M1 (3·10⁻⁷ N) | M2 (6·10⁻⁵ N) |
 |----------|-----|--------|----------------|----------------|
@@ -264,9 +264,9 @@ H1 gilt für einen Parameterbereich `p*` als **falsifiziert**, wenn der aus der 
 ```
 |F_eff(p*)| ≤ k · u_c        (k = 2, ~95 %)
 ```
-mit `u_c` aus Auslesepräzision (Interferometer/optisches Tracking), Aufhängungs-Drift und Wiederholpräzision (GUM-konform). Begleitend die Mediumsdichte-Kontrolle (Abschnitt 11): echter `C_medium`-Schub skaliert mit der Dichte und verschwindet im Teilvakuum.
+mit `u_c` aus Auslesepräzision (Interferometer/optisches Tracking), Aufhängungs-Drift und Wiederholpräzision (GUM-konform). Begleitend die Mediumsdichte-Kontrolle (Abschnitt 11): Echter `C_medium`-Schub skaliert mit der Dichte und verschwindet im Teilvakuum.
 
-**Präzisierung (notwendig vs. hinreichend, ohne Zirkularität):** Dass `C_medium` bei Reduktion der Mediumsdichte verschwindet, ist eine *notwendige*, aber **keine hinreichende** Bedingung — ein Artefakt könnte ebenfalls mit der Dichte skalieren (z. B. thermisch über veränderte Luftkühlung; daher die Vakuum-zu-Vakuum-Kontrolle, Abschnitt 11.3). Um nicht das zu testende Modell zur Definition der Schwelle zu benutzen, wird ein **fester Dichteschwellwert** vorgegeben: `ρ < 10⁻² · ρ₀` (Teilvakuum). Zusätzlich gilt eine vom Modell *unabhängige*, konservative Schranke: der unter den gegebenen Anregungsbedingungen *maximal plausible* Effekt (obere Abschätzung aus Anregungsenergie, nicht aus H1) muss bei dieser Dichte kleiner als `u_c` sein. Bleibt das gemessene Signal dann innerhalb `u_c` um null, ist H1 für `p*` falsifiziert.
+**Präzisierung (notwendig vs. hinreichend, ohne Zirkularität):** Dass `C_medium` bei Reduktion der Mediumsdichte verschwindet, ist eine *notwendige*, aber **keine hinreichende** Bedingung — ein Artefakt könnte ebenfalls mit der Dichte skalieren (z. B. thermisch über veränderte Luftkühlung; daher die Vakuum-zu-Vakuum-Kontrolle, Abschnitt 11.3). Um nicht das zu testende Modell zur Definition der Schwelle zu benutzen, wird ein **fester Dichteschwellwert** vorgegeben: `ρ < 10⁻² · ρ₀` (Teilvakuum). Zusätzlich gilt eine vom Modell *unabhängige*, konservative Schranke: Der unter den gegebenen Anregungsbedingungen *maximal plausible* Effekt (obere Abschätzung aus Anregungsenergie, nicht aus H1) muss bei dieser Dichte kleiner als `u_c` sein. Bleibt das gemessene Signal dann innerhalb `u_c` um null, ist H1 für `p*` falsifiziert.
 
 Lokales Kriterium (pro `p*`); globale Aussage erst nach systematischem Parameter-Scanning.
 
@@ -314,7 +314,7 @@ Alle Arbeiten auf Zenodo unter ORCID 0009-0005-9984-4207. Als Belege zu Abschnit
 - *Simulation-Based Evaluation of Mean Force Signals in Phase-Controlled Multi-Mass Systems* — DOI: [in Vorbereitung].
 - *Null-Ergebnis Einzelmasse (PCMMS)* — DOI: [in Vorbereitung].
 
-(Solange die DOIs nicht vergeben sind, wird in §8 kein öffentlich-verfügbarer Beleg behauptet; der A-priori-Ausschluss via Schwerpunktsatz steht unabhängig davon.)
+(Solange die DOIs nicht vergeben sind, wird in §8 kein öffentlich verfügbarer Beleg behauptet; der A-priori-Ausschluss via Schwerpunktsatz steht unabhängig davon.)
 
 ## 16. Symbolverzeichnis
 
@@ -333,7 +333,7 @@ Alle Arbeiten auf Zenodo unter ORCID 0009-0005-9984-4207. Als Belege zu Abschnit
 | `ρ`, `ρ₀` | Mediumsdichte / Referenzdichte (Luft) | kg/m³ |
 | `F_int(t)` | mittelwertfreie innere Kraft auf die Hülle | N |
 | `v_drift`, `v_osc` | mittlere Drift- / Oszillationsgeschwindigkeit der Hülle; `v_drift` = mittlere Geschwindigkeit, bei der im stationären Zustand das Periodenmittel der Drag-Kraft verschwindet | m/s |
-| `F_eff` | effektiver Netto-Schub `= ½ρc_wA·v_drift|v_drift| = x·M·g/L` (Pendel) | N |
+| `F_eff` | effektiver Netto-Schub `= ½ρc_wA·v_drift\|v_drift\| = x·M·g/L` (Pendel) | N |
 | `x`, `L` | statische Auslenkung / Länge der Schubaufhängung | m |
 | `Skew(v)` | Schiefe der Geschwindigkeit (Drift-Treiber) | – |
 | `Δp_System`, `Δp_Medium` | Impulsänderung System / Medium | kg·m/s |
@@ -357,11 +357,11 @@ Alle Arbeiten auf Zenodo unter ORCID 0009-0005-9984-4207. Als Belege zu Abschnit
 
 ## Änderungs-Log v3.4 → v3.5 (fünftes Review — redaktioneller Feinschliff, publikationsreif)
 
-- **Pkt 1 (Sim-Validierung Tempus):** §8 von „reproduziert“ auf „wird erwartungsgemäß reproduzieren (in Vorbereitung)“ — keine bereits erfolgte Validierung behauptet; A-priori-Ausschluss steht unabhängig.
-- **Pkt 2 (Aufhängung):** §9.2 um Relaxationszeit, Schwingungsisolierung und thermisches Rauschen (brownsche Grenze ~2·10⁻¹¹ m ≪ 35 nm) ergänzt.
-- **Pkt 3 (A↔D-Kalibrierung):** §6 explizit als *empirische* Korrelation (keine theoretische Vorhersage) formuliert.
-- **Pkt 4 (Zusammenfassung):** „falsifiziert dokumentiert“ → „durch Schwerpunktsatz ausgeschlossen (theoretische Falsifikation)“ — empirische Konnotation entfernt.
-- **Pkt 5 (Redaktion):** `v_drift`-Definition in Klartext; µ-Tabelle unverändert (Aussage „tot“ bleibt korrekt).
+- **Pkt. 1 (Sim-Validierung Tempus):** §8 von „reproduziert“ auf „wird erwartungsgemäß reproduzieren (in Vorbereitung)“ — keine bereits erfolgte Validierung behauptet; A-priori-Ausschluss steht unabhängig.
+- **Pkt. 2 (Aufhängung):** §9.2 um Relaxationszeit, Schwingungsisolierung und thermisches Rauschen (brownsche Grenze ~2·10⁻¹¹ m ≪ 35 nm) ergänzt.
+- **Pkt. 3 (A↔D-Kalibrierung):** §6 explizit als *empirische* Korrelation (keine theoretische Vorhersage) formuliert.
+- **Pkt. 4 (Zusammenfassung):** „falsifiziert dokumentiert“ → „durch Schwerpunktsatz ausgeschlossen (theoretische Falsifikation)“ — empirische Konnotation entfernt.
+- **Pkt. 5 (Redaktion):** `v_drift`-Definition in Klartext; µ-Tabelle unverändert (Aussage „tot“ bleibt korrekt).
 
 **Status:** Das fünfte Review erklärt den Rahmen nach diesen Korrekturen für **publikationsfähig** (Preprint / technischer Bericht). Verbleibende offene Punkte sind keine Mängel mehr, sondern reguläre Zukunftsarbeit:
 
@@ -373,5 +373,5 @@ Alle Arbeiten auf Zenodo unter ORCID 0009-0005-9984-4207. Als Belege zu Abschnit
 
 ---
 
-### Versionshistorie (Kurz)
+### Versionshistorie (kurz)
 v3 Reframe → weg von „gravitationsähnlichem Antrieb“. v3.1 → positive Hypothese H1 (medium-gekoppelte Fortbewegung). v3.2 → realistisches Falsifikationskriterium, Größenordnung. v3.3 → explizites dynamisches Kopplungsmodell, Messstrategie-Korrektur. v3.4 → Mehrmassen-Brücke, Reibungsanalyse, Schub-Pendel. v3.5 → redaktioneller Feinschliff, publikationsreif.

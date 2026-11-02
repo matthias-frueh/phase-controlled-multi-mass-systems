@@ -70,11 +70,11 @@ Drei Voice-Coil-Linearaktuatoren (Moving-Coil) bewegen je eine Modulmasse mit ei
 
 ## 5 · Kraftmessung: kalibrierte Messdose + dediziertes Mess-DAQ
 
-Eine kalibrierte DMS-Kraftmessdose (rückführbare Kalibrierung über Referenzmassen oder Herstellerzertifikat) wird über ein simultan abtastendes Mehrkanal-Mess-DAQ ausgelesen (24-bit, ≥ 10 kSPS pro Kanal). „Simultan‘ ist hier der Kern: Kraft, Modulposition und Antriebsreferenz liegen auf einem gemeinsamen Takt, wodurch die Phasenbeziehungen exakt sind und Phasenmittelung, Lock-in und Kreuzkorrelation sauber funktionieren. Der DMS-Pfad ist DC-fähig und liefert damit zugleich die Kontrolle ⟨N⟩ = Mg.
+Eine kalibrierte DMS-Kraftmessdose (rückführbare Kalibrierung über Referenzmassen oder Herstellerzertifikat) wird über ein simultan abtastendes Mehrkanal-Mess-DAQ ausgelesen (24-Bit, ≥ 10 kSPS pro Kanal). „Simultan“ ist hier der Kern: Kraft, Modulposition und Antriebsreferenz liegen auf einem gemeinsamen Takt, wodurch die Phasenbeziehungen exakt sind und Phasenmittelung, Lock-in und Kreuzkorrelation sauber funktionieren. Der DMS-Pfad ist DC-fähig und liefert damit zugleich die Kontrolle ⟨N⟩ = Mg.
 
 **Am Rande — Piezo-Option und die DC-Falle:** Für höchste dynamische Treue ließe sich ein Piezo-Kraftsensor mit Ladungsverstärker nutzen. Piezo ist jedoch AC-gekoppelt und kann den echten Mittelwert nicht liefern — die ⟨N⟩-=-Mg-Kontrolle bräuchte dann einen separaten DC-Kanal (Präzisionswaage oder parallele DMS-Zelle). Die rückführbare DMS-Dose bleibt der saubere Mittelklasse-Weg.
 
-**Am Rande — konkrete Teile (Beispiel):** kalibrierte Wägezelle/Kraftsensor mit Zertifikat (~€200–800), simultanes Mehrkanal-DAQ (z. B. MCC/NI-Klasse, 24-bit, ~€500–2000), IEPE-Beschleunigungssensor (~€100–300), Encoder/LVDT je Modul (~€150–600).
+**Am Rande — konkrete Teile (Beispiel):** kalibrierte Wägezelle/Kraftsensor mit Zertifikat (~€200–800), simultanes Mehrkanal-DAQ (z. B. MCC/NI-Klasse, 24-Bit, ~€500–2000), IEPE-Beschleunigungssensor (~€100–300), Encoder/LVDT je Modul (~€150–600).
 
 ## 6 · Sekundär- und Referenzsensorik
 
@@ -151,7 +151,7 @@ Grob €3.000–8.000, je nach Aktuator- und DAQ-Wahl. Wesentliche Posten: drei 
 | Aktuator ×3 | Voice-Coil-Linearaktuator + Treiber | ~€300–1500 | echtes Egg-Profil, exakte Phase |
 | Positionsrückf. ×3 | optischer Encoder / LVDT | ~€150–600 | Profilverifikation, Lageregelung |
 | Kraftsensor | kalibrierte DMS-Dose (Zertifikat) | ~€200–800 | N(t) DC+dynamisch, rückführbar |
-| Mess-DAQ | simultanes Mehrkanal, 24-bit | ~€500–2000 | alle Kanäle synchron, exakte φ |
+| Mess-DAQ | simultanes Mehrkanal, 24-Bit | ~€500–2000 | alle Kanäle synchron, exakte φ |
 | Beschl.-Sensor | IEPE-Beschleunigungssensor | ~€100–300 | Liftoff-Gegenprobe |
 | Kontakt | kalibrierte Federn / Elastomer-Set | ~€100 | definierte, variierbare k |
 | Isolation | passiver Isolationstisch | ~€300–1500 | niedriger Rauschboden |

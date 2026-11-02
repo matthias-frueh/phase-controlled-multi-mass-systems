@@ -224,7 +224,7 @@ Bezugs nach einem Halt (Vorlage 1.1). (2) P0.7: höchstens zwölf andere Läufe 
 Alarm am R₁ ergänzt, frühere Kampagnensumme nicht mehr als Schranke; Schranken, Modellrechnungen und empirische
 Häufigkeiten getrennt; effektive Freiheitsgrade von σ̂_ref anordnungsabhängig. (4) G4 (§9.1, A9.2): B+ für
 Kombinationsläufe, k(n₀ⱼ) für Lⱼ, D als Diagnosemodus, Fünftelzeiger als optionales Feld der Laufzusammenfassung.
-Grund: die Schwelle je Laufart schloss je Konfiguration 0,4–15 % der Läufe aus (PR #22). (5) Halte und Mengen
+Grund: Die Schwelle je Laufart schloss je Konfiguration 0,4–15 % der Läufe aus (PR #22). (5) Halte und Mengen
 (§5.4, A9.2, A9.11): simulierte Wiederaufnahme (W = 3, T_UA), Mengen G und A, |A| = 1000 mit Nachziehen,
 Reservebedingung 0,95 mit Grenze, b̂ mit den realisierten Laufzahlen, Zeit nach Termen. (6) E3 (§8.10, A9.13):
 Option B mit m = 43 und Rückfall je Prüfgröße. Grund: Die Intervallregel war am Schwellenrand nicht gültig (PR #22).
@@ -984,7 +984,7 @@ von σ̂_ref; bei bekanntem σ sind sie etwa zehnmal kleiner.
   20.10.2026): Alle Schnittpunkte erreichen gemeinsam in mindestens 95 % der nicht endgültig beendeten simulierten
   Kampagnen n_min gültige Läufe; sonst r um eins erhöhen und erneut simulieren, höchstens zehnmal (danach Abbruch
   des Kandidaten mit Grund „Reservegrenze“). Endgültig beendete Kampagnen zählen nicht in diesen bedingten Nenner,
-  wohl aber im Nenner von P(H1 und H2 bestätigt). Das erste Paar (k, T_a), das (v) erfüllt, legt k_max, T_a, n_min und n₀ fest.
+  wohl aber in den Nenner von P(H1 und H2 bestätigt). Das erste Paar (k, T_a), das (v) erfüllt, legt k_max, T_a, n_min und n₀ fest.
   Obere 80-%-Vertrauensgrenze einer Komponente mit Gesamtstreuung s, ν Freiheitsgraden und Bodenanteil b:
   √max(0, s²·ν/χ²₀,₂(ν) − b), je identifizierbarer Komponente mit eigenem ν; der Boden von ⟨N⟩ erhält einen
   gemeinsamen Faktor für alle Laufarten (bisher ein Faktor s·√(ν/χ²₀,₂(ν)) für alle Streuungen). t-Quantile mit dem
@@ -1273,9 +1273,9 @@ die Fassung dieser Regeln (§12).
 - **Messtag.** Aufwärm-Referenzläufe (§6), höchstens zehn; sie lösen keinen Nullpunktalarm aus, und der
   letzte gilt als gültiger Referenzlauf für N_s,int und als Vergleich für den ersten Nullpunktalarm. Nach
   dem letzten Kontrollsatz des Tages folgt der Schlussreferenzlauf, damit jeder Lauf zwischen zwei
-  Referenzläufe liegt. Läufe je Kampagne: (N_K + N_I + 8)·n + 8·d, dazu Aufwärm- und Wiederholungsläufe;
+  Referenzläufen liegt. Läufe je Kampagne: (N_K + N_I + 8)·n + 8·d, dazu Aufwärm- und Wiederholungsläufe;
   je Block N_K + N_I Konfigurationen, der Referenzlauf der Blockmitte und ein Kontrollsatz aus sieben
-  Läufen, je Messtag ein weiterer Kontrollsatz und der Schlussreferenzlauf. In §5.3 (c) steht dafür 18·d
+  Läufen, je Messtag ein weiterer Kontrollsatz und der Schlussreferenzlauf. In §5.3 (c) stehen dafür 18·d
   (acht Läufe und höchstens zehn Aufwärmläufe je Tag) und der Faktor 1/(1 − p̂) (Zeitformel offen, §12: Messzeit
   der Identifizierbarkeitsläufe). Ohne
   Identifizierbarkeitsläufe wären es (N_K + 5)·n + 5·d.

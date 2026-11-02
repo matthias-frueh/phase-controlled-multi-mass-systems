@@ -264,12 +264,12 @@ Kennzahl: λ im Fenster 50–100 s (RK4) bzw. in den letzten 10–13 s (EL). Tab
 
 | Paar | CSV A/B | Lauf 50–100 s | stdshift / vom Partner | EL | Ursache |
 |---|---|---|---|---|---|
-| P6 (0,6)/(13,13) | 75,59 / 18,20 | A: std 75,59, ramp 18,25; B: std 18,20, imp 75,59; bei Δt/2 gleich | reproduzieren den Partner, halten dessen Zustand | P1 75,59 (|µ| 0,741) und P1 18,22 (|µ| 0,366), beide stabil; Rampe → 18,22 | **Multistabilität** |
-| P13 (6,6)/(13,0) | 75,70 / 43,60 | A: alle Starts 75,70; B: std 43,7 (aperiodisch, Blöcke 43,6–43,9), imp/ramp 75,70 | A vom Partner hält 43,69 | B std 43,73 aperiodisch; Hüpfen stabil (|µ| 0,742) | **Multistabilität** |
-| P49 (3,7)/(16,4) | 75,63 / 19,00 | wie P6 (ramp → 19,05/19,00) | wie P6 | 75,63 (|µ| 0,741) und 19,03 (|µ| 0,369); Rampe → 19,03 | **Multistabilität** |
-| P45 (12,17)/(14,2) | 75,63 / 35,42 | A: stdR 75,63 (100 s), std 35,19 („P30“), imp 75,63, ramp 35,09; B: std 34,77 („P3“), imp 75,63 | vom Partner gehalten; bei Δt/2 wählt stdR für **beide** 75,63 | Hüpfen stabil (|µ| 0,741); ~35-%-Zustand aperiodisch, P3/P30 instabil; Rampe 2 s → 35,3/35,2, Rampe 10 s → A 75,63, B 35,66 | **Multistabilität**; Auswahl numerisch fragil |
+| P6 (0,6)/(13,13) | 75,59 / 18,20 | A: std 75,59, ramp 18,25; B: std 18,20, imp 75,59; bei Δt/2 gleich | reproduzieren den Partner, halten dessen Zustand | P1 75,59 (\|µ\| 0,741) und P1 18,22 (\|µ\| 0,366), beide stabil; Rampe → 18,22 | **Multistabilität** |
+| P13 (6,6)/(13,0) | 75,70 / 43,60 | A: alle Starts 75,70; B: std 43,7 (aperiodisch, Blöcke 43,6–43,9), imp/ramp 75,70 | A vom Partner hält 43,69 | B std 43,73 aperiodisch; Hüpfen stabil (\|µ\| 0,742) | **Multistabilität** |
+| P49 (3,7)/(16,4) | 75,63 / 19,00 | wie P6 (ramp → 19,05/19,00) | wie P6 | 75,63 (\|µ\| 0,741) und 19,03 (\|µ\| 0,369); Rampe → 19,03 | **Multistabilität** |
+| P45 (12,17)/(14,2) | 75,63 / 35,42 | A: stdR 75,63 (100 s), std 35,19 („P30“), imp 75,63, ramp 35,09; B: std 34,77 („P3“), imp 75,63 | vom Partner gehalten; bei Δt/2 wählt stdR für **beide** 75,63 | Hüpfen stabil (\|µ\| 0,741); ~35-%-Zustand aperiodisch, P3/P30 instabil; Rampe 2 s → 35,3/35,2, Rampe 10 s → A 75,63, B 35,66 | **Multistabilität**; Auswahl numerisch fragil |
 | P11 (0,11)/(8,8) | 74,35 / 75,09 | alle Starts 75,09 | – | alle Starts 75,085, P1 | **langsamer Transient** |
-| P33 (1,16)/(3,4) | 71,94 / 76,20 | A: std 71,85, imp/ramp 76,19; B: std 76,20, imp 71,85 | – | P3 71,857 % (γ1 1,976, F_max 50,53, |µ| 0,354) und P1 76,195 % (F_max 39,99), beide stabil | **Multistabilität** |
+| P33 (1,16)/(3,4) | 71,94 / 76,20 | A: std 71,85, imp/ramp 76,19; B: std 76,20, imp 71,85 | – | P3 71,857 % (γ1 1,976, F_max 50,53, \|µ\| 0,354) und P1 76,195 % (F_max 39,99), beide stabil | **Multistabilität** |
 
 Zu P11: Mit 5–15 s ist das Fenster bei A noch im Einschwingen (std exakt: Einschwingen 16,6 s, stdshift 14,4 s).
 

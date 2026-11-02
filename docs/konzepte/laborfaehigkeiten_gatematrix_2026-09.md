@@ -182,7 +182,7 @@ Jede Fähigkeit mit Herkunft (aus welcher Observable) und Mindestspezifikation.
 - Blockweise Auswertung, Welch–Satterthwaite bei α = 0,05
 - Dummy-Kanal mitlaufend über die gesamte Kampagne
 
-**Diese Fähigkeit kostet nichts und ersetzt einen erheblichen Teil der Umgebungsinfrastruktur** (Messfundament, Klimatisierung, EMV-Umgebung). Sie ist methodisch außerdem stärker, weil sie Drift *nachweist* statt sie zu unterstellen.
+**Diese Fähigkeit kostet nichts und ersetzt einen erheblichen Teil der Umgebungsinfrastruktur** (Messfundament, Klimatisierung, EMV-Umgebung). Sie ist methodisch außerdem stärker, weil sie Drift *nachweist*, statt sie zu unterstellen.
 
 ### F7 · Rauschboden und Nachweisschwelle
 **Aus:** ε_phys
@@ -210,7 +210,7 @@ Erst wenn F7 zeigt, dass der Rauschboden die Zeltkurve verdeckt, wird Isolation 
 | **G0** | Papierlage, Parameterklärung, Präregistrierung geschärft | — | §1.1 gelöst; ε_⊥, ε_phys-Verfahren festgelegt |
 | **G1** | Kontaktcharakterisierung, Rauschboden, Rig-FRF | F1, F2, F3, F4, F7, F9, F10 | k und c bekannt; f_c bekannt; R3/R4 zahlenmäßig gesetzt; Rauschboden < erwartete F_min-Spanne |
 | **G2** | Strukturnachweis Linie A: Zeltkurve F_min(φ₂) bei festem φ₃ | + F5, F6, F8 | Zeltkurve reproduzierbar über getrennte Blöcke und randomisierte Reihenfolge |
-| **G3** | Quantitative Phasenkarte, volle 2D-Sweep, Unsicherheitsbudget | + externe Kalibrierung, Bootstrap-Auswertung, k als zweite Achse | Karte gegen Simulation abgeglichen; Abweichungen zugeordnet |
+| **G3** | Quantitative Phasenkarte, voller 2D-Sweep, Unsicherheitsbudget | + externe Kalibrierung, Bootstrap-Auswertung, k als zweite Achse | Karte gegen Simulation abgeglichen; Abweichungen zugeordnet |
 | **G4a** | Linie B, separater Aufbau (§6) | eigener Fähigkeitssatz | ρ-Steigung bestimmt oder Nullergebnis dokumentiert |
 | **G4b** | Rückführbare Kalibrierung, unabhängige Replikation extern | externe Messkette, Partneraufbau | unabhängige Bestätigung oder Widerlegung |
 | **G5** | Erweiterung: L3, mehrere Stände, Vergleichssysteme | — | erst nach G3 sinnvoll zu spezifizieren |

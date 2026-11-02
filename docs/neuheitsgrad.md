@@ -65,7 +65,7 @@ Satz lautet daher nicht
 sondern
 
 > „In der durchgeführten Recherche wurde keine Arbeit identifiziert, die diese konkrete Zielsetzung
-> und Versuchsanordnung bereits untersucht."
+> und Versuchsanordnung bereits untersucht.“
 
 Diese Aussage bleibt ausdrücklich widerlegbar — durch Vorlage einer solchen Arbeit.
 
@@ -202,11 +202,11 @@ vollkommen legitimer Anspruch.
 **Zitatprüfung.** Im Projekt sind bereits zwei Fehlzuschreibungen aufgetreten und korrigiert
 worden. Konsequenz: Keine Referenz aus Recherchen Dritter geht ohne DOI und eigene Sichtprüfung in
 ein externes Dokument. Insbesondere ist eine mehrfach genannte Arbeit zur „Bewegung durch Variation
-der Kontaktkraft" mit zwei inneren Massen in der angegebenen Autoren-Titel-Kombination bisher
+der Kontaktkraft“ mit zwei inneren Massen in der angegebenen Autoren-Titel-Kombination bisher
 **nicht bestätigt**.
 
 **Literaturteil.** Der Strang der vibrationsgetriebenen Mehrmodul-Systeme muss gelesen werden,
-nicht zitiert. Ohne einen Literaturteil aus tatsächlich gelesenen Arbeiten trägt keine der obigen
+nicht zitiert. Ohne einen Literaturteil aus tatsächlich gelesenen Arbeiten hält keine der obigen
 Formulierungen einer Begutachtung stand. Ein erster Schritt liegt seit dem 12.09.2026 vor (§10).
 
 ---

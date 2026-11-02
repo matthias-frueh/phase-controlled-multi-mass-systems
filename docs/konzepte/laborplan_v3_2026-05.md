@@ -72,7 +72,7 @@ Drei Module in einem steifen Gehäuse auf definierten Kontaktelementen auf einer
 
 Drei hochwertige Voice-Coil-Aktuatoren oder kleine elektrodynamische Mini-Shaker prägen die Innenbewegung über eine geschlossene Beschleunigungsregelung auf — die laborübliche prescribed acceleration. Ein Echtzeit-Controller fährt das Hold-Schnell-(Egg-)Profil und die relativen Phasen φ₂, φ₃ mit hoher Treue; die tatsächlich erreichte Trajektorie wird berührungslos per Laser-Vibrometer rückgemessen.
 
-**Am Rande — Vibration Controller:** Eine geschlossene Regelung auf ein Soll-Beschleunigungsspektrum (closed-loop vibration control) garantiert, dass das aufgeprägte Profil unabhängig von Last- und Resonanzeffekten dem Soll entspricht — entscheidend, sobald Liftoff die effektive Last innerhalb des Zyklus ändert.
+**Am Rande — Vibration-Controller:** Eine geschlossene Regelung auf ein Soll-Beschleunigungsspektrum (closed-loop vibration control) garantiert, dass das aufgeprägte Profil unabhängig von Last- und Resonanzeffekten dem Soll entspricht — entscheidend, sobald Liftoff die effektive Last innerhalb des Zyklus ändert.
 
 ## 5 · Kraftmessung: rückführbare Metrologie
 
@@ -92,7 +92,7 @@ Eine Vakuum-/Medienkammer erlaubt es, die Gasdichte ρ über mehrere Größenord
 
 ## 8 · Schwingungsisolation
 
-Aktiver Schwingungsisolationstisch (rückgekoppelte Isolation) für den niedrigsten Rauschboden. In Kombination mit LDV und Metrologie-DAQ ergibt sich die kleinste nachweisbare Wellenform-Änderung und die feinste ρ-Auflösung in Experiment B.
+Aktiver Schwingungsisolationstisch (rückgekoppelte Isolation) für den niedrigsten Rauschboden. In Kombination mit LDV und Metrologie-DAQ ergeben sich die kleinste nachweisbare Wellenform-Änderung und die feinste ρ-Auflösung in Experiment B.
 
 ## 9 · Kontrollen (das wissenschaftliche Rückgrat)
 
@@ -147,7 +147,7 @@ Grob €30.000–150.000+, dominiert von Laser-Vibrometer und Vakuum-/Medienkamm
 | --- | --- | --- | --- |
 | Berührungslos | Laser-Doppler-Vibrometer (ggf. scanning) | ~€20k–80k | Profil/Liftoff ohne Massebelastung |
 | Umgebung | Vakuum-/Medienkammer + Pumpe + Druckmessung | ~€5k–30k | ρ-Sweep, Vakuum-Nullpunkt |
-| Aktuator ×3 | Mini-Shaker / High-End Voice-Coil + Controller | ~€5k–30k | geregelte prescribed acceleration |
+| Aktuator ×3 | Mini-Shaker / High-End-Voice-Coil + Controller | ~€5k–30k | geregelte prescribed acceleration |
 | Isolation | aktiver Isolationstisch | ~€5k–20k | niedrigster Rauschboden |
 | Klimakontrolle | Temperaturstabilisierung / Kammer | ~€2k–15k | Driftkontrolle |
 | Kraftmetrologie | rückführbarer Sensor + Präzisionsverstärker | ~€1k–5k | N(t) rückführbar, ⟨N⟩-Kontrolle |

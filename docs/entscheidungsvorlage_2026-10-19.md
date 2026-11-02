@@ -842,7 +842,7 @@ Variante von E3 ab.
   gibt es kein Szenario; die Planung braucht ein aus Phase 0 gebautes Modell. Die Schnittstelle Pilotskript → Haken
   enthält schon Phase-0-Tabelle, Maske, Kalibrierung und Kovarianzen.
 - Warum die Pilotkovarianz nicht direkt einsetzbar ist (gerechnet mit Szenarioparametern, Annahmen gekennzeichnet):
-  (1) Dimension 3 + 6·k (57 bei k = 9, 75 bei k = 12) bei Freiheitsgraden 57 (Piloten), 41 (R), 19 (Lⱼ): die
+  (1) Dimension 3 + 6·k (57 bei k = 9, 75 bei k = 12) bei Freiheitsgraden 57 (Piloten), 41 (R), 19 (Lⱼ): Die
   Kovarianzen von Lⱼ und R sind immer singulär, die Pilotkovarianz ab k = 10; ein Gauß-Generator zöge in
   Unterräumen. (2) Bei L0 entfallen rund 80 % der Lauf-zu-Lauf-Varianz der Harmonischen auf den über die gemessenen
   Zeiger ρ erfassten Phasenanteil, der im Residuum herausfällt; eingesetzt als Laufrauschen würde er die

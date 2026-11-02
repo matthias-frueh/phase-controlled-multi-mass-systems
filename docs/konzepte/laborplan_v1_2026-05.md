@@ -66,11 +66,11 @@ Drei kleine getriebene DC-Motoren mit Exzenter bzw. Kurbel/Nocke bewegen je eine
 
 ## 5 · Kraftmessung: schnelle Messdose + DAQ
 
-Eine DMS-Wägezelle (Biegebalken, ~3–5 kg Bereich — Headroom über Mg ≈ 6,4 N) wird über einen schnellen 24-bit-ADC mit programmierbarem Vorverstärker (PGA) ausgelesen. Die Abtastrate liegt bei ≥ 2 kSPS (rund 200× die Grundfrequenz), damit die scharfen Liftoff-Flanken und Kraftspitzen zeitlich aufgelöst werden. Der DC-fähige Pfad liefert gleichzeitig die statische Kontrolle ⟨N⟩ = Mg.
+Eine DMS-Wägezelle (Biegebalken, ~3–5-kg-Bereich — Headroom über Mg ≈ 6,4 N) wird über einen schnellen 24-Bit-ADC mit programmierbarem Vorverstärker (PGA) ausgelesen. Die Abtastrate liegt bei ≥ 2 kSPS (rund 200× die Grundfrequenz), damit die scharfen Liftoff-Flanken und Kraftspitzen zeitlich aufgelöst werden. Der DC-fähige Pfad liefert gleichzeitig die statische Kontrolle ⟨N⟩ = Mg.
 
 **Wichtig:** Ein HX711 (80 SPS) ist zu langsam für Liftoff und Spitzen und scheidet aus. Als Host genügt ein Raspberry Pi (SPI) oder — am günstigsten — der ESP32 als SPI-Master, der die Rohdaten an einen Laptop streamt.
 
-**Am Rande — konkrete Teile (Beispiel, ~€50):** Wägezelle 5 kg (~€8), ADS1256-Breakout (24-bit, bis 30 kSPS, PGA bis 64×, ~€20), Pi oder vorhandener ESP32 als Logger; Beschleunigungssensor MPU-6050 oder ADXL345 (~€3) am Rahmen zur Liftoff-Gegenprobe.
+**Am Rande — konkrete Teile (Beispiel, ~€50):** Wägezelle 5 kg (~€8), ADS1256-Breakout (24-Bit, bis 30 kSPS, PGA bis 64×, ~€20), Pi oder vorhandener ESP32 als Logger; Beschleunigungssensor MPU-6050 oder ADXL345 (~€3) am Rahmen zur Liftoff-Gegenprobe.
 
 ## 6 · Sekundär- und Referenzsensorik
 
@@ -102,7 +102,7 @@ Weiches Elastomerpad oder Feder mit bekanntem k, c als einseitiger Kontakt. Das 
 
 - ≥ 100 Zyklen von N(t) (und Beschleunigung, Sync) aufzeichnen.
 
-- Observablen berechnen: Schiefe, Liftoff-Anteil, Spitzen-zu-Mittel, sowie ⟨N⟩ als Kontrolle.
+- Observablen berechnen: Schiefe, Liftoff-Anteil, Spitzen-zu-Mittel sowie ⟨N⟩ als Kontrolle.
 
 - Grob-Sweep (7×7) zur Lokalisierung der Regime, danach feines Raster an den Regime-Grenzen.
 
@@ -141,7 +141,7 @@ Grob €150–400, je nachdem, wie viel bereits vorhanden ist (ESP32, Laptop, gg
 | **Komponente** | **Beispielteil** | **Richtpreis** | **Funktion** |
 | --- | --- | --- | --- |
 | Kraftsensor | DMS-Wägezelle 5 kg | ~€8 | N(t), statisch + dynamisch |
-| ADC/DAQ | ADS1256-Breakout, 24-bit | ~€20 | schnelle Abtastung ≥ 2 kSPS |
+| ADC/DAQ | ADS1256-Breakout, 24-Bit | ~€20 | schnelle Abtastung ≥ 2 kSPS |
 | Beschl.-Sensor | MPU-6050 / ADXL345 | ~€3 | Liftoff-Gegenprobe |
 | Aktuator ×3 | DC-Getriebemotor + Exzenter | ~€10–30 | Innenbewegung 10 Hz |
 | Steuerung | ESP32 (vorhanden) | — | Phasenlage φ₂, φ₃ + Sync |

@@ -42,7 +42,7 @@ einer Größenordnung.
 **In Luft eliminiert der Fall die falsche Variable.** Nach 0,78 s Fall beträgt die
 Relativgeschwindigkeit zum Medium 7,65 m/s. Die vorhergesagte Drift liegt bei maximal 0,00069 m/s
 (`sweep_13x13_drift.csv`). Verhältnis 11.000 : 1, und da der Widerstand quadratisch geht, ist der
-Staudruck aus der Fallbewegung rund **10⁸ mal größer** als der aus der Driftbewegung. Gemessen wird
+Staudruck aus der Fallbewegung rund **10⁸-mal größer** als der aus der Driftbewegung. Gemessen wird
 dann Aerodynamik, nicht Medienkopplung.
 
 **Im Vakuum sagt H1_fluid selbst Null voraus.** Ein Vakuumfallturm liefert die Kontrollmessung, nicht
@@ -156,7 +156,7 @@ der Innenkonfiguration eine **Netto-Orientierungsänderung** zurückbleiben, obw
 gilt. Derselbe Mechanismus wie beim Katzendreh.
 
 Für drei Module im Dreieck mit vertikal schwingenden Massen entstehen Kippmomente um zwei
-nicht-parallele horizontale Achsen. Der Netto-Drehwinkel pro Zyklus hinge von der eingeschlossenen
+nichtparallele horizontale Achsen. Der Netto-Drehwinkel pro Zyklus hinge von der eingeschlossenen
 Fläche im Konfigurationsraum ab — und die ist eine direkte Funktion der Phasendifferenzen: null bei
 φ₂ = φ₃ = 0, maximal bei (120°, 240°).
 

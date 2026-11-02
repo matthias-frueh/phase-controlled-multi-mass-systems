@@ -251,13 +251,13 @@ Der Code trennt daher bei **geometrischer Öffnung oder nichtpositiver ungekappt
 
 **Externe Aussage:** Madatov/Li/Popov modellieren quasistatisch und masselos bei kontinuierlichem Kontakt (`Delta u_z <= u_z,0`). Die Autoren grenzen Trägheit, Systemdämpfung, Frequenzverhältnisse, Resonanzen, Stöße und Kontaktverlust aus und verweisen dafür auf ihre Refs. 16–18.
 
-**Refs. 16–18 identifiziert** (Reihenfolge in der Referenzliste des Lubricants-Papers am 12.09.2026 bestätigt: [15] Madatov/Li/Popov, AIP Conf. Proc. 3177 (2025); [16] Mao et al. 2017; [17] Teidelt et al. 2012; [18] Papangelo & Ciavarella 2015; [19] Benad et al. 2018)**:**
+**Refs. 16–18 identifiziert** (Reihenfolge in der Referenzliste des Lubricants-Papers am 12.09.2026 bestätigt: [15] Madatov/Li/Popov, AIP Conf. Proc. 3177 (2025); [16] Mao et al. 2017; [17] Teidelt et al. 2012; [18] Papangelo & Ciavarella 2015; [19] Benad et al. 2018):
 
 16. Mao et al. (2017): Systemmasse, Systemsteifigkeit, Frequenzverhältnisse und Resonanzfall; qualitative experimentelle Stützung.
 17. Teidelt et al. (2012): dynamischer Stick-Slip-Kontakt in Mikroantrieben.
 18. Papangelo & Ciavarella (2015): Grenzen quasistatischer Analyse für einen Coulomb-Reibungsoszillator unter harmonischer Last.
 
-**PCMMS-Regime:** Linie A liegt nach eigenem Befund im dynamischen Nachbarbereich (`3f/f_n ≈ 1,5`), einschließlich dynamischer Liftoff-Schwelle `R_c ≈ 1,45` und dem kontrollierten Befund `gamma_1 = 0` ohne Liftoff bei Sinusprofilen. Deshalb sind Refs. 16–18 für die unmittelbare Regime-Abgrenzung wichtiger als das quasistatische Lubricants-Paper allein. *Nachtrag Oktober 2026:* Das gilt für den Simulationsreferenzsatz. Für V1 verlangt der Entwurf der Präregistrierung v2 Dauerkontakt und Resonanzabstand (dort §5.3); dort trägt die Regime-Abgrenzung nicht, und die Abgrenzung beruht auf der Architektur (innere Anregung, nur Normalkraft, keine Reibung).
+**PCMMS-Regime:** Linie A liegt nach eigenem Befund im dynamischen Nachbarbereich (`3f/f_n ≈ 1,5`), einschließlich dynamischer Liftoff-Schwelle `R_c ≈ 1,45` und des kontrollierten Befunds `gamma_1 = 0` ohne Liftoff bei Sinusprofilen. Deshalb sind Refs. 16–18 für die unmittelbare Regime-Abgrenzung wichtiger als das quasistatische Lubricants-Paper allein. *Nachtrag Oktober 2026:* Das gilt für den Simulationsreferenzsatz. Für V1 verlangt der Entwurf der Präregistrierung v2 Dauerkontakt und Resonanzabstand (dort §5.3); dort trägt die Regime-Abgrenzung nicht, und die Abgrenzung beruht auf der Architektur (innere Anregung, nur Normalkraft, keine Reibung).
 
 **Änderungsvorschlag:** Forschungsstand und §17 müssen Architektur **und** Regime getrennt vergleichen.
 
@@ -305,7 +305,7 @@ Prüfen, ob Schiefe, Liftoff, Asymmetrieverhältnis A und Mittelwertresiduum phy
 - Variante A: Kontaktende geometrisch bei `delta = 0`.
 - Variante B: gekappte Kraft mit Ablösung bei `F_N <= 0` (aktueller v3a-Ansatz).
 - Variante C: dokumentierte alternative dissipative Kontaktform ohne Zugkraft.
-- Vergleichen: Impuls, `e`, Kontaktzeit, Minimum der ungekappte Kraft, Liftoff-Zeit.
+- Vergleichen: Impuls, `e`, Kontaktzeit, Minimum der ungekappten Kraft, Liftoff-Zeit.
 
 **T2 — PCMMS-Phasenpunkte**
 
