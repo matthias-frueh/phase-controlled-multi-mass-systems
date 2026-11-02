@@ -1,6 +1,6 @@
 \documentclass[12pt,a4paper]{report}
 
-\usepackage[ngerman,provide=*]{babel}
+\usepackage[english,main=ngerman,provide=*]{babel}
 \usepackage{iftex}
 % Veröffentlichte PDFs mit pdfLaTeX: T1-Latin-Modern als Type-1-Schriften.
 \ifTUTeX
@@ -153,6 +153,7 @@ schon beschrieben ist, ist ohne systematische Recherche offen.
 \chapter*{Abstract}
 \addcontentsline{toc}{chapter}{Abstract}
 
+\begin{otherlanguage*}{english}
 This working paper develops a measurement framework for the contact force of a
 closed body whose three internal masses are driven periodically under
 phase control and whose support is unilateral, so that contact may be
@@ -228,6 +229,7 @@ target of phase control over internal masses. Whether either has been
 described in metrology, weighing technology or neighbouring fields is
 open without a systematic literature search.
 
+\end{otherlanguage*}
 \clearpage
 
 \pagenumbering{arabic}
@@ -5768,19 +5770,19 @@ geführt. Verwendete Suchbegriffe, jeweils in englischer und, wo
 sinnvoll, deutscher Form:
 
 \begin{itemize}
-\item \emph{Wellenformstatistik und Kontakt:} vibro-impact Hertzian
+\item \emph{Wellenformstatistik und Kontakt:} \foreignlanguage{english}{vibro-impact Hertzian
       contact; impacting contact random excitation statistics normal
       force; contact loss nonlinearity; unilateral contact force
-      waveform skewness.
-\item \emph{Phasensteuerung mehrerer Massen:} phase synchronization
+      waveform skewness.}
+\item \emph{Phasensteuerung mehrerer Massen:} \foreignlanguage{english}{phase synchronization
       eccentric rotors; unbalanced vibration exciter phase control
       amplitude; multiple unbalance motors adjustable exciter; trajectory
-      shaping inertial exciter initial phase.
-\item \emph{Kraft an der Auflage schwingungsangeregter Systeme:} force
+      shaping inertial exciter initial phase.}
+\item \emph{Kraft an der Auflage schwingungsangeregter Systeme:} \foreignlanguage{english}{force
       dynamics vibrated granular packing; bottom force vibrated column;
-      Langevin vibrated granular one-dimensional.
+      Langevin vibrated granular one-dimensional.}
 \item \emph{Bewegung und Kontaktkraft als Entwurfsgrößen:}
-      contact-implicit trajectory optimization compliant contact.
+      \foreignlanguage{english}{contact-implicit trajectory optimization compliant contact.}
 \item \emph{Lehrbuch- und Richtlinienliteratur:} Titel, Auflage und
       Jahr jedes Eintrags einzeln.
 \end{itemize}
@@ -5822,7 +5824,7 @@ Felder im Literaturverzeichnis.
     Featherstone 2008 & Springer & DOI & --- \\
     Kay 1998 & Pearson & ISBN & --- \\
     Lanczos 1986 & Dover & ISBN & Nachdruck 1970 \\
-    Montgomery/Runger 2014 & Wiley & --- & US-Ausgabe 2013 \\
+    \foreignlanguage{english}{Montgomery/Runger} 2014 & Wiley & --- & US-Ausgabe 2013 \\
     Shabana 2010 & Wiley & --- & Jahr korrigiert, nicht 2013; ISBN im Literaturverzeichnis fehlt, zu prüfen \\
     Taylor/Kuyatt 1994 & NIST & DOI & 1994 Edition \\
     \hline
@@ -5834,7 +5836,7 @@ Felder im Literaturverzeichnis.
 
 \paragraph{Abgleich mit dem Literaturverzeichnis (Oktober 2026).}
 Im Literaturverzeichnis fehlen weiterhin Angaben: vier Bücher ohne ISBN
-oder DOI (de Silva, Doebelin, Montgomery/Runger, Shabana) und fünf
+oder DOI (de Silva, Doebelin, \foreignlanguage{english}{Montgomery/Runger}, Shabana) und fünf
 Artikel ohne DOI (Rigaud/Perret-Liaudet 2003 T.\,1, Perret-Liaudet/Rigaud
 2006, Wakou et al.\ 2008, Chatzinikolaidis et al.\ 2020 und 2021). Sie
 sind als zu prüfen markiert und nicht ergänzt, weil die Angaben im
@@ -5895,7 +5897,9 @@ wiederholen.
 
 % ------------------------------------------------------
 
+\begin{otherlanguage*}{english}
 \bibliographystyle{plain}
 \bibliography{references}
+\end{otherlanguage*}
 
 \end{document}

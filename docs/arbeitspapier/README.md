@@ -15,8 +15,9 @@
 um die auf Android beobachteten Buchstabenausfälle in Überschriften zu beheben. Unicode-Zuordnungen der
 Schriften unterstützen Kopieren und Suchen. Schreibweise „gaußsches Rauschen“ korrigiert; Fachstand und Version bleiben v2.5.
 Durch die neuen Seitenumbrüche umfasst die Lesefassung jetzt 112 statt 114 Seiten.
-Die Silbentrennung folgt den deutschen Trennmustern (ngerman) mit Ausnahmen für Zusammensetzungen wie
-Kontakt-eigenfrequenz; die Trennliste des Neusatzes wurde vollständig geprüft.
+Deutsche Passagen verwenden deutsche Trennmuster (ngerman) mit Ausnahmen für Zusammensetzungen wie
+Kontakt-eigenfrequenz. Abstract, englische Suchbegriffe und Literaturtitel verwenden englische Trennmuster;
+deutsche Literaturvermerke bleiben als Deutsch ausgezeichnet.
 
 ## Änderungen
 
