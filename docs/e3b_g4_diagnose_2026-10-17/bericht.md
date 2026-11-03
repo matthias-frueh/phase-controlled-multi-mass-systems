@@ -550,7 +550,7 @@ Angegeben ist der Anteil der von G4 erfassten Läufe an den steilsten Punkten (S
 ### 3.7 Nebenbefund: k der Pilotgrößen (A4)
 
 - Ohne festgelegten Arbeitspunkt bildet die Pilotanalyse σ_Δ mit k = max(min(k_b, K), 3). Bei A4 ist das k_b = 30,
-  weil kein Mode im Band liegt (Befund 6).
+  weil keine Mode im Band liegt (Befund 6).
 - Teil B übernimmt dieses σ_Δ (`pilot_erg['sigma_delta']`), Phase 1 prüft D_F aber mit k_max = 9.
 - Auch nach einer erfolgreichen Suche bliebe σ_Δ beim Start-k und nicht beim festgelegten k_max.
 - §9.1 bezieht G4 auf F_min − ⟨N⟩ mit k ≤ k_max. σ_Δ,F bei k = 30 ist um 13 % größer (1,95 gegen 1,73 mN), mit

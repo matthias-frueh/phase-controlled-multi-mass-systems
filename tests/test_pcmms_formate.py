@@ -2,6 +2,7 @@
 Beispieldatensatz (docs/ap11_ap12_ap13_schnittstellen.md)."""
 import json
 import os
+import re
 
 import numpy as np
 import pytest
@@ -191,6 +192,12 @@ def test_regelmatrix_nennt_jede_regel():
         m = regeln.matrix_markdown(stand)
         for rid in regeln.profil(f'AF-{stand}').regeln:
             assert f'`{rid}`' in m
+
+
+@pytest.mark.parametrize('stand', ('2026-10', '2026-11'))
+def test_regelmatrix_hat_sechs_spalten(stand):
+    for zeile in regeln.matrix_markdown(stand).splitlines():
+        assert len(re.split(r'(?<!\\)\|', zeile)[1:-1]) == 6, zeile
 
 
 # ── Laufzusammenfassung ──────────────────────────────────────────────────────────────────────────────

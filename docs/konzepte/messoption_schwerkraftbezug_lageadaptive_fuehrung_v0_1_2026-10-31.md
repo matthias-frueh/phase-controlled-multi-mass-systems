@@ -224,7 +224,7 @@ Aus F_c − Mg folgt keine eindeutige absolute Position oder vollständige Orien
 
 | Ausprägung | Messmittel und erfasste Größen |
 | --- | --- |
-| Vertikal und geführt | Kraftmessung; externer Weg-/Abstandskanal zum Punkt O; Kinematikmessung der Massen und Arme; Orientierungsüberwachung soweit die Führung Winkel nicht hinreichend festlegt |
+| Vertikal und geführt | Kraftmessung; externer Weg-/Abstandskanal zum Punkt O; Kinematikmessung der Massen und Arme; Orientierungsüberwachung, soweit die Führung Winkel nicht hinreichend festlegt |
 | Räumlich beweglich | Kalibrierte externe Positions- und Orientierungsreferenz, beispielsweise optische Mehrpunktmessung; IMU für schnelle Drehraten und Beschleunigungsinformation; interne Kinematikkanäle; dazu geeignete Kraft-/gegebenenfalls Momentenkanäle |
 
 Die externe Geometrie muss die benötigten Freiheitsgrade eindeutig erfassen. Ein einzelner Abstandskanal liefert zunächst nur die zugehörige Abstandsinformation. Der Schwerkraftvektor liefert unter geeigneten Bedingungen zwei Neigungsinformationen; die Drehung um die Lotachse benötigt eine zusätzliche Referenz [2].

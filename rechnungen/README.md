@@ -37,7 +37,7 @@ Lizenz: Skripte MIT ([`../LICENSE`](../LICENSE)); Protokolle, Ausgaben und Daten
 - **Übernommen wurden** nur Pfade (relativ zum Skript, Repo-Code über `PYTHONPATH`), die Startskripte in
   `statistik/` und die Kopie der v1-Karte für Linie B. Die Ausgabedateien sind die unveränderten Originale bis auf eine
   Warnzeile, in der der damalige absolute Pfad durch den Dateinamen ersetzt ist (`symmetrie_randterm/s6b_…_ausgabe.txt`).
-- **Prüfstand bei der Übernahme (04.10.2026):** alle 173 Skripte kompilieren (`py_compile`). 36 kurze Skripte
+- **Prüfstand bei der Übernahme (04.10.2026):** Alle 173 Skripte kompilieren (`py_compile`). 36 kurze Skripte
   wurden aus einer Kopie des Ordners gestartet: 29 geben Zeile für Zeile die gespeicherte Ausgabe wieder, zwei bis
   auf Laufzeit- und Warnzeilen (`linie_b/b2b_…`, `symmetrie_randterm/s6b_…`), eines mit erwarteter Abweichung
   (`neuheit/bibcheck.py`, siehe dort), eines ohne gespeicherte Vergleichsdatei (`engine/verifikation/vk_paare.py
@@ -122,7 +122,7 @@ Prüfung der vorhandenen Modelle. Das „Egg“-Profil von Linie B ist nicht das
 | | |
 |---|---|
 | Zweck | Kennzahlen des Trägers (Keulegan-Carpenter-Zahl, β), Gültigkeit des quasistationären Widerstandsmodells, periodische Lösung des integrierten Modells und Dichtevergleich, Reproduktion der v1-Fensterkarte und ihre Skalierung mit ρ, Luftkräfte auf Module und Körper des Linie-A-Aufbaus V1 (zugesetzte Masse, Quetschfilm, Auftrieb, Thermik, Elektrostatik) |
-| Modelle | `quelle_kopie/pcmms_fluid_drift_v2.py` und `quelle_kopie/pcmms_medienkopplung_modell_v2.py`: die korrigierten Fassungen vom 06.09.2026, byte-gleich mit dem Bestand, hier unverändert; Lauf des Modells in `b0_medienkopplung_modell_v2_lauf.out` |
+| Modelle | `quelle_kopie/pcmms_fluid_drift_v2.py` und `quelle_kopie/pcmms_medienkopplung_modell_v2.py`: die korrigierten Fassungen vom 06.09.2026, bytegleich mit dem Bestand, hier unverändert; Lauf des Modells in `b0_medienkopplung_modell_v2_lauf.out` |
 | Daten | `sweep_13x13_drift_v2.csv`: stationäre Driftkarte des v2-Modells (ρ = 1000 kg/m³, 169 Punkte, Simulation); `daten/sweep_13x13_drift_v1.csv`: **historische** v1-Karte, archivierter Stand vom 01.09.2026, Kopie aus einer Quelle außerhalb des Repositorys (Fenstermittel 4–8 s, nicht eingeschwungen; nur als Vergleich für `b3b_…` und `verifikation/vb3_…`) |
 | Prüfunterlagen | `review_2026-09-06/` (Nachtrag 22.10.2026, unverändert aus einer Quelle außerhalb des Repositorys): Reproduktionsskript der externen Skriptprüfung vom 06.09.2026 mit der Ausgabe des ursprünglichen Laufs und in `quelle_v1/` die v1-Originale `pcmms_fluid_drift.py`, `pcmms_medienkopplung_modell.py` und `pcmms_medienkopplung_modell-1.py`. Die v1-Skripte sind Prüfgegenstand, kein Werkzeug; die Kontrollrechnungen dieses Ordners benutzen sie nicht. Das Skript lädt die v1-Module aus dem Arbeitsverzeichnis und schreibt nur auf die Konsole; Start: `cd review_2026-09-06/quelle_v1 && PYTHONDONTWRITEBYTECODE=1 python3 ../pcmms_review_reproduktion_2026-09-06.py` (numpy, scipy, pandas). Neustart am 22.10.2026: Ausgabe gleich bis auf die Laufzeit und eine `SyntaxWarning` des v1-Driftskripts unter Python 3.13. Die im Leitfaden genannte `sweep_13x13_drift.csv` ist `daten/sweep_13x13_drift_v1.csv`. Leitfaden und Korrekturbeleg: [`../docs/linie_b/`](../docs/linie_b/README.md) |
 | Start | `b1_kc_kennzahlen.py`, `b1b_kc_medienkopplung_fall_s.py`, `b2_fluid_drift_v2_kontrolle_an.py`, `b2b_periodische_loesung.py`, `b3_dichte_drift_c1.py`, `b3b_v1_fenster_karte.py`, `b4_v1_luftkraefte.py`; Ausgaben `.out` |

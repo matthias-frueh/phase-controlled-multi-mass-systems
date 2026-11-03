@@ -664,6 +664,7 @@ def matrix_markdown(stand_='2026-11'):
         e = entw.regeln[rid]
         wert = '–' if not e.verfuegbar() else json.dumps(formate._json_wert(e.wert), ensure_ascii=False)
         st = r.status + (' → entwicklungsprüffall' if e.status == EP else '')
-        zeilen.append(f'| `{rid}` | {r.gegenstand} | {r.fundstelle} | {st} | {wert.replace("|", "∣")} | '
+        gegenstand = r.gegenstand.replace('|', r'\|')
+        zeilen.append(f'| `{rid}` | {gegenstand} | {r.fundstelle} | {st} | {wert.replace("|", "∣")} | '
                       f'{umsetzung(rid, stand_)} |')
     return '\n'.join(zeilen) + '\n'

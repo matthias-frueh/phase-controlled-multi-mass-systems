@@ -16,7 +16,7 @@ Kampagnenzahl kein Nachweis.
 
 > **Vermerk vom 16.10.2026 (nachträglich, nicht aus dem Prüfstand erzeugt).** Die Tabelle ist der Stand `7a259ef` vor
 > den Korrekturen A–E ([Softwaredokument, Abschnitt 1a](ap11_ap12_ap13_software.md#1a-korrekturen-vom-16102026)) und
-> nicht neu gerechnet. **K12**: Der Planungshaken simulierte T_Lauf = 17 s statt 16 s und einen statt zwei Messtagen
+> nicht neu gerechnet. **K12**: Der Planungshaken simulierte T_Lauf = 17 s statt 16 s und einen statt zwei Messtage
 > (Korrektur A; N_z stimmte); die Kandidatenraten sind potenziell betroffen. **K19**: Der verrauschte Ebenenabgleich lief
 > mit ⟨N⟩ als Phasenmittel in Stufe 1 (Korrektur B); der rauschfreie Abgleich ist nicht betroffen. **E3**: Alle Raten
 > sind ohne Unsicherheit von T gerechnet (Korrektur E; C betrifft nur berichtete k = 2-Werte); daraus folgt keine

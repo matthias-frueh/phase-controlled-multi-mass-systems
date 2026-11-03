@@ -57,7 +57,7 @@ Messung. Nach dem Entwurf der Präregistrierung v2 entsteht die Vorhersage aus s
 Einzelmodulläufen, nicht aus der Simulation; Messdaten gibt es noch nicht. Das
 Kontaktmodell wird nur dort geprüft, wo es sich von der starren Auflage unterscheidet; in einem steifen
 Aufbau ist das wenig. Gerechnet wird mit linear-elastischem Kontakt plus viskoser Dämpfung, unilateral
-abgeschnitten — ohne Hertz'sche Nichtlinearität, Rauheit, Stoßverluste. Dieses Projekt hat an der Stelle
+abgeschnitten — ohne Hertz’sche Nichtlinearität, Rauheit, Stoßverluste. Dieses Projekt hat an der Stelle
 des Kontaktmodells schon einmal ein Artefakt produziert.
 
 **6 · Warum keine Messdaten?**

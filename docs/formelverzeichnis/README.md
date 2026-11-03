@@ -7,6 +7,12 @@
   und Quelltext stimmen überein.
 - Quelle: [`PCMMS_Formelverzeichnis_v2_8.tex`](PCMMS_Formelverzeichnis_v2_8.tex)
 
+**Redaktioneller Neusatz (02.11.2026).** Die PDF wird wie das Arbeitspapier mit pdfLaTeX und eingebetteten
+Type-1-Schriften neu erzeugt, damit die Schriftwiedergabe auf Android zuverlässiger ist.
+Unicode-Zuordnungen der Schriften unterstützen Kopieren und Suchen. Fachstand und Version bleiben v2.8.
+Die Silbentrennung folgt den deutschen Trennmustern (ngerman) mit Ausnahmen für Zusammensetzungen wie
+Kontakt-übertragung; der Zenodo-DOI im Änderungsvermerk wird nicht mehr getrennt.
+
 ## Änderungen
 
 v2.8 (16.10.2026): Lesefassung der Nachträge vom Oktober 2026 – Statusvermerk zu den Architekturebenen, Minimalkraft relativ zum Laufmittel F_min − ⟨N⟩ und Trennung von Π_N und A_pk in den Phasenkarten, Rückzugsvermerk im Glossar, Anschluss an Linie B und C, Parameterstand des V1-Kandidaten und Hubangaben als Spitze-Spitze (Anhang B), Literaturhinweise. Die Definitionen der Größen der v2.7 bleiben unverändert; neu sind F_min − ⟨N⟩ und die Regel für Hubangaben, Linie C ist neu umschrieben.
@@ -21,7 +27,13 @@ Vom Repository-Stamm aus:
 
 ```sh
 (cd docs/formelverzeichnis \
-  && for i in 1 2 3; do xelatex -interaction=nonstopmode -halt-on-error PCMMS_Formelverzeichnis_v2_8.tex || exit 1; done)
+  && latexmk -pdf -interaction=nonstopmode -halt-on-error \
+       -outdir=../_build/formelverzeichnis PCMMS_Formelverzeichnis_v2_8.tex \
+  && cp ../_build/formelverzeichnis/PCMMS_Formelverzeichnis_v2_8.pdf .)
 ```
 
-Benötigt XeLaTeX mit deutschen Trennmustern, Latin Modern OpenType und die Pakete der Präambel (Debian/Ubuntu: `texlive-xetex texlive-latex-extra texlive-lang-german fonts-lmodern`); `lmodern.sty` ist dafür nicht nötig. Unter pdfLaTeX gilt weiter der Weg mit `inputenc`, `fontenc` und `lmodern`. Die beiliegende PDF: Text in Latin Modern (OpenType), Formeln in Computer Modern.
+Benötigt pdfLaTeX mit deutschen Trennmustern, `latexmk`, Latin Modern und die Pakete der Präambel
+(Debian/Ubuntu: `texlive-latex-extra texlive-lang-german lmodern latexmk`).
+Für die veröffentlichte PDF ist dieser pdfLaTeX-Bauweg maßgeblich; die Quelldatei unterstützt weiterhin XeLaTeX/LuaLaTeX.
+Die beiliegende PDF verwendet eingebettete Type-1-Schriften mit Unicode-Zuordnung:
+Latin Modern für Text und Formeln, ergänzt durch AMS-Symbole.

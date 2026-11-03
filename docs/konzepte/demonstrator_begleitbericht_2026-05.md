@@ -31,20 +31,20 @@ Stand: Mai 2026
 | Komponente              | Vorschlag                          | ca. Preis |
 |-------------------------|------------------------------------|-----------|
 | Mikrocontroller        | ESP32 Dev Board (DOIT DEVKIT V1)  | 8,00 €   |
-| Motortreiber           | 2x IRLZ44N N-Kanal MOSFET         | 1,00 €   |
-| Vibrationsmotoren      | 2x Münzvibrationsmotor (10mm, 3V) | 2,00 €/St. |
+| Motortreiber           | 2x IRLZ44N N-Kanal-MOSFET         | 1,00 €   |
+| Vibrationsmotoren      | 2x Münzvibrationsmotor (10 mm, 3 V) | 2,00 €/St. |
 | Freilaufdioden         | 2x 1N4007                         | 0,10 €   |
 | Akku                   | LiPo 1S 500 mAh + JST             | 6,00 €   |
 | Kleinkram              | Breadboard, Kabel, Widerstände    | 5,00 €   |
 
 ## 2. Schaltplan
 
-- MOSFET Gate an GPIO25 (Motor 1) bzw. GPIO26 (Motor 2) mit 10 kΩ Pull-down nach GND.
+- MOSFET-Gate an GPIO25 (Motor 1) bzw. GPIO26 (Motor 2) mit 10-kΩ-Pull-down nach GND.
 - Drain an Motor-Masse, Source an GND.
 - Freilaufdiode parallel zum Motor (Kathode an VCC, Anode an Drain).
-- Motoren direkt am 3.7–4.2 V Akku.
+- Motoren direkt am 3.7–4.2-V-Akku.
 
-## 3. ESP32 Automatik-Code (pcmms_phasen_automatik.ino)
+## 3. ESP32-Automatik-Code (pcmms_phasen_automatik.ino)
 
 ```cpp
 #include <Arduino.h>

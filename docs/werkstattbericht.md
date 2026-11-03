@@ -28,7 +28,7 @@ In der Simulation lässt sich das direkt beobachten. Im Feinsweep um die interes
 
 Wenn die Fläche unter der Kurve festliegt, bleibt die Form. Und die ist alles andere als starr.
 
-Der Kontakt ist einseitig: die Unterlage kann drücken, nicht ziehen. Sobald die Innendynamik den Körper stärker nach oben beschleunigt, als die Schwerkraft ihn hält, hebt er ab und die Kraft ist exakt null. Diese Nullphasen müssen anderswo im Zyklus durch Kraftspitzen kompensiert werden, sonst stimmt der Mittelwert nicht. Aus einer periodischen Profilanregung wird so eine stark verzerrte, unsymmetrische Kraftzeitreihe.
+Der Kontakt ist einseitig: Die Unterlage kann drücken, nicht ziehen. Sobald die Innendynamik den Körper stärker nach oben beschleunigt, als die Schwerkraft ihn hält, hebt er ab und die Kraft ist exakt null. Diese Nullphasen müssen anderswo im Zyklus durch Kraftspitzen kompensiert werden, sonst stimmt der Mittelwert nicht. Aus einer periodischen Profilanregung wird so eine stark verzerrte, unsymmetrische Kraftzeitreihe.
 
 Wie stark, hängt an der Phasenlage. Über 361 Konfigurationen des Grobsweeps — bei 10 Hz, 7,7 mm Hub und einer angesetzten Kontaktsteifigkeit von 10 000 N/m, mit der gesamten Masse in den drei bewegten Modulen (ein ruhendes Gehäuse ist im Modell nicht enthalten) — bewegt sich die Schiefe der Kraftverteilung zwischen −0,2880 und +1,9790. Der Anteil der Zykluszeit ohne Kontakt reicht bis 76,22 %. Die Spitzenkraft erreicht 50,5521 N, also fast das Achtfache der statischen Last. Die Minimalkraft liegt zwischen null und 2,8821 N.
 
@@ -71,7 +71,7 @@ Für die Flanken der Zeltkurve zählt eine andere Harmonische. Neben dem triphas
 
 Macht man die Auflage steif genug, verschwindet die Abhängigkeit. Oberhalb von etwa einer Million Newton pro Meter verändert ein Faktor zehn in K die Minimalkraft noch um 0,14 N, und der Wert läuft gegen den quasistatischen Grenzfall von 4,5483 N, in dem die Kraft nur noch der Spitzenbeschleunigung der Innenmassen folgt.
 
-Daraus folgt eine Auslegungsregel — halte das Verhältnis der dritten Harmonischen zur Kontakteigenfrequenz klein; das gilt für den Wert am triphasischen Punkt, für die Steigung der Zeltkurve und für die Phasenkarte zählen f/f_n und 2f/f_n — und eine Regel für den Umgang mit der Zahl selbst. Die 5,3304 N sind keine Eigenschaft der Phasenlage. Sie sind eine Eigenschaft der Phasenlage bei einer bestimmten, angenommenen Auflagersteifigkeit. Ohne diese Angabe ist die Zahl nicht zitierfähig, und mit vier Nachkommastellen suggeriert sie eine Bestimmtheit, die sie nicht hat.
+Daraus folgt eine Auslegungsregel — halte das Verhältnis der dritten Harmonischen zur Kontakteigenfrequenz klein; das gilt für den Wert am triphasischen Punkt; für die Steigung der Zeltkurve und für die Phasenkarte zählen f/f_n und 2f/f_n — und eine Regel für den Umgang mit der Zahl selbst. Die 5,3304 N sind keine Eigenschaft der Phasenlage. Sie sind eine Eigenschaft der Phasenlage bei einer bestimmten, angenommenen Auflagersteifigkeit. Ohne diese Angabe ist die Zahl nicht zitierfähig, und mit vier Nachkommastellen suggeriert sie eine Bestimmtheit, die sie nicht hat.
 
 Es war einiges an Rechnerei nötig, um an diesen Punkt zu kommen. Der Ertrag ist eine Zahl mit einer Bedingung daran statt einer Zahl ohne.
 

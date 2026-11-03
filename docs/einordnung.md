@@ -166,7 +166,7 @@ Die mechanischen Grundelemente von PCMMS sind alle besetzt. Das ist bekannt und 
 Kandidat, bibliografisch ungeprüft.** Arbeiten um Fang und Xu untersuchen Dynamik und Phasenkoordination
 von Mehrmodul-Vibrationsrobotern mit linearen und nichtlinearen Verbindungen und suchen
 Phasendifferenzen, die die mittlere Dauergeschwindigkeit maximieren. Genannt werden außerdem
-stückweise-glatte Mehrmodulsysteme mit Trockenreibung und diskontinuitätsinduzierte Gleitbifurkationen
+stückweise glatte Mehrmodulsysteme mit Trockenreibung und diskontinuitätsinduzierte Gleitbifurkationen
 (*Commun. Nonlinear Sci. Numer. Simul.* 114, 106704, 2022) und eine bi-objektive Optimierung der
 Lokomotionsleistung durch Diao, Zhang & Fang (*Arch. Appl. Mech.* 91, 2073–2088, 2021). Diese Angaben
 sind nicht gegen die Primärquellen geprüft; in anderen Projektunterlagen stehen dazu abweichende
@@ -185,7 +185,7 @@ Der Roboter BERT nutzt Eigenschwingungen. Mechanische Bewegungserzeugung über S
 über Servoregelung ist damit etablierter, aktiv betriebener Forschungsstand — angrenzend, aber kein
 Vorläufer von PCMMS: dort geht es um Energieeffizienz der Bewegung, nicht um die Kontaktkraft.
 
-**Vibro-impact-Forschung.** Intermittierender Kontakt, Liftoff, Normalkraftdynamik bei starker
+**Vibro-Impact-Forschung.** Intermittierender Kontakt, Liftoff, Normalkraftdynamik bei starker
 Vibrationsanregung — etabliert; dazu gehören Impact-Oszillatoren, Hüpfzustände und Grazing. Arbeiten zu
 Crawl-/Flug-Regimen bei Bürstenrobotern sind ohne Fundstelle genannt und zu prüfen.
 
@@ -207,7 +207,7 @@ Neuheitsbehauptung, weil sie überprüfbar ist.
 
 ## 6 · Die harten Fragen
 
-### „Gibt es das nicht schon dreimal?"
+### „Gibt es das nicht schon dreimal?“
 
 Die Bausteine ja, die Fragestellung nein — aber die Abgrenzung braucht zwei Schritte, nicht einen.
 
@@ -233,9 +233,9 @@ Der Aufbau ähnelt Schritt 2, die Fragestellung ähnelt Schritt 1 — die Kombin
 gezielten, nicht systematischen Suche nicht gefunden. Haptik, Kapselroboter, Impact-Oszillatoren,
 dynamisches Wägen und Metrologie sind dabei noch nicht durchsucht.
 
-Das ist eine schwächere und damit haltbarere Behauptung als „niemand untersucht Kontaktkräfte".
+Das ist eine schwächere und damit haltbarere Behauptung als „niemand untersucht Kontaktkräfte“.
 
-### „Was ist dann konkret der Beitrag?"
+### „Was ist dann konkret der Beitrag?“
 
 Die Kombination, nicht das Einzelteil:
 
@@ -248,7 +248,7 @@ gefunden; das ist ein Suchbefund, kein Nachweis einer Lücke. Das ist eine
 Nischenbehauptung, keine Entdeckungsbehauptung — und sie ist widerlegbar, indem jemand die Arbeit
 zeigt, die es schon gibt.
 
-### „Ist das nicht ein verkapptes Perpetuum mobile?"
+### „Ist das nicht ein verkapptes Perpetuum mobile?“
 
 Nein, und die Struktur des Projekts ist genau darauf ausgelegt, das prüfbar zu machen. Linie A
 behauptet ausdrücklich, dass das Zeitmittel **nicht** verschiebbar ist, und benutzt diese Unmöglichkeit
@@ -266,7 +266,7 @@ Eine frühere Fassung des Projekts behauptete tatsächlich eine Mittelwertversch
 zurückgezogen; Ursache war ein Kontaktmodell mit vorgeschriebener Eindrückung
 ([`archiv_vermerk_kernhypothese_v3.md`](archiv_vermerk_kernhypothese_v3.md)).
 
-### „Warum schwankt die Kraft, wenn der Mittelwert fest ist?"
+### „Warum schwankt die Kraft, wenn der Mittelwert fest ist?“
 
 Weil der Mittelwert eine Aussage über das Integral macht, nicht über den Verlauf. Beim Liftoff ist
 die Kraft phasenweise exakt null; die fehlende Fläche muss durch Spitzen kompensiert werden. In der
@@ -277,7 +277,7 @@ Das ist kein Sonderfall, sondern folgt aus dem Schwerpunktsatz (Abschnitt 2). Fa
 Perret-Liaudet & Rigaud (2003) untersuchen Spektren und Statistik eines Hertz-Kontakts mit möglichem
 Kontaktverlust; ein Nachweis für den PCMMS-Aufbau ist das nicht.
 
-### „Warum keine Messdaten?"
+### „Warum keine Messdaten?“
 
 Weil das Projekt prä-experimentell ist und das so benannt wird. Die Reihenfolge ist bewusst:
 Präregistrierung, Artefaktkatalog, Entscheidungsregeln und Abbruchkriterien stehen **vor** der ersten
@@ -285,30 +285,30 @@ Messung. Präregistrierung ist in der experimentellen Mechanik nach meinem Eindr
 ich das nicht. Dieser Teil der Arbeit bleibt auch bei einem Nullausgang verwertbar, sofern die Präzision
 eine Entscheidung erlaubt.
 
-### „Was ist, wenn nichts herauskommt?"
+### „Was ist, wenn nichts herauskommt?“
 
 Dann ist das ein Ergebnis. Die Falsifikationsbedingung steht vorab fest: Ist die Regime-Struktur nach
 allen Kontrollen nicht über dem Rauschboden nachweisbar, gilt H1 der Präregistrierung vom Juni 2026 für
 den getesteten Bereich als falsifiziert. Nach dem [Entwurf](praeregistrierung_v2_entwurf.md) der
-Präregistrierung v2, der die Bezeichnung H1 neu belegt, ist dieser Ausgang „nicht entscheidbar" (die
+Präregistrierung v2, der die Bezeichnung H1 neu belegt, ist dieser Ausgang „nicht entscheidbar“ (die
 Präzision reicht nicht, dort §9.4) und wird wie jeder Ausgang veröffentlicht. Ein Null-Ergebnis ist
 eingeplant, nicht abgefedert.
 
-### „Warum kein Roboter? Das wäre doch die Anwendung."
+### „Warum kein Roboter? Das wäre doch die Anwendung.“
 
 Weil ein Roboter die Frage unbeantwortbar macht. Sobald sich das System fortbewegt, mischen sich
 Reibungsmodell, Untergrundeigenschaften und Kontaktgeometrie in das Signal. Die Wellenform der
 Kontaktkraft ist dann nicht mehr isolierbar. Der stationäre Aufbau ist eine Vereinfachung mit
 Absicht — Robotik ist eine mögliche nachgelagerte Validierungsebene, keine Voraussetzung.
 
-### „Was ist die praktische Relevanz?"
+### „Was ist die praktische Relevanz?“
 
 Liftoff-Anteil und Spitzenkraft sind bei Vibrationsförderern, Siebmaschinen und Bodenverdichtung
 unmittelbar Durchsatz- und Verschleißgrößen. Wenn sich beide über die Phasenlage einstellen lassen,
 ohne den mittleren Lastfall zu ändern, ist das ein Stellhebel. Ob er praktisch trägt, ist offen —
 das Projekt behauptet es nicht, es untersucht die Grundlage.
 
-### „Warum sollte ich das ernst nehmen — ohne Institut, ohne Labor?"
+### „Warum sollte ich das ernst nehmen — ohne Institut, ohne Labor?“
 
 Die faire Antwort: Die Physik ist unstrittig; Simulationscode und Simulationsdaten liegen in diesem
 Repository (`code/`, `data/`) und sind nachrechenbar. Was fehlt, ist die Messung, und das steht in jedem Dokument. Was das Projekt anbietet, ist

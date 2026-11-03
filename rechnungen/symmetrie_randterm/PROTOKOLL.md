@@ -92,7 +92,7 @@ export PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=../../code
 - **Egg-Profil:** zeitumkehrsymmetrisch um t₀ = 0,325 T, max|a(t₀+s) − a(t₀−s)| = 3,3·10⁻¹⁴ m/s². Die Phasen der P_k relativ zur Achse sind 0° oder 180°, die Profiltriade 0°. Das bestätigt AP v2.4 Z. 1818 und FV v2.7 Abschn. refprofil. Die „Asymmetrie“ des Egg ist eine Halbwellen-/Amplitudenasymmetrie, keine Zeitasymmetrie.
 - **Lineares Modell im Kontaktast, Spiegelpaare:**
 
-| Fall | Egg, Referenz K=10⁴, C=16 | Egg, C = 0 | Egg, starr | Testprofil „skew“ (Triade 55,6°), starr |
+| Fall | Egg, Referenz K = 10⁴, C = 16 | Egg, C = 0 | Egg, starr | Testprofil „skew“ (Triade 55,6°), starr |
 |---|---|---|---|---|
 | (110,234): γ₁ A/A* | −0,180/−0,262 | −0,0197/−0,0197 | −0,599/−0,599 | +0,178/+0,055 |
 | (100,240): γ₁ A/A* | −0,344/+0,050 | gleich | gleich | −0,207/+0,207 |
@@ -181,10 +181,10 @@ export PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=../../code
 
 | Gruppe | Modus | \|ΔF_mean\| | \|ΔN_RK4\| | \|Δγ₁\| | \|Δλ\| | \|ΔF_max\| | Phasenregel |
 |---|---|---|---|---|---|---|---|
-| K1–K3, L1–L3, Z1–Z2 | shift (W1 und W2) | ≤ 3·10⁻¹⁴ N | ≤ 2·10⁻¹⁴ N | ≤ 1,3·10⁻¹² | 0 | ≤ 5·10⁻¹² N | ≤ 2,4·10⁻¹⁰ ° |
-| L4, L5, L6 (aperiodisch/P3) | shift | ≤ 3,9·10⁻⁴ N | ≤ 2,1·10⁻⁴ N | ≤ 1,5·10⁻⁴ | ≤ 0,006 %-Pkt | ≤ 0,014 N | ≤ 0,16 ° |
-| K1–K3 (Kontaktast) | std (W1 = W2) | ≤ 5,6·10⁻⁷ N | ≤ 5,6·10⁻⁷ N | ≤ 8·10⁻⁷ | 0 | ≤ 2·10⁻⁵ N | ≤ 6·10⁻⁴ ° |
-| L1–L3, Z1, Z2 (periodisch) | std (W1 = W2) | ≤ 6,5·10⁻⁴ N (102 ppm) | ≤ 5,6·10⁻⁷ N | ≤ 3,6·10⁻⁴ | ≤ 0,05 %-Pkt | ≤ 1,2·10⁻³ N | ≤ 0,22 ° |
+| K1–K3, L1–L3, Z1–Z2 | shift (W1 und W2) | ≤ 3·10⁻¹⁴ N | ≤ 2·10⁻¹⁴ N | ≤ 1,3·10⁻¹² | 0 | ≤ 5·10⁻¹² N | ≤ 2,4·10⁻¹⁰° |
+| L4, L5, L6 (aperiodisch/P3) | shift | ≤ 3,9·10⁻⁴ N | ≤ 2,1·10⁻⁴ N | ≤ 1,5·10⁻⁴ | ≤ 0,006 %-Pkt | ≤ 0,014 N | ≤ 0,16° |
+| K1–K3 (Kontaktast) | std (W1 = W2) | ≤ 5,6·10⁻⁷ N | ≤ 5,6·10⁻⁷ N | ≤ 8·10⁻⁷ | 0 | ≤ 2·10⁻⁵ N | ≤ 6·10⁻⁴° |
+| L1–L3, Z1, Z2 (periodisch) | std (W1 = W2) | ≤ 6,5·10⁻⁴ N (102 ppm) | ≤ 5,6·10⁻⁷ N | ≤ 3,6·10⁻⁴ | ≤ 0,05 %-Pkt | ≤ 1,2·10⁻³ N | ≤ 0,22° |
 | L4, L5, L6 | std | bis 0,038 N | bis 0,038 N | bis 0,99 | bis 52 %-Pkt | bis 17,6 N | – |
 
 **Deutung.**
@@ -219,7 +219,7 @@ export PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=../../code
 
 ## SYM-05 Symmetrieaussagen in den Quellen (Präreg A7, AP v2.4, FV v2.7)
 
-- **Präreg-v2-Anhang A7 (L5a-095; repo und lokale Überarbeitung vom 01.10. wortgleich):**
+- **Präreg-v2-Anhang A7 (L5a-095; Repo und lokale Überarbeitung vom 01.10. wortgleich):**
   - „Konfiguration bis auf Umbenennung und Zeitverschiebung durch die Folge ihrer zyklischen Abstände bestimmt, bis auf zyklische Vertauschung“: **korrekt** (SYM-01).
   - „Spiegelung = Zeitumkehr, nur bei zeitumkehrsymmetrischem Profil und starrer Auflage eine Symmetrie; erhält die Menge der Abstände“: **korrekt**, mit zwei Präzisierungen. Erstens muss die starre Auflage ohne Abheben sein (oder die Auflage verlustfrei linear). Zweitens sind |N_k| und ⟨N⟩ im Kontaktast für jedes Profil spiegelinvariant (SYM-02).
   - „Jede Konfiguration des Feinfensters mit einem 120°-Abstand ist zu einem Schnittpunkt φ₂ ∈ [100°,140°] äquivalent“: analytisch geprüft, **korrekt**. Fall φ₂ = 120°: äquivalent zu (φ₃−120°, 240°). Fall φ₃ − φ₂ = 120°: äquivalent zu (360°−φ₃, 240°). Beide liegen in [100°, 140°].

@@ -199,7 +199,7 @@ Triphasik-Punkt gilt nicht für einen Körper auf drei Zellen“?
 
 **Methode [R].**
 - Eigenes RK4 in Zellkoordinaten, 15 s, Auswertung 10 s nach 5 s Burn-in, Liftoff F < 10⁻⁹ N.
-- Zwei Starts: Ruhe im statischen Gleichgewicht, sowie Start auf der linearen periodischen Lösung bei t = 0
+- Zwei Starts: Ruhe im statischen Gleichgewicht sowie Start auf der linearen periodischen Lösung bei t = 0
   (im Frequenzbereich berechnet; anderer Weg als der 5-s-Vorlauf der Gruppe).
 - Δt = 50 und 25 µs.
 - Teil B: entkoppelte Einmassenschwinger mit Startverzögerung 0 oder T → alle acht Paritätskombinationen.

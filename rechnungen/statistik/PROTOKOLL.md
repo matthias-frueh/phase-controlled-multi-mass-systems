@@ -201,7 +201,7 @@ Kontrolle mit dem registrierten Bootstrap (`s3b_h2_bootstrap_check.py`).
   (SNR ≈ 20–70). Begrenzend ist die Fensterregel (STA-06).
 - Bootstrap-Kontrolle (s3b, 150 Kampagnen, B = 400, SNR = 1, n = n₀ = 20): 'ref' (w = 16) MC-Halbbreite 0,645°, mittlere
   Bootstrap-Halbbreite 0,624°, Überdeckung 0,947; 'A4' (w = 6) 0,735° gegen 0,696°, Überdeckung 0,927 (Standardfehler 0,018).
-  Das registrierte Perzentil-Bootstrap trifft die Halbbreite auf 3–5 % und ist leicht zu schmal.
+  Der registrierte Perzentil-Bootstrap trifft die Halbbreite auf 3–5 % und ist leicht zu schmal.
 
 **Reproduktion.** `eval timeout 540 $PY s3_h2_zeltfit_mc.py 1500`; `eval timeout 540 $PY s3b_h2_bootstrap_check.py 150 400`
 
@@ -225,7 +225,7 @@ erreichbaren Präzision (u_c,erw ≈ 0,3–1 mN) ist **H2 nach der registrierten
 weit unter 1° läge. Die Regel bindet das Fenster an die Messunsicherheit statt an den Fehler der Spitzenlage; der Formfehler des
 Zelts hebt sich aber in Δφ* auf, weil derselbe Fit auf Messung und Vorhersage angewandt wird (STA-07).
 
-**Reproduktion.** wie STA-05 (Abschnitt 1 der Ausgabe und Zeilen ohne w in `s3_h2_zeltfit_mc.csv`).
+**Reproduktion.** Wie STA-05 (Abschnitt 1 der Ausgabe und Zeilen ohne w in `s3_h2_zeltfit_mc.csv`).
 
 **Einschränkungen.** Rauschfreie Vorhersage zur Fensterwahl (Teil B nutzt die verrauschte Phase-0-Vorhersage; das ändert die
 Schwelle nicht grundsätzlich).
@@ -246,7 +246,7 @@ Schwelle nicht grundsätzlich).
 - **Folgerung:** Der Fit-Bias ist für H2 unschädlich, solange Messung und Vorhersage dieselbe Form haben; die Fensterregel (STA-06)
   schützt gegen ein Problem, das der Differenzvergleich schon löst.
 
-**Reproduktion.** wie STA-05; `s3_h2_bias.csv`.
+**Reproduktion.** Wie STA-05; `s3_h2_bias.csv`.
 
 ---
 
@@ -344,17 +344,17 @@ Kalibrierung ihrer Fehlerraten (insbesondere der IUT-Bestätigung am Rand der Ä
 **Ergebnis.**
 - Bei Drift ist z⁰ überall signifikant, die Falsifikation hängt allein an z¹: P(falsifiziert) = 0,010–0,018 (L0–L2), also unter α;
   P(nicht entscheidbar, Zusatz „Drift“) = 0,98–0,99. Die ŷ¹-Logik **funktioniert** wie beabsichtigt.
-- PB1 wird nur mit r⁰ gebildet (§8.5). Bei Drift bleibt PB1 erfüllt (P = 1,00 auf L0–L2), die Bestätigung scheitert an |z⁰| > c. Ein
+- PB1 wird nur mit r⁰ gebildet (§8.5). Bei Drift bleibt PB1 erfüllt (P = 1,00 auf L0–L2), die Bestätigung scheitert an |z⁰| > c. Eine
   Drift von 0,1 % (G7-Grenze, 1,2 mN Residuum gegen ŷ⁰) reicht auf L0 schon für z⁰ ≈ 4,7 und damit für „nicht entscheidbar“.
 - PB1 teilt den kritischen Wert c (Bonferroni, ggf. Ersatzregel) mit der Signifikanzbedingung: Ein größeres c (kleines ν) erleichtert
   die Nicht-Signifikanz und erschwert PB1. PB1 bindet erst ab u_c(F_min) ≈ 10–20 mN (STA-08); darunter entscheidet allein die
   Signifikanz (STA-09).
 
-**Reproduktion.** wie STA-08; `s4_identifizierbarkeit_rest_ausgabe.txt` Zeilen c).
+**Reproduktion.** Wie STA-08; `s4_identifizierbarkeit_rest_ausgabe.txt` Zeilen c).
 
 ---
 
-## STA-11 · Identifizierbarkeit: welche Ursachen erzeugen eine H1-Signatur?
+## STA-11 · Identifizierbarkeit: Welche Ursachen erzeugen eine H1-Signatur?
 
 **Frage.** Welche Alternativursachen erzeugen dieselbe Signatur wie eine H1-Falsifikation, wie groß, und welche Kontrolle der
 Präreg trennt sie?
@@ -447,7 +447,7 @@ lässt“, `docs/expose_2026-09.md` Z. 18–19) konfirmatorisch umgesetzt?
    lastabhängiger Phasenversatz (1,7 mN) oder Hertz-Kontakt bei f_n = 300 Hz (1,1 mN) H1 – Ursachen, die die Präreg selbst als
    Apparaturfehler einordnet. Zusammen mit Vorschlag 2 schließen sich „äquivalent“ (|r| + t₀,₉₅·u ≤ Δ_q) und „relevant abweichend“
    (|r| − c·u > Δ_q) gegenseitig aus; alles dazwischen ist „nicht entscheidbar“.
-4. **Kritischer Wert aus der gemeinsamen Nullverteilung** (Studentisiertes max|z| über die 147 korrelierten Tests aus der
+4. **Kritischer Wert aus der gemeinsamen Nullverteilung** (studentisiertes max|z| über die 147 korrelierten Tests aus der
    Kalibriersimulation oder einem Bootstrap unter H0) und in beide Richtungen anwenden; die Ersatzregel (§8.4) greift bisher nur,
    wenn Bonferroni zu liberal ist. *Grund:* s2: q95(max|z⁰|) = 3,76–3,95 ≤ c = 3,95; tatsächliche Rate falscher Falsifikation
    ≤ 0,005 statt nominal 0,05 (UND-Verknüpfung mit z¹). Kleiner Gewinn, gegenüber 2./3. nachrangig.

@@ -90,7 +90,7 @@ T_ramp = 2 s, T_ab = 1 s, T_e,P = 4 s, T_a,P = 10 s, T_verfügbar = 4 Tage, d = 
 <!-- tabelle:k12 -->
 | Zählung | alt | neu |
 |---|---:|---:|
-| Aufrufe des Haken (Paare k, N_z) | 28 | 28 |
+| Aufrufe des Hakens (Paare k, N_z) | 28 | 28 |
 | davon simuliert | 2 | 2 |
 | Kandidaten simuliert | 4 | 4 |
 | Kandidaten übersprungen (n > n_max) | 0 | 0 |
@@ -258,7 +258,7 @@ gespeichert, Übergänge je Kampagne werden deshalb nicht berichtet.
 <!-- tabelle:e3_kontrollen -->
 | Punkt | H1 bestätigt alt / neu | H2 bestätigt alt / neu | H1 ∧ H2 alt / neu | ungültig G1, G4 alt / neu | Kontrollen gleich | Seeds bzw. Kohorte |
 |---|---|---|---|---|---|---|
-| N01-A4/L1 | 193/200 / 193/200 | 194/200 / 194/200 | 193/200 / 193/200 | 759/126000 / 759/126000; 2938/126000 / 2938/126000 | ja | max|z⁰| bitgleich 200/200 |
+| N01-A4/L1 | 193/200 / 193/200 | 194/200 / 194/200 | 193/200 / 193/200 | 759/126000 / 759/126000; 2938/126000 / 2938/126000 | ja | max\|z⁰\| bitgleich 200/200 |
 | A06-phase/L1 | 23/30 / 23/30 | 23/30 / 23/30 | 23/30 / 23/30 | 113/18900 / 113/18900; 778/18900 / 778/18900 | ja | Seeds gleich |
 | H03-phase/L1 | 24/30 / 24/30 | 25/30 / 25/30 | 24/30 / 24/30 | 100/18900 / 100/18900; 663/18900 / 663/18900 | ja | Seeds gleich |
 | E04-kette/L1 | 22/30 / 22/30 | 22/30 / 22/30 | 22/30 / 22/30 | 109/18900 / 109/18900; 836/18900 / 836/18900 | ja | Seeds gleich |
@@ -304,7 +304,7 @@ unverändert.
 | [`auftrag.json`](auftrag.json) | Auftragsliste: 13 Aufträge mit Szenario, Stufe, Rolle, allen Seeds, Werkzeug-8-Quelle, Kampagnenzahl; gemeinsame Einstellungen und Profil-Hash |
 | [`werkzeug8_A4.json`](werkzeug8_A4.json), [`werkzeug8_V1G0.json`](werkzeug8_V1G0.json) (+ `.npz`) | vollständige, unveränderte Werkzeug-8-Werte des Altlaufs mit Herkunft im Kopf |
 | [`werkzeug8_testvorgabe.json`](werkzeug8_testvorgabe.json) (+ `.npz`) | die vom Harness erzeugte Testvorgabe (nur Dokumentation) |
-| [`altstand_auszug.json`](altstand_auszug.json) | Vergleichswerte des Altlaufs mit MC-Fehlern, Seedlisten, u_c-Mediane von K19, Planungsaufrufe, max|z⁰| der Prüfkohorte; Prüfsummen der Quelle |
+| [`altstand_auszug.json`](altstand_auszug.json) | Vergleichswerte des Altlaufs mit MC-Fehlern, Seedlisten, u_c-Mediane von K19, Planungsaufrufe, max\|z⁰\| der Prüfkohorte; Prüfsummen der Quelle |
 | [`ergebnisse.json`](ergebnisse.json) | kompakte Ergebnisse mit Herkunft (Rechen-Commit, Rechencode-Hash, Auftrag, Profil, Werkzeug 8, Bibliotheken, Laufzeiten) |
 | [`kampagnen_e3.csv`](kampagnen_e3.csv) | eine Zeile je E3-Kampagne (570): Bewertung, Grund, alte Lesart, Prüfgrößen, T-Diagnose, H1/H2, Gültigkeit |
 | [`laufprotokoll.txt`](laufprotokoll.txt) | Protokoll des Laufs mit Start- und Endzeiten je Auftrag |

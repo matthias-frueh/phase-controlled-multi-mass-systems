@@ -42,7 +42,7 @@ einer Größenordnung.
 **In Luft eliminiert der Fall die falsche Variable.** Nach 0,78 s Fall beträgt die
 Relativgeschwindigkeit zum Medium 7,65 m/s. Die vorhergesagte Drift liegt bei maximal 0,00069 m/s
 (`sweep_13x13_drift.csv`). Verhältnis 11.000 : 1, und da der Widerstand quadratisch geht, ist der
-Staudruck aus der Fallbewegung rund **10⁸ mal größer** als der aus der Driftbewegung. Gemessen wird
+Staudruck aus der Fallbewegung rund **10⁸-mal größer** als der aus der Driftbewegung. Gemessen wird
 dann Aerodynamik, nicht Medienkopplung.
 
 **Im Vakuum sagt H1_fluid selbst Null voraus.** Ein Vakuumfallturm liefert die Kontrollmessung, nicht
@@ -103,7 +103,7 @@ wertvoller als drei zusätzliche im Feinvakuum. Setzt eine entsprechend ausgeleg
 
 **Erwartungskurve aus dem Modell, nicht aus der Intuition.** Die vorhergesagte Form von v_drift(p)
 muss aus `pcmms_medienkopplung_modell.py` abgeleitet und **vor** der Messkampagne festgeschrieben
-werden. „Monoton mit der Dichte" ist eine Vermutung, keine Modellaussage.
+werden. „Monoton mit der Dichte“ ist eine Vermutung, keine Modellaussage.
 
 ---
 
@@ -132,12 +132,12 @@ Vorhandensein und Abwesenheit misst, kann ihn nicht ausschließen.
 
 Zwei Sätze, die in einer früheren Fassung zu weit gingen und in dieser Form verwendet werden sollten:
 
-> **Nicht:** „Kein anderer Mechanismus würde dieses Muster erzeugen."
+> **Nicht:** „Kein anderer Mechanismus würde dieses Muster erzeugen.“
 > **Sondern:** Ein reproduzierbarer Unterschied zwischen PCMMS EIN und AUS, der mit dem Kammerdruck
 > verschwindet und mit der vorhergesagten Druckabhängigkeit skaliert, wäre ein spezifischer Test von
 > H1_fluid und würde nicht durch die betrachteten druckunabhängigen Störmechanismen erklärt.
 
-> **Nicht:** „Die Aktuatorik validiert sich über beide Linien hinweg."
+> **Nicht:** „Die Aktuatorik validiert sich über beide Linien hinweg.“
 > **Sondern:** Die Aktuatorik bildet die gemeinsame experimentelle Basis beider Linien und kann in
 > Linie B unabhängig hinsichtlich ihrer kinematischen und zeitlichen Reproduzierbarkeit
 > charakterisiert werden — Frequenz, Phasenlage, Amplitude, Wiederholbarkeit, Leistungsaufnahme,
@@ -156,7 +156,7 @@ der Innenkonfiguration eine **Netto-Orientierungsänderung** zurückbleiben, obw
 gilt. Derselbe Mechanismus wie beim Katzendreh.
 
 Für drei Module im Dreieck mit vertikal schwingenden Massen entstehen Kippmomente um zwei
-nicht-parallele horizontale Achsen. Der Netto-Drehwinkel pro Zyklus hinge von der eingeschlossenen
+nichtparallele horizontale Achsen. Der Netto-Drehwinkel pro Zyklus hinge von der eingeschlossenen
 Fläche im Konfigurationsraum ab — und die ist eine direkte Funktion der Phasendifferenzen: null bei
 φ₂ = φ₃ = 0, maximal bei (120°, 240°).
 

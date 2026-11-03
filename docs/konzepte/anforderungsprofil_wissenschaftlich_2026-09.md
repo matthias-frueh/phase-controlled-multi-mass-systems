@@ -126,16 +126,16 @@ In der Ablage stehen zwei unvereinbare Parametersätze:
 | Quelle | Masse | Mg | Frequenz |
 |---|---|---|---|
 | Bindende Parameter (00_INDEX) | 0,650 kg **je Modul** × 3 Module = 1,95 kg | ≈ **19,1 N** | **2,2 Hz** |
-| Laborplan V1/V2 (Mai 2026) | ≈ 0,65 kg **gesamt** | ≈ **6,4 N** | **10 Hz**, Hub „einige mm" |
+| Laborplan V1/V2 (Mai 2026) | ≈ 0,65 kg **gesamt** | ≈ **6,4 N** | **10 Hz**, Hub „einige mm“ |
 
 **Warum das auslegungsbestimmend ist:**
 
 1. Gleiche Spitzenbeschleunigung skaliert mit A ∝ 1/f².
    (10 / 2,2)² ≈ **20,7**.
-   Bei 2,2 Hz braucht dieselbe Liftoff-Bedingung rund **zwanzigfachen Hub** — aus „einige mm" wird ~10 cm. Das ändert Aktuatorklasse, Modulgeometrie, Gehäuse, Aufstandsfläche und Fertigungsbedarf grundlegend.
+   Bei 2,2 Hz braucht dieselbe Liftoff-Bedingung rund **zwanzigfachen Hub** — aus „einige mm“ wird ~10 cm. Das ändert Aktuatorklasse, Modulgeometrie, Gehäuse, Aufstandsfläche und Fertigungsbedarf grundlegend.
 2. Mg legt Nennbereich, Überlastgrenze und Auflösungsanforderung der gesamten Kraftmesskette fest (§5, F1).
 
-**Indiz zur Auflösung:** F_min erreicht im Feinsweep maximal ≈ **5,33 N**. Das ist mit Mg ≈ 6,4 N verträglich und mit Mg ≈ 19,1 N nur schwer. Der Verdacht richtet sich damit gegen die Zeile „0,650 kg je Modul", nicht gegen die Laborpläne.
+**Indiz zur Auflösung:** F_min erreicht im Feinsweep maximal ≈ **5,33 N**. Das ist mit Mg ≈ 6,4 N verträglich und mit Mg ≈ 19,1 N nur schwer. Der Verdacht richtet sich damit gegen die Zeile „0,650 kg je Modul“, nicht gegen die Laborpläne.
 
 **Auflösung: gegen `pcmms_v3a_phasen_sweep.py` prüfen, nicht gegen Textdokumente.** Der Code ist die Quelle, aus der die Sweepdaten stammen; die Dokumente sind abgeleitet und können den Fehler tragen.
 
@@ -284,7 +284,7 @@ Der Faktor 20·f sichert die Oberwellen der Kontaktflanken, der Faktor 5·f_c di
 | Dummy-Kanal | über die gesamte Kampagne mitlaufend | **[B]** |
 | Auswertung | blockweise; Welch–Satterthwaite bei α = 0,05 | **[B]** |
 
-**Diese Fähigkeit kostet nichts und ersetzt einen erheblichen Teil der klassischen Umgebungsinfrastruktur** — Messfundament, Klimatisierung, EMV-Umgebung. Sie ist methodisch außerdem stärker, weil sie Drift **nachweist** statt sie zu unterstellen. Eine randomisierte Reihenfolge mit Referenzrückkehr trennt Driftartefakte von φ-Abhängigkeit; ein ruhiger Raum tut das nicht.
+**Diese Fähigkeit kostet nichts und ersetzt einen erheblichen Teil der klassischen Umgebungsinfrastruktur** — Messfundament, Klimatisierung, EMV-Umgebung. Sie ist methodisch außerdem stärker, weil sie Drift **nachweist**, statt sie zu unterstellen. Eine randomisierte Reihenfolge mit Referenzrückkehr trennt Driftartefakte von φ-Abhängigkeit; ein ruhiger Raum tut das nicht.
 
 Sie ist deshalb **nicht** eine Fähigkeit unter zehn, sondern der methodische Hebel, der die Infrastrukturfrage entschärft.
 
@@ -328,7 +328,7 @@ Zielkette: `u(t) → x(t) → y_meas(t) → Auswertefenster → Kennzahl → sta
 
 **[O]** Verfahren jetzt festzulegen, **[G1]** Wert aus F7.
 
-Empfohlene Bindung: ε_phys als Vielfaches der empirischen Wiederholstreuung des jeweiligen Observablen über Blöcke, nicht als absolute Kraftgröße. Damit ist die Schwelle apparaturbezogen und bleibt bei Aufbauänderung nachvollziehbar anpassbar.
+Empfohlene Bindung: ε_phys als Vielfaches der empirischen Wiederholstreuung der jeweiligen Observablen über Blöcke, nicht als absolute Kraftgröße. Damit ist die Schwelle apparaturbezogen und bleibt bei Aufbauänderung nachvollziehbar anpassbar.
 
 ### 5.2 ε_⊥
 
@@ -413,7 +413,7 @@ Wenn die Medienkopplung real ist, ist der Linie-A-Aufbau in Luft **nicht mediums
 | Maschinenwerkstatt (Drehen, Fräsen, Schweißen) | nie intern | externe Fertigung |
 | µN-Metrologie, rückführbare Absolutgenauigkeit | G4b, extern | Messung ist differenziell |
 
-**[B]** „Nicht jetzt erforderlich" heißt nicht „wissenschaftlich nie relevant".
+**[B]** „Nicht jetzt erforderlich“ heißt nicht „wissenschaftlich nie relevant“.
 
 ---
 
@@ -442,7 +442,7 @@ Wenn die Medienkopplung real ist, ist der Linie-A-Aufbau in Luft **nicht mediums
 
 ## 10 · Deckungsmatrix
 
-Vergleichsinstrument für Infrastrukturvarianten. Nicht „Was kostet ein Labor?", sondern:
+Vergleichsinstrument für Infrastrukturvarianten. Nicht „Was kostet ein Labor?“, sondern:
 
 > Welche der Fähigkeiten F1–F10 deckt die Variante ab, und welche bleiben offen?
 

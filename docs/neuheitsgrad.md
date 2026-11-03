@@ -9,7 +9,7 @@ Matthias Früh · ORCID 0009-0005-9984-4207 · Stand September 2026 · Nachtrag 
 
 ## 1 · Kurzantwort
 
-Ja — fast alles davon gibt es schon. Und trotzdem ist „Gibt es das nicht schon?" für Linie A die
+Ja — fast alles davon gibt es schon. Und trotzdem ist „Gibt es das nicht schon?“ für Linie A die
 falsche wissenschaftliche Frage.
 
 Das ist zunächst eine **Prioritätsfrage**. Linie A behauptet kein neues mechanisches Grundprinzip.
@@ -52,26 +52,26 @@ beschreibt sich ausdrücklich als Rekombination bekannter Bausteine.
 
 ## 3 · Was an der Neuheitskritik nicht überzeugt
 
-**Numerische Neuheitswerte.** Eine Bewertung wie „methodische Neuheit 5/10" ist wissenschaftlich
+**Numerische Neuheitswerte.** Eine Bewertung wie „methodische Neuheit 5/10“ ist wissenschaftlich
 nicht belastbar: keine definierte Referenzklasse, keine Messvorschrift. Sie täuscht Präzision vor,
 wo eine Einschätzung steht. Die Rangordnung der Aussagen ist brauchbar, die Zahlen sind es nicht.
 
-**„Nachgewiesene Erstheit."** Falscher Maßstab. Eine Literaturrecherche kann die weltweite Erstheit
+**„Nachgewiesene Erstheit.“** Falscher Maßstab. Eine Literaturrecherche kann die weltweite Erstheit
 einer Forschungsfrage prinzipiell nicht positiv beweisen — sie kann nur widerlegen. Der belastbare
 Satz lautet daher nicht
 
-> „Niemand hat das jemals gemacht."
+> „Niemand hat das jemals gemacht.“
 
 sondern
 
 > „In der durchgeführten Recherche wurde keine Arbeit identifiziert, die diese konkrete Zielsetzung
-> und Versuchsanordnung bereits untersucht."
+> und Versuchsanordnung bereits untersucht.“
 
 Diese Aussage bleibt ausdrücklich widerlegbar — durch Vorlage einer solchen Arbeit.
 
 **Falsche Auflösung bei der Wellenformstatistik.** Schiefe ist als Kenngröße in stochastisch
 angeregter Kontakt- und Granulardynamik etabliert — nicht als *entworfene Zielgröße unter
-deterministischer Phasensteuerung*. Auf der Granularität „existiert irgendwo als Metrik" ist jede
+deterministischer Phasensteuerung*. Auf der Granularität „existiert irgendwo als Metrik“ ist jede
 Rekombinationsarbeit nicht neu, weil jeder Baustein irgendwo existiert.
 
 **Negativbefunde ohne Methode.** Eine Gegenrecherche ohne Angabe von Datenbanken, Suchtermen,
@@ -162,9 +162,9 @@ sekundär, primär sind F_min − ⟨F_N⟩ und die ersten drei Harmonischen der
 
 ## 7 · Was als möglicher Beitrag übrig bleibt
 
-Nicht: „PCMMS erfindet innere Massen."
-Nicht: „PCMMS erfindet Phasensteuerung."
-Nicht: „PCMMS entdeckt Liftoff."
+Nicht: „PCMMS erfindet innere Massen.“
+Nicht: „PCMMS erfindet Phasensteuerung.“
+Nicht: „PCMMS entdeckt Liftoff.“
 
 Sondern die Zusammenstellung:
 
@@ -192,7 +192,7 @@ Mechanik.
 Ob diese Kombination tatsächlich eine bisher nicht untersuchte Lücke darstellt, entscheidet die
 einschlägige Literaturprüfung — und anschließend das Experiment.
 
-Das ist ein wesentlich kleinerer Anspruch als „neue Physik". Es ist ein wissenschaftlich
+Das ist ein wesentlich kleinerer Anspruch als „neue Physik“. Es ist ein wissenschaftlich
 vollkommen legitimer Anspruch.
 
 ---
@@ -202,11 +202,11 @@ vollkommen legitimer Anspruch.
 **Zitatprüfung.** Im Projekt sind bereits zwei Fehlzuschreibungen aufgetreten und korrigiert
 worden. Konsequenz: Keine Referenz aus Recherchen Dritter geht ohne DOI und eigene Sichtprüfung in
 ein externes Dokument. Insbesondere ist eine mehrfach genannte Arbeit zur „Bewegung durch Variation
-der Kontaktkraft" mit zwei inneren Massen in der angegebenen Autoren-Titel-Kombination bisher
+der Kontaktkraft“ mit zwei inneren Massen in der angegebenen Autoren-Titel-Kombination bisher
 **nicht bestätigt**.
 
 **Literaturteil.** Der Strang der vibrationsgetriebenen Mehrmodul-Systeme muss gelesen werden,
-nicht zitiert. Ohne einen Literaturteil aus tatsächlich gelesenen Arbeiten trägt keine der obigen
+nicht zitiert. Ohne einen Literaturteil aus tatsächlich gelesenen Arbeiten hält keine der obigen
 Formulierungen einer Begutachtung stand. Ein erster Schritt liegt seit dem 12.09.2026 vor (§10).
 
 ---

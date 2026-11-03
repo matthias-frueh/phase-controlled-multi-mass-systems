@@ -17,7 +17,7 @@ Repositorys oder daraus abgeleitet.
 | v1 | v2 | Grund |
 |---|---|---|
 | Arbeitsfassung, internes Grundlagendokument | zweistufig, extern registriert, an Commit-Hashes gebunden | Vorhersagen hängen von Größen ab, die erst Phase 0 misst |
-| §1: Nachweis phasenabhängiger Strukturen | quantitative Fragestellung (§2) | Die Phasenabhängigkeit folgt aus dem Newtonschen Gesetz |
+| §1: Nachweis phasenabhängiger Strukturen | quantitative Fragestellung (§2) | Die Phasenabhängigkeit folgt aus dem newtonschen Gesetz |
 | §2 H0 im Fehlerbudget | H0 je Lauf, ε_ctrl = 3·σ̂_ref oder 3·σ̂_betr (§8.8) | Schwelle war offen |
 | §2 H1: Wellenformstatistik hängt von der Phase ab | H1 Superposition, H2 Zeltspitze, H3 Kontaktmodell, H4 Vorzeichen der Schiefe | Das qualitative H1 ist praktisch garantiert |
 | §2 H1_fluid | eigene Präregistrierung | anderer Aufbau |
@@ -224,7 +224,7 @@ Bezugs nach einem Halt (Vorlage 1.1). (2) P0.7: höchstens zwölf andere Läufe 
 Alarm am R₁ ergänzt, frühere Kampagnensumme nicht mehr als Schranke; Schranken, Modellrechnungen und empirische
 Häufigkeiten getrennt; effektive Freiheitsgrade von σ̂_ref anordnungsabhängig. (4) G4 (§9.1, A9.2): B+ für
 Kombinationsläufe, k(n₀ⱼ) für Lⱼ, D als Diagnosemodus, Fünftelzeiger als optionales Feld der Laufzusammenfassung.
-Grund: die Schwelle je Laufart schloss je Konfiguration 0,4–15 % der Läufe aus (PR #22). (5) Halte und Mengen
+Grund: Die Schwelle je Laufart schloss je Konfiguration 0,4–15 % der Läufe aus (PR #22). (5) Halte und Mengen
 (§5.4, A9.2, A9.11): simulierte Wiederaufnahme (W = 3, T_UA), Mengen G und A, |A| = 1000 mit Nachziehen,
 Reservebedingung 0,95 mit Grenze, b̂ mit den realisierten Laufzahlen, Zeit nach Termen. (6) E3 (§8.10, A9.13):
 Option B mit m = 43 und Rückfall je Prüfgröße. Grund: Die Intervallregel war am Schwellenrand nicht gültig (PR #22).
@@ -337,7 +337,7 @@ bezogen auf seinen eigenen Takt, und jede Phasenkonfiguration ist die Summe
 Weil N_k⁽ʲ⁾ in den Einzelmodulläufen gemessen wird, gilt diese Superposition für jedes lineare,
 zeitinvariante System, auch bei ungleichen Modulen und einer beliebigen Übertragung; K, C und μ werden
 nicht gebraucht. Im Zeitbereich lautet sie N̂(t) = N_s + Σⱼ [N⁽ʲ⁾(t − τⱼ) − N_s] mit τⱼ = φⱼ/(2πf). Für
-starre Auflage (H = 1) bleibt N(t) = M·g + Σⱼ m_j·a_j(t − τⱼ), das Newtonsche Gesetz für den ruhenden
+starre Auflage (H = 1) bleibt N(t) = M·g + Σⱼ m_j·a_j(t − τⱼ), das newtonsche Gesetz für den ruhenden
 Körper; dass die Wellenform von der Phasenlage abhängt, ist damit keine offene Frage. Bei identischen
 Modulen entspricht ein Einzelmodullauf im Modell der synchronen Phasung mit μ/3; so wird er im
 Zahlennachweis gerechnet.
@@ -984,7 +984,7 @@ von σ̂_ref; bei bekanntem σ sind sie etwa zehnmal kleiner.
   20.10.2026): Alle Schnittpunkte erreichen gemeinsam in mindestens 95 % der nicht endgültig beendeten simulierten
   Kampagnen n_min gültige Läufe; sonst r um eins erhöhen und erneut simulieren, höchstens zehnmal (danach Abbruch
   des Kandidaten mit Grund „Reservegrenze“). Endgültig beendete Kampagnen zählen nicht in diesen bedingten Nenner,
-  wohl aber im Nenner von P(H1 und H2 bestätigt). Das erste Paar (k, T_a), das (v) erfüllt, legt k_max, T_a, n_min und n₀ fest.
+  wohl aber in den Nenner von P(H1 und H2 bestätigt). Das erste Paar (k, T_a), das (v) erfüllt, legt k_max, T_a, n_min und n₀ fest.
   Obere 80-%-Vertrauensgrenze einer Komponente mit Gesamtstreuung s, ν Freiheitsgraden und Bodenanteil b:
   √max(0, s²·ν/χ²₀,₂(ν) − b), je identifizierbarer Komponente mit eigenem ν; der Boden von ⟨N⟩ erhält einen
   gemeinsamen Faktor für alle Laufarten (bisher ein Faktor s·√(ν/χ²₀,₂(ν)) für alle Streuungen). t-Quantile mit dem
@@ -1170,7 +1170,7 @@ Bediener, Ergebnis der Gültigkeitsprüfung mit Grund, Protokollnotizen.
 ### A9.11 Pipelinetest und Simulationen
 
 Einzelmodul- und Kombinationsläufe aus `linear_solver.py` mit Rauschen, Jitter und Drift müssen H1
-bestätigen; Daten mit bekannter Nichtlinearität (etwa ein Hertzscher Kontakt nach Testebene T0 des
+bestätigen; Daten mit bekannter Nichtlinearität (etwa ein hertzscher Kontakt nach Testebene T0 des
 Literaturabgleichs) oder mit eingebauter Modulkopplung müssen H1 falsifizieren, wenn ihr größtes Residuum
 mindestens 2·Δ_rel beträgt (Power-Kriterium unten); knapp über Δ_rel ist „nicht entscheidbar“ zu erwarten.
 Vor Teil B zwei Simulationen (Arbeitsfestlegung vom 20.10.2026; bisher eine Simulation mit den Pilotstreuungen, die
@@ -1238,7 +1238,7 @@ Lauf-zu-Lauf-Streuung je Modul) und in Teil B (mit dem Strukturmodell aus Phase 
 **Zuordnung, H1Z und E3.** Zusätzliche Szenarien, jeweils für beide Arten von Einstellung 2 (zweite Amplitude,
 zweite Frequenz mit festem Hub): Aktorkopplung fester relativer Stärke (0,1 % und 1 %; Simulationsannahmen, keine
 Vorhersagen für die reale Apparatur V1); Kopplung, deren Stärke mit der Last wächst; quadratische Kettenkennlinie;
-Hertzscher Kontakt in Reihe zur Zelle; lastabhängiger Phasenversatz eines Moduls; Wechselwirkung der Antriebe;
+hertzscher Kontakt in Reihe zur Zelle; lastabhängiger Phasenversatz eines Moduls; Wechselwirkung der Antriebe;
 Zelllage- und Zellverstärkungsfehler innerhalb und außerhalb der Unsicherheit aus P0.1. Kriterien:
 
 - Zuordnung (Kriterium offen, §12: feste Anker oder Zuordnungsgrenze): Trefferquote ≥ 0,8 bei der geplanten
@@ -1273,9 +1273,9 @@ die Fassung dieser Regeln (§12).
 - **Messtag.** Aufwärm-Referenzläufe (§6), höchstens zehn; sie lösen keinen Nullpunktalarm aus, und der
   letzte gilt als gültiger Referenzlauf für N_s,int und als Vergleich für den ersten Nullpunktalarm. Nach
   dem letzten Kontrollsatz des Tages folgt der Schlussreferenzlauf, damit jeder Lauf zwischen zwei
-  Referenzläufe liegt. Läufe je Kampagne: (N_K + N_I + 8)·n + 8·d, dazu Aufwärm- und Wiederholungsläufe;
+  Referenzläufen liegt. Läufe je Kampagne: (N_K + N_I + 8)·n + 8·d, dazu Aufwärm- und Wiederholungsläufe;
   je Block N_K + N_I Konfigurationen, der Referenzlauf der Blockmitte und ein Kontrollsatz aus sieben
-  Läufen, je Messtag ein weiterer Kontrollsatz und der Schlussreferenzlauf. In §5.3 (c) steht dafür 18·d
+  Läufen, je Messtag ein weiterer Kontrollsatz und der Schlussreferenzlauf. In §5.3 (c) stehen dafür 18·d
   (acht Läufe und höchstens zehn Aufwärmläufe je Tag) und der Faktor 1/(1 − p̂) (Zeitformel offen, §12: Messzeit
   der Identifizierbarkeitsläufe). Ohne
   Identifizierbarkeitsläufe wären es (N_K + 5)·n + 5·d.

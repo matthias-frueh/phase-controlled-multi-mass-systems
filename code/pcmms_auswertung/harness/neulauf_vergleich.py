@@ -385,7 +385,7 @@ def tabellen(z):
     k = z['k12']
     zn, za = k['neu']['zaehlung'], k['alt']['zaehlung']
     zl = ['| Zählung | alt | neu |', '|---|---:|---:|']
-    for key, txt in (('aufrufe', 'Aufrufe des Haken (Paare k, N_z)'), ('aufrufe_simuliert', 'davon simuliert'),
+    for key, txt in (('aufrufe', 'Aufrufe des Hakens (Paare k, N_z)'), ('aufrufe_simuliert', 'davon simuliert'),
                      ('kandidaten_simuliert', 'Kandidaten simuliert'), ('kandidaten_uebersprungen',
                                                                         'Kandidaten übersprungen (n > n_max)'),
                      ('aufrufe_nicht_gerechnet_aufrufgrenze', 'Aufrufe nicht gerechnet (Aufrufgrenze 2)'),
@@ -468,7 +468,7 @@ def tabellen(z):
         r = x['kontrollen']['raten']
         g = '; '.join(f'{_zn(r[q]["alt"])} / {_zn(r[q]["neu"])}' for q in ('ungültig G1', 'ungültig G4') if q in r)
         ko = x['kontrollen'].get('kohorte')
-        sd = (f'max|z⁰| bitgleich {ko.get("bitgleich", "–")}/{ko["n"]}' if ko else
+        sd = (f'max\\|z⁰\\| bitgleich {ko.get("bitgleich", "–")}/{ko["n"]}' if ko else
               ('Seeds gleich' if x['kontrollen'].get('seeds_gleich_alt') else 'Seeds verschieden'))
         zl.append(f'| {pid} | {_zn(r["H1: bestätigt"]["alt"])} / {_zn(r["H1: bestätigt"]["neu"])} | '
                   f'{_zn(r["H2: bestätigt"]["alt"])} / {_zn(r["H2: bestätigt"]["neu"])} | '

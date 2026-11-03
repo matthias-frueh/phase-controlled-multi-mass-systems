@@ -335,7 +335,7 @@ Der Katalog führt die Werkzeug-8-Anforderungen der Bündel B01 (S₃), B04 (Mes
 6. F – S₃-Prüffall
 7. G – Vorzeichen-Inversionstest (neue Option der Analyse)
 
-Dazu kommen die Bezugsgruppe N (Null- und Kalibrierszenarien), H (Annahmenbruch für H2), I (Identifizierbarkeitsläufe nach AP-09) und S (Gültigkeits-, Abbruch- und Sicherheitspfade).
+Dazu kommen die Bezugsgruppen N (Null- und Kalibrierszenarien), H (Annahmenbruch für H2), I (Identifizierbarkeitsläufe nach AP-09) und S (Gültigkeits-, Abbruch- und Sicherheitspfade).
 
 ### 3.2 Zirkularitätsregel
 
@@ -608,7 +608,7 @@ Projektionsmatrizen mit festen Abszissen, wie in der P2-Rechnung, sind mit A9.6 
 
 AP-12 braucht von AP-13: das Datenformat und die Trennstelle Stufe 1/2 (2.6), die Festlegung der Bootstrap-Indizes und Toleranzen (2.6 c, e), den Prüfdatensatz mit bekannten Antworten (S₃, exakte Superposition) für sein eigenes Erfolgskriterium [Quelle: Arbeitsplan AP-12], den Testsatz des Zeltfits und den Abgleichsatz.
 
-Die Endabnahme von AP-13 braucht AP-12: Kernszenarien (N01, N05, N06, A04, E07, H01, F01) erneut mit AP-12 statt der Referenzregeln, c mit AP-12 als Auswertekern neu berechnet, End-zu-End-Stichproben auf Ebene Z durch Stufe 1 und 2 von AP-12, eingefrorener Prüfdatensatz für die Codefehler-Regel (§6) und Commit-Hashes für Teil A.
+Die Endabnahme von AP-13 braucht AP-12: Kernszenarien (N01, N05, N06, A04, E07, H01, F01) erneut mit AP-12 statt der Referenzregeln, c mit AP-12 als Auswertekern neu berechnet, End-zu-End-Stichproben auf Ebene Z durch Stufe 1 und 2 von AP-12, eingefrorenen Prüfdatensatz für die Codefehler-Regel (§6) und Commit-Hashes für Teil A.
 
 ### 5.3 Einfluss der übrigen Pakete
 

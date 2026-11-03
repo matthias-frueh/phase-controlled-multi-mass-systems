@@ -11,6 +11,14 @@
 - Offene Punkte: [`PCMMS_Arbeitspapier_Offene_Punkte.md`](PCMMS_Arbeitspapier_Offene_Punkte.md)
 - Bezeichnungen und Zuordnung zu den Symbolen des Forschungsrahmens: [`../formelverzeichnis/`](../formelverzeichnis/). Die mit v2.4 neuen Symbole führt das Formelverzeichnis ab v2.7.
 
+**Redaktioneller Neusatz (02.11.2026).** Die PDF wird mit pdfLaTeX und eingebetteten Type-1-Schriften neu erzeugt,
+um die auf Android beobachteten Buchstabenausfälle in Überschriften zu beheben. Unicode-Zuordnungen der
+Schriften unterstützen Kopieren und Suchen. Schreibweise „gaußsches Rauschen“ korrigiert; Fachstand und Version bleiben v2.5.
+Durch die neuen Seitenumbrüche umfasst die Lesefassung jetzt 112 statt 114 Seiten.
+Deutsche Passagen verwenden deutsche Trennmuster (ngerman) mit Ausnahmen für Zusammensetzungen wie
+Kontakt-eigenfrequenz. Abstract, englische Suchbegriffe und Literaturtitel verwenden englische Trennmuster;
+deutsche Literaturvermerke bleiben als Deutsch ausgezeichnet.
+
 ## Änderungen
 
 **v2.5 (16.10.2026).** Lesefassung der Nachträge vom 2. und 3. Oktober 2026, die bisher nur im Quelltext von v2.4 standen: Reichweite der Kontrollgröße begrenzt, Definition von F_min − ⟨N⟩, Antrieb, Kontakt und Nennlast als offene Entscheidungen, der Wert am Punkt (0°, 208,4°) als Folge eines von der Festschritt-Integration verlängerten Einschwingens, Profilasymmetrie und Harmonische, Lücken- und Beitragsaussagen auf Suchbefunde zurückgenommen. Gegenüber diesem Quelltext ändern sich nur Titelblatt, Versionshinweis und Präambel. Einzelheiten im Versionshinweis des Papiers.
@@ -25,10 +33,13 @@ Vom Repository-Stamm aus:
 
 ```sh
 (cd docs/arbeitspapier \
-  && xelatex -interaction=nonstopmode -halt-on-error PCMMS_Arbeitspapier_v2_5.tex \
-  && bibtex PCMMS_Arbeitspapier_v2_5 \
-  && xelatex -interaction=nonstopmode -halt-on-error PCMMS_Arbeitspapier_v2_5.tex \
-  && xelatex -interaction=nonstopmode -halt-on-error PCMMS_Arbeitspapier_v2_5.tex)
+  && latexmk -pdf -interaction=nonstopmode -halt-on-error \
+       -outdir=../_build/arbeitspapier PCMMS_Arbeitspapier_v2_5.tex \
+  && cp ../_build/arbeitspapier/PCMMS_Arbeitspapier_v2_5.pdf .)
 ```
 
-Benötigt XeLaTeX mit deutschen Trennmustern und Latin Modern OpenType (Debian/Ubuntu: `texlive-xetex texlive-latex-extra texlive-lang-german fonts-lmodern`); `lmodern.sty` ist dafür nicht nötig. Unter pdfLaTeX gilt weiter der Weg mit `fontenc` und `lmodern`. Die beiliegende PDF: Text in Latin Modern (OpenType), Formeln in Computer Modern. Die Abbildungen sind Rasterbilder, keine Vektororiginale.
+Benötigt pdfLaTeX mit deutschen Trennmustern, `latexmk`, `bibtex` und Latin Modern
+(Debian/Ubuntu: `texlive-latex-extra texlive-lang-german lmodern latexmk`).
+Für die veröffentlichte PDF ist dieser pdfLaTeX-Bauweg maßgeblich; die Quelldatei unterstützt weiterhin XeLaTeX/LuaLaTeX.
+Die beiliegende PDF verwendet eingebettete Type-1-Schriften mit Unicode-Zuordnung: Latin Modern für Text und
+Formeln, ergänzt durch AMS-Symbole. Die Abbildungen sind Rasterbilder, keine Vektororiginale.

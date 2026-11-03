@@ -79,14 +79,14 @@ In der Ablage stehen zwei unvereinbare Parametersätze:
 | Quelle | M | f |
 |---|---|---|
 | Bindende Parameter (00_INDEX) | 0,650 kg **je Modul**, 3 Module → Mg ≈ 19,1 N | **2,2 Hz** |
-| Laborplan V1/V2 (Mai 2026) | ≈ 0,65 kg **gesamt** → Mg ≈ 6,4 N | **10 Hz**, Hub „einige mm" |
+| Laborplan V1/V2 (Mai 2026) | ≈ 0,65 kg **gesamt** → Mg ≈ 6,4 N | **10 Hz**, Hub „einige mm“ |
 
 Die Differenz ist auslegungsbestimmend, nicht kosmetisch:
 
-- Gleiche Spitzenbeschleunigung skaliert mit A ∝ 1/f². (10 / 2,2)² ≈ **21**. Bei 2,2 Hz braucht dieselbe Liftoff-Bedingung rund zwanzigfachen Hub — aus „einige mm" wird ~10 cm. Das ändert Aktuatorklasse, Modulgeometrie, Gehäuse, Aufstandsfläche und Fertigungsbedarf.
+- Gleiche Spitzenbeschleunigung skaliert mit A ∝ 1/f². (10 / 2,2)² ≈ **21**. Bei 2,2 Hz braucht dieselbe Liftoff-Bedingung rund zwanzigfachen Hub — aus „einige mm“ wird ~10 cm. Das ändert Aktuatorklasse, Modulgeometrie, Gehäuse, Aufstandsfläche und Fertigungsbedarf.
 - Mg legt Messbereich, Überlastgrenze und Auflösung fest.
 
-Indiz: F_min erreicht im Feinsweep maximal ≈ 5,33 N. Das passt zu Mg ≈ 6,4 N, nicht zu 19,1 N. Der Verdacht richtet sich damit gegen die Zeile „0,650 kg je Modul", nicht gegen die Laborpläne. **Zu prüfen an `pcmms_v3a_phasen_sweep.py`, nicht an den Textdokumenten.**
+Indiz: F_min erreicht im Feinsweep maximal ≈ 5,33 N. Das passt zu Mg ≈ 6,4 N, nicht zu 19,1 N. Der Verdacht richtet sich damit gegen die Zeile „0,650 kg je Modul“, nicht gegen die Laborpläne. **Zu prüfen an `pcmms_v3a_phasen_sweep.py`, nicht an den Textdokumenten.**
 
 Bis zur Klärung sind alle Spezifikationen unten **parametrisch in M und f** formuliert und bleiben dadurch in beiden Zweigen gültig.
 
@@ -182,7 +182,7 @@ Jede Fähigkeit mit Herkunft (aus welcher Observable) und Mindestspezifikation.
 - Blockweise Auswertung, Welch–Satterthwaite bei α = 0,05
 - Dummy-Kanal mitlaufend über die gesamte Kampagne
 
-**Diese Fähigkeit kostet nichts und ersetzt einen erheblichen Teil der Umgebungsinfrastruktur** (Messfundament, Klimatisierung, EMV-Umgebung). Sie ist methodisch außerdem stärker, weil sie Drift *nachweist* statt sie zu unterstellen.
+**Diese Fähigkeit kostet nichts und ersetzt einen erheblichen Teil der Umgebungsinfrastruktur** (Messfundament, Klimatisierung, EMV-Umgebung). Sie ist methodisch außerdem stärker, weil sie Drift *nachweist*, statt sie zu unterstellen.
 
 ### F7 · Rauschboden und Nachweisschwelle
 **Aus:** ε_phys
@@ -210,7 +210,7 @@ Erst wenn F7 zeigt, dass der Rauschboden die Zeltkurve verdeckt, wird Isolation 
 | **G0** | Papierlage, Parameterklärung, Präregistrierung geschärft | — | §1.1 gelöst; ε_⊥, ε_phys-Verfahren festgelegt |
 | **G1** | Kontaktcharakterisierung, Rauschboden, Rig-FRF | F1, F2, F3, F4, F7, F9, F10 | k und c bekannt; f_c bekannt; R3/R4 zahlenmäßig gesetzt; Rauschboden < erwartete F_min-Spanne |
 | **G2** | Strukturnachweis Linie A: Zeltkurve F_min(φ₂) bei festem φ₃ | + F5, F6, F8 | Zeltkurve reproduzierbar über getrennte Blöcke und randomisierte Reihenfolge |
-| **G3** | Quantitative Phasenkarte, volle 2D-Sweep, Unsicherheitsbudget | + externe Kalibrierung, Bootstrap-Auswertung, k als zweite Achse | Karte gegen Simulation abgeglichen; Abweichungen zugeordnet |
+| **G3** | Quantitative Phasenkarte, voller 2D-Sweep, Unsicherheitsbudget | + externe Kalibrierung, Bootstrap-Auswertung, k als zweite Achse | Karte gegen Simulation abgeglichen; Abweichungen zugeordnet |
 | **G4a** | Linie B, separater Aufbau (§6) | eigener Fähigkeitssatz | ρ-Steigung bestimmt oder Nullergebnis dokumentiert |
 | **G4b** | Rückführbare Kalibrierung, unabhängige Replikation extern | externe Messkette, Partneraufbau | unabhängige Bestätigung oder Widerlegung |
 | **G5** | Erweiterung: L3, mehrere Stände, Vergleichssysteme | — | erst nach G3 sinnvoll zu spezifizieren |

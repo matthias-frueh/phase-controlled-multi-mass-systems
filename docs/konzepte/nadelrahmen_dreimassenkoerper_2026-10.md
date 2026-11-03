@@ -206,7 +206,7 @@ eigene Modellbestandteile, ebenso die nicht gerechnete Elastizität von Rahmenst
 abheben würde, setzt der Rahmen die lineare Lösung fort, solange jede Nadel in ihrem Kontaktzustand bleibt (B
 zugfest, C mit ausreichender Vorspannung oder gefangenem Kugelgelenk); F_z < 0 trägt dann die Nadel oben.
 
-### 5.2 Basislinie: sechs Nulltests statt einem
+### 5.2 Basislinie: sechs Nulltests statt eines
 
 Voraussetzungen: Bilanzgrenze und M sind festgelegt; außer dem Gewicht laufen alle Lasten auf die bilanzierte Masse
 über die sechs Schnittstellen (keine Kabel, Zuleitungen oder sonstigen äußeren Lasten); der Rahmen ist ortsfest;

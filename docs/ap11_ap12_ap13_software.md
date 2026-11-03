@@ -78,7 +78,7 @@ Drift-Zusatz sind unverändert.
 
 | | Fehler | Korrektur | Regression, Gegenprobe | betroffene historische Ergebnisse | verbleibender Neulauf |
 |---|---|---|---|---|---|
-| A | Planungshaken: N_z änderte nur den Seed; simuliert wurden die Vorgaben des Grundplans (100 Zyklen, T_Lauf = 17 s, 1 Messtag) | `5d52e6c`: Plan der Kampagnensimulation mit n_zyklen = N_z, T_Lauf und d aus dem Pilotskript, Abbruch bei widersprechendem f, T_a, N_K oder N_I, `plan_simuliert` je Kandidat | `test_planungshaken_simuliert_gewaehlte_fensterlaenge`: N_z = 20 und 80 im instrumentierten Aufruf; echte Läufe mit diesem Plan auf Ebene H (Zyklen, Laufdauer, Messtage, Budget von n_max) und je ein Rohlauf auf Ebene Z durch Stufe 1 (gezählte Zyklen, Fensterdauer); am alten Stand 100 statt 20 Zyklen | Planungsschritt des Prüfstands (K12): N_z = 100 stimmte zufällig, simuliert wurden aber T_Lauf = 17 s statt 16 s und 1 statt 2 Messtagen. Die Kandidatenraten (P ≤ 0,25) und „kein zulässiger Arbeitspunkt“ sind potenziell betroffen (Zeitlage der Drift, Tagesstruktur) | erledigt am 17.10.2026 (147 s): Suchergebnis unverändert, [Neulaufbericht](ap13_neulaeufe_2026-10-17/bericht.md) Abschnitt 2; eine Planung für Teil B bleibt eine eigene Rechnung mit ≥ 1000 Kampagnen je Kandidat |
+| A | Planungshaken: N_z änderte nur den Seed; simuliert wurden die Vorgaben des Grundplans (100 Zyklen, T_Lauf = 17 s, 1 Messtag) | `5d52e6c`: Plan der Kampagnensimulation mit n_zyklen = N_z, T_Lauf und d aus dem Pilotskript, Abbruch bei widersprechendem f, T_a, N_K oder N_I, `plan_simuliert` je Kandidat | `test_planungshaken_simuliert_gewaehlte_fensterlaenge`: N_z = 20 und 80 im instrumentierten Aufruf; echte Läufe mit diesem Plan auf Ebene H (Zyklen, Laufdauer, Messtage, Budget von n_max) und je ein Rohlauf auf Ebene Z durch Stufe 1 (gezählte Zyklen, Fensterdauer); am alten Stand 100 statt 20 Zyklen | Planungsschritt des Prüfstands (K12): N_z = 100 stimmte zufällig, simuliert wurden aber T_Lauf = 17 s statt 16 s und 1 statt 2 Messtage. Die Kandidatenraten (P ≤ 0,25) und „kein zulässiger Arbeitspunkt“ sind potenziell betroffen (Zeitlage der Drift, Tagesstruktur) | erledigt am 17.10.2026 (147 s): Suchergebnis unverändert, [Neulaufbericht](ap13_neulaeufe_2026-10-17/bericht.md) Abschnitt 2; eine Planung für Teil B bleibt eine eigene Rechnung mit ≥ 1000 Kampagnen je Kandidat |
 | B | Stufe 1: ⟨N⟩ war das Mittel der auf N_θ resampelten Zyklen (Phasenmittel), bei ungleichen Perioden nicht das Zeitmittel nach A1 | `87c5888`: Zeitintegral über die akzeptierten Zyklusintervalle aus den Rohzeiten (`stufe1-0.2`); Bedeutung je Verarbeitungsstand, alte Zusammenfassungen werden gemeldet | vier Rohdatentests: 99/101 ms (4,010 N statt 4,000 N), Grenzen zwischen Abtastwerten mit ausgelassenem Zyklus, Fünftel (4,010 und 5,575 N), Standardfall gleicher Perioden; Meldung der alten Bedeutung; am alten Stand drei von vier fehlgeschlagen | nur Rohdatenketten (Ebene Z → Stufe 1): ⟨N⟩ in G1, G4 (D_N), σ̂_ref, ε_ctrl, Nullkontrolle, S-Regeln und N_s. Der Generator der Ebene Z hat gleiche Periodendauern; der rauschfreie Abgleich Z ↔ H bleibt bei 3·10⁻⁷ N. Potenziell betroffen: der verrauschte Ebenenabgleich (K19, je 4 Kampagnen) und die Ebene-Z-Läufe in Abschnitt 4.3. Ebene H (fast der ganze Prüfstand) und F_min − ⟨N⟩ (aus den Harmonischen) sind nicht betroffen | erledigt am 17.10.2026 (266 s): u_c-Mediane bitgleich, innerhalb 5 %, [Neulaufbericht](ap13_neulaeufe_2026-10-17/bericht.md) Abschnitt 3 |
 | C | E3a aus k = 2 wurde erst nach der Halbierung gewickelt: Scheinfehler 180° bei exakt passender zweiter Harmonischer | `0397d48`: zuerst modulo 360° auf Ebene der Harmonischen, dann halbiert; Bezug und 180°-Mehrdeutigkeit im Ergebnis (`k2_hinweis`) | `tests/test_ap12_kontrollen.py`: T = I mit 0°/120°/240° (vorher 180° für Module 2 und 3), Phasen über den Argument-Sprung mit kleinen Fehlern (k = 2 gleich k = 1), Mehrdeutigkeit (δ = 100° erscheint als −80°) | nur berichtete k = 2-Werte; die Bewertung nutzt k = 1, die Raten sind nicht betroffen | keiner |
 | D | Nullkontrolle mit beiden Stichprobenvarianzen null: Welch-Satterthwaite 0/0, NaN-Grenzen, trotzdem „prüfbar“ und „kein Unterschied nachgewiesen“ | `eddc156`: „nicht prüfbar“ mit Grund, Differenz und Stichprobenzahlen, ohne Testaussage und ohne Ersatzstreuung; nicht endliche Größen ebenso | 10 × 0,125 N gegen 10 × 0 N bei ε_ctrl = 0,01 N, gleiche Konstanten, eine konstante Stichprobe und zwei gewöhnliche gegen `scipy.stats.ttest_ind` (ν, Intervall), zu wenige und nicht endliche Werte, ohne Laufzeitwarnung | keine Raten des Prüfstands (alle Läufe verrauscht); betroffen wären rauschfreie Grenzfälle | keiner |
@@ -127,7 +127,7 @@ Funktion und Korrekturen, keine Fehlerraten oder Power):
 
 Zwei technische Änderungen ohne Regeländerung (Auftrag vom 17.10.2026,
 [Bericht](ap13_kmax_wiederholungen_2026-10-17/bericht.md) mit maschinenlesbaren Ergebnissen, Auftragsliste und
-Laufprotokoll). Präregistrierung, Regelprofile, G4-Formel mit Faktor 3, Poolregel und normative Schwellen sind
+Laufprotokoll). Präregistrierung, Regelprofile, G4-Formel mit Faktor 3, Pool-Regel und normative Schwellen sind
 unverändert.
 
 - **Bindung der Phase-0-Größen an den Plan** (`pilot-0.3`, `teil_b-0.3`):
@@ -292,7 +292,7 @@ kleinen Proben sind danach neu gerechnet.
 1. Phase-0-Modell und Ablauf verbunden:
    - `generator.phase0_modell.Vorrat` ist der Spiegel von `ebene_h.Vorrat`. Ohne zusätzliche Versuche ist er
      bitgleich zu `erzeuge`, auch mit Zufallspfad, Sprüngen und Laufdriftstreuung. Der Nullpunktpfad wird für neue
-     Zeitpunkte bedingt fortgesetzt (Brownsche Brücke).
+     Zeitpunkte bedingt fortgesetzt (brownsche Brücke).
    - `harness.phase0_rechnungen.MessungQuelle` und `kampagne_quelle(…, verfahren=ZUSTAND)` liefern Wiederholungen,
      Halte, simulierte Wiederaufnahme und die Offline-Gegenprobe. Ohne Ablaufoptionen entstehen dieselben Daten wie
      beim statischen Laufplan.
@@ -481,7 +481,7 @@ und Empfindlichkeit je Zelle, Laststellen (1/g, x/g, y/g), Zellverstärkungen, K
 falscher Brückensimulator (Widerspruch zur Statik), amplitudenabhängige Steifigkeit (Linearitätsprüfung), exzentrische
 Restmasse (1-FG-Prüfung), falsches G_x-Datenblatt. Fehlfälle mit verständlicher Diagnose: kollineare Laststellen (nicht
 bestimmbar, kein Optimiererwert), f_n außerhalb des Bands, nicht identifizierbare Anpassung, zu wenige Indeximpulse,
-starre Auflage ohne Mode. u(Δδⱼ) ≤ 0,1° ist eine prüfbare Anforderung: bei großem Jitter wird sie als nicht erfüllt
+starre Auflage ohne Mode. u(Δδⱼ) ≤ 0,1° ist eine prüfbare Anforderung: Bei großem Jitter wird sie als nicht erfüllt
 gemeldet. Das Pilotskript gibt keine Residuen, Vorhersagen oder Entscheidungen aus (Feldprüfung `pruefe_ausgabe`), auch
 nicht mit angebundener Planung; ohne Planung meldet es die Planung als offen, ohne zulässiges k „kein zulässiger
 Arbeitspunkt“. In der Kette verwenden Teil B und AP-12 nachweislich die AP-11-Kalibrierung aus der Datei

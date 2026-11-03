@@ -71,7 +71,7 @@ Phasenstarre PWM-Steuerung mit einstellbarem/zyklischem Phasenversatz (0 Grad, 9
 Freie Plattform oder Pendel mit rotem Marker → Video → automatisches Tracking → Driftkurven pro Phase.
 
 **Phase 2 – Ballontest**:  
-30 s Intervalle pro Konfiguration. Quantitative Auswertung via Tracking.
+30-s-Intervalle pro Konfiguration. Quantitative Auswertung via Tracking.
 
 **Erfolgskriterium**: Phasenabhängige Drift oberhalb von Umgebungs- und Streurauschen, reproduzierbar.
 

@@ -63,7 +63,7 @@ Validierung der eigenen Werkzeuge [R]: (i) RK4-μ-Engine bei μ = 1 gegen `code/
 
 **Methode.** [R] Starre Auflage, μ = 0,4, 10 Hz, Referenzhub, 21 Schnittpunkte; c = t(1 − 0,05/(2·147); ν).
 
-**Ergebnis.** F_min(120°) = 5,6452 N, F_min(100°) = 5,1759 N, F_min(140°) = 5,1760 N, **ΔF_Zelt = 0,4693 N**, Δ = 0,1173 N; c(∞) = 3,5826, c(19) = 4,3560 → **u_c ≤ 0,0327 N bzw. 0,0269 N (0,422 % von Mg)**. Sekanten 0,0469/0,0468 N/°. **Bestätigt.** Zusatz [R]: Für Re/Im N_k ist D_k = max_i |N̂_k,i| auf dem Schnitt im starren Fall 0,1483 / 0,0963 / 0,1822 · Mg·ε (k = 1, 2, 3), also für N₂ nur 62 % von ΔF_Zelt; im A4-Beispiel D₂ = 0,2924 N → u_c(N₂) ≤ 0,0204 N (ν → ∞) bzw. 0,0168 N (ν = 19). Das bestätigt die Vermutung in der Lückenspalte von L5a-065 (≈ 0,017 N): **die N₂-Anforderung ist strenger als die F_min-Anforderung** (Faktor 0,62); ob Harmonische entsprechend schwächer rauschen, ist Sache der Statistikgruppe.
+**Ergebnis.** F_min(120°) = 5,6452 N, F_min(100°) = 5,1759 N, F_min(140°) = 5,1760 N, **ΔF_Zelt = 0,4693 N**, Δ = 0,1173 N; c(∞) = 3,5826, c(19) = 4,3560 → **u_c ≤ 0,0327 N bzw. 0,0269 N (0,422 % von Mg)**. Sekanten 0,0469/0,0468 N/°. **Bestätigt.** Zusatz [R]: Für Re/Im N_k ist D_k = max_i |N̂_k,i| auf dem Schnitt im starren Fall 0,1483 / 0,0963 / 0,1822 · Mg·ε (k = 1, 2, 3), also für N₂ nur 62 % von ΔF_Zelt; im A4-Beispiel D₂ = 0,2924 N → u_c(N₂) ≤ 0,0204 N (ν → ∞) bzw. 0,0168 N (ν = 19). Das bestätigt die Vermutung in der Lückenspalte von L5a-065 (≈ 0,017 N): **Die N₂-Anforderung ist strenger als die F_min-Anforderung** (Faktor 0,62); ob Harmonische entsprechend schwächer rauschen, ist Sache der Statistikgruppe.
 
 **Reproduktion.** `a1_p1_zahlen.py` (PB1), `python3 a3a_G_funktionen.py` (D_k).
 
@@ -188,7 +188,7 @@ Nennlast: [R] größte erwartete Zellkraft im Kontaktast 4,3–4,9 N (≈ 0,45�
 
 **Reproduktion.** `python3 a3b_arbeitspunkte.py` (≈ 1 min).
 
-## AUS-11 · Nichtlineare Stichprobe: gilt die lineare Vorhersage?
+## AUS-11 · Nichtlineare Stichprobe: Gilt die lineare Vorhersage?
 
 **Methode.** [R] RK4-μ-Engine (einseitiger Kontakt, Standardstart, 8 s, Auswertung der letzten 5 s), je 30 Läufe (Einzelmodul, Paare Δ = 0/120/180°, synchron, (0°,180°), 3 Piloten, 21 Schnittpunkte) an V1 (ζ = 0,05), V2 (ζ = 0,02), V4 (ζ = 0,02 und 0,1), V5 (ζ = 0,05).
 
@@ -202,7 +202,7 @@ Nennlast: [R] größte erwartete Zellkraft im Kontaktast 4,3–4,9 N (≈ 0,45�
 
 **Methode.** [R] RK4-μ-Engine, Wurfstart ż₀ aus der statischen Ruhelage bei t = 0, 16 s, Auswertung der letzten 4 s. Referenz-Gegenprobe (K = 10⁴, ż₀ = 3 m/s, 15 s/10 s); V1 über ζ = 0,02/0,05/0,1/0,2 an (120°,240°) und synchron, ż₀ = 0,05/0,1/0,2/0,5 m/s; V2 (ζ = 0,02); Zeitschritt T/2000, T/4000, T/8000 und 40 s Laufzeit (a4d); Schwelle von ż₀ (a4c). Restitutionskoeffizient des Kelvin-Voigt-Stoßes e = exp(−πζ/√(1−ζ²)): 0,939/0,854/0,729/0,527.
 
-**Ergebnis.** Referenz: (98°/120°/148°, 240°) mit ż₀ = 3 m/s → λ = 0 (bestätigt die Angabe von linear_solver). **V1 synchron, ż₀ = 0,5 m/s (Fallhöhe 12,7 mm): dauerhafter Hüpfzustand mit λ ≈ 98 % und Stoßspitzen 484–490 N (≈ 76·Mg) für ζ = 0,02, 0,05 und 0,1**; für ζ = 0,2 Rückkehr in den Kontaktast. ż₀ ≤ 0,2 m/s (h ≤ 2 mm): überall Rückkehr. V1 (120°,240°): bis 0,5 m/s Rückkehr für alle ζ. **V2 (ζ = 0,02), (120°,240°), ż₀ = 0,5 m/s: λ = 94,18 % bei Δt = T/2000, aber λ = 0 bei Δt = T/4000** – ebenso λ = 0 bei Δt = T/8000 (a4d C): **der Hüpfbefund an diesem Punkt ist ein Zeitschritt-Artefakt der groben Schrittweite und wird verworfen**; die übrigen V2-Wurfproben (Einzelmodul und synchron bei 0,5 m/s ≈ 98 %, Schnittränder bei 1,5 m/s λ 30–41 %, alle Δt = T/2000) sind nicht zeitschrittgeprüft. Schwelle (a4c): V1 synchron (ζ = 0,05) kehrt bis ż₀ = 0,25 m/s (h = 3,2 mm) zurück, ab 0,30 m/s (h = 4,6 mm) Hüpfzustand (λ ≈ 98 %, F_max ≈ 485 N); V2 Triphasik (ζ = 0,02) bis 0,40 m/s (8,2 mm) zurück (0,50 m/s siehe oben: Artefakt). **Zeitschritt- und Laufzeitprüfung (a4d):** V1 synchron, ζ = 0,05, ż₀ = 0,30/0,50 m/s: Δt = 25 µs (16 s) λ = 97,990/97,988 %, F_max 484,99/484,66 N; Δt = 50 µs über 40 s λ = 97,985/97,993 %, F_max 485,39/485,52 N; je ein Stoß pro Anregungsperiode (Abstände 1,000 ± 0,004 T), Kontaktdauer ≈ 2 % der Periode ≈ π/ω_n. **Der synchrone Hüpfzustand ist ein zeitschrittfester, dauerhafter Endzustand.** **Neu**: Bei steifem, schwach bis mäßig gedämpftem Kontakt (ζ ≤ 0,1) koexistieren der Kontaktast und Hüpfzustände (Prallkugel-Dynamik); der Standardstart (Module setzen aus der Ruhe ein) landet auf dem Kontaktast, eine Störung von wenigen mm Fallhöhe (synchron V1: ≥ 4,6 mm) nicht. ζ = 0,2 beseitigte den Hüpfzustand in der Probe.
+**Ergebnis.** Referenz: (98°/120°/148°, 240°) mit ż₀ = 3 m/s → λ = 0 (bestätigt die Angabe von linear_solver). **V1 synchron, ż₀ = 0,5 m/s (Fallhöhe 12,7 mm): dauerhafter Hüpfzustand mit λ ≈ 98 % und Stoßspitzen 484–490 N (≈ 76·Mg) für ζ = 0,02, 0,05 und 0,1**; für ζ = 0,2 Rückkehr in den Kontaktast. ż₀ ≤ 0,2 m/s (h ≤ 2 mm): überall Rückkehr. V1 (120°,240°): bis 0,5 m/s Rückkehr für alle ζ. **V2 (ζ = 0,02), (120°,240°), ż₀ = 0,5 m/s: λ = 94,18 % bei Δt = T/2000, aber λ = 0 bei Δt = T/4000** – ebenso λ = 0 bei Δt = T/8000 (a4d C): **Der Hüpfbefund an diesem Punkt ist ein Zeitschritt-Artefakt der groben Schrittweite und wird verworfen**; die übrigen V2-Wurfproben (Einzelmodul und synchron bei 0,5 m/s ≈ 98 %, Schnittränder bei 1,5 m/s λ 30–41 %, alle Δt = T/2000) sind nicht zeitschrittgeprüft. Schwelle (a4c): V1 synchron (ζ = 0,05) kehrt bis ż₀ = 0,25 m/s (h = 3,2 mm) zurück, ab 0,30 m/s (h = 4,6 mm) Hüpfzustand (λ ≈ 98 %, F_max ≈ 485 N); V2 Triphasik (ζ = 0,02) bis 0,40 m/s (8,2 mm) zurück (0,50 m/s siehe oben: Artefakt). **Zeitschritt- und Laufzeitprüfung (a4d):** V1 synchron, ζ = 0,05, ż₀ = 0,30/0,50 m/s: Δt = 25 µs (16 s) λ = 97,990/97,988 %, F_max 484,99/484,66 N; Δt = 50 µs über 40 s λ = 97,985/97,993 %, F_max 485,39/485,52 N; je ein Stoß pro Anregungsperiode (Abstände 1,000 ± 0,004 T), Kontaktdauer ≈ 2 % der Periode ≈ π/ω_n. **Der synchrone Hüpfzustand ist ein zeitschrittfester, dauerhafter Endzustand.** **Neu**: Bei steifem, schwach bis mäßig gedämpftem Kontakt (ζ ≤ 0,1) koexistieren der Kontaktast und Hüpfzustände (Prallkugel-Dynamik); der Standardstart (Module setzen aus der Ruhe ein) landet auf dem Kontaktast, eine Störung von wenigen mm Fallhöhe (synchron V1: ≥ 4,6 mm) nicht. ζ = 0,2 beseitigte den Hüpfzustand in der Probe.
 
 **Reproduktion.** `timeout 540 python3 a4b_bistabilitaet.py` (≈ 5–7 min), `timeout 540 python3 a4c_einzugsbereich.py`, `python3 a4_rk4_stichprobe.py start`, `timeout 540 python3 a4d_konvergenz.py A` (analog `B`, `C`; Teil `D` mit Δt = T/8000 nicht ausgeführt).
 
@@ -228,7 +228,7 @@ Nennlast: [R] größte erwartete Zellkraft im Kontaktast 4,3–4,9 N (≈ 0,45�
 
 | Kennzahl | Referenz (ρ = 0,507) | starr | V1 / V2 / V3 (ζ = 0,05, ρ ≈ 0,04) | Art der Änderung |
 |---|---|---|---|---|
-| (Mg − F_min(120°))/(Mg·ε) | 0,138 | 0,241 | 0,266 / 0,263 / 0,266 | qualitativ (Referenz: k = 3 über der Resonanz gedämpft, |H₃| = 0,78) |
+| (Mg − F_min(120°))/(Mg·ε) | 0,138 | 0,241 | 0,266 / 0,263 / 0,266 | qualitativ (Referenz: k = 3 über der Resonanz gedämpft, \|H₃\| = 0,78) |
 | ΔG_Zelt | 0,601 | 0,1545 | 0,154 / 0,155 / 0,153 | qualitativ (Faktor 3,9 durch 2f ≈ f_n) |
 | Sekanten S_L / S_R [1/°] | 0,0280 / 0,0257 | 0,0154 / 0,0154 | 0,0149/0,0157; 0,0161/0,0153; 0,0148/0,0154 | qualitativ (Überhöhung 1,8 entfällt) |
 | s_L/s_R (Zeltasymmetrie) | 1,088 | 1,000 | 0,955 / 1,053 / 0,956 | qualitativ (Vorzeichen der Asymmetrie hängt von ρ ab; starr symmetrisch) |
@@ -238,8 +238,8 @@ Nennlast: [R] größte erwartete Zellkraft im Kontaktast 4,3–4,9 N (≈ 0,45�
 | γ₁ synchron / (0°,180°) / Einzelmodul (linear) | +0,14 / +0,04 / +0,14 (heben ab) | +0,755 / +0,986 / +0,755 | +0,76 / +0,98 / +0,76 | qualitativ (Referenzläufe haben keinen Kontaktast) |
 | A bei 120° | 1,066 | 0,653 | 0,612 / 0,598 / 0,608 | qualitativ |
 | Kontaktanteil Phasenraster (2°) | 4,19 % | 76,6 % (μ = 1) | 100 % | qualitativ: kein Liftoff mehr in der Phasenebene |
-| |H₂| | 5,03 | 1 | 1,007 / 1,006 / 1,007 | Resonanznähe der 2. Harmonischen entfällt |
-| größtes |H(kω)| | 5,03 (k = 2) | 1 | ≈ 10 bei k = 24/26/24 | neue Empfindlichkeit: hohe Profilharmonische |
+| \|H₂\| | 5,03 | 1 | 1,007 / 1,006 / 1,007 | Resonanznähe der 2. Harmonischen entfällt |
+| größtes \|H(kω)\| | 5,03 (k = 2) | 1 | ≈ 10 bei k = 24/26/24 | neue Empfindlichkeit: hohe Profilharmonische |
 
 - **Nur Skalierung (gleiches ρ, ζ):** Ändert man bei K = 10⁴ N/m nur μ (1 → 0,4), bleiben alle normierten Kennzahlen gleich (G120 = 0,1378, ΔG = 0,601, γ₁ = +0,067, s_L/s_R = 1,088); F_min(120°) = Mg − 1,0461 N·μ (5,958 N bei μ = 0,4). Nicht linear ist dagegen der Kontaktanteil (Schwellengröße): 4,24 % (μ = 1), 48,59 % (μ = 0,5; Präreg A3: 48,6 % – bestätigt), 71,84 % (μ = 0,4), 1°-Raster.
 - **Innerhalb des neuen Bereichs (ρ ≤ 0,05, ζ ≥ 0,05)** skaliert alles in guter Näherung mit ε: Abweichungen vom starren Wert ≤ 1,5 % (G_syn), ≤ 3,3 % (ΔG), ≤ 8,2 % (Sekanten), ≤ 7,8 % (G_Schnitt). Das A4-Beispiel der Präregistrierung (starr, μ = 0,4) ist deshalb auf V1–V3 übertragbar, die Referenzzahlen (5,33 N, 0,212/0,195 N/°, 0,228/0,186 N/°, ΔF_Zelt 4,56 N, 4,24 % Kontaktanteil, γ₁ = +0,067, Liftoff-Tabellen) nicht.
@@ -249,7 +249,7 @@ Nennlast: [R] größte erwartete Zellkraft im Kontaktast 4,3–4,9 N (≈ 0,45�
 
 ## AUS-15 · Widerspruch AP v2.4 „Auslegungsbedingung“ ↔ Präreg §5.3(a)/A2.5
 
-[Q] AP v2.4, Kap. 5 (Z. 2110–2117): „Frequenz, Masse und Kontaktsteifigkeit sind so abzustimmen, dass in einem Teil der Phasenlagen tatsächlich Liftoff auftritt.“ [R] Im quasistatischen Bereich ist die synchrone Phasung der globale ungünstigste Fall (N − Mg = μM·ā(t) ≥ μM·min a). Erfüllt der Arbeitspunkt (a) für die ZUSATZ-Menge oder im Zellmodell A2.5, hat **kein** Punkt der Phasenebene Liftoff (V1–V3: Kontaktanteil 100 %). Beide Forderungen sind bei einer Frequenz unvereinbar; Liftoff ist dann nur über E1 (höheres f) erreichbar – mit den Spitzen aus AUS-13. Nur die PFLICHT-Menge mit Modulwirkung im Zellschwerpunkt (V5) lässt Liftoff nahe der synchronen Phasung zu.
+[Q] AP v2.4, Kap. 5 (Z. 2110–2117): „Frequenz, Masse und Kontaktsteifigkeit sind so abzustimmen, dass in einem Teil der Phasenlagen tatsächlich Liftoff auftritt.“ [R] Im quasistatischen Bereich ist die synchrone Phasung der global ungünstigste Fall (N − Mg = μM·ā(t) ≥ μM·min a). Erfüllt der Arbeitspunkt (a) für die ZUSATZ-Menge oder im Zellmodell A2.5, hat **kein** Punkt der Phasenebene Liftoff (V1–V3: Kontaktanteil 100 %). Beide Forderungen sind bei einer Frequenz unvereinbar; Liftoff ist dann nur über E1 (höheres f) erreichbar – mit den Spitzen aus AUS-13. Nur die PFLICHT-Menge mit Modulwirkung im Zellschwerpunkt (V5) lässt Liftoff nahe der synchronen Phasung zu.
 
 ## AUS-16 · Folgerung aus P1 §3.1 für Einzelmodulläufe
 
@@ -275,11 +275,11 @@ Nennlast: [R] größte erwartete Zellkraft im Kontaktast 4,3–4,9 N (≈ 0,45�
 
 ## Empfehlungen für V1
 
-1. Auslegung dimensionslos führen: ε = μ·π²·Hub·f²/(TH·g), ρ = f/f_n, ζ; Ziel ε ≈ 0,55–0,70 (ZUSATZ/A2.5), ρ ≤ 0,05 (f_n ≥ 20·f) solange ζ nicht gemessen ist.
+1. Auslegung dimensionslos führen: ε = μ·π²·Hub·f²/(TH·g), ρ = f/f_n, ζ; Ziel ε ≈ 0,55–0,70 (ZUSATZ/A2.5), ρ ≤ 0,05 (f_n ≥ 20·f), solange ζ nicht gemessen ist.
 2. Konkrete Startpunkte: V1 (3 × 100 g, 8 mm, 10 Hz, K ≥ 1,5·10⁶ N/m) oder V3 (3 × 50 g, 8 mm, 14 Hz, K ≥ 3·10⁶ N/m); V2 nur mit Reserve-Kontrolle (29–31 %).
 3. K und ζ in P0.4 messen, bevor f festgelegt wird; ρ-Bänder um 1/7, 1/9, 1/12, 1/15, 1/18 meiden, wenn ζ < 0,1.
 4. Zell- und Modulgeometrie bewusst wählen: Modulwirkung nahe dem Zellschwerpunkt erlaubt ε bis ≈ 1,1 (ΔF_Zelt bis ≈ 1,1 N); jedes Modul über einer Zelle (A2.5) begrenzt ε auf 0,75. Abstimmen mit der Kipp-Gruppe.
-5. Kontaktdämpfung erhöhen (ζ ≥ 0,2 beseitigt im Test den Hüpfzustand nach 0,5 m/s Wurf) und Startprozedur festlegen (Module aus der Ruhe mit Rampe, kein Aufsetzen unter Bewegung); Einzelzell-Liftoff-Erkennung über den ganzen Lauf beibehalten.
+5. Kontaktdämpfung erhöhen (ζ ≥ 0,2 beseitigt im Test den Hüpfzustand nach 0,5-m/s-Wurf) und Startprozedur festlegen (Module aus der Ruhe mit Rampe, kein Aufsetzen unter Bewegung); Einzelzell-Liftoff-Erkennung über den ganzen Lauf beibehalten.
 6. Nennlast und Überlastschutz nach E1/Hüpfzuständen auslegen (Größenordnung 10²·Mg bei steifem Kontakt) oder E1 mit eigener, weicherer Kontaktstufe fahren.
 7. PB1 für Re/Im N₂ ist etwa 0,6-mal strenger als für F_min; mit der Statistikgruppe klären, welche Anforderung bindet.
 8. Hochfrequenzspektrum des realen Profils in P0.5 bestimmen; es geht in das ungebänderte F_min der Bedingung (a) ein.

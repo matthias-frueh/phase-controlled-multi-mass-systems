@@ -121,7 +121,7 @@ Gesamt [E]: Die Empfehlung (registrierte Kontrolle mit vorab festgelegter Auswer
 
 ## 5 Quellenstichprobe
 
-Geprüft und korrekt: Präreg A2.5 Z. 192–201; A6 Z. 325–327; A9.2 P0.1 „mindestens fünf Stellen“ Z. 454; P0.4 ohne Anregungsort Z. 465–472; u_c ≤ 0,0327 N A4 Z. 289; E3 §3; §8.5 PB1 nur r⁰; G7; §9.3; AP v2.4 Z. 86/3491 („0,2 ppm“), Z. 5293–5295 („eindimensional … Kippen“); PCMMFM-Fehlerbudget §6 (elektrisch 0,001–0,005 N, σ_total ≈ 0,024 N); evidenzmatrix-Einträge wie in §1.
+Geprüft und korrekt: Präreg A2.5 Z. 192–201; A6 Z. 325–327; A9.2 P0.1 „mindestens fünf Stellen“ Z. 454; P0.4 ohne Anregungsort Z. 465–472; u_c ≤ 0,0327 N A4 Z. 289; E3 §3; §8.5 PB1 nur r⁰; G7; §9.3; AP v2.4 Z. 86/3491 („0,2 ppm“), Z. 5293–5295 („eindimensional … Kippen“); PCMMFM-Fehlerbudget §6 (elektrisch 0,001–0,005 N, σ_total ≈ 0,024 N); Evidenzmatrix-Einträge wie in §1.
 Falsch wiedergegeben: Präreg §2 „Reichweite“ in KM-12 (s. o.).
 
 ## 6 Bewertungsmaßstab
