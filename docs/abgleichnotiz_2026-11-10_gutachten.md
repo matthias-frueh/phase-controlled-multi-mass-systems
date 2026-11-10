@@ -9,8 +9,11 @@ Lizenz: CC BY 4.0 (Ordner docs/, siehe LICENSE-CC-BY-4.0)
 
 > **Vermerk (10.11.2026).** Abgleich am Repository-Stand `51f79a2` (`main`, 03.11.2026, PR #29). Zeilenangaben ohne
 > Dateinamen („Z. …“) beziehen sich auf den Quelltext des Arbeitspapiers v2.5,
-> [`arbeitspapier/PCMMS_Arbeitspapier_v2_5.tex`](arbeitspapier/PCMMS_Arbeitspapier_v2_5.tex), an diesem Stand. Die beiden
-> abgeglichenen Texte und der Auftrag an Claude Code liegen nicht im Repository. Die Notiz ändert keine Zahl, keine
+> [`arbeitspapier/PCMMS_Arbeitspapier_v2_5.tex`](arbeitspapier/PCMMS_Arbeitspapier_v2_5.tex), an diesem Stand. Auch die
+> Zeilenangaben zu anderen Dateien gelten am Stand `51f79a2`. Der Pull Request, der diese Notiz anlegt, fügt Zeilen ein:
+> in `README.md` nach Z. 62 eine, in [`overview.md`](overview.md) nach Z. 39 vier, in den Offenen Punkten des
+> Arbeitspapiers nach Z. 92 eine und nach Z. 101 zwei; spätere Zeilen dieser Dateien stehen seither entsprechend tiefer.
+> Die beiden abgeglichenen Texte und der Auftrag an Claude Code liegen nicht im Repository. Die Notiz ändert keine Zahl, keine
 > Hypothese, keinen Code und keine Daten; Arbeitspapier (Quelltext und PDF) und Literaturverzeichnis bleiben
 > unverändert (Variante A des Auftrags, kein Neusatz). Alle Zahlen des Repositorys sind Simulation; Messdaten
 > existieren nicht.
@@ -38,7 +41,7 @@ Abstract und der Rechercheanhang sind vorhanden.
 | **G-1** Im Arbeitspapier fehle ein Abschnitt zu Forschungsstand und Beitrag; der Literaturabgleich liege nur als eigenes Dokument vor. | **Trifft nicht zu.** Das Arbeitspapier v2.5 enthält das Kapitel „Stand der Forschung“ mit acht Abschnitten, darunter „Mehrkörperdynamik und phasengesteuerte Anregung“ und „Einordnung und mögliche Lücke“ mit vier Merkmalen der untersuchten Konstellation, und den Anhang „Dokumentation der Literaturrecherche“ (Anhang C). Richtig ist nur der engere Punkt, dass die Einträge des Literaturabgleichs vom 12.09.2026 nicht ins Arbeitspapier übernommen sind (unten, „Was zutrifft“). | `chap:stand` Z. 700–973, Abschnitte ab Z. 703, 721, 771, 825, 863, 885, 905, 920; „Mehrkörperdynamik …“ Z. 721–769; „Einordnung und mögliche Lücke“ Z. 920–973, Merkmale Z. 942–951; `app:recherche` Z. 5732–5895 |
 | **G-2** Die Beitragsaussage fehle in Abstract und Einleitung oder sei unklar; sie sei zu „verdichten“. | **Trifft nicht zu.** Kurzfassung und Abstract schließen mit der Beitragsaussage (keine neue Physik; möglicher Beitrag methodisch und eng; Neuheit ohne systematische Recherche offen). Die Einleitung enthält den Abschnitt „Beitrag dieser Arbeit“ mit neun Punkten, das Fazit den Abschnitt „Methodischer Beitrag“. Ob die Aussagen untereinander widerspruchsfrei sind, ist eine andere Frage; sie ist in Abschnitt 4 geprüft. | Kurzfassung Z. 144–149; Abstract Z. 225–230; `sec:beitrag` Z. 590–696; Fazit „Methodischer Beitrag“ Z. 5175–5196 |
 | **G-3** Abzugrenzen sei gegen „Olgac (2005)“, „Korendiy et al. (2026)“ und „Xiong & Xu (2015)“, mit einer Tabelle Zielgröße/Abgrenzung. | **Teilweise schon geführt, in dieser Form nicht übernommen.** „Korendiy et al. 2026“ führt Anhang C als nicht auffindbar; zitiert ist stattdessen Gurskyi, Korendiy et al. 2023. Arbeiten von Fang, Xu und Mitarbeitern stehen als bibliografisch ungeprüfte Kandidaten in Anhang C, in der Einordnung, im Neuheitsgrad-Dokument und in den Zehn Fragen. „Olgac“ kommt im Repository nicht vor. Die drei Angaben sind Gegenstand von Abschnitt 2; die Abgrenzungstabelle des Gutachtens wird nicht übernommen. | Verifikationstabelle Z. 5816; „Nicht aufgenommene Angaben“ Z. 5860–5862 und Z. 5863–5869; Zitat Gurskyi/Korendiy 2023 Z. 741–746, [`references.bib`](arbeitspapier/references.bib) Z. 214–223; [`einordnung.md`](einordnung.md) §5, Z. 165–174; [`neuheitsgrad.md`](neuheitsgrad.md) §10, Z. 236–240; [`zehn_fragen.md`](zehn_fragen.md) Z. 19–21; Suche nach „Olgac“ im ganzen Repository ohne Treffer |
-| **G-4** Beitragsformel: Rekombination bekannter Bausteine (Phasensteuerung, Mehrmassensystem, Kontaktkraft) unter methodischer Kontrolle (ruhender Körper, Nullkontrolle, Präregistrierung) mit dem Ziel der Wellenform-Charakterisierung, nicht der Entdeckung eines neuen Effekts. | **Nicht übernommen; am Repository gemessen.** Die Formel trifft den Verzicht auf einen Effektanspruch und die Selbstbeschreibung als Rekombination, weicht aber in Status der Präregistrierung, Zielgrößen, Gewichtung und Begriffen ab. | Abschnitt 4 |
+| **G-4** Beitragsformel: Rekombination bekannter Bausteine (Phasensteuerung, Mehrmassensystem, Kontaktkraft) unter methodischer Kontrolle (ruhender Körper, Nullkontrolle, Präregistrierung) mit dem Ziel der Wellenform-Charakterisierung, nicht der Entdeckung eines neuen Effekts. | **Nicht übernommen; am Repository gemessen.** Die Formel trifft den Verzicht auf einen Effektanspruch und die Selbstbeschreibung als Rekombination. Sie ändert den Anspruch beim Status der Präregistrierung, bei der Gewichtung der Nullgröße und beim Ziel; Zielgrößen nennt erst die Tabelle des Gutachtens. | Abschnitt 4.5 |
 | **G-5** Die Messkampagne der Linie A sei zu konkretisieren (Hardware, Kanalplan, Schutzkonzept). | **Nicht Teil dieses Abgleichs.** | Abschnitt 6 |
 | **G-6** Ein Benchmark sei zu prüfen (offene Daten, Nachrechnung durch Dritte). | **Bestandsaufnahme.** Festgehalten ist, was heute allein aus dem Repository nachrechenbar ist; eine Seite dazu entsteht nicht. | Abschnitt 5 |
 | **G-7** Die Unabhängigkeit sei als Stärke darzustellen. | **Nicht Teil dieses Abgleichs.** | Abschnitt 6 |
@@ -328,3 +331,182 @@ Request gemeldet und nicht geändert.
    auf „v2.5“ in anderen Dateien: nur in Variante B (E-2).
 8. Die Zählungen unter „Stand des Dokuments“ in den Offenen Punkten (Z. 64, 110, 123 der Datei) sind historisch und
    bleiben.
+
+## 4. Beitragsaussagen: Prüfung auf Widerspruchsfreiheit
+
+Verglichen sind sieben Stellen: (1) der Schlussabsatz der Kurzfassung (Z. 144–149), (2) der Schlussabsatz des Abstracts
+(Z. 225–230), (3) „Beitrag dieser Arbeit“ (Z. 590–696), (4) „Einordnung und mögliche Lücke“ (Z. 920–973), (5) das Fazit
+„Methodischer Beitrag“ (Z. 5175–5196), (6) [`neuheitsgrad.md`](neuheitsgrad.md) §7 und §8 (Z. 163–196) und (7) der
+Abschnitt „Worum es geht“ der [README](../README.md) (Z. 9–36). Maßstab sind die „Verbindlichen Begriffe“ in
+[`overview.md`](overview.md) (Z. 46–57) und der [Entwurf der Präregistrierung v2](praeregistrierung_v2_entwurf.md).
+Ergebnis ist diese Liste. Es wird nichts umformuliert, und es gibt keinen neuen Wortlaut für Kurzfassung, Abstract oder
+Einleitung. Jede Abweichung ist von einem zweiten Leser an den Fundstellen gegengeprüft; was dabei nicht standhielt,
+steht unter 4.3 oder 4.4 und nicht unter 4.2.
+
+### 4.1 Worin die Stellen übereinstimmen
+
+- Keine neue Physik, kein Effektanspruch (Z. 144, Z. 225; README Z. 30–31; `neuheitsgrad.md` Z. 195).
+- Das Zeitmittel ist Kontrollgröße, nicht Zielgröße und kein Ergebnis (Z. 88–90, Z. 606–616, Z. 949–950, Z. 5181–5183;
+  `neuheitsgrad.md` Z. 110–114; README Z. 20–21).
+- Der mögliche Beitrag ist methodisch und eng; die Bausteine sind bekannt (Z. 144–145, Z. 595–596, Z. 922–935;
+  `neuheitsgrad.md` Z. 48–49, Z. 176).
+- Ob eine Lücke besteht, ist offen; „nicht gefunden“ ist ein Suchbefund (Z. 148–149, Z. 597, Z. 937–940, Z. 5192–5194;
+  `neuheitsgrad.md` Z. 192–193).
+- An keiner der sieben Stellen heißt die Präregistrierung registriert oder eingefroren; wo sie genannt ist, steht
+  „Entwurf“.
+
+### 4.2 Abweichungen, die den Anspruch ändern
+
+**BA-1 Die Neuheit der Nullgröße als Prüfmittel steht einmal als Tatsache da, sonst als offen.** In Kapitel 2 heißt es:
+„neu ist hier allein die Verwendung dieser Basislinie als Prüfmittel gegen die Messkette“ (Z. 860–861). Der Satz steht
+im Abschnitt „Kraftverläufe an der Auflage schwingungsangeregter Systeme“, außerhalb der sieben Stellen, trifft aber
+dieselbe Aussage. Dagegen stehen „ist nicht recherchiert; er ist deshalb als methodischer Baustein mit ungeklärter
+Neuheit zu lesen“ (Z. 5193–5194), „ohne systematische Recherche offen“ (Z. 148–149) und die Einordnung, die für die
+nicht ausgewertete Metrologie- und Wägetechnikliteratur festhält: „dort liegt die Verwendung einer bekannten Last als
+Kontrolle nahe“ (Z. 957–961). Der Versionshinweis führt die Lücken- und Beitragsaussagen in Kapitel 2 als auf
+Suchbefunde zurückgenommen (Z. 355–358); Z. 860–861 ist davon nicht erfasst.
+
+**BA-2 Zielgrößen, Rangfolge und Kontaktregime.** Das Arbeitspapier führt vier Funktionale – Schiefe, Liftoff-Anteil,
+Asymmetrieverhältnis, minimale Kontaktkraft – ohne Abstufung als „primäre Zielgrößen“ des Messrahmens (Z. 622–624;
+Kurzfassung Z. 91–96; Abstract Z. 172–176) und prüft sie nach seinem Hypothesenteil einzeln (Z. 1929–1941). Der
+Gegenstand ist über die Auflage bestimmt, die „einseitig ist, also innerhalb eines Zyklus abheben kann“ (Z. 79–80).
+README (Z. 14–17), `neuheitsgrad.md` (Z. 157–159) und `overview.md` (Z. 52–55) ordnen die vier Funktionale der
+Simulation zu. Für die Messkampagne sind nach dem Entwurf der Präregistrierung v2 F_min − ⟨N⟩ und die Harmonischen 1 bis
+3 primär (H1, dort Z. 161), ebenso die Lage der Zeltspitze (H2, Z. 172); das Vorzeichen der Schiefe ist sekundär (H4,
+Z. 196), A beschreibend, der Liftoff-Bereich explorativ (E1, Z. 215). Gegenstand ist dort der Körper, „solange er auf
+allen Auflagepunkten Kontakt hält“ (Z. 13–15); der Arbeitspunkt hält Abstand zum Abheben (§5.3 (a), Z. 340–344), und
+der Liftoff-Bereich wird nicht konfirmatorisch geprüft (Z. 139–140). Das Arbeitspapier nennt beides im Hauptteil selbst
+(Z. 1855–1868, Z. 2299–2313), in den Beitragsaussagen nicht; die Harmonischen kommen dort als Zielgröße nicht vor.
+
+**BA-3 Was die Messung entscheidet.** Die Beitragsaussagen des Arbeitspapiers beschreiben einen Rahmen, in dem eine
+Phasenabhängigkeit der Wellenform „nachgewiesen, begrenzt oder ausgeschlossen“ werden kann (Z. 693–695; Z. 966–968 mit
+„beziffert“). Gemeint ist der Nachweis oberhalb der Auflösungsschwelle (Z. 518–521; Frage F2, Z. 1899–1902; Hypothesen
+Z. 1929–1941), nicht die Abhängigkeit im Modell, die das Papier selbst nennt (Z. 130–131). Zwei Punkte bleiben. Erstens
+geht „ausgeschlossen“ über den Endzustand „nachgewiesenes Nullergebnis mit oberer Schranke“ hinaus (Z. 99–101,
+Z. 3565–3569); das Papier sagt an anderer Stelle selbst: „Das Ausbleiben eines Befunds beweist nicht die Abwesenheit
+einer Abhängigkeit“ (Z. 4953–4954). Zweitens weicht die Fassung als Nachweisentscheidung vom Entwurf der
+Präregistrierung v2 ab, auf den README und `neuheitsgrad.md` für die Messkampagne verweisen: Dort ist die Abhängigkeit
+„keine Hypothese“ (Z. 118–119), geprüft werden quantitative Vorhersagen aus Messungen an der Apparatur (H1, H2), und
+ε_phys ist für die Wellenformgrößen ersetzt (Z. 97–98).
+
+**BA-4 Festgelegte Kriterien gegenüber einer Präregistrierung im Entwurf.** Das Fazit sagt über die Arbeit: „Sie legt
+die Kriterien fest, bevor Daten vorliegen, und macht sie damit der nachträglichen Anpassung unzugänglich“
+(Z. 5089–5091, Abschnitt „Zusammenfassung der Arbeit“, außerhalb der sieben Stellen). „Beitrag dieser Arbeit“ führt
+eine Schwelle ε_phys und vier Endzustände „mit vorab festgelegten Kriterien“ (Z. 654–668), ohne die Präregistrierung
+oder ihren Status zu nennen. Dagegen stehen `neuheitsgrad.md` §7 mit „einer Präregistrierung im Entwurf (v2, nicht
+eingefroren; v1 als nicht extern registrierte Arbeitsfassung)“ (Z. 174), der Entwurf v2 als Entwicklungsversion mit
+vorläufigen Arbeitsfestlegungen (dort Z. 4, Z. 62–66), der ε_phys für die Wellenformgrößen ersetzt (Z. 97–98), und das
+Arbeitspapier selbst, nach dem die Schwellen nicht beziffert sind (Z. 5007–5010, Z. 2140–2141). Innerhalb der sieben
+Stellen ist das ein Unterschied im Status – im Papier definierte Regeln gegenüber einer noch nicht eingefrorenen
+Festlegung –, kein Widerspruch im Wortlaut. Die Aussage in Z. 5089–5091 geht darüber hinaus.
+
+### 4.3 Verkürzungen und uneinheitliche Gewichtung bei gleichem Umfang
+
+- **Ruhender Körper.** Die Einordnung führt ihn als eines von vier Merkmalen der Konstellation des Suchbefunds
+  (Z. 948), `neuheitsgrad.md` nennt ihn den entscheidenden Unterschied (Z. 83–85) und führt ihn in der Zusammenstellung
+  (Z. 173), die README beginnt mit ihm (Z. 11). Die Beitragsaussagen von Kurzfassung, Abstract, „Beitrag dieser
+  Arbeit“ und Fazit grenzen ohne ihn ab (Z. 146–148, Z. 625–629). Sie verkürzen; der Sache nach enthält das Papier das
+  Merkmal (Z. 948, Z. 2250–2254). Dem Wortlaut nach ist die Kurzformel aber um dieses Merkmal weiter als die
+  Konstellation, für die das Papier einen Suchbefund angibt. „Ruhend“ ist nirgends definiert und steht neben einer
+  Auflage, die abheben kann (Z. 79–80).
+- **Kern des Beitrags.** Das Arbeitspapier nennt die Nullgröße als Prüfmittel den „konstruktiven Kern“ (Z. 5178–5183;
+  „Der zentrale methodische Zug“, Z. 4837–4838) und verweist dabei auf alle Elemente von „Beitrag dieser Arbeit“
+  (Z. 5177–5178). `neuheitsgrad.md` nennt die Wellenformstatistik der unilateralen Kontaktkraft als Zielgröße „die
+  methodische Behauptung“ (Z. 157), führt die Nullbasis als Zusatz („Dazu die Nullbasislinie“, Z. 108) und nennt sie in
+  §8 nicht (Z. 188–190). Kurzfassung und Abstract nennen beide Elemente gleichrangig (Z. 145–148).
+- **Zahl der Elemente.** Zwei in Kurzfassung und Abstract, neun „wesentliche Beiträge“ in „Beitrag dieser Arbeit“
+  (Z. 602–691), vier Merkmale in der Einordnung, acht in `neuheitsgrad.md` §7 (Z. 171–174). Bahnprofil und
+  Präregistrierung im Entwurf zählen nur dort zur Zusammenstellung.
+- **Attribution.** `neuheitsgrad.md` §8 nennt die „Attribution über die Phasensteuerung“ als einen Ort des möglichen
+  Beitrags (Z. 188–190) und schränkt selbst ein: „die Zuordnung selbst ist damit noch nicht gezeigt“ (Z. 104). Im
+  Arbeitspapier fehlt ein so benanntes Element; die Sache steht dort als Trennung von Artefakten durch das
+  Versuchsdesign (Z. 676–681), und der Rahmen endet bei einer „nachgewiesenen Abhängigkeit ohne Mechanismusbehauptung“
+  (Z. 100–101).
+- **Reichweite der Kontrolle.** „Beitrag dieser Arbeit“ und die Einordnung schließen mit dem Satz, die Apparatur werde
+  „fortlaufend gegen eine Größe qualifiziert …, deren Wert bekannt ist“ (Z. 695–696, Z. 968–969). Die README sagt:
+  „Umgekehrt qualifiziert ein unauffälliges Zeitmittel die dynamische Messkette nicht“ (Z. 25–26). Die Grenze steht im
+  Arbeitspapier in Kurzfassung (Z. 138–140), Abstract (Z. 219–221), „Beitrag dieser Arbeit“ (Z. 614–616) und Fazit
+  (Z. 5187–5190); ohne Einschränkung bleibt nur „Einordnung und mögliche Lücke“. Uneinheitlich ist außerdem, was
+  geprüft wird: „Auswertekette“ (Z. 90, Z. 614, Z. 950, Z. 5183), „Messkette“ (Z. 146, Z. 959) oder „Apparatur“
+  (Z. 94, Z. 695, Z. 968).
+- **Drift.** Kurzfassung (Z. 88–90), „Beitrag dieser Arbeit“ (Z. 612–614) und `neuheitsgrad.md` (Z. 112–113) nennen
+  Drift unter dem, worauf die Kontrolle prüft; das Papier sagt, Drift werde „von der Kontrollgröße erfasst“
+  (Z. 2672–2673), trennt die Kontrollgröße aber zugleich durch Verschachtelung und Randomisierung von Drift
+  (Z. 1490–1493). Die README zählt Drift zu dem, was trotz unauffälligem Zeitmittel gesondert zu charakterisieren ist
+  (Z. 26–27).
+
+### 4.4 Unterschiede der Wortwahl
+
+- „nachgewiesen, begrenzt oder ausgeschlossen“ (Z. 694–695) gegenüber „nachgewiesen, beziffert oder ausgeschlossen“
+  (Z. 967–968).
+- „möglicher Beitrag“ (Z. 144, Z. 5177) gegenüber „Der Beitrag der Arbeit ist“ (Z. 965) und „Die wesentlichen Beiträge
+  sind“ (Z. 602); der Vorbehalt steht jeweils im Text davor.
+- „ohne systematische Recherche offen“ (Z. 149, Z. 597, Z. 711, Z. 940) gegenüber „ist nicht recherchiert“ (Z. 5193);
+  nach Anhang C wurde in Metrologie und Wägetechnik nicht gesucht (Z. 5888–5890).
+- Minimale Kontaktkraft N_min gegenüber F_min − ⟨N⟩: ein sachlicher Unterschied (Bandbegrenzung, Mittelung über Läufe,
+  Bezug auf das Laufmittel), den das Arbeitspapier (Z. 1855–1868) und die README selbst erklären.
+- „Primär“ steht vor drei verschiedenen Dingen: der zeitaufgelösten Kontaktkraft im Gegensatz zur Körperbewegung
+  (`neuheitsgrad.md` Z. 171–172), den vier Funktionalen im Gegensatz zum Zeitmittel (Z. 622–624) und dem Rang nach dem
+  Entwurf v2 (README Z. 16–17). Der Zusammenhang klärt jede Verwendung; verwechselbar bleibt Z. 623 neben der README.
+- „Nur die minimale Kontaktkraft trägt eigenständige Information“ (Z. 119–121) ist ein Modellbefund, „F_min ist … nicht
+  der Neuheitskern“ (`neuheitsgrad.md` Z. 155–156) eine Aussage zur Neuheit; ein Widerspruch ist das nicht.
+
+### 4.5 Die Formel G-4, gemessen am Repository
+
+**Was sie trifft.** „Rekombination bekannter Bausteine“ ist die Selbstbeschreibung des Projekts (`neuheitsgrad.md`
+Z. 48–49; sinngleich Z. 922 und Z. 934–935). „Nicht der Entdeckung eines neuen Effekts“ steht mit keiner der sieben
+Stellen im Widerspruch (Z. 144, Z. 225, Z. 597–598; README Z. 30–31). „Ruhender Körper“ und „Nullkontrolle“ sind
+Begriffe des Repositorys. In grober Form deckt die Formel die vier Merkmale der Einordnung: die Wellenform als Ziel, die
+Phasensteuerung eines Mehrmassensystems, den ruhenden Körper und die Nullkontrolle.
+
+**Wo sie den Anspruch ändert.**
+
+- **Präregistrierung als methodische Kontrolle.** Die Formel nennt sie ohne Zusatz. Im Repository ist v1 eine nicht
+  extern registrierte Arbeitsfassung und v2 ein Entwurf, „nicht eingefroren, nicht registriert“
+  (`neuheitsgrad.md` Z. 174; Entwurf v2, Z. 4 und Z. 62–66); Einfrieren und Registrierung sind in AP-14 offen
+  ([`arbeitsplan_status.md`](arbeitsplan_status.md)). Die Beitragsstellen des Arbeitspapiers nennen die Präregistrierung
+  nicht.
+- **Gewichtung der Nullgröße.** Das Arbeitspapier führt sie als erstes von zwei Beitragselementen (Z. 144–148), als
+  „konstruktiven Kern“ (Z. 5178–5185) und als „zentralen methodischen Zug“ (Z. 4837–4838), mit ausdrücklich ungeklärter
+  Neuheit (Z. 5192–5194). In der Formel ist die „Nullkontrolle“ eines von drei Gliedern der methodischen Kontrolle; ihre
+  Funktion als Prüfmittel der eigenen Auswertekette und der Neuheitsvorbehalt fehlen. Diese Gewichtung entspricht der
+  von `neuheitsgrad.md` (4.3, „Kern des Beitrags“).
+- **Ziel.** „Charakterisierung“ ist beschreibend und mit README und `neuheitsgrad.md` §8 vereinbar. Die Beitragsstellen
+  des Arbeitspapiers nennen dagegen einen Messrahmen mit Entscheidungsstruktur, Äquivalenzlogik und Nullausgang
+  (Z. 597–598, Z. 654–674); beides nennt die Formel nicht.
+
+**Was ihr fehlt, ohne den Anspruch zu ändern.**
+
+- **Zielgrößen.** Die Formel nennt keine; „Wellenform-Charakterisierung“ deckt auch F_min − ⟨N⟩ und die Harmonischen.
+  Schiefe und Liftoff nennt die Tabelle des Gutachtens, und für sie gilt BA-2: Nach dem Entwurf v2 sind F_min − ⟨N⟩, die
+  Harmonischen 1 bis 3 und die Lage der Zeltspitze primär, das Vorzeichen der Schiefe sekundär, der Liftoff-Bereich
+  explorativ, und V1 verlangt Dauerkontakt.
+- **Phasensteuerung.** Die Formel nennt sie als Baustein. Als Modellaussage ist gedeckt, dass die Phasenlage die
+  Wellenform formt (Entwurf v2, Z. 118–119; Arbeitspapier Z. 945–947); die Zahlen dazu sind Simulation. Nicht gezeigt
+  ist die Zuordnung beobachteter Änderungen zur Phasenvariation allein (`neuheitsgrad.md` Z. 100–104).
+- **Status und Vorbehalt.** Die Formel trägt weder den Stand „prä-experimentell“ (Z. 80–81) noch den Vorbehalt des
+  „möglichen“ Beitrags bei offener Recherche (Z. 144–149, Z. 5192–5194). „Unter klarer methodischer Kontrolle“
+  beschreibt als gegeben, was im Repository Auslegung, Entwurf und Simulation ist. Das wiegt nur, wenn die Formel allein
+  als Beitragsaussage steht; auch das Arbeitspapier setzt den Vorbehalt nicht an jeder Stelle (Z. 602, Z. 965).
+- **Bausteine.** Es fehlen „unilateral“ und „innere Massen eines geschlossenen Körpers“ (Z. 943–947) und das
+  Bahnprofil, das nur `neuheitsgrad.md` als Merkmal führt (Z. 171). Die Formel verliert Abgrenzungsschärfe, erhebt aber
+  keinen weiteren Anspruch.
+- **Begriff.** „Kontaktkraft“ steht ohne Bezug auf die Kraftverschiebung gegen die Referenz (`overview.md` Z. 50–51;
+  README Z. 19–20). In der Formel bezeichnet das Wort einen Baustein, nicht die ausgewertete Größe; die Kurzaussagen
+  des Repositorys halten es ebenso (Z. 146–148; `neuheitsgrad.md` Z. 172).
+
+**Dieselbe Lesart im Repository.** [`CITATION.cff`](../CITATION.cff) führt „preregistration“ als Schlagwort ohne Status
+(Z. 19), nennt als Zielgrößen „Schiefe, Liftoff-Anteil, Asymmetrieverhältnis und Minimalkraft“ und zählt zum Enthaltenen
+die „Präregistrierung“ (Z. 27–29). Die Datei liegt außerhalb der sieben Stellen und ist nicht geändert.
+
+Die Formel wird nicht übernommen, und diese Notiz setzt keine andere an ihre Stelle.
+
+### 4.6 Offen, nicht entschieden
+
+- D-3, die Neuheitsformulierung der Konstruktionsform, bleibt Entscheidung des Autors
+  ([`arbeitsplan_status.md`](arbeitsplan_status.md)).
+- Ob Linie A künftig von der einzelnen einseitigen Auflage her beschrieben wird (README Z. 11; Kurzfassung Z. 77–80)
+  oder vom Messrahmen mit Rundum-Kontaktkette (AP-27, Konzept;
+  [`konzepte/nadelrahmen_dreimassenkoerper_2026-10.md`](konzepte/nadelrahmen_dreimassenkoerper_2026-10.md)), ist offen.
+  [`einordnung.md`](einordnung.md) nennt schon beides (Z. 69). Die Frage berührt BA-2 und den Punkt „Ruhender Körper“
+  in 4.3 und ist hier nur vermerkt.
