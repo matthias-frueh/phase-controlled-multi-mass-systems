@@ -1,7 +1,7 @@
 # Gibt es das nicht schon? — Zum Neuheitsgrad von PCMMS
 
 **Phase-Controlled Multi-Mass Systems · Phasenkontrollierte Mehrmassensysteme**
-Matthias Früh · ORCID 0009-0005-9984-4207 · Stand September 2026 · Nachtrag 20.09.2026 (§10) · Nachträge 2. Oktober 2026
+Matthias Früh · ORCID 0009-0005-9984-4207 · Stand September 2026 · Nachtrag 20.09.2026 (§10) · Nachträge 2. Oktober 2026 · Nachtrag 10.11.2026 (§10)
 
 *Antwort auf die häufigste und berechtigtste Rückfrage.*
 
@@ -238,6 +238,14 @@ Der Strang der vibrationsgetriebenen Mehrmodul-Roboter (Fang, Xu und Mitarbeiter
 und bibliografisch ungeprüft; §9 gilt dafür weiter. Dasselbe gilt für Impact-Oszillatoren und Grazing,
 Haptik, Kapselroboter, dynamisches Wägen und Metrologie. Bis zu einer Recherche in diesen Feldern trifft
 das Projekt keine Aussage, ein Gegenstand sei dort nicht behandelt.
+
+*Nachtrag 10.11.2026.* Drei Literaturangaben aus einem simulierten Fachgutachten sind an den Primärquellen geprüft
+([`abgleichnotiz_2026-11-10_gutachten.md`](abgleichnotiz_2026-11-10_gutachten.md), Abschnitt 2). Korendiy et al. 2026
+(Vibroengineering Procedia 62, S. 41–50) ist auf der Verlagsseite bestätigt und im Volltext gelesen: Dort stellt der
+Phasenversatz zweier Schubkurbelkanäle die Bahn eines Arbeitsorgans; eine Kraft an Auflage oder Fundament wird nicht
+ausgewertet. Mikus, Olgac, Sipahi 2009 und Zhan, Xu 2015 sind nur am Registereintrag bestätigt; die Arbeit von Zhan und
+Xu gehört nach Titel und Abstract zum Strang der vibrationsgetriebenen Systeme mit inneren Massen. §9 gilt weiter:
+Keine der drei Arbeiten steht im Literaturverzeichnis, und die Recherche in diesem Strang ist nicht begonnen.
 
 ---
 

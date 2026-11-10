@@ -1,6 +1,6 @@
 # Wegweiser durch die Dokumente
 
-Stand: 25. September 2026, Nachträge 2., 4., 11., 16., 22., 29. und 31. Oktober 2026. Diese Datei ersetzt die Übersicht vom April 2026.
+Stand: 25. September 2026, Nachträge 2., 4., 11., 16., 22., 29. und 31. Oktober 2026 und 10. November 2026. Diese Datei ersetzt die Übersicht vom April 2026.
 
 Lizenz dieses Ordners: CC BY 4.0, siehe [`../LICENSE-CC-BY-4.0`](../LICENSE-CC-BY-4.0). Namensnennung: „Matthias Früh, PCMMS“, https://github.com/matthias-frueh/phase-controlled-multi-mass-systems
 
@@ -37,6 +37,10 @@ Lizenz dieses Ordners: CC BY 4.0, siehe [`../LICENSE-CC-BY-4.0`](../LICENSE-CC-B
     29.10.2026: Abgrenzung der Linien A/B/C durch den Autor, Abgleich mit dem Projektstand, Entscheidung D-1
     (Stufenfolge bleibt, B2 nur als Randbedingung für AP-01, AP-04, AP-06), offene Entscheidungen D-2 bis D-6,
     Prüfvermerke und Korrekturen.
+14. [`abgleichnotiz_2026-11-10_gutachten.md`](abgleichnotiz_2026-11-10_gutachten.md) — Abgleich eines simulierten
+    Fachgutachtens und einer Gegenprüfung mit dem Repository (10.11.2026): drei Literaturangaben an den Primärquellen
+    geprüft, Berichtigung zu Anhang C des Arbeitspapiers als Vorschlag, Beitragsaussagen auf Widerspruchsfreiheit
+    geprüft, nachrechenbare Referenzfälle, offene Entscheidungen E-1 bis E-4; Notiz, kein Arbeitsauftrag.
 
 **Zurückgezogen** sind frühere Aussagen zu einer Mittelwertverschiebung (Ursache: Kontaktmodell mit
 vorgeschriebener Eindrückung; Archiv-Vermerk), zu einer gerichteten Netto-Impulsübertragung ohne äußeren

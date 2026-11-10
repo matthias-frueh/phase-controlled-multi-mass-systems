@@ -640,3 +640,30 @@ Aufrufe vom Repository-Stamm, nach `pip install -r code/requirements.txt`. R-1 i
 - `data/regime_2400s.csv` und `data/regime_2400s_dt2.csv`: Das Erzeugungsskript ist nicht überliefert.
 - `data/sweep_7x7_sinus.csv`: Das erzeugende Skript liegt nicht im Repository; die Amplitude ist aus den Daten
   rekonstruiert.
+
+## 6. Nicht bearbeitet
+
+- **G-5, Messkampagne der Linie A konkretisieren.** Hardware, Messkette und Schutzkonzept sind die Arbeitspakete AP-01,
+  AP-06 und AP-05 und hängen an Entscheidungen des Autors, aus denen kein Entwicklungsauftrag entsteht
+  ([`arbeitsplan_status.md`](arbeitsplan_status.md), „Offene Entscheidungen des Autors“); diese Notiz plant dazu nichts.
+- **G-7, Unabhängigkeit als Stärke darstellen.** Die Außendarstellung des Projekts ist nicht Gegenstand des Repositorys.
+- **G-8, Gesamturteil.** Eine Gesamtnote ohne Bezugsklasse wird nicht geführt ([`neuheitsgrad.md`](neuheitsgrad.md) §3).
+
+## 7. Offene Entscheidungen des Autors
+
+Sie werden nur geführt; aus ihnen entsteht kein Entwicklungsauftrag. Sie stehen auch in
+[`arbeitsplan_status.md`](arbeitsplan_status.md).
+
+- **E-1** Sichtprüfung der geprüften Arbeiten durch den Autor. Sie ist Voraussetzung für jede Aufnahme ins
+  Literaturverzeichnis ([`neuheitsgrad.md`](neuheitsgrad.md) §9). Für a) liegen Verlagsseite und Volltext vor
+  (Abschnitt 2.1); für b) und c) fehlt die Bestätigung auf der Verlagsseite, für b) auch die Lektüre des Aufsatzes.
+- **E-2** Arbeitspapier v2.6 mit eingearbeiteter Berichtigung (Variante B des Auftrags) jetzt, gebündelt mit der
+  Primärquellenprüfung nach Nr. 42 der Offenen Punkte, oder vorerst nicht. Was dann zu ändern wäre, steht in
+  Abschnitt 3.3.
+- **E-3** Eine Seite mit Referenzfällen zum Nachrechnen anlegen oder nicht (Abschnitt 5).
+- **E-4** Die Recherche im Strang vibrationsgetriebener Systeme mit inneren Massen beginnen oder weiter zurückstellen
+  (AP-16).
+
+Unberührt bleiben die offenen Entscheidungen D-2 bis D-6 der
+[Abgleichnotiz vom 29.10.2026](abgleichnotiz_2026-10-29_v4.md), AP-01, AP-04 bis AP-07 und AP-18 sowie Nr. 42 der
+Offenen Punkte.
