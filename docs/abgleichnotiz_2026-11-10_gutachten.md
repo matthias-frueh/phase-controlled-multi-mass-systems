@@ -510,3 +510,133 @@ Die Formel wird nicht übernommen, und diese Notiz setzt keine andere an ihre St
   [`konzepte/nadelrahmen_dreimassenkoerper_2026-10.md`](konzepte/nadelrahmen_dreimassenkoerper_2026-10.md)), ist offen.
   [`einordnung.md`](einordnung.md) nennt schon beides (Z. 69). Die Frage berührt BA-2 und den Punkt „Ruhender Körper“
   in 4.3 und ist hier nur vermerkt.
+
+## 5. Nachrechenbare Referenzfälle (zu G-6): Bestandsaufnahme
+
+Die Frage ist, was ein Dritter heute allein aus dem Repository nachrechnen kann. Es entsteht keine neue Seite, es gibt
+keine neuen Daten und keinen Aufruf an Dritte; ob aus der Liste eine Seite zum Nachrechnen wird, entscheidet der Autor
+(E-3). Alle Zahlen sind Simulation. Das Zeitmittel (`F_mean`, ⟨N⟩) ist in jedem Fall Kontrollgröße mit dem Sollwert
+M·g = 6,3765 N, kein Ergebnis.
+
+### 5.1 Was vorliegt
+
+- **Parametersatz:** [`data/README.md`](../data/README.md) (Z. 15–23), gleichlautend im Abschnitt „Simulationsstand“
+  der [README](../README.md): M = 0,650 kg, f = 10 Hz, Egg-Profil, K = 10⁴ N/m, C = 16 N·s/m, RK4 mit Δt = 50 µs,
+  15 s je Konfiguration, ausgewertet die letzten 10 s.
+- **Rechenwege:** die Referenz-Engine (`code/pcmms_v3a_phasen_sweep.py`, skalar, RK4 mit festem Schritt), ihre
+  vektorisierte Fassung für den Feinsweep (`code/finesweep.py`), die analytische Lösung des Kontaktasts
+  (`code/linear_solver.py`), der ereignisgenaue Löser (`code/ereignisloeser.py`) und das Auslegungswerkzeug
+  (`code/auslegung.py`).
+- **Sollwerte:** die Datensätze in `data/` (361, 441 und 49 Punkte) und Tests mit festgehaltenen Zahlen
+  (`tests/test_ereignisloeser.py`, `tests/test_auslegung.py`). Am Punkt (120°, 240°) binden drei Tests denselben Wert
+  F_min = 5,330390 N an zwei weitere Rechenwege: den ereignisgenauen Löser auf 1·10⁻⁶ N (`tests/test_ereignisloeser.py`,
+  Z. 51) und das Auslegungswerkzeug auf 5·10⁻⁷ N (`tests/test_auslegung.py`, Z. 66 und Z. 498).
+- **Nachweisarchiv:** [`rechnungen/`](../rechnungen/README.md) mit Prüfskripten und abgelegten Ausgaben, etwa
+  `rechnungen/engine/validate_eng_ausgabe.txt`, und die Gegenprobe zum linearen Löser in
+  `docs/arbeitspapier/gegenprobe_2026-09-26/`. Die README nennt das Archiv „für den Einstieg nicht nötig“ (Z. 76).
+- **Anleitung:** der Block „Nachrechnen“ der README (Z. 199–214) mit Aufrufen und einigen Laufzeiten.
+
+### 5.2 Vorschlag: fünf Referenzfälle
+
+Aufrufe vom Repository-Stamm, nach `pip install -r code/requirements.txt`. R-1 ist in dieser Sitzung nachgerechnet, die
+übrigen Fälle sind aus Code, Tests und Dokumenten gelesen und nicht ausgeführt.
+
+**R-1 Dauerkontakt am Triphasik-Punkt (120°, 240°), Referenz-Engine**
+
+- Konfiguration: Referenzsatz, Standardstart (z₀ = −M·g/K), Δt = 50 µs, Fenster 5–15 s.
+- Größen und Sollwerte: `F_mean` 6,376500 N (Kontrollgröße), `F_skew` 0,066794, `liftoff` 0, `F_max` 7,491922 N,
+  `F_min` 5,330390 N, `peak_ratio` (Asymmetrieverhältnis A) 1,066257.
+- Quelle: [`data/finesweep_2deg_120_240.csv`](../data/finesweep_2deg_120_240.csv), Zeile 222 (Spaltennamen in Zeile 1).
+  Die Zeile stammt aus `finesweep.py`; der Punkt liegt nicht auf dem 19×19-Raster der Engine.
+- Aufruf: `python3 -c "import sys; sys.path.insert(0, 'code'); import pcmms_v3a_phasen_sweep as e; print(e.simulate_point(120.0, 240.0))"`.
+  Eine Kommandozeilenoption für einen Einzelpunkt hat die Engine nicht; der Import allein startet keine Rechnung und
+  schreibt keine Ergebnisdatei.
+- Laufzeit: „Engine: ca. 2 s“ je Punkt (`code/linear_solver.py`, Z. 42); in dieser Sitzung rund 1 s.
+- Zulässige Abweichung: Gleichheit auf die sechs Nachkommastellen der CSV, also ±5·10⁻⁷. Herkunft ist die Rundung der
+  Datei (`float_format='%.6f'`); eine Toleranz für die Nachrechnung legt das Repository nicht fest. Zeitschritt, Fenster
+  und Start sind fest; ohne Liftoff ist der Zustand eindeutig. Dass an diesem Punkt alle Starts, der halbe Zeitschritt
+  und der ereignisgenaue Löser dieselben Kenngrößen geben, hält `rechnungen/engine/PROTOKOLL.md` fest (Z. 73–86).
+- **Nachgerechnet am 10.11.2026:** alle sechs Spalten auf sechs Nachkommastellen gleich; größte Abweichung vor der
+  Rundung 1,8·10⁻⁷ (`F_min`); `F_mean` − M·g = 6·10⁻¹³ N. Rechenzeit von `simulate_point` 0,9 bis 1,0 s ohne
+  Programmstart (Python 3.13.18, numpy 2.5.4, scipy 1.18.1, 4 Kerne). Das ist der eine Einzelpunkt, den der Auftrag
+  zulässt; es gab keinen Sweep.
+
+**R-2 Analytische Lösung gegen die drei Datensätze**
+
+- Konfiguration: Referenzsatz; alle 851 Punkte der drei CSV-Dateien, verglichen werden die 442 liftoff-freien
+  (12 von 361, 400 von 441, 30 von 49).
+- Größen und Sollwerte: Einteilung liftoff-frei oder abhebend ohne Abweichung; größte Abweichung von F_min, F_max,
+  Schiefe und A höchstens 6·10⁻⁶; Schlusszeile „Ergebnis: bestanden“.
+- Quelle: `code/linear_solver.py`, Z. 45–46; [`README.md`](../README.md), Z. 137.
+- Aufruf: `python3 code/linear_solver.py --validate`
+- Laufzeit: ca. 5 s (README, Z. 204).
+- Zulässige Abweichung: Der Code lässt 1·10⁻⁴ zu (N bzw. dimensionslos; 1·10⁻⁵ N für |`F_mean` − M·g|, Z. 266); die
+  engere Angabe 6·10⁻⁶ steht nur im Text. Herkunft: gleiche Stichproben wie in der Engine (Δt = 50 µs) und die Rundung
+  der Dateien.
+- Hinweis: Die 409 Liftoff-Punkte gehen nur als Einteilung ein. Geprüft wird gegen die abgelegten Werte; im
+  Liftoff-Bereich hängen sie von der Startbedingung ab (R-4).
+
+**R-3 Zeltkurve im Kontaktast (Schnitt φ₂ = 100° … 140° bei φ₃ = 240°)**
+
+- Konfiguration: Referenzsatz, 21 Punkte, analytische Lösung.
+- Größen und Sollwerte: F_min 5,3304 N bei 120°, 0,7677 N bei 100°, 1,6176 N bei 140°; 2°-Sekanten an der Spitze
+  0,2124 und 0,1952 N je Grad; Spannweite 4,5627 N.
+- Quelle: [`praeregistrierung_v2_anhang.md`](praeregistrierung_v2_anhang.md), Zahlennachweis, Z. 1547; die Spannweite
+  hält außerdem `tests/test_auslegung.py`, Z. 164, über das Auslegungswerkzeug fest (±6·10⁻⁵ N).
+- Aufruf: `python3 code/linear_solver.py --section`
+- Laufzeit: nicht angegeben; der Löser braucht „ca. 1 ms je Punkt“ (`code/linear_solver.py`, Z. 42).
+- Zulässige Abweichung: die letzte gedruckte Stelle (±5·10⁻⁵); das folgt aus dem Ausgabeformat und ist im Repository
+  nicht festgelegt. Die README nennt für dieselbe Kurve ≈ 0,23 und ≈ 0,19 N
+  je Grad; das sind die Sekanten über 20°, nicht die über 2°.
+
+**R-4 Satelliteninsel (35°, 116°), ereignisgenau – Fall im Liftoff-Bereich**
+
+- Konfiguration: Referenzsatz; zwei Zustände am selben Punkt: Kontaktorbit (Start auf dem linearen Orbit) und
+  Hüpfzustand (vom Standardstart aus).
+- Größen und Sollwerte: Kontaktorbit mit Liftoff 0, F_min 0,3665 N, F_max 19,812 N, Schiefe 0,82305; Hüpfzustand mit
+  Liftoff-Anteil 75,8154 %, F_max 39,473 N, Schiefe 1,69813.
+- Quelle: `tests/test_ereignisloeser.py`, `test_satelliteninsel_bistabil`, Z. 101–120.
+- Aufruf: `python3 -m pytest tests/test_ereignisloeser.py::test_satelliteninsel_bistabil -q` oder
+  `python3 code/ereignisloeser.py --point 35 116 --orbit`
+- Laufzeit: Kommandozeile ca. 5 s (README, Z. 207); für den einzelnen Test nicht angegeben.
+- Zulässige Abweichung: die Toleranzen des Tests (F_min ±1·10⁻⁴ N, F_max ±1·10⁻³ N, Schiefe ±1·10⁻⁵, Liftoff-Anteil
+  ±1·10⁻⁴ Prozentpunkte). Herkunft: „letzte angegebene Stelle der Referenz, höchstens 0,1 %“ (Kopf der Testdatei, Z. 5).
+- **Hinweis.** Der Punkt liegt im Liftoff-Bereich. Dort ist die Karte nicht eindeutig: Es gibt mehrere stabile
+  Zustände, und welcher erreicht wird, hängt von der Startbedingung ab ([`data/README.md`](../data/README.md),
+  Z. 54–58; README, Z. 148–153). Als Referenzfall taugt der Punkt deshalb nur mit beiden Zuständen und ihren Starts.
+
+**R-5 V1-Kandidat der Auslegung – andere Parameter als der Referenzsatz**
+
+- Konfiguration: Restmasse 0,350 kg, drei Module zu je 0,100 kg, Hub 8 mm, 10 Hz, K = 1,5·10⁶ N/m, ζ = 0,05
+  (`code/auslegung.py`, Z. 193).
+- Größen und Sollwerte: Spannweite der Zeltkurve 0,560 N; kleinste Zellreserve 0,41137; Kontakteigenfrequenz 241,8 Hz.
+- Quelle: `tests/test_auslegung.py`, Z. 242 (Spannweite über die Python-Schnittstelle, ±5·10⁻⁴ N) und Z. 494–495
+  (Zellreserve und Eigenfrequenz über die Kommandozeile, ±1·10⁻⁵ und ±0,05 Hz).
+- Aufruf: `python3 code/auslegung.py --candidate`, mit `--json` maschinenlesbar.
+- Laufzeit: ca. 2 s (README, Z. 206).
+- Zulässige Abweichung: die Toleranzen der Tests.
+- Hinweis: Auslegungswert eines angenommenen Aufbaus, keine Vorhersage für V1 (README, Z. 122–123).
+
+### 5.3 Was einem Dritten heute fehlt
+
+- Die Engine hat keinen dokumentierten Weg zu einem Einzelpunkt (die README nennt nur den vollen Sweep mit 30 bis
+  60 Minuten), und kein Test ruft sie auf.
+- Für die Nachrechnung der Engine gegen ihre eigenen Datensätze legen die README-Dateien und `code/` keine Toleranz
+  fest. `finesweep.py --validate` druckt Rechenwert und CSV-Wert nebeneinander, ohne Urteil und mit Exit-Code 0.
+- `linear_solver.py --validate` gehört nicht zur Testsuite; der Lauf druckt die erreichten Höchstabweichungen, abgelegt
+  ist davon nur das Urteil „bestanden“.
+- Abgelegte Soll-Ausgaben gibt es, aber im Nachweisarchiv und nicht dort, wo ein Dritter beginnt.
+- [`code/requirements.txt`](../code/requirements.txt) nennt fünf Pakete ohne Versionen; eine CI-Konfiguration gibt es
+  nicht. Die dokumentierten Prüfumgebungen sind verschieden (Python 3.11 mit numpy 2.4 in
+  [`abnahme_ap02_ap03.md`](abnahme_ap02_ap03.md), Python 3.13 mit NumPy 2.5 in
+  [`ap11_ap12_ap13_software.md`](ap11_ap12_ap13_software.md)).
+- Laufzeiten sind nur für einen Teil der Aufrufe angegeben.
+
+### 5.4 Was sich nicht als Referenzfall eignet
+
+- Einzelne Liftoff-Punkte der Engine-Datensätze: Ihr Wert hängt von Start, Zeitschritt und Auswertungsreihenfolge ab.
+  Am Punkt (0°, 0°) mit 75,8 % Liftoff weichen skalare und vektorisierte Fassung in `F_mean` um 1,7·10⁻⁴ N voneinander
+  ab (`code/finesweep.py`, Z. 4–5).
+- `data/regime_2400s.csv` und `data/regime_2400s_dt2.csv`: Das Erzeugungsskript ist nicht überliefert.
+- `data/sweep_7x7_sinus.csv`: Das erzeugende Skript liegt nicht im Repository; die Amplitude ist aus den Daten
+  rekonstruiert.
