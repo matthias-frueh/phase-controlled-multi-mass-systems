@@ -225,3 +225,106 @@ Registers (b, c).
 `ZhanXu2015` nur gegen den Registereintrag geprüft, DOI aufgelöst, Verlagsseite offen. Kein Eintrag geht ohne die
 Sichtprüfung des Autors ins Literaturverzeichnis ([`neuheitsgrad.md`](neuheitsgrad.md) §9; E-1). In `references.bib`
 wären die Schlüssel nach der dortigen Schreibweise klein zu führen, etwa `korendiy2026`.
+
+## 3. Berichtigung und Textvorschläge
+
+Nur für die Arbeit, die Abschnitt 2 bibliografisch bestätigt hat: a) Korendiy et al. 2026. Für b) und c) entsteht kein
+Textvorschlag, solange die Verlagsseiten nicht gelesen sind (E-1). Alles in diesem Abschnitt ist Vorschlag. Quelltext,
+PDF und Literaturverzeichnis des Arbeitspapiers v2.5 bleiben unverändert (Variante A); der Berichtigungshinweis steht in
+[`arbeitspapier/README.md`](arbeitspapier/README.md) und in den
+[Offenen Punkten](arbeitspapier/PCMMS_Arbeitspapier_Offene_Punkte.md) (Nr. 45 und 46).
+
+### 3.1 Berichtigung zu Anhang C
+
+**Sachverhalt.** Anhang C führt „Korendiy et al. 2026“ an zwei Stellen als nicht auffindbar. Die Arbeit besteht und ist
+am 08.06.2026 erschienen, vor dem Stichtag der Recherche (4. und 5. September 2026, Z. 5757). Die Suche hat sie nicht
+gefunden.
+
+**Verifikationstabelle (`tab:verifikation`), Zeile Z. 5816.** Bisher:
+
+```latex
+    Gurskyi/Korendiy et al.\ 2023 & MDPI & DOI & Ersatz für nicht auffindbares „Korendiy 2026“ \\
+```
+
+Vorschlag, mit einer neuen Zeile für die geprüfte Arbeit:
+
+```latex
+    Gurskyi/Korendiy et al.\ 2023 & MDPI & DOI & am 5.9.2026 anstelle der damals nicht gefundenen Angabe „Korendiy 2026“ aufgenommen; diese ist inzwischen bestätigt (nächste Zeile) \\
+    Korendiy et al.\ 2026 & Extrica, Crossref & DOI & geprüft am 10.11.2026, Volltext gelesen; erschienen am 8.6.2026, bei der Suche vom 4./5.9.2026 nicht gefunden \\
+```
+
+**„Nicht aufgenommene Angaben“, Punkt „Korendiy et al. 2026“ (Z. 5860–5862).** Bisher:
+
+```latex
+\item \emph{„Korendiy et al.\ 2026“} --- keine Arbeit dieses Jahres
+      auffindbar; die Arbeitsgruppe ist real, die verifizierte Arbeit
+      von 2023 wurde stattdessen aufgenommen.
+```
+
+Vorschlag:
+
+```latex
+\item \emph{„Korendiy et al.\ 2026“} --- bei der Suche am 4.\ und
+      5.\ September 2026 nicht gefunden; aufgenommen wurde damals die
+      verifizierte Arbeit derselben Gruppe von 2023. Berichtigung vom
+      10.\ November 2026: Die Arbeit besteht. Sie ist am 8.\ Juni 2026
+      erschienen, also vor dem Stichtag; die Suche hat sie nicht
+      gefunden. Sie ist auf der Verlagsseite geprüft, im Volltext
+      gelesen und aufgenommen \cite{korendiy2026}.
+```
+
+**Punkt zur Fudan-Zuschreibung (Z. 5863–5869).** Kein Vorschlag, weil c) nicht im Sinn von Anhang C bestätigt ist. Als
+Hinweis für die Sichtprüfung: Die von den Texten als „Xiong & Xu (2015)“ genannte Arbeit ist nach dem Registereintrag
+Zhan und Xu 2015; der Eintrag nennt die Tongji-Universität, nicht die Fudan-Universität, und die Arbeit ist keine der
+beiden Fundstellen in [`einordnung.md`](einordnung.md) §5 (Abschnitt 2.3).
+
+### 3.2 Textvorschlag für „Mehrkörperdynamik und phasengesteuerte Anregung“
+
+Ein Absatz für a), im Ton der vorhandenen Absätze. Einzufügen nach dem Satz zu Gurskyi, Korendiy et al., der in Z. 746
+mit `\cite{gurskyi2023}` endet; der Satz zur Haptik (Z. 746–750) beginnt dann einen neuen Absatz.
+
+```latex
+Korendiy et al.\ untersuchen ein ebenes Dreimassensystem mit
+Schubkurbelantrieb: Zwei Hilfsmassen laufen auf geneigten Führungen und
+regen das viskoelastisch gelagerte Arbeitsorgan über
+Feder-Dämpfer-Glieder an \cite{korendiy2026}. Stellgröße ist der
+Phasenversatz zwischen den beiden Kurbelkanälen, Zielgröße die
+stationäre Bahn des Arbeitsorgans --- geradlinig, elliptisch oder
+nahezu kreisförmig. Die nicht harmonische Kurbelkinematik erscheint
+dort als kleine Störung der idealen Bahn. Die Arbeit ist eine
+Simulationsstudie an einem Modell mit vier Freiheitsgraden; ein
+Experiment steht aus, und eine Kraft an Auflage oder Fundament wird
+nicht ausgewertet.
+```
+
+**Gilt der Absatz „Der Zweck ist in diesen Anwendungen …“ (Z. 764–769) unverändert?** Mit a) ja. Zweck der neuen Arbeit
+ist die Bahn des Arbeitsorgans, und die steht in der Aufzählung des Absatzes (Z. 766). Die Kraft an der Auflage ist dort
+nicht Zielgröße; sie wird nicht einmal ausgewertet, „Begleiterscheinung“ (Z. 769) trifft also nur im weiteren Sinn. Für
+b) und c) ist die Frage vor einer Aufnahme am Volltext zu klären. Nach den gelesenen Nebenquellen und dem Abstract
+fielen sie unter „Betrag der resultierenden Kraft“ und „Fortbewegung eines Körpers“; bei b) wäre die erzeugte Kraft
+allerdings selbst die Zielgröße.
+
+Unabhängig von den neuen Arbeiten steht der Absatz schon am Stand `51f79a2` in Spannung zum Absatz davor: Dort heißt es
+für die Robotik, Bewegung und Kontaktkraft würden „gemeinsam als Entwurfsgrößen behandelt“ (Z. 753–754), hier dagegen,
+die Kraft an der Auflagefläche sei „durchweg“ nicht Zielgröße, sondern Begleiterscheinung (Z. 764–769). Das ist im Pull
+Request gemeldet und nicht geändert.
+
+### 3.3 Folgeänderungen bei einer Aufnahme von a)
+
+1. [`references.bib`](arbeitspapier/references.bib): neuer Eintrag `korendiy2026` mit den Feldern aus Abschnitt 2.4,
+   nach `gurskyi2023` (Z. 214–223 der Datei); Kopfkommentar um den Prüfstand 10.11.2026 ergänzen.
+2. „Einordnung und mögliche Lücke“, Z. 925–927: den Verweis `\cite{chen2019, osadchyy2023, gurskyi2023}` um
+   `korendiy2026` ergänzen.
+3. Z. 5792: „Jede der 21 Literaturquellen“ wird zu 22; dazu der Hinweis, dass ein Eintrag am 10.11.2026 geprüft ist
+   (der Stichtag der Rahmendaten, Z. 5757, bleibt 4. und 5. September 2026).
+4. Verifikationstabelle: neue Zeile und geänderte Anmerkung wie in 3.1; in den Rahmendaten (Z. 5759–5760,
+   „Verifikationsquellen“) fehlt Extrica.
+5. „Nicht aufgenommene Angaben“, Einleitungssatz Z. 5852–5854: „Drei Angaben … wurden nicht aufgenommen, weil sie sich
+   nicht verifizieren ließen“ gilt nach der Berichtigung nur noch für zwei.
+6. „Folgerung für die Aussagen zum Forschungsstand“ (Z. 5882–5895): Dass die gezielte Suche eine einschlägige, drei
+   Monate vorher erschienene Arbeit nicht gefunden hat, gehört als Beleg für ihre begrenzte Reichweite dorthin (ein
+   Satz).
+7. Versionshinweis und Titelblatt, Neusatz nach [`arbeitspapier/README.md`](arbeitspapier/README.md) und die Verweise
+   auf „v2.5“ in anderen Dateien: nur in Variante B (E-2).
+8. Die Zählungen unter „Stand des Dokuments“ in den Offenen Punkten (Z. 64, 110, 123 der Datei) sind historisch und
+   bleiben.

@@ -19,6 +19,12 @@ Deutsche Passagen verwenden deutsche Trennmuster (ngerman) mit Ausnahmen für Zu
 Kontakt-eigenfrequenz. Abstract, englische Suchbegriffe und Literaturtitel verwenden englische Trennmuster;
 deutsche Literaturvermerke bleiben als Deutsch ausgezeichnet.
 
+**Berichtigung 10.11.2026.** Anhang C des Arbeitspapiers v2.5 führt die Angabe „Korendiy et al. 2026“ als nicht
+auffindbar. Die Arbeit besteht (Vibroengineering Procedia 62, 2026, S. 41–50, DOI 10.21595/vp.2026.26165, erschienen am
+08.06.2026); die Suche vom 4. und 5. September 2026 hat sie nicht gefunden. Prüfung, Wortlaut der Berichtigung und
+Textvorschläge stehen in der [Abgleichnotiz vom 10.11.2026](../abgleichnotiz_2026-11-10_gutachten.md), Abschnitte 2
+und 3; PDF, Quelltext und Literaturverzeichnis sind nicht geändert, Fachstand und Version bleiben v2.5.
+
 ## Änderungen
 
 **v2.5 (16.10.2026).** Lesefassung der Nachträge vom 2. und 3. Oktober 2026, die bisher nur im Quelltext von v2.4 standen: Reichweite der Kontrollgröße begrenzt, Definition von F_min − ⟨N⟩, Antrieb, Kontakt und Nennlast als offene Entscheidungen, der Wert am Punkt (0°, 208,4°) als Folge eines von der Festschritt-Integration verlängerten Einschwingens, Profilasymmetrie und Harmonische, Lücken- und Beitragsaussagen auf Suchbefunde zurückgenommen. Gegenüber diesem Quelltext ändern sich nur Titelblatt, Versionshinweis und Präambel. Einzelheiten im Versionshinweis des Papiers.
