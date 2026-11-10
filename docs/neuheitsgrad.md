@@ -245,7 +245,7 @@ das Projekt keine Aussage, ein Gegenstand sei dort nicht behandelt.
 Phasenversatz zweier Schubkurbelkanäle die Bahn eines Arbeitsorgans; eine Kraft an Auflage oder Fundament wird nicht
 ausgewertet. Mikus, Olgac, Sipahi 2009 und Zhan, Xu 2015 sind nur am Registereintrag bestätigt; die Arbeit von Zhan und
 Xu gehört nach Titel und Abstract zum Strang der vibrationsgetriebenen Systeme mit inneren Massen. §9 gilt weiter:
-Keine der drei Arbeiten steht im Literaturverzeichnis, und die Recherche in diesem Strang ist nicht begonnen.
+Keine der drei Arbeiten steht im Literaturverzeichnis, und über die drei Angaben hinaus ist nicht recherchiert.
 
 ---
 

@@ -26,7 +26,8 @@ unabhängige Begutachtung und kein Beleg. Diese Notiz hält fest, welche ihrer A
 ändert weder eine Regel noch einen Plan.
 
 Die Texte selbst sind nicht abgelegt. Ihre Aussagen sind unter den Arbeitskennungen G-1 bis G-8 sinngemäß
-wiedergegeben (Abschnitt 1). Die Kennungen E-1 bis E-4 in Abschnitt 7 bezeichnen offene Entscheidungen des Autors; sie
+wiedergegeben (Abschnitt 1). Grundlage der Wiedergabe ist der Auftrag des Autors vom 10.11.2026; die Texte selbst lagen
+bei der Bearbeitung nicht vor. Die Kennungen E-1 bis E-4 in Abschnitt 7 bezeichnen offene Entscheidungen des Autors; sie
 sind weder die Eingänge E-1 bis E-4 der [Abgleichnotiz vom 29.10.2026](abgleichnotiz_2026-10-29_v4.md) noch die
 explorativen Fragen E1 bis E5 der [Präregistrierung v2 (Entwurf)](praeregistrierung_v2_entwurf.md).
 
@@ -41,7 +42,7 @@ Abstract und der Rechercheanhang sind vorhanden.
 | **G-1** Im Arbeitspapier fehle ein Abschnitt zu Forschungsstand und Beitrag; der Literaturabgleich liege nur als eigenes Dokument vor. | **Trifft nicht zu.** Das Arbeitspapier v2.5 enthält das Kapitel „Stand der Forschung“ mit acht Abschnitten, darunter „Mehrkörperdynamik und phasengesteuerte Anregung“ und „Einordnung und mögliche Lücke“ mit vier Merkmalen der untersuchten Konstellation, und den Anhang „Dokumentation der Literaturrecherche“ (Anhang C). Richtig ist nur der engere Punkt, dass die Einträge des Literaturabgleichs vom 12.09.2026 nicht ins Arbeitspapier übernommen sind (unten, „Was zutrifft“). | `chap:stand` Z. 700–973, Abschnitte ab Z. 703, 721, 771, 825, 863, 885, 905, 920; „Mehrkörperdynamik …“ Z. 721–769; „Einordnung und mögliche Lücke“ Z. 920–973, Merkmale Z. 942–951; `app:recherche` Z. 5732–5895 |
 | **G-2** Die Beitragsaussage fehle in Abstract und Einleitung oder sei unklar; sie sei zu „verdichten“. | **Trifft nicht zu.** Kurzfassung und Abstract schließen mit der Beitragsaussage (keine neue Physik; möglicher Beitrag methodisch und eng; Neuheit ohne systematische Recherche offen). Die Einleitung enthält den Abschnitt „Beitrag dieser Arbeit“ mit neun Punkten, das Fazit den Abschnitt „Methodischer Beitrag“. Ob die Aussagen untereinander widerspruchsfrei sind, ist eine andere Frage; sie ist in Abschnitt 4 geprüft. | Kurzfassung Z. 144–149; Abstract Z. 225–230; `sec:beitrag` Z. 590–696; Fazit „Methodischer Beitrag“ Z. 5175–5196 |
 | **G-3** Abzugrenzen sei gegen „Olgac (2005)“, „Korendiy et al. (2026)“ und „Xiong & Xu (2015)“, mit einer Tabelle Zielgröße/Abgrenzung. | **Teilweise schon geführt, in dieser Form nicht übernommen.** „Korendiy et al. 2026“ führt Anhang C als nicht auffindbar; zitiert ist stattdessen Gurskyi, Korendiy et al. 2023. Arbeiten von Fang, Xu und Mitarbeitern stehen als bibliografisch ungeprüfte Kandidaten in Anhang C, in der Einordnung, im Neuheitsgrad-Dokument und in den Zehn Fragen. „Olgac“ kommt im Repository nicht vor. Die drei Angaben sind Gegenstand von Abschnitt 2; die Abgrenzungstabelle des Gutachtens wird nicht übernommen. | Verifikationstabelle Z. 5816; „Nicht aufgenommene Angaben“ Z. 5860–5862 und Z. 5863–5869; Zitat Gurskyi/Korendiy 2023 Z. 741–746, [`references.bib`](arbeitspapier/references.bib) Z. 214–223; [`einordnung.md`](einordnung.md) §5, Z. 165–174; [`neuheitsgrad.md`](neuheitsgrad.md) §10, Z. 236–240; [`zehn_fragen.md`](zehn_fragen.md) Z. 19–21; Suche nach „Olgac“ im ganzen Repository ohne Treffer |
-| **G-4** Beitragsformel: Rekombination bekannter Bausteine (Phasensteuerung, Mehrmassensystem, Kontaktkraft) unter methodischer Kontrolle (ruhender Körper, Nullkontrolle, Präregistrierung) mit dem Ziel der Wellenform-Charakterisierung, nicht der Entdeckung eines neuen Effekts. | **Nicht übernommen; am Repository gemessen.** Die Formel trifft den Verzicht auf einen Effektanspruch und die Selbstbeschreibung als Rekombination. Sie ändert den Anspruch beim Status der Präregistrierung, bei der Gewichtung der Nullgröße und beim Ziel; Zielgrößen nennt erst die Tabelle des Gutachtens. | Abschnitt 4.5 |
+| **G-4** Der Beitrag sei eine Rekombination bekannter Bausteine (Phasensteuerung, Mehrmassensystem, Kontaktkraft) unter methodischer Kontrolle (ruhender Körper, Nullkontrolle, Präregistrierung); Ziel sei die Charakterisierung der Wellenform, nicht die Entdeckung eines neuen Effekts. | **Nicht übernommen; am Repository gemessen.** Die Formel trifft den Verzicht auf einen Effektanspruch und die Selbstbeschreibung als Rekombination. Sie ändert den Anspruch beim Status der Präregistrierung, bei der Gewichtung der Nullgröße und beim Ziel; Zielgrößen nennt erst die Tabelle des Gutachtens. | Abschnitt 4.5 |
 | **G-5** Die Messkampagne der Linie A sei zu konkretisieren (Hardware, Kanalplan, Schutzkonzept). | **Nicht Teil dieses Abgleichs.** | Abschnitt 6 |
 | **G-6** Ein Benchmark sei zu prüfen (offene Daten, Nachrechnung durch Dritte). | **Bestandsaufnahme.** Festgehalten ist, was heute allein aus dem Repository nachrechenbar ist; eine Seite dazu entsteht nicht. | Abschnitt 5 |
 | **G-7** Die Unabhängigkeit sei als Stärke darzustellen. | **Nicht Teil dieses Abgleichs.** | Abschnitt 6 |
@@ -81,13 +82,12 @@ aus dem selbst gelesenen Text; der Lesestand steht dabei.
 | Angabe der Texte | Gefundene Arbeit | Bibliografisch geprüft | Lesestand | DOI |
 |---|---|---|---|---|
 | a) „Korendiy et al. (2026)“ | Korendiy, Yaniv, Predko, Laushnyk, Dzyubyk, Hrevtsov 2026, Vibroengineering Procedia 62, S. 41–50 | **ja** (Verlagsseite, Verlags-PDF, DOI aufgelöst; Register stimmt überein) | Volltext | `10.21595/vp.2026.26165` |
-| b) „Olgac (2005)“ | kein Aufsatz dieser Form; gefunden: Mikus, Olgac, Sipahi 2009, Control Engineering Practice 17 (1), S. 210–220 | **nein** – DOI aufgelöst und Registereintrag gelesen, die Verlagsseite verlangt eine Captcha-Eingabe und ist nicht gelesen | nur Katalogeintrag (Aufsatz); daneben Abstract der Konferenzfassung und Patentanmeldung | `10.1016/j.conengprac.2008.07.002` |
+| b) „Olgac (2005)“ | kein Aufsatz dieser Form; gefunden: Mikus, Olgac, Sipahi 2009, Control Engineering Practice 17 (1), S. 210–220 | **nein** – DOI aufgelöst und Registereintrag gelesen, die Verlagsseite verlangt eine Captcha-Eingabe und ist nicht gelesen | nur Katalogeintrag (Aufsatz); daneben der Abstract der Konferenzfassung | `10.1016/j.conengprac.2008.07.002` |
 | c) „Xiong & Xu (2015)“ | Zhan, Xu 2015, Advances in Mechanical Engineering 7 (3), Artikel 1687814015573766; „Xiong“ ist der Vorname des Erstautors | **nein** – DOI aufgelöst und Registereintrag gelesen, die Verlagsseite verlangt eine Captcha-Eingabe und ist nicht gelesen | Abstract (im Registereintrag) | `10.1177/1687814015573766` |
 
 Die Angabe in Anhang C, zu „Korendiy et al. 2026“ sei keine Arbeit dieses Jahres auffindbar (Z. 5860–5862, Stichtag
 4. und 5. September 2026, Z. 5757), ist damit überholt: Die Arbeit ist am 08.06.2026 erschienen, die Suche hat sie nicht
-gefunden. Für b) und c) steht die Bestätigung auf der Verlagsseite aus; im Browser ist sie eine Sache von Minuten
-(E-1).
+gefunden. Für b) und c) fehlt die Bestätigung auf der Verlagsseite; sie gehört zur Sichtprüfung des Autors (E-1).
 
 ### 2.1 a) „Korendiy et al. (2026)“
 
@@ -105,16 +105,16 @@ gefunden. Für b) und c) steht die Bestätigung auf der Verlagsseite aus; im Bro
 | Art der Arbeit | Analytik (Modell, stationäre Amplituden- und Phasenbeziehungen) und numerische Simulation (Wolfram Mathematica) an einem idealisierten Modell. Kein Experiment; die experimentelle Prüfung an einem Prototyp ist als künftige Arbeit genannt (dort Abschnitte 3, 4). |
 
 **Abgrenzung zu PCMMS** (entlang der vier Merkmale, Z. 942–951). Gemeinsam sind ein Körper auf Stützen, der seinen
-Antrieb mit bewegten Massen selbst trägt, drei bewegte Massen, die relative Phase als wichtigste Stellgröße, eine nicht
-harmonische Bewegung aus der Kurbelkinematik und eine reine Simulationsstudie an einem idealisierten Modell. Zielgröße
+Antrieb mit bewegten Massen selbst trägt, drei Massen, die relative Phase als wichtigste Stellgröße, eine nicht
+harmonische Bewegung (dort aus der Kurbelkinematik) und eine reine Simulationsstudie an einem idealisierten Modell. Zielgröße
 ist dort die Bahn des Arbeitsorgans, nicht die Wellenform einer Kontaktkraft; gestellt wird die Phase zwischen zwei
 Erregerkanälen mit je einer Hilfsmasse, und der Körper soll schwingen, auf beidseitig viskoelastischen Stützen ohne
 einseitigen Kontakt. Eine Kraft an Auflage oder Fundament wird nicht ausgewertet, und eine durch einen Erhaltungssatz
 festgelegte Kontrollgröße kommt im Volltext nicht vor.
 
-Die Arbeit nennt in Einleitung und Literaturliste eigene Vorarbeiten der Gruppe zur Schubkurbel-Erregung. Sie sind hier
-weder geprüft noch als Kandidaten aufgenommen (E-4). In der Literaturliste steht auch Osadchyy et al. 2023, das im
-Literaturverzeichnis des Arbeitspapiers geführt ist.
+Die Literaturliste der Arbeit enthält mehrere frühere Arbeiten mit Korendiy als Autor, darunter solche zur
+Schubkurbel-Erregung (dort [18] bis [20]). Sie sind hier weder geprüft noch als Kandidaten aufgenommen (E-4). In der
+Literaturliste steht auch Osadchyy et al. 2023, das im Literaturverzeichnis des Arbeitspapiers geführt ist.
 
 ### 2.2 b) „Olgac (2005)“
 
@@ -126,14 +126,14 @@ Patentanmeldung derselben drei Personen, die mutmaßliche Herkunft der Angabe. Z
 |---|---|
 | Bibliografie | Oldrich Mikus, Nejat Olgac, Rifat Sipahi: „An actively controlled harmonic force generator“. Control Engineering Practice, Band 17, Heft 1 (Januar 2009), S. 210–220; ISSN 0967-0661; Elsevier. DOI `10.1016/j.conengprac.2008.07.002`. Angaben nach dem Registereintrag. |
 | Prüfweg | Registereintrag <https://api.crossref.org/works/10.1016/j.conengprac.2008.07.002>: Autoren, Titel, Zeitschrift, Band, Heft, Seiten, Jahr. <https://doi.org/10.1016/j.conengprac.2008.07.002> leitet weiter (302) auf <https://linkinghub.elsevier.com/retrieve/pii/S0967066108001238> (200), eine Weiterleitungsseite des Verlags, die nur den Titel und die Kennung (PII) des Artikels nennt. Die Artikelseite <https://www.sciencedirect.com/science/article/pii/S0967066108001238> antwortet mit 403 und einer Captcha-Abfrage; sie ist nicht gelesen. Abruf 10.11.2026. **Bibliografisch geprüft: nein** – Registereintrag und DOI-Auflösung liegen vor, die Bestätigung auf der Verlagsseite fehlt. |
-| Lesestand | Zeitschriftenaufsatz: nur Katalogeintrag (der Registereintrag enthält keinen Abstract). Nebenquellen, kein Ersatz für den Aufsatz: Abstract der Konferenzfassung im Registereintrag; Patentanmeldung im Volltext. |
-| System | Aus dem Katalogeintrag nicht zu entnehmen. Konferenz-Abstract: Geräte mit umlaufenden Exzentermassen. Patentanmeldung: vier gleiche umlaufende Exzentermassen, paarweise gegenläufig; die Kraftanteile quer zur Wirklinie heben sich auf. |
-| Bewegungsgesetz | Aus dem Katalogeintrag nicht zu entnehmen. Patentanmeldung: Umlauf mit im Idealfall konstanter Winkelgeschwindigkeit, also harmonische Kraft; die Drehzahl wird nur in Übergängen verändert. |
-| Stellgröße | Aus dem Katalogeintrag nicht zu entnehmen. Konferenz-Abstract: Amplitude, Frequenz und Phasenwinkel der harmonischen Kraft. Patentanmeldung: die relative Winkellage φ („relative angular position“) zwischen zwei Gruppen der vier Massen stellt die Kraftamplitude (Spitzenwert 4·m·ω²·r·cos(φ/2), von null bei φ = π bis 4·m·ω²·r bei φ = 0); die Drehzahl stellt die Frequenz; die Phase der Kraft gegen ein Bezugssignal wird über vorübergehende Drehzahländerungen gestellt. |
-| Zielgröße | Aus dem Katalogeintrag nicht zu entnehmen. Konferenz-Abstract und Patentanmeldung: eine harmonische Kraft (nach der Patentanmeldung längs einer festen Achse) mit einstellbarer Amplitude (null bis F_max), Frequenz (rund ±10 % um die Nennfrequenz) und Phase (0 bis 2π gegen ein gegebenes harmonisches Signal), zur Erregung oder zur Tilgung harmonischer Schwingungen einer Struktur. |
-| Körper | Aus dem Katalogeintrag nicht zu entnehmen; in den Nebenquellen kein ruhender Körper auf einer einseitigen Auflage genannt. |
-| Kraft an Auflage oder Fundament | Aus dem Katalogeintrag nicht zu entnehmen. In den Nebenquellen ist die erzeugte resultierende Kraft selbst die Zielgröße; nach der Patentanmeldung wird sie am Prototyp mit einem Kraftaufnehmer gemessen. Eine Auflagekraft ist nicht genannt. |
-| Art der Arbeit | Aus dem Katalogeintrag nicht zu entnehmen. Konferenz-Abstract: Entwurf und Steuerung, Erprobung an einem Prototyp. Patentanmeldung: Analytik und Versuche an einem gebauten Prototyp. |
+| Lesestand | Zeitschriftenaufsatz: nur Katalogeintrag (der Registereintrag enthält keinen Abstract). Nebenquelle, kein Ersatz für den Aufsatz: der Abstract der Konferenzfassung im Registereintrag. |
+| System | Aus dem Katalogeintrag nicht zu entnehmen. Abstract der Konferenzfassung: Geräte mit umlaufenden Exzentermassen; Zahl und Anordnung der Massen sind im Abstract nicht genannt. |
+| Bewegungsgesetz | Aus dem Katalogeintrag nicht zu entnehmen. Abstract der Konferenzfassung: Erzeugt wird eine harmonische Kraft; ob die Bewegung der Massen vorgegeben ist, ist im Abstract nicht genannt. |
+| Stellgröße | Aus dem Katalogeintrag nicht zu entnehmen. Abstract der Konferenzfassung: Verstellt werden Amplitude, Frequenz und Phasenwinkel der harmonischen Kraft. Die „relative phase“ ist dort die Phase der Kraft gegen ein gegebenes harmonisches Signal; eine Phase zwischen den Massen nennt der Abstract nicht. |
+| Zielgröße | Aus dem Katalogeintrag nicht zu entnehmen. Abstract der Konferenzfassung: eine harmonische Kraft mit einstellbarer Amplitude (null bis F_max), Frequenz (rund ±10 % um die Nennfrequenz) und Phase (0 bis 2π gegen ein gegebenes harmonisches Signal), zur Krafterregung oder zur Tilgung harmonisch erregter Schwingungen; dazu ein günstiges Verhältnis von Spitzenkraft zu Gewicht. |
+| Körper | Aus dem Katalogeintrag nicht zu entnehmen; im Abstract der Konferenzfassung nicht genannt. |
+| Kraft an Auflage oder Fundament | Aus dem Katalogeintrag nicht zu entnehmen. Im Abstract der Konferenzfassung ist die erzeugte Kraft selbst die Zielgröße; eine Kraft an Auflage oder Fundament ist dort nicht genannt. |
+| Art der Arbeit | Aus dem Katalogeintrag nicht zu entnehmen. Abstract der Konferenzfassung: Entwurf und Steuerung eines Geräts, Erprobung an einem Prototyp. |
 
 **Prüfvermerk zur Herkunft der Angabe.** Konferenzfassung nach dem Registereintrag: O. Mikus, N. Olgac, R. Sipahi,
 „An Actively Controlled Harmonic Force Generator“, in „Dynamic Systems and Control, Volumes 1 and 2“ (ASME 2003
@@ -141,13 +141,15 @@ International Mechanical Engineering Congress and Exposition, Washington, DC, 15
 DOI `10.1115/imece2003-41410`; die DOI leitet auf `asmedigitalcollection.asme.org` weiter, die Seite ist nicht
 abgerufen. Patentanmeldung: US 2005/0077845 A1, „Actively controlled harmonic force generator“, Erfinder Nejat Olgac,
 Oldrich Mikus, Rifat Sipahi, angemeldet 20.08.2004, veröffentlicht 14.04.2005, gelesen unter
-<https://patents.google.com/patent/US20050077845A1/en>. Die Patentanmeldung ist kein Literatureintrag.
+<https://patents.google.com/patent/US20050077845A1/en>. Sie beschreibt einen Kraftgenerator mit vier gleichen umlaufenden
+Exzentermassen, paarweise gegenläufig, dessen Kraftamplitude über die Winkellage zweier Massengruppen gestellt wird. Die
+Anmeldung ist die mutmaßliche Herkunft der Jahreszahl 2005. Sie ist kein Literatureintrag, und ihr Inhalt ist in der
+Tabelle oben nicht verwendet.
 
 **Abgrenzung zu PCMMS.** Der Aufsatz selbst ist nicht gelesen; die folgende Einordnung stützt sich nur auf den Abstract
-der Konferenzfassung und die Patentanmeldung. Gemeinsam sind mehrere bewegte Massen, deren gegenseitige Winkellage eine
-resultierende Kraft formt. Zielgröße ist dort eine harmonische Kraft mit einstellbarer Amplitude, Frequenz und Phase,
-nicht die Wellenform einer einseitigen Kontaktkraft; zu ruhendem Körper, Kontaktverlust und einer Kontrollgröße sagen
-die gelesenen Quellen nichts.
+der Konferenzfassung. Gemeinsam sind bewegte, hier umlaufende Massen, mit denen eine Kraft geformt wird. Zielgröße ist
+dort eine harmonische Kraft mit einstellbarer Amplitude, Frequenz und Phase, nicht die Wellenform einer einseitigen
+Kontaktkraft; zu ruhendem Körper, Kontaktverlust und einer Kontrollgröße sagt der Abstract nichts.
 
 ### 2.3 c) „Xiong & Xu (2015)“
 
@@ -268,12 +270,12 @@ Vorschlag:
 
 ```latex
 \item \emph{„Korendiy et al.\ 2026“} --- bei der Suche am 4.\ und
-      5.\ September 2026 nicht gefunden; aufgenommen wurde damals die
-      verifizierte Arbeit derselben Gruppe von 2023. Berichtigung vom
-      10.\ November 2026: Die Arbeit besteht. Sie ist am 8.\ Juni 2026
-      erschienen, also vor dem Stichtag; die Suche hat sie nicht
-      gefunden. Sie ist auf der Verlagsseite geprüft, im Volltext
-      gelesen und aufgenommen \cite{korendiy2026}.
+      5.\ September 2026 nicht gefunden; aufgenommen wurde damals
+      stattdessen die verifizierte Arbeit von 2023 \cite{gurskyi2023}.
+      Berichtigung vom 10.\ November 2026: Die Arbeit besteht. Sie ist
+      am 8.\ Juni 2026 erschienen, also vor dem Stichtag; die Suche hat
+      sie nicht gefunden. Sie ist auf der Verlagsseite geprüft, im
+      Volltext gelesen und aufgenommen \cite{korendiy2026}.
 ```
 
 **Punkt zur Fudan-Zuschreibung (Z. 5863–5869).** Kein Vorschlag, weil c) nicht im Sinn von Anhang C bestätigt ist. Als
@@ -284,7 +286,7 @@ beiden Fundstellen in [`einordnung.md`](einordnung.md) §5 (Abschnitt 2.3).
 ### 3.2 Textvorschlag für „Mehrkörperdynamik und phasengesteuerte Anregung“
 
 Ein Absatz für a), im Ton der vorhandenen Absätze. Einzufügen nach dem Satz zu Gurskyi, Korendiy et al., der in Z. 746
-mit `\cite{gurskyi2023}` endet; der Satz zur Haptik (Z. 746–750) beginnt dann einen neuen Absatz.
+mit `\cite{gurskyi2023}` endet; die beiden Sätze zur Haptik (Z. 746–750) beginnen dann einen neuen Absatz.
 
 ```latex
 Korendiy et al.\ untersuchen ein ebenes Dreimassensystem mit
@@ -303,9 +305,9 @@ nicht ausgewertet.
 **Gilt der Absatz „Der Zweck ist in diesen Anwendungen …“ (Z. 764–769) unverändert?** Mit a) ja. Zweck der neuen Arbeit
 ist die Bahn des Arbeitsorgans, und die steht in der Aufzählung des Absatzes (Z. 766). Die Kraft an der Auflage ist dort
 nicht Zielgröße; sie wird nicht einmal ausgewertet, „Begleiterscheinung“ (Z. 769) trifft also nur im weiteren Sinn. Für
-b) und c) ist die Frage vor einer Aufnahme am Volltext zu klären. Nach den gelesenen Nebenquellen und dem Abstract
-fielen sie unter „Betrag der resultierenden Kraft“ und „Fortbewegung eines Körpers“; bei b) wäre die erzeugte Kraft
-allerdings selbst die Zielgröße.
+b) und c) ist die Frage vor einer Aufnahme am Volltext zu klären. Nach den gelesenen Abstracts fielen sie unter „Betrag
+der resultierenden Kraft“ und „Fortbewegung eines Körpers“; bei b) wäre die erzeugte Kraft allerdings selbst die
+Zielgröße.
 
 Unabhängig von den neuen Arbeiten steht der Absatz schon am Stand `51f79a2` in Spannung zum Absatz davor: Dort heißt es
 für die Robotik, Bewegung und Kontaktkraft würden „gemeinsam als Entwurfsgrößen behandelt“ (Z. 753–754), hier dagegen,
