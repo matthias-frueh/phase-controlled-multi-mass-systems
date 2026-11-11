@@ -2,7 +2,7 @@
 
 ### Ein Werkstattbericht zu phasenkontrollierten Mehrmassensystemen
 
-*Matthias Früh · Gravidon Systemics Research · ORCID 0009-0005-9984-4207 · September 2026 · Nachträge 2. Oktober 2026*
+*Matthias Früh · Unabhängiger Forscher · ORCID 0009-0005-9984-4207 · September 2026 · Nachträge 2. Oktober 2026*
 
 ---
 
