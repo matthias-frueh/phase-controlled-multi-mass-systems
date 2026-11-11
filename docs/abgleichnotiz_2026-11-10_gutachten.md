@@ -2,7 +2,7 @@
 
 Projekt: Phasenkontrollierte Mehrmassensysteme (PCMMS)
 Autor: Matthias Früh, ORCID 0009-0005-9984-4207
-Erstellt: 10.11.2026, Claude Code, nach Auftrag des Autors vom selben Tag
+Erstellt: 10.11.2026, Claude Code, nach Auftrag des Autors vom selben Tag; nach Gegenlesen berichtigt am 11.11.2026
 Status: Notiz, kein Arbeitsauftrag
 Zuordnung: AP-16 (Literaturbestand); berührt die Offenen Punkte Nr. 21 und 42 des Arbeitspapiers
 Lizenz: CC BY 4.0 (Ordner docs/, siehe LICENSE-CC-BY-4.0)
@@ -75,21 +75,22 @@ bestätigt ist eine der drei Angaben, a); b) und c) sind nur am Registereintrag 
 
 **Prüfweg.** Alle Adressen wurden am 10.11.2026 zwischen 15:00 und 15:03 UTC in dieser Sitzung direkt abgerufen; gelesen
 wurden die Rohantworten der Server (HTML, PDF, JSON, Kopfzeilen der Weiterleitung), nicht die Ausgabe eines
-Zusammenfassungswerkzeugs. Aus der Vorprüfung im Chat vom selben Tag stammen nur die Suchschlüssel (Titel, Autoren,
-DOI); ihre Ergebnisse sind nicht übernommen, alle Angaben unten sind an den abgerufenen Quellen neu gelesen. Der
-Netzzugang der Sitzung war zunächst gesperrt und wurde vom Autor für sieben Hosts freigegeben (`doi.org`,
-`api.crossref.org`, `www.extrica.com`, `journals.sagepub.com`, `www.sciencedirect.com`, `linkinghub.elsevier.com`,
-`patents.google.com`). „Bibliografisch geprüft“ heißt wie in Anhang C des Arbeitspapiers (Z. 5794–5797): Autoren, Titel,
-Erscheinungsort und Jahr auf der Seite des Verlags oder Repositoriums bestätigt, DOI aufgelöst. Der Eintrag im
-DOI-Register Crossref enthält die vom Verlag hinterlegten Angaben; er ist hier als Registereintrag geführt und zählt
-nicht als Verlagsseite. Aussagen über den Inhalt stammen nur aus dem selbst gelesenen Text; der Lesestand steht dabei.
+Zusammenfassungswerkzeugs. Aus der Vorprüfung im Chat vom selben Tag stammen nur die Suchschlüssel: Titel, Autoren und
+Kennungen (die DOIs zu a) und c), zu b) die Artikelkennung PII; die DOI zu b) stammt aus der Registersuche). Ihre
+Ergebnisse sind nicht übernommen, alle Angaben unten sind an den abgerufenen Quellen neu gelesen. Der Netzzugang der
+Sitzung war zunächst gesperrt und wurde vom Autor für sieben Hosts freigegeben (`doi.org`, `api.crossref.org`,
+`www.extrica.com`, `journals.sagepub.com`, `www.sciencedirect.com`, `linkinghub.elsevier.com`, `patents.google.com`).
+„Bibliografisch geprüft“ heißt wie in Anhang C des Arbeitspapiers (Z. 5794–5797): Autoren, Titel, Erscheinungsort und
+Jahr auf der Seite des Verlags oder Repositoriums bestätigt, DOI aufgelöst. Der Eintrag im DOI-Register Crossref enthält
+die vom Verlag hinterlegten Angaben; er ist hier als Registereintrag geführt und zählt nicht als Verlagsseite. Aussagen
+über den Inhalt stammen nur aus dem selbst gelesenen Text; der Lesestand steht dabei.
 
 **Ergebnis.**
 
 | Angabe der Texte | Gefundene Arbeit | Bibliografisch geprüft | Lesestand | DOI |
 |---|---|---|---|---|
 | a) „Korendiy et al. (2026)“ | Korendiy, Yaniv, Predko, Laushnyk, Dzyubyk, Hrevtsov 2026, Vibroengineering Procedia 62, S. 41–50 | **ja** (Verlagsseite, Verlags-PDF, DOI aufgelöst; Register stimmt überein) | Volltext | `10.21595/vp.2026.26165` |
-| b) „Olgac (2005)“ | kein Aufsatz von 2005 zum Kraftgenerator gefunden (eine Registerabfrage nach Titel und Autoren); gefunden: Mikus, Olgac, Sipahi 2009, Control Engineering Practice 17 (1), S. 210–220 | **nein** – DOI aufgelöst und Registereintrag gelesen; die Weiterleitungsseite des Verlags nennt nur den Titel, die Artikelseite verlangt eine Captcha-Eingabe und ist nicht gelesen | nur Katalogeintrag (Aufsatz); daneben der Abstract eines Tagungsbeitrags gleichen Titels von 2003 | `10.1016/j.conengprac.2008.07.002` |
+| b) „Olgac (2005)“ | kein Aufsatz von 2005 zum Kraftgenerator gefunden (eine Registerabfrage nach Titel und Autoren, die ersten fünf Treffer); gefunden: Mikus, Olgac, Sipahi 2009, Control Engineering Practice 17 (1), S. 210–220 | **nein** – DOI aufgelöst und Registereintrag gelesen; die Weiterleitungsseite des Verlags nennt nur den Titel, die Artikelseite verlangt eine Captcha-Eingabe und ist nicht gelesen | nur Katalogeintrag (Aufsatz); daneben der Abstract eines Tagungsbeitrags gleichen Titels von 2003 | `10.1016/j.conengprac.2008.07.002` |
 | c) „Xiong & Xu (2015)“ | Zhan, Xu 2015, Advances in Mechanical Engineering 7 (3), Artikel 1687814015573766 – mutmaßlich die gemeinte Arbeit; nach dem Registereintrag ist „Xiong“ der Vorname des Erstautors | **nein** – DOI aufgelöst und Registereintrag gelesen, die Verlagsseite antwortet mit 403 und einer Zugangsprüfung und ist nicht gelesen | Abstract (im Registereintrag) | `10.1177/1687814015573766` |
 
 Die Angabe in Anhang C, zu „Korendiy et al. 2026“ sei keine Arbeit dieses Jahres auffindbar (Z. 5860–5862, Stichtag 4.
@@ -132,16 +133,16 @@ im Literaturverzeichnis des Arbeitspapiers geführt ist.
 Einen Aufsatz von 2005 zum Kraftgenerator hat die Prüfung nicht ergeben. Dass die Angabe „Olgac (2005)“ den
 Kraftgenerator-Aufsatz von Mikus, Olgac und Sipahi meint, ist ein Hinweis der Vorprüfung und nicht gesichert; die Texte
 lagen nicht vor. Gesucht wurde mit einer einzigen Abfrage im DOI-Register nach Titel und Autoren dieses Aufsatzes, nicht
-allgemein nach Arbeiten von Olgac aus dem Jahr 2005. Unter den fünf Treffern sind ein Zeitschriftenaufsatz von 2009 und
-ein Tagungsbeitrag gleichen Titels von 2003. Ein weiterer Treffer ist ein Tagungsbeitrag von Olgac und Sipahi von 2005,
-dem Titel nach zu einem anderen Gegenstand („Chatter Stability Mapping for Simultaneous Machining“,
-DOI `10.1115/imece2005-79116`); er ist nicht geprüft und kein Kandidat. Zur Jahreszahl 2005 siehe den Prüfvermerk unten.
-Zitierfähig wäre der Aufsatz von 2009.
+allgemein nach Arbeiten von Olgac aus dem Jahr 2005. Abgerufen sind die ersten fünf Treffer (`rows=5`; das Register
+meldet 1 183 594). Unter ihnen sind ein Zeitschriftenaufsatz von 2009 und ein Tagungsbeitrag gleichen Titels von 2003.
+Ein weiterer Treffer ist ein Tagungsbeitrag von Olgac und Sipahi von 2005, dem Titel nach zu einem anderen Gegenstand
+(„Chatter Stability Mapping for Simultaneous Machining“, DOI `10.1115/imece2005-79116`); er ist nicht geprüft und kein
+Kandidat. Zur Jahreszahl 2005 siehe den Prüfvermerk unten. Zitierfähig wäre der Aufsatz von 2009.
 
 | Feld | Inhalt |
 |---|---|
 | Bibliografie | Oldrich Mikus, Nejat Olgac, Rifat Sipahi: „An actively controlled harmonic force generator“. Control Engineering Practice, Band 17, Heft 1 (Januar 2009), S. 210–220; ISSN 0967-0661; Elsevier. DOI `10.1016/j.conengprac.2008.07.002`. Angaben nach dem Registereintrag. |
-| Prüfweg | Registersuche `https://api.crossref.org/works?query.bibliographic=An+actively+controlled+harmonic+force+generator+Mikus+Olgac+Sipahi&rows=5` (dazu eine Feldauswahl mit `select=`; fünf Treffer). Registereintrag <https://api.crossref.org/works/10.1016/j.conengprac.2008.07.002>: Autoren, Titel, Zeitschrift, Band, Heft, Seiten, Jahr. <https://doi.org/10.1016/j.conengprac.2008.07.002> leitet weiter (302) auf <https://linkinghub.elsevier.com/retrieve/pii/S0967066108001238> (200), eine Weiterleitungsseite des Verlags, die nur den Titel und die Kennung (PII) des Artikels nennt. Die Artikelseite <https://www.sciencedirect.com/science/article/pii/S0967066108001238> antwortet mit 403 und einer Captcha-Abfrage; sie ist nicht gelesen. Registereintrag des Tagungsbeitrags von 2003: <https://api.crossref.org/works/10.1115/imece2003-41410>. Abruf 10.11.2026. **Bibliografisch geprüft: nein** – Registereintrag und DOI-Auflösung liegen vor, die Bestätigung auf der Verlagsseite fehlt. |
+| Prüfweg | Registersuche `https://api.crossref.org/works?query.bibliographic=An+actively+controlled+harmonic+force+generator+Mikus+Olgac+Sipahi&rows=5` (dazu eine Feldauswahl mit `select=`; abgerufen sind die ersten fünf von 1 183 594 gemeldeten Treffern). Registereintrag <https://api.crossref.org/works/10.1016/j.conengprac.2008.07.002>: Autoren, Titel, Zeitschrift, Band, Heft, Seiten, Jahr. <https://doi.org/10.1016/j.conengprac.2008.07.002> leitet weiter (302) auf <https://linkinghub.elsevier.com/retrieve/pii/S0967066108001238> (200), eine Weiterleitungsseite des Verlags, die nur den Titel und die Kennung (PII) des Artikels nennt. Die Artikelseite <https://www.sciencedirect.com/science/article/pii/S0967066108001238> antwortet mit 403 und einer Captcha-Abfrage; sie ist nicht gelesen. Registereintrag des Tagungsbeitrags von 2003: <https://api.crossref.org/works/10.1115/imece2003-41410>. Abruf 10.11.2026. **Bibliografisch geprüft: nein** – Registereintrag und DOI-Auflösung liegen vor, die Bestätigung auf der Verlagsseite fehlt. |
 | Lesestand | Zeitschriftenaufsatz: nur Katalogeintrag, hier der Registereintrag bei Crossref (ohne Abstract). Nebenquelle, kein Ersatz für den Aufsatz: der Abstract des Tagungsbeitrags gleichen Titels von 2003 im Registereintrag (zur Zuordnung siehe den Prüfvermerk). |
 | System | Aus dem Registereintrag nicht zu entnehmen. Abstract des Tagungsbeitrags: Geräte mit umlaufenden Exzentermassen; Zahl und Anordnung der Massen sind im Abstract nicht genannt. |
 | Bewegungsgesetz | Aus dem Registereintrag nicht zu entnehmen. Abstract des Tagungsbeitrags: Erzeugt wird eine harmonische Kraft; ob die Bewegung der Massen vorgegeben ist, ist im Abstract nicht genannt. |
@@ -152,17 +153,17 @@ Zitierfähig wäre der Aufsatz von 2009.
 | Art der Arbeit | Aus dem Registereintrag nicht zu entnehmen. Abstract des Tagungsbeitrags: Entwurf und Steuerung eines Geräts, Erprobung an einem Prototyp. |
 
 **Prüfvermerk zur Herkunft der Angabe.** Tagungsbeitrag nach dem Registereintrag
-<https://api.crossref.org/works/10.1115/imece2003-41410> (Abruf 10.11.2026): O. Mikus, N. Olgac, R. Sipahi,
-„An Actively Controlled Harmonic Force Generator“, in „Dynamic Systems and Control, Volumes 1 and 2“ (ASME 2003
-International Mechanical Engineering Congress and Exposition, Washington, DC, 15.–21.11.2003), S. 31–40,
-DOI `10.1115/imece2003-41410`. Dass er die Konferenzfassung des Aufsatzes ist, ist aus dem gleichen Titel und denselben
-drei Autoren geschlossen; eine Beziehung zwischen beiden Einträgen ist im Register nicht hinterlegt. Als Zieladresse der
-DOI nennt der Registereintrag eine Seite unter `asmedigitalcollection.asme.org`; die DOI ist in dieser Sitzung nicht
-aufgelöst, die Seite nicht abgerufen. Patentanmeldung: US 2005/0077845 A1, „Actively controlled harmonic force
-generator“, Erfinder Nejat Olgac, Oldrich Mikus, Rifat Sipahi, angemeldet 20.08.2004, veröffentlicht 14.04.2005, gelesen
-unter <https://patents.google.com/patent/US20050077845A1/en>. Der Titel ist bis auf den einleitenden Artikel der des
-Aufsatzes, die drei Personen sind dieselben; die Anmeldung ist die mutmaßliche Herkunft der Jahreszahl 2005. Sie ist
-kein Literatureintrag, und ihr Inhalt ist in dieser Notiz nicht verwendet.
+<https://api.crossref.org/works/10.1115/imece2003-41410> (Abruf 10.11.2026): O. Mikus, N. Olgac, R. Sipahi, „An Actively
+Controlled Harmonic Force Generator“, in „Dynamic Systems and Control, Volumes 1 and 2“ (ASME 2003 International
+Mechanical Engineering Congress and Exposition, Washington, DC, 15.–21.11.2003), S. 31–40, DOI
+`10.1115/imece2003-41410`. Dass er die Konferenzfassung des Aufsatzes ist, ist aus dem gleichen Titel und denselben drei
+Autoren geschlossen; eine Beziehung zwischen beiden Einträgen ist im Register nicht hinterlegt. Als Zieladresse der DOI
+nennt der Registereintrag eine Seite unter `asmedigitalcollection.asme.org`; die DOI ist in dieser Sitzung nicht
+aufgelöst, die Seite nicht abgerufen. Patentanmeldung (Nummer aus der Vorprüfung): US 2005/0077845 A1, „Actively
+controlled harmonic force generator“, Erfinder Nejat Olgac, Oldrich Mikus, Rifat Sipahi, angemeldet 20.08.2004,
+veröffentlicht 14.04.2005, gelesen unter <https://patents.google.com/patent/US20050077845A1/en>. Der Titel ist bis auf
+den einleitenden Artikel der des Aufsatzes, die drei Personen sind dieselben; die Anmeldung ist die mutmaßliche Herkunft
+der Jahreszahl 2005. Sie ist kein Literatureintrag, und ihr Inhalt ist in dieser Notiz nicht verwendet.
 
 **Abgrenzung zu PCMMS** (nur nach dem Abstract des Tagungsbeitrags von 2003; der Aufsatz selbst ist nicht gelesen).
 Gemeinsam sind nach diesem Abstract bewegte Massen, mit denen eine Kraft geformt wird; er nennt dafür Geräte mit
@@ -324,9 +325,9 @@ Vorschlag:
 ```
 
 **Punkt zur Fudan-Zuschreibung (Z. 5863–5869).** Kein Vorschlag, weil c) nicht im Sinn von Anhang C bestätigt ist. Als
-Hinweis: Die in den Texten als „Xiong & Xu (2015)“ angeführte Arbeit ist nach dem Registereintrag Zhan und Xu 2015; der
-Eintrag nennt die Tongji-Universität, nicht die Fudan-Universität, und die Arbeit ist keine der beiden Fundstellen in
-[`einordnung.md`](einordnung.md) §5 (Abschnitt 2.3).
+Hinweis: Mit „Xiong & Xu (2015)“ ist mutmaßlich Zhan und Xu 2015 gemeint (Abschnitt 2.3); der Registereintrag dieser
+Arbeit nennt die Tongji-Universität, nicht die Fudan-Universität, und die Arbeit ist keine der beiden Fundstellen in
+[`einordnung.md`](einordnung.md) §5.
 
 ### 3.2 Textvorschlag für „Mehrkörperdynamik und phasengesteuerte Anregung“
 
@@ -341,16 +342,17 @@ Feder-Dämpfer-Glieder an \cite{korendiy2026}. Steuergröße ist vor allem
 der Phasenversatz zwischen den beiden Kurbelkanälen, daneben
 Führungswinkel und Kurbelradien; Zielgröße ist die stationäre Bahn des
 Arbeitsorgans --- geradlinig, elliptisch oder nahezu kreisförmig. Der
-Schieberweg ist nicht sinusförmig, und kleine Abweichungen der Bahnen
-von der idealen Ellipse oder dem Kreis führen die Autoren auf dessen
-höhere Harmonische zurück. Gerechnet wird an einem idealisierten Modell
-mit vier Freiheitsgraden, analytisch und in numerischer Simulation; ein
-Experiment steht aus, und eine Kraft an Auflage oder Fundament wird
-nicht ausgewertet.
+Schieberweg ist nur näherungsweise sinusförmig, und kleine Abweichungen
+der Bahnen von der idealen Ellipse oder dem Kreis führen die Autoren
+auf dessen höhere Harmonische zurück. Gerechnet wird an einem
+idealisierten Modell mit vier Freiheitsgraden, analytisch und in
+numerischer Simulation; ein Experiment steht aus, und eine Kraft an
+Auflage oder Fundament wird nicht ausgewertet.
 ```
 
-Der Vorschlag hat vier Sätze und folgt der Wortwahl des Arbeitspapiers („Steuergröße“, „nicht sinusförmig“). Jede
-Aussage steht in Abschnitt 2.1.
+Der Vorschlag hält die Grenze von fünf Sätzen ein (vier Satzschlüsse, im ersten Satz ein Ganzsatz nach dem Doppelpunkt)
+und folgt der Wortwahl des Arbeitspapiers („Steuergröße“, Z. 804; für die Schubkurbel „näherungsweise sinusförmig“,
+Z. 2270–2271 und Z. 4125–4126). Jede Aussage steht in Abschnitt 2.1.
 
 **Gilt der Absatz „Der Zweck ist in diesen Anwendungen …“ (Z. 764–769) unverändert?** Mit a) ja. Zweck der neuen Arbeit
 ist die Bahn des Arbeitsorgans, und die steht in der Aufzählung des Absatzes (Z. 766). Die Kraft an der Auflage ist dort
@@ -364,8 +366,9 @@ Begleiterscheinung“ (Z. 764–769). Das ist nicht geändert und in der Beschre
 
 ### 3.3 Folgeänderungen
 
-Nr. 1 bis 4 gelten bei einer Aufnahme von a), Nr. 5 und 6 schon mit der Berichtigung; Nr. 7 betrifft den Neusatz, Nr. 8
-nennt, was bleibt, und Nr. 9 die Dateien außerhalb des Arbeitspapiers.
+Nr. 1 bis 3 und die neue Zeile aus Nr. 4 gelten bei einer Aufnahme von a); die geänderte Anmerkung aus Nr. 4 (ohne den
+Zusatz „(nächste Zeile)“) sowie Nr. 5 und 6 gelten schon mit der Berichtigung; Nr. 7 betrifft den Neusatz, Nr. 8 nennt,
+was bleibt, und Nr. 9 die Dateien außerhalb des Arbeitspapiers.
 
 1. [`references.bib`](arbeitspapier/references.bib): neuer Eintrag `korendiy2026` mit den Feldern aus Abschnitt 2.4,
    nach `gurskyi2023` (Z. 214–223 der Datei) und mit eigener Kommentarzeile zum Prüfstand 10.11.2026, weil der Block
@@ -378,9 +381,9 @@ nennt, was bleibt, und Nr. 9 die Dateien außerhalb des Arbeitspapiers.
    für die Bahnform eines Dreimassensystems am Modell untersucht `\cite{korendiy2026}`“.
 3. Z. 5792: „Jede der 21 Literaturquellen“ wird zu 22; dazu der Hinweis, dass ein Eintrag am 10.11.2026 geprüft ist
    (der Stichtag der Rahmendaten, Z. 5757, bleibt 4. und 5. September 2026).
-4. Verifikationstabelle: neue Zeile und geänderte Anmerkung wie in 3.1. In den Rahmendaten (Z. 5759–5760,
-   „Verifikationsquellen“) fehlt dann Extrica; dort fehlen schon am Stand `51f79a2` Hindawi, PMC, CRC und McGraw-Hill,
-   die die Tabelle nennt (Z. 5814, 5815, 5822, 5823; in der Beschreibung des Pull Requests gemeldet).
+4. Verifikationstabelle: geänderte Anmerkung wie in 3.1; die neue Zeile nur bei Aufnahme. In den Rahmendaten
+   (Z. 5759–5760, „Verifikationsquellen“) fehlt dann Extrica; dort fehlen schon am Stand `51f79a2` Hindawi, PMC, CRC und
+   McGraw-Hill, die die Tabelle nennt (Z. 5814, 5815, 5822, 5823; in der Beschreibung des Pull Requests gemeldet).
 5. „Nicht aufgenommene Angaben“, Einleitungssatz Z. 5852–5854: neu fassen (Wortlaut in 3.1); der Punkt bleibt in der
    Liste.
 6. Möglich, vom Auftrag nicht verlangt: in „Folgerung für die Aussagen zum Forschungsstand“ (Z. 5882–5895) ein Satz,
@@ -406,12 +409,13 @@ Verglichen sind sieben Stellen: (1) der Schlussabsatz der Kurzfassung (Z. 144–
 Abschnitt „Worum es geht“ der [README](../README.md) (dort Z. 9–36). Maßstab sind die „Verbindlichen Begriffe“ in
 [`overview.md`](overview.md) (dort Z. 46–57) und der [Entwurf der Präregistrierung v2](praeregistrierung_v2_entwurf.md).
 Weitere Beitragsaussagen des Repositorys sind nicht verglichen, etwa in [`einordnung.md`](einordnung.md) („Was ist dann
-konkret der Beitrag?“), [`zehn_fragen.md`](zehn_fragen.md) (Frage 2) und [`was_ist_pcmms.md`](was_ist_pcmms.md); die
-drei unten genannten Stellen außerhalb der sieben (Z. 860–861, Z. 5089–5091, `CITATION.cff`) sind keine vollständige
-Durchsicht. Ergebnis ist die Liste in 4.2; 4.3 und 4.4 halten fest, was geprüft und nicht als Anspruchsänderung gewertet
-ist. Es wird nichts umformuliert, und es gibt keinen neuen Wortlaut für Kurzfassung, Abstract oder Einleitung. Die Liste
-ist in getrennten Lesedurchgängen derselben Sitzung (Claude Code, ohne Beteiligung des Autors) an den Fundstellen
-gegengelesen; die Einordnung unter 4.2, 4.3 oder 4.4 folgt diesen Durchgängen.
+konkret der Beitrag?“), [`zehn_fragen.md`](zehn_fragen.md) (Frage 2) und [`was_ist_pcmms.md`](was_ist_pcmms.md). Als
+Beleg sind unten weitere Stellen herangezogen, vor allem aus dem Hauptteil des Arbeitspapiers; als eigene Abweichung
+geführt sind davon Z. 860–861, Z. 5089–5091 und `CITATION.cff`. Eine vollständige Durchsicht ist das nicht. Ergebnis ist
+die Liste in 4.2; 4.3 und 4.4 halten fest, was geprüft und nicht als Anspruchsänderung gewertet ist. Es wird nichts
+umformuliert, und es gibt keinen neuen Wortlaut für Kurzfassung, Abstract oder Einleitung. Die Liste ist in getrennten
+Lesedurchgängen derselben Sitzung (Claude Code, ohne Beteiligung des Autors) an den Fundstellen gegengelesen; die
+Einordnung unter 4.2, 4.3 oder 4.4 folgt diesen Durchgängen.
 
 ### 4.1 Worin die Stellen übereinstimmen
 
@@ -444,29 +448,30 @@ Asymmetrieverhältnis, minimale Kontaktkraft – ohne Abstufung als Zielgrößen
 als „primäre Zielgrößen“ (Z. 622–624; Kurzfassung Z. 91–96; Abstract Z. 172–176), und prüft sie nach seinem
 Hypothesenteil einzeln (Z. 1929–1941). Der Gegenstand ist über die Auflage bestimmt, die „einseitig ist, also innerhalb
 eines Zyklus abheben kann“ (Z. 79–80). README (Z. 14–17) und `overview.md` (Z. 52–55) ordnen die vier Funktionale der
-Simulation zu; `neuheitsgrad.md` nennt die vier nicht zusammen, gibt aber die Rangfolge des Entwurfs v2 wieder (dort
-Z. 157–159). Für die Messkampagne sind nach dem Entwurf der Präregistrierung v2 F_min − ⟨N⟩ und die Harmonischen 1 bis 3
-primär (H1, dort Z. 161), ebenso die Lage der Zeltspitze (H2, dort Z. 172); das Vorzeichen der Schiefe ist sekundär (H4,
-dort Z. 196), das Asymmetrieverhältnis A beschreibend, der Liftoff-Bereich explorativ (E1, dort Z. 215). Gegenstand ist
-dort der Körper, „solange er auf allen Auflagepunkten Kontakt hält“ (dort Z. 13–15); der Arbeitspunkt hält Abstand zum
-Abheben (§5.3 (a), dort Z. 340–344), und der Liftoff-Bereich wird nicht konfirmatorisch geprüft (dort Z. 139–140). Das
-Arbeitspapier nennt F_min − ⟨N⟩ und die Beschränkung auf den Dauerkontakt im Hauptteil selbst (Z. 1855–1868,
-Z. 2299–2313), in den Beitragsaussagen nicht; die Harmonischen 1 bis 3 nennt es nirgends als Zielgröße. Dass F_min − ⟨N⟩
-nicht die minimale Kontaktkraft N_min der Beitragsaussagen ist (Bandbegrenzung, Mittelung über Läufe, Bezug auf das
-Laufmittel statt auf M·g), erklärt nur das Arbeitspapier (Z. 1855–1870); die README nennt beide Größen ohne Erklärung
-(dort Z. 14–17).
+Simulation zu; `neuheitsgrad.md` nennt die vier nicht zusammen, gibt aber die Rangfolge des Entwurfs v2 wieder
+(`neuheitsgrad.md` Z. 157–159). Für die Messkampagne sind nach dem Entwurf der Präregistrierung v2 F_min − ⟨N⟩ und die
+Harmonischen 1 bis 3 primär (H1, dort Z. 161), ebenso die Lage der Zeltspitze (H2, dort Z. 172); das Vorzeichen der
+Schiefe ist sekundär (H4, dort Z. 196), das Asymmetrieverhältnis A beschreibend, der Liftoff-Bereich explorativ (E1,
+dort Z. 215). Gegenstand ist dort der Körper, „solange er auf allen Auflagepunkten Kontakt hält“ (dort Z. 13–15); der
+Arbeitspunkt hält Abstand zum Abheben (§5.3 (a), dort Z. 340–344), und der Liftoff-Bereich wird nicht konfirmatorisch
+geprüft (dort Z. 139–140). Das Arbeitspapier nennt F_min − ⟨N⟩ und die Beschränkung auf den Dauerkontakt im Hauptteil
+selbst (Z. 1855–1868, Z. 2299–2313), in den Beitragsaussagen nicht; die Harmonischen 1 bis 3 nennt es nirgends als
+Zielgröße. Dass F_min − ⟨N⟩ nicht die minimale Kontaktkraft N_min der Beitragsaussagen ist (Bandbegrenzung, Mittelung
+über Läufe, Bezug auf das Laufmittel statt auf M·g), erklärt nur das Arbeitspapier (Z. 1855–1870); die README nennt
+beide Größen ohne Erklärung (dort Z. 14–17).
 
 **BA-3 Was die Messung entscheidet.** Die Beitragsaussagen des Arbeitspapiers beschreiben einen Rahmen, in dem eine
 Phasenabhängigkeit der Wellenform „nachgewiesen, begrenzt oder ausgeschlossen“ werden kann (Z. 693–695; Z. 966–968 mit
 „beziffert“). Gemeint ist der Nachweis oberhalb der Auflösungsschwelle (Z. 518–521; Frage F2, Z. 1899–1902; Hypothesen
 Z. 1929–1941), nicht die Abhängigkeit im Modell, die das Papier selbst nennt (Z. 130–131). Davon unabhängig weichen zwei
 Punkte ab. Erstens geht „ausgeschlossen“ über den Endzustand „nachgewiesenes Nullergebnis mit oberer Schranke“ hinaus
-(Z. 99–101, Z. 3565–3569); das Papier verlangt an anderer Stelle selbst, eine Schranke als solche zu berichten, „statt
-als Ausschluss“ (Z. 4953–4961). Zweitens weicht die Fassung als Nachweisentscheidung von README und Entwurf v2 ab: Die
-README fragt, „wie“ die Phasenkonfiguration die zeitliche Form der Kontaktkraft bestimmt (dort Z. 12–13), nicht ob. Im
-Entwurf der Präregistrierung v2, auf den README und `neuheitsgrad.md` für die Messkampagne verweisen, ist die
-Abhängigkeit „keine Hypothese“ (dort Z. 118–119), geprüft werden quantitative Vorhersagen aus Messungen an der Apparatur
-(H1, H2), und ε_phys ist für die Wellenformgrößen ersetzt (dort Z. 97–98).
+(Z. 99–101, Z. 3565–3569); das Papier verlangt an anderer Stelle selbst, eine schwache Schranke (weite Schwelle bei
+großem σ̂_ref) als solche zu berichten, „statt als Ausschluss“ (Z. 4957–4961). Zweitens weicht die Fassung als
+Nachweisentscheidung von README und Entwurf v2 ab: Die README fragt, „wie“ die Phasenkonfiguration die zeitliche Form
+der Kontaktkraft bestimmt (dort Z. 12–13), nicht ob. Im Entwurf der Präregistrierung v2, auf den README und
+`neuheitsgrad.md` für die Messkampagne verweisen, ist die Abhängigkeit „keine Hypothese“ (Entwurf v2, Z. 118–119),
+geprüft werden quantitative Vorhersagen aus Messungen an der Apparatur (H1, H2), und ε_phys ist für die Wellenformgrößen
+ersetzt (Entwurf v2, Z. 97–98).
 
 **BA-4 Festgelegte Kriterien gegenüber einer Präregistrierung im Entwurf.** Das Kapitel „Fazit“ sagt im Abschnitt
 „Zusammenfassung der Arbeit“ über die Arbeit: „Sie legt die Kriterien fest, bevor Daten vorliegen, und macht sie damit
@@ -483,17 +488,18 @@ in der Beschreibung des Pull Requests gemeldet.
 **BA-5 Wo der mögliche Beitrag liegt.** Kurzfassung und Abstract nennen zwei Elemente: die Nullgröße als Prüfmittel
 gegen die eigene Messkette und die Wellenform der Kontaktkraft als entworfene Zielgröße einer Phasensteuerung innerer
 Massen (Z. 144–148, Z. 225–228). Das Fazit verweist auf alle Elemente von „Beitrag dieser Arbeit“ und hebt die Nullgröße
-als Prüfmittel hervor; sie ist dort „der konstruktive Kern“ (Z. 5177–5185; ebenso „Der zentrale methodische Zug“,
-Z. 4837–4838). `neuheitsgrad.md` §8 nennt dagegen die konkrete experimentelle Fragestellung, die „Attribution über die
-Phasensteuerung“ und die methodisch kontrollierte Messung der Kraftwellenform (dort Z. 188–190). Die Nullbasis ist dort
-eines von acht Gliedern der Zusammenstellung (dort Z. 173) und in §8 nicht genannt; ihre Funktion als Kontrollkanal
-beschreibt §5 (dort Z. 110–114, außerhalb der sieben Stellen), und als „methodische Behauptung“ gilt dort die
-Wellenformstatistik der unilateralen Kontaktkraft als Zielgröße (dort Z. 157, außerhalb der sieben Stellen). Eine
-Attribution führt das Arbeitspapier nicht als Beitrag: Sein Rahmen endet beim Endzustand „nachgewiesene Abhängigkeit
-ohne Mechanismusbehauptung“ (Z. 100–101), ohne kausale Auslegung (Z. 4949–4951), und die Sache steht dort als Trennung
-von Artefakten durch das Versuchsdesign (Z. 676–681); `neuheitsgrad.md` schränkt selbst ein: „die Zuordnung selbst ist
-damit noch nicht gezeigt“ (dort Z. 104). Die Stellen setzen den Kern des möglichen Beitrags verschieden an; das ändert,
-was als Beitrag vorgetragen wird.
+als Prüfmittel hervor; sie ist dort „der konstruktive Kern“ (Z. 5177–5185; ebenso, außerhalb der sieben Stellen, „Der
+zentrale methodische Zug“, Z. 4837–4838). `neuheitsgrad.md` §8 nennt dagegen die konkrete experimentelle Fragestellung,
+die „Attribution über die Phasensteuerung“ und die methodisch kontrollierte Messung der Kraftwellenform (dort
+Z. 188–190). Die Nullbasis ist dort eines von acht Gliedern der Zusammenstellung (dort Z. 173) und in §8 nicht genannt;
+ihre Funktion als Kontrollkanal beschreibt §5 (dort Z. 110–114, außerhalb der sieben Stellen), und als „methodische
+Behauptung“ gilt dort die Wellenformstatistik der unilateralen Kontaktkraft als Zielgröße (dort Z. 157, außerhalb der
+sieben Stellen). Ein so benanntes Element führt das Arbeitspapier nicht: Sein Rahmen endet beim Endzustand
+„nachgewiesene Abhängigkeit ohne Mechanismusbehauptung“ (Z. 100–101), eine kausale Auslegung nimmt es nur vor, wenn
+unabhängige Belege artefaktbasierte Erklärungen ausschließen (Z. 4947–4951), und die Sache steht dort unter den neun
+Beiträgen als Trennung von Artefakten durch das Versuchsdesign (Z. 676–681); `neuheitsgrad.md` schränkt selbst ein: „die
+Zuordnung selbst ist damit noch nicht gezeigt“ (dort Z. 104). Die Stellen setzen den Kern des möglichen Beitrags
+verschieden an; das ändert, was als Beitrag vorgetragen wird.
 
 ### 4.3 Verkürzungen, uneinheitliche Gewichtung und uneinheitliche Einzelaussagen
 
@@ -548,7 +554,7 @@ Wortlaut einer Stelle trotzdem weiter reicht oder einer anderen widerspricht, is
 
 Gemessen ist die Formel in der Wiedergabe des Auftrags (Abschnitt 0); der Text des Gutachtens lag nicht vor.
 
-**Was sie trifft.** „Rekombination bekannter Bausteine“ ist die Selbstbeschreibung des Projekts (`neuheitsgrad.md`
+**Was sie trifft.** Als Rekombination bekannter Bausteine beschreibt sich das Projekt selbst (`neuheitsgrad.md`
 Z. 48–49; sinngleich im Arbeitspapier, Z. 922 und Z. 934–935). Der Verzicht auf einen Effektanspruch steht mit keiner
 der sieben Stellen im Widerspruch (Z. 144, Z. 225, Z. 597–598; README Z. 30–31). „Ruhender Körper“ und „Nullkontrolle“
 sind Begriffe des Repositorys. In grober Form deckt die Formel die vier Merkmale der Einordnung: die Wellenform als
@@ -566,10 +572,10 @@ Ziel, die Phasensteuerung eines Mehrmassensystems, den ruhenden Körper und die 
   ([`arbeitsplan_status.md`](arbeitsplan_status.md)). Die Beitragsstellen des Arbeitspapiers nennen die Präregistrierung
   nicht.
 - **Gewichtung der Nullgröße.** Das Arbeitspapier führt sie als erstes von zwei Beitragselementen (Z. 144–148), als
-  konstruktiven Kern (Z. 5177–5185) und als zentralen methodischen Zug (Z. 4837–4838), mit ausdrücklich ungeklärter
-  Neuheit (Z. 5192–5194). In der Formel ist die „Nullkontrolle“ eines von drei Gliedern der methodischen Kontrolle; ihre
-  Funktion als Prüfmittel der eigenen Auswertekette und der Neuheitsvorbehalt fehlen. Diese Gewichtung entspricht der
-  von `neuheitsgrad.md` (BA-5).
+  konstruktiven Kern (Z. 5177–5185) und als zentralen methodischen Zug (Z. 4837–4838, Kapitel „Diskussion“), mit
+  ausdrücklich ungeklärter Neuheit (Z. 5192–5194). In der Formel ist die „Nullkontrolle“ eines von drei Gliedern der
+  methodischen Kontrolle; ihre Funktion als Prüfmittel der eigenen Auswertekette und der Neuheitsvorbehalt fehlen. Diese
+  Gewichtung entspricht der von `neuheitsgrad.md` (BA-5).
 - **Ziel.** Eine Charakterisierung als Ziel ist beschreibend und mit README und `neuheitsgrad.md` §8 vereinbar. Die
   Beitragsstellen des Arbeitspapiers nennen dagegen einen Messrahmen mit Entscheidungsstruktur, Äquivalenzlogik und
   Nullausgang (Z. 597–598, Z. 654–674); nichts davon nennt die Formel.
@@ -635,8 +641,8 @@ M·g = 6,3765 N, kein Ergebnis.
   Z. 51) und das Auslegungswerkzeug auf 5·10⁻⁷ N (`tests/test_auslegung.py`, Z. 66 und Z. 498).
 - **Nachweisarchiv:** [`rechnungen/`](../rechnungen/README.md) mit Prüfskripten und abgelegten Ausgaben, etwa
   `rechnungen/engine/validate_eng_ausgabe.txt`, und die unabhängige Prüfung des linearen Lösers (PR #4) in
-  `docs/arbeitspapier/gegenprobe_2026-09-26/`, dort neben der Gegenprobe zum Einzelmodul. Die README nennt das Archiv
-  „für den Einstieg nicht nötig“ (dort Z. 76).
+  `docs/arbeitspapier/gegenprobe_2026-09-26/`, dort neben der Gegenprobe zum Einzelmodul. Die README des
+  Repository-Stamms nennt das Archiv „für den Einstieg nicht nötig“ (dort Z. 76).
 - **Anleitung:** der Block „Nachrechnen“ der README (dort Z. 199–214) mit Aufrufen und einigen Laufzeiten; der
   Zahlennachweis der Präregistrierung v2 ([`praeregistrierung_v2_anhang.md`](praeregistrierung_v2_anhang.md), Abschnitt
   Z, ab Z. 1534) mit einem Befehl je Zahl; für die Attraktorkarten der Abschnitt „Reproduktion und Dateien“ in
@@ -777,8 +783,9 @@ Die Liste hält fest, was auffiel; ein Auftrag folgt daraus nicht (E-3).
   0°) mit 75,8 % Liftoff weichen skalare und vektorisierte Fassung in `F_mean` um 1,7·10⁻⁴ N voneinander ab
   (`code/finesweep.py`, Z. 4–5); am Punkt (0°, 208,421°) hängt das Einschwingen schon von der letzten Stelle der
   Phasenangabe ab ([`data/README.md`](../data/README.md), Z. 46–48). Mit der skalaren Engine und den Phasen der CSV sind
-  die abgelegten Werte im Nachweisarchiv dagegen reproduziert (`rechnungen/symmetrie_randterm/PROTOKOLL.md`, Z. 376–381;
-  `rechnungen/engine/PROTOKOLL.md`, Z. 113).
+  im Nachweisarchiv dagegen abgelegte Werte reproduziert: `F_mean` an 70 Punkten des 19×19-Rasters, darunter alle 45 mit
+  |δ| > 50 ppm (`rechnungen/symmetrie_randterm/PROTOKOLL.md`, Z. 376–381), und am Punkt (0°, 208,421°) Zeitmittel,
+  Liftoff-Anteil, Schiefe und F_max (`rechnungen/engine/PROTOKOLL.md`, Z. 113).
 - `data/regime_2400s.csv` und `data/regime_2400s_dt2.csv`: Das Erzeugungsskript ist nicht überliefert.
 - `data/sweep_7x7_sinus.csv`: Das erzeugende Skript liegt nicht im Repository; die Amplitude ist aus den Daten
   rekonstruiert. Als eigener Referenzfall eignet sich die Datei deshalb nicht; in R-2 geht sie nur mit diesem Vorbehalt
