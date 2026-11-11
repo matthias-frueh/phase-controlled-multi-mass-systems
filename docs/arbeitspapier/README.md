@@ -20,10 +20,11 @@ Kontakt-eigenfrequenz. Abstract, englische Suchbegriffe und Literaturtitel verwe
 deutsche Literaturvermerke bleiben als Deutsch ausgezeichnet.
 
 **Berichtigung 10.11.2026.** Anhang C des Arbeitspapiers v2.5 führt die Angabe „Korendiy et al. 2026“ als nicht
-auffindbar. Die Arbeit besteht (Vibroengineering Procedia 62, 2026, S. 41–50, DOI 10.21595/vp.2026.26165, erschienen am
-08.06.2026); die Suche vom 4. und 5. September 2026 hat sie nicht gefunden. Prüfung, Wortlaut der Berichtigung und
-Textvorschläge stehen in der [Abgleichnotiz vom 10.11.2026](../abgleichnotiz_2026-11-10_gutachten.md), Abschnitte 2
-und 3; PDF, Quelltext und Literaturverzeichnis sind nicht geändert, Fachstand und Version bleiben v2.5.
+auffindbar. Eine Arbeit von Korendiy et al. aus diesem Jahr besteht (Vibroengineering Procedia 62, S. 41–50,
+DOI 10.21595/vp.2026.26165, erschienen am 08.06.2026); die Suche vom 4. und 5. September 2026 hat sie nicht gefunden.
+Prüfung, Wortlaut der Berichtigung, Textvorschlag und Folgeänderungen stehen in der
+[Abgleichnotiz vom 10.11.2026](../abgleichnotiz_2026-11-10_gutachten.md), Abschnitte 2 und 3; PDF, Quelltext und
+Literaturverzeichnis sind nicht geändert, Fachstand und Version bleiben v2.5.
 
 ## Änderungen
 

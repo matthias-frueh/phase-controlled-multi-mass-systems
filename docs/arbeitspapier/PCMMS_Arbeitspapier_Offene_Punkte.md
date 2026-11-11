@@ -1,7 +1,7 @@
 # PCMMS-Arbeitspapier — Offene Punkte
 
 Historischer Ausgangsstand: 05.09.2026 · Quelle: PCMMS_Dissertation_v2.tex, **97 Seiten**
-· Abgleich mit den Nachträgen vom 2. Oktober 2026: Abschnitt am Ende (03.10.2026)
+· Abgleich mit den Nachträgen vom 2. Oktober 2026: Abschnitt am Ende (03.10.2026) · Abgleich vom 10.11.2026 (Berichtigung zu Anhang C, Literaturprüfung): Abschnitt dahinter
 
 ## Erledigt (05.09.2026)
 
@@ -90,7 +90,7 @@ Vorrang: Präzisierung, kein zusätzlicher Umfang.
     *Überholt durch die Nachträge vom 02.10.2026: Nennlast nicht hergeleitet, siehe Punkt 13.*
 21. Literaturkandidaten aus der Prüfung, VOR Aufnahme einzeln verifizieren:
     Osadchyy et al. 2023, Korendiy et al. 2026, Chatzinikolaidis et al.
-    *Nachtrag 10.11.2026:* „Korendiy et al. 2026“ besteht und ist an der Verlagsseite geprüft (Punkt 45).
+    *Nachtrag 10.11.2026:* Eine Arbeit von Korendiy et al. von 2026 besteht und ist auf der Verlagsseite geprüft (Punkt 45).
 
 ### Stand Block D (05.09.2026, abends)
 - [x] 15 Äquivalenzlogik, vier Ausgänge, ε_ctrl eingeführt — Kap. 6, 9, 10, 13, Fazit, Kurzfassung, Abstract, §1.5, Symbolverzeichnis
@@ -100,8 +100,8 @@ Vorrang: Präzisierung, kein zusätzlicher Umfang.
 - [x] 19 „nach Stichproben“ statt „gesichert“/„Fenster“ — Kap. 11, Fazit, Kurzfassung, Abstract
 - [x] 20 Lastreserve zweistufig ~~abgeschlossen~~ — Kap. 7, Kap. 8, Fazit; überholt durch die Nachträge vom 02.10.2026: Nennlast nicht hergeleitet (Punkt 13)
 - [x] 21 Literaturkandidaten geprüft und aufgenommen: Osadchyy 2023 (Sensors, DOI 10.3390/s23042170), Gurskyi/Korendiy 2023 (Machines, DOI 10.3390/machines11010097 — „Korendiy 2026“ nicht auffindbar, ersetzt), Chatzinikolaidis 2020 + 2021 (IEEE RA-L). 21 Einträge.
-      *Nachtrag 10.11.2026:* „nicht auffindbar“ gibt den Suchstand vom 05.09.2026 wieder. Die Arbeit ist am 08.06.2026
-      erschienen und am 10.11.2026 geprüft; die Aufnahme von 2023 bleibt bestehen (Punkte 45 und 46).
+      *Nachtrag 10.11.2026:* „nicht auffindbar“ gibt den Stand der Suche vom 4. und 5. September 2026 wieder. Eine Arbeit von Korendiy et al.
+      ist am 08.06.2026 erschienen und am 10.11.2026 geprüft; die Aufnahme von Gurskyi/Korendiy 2023 bleibt bestehen (Punkte 45 und 46).
 
 ## Stand 20.09.2026 (v2.1) — Abgleich mit Repository-Stand 2026-09 und Symbolverzeichnis v2.5
 
@@ -180,21 +180,24 @@ Repository geschlossen), 12, 13, 18, 20, 28, 38 und „Stand des Dokuments“ (0
     (29.10.2026).
 
 
-## Abgleich 10.11.2026 — Gutachtenabgleich und Literaturnachtrag
+## Abgleich 10.11.2026 — Berichtigung zu Anhang C und Literaturprüfung
 
-Grundlage ist die [Abgleichnotiz vom 10.11.2026](../abgleichnotiz_2026-11-10_gutachten.md). Quelltext, PDF und
+Grundlage ist die [Abgleichnotiz vom 10.11.2026](../abgleichnotiz_2026-11-10_gutachten.md) zu einem simulierten
+Fachgutachten und einer Gegenprüfung dazu (Hinweise, keine unabhängige Begutachtung). Quelltext, PDF und
 Literaturverzeichnis des Arbeitspapiers v2.5 sind nicht geändert; es gibt keinen Neusatz und keine neue
 Versionsnummer.
 
 45. Berichtigung zu Anhang C: Die Angabe „Korendiy et al. 2026“ ist dort als nicht auffindbar geführt
-    (Verifikationstabelle und „Nicht aufgenommene Angaben“). Die Arbeit besteht: Korendiy, Yaniv, Predko, Laushnyk,
-    Dzyubyk, Hrevtsov, Vibroengineering Procedia 62 (2026), S. 41–50, DOI 10.21595/vp.2026.26165, erschienen am
-    08.06.2026. Sie ist am 10.11.2026 auf der Verlagsseite geprüft und im Volltext gelesen; die Suche vom 4. und
-    5. September 2026 hat sie nicht gefunden. Der Wortlaut der Berichtigung steht als Vorschlag in der Abgleichnotiz,
-    Abschnitt 3.1, und ist beim nächsten Neusatz einzuarbeiten.
+    (Verifikationstabelle und „Nicht aufgenommene Angaben“). Eine Arbeit dieser Autoren aus dem Jahr 2026 besteht:
+    Korendiy, Yaniv, Predko, Laushnyk, Dzyubyk, Hrevtsov 2026, Vibroengineering Procedia 62, S. 41–50,
+    DOI 10.21595/vp.2026.26165, erschienen am 08.06.2026. Sie ist am 10.11.2026 auf der Verlagsseite geprüft und im
+    Volltext gelesen; die Suche vom 4. und 5. September 2026 hat sie nicht gefunden. Der Wortlaut der Berichtigung steht
+    als Vorschlag in der Abgleichnotiz, Abschnitt 3.1; er setzt die Aufnahme der Arbeit voraus (Punkt 46) und nennt,
+    was ohne Aufnahme entfällt. Ob und wann er eingearbeitet wird, ist offen (E-1 und E-2 der Abgleichnotiz).
 46. Aufnahme der geprüften Arbeiten erst nach der Sichtprüfung des Autors
     ([`../neuheitsgrad.md`](../neuheitsgrad.md) §9): Korendiy et al. 2026 ist bibliografisch geprüft; Textvorschlag und
     Folgeänderungen stehen in der Abgleichnotiz, Abschnitte 3.2 und 3.3. Mikus, Olgac, Sipahi 2009 (Control Engineering
-    Practice 17 (1), S. 210–220) und Zhan, Xu 2015 (Advances in Mechanical Engineering 7 (3)) sind nur am
-    Registereintrag bestätigt, weil die Verlagsseiten am 10.11.2026 nicht lesbar waren; für sie gibt es keinen
-    Textvorschlag. Gehört zu Punkt 42.
+    Practice 17, Heft 1, S. 210–220) und Zhan, Xu 2015 (Advances in Mechanical Engineering 7, Heft 3,
+    Artikel 1687814015573766) sind nur am Registereintrag geprüft, weil die Verlagsseiten am 10.11.2026 nicht lesbar
+    waren; für sie gibt es keinen Textvorschlag. Berührt Punkt 42; ob beides gebündelt wird, ist offen (E-2 der
+    Abgleichnotiz).

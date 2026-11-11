@@ -239,13 +239,14 @@ und bibliografisch ungeprüft; §9 gilt dafür weiter. Dasselbe gilt für Impact
 Haptik, Kapselroboter, dynamisches Wägen und Metrologie. Bis zu einer Recherche in diesen Feldern trifft
 das Projekt keine Aussage, ein Gegenstand sei dort nicht behandelt.
 
-*Nachtrag 10.11.2026.* Drei Literaturangaben aus einem simulierten Fachgutachten sind an den Primärquellen geprüft
-([`abgleichnotiz_2026-11-10_gutachten.md`](abgleichnotiz_2026-11-10_gutachten.md), Abschnitt 2). Korendiy et al. 2026
-(Vibroengineering Procedia 62, S. 41–50) ist auf der Verlagsseite bestätigt und im Volltext gelesen: Dort stellt der
-Phasenversatz zweier Schubkurbelkanäle die Bahn eines Arbeitsorgans; eine Kraft an Auflage oder Fundament wird nicht
-ausgewertet. Mikus, Olgac, Sipahi 2009 und Zhan, Xu 2015 sind nur am Registereintrag bestätigt; die Arbeit von Zhan und
-Xu gehört nach Titel und Abstract zum Strang der vibrationsgetriebenen Systeme mit inneren Massen. §9 gilt weiter:
-Keine der drei Arbeiten steht im Literaturverzeichnis, und über die drei Angaben hinaus ist nicht recherchiert.
+**Nachtrag 10.11.2026.** Drei Literaturangaben aus einem simulierten Fachgutachten sind geprüft
+([`abgleichnotiz_2026-11-10_gutachten.md`](abgleichnotiz_2026-11-10_gutachten.md), Abschnitt 2).
+Korendiy et al. 2026 (Vibroengineering Procedia 62, S. 41–50) ist auf der Verlagsseite bestätigt und im
+Volltext gelesen; Stellgröße ist dort der Phasenversatz zweier Schubkurbelkanäle, Zielgröße die Bahn eines
+Arbeitsorgans, und eine Kraft an Auflage oder Fundament wird nicht ausgewertet. Mikus, Olgac, Sipahi 2009
+und Zhan, Xu 2015 sind nur am Registereintrag geprüft; ob die Arbeit von Zhan und Xu zu den oben als
+„Fang, Xu und Mitarbeiter“ geführten gehört, ist aus den gelesenen Quellen nicht zu entscheiden. Keine der
+drei Arbeiten steht im Literaturverzeichnis (§9), und über die drei Angaben hinaus ist nicht recherchiert.
 
 ---
 
