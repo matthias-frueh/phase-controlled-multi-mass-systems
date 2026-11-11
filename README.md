@@ -2,9 +2,11 @@
 
 **Phase-Controlled Multi-Mass Systems**\
 Matthias Früh · Gravidon Systemics Research · ORCID [0009-0005-9984-4207](https://orcid.org/0009-0005-9984-4207)\
-Stand: 28. September 2026, Nachträge 2., 4., 11. und 16. Oktober 2026 · Status: prä-experimentell (Simulation; keine Messdaten)
+Stand: 28. September 2026, Nachträge 2., 4., 11., 16. und 22. Oktober 2026 sowie 10. und 11. November 2026 · Status: prä-experimentell (Simulation; keine Messdaten)
 
 ---
+
+**Leseführung:** Wo man anfängt und was beim Lesen gilt, steht in [`LESEFUEHRUNG.md`](LESEFUEHRUNG.md).
 
 ## Worum es geht
 
@@ -53,6 +55,7 @@ ist mit dem Arbeitspapier v2.4 (Abschnitt 4.8) zurückgezogen. Die alten Gleichu
 
 | Pfad | Inhalt |
 |---|---|
+| [`LESEFUEHRUNG.md`](LESEFUEHRUNG.md) | Leseführung: Schnelleinstieg, Lesepfade nach Anliegen, Kennzeichnungen, gültige Fassungen, Stolperstellen |
 | [`docs/overview.md`](docs/overview.md) | Wegweiser durch die Dokumente, Lesereihenfolge |
 | [`docs/was_ist_pcmms.md`](docs/was_ist_pcmms.md) | Einstieg ohne Vorwissen |
 | [`docs/werkstattbericht.md`](docs/werkstattbericht.md) | „Wellenform statt Mittelwert“ — der Stand für fachliche Leser |
