@@ -114,7 +114,8 @@ Entwurf und Anhang der Präregistrierung v2 haben zusammen rund 47 000 Wörter; 
    [Plan des Pipelinetests](docs/plan_ap13_pipelinetest.md). Nur synthetische Daten; AP-13 ist nicht abgenommen,
    die große Kalibrierung nicht ausgeführt.
 5. [`docs/entscheidungsvorlage_2026-10-19.md`](docs/entscheidungsvorlage_2026-10-19.md) – Herkunft des Regelstands
-   2026-11 (Abschnitt 9). Berichte vom 17.10.2026:
+   2026-11 (Abschnitt 9); Skripte und Ausgaben dazu im
+   [Belegordner](docs/entscheidungsvorlage_2026-10-19_belege/README.md). Berichte vom 17.10.2026:
    [Neuläufe](docs/ap13_neulaeufe_2026-10-17/bericht.md),
    [Diagnose E3b/G4](docs/e3b_g4_diagnose_2026-10-17/bericht.md),
    [k-Konsistenz und Ablauf](docs/ap13_kmax_wiederholungen_2026-10-17/bericht.md). Beispiele zum Regelstand:
