@@ -17,10 +17,11 @@
 # Ergebnisse unterscheiden sich dann im Rundungsrauschen (in den geprüften Laufzusammenfassungen bis
 # 1,6·10⁻¹³ relativ). Damit jeder Lauf gleich rechnet, sind der Rechenkern (HASWELL) und die Zahl der
 # BLAS-Threads (1) festgelegt; mit dem Kern HASWELL und vier Threads schlägt
-# test_kampagnen_unabhaengig_von_der_prozesszahl fehl, mit einem Thread besteht er. Vier Tests vergleichen mit
-# hinterlegten Werten, die zum Rechenkern SkylakeX gehören (Prozessoren mit AVX-512). Sie sind im Lauf
+# test_kampagnen_unabhaengig_von_der_prozesszahl fehl, mit einem Thread besteht er. Drei Tests vergleichen mit
+# hinterlegten Prüfsummen, die zum Rechenkern SkylakeX gehören (Prozessoren mit AVX-512). Sie sind im Lauf
 # abgewählt und werden im Protokoll genannt; die Liste steht im Schritt „Testsuite ausführen“. Auf einem
-# Rechner mit dem Kern SkylakeX und zlib 1.3 bestehen sie.
+# Rechner mit dem Kern SkylakeX und zlib 1.3 bestehen sie. Ein vierter Test (test_cli_text_und_vorrang) war bis
+# zum 12.11.2026 abgewählt; seit der Vergleich in code/auslegung.py eine Toleranz hat, läuft er wieder mit.
 
 name: Tests
 
@@ -73,13 +74,12 @@ jobs:
 
       - name: Testsuite ausführen
         run: |
-          # An den Rechenkern SkylakeX gebunden (hinterlegte Prüfsummen, bei test_cli_text_und_vorrang die
-          # Zählung des Gleichstands); abgewählt, solange der Lauf mit dem Kern HASWELL rechnet.
+          # An den Rechenkern SkylakeX gebunden (hinterlegte Prüfsummen); abgewählt, solange der Lauf mit dem
+          # Kern HASWELL rechnet.
           ABGEWAEHLT=(
             "tests/test_ablauf4.py::test_ablauf_pruefsatz_ablauf4_nachrechenbar"
             "tests/test_ap13_ablauf.py::test_ablauf_pruefsatz_nachrechenbar"
             "tests/test_ap13_harness.py::test_pruefsatz_unveraendert"
-            "tests/test_auslegung.py::test_cli_text_und_vorrang"
           )
           auswahl=()
           for t in "${ABGEWAEHLT[@]}"; do
