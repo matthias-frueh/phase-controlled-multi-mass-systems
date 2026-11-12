@@ -5,7 +5,8 @@ Belegdateien für die Korrektur in Arbeitspapier v2.3 (Abschnitt 9.4, Tabelle 9.
 - `sweep_19x19_burnin_2026-09-13.csv` – 361 Konfigurationen mit Randterm (`R_ppm` = 10⁶·δ_w), Quadratur (`Q_ppm` = 10⁶·δ_Q), Residuum (`delta_ppm` = 10⁶·δ), Burn-in-Zeit, erkannter Periode und den Archivwerten (`arch_*`) zum Vergleich.
 - `PCMMS_Klassifikation_100s_2026-09-13.csv` – 100-s-Folgeläufe an 26 Punkten (Periode, Stationarität).
 - `pcmms_sweep_burnin_2026-09-13.py`, `pcmms_folgelaeufe_2026-09-13.py` – erzeugende Skripte. Gegenüber dem Original sind nur die Pfade angepasst: Die Engine wird aus `code/pcmms_v3a_phasen_sweep.py` dieses Repositorys geladen, Ausgaben landen in diesem Ordner.
-- `PCMMS_Ergebnisnotiz_Sweep_Burnin_2026-09-13_v2.txt` – Ergebnisnotiz mit Verfahren, Kernzahlen und Deutung. Sie verwendet noch R und Q für δ_w und δ_Q.
+- `PCMMS_Ergebnisnotiz_Sweep_Burnin_2026-09-13_v2.txt` – Ergebnisnotiz mit Verfahren, Kernzahlen und Deutung. Sie verwendet noch R und Q für δ_w und δ_Q. Historischer Rechenstand, unverändert; zum heutigen Stand ihrer Angaben siehe den Statusvermerk.
+- [`statusvermerk_2026-11-12.md`](statusvermerk_2026-11-12.md) – Statusvermerk zur Ergebnisnotiz (12.11.2026): welche ihrer Angaben spätere Prüfungen eingeschränkt oder überholt haben, was weiter verwendet werden kann, und ein Prüfhinweis zu den Extremwerten.
 
 Rechenzeit des Sweeps etwa 9 min auf einem Kern (laut Ergebnisnotiz).
 
