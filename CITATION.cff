@@ -6,7 +6,6 @@ authors:
   - family-names: "Früh"
     given-names: "Matthias"
     orcid: "https://orcid.org/0009-0005-9984-4207"
-    affiliation: "Gravidon Systemics Research"
 repository-code: "https://github.com/matthias-frueh/phase-controlled-multi-mass-systems"
 license:
   - MIT

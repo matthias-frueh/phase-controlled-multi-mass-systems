@@ -1,7 +1,7 @@
 # Leseführung
 
 **PCMMS — Phasenkontrollierte Mehrmassensysteme**\
-Matthias Früh · Gravidon Systemics Research · ORCID [0009-0005-9984-4207](https://orcid.org/0009-0005-9984-4207)\
+Matthias Früh · Unabhängiger Forscher · ORCID [0009-0005-9984-4207](https://orcid.org/0009-0005-9984-4207)\
 Stand: 11. November 2026 · abgeglichen mit dem Repository-Stand `d8384bc` (nach Pull Request #30)
 
 Diese Datei führt durch das Repository: was man in welcher Reihenfolge liest und was beim Lesen gilt. Sie ordnet
