@@ -189,7 +189,7 @@ MENGEN = dict(pflicht=('einzel', 'pilot', 'schnitt'),
               zusatz=('einzel', 'pilot', 'schnitt', 'synchron', 'zweiergruppe'),
               alle=('einzel', 'pilot', 'schnitt', 'synchron', 'zweiergruppe', 'paar'))
 RANG = ('synchron', 'zweiergruppe', 'einzel', 'pilot', 'schnitt', 'paar')     # Meldung bei Gleichstand
-GLEICH = 1e-9                           # Gleichstand von Reserven
+GLEICH = 1e-9                           # Gleichstand von Reserven (Läufe untereinander; Zelle gegen Summe)
 KANDIDAT = dict(m=(0.1, 0.1, 0.1), hub=8e-3, m0=0.35, f=10.0, K=1.5e6, C=None, zeta=0.05)
 REFERENZ = dict(m=(M_REF / 3,) * 3, hub=HUB_REF, m0=0.0, f=F_HZ, K=K_REF, C=C_REF, zeta=None)
 
@@ -604,14 +604,16 @@ def bewerte(aufbau, kmax=None, paar_schritt=15.0, nu=np.inf):
 
 def _fenster_eins(aufbau, kmax, df_req, reserve_min, paar_schritt):
     """ε-Fenster eines Aufbaus bei festem K, C: ε_sig aus dem Signal, ε_max je Laufmenge aus der kleinsten
-    Reserve (Zellen und Summe skalieren linear mit dem gemeinsamen Hubfaktor)."""
+    Reserve (Zellen und Summe skalieren linear mit dem gemeinsamen Hubfaktor). Als bindend wird der Lauf der
+    Zellreserve genannt, wenn sie mindestens so weit ausgenutzt ist wie die Summenreserve; bei Gleichstand
+    innerhalb von GLEICH gilt die Zellreserve. ε_max hängt davon nicht ab."""
     b = bewerte(aufbau, kmax, paar_schritt)
     out = dict(eps_sig=b['eps'] * df_req / b['schnitt']['dF'], dF=b['schnitt']['dF'], eps_max={}, bindend={},
                reserve_zelle={})
     for name, m in b['mengen'].items():
         uz, us = 1 - m['reserve_zelle'], 1 - m['reserve_summe']
         out['eps_max'][name] = b['eps'] * (1 - reserve_min) / max(uz, us) if max(uz, us) > 0 else np.inf
-        out['bindend'][name] = m['lauf_zelle'] if uz >= us else m['lauf_summe']
+        out['bindend'][name] = m['lauf_zelle'] if uz >= us - GLEICH else m['lauf_summe']
         out['reserve_zelle'][name] = m['reserve_zelle']
     return out
 
