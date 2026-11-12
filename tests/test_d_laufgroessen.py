@@ -183,7 +183,7 @@ def test_regel_gebunden_und_nur_im_aktuellen_stand(a4):
     s = pilot.satz_fuer_plan(tab, kal, AKTUELL, m.system.f, 9, 5)
     lg = s['laufgroessen']
     assert (lg['bindung']['k'], lg['bindung']['N_z'], lg['version']) == (9, 100, lgm.VERSION)
-    assert s['bindung']['version'] == pilot.VERSION == 'pilot-0.4'
+    assert s['bindung']['version'] == pilot.VERSION == 'pilot-0.5'
     pilot.pruefe_ausgabe(s)
     assert AKTUELL.wert('p0.laufgroessen') == lgm.REGELWERT
     h = pilot.satz_fuer_plan(tab, kal, HIST, m.system.f, 9, 5)
@@ -201,11 +201,11 @@ def test_regel_gebunden_und_nur_im_aktuellen_stand(a4):
 def test_teil_b_felder_sigma_a_delta_off(a4):
     m, tab, kal = a4
     pe = pilot.pilot_auswerten(tab, kal, AKTUELL, m.system.f, seed=5)
-    assert pe['version'] == 'pilot-0.4' and pe['laufgroessen']['bindung']['k'] == pe['k_pilotgroessen']
+    assert pe['version'] == 'pilot-0.5' and pe['laufgroessen']['bindung']['k'] == pe['k_pilotgroessen']
     pl = kette.plan_info(m, 18)
     tb = teil_b.erstellen(tab, kal, pe, AKTUELL, pl, kette.testvorgabe_werkzeug8(), seed_b0=1, B=50)
     n2 = tb['nr2']
-    assert tb['version'] == 'teil_b-0.4' and n2['laufgroessen']['bindung'] == dict(
+    assert tb['version'] == 'teil_b-0.5' and n2['laufgroessen']['bindung'] == dict(
         n2['laufgroessen']['bindung'], k=9, N_z=100)
     for name in ('sigma_a_j', 'sigma_delta_j', 'sigma_off_j'):
         assert len(n2[name]['wert']) == 3 and len(n2[name]['nu']) == 3 and n2[name]['bindung'] == dict(k=9, N_z=100)
@@ -213,14 +213,15 @@ def test_teil_b_felder_sigma_a_delta_off(a4):
     assert n2['sigma_a_j']['nu'] == [float(n - 1) for n in n2['laufgroessen']['bindung']['n0']]   # ν = n₀ⱼ − 1 (gültig)
     assert tb['nr10']['werte_regel']['planung_teil_b_werte'] == 'punktschaetzer'
     assert n2['phase0_bindung']['laufgroessen_quelle'] == 'mit dem Satz neu berechnet (Code des Pilotskripts)'
-    # Pilotausgabe eines historischen Profils mit passendem Satz (k = 9): Laufgrößen in Teil B aus diesem Satz berechnet
+    # Pilotausgabe eines historischen Profils mit passendem Satz (k = 9): Sie trägt keinen Herkunftsnachweis der
+    # Phase-0-Läufe und gilt seit teil_b-0.5 (12.11.2026) im Regelstand 2026-11 nicht mehr als an sie gebunden. Bis
+    # teil_b-0.4 wurde ihr Satz übernommen und die Laufgrößen wurden in Teil B daraus berechnet.
     ph = pilot.pilot_auswerten(tab, kal, HIST, m.system.f, seed=5)
     s9 = pilot.satz_fuer_plan(tab, kal, HIST, m.system.f, 9, 5)
     ph = dict(ph, k_pilotgroessen=9, bindung=s9['bindung'], streuungen_volles_fenster=s9['streuungen'],
               **{x: s9[x] for x in pilot.SATZ_FELDER if x != 'streuungen'})
-    tbx = teil_b.erstellen(tab, kal, ph, AKTUELL, pl, kette.testvorgabe_werkzeug8(), seed_b0=1, B=50)
-    assert tbx['nr2']['phase0_bindung']['laufgroessen_quelle'].startswith('in Teil B')
-    assert tbx['nr2']['sigma_a_j']['wert'] == pytest.approx(n2['sigma_a_j']['wert'])
+    with pytest.raises(ValueError, match='Pilotausgabe ohne Herkunftsnachweis'):
+        teil_b.erstellen(tab, kal, ph, AKTUELL, pl, kette.testvorgabe_werkzeug8(), seed_b0=1, B=50)
     tbh = teil_b.erstellen(tab, kal, ph, HIST, pl, kette.testvorgabe_werkzeug8(), seed_b0=1, B=50)
     assert tbh['version'] == 'teil_b-0.3' and 'sigma_a_j' not in tbh['nr2'] and 'werte_regel' not in tbh['nr10']
 

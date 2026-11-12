@@ -8,13 +8,37 @@ Sensorrauschen je Zelle auf Re/Im N_k und ⟨N_c⟩, die Fünftel aus den Zyklen
 eigenem Rauschen (Laufrauschen = Mittel der fünf Fünftel), Rohextrema aus der ungebänderten Zellkurve (negativ
 abgeschnitten: Abheben einer Zelle ohne Stoßdynamik, nur für die Regeln G6/S2) mit einem Extremwert des Rauschens.
 Ebene H bildet Rampe und Einschwingen nicht ab; das leistet Ebene Z.
+
+Herkunft: Läufe der Ebene H haben keine Rohdatei und tragen keinen Rohdatei-Hash. Jede erzeugte Tabelle erhält dafür
+in ihren Metadaten den Generatornachweis (generatornachweis; Bedeutung und Regeln in herkunft.py). Die Laufköpfe
+bleiben unverändert.
 """
+from dataclasses import asdict
+
 import numpy as np
 
+from .. import formate, herkunft
 from .. import konventionen as kv
 from .. import zusammenfassung as zf
 
 VERSION = 'ebene_h-0.1'
+
+
+def generatornachweis(modell, laeufe, rng, rausch=None, rng_zusatz=None, version=None):
+    """Generatornachweis einer Tabelle (herkunft.py), vor der ersten Ziehung zu bilden: Generatorversion (Vorgabe
+    VERSION), Prüfsumme der Modellbeschreibung mit dem wirksamen Rauschmodell (rausch; Vorgabe das des Modells),
+    Prüfsumme der übergebenen Laufliste und der Zustand der Zufallsströme. Liest nur; verbraucht keine Zufallszahl.
+    Den Aufruf (Szenario, Stufe, Seed) ergänzt harness.kette."""
+    if hasattr(modell, 'beschreibung'):
+        b = modell.beschreibung()
+    else:
+        from . import szenarien                    # hier, weil szenarien dieses Modul über wahrheit importiert
+        b = szenarien.beschreibung(modell)
+    if rausch is not None:
+        b = dict(b, rauschen=rausch.beschreibung() if hasattr(rausch, 'beschreibung') else asdict(rausch))
+    return dict(version=VERSION if version is None else version, modell_sha256=formate.sha256_json(b),
+                laufplan_sha256=formate.sha256_json(laeufe), strom_sha256=herkunft.strom_sha256(rng),
+                zusatzstrom_sha256=None if rng_zusatz is None else herkunft.strom_sha256(rng_zusatz), aufruf=None)
 
 
 def _extremwert(rng, n_abtast, form):
@@ -223,8 +247,9 @@ def kopf(modell, l, z, zeile):
 
 def erzeuge(modell, laeufe, rng, rausch=None):
     """Laufzusammenfassungen (LaufTabelle) für die Läufe des Plans (Liste aus kampagne.laufplan) zu ihren geplanten
-    Zeitpunkten."""
+    Zeitpunkten, mit dem Generatornachweis in den Metadaten der Tabelle."""
     rausch = modell.rausch if rausch is None else rausch
+    nw = generatornachweis(modell, laeufe, rng, rausch)              # vor der ersten Ziehung
     n = len(laeufe)
     daten = zf.leere_daten(modell.k_voll, n)
     koepfe = [None] * n
@@ -236,7 +261,7 @@ def erzeuge(modell, laeufe, rng, rausch=None):
         for jj, i in enumerate(idx):
             koepfe[i] = kopf(modell, laeufe[i], z, jj)
     _ereignisse(modell, laeufe, koepfe, daten)
-    return zf.LaufTabelle(koepfe, daten)
+    return zf.LaufTabelle(koepfe, daten, meta={zf.META_GENERATORNACHWEIS: nw})
 
 
 def ereignis_anwenden(modell, eff, kopf_, daten, i):
@@ -276,11 +301,13 @@ class Vorrat:
     Läufe zu anderen Zeitpunkten ausführt: Der ursprüngliche Versuch eines geplanten Laufs erhält dessen Ziehung,
     gebildet zum tatsächlichen Zeitpunkt; ohne Verschiebung entsteht genau die Tabelle von erzeuge. Zusätzliche
     Versuche (Wiederholungen, eingefügte Referenzläufe) ziehen aus einem eigenen Strom je Versuch und verbrauchen den
-    Strom der geplanten Läufe nicht."""
+    Strom der geplanten Läufe nicht. Der Generatornachweis (nachweis) ist derselbe wie bei erzeuge mit denselben
+    Eingaben; tabelle gibt ihn der Tabelle der geplanten Läufe mit."""
 
     def __init__(self, modell, laeufe, rng, rausch=None):
         self.modell = modell
         self.rausch = modell.rausch if rausch is None else rausch
+        self.nachweis = generatornachweis(modell, laeufe, rng, self.rausch)      # wie erzeuge, vor der ersten Ziehung
         self.ort = {}
         for idx in _gruppen(laeufe):
             z = ziehen(modell, [laeufe[i] for i in idx], rng, self.rausch)
@@ -315,4 +342,5 @@ class Vorrat:
             k, d, _ = self.lauf(dict(l, position_geplant=l['position']), bezug=l['lauf_id'])
             koepfe.append(k)
             zeilen.append(d)
-        return zf.LaufTabelle(koepfe, {f: np.concatenate([d[f] for d in zeilen]) for f in zeilen[0]})
+        return zf.LaufTabelle(koepfe, {f: np.concatenate([d[f] for d in zeilen]) for f in zeilen[0]},
+                              meta={zf.META_GENERATORNACHWEIS: dict(self.nachweis)})

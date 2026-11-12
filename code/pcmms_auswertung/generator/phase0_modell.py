@@ -56,7 +56,7 @@ import numpy as np
 
 from .. import anpassung, formate, konventionen as kv
 from .. import zusammenfassung as zf
-from . import ebene_h, rauschen
+from . import ebene_h, kampagne, rauschen
 from .systeme import antworten
 
 VERSION = 'phase0_modell-0.1'
@@ -341,6 +341,20 @@ class Phase0Modell:
             return [pos[a['nummer']]] if len(pos) > a['nummer'] else []
         return pos
 
+    def beschreibung(self):
+        """JSON-fähige Beschreibung für den Generatornachweis (ebene_h.generatornachweis): wie
+        szenarien.beschreibung, dazu die Struktur als Prüfsumme ihrer Felder (Nz, F0) und Δδ̂ⱼ. Die Struktur stammt aus
+        berechneten Größen; die Prüfsumme gilt deshalb für genau diese Felder."""
+        st = self.struktur
+        return formate._json_wert(dict(
+            modell='phase0', system=asdict(self.system), struktur=dict(
+                quelle=st.quelle, herkunft=st.herkunft, f=st.f,
+                sha256=formate.sha256_bytes(np.ascontiguousarray(st.Nz).tobytes()
+                                            + np.ascontiguousarray(st.F0).tobytes())),
+            delta_delta_grad=self._dd, rauschen=parameter(self.rausch).beschreibung(),
+            plan=kampagne.plan_dict(self.plan), effekte=list(self.effekte), k_voll=self.k_voll,
+            vollausschlag_N=self.vollausschlag_N, herkunft=self.herkunft))
+
 
 # ── Generator (Spiegel von ebene_h mit Erweiterungen) ────────────────────────────────────────────────────
 def _jitter_umformen(zj, st, modell, phi_idx, Nz):
@@ -561,11 +575,13 @@ def nullpunktspruenge(sd, laeufe, rng):
 def erzeuge(modell, laeufe, rng, rausch=None, rng_zusatz=None):
     """Laufzusammenfassungen (LaufTabelle) wie ebene_h.erzeuge mit Strukturparametern (rausch: Strukturparameter oder
     rauschen.Rauschmodell; Vorgabe modell.rausch). rng_zusatz: eigener Strom der Erweiterungen mit Ziehung; ohne ihn
-    sind solche Erweiterungen ein Fehler (kein stiller Ersatzstrom)."""
+    sind solche Erweiterungen ein Fehler (kein stiller Ersatzstrom). Der Generatornachweis der Tabelle (herkunft.py)
+    trägt die Version dieses Generators, die wirksamen Strukturparameter und den Zustand beider Ströme."""
     st = parameter(modell.rausch if rausch is None else rausch)
     if st.zusatzstrom_noetig() and rng_zusatz is None:
         raise ValueError('Strukturmodell: Erweiterungen mit eigener Ziehung (Rest, Zufallspfad, Laufdrift, Fünftel) '
                          'verlangen rng_zusatz')
+    nw = ebene_h.generatornachweis(modell, laeufe, rng, st, rng_zusatz, VERSION)       # vor der ersten Ziehung
     n = len(laeufe)
     daten = zf.leere_daten(modell.k_voll, n)
     koepfe = [None] * n
@@ -582,7 +598,7 @@ def erzeuge(modell, laeufe, rng, rausch=None, rng_zusatz=None):
         for jj, i in enumerate(idx):
             koepfe[i] = ebene_h.kopf(modell, laeufe[i], z, jj)
     ebene_h._ereignisse(modell, laeufe, koepfe, daten)
-    tab = zf.LaufTabelle(koepfe, daten)
+    tab = zf.LaufTabelle(koepfe, daten, meta={zf.META_GENERATORNACHWEIS: nw})
     tab.meta['generator'] = dict(version=VERSION, parameter=st.name, erweiterungen=st.erweiterungen())
     return tab
 
@@ -604,6 +620,7 @@ class Vorrat:
         if st.zusatzstrom_noetig() and rng_zusatz is None:
             raise ValueError('Strukturmodell: Erweiterungen mit eigener Ziehung (Rest, Zufallspfad, Laufdrift, '
                              'Fünftel) verlangen rng_zusatz')
+        self.nachweis = ebene_h.generatornachweis(modell, laeufe, rng, st, rng_zusatz, VERSION)   # wie erzeuge
         self.T_lauf = float(modell.plan.T_lauf)
         td = np.array([self._zeit(l) for l in laeufe])
         D = st.nullpunkt_diffusion_N2_je_s
@@ -692,7 +709,8 @@ class Vorrat:
             k, d, _ = self.lauf(dict(l, position_geplant=l['position']), bezug=l['lauf_id'])
             koepfe.append(k)
             zeilen.append(d)
-        tab = zf.LaufTabelle(koepfe, {f: np.concatenate([d[f] for d in zeilen]) for f in zeilen[0]})
+        tab = zf.LaufTabelle(koepfe, {f: np.concatenate([d[f] for d in zeilen]) for f in zeilen[0]},
+                             meta={zf.META_GENERATORNACHWEIS: dict(self.nachweis)})
         tab.meta['generator'] = dict(version=VERSION, parameter=self.st.name, erweiterungen=self.st.erweiterungen())
         return tab
 

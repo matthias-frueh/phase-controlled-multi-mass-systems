@@ -14,11 +14,12 @@ import time
 import numpy as np
 from scipy import stats
 
-from .. import ablauf, anpassung, auswertung, formate, pilot, rohdaten, stufe1, teil_b, verfahren as vf, zufall
-from .. import zusammenfassung as zf
+from .. import ablauf, anpassung, auswertung, formate, herkunft, pilot, rohdaten, stufe1, teil_b, verfahren as vf
+from .. import zufall, zusammenfassung as zf
 from ..generator import ebene_h, ebene_z, kalibrierdaten, kampagne, szenarien, wahrheit
 
 BAND_HZ = (20.0, 600.0)                 # Anpassungsband der Entwicklungsläufe (ausdrücklich, Regel p0.4.band)
+STROEME = dict(reihenfolge='reihenfolge', generator='generator')    # Zufallsströme von Laufplan und Generator (Ebene H)
 
 
 def testvorgabe_werkzeug8(nu=19, kennzeichnung='TESTVORGABE (keine Kalibriersimulation)'):
@@ -58,10 +59,13 @@ def kalibrierung_erzeugen(sz, m, seed):
 
 
 def kampagne_erzeugen(sid, stufe, plan, seed, staerke=None, rausch=None, k_max=None):
-    """Modell, Laufplan und Ebene-H-Tabelle einer Kampagne mit getrennten Zufallsströmen."""
+    """Modell, Laufplan und Ebene-H-Tabelle einer Kampagne mit getrennten Zufallsströmen. Der Generatornachweis der
+    Tabelle (herkunft.py) nennt den Aufruf: Szenario, Stufe, Seed und die Namen der Ströme; Plan, Stärke, Rauschmodell
+    und k_max stehen in seiner Modellprüfsumme."""
     m = szenarien.modell(sid, stufe, plan=plan, staerke=staerke, rausch=rausch, k_max=k_max)
-    laeufe = kampagne.laufplan(m.plan, zufall.strom(seed, 'reihenfolge'))
-    tab = ebene_h.erzeuge(m, laeufe, zufall.strom(seed, 'generator'))
+    laeufe = kampagne.laufplan(m.plan, zufall.strom(seed, STROEME['reihenfolge']))
+    tab = ebene_h.erzeuge(m, laeufe, zufall.strom(seed, STROEME['generator']))
+    herkunft.mit_aufruf(tab, m.szenario, stufe, seed, STROEME)
     return m, laeufe, tab
 
 
@@ -87,7 +91,7 @@ class MessungH:
 
     def __init__(self, modell, laeufe, seed, rausch=None):
         self.modell, self.seed = modell, int(seed)
-        self.vorrat = ebene_h.Vorrat(modell, laeufe, zufall.strom(seed, 'generator'), rausch)
+        self.vorrat = ebene_h.Vorrat(modell, laeufe, zufall.strom(seed, STROEME['generator']), rausch)
         self.versuch_ereignisse = [e for e in modell.effekte_art('ereignis') if 'versuch' in e]
 
     def _effekte(self, spec, versuch):
@@ -223,7 +227,7 @@ def kampagne_ablauf(sid, stufe, plan, seed, profil, werkzeug8=None, n_min=None, 
     m = modell if modell is not None else szenarien.modell(sid, stufe, plan=plan, staerke=staerke, rausch=rausch,
                                                             k_max=k_max)
     kennung = formate.synth_kennung('ABLAUF', sid, stufe, seed)
-    rng_r = zufall.strom(seed, 'reihenfolge')
+    rng_r = zufall.strom(seed, STROEME['reihenfolge'])
     laeufe = kampagne.laufplan(m.plan, rng_r)
     mes, kwahr, kal = kalibrierung_erzeugen(sz, m, seed)
     if ebene == 'Z':
@@ -235,6 +239,8 @@ def kampagne_ablauf(sid, stufe, plan, seed, profil, werkzeug8=None, n_min=None, 
     else:
         raise ValueError(f'Ebene {ebene!r} (Z oder H)')
     tab0 = messung.phase0(laeufe)
+    if ebene == 'H' and modell is None:     # Aufruf wie kampagne_erzeugen; ein vorgegebenes Modell folgt nicht aus sid
+        herkunft.mit_aufruf(tab0, m.szenario, stufe, seed, STROEME)
     w8 = testvorgabe_werkzeug8() if werkzeug8 is None else werkzeug8
     tb, pe = teil_b_erzeugen(tab0, kal, m, profil, w8, seed, n_min, kennung=kennung, verfahren=v)
     sw = auswertung._schwellen(tb, profil)
@@ -262,11 +268,15 @@ def kampagne_ablauf(sid, stufe, plan, seed, profil, werkzeug8=None, n_min=None, 
 
 
 def ablauf_tabelle(r):
-    """Phase-0-Läufe und alle Versuche der Phase 1 in einer Tabelle mit dem Ablaufstand (meta „ablauf“)."""
+    """Phase-0-Läufe und alle Versuche der Phase 1 in einer Tabelle mit dem Ablaufstand (meta „ablauf“) und, bei
+    Ebene H, dem Generatornachweis der Phase-0-Läufe."""
     t1 = r['ablauf'].tabelle()
     t0 = r['tab0']
+    meta = dict(t1.meta)
+    if zf.META_GENERATORNACHWEIS in t0.meta:
+        meta[zf.META_GENERATORNACHWEIS] = t0.meta[zf.META_GENERATORNACHWEIS]
     return zf.LaufTabelle(t0.koepfe + t1.koepfe, {f: np.concatenate([t0.daten[f], t1.daten[f]]) for f in t0.daten},
-                          meta=dict(t1.meta))
+                          meta=meta)
 
 
 def kette(sid, stufe, profil, plan=None, seed=1, werkzeug8=None, staerke=None, kalibrierung=None, n_min=None,

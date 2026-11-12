@@ -27,20 +27,31 @@ des Satzes berechnet), nr2.sigma_a_j, nr2.sigma_delta_j und nr2.sigma_off_j je M
 80-%-Grenze (A9.3 Nr. 2, Entwurf). nr10.werte_regel nennt die Regel planung.teil_b_werte (Teil-B-Werte aus
 Punktschätzern nach der Planung) und die Modellquelle der Werkzeug-8-Werte. Unter den historischen Profilen bleibt
 Teil B unverändert (teil_b-0.3).
+
+Herkunft (ab teil_b-0.5, nur Regelstand 2026-11; Entscheidung vom 12.11.2026): nr1.phase0_herkunft ist der
+Herkunftsnachweis der übergebenen Phase-0-Läufe (herkunft.py) mit seiner Prüfsumme nr1.phase0_herkunft_sha256. Für
+Läufe mit Rohdatei stehen dort je Lauf die SHA-256-Prüfsumme der Rohdatei, die des Kalibrierobjekts und die Version
+von Stufe 1 (A9.3 Nr. 1), für Läufe ohne Rohdatei (Ebene H) der Generatornachweis. nr1.phase0_sha256 und
+nr1.phase0_optionale_sha256 entfallen. Teil B wird nur gebildet, wenn die Pilotausgabe ihren Herkunftsnachweis trägt
+und er zu den übergebenen Läufen passt (pruefe_pilot_herkunft); eine Pilotausgabe ohne Nachweis gilt nicht als an diese
+Läufe gebunden und wird zurückgewiesen. Ein Satz wird über die Prüfsumme des Nachweises zugeordnet statt über eine
+Prüfsumme der Datenfelder. Der Nachweis belegt die Herkunft, nicht die Werte. Unter den historischen Profilen bleiben
+phase0_sha256 und die Prüfung über pilot.daten_sha256 unverändert (teil_b-0.3).
 """
 import math
 
 import numpy as np
 from scipy import stats
 
-from . import bootstrap as bs, formate, g4, h2, kontrollen, konventionen as kv, laufgroessen, pilot, regeln
+from . import bootstrap as bs, formate, g4, h2, herkunft, kontrollen, konventionen as kv, laufgroessen, pilot, regeln
 from . import vorhersage as vh, zeltfit as zfit
 from . import zusammenfassung as zf
 from .regeln import RegelOffen
 
-VERSION = 'teil_b-0.4'          # 0.2: nr5.unsicherheit (Korrektur E), nr1.phase0_verarbeitung (Korrektur B);
+VERSION = 'teil_b-0.5'          # 0.2: nr5.unsicherheit (Korrektur E), nr1.phase0_verarbeitung (Korrektur B);
                                 # 0.3: Phase-0-Satz an k_max und N_z des Plans gebunden, nr2.arbeitspunkt;
-                                # 0.4: Laufgrößen in nr2 (nur Regelstand 2026-11)
+                                # 0.4: Laufgrößen in nr2 (nur Regelstand 2026-11);
+                                # 0.5: Herkunftsnachweis der Phase-0-Läufe in nr1 und in der Bindung (nur 2026-11)
 VERSION_HISTORISCH = 'teil_b-0.3'
 
 
@@ -50,14 +61,44 @@ def version(profil):
 
 
 BINDUNGEN = ('plan', 'historisch')
-# Felder einer Bindung, die den Satz bestimmen (Phase-0-Daten, k, Fenster, Code und Seed); die Quellangabe zählt nicht
-BINDUNG_IDENTITAET = ('k', 'N_z', 'n_fuenftel', 'T_a_s', 'phase0_sha256', 'n_laeufe', 'n_pilot', 'seed_eps_ctrl',
-                      'n_sim_eps_ctrl', 'version')
+# Felder einer Bindung, die den Satz bestimmen (k, Fenster, Code und Seed); die Quellangabe zählt nicht. Dazu kommt die
+# Angabe zu den Phase-0-Läufen (BINDUNG_DATEN): ab pilot-0.5 die Prüfsumme des Herkunftsnachweises, bis pilot-0.4 und
+# unter den historischen Profilen die Prüfsumme der Datenfelder.
+BINDUNG_IDENTITAET = ('k', 'N_z', 'n_fuenftel', 'T_a_s', 'n_laeufe', 'n_pilot', 'seed_eps_ctrl', 'n_sim_eps_ctrl',
+                      'version')
+BINDUNG_DATEN = (pilot.FELD_HERKUNFT, pilot.FELD_DATEN_HISTORISCH)
 
 
 def gleich_gebunden(a, b):
-    """Bezeichnen zwei Bindungen denselben Satz (BINDUNG_IDENTITAET)? Fehlt eine Bindung, nein."""
-    return isinstance(a, dict) and isinstance(b, dict) and all(a.get(x) == b.get(x) for x in BINDUNG_IDENTITAET)
+    """Bezeichnen zwei Bindungen denselben Satz? Gleiche Felder BINDUNG_IDENTITAET und dieselbe Angabe zu den
+    Phase-0-Läufen in derselben Fassung (BINDUNG_DATEN). Fehlt eine Bindung oder diese Angabe, nein; eine Bindung über
+    die Herkunft und eine über die Datenfelder bezeichnen nie denselben Satz."""
+    if not (isinstance(a, dict) and isinstance(b, dict)):
+        return False
+    daten = [x for x in BINDUNG_DATEN if a.get(x) or b.get(x)]
+    return (len(daten) == 1 and a.get(daten[0]) == b.get(daten[0])
+            and all(a.get(x) == b.get(x) for x in BINDUNG_IDENTITAET))
+
+
+def pruefe_pilot_herkunft(pilot_erg, nw):
+    """Regelstand 2026-11: Die Pilotausgabe muss ihren Herkunftsnachweis tragen (ab pilot-0.5), jeder Nachweis muss zu
+    seiner Prüfsumme in der Bindung passen, und der Nachweis nw der übergebenen Phase-0-Läufe muss einer davon sein
+    (Satz auf oberster Ebene oder Satz der Suche). Sonst ValueError. Rückgabe: Name des passenden Satzes."""
+    belege = pilot.herkunft_belege(pilot_erg)
+    if not belege:
+        raise ValueError(f'Teil B ({VERSION}): Pilotausgabe ohne Herkunftsnachweis der Phase-0-Läufe (Fassung '
+                         f'{pilot_erg.get("version") or "unbekannt"}); sie gilt nicht als an diese Läufe gebunden. Das '
+                         'Pilotskript mit dem aktuellen Stand neu rechnen')
+    for name, h, n in belege:
+        if not isinstance(n, dict) or herkunft.sha256(n) != h:
+            raise ValueError(f'Teil B: Herkunftsnachweis der Pilotausgabe ({name}) fehlt oder passt nicht zu seiner '
+                             'Prüfsumme in der Bindung')
+    h_nw = herkunft.sha256(nw)
+    for name, h, _ in belege:
+        if h == h_nw:
+            return name
+    raise ValueError('Teil B: Pilotausgabe stammt aus anderen Phase-0-Daten als den übergebenen Läufen ('
+                     + herkunft.unterschied(belege[0][2], nw) + ')')
 
 
 def konfigurationen(zusatz=False, punkte_I=None):
@@ -111,7 +152,12 @@ def phase0_satz(tab0, kal, pilot_erg, profil, plan, bindung='plan', seed_pilot=N
     Satz auf oberster Ebene (beide haben gleiches k und N_z, wenn die Suche beim k der Pilotgrößen festlegt); gleiches k
     und N_z bei anderen Daten ist unvereinbar. Sonst wird der Satz mit dem Code und Seed des Pilotskripts neu berechnet
     (seed_pilot, falls die Pilotausgabe keinen Seed nennt). bindung='historisch': der vorläufige Satz auf oberster Ebene
-    wie bis teil_b-0.2, gekennzeichnet und nicht qualifizierend."""
+    wie bis teil_b-0.2, gekennzeichnet und nicht qualifizierend.
+
+    „Gleiche Phase-0-Daten“ heißt im Regelstand 2026-11 gleicher Herkunftsnachweis (herkunft.py). Dort wird in beiden
+    Bindungsarten zuerst geprüft, dass die Pilotausgabe zu den übergebenen Läufen gehört (pruefe_pilot_herkunft); ein
+    Satz ohne Herkunftsnachweis wird nicht übernommen. Unter den historischen Profilen gilt die Prüfsumme der
+    Datenfelder (pilot.daten_sha256) wie bis teil_b-0.3."""
     if bindung not in BINDUNGEN:
         raise ValueError(f'Bindung {bindung!r} unbekannt ({", ".join(BINDUNGEN)})')
     t = tab0.auswahl(tab0.spalte('phase', int) == 0).sortiert()
@@ -123,6 +169,11 @@ def phase0_satz(tab0, kal, pilot_erg, profil, plan, bindung='plan', seed_pilot=N
     einordnung = pilot.einordnen(pilot_erg)
     info = dict(modus=bindung, k_plan=k, N_z_plan=plan.get('N_z'), N_z=N_z, pilot_version=pilot_erg.get('version'),
                 pilot_einordnung=einordnung['bedeutung'], k_pilotgroessen=pilot_erg.get('k_pilotgroessen'))
+    neu = pilot.herkunft_gebunden(profil)
+    if neu:                                                 # Herkunft: Pilotausgabe und Läufe gehören zusammen
+        nw = herkunft.nachweis(t)
+        h, feld = herkunft.sha256(nw), pilot.FELD_HERKUNFT
+        info.update(phase0_herkunft_sha256=h, pilot_herkunft=pruefe_pilot_herkunft(pilot_erg, nw))
     if bindung == 'historisch':
         s = pilot.satz_oberste_ebene(pilot_erg)
         info.update(quelle='historisch: vorläufiger Satz bei k der Pilotgrößen (bis teil_b-0.2)', k=info['k_pilotgroessen'],
@@ -132,7 +183,8 @@ def phase0_satz(tab0, kal, pilot_erg, profil, plan, bindung='plan', seed_pilot=N
         if pilot.mit_laufgroessen(profil) and 'laufgroessen' not in s and info['k_pilotgroessen'] is not None:
             return _mit_laufgroessen(s, t, profil, int(info['k_pilotgroessen']), info)
         return s, info
-    h = pilot.daten_sha256(t)
+    if not neu:
+        h, feld = pilot.daten_sha256(t), pilot.FELD_DATEN_HISTORISCH
     such = pilot_erg.get('suche') or {}
     kandidaten = [('Pilotskript, oberste Ebene', pilot.satz_oberste_ebene(pilot_erg))]
     if such.get('satz'):
@@ -140,9 +192,9 @@ def phase0_satz(tab0, kal, pilot_erg, profil, plan, bindung='plan', seed_pilot=N
     passend = [(name, s) for name, s in kandidaten
                if s.get('bindung') and s['bindung']['k'] == k and s['bindung']['N_z'] == N_z]
     for name, s in passend:
-        if s['bindung']['phase0_sha256'] != h:
+        if s['bindung'].get(feld) != h:
             raise ValueError(f'Teil B: Satz „{name}“ (k = {k}, N_z = {N_z}) stammt aus anderen Phase-0-Daten als den '
-                             'übergebenen Läufen')
+                             'übergebenen Läufen' + ('' if feld in s['bindung'] else f' (Bindung ohne {feld})'))
     if passend:
         name, s = passend[0]
         info.update(quelle=name, k=k, qualifiziert=True, neu_berechnet=False, bindung=s['bindung'])
@@ -393,11 +445,13 @@ def erstellen(tab0, kal, pilot_erg, profil, plan, werkzeug8=None, kennung=None, 
                                    modellquelle=w8.get('modellquelle', 'nicht angegeben (Werkzeug 8)'),
                                    hinweis='Planung an der oberen Grenze mit c_B; Teil-B-Werte aus Punktschätzern '
                                            'der Kalibrierung nach der Planung')
-    nr1_neu = {} if regeln.ist_historisch(profil) else dict(phase0_optionale_sha256={
-        k: formate.sha256_bytes(formate.npz_bytes({k: v})) for k, v in tab0.daten.items() if k in zf.OPTIONALE_FELDER})
+    if pilot.herkunft_gebunden(profil):             # ab teil_b-0.5: Herkunftsnachweis der Phase-0-Läufe (A9.3 Nr. 1)
+        nw = herkunft.nachweis(tab0.auswahl(tab0.spalte('phase', int) == 0))
+        nr1_phase0 = dict(phase0_herkunft=nw, phase0_herkunft_sha256=herkunft.sha256(nw))
+    else:                                           # historische Profile: Prüfsumme der Pflichtfelder wie teil_b-0.3
+        nr1_phase0 = dict(phase0_sha256=formate.sha256_bytes(formate.npz_bytes(zf.pflichtfelder(tab0.daten))))
     return dict(version=version(profil), kennung=kennung,
-                nr1=dict(kalibrierung_sha256=formate.sha256_json(kal), **nr1_neu,
-                         phase0_sha256=formate.sha256_bytes(formate.npz_bytes(zf.pflichtfelder(tab0.daten))),
+                nr1=dict(kalibrierung_sha256=formate.sha256_json(kal), **nr1_phase0,
                          phase0_verarbeitung=zf.verarbeitungsstand(tab0.koepfe),
                          pilot_sha256=formate.sha256_json(pilot_erg), code_version=formate.code_version()),
                 nr2=nr2, nr3=nr3, nr4=nr4, nr5=nr5, nr6=nr6, nr7=dict(hinweis='H3-Vorhersage rechnet Stufe 2 aus der '

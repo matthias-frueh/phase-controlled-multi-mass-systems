@@ -1,8 +1,8 @@
 # AP-11 bis AP-13: Anpassung, Auswertung und synthetischer Pipelinetest — erste Softwarestufe
 
 Stand 16.10.2026, mit den Korrekturen A–E vom selben Tag (Abschnitt 1a), der k-Konsistenz mit dem Ablauf der Phase 1
-vom 17.10.2026 (Abschnitt 1b), den Korrekturen vom 18.10.2026 (Abschnitt 1c) und dem Regelstand 2026-11 vom 20.10.2026
-(Abschnitt 1d) · Basis `a1c9953` (`main` nach PR #19) · Paket [`code/pcmms_auswertung/`](../code/pcmms_auswertung/)
+vom 17.10.2026 (Abschnitt 1b), den Korrekturen vom 18.10.2026 (Abschnitt 1c), dem Regelstand 2026-11 vom 20.10.2026
+(Abschnitt 1d) und der Bindung über die Herkunft vom 12.11.2026 (Abschnitt 1e) · Basis `a1c9953` (`main` nach PR #19) · Paket [`code/pcmms_auswertung/`](../code/pcmms_auswertung/)
 (Code MIT, dieses Dokument CC BY 4.0) · Umgebung der Prüfläufe: Python 3.13.16, NumPy 2.5.3, SciPy 1.18.1, 4 Kerne.
 *Nur Software und Simulation.* Es gibt keine Messdaten, keine Hardwarewahl, keine Festlegung offener Regeln und kein
 ausgefülltes Teil B; synthetische Kennungen beginnen mit `SYNTH-` und behaupten keine Registrierung. Die
@@ -354,6 +354,48 @@ kleinen Proben sind danach neu gerechnet.
   Vorschlagscharakter (`rauschmodelle.sensitivitaeten`, `p0.strukturmodell`), Festlegung beim Autor.
 - Rechenaufwand neben der Testsuite: etwa 0,5 Kernstunden ([Protokoll](../rechnungen/regelstand_2026-11/README.md)).
   Die große Kalibrierung, die volle Matrix und große Planungsläufe wurden nicht ausgeführt.
+
+## 1e Bindung Phase 0 ↔ Teil B über die Herkunft vom 12.11.2026 (PR #40)
+
+Entscheidung des Autors vom 12.11.2026 ([Entscheidungsnotiz](entscheidungsnotiz_herkunft_phase0_2026-11-12.md) mit
+Alternativen, Messungen und den Abweichungen der Umsetzung vom Entwurf). Präregistrierung, Regelprofile,
+Entscheidungsregeln, Schwellen, Modelle, Daten, Prüfsätze und Fixtures sind unverändert; A9.3 Nr. 1 bleibt
+maßgeblich.
+
+- **Anlass.** Die Bindung des Phase-0-Satzes (`pilot.daten_sha256`, Abschnitt 1b) war eine Prüfsumme über die
+  komprimierten Datenfelder. Gleiche Läufe ergaben mit einem anderen zlib oder einem anderen Rechenkern von
+  OpenBLAS eine andere Prüfsumme (PR #36 bis #38). Teil B führte keine Prüfsummen der Rohdaten.
+- **Jetzt** (`pilot-0.5`, `teil_b-0.5`, nur Regelstand 2026-11; Modul `herkunft.py`):
+  - Die Bindung ist die SHA-256-Prüfsumme des Herkunftsnachweises der Phase-0-Läufe. Er enthält nur exakte
+    Angaben und keine Gleitkommazahl.
+  - Läufe mit Rohdatei (Ebene Z): je Lauf `hash_rohdatei`, `kalibrier_hash`, `version_stufe1`. Teil B führt sie
+    einzeln in `nr1.phase0_herkunft`.
+  - Läufe ohne Rohdatei (Ebene H): kein Rohdatei-Hash, auch kein künstlicher. Die Tabelle trägt den
+    Generatornachweis (Generatorversion, Prüfsummen von Modellbeschreibung und Laufliste, Zustand des
+    Zufallsstroms; aus `harness.kette` dazu Szenario, Stufe, Seed und Stromnamen). Der Generator legt ihn selbst an.
+  - Teil B wird nur gebildet, wenn die Pilotausgabe ihren Nachweis trägt und er dem der übergebenen Läufe gleicht,
+    auch wenn Teil B den Satz neu rechnet. Die Fehlermeldung nennt den ersten Unterschied.
+- **Altbestand.** Unter den historischen Profilen rechnen und schreiben Pilotskript und Teil B wie bisher
+  (`pilot-0.3`, `teil_b-0.3`, `phase0_sha256`). Eine Pilotausgabe ohne Nachweis wird unter `teil_b-0.5` nicht
+  übernommen und nicht umgedeutet; Teil B bricht ab.
+- **Geprüft.** `tests/test_herkunft.py` mit 25 Tests: die 15 Negativtests und zwei Gegenproben der Notiz, der
+  Inhalt des Nachweises auf Ebene H und Z (jede Prüfsumme gegen Rohdatei und Manifest), der Satz der Suche mit
+  gekürztem Fenster, die unveränderte Bindung der historischen Profile und die Grenze des Nachweises. Testsuite am
+  12.11.2026: mit dem Kern HASWELL und der Abwahl der CI 577 bestanden, 8 übersprungen, 3 abgewählt; mit dem Kern
+  SkylakeX ohne Abwahl 580 bestanden, 8 übersprungen (Python 3.13.18, NumPy 2.5.4, SciPy 1.18.1, zlib 1.3, ein
+  BLAS-Thread). Die drei Prüfsatz-Tests bestehen mit SkylakeX unverändert: Datenfelder und Laufköpfe der
+  Prüfkampagnen sind dieselben wie vor der Änderung.
+- **Gemessen.** Für vier Kampagnen ist der Nachweis unter den Kernen SkylakeX und HASWELL gleich, für eine davon
+  unter sechs Kernen; die Prüfsumme der Datenfelder unterscheidet sich jeweils (Notiz, Abschnitt 3.7).
+- **Grenzen.**
+  - Der Nachweis belegt Herkunft und Rechenvorschrift, nicht die Werte. Geänderte Datenfelder bei unverändertem
+    Nachweis erkennt die Bindung nicht. Der Wertevergleich mit Toleranz steht aus (nächster Schritt, „PR C“).
+  - Bei Ebene Z gilt der Nachweis für die gespeicherten Dateien und das Kalibrierobjekt von Stufe 1. Eine neu
+    gerechnete Kalibrierung kann sich in den letzten Bits unterscheiden (Abschnitt 1d) und ergibt dann eine andere
+    Prüfsumme.
+  - Die drei Prüfsatz-Tests bleiben in der CI abgewählt, Rechenkern und Thread-Zahl bleiben dort festgelegt
+    (Übergangslösung aus PR #38), bis der Wertevergleich mit Toleranz umgesetzt ist. Bis dahin wird kein
+    Referenzstand eingefroren.
 
 ## 1 Erreichter Umfang
 
