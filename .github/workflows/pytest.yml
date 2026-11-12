@@ -5,8 +5,12 @@
 # Bestätigung ist das nicht; alles im Repository ist Simulation oder Analytik.
 #
 # Der Lauf ändert keine Dateien und führt keinen Merge aus. Eine Merge-Sperre ist damit nicht eingerichtet.
-# Die Abhängigkeiten stehen in code/requirements.txt ohne Versionsangabe; installiert wird der jeweils
-# aktuelle Stand. Welche Versionen das im einzelnen Lauf waren, hält der Schritt „Umgebung protokollieren“ fest.
+#
+# Umgebung: Die Abhängigkeiten stehen in code/requirements.txt ohne Versionsangabe; installiert wird der jeweils
+# aktuelle Stand. Das Betriebssystem ist auf Ubuntu 24.04 festgelegt, weil vier Tests SHA-256-Prüfsummen über
+# komprimierte NPZ-Bytes vergleichen und das Ergebnis der Kompression vom zlib des Systems abhängt: Mit zlib 1.3
+# (Ubuntu 24.04) entstehen die hinterlegten Prüfsummen, mit zlib-ng nicht. Welche Versionen im einzelnen Lauf
+# galten, hält der Schritt „Umgebung protokollieren“ fest.
 
 name: Tests
 
@@ -21,7 +25,7 @@ permissions:
 jobs:
   pytest:
     name: pytest
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 30
 
     steps:
@@ -39,6 +43,7 @@ jobs:
       - name: Umgebung protokollieren
         run: |
           python3 --version
+          python3 -c "import zlib; print('zlib', zlib.ZLIB_RUNTIME_VERSION)"
           python3 -m pip list
 
       - name: Testsuite ausführen
