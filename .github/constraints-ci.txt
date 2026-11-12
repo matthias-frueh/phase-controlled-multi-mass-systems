@@ -33,3 +33,6 @@ Pygments==2.21.0
 pyparsing==3.3.3
 python-dateutil==4.0.0
 tzdata==2026.6
+
+# Nur für den Schritt „Umgebung protokollieren“; wird außerhalb der Testumgebung installiert
+threadpoolctl==3.8.0
