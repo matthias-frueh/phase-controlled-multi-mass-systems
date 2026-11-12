@@ -16,9 +16,11 @@
 # Runner mit verschiedenen Prozessoren zu, und OpenBLAS wählt seinen Rechenkern nach dem Prozessor. Die
 # Ergebnisse unterscheiden sich dann im Rundungsrauschen (in den geprüften Laufzusammenfassungen bis
 # 1,6·10⁻¹³ relativ). Damit jeder Lauf gleich rechnet, sind der Rechenkern (HASWELL) und die Zahl der
-# BLAS-Threads (1) festgelegt. Vier Tests vergleichen mit hinterlegten Werten, die zum Rechenkern SkylakeX
-# gehören (Prozessoren mit AVX-512). Sie sind im Lauf abgewählt und werden im Protokoll genannt; die Liste
-# steht im Schritt „Testsuite ausführen“. Auf einem Rechner mit dem Kern SkylakeX und zlib 1.3 bestehen sie.
+# BLAS-Threads (1) festgelegt; mit dem Kern HASWELL und vier Threads schlägt
+# test_kampagnen_unabhaengig_von_der_prozesszahl fehl, mit einem Thread besteht er. Vier Tests vergleichen mit
+# hinterlegten Werten, die zum Rechenkern SkylakeX gehören (Prozessoren mit AVX-512). Sie sind im Lauf
+# abgewählt und werden im Protokoll genannt; die Liste steht im Schritt „Testsuite ausführen“. Auf einem
+# Rechner mit dem Kern SkylakeX und zlib 1.3 bestehen sie.
 
 name: Tests
 
@@ -69,27 +71,7 @@ jobs:
               print(f"BLAS: {b['internal_api']} {b['version']}, Kern {b.get('architecture')}, Threads {b['num_threads']} ({ort})")
           PY
 
-      - name: Gegenversuch (vorübergehend)
-        run: |
-          T5="tests/test_ap13_harness.py::test_kampagnen_unabhaengig_von_der_prozesszahl"
-          T14="tests/test_ablauf4.py::test_ablauf_pruefsatz_ablauf4_nachrechenbar tests/test_ap13_ablauf.py::test_ablauf_pruefsatz_nachrechenbar tests/test_ap13_harness.py::test_pruefsatz_unveraendert tests/test_auslegung.py::test_cli_text_und_vorrang"
-          versuch() {
-            name="$1"; tests="$2"; shift 2
-            lage=$(env "$@" PYTHONPATH="$RUNNER_TEMP/protokoll" python3 -c "import numpy; from threadpoolctl import threadpool_info as t; b = t()[0]; print('Kern', b.get('architecture'), 'Threads', b['num_threads'])")
-            if env "$@" python3 -m pytest $tests -q -p no:cacheprovider > "$RUNNER_TEMP/aus.txt" 2>&1; then erg=bestanden; else erg=FEHLGESCHLAGEN; fi
-            echo "GEGENVERSUCH | $name | $lage | $erg | $(tail -1 "$RUNNER_TEMP/aus.txt")"
-            grep -E '^FAILED' "$RUNNER_TEMP/aus.txt" | sed -E 's/ - .*//; s/^/GEGENVERSUCH |   /' || true
-          }
-          versuch "Test 5: Kern nach Prozessor, Threads Voreinstellung" "$T5" -u OPENBLAS_CORETYPE -u OPENBLAS_NUM_THREADS
-          versuch "Test 5: Kern nach Prozessor, 2 Threads" "$T5" -u OPENBLAS_CORETYPE OPENBLAS_NUM_THREADS=2
-          versuch "Test 5: Kern nach Prozessor, 1 Thread" "$T5" -u OPENBLAS_CORETYPE OPENBLAS_NUM_THREADS=1
-          versuch "Test 5: Kern HASWELL, Threads Voreinstellung" "$T5" -u OPENBLAS_NUM_THREADS OPENBLAS_CORETYPE=HASWELL
-          versuch "Test 5: Kern HASWELL, 1 Thread" "$T5" OPENBLAS_CORETYPE=HASWELL OPENBLAS_NUM_THREADS=1
-          versuch "Tests 1-4: Kern nach Prozessor, 1 Thread" "$T14" -u OPENBLAS_CORETYPE OPENBLAS_NUM_THREADS=1
-          versuch "Tests 1-4: Kern HASWELL, 1 Thread" "$T14" OPENBLAS_CORETYPE=HASWELL OPENBLAS_NUM_THREADS=1
-
       - name: Testsuite ausführen
-        if: ${{ false }}
         run: |
           # An den Rechenkern SkylakeX gebunden (hinterlegte Prüfsummen, bei test_cli_text_und_vorrang die
           # Zählung des Gleichstands); abgewählt, solange der Lauf mit dem Kern HASWELL rechnet.
