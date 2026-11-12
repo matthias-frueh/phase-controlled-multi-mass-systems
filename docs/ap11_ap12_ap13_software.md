@@ -377,7 +377,9 @@ maßgeblich.
     auch wenn Teil B den Satz neu rechnet. Die Fehlermeldung nennt den ersten Unterschied.
 - **Altbestand.** Unter den historischen Profilen rechnen und schreiben Pilotskript und Teil B wie bisher
   (`pilot-0.3`, `teil_b-0.3`, `phase0_sha256`). Eine Pilotausgabe ohne Nachweis wird unter `teil_b-0.5` nicht
-  übernommen und nicht umgedeutet; Teil B bricht ab.
+  übernommen und nicht umgedeutet; Teil B bricht ab. Der Generator legt den Generatornachweis unabhängig vom Profil
+  an: Eine Datei `zusammenfassungen` der Ebene H hat seither einen zusätzlichen Schlüssel im Kopf, auch unter den
+  historischen Profilen, die ihn nicht auswerten. Laufköpfe und Datenfelder sind unverändert.
 - **Geprüft.** `tests/test_herkunft.py` mit 25 Tests: die 15 Negativtests und zwei Gegenproben der Notiz, der
   Inhalt des Nachweises auf Ebene H und Z (jede Prüfsumme gegen Rohdatei und Manifest), der Satz der Suche mit
   gekürztem Fenster, die unveränderte Bindung der historischen Profile und die Grenze des Nachweises. Testsuite am

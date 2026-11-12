@@ -152,7 +152,9 @@ ist, nennt die Fehlermeldung den ersten abweichenden Lauf und das abweichende Fe
   und `nr1.phase0_optionale_sha256` entfallen dort.
 - Unter den historischen Profilen (AF-2026-10, ENTW-2026-10) bleiben `pilot-0.3` und `teil_b-0.3` mit
   `phase0_sha256` unverändert. Die Docstrings benennen die Bedeutung: Ergebnisprüfsumme, an zlib und Rechenkern
-  gebunden. Ein Generatornachweis wird dort nicht verlangt.
+  gebunden. Ein Generatornachweis wird dort nicht verlangt und nicht ausgewertet. Der Generator legt ihn aber
+  unabhängig vom Profil an; eine Datei `zusammenfassungen` der Ebene H hat deshalb auch dort einen zusätzlichen
+  Schlüssel im Kopf.
 - Eine Pilotausgabe ohne Herkunftsnachweis (bis `pilot-0.4` oder aus einem historischen Profil) gilt unter
   `teil_b-0.5` nicht als an die Läufe gebunden. Sie wird nicht umgedeutet: Teil B bricht ab und verlangt, das
   Pilotskript neu zu rechnen.
