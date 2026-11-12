@@ -72,24 +72,7 @@ jobs:
               print(f"BLAS: {b['internal_api']} {b['version']}, Kern {b.get('architecture')}, Threads {b['num_threads']} ({ort})")
           PY
 
-      - name: Gegenversuch (vorübergehend)
-        run: |
-          versuch() {
-            name="$1"; shift
-            lage=$(env "$@" PYTHONPATH="$RUNNER_TEMP/protokoll" python3 -c "import numpy; from threadpoolctl import threadpool_info as t; b = t()[0]; print('Kern', b.get('architecture'), 'Threads', b['num_threads'])")
-            if env "$@" python3 -m pytest tests/test_auslegung.py -q -p no:cacheprovider > "$RUNNER_TEMP/aus.txt" 2>&1; then erg=bestanden; else erg=FEHLGESCHLAGEN; fi
-            echo "GEGENVERSUCH | $name | $lage | $erg | $(tail -1 "$RUNNER_TEMP/aus.txt")"
-            grep -E '^FAILED' "$RUNNER_TEMP/aus.txt" | sed -E 's/ - .*//; s/^/GEGENVERSUCH |   /' || true
-            zeile=$(cd data && env "$@" python3 ../code/auslegung.py --window --rigid --K 1e6 | grep 'starr:' | sed -E 's/^ +//' || true)
-            echo "GEGENVERSUCH |   Ausgabe: $zeile"
-          }
-          versuch "Kern nach Prozessor, 1 Thread" -u OPENBLAS_CORETYPE OPENBLAS_NUM_THREADS=1
-          versuch "Kern nach Prozessor, Threads Voreinstellung" -u OPENBLAS_CORETYPE -u OPENBLAS_NUM_THREADS
-          versuch "Kern HASWELL, 1 Thread" OPENBLAS_CORETYPE=HASWELL OPENBLAS_NUM_THREADS=1
-          versuch "Kern HASWELL, Threads Voreinstellung" -u OPENBLAS_NUM_THREADS OPENBLAS_CORETYPE=HASWELL
-
       - name: Testsuite ausführen
-        if: ${{ false }}
         run: |
           # An den Rechenkern SkylakeX gebunden (hinterlegte Prüfsummen); abgewählt, solange der Lauf mit dem
           # Kern HASWELL rechnet.
