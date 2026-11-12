@@ -6,11 +6,11 @@
 #
 # Der Lauf ändert keine Dateien und führt keinen Merge aus. Eine Merge-Sperre ist damit nicht eingerichtet.
 #
-# Umgebung: Die Abhängigkeiten stehen in code/requirements.txt ohne Versionsangabe; installiert wird der jeweils
-# aktuelle Stand. Das Betriebssystem ist auf Ubuntu 24.04 festgelegt, weil vier Tests SHA-256-Prüfsummen über
-# komprimierte NPZ-Bytes vergleichen und das Ergebnis der Kompression vom zlib des Systems abhängt: Mit zlib 1.3
-# (Ubuntu 24.04) entstehen die hinterlegten Prüfsummen, mit zlib-ng nicht. Welche Versionen im einzelnen Lauf
-# galten, hält der Schritt „Umgebung protokollieren“ fest.
+# Umgebung: Die Abhängigkeiten stehen in code/requirements.txt ohne Versionsangabe; welche Versionen der Lauf
+# installiert, legt .github/constraints-ci.txt fest. Das Betriebssystem ist auf Ubuntu 24.04 festgelegt, weil
+# vier Tests SHA-256-Prüfsummen über komprimierte NPZ-Bytes vergleichen und das Ergebnis der Kompression vom
+# zlib des Systems abhängt: Mit zlib 1.3 (Ubuntu 24.04) entstehen die hinterlegten Prüfsummen, mit zlib-ng
+# nicht. Welche Versionen im einzelnen Lauf galten, hält der Schritt „Umgebung protokollieren“ fest.
 
 name: Tests
 
@@ -38,7 +38,7 @@ jobs:
           python-version: "3.13"
 
       - name: Abhängigkeiten installieren
-        run: python3 -m pip install -r code/requirements.txt
+        run: python3 -m pip install -r code/requirements.txt -c .github/constraints-ci.txt
 
       - name: Umgebung protokollieren
         run: |
