@@ -21,11 +21,11 @@ Ohne angebundene Planung liefert das Skript die vorbereitenden Größen und kenn
 
 Bindung (ab pilot-0.3): Gültigkeitsmasken, σ_Δ, σ̂_ref, ε_ctrl mit kritischem Wert, p̂, Streuungen und Kovarianzen hängen
 über G4 (F_min − ⟨N⟩ mit k ≤ k) von k und über die Fünftel von der Zyklenzahl N_z des Fensters ab. Sie werden als
-zusammengehöriger Satz mit seiner Bindung ausgegeben (k, N_z, Prüfsumme der Phase-0-Läufe, Seed und Datensatzzahl der
-ε_ctrl-Simulation). Die Größen auf oberster Ebene sind der vorläufige Satz bei k = max(min(k_b, K), 3) vor der Suche
-(bis pilot-0.2 ohne Bindungsangabe); nach erfolgreicher Suche steht der Satz des festgelegten Paars (k_max, N_z) unter
-suche.satz. Teil B verwendet nur einen Satz, der zu k_max und N_z des tatsächlich verwendeten Plans passt
-(teil_b.phase0_satz), und berechnet ihn sonst mit satz_fuer_plan neu.
+zusammengehöriger Satz mit seiner Bindung ausgegeben (k, N_z, Angabe zu den Phase-0-Läufen, Seed und Datensatzzahl der
+ε_ctrl-Simulation; zur Angabe über die Läufe siehe „Herkunft“). Die Größen auf oberster Ebene sind der vorläufige Satz
+bei k = max(min(k_b, K), 3) vor der Suche (bis pilot-0.2 ohne Bindungsangabe); nach erfolgreicher Suche steht der Satz
+des festgelegten Paars (k_max, N_z) unter suche.satz. Teil B verwendet nur einen Satz, der zu k_max und N_z des
+tatsächlich verwendeten Plans passt (teil_b.phase0_satz), und berechnet ihn sonst mit satz_fuer_plan neu.
 
 Laufgrößen (ab pilot-0.4, nur Regelstand 2026-11, Regel p0.laufgroessen): Jeder Satz enthält zusätzlich die
 Komponentenschätzer des Strukturmodells (laufgroessen.schaetzen bei k und N_z des Satzes: Boden aus den R-Läufen,
@@ -34,19 +34,29 @@ Nullpunktprozess, laufinterne Fünftelanteile, Übertragungstest L → K). Sie v
 N̄⁽ʲ⁾ zusammen mit den Zeigern der Piloten nur für zweite Momente; Superpositionsresiduen und Vorhersagen der Piloten
 werden weiterhin weder berechnet noch ausgegeben. Der Planungshaken erhält den Satz als „laufgroessen“. Unter den
 historischen Profilen (2026-10) rechnet und schreibt das Skript wie pilot-0.3 (Version, Felder, Bindung).
+
+Herkunft (ab pilot-0.5, nur Regelstand 2026-11; Entscheidung vom 12.11.2026): Die Bindung nennt die Phase-0-Läufe
+nicht mehr über eine Prüfsumme ihrer Datenfelder (phase0_sha256), sondern über die Prüfsumme ihres Herkunftsnachweises
+(phase0_herkunft_sha256, herkunft.py): Rohdaten-, Kalibrier- und Versionsangaben je Lauf mit Rohdatei, der
+Generatornachweis für Läufe ohne Rohdatei. Der Nachweis selbst steht bei jedem Satz als phase0_herkunft. Er enthält
+keine berechneten Werte und hängt deshalb weder an der Kompressionsbibliothek noch am Rechenkern. Unter den
+historischen Profilen bleibt phase0_sha256 (daten_sha256) unverändert.
 """
 import math
 
 import numpy as np
 from scipy import stats
 
-from . import formate, gueltigkeit, konventionen as kv, laufgroessen, regeln, zufall
+from . import formate, gueltigkeit, herkunft, konventionen as kv, laufgroessen, regeln, zufall
 from . import zusammenfassung as zf
 
-VERSION = 'pilot-0.4'                   # 0.2: Begründung der Suche nach dem tatsächlichen Abbruchgrund; 0.3: Satz mit
+VERSION = 'pilot-0.5'                   # 0.2: Begründung der Suche nach dem tatsächlichen Abbruchgrund; 0.3: Satz mit
                                         # Bindung (k, N_z, Daten, Seed), Satz der Suche beim festgelegten Paar;
-                                        # 0.4: Laufgrößen im Satz (nur Regelstand 2026-11)
+                                        # 0.4: Laufgrößen im Satz (nur Regelstand 2026-11); 0.5: Bindung über den
+                                        # Herkunftsnachweis der Phase-0-Läufe (nur Regelstand 2026-11)
 VERSION_HISTORISCH = 'pilot-0.3'        # unter den historischen Profilen unveränderte Ausgabe
+FELD_HERKUNFT = 'phase0_herkunft_sha256'    # Bindung ab pilot-0.5: Prüfsumme des Herkunftsnachweises
+FELD_DATEN_HISTORISCH = 'phase0_sha256'     # Bindung bis pilot-0.4 und unter den historischen Profilen (daten_sha256)
 
 
 def version(profil):
@@ -60,6 +70,12 @@ def mit_laufgroessen(profil):
         return False
     laufgroessen.regel(profil)
     return True
+
+
+def herkunft_gebunden(profil):
+    """Bindung des Satzes über den Herkunftsnachweis der Phase-0-Läufe (herkunft.py)? Im Regelstand 2026-11; die
+    historischen Profile binden wie pilot-0.3 über die Prüfsumme der Datenfelder (daten_sha256)."""
+    return not regeln.ist_historisch(profil)
 
 
 VERBOTEN_TEIL = ('residu', 'yhat', 'vorhersage', 'superposition', 'bestaetigt', 'falsifiziert', 'entscheid', 'ausgang')
@@ -238,7 +254,10 @@ def fenster(tab):
 
 
 def daten_sha256(tab):
-    """Prüfsumme der Phase-0-Läufe (Kennungen in Laufreihenfolge, Datenfelder), an die ein Satz gebunden ist."""
+    """Prüfsumme der Phase-0-Läufe (Kennungen in Laufreihenfolge, Datenfelder), an die ein Satz unter den historischen
+    Profilen gebunden ist. Sie ist eine Ergebnisprüfsumme über berechnete Felder in komprimierter Form: Gleiche Läufe
+    ergeben mit einer anderen Kompressionsbibliothek oder einem anderen Rechenkern eine andere Prüfsumme. Im
+    Regelstand 2026-11 tritt deshalb die Prüfsumme des Herkunftsnachweises an ihre Stelle (herkunft_gebunden)."""
     t = tab.auswahl(tab.spalte('phase', int) == 0).sortiert()
     return formate.sha256_json(dict(laeufe=[k['lauf_id'] for k in t.koepfe],
                                     daten=formate.sha256_bytes(formate.npz_bytes(zf.pflichtfelder(t.daten)))))
@@ -274,9 +293,14 @@ def _satz(tab, sw0, k, profil, seed, n_sim, f_soll, quelle):
     gp = pr['gueltig']
     N_z, n_f = fenster(tab)
     g6p = [int(i) for i in np.flatnonzero(pil) if pr['regeln']['G6'][i] is True]
+    if herkunft_gebunden(profil):                                       # ab pilot-0.5: Herkunft statt Datenfelder
+        nw = herkunft.nachweis(tab)
+        daten = {FELD_HERKUNFT: herkunft.sha256(nw)}
+    else:
+        nw, daten = None, {FELD_DATEN_HISTORISCH: daten_sha256(tab)}
     s = dict(
         bindung=dict(k=int(k), N_z=int(N_z), n_fuenftel=int(n_f), T_a_s=float(N_z / f_soll), quelle=quelle,
-                     phase0_sha256=daten_sha256(tab), n_laeufe=len(tab), n_pilot=int(pil.sum()),
+                     **daten, n_laeufe=len(tab), n_pilot=int(pil.sum()),
                      seed_eps_ctrl=int(seed), n_sim_eps_ctrl=int(n_sim), version=version(profil)),
         sigma_ref=dict(sigma_ref=sr['sigma_ref'], sigma_ref_zellen=sr['sigma_ref_zellen'], n=sr['n'],
                        werte=sr['werte'], mindestzahl=profil.wert('h0.referenzlaeufe_min'),
@@ -295,6 +319,8 @@ def _satz(tab, sw0, k, profil, seed, n_sim, f_soll, quelle):
         kovarianzen=kovarianzen(tab, gp, k), streuungen=streuungen(tab, gp & pil, k))
     if mit_laufgroessen(profil):
         s['laufgroessen'] = laufgroessen.schaetzen(tab, gp, k)
+    if nw is not None:
+        s['phase0_herkunft'] = nw
     return s, pr
 
 
@@ -312,9 +338,22 @@ def satz_oberste_ebene(pe):
     s = {x: pe.get(x) for x in SATZ_FELDER if x != 'streuungen'}
     s['streuungen'] = pe.get('streuungen_volles_fenster')
     s['bindung'] = pe.get('bindung')
-    if 'laufgroessen' in pe:
-        s['laufgroessen'] = pe['laufgroessen']
+    for x in ('laufgroessen', 'phase0_herkunft'):
+        if x in pe:
+            s[x] = pe[x]
     return s
+
+
+def herkunft_belege(pe):
+    """Herkunftsnachweise einer Pilotausgabe ab pilot-0.5: Liste (Name, Prüfsumme aus der Bindung, Nachweis) für den
+    Satz auf oberster Ebene und den Satz der Suche. Leer bei Fassungen ohne Nachweis (bis pilot-0.4 und unter den
+    historischen Profilen)."""
+    out = []
+    for name, s in (('oberste Ebene', pe), ('Suche', (pe.get('suche') or {}).get('satz') or {})):
+        h = (s.get('bindung') or {}).get(FELD_HERKUNFT)
+        if h:
+            out.append((name, h, s.get('phase0_herkunft')))
+    return out
 
 
 def einordnen(pe):
@@ -372,8 +411,9 @@ def pilot_auswerten(tab, kal, profil, f_soll, zeit=None, seed=0, planung=None, t
     s, _ = _satz(tab, sw0, k_val, profil, seed, n_sim, f_soll, 'vorläufig: k = max(min(k_b, K), 3) vor der Suche')
     for x in SATZ_FELDER:
         out['streuungen_volles_fenster' if x == 'streuungen' else x] = s[x]
-    if 'laufgroessen' in s:
-        out['laufgroessen'] = s['laufgroessen']
+    for x in ('laufgroessen', 'phase0_herkunft'):
+        if x in s:
+            out[x] = s[x]
     out['k_pilotgroessen'] = k_val
     out['bindung'] = s['bindung']
     out['seed'] = int(seed)

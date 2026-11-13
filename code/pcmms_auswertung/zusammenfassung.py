@@ -24,10 +24,16 @@ Felder je Lauf (Kopf: JSON-Werte; Daten: Felder fester Form, k = 1 … k_voll, k
   Optional fuenftel_zeiger (2, 3) = Σ_c e^{−iφⱼ,c} (k = 1) der Indexphasen über die Zyklen des ersten und letzten
           Fünftels (Modul 1: n_f; nicht laufende Module: nan), seit dem Auftrag vom 20.10.2026 für die
           phasenkorrigierte Fünftel-Differenz (G4-Modus D). Ältere Zusammenfassungen ohne das Feld bleiben gültig und
-          werden erkannt (hat_fuenftelzeiger); D ist dann nicht prüfbar. Die Prüfsummen der Phase-0-Daten (Bindung
-          des Satzes, Teil B nr1.phase0_sha256) decken nur die Pflichtfelder ab (pflichtfelder); Teil B des
-          Regelstands 2026-11 führt die optionalen Felder gesondert (nr1.phase0_optionale_sha256).
+          werden erkannt (hat_fuenftelzeiger); D ist dann nicht prüfbar. Unter den historischen Profilen decken die
+          Prüfsummen der Phase-0-Daten (Bindung des Satzes, Teil B nr1.phase0_sha256) nur die Pflichtfelder ab
+          (pflichtfelder). Im Regelstand 2026-11 ist der Satz über die Herkunft der Läufe gebunden (herkunft.py, ab
+          pilot-0.5 und teil_b-0.5); der Nachweis nennt die vorhandenen optionalen Felder beim Namen.
 Fehlende Kanäle werden in fehlende_kanaele genannt; die abhängigen Felder sind nan, nie null-ergänzt.
+
+Metadaten einer Tabelle (LaufTabelle.meta; sie stehen im Kopf der Datei, nicht in den Laufköpfen): schema,
+schema_version, datenart und kennung aus der Datei; ablauf (Ablaufstand des zustandsbehafteten Ablaufs);
+generatornachweis (META_GENERATORNACHWEIS): Herkunft der Läufe ohne Rohdatei (Ebene H), vom Generator angelegt
+(herkunft.py). auswahl und sortiert geben die Metadaten weiter, schreiben und lesen erhalten sie.
 """
 import numpy as np
 
@@ -70,6 +76,8 @@ KOPFFELDER = ('lauf_id', 'laufart', 'modul', 'einstellung', 'konfiguration', 'ph
               'kontrollsatz', 't_start', 't_ende', 'f_soll', 'f_mittel', 'n_zyklen', 'n_fuenftel', 'k_voll', 'n_theta',
               'stoerung', 'aufzeichnung_ok', 'park_ok', 'fehlende_kanaele', 'hash_rohdatei', 'version_stufe1',
               'kalibrier_hash', 'ebene')
+META_GENERATORNACHWEIS = 'generatornachweis'     # Metadaten der Tabelle: Herkunft der Läufe der Ebene H (herkunft.py)
+META_KOPF = ('ablauf', META_GENERATORNACHWEIS)   # Metadaten, die schreiben und lesen im Kopf der Datei erhalten
 
 
 def konfig_id(laufart, phi_soll=None, modul=None, einstellung=1, gruppe=None):
@@ -126,7 +134,7 @@ def _form(spec, kv):
 
 def pflichtfelder(daten):
     """Nur die Pflichtfelder (für Prüfsummen, die vor den optionalen Feldern festgelegt wurden: Bindung des
-    Phase-0-Satzes, Teil B nr1, historische Prüfsätze)."""
+    Phase-0-Satzes und Teil B nr1 unter den historischen Profilen, historische Prüfsätze)."""
     return {k: v for k, v in daten.items() if k in DATENFELDER}
 
 
@@ -238,8 +246,9 @@ class LaufTabelle:
         return self.auswahl(np.argsort(self.spalte('position', int), kind='stable'))
 
     def schreiben(self, pfad, kennung, datenart='synthetisch', **weitere):
-        if 'ablauf' in self.meta and 'ablauf' not in weitere:            # Ablaufstand des zustandsbehafteten Ablaufs
-            weitere['ablauf'] = self.meta['ablauf']
+        for x in META_KOPF:                          # Ablaufstand des zustandsbehafteten Ablaufs, Generatornachweis
+            if x in self.meta and x not in weitere:
+                weitere[x] = self.meta[x]
         k = formate.kopf('zusammenfassungen', kennung, datenart, laeufe=self.koepfe, **weitere)
         return formate.schreibe(pfad, k, self.daten)
 
@@ -247,6 +256,5 @@ class LaufTabelle:
     def lesen(cls, pfad):
         k, _, felder = formate.lies(pfad, 'zusammenfassungen')
         meta = {x: k[x] for x in ('schema', 'schema_version', 'datenart', 'kennung')}
-        if 'ablauf' in k:
-            meta['ablauf'] = k['ablauf']
+        meta.update({x: k[x] for x in META_KOPF if x in k})
         return cls(k['laeufe'], felder, meta)

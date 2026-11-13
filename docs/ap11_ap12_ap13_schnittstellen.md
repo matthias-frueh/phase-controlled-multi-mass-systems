@@ -14,6 +14,12 @@ Umfang und Prüfergebnisse: [`ap11_ap12_ap13_software.md`](ap11_ap12_ap13_softwa
 > Teil B `nr5` (Abschnitt 5), Strom `E3/T` (Abschnitt 7), Nullkontrolle ohne definierten Test, E3 mit T-Ziehungen und
 > Verarbeitungsstand im Ergebnis (Abschnitt 8), Planungshaken mit dem Plan des Kandidaten (Abschnitt 5). Ältere
 > Dateien bleiben lesbar und werden nicht als neu berechnet behandelt.
+>
+> **Vermerk vom 12.11.2026 (Herkunftsnachweis, PR #40).** Im Regelstand 2026-11 ist Teil B über die Herkunft der
+> Phase-0-Läufe an sie gebunden, nicht mehr über eine Prüfsumme ihrer Datenfelder (`pilot-0.5`, `teil_b-0.5`):
+> Generatornachweis in den Metadaten der Zusammenfassungen (Abschnitt 4), `nr1.phase0_herkunft` in Teil B
+> (Abschnitt 5). Unter den historischen Profilen bleiben Felder und Prüfung unverändert. Grundlage:
+> [Entscheidungsnotiz vom 12.11.2026](entscheidungsnotiz_herkunft_phase0_2026-11-12.md).
 
 ## 1 Trennstelle
 
@@ -106,9 +112,29 @@ Die Bedeutung je `version_stufe1` steht in `zusammenfassung.MITTEL_BEDEUTUNG`; T
 Ergebnis (`herkunft.verarbeitung`) nennen den Verarbeitungsstand, Zusammenfassungen der alten Bedeutung werden als
 solche gemeldet. Ebene H liefert den Gleichanteil des Modells (gleiche Periodendauern).
 
+**Herkunft eines Laufs und Generatornachweis** (`herkunft.py`, seit 12.11.2026). Ein Lauf der Ebene Z trägt im Kopf
+`hash_rohdatei` (SHA-256 der Datendatei), `kalibrier_hash` (SHA-256 des Kalibrierobjekts von Stufe 1) und
+`version_stufe1`. Ein Lauf der Ebene H hat keine Rohdatei; `hash_rohdatei` und `kalibrier_hash` bleiben leer, auch
+ein künstlicher Wert ist unzulässig. Dafür steht im Kopf der Datei `zusammenfassungen` (Metadaten der Tabelle, nicht
+im Laufkopf) der `generatornachweis`:
+
+| Feld | Inhalt |
+|---|---|
+| `version` | Version des Generators (`ebene_h-0.1`, beim Strukturgenerator `phase0_modell-0.1`) |
+| `modell_sha256` | SHA-256 der Modellbeschreibung mit dem wirksamen Rauschmodell (System, Rauschmodell, Plan, Effektstärke, Effekte, k_voll, Vollausschlag, Hertz-Modell) |
+| `laufplan_sha256` | SHA-256 der Laufliste, die der Generator erhalten hat (alle Läufe, auch die der Phase 1) |
+| `strom_sha256` | SHA-256 des Zustands des Zufallsstroms vor der ersten Ziehung |
+| `zusatzstrom_sha256` | dasselbe für den Zusatzstrom des Strukturmodells, sonst `null` |
+| `aufruf` | `null` oder `szenario`, `stufe`, `seed` und `stroeme` (Namen der Ströme) des Aufrufs von `harness.kette`; der Seed muss den Zustand `strom_sha256` ergeben |
+
+Der Generator legt den Nachweis an, bevor er die erste Zahl zieht; die Laufköpfe ändern sich dadurch nicht. Der
+Nachweis belegt Herkunft und Rechenvorschrift, nicht die Werte: Dieselbe Generatoridentität ergibt auf verschiedenen
+Prozessoren Werte, die sich im Rundungsrauschen unterscheiden.
+
 ## 5 Synthetisches Teil B
 
-`teil_b.json` gliedert nach A9.3: `nr1` Herkunft (Kalibrier-, Phase-0- und Code-Hashes), `nr2` Platzhalterwerte (f,
+`teil_b.json` gliedert nach A9.3: `nr1` Herkunft (Prüfsumme der Kalibrierung, Herkunftsnachweis der Phase-0-Läufe,
+Verarbeitungsstand, Prüfsumme der Pilotausgabe, Codestand; siehe unten), `nr2` Platzhalterwerte (f,
 k_max, k_voll, Δδⱼ, σ_tol, δf_tol, σ̂_ref und σ̂_ref,c, ε_ctrl mit Prüfgröße und kritischem Wert, σ_c, F_LO,c, σ_Δ je
 Laufart, T_P0 und ΔT, n_min, n₀, r, n, n_max, d, p̂, Einstellung 2 mit s und I), `nr3` Einzelmodul-Harmonische der
 Phase 0 je Lauf (Summe, Zellen, ungebändert) mit den Indexmatrizen B⁰ⱼ als feste Eingabe von Bootstrap B und H2
@@ -120,6 +146,32 @@ zum Vergleich; Stufe 2 rechnet sie aus der Kalibrierung), `nr8` Prüfmenge V, `n
 für ε_ctrl, Raten). Die Werkzeug-8-Werte kommen aus `harness kalibrierung` (Datei `werkzeug8`) oder ausdrücklich als
 `testvorgabe` (c = c_B, b̂ = 0, Perzentilintervall; jede Herkunftsangabe trägt dann „TESTVORGABE“).
 Fehlt ein benötigter Wert, meldet Stufe 2 den betroffenen Ausgang als nicht entscheidbar mit Grund.
+
+**Herkunft der Phase-0-Läufe** (ab `pilot-0.5` und `teil_b-0.5`, nur Regelstand 2026-11; A9.3 Nr. 1).
+`nr1.phase0_herkunft` ist der Herkunftsnachweis der übergebenen Phase-0-Läufe, `nr1.phase0_herkunft_sha256` seine
+SHA-256-Prüfsumme in kanonischer JSON-Form:
+
+| Feld | Inhalt |
+|---|---|
+| `version` | `herkunft-1` |
+| `datenart` | `synthetisch` oder `messung`; ohne Angabe in der Tabelle `synthetisch` |
+| `klassen` | Zahl der Läufe je Klasse: `rohdatei` (Ebene Z), `generator` (Ebene H) |
+| `optionale_felder` | Namen der vorhandenen optionalen Datenfelder |
+| `laeufe` | je Lauf in aufsteigender Position: `lauf_id`, `position`, `klasse`, `version_stufe1`; bei Klasse `rohdatei` dazu `hash_rohdatei` und `kalibrier_hash` |
+| `generator` | der Generatornachweis (Abschnitt 4), wenn Läufe der Klasse `generator` vorkommen, sonst `null` |
+
+- Der Nachweis enthält keine Gleitkommazahl. Er hängt weder an der Kompressionsbibliothek noch am Rechenkern.
+- Die Pilotausgabe führt denselben Nachweis je Satz (`phase0_herkunft`) und seine Prüfsumme in der Bindung
+  (`bindung.phase0_herkunft_sha256`). Teil B wird nur gebildet, wenn die Pilotausgabe ihren Nachweis trägt und er
+  dem der übergebenen Läufe gleicht; die Fehlermeldung nennt den ersten Unterschied. Eine Pilotausgabe ohne
+  Nachweis (bis `pilot-0.4` oder aus einem historischen Profil) wird zurückgewiesen.
+- Regeln des Nachweises: Positionen und Lauf-IDs eindeutig; derselbe Rohdatei-Hash bei zwei Läufen ist ein Fehler;
+  Läufe der Klasse `generator` verlangen den Generatornachweis; bei Datenart `messung` nur Klasse `rohdatei`.
+- `nr1.phase0_sha256` und `nr1.phase0_optionale_sha256` entfallen im Regelstand 2026-11. Unter den historischen
+  Profilen bleibt `nr1.phase0_sha256` (Prüfsumme der komprimierten Pflichtfelder; sie hängt am zlib des Systems und
+  am Rechenkern).
+- Geänderte Datenfelder bei unverändertem Nachweis erkennt die Bindung nicht; der Wertevergleich mit Toleranz ist
+  eine gesonderte Prüfung und noch nicht umgesetzt.
 
 `nr5.unsicherheit` (ab `teil_b-0.2`, Format `e3_T_unsicherheit-0.1`, Modell `e3_T-0.2`, Herkunft mit
 Kalibrierungs-Hash; A9.3 Nr. 5): Nennwerte und gemeinsame Kovarianz von (g₁…g₃, x₁…x₃, y₁…y₃) aus P0.1, Parameter

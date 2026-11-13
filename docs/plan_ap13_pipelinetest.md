@@ -274,6 +274,13 @@ Ziel: AP-13 entsteht vor AP-12 gegen die Referenzregeln und lässt sich später 
 | `amplitude_stufe`, `frequenz` | Identifizierbarkeitsläufe | AP-09-Auswertung |
 | `hash_rohdatei`, `version_stufe1` | Herkunft | Nachvollziehbarkeit |
 
+**Nachtrag vom 12.11.2026 (Umsetzung, PR #40).** `hash_rohdatei`, `kalibrier_hash` und `version_stufe1` sind seit
+`pilot-0.5` und `teil_b-0.5` die Grundlage der Bindung von Teil B an die Phase-0-Läufe (Herkunftsnachweis; Teil B
+Nr. 1 führt die Prüfsummen je Lauf). Läufe der Ebene H tragen keinen Rohdatei-Hash; ihre Tabelle führt einen
+Generatornachweis. Beschreibung in den [Schnittstellen](ap11_ap12_ap13_schnittstellen.md), Abschnitte 4 und 5;
+Entscheidung in der [Notiz vom 12.11.2026](entscheidungsnotiz_herkunft_phase0_2026-11-12.md). Der Plan ist im
+Übrigen unverändert.
+
 **c) Funktionsaufrufe (Spezifikation, kein Repo-Code).**
 
 ```python
