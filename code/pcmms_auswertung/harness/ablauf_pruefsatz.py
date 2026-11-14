@@ -14,13 +14,19 @@ Zwei Stände (Auftrag vom 20.10.2026): der historische Prüfsatz (ablauf-3, Prof
 „historisch“; Datei tests/fixtures/ap13_ablauf_pruefsatz.json, unverändert) und der Prüfsatz des Regelstands 2026-11
 (ablauf-4, ENTW-2026-11, P0.7-Anordnung; tests/fixtures/ap13_ablauf_pruefsatz_ablauf4.json). pruefen() liest den Stand
 aus der Datei und rechnet mit genau diesem Stand nach.
+
+Wertevergleich mit Toleranz (14.11.2026): Die Prüfsumme „daten“ hängt trotz der Rundung am Rechenkern von OpenBLAS und
+am zlib des Systems (harness.pruefsatz, RECHNERGEBUNDEN). pruefen() vergleicht Inhalt, Köpfe, Entscheidungen, Ziehungen
+und Schwellen weiter exakt, die Datenfelder aber über ihre Kennwerte mit Toleranz (kennwerte.py); die Bezugswerte
+stehen je Prüfsatz in <Pfad>_kennwerte.json. Ob die Prüfsumme „daten“ bitgleich wiederkehrt, steht zur Auskunft im
+Ergebnis (bitgleich). Die Prüfsatz-Dateien selbst bleiben unverändert.
 """
 import platform
 
 import numpy as np
 import scipy
 
-from .. import ablauf, auswertung, formate, regeln, verfahren as vf
+from .. import ablauf, auswertung, formate, kennwerte, regeln, verfahren as vf
 from ..generator import kampagne as kp
 from . import kette, pruefsatz
 
@@ -34,6 +40,7 @@ FAELLE = (('N01-A4', 'L1', 13, 'zustand'),          # reguläre Wiederholungen, 
           ('I01-amplitude', 'L1', 7, 'zustand'))    # Einstellung 2: L′, Lücken G2–G4 und S-Regeln für L′
 
 
+RECHNERGEBUNDEN = ('daten',)                        # Prüfsumme über berechnete Felder: an Rechenkern und zlib
 FASSUNG = 'ablauf-3'      # historischer Prüfsatz (PR #23): Fassung ablauf-3, Plan ohne p0_anordnung (historisch)
 STAENDE = {'ablauf-3': dict(profil=PROFIL, plan=PLAN),
            'ablauf-4': dict(profil=('ENTW-2026-11', PROFIL[1]), plan=dict(PLAN, p0_anordnung='p07'))}
@@ -55,7 +62,7 @@ def _verfahren(art, fassung=FASSUNG):
 
 
 def fall(sid, stufe, seed, art, fassung=FASSUNG):
-    """Eine Prüfkampagne: Ablauf, Tabelle, Bericht und die Prüfsummen."""
+    """Eine Prüfkampagne: Ablauf, Tabelle, Bericht, die Prüfsummen und die Kennwerte der Datenfelder (werte)."""
     prof = _profil(fassung)
     r = kette.kampagne_ablauf(sid, stufe, kp.plan_aus_dict(_stand(fassung)['plan']), seed, prof, n_min=N_MIN,
                               verfahren=_verfahren(art, fassung))
@@ -69,7 +76,7 @@ def fall(sid, stufe, seed, art, fassung=FASSUNG):
     h = dict(daten=pruefsatz.hash_felder(t1.daten, ohne), koepfe=formate.sha256_json(t1.koepfe),
              entscheidungen=formate.sha256_json(a.z['entscheidungen']), ziehungen=formate.sha256_json(a.z['ziehungen']),
              schwellen=a.kennung['schwellen_sha256'])
-    return dict(inhalt=inhalt, hashes=h), r
+    return dict(inhalt=inhalt, hashes=h, werte=dict(daten=kennwerte.felder(t1.daten))), r
 
 
 def _gegenprobe(sid, stufe, seed, art, r, fassung=FASSUNG):
@@ -99,12 +106,14 @@ def _gegenprobe(sid, stufe, seed, art, r, fassung=FASSUNG):
     return out
 
 
-def erstellen(fassung=FASSUNG):
+def _erstellen(fassung=FASSUNG):
+    """Prüfsatz und, je Prüfkampagne, die Kennwerte der Datenfelder."""
     st_ = _stand(fassung)
-    faelle, gegen = {}, {}
+    faelle, gegen, werte = {}, {}, {}
     for sid, st, sd, art in FAELLE:
         f, r = fall(sid, st, sd, art, fassung)
         key = f'{sid}/{st}/{sd}/{art}'
+        werte[key] = f.pop('werte')
         faelle[key] = f
         gegen[key] = _gegenprobe(sid, st, sd, art, r, fassung)
     out = dict(beschreibung='Prüfsatz des zustandsbehafteten Phase-1-Ablaufs (getrennt vom Software-Prüfsatz)',
@@ -114,23 +123,35 @@ def erstellen(fassung=FASSUNG):
                profil=dict(id=st_['profil'][0], reduktion=st_['profil'][1], sha256=_profil(fassung).sha256()),
                rundung_stellen=pruefsatz.STELLEN, faelle=faelle, gegenprobe=gegen)
     out['sha256_gesamt'] = formate.sha256_json({k: v for k, v in out.items() if k != 'umgebung'})
-    return out
+    return out, werte
+
+
+def erstellen(fassung=FASSUNG):
+    return _erstellen(fassung)[0]
+
+
+KENNUNG_KENNWERTE = formate.synth_kennung('ABLAUF-PRUEFSATZ', 'KENNWERTE')
 
 
 def schreiben(pfad, ps=None, fassung=FASSUNG):
-    ps = ps or erstellen(fassung)
+    """Schreibt einen neuen Prüfsatz und die Kennwerte seiner Datenfelder (<Pfad>_kennwerte.json). Mit einem
+    übergebenen Prüfsatz ps entsteht nur die Prüfsatz-Datei; die Kennwerte schreibt dann schreiben_kennwerte."""
+    werte = None
+    if ps is None:
+        ps, werte = _erstellen(fassung)
     if any(ps['gegenprobe'].values()):
         raise ValueError(f'Gegenprobe nicht bestanden: {ps["gegenprobe"]}')
     formate.schreibe_objekt(pfad, formate.kopf('pruefsatz', formate.synth_kennung('ABLAUF-PRUEFSATZ')), ps)
+    if werte is not None:
+        pruefsatz.kennwerte_schreiben(pfad, werte, True, KENNUNG_KENNWERTE)
     return ps
 
 
-def pruefen(pfad):
-    """Neuberechnung gegen den gespeicherten Prüfsatz: Inhalt, Prüfsummen und Gegenprobe; Rückgabe dict(gleich, …)."""
-    _, alt = formate.lies_objekt(pfad, 'pruefsatz')
-    neu = erstellen(alt.get('ablauf_version'))
+def _vergleich_exakt(alt, neu):
+    """Exakte Teile und Prüfsummen der berechneten Felder: (Abweichungen, abweichende Prüfsummen)."""
     abw = [k for k in ('ablauf_version', 'verfahren', 'plan', 'n_min', 'profil', 'rundung_stellen')
            if formate.sha256_json(alt.get(k)) != formate.sha256_json(neu.get(k))]
+    summen = []
     for key, f in alt['faelle'].items():
         g = neu['faelle'].get(key)
         if g is None:
@@ -138,7 +159,33 @@ def pruefen(pfad):
             continue
         abw += [f'{key}: Inhalt {x}' for x in f['inhalt'] if formate.sha256_json(f['inhalt'][x]) !=
                 formate.sha256_json(g['inhalt'].get(x))]
-        abw += [f'{key}: Prüfsumme {x}' for x in f['hashes'] if f['hashes'][x] != g['hashes'].get(x)]
+        for x in f['hashes']:
+            if f['hashes'][x] != g['hashes'].get(x):
+                (summen if x in RECHNERGEBUNDEN else abw).append(f'{key}: Prüfsumme {x}')
     abw += [f'{k}: Gegenprobe {v}' for k, v in neu['gegenprobe'].items() if v]
-    return dict(gleich=not abw, abweichungen=abw, umgebung_alt=alt['umgebung'], umgebung_neu=neu['umgebung'],
-                inhalt={k: v['inhalt'] for k, v in neu['faelle'].items()})
+    return abw, summen
+
+
+def pruefen(pfad):
+    """Neuberechnung gegen den gespeicherten Prüfsatz: Inhalt, Prüfsummen der exakten Teile und Gegenprobe exakt, die
+    Datenfelder über ihre Kennwerte mit Toleranz (<Pfad>_kennwerte.json). Rückgabe dict(gleich, abweichungen,
+    bitgleich, pruefsummen_abweichend, werte, …): gleich – exakte Teile gleich und Werte innerhalb der Toleranz;
+    bitgleich – auch die Prüfsumme „daten“ kehrt wieder (nur bei gleichem Rechenkern und zlib zu erwarten)."""
+    _, alt = formate.lies_objekt(pfad, 'pruefsatz')
+    neu, werte = _erstellen(alt.get('ablauf_version'))
+    abw, summen = _vergleich_exakt(alt, neu)
+    v = pruefsatz.kennwerte_vergleichen(pruefsatz.kennwerte_lesen(pfad), werte)
+    return dict(gleich=not (abw or v['abweichungen']), abweichungen=abw + v['abweichungen'], bitgleich=not summen,
+                pruefsummen_abweichend=summen, werte={k: w for k, w in v.items() if k != 'abweichungen'},
+                umgebung_alt=alt['umgebung'], umgebung_neu=pruefsatz.umgebung(),
+                inhalt={k: v_['inhalt'] for k, v_ in neu['faelle'].items()})
+
+
+def schreiben_kennwerte(pfad, erzwingen=False):
+    """Bezugswerte des Wertevergleichs zu einem vorhandenen Prüfsatz (die Prüfsatz-Datei bleibt unverändert); verlangt
+    wie pruefsatz.schreiben_kennwerte, dass die Neuberechnung den Prüfsatz bitgleich wiedergibt."""
+    _, alt = formate.lies_objekt(pfad, 'pruefsatz')
+    neu, werte = _erstellen(alt.get('ablauf_version'))
+    abw, summen = _vergleich_exakt(alt, neu)
+    pruefsatz.kennwerte_pruefe_anker(abw, summen, erzwingen)
+    return pruefsatz.kennwerte_schreiben(pfad, werte, not summen, KENNUNG_KENNWERTE)

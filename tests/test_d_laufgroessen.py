@@ -183,7 +183,7 @@ def test_regel_gebunden_und_nur_im_aktuellen_stand(a4):
     s = pilot.satz_fuer_plan(tab, kal, AKTUELL, m.system.f, 9, 5)
     lg = s['laufgroessen']
     assert (lg['bindung']['k'], lg['bindung']['N_z'], lg['version']) == (9, 100, lgm.VERSION)
-    assert s['bindung']['version'] == pilot.VERSION == 'pilot-0.5'
+    assert s['bindung']['version'] == pilot.VERSION == 'pilot-0.6'
     pilot.pruefe_ausgabe(s)
     assert AKTUELL.wert('p0.laufgroessen') == lgm.REGELWERT
     h = pilot.satz_fuer_plan(tab, kal, HIST, m.system.f, 9, 5)
@@ -201,11 +201,11 @@ def test_regel_gebunden_und_nur_im_aktuellen_stand(a4):
 def test_teil_b_felder_sigma_a_delta_off(a4):
     m, tab, kal = a4
     pe = pilot.pilot_auswerten(tab, kal, AKTUELL, m.system.f, seed=5)
-    assert pe['version'] == 'pilot-0.5' and pe['laufgroessen']['bindung']['k'] == pe['k_pilotgroessen']
+    assert pe['version'] == 'pilot-0.6' and pe['laufgroessen']['bindung']['k'] == pe['k_pilotgroessen']
     pl = kette.plan_info(m, 18)
     tb = teil_b.erstellen(tab, kal, pe, AKTUELL, pl, kette.testvorgabe_werkzeug8(), seed_b0=1, B=50)
     n2 = tb['nr2']
-    assert tb['version'] == 'teil_b-0.5' and n2['laufgroessen']['bindung'] == dict(
+    assert tb['version'] == 'teil_b-0.6' and n2['laufgroessen']['bindung'] == dict(
         n2['laufgroessen']['bindung'], k=9, N_z=100)
     for name in ('sigma_a_j', 'sigma_delta_j', 'sigma_off_j'):
         assert len(n2[name]['wert']) == 3 and len(n2[name]['nu']) == 3 and n2[name]['bindung'] == dict(k=9, N_z=100)

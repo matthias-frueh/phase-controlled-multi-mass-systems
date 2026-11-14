@@ -4,6 +4,16 @@ mit eigenem Seed, ein kompakter Befund und daraus Raten mit Monte-Carlo-Fehler g
 Seeds: Kampagne i des Szenarios s auf Stufe L mit Rolle ρ (kalibrierung_c, pruefung_c, pruefung, planung …) erhält
 den Seed zufall.unterseed(Basis, ρ, s, L, i). Das Ergebnis hängt nicht von der Zahl der Prozesse ab.
 Die Wahrheit liest nur dieser Harness; AP-12 erhält sie nicht.
+
+Was „hängt nicht von der Zahl der Prozesse ab“ heißt (Abnahmekriterium vom 14.11.2026): Seeds, Entscheidungen, Gründe,
+Zählgrößen und Texte der Befunde sind gleich; Zahlenfelder stimmen innerhalb der Toleranz von kennwerte.py überein
+(je Eintrag RTOL·M + ATOL, M größter Betrag des Feldes). Bitgleichheit ist damit nicht zugesagt: Arbeitsprozesse
+rechnen immer mit einem BLAS-Thread (_parallel), der eigene Prozess (prozesse=1) mit der Thread-Zahl der Umgebung.
+Mit dem Rechenkern Haswell von OpenBLAS unterscheiden sich die Zahlenfelder zwischen einem und vier Threads im
+Rundungsrauschen (gemessen: bis 9,8·10⁻¹⁵·M, alle Entscheidungen gleich; mit dem Kern SkylakeX kein Unterschied;
+docs/kennwerte_untersuchung_2026-11-13/bericht.md, Abschnitt 6). Bitgleich zwischen den Prozesszahlen sind die
+Befunde, wenn auch der eigene Prozess mit einem Thread rechnet (etwa OPENBLAS_NUM_THREADS=1 vor dem Start). Zwischen
+verschiedenen Rechenkernen gilt Bitgleichheit nicht.
 """
 import concurrent.futures as cf
 import csv

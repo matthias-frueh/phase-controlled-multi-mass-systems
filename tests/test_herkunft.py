@@ -1,10 +1,11 @@
-"""Herkunftsnachweis der Phase-0-Läufe und Bindung Phase 0 ↔ Teil B (herkunft.py, pilot-0.5, teil_b-0.5; Entscheidung
-des Autors vom 12.11.2026, docs/entscheidungsnotiz_herkunft_phase0_2026-11-12.md).
+"""Herkunftsnachweis der Phase-0-Läufe und Bindung Phase 0 ↔ Teil B (herkunft.py, eingeführt mit pilot-0.5 und
+teil_b-0.5; Entscheidung des Autors vom 12.11.2026, docs/entscheidungsnotiz_herkunft_phase0_2026-11-12.md), dazu die
+Ergebnisprüfung der Werte über Kennwerte mit Toleranz (kennwerte.py, pilot-0.6 und teil_b-0.6; Entscheidung E-4).
 
 Die Tests N1 bis N15 sind die Negativtests der Notiz (Abschnitt 7): Jeder verändert eine Angabe zur Herkunft und
 erwartet, dass Teil B die Läufe zurückweist. P1 und P2 sind die Gegenproben, die angenommen werden müssen. Dazu: der
-Inhalt des Nachweises in Teil B, die unveränderte Bindung unter den historischen Profilen und die Grenze des
-Nachweises (er belegt die Herkunft, nicht die Werte).
+Inhalt des Nachweises in Teil B und die unveränderte Bindung unter den historischen Profilen. Die Tests W1 bis W6
+prüfen die Ergebnisprüfung: Der Nachweis belegt die Herkunft, die Kennwerte prüfen die Werte.
 
 Alle Daten sind synthetisch: Generator auf Ebene H, für Läufe mit Rohdatei Ebene Z mit Stufe 1. Geprüft wird die
 Software, keine Apparatur."""
@@ -17,7 +18,7 @@ import sys
 import numpy as np
 import pytest
 
-from pcmms_auswertung import formate, herkunft, pilot, regeln, stufe1, teil_b, zufall
+from pcmms_auswertung import formate, herkunft, kennwerte, pilot, regeln, stufe1, teil_b, zufall
 from pcmms_auswertung import zusammenfassung as zf
 from pcmms_auswertung.generator import ebene_h, kampagne as kp, phase0_modell as p0m, rauschen, szenarien
 from pcmms_auswertung.harness import kette
@@ -30,6 +31,7 @@ SID, STUFE, SEED = 'N01-V1G0', 'L1', 7                       # k der Pilotgröß
 W8 = kette.testvorgabe_werkzeug8()
 GN = zf.META_GENERATORNACHWEIS
 ANDERE_DATEN = 'aus anderen Phase-0-Daten'
+ANDERE_WERTE = 'dieselbe Herkunft wie in der Pilotausgabe, aber andere Werte'
 SHA_A, SHA_B = 'a' * 64, 'b' * 64
 
 
@@ -103,7 +105,7 @@ def test_teil_b_fuehrt_den_nachweis_der_ebene_h(basis):
     t0, pe = basis['t0'], basis['pe']
     tb = teil_b.erstellen(t0, basis['kal'], pe, PROFIL, basis['plan'], W8, seed_b0=1, B=50)
     n1, b = tb['nr1'], tb['nr2']['phase0_bindung']
-    assert tb['version'] == teil_b.VERSION == 'teil_b-0.5' and pe['version'] == pilot.VERSION == 'pilot-0.5'
+    assert tb['version'] == teil_b.VERSION == 'teil_b-0.6' and pe['version'] == pilot.VERSION == 'pilot-0.6'
     assert 'phase0_sha256' not in n1 and 'phase0_optionale_sha256' not in n1
     nw = n1['phase0_herkunft']
     assert nw == basis['nw'] == pe['phase0_herkunft'] and n1['phase0_herkunft_sha256'] == herkunft.sha256(nw)
@@ -122,7 +124,7 @@ def test_teil_b_fuehrt_den_nachweis_der_ebene_h(basis):
     assert all(isinstance(x, (str, int)) or x is None for x in _blaetter(nw))
     # Bindung: Prüfsumme des Nachweises, keine Prüfsumme der Datenfelder
     assert b['bindung'][pilot.FELD_HERKUNFT] == b['phase0_herkunft_sha256'] == n1['phase0_herkunft_sha256']
-    assert 'phase0_sha256' not in b['bindung'] and b['bindung']['version'] == 'pilot-0.5'
+    assert 'phase0_sha256' not in b['bindung'] and b['bindung']['version'] == 'pilot-0.6'
     assert b['quelle'] == 'Pilotskript, oberste Ebene' and b['pilot_herkunft'] == 'oberste Ebene'
     pilot.pruefe_ausgabe(pe)
 
@@ -431,21 +433,21 @@ KERNE = ('HASWELL', 'SANDYBRIDGE')
 SKRIPT_P2 = """
 import json, sys
 sys.path.insert(0, sys.argv[1])
-from pcmms_auswertung import herkunft, pilot
+from pcmms_auswertung import formate, herkunft, pilot
 from pcmms_auswertung.generator import kampagne as kp
 from pcmms_auswertung.harness import kette
 tab = kette.kampagne_erzeugen('N01-V1G0', 'L1', kp.Plan(n0=20, n_pilot=20, n_bloecke=2), 7)[2]
 t0 = tab.auswahl(tab.spalte('phase', int) == 0)
-print(json.dumps(dict(nachweis=herkunft.sha256(herkunft.nachweis(t0)), datenfelder=pilot.daten_sha256(t0))))
+print(json.dumps(dict(nachweis=herkunft.sha256(herkunft.nachweis(t0)), datenfelder=pilot.daten_sha256(t0),
+                      kennwerte=formate._json_wert(pilot.phase0_kennwerte(t0)))))
 """
 
 
-def test_p2_nachweis_gleich_unter_zwei_rechenkernen(basis):
-    """P2: dieselbe Kampagne, in zwei Prozessen mit verschiedenen Rechenkernen von OpenBLAS erzeugt (HASWELL und
-    SANDYBRIDGE laufen auf jedem x86-64-Prozessor mit AVX2), ergibt denselben Nachweis wie in diesem Prozess. Die
-    Prüfsumme der Datenfelder (Bindung der historischen Profile) unterscheidet sich zwischen diesen Kernen, wo
-    OpenBLAS die Vorgabe befolgt (gemessen am 12.11.2026: d1243250… und bc747fdf…); das wird hier nicht verlangt,
-    weil eine andere BLAS-Bibliothek die Vorgabe nicht kennt."""
+@pytest.fixture(scope='module')
+def kerne():
+    """Die Basiskampagne, in zwei Prozessen mit verschiedenen Rechenkernen von OpenBLAS erzeugt (HASWELL und
+    SANDYBRIDGE laufen auf jedem x86-64-Prozessor mit AVX2): Prüfsumme des Nachweises, Prüfsumme der Datenfelder und
+    Kennwerte der Phase-0-Läufe je Kern."""
     erg = {}
     for kern in KERNE:
         lauf = subprocess.run([sys.executable, '-c', SKRIPT_P2, CODE], capture_output=True, text=True,
@@ -454,18 +456,146 @@ def test_p2_nachweis_gleich_unter_zwei_rechenkernen(basis):
             pytest.skip(f'Rechenkern {kern} auf diesem Prozessor nicht ausführbar (Signal {-lauf.returncode})')
         assert lauf.returncode == 0, lauf.stderr[-2000:]
         erg[kern] = json.loads(lauf.stdout.strip().splitlines()[-1])
-    assert erg[KERNE[0]]['nachweis'] == erg[KERNE[1]]['nachweis'] == herkunft.sha256(basis['nw'])
+    return erg
 
 
-def test_grenze_der_nachweis_belegt_die_herkunft_nicht_die_werte(basis):
-    """Bekannte Grenze (Notiz, Abschnitt 4): Geänderte Datenfelder bei unverändertem Nachweis erkennt die Bindung über
-    die Herkunft nicht; die Prüfsumme der Datenfelder unter den historischen Profilen erkennt sie. Den Wertevergleich
-    mit Toleranz bringt eine gesonderte Prüfung (PR C); dieser Test hält den Stand fest und ist dann anzupassen."""
-    t0, kal = basis['t0'], basis['kal']
-    geaendert = zf.LaufTabelle(t0.koepfe, dict(t0.daten, N_mittel=t0.daten['N_mittel'] + 1e-3), meta=t0.meta)
-    assert herkunft.nachweis(geaendert) == basis['nw']
-    _, info = _satz(basis, geaendert)
-    assert info['quelle'] == 'Pilotskript, oberste Ebene'
-    alt = pilot.pilot_auswerten(t0, kal, HIST, basis['m'].system.f, seed=SEED)
+def test_p2_nachweis_gleich_unter_zwei_rechenkernen(basis, kerne):
+    """P2: dieselbe Kampagne, mit zwei Rechenkernen erzeugt, ergibt denselben Nachweis wie in diesem Prozess. Die
+    Prüfsumme der Datenfelder (Bindung der historischen Profile) unterscheidet sich zwischen diesen Kernen, wo
+    OpenBLAS die Vorgabe befolgt (gemessen am 12.11.2026: d1243250… und bc747fdf…); das wird hier nicht verlangt,
+    weil eine andere BLAS-Bibliothek die Vorgabe nicht kennt."""
+    assert kerne[KERNE[0]]['nachweis'] == kerne[KERNE[1]]['nachweis'] == herkunft.sha256(basis['nw'])
+
+
+# ── Ergebnisprüfung der Werte (Entscheidung E-4; pilot-0.6, teil_b-0.6) ──────────────────────────────
+def _mit_daten(tab, **felder):
+    """Kopie der Tabelle mit geänderten Datenfeldern; Köpfe und Metadaten (und damit der Nachweis) bleiben."""
+    return zf.LaufTabelle(tab.koepfe, dict(tab.daten, **felder), meta=tab.meta)
+
+
+def _geaendert(tab, feld, fn):
+    a = np.array(tab.daten[feld])
+    fn(a)
+    return _mit_daten(tab, **{feld: a})
+
+
+def test_w1_pilotausgabe_und_teil_b_fuehren_die_kennwerte(basis, z):
+    """Die Pilotausgabe führt je Satz die Kennwerte der Phase-0-Datenfelder neben der Bindung, nicht in ihr; Teil B
+    führt die Kennwerte der übergebenen Läufe in nr1 und das Ergebnis des Vergleichs in nr2.phase0_bindung."""
+    for b in (basis, z):
+        t0, pe = b['t0'], b['pe']
+        kw = pe['phase0_kennwerte']
+        assert kw == pilot.phase0_kennwerte(t0) and kw['version'] == kennwerte.VERSION == 'kennwerte-1'
+        assert set(kw['felder']) == set(t0.daten) and 'phase0_kennwerte' not in pe['bindung']
+        assert not any('kennwert' in str(x).lower() for x in _blaetter(pe['bindung']))
+        assert set(kw['felder']['index_fehler']) == {'dtype', 'form', 'n', 'sha256'}            # exaktes Feld
+        assert kw['felder']['Nk_zellen']['n'] == 2 * t0.daten['Nk_zellen'].size
+        tb = teil_b.erstellen(t0, b['kal'], pe, PROFIL, b['plan'], W8, seed_b0=1, B=50)
+        assert tb['nr1']['phase0_kennwerte'] == kw
+        pw = tb['nr2']['phase0_bindung']['pilot_werte']
+        assert pw == dict(satz='oberste Ebene', gleich=True, kennwerte_gleich=True, auslastung=0.0,
+                          feld_auslastung=None, toleranz=kennwerte.toleranz(), version='kennwerte-1')
+        assert tb['nr2']['phase0_bindung']['pilot_herkunft'] == 'oberste Ebene'
+    # die Zeilenreihenfolge hat keinen Einfluss (kanonische Ordnung wie im Nachweis)
+    um = basis['t0'].auswahl(np.arange(len(basis['t0']))[::-1])
+    assert pilot.phase0_kennwerte(um) == basis['pe']['phase0_kennwerte']
+    assert kennwerte.felder(um.daten) != basis['pe']['phase0_kennwerte']['felder']
+
+
+W2_FAELLE = {
+    'N_mittel aller Läufe um 1 mN größer': ('N_mittel', lambda a: a.__iadd__(1e-3)),
+    'Harmonische eines Laufs um 1 ‰ größer': ('Nk_zellen', lambda a: a[3].__imul__(1.001)),
+    'Werte zweier Läufe vertauscht': ('Nk_summe', lambda a: a.__setitem__([2, 9], a[[9, 2]])),
+    'optionales Feld um 1 ‰ größer': ('fuenftel_zeiger', lambda a: a.__imul__(1.001)),
+    'ein Indexfehler mehr': ('index_fehler', lambda a: a[0].__iadd__(1)),
+    'Übersteuerung gesetzt': ('uebersteuert_zellen', lambda a: a.__setitem__((0, 0), not a[0, 0])),
+    'ein Wert fehlt (NaN)': ('sigma_grad', lambda a: a.__setitem__((5, 1), np.nan)),
+    'eine Phase um 10⁻⁶ ° verschoben': ('phi_mittel_grad', lambda a: a.__iadd__(1e-6)),
+}
+
+
+@pytest.mark.parametrize('fall', W2_FAELLE)
+def test_w2_geaenderte_werte_bei_gleicher_herkunft_werden_zurueckgewiesen(basis, fall):
+    """W2: Die Läufe tragen denselben Nachweis wie in der Pilotausgabe, ihre Werte sind aber verändert. Bis teil_b-0.5
+    nahm Teil B solche Läufe an (Grenze der Notiz, Abschnitt 4); die Ergebnisprüfung weist sie zurück und nennt Feld
+    und Kennwert."""
+    feld, fn = W2_FAELLE[fall]
+    geaendert = _geaendert(basis['t0'], feld, fn)
+    assert herkunft.nachweis(geaendert) == basis['nw']                  # Herkunft unverändert
+    with pytest.raises(ValueError, match=f'{ANDERE_WERTE} \\(Feld {feld}: '):
+        _satz(basis, geaendert)
+    with pytest.raises(ValueError, match=ANDERE_WERTE):
+        teil_b.erstellen(geaendert, basis['kal'], basis['pe'], PROFIL, basis['plan'], W8, seed_b0=1, B=50)
+
+
+def test_w2_ebene_z_und_bindung_historisch(basis, z):
+    """W2 für Läufe mit Rohdatei und für die Bindungsart „historisch“: Auch dort werden geänderte Werte bei gleicher
+    Herkunft zurückgewiesen. Unter den historischen Profilen erkennt wie bisher die Prüfsumme der Datenfelder sie."""
+    geaendert = _geaendert(z['t0'], 'N_mittel_zellen', lambda a: a.__iadd__(1e-3))
+    assert herkunft.nachweis(geaendert) == z['nw']
+    _abgelehnt(z, geaendert, ANDERE_WERTE)
+    g = _geaendert(basis['t0'], 'N_mittel', lambda a: a.__iadd__(1e-3))
+    with pytest.raises(ValueError, match=ANDERE_WERTE):
+        teil_b.phase0_satz(g, basis['kal'], basis['pe'], PROFIL, basis['plan'], bindung='historisch')
+    alt = pilot.pilot_auswerten(basis['t0'], basis['kal'], HIST, basis['m'].system.f, seed=SEED)
     with pytest.raises(ValueError, match=ANDERE_DATEN):
-        _satz(basis, geaendert, alt, HIST)
+        _satz(basis, g, alt, HIST)
+
+
+def test_w3_rundungsrauschen_wird_angenommen(basis):
+    """W3: Abweichungen in der Größe des Rundungsrauschens zwischen zwei Rechnern (hier 10⁻¹³ relativ in jedem
+    Gleitkommafeld, mehr als das Hundertfache des gemessenen) nimmt die Ergebnisprüfung an und weist sie im Ergebnis
+    aus: Kennwerte nicht genau gleich, Auslastung der Toleranz unter 1."""
+    t0 = basis['t0']
+    rausch = _mit_daten(t0, **{k: v * (1 + 1e-13) for k, v in t0.daten.items() if v.dtype.kind in 'fc'})
+    assert pilot.daten_sha256(rausch) != pilot.daten_sha256(t0)         # die alte Prüfsumme hätte angeschlagen
+    s, info = _satz(basis, rausch)
+    pw = info['pilot_werte']
+    assert info['quelle'] == 'Pilotskript, oberste Ebene' and pw['gleich'] and not pw['kennwerte_gleich']
+    assert 0 < pw['auslastung'] < 0.01 and pw['feld_auslastung'] in t0.daten
+    # dieselbe Änderung tausendfach größer liegt außerhalb der Toleranz
+    grob = _mit_daten(t0, **{k: v * (1 + 1e-9) for k, v in t0.daten.items() if v.dtype.kind in 'fc'})
+    _abgelehnt(basis, grob, ANDERE_WERTE)
+
+
+def test_w4_pilotausgabe_ohne_kennwerte_oder_in_anderer_fassung(basis):
+    """W4: Eine Pilotausgabe mit Herkunftsnachweis, aber ohne Kennwerte (pilot-0.5) gilt unter teil_b-0.6 nicht als
+    prüfbar und wird zurückgewiesen, nicht umgedeutet; ebenso Kennwerte einer anderen Fassung."""
+    pe = basis['pe']
+    ohne = {k: v for k, v in pe.items() if k != 'phase0_kennwerte'}
+    with pytest.raises(ValueError, match='Pilotausgabe ohne Kennwerte der Phase-0-Daten'):
+        _satz(basis, basis['t0'], ohne)
+    with pytest.raises(ValueError, match='Pilotausgabe ohne Kennwerte der Phase-0-Daten'):
+        teil_b.erstellen(basis['t0'], basis['kal'], ohne, PROFIL, basis['plan'], W8, seed_b0=1, B=50)
+    fremd = dict(pe, phase0_kennwerte=dict(pe['phase0_kennwerte'], version='kennwerte-0'))
+    with pytest.raises(ValueError, match="Fassung 'kennwerte-0' statt 'kennwerte-1'"):
+        _satz(basis, basis['t0'], fremd)
+    verkuerzt = dict(pe, phase0_kennwerte=dict(pe['phase0_kennwerte'], felder={
+        k: v for k, v in pe['phase0_kennwerte']['felder'].items() if k != 't_phi'}))
+    with pytest.raises(ValueError, match=f'{ANDERE_WERTE} \\(Feld t_phi: zusätzlich'):
+        _satz(basis, basis['t0'], verkuerzt)
+
+
+def test_w5_historische_profile_ohne_kennwerte(basis):
+    """W5: Unter den historischen Profilen bleiben Pilotausgabe (pilot-0.3) und Teil B (teil_b-0.3) ohne Kennwerte und
+    ohne Ergebnisprüfung; dort bindet weiter die Prüfsumme der Datenfelder."""
+    t0, kal = basis['t0'], basis['kal']
+    pe = pilot.pilot_auswerten(t0, kal, HIST, basis['m'].system.f, seed=SEED)
+    assert pe['version'] == 'pilot-0.3' and 'phase0_kennwerte' not in pe
+    assert pilot.werte_beleg(pe, 'oberste Ebene') is None
+    tb = teil_b.erstellen(t0, kal, pe, HIST, basis['plan'], W8, seed_b0=1, B=50)
+    assert tb['version'] == 'teil_b-0.3' and 'phase0_kennwerte' not in tb['nr1']
+    assert 'pilot_werte' not in tb['nr2']['phase0_bindung']
+
+
+def test_w6_werte_eines_anderen_rechenkerns_werden_angenommen(basis, kerne):
+    """W6: Die Pilotausgabe trägt die Kennwerte derselben Kampagne, gerechnet mit einem anderen Rechenkern von
+    OpenBLAS; die Läufe stammen aus diesem Prozess. Teil B nimmt sie an (gleiche Herkunft, Werte innerhalb der
+    Toleranz) und weist den Abstand zur Toleranz aus. Gemessen am 13.11.2026 in einem Prozess mit dem Kern SkylakeX:
+    Auslastung 2,2·10⁻⁶ gegen HASWELL und gegen SANDYBRIDGE."""
+    for kern in KERNE:
+        assert kerne[kern]['kennwerte']['version'] == kennwerte.VERSION
+        pe = dict(basis['pe'], phase0_kennwerte=kerne[kern]['kennwerte'])
+        s, info = _satz(basis, basis['t0'], pe)
+        pw = info['pilot_werte']
+        assert info['quelle'] == 'Pilotskript, oberste Ebene' and pw['gleich'], (kern, pw['auslastung'])

@@ -789,3 +789,60 @@ def test_luft_cli_fehler(argv):
     with pytest.raises(SystemExit) as e:
         al.main(argv + ['--candidate'])
     assert e.value.code == 2
+
+
+# ── Gleichstand von Reserven: konstruiertes Beispiel (Nachtrag zu PR #39, 14.11.2026) ───────────────
+def _rauschmuster(n, anzahl=12, seed=4):
+    """Störungen in der Größe des Rundungsrauschens zwischen Rechenkernen (≤ 1e-12, weit unter GLEICH = 1e-9): keine,
+    gleichgerichtete, wechselnde und zufällige."""
+    rng = np.random.default_rng(seed)
+    fest = [np.zeros(n), np.full(n, 1e-12), np.full(n, -1e-12), 1e-12 * np.where(np.arange(n) % 2, 1.0, -1.0)]
+    return fest + [rng.uniform(-1e-12, 1e-12, n) for _ in range(anzahl - len(fest))]
+
+
+def test_gleichstand_der_laeufe_haengt_nicht_am_rundungsrauschen():
+    """Konstruierter Gleichstand in _kleinster: Fünf Läufe aus vier Gruppen tragen dieselbe kleinste Reserve, zwei
+    weitere liegen knapp darüber. Wie immer das Rundungsrauschen auf die fünf fällt (welcher davon also rechnerisch
+    der kleinste ist): Genannt wird derselbe Lauf (der erste nach RANG, dann nach der Reihenfolge) mit derselben
+    Zahl gleicher Läufe. Ein Abstand über GLEICH zählt nicht als Gleichstand."""
+    L = [('Schnitt (100°,240°)', 'schnitt'), ('L1', 'einzel'), ('Pilot (110°,252°)', 'pilot'), ('L2', 'einzel'),
+         ('synchron (0°,0°)', 'synchron'), ('Paar 12 Δ=0°', 'paar'), ('(0°,180°)', 'zweiergruppe'),
+         ('Schnitt (140°,240°)', 'schnitt')]
+    basis = np.array([0.4285, 0.4285, 0.4285 + 3e-9, 0.4285, 0.4285, 0.5, 0.4285 + 1.5e-9, 0.4285])
+    alle = np.arange(len(L))
+    ergebnisse = set()
+    for stoerung in _rauschmuster(len(L)):
+        werte = basis + stoerung
+        v, name = al._kleinster(werte, alle, L)
+        assert v == werte.min() and v == pytest.approx(0.4285, abs=2e-12)
+        ergebnisse.add(name)
+        # ohne den synchronen Lauf: der erste Einzelmodullauf; nur unter Schnitt und Pilot: der Pilot zählt nicht mit
+        assert al._kleinster(werte, np.array([0, 1, 2, 3, 5, 6, 7]), L)[1] == 'L1 u. a. (4 gleich)'
+        assert al._kleinster(werte, np.array([0, 2, 7]), L)[1] == 'Schnitt (100°,240°) u. a. (2 gleich)'
+        assert al._kleinster(werte, np.array([2, 5, 6]), L)[1] == '(0°,180°)'      # 1,5e-9, 3e-9: kein Gleichstand
+    assert ergebnisse == {'synchron (0°,0°) u. a. (5 gleich)'}
+    # Gegenprobe: ohne Toleranz (argmin) hinge der genannte Lauf am Rauschen
+    assert len({int(np.argmin(basis + s)) for s in _rauschmuster(len(L))}) > 1
+
+
+def test_gleichstand_zelle_gegen_summe_haengt_nicht_am_rundungsrauschen(monkeypatch):
+    """Konstruierter Gleichstand in _fenster_eins (starre Auflage: Zell- und Summenreserve sind gleich): Als bindend
+    gilt der Lauf der Zellreserve, gleich ob das Rundungsrauschen die Zell- oder die Summenreserve kleiner macht;
+    ε_max ändert sich dabei nur im Rauschen. Erst ein Abstand über GLEICH lässt die Summe binden."""
+    def falsch(dz, ds):
+        m = dict(reserve_zelle=0.4285 + dz, reserve_summe=0.4285 + ds, lauf_zelle='Lauf der Zelle',
+                 lauf_summe='Lauf der Summe')
+        monkeypatch.setattr(al, 'bewerte', lambda aufbau, kmax, paar_schritt: dict(
+            eps=0.5715, schnitt=dict(dF=0.56), mengen=dict(pflicht=m)))
+        return al._fenster_eins(None, 12, 0.3, 0.25, 15.0)
+
+    bezug = falsch(0.0, 0.0)
+    assert bezug['bindend']['pflicht'] == 'Lauf der Zelle' and bezug['reserve_zelle']['pflicht'] == 0.4285
+    for dz, ds in ((1e-12, 0.0), (0.0, 1e-12), (1e-12, -1e-12), (-1e-12, 1e-12), (5e-10, -4e-10), (-4e-10, 5e-10)):
+        f = falsch(dz, ds)
+        assert f['bindend']['pflicht'] == 'Lauf der Zelle', (dz, ds)
+        assert f['eps_max']['pflicht'] == pytest.approx(bezug['eps_max']['pflicht'], rel=2e-9)
+    assert falsch(0.0, -2e-9)['bindend']['pflicht'] == 'Lauf der Summe'           # Summe um mehr als GLEICH knapper
+    assert falsch(0.0, -1e-3)['bindend']['pflicht'] == 'Lauf der Summe'
+    assert falsch(-1e-3, 0.0)['bindend']['pflicht'] == 'Lauf der Zelle'
+    assert al.GLEICH == 1e-9

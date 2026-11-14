@@ -253,11 +253,15 @@ def _harness(ap, argv):
     g = q.add_mutually_exclusive_group(required=True)
     g.add_argument('--schreiben')
     g.add_argument('--pruefen')
+    g.add_argument('--kennwerte', help='Kennwerte der berechneten Felder zu einem vorhandenen Prüfsatz schreiben '
+                                       '(<Pfad>_kennwerte.json); nur in der Umgebung des Prüfsatzes')
     qa = sp.add_parser('ablauf-pruefsatz', help='Prüfsatz des zustandsbehafteten Phase-1-Ablaufs '
                                                 '(harness.ablauf_pruefsatz)')
     ga = qa.add_mutually_exclusive_group(required=True)
     ga.add_argument('--schreiben')
     ga.add_argument('--pruefen')
+    ga.add_argument('--kennwerte', help='Kennwerte der Datenfelder zu einem vorhandenen Prüfsatz schreiben '
+                                        '(<Pfad>_kennwerte.json); nur in der Umgebung des Prüfsatzes')
     qa.add_argument('--fassung', default='ablauf-3', choices=('ablauf-3', 'ablauf-4'),
                     help='Stand beim Schreiben: ablauf-3 (historisch, PR #23) oder ablauf-4 (Regelstand 2026-11); '
                          '--pruefen liest den Stand aus der Datei')
@@ -362,6 +366,11 @@ def _harness(ap, argv):
         if a.schreiben:
             ps = pruefsatz.schreiben(a.schreiben)
             print(f'Prüfsatz {a.schreiben}.json: SHA-256 {ps["sha256_gesamt"][:16]}…')
+        elif a.kennwerte:
+            k = pruefsatz.schreiben_kennwerte(a.kennwerte)
+            print(f'Kennwerte {a.kennwerte}_kennwerte.json zu {k["pruefsatz"]["datei"]} '
+                  f'(SHA-256 {k["pruefsatz"]["sha256"][:16]}…), Toleranz {k["toleranz"]["rtol"]:g}/'
+                  f'{k["toleranz"]["atol"]:g}')
         else:
             r = pruefsatz.pruefen(a.pruefen)
             print(_json(r))
@@ -385,6 +394,11 @@ def _harness(ap, argv):
         if a.schreiben:
             ps = ablauf_pruefsatz.schreiben(a.schreiben, fassung=a.fassung)
             print(f'Ablauf-Prüfsatz {a.schreiben}.json: SHA-256 {ps["sha256_gesamt"][:16]}…')
+        elif a.kennwerte:
+            k = ablauf_pruefsatz.schreiben_kennwerte(a.kennwerte)
+            print(f'Kennwerte {a.kennwerte}_kennwerte.json zu {k["pruefsatz"]["datei"]} '
+                  f'(SHA-256 {k["pruefsatz"]["sha256"][:16]}…), Toleranz {k["toleranz"]["rtol"]:g}/'
+                  f'{k["toleranz"]["atol"]:g}')
         else:
             r = ablauf_pruefsatz.pruefen(a.pruefen)
             print(_json(r))

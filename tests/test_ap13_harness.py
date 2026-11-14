@@ -11,7 +11,7 @@ import os
 import numpy as np
 import pytest
 
-from pcmms_auswertung import auswertung, cli, formate, pilot, regeln
+from pcmms_auswertung import auswertung, cli, formate, kennwerte, pilot, regeln
 from pcmms_auswertung.generator import kampagne
 from pcmms_auswertung.harness import (dateien, ebenen, kalibrierung, kampagnen, kette, kriterien, metriken, planung,
                                       pruefsatz, s3)
@@ -19,6 +19,7 @@ from pcmms_auswertung.harness import (dateien, ebenen, kalibrierung, kampagnen, 
 PROFIL = regeln.profil('ENTW-2026-10').mit_reduktion(bootstrap_B=200, eps_ctrl_datensaetze=300, h3_mc=1000)
 PLAN = kampagne.Plan(n0=20, n_pilot=20, n_bloecke=24)
 FIXTURES = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'fixtures')
+BITGLEICH = os.environ.get('PCMMS_BITGLEICH') == '1'    # zusätzlich die an Rechenkern und zlib gebundenen Prüfsummen
 
 
 def _ohne_zeit(b):
@@ -38,10 +39,18 @@ def test_rate_mit_zaehler_nenner_und_mc_fehler():
 
 # ── Kampagnen: Seeds, Prozesse ───────────────────────────────────────────────────────────────────────
 def test_kampagnen_unabhaengig_von_der_prozesszahl():
+    """Abnahmekriterium der Unabhängigkeit von der Prozess- und Thread-Zahl (14.11.2026): Dieselben Kampagnen, im
+    eigenen Prozess (prozesse=1, BLAS-Threads der Umgebung) und in Arbeitsprozessen (prozesse=2, je ein BLAS-Thread)
+    gerechnet, ergeben dieselben Befunde: Seeds, Entscheidungen, Gründe, Zählgrößen und Texte exakt, Zahlenfelder
+    innerhalb der Toleranz von kennwerte.py je Eintrag. Bitgleichheit wird nicht verlangt; sie gilt nur, wenn beide
+    Wege mit derselben Thread-Zahl rechnen (Kopf von harness/kampagnen.py). Ein anderer Basis-Seed ergibt andere
+    Befunde."""
     a = kampagnen.ausfuehren('A04-R4', 'L1', PROFIL, 3, 11, 'test', PLAN, 18, prozesse=1)
     b = kampagnen.ausfuehren('A04-R4', 'L1', PROFIL, 3, 11, 'test', PLAN, 18, prozesse=2)
     c = kampagnen.ausfuehren('A04-R4', 'L1', PROFIL, 3, 12, 'test', PLAN, 18, prozesse=1)
-    assert [_ohne_zeit(x) for x in a['befunde']] == [_ohne_zeit(x) for x in b['befunde']]
+    v = kennwerte.vergleich_objekt(a['befunde'], b['befunde'], ohne=('laufzeit_s',))
+    assert v['gleich'], (v['abweichungen'], v['auslastung'], v['stelle_auslastung'])
+    assert not kennwerte.vergleich_objekt(a['befunde'], c['befunde'], ohne=('laufzeit_s',))['gleich']
     assert not {_ohne_zeit(x) for x in a['befunde']} & {_ohne_zeit(x) for x in c['befunde']}
     assert a['meta']['seeds'] == b['meta']['seeds'] and a['meta']['reduziert']
     r = kampagnen.raten(a)
@@ -252,8 +261,78 @@ def test_s3_bilder_und_vorhersage():
 
 
 def test_pruefsatz_unveraendert():
+    """Der Software-Prüfsatz rechnet sich in jeder Umgebung nach: exakte Teile exakt, die berechneten Felder über ihre
+    Kennwerte mit Toleranz (tests/fixtures/ap13_pruefsatz_kennwerte.json). Mit PCMMS_BITGLEICH=1 wird zusätzlich
+    verlangt, dass die im Prüfsatz hinterlegten Prüfsummen der berechneten Felder bitgleich wiederkehren; das gilt nur
+    in der Umgebung ihrer Erzeugung (Rechenkern SkylakeX, zlib 1.3)."""
     r = pruefsatz.pruefen(os.path.join(FIXTURES, 'ap13_pruefsatz'))
-    assert r['gleich'], r['abweichungen']
+    assert r['gleich'], (r['abweichungen'], r['werte'])
+    assert r['werte']['toleranz'] == dict(rtol=1e-10, atol=1e-12) and r['werte']['auslastung'] <= 1.0
+    assert set(r['pruefsummen_abweichend']) <= {f'testdaten {s}/{st}/{sd}: {x}' for s, st, sd in
+                                                pruefsatz.PRUEFKAMPAGNEN for x in pruefsatz.RECHNERGEBUNDEN}
+    assert r['bitgleich'] == (not r['pruefsummen_abweichend'])
+    if BITGLEICH:
+        assert r['bitgleich'], r['pruefsummen_abweichend']
+
+
+def test_pruefsatz_wertevergleich_und_kennwerte_datei(tmp_path, monkeypatch):
+    """Der Wertevergleich des Prüfsatzes ohne Neuberechnung der Kampagnen: Einordnung der Abweichungen (exakter Teil
+    gegen rechnergebundene Prüfsumme), Abweichungen der Kennwerte mit Ort, Bindung der Kennwerte-Datei an die
+    Prüfsatz-Datei und die Bedingung für das Erzeugen neuer Bezugswerte."""
+    import copy
+    import shutil
+    pfad = os.path.join(FIXTURES, 'ap13_pruefsatz')
+    _, alt = formate.lies_objekt(pfad, 'pruefsatz')
+    bezug = pruefsatz.kennwerte_lesen(pfad)
+    assert bezug['version'] == 'kennwerte-1' and bezug['pruefsummen_bitgleich'] is True
+    assert bezug['pruefsatz'] == dict(datei='ap13_pruefsatz.json', sha256=formate.sha256_datei(pfad + '.json'))
+    assert set(bezug['kennwerte']) == set(alt['testdaten']) and bezug['umgebung']['zlib'] == '1.3'
+    key = 'A04-R4/L1/7'
+    assert set(bezug['kennwerte'][key]) == {'zusammenfassungen', 'p0_messung', 'p0_skelett_sha256'}
+    werte = copy.deepcopy(bezug['kennwerte'])
+    v = pruefsatz.kennwerte_vergleichen(bezug, werte)
+    assert v == dict(abweichungen=[], kennwerte_gleich=True, auslastung=0.0, stelle_auslastung=None,
+                     toleranz=dict(rtol=1e-10, atol=1e-12))
+    # Rundungsrauschen: innerhalb der Toleranz, mit Ort der größten Auslastung
+    f = werte[key]['zusammenfassungen']['Nk_summe']
+    f['summe'] += 1e-12
+    v = pruefsatz.kennwerte_vergleichen(bezug, werte)
+    assert not v['abweichungen'] and not v['kennwerte_gleich'] and 0 < v['auslastung'] < 1
+    assert v['stelle_auslastung'] == f'{key}: zusammenfassungen: Nk_summe'
+    # geänderte Werte, geänderter exakter Teil, fehlende Kampagne
+    f['summe'] += 1e-3
+    werte[key]['p0_skelett_sha256'] = 'x'
+    del werte['N01-A4/L1/7']
+    v = pruefsatz.kennwerte_vergleichen(bezug, werte)
+    assert len(v['abweichungen']) == 3 and v['abweichungen'][0].startswith(f'{key}: p0_skelett_sha256')
+    assert v['abweichungen'][1].startswith(f'{key}: zusammenfassungen: Feld Nk_summe: summe: ')
+    assert v['abweichungen'][2] == 'N01-A4/L1/7: fehlt'
+    # pruefen(): eine abweichende Prüfsumme berechneter Felder ändert „gleich“ nicht, ein exakter Teil schon
+    neu = copy.deepcopy(alt)
+    neu['testdaten'][key]['zusammenfassungen'] = 'a' * 64
+    monkeypatch.setattr(pruefsatz, '_erstellen', lambda mit_katalog=True: (neu, bezug['kennwerte']))
+    r = pruefsatz.pruefen(pfad)
+    assert r['gleich'] and not r['bitgleich'] and r['pruefsummen_abweichend'] == [f'testdaten {key}: zusammenfassungen']
+    neu['testdaten'][key]['koepfe'] = 'b' * 64
+    r = pruefsatz.pruefen(pfad)
+    assert not r['gleich'] and r['abweichungen'] == [f'testdaten {key}: koepfe']
+    # neue Bezugswerte nur, wenn die Rechnung den Prüfsatz bitgleich wiedergibt (oder ausdrücklich erzwungen)
+    with pytest.raises(ValueError, match='weicht in exakten Teilen ab'):
+        pruefsatz.schreiben_kennwerte(pfad)
+    neu['testdaten'][key]['koepfe'] = alt['testdaten'][key]['koepfe']
+    with pytest.raises(ValueError, match='kehren hier nicht bitgleich wieder'):
+        pruefsatz.schreiben_kennwerte(pfad)
+    # die Kennwerte-Datei gehört zu genau einer Prüfsatz-Datei
+    kopie = str(tmp_path / 'ps')
+    shutil.copy(pfad + '.json', kopie + '.json')
+    with pytest.raises(formate.FormatFehler, match='Kennwerte zum Prüfsatz fehlen'):
+        pruefsatz.kennwerte_lesen(kopie)
+    k = pruefsatz.schreiben_kennwerte(kopie, erzwingen=True)
+    assert k['pruefsummen_bitgleich'] is False and pruefsatz.kennwerte_lesen(kopie)['kennwerte'] == bezug['kennwerte']
+    with open(kopie + '.json', 'a', encoding='utf-8') as fh:
+        fh.write('\n')
+    with pytest.raises(formate.FormatFehler, match='gehört zu einer anderen Fassung der Prüfsatz-Datei'):
+        pruefsatz.kennwerte_lesen(kopie)
 
 
 # ── Kriterienmatrix ──────────────────────────────────────────────────────────────────────────────────

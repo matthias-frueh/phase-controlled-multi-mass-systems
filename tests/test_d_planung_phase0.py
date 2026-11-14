@@ -142,6 +142,40 @@ def test_haken_phase0_im_pilotskript_ohne_szenario(a4, monkeypatch):
     assert prot[0]['kandidaten'][0]['nenner'] == 1 and prot[0]['reduziert']
 
 
+def test_modellpruefsumme_des_strukturgenerators_gilt_innerhalb_eines_rechenlaufs(a4):
+    """Grenze des Herkunftsnachweises beim Strukturgenerator (Notiz vom 12.11.2026, Abschnitt 4; Prüfpunkt B vom
+    13.11.2026): Das Modell stammt aus geschätzten Größen (Struktur aus P0.8, Rauschparameter aus den Laufgrößen).
+    Seine Prüfsumme im Generatornachweis ist deshalb innerhalb eines Rechenlaufs stabil – zweimal gebildet und über
+    eine Prozessgrenze hinweg (pickle, wie beim Versand an Arbeitsprozesse) gleich –, hängt aber an den berechneten
+    Werten: Schon eine Änderung im Rundungsrauschen ergibt eine andere Prüfsumme. Gemessen am 13.11.2026 für diese
+    Kampagne: SkylakeX 83b9b22e…, Haswell 2eea385f…, Sandybridge 7f88bf1a…; die Struktur stimmt dabei innerhalb der
+    Toleranz von kennwerte.py überein (Auslastung 2,1·10⁻⁶). Eine auf einem anderen Rechner neu erzeugte Tabelle weist
+    Teil B deshalb zurück; die Tabellen dieses Generators dienen der Planungssimulation innerhalb eines Rechenlaufs."""
+    import pickle
+    from pcmms_auswertung import kennwerte, zusammenfassung as zf
+    m, t0, kal = a4
+    q, _ = planung.quelle_aus_aufruf(_aufruf(m, t0, kal), 'punkt', profil=AKTUELL)
+    q2, _ = planung.quelle_aus_aufruf(_aufruf(m, t0, kal), 'punkt', profil=AKTUELL)
+    q3 = pickle.loads(pickle.dumps(q))
+
+    def h(x):
+        return formate.sha256_json(x.modell(PLAN).beschreibung())
+    assert h(q) == h(q2) == h(q3) and q.kennung()['sha256'] == q2.kennung()['sha256'] == q3.kennung()['sha256']
+    laeufe = kp.laufplan(PLAN, zufall.strom(3, 'reihenfolge'))
+    a, b = (p0m.erzeuge(x.modell(PLAN), laeufe, zufall.strom(3, 'generator'),
+                        rng_zusatz=zufall.strom(3, 'generator_struktur')) for x in (q, q3))
+    gn = zf.META_GENERATORNACHWEIS
+    assert a.meta[gn] == b.meta[gn] and a.meta[gn]['modell_sha256'] == h(q)
+    assert kennwerte.vergleich_felder(kennwerte.felder(a.daten), kennwerte.felder(b.daten))['kennwerte_gleich']
+    st = q.struktur
+    rausch = q.mit(struktur=p0m.Struktur(f=st.f, Nz=st.Nz * (1 + 1e-15), F0=st.F0, quelle=st.quelle,
+                                         herkunft=st.herkunft))
+    assert h(rausch) != h(q) and rausch.kennung()['sha256'] != q.kennung()['sha256']
+    v = kennwerte.vergleich_felder(kennwerte.felder(dict(Nz=st.Nz, F0=st.F0)),
+                                   kennwerte.felder(dict(Nz=rausch.struktur.Nz, F0=rausch.struktur.F0)))
+    assert v['gleich'] and not v['kennwerte_gleich']
+
+
 # ── Kampagnen aus einer Modellquelle ────────────────────────────────────────────────────────────────
 def test_kampagne_aus_modellquelle_teil_b_und_wahrheit(a4):
     m, t0, kal = a4
