@@ -209,13 +209,41 @@ python3 ../code/linear_solver.py --validate  # analytische Lösung gegen alle dr
 python3 ../code/plot_figures.py              # Abbildungen nach docs/figures/ (ca. 40 s)
 python3 ../code/auslegung.py --candidate     # Auslegung des V1-Kandidaten: Laufarten, Zellreserven, Prüfung §5.3 (ca. 2 s)
 python3 ../code/ereignisloeser.py --point 35 116 --orbit   # ereignisgenau: Satelliteninsel, beide Zustände (ca. 5 s)
-cd .. && python3 -m pytest tests -q          # Testsuite (ca. 7 min; lange Tests mit PCMMS_SLOW=1)
+cd .. && python3 -m pytest tests -q          # Testsuite (ca. 7–13 min je nach Rechner; lange Tests mit PCMMS_SLOW=1)
 python3 code/pcmms_auswertung kette --szenario A04-R4 --stufe L1 --seed 7 --ebene H --band 20 600 \
   --profil ENTW-2026-10 --red bootstrap_B=200,h3_mc=1000,eps_ctrl_datensaetze=300 --n-min 18 --ausgabe /tmp/pcmms_kette
                                              # synthetische Kette Generator → AP-11 → AP-12 → Bewertung (ca. 5 s)
 ```
 
 Der vollständige 19×19-Sweep braucht je nach Rechner 30–60 Minuten; das Skript ist checkpoint-fest.
+
+### Testsuite und Rechenumgebung
+
+Bestandene Tests heißen: Die Software rechnet wie geprüft. Eine wissenschaftliche Bestätigung ist das nicht; alles
+im Repository ist Simulation oder Analytik.
+
+- **Erwartetes Ergebnis.** Stand `805653d` (14.11.2026), `python3 -m pytest tests -q`: „636 passed, 8 skipped“.
+  Übersprungen sind die langen Tests (`PCMMS_SLOW=1`).
+- **Automatischer Lauf.** Bei jedem Pull Request gegen `main` rechnet GitHub dieselbe Testsuite
+  ([`.github/workflows/pytest.yml`](.github/workflows/pytest.yml): Ubuntu 24.04, Python 3.13). Die Paketversionen
+  dieses Laufs stehen in [`.github/constraints-ci.txt`](.github/constraints-ci.txt); lokal mit denselben Versionen:
+  `pip install -r code/requirements.txt -c .github/constraints-ci.txt`. Rechenkern und Thread-Zahl sind nicht
+  festgelegt, kein Test ist abgewählt.
+- **Vergleich in zwei Stufen.** Gleitkommaergebnisse hängen in den letzten Stellen vom Rechner ab (Prozessor,
+  Rechenkern der BLAS-Bibliothek, Thread-Zahl). Exakte Inhalte – Laufköpfe, Entscheidungen, Seeds, Zählgrößen –
+  vergleichen die Tests exakt, berechnete Zahlenfelder über Kennwerte je Feld mit Toleranz
+  ([`code/pcmms_auswertung/kennwerte.py`](code/pcmms_auswertung/kennwerte.py)): je Eintrag τ = 10⁻¹⁰·M + 10⁻¹²; M ist
+  der größte Betrag des Feldes. In der Messreihe (zehn Rechenumgebungen auf einem Rechner: Rechenkern, Thread-Zahl
+  und Rechenwege von NumPy variiert) war diese Toleranz zu höchstens 0,054 % ausgeschöpft (Bericht, Abschnitt 1).
+  Grenze: Die Änderung eines einzelnen Eintrags erkennen die Kennwerte erst oberhalb von n·τ, n ist die Zahl der
+  Einträge des Feldes (Bericht, Abschnitt 5).
+- **Bitgleichheit nur auf Verlangen.** `PCMMS_BITGLEICH=1 python3 -m pytest tests -q` verlangt zusätzlich, dass die
+  hinterlegten Prüfsummen berechneter Felder bitgleich wiederkehren. Das gilt nur in der Umgebung ihrer Erzeugung
+  (OpenBLAS-Rechenkern SkylakeX, zlib 1.3); in anderen Umgebungen schlagen diese Prüfungen fehl, ohne dass ein
+  Fehler vorliegt.
+
+Bericht mit Messreihe, Begründung der Toleranz und offenen Punkten:
+[`docs/kennwerte_untersuchung_2026-11-13/bericht.md`](docs/kennwerte_untersuchung_2026-11-13/bericht.md).
 
 ## Zitieren
 

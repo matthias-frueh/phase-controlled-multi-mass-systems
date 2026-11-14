@@ -30,7 +30,8 @@ entscheidet er.
 - **Reproduktionsbefunde** nennen den Commit, den vollständigen Aufruf und die maßgebliche Ausgabe im Wortlaut.
   Weicht das Ergebnis von einer Angabe im Repository ab, wird diese Angabe mit Fundstelle genannt.
 - **Pull Requests, die Code oder Tests ändern,** nennen in derselben Form das Ergebnis der Testsuite
-  (`python3 -m pytest tests -q`, etwa 7 Minuten; siehe [README, „Nachrechnen“](../README.md#nachrechnen)).
+  (`python3 -m pytest tests -q`, etwa 7 bis 13 Minuten je nach Rechner; siehe
+  [README, „Nachrechnen“](../README.md#nachrechnen)).
 
 ## Literatur
 
