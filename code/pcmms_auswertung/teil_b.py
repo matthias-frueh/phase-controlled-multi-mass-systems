@@ -37,21 +37,30 @@ und er zu den übergebenen Läufen passt (pruefe_pilot_herkunft); eine Pilotausg
 Läufe gebunden und wird zurückgewiesen. Ein Satz wird über die Prüfsumme des Nachweises zugeordnet statt über eine
 Prüfsumme der Datenfelder. Der Nachweis belegt die Herkunft, nicht die Werte. Unter den historischen Profilen bleiben
 phase0_sha256 und die Prüfung über pilot.daten_sha256 unverändert (teil_b-0.3).
+
+Werte (ab teil_b-0.6, nur Regelstand 2026-11; Entscheidung E-4 vom 12.11.2026): Die Werte prüft eine eigene
+Ergebnisprüfung neben der Bindung (pruefe_pilot_werte). Die Kennwerte der Datenfelder der übergebenen Phase-0-Läufe
+(kennwerte.py) müssen denen gleichen, die die Pilotausgabe für den passenden Satz führt, innerhalb der Toleranz
+kennwerte.RTOL und ATOL je Eintrag. Die Kennwerte stehen in nr1.phase0_kennwerte, das Ergebnis des Vergleichs in
+nr2.phase0_bindung.pilot_werte. Eine Pilotausgabe ohne Kennwerte (bis pilot-0.5) wird zurückgewiesen. Die Bindung
+selbst bleibt exakt; die Kennwerte gehen nicht in sie ein.
 """
 import math
 
 import numpy as np
 from scipy import stats
 
-from . import bootstrap as bs, formate, g4, h2, herkunft, kontrollen, konventionen as kv, laufgroessen, pilot, regeln
+from . import bootstrap as bs, formate, g4, h2, herkunft, kennwerte, kontrollen, konventionen as kv, laufgroessen
+from . import pilot, regeln
 from . import vorhersage as vh, zeltfit as zfit
 from . import zusammenfassung as zf
 from .regeln import RegelOffen
 
-VERSION = 'teil_b-0.5'          # 0.2: nr5.unsicherheit (Korrektur E), nr1.phase0_verarbeitung (Korrektur B);
+VERSION = 'teil_b-0.6'          # 0.2: nr5.unsicherheit (Korrektur E), nr1.phase0_verarbeitung (Korrektur B);
                                 # 0.3: Phase-0-Satz an k_max und N_z des Plans gebunden, nr2.arbeitspunkt;
                                 # 0.4: Laufgrößen in nr2 (nur Regelstand 2026-11);
-                                # 0.5: Herkunftsnachweis der Phase-0-Läufe in nr1 und in der Bindung (nur 2026-11)
+                                # 0.5: Herkunftsnachweis der Phase-0-Läufe in nr1 und in der Bindung (nur 2026-11);
+                                # 0.6: Ergebnisprüfung der Phase-0-Werte über Kennwerte mit Toleranz (nur 2026-11)
 VERSION_HISTORISCH = 'teil_b-0.3'
 
 
@@ -101,6 +110,30 @@ def pruefe_pilot_herkunft(pilot_erg, nw):
                      + herkunft.unterschied(belege[0][2], nw) + ')')
 
 
+def pruefe_pilot_werte(pilot_erg, name, t, kw=None):
+    """Regelstand 2026-11, ab teil_b-0.6: Ergebnisprüfung neben der Bindung (Entscheidung E-4). Die Kennwerte der
+    Datenfelder der übergebenen Phase-0-Läufe t müssen innerhalb der Toleranz denen gleichen, die die Pilotausgabe für
+    den Satz name führt (name aus pruefe_pilot_herkunft: der Satz mit demselben Herkunftsnachweis). Sonst ValueError.
+    kw: schon berechnete Kennwerte von t (pilot.phase0_kennwerte). Rückgabe: Ergebnis des Vergleichs für
+    nr2.phase0_bindung (Satz, Toleranz, Auslastung)."""
+    beleg = pilot.werte_beleg(pilot_erg, name)
+    if not (isinstance(beleg, dict) and isinstance(beleg.get('felder'), dict)):
+        raise ValueError(f'Teil B ({VERSION}): Pilotausgabe ohne Kennwerte der Phase-0-Daten (Fassung '
+                         f'{pilot_erg.get("version") or "unbekannt"}); die Werte der Läufe sind nicht prüfbar. Das '
+                         'Pilotskript mit dem aktuellen Stand neu rechnen')
+    kw = pilot.phase0_kennwerte(t) if kw is None else kw
+    if beleg.get('version') != kw['version']:
+        raise ValueError(f'Teil B: Kennwerte der Pilotausgabe in der Fassung {beleg.get("version")!r} statt '
+                         f'{kw["version"]!r}')
+    v = kennwerte.vergleich_felder(beleg['felder'], kw['felder'])
+    if not v['gleich']:
+        mehr = '' if len(v['abweichungen']) == 1 else f'; {len(v["abweichungen"]) - 1} weitere Abweichungen'
+        raise ValueError('Teil B: Die übergebenen Phase-0-Läufe haben dieselbe Herkunft wie in der Pilotausgabe, aber '
+                         f'andere Werte ({v["abweichungen"][0]}{mehr})')
+    return dict(satz=name, gleich=True, kennwerte_gleich=v['kennwerte_gleich'], auslastung=v['auslastung'],
+                feld_auslastung=v['feld_auslastung'], toleranz=v['toleranz'], version=kw['version'])
+
+
 def konfigurationen(zusatz=False, punkte_I=None):
     """Konfigurationsliste in der Reihenfolge von §6 (Schnitt aufsteigend, Zusatz, Punkte I bei Einstellung 2)."""
     out = [dict(id=zf.konfig_id('K', (0.0, p, kv.SCHNITT_PHI3), gruppe='schnitt'), gruppe='schnitt',
@@ -143,7 +176,7 @@ def d_grenzen(Y, kmax):
     return np.array(DB), np.array(DA)
 
 
-def phase0_satz(tab0, kal, pilot_erg, profil, plan, bindung='plan', seed_pilot=None):
+def phase0_satz(tab0, kal, pilot_erg, profil, plan, bindung='plan', seed_pilot=None, kennw=None):
     """Der für Phase 1 maßgebliche Satz der Phase-0-Größen und seine Einordnung (nr2.phase0_bindung).
 
     bindung='plan': Satz bei k_max des Plans und dem Fenster der übergebenen Phase-0-Läufe; ihre Zyklenzahl muss N_z des
@@ -155,9 +188,11 @@ def phase0_satz(tab0, kal, pilot_erg, profil, plan, bindung='plan', seed_pilot=N
     wie bis teil_b-0.2, gekennzeichnet und nicht qualifizierend.
 
     „Gleiche Phase-0-Daten“ heißt im Regelstand 2026-11 gleicher Herkunftsnachweis (herkunft.py). Dort wird in beiden
-    Bindungsarten zuerst geprüft, dass die Pilotausgabe zu den übergebenen Läufen gehört (pruefe_pilot_herkunft); ein
-    Satz ohne Herkunftsnachweis wird nicht übernommen. Unter den historischen Profilen gilt die Prüfsumme der
-    Datenfelder (pilot.daten_sha256) wie bis teil_b-0.3."""
+    Bindungsarten zuerst geprüft, dass die Pilotausgabe zu den übergebenen Läufen gehört (pruefe_pilot_herkunft) und
+    dass die Werte der Läufe innerhalb der Toleranz denen der Pilotausgabe gleichen (pruefe_pilot_werte); ein Satz ohne
+    Herkunftsnachweis wird nicht übernommen. Unter den historischen Profilen gilt die Prüfsumme der Datenfelder
+    (pilot.daten_sha256) wie bis teil_b-0.3. kennw: schon berechnete Kennwerte der Phase-0-Läufe (sonst hier
+    gebildet)."""
     if bindung not in BINDUNGEN:
         raise ValueError(f'Bindung {bindung!r} unbekannt ({", ".join(BINDUNGEN)})')
     t = tab0.auswahl(tab0.spalte('phase', int) == 0).sortiert()
@@ -174,6 +209,7 @@ def phase0_satz(tab0, kal, pilot_erg, profil, plan, bindung='plan', seed_pilot=N
         nw = herkunft.nachweis(t)
         h, feld = herkunft.sha256(nw), pilot.FELD_HERKUNFT
         info.update(phase0_herkunft_sha256=h, pilot_herkunft=pruefe_pilot_herkunft(pilot_erg, nw))
+        info.update(pilot_werte=pruefe_pilot_werte(pilot_erg, info['pilot_herkunft'], t, kennw))    # und die Werte
     if bindung == 'historisch':
         s = pilot.satz_oberste_ebene(pilot_erg)
         info.update(quelle='historisch: vorläufiger Satz bei k der Pilotgrößen (bis teil_b-0.2)', k=info['k_pilotgroessen'],
@@ -305,7 +341,9 @@ def erstellen(tab0, kal, pilot_erg, profil, plan, werkzeug8=None, kennung=None, 
     B = profil.zahl('bootstrap_B') if B is None else int(B)
     p05 = kal['p0_5']
     dd = np.asarray(p05['delta_delta_grad'], float)
-    satz, bindung_info = phase0_satz(tab0, kal, pilot_erg, profil, plan, bindung, seed_pilot)
+    t0 = tab0.auswahl(tab0.spalte('phase', int) == 0)
+    kennw = pilot.phase0_kennwerte(t0) if pilot.herkunft_gebunden(profil) else None      # einmal je Teil B
+    satz, bindung_info = phase0_satz(tab0, kal, pilot_erg, profil, plan, bindung, seed_pilot, kennw)
     ungueltig = set(satz['gueltigkeit']['gruende'])
     e2 = plan.get('einstellung2')
     # nr3: Einzelmodulläufe der Phase 0 und feste Indexmatrizen B⁰ⱼ
@@ -446,8 +484,9 @@ def erstellen(tab0, kal, pilot_erg, profil, plan, werkzeug8=None, kennung=None, 
                                    hinweis='Planung an der oberen Grenze mit c_B; Teil-B-Werte aus Punktschätzern '
                                            'der Kalibrierung nach der Planung')
     if pilot.herkunft_gebunden(profil):             # ab teil_b-0.5: Herkunftsnachweis der Phase-0-Läufe (A9.3 Nr. 1)
-        nw = herkunft.nachweis(tab0.auswahl(tab0.spalte('phase', int) == 0))
-        nr1_phase0 = dict(phase0_herkunft=nw, phase0_herkunft_sha256=herkunft.sha256(nw))
+        nw = herkunft.nachweis(t0)
+        nr1_phase0 = dict(phase0_herkunft=nw, phase0_herkunft_sha256=herkunft.sha256(nw),
+                          phase0_kennwerte=kennw)                               # ab teil_b-0.6: Werte (E-4)
     else:                                           # historische Profile: Prüfsumme der Pflichtfelder wie teil_b-0.3
         nr1_phase0 = dict(phase0_sha256=formate.sha256_bytes(formate.npz_bytes(zf.pflichtfelder(tab0.daten))))
     return dict(version=version(profil), kennung=kennung,

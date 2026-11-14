@@ -20,6 +20,12 @@ Umfang und Prüfergebnisse: [`ap11_ap12_ap13_software.md`](ap11_ap12_ap13_softwa
 > Generatornachweis in den Metadaten der Zusammenfassungen (Abschnitt 4), `nr1.phase0_herkunft` in Teil B
 > (Abschnitt 5). Unter den historischen Profilen bleiben Felder und Prüfung unverändert. Grundlage:
 > [Entscheidungsnotiz vom 12.11.2026](entscheidungsnotiz_herkunft_phase0_2026-11-12.md).
+>
+> **Vermerk vom 14.11.2026 (Wertevergleich mit Toleranz, PR C).** Neben der Herkunft werden im Regelstand 2026-11
+> die Werte der Phase-0-Läufe geprüft (`pilot-0.6`, `teil_b-0.6`): Kennwerte der Datenfelder in der Pilotausgabe
+> (`phase0_kennwerte`) und in Teil B (`nr1.phase0_kennwerte`), Vergleich mit Toleranz in Teil B (Abschnitt 5). Die
+> Prüfsätze vergleichen berechnete Felder ebenfalls über Kennwerte (Abschnitt 12). Grundlage:
+> [Untersuchung vom 13.11.2026](kennwerte_untersuchung_2026-11-13/bericht.md).
 
 ## 1 Trennstelle
 
@@ -170,8 +176,34 @@ SHA-256-Prüfsumme in kanonischer JSON-Form:
 - `nr1.phase0_sha256` und `nr1.phase0_optionale_sha256` entfallen im Regelstand 2026-11. Unter den historischen
   Profilen bleibt `nr1.phase0_sha256` (Prüfsumme der komprimierten Pflichtfelder; sie hängt am zlib des Systems und
   am Rechenkern).
-- Geänderte Datenfelder bei unverändertem Nachweis erkennt die Bindung nicht; der Wertevergleich mit Toleranz ist
-  eine gesonderte Prüfung und noch nicht umgesetzt.
+- Geänderte Datenfelder bei unverändertem Nachweis erkennt die Bindung nicht. Das leistet seit `teil_b-0.6` die
+  Ergebnisprüfung der Werte (nächster Absatz).
+
+**Werte der Phase-0-Läufe** (ab `pilot-0.6` und `teil_b-0.6`, nur Regelstand 2026-11; Entscheidung E-4 vom
+12.11.2026). `phase0_kennwerte` hat die Form `{version: "kennwerte-1", felder: {Feldname: Kennwerte}}` und steht in
+der Pilotausgabe je Satz neben der Bindung, in Teil B als `nr1.phase0_kennwerte`. Die Läufe sind dafür nach
+aufsteigender Position geordnet wie im Nachweis. Kennwerte eines Feldes (`kennwerte.py`):
+
+| Feld | Inhalt |
+|---|---|
+| `dtype`, `form`, `n` | Datentyp, Form und Zahl der reellen Einträge (komplex: Real- und Imaginärteil nacheinander) |
+| `summe`, `quadrat` | Σ xᵢ und Σ xᵢ², exakt gerundet (`math.fsum`) |
+| `gewichtet_1`, `gewichtet_2` | Σ gᵢ·xᵢ mit festen, von der Stelle i abhängigen Gewichten; erkennen vertauschte Einträge |
+| `minimum`, `maximum` | Extremwerte der endlichen Einträge |
+| `nicht_endlich` | Zahl und SHA-256 des Musters der Einträge NaN und ±∞ (exakt) |
+| `sha256` | nur bei Feldern mit ganzen Zahlen oder Wahrheitswerten, statt der Summen: Prüfsumme der Werte (exakt) |
+
+- Teil B wird nur gebildet, wenn die Kennwerte der übergebenen Läufe denen des passenden Satzes der Pilotausgabe
+  gleichen: Form, Typ, Zahl, Muster und exakte Felder genau, die übrigen Kennwerte innerhalb der Toleranz. Je
+  Eintrag gilt τ = 10⁻¹⁰·M + 10⁻¹² (M größter Betrag des Feldes); daraus n·τ für die Summen, (2·M + τ)·n·τ für die
+  Quadratsumme und τ für die Extremwerte. Die Fehlermeldung nennt Feld und Kennwert.
+- `nr2.phase0_bindung.pilot_werte` hält das Ergebnis fest: Satz, Toleranz, ob die Kennwerte genau gleich waren, und
+  die Auslastung der Toleranz (größte Abweichung geteilt durch ihre Toleranz).
+- Die Kennwerte gehen nicht in die Bindung ein; die Bindung bleibt exakt.
+- Eine Pilotausgabe ohne Kennwerte (bis `pilot-0.5`) wird zurückgewiesen. Unter den historischen Profilen gibt es
+  weder Kennwerte noch diese Prüfung.
+- Grenze: Die Änderung eines einzelnen Eintrags fällt erst oberhalb von n·τ auf
+  ([Untersuchung](kennwerte_untersuchung_2026-11-13/bericht.md), Abschnitt 5).
 
 `nr5.unsicherheit` (ab `teil_b-0.2`, Format `e3_T_unsicherheit-0.1`, Modell `e3_T-0.2`, Herkunft mit
 Kalibrierungs-Hash; A9.3 Nr. 5): Nennwerte und gemeinsame Kovarianz von (g₁…g₃, x₁…x₃, y₁…y₃) aus P0.1, Parameter
@@ -238,7 +270,8 @@ wird.
 python3 code/pcmms_auswertung beispiel --ausgabe /tmp/pcmms_beispiel
 ```
 
-erzeugt bitgleich den eingecheckten Datensatz [`tests/fixtures/ap1x_beispiel/`](../tests/fixtures/ap1x_beispiel/):
+erzeugt den eingecheckten Datensatz [`tests/fixtures/ap1x_beispiel/`](../tests/fixtures/ap1x_beispiel/) neu
+(inhaltsgleich in jeder Umgebung, bitgleich mit zlib 1.3; siehe unter der Tabelle):
 einen Referenzlauf und einen Einzelmodullauf L₁ (je 6 Zyklen bei 10 Hz, f_s = 2110 Hz nach A6 für k_max = 3, analytisch
 vorgegebene Zellharmonische k = 1 … 3, ADC 24 Bit, Indexzeitstempel auf 1 µs), Manifest (JSON und CSV), statische
 Kalibrierung, das Regelprofil ENTW-2026-10, ein Beispiel für Bootstrap-Indizes und die Wahrheit unter `wahrheit/`.
@@ -250,6 +283,10 @@ SHA-256 der Datendateien:
 | `eingang/laeufe/B-L1-001.npz` | `dc06ead11196e29fa453c02c39663f6a8326fb97cebbc47996f818f344313720` |
 | `eingang/bootstrap_indizes.npz` | `c794b13d0b0817bfe3a1b3b230c102001a0f439292b1cb2c18ef9ba149607f68` |
 | `wahrheit/wahrheit.npz` | `7435ea9ea5c5546741a4ca728fbfa58e9bf75823ce3de9182b49e89aec7ba626` |
+
+Die NPZ-Dateien sind komprimiert; ihre Bytes und damit diese Prüfsummen hängen am zlib des Systems (zlib 1.3 bei
+der Erzeugung). Der Test `test_beispiel_reproduzierbar_und_gleich_fixture` verlangt seit dem 14.11.2026, dass die
+Felder Wert für Wert gleich neu entstehen, und nur mit `PCMMS_BITGLEICH=1` zusätzlich gleiche Bytes und Prüfsummen.
 
 Die JSON-Köpfe tragen den Codestand und ändern sich deshalb mit jedem Commit; ihr übriger Inhalt ist fest
 (`tests/test_pcmms_formate.py`). Stufe 1 rechnet aus Rohdateien Laufzusammenfassungen, die Ebene H bis auf den
@@ -273,3 +310,25 @@ Interpolationsfehler nach A6 und die Quantisierung der Zeitstempel treffen (`tes
 
 Der Generator schreibt nur Generatorausgaben; Kalibrierung, Pilot und Teil B entstehen aus diesen Dateien in AP-11
 (auf Ebene Z aus den Stufe-1-Zusammenfassungen der Phase-0-Läufe). Ein nicht leeres `eingang/` wird zurückgewiesen.
+
+## 12 Prüfsätze und ihre Kennwerte-Dateien
+
+Die drei Prüfsätze (`tests/fixtures/ap13_pruefsatz.json`, `ap13_ablauf_pruefsatz.json`,
+`ap13_ablauf_pruefsatz_ablauf4.json`; `harness.pruefsatz`, `harness.ablauf_pruefsatz`) halten exakte Inhalte und
+Prüfsummen fest. Die Prüfsummen über berechnete Felder (`zusammenfassungen`, `p0_messung`, `daten`) gelten nur für
+die Umgebung ihrer Erzeugung (Rechenkern SkylakeX von OpenBLAS, zlib 1.3). Seit dem 14.11.2026 steht neben jedem
+Prüfsatz eine Datei `<Name>_kennwerte.json` (Schema `pcmms.pruefsatz`):
+
+| Feld | Inhalt |
+|---|---|
+| `version`, `toleranz` | `kennwerte-1`; rtol und atol des Vergleichs |
+| `pruefsatz` | Dateiname und SHA-256 der Prüfsatz-Datei, zu der die Kennwerte gehören |
+| `pruefsummen_bitgleich` | ob die Rechnung, aus der die Kennwerte stammen, die Prüfsummen des Prüfsatzes bitgleich wiedergab |
+| `umgebung` | Versionen, zlib und, mit `threadpoolctl`, Rechenkern und Thread-Zahl bei der Erzeugung |
+| `kennwerte` | je Prüfkampagne die Kennwerte der berechneten Felder (Abschnitt 5), beim Software-Prüfsatz dazu die Prüfsumme des Skeletts der P0-Messung |
+
+`pruefen()` vergleicht exakte Teile exakt und die berechneten Felder über diese Kennwerte; das Ergebnis nennt
+getrennt, ob die Prüfsummen der berechneten Felder bitgleich wiederkehren (`bitgleich`). Die Prüfsatz-Dateien selbst
+sind unverändert. Neue Kennwerte zu einem vorhandenen Prüfsatz schreibt
+`python3 code/pcmms_auswertung harness pruefsatz --kennwerte <Pfad>` (ebenso `ablauf-pruefsatz`), aber nur, wenn die
+Rechnung den Prüfsatz bitgleich wiedergibt.

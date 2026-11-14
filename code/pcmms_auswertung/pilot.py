@@ -41,22 +41,30 @@ nicht mehr über eine Prüfsumme ihrer Datenfelder (phase0_sha256), sondern übe
 Generatornachweis für Läufe ohne Rohdatei. Der Nachweis selbst steht bei jedem Satz als phase0_herkunft. Er enthält
 keine berechneten Werte und hängt deshalb weder an der Kompressionsbibliothek noch am Rechenkern. Unter den
 historischen Profilen bleibt phase0_sha256 (daten_sha256) unverändert.
+
+Werte (ab pilot-0.6, nur Regelstand 2026-11; Entscheidung E-4 vom 12.11.2026): Neben dem Herkunftsnachweis trägt
+jeder Satz die Kennwerte der Datenfelder seiner Phase-0-Läufe (phase0_kennwerte, kennwerte.py: je Feld Summen,
+gewichtete Summen und Extremwerte, exakte Felder als Prüfsumme). Sie stehen neben der Bindung, nicht in ihr: Die
+Bindung bleibt exakt, die Werte vergleicht Teil B mit Toleranz (teil_b.pruefe_pilot_werte). Damit fällt auf, wenn die
+übergebenen Läufe zwar dieselbe Herkunft, aber andere Werte haben als die, mit denen das Pilotskript gerechnet hat.
 """
 import math
 
 import numpy as np
 from scipy import stats
 
-from . import formate, gueltigkeit, herkunft, konventionen as kv, laufgroessen, regeln, zufall
+from . import formate, gueltigkeit, herkunft, kennwerte, konventionen as kv, laufgroessen, regeln, zufall
 from . import zusammenfassung as zf
 
-VERSION = 'pilot-0.5'                   # 0.2: Begründung der Suche nach dem tatsächlichen Abbruchgrund; 0.3: Satz mit
+VERSION = 'pilot-0.6'                   # 0.2: Begründung der Suche nach dem tatsächlichen Abbruchgrund; 0.3: Satz mit
                                         # Bindung (k, N_z, Daten, Seed), Satz der Suche beim festgelegten Paar;
                                         # 0.4: Laufgrößen im Satz (nur Regelstand 2026-11); 0.5: Bindung über den
-                                        # Herkunftsnachweis der Phase-0-Läufe (nur Regelstand 2026-11)
+                                        # Herkunftsnachweis der Phase-0-Läufe (nur Regelstand 2026-11); 0.6: Kennwerte
+                                        # der Phase-0-Datenfelder im Satz (Ergebnisprüfung, nur Regelstand 2026-11)
 VERSION_HISTORISCH = 'pilot-0.3'        # unter den historischen Profilen unveränderte Ausgabe
 FELD_HERKUNFT = 'phase0_herkunft_sha256'    # Bindung ab pilot-0.5: Prüfsumme des Herkunftsnachweises
 FELD_DATEN_HISTORISCH = 'phase0_sha256'     # Bindung bis pilot-0.4 und unter den historischen Profilen (daten_sha256)
+FELD_KENNWERTE = 'phase0_kennwerte'         # ab pilot-0.6 je Satz, neben der Bindung: Kennwerte der Datenfelder
 
 
 def version(profil):
@@ -263,6 +271,13 @@ def daten_sha256(tab):
                                     daten=formate.sha256_bytes(formate.npz_bytes(zf.pflichtfelder(t.daten)))))
 
 
+def phase0_kennwerte(tab):
+    """Kennwerte der Datenfelder der übergebenen Läufe (kennwerte.py) in kanonischer Ordnung (aufsteigende Position,
+    wie im Herkunftsnachweis): Grundlage der Ergebnisprüfung zwischen Pilotausgabe und Teil B. Die Zeilenreihenfolge
+    der Tabelle hat keinen Einfluss."""
+    return dict(version=kennwerte.VERSION, felder=kennwerte.felder(tab.sortiert().daten))
+
+
 def _schwellen0(tab, kal, profil, f_soll):
     """Phase-0-Schwellen, die nicht von k abhängen: σ_tol aus allen Pilotläufen, F_LO aus den Referenzläufen, Δδⱼ."""
     art = tab.spalte('laufart', object)
@@ -321,6 +336,7 @@ def _satz(tab, sw0, k, profil, seed, n_sim, f_soll, quelle):
         s['laufgroessen'] = laufgroessen.schaetzen(tab, gp, k)
     if nw is not None:
         s['phase0_herkunft'] = nw
+        s[FELD_KENNWERTE] = phase0_kennwerte(tab)                       # ab pilot-0.6: Werte neben der Herkunft
     return s, pr
 
 
@@ -338,7 +354,7 @@ def satz_oberste_ebene(pe):
     s = {x: pe.get(x) for x in SATZ_FELDER if x != 'streuungen'}
     s['streuungen'] = pe.get('streuungen_volles_fenster')
     s['bindung'] = pe.get('bindung')
-    for x in ('laufgroessen', 'phase0_herkunft'):
+    for x in ('laufgroessen', 'phase0_herkunft', FELD_KENNWERTE):
         if x in pe:
             s[x] = pe[x]
     return s
@@ -354,6 +370,13 @@ def herkunft_belege(pe):
         if h:
             out.append((name, h, s.get('phase0_herkunft')))
     return out
+
+
+def werte_beleg(pe, name):
+    """Kennwerte der Phase-0-Datenfelder des Satzes name ('oberste Ebene' oder 'Suche') einer Pilotausgabe ab
+    pilot-0.6; None bei Fassungen ohne Kennwerte."""
+    s = pe if name == 'oberste Ebene' else (pe.get('suche') or {}).get('satz') or {}
+    return s.get(FELD_KENNWERTE)
 
 
 def einordnen(pe):
@@ -411,7 +434,7 @@ def pilot_auswerten(tab, kal, profil, f_soll, zeit=None, seed=0, planung=None, t
     s, _ = _satz(tab, sw0, k_val, profil, seed, n_sim, f_soll, 'vorläufig: k = max(min(k_b, K), 3) vor der Suche')
     for x in SATZ_FELDER:
         out['streuungen_volles_fenster' if x == 'streuungen' else x] = s[x]
-    for x in ('laufgroessen', 'phase0_herkunft'):
+    for x in ('laufgroessen', 'phase0_herkunft', FELD_KENNWERTE):
         if x in s:
             out[x] = s[x]
     out['k_pilotgroessen'] = k_val

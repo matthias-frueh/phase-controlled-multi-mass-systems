@@ -1186,7 +1186,13 @@ def test_ablauf_pruefsatz_nachrechenbar():
     from pcmms_auswertung.harness import ablauf_pruefsatz
     pfad = os.path.join(os.path.dirname(__file__), 'fixtures', 'ap13_ablauf_pruefsatz')
     r = ablauf_pruefsatz.pruefen(pfad)
-    assert r['gleich'], r['abweichungen']
+    assert r['gleich'], (r['abweichungen'], r['werte'])
+    # Datenfelder über Kennwerte mit Toleranz (ap13_ablauf_pruefsatz_kennwerte.json); die Prüfsumme „daten“ ist an
+    # Rechenkern und zlib gebunden und wird nur mit PCMMS_BITGLEICH=1 verlangt (Rechenkern SkylakeX, zlib 1.3)
+    assert all(x.endswith(': Prüfsumme daten') for x in r['pruefsummen_abweichend'])
+    assert r['bitgleich'] == (not r['pruefsummen_abweichend']) and r['werte']['auslastung'] <= 1.0
+    if os.environ.get('PCMMS_BITGLEICH') == '1':
+        assert r['bitgleich'], r['pruefsummen_abweichend']
     assert r['inhalt']['N01-A4/L1/13/aus']['laufzahl']['zusaetzlich'] == 0
     assert r['inhalt']['S02-kontrolllauf/L1/7/zustand']['halt'] == 'S2'
 

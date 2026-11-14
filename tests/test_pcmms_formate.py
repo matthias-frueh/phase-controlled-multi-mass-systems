@@ -11,6 +11,7 @@ from scipy import stats
 from pcmms_auswertung import beispiel, formate, konventionen as kv, regeln, zusammenfassung as zf
 
 FIXTURE = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'fixtures', 'ap1x_beispiel')
+BITGLEICH = os.environ.get('PCMMS_BITGLEICH') == '1'    # zusätzlich die an das zlib gebundenen Bytes der NPZ-Dateien
 
 
 # ── Pflichtmetadaten ─────────────────────────────────────────────────────────────────────────────────
@@ -256,8 +257,21 @@ def _ohne_codeversion(o):
     return o
 
 
+def _ohne_npz_summen(o):
+    """Ohne die Prüfsummen der komprimierten NPZ-Dateien (kopf.daten.sha256, sha256_daten im Manifest)."""
+    if isinstance(o, dict):
+        return {k: _ohne_npz_summen(v) for k, v in o.items()
+                if k != 'sha256_daten' and not (k == 'sha256' and 'datei' in o and 'felder' in o)}
+    if isinstance(o, list):
+        return [_ohne_npz_summen(v) for v in o]
+    return o
+
+
 def test_beispiel_reproduzierbar_und_gleich_fixture(tmp_path):
-    """Der eingecheckte Beispieldatensatz entsteht bitgleich neu (NPZ) bzw. inhaltsgleich (JSON ohne Codestand)."""
+    """Der eingecheckte Beispieldatensatz entsteht inhaltsgleich neu: die Felder der NPZ-Dateien Wert für Wert, JSON
+    ohne Codestand und ohne die Prüfsummen der NPZ-Dateien. Diese Prüfsummen und die Bytes der NPZ-Dateien hängen am
+    zlib des Systems (Kompression); mit PCMMS_BITGLEICH=1 wird zusätzlich verlangt, dass auch sie gleich sind (zlib 1.3
+    wie bei der Erzeugung des Datensatzes)."""
     beispiel.erzeugen(str(tmp_path))
     n = 0
     for wurzel, _, dateien in os.walk(FIXTURE):
@@ -270,9 +284,18 @@ def test_beispiel_reproduzierbar_und_gleich_fixture(tmp_path):
                 if d == 'manifest.json':                    # Kopf-SHA-256 hängt am Codestand im Kopf der Rohdatei
                     for z in ja['inhalt']['laeufe'] + jb['inhalt']['laeufe']:
                         z.pop('sha256_kopf')
-                assert _ohne_codeversion(ja) == _ohne_codeversion(jb), d
+                ja, jb = _ohne_codeversion(ja), _ohne_codeversion(jb)
+                assert _ohne_npz_summen(ja) == _ohne_npz_summen(jb), d
+                if BITGLEICH:
+                    assert ja == jb, d
             elif d.endswith('.npz'):
-                assert open(a, 'rb').read() == open(b, 'rb').read(), d
+                with np.load(a) as za, np.load(b) as zb:
+                    assert sorted(za.files) == sorted(zb.files), d
+                    for name in za.files:
+                        assert za[name].dtype == zb[name].dtype and za[name].shape == zb[name].shape, (d, name)
+                        assert np.array_equal(za[name], zb[name], equal_nan=za[name].dtype.kind in 'fc'), (d, name)
+                if BITGLEICH:
+                    assert open(a, 'rb').read() == open(b, 'rb').read(), d
             n += 1
     assert n == 12
     k, zeilen, _ = __import__('pcmms_auswertung.rohdaten', fromlist=['x']).lies_manifest(

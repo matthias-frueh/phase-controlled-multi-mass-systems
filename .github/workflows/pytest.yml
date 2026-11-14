@@ -7,21 +7,19 @@
 # Der Lauf ändert keine Dateien und führt keinen Merge aus. Eine Merge-Sperre ist damit nicht eingerichtet.
 #
 # Umgebung: Die Abhängigkeiten stehen in code/requirements.txt ohne Versionsangabe; welche Versionen der Lauf
-# installiert, legt .github/constraints-ci.txt fest. Das Betriebssystem ist auf Ubuntu 24.04 festgelegt, weil
-# Tests SHA-256-Prüfsummen über komprimierte NPZ-Bytes vergleichen und das Ergebnis der Kompression vom zlib
-# des Systems abhängt (zlib 1.3 gegen zlib-ng). Was im einzelnen Lauf galt, hält der Schritt „Umgebung
+# installiert, legt .github/constraints-ci.txt fest. Das Betriebssystem ist auf Ubuntu 24.04 festgelegt, damit
+# der Lauf in einer benannten Umgebung rechnet. Was im einzelnen Lauf galt, hält der Schritt „Umgebung
 # protokollieren“ fest.
 #
-# Übergangslösung vom 12.11.2026, bis die Prüfsummen und Vergleiche vor AP-14 überarbeitet sind: GitHub teilt
-# Runner mit verschiedenen Prozessoren zu, und OpenBLAS wählt seinen Rechenkern nach dem Prozessor. Die
-# Ergebnisse unterscheiden sich dann im Rundungsrauschen (in den geprüften Laufzusammenfassungen bis
-# 1,6·10⁻¹³ relativ). Damit jeder Lauf gleich rechnet, sind der Rechenkern (HASWELL) und die Zahl der
-# BLAS-Threads (1) festgelegt; mit dem Kern HASWELL und vier Threads schlägt
-# test_kampagnen_unabhaengig_von_der_prozesszahl fehl, mit einem Thread besteht er. Drei Tests vergleichen mit
-# hinterlegten Prüfsummen, die zum Rechenkern SkylakeX gehören (Prozessoren mit AVX-512). Sie sind im Lauf
-# abgewählt und werden im Protokoll genannt; die Liste steht im Schritt „Testsuite ausführen“. Auf einem
-# Rechner mit dem Kern SkylakeX und zlib 1.3 bestehen sie. Ein vierter Test (test_cli_text_und_vorrang) war bis
-# zum 12.11.2026 abgewählt; seit der Vergleich in code/auslegung.py eine Toleranz hat, läuft er wieder mit.
+# Rechenkern und Thread-Zahl sind seit dem 14.11.2026 nicht mehr festgelegt, und kein Test ist abgewählt. GitHub
+# teilt Runner mit verschiedenen Prozessoren zu; OpenBLAS und NumPy wählen ihre Rechenwege nach dem Prozessor,
+# und die Ergebnisse unterscheiden sich dann im Rundungsrauschen. Die Tests vergleichen deshalb exakte Inhalte
+# (Köpfe, Entscheidungen, Seeds, Zählgrößen) exakt und berechnete Zahlenfelder mit Toleranz
+# (code/pcmms_auswertung/kennwerte.py; Untersuchung in docs/kennwerte_untersuchung_2026-11-13/). Die
+# Übergangslösung vom 12.11.2026 (Rechenkern HASWELL, ein BLAS-Thread, drei abgewählte Tests) ist damit
+# aufgehoben. Die hinterlegten Prüfsummen berechneter Felder gelten nur für die Umgebung ihrer Erzeugung
+# (Rechenkern SkylakeX, zlib 1.3); dass sie dort bitgleich wiederkehren, prüfen die Tests nur auf Verlangen
+# (PCMMS_BITGLEICH=1), nicht in diesem Lauf.
 
 name: Tests
 
@@ -38,9 +36,6 @@ jobs:
     name: pytest
     runs-on: ubuntu-24.04
     timeout-minutes: 30
-    env:
-      OPENBLAS_CORETYPE: HASWELL
-      OPENBLAS_NUM_THREADS: "1"
 
     steps:
       - name: Repository auschecken
@@ -58,7 +53,7 @@ jobs:
         run: |
           echo "Prozessor: $(grep -m1 'model name' /proc/cpuinfo | cut -d: -f2- | sed 's/^ *//') ($(nproc) Kerne)"
           if grep -qw avx512f /proc/cpuinfo; then echo "AVX-512: ja"; else echo "AVX-512: nein"; fi
-          echo "Festgelegt: OPENBLAS_CORETYPE=$OPENBLAS_CORETYPE, OPENBLAS_NUM_THREADS=$OPENBLAS_NUM_THREADS"
+          echo "Festgelegt: nichts (OPENBLAS_CORETYPE='${OPENBLAS_CORETYPE:-}', OPENBLAS_NUM_THREADS='${OPENBLAS_NUM_THREADS:-}')"
           python3 --version
           python3 -c "import zlib; print('zlib', zlib.ZLIB_RUNTIME_VERSION)"
           python3 -m pip list
@@ -73,17 +68,4 @@ jobs:
           PY
 
       - name: Testsuite ausführen
-        run: |
-          # An den Rechenkern SkylakeX gebunden (hinterlegte Prüfsummen); abgewählt, solange der Lauf mit dem
-          # Kern HASWELL rechnet.
-          ABGEWAEHLT=(
-            "tests/test_ablauf4.py::test_ablauf_pruefsatz_ablauf4_nachrechenbar"
-            "tests/test_ap13_ablauf.py::test_ablauf_pruefsatz_nachrechenbar"
-            "tests/test_ap13_harness.py::test_pruefsatz_unveraendert"
-          )
-          auswahl=()
-          for t in "${ABGEWAEHLT[@]}"; do
-            echo "::notice title=Test abgewählt::$t (an den Rechenkern SkylakeX gebunden)"
-            auswahl+=(--deselect "$t")
-          done
-          python3 -m pytest tests -q "${auswahl[@]}"
+        run: python3 -m pytest tests -q
