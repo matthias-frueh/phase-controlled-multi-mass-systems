@@ -47,6 +47,7 @@ N_MISCHUNG = 32                      # Ziehungen der Laufgrößen (τ, A), antit
 N_FUENFTEL = 12                      # Ziehungen der Fünftelmittel e, antithetisch verdoppelt
 SEED_ZIEHUNGEN = 20261020
 FAKTOR = 3.0
+VERDOPPLUNGEN = 60                   # der oberen Suchgrenze von k(n) höchstens; danach Abbruch mit Meldung
 
 
 def alpha(faktor=FAKTOR):
@@ -208,10 +209,29 @@ def d_schwelle(D_piloten, faktor=FAKTOR):
 
 
 # ── Lⱼ: von n abhängige Schwelle, Pooling-Vergleich ───────────────────────────────────────────────────────
+def _suchintervall(f, unten, oben, was, verdopplungen=VERDOPPLUNGEN):
+    """Suchintervall für die Nullstelle einer fallenden Funktion f mit f(unten) > 0: (unten, oben), wenn f(oben) ≤ 0
+    ist; sonst wird die obere Grenze verdoppelt, bis f dort nicht mehr positiv ist, und die untere rückt auf die
+    letzte Grenze mit f > 0 nach. Bleibt f auch nach `verdopplungen` Verdopplungen positiv: ValueError."""
+    for _ in range(verdopplungen + 1):
+        if f(oben) <= 0:
+            return unten, oben
+        unten, oben = oben, 2 * oben
+    raise ValueError(f'{was}: kein Vorzeichenwechsel bis {unten:g}')
+
+
 @lru_cache(maxsize=64)
 def faktor_n(n, faktor=FAKTOR, n_mc=40_000, seed=SEED_ZIEHUNGEN):
     """k(n): E_σ̂[2·Φ̄(k·σ̂/σ)] = 2·Φ̄(faktor) für σ̂ = 1,4826·MAD aus n Normalwerten (unabhängig vom geprüften
-    Lauf; feste Ziehungen, deterministisch). Für n → ∞ geht k(n) gegen faktor."""
+    Lauf; feste Ziehungen, deterministisch). Für n → ∞ geht k(n) gegen faktor.
+
+    Nullstellensuche: zuerst in [faktor, 4·faktor]; liegt die Lösung darüber, wird die obere Grenze verdoppelt
+    (_suchintervall; Korrektur vom 14.11.2026, davor brach die Suche in diesem Fall ab). Mit den festen Ziehungen
+    und faktor = 3 liegt die Lösung ab n = 6 im ersten Intervall (k(6) ≈ 11,68, k(7) ≈ 11,23); dort rechnet die
+    Suche mit demselben Intervall wie vor der Korrektur, die Werte sind bitgleich. Für n = 3, 4, 5 liegt die Lösung
+    darüber (k ≈ 324,75; 26,45; 23,72): σ̂ aus so wenigen Läufen ist sehr unsicher, die Schwelle liegt dann weit über
+    3σ und spricht nur noch auf sehr große Abweichungen an. Die untere Grenze bleibt faktor: σ̂ unterschätzt σ im
+    Mittel und Φ̄ ist auf (0, ∞) konvex, die Rate bei k = faktor liegt also über dem Ziel."""
     n = int(n)
     if n < 3:
         raise ValueError('faktor_n: n ≥ 3')
@@ -219,7 +239,8 @@ def faktor_n(n, faktor=FAKTOR, n_mc=40_000, seed=SEED_ZIEHUNGEN):
     s = 1.4826 * np.median(np.abs(x - np.median(x, 1, keepdims=True)), 1)
     a = alpha(faktor)
     f = lambda k: float(np.mean(special.erfc(k * s / np.sqrt(2)))) - a                   # noqa: E731
-    return float(optimize.brentq(f, faktor, 4 * faktor, xtol=1e-10))
+    unten, oben = _suchintervall(f, faktor, 4 * faktor, f'faktor_n (n = {n})')
+    return float(optimize.brentq(f, unten, oben, xtol=1e-10))
 
 
 @lru_cache(maxsize=64)
