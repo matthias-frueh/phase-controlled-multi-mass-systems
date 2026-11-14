@@ -10,6 +10,11 @@ Stand: 12. November 2026 · Fassung 1 (entschieden und umgesetzt) · Entwurf 1 v
 nennt, wo die Umsetzung vom Entwurf abweicht. Alles im Repository ist Simulation oder Analytik; Messdaten existieren
 nicht.
 
+**Nachtrag vom 14.11.2026 (PR C).** Der Wertevergleich mit Toleranz (E-4) ist umgesetzt: `pilot-0.6`, `teil_b-0.6`,
+Modul [`kennwerte.py`](../code/pcmms_auswertung/kennwerte.py). Abschnitt 11 nennt, was aus den offenen Punkten
+(Abschnitte 4, 6 und 10) geworden ist, und berichtigt eine Angabe in Abschnitt 3.7. Die Abschnitte 1 bis 10 stehen
+sonst wie am 12.11.2026.
+
 ---
 
 ## 1 Anlass
@@ -178,6 +183,11 @@ BLAS-Thread). „Datenfelder“ ist die bisherige Prüfsumme `pilot.daten_sha256
 - Eine vierte Kampagne (N01-V1G0, Seed 7, Plan mit zwei Blöcken wie in `tests/test_herkunft.py`, 162
   Phase-0-Läufe) ist unter sechs Kernen gerechnet: SkylakeX, HASWELL, ZEN, SANDYBRIDGE, NEHALEM, PRESCOTT. Der
   Nachweis ist sechsmal gleich (`d86333f3ed60`); die Prüfsumme der Datenfelder nimmt vier verschiedene Werte an.
+  *Berichtigung vom 14.11.2026:* Gerechnet wurde mit sechs Vorgaben für `OPENBLAS_CORETYPE`, wirksam waren fünf
+  Rechenkerne. In den OpenBLAS-Fassungen von NumPy 2.5.4 und SciPy 1.18.1 führt die Vorgabe ZEN zum Kern Haswell
+  und die Vorgabe PRESCOTT zum Kern Katmai (ausgelesen mit `threadpoolctl`). Die vier Werte der Prüfsumme gehören
+  zu SkylakeX, Haswell (HASWELL und ZEN), Sandybridge und Nehalem (gleich) und Katmai (PRESCOTT). Am Ergebnis
+  ändert das nichts.
 - Die Modellprüfsumme ist für alle 36 Szenarien des Katalogs (Stufe L1, Plan des Prüfsatzes) unter SkylakeX und
   HASWELL gleich, auch für die sieben Szenarien mit Stärkesuche und den Hertz-Fall.
 
@@ -306,7 +316,54 @@ Zwei Absicherungen aus der Entscheidung:
 - konstruiertes Gleichstandsbeispiel für `code/auslegung.py`;
 - danach: Festlegung von Rechenkern und Thread-Zahl in der CI aufheben.
 
+## 11 Nachtrag vom 14.11.2026: Umsetzung von PR C
+
+Grundlage ist die [Untersuchung der Kennwerte](kennwerte_untersuchung_2026-11-13/bericht.md) mit Messreihe über zehn
+Rechenumgebungen und Abdeckungsprüfung. Präregistrierung, Regelprofile, Entscheidungsregeln, Schwellen, Modelle und
+die Prüfsatz-Dateien sind unverändert.
+
+**Zu Abschnitt 4 (Grenzen).**
+
+- *Werte.* Die Lücke ist geschlossen: Die Pilotausgabe führt je Satz die Kennwerte der Phase-0-Datenfelder
+  (`phase0_kennwerte`, neben der Bindung), Teil B vergleicht sie mit denen der übergebenen Läufe
+  (`teil_b.pruefe_pilot_werte`) und bricht bei einer Abweichung außerhalb der Toleranz ab. Die Bindung über den
+  Nachweis bleibt exakt; die Kennwerte gehen nicht in sie ein (Präzisierung zu E-4). Der Test
+  `test_grenze_der_nachweis_belegt_die_herkunft_nicht_die_werte` ist durch die Tests W1 bis W6 in
+  `tests/test_herkunft.py` ersetzt. Verbleibende Grenze: Die Änderung eines einzelnen Eintrags erkennen die
+  Kennwerte erst oberhalb von n·τ (Bericht, Abschnitt 5).
+- *Rundungsrauschen.* Die Angabe „bis 1,6·10⁻¹³ relativ“ nannte keinen Bezug. Die Messreihe ergibt je Eintrag
+  höchstens 6,5·10⁻¹⁴ des größten Betrags seines Feldes; bezogen auf den Eintrag selbst reicht die Abweichung bis
+  100 % (Einträge nahe null).
+- *Strukturgenerator.* Gemessen: Die Modellprüfsumme hängt am Rechenkern, über die Prüfsumme der Strukturfelder und
+  über die geschätzten Rauschparameter. Innerhalb eines Rechenlaufs ist sie stabil, auch über die Prozessgrenze zu
+  den Arbeitsprozessen. Für die Planungssimulation reicht das; eine auf einem anderen Rechner neu erzeugte Tabelle
+  weist Teil B zurück (Bericht, Abschnitt 7; Test in `tests/test_d_planung_phase0.py`).
+
+**Zu Abschnitt 6 (weitere Prüfsummen über berechnete Felder).**
+
+| Stelle | Ergebnis |
+|---|---|
+| `harness/pruefsatz.py` und `harness/ablauf_pruefsatz.py` (`hash_felder`) | Vergleich umgestellt: exakte Teile exakt, berechnete Felder über Kennwerte mit Toleranz. Bezugswerte in `tests/fixtures/*_kennwerte.json`, erzeugt in einer Rechnung, die die hinterlegten Prüfsummen bitgleich wiedergab. Die Prüfsummen bleiben in den Prüfsatz-Dateien und werden mit `PCMMS_BITGLEICH=1` weiter verlangt. |
+| `harness/phase0_rechnungen.py` (`r2d_bekannt_gleich`) | Unverändert. Verglichen werden zwei Rechnungen im selben Prozess; der Vergleich hängt nicht an der Umgebung. |
+| `auswertung.py` (`zusammenfassungen_sha256` in der Herkunft eines Ergebnisses) | Unverändert. Die Prüfsumme benennt die ausgewerteten Daten im Speicher und dient keiner Prüfung; sie hängt an zlib und Rechenkern. Ob Ergebnisse Kennwerte ihrer Eingangsdaten führen sollen, ist offen (Sache des Autors, mit AP-14). |
+| `generator/phase0_modell.py` (`daten_sha256` in der Herkunft der Struktur) | Unverändert; siehe oben zum Strukturgenerator. |
+
+**Zu Abschnitt 10.**
+
+- Abgleich der Werte mit Toleranz: umgesetzt mit Kennwerten je Feld. Volle Bezugsfelder wären 66 MB groß
+  (komprimiert) und sind nicht hinterlegt.
+- Unabhängigkeit von der Thread-Zahl: Abnahmekriterium festgelegt und geprüft (exakte Inhalte gleich, Zahlenfelder
+  innerhalb der Toleranz; Kopf von `harness/kampagnen.py`). Die Rechnung ist unverändert; bitgleich zwischen den
+  Prozesszahlen ist sie nur bei gleicher Thread-Zahl.
+- Gleichstandsbeispiel für `code/auslegung.py`: zwei Tests in `tests/test_auslegung.py`.
+- CI: Rechenkern und Thread-Zahl sind nicht mehr festgelegt, kein Test ist abgewählt.
+
+**Weiter offen (Sache des Autors):** feinere Kennwerte für die großen Felder, engere Toleranz, Toleranz für den
+Vergleich von Ergebnissen zwischen Rechnern, Begrenzung des eigenen Prozesses auf einen BLAS-Thread (Bericht,
+Abschnitt 9).
+
 ---
 
 *Vermerk:* Erstellt am 12.11.2026, Chat-Sitzung (Claude), nach Auftrag und Entscheidung des Autors. Die Zahlen in
-Abschnitt 3.7 sind mit dem Stand von Pull Request #40 gerechnet. Lizenz: CC BY 4.0 wie `docs/`.
+Abschnitt 3.7 sind mit dem Stand von Pull Request #40 gerechnet. Nachtrag (Statusabsatz, Berichtigung in 3.7,
+Abschnitt 11) am 14.11.2026 in derselben Weise. Lizenz: CC BY 4.0 wie `docs/`.

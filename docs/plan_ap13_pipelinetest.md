@@ -281,6 +281,13 @@ Generatornachweis. Beschreibung in den [Schnittstellen](ap11_ap12_ap13_schnittst
 Entscheidung in der [Notiz vom 12.11.2026](entscheidungsnotiz_herkunft_phase0_2026-11-12.md). Der Plan ist im
 Übrigen unverändert.
 
+**Nachtrag vom 14.11.2026 (Umsetzung, PR C).** Neben der Herkunft prüft Teil B seit `pilot-0.6` und `teil_b-0.6`
+die Werte der Phase-0-Läufe über Kennwerte der Datenfelder mit Toleranz. Die Prüfsätze dieses Pipelinetests
+vergleichen berechnete Felder ebenfalls über Kennwerte statt über Prüfsummen, die an Rechenkern und zlib hängen.
+Beschreibung in den [Schnittstellen](ap11_ap12_ap13_schnittstellen.md), Abschnitte 5 und 12; Messreihe und
+Abdeckung in der [Untersuchung vom 13.11.2026](kennwerte_untersuchung_2026-11-13/bericht.md). Der Plan ist im
+Übrigen unverändert.
+
 **c) Funktionsaufrufe (Spezifikation, kein Repo-Code).**
 
 ```python

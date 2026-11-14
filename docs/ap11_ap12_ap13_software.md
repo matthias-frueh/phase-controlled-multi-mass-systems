@@ -2,7 +2,8 @@
 
 Stand 16.10.2026, mit den Korrekturen A–E vom selben Tag (Abschnitt 1a), der k-Konsistenz mit dem Ablauf der Phase 1
 vom 17.10.2026 (Abschnitt 1b), den Korrekturen vom 18.10.2026 (Abschnitt 1c), dem Regelstand 2026-11 vom 20.10.2026
-(Abschnitt 1d) und der Bindung über die Herkunft vom 12.11.2026 (Abschnitt 1e) · Basis `a1c9953` (`main` nach PR #19) · Paket [`code/pcmms_auswertung/`](../code/pcmms_auswertung/)
+(Abschnitt 1d), der Bindung über die Herkunft vom 12.11.2026 (Abschnitt 1e) und dem Wertevergleich mit Toleranz vom
+14.11.2026 (Abschnitt 1f) · Basis `a1c9953` (`main` nach PR #19) · Paket [`code/pcmms_auswertung/`](../code/pcmms_auswertung/)
 (Code MIT, dieses Dokument CC BY 4.0) · Umgebung der Prüfläufe: Python 3.13.16, NumPy 2.5.3, SciPy 1.18.1, 4 Kerne.
 *Nur Software und Simulation.* Es gibt keine Messdaten, keine Hardwarewahl, keine Festlegung offener Regeln und kein
 ausgefülltes Teil B; synthetische Kennungen beginnen mit `SYNTH-` und behaupten keine Registrierung. Die
@@ -348,6 +349,7 @@ kleinen Proben sind danach neu gerechnet.
   Prüfsummen von Kalibrierung und Pilotausgabe aus. Die Vergleiche mit `main` laufen mit Toleranz. Die Prüfsätze
   runden auf 12 Stellen und haben in der Endabnahme bestanden. Sie vergleichen gespeicherte Prüfsummen und können in
   einer anderen Rechenumgebung an den letzten Bits scheitern; ein Prüfsatzvergleich mit Toleranz ist nicht umgesetzt.
+  *Nachtrag vom 14.11.2026:* umgesetzt, siehe Abschnitt 1f.
 - Werkzeug-8-Werte, Prüfstandsraten, K12 und E3-Zähler früherer Stände sind auf den Regelstand 2026-11 nicht
   übertragbar.
 - Die Stärken der benannten Sensitivitäten und die Regularisierung des Strukturmodells sind technische Regeln mit
@@ -392,12 +394,88 @@ maßgeblich.
 - **Grenzen.**
   - Der Nachweis belegt Herkunft und Rechenvorschrift, nicht die Werte. Geänderte Datenfelder bei unverändertem
     Nachweis erkennt die Bindung nicht. Der Wertevergleich mit Toleranz steht aus (nächster Schritt, „PR C“).
+    *Nachtrag vom 14.11.2026:* umgesetzt, siehe Abschnitt 1f.
   - Bei Ebene Z gilt der Nachweis für die gespeicherten Dateien und das Kalibrierobjekt von Stufe 1. Eine neu
     gerechnete Kalibrierung kann sich in den letzten Bits unterscheiden (Abschnitt 1d) und ergibt dann eine andere
     Prüfsumme.
   - Die drei Prüfsatz-Tests bleiben in der CI abgewählt, Rechenkern und Thread-Zahl bleiben dort festgelegt
     (Übergangslösung aus PR #38), bis der Wertevergleich mit Toleranz umgesetzt ist. Bis dahin wird kein
-    Referenzstand eingefroren.
+    Referenzstand eingefroren. *Nachtrag vom 14.11.2026:* aufgehoben, siehe Abschnitt 1f.
+- **Berichtigung vom 14.11.2026 zu „Gemessen“.** „Unter sechs Kernen“ heißt: mit sechs Vorgaben für
+  `OPENBLAS_CORETYPE`; wirksam waren fünf Rechenkerne, weil die Vorgabe ZEN zum Kern Haswell und die Vorgabe
+  PRESCOTT zum Kern Katmai führt (Notiz, Abschnitt 3.7).
+
+## 1f Wertevergleich mit Toleranz vom 14.11.2026 (PR C)
+
+Auftrag des Autors vom 13.11.2026 nach Entscheidung E-4 der
+[Notiz vom 12.11.2026](entscheidungsnotiz_herkunft_phase0_2026-11-12.md) (Nachtrag dort in Abschnitt 11).
+Grundlage ist die [Untersuchung der Kennwerte](kennwerte_untersuchung_2026-11-13/bericht.md) mit Messreihe über
+zehn Rechenumgebungen und Abdeckungsprüfung. Präregistrierung, Regelprofile, Entscheidungsregeln, Schwellen,
+Modelle, Daten und die Prüfsatz-Dateien sind unverändert.
+
+- **Anlass.**
+  - Seit PR #40 belegte die Bindung die Herkunft der Phase-0-Läufe, nicht ihre Werte.
+  - Drei Prüfsatz-Tests verglichen Prüfsummen über berechnete Felder. Sie gelten nur für den Rechenkern SkylakeX
+    von OpenBLAS und zlib 1.3 und waren in der CI abgewählt; die CI legte Rechenkern und Thread-Zahl fest (PR #38).
+  - `test_kampagnen_unabhaengig_von_der_prozesszahl` verglich Prüfsummen der Befunde und schlug mit dem Kern
+    Haswell und vier BLAS-Threads fehl.
+- **Jetzt.**
+  - Modul `kennwerte.py`: je Feld wenige Kennwerte (Summe, Quadratsumme, zwei stellengewichtete Summen, Minimum,
+    Maximum; exakte Felder als Prüfsumme), exakt gerundet gebildet, verglichen mit der Toleranz
+    τ = 10⁻¹⁰·M + 10⁻¹² je Eintrag (M größter Betrag des Feldes). Dazu der Vergleich zweier vollständiger Objekte
+    Eintrag für Eintrag mit derselben Toleranz.
+  - Phase 0 ↔ Teil B (`pilot-0.6`, `teil_b-0.6`, nur Regelstand 2026-11): Die Pilotausgabe führt je Satz die
+    Kennwerte der Phase-0-Datenfelder neben der Bindung. Teil B vergleicht sie mit denen der übergebenen Läufe und
+    bricht bei einer Abweichung außerhalb der Toleranz ab; die Meldung nennt Feld und Kennwert. Die Bindung über
+    den Herkunftsnachweis bleibt exakt.
+  - Prüfsätze: exakte Teile exakt, berechnete Felder über Kennwerte. Die Bezugswerte stehen in
+    `tests/fixtures/*_kennwerte.json`; jede Datei nennt die SHA-256-Prüfsumme der Prüfsatz-Datei, zu der sie
+    gehört. Sie stammen aus einer Rechnung, die die hinterlegten Prüfsummen bitgleich wiedergab.
+  - Beispieldatensatz: Der Test verlangt gleiche Feldwerte statt gleicher Bytes der komprimierten NPZ-Dateien
+    (die Bytes hängen am zlib).
+  - Kampagnen des Harness: Abnahmekriterium der Unabhängigkeit von Prozess- und Thread-Zahl (exakte Inhalte gleich,
+    Zahlenfelder innerhalb der Toleranz; Kopf von `harness/kampagnen.py`). Die Rechnung ist unverändert.
+  - `code/auslegung.py`: zwei konstruierte Gleichstandsbeispiele als Tests (Nachtrag zu PR #39); der Code ist
+    unverändert.
+  - CI: Rechenkern und Thread-Zahl sind nicht mehr festgelegt, kein Test ist abgewählt.
+- **Altbestand.** Unter den historischen Profilen rechnen und schreiben Pilotskript und Teil B wie bisher, ohne
+  Kennwerte. Eine Pilotausgabe ohne Kennwerte (`pilot-0.5`) wird unter `teil_b-0.6` zurückgewiesen. Die Prüfsummen
+  der berechneten Felder bleiben in den Prüfsatz-Dateien; mit `PCMMS_BITGLEICH=1` verlangen die Tests weiter, dass
+  sie bitgleich wiederkehren (nur mit dem Kern SkylakeX und zlib 1.3).
+- **Geprüft.** `tests/test_kennwerte.py` (26 Tests), in `tests/test_herkunft.py` die Tests W1 bis W6 statt des
+  Grenztests (jetzt 38 Tests), dazu Tests des Wertevergleichs der Prüfsätze, der Modellprüfsumme des
+  Strukturgenerators und des Gleichstands. Testsuite am 14.11.2026 ohne Abwahl (Python 3.13.18, NumPy 2.5.4,
+  SciPy 1.18.1), jeweils 624 bestanden, 8 übersprungen:
+
+  | Rechenkern | BLAS-Threads | NumPy mit AVX-512 | zlib | Besonderheit |
+  |---|---|---|---|---|
+  | Haswell | 1 | ja | 1.3 | Stand des Commits `40406ee` |
+  | SkylakeX | 1 | ja | 1.3 | mit `PCMMS_BITGLEICH=1`: auch die hinterlegten Prüfsummen kehren bitgleich wieder |
+  | Haswell | 2 (nicht festgelegt) | nein | 1.3 | nächste Nachstellung eines GitHub-Runners ohne AVX-512 |
+  | SkylakeX (nicht festgelegt) | 2 (nicht festgelegt) | ja | zlib-ng (1.3.1.zlib-ng) | nichts festgelegt |
+  | Sandybridge | 1 | ja | 1.3 | – |
+
+  Die Läufe der Zeilen 2 bis 5 rechneten auf dem Stand unmittelbar vor `40406ee`; danach sind nur Kommentare
+  geändert und in drei Tests eine Abstandsforderung (Auslastung unter 1 %) auf das Kriterium selbst (innerhalb der
+  Toleranz) zurückgenommen. Die langen Tests (`PCMMS_SLOW=1`, `-m slow`) mit dem Kern SkylakeX auf `40406ee`:
+  8 bestanden. Die Läufe auf GitHub stehen im Pull Request.
+- **Gemessen** (Bericht, Abschnitte 3 bis 7).
+  - Exakte Inhalte der Prüfsätze sind in allen zehn Umgebungen gleich. Berechnete Felder weichen je Eintrag um
+    höchstens 6,5·10⁻¹⁴·M ab; die Toleranz der Kennwerte ist zu höchstens 0,054 % ausgeschöpft.
+  - Mit dem Kern Haswell unterscheiden sich die Befunde zwischen einem und vier Threads um höchstens 9,8·10⁻¹⁵·M;
+    alle Entscheidungen sind gleich.
+  - Abdeckung: systematische Änderungen, Verschiebungen und fehlende Werte werden vollständig erkannt, vertauschte
+    oder ersetzte Läufe so gut wie bei einem Vergleich Eintrag für Eintrag.
+- **Grenzen.**
+  - Die Änderung eines einzelnen Eintrags erkennen die Kennwerte erst oberhalb von n·τ. In den vier großen
+    Harmonischen-Feldern (n bis 3,6·10⁵) wird eine relative Änderung eines Eintrags um 10⁻² nur in 345 von 800
+    Versuchen erkannt, in den kleineren Feldern in allen 2600. Die vollen Bezugsfelder wären 66 MB groß.
+  - Die Toleranz ist für Datenfelder gewählt. Befunde der Auswertung streuen zwischen Rechenkernen bis
+    1,5·10⁻¹⁰·M; ein Vergleich von Ergebnissen zwischen Rechnern braucht eine eigene Toleranz (offen, mit AP-14).
+  - Gemessen ist ein Rechner mit OpenBLAS auf x86-64 unter Linux. Andere Betriebssysteme, ARM-Prozessoren und
+    andere BLAS-Bibliotheken sind nicht geprüft.
+  - Die Modellprüfsumme des Strukturgenerators hängt am Rechenkern; sie gilt innerhalb eines Rechenlaufs.
+  - Bitgleich zwischen den Prozesszahlen sind die Kampagnen nur bei gleicher Zahl von BLAS-Threads.
 
 ## 1 Erreichter Umfang
 
