@@ -8,6 +8,17 @@ Stand: 28. September 2026, Nachträge 2., 4., 11., 16. und 22. Oktober 2026 sowi
 
 **Leseführung:** Wo man anfängt und was beim Lesen gilt, steht in [`LESEFUEHRUNG.md`](LESEFUEHRUNG.md).
 
+*Summary (EN):* Pre-experimental study in classical mechanics. A body at rest carries three internally
+oscillating masses with adjustable relative phases (φ₂, φ₃). The object of study is the waveform of the
+unilateral contact force — skewness, liftoff fraction, asymmetry ratio, minimum force — not its time
+average, which is fixed at M·g by the centre-of-mass theorem and serves as the null control. No claim of
+reactionless propulsion, gravity modification or mean-force shift is made; an earlier mean-shift result
+was identified as a contact-model artefact and retracted. All data here are simulation output. For the
+measurement campaign, the draft preregistration v2 makes F_min − ⟨N⟩ and the first three harmonics of the
+contact force primary, skewness secondary, the asymmetry ratio descriptive and the liftoff fraction exploratory.
+All documents are in German; the working paper v2.5 ([`docs/arbeitspapier/`](docs/arbeitspapier/)) contains an
+English abstract.
+
 ## Worum es geht
 
 Ein ruhender Körper steht auf einer Unterlage. In seinem Inneren bewegen sich drei Massen periodisch
@@ -17,6 +28,16 @@ in der Simulation gemessen an Schiefe γ₁, Liftoff-Anteil λ, Asymmetrieverhä
 A = (F_max − M·g)/(M·g − F_min) und Minimalkraft F_min. Für die Messkampagne sind nach dem
 [Entwurf der Präregistrierung v2](docs/praeregistrierung_v2_entwurf.md) F_min − ⟨N⟩ und die Harmonischen
 1–3 der Kontaktkraft N(t) primär, γ₁ sekundär, A beschreibend und λ explorativ.
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/figures/prinzipskizze_dark.png">
+  <img alt="Prinzipskizze: Körper mit drei Modulen auf einer Unterlage, einseitiger Feder-Dämpfer-Kontakt mit Kontaktkraft N(t) und Gewichtskraft M·g; daneben der Weg der drei Module über eine Periode, gleiches Profil, gegeneinander versetzt um 120° und 240°" src="docs/figures/prinzipskizze_light.png">
+</picture>
+
+*Prinzipskizze, kein Simulationsergebnis: Drei Module bewegen je eine Masse mit demselben Profil relativ zum
+Körper, versetzt um φ₂ und φ₃; ausgewertet wird die Kontaktkraft N(t) an der einseitigen Auflage. Das Schema
+links ist nicht maßstäblich. Rechts das Egg-Profil des Referenzsatzes am Beispiel (120°, 240°); die Parameter
+stehen unter [Simulationsstand](#simulationsstand).*
 
 Der Grundsatz des Projekts: **Primär ausgewertet werden nicht Absolutkräfte, sondern Abweichungen der
 Kontaktkraft gegen eine Referenz.** Die Referenz ist das Zeitmittel ⟨N⟩ = M·g, das aus dem Schwerpunktsatz
@@ -37,6 +58,15 @@ eines Kontaktmodells mit vorgeschriebener Eindrückung
 ([`docs/archiv_vermerk_kernhypothese_v3.md`](docs/archiv_vermerk_kernhypothese_v3.md)); die Vorzeichenregel
 ist mit dem Arbeitspapier v2.4 (Abschnitt 4.8) zurückgezogen. Die alten Gleichungen bleiben als Nulllinie dokumentiert.
 
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/figures/wellenformen_dark.png">
+  <img alt="Kontaktkraft N(t) über 300 ms für synchrone Phasen (Liftoff 75,8 %), einen Übergangspunkt (Liftoff 10,9 %) und die triphasische Konfiguration (kein Liftoff)" src="docs/figures/wellenformen_light.png">
+</picture>
+
+*Kontaktkraft N(t) für drei Phasenlagen aus der Simulation mit dem Referenzsatz (K = 10⁴ N/m), gleiche y-Achse:
+synchron hebt der Körper ab und landet mit Spitzen um 40 N, triphasisch bleibt die Kraft in einem schmalen Band
+um M·g. Parameter, Befunde und weitere Abbildungen stehen unter [Simulationsstand](#simulationsstand).*
+
 ## Zwei Forschungslinien
 
 - **Linie A (primär):** Wellenformstatistik der einseitigen Kontaktkraft eines *ruhenden* Körpers.
@@ -50,6 +80,23 @@ ist mit dem Arbeitspapier v2.4 (Abschnitt 4.8) zurückgezogen. Die alten Gleichu
   umgebendes Medium (Luft); das Medium ist der Reaktionspartner, das Vakuum der Nullfall. Ihre Unterlagen
   liegen gekennzeichnet in [`docs/linie_b/`](docs/linie_b/README.md) (Demonstrator: `docs/konzepte/`,
   `code/demonstrator/`, BLDC- und LRA-Sketche in `code/firmware/`); Messdaten gibt es nicht.
+
+## Schnellprüfung
+
+```bash
+pip install -r code/requirements.txt
+python3 code/linear_solver.py --validate     # ca. 5 s
+```
+
+Der Aufruf gleicht drei gespeicherte Datensätze der RK4-Simulation ([`sweep_19x19.csv`](data/sweep_19x19.csv),
+[`finesweep_2deg_120_240.csv`](data/finesweep_2deg_120_240.csv) und `sweep_7x7_sinus.csv`, beschrieben in
+[`data/README.md`](data/README.md)) mit der analytischen Lösung für den Dauerkontakt ab, die auf anderem Weg rechnet:
+Fourier-Reihe des Profils und Übertragungsfunktion des Kontakts statt Zeitintegration. Geprüft werden an allen
+851 Punkten die Einstufung als liftoff-frei oder abhebend, an den 442 liftoff-freien Punkten F_min und F_max
+(Toleranz 10⁻⁴ N), Schiefe und A (Toleranz 10⁻⁴) sowie dort die Nullkontrolle |⟨F⟩ − M·g| ≤ 10⁻⁵ N. Die letzte
+Zeile der Ausgabe lautet dann „Ergebnis: bestanden“; bei einer Abweichung endet der Aufruf mit Exit-Code 1.
+Bestanden heißt: Simulationsdaten und analytische Lösung stimmen überein. Eine wissenschaftliche Bestätigung ist
+das nicht. Alle weiteren Aufrufe stehen unter [Nachrechnen](#nachrechnen).
 
 ## Inhalt des Repositorys
 
@@ -75,7 +122,7 @@ ist mit dem Arbeitspapier v2.4 (Abschnitt 4.8) zurückgezogen. Die alten Gleichu
 | [`code/`](code/) | Simulations-Engine ([`pcmms_v3a_phasen_sweep.py`](code/pcmms_v3a_phasen_sweep.py)), 2°-Feinsweep ([`finesweep.py`](code/finesweep.py)), analytische Lösung für den liftoff-freien Bereich ([`linear_solver.py`](code/linear_solver.py)), Auslegungswerkzeug für den Arbeitspunkt mit Zellkräften ([`auslegung.py`](code/auslegung.py); Präregistrierung v2 §12, Werkzeug 2), ereignisgenauer Löser mit Einzugsprüfung für Liftoff und Hüpfzustände ([`ereignisloeser.py`](code/ereignisloeser.py)), Attraktorkarten des V1-Kandidaten ([`einzugsgebiete.py`](code/einzugsgebiete.py); Ergebnisse in [`docs/einzugsgebiete_v1_kandidat.md`](docs/einzugsgebiete_v1_kandidat.md)) und Abbildungen ([`plot_figures.py`](code/plot_figures.py)); Paket [`pcmms_auswertung/`](code/pcmms_auswertung/) für AP-11 bis AP-13 (Anpassung, Pilotskript, Auswertung, Generator und Harness des Pipelinetests, nur synthetische Daten); Tests in [`tests/`](tests/) |
 | [`code/firmware/`](code/firmware/) | Firmware-Muster (ESP32) der Demonstratoren und Tischtests mit zwei Aktoren; keine V1-Firmware ([`code/firmware/README.md`](code/firmware/README.md)) |
 | [`code/demonstrator/`](code/demonstrator/) | Tracking- und Auswerteskripte des Ballon-Demonstrators der Linie B (Video → Höhen-CSV → Drift) und Marker-Tracker des Pendeltests (Pixelkoordinaten ohne Maßstab, passt nicht zum Eingang der Drift-Auswertung); nicht getestet, keine Messdaten ([`code/demonstrator/README.md`](code/demonstrator/README.md)) |
-| [`docs/figures/`](docs/figures/) | Abbildungen aus den Simulationsdaten, je in heller und dunkler Fassung |
+| [`docs/figures/`](docs/figures/) | Abbildungen aus den Simulationsdaten und eine Prinzipskizze des Modells, je in heller und dunkler Fassung |
 | [`data/`](data/) | Simulationsausgaben: 19×19-Phasensweep, 2°-Feinsweep, Langläufe der Regimeanalyse (2400 s, 23 Punkte, Erzeugungsskript nicht überliefert) und Attraktorkarten des V1-Kandidaten ([`data/README.md`](data/README.md)) |
 | [`rechnungen/`](rechnungen/) | Rechen- und Prüfskripte der Gesamtprojektanalyse 10/2026 mit gespeicherten Ergebnissen und Protokollen: Auslegung, Engine-Prüfung, Kippmoment, Statistik, Symmetrie und Randterm, Linie-B-Kontrollrechnungen, Bewertungen, dazu die Kurzmessungen zum Pipelinetest und die Kontrollrechnung zu den Entscheidungsregeln ([`rechnungen/README.md`](rechnungen/README.md); Simulation und Analytik, historischer Stand 02.10.2026); außerdem die Konzeptrechnung zum Sechs-Nadel-Messrahmen ([`rechnungen/nadelrahmen/`](rechnungen/nadelrahmen/PROTOKOLL.md), 11.10.2026). Nachweisarchiv, für den Einstieg nicht nötig; Kennungen wie „L1a-019“ verweisen auf nicht veröffentlichte Arbeitsdokumente (siehe `rechnungen/README.md`). |
 
@@ -160,8 +207,10 @@ Kürzel v3a auch den zurückgezogenen Simulationszyklus v3a–v3d bezeichnet. Mi
 
 ### Abbildungen
 
-Alle Abbildungen zeigen Simulationsausgaben bei K = 10⁴ N/m; erzeugt mit
-[`code/plot_figures.py`](code/plot_figures.py) aus den Dateien in [`data/`](data/).
+Zeltkurve und Phasenkarten zeigen Simulationsausgaben bei K = 10⁴ N/m, erzeugt mit
+[`code/plot_figures.py`](code/plot_figures.py) aus den Dateien in [`data/`](data/). Dasselbe Skript erzeugt die
+Prinzipskizze und die Wellenformen N(t) (neu gerechnet, ca. 30 s); beide stehen oben unter
+[Worum es geht](#worum-es-geht).
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="docs/figures/zeltkurve_dark.png">
@@ -182,14 +231,6 @@ der Kontaktsteifigkeit ab.*
 triphasischen Konfigurationen auf (höchstens 28° entfernt). Deutlich negative Schiefe (−0,2 bis −0,29) liegt
 bis 40° um diese Punkte, schwach negative (bis −0,08) reicht weiter in den Übergangsbereich. Im Liftoff-Bereich hängt der Wert einzelner Zellen von der
 Startbedingung ab (siehe oben).*
-
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="docs/figures/wellenformen_dark.png">
-  <img alt="Kontaktkraft N(t) über 300 ms für synchrone Phasen (Liftoff 75,8 %), einen Übergangspunkt (Liftoff 10,9 %) und die triphasische Konfiguration (kein Liftoff)" src="docs/figures/wellenformen_light.png">
-</picture>
-
-*Kontaktkraft N(t) für drei Phasenlagen, gleiche y-Achse: synchron hebt der Körper ab und landet mit
-Spitzen um 40 N, triphasisch bleibt die Kraft in einem schmalen Band um M·g.*
 
 Die Auslegung eines physischen Aufbaus (Bewegungsprofil, Wägezellen, Kalibrierung bei intermittierendem
 Kontakt) ist davon getrennt und offen; siehe [`docs/expose_2026-09.md`](docs/expose_2026-09.md), Abschnitt „Nächster Schritt“.
@@ -262,14 +303,3 @@ dokumentieren den Weg, nicht den aktuellen Stand.
   [`docs/arbeitspapier/nachrechnung_2026-09-13/`](docs/arbeitspapier/nachrechnung_2026-09-13/) und
   [`docs/arbeitspapier/gegenprobe_2026-09-26/`](docs/arbeitspapier/gegenprobe_2026-09-26/) stehen als Code unter
   MIT (siehe [`LICENSE`](LICENSE)); Texte und Daten dort unter CC BY 4.0.
-
----
-
-*Summary (EN):* Pre-experimental study in classical mechanics. A body at rest carries three internally
-oscillating masses with adjustable relative phases (φ₂, φ₃). The object of study is the waveform of the
-unilateral contact force — skewness, liftoff fraction, asymmetry ratio, minimum force — not its time
-average, which is fixed at M·g by the centre-of-mass theorem and serves as the null control. No claim of
-reactionless propulsion, gravity modification or mean-force shift is made; an earlier mean-shift result
-was identified as a contact-model artefact and retracted. All data here are simulation output. For the
-measurement campaign, the draft preregistration v2 makes F_min − ⟨N⟩ and the first three harmonics of the
-contact force primary, skewness secondary, the asymmetry ratio descriptive and the liftoff fraction exploratory.

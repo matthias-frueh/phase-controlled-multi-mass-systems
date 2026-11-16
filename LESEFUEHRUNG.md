@@ -43,7 +43,8 @@ nichts nötig. Die Minutenangaben sind Richtwerte aus dem Textumfang (rund 200 W
 
 1. [`docs/was_ist_pcmms.md`](docs/was_ist_pcmms.md) (≈ 6 min) – Grundidee, was gemessen wird, was nicht behauptet
    wird.
-2. [README, „Abbildungen“](README.md#abbildungen) – Zeltkurve, Phasenkarten und Wellenformen aus der Simulation.
+2. [README, „Worum es geht“](README.md#worum-es-geht) und [„Abbildungen“](README.md#abbildungen) – Prinzipskizze
+   des Modells; Wellenformen, Zeltkurve und Phasenkarten aus der Simulation.
 3. [`docs/zehn_fragen.md`](docs/zehn_fragen.md) (≈ 4 min) – die üblichen Einwände in Kurzform.
 
 ### B · Fachlich einordnen (etwa 1 Stunde)
@@ -238,7 +239,7 @@ zur Linie C. Ältere Fassungen, die außerhalb kursieren, sind überholt
 
 ---
 
-*Reading guide (EN):* All documents are in German. An English summary closes the [README](README.md); the working
+*Reading guide (EN):* All documents are in German. An English summary opens the [README](README.md); the working
 paper v2.5 contains an English abstract. Everything here is simulation output; measured data do not exist.
 
 *Vermerk:* Erstellt am 11.11.2026, Chat-Sitzung (Claude), nach Auftrag des Autors. Pfade, Versionsstände und
