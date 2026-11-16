@@ -2,15 +2,18 @@
 plot_figures.py – Abbildungen für README und docs aus den Simulationsdaten in data/.
 
 Erzeugt in docs/figures/ je eine helle und eine dunkle Fassung:
-  zeltkurve_{light,dark}.png     F_min entlang φ₃ = 240° aus finesweep_2deg_120_240.csv
-  phasenkarten_{light,dark}.png  Schiefe und Liftoff-Anteil aus sweep_19x19.csv
-  wellenformen_{light,dark}.png  N(t) über drei Perioden für drei Phasenlagen
-                                 (gerechnet mit finesweep.run, ca. 30 s)
+  zeltkurve_{light,dark}.png      F_min entlang φ₃ = 240° aus finesweep_2deg_120_240.csv
+  phasenkarten_{light,dark}.png   Schiefe und Liftoff-Anteil aus sweep_19x19.csv
+  wellenformen_{light,dark}.png   N(t) über drei Perioden für drei Phasenlagen
+                                  (gerechnet mit finesweep.run, ca. 30 s)
+  prinzipskizze_{light,dark}.png  Schema des Modells und Bewegungsprofil der Module
+                                  (Zeichnung aus den Profilparametern der Engine, keine Simulation)
 
 Aufruf (aus beliebigem Verzeichnis):  python3 code/plot_figures.py
-Alle Abbildungen zeigen Simulationsausgaben, keine Messdaten.
+Zeltkurve, Phasenkarten und Wellenformen zeigen Simulationsausgaben, keine Messdaten.
+Die Prinzipskizze ist ein Schema und kein Ergebnis.
 
-Matthias Früh · PCMMS · September 2026
+Matthias Früh · PCMMS · September 2026 · Prinzipskizze ergänzt im November 2026
 """
 import os
 import sys
@@ -20,6 +23,7 @@ import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 from matplotlib.colors import LinearSegmentedColormap, TwoSlopeNorm, Normalize
+from matplotlib.patches import Rectangle
 from matplotlib.ticker import FuncFormatter
 
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -207,6 +211,164 @@ def plot_waves(th, path, t, series, out):
     plt.close(fig)
 
 
+# ── 4 · Prinzipskizze ────────────────────────────────────────────────────────
+SKETCH_PHASES = (0.0, 120.0, 240.0)   # Beispiel der Skizze: triphasische Konfiguration (φ₁ = 0 ist der Bezug)
+SKETCH_POSE = 100.0                   # Zyklusphase [°] der links gezeichneten Stellung
+SKETCH_DASHES = ['-', (0, (5, 2.2)), (0, (1.2, 1.8))]
+
+
+def egg_weg(t):
+    """Weg einer Modulmasse relativ zum Rahmen [m] zur Zeit t [s]: das Egg-Profil der Engine, zweifach
+    integriert. finesweep.z_egg_zdd ist seine zweite Ableitung; der Nullpunkt liegt am Beginn der Haltephase.
+    Oben der langsame Bogen (Halteanteil THOLD, Radius RTOP), unten der schnelle (TFAST, RBOT)."""
+    u = np.mod(t, finesweep.T_CYC) / finesweep.T_CYC
+    return np.where(u < finesweep.THOLD,
+                    finesweep.RTOP * np.sin(np.pi * u / finesweep.THOLD),
+                    -finesweep.RBOT * np.sin(np.pi * (u - finesweep.THOLD) / finesweep.TFAST))
+
+
+def check_egg_weg(n=20000):
+    """Gegenprobe zur Skizze: Die zweite Differenz von egg_weg muss die Profilbeschleunigung der Engine
+    ergeben (außerhalb der beiden Nahtstellen des Profils). Bricht bei Abweichung ab."""
+    h = finesweep.T_CYC / n
+    t = (np.arange(n) + 0.5) * h
+    u = t / finesweep.T_CYC
+    innen = (u > 2.0 / n) & (u < 1.0 - 2.0 / n) & (np.abs(u - finesweep.THOLD) > 2.0 / n)
+    d2 = (egg_weg(t + h) - 2.0 * egg_weg(t) + egg_weg(t - h)) / h**2
+    a = finesweep.z_egg_zdd(t)
+    err = np.abs(d2 - a)[innen].max() / np.abs(a).max()
+    if not err < 1e-5:
+        raise AssertionError(f'egg_weg passt nicht zu finesweep.z_egg_zdd (relative Abweichung {err:.1e})')
+    return err
+
+
+def sketch_weg_mm(theta_deg):
+    """Weg der drei Module [mm] bei Zyklusphase theta [°] für SKETCH_PHASES; Feld (..., 3)."""
+    th = np.asarray(theta_deg, float)[..., None] - np.asarray(SKETCH_PHASES)
+    return 1e3 * egg_weg(th / 360.0 * finesweep.T_CYC)
+
+
+def _feder(ax, x, y0, y1, color, n=4, b=0.17):
+    """Zickzack-Feder von (x, y0) nach (x, y1)."""
+    e = 0.14 * (y1 - y0)
+    yy = np.linspace(y0 + e, y1 - e, 2 * n + 1)
+    xx = x + b * np.array([0.0] + [(-1.0) ** k for k in range(2 * n - 1)] + [0.0])
+    ax.plot(np.r_[x, xx, x], np.r_[y0, yy, y1], color=color, linewidth=1.3, solid_joinstyle='miter')
+
+
+def _daempfer(ax, x, y0, y1, color, b=0.17):
+    """Dämpfersymbol (Topf mit Kolben) von (x, y0) nach (x, y1)."""
+    ym, h = 0.5 * (y0 + y1), 0.20 * (y1 - y0)
+    kw = dict(color=color, linewidth=1.3, solid_capstyle='butt')
+    ax.plot([x, x], [y0, ym - h], **kw)
+    ax.plot([x - b, x - b, x + b, x + b], [ym + h, ym - h, ym - h, ym + h], **kw)
+    ax.plot([x - 0.72 * b, x + 0.72 * b], [ym + 0.15 * h, ym + 0.15 * h], **kw)
+    ax.plot([x, x], [ym + 0.15 * h, y1], **kw)
+
+
+def _pfeil(ax, xy_from, xy_to, color, lw=1.8, style='-|>', scale=13):
+    ax.annotate('', xy=xy_to, xytext=xy_from,
+                arrowprops=dict(arrowstyle=style, color=color, linewidth=lw, shrinkA=0, shrinkB=0,
+                                mutation_scale=scale))
+
+
+def plot_sketch(th, path):
+    check_egg_weg()
+    fig = new_figure(th, (10.4, 4.6))
+    hub_mm = 1e3 * (finesweep.RTOP + finesweep.RBOT)
+    p2, p3 = (fmt(p, 0) for p in SKETCH_PHASES[1:])
+    title(fig, th, 'Prinzipskizze: drei Module, gleiches Profil, einstellbare Phase',
+          f'Links ein Schema (nicht maßstäblich), rechts das Egg-Profil des Referenzsatzes (Hub {fmt(hub_mm, 2)} mm) '
+          f'am Beispiel ({p2}°, {p3}°) – kein Simulationsergebnis')
+
+    # links: Modell
+    fig.text(0.02, 0.815, 'Modell', color=th['ink'], fontsize=10, ha='left', va='top')
+    ax = fig.add_axes([0.02, 0.03, 0.43, 0.75])
+    ax.set_xlim(0, 10)
+    ax.set_ylim(0.2, 8.6)
+    ax.set_aspect('equal')
+    ax.axis('off')
+    line = th['ink2']
+
+    y_g, y_f0, y_f1 = 1.2, 2.6, 8.3                       # Unterlage, Rahmen unten, Rahmen oben
+    ax.plot([0.8, 9.2], [y_g, y_g], color=th['ink'], linewidth=1.6)
+    for xi in np.arange(1.0, 9.21, 0.41):
+        ax.plot([xi, xi - 0.28], [y_g, y_g - 0.32], color=th['muted'], linewidth=1)
+    ax.text(9.2, y_g - 0.5, 'Unterlage', color=th['muted'], fontsize=8.5, ha='right', va='top')
+
+    ax.add_patch(Rectangle((1.3, y_f0), 7.4, y_f1 - y_f0, facecolor=th['mid'], edgecolor=th['ink'],
+                           linewidth=1.6, joinstyle='round'))
+    ax.text(1.5, y_f1 - 0.18, 'Körper', color=th['ink2'], fontsize=9, ha='left', va='top')
+
+    y_p = y_g + 0.07                                      # Fußplatte: liegt auf, ist nicht befestigt
+    ax.plot([4.15, 5.85], [y_p, y_p], color=line, linewidth=2.2, solid_capstyle='butt')
+    _feder(ax, 4.55, y_p, y_f0, line)
+    _daempfer(ax, 5.45, y_p, y_f0, line)
+    ax.text(6.1, 0.5 * (y_g + y_f0), 'Kontakt K, C\neinseitig: nur Druck', color=th['ink2'], fontsize=8.5,
+            ha='left', va='center', linespacing=1.35)
+    _pfeil(ax, (3.55, y_g + 0.04), (3.55, y_f0 - 0.06), th['series'], lw=2.2, scale=15)
+    ax.text(3.37, 0.5 * (y_g + y_f0), 'N(t)', color=th['ink'], fontsize=10, fontweight='bold',
+            ha='right', va='center')
+
+    _pfeil(ax, (5.0, 3.85), (5.0, y_f0 + 0.12), line)
+    ax.text(5.22, 3.3, 'M·g', color=th['ink'], fontsize=9.5, ha='left', va='center')
+
+    w = sketch_weg_mm(SKETCH_POSE)
+    names = [('Modul 1', 'Bezug'), ('Modul 2', 'φ₂'), ('Modul 3', 'φ₃')]
+    for k, xc in enumerate((2.75, 5.0, 7.25)):
+        ax.plot([xc, xc], [5.0, 7.75], color=th['muted'], linewidth=1)   # Führung
+        yc = 6.2 + 0.16 * w[k]
+        ax.add_patch(Rectangle((xc - 0.62, yc - 0.4), 1.24, 0.8, facecolor=th['series'],
+                               edgecolor=th['surface'], linewidth=1, zorder=3))
+        ax.text(xc, yc, str(k + 1), color='#ffffff', fontsize=10, fontweight='bold', ha='center',
+                va='center', zorder=4)
+        _pfeil(ax, (xc + 0.9, 5.55), (xc + 0.9, 7.15), line, lw=1, style='<|-|>', scale=9)
+        ax.text(xc, 4.72, names[k][0], color=th['ink'], fontsize=8.5, ha='center', va='top')
+        ax.text(xc, 4.3, names[k][1], color=th['ink2'], fontsize=8.5, ha='center', va='top')
+
+    # rechts: Bewegungsprofil
+    fig.text(0.535, 0.815, 'Bewegungsprofil der Module: Weg relativ zum Körper', color=th['ink'],
+             fontsize=10, ha='left', va='top')
+    ax = fig.add_axes([0.535, 0.15, 0.435, 0.53])
+    style_axes(ax, th)
+    ax.grid(axis='y', color=th['grid'], linewidth=1)
+    ax.set_axisbelow(True)
+    ax.axhline(0.0, color=th['axis'], linewidth=1)
+    theta = np.linspace(0.0, 360.0, 1441)
+    curves = sketch_weg_mm(theta)
+    labels = ['Modul 1', f'Modul 2 (φ₂ = {p2}°)', f'Modul 3 (φ₃ = {p3}°)']
+    for k in range(3):
+        ax.plot(theta, curves[:, k], color=th['series'], linewidth=2, linestyle=SKETCH_DASHES[k],
+                label=labels[k], zorder=3)
+    ax.plot([SKETCH_POSE, SKETCH_POSE], [-3.05, 5.75], color=th['muted'], linewidth=1,
+            linestyle=(0, (1, 2.5)), zorder=2)
+    ax.scatter([SKETCH_POSE] * 3, w, s=26, color=th['series'], edgecolors=th['surface'], linewidths=1.5,
+               zorder=4)
+    ax.text(SKETCH_POSE + 4, 5.78, 'Stellung links', color=th['muted'], fontsize=8, ha='left', va='center')
+
+    hold = 360.0 * finesweep.THOLD
+    for x0, x1, txt in [(0.0, hold, f'Modul 1: Haltephase {fmt(100 * finesweep.THOLD, 0)} %'),
+                        (hold, 360.0, f'schnelle Phase {fmt(100 * finesweep.TFAST, 0)} %')]:
+        ax.plot([x0 + 1.5, x1 - 1.5], [-3.6, -3.6], color=th['muted'], linewidth=1)
+        for xe in (x0 + 1.5, x1 - 1.5):
+            ax.plot([xe, xe], [-3.78, -3.42], color=th['muted'], linewidth=1)
+        ax.text(0.5 * (x0 + x1), -4.0, txt, color=th['ink2'], fontsize=8, ha='center', va='top')
+
+    ax.set_xlim(0, 360)
+    ax.set_ylim(-4.9, 6.3)
+    ax.set_xticks([0, 120, 240, 360])
+    ax.set_yticks([-1e3 * finesweep.RBOT, 0.0, 1e3 * finesweep.RTOP])
+    ax.set_yticklabels([fmt(-1e3 * finesweep.RBOT, 2), '0', fmt(1e3 * finesweep.RTOP, 0)])
+    ax.set_xlabel('Zyklusphase [°]')
+    ax.set_ylabel('Weg [mm]')
+    leg = ax.legend(loc='lower left', bbox_to_anchor=(-0.01, 1.0), ncol=3, frameon=False, fontsize=8.5,
+                    handlelength=2.6, columnspacing=1.4, borderaxespad=0.2)
+    for txt in leg.get_texts():
+        txt.set_color(th['ink2'])
+    fig.savefig(path, dpi=150, facecolor=th['surface'])
+    plt.close(fig)
+
+
 if __name__ == '__main__':
     os.makedirs(OUT, exist_ok=True)
     t, series, out = compute_series()
@@ -214,4 +376,5 @@ if __name__ == '__main__':
         plot_tent(th, os.path.join(OUT, f'zeltkurve_{mode}.png'))
         plot_maps(th, os.path.join(OUT, f'phasenkarten_{mode}.png'))
         plot_waves(th, os.path.join(OUT, f'wellenformen_{mode}.png'), t, series, out)
+        plot_sketch(th, os.path.join(OUT, f'prinzipskizze_{mode}.png'))
     print('Abbildungen geschrieben nach', os.path.normpath(OUT))
