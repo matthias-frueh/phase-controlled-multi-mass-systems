@@ -1,0 +1,65 @@
+Prüfung vom 16.11.2026 zu docs/arbeitspapier/sinus_sensitivitaet_2026-09-05/
+Aufruf: python3 pruefung_2026-11-16.py --voll
+Umgebung: Python 3.13.18, numpy 2.5.3, scipy 1.17.1, pandas 2.2.3, Linux-6.18.44-fc-v470-x86_64-with-glibc2.39
+Engine: code/pcmms_v3a_phasen_sweep.py, SHA-256 51c16ec941536def78783e06f9cc4834280a1b2ad620199da7efbb06b0437d69
+
+A  Sinusamplitude
+   a_sin.py: Hub des Egg-Profils 7.692315 mm, A = 0.0038461573223484992 m
+   A_sin.txt:                                A = 0.0038461573223484992 m   gleich: ja
+   (RTOP + RBOT)/2 = 0.003846153846153846 m; A liegt 3.48 nm darüber (relativ 9.04e-07)
+
+B  Sinus-Sweep, 49 Punkte mit sinsweep.py (35 s) gegen data/sweep_7x7_sinus.csv
+   SHA-256 im Repository: bd6b33af5547759cc2dfd32ad69cb5ca1a5ba3e704ed314e903ebe24294984ee
+   SHA-256 neu gerechnet: bd6b33af5547759cc2dfd32ad69cb5ca1a5ba3e704ed314e903ebe24294984ee   bytegleich: ja
+   Zellen: 441, davon bitgleich: 441
+   Zeilen ohne Liftoff: 30, größte Abweichung dort 0.00e+00 (TOL 1e-09)
+   Zeilen mit Liftoff: 19, davon in F_mean, liftoff, F_max und F_min bitgleich: 19; größte Abweichung dort 0.00e+00 (nicht im Urteil)
+   mit (RTOP + RBOT)/2 statt A_sin.txt, 30 Punkte ohne Liftoff: Abweichung in F_max und F_min 2.21e-06 bis 5.63e-06 N
+
+C  Steifigkeitsreihe
+   Kennzahlen je Datei gegen Arbeitspapier v2.5, Tabelle tab:sens-k; Reihenfolge: f_n, 3f/f_n, liftoff-frei,
+   max λ, min γ₁, max N_max/Mg, γ₁ < 0 mit gleichphasigem Paar, γ₁ < 0 gesamt
+   sens_k_1e+03_0.10.csv: (6.2, 4.81, 48, 12.4, -0.331, 1.94, 16, 34)  Arbeitspapier: (6.2, 4.81, 48, 12.4, -0.331, 1.94, 16, 34)  8/8
+   sens_k_3e+03_0.10.csv: (10.8, 2.77, 0, 56.7, 0.361, 3.52, 0, 0)  Arbeitspapier: (10.8, 2.77, 0, 56.7, 0.361, 3.52, 0, 0)  8/8
+   sens_k_1e+04_0.10.csv: (19.7, 1.52, 0, 76.1, -0.128, 7.09, 0, 6)  Arbeitspapier: (19.7, 1.52, 0, 76.1, -0.128, 7.09, 0, 6)  8/8
+   sens_k_3e+04_0.10.csv: (34.2, 0.88, 18, 86.2, -0.495, 13.96, 0, 12)  Arbeitspapier: (34.2, 0.88, 18, 86.2, -0.495, 13.96, 0, 12)  8/8
+   sens_k_1e+05_0.10.csv: (62.4, 0.48, 30, 92.1, -0.945, 26.05, 0, 18)  Arbeitspapier: (62.4, 0.48, 30, 92.1, -0.945, 26.05, 0, 18)  8/8
+   Kennzahlen: 40 von 40 stimmen
+   Punkte mit sens.py neu gerechnet (alle 49 je Steifigkeit) gegen die Dateien
+   sens_k_1e+03_0.10.csv (C = 5.059644256269407 N·s/m, 64 s, bytegleich: ja)
+   Zellen: 392, davon bitgleich: 392
+   Zeilen ohne Liftoff: 48, größte Abweichung dort 0.00e+00 (TOL 1e-09)
+   Zeilen mit Liftoff: 1, davon in F_mean, liftoff, F_max und F_min bitgleich: 1; größte Abweichung dort 0.00e+00 (nicht im Urteil)
+   sens_k_3e+03_0.10.csv (C = 8.763560920082657 N·s/m, 62 s, bytegleich: ja)
+   Zellen: 392, davon bitgleich: 392
+   Zeilen mit Liftoff: 49, davon in F_mean, liftoff, F_max und F_min bitgleich: 49; größte Abweichung dort 0.00e+00 (nicht im Urteil)
+   sens_k_1e+04_0.10.csv (C = 15.999999999999998 N·s/m, 60 s, bytegleich: ja)
+   Zellen: 392, davon bitgleich: 392
+   Zeilen mit Liftoff: 49, davon in F_mean, liftoff, F_max und F_min bitgleich: 49; größte Abweichung dort 0.00e+00 (nicht im Urteil)
+   sens_k_3e+04_0.10.csv (C = 27.71281292110204 N·s/m, 59 s, bytegleich: ja)
+   Zellen: 392, davon bitgleich: 392
+   Zeilen ohne Liftoff: 18, größte Abweichung dort 0.00e+00 (TOL 1e-09)
+   Zeilen mit Liftoff: 31, davon in F_mean, liftoff, F_max und F_min bitgleich: 31; größte Abweichung dort 0.00e+00 (nicht im Urteil)
+   sens_k_1e+05_0.10.csv (C = 50.59644256269407 N·s/m, 60 s, bytegleich: ja)
+   Zellen: 392, davon bitgleich: 392
+   Zeilen ohne Liftoff: 30, größte Abweichung dort 0.00e+00 (TOL 1e-09)
+   Zeilen mit Liftoff: 19, davon in F_mean, liftoff, F_max und F_min bitgleich: 19; größte Abweichung dort 0.00e+00 (nicht im Urteil)
+   Punkt (0°, 0°) mit K = 1e4 N/m und C = 16.0 N·s/m: F_mean 6.376243, F_skew 1.705483, liftoff 75.7885, F_max 41.123260, F_min 0.000000
+   gleich der Zeile in data/sweep_19x19.csv auf die dort abgelegten Nachkommastellen: ja (Punkt mit Liftoff, nicht im Urteil)
+
+D  2400-s-Tabellen gegen den Burn-in-Sweep vom 13.09.2026 (Indiz für die Herkunft, kein Nachweis)
+   pcmms_sweep_burnin_2026-09-13.py: K_LIST = [1, 2, 3, 4, 5, 6, 7, 8, 10, 20, 25, 50, 100], TOL_V = 0.001 m/s, TOL_Z = 0.0001 m, Variablen jv und jz: ja
+   sweep_19x19_burnin_2026-09-13.csv: 361 Zeilen, Spalten i2 und i3: ja, ohne erkannte Periode (period_k = -1): 23
+   regime_2400s.csv: 23 Zeilen
+      1. bestk [2, 3, 4, 5, 6, 7, 8, 10, 25, 50, 100], passk [0, 6] (0 laut data/README.md: Kriterium nicht erfüllt); alle Werte in K_LIST: ja
+      2. Spalten bestjv und bestjz (im Skript jv und jz), 3. Spalten i2 und i3: ja
+      4. Punkte und Reihenfolge gleich den 23 Punkten ohne erkannte Periode: ja
+      5. passk > 0 genau dort, wo bestjv < TOL_V und bestjz < TOL_Z: ja (bestjv mit passk > 0: 1.955e-04, 1.879e-04; kleinster bestjv mit passk = 0: 1.441e-03)
+   regime_2400s_dt2.csv: 23 Zeilen
+      1. bestk [2, 3, 4, 6, 7, 8, 10, 20, 50], passk [0, 2] (0 laut data/README.md: Kriterium nicht erfüllt); alle Werte in K_LIST: ja
+      2. Spalten bestjv und bestjz (im Skript jv und jz), 3. Spalten i2 und i3: ja
+      4. Punkte und Reihenfolge gleich den 23 Punkten ohne erkannte Periode: ja
+      5. passk > 0 genau dort, wo bestjv < TOL_V und bestjz < TOL_Z: ja (bestjv mit passk > 0: 7.257e-04; kleinster bestjv mit passk = 0: 1.087e-03)
+
+Urteil: A ja, B ja, C ja, D ja
+Ergebnis: bestanden

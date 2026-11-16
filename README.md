@@ -300,6 +300,7 @@ dokumentieren den Weg, nicht den aktuellen Stand.
 - Skripte in `rechnungen/` und Tests in `tests/`: MIT (wie `code/`); Protokolle, Ausgaben und Daten in `rechnungen/`:
   CC BY 4.0 (wie in `rechnungen/README.md`).
 - Ausnahme: Die Python-Skripte in
-  [`docs/arbeitspapier/nachrechnung_2026-09-13/`](docs/arbeitspapier/nachrechnung_2026-09-13/) und
-  [`docs/arbeitspapier/gegenprobe_2026-09-26/`](docs/arbeitspapier/gegenprobe_2026-09-26/) stehen als Code unter
-  MIT (siehe [`LICENSE`](LICENSE)); Texte und Daten dort unter CC BY 4.0.
+  [`docs/arbeitspapier/nachrechnung_2026-09-13/`](docs/arbeitspapier/nachrechnung_2026-09-13/),
+  [`docs/arbeitspapier/gegenprobe_2026-09-26/`](docs/arbeitspapier/gegenprobe_2026-09-26/) und
+  [`docs/arbeitspapier/sinus_sensitivitaet_2026-09-05/`](docs/arbeitspapier/sinus_sensitivitaet_2026-09-05/) stehen
+  als Code unter MIT (siehe [`LICENSE`](LICENSE)); Texte und Daten dort unter CC BY 4.0.

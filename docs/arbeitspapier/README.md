@@ -8,6 +8,8 @@
 - Quelle: `PCMMS_Arbeitspapier_v2_5.tex`, `references.bib`, Abbildungen in `Plots/`
 - Belege der Korrektur in v2.4: [`gegenprobe_2026-09-26/`](gegenprobe_2026-09-26/)
 - Belege der Korrektur in v2.3: [`nachrechnung_2026-09-13/`](nachrechnung_2026-09-13/)
+- Erzeugende Skripte zu den Abschnitten 9.7 (Sinus-Sweep) und 9.8 (Kontaktsteifigkeit), am 16.11.2026 nachgetragen:
+  [`sinus_sensitivitaet_2026-09-05/`](sinus_sensitivitaet_2026-09-05/)
 - Offene Punkte: [`PCMMS_Arbeitspapier_Offene_Punkte.md`](PCMMS_Arbeitspapier_Offene_Punkte.md)
 - Bezeichnungen und Zuordnung zu den Symbolen des Forschungsrahmens: [`../formelverzeichnis/`](../formelverzeichnis/). Die mit v2.4 neuen Symbole führt das Formelverzeichnis ab v2.7.
 

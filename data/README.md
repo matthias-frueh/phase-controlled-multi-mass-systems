@@ -6,7 +6,9 @@ existieren nicht. Beim Zitieren immer als Simulation kennzeichnen.
 Lizenz dieses Ordners: CC BY 4.0, siehe [`../LICENSE-CC-BY-4.0`](../LICENSE-CC-BY-4.0). Namensnennung: „Matthias Früh, PCMMS“, https://github.com/matthias-frueh/phase-controlled-multi-mass-systems
 
 Herkunft: erzeugt mit der Referenz-Engine [`../code/pcmms_v3a_phasen_sweep.py`](../code/pcmms_v3a_phasen_sweep.py)
-(19×19-Sweep) und [`../code/finesweep.py`](../code/finesweep.py) (2°-Feinsweep). Engine-Stand im Repository:
+(19×19-Sweep), mit [`../code/finesweep.py`](../code/finesweep.py) (2°-Feinsweep) und mit
+[`sinsweep.py`](../docs/arbeitspapier/sinus_sensitivitaet_2026-09-05/sinsweep.py) (Sinus-Sweep; Parameter aus der
+Engine, Sinus- statt Egg-Profil). Engine-Stand im Repository:
 Commit `1f75564` vom 20.09.2026, mit dem Engine und Datensätze gemeinsam abgelegt wurden. Ein Erzeugungsdatum
 ist in den CSV-Dateien nicht hinterlegt. Eigene Herkunft und eigene Laufparameter haben die Regime-Langläufe
 `regime_2400s*.csv` (Erzeugungsskript nicht überliefert) und die Attraktorkarten `einzugsgebiete_v1_kandidat*.csv`;
@@ -78,10 +80,26 @@ Arbeitsverzeichnis: Kontaktkraft N(t) über 0,3 s ab Ende des Einschwingens für
 ### `sweep_7x7_sinus.csv` — Kontrollsweep mit Sinusprofil, 49 Konfigurationen
 Gleiche Engine-Parameter, aber sinusförmiges statt Egg-Bewegungsprofil; Raster 7×7 über [0°, 360°),
 Schrittweite 360°/7. Ergebnis: Ohne Liftoff ist die Schiefe exakt null; die Phasenkarte kollabiert auf
-die Zeigersumme R. Das erzeugende Skript (Sinus-Variante der Engine) ist noch nicht im Repository abgelegt.
-Die Sinusamplitude ist nicht mit abgelegt; rekonstruiert aus den Daten beträgt sie (RTOP + RBOT)/2 ≈ 3,85 mm,
-also derselbe Hub von 7,69 mm Spitze-Spitze wie beim Egg-Profil. Mit dieser Amplitude reproduziert die Engine
-die liftoff-freien Punkte auf 10⁻⁵ N.
+die Zeigersumme R.
+Erzeugt mit [`sinsweep.py`](../docs/arbeitspapier/sinus_sensitivitaet_2026-09-05/sinsweep.py) aus der Arbeit vom
+05.09.2026; Skript, Amplitude und Prüfung sind am 16.11.2026 unter
+[`../docs/arbeitspapier/sinus_sensitivitaet_2026-09-05/`](../docs/arbeitspapier/sinus_sensitivitaet_2026-09-05/)
+nachgetragen. Das Skript übernimmt die Parameter aus der Engine und rechnet mit eigener RK4-Schleife (Schritt, Start
+und Auswertefenster wie dort); ersetzt ist das Profil. Die Sinusamplitude steht dort in `A_sin.txt`:
+A = 0,0038461573223484992 m, der halbe Hub, den `a_sin.py` aus der zweimal numerisch integrierten Beschleunigung des
+Egg-Profils bestimmt. Das sind 3,48 nm mehr als (RTOP + RBOT)/2 (relativ 9,0·10⁻⁷); der Hub ist mit 7,69 mm
+Spitze-Spitze derselbe wie beim Egg-Profil.
+Nachrechnung vom 16.11.2026 (`pruefung_2026-11-16.py` mit Ausgaben im selben Ordner), auf einem Rechner (Linux x86-64):
+Mit Python 3.13.18, numpy 2.5.3, scipy 1.17.1 und pandas 2.2.3 entsteht die Datei bytegleich
+(SHA-256 `bd6b33af5547759cc2dfd32ad69cb5ca1a5ba3e704ed314e903ebe24294984ee`). Mit den Paketversionen des Testlaufs
+(numpy 2.5.4, scipy 1.18.1, pandas 3.1.1) weicht `F_skew` in 33 der 49 Zeilen in der letzten Stelle ab (höchstens
+2,2·10⁻¹⁶); alle anderen Spalten sind bitgleich. Ob die Datei bytegleich wiederkehrt, hängt also an den
+Paketversionen.
+Bis zum 16.11.2026 stand hier die aus den Daten rekonstruierte Amplitude (RTOP + RBOT)/2. Mit ihr statt A weichen
+F_max und F_min der 30 liftoff-freien Punkte in derselben Rechnung um 2,2·10⁻⁶ bis 5,6·10⁻⁶ N ab.
+[`../code/linear_solver.py`](../code/linear_solver.py) (`SINUS_AMPLITUDE`) und
+[`../code/ereignisloeser.py`](../code/ereignisloeser.py) rechnen weiter mit diesem analytischen halben Hub; ihre
+Vergleiche mit dieser Datei (F_max, F_min, Schiefe) haben die Toleranz 10⁻⁴.
 
 ### `regime_2400s.csv` — Langläufe über 2400 s an 23 Rasterpunkten, Δt = 50 µs
 Grundlage der Regimeanalyse v1.2 (Linie A;
@@ -112,10 +130,25 @@ keine Fehlerschätzung. Eine ereignisgenaue Nachrechnung der 23 Punkte mit
 [`../code/ereignisloeser.py`](../code/ereignisloeser.py) liegt nicht vor. Die Zusatzläufe der Notiz zu (12,17) und
 (9,9) (§1.2) gehören nicht zu dieser Datei und liegen nicht im Repository.
 
+Hinweis zur Herkunft (Indiz, kein Nachweis; Stand 16.11.2026): Diese Datei und `regime_2400s_dt2.csv` stimmen in fünf
+Punkten mit dem Burn-in-Sweep vom 13.09.2026 überein
+([`../docs/arbeitspapier/nachrechnung_2026-09-13/`](../docs/arbeitspapier/nachrechnung_2026-09-13/)).
+(1) Alle Werte von `bestk` und alle von null verschiedenen Werte von `passk` stehen in der Liste `K_LIST` des Skripts
+`pcmms_sweep_burnin_2026-09-13.py` (Zeile 22). (2) Die Spalten `bestjv` und `bestjz` tragen die Namen der Variablen
+`jv` und `jz` seiner Funktion `converged` (Zeilen 40–54). (3) Die Punkte tragen wie in `sweep_19x19_burnin_2026-09-13.csv` die
+Indexspalten `i2` und `i3`. (4) Die 23 Punkte sind, in derselben Reihenfolge, genau die 23 Punkte, an denen dieser
+Sweep bis 40 s keine Periode erkannte (`period_k` = −1). (5) `passk` ist genau dort von null verschieden, wo
+`bestjv` < 10⁻³ m/s und `bestjz` < 10⁻⁴ m gilt; das sind die Toleranzen `TOL_V` und `TOL_Z` des Skripts (Zeile 21).
+Das spricht dafür, dass die Tabellen mit einer Ableitung der Skripte vom 13.09.2026 gerechnet wurden. Startzustand,
+Einschwingdauer, Auswertefenster und die Definition von `recur_frac` legt es nicht fest, und das fehlende Skript
+ersetzt es nicht; die Dateien bleiben aus dem Repository nicht reproduzierbar. Nachzurechnen mit Abschnitt D von
+[`pruefung_2026-11-16.py`](../docs/arbeitspapier/sinus_sensitivitaet_2026-09-05/pruefung_2026-11-16.py).
+
 ### `regime_2400s_dt2.csv` — dieselben 23 Punkte mit halbiertem Zeitschritt
 Wie [`regime_2400s.csv`](regime_2400s.csv): gleiche Spalten, Punkte und `cycles`, aber `dt` = 2,5·10⁻⁵ s („Die zweite
 Datei verwendet den halbierten Schritt.“, Notiz §1.1). Der Vergleich beider Dateien ist die Grundlage der Gruppen A–D
-der Notiz (§2, §5.2). Erzeugungsskript ebenfalls nicht überliefert; Daten unverändert übernommen.
+der Notiz (§2, §5.2). Erzeugungsskript ebenfalls nicht überliefert; Daten unverändert übernommen. Der Hinweis zur
+Herkunft oben gilt für beide Dateien.
 
 ### `einzugsgebiete_v1_kandidat*.csv` — Attraktorkarten des V1-Kandidaten (ereignisgenau)
 Andere Parameter als oben: V1-Kandidat aus [`../code/auslegung.py`](../code/auslegung.py) (Restmasse 0,350 kg,
