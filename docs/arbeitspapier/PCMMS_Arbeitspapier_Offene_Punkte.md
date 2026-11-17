@@ -2,6 +2,7 @@
 
 Historischer Ausgangsstand: 05.09.2026 · Quelle: PCMMS_Dissertation_v2.tex, **97 Seiten**
 · Abgleich mit den Nachträgen vom 2. Oktober 2026: Abschnitt am Ende (03.10.2026) · Abgleich vom 10.11.2026 (Berichtigung zu Anhang C, Literaturprüfung): Abschnitt dahinter
+· Nachtrag vom 16.11.2026 (erzeugende Skripte zu den Abschnitten 9.7 und 9.8): letzter Abschnitt
 
 ## Erledigt (05.09.2026)
 
@@ -201,3 +202,21 @@ Versionsnummer.
     Artikel 1687814015573766) sind nur am Registereintrag geprüft, weil die Verlagsseiten am 10.11.2026 nicht lesbar
     waren; für sie gibt es keinen Textvorschlag. Berührt Punkt 42; ob beides gebündelt wird, ist offen (E-2 der
     Abgleichnotiz).
+
+## Nachtrag 16.11.2026 — Erzeugende Skripte zu den Abschnitten 9.7 und 9.8
+
+Quelltext, PDF und Literaturverzeichnis des Arbeitspapiers v2.5 sind nicht geändert; keine Zahl des Papiers ändert
+sich.
+
+47. Belegordner [`sinus_sensitivitaet_2026-09-05/`](sinus_sensitivitaet_2026-09-05/) angelegt: die Skripte der Arbeit
+    vom 05.09.2026 zum Sinus-Sweep (Punkt 1; Abschnitt 9.7, Anhang A.2) und zur Steifigkeitsreihe (Punkt 2;
+    Abschnitt 9.8, Tabelle 9.8), aus dem Protokoll jener Sitzung übernommen (je eine Zeile für den Pfad der Engine
+    angepasst), dazu die Sinusamplitude (`A_sin.txt`), die fünf Raster `sens_k_*.csv` und eine Prüfung mit Ausgaben.
+    Die Raster sind am 16.11.2026 neu erzeugt; die Dateien vom 05.09.2026 liegen nicht vor. Ergebnis der
+    Prüfung: `data/sweep_7x7_sinus.csv` entsteht bytegleich neu (in der Umgebung, die die LIESMICH des Ordners nennt),
+    und die 40 Kennzahlen der Tabelle 9.8 folgen aus den neu erzeugten Rastern. Die Sinusamplitude beträgt
+    0,0038461573223484992 m; die Angaben 3,85 mm (Abschnitt 9.7) und 3,846 mm (Anhang A.2) sind Rundungen davon.
+    Einzelheiten und Grenzen in der [LIESMICH](sinus_sensitivitaet_2026-09-05/LIESMICH.md) des Ordners.
+    Weiter ohne erzeugendes Skript im Repository: die Dämpfungstabelle des Abschnitts 9.8 (Tabelle 9.9, Rechnung an
+    vier Regimepunkten) und die Abbildungen 9.5 und 9.6 (`Plots/sinus_kollaps.pdf`, `Plots/sens_k.pdf`; berührt
+    Punkt 33).
